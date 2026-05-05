@@ -1954,5 +1954,11 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "GUILD_LARGE_ICON", 0);
 #endif
 
+#ifdef TASKBAR_SKILL_COOLDOWN_TEXT
+	PyModule_AddIntConstant(poModule, "TASKBAR_SKILL_COOLDOWN_TEXT", 1);
+#else
+	PyModule_AddIntConstant(poModule, "TASKBAR_SKILL_COOLDOWN_TEXT", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

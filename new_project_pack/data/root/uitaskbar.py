@@ -12,6 +12,17 @@ import app
 
 MOUSE_SETTINGS = [0, 0]
 
+if app.TASKBAR_SKILL_COOLDOWN_TEXT:
+	import math
+	def _TaskbarGetCooldownSecondsLeft(skillSlotIndex):
+		if not player.IsSkillCoolTime(skillSlotIndex):
+			return 0
+		coolTime, elapsed = player.GetSkillCoolTime(skillSlotIndex)
+		remaining = float(coolTime) - float(elapsed)
+		if remaining <= 0.0:
+			return 0
+		return max(0, int(math.ceil(remaining - 0.001)))
+
 def InitMouseButtonSettings(left, right):
 	global MOUSE_SETTINGS
 	MOUSE_SETTINGS = [left, right]
@@ -299,6 +310,19 @@ class TaskBar(ui.ScriptWindow):
 											"d:/ymir work/ui/public/slot_cover_button_04.sub", True, False)
 			self.SetSize(32, 32)
 
+			self.coolTimeSecondText = None
+			if app.TASKBAR_SKILL_COOLDOWN_TEXT:
+				t = ui.TextLine()
+				t.SetParent(self)
+				t.SetPosition(16, 16)
+				t.SetHorizontalAlignCenter()
+				t.SetVerticalAlignCenter()
+				t.SetOutline()
+				t.SetFontName(getattr(localeInfo, "UI_BOLD_FONT_LARGE2", getattr(localeInfo, "UI_DEF_FONT_LARGE", localeInfo.UI_DEF_FONT)))
+				t.SetFontColor(1.0, 1.0, 1.0)
+				t.Hide()
+				self.coolTimeSecondText = t
+
 		def __del__(self):
 			ui.SlotWindow.__del__(self)
 
@@ -430,6 +454,23 @@ class TaskBar(ui.ScriptWindow):
 			slot.SetUnselectItemSlotEvent(ui.__mem_func__(self.UnselectItemQuickSlot))
 			slot.SetOverInItemEvent(ui.__mem_func__(self.OverInItem))
 			slot.SetOverOutItemEvent(ui.__mem_func__(self.OverOutItem))
+
+		self.quickSlotCooldownTextLines = []
+		if app.TASKBAR_SKILL_COOLDOWN_TEXT:
+			for slot in self.quickslot:
+				lines = []
+				for i in xrange(4):
+					t = ui.TextLine()
+					t.SetParent(slot)
+					t.SetPosition(16 + i * 32, 16)
+					t.SetHorizontalAlignCenter()
+					t.SetVerticalAlignCenter()
+					t.SetOutline()
+					t.SetFontName(getattr(localeInfo, "UI_BOLD_FONT_LARGE2", getattr(localeInfo, "UI_DEF_FONT_LARGE", localeInfo.UI_DEF_FONT)))
+					t.SetFontColor(1.0, 1.0, 1.0)
+					t.Hide()
+					lines.append(t)
+				self.quickSlotCooldownTextLines.append(lines)
 
 		toggleButtonDict = {}
 		toggleButtonDict[TaskBar.BUTTON_CHARACTER]=self.GetChild("CharacterButton")
@@ -964,6 +1005,55 @@ class TaskBar(ui.ScriptWindow):
 		if 0 != self.tooltipSkill:
 			self.tooltipSkill.HideToolTip()
 
+	def __UpdateTaskbarSkillCooldownSecondText(self):
+		if not app.TASKBAR_SKILL_COOLDOWN_TEXT:
+			return
+
+		if self.curSkillButton and self.curSkillButton.coolTimeSecondText:
+			t = self.curSkillButton.coolTimeSecondText
+			si = self.curSkillButton.GetSlotIndex()
+			if si and self.curSkillButton.skillIndex and player.IsSkillCoolTime(si):
+				sec = _TaskbarGetCooldownSecondsLeft(si)
+				if sec > 0:
+					t.SetText(str(sec))
+					t.Show()
+				else:
+					t.Hide()
+			else:
+				t.Hide()
+
+		if self.quickSlotCooldownTextLines:
+			slotIdx = 0
+			for lines in self.quickSlotCooldownTextLines:
+				for i in xrange(4):
+					t = lines[i]
+					(Type, Position) = player.GetLocalQuickSlot(slotIdx)
+					if player.SLOT_TYPE_SKILL == Type and player.IsSkillCoolTime(Position):
+						sec = _TaskbarGetCooldownSecondsLeft(Position)
+						if sec > 0:
+							t.SetText(str(sec))
+							t.Show()
+						else:
+							t.Hide()
+					else:
+						t.Hide()
+					slotIdx += 1
+
+		if self.selectSkillButtonList:
+			for button in self.selectSkillButtonList:
+				if button and button.coolTimeSecondText:
+					t = button.coolTimeSecondText
+					si = button.GetSlotIndex()
+					if si and button.skillIndex and player.IsSkillCoolTime(si):
+						sec = _TaskbarGetCooldownSecondsLeft(si)
+						if sec > 0:
+							t.SetText(str(sec))
+							t.Show()
+						else:
+							t.Hide()
+					else:
+						t.Hide()
+
 	def OnUpdate(self):
 		if app.GetGlobalTime() - self.lastUpdateQuickSlot > 500:
 			self.lastUpdateQuickSlot = app.GetGlobalTime()
@@ -988,6 +1078,9 @@ class TaskBar(ui.ScriptWindow):
 			self.tooltipEXP.Show()
 		else:
 			self.tooltipEXP.Hide()
+
+		if app.TASKBAR_SKILL_COOLDOWN_TEXT:
+			self.__UpdateTaskbarSkillCooldownSecondText()
 
 	## Skill
 	def ToggleLeftMouseButtonModeWindow(self):

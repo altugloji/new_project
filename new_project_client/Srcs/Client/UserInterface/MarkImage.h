@@ -9,7 +9,7 @@
 	namespace GuildMarkDef
 	{
 		// ---- Edit these to resize guild marks ----
-		inline constexpr int MARK_WIDTH			= 26;
+		inline constexpr int MARK_WIDTH			= 24;
 		inline constexpr int MARK_HEIGHT		= 16;
 		inline constexpr int ATLAS_WIDTH		= 1024;
 		inline constexpr int ATLAS_HEIGHT		= 1024;

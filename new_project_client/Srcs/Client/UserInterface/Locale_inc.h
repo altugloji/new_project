@@ -131,7 +131,7 @@
 #define __BL_MULTI_LANGUAGE_ULTIMATE__
 
 #define GUILD_LARGE_ICON
-
+#define TASKBAR_SKILL_COOLDOWN_TEXT
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

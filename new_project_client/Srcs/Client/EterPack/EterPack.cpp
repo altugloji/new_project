@@ -251,7 +251,7 @@ bool CEterPack::Create(CEterFileDict& rkFileDict, const char * dbname, const cha
 	strncpy(m_dbName, dbname, DBNAME_MAX_LEN);
 
 	strncpy(m_indexFileName, dbname, MAX_PATH);
-	strcat(m_indexFileName, ".eix");
+	strcat(m_indexFileName, ".edata");
 
 	m_stDataFileName = dbname;
 	m_stDataFileName += ".epk";
@@ -311,21 +311,21 @@ bool CEterPack::DecryptIndexFile()
 	m_bEncrypted = false;
 	return true;
 }
-
+//Hex: 286f4353, 31ae9d66, 643de765, 458cdb75 [53436f28669dae3165e73d6475db8c45]
 static DWORD s_adwEterPackKey[] =
 {
-	45129401,
-	92367215,
-	681285731,
-	1710201,
+	678380371,
+	833527142,
+	1681778533,
+	1166859125
 };
-
+//Hex: 2fec0232, 3a7b73cf, 5b0e3998, 41a43031[3202ec2fcf737b3a98390e5b3130a441]
 static DWORD s_adwEterPackSecurityKey[] =
 {
-	78952482,
-	527348324,
-	1632942,
-	486274726,
+	803996210,
+	981169103,
+	1527658904,
+	1101279281
 };
 
 bool CEterPack::EncryptIndexFile()
