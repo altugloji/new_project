@@ -232,6 +232,11 @@ CPacketInfoGG::CPacketInfoGG()
 	Set(HEADER_GG_MONARCH_NOTICE,		sizeof(TPacketGGMonarchNotice),	"MonarchNotice", false);
 	Set(HEADER_GG_MONARCH_TRANSFER,		sizeof(TPacketMonarchGGTransfer),	"MonarchTransfer", false);
 	Set(HEADER_GG_CHECK_AWAKENESS,		sizeof(TPacketGGCheckAwakeness),	"CheckAwakeness",		false);
+
+#ifdef DC_P2P_UPDATE
+	Set(HEADER_GG_DC_P2P_UPDATE,		sizeof(TPacketGGDCP2PUpdate),		"GGDCP2PUpdate",	false);
+#endif
+
 }
 
 CPacketInfoGG::~CPacketInfoGG()

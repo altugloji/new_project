@@ -379,11 +379,13 @@ ACMD(do_warp)
 
 			if (nullptr != pkCCI)
 			{
+#ifndef WARP_CH_UPDATE
 				if (pkCCI->bChannel != g_bChannel)
 				{
 					ch->ChatPacket(CHAT_TYPE_INFO, "Target(%s) is in %d channel (my channel %d)", arg1, pkCCI->bChannel, g_bChannel);
 					return;
 				}
+#endif
 
 				ch->WarpToPID( pkCCI->dwPID );
 			}
@@ -1470,7 +1472,14 @@ ACMD(do_disconnect)
 
 	if (tch == ch)
 	{
+#ifdef DC_P2P_UPDATE
+		TPacketGGDCP2PUpdate ggPacket	{};
+		ggPacket.byHeader =				HEADER_GG_DC_P2P_UPDATE;
+		strlcpy(ggPacket.szName,		arg1, sizeof(ggPacket.szName));
+		P2P_MANAGER::instance().Send(&ggPacket, sizeof(TPacketGGDCP2PUpdate));
+#else
 		ch->ChatPacket(CHAT_TYPE_INFO, "cannot disconnect myself");
+#endif
 		return;
 	}
 

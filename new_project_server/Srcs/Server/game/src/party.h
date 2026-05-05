@@ -148,7 +148,12 @@ class CParty
 		int		GetPartyBonusAttackGrade() const { return m_iAttBonus; }
 		int		GetPartyBonusDefenseGrade() const { return m_iDefBonus; }
 
+#ifdef PARTY_EXP_FIX
+		int	ComputePartyBonusExpPercent(int memberCount = 0);
+#else
 		int	ComputePartyBonusExpPercent();
+#endif
+
 		inline int	ComputePartyBonusAttackGrade() const;
 		inline int	ComputePartyBonusDefenseGrade() const;
 

@@ -1490,7 +1490,11 @@ void CInputDB::ItemLoad(LPDESC d, const char * c_pData) const
 					break;
 
 				case EQUIPMENT:
-					if (item->CheckItemUseLevel(ch->GetLevel()) == true )
+					if (item->CheckItemUseLevel(ch->GetLevel()) == true
+#ifdef DISABLE_ITEM_LEVEL_FOR_GM
+						|| ch->IsGM()
+#endif
+						)
 					{
 						if (item->EquipTo(ch, p->pos) == false )
 						{

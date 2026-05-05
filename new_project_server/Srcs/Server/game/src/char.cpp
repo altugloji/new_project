@@ -253,6 +253,10 @@ void CHARACTER::Initialize()
 	m_iSafeboxSize = -1;
 	m_iSafeboxLoadTime = 0;
 
+#ifdef FAST_PACKET_BLOCK
+	m_iPacketTime = 0;
+#endif
+
 	m_pkMall = nullptr;
 	m_iMallLoadTime = 0;
 
@@ -375,6 +379,10 @@ void CHARACTER::Initialize()
 	//END_PREVENT_PORTAL_AFTER_EXCHANGE
 
 	m_iSafeboxLoadTime = 0;
+
+#ifdef FAST_PACKET_BLOCK
+	m_iPacketTime = 0;
+#endif
 
 	m_iMyShopTime = 0;
 
@@ -5186,7 +5194,11 @@ void CHARACTER::ExitToSavedLocation()
 	m_lExitMapIndex = 0;
 }
 
-bool CHARACTER::WarpSet(long x, long y, long lPrivateMapIndex)
+bool CHARACTER::WarpSet(long x, long y, long lPrivateMapIndex
+#ifdef WARP_CH_UPDATE
+							, BYTE byChannel
+#endif
+						)
 {
 	if (!IsPC())
 		return false;
@@ -5195,7 +5207,11 @@ bool CHARACTER::WarpSet(long x, long y, long lPrivateMapIndex)
 	long lMapIndex;
 	WORD wPort;
 
-	if (!CMapLocation::instance().Get(x, y, lMapIndex, lAddr, wPort))
+	if (!CMapLocation::instance().Get(x, y, lMapIndex, lAddr, wPort
+#ifdef WARP_CH_UPDATE
+										, byChannel
+#endif
+										))
 	{
 		sys_err("cannot find map location index %d x %d y %d name %s", lMapIndex, x, y, GetName());
 		return false;
@@ -6533,9 +6549,17 @@ bool CHARACTER::WarpToPID(DWORD dwPID)
 	if ((victim = (CHARACTER_MANAGER::instance().FindByPID(dwPID))))
 	{
 		const int mapIdx = victim->GetMapIndex();
-		if (IS_SUMMONABLE_ZONE(mapIdx))
+		if (IS_SUMMONABLE_ZONE(mapIdx)
+#ifdef WARP_CH_UPDATE
+				|| IsGM()
+#endif
+			)
 		{
-			if (CAN_ENTER_ZONE(this, mapIdx))
+			if (CAN_ENTER_ZONE(this, mapIdx)
+#ifdef WARP_CH_UPDATE
+				|| IsGM()
+#endif
+				)
 			{
 				WarpSet(victim->GetX(), victim->GetY());
 			}
@@ -6561,19 +6585,31 @@ bool CHARACTER::WarpToPID(DWORD dwPID)
 			return false;
 		}
 
-		if (pcci->bChannel != g_bChannel)
+		if (pcci->bChannel != g_bChannel
+#ifdef WARP_CH_UPDATE
+				&& !IsGM()
+#endif
+			)
 		{
 			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("상대방이 %d 채널에 있습니다. (현재 채널 %d)"), pcci->bChannel, g_bChannel);
 			return false;
 		}
-		else if (false == IS_SUMMONABLE_ZONE(pcci->lMapIndex))
+		else if (false == IS_SUMMONABLE_ZONE(pcci->lMapIndex)
+#ifdef WARP_CH_UPDATE
+					&& !IsGM()
+#endif
+				)
 		{
 			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("상대방이 있는 곳으로 워프할 수 없습니다."));
 			return false;
 		}
 		else
 		{
-			if (!CAN_ENTER_ZONE(this, pcci->lMapIndex))
+			if (!CAN_ENTER_ZONE(this, pcci->lMapIndex)
+#ifdef WARP_CH_UPDATE
+					&& !IsGM()
+#endif
+				)
 			{
 				ChatPacket(CHAT_TYPE_INFO, LC_TEXT("상대방이 있는 곳으로 워프할 수 없습니다."));
 				return false;

@@ -353,6 +353,9 @@ void CInputP2P::FindPosition(LPDESC d, const char* c_pData) const
 #ifdef ENABLE_CMD_WARP_IN_DUNGEON
 		pw.mapIndex = (ch->GetMapIndex() < 10000) ? 0 : ch->GetMapIndex();
 #endif
+#ifdef WARP_CH_UPDATE
+		pw.byChannel = g_bChannel;
+#endif
 		d->Packet(&pw, sizeof(pw));
 	}
 }
@@ -363,7 +366,11 @@ void CInputP2P::WarpCharacter(const char* c_pData) const
 	LPCHARACTER ch = CHARACTER_MANAGER::instance().FindByPID(p->pid);
 #ifdef ENABLE_CMD_WARP_IN_DUNGEON
 	if (ch)
-		ch->WarpSet(p->x, p->y, p->mapIndex);
+		ch->WarpSet(p->x, p->y, p->mapIndex
+#ifdef WARP_CH_UPDATE
+						, p->byChannel
+#endif
+					);
 #else
 	if (ch)
 		ch->WarpSet(p->x, p->y);
@@ -467,6 +474,22 @@ void CInputP2P::IamAwake(LPDESC d, const char * c_pData) const
 	P2P_MANAGER::instance().GetP2PHostNames(hostNames);
 	sys_log(0, "P2P Awakeness check from %s. My P2P connection number is %d. and details...\n%s", d->GetHostName(), P2P_MANAGER::instance().GetDescCount(), hostNames.c_str());
 }
+
+#ifdef DC_P2P_UPDATE
+void CInputP2P::GGDCP2PUpdate(const char * c_pData)
+{
+	const TPacketGGDCP2PUpdate* p = reinterpret_cast<const TPacketGGDCP2PUpdate*>(c_pData);
+
+	LPDESC d		= DESC_MANAGER::instance().FindByCharacterName(p->szName);
+	LPCHARACTER tch	= d ? d->GetCharacter() : NULL;
+
+	if (!tch)
+		return;
+
+	DESC_MANAGER::instance().DestroyLoginKey(d);
+	DESC_MANAGER::instance().DestroyDesc(d);
+}
+#endif
 
 int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 {
@@ -582,6 +605,12 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 		case HEADER_GG_CHECK_AWAKENESS:
 			IamAwake(d, c_pData);
 			break;
+
+#ifdef DC_P2P_UPDATE
+		case HEADER_GG_DC_P2P_UPDATE:
+			GGDCP2PUpdate(c_pData);
+			break;
+#endif
 	}
 
 	return (iExtraLen);

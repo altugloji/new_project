@@ -2282,6 +2282,12 @@ static void GiveExp(LPCHARACTER from, LPCHARACTER to, int iExp)
 	iExp = AdjustExpByLevel(to, iExp);
 	if (test_server)
 		to->ChatPacket(CHAT_TYPE_INFO, "base_exp(%d) * rate(%Lf) = exp(%d) => exp+minGNE+adjust(%d)", iBaseExp, rateFactor/100.0L, iOldExp, iExp);
+
+#ifdef EXP_DEC_IN_DUNGEON
+	if (to->GetMapIndex() >= 10000)
+		iExp /= 4;
+#endif
+
 	// set
 	to->PointChange(POINT_EXP, iExp, true);
 	from->CreateFly(FLY_EXP, to);
@@ -2470,9 +2476,13 @@ namespace NPartyExpDistribute
 
 				switch (m_iMode)
 				{
+#ifdef DISABLE_PARTY_EXP_WITH_LEVEL
+					case PARTY_EXP_DISTRIBUTION_NON_PARITY:
+#else
 					case PARTY_EXP_DISTRIBUTION_NON_PARITY:
 						iExp2 = (DWORD) (_iExp * (float) __GetPartyExpNP(ch->GetLevel()) / total);
 						break;
+#endif
 
 					case PARTY_EXP_DISTRIBUTION_PARITY:
 						iExp2 = _iExp / m_iMemberCount;
@@ -2511,7 +2521,13 @@ typedef struct SDamageInfo
 			pParty->ForEachOnlineMember(f);
 
 			if (pParty->IsPositionNearLeader(ch))
+			{
+#ifdef PARTY_EXP_FIX
+				iExp = iExp * (100 + pParty->ComputePartyBonusExpPercent(f.member_count)) / 100;
+#else
 				iExp = iExp * (100 + pParty->GetExpBonusPercent()) / 100;
+#endif
+			}
 
 			if (test_server)
 			{

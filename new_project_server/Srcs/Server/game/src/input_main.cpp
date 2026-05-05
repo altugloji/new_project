@@ -927,6 +927,15 @@ void CInputMain::ItemDrop2(LPCHARACTER ch, const char * data) const
 
 void CInputMain::ItemMove(LPCHARACTER ch, const char * data) const
 {
+#ifdef FAST_PACKET_BLOCK
+	if (thecore_pulse() - ch->GetPacketLastTime() < PASSES_PER_SEC(0.1))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FAST_PACKET_MESSAGE"));
+		return;
+	}
+
+	ch->SetPacketLastTime();
+#endif
 	const auto pinfo = (struct command_item_move *) data;
 
 	if (ch)
@@ -1090,6 +1099,16 @@ int CInputMain::Shop(LPCHARACTER ch, const char * data, size_t uiBytes) const
 				if (uiBytes < sizeof(BYTE) + sizeof(BYTE))
 					return -1;
 
+#ifdef FAST_PACKET_BLOCK
+				if (thecore_pulse() - ch->GetPacketLastTime() < PASSES_PER_SEC(0.1))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FAST_PACKET_MESSAGE"));
+					return (sizeof(BYTE) + sizeof(BYTE));
+				}
+
+				ch->SetPacketLastTime();
+#endif
+
 				const BYTE bPos = *(c_pData + 1);
 				sys_log(1, "INPUT: %s SHOP: BUY %d", ch->GetName(), bPos);
 				CShopManager::instance().Buy(ch, bPos);
@@ -1100,6 +1119,16 @@ int CInputMain::Shop(LPCHARACTER ch, const char * data, size_t uiBytes) const
 			{
 				if (uiBytes < sizeof(BYTE))
 					return -1;
+
+#ifdef FAST_PACKET_BLOCK
+				if (thecore_pulse() - ch->GetPacketLastTime() < PASSES_PER_SEC(0.1))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FAST_PACKET_MESSAGE"));
+					return sizeof(BYTE);
+				}
+
+				ch->SetPacketLastTime();
+#endif
 
 				const BYTE pos = *c_pData;
 
@@ -1112,6 +1141,16 @@ int CInputMain::Shop(LPCHARACTER ch, const char * data, size_t uiBytes) const
 			{
 				if (uiBytes < sizeof(TPacketCGShopSell))
 					return -1;
+
+#ifdef FAST_PACKET_BLOCK
+				if (thecore_pulse() - ch->GetPacketLastTime() < PASSES_PER_SEC(0.1))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FAST_PACKET_MESSAGE"));
+					return sizeof(BYTE) + sizeof(BYTE);
+				}
+
+				ch->SetPacketLastTime();
+#endif
 
 				const auto p = (TPacketCGShopSell*)c_pData;
 				sys_log(0, "INPUT: %s SHOP: SELL2 pos %d count %d", ch->GetName(), p->pos, p->count);
@@ -1230,6 +1269,15 @@ void CInputMain::Exchange(LPCHARACTER ch, const char * data) const
 		case EXCHANGE_SUBHEADER_CG_ITEM_ADD:	// arg1 == position of item, arg2 == position in exchange window
 			if (ch->GetExchange())
 			{
+#ifdef FAST_PACKET_BLOCK
+				if (iPulse - ch->GetPacketLastTime() < PASSES_PER_SEC(0.1))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FAST_PACKET_MESSAGE"));
+					return;
+				}
+
+				ch->SetPacketLastTime();
+#endif
 				if (ch->GetExchange()->GetCompany()->GetAcceptStatus() != true)
 					ch->GetExchange()->AddItem(pinfo->Pos, pinfo->arg2);
 			}
@@ -1238,6 +1286,15 @@ void CInputMain::Exchange(LPCHARACTER ch, const char * data) const
 		case EXCHANGE_SUBHEADER_CG_ITEM_DEL:	// arg1 == position of item
 			if (ch->GetExchange())
 			{
+#ifdef FAST_PACKET_BLOCK
+				if (iPulse - ch->GetPacketLastTime() < PASSES_PER_SEC(0.1))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FAST_PACKET_MESSAGE"));
+					return;
+				}
+
+				ch->SetPacketLastTime();
+#endif
 				if (ch->GetExchange()->GetCompany()->GetAcceptStatus() != true)
 					ch->GetExchange()->RemoveItem(pinfo->arg1);
 			}
@@ -1246,6 +1303,15 @@ void CInputMain::Exchange(LPCHARACTER ch, const char * data) const
 		case EXCHANGE_SUBHEADER_CG_ELK_ADD:	// arg1 == amount of gold
 			if (ch->GetExchange())
 			{
+#ifdef FAST_PACKET_BLOCK
+				if (iPulse - ch->GetPacketLastTime() < PASSES_PER_SEC(0.1))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FAST_PACKET_MESSAGE"));
+					return;
+				}
+
+				ch->SetPacketLastTime();
+#endif
 				const int64_t nTotalGold = static_cast<int64_t>(ch->GetExchange()->GetCompany()->GetOwner()->GetGold()) + static_cast<int64_t>(pinfo->arg1);
 
 				if (GOLD_MAX <= nTotalGold)
@@ -1292,6 +1358,15 @@ void CInputMain::Exchange(LPCHARACTER ch, const char * data) const
 		case EXCHANGE_SUBHEADER_CG_ACCEPT:	// arg1 == not used
 			if (ch->GetExchange())
 			{
+#ifdef FAST_PACKET_BLOCK
+				if (iPulse - ch->GetPacketLastTime() < PASSES_PER_SEC(0.1))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FAST_PACKET_MESSAGE"));
+					return;
+				}
+
+				ch->SetPacketLastTime();
+#endif
 				sys_log(0, "CInputMain()::Exchange() ==> ACCEPT ");
 				ch->GetExchange()->Accept(true);
 			}

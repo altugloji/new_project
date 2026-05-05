@@ -1638,7 +1638,11 @@ BYTE CParty::GetMemberMinLevel()
 	return bMin;
 }
 
-int CParty::ComputePartyBonusExpPercent()
+int CParty::ComputePartyBonusExpPercent(
+#ifdef PARTY_EXP_FIX
+											int memberCount
+#endif
+										) 
 {
 	if (GetNearMemberCount() <= 1)
 		return 0;
@@ -1649,6 +1653,11 @@ int CParty::ComputePartyBonusExpPercent()
 
 	// UPGRADE_PARTY_BONUS
 	const int iMemberCount=MIN(8, GetNearMemberCount());
+
+#ifdef PARTY_EXP_FIX
+	if (memberCount > 0)
+		iMemberCount = memberCount;
+#endif
 
 	if (leader && (leader->IsEquipUniqueItem(UNIQUE_ITEM_PARTY_BONUS_EXP) || leader->IsEquipUniqueItem(UNIQUE_ITEM_PARTY_BONUS_EXP_MALL)
 		|| leader->IsEquipUniqueItem(UNIQUE_ITEM_PARTY_BONUS_EXP_GIFT) || leader->IsEquipUniqueGroup(10010)))

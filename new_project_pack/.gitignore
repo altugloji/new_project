@@ -1,6 +1,7 @@
 _out
 
 *.eix
+*.edata
 *.epk
 
 ### archives

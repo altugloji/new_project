@@ -905,7 +905,11 @@ bool CHARACTER::DoRefine(LPITEM item, bool bMoneyOnly)
 	int prob = number(1, 100);
 
 	if (IsRefineThroughGuild() || bMoneyOnly)
+#ifdef DISABLE_EXTRA_PROB_FOR_REFINE
+		prob -= 5;
+#else
 		prob -= 10;
+#endif
 
 	// END_OF_REFINE_COST
 
@@ -1626,6 +1630,10 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 			case LIMIT_LEVEL:
 				if (GetLevel() < limitValue)
 				{
+#ifdef DISABLE_ITEM_LEVEL_FOR_GM
+					if (IsGM())
+						break;
+#endif
 					ChatPacket(CHAT_TYPE_INFO, LC_TEXT("¾ÆÀÌÅÛÀÇ ·¹º§ Á¦ÇÑº¸´Ù ·¹º§ÀÌ ³·½À´Ï´Ù."));
 					return false;
 				}
@@ -7817,6 +7825,10 @@ bool CHARACTER::CanEquipNow(const LPITEM item, const TItemPos& srcCell, const TI
 			case LIMIT_LEVEL:
 				if (GetLevel() < limit)
 				{
+#ifdef DISABLE_ITEM_LEVEL_FOR_GM
+					if (IsGM())
+						break;
+#endif
 					ChatPacket(CHAT_TYPE_INFO, LC_TEXT("·¹º§ÀÌ ³·¾Æ Âø¿ëÇÒ ¼ö ¾ø½À´Ï´Ù."));
 					return false;
 				}

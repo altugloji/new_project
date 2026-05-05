@@ -907,7 +907,12 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		bool			SetSyncOwner(LPCHARACTER ch, bool bRemoveFromList = true);
 		bool			IsSyncOwner(LPCHARACTER ch) const;
 
-		bool			WarpSet(long x, long y, long lRealMapIndex = 0);
+		bool			WarpSet(long x, long y, long lRealMapIndex = 0
+#ifdef WARP_CH_UPDATE
+							, BYTE byChannel = 0
+#endif
+						);
+
 		void			SetWarpLocation(long lMapIndex, long x, long y);
 		void			WarpEnd();
 		const PIXEL_POSITION & GetWarpPosition() const { return m_posWarp; }
@@ -2118,6 +2123,15 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		uint64_t GetGuildToken() const;
 		void SendGuildToken();
 #endif
+
+#ifdef FAST_PACKET_BLOCK
+	private:
+		int					m_iPacketTime;
+	public:
+		int					GetPacketLastTime() const { return m_iPacketTime; }
+		void				SetPacketLastTime() { m_iPacketTime = thecore_pulse(); }
+#endif
+
 };
 
 ESex GET_SEX(LPCHARACTER ch);

@@ -119,6 +119,15 @@ enum eCommonDefines {
 #define __BL_MULTI_LANGUAGE_ULTIMATE__
 
 #define GUILD_LARGE_ICON
+#define ENABLE_SPAMDB_REFRESH	//spam_db otomatik chat ban
+//#define DC_P2P_UPDATE												// Farklı CH'de ki oyuncuyu dc atmak için
+#define WARP_CH_UPDATE												// Farklı CH'de ki oyuncunun yanına gitmek için
+#define EXP_DEC_IN_DUNGEON											// Zindanlarda %90 Daha Az EXP
+#define DISABLE_EXTRA_PROB_FOR_REFINE								// Lonca demiricis ekstra şans azaltma
+#define DISABLE_PARTY_EXP_WITH_LEVEL								// Grup exp bug fix
+#define DISABLE_ITEM_LEVEL_FOR_GM									// GM her level itemi giyebilir.
+#define FAST_PACKET_BLOCK											// Paket buglarını önlemek için süre engelleri
+#define PARTY_EXP_FIX												// Grup bugu. Karakteri ortaya alma.
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

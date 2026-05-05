@@ -1337,6 +1337,7 @@ class ItemToolTip(ToolTip):
 		self.__AppendSealInformation(window_type, slotIndex) ## cyh itemseal 2013 11 11
 
 		self.AdditionalTips(window_type, itemVnum, metinSlot, slotIndex)
+		self.AppendAntiFlagInformation()
 		self.ShowToolTip()
 
 	def AdditionalTips(self, window_type, itemVnum, metinSlot, slotIndex):
@@ -1649,6 +1650,27 @@ class ItemToolTip(ToolTip):
 
 		if item.IsAntiFlag(item.ITEM_ANTIFLAG_FEMALE):
 			textLine = self.AppendTextLine(localeInfo.FOR_MALE, self.NORMAL_COLOR, True)
+			textLine.SetFeather()
+
+	def AppendAntiFlagInformation(self):
+		flagList = [
+			[item.ITEM_ANTIFLAG_GIVE, "Verilemez"],
+			[item.ITEM_ANTIFLAG_SAFEBOX, "Depolanamaz"],
+			[item.ITEM_ANTIFLAG_SELL, "Satilamaz "],
+		]
+
+		antiflagNames = ""
+		size = len(flagList)
+		for i in xrange(size):
+			if item.IsAntiFlag(flagList[i][0]):
+				antiflagNames += flagList[i][1]
+				if (i < size-1):
+					antiflagNames += " - "
+
+		if antiflagNames != "":
+			self.AppendSpace(5)
+			# self.AppendTextLine("[ Bu Eşya İle Yapamayacakların ]", self.DISABLE_COLOR)
+			textLine = self.AppendTextLine("(" + antiflagNames[:-1] + ")", self.DISABLE_COLOR, True)
 			textLine.SetFeather()
 
 	def __AppendPotionInformation(self):
