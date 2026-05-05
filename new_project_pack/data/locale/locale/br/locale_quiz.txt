@@ -1,0 +1,63 @@
+1	1	Uchiha é um nome de família, do desenho Naruto.
+1	2	Aang é o nome do Último Dobrador de Ar.
+1	3	O objetivo da Nação do Fogo em Avatar é promover a paz.
+1	4	Zuko é irmão de Katara em Avatar.
+1	5	Sokka, de Avatar, é um guerreiro da Nação da Terra.
+1	6	Appah, de Avatar, é um Lêmure Voador dos Nômades do Ar.
+1	7	Aang, de Avatar, pode dominar três elementos, Fogo, Terra e Água.
+1	8	Sokka, de Avatar, é um dobrador de água.
+1	9	Katara, de Avatar, é uma dobradora de água.
+1	10	Sozen foi um dos Imperadores da Nação do Fogo.
+1	11	A Avó de Katara, de Avatar, era uma dobradora de Água.
+1	12	O nome do pai de Naruto é Namikaze Minato.
+1	13	O nome do cachorro do TinTin é Milu.
+1	14	O nome do Líder dos Thundercats é Lion-o.
+1	15	Pikashu é o nome de um Pokémon.", false)
+1	16	Mumm-Rah é o arqui-inimigo dos Thundercats.
+1	17	Zetsu é o nome de um dos Membros da Akatsuki.
+1	18	Tobi é o melhor amigo de Naruto.
+1	19	A voz de Mickey Mouse já foi interpretada pelo próprio Walt Disney.
+1	20	O Scooby-Doo não é um cachorro da raça Dogue Alemão.
+1	21	A arma de Hank da Caverna do Dragão é um arco.
+1	22	Em As Meninas Super Poderosas, a garota de cabelo ruivo é a Docinho.
+1	23	Snoopy é um cão da raça Beagle.
+1	24	Pokémon começou com uma leva de 150 Pokémons diferentes.
+1	25	A dona do Coragem, o cão covarde é a Muriel.
+1	26	South Park está no Guiness como o filme de animação produzido em menor tempo.
+1	27	O nome do cachorro do Cebolinha é Costelinha.
+1	28	He-man foi lançado em 1983.
+1	29	O nome da mãe de Johnny Bravo é Bunny Bravo.
+1	30	Os nomes das Três Espiãs Demais são: Sam, Clover e Phoebe.
+1	31	As cores do vestido das meninas super poderosas são azul, verde e vermelho.
+1	32	O nome da cidade que as meninas super poderosas vivem é Toonsville.
+1	33	Lara Bello é o nome da secretária do desenho As Meninas Super Poderosas.
+1	34	Wanda, do desenho Os Padrinhos Mágicos não tem os cabelos azuis.
+1	35	Cosmo e Wanda, do desenho Os Padrinhos Mágicos usam coroas na cabeça.
+1	36	A.J. e Chester são os melhores amigos de Timmy.
+1	37	Sakuke, do desenho Naruto, adora o irmão Itachi.
+1	38	Kakashi tem o olho direito tampado.
+1	39	Dexter, do desenho Laboratório de Dexter, adora sua irmã Dee Dee.
+1	40	Gwen Tennyson é prima do Ben, do desenho Ben 10.
+1	41	O nome da irmão do Dexter, do desenho Laboratório de Dexter é Kiddy.
+1	42	O nome do livro quatro da animação A lenda de Korra é Destruição.
+1	43	O segundo epsódio do livro 2 da animação A lenda de Korra se chama As Luzes do Sul.
+1	44	Bucky é a Grande Criança de Secandas no anime Bucky.
+1	45	Pink do anime Bucky tem cabelo rosa.
+1	46	Spaak é a antiga Grande Criança de Primas no anime Bucky.
+1	47	Bucky chama seu espirito de estranho no anime Bucky.
+1	48	O monstro guia de Bucky se chama Chicky no anime Bucky.
+1	49	O Rei Gelado é pai da Marceline no desenho Hora da Aventura.
+1	50	Gutter é um pinguim qualquer no desenho Hora da Aventura.
+1	51	Asuna Kiritsugu é um personagem que apareceu na 6ª temporada do One Piece.
+1	52	Saltitão tem mais de 100 anos no desenho Apenas um Show.
+1	53	Atualmente Tom Cruise mora no armário do Stan no desenho South Park.
+1	54	Em South Park, Al Gore procura o tenebroso Homem Urso Cabra?.
+1	55	O Kyle é de New Jersey no desenho South Park.
+1	56	No desenho Popeye é um marinheiro.
+1	57	No desenho Popeye Dudu odeia hamburgers.
+1	58	No desenho Popeye Brutus é o melhor amigo do protagonista.
+1	59	Bob Esponja é um caracol do mar.
+1	60	Bob Esponja vive em um abacaxi.
+1	61	She-Ra é irmã de He-man.
+1	62	No desenho O Gato Félix o protagonista era dublado por José Luiz Barbeito.
+

@@ -1,0 +1,7 @@
+[DELAY value;0]
+Minél többet szurkoltál a választott csapatodnak,[ENTER]
+annál több jutalmat kapsz, ha õk nyernek.[ENTER]
+Ország jegy: Futball világbajnokság trófeára[ENTER]
+beváltáskor szerezhetõ.[ENTER]
+Szurkolói jegy: Futball világbajnokság ládából[ENTER]
+szerezhetõ.

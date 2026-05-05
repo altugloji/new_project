@@ -1,0 +1,40 @@
+1	Alfa Ulve
+2	Pakkens Leder
+3	Enestående
+4	Tiger, Bjørn, Vildsvin
+5	Den Hvide Eds Hævn
+6	Den Sorte Storms Hævn
+7	Brødre
+8	Familiebånd
+9	Grusomt og Brutalt
+10	Næsten Menneske
+11	Evige Vagter
+12	Nefrit Vagter
+13	Tordenbjergernes Herskere
+14	Problemer på Gautama Klippen
+15	Abens Onkler
+16	Hulens Herskere
+17	Djævelsk
+18	Sung Mahis Tjenere
+19	Slutningen Retfærdiggør Midlerne
+20	Skovens Vagter
+21	Sung Mahis Generaler
+22	Lynets Stjernetegn
+23	Ildens Stjernetegn
+24	Isens Stjernetegn
+25	Vindens Stjernetegn
+26	Jordens Stjernetegn
+27	Mørkets Stjernetegn
+28	Level Vagten
+29	Sung Mahis Quag
+30	Halv-Menneske Hersker
+31	Isende Vagt
+32	Hule Trioen
+33	Den Giftige Dronning
+34	Det Brændende Tårn
+35	Det Frosne Tårn
+36	Det Elektrificerede Tårn
+37	Det Stormede Tårn
+38	Det Stedfaste Tårn
+39	Det Mørke Tårn
+40	Alastors Ende

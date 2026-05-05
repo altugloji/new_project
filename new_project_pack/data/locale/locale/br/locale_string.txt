@@ -1,0 +1,1857 @@
+1	Todos serão enviados para a cidade em instantes.
+2	Item inexistente.
+3	A Arca explodiu com um estrondo! A explosão o deixou ferido!
+4	<Guilda>  A troca de Terreno de Guilda não foi bem sucedida. 
+5	<Guilda> A Troca de Terrenos não foi bem sucedida pois o gold é insuficiente.
+6	<Guilda> Não pode deixar a guilda enquanto sua guilda está em votação.
+7	<Guilda> O membro da guilda está off-line ou em outros mapas.
+8	<Guilda> Não é possível definir a posição enquanto você está em uma guerra de guild .
+9	<Guild> Não é possivel realizar uma nova votação enquanto outra votação estiver ocorrendo.
+10	<Guilda> Não pode fazer isso enquanto você estiver em uma guerra de guild .
+11	<Guilda> Não é possível melhorar pois o cofre da guilda está cheio. 
+12	<Guilda> Não é possível utilizar o armazém enquanto estiver em uma votação.
+13	Uma fumaça verde escapou da Arca, e o deixou envenenado!
+14	<Guilda> Não é possível fazer isso enquanto o armazém de guildas estiver aberto.
+15	<Guilda> Não pode mudar a autoridade enquanto estiver em uma guerra de guild .
+16	<Guilda> %s Usou %s.
+17	<Guilda> Você não tem autoridade para utilizar uma skill de guilda. 
+18	<Guilda> Você está em modo de observador devido a exceder o limite de resurreição.
+19	<Guilda> Por favor, verifique membro e líder.
+20	<Guilda> Por favor, verifique membros e líderes adversários.
+21	<Guilda> Alguns membros estão off-line ou em outros mapas.
+22	<Guilda> Alguns membros da guilda oponente estão off-line ou em outros mapas.
+23	<Guilda> Não há ninguém para realizar a guerra.
+24	Você recebeu %s x%d.
+25	<Guilda> Não pode fechar enquanto está em uma guerra de guilda.
+26	<Guilda> Pode usar após 10 segundos.
+27	<Guilda> O nível de personagem deve ser 40 ou mais para obter autoridade de líder.
+28	<Guilda> Guilda %s ganhou.
+29	<Guilda> Empate.
+30	<Guilda> Não é possível expulsar um membro da guilda durante uma guerra. 
+31	<Guilda> Não pode votar para expulsar o líder da guilda.
+32	<Guilda> Não pode votar para expulsar-se.
+33	<Guilda> Você precisa do Anel da Sucessão para trocar o líder da guilda.
+34	<Guilda> Não há lugar suficiente para o dinheiro da guild.
+35	Você recebeu %s.
+36	<Guilda> Você não pode deixar a guild dentro de 12 horas. Depois de usar o armazém da guilda.
+37	<Guilda> O objeto final apareceu para a guilda [%s].
+38	<Guilda> A Guerra terminou há 5 minutos.
+39	<Guilda> A Guerra terminou há 1 minuto.
+40	<Guilda> A lista não existe.
+41	<Guilda> No momento nenhuma guilda finalizou a dungeon. 
+42	<Guilda> Ranking de Renovação.
+43	<Guilda> O Covil de Meley começou!
+44	<Guilda> Você tem 1 hora para finalizar a dungeon. 
+45	<Guilda> Você finalizou o Covil de Meley com sucesso!
+46	É a chave errada!
+47	<Guilda> Tempo de finalização: %dmin. %dsec.
+48	<Guilda> Você será teleportado em 10 minutos.
+49	<Guilda> Tempo esgostado.
+50	<Guilda> A Dungeon está fechada. 
+51	<Guilda> Você será teleportado em 1 minuto.
+52	<Guilda> A Dungeon será fechada em %d min.
+53	<Guilda> Você desistiu do Covil do Dragão.
+54	<Guilda> Você não pode declarar guerra enquanto estiver numa dungeon.
+55	<Guilda> A guilda oponente está numa dungeon.
+56	Está vazia.
+57	<Guilda> Você está registrado para entrar no Covil de Meley.
+58	<Guilda> Por favor, entre atráves do NPC.
+59	O Evento de Verão começou.
+60	O Evento de Verão terminou.
+61	Há mais um bom efeito.
+62	<Guilda> 10 segundos após o depósito, você pode usá-lo.
+63	<Guilda> Outro membro está usando o gold da guilda.
+64	<Guilda> A Guilda [%s] foi aniquilada e a Guilda [%s] ganhou esta batalha .
+65	Você não abre esta caixa, porque seu dinheiro está está acima de 2 bilhões de gold.
+66	<Guilda> Necessário mais Gold de Guilda.
+67	Gold insuficiente.
+68	<Guilda> Sucesso alterar posição do objeto.
+69	123456789
+70	<Transformação de itens> Você não pode equipar o item transformado devido ao gênero.
+71	<Transformação de itens> Você não pode equipar o item transformado devido a classe.
+72	<Cartas de Monstro>Você matou %d estágios %s.
+73	<Cartas de Monstro>Você completou a caçada, receba a recompensa.
+74	<Cartas de Monstro> Você não possui espaço no inventário.
+75	<Cartas de Monstro> [%s] Você terminou a atualização.
+76	<Cartas de Monstro> A Movimentação foi adicionada.
+77	<Cartas de Monstro> A Transformação foi adicionada.
+78	O nível da Skill foi reduzido.
+79	<<Cartas de Monstro> O Teleport foi adicionado.
+80	<Guilda> Não entre! Líder da Guilda.
+81	<Guilda> Não é um possível candidato ( Nível Possível: %d )
+82	<Guilda> Outra guilda ou a sua guilda possui 10 segundos após o depósito.
+83	<Guilda> Guilda %s comprou Terreno!.
+84	<Guilda> Outro canal está rodando o Covil do Dragão
+85	<Guilda> Servidor de Eventos está em manutenção. 
+86	<Guilda> Marque o pedido concluído.
+87	<Guilda> Este terreno é propriedade de outro jogador.
+88	Não foi possível reduzir o nível da Skill.
+89	Seu nível é muito baixo. (Nível Necessário : %d ).
+90	Você não pode entrar na Batalha Campal nesse mapa.
+91	Você não está autorizado a se teleportar, feche todas as janelas.
+92	Você não pode teleportar estando morto.
+93	Você será teleportado, aguarde um instante.
+94	Você está saindo da Batalha Campal, aguarde um instante.
+95	Você tem %d minutos restantes para a próxima entrada.
+96	Você tem %d segundos restantes para a próxima entrada.
+97	Esse item só pode ser usado na Batalha Campal.
+98	Você não pode usar nesse mapa.
+99	O item já está em uso.
+100	Você não possui nenhum O Player que Renasce.
+101	A Batalha Campal está aberta.
+102	A Batalha Campal está fechada.
+103	A Batalha Campal será aberta em %d minuto(s).
+104	A Batalha Campal será fechada em %d minuto(s).
+105	O Evento 2x está ativo!
+106	O Evento da Batalha Campal foi encerrado.
+107	A solicitação de saída foi feita, você pode sair em %d minutos.
+108	Esse jogador está em solicitação de saída, caso o mate receberá mais pontos!
+109	A solicitação de saída foi cancelada.
+110	Não há espaço suficiente para receber a premiação. Esvazie o inventário.
+111	Com uso somente nas Lan Houses parceiras.
+112	Você está em solicitação de saída.
+113	Não é permitido entrar na Batalha Campal Agora.
+114	Você recebeu uma recompensa por ficar no lugar %d no ranking da Batalha Campal.
+115	Você ganhou %d ponto(s). (Pontos Totais: %d)
+116	YVocê não pode usar enquanto aguarda a saída.
+117	Você não pode declarar guerra durante a Batalha Campal.
+118	Você não pode realizar essa ação nesse mapa.
+119	Número Restante: %d
+120	<Guilda> Gold da guilda está acima do limite .
+121	<Guilda> Você não retira Gold, porque você tem mais de 2 bilhões de gold.
+122	Não pode usar novamente.
+123	<Guilda> Você não pode retirar Gold se outra janela de comércio estiver aberta.
+124	<Guilda> A declaração será fechada em 3 minutos .
+125	%d segundos para entrar na Batalha Campal.
+126	%d segundos para sair da Batalha Campal.
+127	Você perdeu %d ponto(s). (Pontos Restantes: %d)
+128	Seu invertário está cheio.
+129	Você não pode receber pontos desse jogador.
+130	TA solicitação de saída foi feita, você pode sair em %d segundos.
+131	O Evento de Páscoa Começou!
+132	Semente ou Bolo Lunar foi utilizado.
+133	Remova %s da lista de amigos para prosseguir.
+134	%s foi adicionado à sua lista de bloqueios.
+135	%s foi removido da sua lista de bloqueios.
+136	%s já está em sua lista de bloqueios.
+137	Seu cônjuge não pode ser adicionado à lista de bloqueios.
+138	Remova %s da lista de bloqueio para prosseguir.
+139	Você foi adicionado à lista de bloqueio de %s.
+140	O monstro do 10º Aniversário apareceu!
+141	Sem bandeiras suficientes
+142	O Evento de 10º Aniversário Começou!
+143	Você não pode utilizar o anel de casamento caso esteja solteiro.
+144	O Evento de 10º aniversário termina em  %d Minutos.
+145	Voce nao pode equipa-lo enquanto usa um traje.
+146	Voce nao pode equipa-lo enquanto usa uma roupa formal.
+147	Você não pode fazer isso com um item equipado.
+148	<Guilda> Se outra janela estiver aberta, não é possível depositar ou retirar Gold.
+149	<Guilda> Você não pode negociar Gold com a janela de retirada e depósito do banco da Guilda aberta
+150	<Guilda> A janela de depósito e retirada já está aberta.
+151	<Guilda> Se você invocar um Pet, você não pode depositar ou retirar dinheiro.
+152	%s Foi invocado em %s.
+153	Vale Suryoung
+154	Parece que o detector de evento não está funcionando neste local.
+155	Montanha Sohan
+156	Deserto Yongbi
+157	Campo Doyama
+158	123456789
+159	123456789
+160	Não pode trocar de Canal.
+161	Aguarde. O Canal será trocado.
+162	Esse item não pode ser absorvido pela Faixa.
+163	Esse item não pode ser transformado.
+164	<Item do Aprendiz> Os adicionais desse item não podem ser alterados.
+165	O detector do evento está sumindo emanando uma luz misteriosa.
+166	<Item do Aprendiz> Os adicionais desse item não podem ser alterados.
+167	A troca só é possível ao estar no mesmo mapa.
+168	Não é possível acessar o canal. Tente novamente mais tarde.
+169	<Formação de Grupo>Você não pode fazer isso enquanto a formação de grupo ocorre.
+170	<Gaya> Você não tem Gemas Brutas o suficiente.
+171	<Gaya> Você não tem Gold para refinar.
+172	<Gaya> O Gaya excede o limite permitido.
+173	<Gaya> Refinado com sucesso!
+174	<Gaya> Falha na refinação.
+175	<Gaya> A lista de itens foi atualizada.
+176	O detector do evento sumiu sem deixar rastros.
+177	<Gaya> Você não tem Gaya suficiente.
+178	<Gaya> Você não pode comprar esse item.
+179	<Gaya> Seu inventário está cheio.
+180	<Gaya> Você não tem Resets de Gaya suficientes.
+181	<Gaya> A Loja de Gaya deve ser aberta primeiro.
+182	<Gaya> Você não tem espaços para expandir.
+183	<Gaya> (%s) Precisa de %d Gaya a mais
+184	<Gaya> A Loja de Gaya está indisponível no momento.
+185	<Gaya> A Loja de Gaya está aberta.
+186	<Gaya> Você não pode abrir a Loja de Gaya enquanto tiver outra janela aberta.
+187	Parece que o detector de Pedra Espiritual não está funcionando neste local.
+188	<Grupo> A batalha começou.
+189	<Grupo> Você tem 1 hora para terminar a Dungeon.
+190	<Grupo> Você superou o desafio.
+191	<Grupo> Tempo de conclusão: %dm %dsec.
+192	<Grupo> Você será teleportado depois de 10 minutos.
+193	<Grupo> Você se registrou no Covil de Meley.
+194	<Grupo> Por favor, entre através do NPC.
+195	<Grupo> Você desistiu do desafio.
+196	<Grupo> Você voltará para a cidade dentro de um minuto.
+197	Vá para %s e pegue sua recompensa.
+198	O detector de Pedra Espiritual está sumindo emanando uma luz misteriosa.
+199	<Grupo> Rankings são registrados para batalha em grupo do Covil de Meley.
+200	<Grupo> Você não pode sair durante a Dungeon.
+201	<Grupo> Desafio finalizado
+202	<Grupo> Sair da Dungeon.
+203	<Grupo> A Dungeon terminou a %d minutos atrás.
+204	Adquiriu item: %s - %d
+205	Não pode abrir uma loja enquanto estiver fora-de-combate.
+206	Não pode usar itens enquanto estiver fora-de-combate.
+207	Esse comando só é permitido em masmorras instanciadas.
+208	Sem talismãs suficientes.
+209	O detector de Pedra Espiritual sumiu sem deixar rastros.
+210	Há algo que você ainda não fez.
+211	Você precisa de mais Cofres Verdes e Cofres Amarelos para ser recompensado.
+212	Você ressuscitou %s.
+213	Foi ressuscitado com a ajuda de %s.
+214	Item de ressurreição insuficiente.
+215	Ressuscitado.
+216	Uso não permitido nesse mapa.
+217	Não pode usar agora.
+218	%s ressuscitado.
+219	Concluiu o 1º andar. Volte ao Zodiwahdan e conte o resultado.
+220	Você adquiriu %s.
+221	Apareceu uma pedra dentro da concha!
+222	Os membros estão fora-de-combate. Não se pode mais prosseguir com a missão.
+223	Concluiu todos os andares. Será transportado para o andar bônus.
+224	Missão completa(Pode ir para o andar %d se o líder apertar o botão de pulo.)
+225	Missão falhada.
+226	Exterminado. A masmorra terminará se ninguém ressuscitar em um minuto.
+227	O tempo acabou.
+228	Você não pode se transportar para masmorras instanciadas.
+229	Os membros do grupo precisam estar no mesmo mapa para entrar.
+230	Você não é o líder do grupo.
+231	Há %d masmorras instanciadas nesse mapa. Insira o comando se você quer ir para CriarMasmorra <1~%d>.
+232	A concha sumiu sem deixar rastros...
+233	Se mmasmorras instanciadas nesse mapa.
+234	Destrua 10 Metins
+235	Destrua 10 Metins (Bonus)
+236	Destrua 12 Metins
+237	Destrua 5 Metins
+238	Advinhe e mate os 5 monstros alvo
+239	Pode usar o Mercador por 5 minutos (Bonus)
+240	Destrua 6 Metins
+241	Destrua 8 Metins
+242	Destrua todas Metins
+243	Apareceu uma Pérola Branca dentro da concha!
+244	Destrua todas Metins e mate o chefe
+245	Destrua todas Metins
+246	Mate todos os monstros
+247	Mate todos os inimigos
+248	Mate 100 monstros
+249	Mate 80 monstros
+250	Mate todos os monstros
+251	Você falhou em conseguir o bônus.
+252	Mate todos os monstros chefes
+253	Apareceu uma Pérola Azul dentro da concha!
+254	Mate o monstro chefe
+255	Mate o chefe
+256	Mate o chefe sem ser derrotado
+257	Mate todos os inimigos sem ser derrotado
+258	Acabou o tempo. Tente de novo outra hora.
+259	Mate o último chefe (último andar)
+260	Advinhe e mate o monstro alvo
+261	Destrua uma das Metins (Bônus)
+262	Destrua a Metin correta (bônus se conseguir)
+263	123456789
+264	Apareceu uma Pérola Vermelha dentro da concha!
+265	123456789
+266	123456789
+267	123456789
+268	123456789
+269	123456789
+270	123456789
+271	123456789
+272	123456789
+273	123456789
+274	Este livro é muito complexo para ser entendido.
+275	123456789
+276	123456789
+277	123456789
+278	123456789
+279	123456789
+280	123456789
+281	123456789
+282	123456789
+283	123456789
+284	Este livro não parece oferecer nada de interessante.
+285	123456789
+286	123456789
+287	O Evento Metin2 Yutnori começou!!
+288	Aaproveite o mini-game matando monstros.
+289	Várias recompensas o esperam.
+290	O Evento Metin2 Yutnori terminou!!
+291	Obtenha recompensas marcando o ranking através do NPC de eventos.
+293	<Magatamas> Você pode obter o efeito quando usar %s.
+294	<Magatamas> Já está em seu nível mais alto.  
+295	Não pode aprender essa habilidade antes do nível 30.
+296	<Magatamas> Item em uso.
+297	Ao usar o sistema de refinação, você não pode alimentar seu pet.
+298	[Evento da Sorte]Em %s , %s apareceu.
+299	Vila Jayang
+300	Vila Bokujong
+301	Vila Bakura
+302	Templo Miokio
+303	Gomi 1
+304	Gomi 2
+305	Não pode aprender essa habilidade antes do nível 50.
+306	Gautama
+307	Nephrite
+308	Trovão
+309	Floresta Encantada
+310	Gruta Chun 1
+311	Gruta Chun 2
+312	Não pode entrar enquanto montado.
+313	Não pode ser usado em itens equipados
+314	123456789
+315	123456789
+316	Não é possível continuar o treinamento dessa habilidade.
+317	%d mais %s é necessário.
+318	É impossível usar após o evento.
+319	É impossível usar acima do nível máximo.
+320	%s Buff aumentou para %d nível.
+321	Não conseguiu aumentar %s o nível do Buff para o %d nível.
+322	Mudou para %s buff.
+323	Não foi possível mudar para %s buff.
+324	%s Buff está ativado.
+325	%s O buff não foi ativado.
+326	O Evento das Flores foi iniciado!
+327	A Guilda %s capturou a bandeira da Guilda %s!
+328	Já é um idioma que você entende perfeitamente.
+329	O Evento das Flores foi encerrado!
+330	<Correio> Aguarde 10 segundos para abrir o correio novamente.
+331	<Correio>Você não pode abrir seu correio com outras janelas abertas (armazém, trocas, lojas, etc).
+332	<Correio>O correio está cheio.
+333	<Correio>Por favor, limpe seu correio.
+334	<Correio>Você não pode usar isso agora.
+335	123456789
+336	123456789
+337	<Correio>Você recebeu %d Won
+338	<Guilda> %d gold foi depositado.
+339	Não é possível continuar o treinamento.
+340	<Guilda> A negociação de terrenos foi cancelada porque você já tem um terreno.
+341	<Guilda> A negociação foi cancelada porque a guilda já tem um terreno.
+342	Não pode receber nada.
+343	O evento Pegue o Rei acabou de começar!!
+344	Destrua monstros para jogar mini-games
+345	Muitas recompensas o aguardam.
+346	O evento Pegue o Rei terminou.
+347	Cheque o ranking e ganhe recompensas pelo NPC do evento.
+349	%s fez %d no mini-game.
+350	É necessário um nível maior para ler este livro.
+351	Já foi usada.
+352	A instância Onda de Defesa foi criada. Por favor, vá até o Pescador.
+353	Estamos sendo atacados por monstros aquáticos! Prepare-se para a batalha!
+354	Um novo ataque está acontecendo! Prepare-se para a batalha!
+355	Você protegeu a vela com sucesso e chegou a um novo continente. Vá até o portal.
+356	Você não aguentou continuar. A batalha acabou.
+357	Você não aguenta continuar. A instância será finalizada em %d segundos.
+358	Você não aguenta continuar. A instância será finalizada em %d minutos.
+359	A batalha começará em %d seg.
+361	A batalha começará em %d min.
+362	Você perdeu, pois não iniciou a batalha.
+363	Você perderá automaticamente caso não inicie a batalha dentro de 1 minuto.
+364	O HP restante da %s é %d%%.
+365	O navio está afundando porque a vela foi destruída. Você retornará para a vila.
+366	Missão da Fase %d: Durante %d segundos, proteja %s.
+367	Missão da Fase %d: Enquanto protege %s, derrote a %s.
+368	Missão completa. Iniciando a próxima fase.
+369	Faltam %ds para iniciar a próxima fase.
+370	Estátua de %s.
+371	Você já aprendeu tudo o que podia através desse livro.
+372	Você ainda não pode desistir. Espere mais %d segundos.
+373	123456789
+374	<Correio>Você precisa aguardar %d segundos depois de abrir o correio para poder mudar de canais ou teleportar.
+375	Imposto configurado em: %d %
+376	Você não tem o nível necessário para utilizar essa Skill de Montaria.
+377	Você conseguiu ler o Livro devido ao Pergaminho do Exorcismo.
+378	Você não pode ler o Manual de Montaria novamente.
+379	Conseguiu ler o Manual de Montaria com sucesso!
+380	Pontos insuficientes para aumentar o nível de Montaria.
+381	%s conseguiu capturar a bandeira da Guilda %s!
+382	Não conseguiu ler o Manual de Montaria.
+383	Sinto uma luz dentro de mim. Como se tirassem um peso de minhas costas.
+384	Recebeu %d Pontos de Honra.
+385	Não é possível tingir ou remover a tintura com o corte de cabelo atual.
+386	Você poderá tingir o cabelo novamente no nível %d.
+387	Esse item só pode ser usado pelo sexo oposto.
+388	Impossível usar essa localização.
+389	Aguarde, você será teleportado em breve.
+390	Retornar onde estava anteriormente.
+391	Você não pode usar %s%s dentro de uma Dungeon.
+392	<Quest> Pode receber apenas uma vez.
+393	_
+394	_
+395	Não há nenhum Slot.
+396	Impossível alterar as propriedades do item.
+397	Não há nenhuma propriedades para alterar.
+398	Aguarde %d minutos antes de tentar fazer uma nova modificação.(Faltam %d minutos )
+399	Propriedade alterada com sucesso!
+400	Propriedade adicionada com sucesso!
+401	Não foi possível adicionar a propriedade.
+402	Não é possível adicionar mais propriedades através desse item.
+403	Não é possível utilizar na Arena.
+404	Não é possível adicionar mais propriedades através desse item.
+405	Use um Pergaminho do Novo Aprimoramento antes de adicionar a propriedade.
+406	Parabéns!! Você adicionou um Slot com sucesso!
+407	Oh não!! Você não conseguiu adicionar um Slot ao item!
+408	Não há mais espaço para Slots neste acessório.
+409	Você não pode adicionar Slots nesse tipo de item!
+410	A tentativa de acoplar foi bem sucedida!
+411	A tentativa de acoplar falhou!
+412	O item não possui Slots. Crie um Slot usando um Diamante.
+413	Não há nenhum Slot disponível no item.
+414	Você precisa de uma Máscara Emotiva para utilizar as expressões.
+415	Você deve criar um Slot através de um Diamante.
+416	Não é possível adicionar mais jóias neste acessório.
+417	Não é possível acoplar esse tipo de jóia nesse item.
+418	Impossível trocar a isca durante a pescaria.
+419	A isca anterior foi retirada, e %s foi preso no anzol.
+420	%s foi preso no anzol da Vara de Pescar.
+421	Falta ingredientes para criar a poção.
+422	Ainda falta o ingrediente %s.
+423	Faltam garrafas vazias.
+424	A criação da poção falhou.
+425	Apenas para personagens femininos.
+426	Impossível adicionar mais de um tipo de jóia.
+427	Não é possível incluir esta jóia neste equipamento.
+428	Não é possível incluir esta jóia nesta arma.
+429	Parabéns!! A jóia foi acoplada com sucesso!
+430	Oh não!! Você falhou em acoplar a jóia!
+431	Não há espaço para um novo slot.
+432	Não é possível utilizar.
+433	Impossível usar Pergaminhos de Retorno durante a Guerra da Encruzilhada.
+434	Aguarde %d segundos após fechar o Armazém antes de usar esse item.
+435	Não é possível utilizar pergaminhos de retorno com janelas troca abertas.
+436	Usuário inexistente.
+437	Aguarde %d segundos após uma refinação antes de usar esse item.
+438	Após abrir a Loja Particular, não poderá utilizar Pergaminho de Retorno dentro de %d segundos
+439	Está muito perto do destino para usar um Pergaminho de Retorno.
+440	Aguarde %d segundos após uma negociação para teleportar-se.
+441	Impossível usar esse item com uma janela de troca aberta.
+442	Impossível se desfazer desse item.
+443	Itens no chão desaparecem após 3 minutos.
+444	Adquiriu %s.
+445	Seu inventário está cheio.
+446	Obteve o item: do jogador %s para o jogador %s.
+447	Em instantes o império será enviado para a cidade.
+448	Está muito perto.
+449	Item entregue: do jogador %s para o jogador %s.
+450	Impossível alterar equipamentos durante a transfiguração.
+451	Impossível utilizar em movimento.
+452	Não pode usar esse item em montarias saudáveis.
+453	Impossível alimentar um cavalo inconsciente.
+454	O item foi usado em sua montaria.
+455	Você alimentou seu cavalo.
+456	Você não pode usar esse corte de cabelo nesse nível.
+457	Você já está utilizando este tipo de corte de cabelo.
+458	Você já está transfigurado.
+459	Está muito longe.
+460	Item de transfiguração incorreto.
+461	Não é possível transformar num monstro com nível muito maior que o meu.
+462	Não possui o nível necessário para equipar esse item.
+463	Não possui FOR suficiente.
+464	Não possui INT suficiente.
+465	Não possui DES suficiente.
+466	Não possui VIT suficiente.
+467	Não pode usar pois ainda não está casado.
+468	Impossível equipar dois itens únicos ao mesmo tempo.
+469	123456789
+470	Item utilizado por casais.
+471	A jóia inserida em %s irá desaparecer.
+472	<Guilda> Nome inadequado.
+473	<Guilda> Nome já existente.
+474	<Guilda> Não foi possível criar a Guilda.
+475	Guilda %s desafiou a Guilda %s para Guerra entre Guildas!
+476	<Guilda> Guilda %s recusou o desafio para Guerra.
+477	A Guerra entre as Guildas %s e %s irá começar em breve.
+478	A Guerra entre as Guildas %s e %s começou!
+479	As Guerra entre as Guildas %s e %s resultou em empate!
+480	A Guilda %s derrotou a Guilda %s em uma Guerra entre Guildas!
+481	Você precisa da permissão do usuário para fazer isso.
+482	<Guilda> A Guerra entre Guildas foi cancelada.
+483	A Guerra entre as Guildas %s e %s foi cancelada.
+484	Fechar
+485	Cancelada por iniciar a batalha.
+486	A conexão foi finalizada, houve uma conexão simultânea em outro computador.
+487	Uma luz misteriosa surgiu na árvore.
+488	Depósito bem sucedido, %d minutos adicionados (Num: %d)
+489	Participar da Guerra entre Guildas no modo espectador.
+490	Clicando em seu personagem, o botão <Finalizar> encerra o Modo Observador.
+491	Não há oponentes para continuar a Guerra entre Guildas.
+492	O duelo contra o jogador %s será iniciado!
+493	A Guerra será finalizada em 1 minuto caso não haja oponentes.
+494	A Guerra entre as Guildas acabou em empate.
+495	Energias preenchidas através da Bênção do Governador.
+496	A Bênção do Governador poderá ser utilizada em %d segundos.
+497	Não há Gold suficiente no Tesouro Nacional. Valor atual: %d.
+498	[ TEST_ONLY ] Tesouraria Nacional atual: %d
+499	A transfiguração falhou.
+500	Treino de transfiguração terminado. Procure Shinsun.
+501	Uma montaria é necessária.
+502	A montaria foi dispensada.
+503	O jogador %s está desafiando você para um duelo!
+504	É necessário desmontar do cavalo.
+505	Impossível alimentar o cavalo enquanto estiver montado.
+506	Alimentou o cavalo usando %s%s.
+507	Você precisa do item %s.
+508	Acesso ao servidor será interrompido em %d segundos.
+509	Servidor será encerrado em %d segundos.
+510	Por favor, aguarde %d segundo(s).
+511	Cancelado.
+512	Retornando à tela de Login...
+513	Finalizando o jogo...
+514	O jogador %s está desafiando você para um duelo!
+515	Acessando a tela de seleção de personagem...
+516	Aguarde %d segundos antes de retornar.
+517	Aguarde %d segundos antes de retornar.
+518	Aguarde %d segundos antes de retornar.
+519	Ainda não é possível retornar para a cidade. Aguarde %d segundos.
+520	Não é possível retornar nessa área. Você será enviado para a cidade.
+521	Impossível adicionar pontos durante a transfiguração.
+522	O jogador está realizando um duelo.
+523	<Guilda> Você não pertence à uma Guilda.
+524	<Guilda> Não possui autoridade para isso.
+525	Opção incorreta.
+526	<Armazém> Senha incorreta.
+527	<Armazém> O armazém está aberto.
+528	<Armazém> Aguarde 10 segundos para abrir o armazém novamente.
+529	<Armazém> Está muito longe para acessar o armazém.
+530	<Grupo> Não é possível realizar este tipo de ação por problemas com o servidor.
+531	<Grupo> Não pode sair de um Grupo enquanto estiver dentro de uma Dungeon.
+532	<Grupo> Saiu do grupo.
+533	<Guilda> Já está participando de outra Guerra.
+534	<Guilda> Apenas o líder pode enviar desafios para Guerra entre Guildas.
+535	<Guilda> Guilda inexistente.
+536	Você já é um candidato para o governo.
+537	<Guilda> O oponente já está em uma Guerra.
+538	<Guilda> Não possui Gold suficiente para iniciar a Guerra entre Guildas.
+539	<Guilda> A Guilda oponente não possui Gold suficiente para iniciar a Guerra.
+540	<Guilda> A Guilda já está sendo desafiada.
+541	<Guilda> A Guilda já se encontra em uma Guerra entre Guildas.
+542	<Guilda> A Guilda não possui nível suficiente para participar de uma Guerra.
+543	<Guilda> São necessários %d membros para iniciar uma Guerra entre Guildas.
+544	<Guilda> A Guilda oponente não possui nível suficiente para iniciar a Guerra.
+545	<Guilda> A Guilda oponente não possui membros suficientes para iniciar uma Guerra.
+546	É necessário alcançar o nível 20 antes de cadastrar um número de celular.
+547	Não possui as qualidades para ser Governador.
+548	Seu convite para adicionar %s como contato foi recusado.
+549	Você já faz parte de um Grupo, não pode se juntar à outro.
+550	Função pode ser utilizada somente pelo Governador.
+551	Cooldown de %d segundos.
+552	Gold insuficiente no Tesouro Nacional: %u. Gold necessário:%u
+553	Comando: teleportepara <nome do personagem>
+554	Você não pode teleportar-se para jogadores de outro reino.
+555	Usuário se encontra no canal %d. Canal atual: %d
+556	Teleportar-se para %s
+557	Impossível convocar um jogador de outro reino.
+558	<Guilda> Não há bônus de experiência durante Guerras entre Guildas.
+559	O jogador %s terá seu HP e MP recuperados pela Bênção do Governador.
+560	Informações sobre o governador do meu reino.
+561	[Governador %s]:%s possui %lld
+562	[Governador %s]:%s
+563	Informações sobre o governador do meu reino.
+564	Função usada somente pelo Governador.
+565	Escolha um número entre 1 e 50.
+566	123456789
+567	Não é possível evocar aquele monstro.
+568	HP Máximo +%d
+569	MP Máximo +%d
+570	A Bênção do Governador foi concedida.
+571	Força +%d
+572	Inteligência +%d
+573	Vitalidade +%d
+574	Destreza +%d
+575	Velocidade de ataque +%d
+576	Velocidade de movimento +%d
+577	Cooldown de Skills -%d
+578	Regeneração de HP +%d
+579	Regeneração de MP +%d
+580	Ataque Venenoso +%d
+581	Aguarde o tempo de cooldown: %d second.
+582	Paralisar +%d
+583	Redução de velocidade +%d
+584	Ataque crítico com %d%% de probabilidade
+585	Ataque perfuração com %d%% de probabilidade
+586	Dano vs. Humanos +%d%%
+587	Dano vs. Animais +%d%%
+588	Dano vs. Orcs +%d%%
+589	Dano vs. Fanáticos +%d%%
+590	Dano vs. Morto-Vivos +%d%%
+591	Dano vs. Demônios +%d%%
+592	O jogador %s terá um bônus de 10%% em seu ataque durante 3 minutos.
+593	%d%% de dano foi absorvido pelo HP
+594	%d%% de dano foi absorvido pelo MP
+595	Probabilidade de %d%% de redução no MP do oponente em ataques efetuados
+596	Probabilidade de %d%% de recuperação no MP em ataques recebidos
+597	Probabilidade de %d%% de bloqueio nos ataques físicos
+598	Probabilidade de %d%% de evasão de Flechas
+599	Defesa com arma de 1 mão %d%%
+600	Defesa com uma arma em cada mão %d%%
+601	Defesa com arma de 2 mãos %d%%
+602	Defesa com Sino %d%%
+603	O jogador %s terá um bônus de 10%% em sua defesa durante 3 minutos.
+604	Defesa com Leque %d%%
+605	Resistência à Flecha %d%%
+606	Resistência ao Fogo %d%%
+607	Resistência ao Relâmpago %d%%
+608	Resistência à Magia %d%%
+609	Resistência ao Vento %d%%
+610	Probabilidade de Contra-ataque: %d%%
+611	Probabilidade de refletir maldição: %d%%
+612	Resistência ao Veneno %d%%
+613	Probabilidade de %d%% de recuperação de MP caso derrote o monstro
+614	O evento Quiz Metin 2 está em andamento. (Flag: %d)
+615	Probabilidade de %d%% de aumento de Experiência caso derrote o monstro
+616	Probabilidade de %d%% de Drop de gold em 2x caso derrote o monstro
+617	Probabilidade de %d%% de Drop de Item em 2x caso derrote o monstro
+618	Probabilidade de %d%% de eficiência em caso de utilizar poção
+619	Probabilidade de %d%% de recuperação de HP caso derrote o monstro
+620	Anti-Desmaio %d%%
+621	Anti-Redução de Velocidade %d%%
+622	Anti-Nocaute %d%%
+623	Ataque +%d
+624	Defesa +%d
+625	Problemas para iniciar o evento Quiz Metin 2.
+626	Ataque mágico +%d
+627	Resistência a magia +%d
+628	Resistência Máxima +%d
+629	Bônus contra Guerreiros +%d%%
+630	Bônus contra Ninjas +%d%%
+631	Bônus contra Shuras +%d%%
+632	Bônus contra Shamans +%d%%
+633	Bônus contra Monstros +%d%%
+634	Ataque +%d%%
+635	Defesa +%d%%
+636	Evento Quiz Metin 2 iniciado corretamente.
+637	Experiência +%d%%
+638	Taxa de Drop de Itens %.1f vezes
+639	Taxa de Drop de Gold %.1f vezes
+640	HP Máximo +%d%%
+641	MP Máximo +%d%%
+642	Dano de Skill %d%%
+643	Dano de Ataque %d%%
+644	Resistência à Skills: %d%%
+645	Resistência à Ataques: %d%%
+646	Resistência aos ataques de Guerreiros em %d%%
+647	Olá! Bem-vindo ao Metin 2!
+648	Resistência aos ataques de Ninjas em %d%%
+649	Resistência aos ataques de Shuras em %d%%
+650	Resistência aos ataques de Shamans em %d%%
+651	(Data de expiração: ano %d - mês %d - dia %d)
+652	Chat bloqueado.
+653	123456789
+654	Impossível gritar com nível abaixo de %d.
+655	Não está em grupo.
+656	Não faz parte de uma guilda.
+657	O usuário bloqueou as mensagens particulares. Tente novamente mais tarde.
+658	Início do evento Quiz Metin 2!
+659	<Contatos> Não é possível adicionar um GM como contato.
+660	%s não está online.
+661	Após terminar uma negociação, aguarde %d para abrir o armazém.
+662	Após acessar o armazém, aguarde %d segundos para iniciar uma negociação.
+663	Você não pode fazer negociações porque está no limite da quantia de Gold.
+664	Não é possível acessar o armazém durante uma negociação.
+665	Não foi possível negociar, pois o jogador está no limite de Gold.
+666	<Armazém> Não é possível mover para este local.
+667	<Armazém> Não foi possível depositar o item no armazém.
+668	<Grupo> Não foi possível encontrar o jogador que enviou o convite.
+669	O servidor de Guerra não está disponível. A Guerra não será iniciada.
+670	A entrada é permitida através do NPC Uriel.
+671	<Grupo> Apenas o líder tem autoridade para efetuar mudanças.
+672	<Grupo> Impossível fazer isso quando não é um membro do Grupo.
+673	<Grupo> Você não pode expulsar jogadores do Grupo dentro de uma Dungeon.
+674	<Grupo> Você não pode expulsar jogadores do Grupo dentro de uma Dungeon.
+675	<Grupo> Você foi expulso do Grupo.
+676	<Grupo> Você não pode abandonar o Grupo dentro de uma Dungeon.
+677	<Grupo> Impossível expulsar membros do Grupo.
+678	<Guilda> É necessário aguardar %d dias para criar uma nova Guilda. 
+679	<Guilda> É preciso aguardar %d após sair de uma Guilda para criar uma nova.
+680	Nome de Guilda inapropriado.
+681	Desejamos muita sorte a todos!
+682	<Guilda> Guilda [%s] criada com sucesso!
+683	<Guilda> Não foi possível criar a Guilda.
+684	<Grupo> Apenas o líder pode usar as Técnicas de Grupo.
+685	<Grupo> A pessoa não está online.
+686	<Guilda> Valor incorreto.
+687	<Guilda> Gold insuficiente.
+688	<Guilda> Não foi possível encontrar o usuário.
+689	<Guilda> O usuário não é membro da Guilda.
+690	<Guilda> Você não possui autoridade para expulsar membros.
+691	<Guilda> Usuário %s foi expulso da Guilda.
+692	O evento Quiz Metin 2 foi encerrado ou as perguntas já estão sendo feitas.(flag: %d)
+693	<Guilda> O usuário foi expulso da Guilda.
+694	<Guilda> Não possui autoridade para adicionar pontos da Guilda.
+695	<Guilda> Não é possível alterar a posição do Líder da Guilda.
+696	<Guilda> Não é possível usar palavras/letras inválidas no posicionamento.
+697	<Guilda> Não possui autoridade para efetuar essa alteração.
+698	<Guilda> Não é possível remover autoridade do Líder da Guilda.
+699	<Guilda> Investiu %u Pontos de experiência.
+700	<Guilda> Você falhou em investir EXP
+701	<Guilda> Não possui Gold suficiente.
+702	<Guilda> Não foi possível recuperar GSP.
+703	O evento Quiz Metin 2 será iniciado em instantes!
+704	<Guilda> Não possui autoridade para enviar mensagens.
+705	<Guilda> Não possui autoridade para alterar a autoridade ou posição.
+706	<Guilda> Não é possível alterar a posição do Líder da Guilda.
+707	<Guilda> Não é possível alterar a autoridade para o Líder da Guilda.
+708	<Guilda> Não possui autoridade para nomear um General.
+709	<Guilda> Não é possível designar mais Generais.
+710	Não foi possível transferir o item.
+711	Programa ilegal, o Metin 2 será finalizado.
+712	Impossível negociar, está no limite de Gold no inventário.
+713	Gold insuficiente.
+714	Os jogadores participantes serão enviados de volta para a cidade.
+715	Iniciar o sorteio de item.
+716	Iniciar a roda da fortuna.
+717	A pessoa está Online, por favor utilize uma mensagem privada.
+718	Este número de celular não está registrado.
+719	Não é possível mandar mensagens abaixo do nível 20.
+720	Será cobrado $1 através de SMS.
+721	Sua mensagem foi enviada com sucesso.
+722	Guilda %s teve o %s aumentado em %d%% !!
+723	Guilda %s teve seu %s normalizado.
+724	O jogador %s teve seu %s aumentado em %d%% !!
+725	O evento Quiz Metin 2 será finalizado.
+726	O jogador %s teve seu %s normalizado.
+727	A habilidade da Picareta está no máximo: %d
+728	Sua habilidade com a Picareta está no máximo.
+729	Converse com o Lenhador e poderá aumentar o nível de sua Picareta.
+730	Habilidade com Picareta aumentou:%d/%d
+731	Para minerar, você precisa de uma Picareta.
+732	Você não pode mais cavar.
+733	A mineração foi bem-sucedida!
+734	A mineração falhou.
+735	<Contatos> Você adicionou %s aos seus contatos.
+736	Você será enviado para a cidade dentro de instantes.
+737	<Contatos> Você removeu %s dos seus contatos.
+738	Houve um erro crítico no jogo. O servidor será reiniciado.
+739	Você será desconectado automaticamente do jogo,
+740	podendo ser reconectado normalmente dentro de 5 minutos.
+741	Guilda %s foi criada provisoriamente.
+742	Guildas em guerra no momento:
+743	Guilda %s não existe.
+744	Impossível encontrar o nome ou número da Guilda.
+745	Essa construção não existe.
+746	Impossível construir devido à outra estrutura já construída.
+747	Finalizar o evento Quiz Metin 2. (Flag:%d)
+748	Não possui a estrutura necessária para este tipo de construção.
+749	Você não possui todos os requisitos necessários para a construção.
+750	Gold insuficiente.
+751	Materiais insuficientes.
+752	Impossível construir nesse local.
+753	O personagem não existe.
+754	Falha na finalização forçada do duelo.
+755	Sucesso na finalização forçada do duelo.
+756	Duelo bem-sucedido.
+757	Houve um problema no início do duelo.
+758	Não foi possível enviar a perguntar.
+759	Não há oponente.
+760	Não há Pontos de Status remanescentes.
+761	Pontos de Status insuficientes.
+762	Erro no preço.
+763	Comando incorreto.
+764	%d e %d realizaram um divórcio.
+765	Girando a roleta. Valor: %d
+766	O log do item foi registrado no syslog.
+767	Informações sobre os reinos.
+768	Informações sobre o mapa selecionado. Terra Sagrada %d Corredor %d %d %d
+769	A pergunta foi enviada.
+770	%s - Vitórias:%d  Monstros:%d  Chefes:%d  Exército:%d
+771	Informações sobre a Guerra da Encruzilhada.
+772	Carregando a Quest. Aguarde um momento.
+773	Não é possível usar o armazém e a loja ao mesmo tempo.
+774	<Armazém> A senha do armazém foi alterada com sucesso!
+775	<Armazém> Senha incorreta.
+776	O seu crédito para jogar será finalizado em %d minutos.
+777	Voto realizado com sucesso.
+778	Você realizou a votação.
+779	%s foi para a batalha.
+780	Já foi declarada Guerra contra esta Guilda!
+781	O evento Quiz Metin 2 não foi iniciado ou as perguntas já estão sendo feitas.(Flag: %d)
+782	Não é possível jogar.
+783	%s tesouro nacional atualmente possui %u Gold.
+784	%s tesouro nacional atualmente possui %d Gold.
+785	Gold insuficiente, ou não pode retirar o Gold.
+786	123456789
+787	123456789
+788	123456789
+789	123456789
+790	123456789
+791	123456789
+792	Foi encerrado o período de entrada para o evento Quiz Metin 2.
+793	Reino Shinsu
+794	Reino Chunjo
+795	Reino Jinno
+796	Habilidades da Vara de Pescar aumentaram: %d/%d
+797	Sua habilidade com a pesca está no máximo.
+798	Você pode melhorar sua Vara de Pescar falando com o Pescador.
+799	Oh não! O peixe comeu sua isca!
+800	Parabéns!! Você pescou um peixe: %s
+801	O tamanho do peixe é: %.2fcm.
+802	Parabéns, você pescou um peixe do evento: Carpa Crucian Grande!
+803	Os participantes restantes do evento Quiz Metin 2 foram registrados.
+804	Pescou um peixe do evento: Carpa
+805	%s:%d peixes
+806	Pescou %d de %d peixe!
+807	Ah! O peixe escapou!
+808	Você encontrou ostras no peixe.
+809	Você encontrou minhocas no peixe.
+810	%s foi assado.
+811	Não é possível inserir preço com valor acima dos 2 bilhões!
+812	Não utilize palavras ofensivas no nome de sua loja!
+813	Não é possível comercializar um item Premium.
+814	Houve uma falha no registro dos participantes restantes do evento Quiz Metin 2.
+815	A mineração foi interrompida.
+816	Você precisa de uma Picareta.
+817	Você precisa de uma Vara de Pescar.
+818	É necessário utilizar uma isca antes de jogar o anzol na água.
+819	Você precisa de uma Vara de Pescar.
+820	O líder do grupo não está online.
+821	<Grupo> Não é possível formar grupos com personagens de outros impérios.
+822	<Grupo> Não é possível convidar para um Grupo dentro de uma Dungeon.
+823	<Grupo> Não é possível convidar para um Grupo quando está no modo observador.
+824	<Grupo> Impossível convidar para o Grupo se houver 10 ou mais níveis de diferença.
+825	Jogadores participando: %d
+826	<Grupo> Impossível convidar para o Grupo se houver 10 ou mais níveis de diferença.
+827	<Grupo> Impossível convidar para o Grupo se houver 10 ou mais níveis de diferença.
+828	<Grupo> Impossível convidar mais membros. O Grupo está completo.
+829	Foi enviado um pedido para entrar no Grupo de %s.
+830	O usuário não está participando de nenhum Grupo.
+831	<Grupo> Impossível participar de um Grupo se houver 30 ou mais níveis de diferença.
+832	<Grupo> Não possui autorização para convidar membros para o Grupo.
+833	<Grupo> %s bloqueou convites para Grupos.
+834	<Grupo> %s já está participando de um Grupo.
+835	<Grupo> Não é possível criar grupos dentro de uma Dungeon.
+836	O evento Quiz Metin 2 teve de ser finalizado.
+837	<Grupo> Não é possível responder ao convite do Grupo.
+838	<Grupo> %s recusou o seu convite.
+839	<Grupo> %s juntou-se ao Grupo!
+840	<Grupo> %s juntou-se ao Grupo!
+841	Impossível acessar uma loja com uma negociação ou armazém abertos.
+842	O jogador está em outra negociação.
+843	Número de validação Metin 2: %s
+844	Número inválido, tente novamente.
+845	Número de celular registrado.
+846	Impossível teleportar-se para o local desejado.
+847	O prêmio do evento Quiz Metin 2 foi entregue. ID: %d  Quantidade: %d
+848	O usuário não está conectado.
+849	O usuário está no canal %d. Canal atual: %d
+850	Aguarde %d segundos após fechar o armazém antes de efetuar logout.
+851	Impossível efetuar logout com janelas de negociação ou armazém abertos.
+852	Aguarde %d segundos após finalizar uma negociação antes de efetuar logout.
+853	O duelo será finalizado pois o oponente está offline.
+854	Não há limite no uso da poção.
+855	É possível utilizar até %d poções.
+856	O duelo será iniciado em 10 segundos.
+857	O duelo foi iniciado!
+858	TRUE
+859	O duelo foi finalizado por um erro com a Arena.
+860	O duelo foi finalizado por exceder o tempo limite.
+861	Será teleportado para a cidade em 10 segundos.
+862	O duelo será interrompido pois o oponente encontrou problemas.
+863	O duelo será interrompido. O oponente está com problemas.
+864	O duelo será finalizado por problemas com o oponente.
+865	O jogador %s venceu o duelo!
+866	O jogador %s saiu vitorioso.
+867	Será teleportado para a cidade em 10 segundos.
+868	A próxima etapa será iniciada em 10 segundos.
+869	FALSE
+870	O duelo foi interrompido pela desistência do oponente.
+871	Bônus de %d%% na Taxa de Drop.
+872	Bônus de %d%% na Taxa de Gold.
+873	Bônus de %d%% com o evento Chuva de Ouro!
+874	Bônus de %d%% na Taxa de Experiência.
+875	Versão diferente da atual. Atualize seu jogo e tente novamente.
+876	Não é possível usar o Armazém após abrir a janela de negociação.
+877	Está longe demais para negociar itens.
+878	Está longe demais para negociar itens.
+879	Impossível vender mais itens, está no limite de Gold no inventário.
+880	Total de perguntas: %d
+881	Um valor de %d%% do valor de venda será coletado para o imposto.
+882	Não é possível montar num cavalo quando está transfigurado.
+883	Não é possível montar num cavalo quando está usando trajes de casamento.
+884	Você não possui um cavalo.
+885	Seu cavalo está morto.
+886	Seu cavalo está esgotado, não é possível cavalgar.
+887	Falhou em evocar seu cavalo.
+888	 montaria
+889	A cerimônia será encerrada.
+890	Todos serão desconectados automaticamente.
+891	A Guerra já foi finalizada!
+892	10 segundos para a resposta.
+893	Impossível negociar itens no modo de espera.
+894	Não é possível negociar novamente após abrir a janela de negociação.
+895	O jogador está em outra negociação, por favor aguarde.
+896	O pedido de negociação foi recusado.
+897	Não possui Gold suficiente, ou o item foi retirado.
+898	O oponente não possui Gold suficiente ou está em uma localização incorreta.
+899	O inventário do jogador está cheio.
+900	Negociação com %s foi finalizada.
+901	O Deus Dragão impediu que você perdesse experiência.
+902	Pontuação Atual:   Shinsu: %d    Chunjo:%d    Jinno:%d
+903	A resposta correta é:
+904	%s - Vidas:%d  Reino:%d  Derrotou:%d (meta: %d)  Monstros:%d  Regen:%d
+905	Rei maligno: Vocês não tem o direito de ficar neste local!
+906	Em 10 segundos, todos serão movidos para a cidade.
+907	O %s foi o primeiro dos reinos a ser desclassificado da guerra.
+908	O mestre da Guerra da Encruzilhada ressurgiu!
+909	Caso consigam derrotar o Guardião do Castelo, se tornarão os donos do castelo.[ENTER][ENTER]
+910	O Deus Dragão impediu que você perdesse itens.
+911	Bônus no dano: %d
+912	Bloqueou %s! (%d%%)
+913	Esquivou de %s! (%d%%)
+914	O
+915	%s [%d] atacou da posição: %d %d
+916	Insira todos os comandos.
+917	Não é possível fazer isso montado em um cavalo.
+918	Não é possível usar esse item enquanto atordoado.
+919	Impossível fazer isso enquanto estiver dormindo.
+920	Acorde, por favor.
+921	Esse comando não existe.
+922	<Grupo> O Grupo foi desfeito.
+923	<Grupo> Não foi possível convocar o jogador.
+924	<Grupo> Impossível convocar um membro do grupo para este local.
+925	X
+926	A cooperação do grupo aumentou e a experiência obtida será aumentada.
+927	Líder
+928	Membro
+929	<Guilda> A experiência inserida é maior que a experiência restante.
+930	<Guilda> Não foi possível apagar.
+931	<Guilda> Não possui GSP suficiente: %d / %d
+932	<Guilda> Não é possível usar Skill da Guilda agora, aguarde o cooldown.
+933	<Guilda> Habilidade %d foi usada (%d, %d) para %u
+934	<Guilda> O usuário está no canal %d. Canal atual: %d
+935	<Guilda> % não está online.
+936	Os que falharam em responder serão movidos para fora em 5 segundos.
+937	<Guilda> Skills de Guilda podem ser usadas somente durante Guerras entre Guildas.
+938	<Guilda> %u GSP foi restaurado.
+939	<Guilda> Apenas o líder pode retirar o Gold da Guilda.
+940	<Guilda> O usuário está bloqueando todos os convites.
+941	<Guilda> Você não possui autoridade para recrutar membros.
+942	<Guilda> Não é possível recrutar pessoas de outros reinos.
+943	<Guilda> Precisa aguardar %d dias antes de se juntar à uma outra Guilda.
+944	<Guilda> O jogador precisa aguardar %d dias antes de entrar para outra Guilda.
+945	<Guilda> O usuário pertence à outra Guilda.
+946	<Guilda> A Guilda já possui o máximo de membros permitidos.
+947	Preparem-se para a próxima pergunta!
+948	Não foi possível adicionar mais pontos à essa Skill.
+949	Essa skill não possui nível Grand Master.
+950	Essa skill já está no nível máximo, é impossível treinar mais.
+951	Ainda faltam pontos para que a skill possa ser considerada Grand Master.
+952	Argh... Há algo de errado com a minha energia! O que será isso? Mas que droga!
+953	O aprendizado falhou. Tente novamente após 24 horas.
+954	Estou sentindo uma energia muito forte dentro de mim!
+955	O que será isso...? Estou sentindo um formigamento estranho...
+956	O treinamento Grand Master da skill foi concluído.
+957	Experiência insuficiente, impossível ler o livro.
+958	Pergunta:
+959	O treinamento Grand Master não é feito através de livros.
+960	É necessário nível da skill M1 ou superior para habilitar o uso de livros. 
+961	Hmm. Acho que entendi um pouco sobre esta habilidade. Mas falta alguma coisa...
+962	Será que já está acabando finalmente...? Essa é uma técnica muito difícil...
+963	Somente me esforçando muito conseguirei aprender essa habilidade.
+964	O treinamento Master da skill foi concluído.
+965	O teleporte falhou!
+966	Você não possui um cavalo. Procure o Ajudante do estábulo.
+967	É necessário usar o item para convocar o cavalo.
+968	%s MP consumido: %d
+969	Caso esteja certo mova-se para O, caso esteja errado, mova-se para X.
+970	Estou sentindo um poder estranho... Preciso aprender a controlar isso.
+971	Estou no caminho certo, mas preciso me acalmar. Só não posso desistir!
+972	Incrível! Posso sentir meu corpo transbordando de energia!
+973	Terminei de ler! Agora só me resta a controlar a energia como está escrito
+974	para que este treinamento seja finalizado!
+975	Esta é a última folha deste livro! Estou no fim desse treinamento sofrido!
+976	Preciso agüentar firme. Falta pouco!
+977	Muito bem! Só falta ler mais um pouquinho!
+978	Não falta muito mais para acabar com esses livros todos!
+979	Estou sentindo um aumento da força dentro de mim!
+980	Resposta Correta!
+981	Hmmm. Acho que estou finalmente começando a aprender...
+982	Muito bem! Vamos em frente!
+983	Mas o que está acontecendo? Estou lendo o dia inteiro e não consigo me concentrar!
+984	Estou realmente cansando de estudar...
+985	É mais difícil que eu imaginava. A escrita e o conteúdo são muito complexos...
+986	Não consigo aprender desse jeito, preciso de um descanso!
+987	Seu chat foi bloqueado pelos GM's e será liberado em algum tempo.
+988	Chat foi desbloqueado. Respeite os outros ou será bloqueado novamente.
+989	A janela de refinação está aberta.
+990	Impossível usar com janelas de trocas abertas.
+991	Não foi possível refinar.
+992	A janela de refinação está fechada.
+993	Faltam ingredientes para criação.
+994	<Guilda> Aguarde um momento antes de utilizar novamente.
+995	É necessário ler mais %d livros para concluir o treinamento.
+996	123456789
+997	Função habilitada apenas dentro do castelo.
+998	TEST: O Sapo de Ouro foi convertido para o Cofre do Tesouro Nacional
+999	TEST: Imposto Coletado Atual: %d
+1000	TEST: Não foi possível coletar o sapo de ouro para o Cofre do Tesouro Nacional
+1001	<Guilda> Pontos de Guerra: %d
+1002	Este item não pode ser refinado.
+1003	A refinação sem custo é aplicada apenas para as armas de nível 20 ou inferior.
+1004	Sua classe não permite que você use esse item.
+1005	Este item não poderá ser utilizado pelo seu personagem.
+1006	Formato: transfer <nome>
+1007	Função exclusiva para os Governadores.
+1008	Não é possível convocar jogadores de outro império.
+1009	O jogador %s está conectado no canal %d. Canal atual: %d
+1010	O jogador %s foi convocado.
+1011	Não há pessoas com este nome.
+1012	Não é possível convocar a si mesmo.
+1013	Você possui nível menor que o requerido pelo item refinado.
+1014	Não é possível produzir com janelas como armazém, negociação ou venda abertas.
+1015	O Governador de %s foi substituído pelo jogador %s
+1016	Batalhas ao redor das tochas acontecem no reino %s.
+1017	%s conseuguiu defender as Tochas!
+1018	%s ganhou o direito de tentar destruir as Tochas nos próximos 30 minutos.
+1019	Os 30 minutos se esgotaram, as Tochas irão desaparecer.
+1020	A profecia aconteceu! As Tochas serão defendidas pelo %s
+1021	Uma Tocha foi destruida pelo %s
+1022	%s falhou em defender o castelo e perdeu a guerra.
+1023	%s conseguiu destruir todas as Tochas!
+1024	Você não tem ouro suficiente. 
+1025	É necessário desequipar sua armadura para abrir a Loja Particular
+1026	Não é possível montar num cavalo quando está usando trajes de casamento.
+1027	Você precisa do item %s para anunciar
+1028	%d horas %d minutos %d segundos restantes de chat bloqueado
+1029	%d horas %d segundos restantes de chat bloqueado
+1030	%d minutos %d segundos restantes de chat bloqueado
+1031	Taxa de Gold Tenners 
+1032	Não há mais nenhuma Gema a ser retirada.
+1033	Ainda não é possível utilizar.
+1034	Não é preciso aguardar o tempo mínimo no servidor de testes
+1035	Não possui os itens necessários para refinação.
+1036	Alcançou o limite de Pontos de Honra
+1037	Todos os Impérios 
+1038	Taxa de Drop 
+1039	Taxa de Gold 
+1040	Taxa de Experiência 
+1041	Você não pode ler livros enquanto está transfigurado.
+1042	%d segundos restantes de chat bloqueado
+1043	Não pode usar expressões enquanto montado.
+1044	Não pode usar expressões enquanto montado.
+1045	Esse pergaminho não pode ser usado nesse nível de refinação do item.
+1046	%s rolou o dado e tirou %d. (%d-%d)
+1047	Você rolou o dado e tirou %d. (%d-%d)
+1048	O líder da guilda adversária está offline.
+1049	Não pode montar enquanto estiver caído.
+1050	<Guilda> A Guilda está em guerra agora
+1051	Você não pode pescar nesse lugar.
+1052	<Guild> Sua guilda alcançou o nível máximo.
+1053	Você não pode se transfigurar enquanto montado.
+1054	Atalho indisponível para essa montaria
+1055	A outra parte não pode receber convites de amizade.
+1056	Não é possível refinar com esse pergaminho.
+1057	Itens no chão desaparecem após %d minutos.
+1058	<Guilda> A outra parte não pode receber convite.
+1059	Você não pode vender itens que estão equipados.
+1060	Você não pode vender itens que estão equipados.
+1061	<Armazém> Você não pode mover itens equipados para o armazém
+1062	Aguarde o tempo de drop para GOLD
+1063	123456789
+1064	Não é possível usar devido a limitação de nível.
+1065	Pode ser usado apenas em armas e armaduras.
+1066	Não pode ser recarregado.
+1067	A recompensa da Estátua Demoníaca poderá ser utilizada apenas uma vez.
+1068	A Pedra do Dragão foi removida.
+1069	Você não pode mover itens enquanto a janela de refinação está aberta.
+1071	O Detector foi usado, mas nenhuma Metin foi encontrada.
+1072	A duração remanescente da Pedra do Dragão foi extraida.
+1073	A extração da duração falhou.
+1074	A extração da pedra falhou e foi ganhado %s.
+1075	Extração sem sucesso.
+1076	Não é um ingrediente necessário para o melhoramento.
+1077	Impossível refinar este item dessa forma.
+1078	Melhoramento efetuado com sucesso.
+1079	Falha ao melhorar as taxas.
+1080	Sem passos necessários para melhoramento.
+1081	Impossível melhoramento para a pedra. 
+1082	É possível efetuar o melhoramento.
+1083	Falha no melhoramento.
+1084	Você não possui os materiais necessários para fortalecer a Pedra do Dragão. 
+1085	Esta Pedra do Dragão não pode ser usado para fortalecer. 
+1086	Impossível juntar os mesmos pergaminhos de refinação.
+1087	O fortalecimento foi bem sucedido. 
+1088	O fortalecimento falhou. 
+1089	A Pedra do Dragão não está ativa.
+1090	Você já está carregando uma Pedra do Dragão deste tipo. 
+1091	A Pedra do Dragão  não pode ser removida.
+1092	Você já possui esse tipo de Jóia do Dragão equipada
+1093	%d segundos foram adicionados. 
+1094	Antes de abrir uma pedra você deve primeiro completar a quest do Alquimista
+1095	Você não pode retirar o Cinto com itens no inventário de poções.
+1096	Você poderá juntar o Pergaminho da Benção e o Metal Mágico.
+1097	Este tipo de item não pode ser inserido no inventário de poções.
+1098	Você não pode montar nesta dungeon.
+1099	Você só pode produzir poções ao mesmo tempo com no máximo 200 ingredientes.
+1100	Você não pode vender itens bloqueados em uma loja particular. 
+1101	Você não pode mudar os atributos de um item bloqueado. 
+1102	Você não pode usar um item bloqueado. 
+1103	Você não pode jogar um item bloqueado no chão. 
+1104	Você não pode dar um item bloqueado para alguém
+1105	Você não pode bloquear itens neste servidor.
+1106	Você não pode bloquear este item.
+1107	Investiu %d Gold.
+1108	Não há Slots para remover do item.
+1109	Este item já está bloqueado.
+1110	Este item já está em processo de desbloqueio.
+1111	Este item não está bloqueado. 
+1112	Você não pode melhorar um item bloqueado. 
+1113	Você não pode vender um item bloqueado.
+1114	Você não pode abrir este baú, pois não possui espaço no inventário.
+1115	Você não pode abrir uma loja privada, enquanto você está negociando com outros. 
+1116	Quando outra janela estiver aberta, você não pode depositar ou retirar gold.
+1117	Você não pode usar um Pergaminho do Retorno enquanto a janela de Faixas de Ombro estiver aberta. 
+1118	Você não pode negociar enquanto outra janela estiver aberta. 
+1119	Impossível memorizar a coordenada.
+1120	Você só pode usar Faixas de Ombro, bem como armas e armaduras. 
+1121	Arraste os itens para a janela. 
+1122	Isso já foi personalizado. 
+1123	A faixa não pode não pode receber quaisquer bônus. 
+1124	Você só pode usar Faixas de Ombro. 
+1125	Somente faixas do mesmo nível podem ser combinadas. 
+1126	Falha! 
+1127	Sucesso! 
+1128	Você não tem dinheiro suficiente para a combinação. 
+1129	Você não pode usar este item enquanto as janelas para a absorção e combinação estão abertas. 
+1130	Não há espaço suficiente em seu inventário.
+1131	%s foi um sucesso! A taxa de absorção %d%% na sua nova%s. Parabéns! 
+1132	Você não pode usar nenhum item bloqueado. 
+1133	Você não pode vender item em uso na loja privada.
+1134	Você não pode abrir uma loja pessoal enquanto estiver montado.
+1135	Primeira rodada foi encerrada devido término do tempo
+1136	Segunda rodada foi encerrada devido término do tempo
+1137	Tempo restante para o fim da primeira rodada - %d minutos
+1138	Tempo restante para o fim da segunda rodada - %d minutos 
+1139	Safe zone foi removida
+1140	Tempo restante para remover a Safe zone - %d minutos 
+1141	Não é possível teleportar. A localização memorizada pertence a outro reino.
+1142	20 segundos para a resposta.
+1143	Os participantes que erraram serão retirados da arena em 15 segundos.
+1144	Seu nível é muito baixo para invocar o pet. 
+1145	Os itens necessários não foram registrados.
+1146	Você invocou %s. 
+1147	%s retornou ao selo.
+1148	%s alcançou o nível %d!
+1149	%s está dormindo profundamente.
+1150	%s chocou! 
+1151	Seu pet devorou a Ração de Proteína. 
+1152	HP insuficiente.
+1153	%s acorda e devora a refeição suculenta. 
+1154	%s agora está na Caixa de Transporte. 
+1155	%s surge da Caixa de Transporte. 
+1156	%s evoluiu para %s! Excelente! 
+1157	%s se recusa a comer qualquer coisa! 
+1158	¸ðµç ±¹°¡°¡ Âü¿©ÇÏÁö ¾Ê¾Æ »ï°Å¸® ÀüÅõ¸¦ Á¾·áÇÕ´Ï´Ù.
+1159	Você transferiu os bônus do Traje.
+1160	Você não possui gold para um livro de habilidade
+1161	Por favor, insira outro nome. 
+1162	MP insuficiente.
+1163	Impossível trocar enquanto a Incubadora de seu amigo está aberta. 
+1164	Você não pode abrir a Incubadora enquanto está com negociação, armazém ou uma loja aberta. 
+1165	Você não pode abir uma loja enquanto seu pet está invocado. 
+1166	Você não pode fazer trocas enquanto seu pet está invocado. 
+1167	Você não pode trocar com um amigo que esteja com um pet invocado. 
+1168	Seu pet possui exp o suficiente. Agora ele requer EXP de item para alcançar o próximo nível.
+1169	Seu pet está pronto para evoluir. Use livros de pet. 
+1170	Seu pet já atingiu o maior estágio de evolução possível. 
+1171	O nome inserido é muito curto. 
+1172	Será teleportado em %d segundos.
+1173	Você não possui Gold suficiente. 
+1174	Você treinou bem o pet! Ele está aprendendo a habilidade rapidamente! 
+1175	Experiência aumentou para %d pontos. 
+1176	Seu pet já aprendeu essa habilidade e se recusa a treiná-la novamente. 
+1177	%s habilidade ativada. HP restaurado em %d. 
+1178	Necessário Livro do Pet Valente para a evolução especial do pet.
+1179	Seu pet deve ter nível %d para ser treinado e promovido para o próximo estágio. 
+1180	Seu pet deve ter %d de idade para ser treinado e promovido para o próximo estágio. 
+1181	Seu pet deve ter 100% de experiência para ser treinado e promovido para o próximo estágio. 
+1182	%s efeito ativado. 
+1183	Você não possui o nível necessário para usar esse item.
+1184	%s efeito não ativado. 
+1185	%s habilidade ativada. Você agora não receberá dano. 
+1186	%s habilidade ativada. Lentidão, veneno e sangramento removidos. 
+1187	O bônus foi mantido.
+1188	A janela já está aberta.
+1189	Taxa de redução de resistência mágica %d%%
+1190	%s se recupera do cansaço
+1191	Você não pode usar o item aqui.
+1192	Você não pode invocar seu pet enquanto troca. 
+1193	Não é possível abrir loja pessoal nesta área.
+1194	Caso esteja utilizando Bolo Lunar ou Semente, aguardar 5 segundos.
+1195	%s é insuficiente. Você precisa de %d para o próximo estágio. 
+1196	O nível do pet não pode ser maior do que o do jogador. 
+1197	estágio Jovem 
+1198	estágio Feroz 
+1199	estágio Valente 
+1200	estágio Heróico 
+1201	@*** Rolagem de Dado Iniciada (Item : %s) ***
+1202	@ ->%*s Resultado : %4d
+1203	$*** Resultado(Item : %s) Obteve : %s ***
+1204	<Accessório> Nova Taxa de Absorção: %d
+1205	Não pode ser utilizado durante um duelo.
+1206	<Accessório> Máxima Taxa de Absorção.
+1207	Você já aprendeu PAHE skill
+1208	Nenhum item foi encontrado.
+1209	<Evento de Halloween> A coleta de items terminou.
+1210	<Evento de Halloween> Verifique a Recompensa no NPC.
+1211	<Evento de Halloween> Evento de Halloween começou.
+1212	<Evento de Halloween> Inicie o evento pelo NPC de Halloween.
+1213	<Evento de Halloween> Evento de Halloween terminou.
+1214	<Evento de Halloween> Items entregues : %d
+1215	<Evento de Halloween> Minha contribuicao : %d
+1216	Obteve %d Gold.
+1217	Não pode montar uma fogueira neste local.
+1218	123456789
+1219	Você precisa equipar uma arma primeiro.
+1220	Você não pode usar essa skin com esta arma
+1221	Para trocar de arma, primeiro remova a skin de arma
+1224	<Okey>O jogo começou.
+1225	<Okey>Você não pode comprar mais cartas.
+1226	<Okey>Você não pode descartar enquanto há cartas na mesa.
+1227	<Okey>Você não pode comprar enquanto há cartas na mesa.
+1228	Não pode montar uma fogueira dentro da água.
+1229	<OkeySeu invetário está cheio.
+1230	Por favor, tente de novo depois de esvaziar o inventário.
+1231	<Okey>%s recebido pelos %d pontos do Okey.
+1233	<Okey>O Evento de Natal 2015 começou!!
+1234	<Okey>O Evento de Natal 2015 terminou.
+1235	<Okey>Você pode receber recompensas no NPC de acordo com seu ranking!
+1236	<Okey>Você não pode fazer isto durante a partida de Okey.
+1237	A Arca está trancada. É necessário uma chave para abri-la.
+1238	A Pedra do Ritual funciona apenas em items de nível 80 ou superior.
+1239	Você não pode trocar, pois o valor excede %d Won.
+1240	Você não possui Gold suficiente para trocar por Won.
+1241	Você não possui Won suficiente para trocar por Gold.
+1242	Você não pode trocar, pois excederá o limite de Gold.
+1243	Você não pode trocar, pois excederá o limite de Won.
+1244	Você não pode abrir,  pois excederá a quantia %d Won.
+1245	<Expansão de Inventário>Você não pode expandir o inventário em uma negociação.
+1246	<Okey>O Evento começou!
+1247	<Okey>O Evento terminou.
+1248	Não pode colocar a chave aí!
+1249	<Revanche dos Monstros>Monstros chefe retornaram e estão fracos!
+1250	<Revanche dos Monstros>Receber recompensa do evento.
+1251	<Revanche dos Monstros>Evento de Páscoa será encerrado após %d minuto(s).
+1252	<Revanche dos Monstros>Monstros e NPC desaparecerão após %d minuto(s).
+1253	Sucesso! Você já pode resgatar sua recompensa
+1254	Não é possível realizar essa ação enquanto estiver com vestes de casamento.
+1255	A outra parte não pode negociar.
+1256	Não é possível realizar essa ação enquanto estiver com skin de arma.
+1257	A %d Batalha
+1258	Não é necessária uma chave para abrir esse baú.
+1259	<Guilda> O investimento de EXP excedeu o limite.
+1260	<Guilda> Sua guilda está registrada para promoção.
+1261	<Guilda> A lista de promoções da Guilda foi atualizada.
+1262	<Guilda> O Ranking está recarregando, tente novamente mais tarde.
+1263	<Guilda> Não há nenhuma guilda registrada para participar.
+1264	<Guilda> Você já se registrou.
+1265	<Guilda> O seu registro foi feito.
+1266	<Guilda> %s se candidatou à sua guilda.
+1267	<Guilda> A lista de candidados está recarregando, tente novamente mais tarde
+1268	<Guilda> Não existe guilda para se candidatar.
+1269	Você encontrou %d Gold!
+1270	<Guilda> Não existem candidados.
+1271	<Guilda> A promoção é válida até %s.
+1272	<Guilda> O registro da promoção vai expirar em breve.
+1273	<Guilda> Ganhou %d Gold.
+1274	<Guilda> Você ganhou %d%% Gold excluindo a comissão %d 
+1275	<Guilda> Você não pode participar da guerra enquanto tiver voto de guilda.
+1276	<Guilda> Você não pode dispersar a guilda enquanto você tiver voto de guilda.
+1277	<Guilda> Você não pode convidar enquanto tiver voto de guilda.
+1278	<Guilda> Você não pode construir mais de um Armazém de Guilda.
+1279	Surge uma luz misteriosa e...
+1280	<Guilda> Você pode tentar depois de 10 segundos.
+1281	<Guilda> Outro membro da guilda está usando no momento.
+1282	<Guilda>Os itens permanecem no Armazém.
+1283	<Guilda> Você discordou com a votação.
+1284	<Guilda> Você concordou com a votação.
+1285	<Guilda> O membro da guilda está offline agora.
+1286	<Guilda> Não há votação em curso.
+1287	<Guilda> Inicio da votação para alteração de Líder da Guilda. 
+1288	<Guilda> Inicio da votação para expulsão de membro.
+1289	<Guilda> Inicio da votação para troca de Terreno.
+1290	Você recebeu %d Pontos de Experiência!
+1291	<Guilda> Inicio da votação para abandono do Terreno de Guilda.
+1292	<Guilda> A votação para troca de líder está ocorrendo.
+1293	<Guilda> A votação para expulsão de membro está ocorrendo.
+1294	<Guilda> A votação para troca de Terreno de Guilda está ocorrendo.
+1295	<Guilda> A votação para abandono do Terreno de Guilda está ocorrendo.
+1296	<Guilda> O Armazém da Guilda está sendo usado.
+1297	<Guilda> Você deve aguardar 10 segundos para usar novamente o Armazém de Guilda.
+1298	<Guilda> Sua Guilda não possui Armazém.
+1299	Cuidado, surgiram monstros da caixa!
+1300	<Guilda> Este membro obteve voto negativo. Tente novamente depois %d<ês %dDias %dhrs. %dmins.
+1301	<Guilda> Este membro da guilda será expulso por causa de longo prazo off-line.
+1302	<Guilda> Não pode votar para expulsar o membro da guilda.
+1303	<Guilda> Não pode votar para trocar o líder da Guilda.
+1304	<Guilda> Não é possível votar para trocar o líder da guilda enquanto você está em uma guerra de guilda. 
+1305	<Guilda> Você não pode negociar com a guilda que você pertence.
+1306	<Guilda> A guilda não existe.
+1307	<Guilda> Não é possível votar para troca de Terreno enquanto você está em uma guerra de guilda. 
+1308	<Guilda> O nível da guilda é baixo.
+1309	<Guilda> Os membros da guilda foram contra a última votação, tente de novo em %dMês %dDias %dhr. %d min.
+1310	Uma fumaça vermelha escapou da Arca, diminuindo a sua velocidade!
+1311	<Guilda> Não pode votar para abandonar a guilda enquanto estiver em uma guerra de guilda. 
+1312	<Guilda> Os membros da guilda foram contra a última votação sobre o Terreno, tente de novo em %dMês %dDias %dhr. %d min.
+1313	<Guilda> Você precisa ter voto de comércio de guild.
+1314	<Guilda> Esta guilda é uma guilda diferente da que você votou para o comércio de Terreno de Guilda.  
+1315	<Guild> Os membros da guilda foram contra a ultima votação sobre o Terreno da Guilda, tente novamente depois. 
+1316	<Guilda> Você não pode negociar com a guilda que você pertence.
+1317	<Guilda> O líder da guilda oponente está off-line ou nos outros mapas.
+1318	<Guilda> Essa guilda possui Terreno de Guilda. 
+1319	<Guilda> Não é possível encontrar o Terreno da Guilda. 
+1320	<Guilda> Você finalizou a troca do Terreno de Guilda.
+1321	Você só pode usar este item enquanto o evento estiver acontecendo.
+1322	Um erro ocorreu. O bônus não pôde ser alterado.
+1323	Você não pode invocar mais.
+1324	123456789
+1325	Atributos não podem ser transferidos para ou deste item.
+1326	123456789
+1327	123456789
+1328	Taxa de drop de item %d%%
+1329	123456789
+1330	Faixas com bônus não podem ser usadas como base.
+1331	Faixas sem bônus não podem ser usadas como material.
+1332	As duas faixas precisam ter a mesma absorção.
+1333	As duas faixas precisam ser do mesmo nível.
+1334	Falhou, a absorção foi reduzida em 1%
+1335	Sucesso, a absorção foi reduzida em 1%
+1336	Perfeito, bônus transferido!
+1337	Não é possível descartar itens com a janela aberta.
+1338	Não é possível mover itens com a janela aberta.
+1339	Não é possível vender itens com a janela aberta.
+1340	Não é possível com a janela aberta.
+1341	Não é possível, usuário ocupado.
+1342	Para identificar o pet, é necessário o item Analisador de Pet
+1343	Por favor, tente novamente após ativar o pet
+1344	Enquanto está alterando o atributo do pet, não é possível negociar, vender em NPC, usar armazém, etc.
+1345	Enquanto está alterando o atributo do pet, não é possível usar itens.
+1346	Enquanto está alterando o atributo do pet, não é possível dropar itens.
+1347	Enquanto está alterando o atributo do pet, não é possível mover itens.
+1348	Enquanto a outra pessoa está alterando o atributo do pet, não é possível negociar com ela.
+1349	Enquanto está alterando o atributo do pet, não é possível acessar quest.
+1350	Atributos do pet foram alterados.
+1351	Aguarde 3 segundos para abrir a janela de alteração de atributo do pet após fechá-la.
+1352	Todos espacos sendo usados.
+1353	Os participantes que erraram serão retirados da arena em 5 segundos.
+1354	Impossível transfigurar em monstros que possuem nível superior ao seu.
+1355	Tempo restante para o slot ser removido do item %s: %d
+1356	Gold insuficiente no Tesouro Nacional: %u. Gold necessário:%lu
+1357	%s renunciou à candidatura!
+1358	%s não é candidato ao reinado.
+1359	%s foi escolhido! ~Vida longa ao Governador!!
+1360	%s não pode ser selecionado Governador.
+1361	%s foi removido do governo.
+1362	Não é possível remover %s do governo.
+1363	%s bloqueou! (%Id%%)
+1364	%s esquivou! (%Id%%)
+1365	%s[%ld] Posição de ataque: %d %d
+1366	<Guilda> Skill %d foi usada (%d / %d) em %u.
+1367	Este item não pode ser utilizado durante 5 segundos após o seu uso.
+1368	Falta Gold no Cofre do Tesouro Nacional - Imposto Coletado: %d
+1369	[TEST_ONLY] Imposto Coletado Atual: %d
+1370	[Governador %s]: %s valor retido %lld
+1371	[Governador %s]: %s
+1372	(Validade - Ano:%d Mês:%d Dia:%d)
+1373	Propriedade adicionada com sucesso!
+1374	Não é possível adicionar mais propriedades através desse item.
+1375	Faltam 5 minutos para o ataque dos monstros!
+1376	Falta 1 minuto para o ataque dos monstros!!
+1377	Os monstros iniciaram o ataque ao castelo.
+1378	Uma energia maligna está se concentrando no altar central.
+1379	Parece que os monstros estão começando a recuar.
+1380	Os monstros estão batendo em retirada.
+1381	Você retornará à cidade em alguns instantes.
+1382	O Chefe dos monstros surgiu.
+1383	Você tem 30 min para derrotar a Árvore Demoníaca.
+1384	A Árvore Demoníaca e sua horda foram derrotados.
+1385	A Árvore Demoníaca abandonou a batalha.
+1386	Os monstros estão avançando para o castelo de %s.
+1387	Faltam 10 minutos para o ataque ao castelo.
+1388	<Armazém>Só é possível usar letras na senha do armazém
+1389	<Guilda> Sua guilda deve aguardar a restrição de tempo para adicionar um novo membro.
+1390	Não é possível aprimorar esse item.
+1391	Não há atributos para alterar.
+1392	Você não pode combinar esses itens.
+1393	Não pode ser melhorado com a pedra.
+1394	Este item não pode evoluir desta forma. 
+1395	Você não pode usar este item enquanto você está negociando. 
+1396	“Não pode ser invocado nessa área
+1397	Você não pode receber agora.
+1398	Recebeu %d rodada de recompensas.
+1401	Pet skill (%s) ativada - (%s) usa Passos Leves
+1403	Esse nome já foi registrado.
+1404	Please remove the equipped Dragon Stone before using this item.
+1405	Declação de guerra não está disponível
+1406	Prêmio por contribuição
+1407	Recompensa rank %d
+1408	O boss foi derrotado. Será movido para a vila em breve.
+1409	Será movido para a vila em breve.
+1410	Entrou na dungeon de %s com dificuldade %d.  A batalha iniciará em %d segundos.
+1417	Entrou na dungeon %s.
+1418	Mini dungeon foi encerrada.
+1419	Mini dungeon foi aberta.
+1411	Não é possível acessar quests enquanto usa a Caixa da Sorte.
+1412	Não é possível usar itens enquanto usa a Caixa da Sorte.
+1413	Não é possível dropar itens enquanto usa a Caixa da Sorte.
+1414	Não é possível mover itens enquanto usa a Caixa da Sorte.
+1415	Não é possível negociar enquanto usa a Caixa da Sorte.
+1416	Enquanto a outra pessoa está usando a Caixa da Sorte, não é possível negociar com ela.
+1420	Os bônus da Pedra do Dragão foram alterados.
+1421	Destrua monstros para jogar mini-games
+1422	Muitas recompensas o aguardam.
+1423	Você pode receber recompensas no NPC de acordo com seu ranking!
+1426	Bônus do armazém: EXP +%d%%.
+1427	Bônus do armazém: defesa +%d.
+1428	Bônus do armazém: HP +%d%%.
+1429	Bônus do armazém: dano contra monstros +%d%% .
+1430	Libere espaço em seu inventário antes de pescar.
+1431	Não é possível mover itens enquanto a janela de troca de bônus está aberta.
+1432	Não há nada especial.
+1433	Não é possível pescar quando o seu pet está invocado.
+1434	Não é possível pescar quando o seu pet está invocado.
+1435	Não é possível pescar enquanto encanta o seu pet.
+1436	Não é possível realizar essa ação enquanto a janela de combinar ou absorver faixa está aberta.
+1437	Não é possível realizar essa ação enquanto a janela de transferência de bônus de faixa está aberta.
+1438	Não é possível realizar essa ação enquanto a janela de transferência de bônus está aberta.
+1439	Não é possível pescar enquanto outras janelas estão abertas.
+1440	Não é possível realizar essa ação enquanto pesca.
+1441	Tempo restante:  %.2f. Dificuldade do peixe: %u. Redução de dificuldade: %d.
+1442	Os rankings da Batalha Campal foram removidos.
+1443	Entregue a skin de arma equipada.
+1444	Seu inventário está cheio.
+1452	O Altar de Sangue foi invocado. Ofereça sacrifícios para iniciar o Ritual de Sangue.
+1453	Alma coletada.
+1454	<Ritual de Sangue> Inventário está cheio.
+1455	<Ritual de Sangue> Não possui almas suficientes.
+1456	<Ritual de Sangue> Não possui gold suficiente.
+1457	<Ritual de Sangue> A cerimônia no Altar de Sangue foi iniciada. Tenha maior chance de adquirir melhores recompensas.
+1458	<Ritual de Sangue> A cerimônia no Altar de Sangue foi encerrada. Tente novamente na próxima vez.
+1459	Falhou em mudar o bônus.
+1460	Esse item pode ser usado apenas no Covil da Meley.
+1461	O Detector foi usado, mas o Guardião não foi encontrado.
+1462	Não é possível adquirir itens enquanto troca.
+1463	Não é possível descartar itens enquanto troca.
+1464	Não pode aprimorar a arma enquanto o pet está invocado.
+1465	Necessário liberar %d espaços verticais em seu inventário para abrir a caixa.
+1466	Não há espaço suficiente em seu inventário.
+1467	[Storeroom] Items that are being summoned can not be kept in the storeroom
+1468	<Aura> Não é possível usar um item vinculado.
+1469	<Aura> Essa Aura não pode absorver mais bônus.
+1470	<Aura> A Aura atingiu o nível máximo.
+1471	<Aura> É possível evoluir depois de fortalecer.
+1472	<Aura> Apenas Aura está disponível.
+1473	<Aura> Apenas escudo, colar, brincos e bracelete estão disponíveis.
+1474	<Aura> Esse item não pode ser usado no fortalecimento.
+1475	<Aura> Registre primeiro a Aura.
+1476	<Aura> É possível fortalecer após evoluir.
+1477	<Aura> Esse item não pode ser usado na evolução.
+1478	<Aura> É possível evoluir para o próximo estágio após fortalecimento.
+1479	<Aura> Necessário registrar um item.
+1480	<Aura> Fortalecimento bem sucedido. É possível evoluir para próximo estágio.
+1481	<Aura> Fortalecimento bem sucedido.
+1482	<Aura> Não tem gold suficiente para evoluir.
+1483	<Aura> Evolução bem sucedida.
+1484	<Aura> Sucesso.
+1485	<Guilda> Doou %d de experiência.
+1486	Não é possível alimentar o pet com a janela do Cubo aberta.
+1487	A Guerra dos Santuários começou! A duração é de [%d dias]!
+1488	A Guerra dos Santuários terminou. A próxima será iniciada em %d horas.
+1489	A montaria está invocada.
+1490	O evento não está em andamento.
+1491	Não é possível realizar a ação (negociação, mover, vender, dropar, armazenar) enquanto a montaria estiver invocada.
+1492	A Guerra dos Santuários foi finalizada devido à um problema inesperado.
+1493	A batalha terminará em %d minutos.
+1494	Necessário %s x%d
+1495	<Palácio do Rei Dragão> Liberada entrada para [Raid de Guilda para o Boss Nível %d].
+1496	<Palácio do Rei Dragão> Liberada entrada para [Raid de Guilda para o Boss Nível %d].
+1497	<Palácio do Rei Dragão> O boss foi derrotado!
+1498	Recebeu [%d] experiência de guilda!
+1499	<Palácio do Rei Dragão> O tempo se esgotou.
+1500	<Palácio do Rei Dragão> A dungeon será fechada caso não inicie a batalha dentro de %d minutos.
+1501	<Palácio do Rei Dragão> A dungeon foi fechada pois a batalha não foi iniciada.
+1502	%s ocupou %s!
+1503	Não é possível fazer doação com o pet invocado.
+1504	O personagem não está disponível para duelo.
+1505	De %d, você ainda pode abrir %d.
+1506	Abra o próximo presente em %d minutos.
+1507	%s está atacando %s!
+1508	%s alcançou a pontuação pessoal %d!
+1509	Reward for Ritual of Blood
+1510	Insufficient space in your inventory. The reward will be sent to your mailbox.
+1511	Os membros do grupo estão muito distantes para receber o item.
+1512	A guilda atingiu o nível máximo, não é possível doar mais experiência.
+1513	<Duelo de Videntes> O mini-game Duelo de Videntes começou!!
+1514	<Duelo de Videntes> Aceite a missão na janela de missões.
+1515	<Duelo de Videntes> Recompensas incríveis aguardam!
+1516	<Duelo de Videntes> O Duelo de Videntes terminou.
+1517	<Duelo de Videntes> Verifique seu ranking e resgate sua recompensa.
+1518	<Duelo de Videntes> Não é possível doar devido à falta de Moedas da Clarividência
+1519	Prêmio Rank D. de Videntes
+1520	<Duelo de Videntes> Sua quantidade de doações subiu em 1.
+1521	Itens bloqueados não podem ser modificados.
+1522	Você não pode entrar no Battle Royale agora.
+1524	Por favor, entre após sair do grupo.
+1525	Contagem regressiva iniciada. Não é possível entrar.
+1527	%s venceu o Battle Royale!
+1528	%s derrotou %s.
+1529	Contagem regressiva. Battle Royale será iniciado em %d segundos.
+1530	Não há jogadores suficientes. Battle Royale não pode ser iniciada.
+1531	Battle Royale foi iniciada. A primeira Zona de Batalha aparecerá em %d segundos.
+1532	Nova zona de batalha apareceu. Zona de Batalha será limitada em %d segundos.
+1533	Zona de Batalha será limitada durante %d segundos.
+1534	Campo Elétrico parou. A próxima Zona de Batalha aparecerá em %d segundos.
+1535	Battle Royale será finalizada em %d segundos.
+1536	Essa ação só é possível durante a participação no Battle Royale.
+1537	Não é possível se registrar no mapa atual.
+1538	Não é possível se registrar no servidor do Battle Royale.
+1540	Não é possível cancelar no servidor do Battle Royale.
+1541	Battle Royale começou!!
+1542	Battle Royale terminou!!
+1543	Não haverá próxima Zona de Batalha. Será totalmente limitado em %d segundos.
+1544	Não há debuff ativo. Nâo é possível usar.
+1545	Uma Entrada Battle Royale é necessário para registrar.
+1546	Caixa Especial de Suprimento apareceu em algum lugar.
+1547	<Bônus de Relíquia> Já possui uma relíquia equipada.
+1548	Não é possível usar neste local.
+1549	Falhou em ser teletransportado para a área especial da Terra dos Espíritos.
+1550	Não pode ser usado novamente.
+1551	Não possui gema de gaya suficiente para criação.
+1552	Situação de Entrada no Battle Royale: (%u/%u)
+1553	A dungeon no qual você se registrou está fechada.
+1554	Por favor, tente novamente mais tarde.
+1555	Não é possível fazer isso devido a utilização de outras funções.
+1559	Prêmio Duelo de Videntes
+1560	Enviado por correio devido ao inventário cheio.
+1561	Devido ao seu inventário estar cheio, a recompensa será enviada pelo correio.
+1562	Adquiriu %lu experiência de Yohara.
+1563	Recompensa do Desafio
+1564	A recompensa do ranking do evento do desafio foi entregue. Agradecemos a participação.
+1565	<Evento do Desafio> Não pode mais ser usado.
+1566	<Evento do Desafio> O evento do desafio começou!!
+1567	<Evento do Desafio> Aproveite o mini-game com o Ticket de Desafio que pode ser obtido através do drop de monstros.
+1568	<Evento do Desafio> Diversas recompensas os aguardam.
+1569	<Evento do Desafio> O evento do desafio terminou.
+1570	<Evento do Desafio> O tempo de espera foi removido usando o item Remover Espera (ED). 
+1571	<Evento do Desafio> Experiência de desafio (+5000) foi recebida.
+1572	<Evento do Desafio> Por favor, use após a vitória/derrota no mini-game ser decidida.
+1573	<Evento do Desafio> Isso só é possível se o nível de desafio for 1 ou superior.
+1574	Aguarde um pouco para usar
+1575	Battle Royale
+1576	Recompensa do Ranking da Temporada do Battle Royale. Rank: %d
+1577	Recompensa Básica do Battle Royale
+1578	Recompensa de Partida do Battle Royale. Rank: %d
+1579	Recompensa de Mortes do Battle Royale. %d ou mais
+1580	Não é possível registrar conquista enquanto a barra de registros do monstro estiver cheia.
+1581	Não é possível usar emotes agora.
+1582	Centro Shinsuyon
+1583	A guilda %s comprou terreno no mapa %s, coordenadas %d, %d, por %d won!
+1584	O líder da guilda aplicou para o leilão do terreno de %s %lld,%lld.Por favor, junte-se quando o tempo chegar.
+1585	Você já deu seu lance.
+1586	Há dinheiro não resgatado.
+1587	Não há dinheiro para resgatar.
+1588	Você não pode resgatar pois atingiu a quantia máxima de won.
+1589	O valor de %d de lance foi resgatado.
+1590	Apenas líder de guilda ou cavaleiro pode pagar a taxa.
+1591	Não há taxa a ser paga.
+1592	Não há dinheiro suficiente na guilda.
+1593	[Taxa de terreno] Vá ao Guarda da Praça e pague a taxa de %d gold.
+1594	A taxa do terreno de %lu foi paga.
+1595	Não é possível utilizar essa função enquanto o leilão está em andamento.
+1596	Não aplicou para leilão de terreno de guilda.
+1597	Você não possui guilda.
+1598	Você já aplicou.
+1599	Apenas o líder da guilda pode aplicar.
+1600	Guilda com nível %d ou superior pode aplicar.
+1601	Você não pode aplicar pois já possui terreno de guilda.
+1602	Não há leilão de terreno de guilda em andamento.
+1603	O lance máximo é de %d won.
+1604	Você não possui a quantia necessária de won para fazer o lance.
+1605	Sua guilda não aplicou para o leilão.
+1606	Você pode fazer isso 24 horas após ingressar na guilda.
+1607	O terreno foi abandonado devido ao não pagamento da taxa.
+1608	Nenhuma guilda aplicou para o leilão do terreno.
+1609	Seu lance foi de %d won.
+1610	A guilda não existe.
+1611	Planície Dongan
+1612	Você pode resgatar o dinheiro do lance através do Guarda da Praça.
+1613	Você anexou com sucesso a joia amplificada.
+1614	Centro Chonjoyon
+1615	Centro Jinnoyon
+1616	Forte Jurang
+1617	Forte Waryon
+1618	Forte Imura
+1619	Área de Guildas (Shinsu)
+1620	Área de Guildas (Chunjo)
+1621	Área de Guildas (Jinno)
+1635	<Jardim Secreto> Não possui sementes o suficiente.
+1636	<Jardim Secreto> Não há espaço suficiente em seu inventário.
+1637	<Jardim Secreto> Recebeu uma caixa de sementes.
+1638	<Jardim Secreto> Não possui caixas de semente suficientes.
+1639	<Jardim Secreto> Recebeu Semente de Amaranto.
+1640	<Jardim Secreto> Recebeu Semente de Flor Cônica.
+1641	<Jardim Secreto> Recebeu Semente de Narciso.
+1642	<Jardim Secreto> Recebeu Semente de Lírio.
+1643	<Jardim Secreto> Recebeu Semente de Girassol.
+1645	<Jardim Secreto> O item está cheio e não pode mais ser usado.
+1646	Não é possível utilizar transfiguração.
+1647	Derrote todos os monstros dentro do tempo limite.
+1648	Vá ao portal para mover-se para o próximo estágio.
+1649	Desvie dos ataques dos monstros para sobreviver.
+1650	Vá ao portal para mover-se para o próximo estágio.
+1651	%s concluiu o %uº andar da Torre Infernal de Sung Mahi.
+1652	A recompensa da Torre Infernal de Sung Mahi foi enviada para o correio.
+1653	Prêmio da Torre: %dº andar
+1654	Recompensa por concluir o andar na Torre Infernal de Sung Mahi.
+1655	A batalha iniciará em %d segundos.
+1656	Desafio do %dº andar.
+1657	Derrote os monstros que não combinam.
+1658	Você encostou no monstro errado. Derrote todos os monstros.
+1659	Derrote todos os monstros dentro do tempo limite.
+1660	Destruiu a Metin incorreta. Derrote todos os monstros.
+1661	Destrua a Metin correta.
+1662	Encontre a Chave da Torre Infernal correta para escapar.
+1663	Encontre o Selo de Sung Mahi para remover o selo.
+1664	<Torre Infernal de Sung Mahi> Derrote todos os monstros dentro do tempo limite.
+1665	<Torre Infernal de Sung Mahi> A temporada da torre foi encerrada.
+1666	<Torre Infernal de Sung Mahi> A nova temporada da torre foi iniciada.
+1667	Premiação da Torre Infernal
+1668	Recompensa da temporada da Torre Infernal de Sung Mahi.
+1669	Não há maldição.
+1670	Todas as maldições foram removidas.
+1671	O tempo acabou. Você será movido para fora em instantes.
+1672	<Torre Infernal de Sung Mahi> Derrote a Metin Demoníaca Infernal.
+1673	<Torre Infernal de Sung Mahi> Essa não é a chave correta. Encontre a certa.
+1674	<Torre Infernal de Sung Mahi> Removeu o selo do pilar com o Selo de Sung Mahi.
+1675	<Torre Infernal de Sung Mahi> Remova o selo de outro pilar antes.
+1676	Você já desbloqueou o espaço para luvas.
+1677	O espaço para luvas não foi desbloqueado.
+1678	Esta função está indisponível, pois foi detectado um programa irregular.
+1679	<Torre Infernal de Sung Mahi> Concluiu o estágio em %d segundos.
+1680	Você não pode participar do leilão no mesmo dia em que a guilda foi criada.
+1681	%s tornou-se mestre do Portão do Dragão: %s!
+1686	<Torre Infernal de Sung Mahi> Suba as escadas para desafiar o próximo andar.
+1687	<Loja Pessoal Premium> Não é possível utilizar. Vá até a Gerente do Mercado na vila.
+1688	Você entrou em uma área que está sob domínio de Sung Mahi e está sofrendo de sua maldição.
+1689	%s tem %d postos avançados. (%d/%d)
+1690	%s está com todos os postos avançados erguidos e a maldição de Sung Mahi será iniciada em %d minutos.
+1691	Os postos avançados de Sung Mahi estão sendo erguidos.
+1692	Os postos avançados de Sung Mahi foram destruídos.
+1693	Todos os postos avançados em %s foram destruídos e a área não está mais sob a maldição de Sung Mahi.
+1694	Deserto Seogan
+1695	Abismo Namgan
+1698	Graças à bênção da imunidade, você não está sob influência da maldição de Sung Mahi.
+1699	Sua bênção da imunidade acabou e você está novamente sob influência da maldição de Sung Mahi.
+1700	Não é possível realizar a ação com uma conta suspeita.
+1701	Não há material suficiente para melhoria. (Não pode usar item bloqueado)
+1702	Seu terreno de guilda será abandonado automaticamente em %d horas. Itens no armazém da guilda serão excluídos.
+1703	<Guilda> Você não pode expulsar o líder da guilda.
+1704	<Guilda> Você não pode se expulsar.
+1705	<Guilda> Você não pode repassar a liderança da guilda para você mesmo.
+1706	<Guilda> Disponível apenas para o líder da guilda.
+1707	<Guilda> Você não pode realizar esta ação durante uma batalha de guilda.
+1708	Não pode ser negociado agora.
+1709	Kit de Ações da Torre ativado.
+1710	You can learn this after reaching the Champion Level.
+1711	<Loja Pessoal Premium> Não é possível abrir pois há dinheiro a ser resgatado.
+1712	<Loja Pessoal Premium> Não é possível abrir pois há itens a serem resgatados.
+1713	<Loja Pessoal Premium> Você já abriu a loja pessoal.
+1714	<Loja Pessoal Premium> A loja está sendo preparada.
+1715	<Loja Pessoal Premium> Não há espaço suficiente em seu inventário.
+1716	<Loja Pessoal Premium> Há itens a serem resgatados em sua loja pessoal.
+1717	<Loja Pessoal Premium> Há dinheiro a ser resgatado em sua loja pessoal.
+1718	<Loja Pessoal Premium> Vendeu %s. Por favor, resgate o dinheiro.
+1719	<Loja Pessoal Premium> Não é possível reabrir durante %d segundos após o fechamento.
+1720	Não é possível realizar esta ação enquanto cria a dungeon.
+1721	Não é possível reviver mais. Você será movido para fora.
+1722	Você já recebeu os benefícios. Se desejar recebê-los novamente, volte mais tarde~. Tempo restante: %dh %dm
+1723	Você pode reviver mais %d vezes.
+1724	Você pode entrar no Templo da Serpente agora. Por favor, acesse através da Estátua da Serpente.
+1725	Não houve reação ao destruir as Metins. Todas as Metins serão invocadas novamente.
+1726	Não houve reação ao destruir as Metins. Todas as Metins serão invocadas novamente.
+1727	Destruiu a %dª metin. Encontre e destrua a %dª metin.
+1728	O tempo acabou. Você será movido para fora da dungeon.
+1729	Disponível por %d minutos a partir de agora.
+1730	O tempo restante não pode ser aumentado além disso.
+1731	O tempo restante foi aumentado em 1 minuto.
+1732	Você derrotou todos os monstros. Você será movido para o %dº andar em %d segundos.
+1733	Você destruiu todas as metins. Você será movido para o %dº andar em %d segundos.
+1734	Você encaixou a peça, mas a cabeça da serpente não respondeu.
+1735	Todos os selos foram removidos. Você será movido para o %dº andar em %d segundos.
+1736	O ferreiro especial do Templo da Serpente apareceu!
+1737	O Ferreiro do Templo da Serpente apareceu!
+1738	Você derrotou todos os monstros. Você pode ir para o andar do boss.
+1739	Você concluiu o Templo da Serpente. Você será movido para fora da dungeon em %d segundos.
+1740	Destrua as metins na ordem correta.
+1741	Derrote todos os monstros.
+1742	Pegue a chave dos monstros para liberar o selo.
+1743	Colocou a peça na cabeça da serpente.
+1744	Encontre a peça correta para a cabeça da serpente e encaixe-a.
+1745	Você liberou com sucesso.
+1746	Você deve liberar o selo de outro pilar antes.
+1747	A prisão foi aberta. O ferreiro sorri para você.
+1748	Esta chave não serviu para abrir a prisão para salvar o ferreiro.
+1749	Este pedaço não encaixa na cabeça da serpente.
+1751	Não é possível reiniciar pois ultrapassa o limite de pontos.
+1752	Você deve ser nível 120 e ter um orbe de experiência cheio para adquirir Nível Conquistador.
+1753	Você deve completar a dungeon ‘Onda de Defesa.
+1754	You have already reached the Champion Level.
+1755	<Loja Pessoal Premium> Não é possível utilizar itens enquanto está abrindo a loja pessoal.
+1756	<Loja Pessoal Premium> Não é possível utilizar enquanto a janela de gerenciamento de itens está aberta.
+1757	<Loja Pessoal Premium> Não é possível utilizar a Loja Pessoal Premium enquanto outras janelas estão abertas.
+1758	<Loja Pessoal Premium> Não é possível prosseguir enquanto a janela de gerenciamento de itens está aberta.
+1760	<Bônus de Relíquia> Indisponível, feche a janela de Relíquia para prosseguir.
+1761	%s saiu da batalha.
+1762	Você tem %d minutos restantes.
+1763	<Loja Pessoal Premium> Não é possível duelar aqui.
+1764	<Loja Pessoal Premium> O valor do dinheiro a ser resgatado não é renovado enquanto a janela de gerenciamento de itens está aberta.
+1765	O boss final do Templo da Serpente apareceu!
+1766	<Loja Pessoal Premium> Há uma loja que já foi aberta. Por favor, abra em outro local.
+1767	Não é possível melhorar enquanto o pet estiver invocado.
+1768	<Abismo Boreal> Você tem %d minutos restantes.
+1769	<Abismo Boreal> Caso não inicie a batalha dentro de 3 minutos, a dungeon será removida.
+1770	<Abismo Boreal> O tempo acabou e você será removido da dungeon.
+1772	<Abismo Boreal> A dungeon para o Abismo Boreal foi criada.
+1773	Vitalidade
+1774	Defesa
+1775	Resist. Dano
+1776	Vel. Ataque
+1777	Experiência
+1778	Resist. (Fogo)
+1779	Resist. (Gelo)
+1780	Resist. (Relâmpago)
+1781	Resist. (Vento)
+1782	Resist. (Terra)Esta habilidade pode ser aprendida quando o Cavalo atingir nível 21.
+1783	Resist. (Trevas)
+1784	Força
+1785	Bônus (Fogo)
+1786	Bônus (Gelo)
+1787	Bônus (Relâmpago)
+1788	Bônus (Vento)
+1789	Bônus (Terra)
+1790	Bônus (Trevas)
+1791	Bônus (Monstros)Esta habilidade pode ser aprendida quando o Cavalo atingir nível 21.
+1792	Sung Ma (FOR)
+1793	Sung Ma (RES)
+1794	Sung Ma (VIT)
+1795	Sung Ma (INT)
+1796	<Abismo Boreal> Alastor foi derrotado! Você será movido para fora em 20 segundos.
+1797	<Abismo Boreal> Alastor entrará em modo Fúria em instantes.
+1798	<Abismo Boreal> Alastor entrou no nível %d do modo Fúria.
+1799	<Abismo Boreal> Você conseguiu conter o modo Fúria.
+1800	<Abismo Boreal> Se você não destruir os ovos do dragão branco dentro de %d segundos, um efeito congelante atingirá o local.
+1801	Ação não está disponível neste local.
+1802	Disponível após a batalha iniciar.
+1803	<Abismo Boreal> A dungeon foi removida, porque a batalha não foi iniciada dentro do tempo limite.
+1804	Não é possível realizar essa ação com o Portão do Dragão aberto.
+1805	<Filtro de Espólios> O item não pode ser coletado, porque a sua coleta está desativada.
+1806	<Filtro de Espólios> O item não pode ser coletado, porque a sua coleta foi desativada por membro do grupo.
+1808	Você recebeu %d pontos de experiência de conquistador.
+1809	Você recebeu %d pontos de experiência.
+1810	Você perdeu %d pontos de experiência.
+1811	Você perdeu %d pontos de experiência de conquistador.
+1812	Não está disponível durante outra transações.
+1813	Desafio da Metin começou!
+1814	Complete a missão da lista de Missão de Evento, destrua Metins e receba a recompensa.
+1815	Desafio da Metin foi encerrado.
+1816	<Dragão da Água> A dungeon foi criada.
+1817	<Dragão da Água> A dungeon será encerrada caso não inicie a batalha dentro de 3 minutos.
+1818	<Dragão da Água> Você derrotou o Dragão da Água. Será movido para fora dentro de %s segundos.
+1819	<Dragão da Água> Você tem %d minutos.
+1820	<Dragão da Água> A dungeon foi encerrada porque a batalha não foi iniciada.
+1821	<Dragão da Água> O tempo da dungeon foi encerrado e todos serão movidos para fora.
+1822	<Dragão da Água> A dungeon foi criada.
+1823	<Dragão da Água> A dungeon será encerrada caso não inicie a batalha dentro de 3 minutos.
+1824	<Dragão da Água> A dungeon foi iniciada.
+1825	<Dragão da Água> Você desistiu de continuar a batalha e a dungeon foi encerrada.
+1829	<Dragão da Água> A dungeon será encerrada caso ninguém entre dentro de %d segundos.
+1830	<Dragão da Água> A dungeon foi encerrada por falta de jogadores.
+1836	You cannot move to that area.
+1840	Ação permitida para %s.
+1844	Consumiu %d Forragem para aumentar %d pontos de experiência do Cavalo.
+1845	Não possui gaya ou gold suficiente.
+1846	Você não pode obter habilidade do Cavalo.
+1847	<Templo Oculto> Este item não pode ser utilizado aqui.
+1848	<Templo Oculto> Apenas o líder do grupo pode utilizar o pergaminho.
+1849	<Templo Oculto> %s está fora de alcance.
+1850	<Templo Oculto> Não possui nível requerido para utilizar o pergaminho.
+1851	<Templo Oculto> %s não possui nível requerido para entrar.
+1852	<Templo Oculto> %s recusou-se a entrar.
+1853	<Templo Oculto> A dungeon será fechada se a batalha não for iniciada.
+1854	<Templo Oculto> O portal para o Templo Oculto foi criado.
+1855	<Templo Oculto> Destrua a pedra de Metin.
+1856	<Templo Oculto> Esta pedra de Metin não é a verdadeira. Encontre a verdadeira.
+1857	<Templo Oculto> Você encontrou o Tesouro Oculto na pedra de Metin.
+1858	<Templo Oculto> A verdadeira Metin não foi encontrada. Mova-se para outra área para tentar encontrá-la.
+1859	<Templo Oculto> Missão completa. Encontre a Sala Secreta.
+1860	<Templo Oculto> Encontre o verdadeiro inimigo e derrote-o! Eles são doppelgangers!
+1861	<Templo Oculto> O verdadeiro inimigo não foi encontrado. Mova-se para outra área para tentar encontrá-la.
+1862	<Templo Oculto> Você encontrou o Tesouro Oculto.
+1863	<Templo Oculto> Boas-vindas a Sala Secreta.
+1864	<Templo Oculto> Tempo esgotado! Todos serão movidos para fora.
+1865	<Templo Oculto> Você recebeu o Bônus do Templo Oculto!
+1866	<Templo Oculto> Recompensa diária não está disponível. Tempo restante: %dhs %dmins
+1867	Premiação Templo Oculto
+1868	<Templo Oculto> O tempo limite acabou e a dungeon foi removida.
+1869	<Templo Oculto> A batalha pode ser iniciada através do Portal Oculto.
+1870	<Templo Oculto> Você recebeu um Baú Oculto Bônus ao utilizar o Bônus do Templo Oculto.
+1871	<Templo Oculto> Você recebeu o Baú do Tesouro como recompensa. Verifique a caixa de correio.
+1872	A habilidade %s foi removida.
+1873	Adquiriu a habilidade %s. Verifique na janela de skills.
+1874	Não possui gaya suficiente.
+1876	Por favor, tente mais tarde.
+1878	Você será movido para a vila após o tempo se esgotar.
+1879	Não possui Água da Reencarnação suficiente.
+1880	Você completou o calabouço. Será movido para fora após %d minutos.
+1881	Você derrotou todos os Emissários. Você pode entrar na Sala do Asmodeus através do Hae-Tae.
+1882	Você não pode usar mais do que a quantidade de itens que tenha em posse.
+1883	Como a Pré-Jornada ao Submundo foi encerrada, as Chamas Mortais não poderão mais ser obtidas.
+1884	A Pré-Jornada ao Submundo foi iniciada. Derrote monstros para coletar Chamas Mortais.
+1885	A Jornada ao Submundo foi encerrada.
+1886	A Jornada ao Submundo foi iniciada. Utilize o Portal do Submundo na Península do Dragão e derrote Asmodeus.
+1887	Ressuscitado ao usar %d Água da Reencarnação. O número restante de reencarnações é %d.
+1888	Obteve %d Chamas Mortais.
+1895	Você derrotou o Emissário do Leste.
+1896	Você derrotou o Emissário do Oeste.
+1897	Você derrotou o Emissário do Sul.
+1898	Você derrotou o Emissário do Norte.
+1899	O calabouço será encerrado em %d minutos.
+1900	Atingiu o limite de Chamas Mortais em posse.
+1901	Não é possível realizar esta ação agora. Tempo restante: %dh %dmin
+1902	<Grupo> Não é possível trocar o grupo quando a sala está criada.
+1903	Não é possível contratar mais Mercenários.
+1904	Vigor excedido.
+1905	<Templo Oculto> Destrua a Metin do Templo Oculto para prosseguir para o próximo estágio.
+1916	Você já adquiriu esta habilidade.
+1917	Esta habilidade pode ser aprendida quando o Cavalo atingir nível 31.
+1918	Não é possível adquirir mais habilidades.
+1919	Esta habilidade pode ser aprendida quando o Cavalo atingir nível 21.
+1921	<Templo Oculto> Você não pode acessar a dungeon. Não possui nível requerido.
+1922	Não é possível trocar de aba pois a outra arma não é compatível com a skin de arma equipada.
+1924	<Filtro de Espólios> O sistema de Filtro de Espólios foi ativado.
+1925	<Filtro de Espólios> O período do Filtro de Espólios foi estendido.
+1926	<Invasão de Sung Mahi> O Portal de Sung Mahi surgiu em algum local.[ENTER]Verifique no mapa.
+1927	<Invasão de Sung Mahi> Em alguma parte do mapa, o boss Akanor surgiu!
+1930	<Invasão de Sung Mahi> O poder do Portal foi enfraquecido e agora pode ser destruído.
+1931	<Invasão de Sung Mahi> A defesa da área foi bem sucedida. Você será movido para fora em breve.
+1932	<Invasão de Sung Mahi> O Portal de Sung Mahi foi fechado.
+1933	<Invasão de Sung Mahi> Flores do Poder foram invocadas ao redor do portal.[ENTER]Se a Flor do Poder tiver o mesmo atributo do mapa, você receberá um efeito bônus.
+1934	<Invasão de Sung Mahi> Flores do Poder foram invocadas ao redor do boss.[ENTER]Se a Flor do Poder tiver o mesmo atributo do mapa, você receberá um efeito bônus.
+1936	<Invasão de Sung Mahi> Não há espaço suficiente em seu inventário para receber a recompensa.
+1937	<Invasão de Sung Mahi> Derrote todos os monstros ao redor do Portal para poder destruí-lo.
+1938	<Guilda> A quantia de %d gold foi retirada.
+1941	Adquiriu todos os pontos de Vigor da missão. Receba a recompensa de conclusão através da janela de quest.
+1944	Não há espaço suficiente em seu inventário para refinar o item.
+1946	Membros não podem deixar a guilda enquanto Meley está em progresso.
+1947	Membros não podem deixar a guilda enquanto a dungeon PVE está em progresso.
+1950	<Guia de NPC> Este NPC não está presente neste mapa.

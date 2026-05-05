@@ -1,0 +1,3 @@
+# step not necessary
+71051	ETC	icon/item/71051.tga
+71052	ETC	icon/item/71052.tga

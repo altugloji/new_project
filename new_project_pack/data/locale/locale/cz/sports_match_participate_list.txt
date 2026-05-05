@@ -1,0 +1,32 @@
+1	Katar
+2	Ekvádor
+3	Senegal
+4	Nizozemsko
+5	Anglie
+6	Írán
+7	USA
+8	Wales
+9	Argentina
+10	Saudská Arábie
+11	Mexiko
+12	Polsko
+13	Francie
+14	Austrálie
+15	Dánsko
+16	Tunisko
+17	Španìlsko
+18	Kostarika
+19	Nìmecko
+20	Japonsko
+21	Belgie
+22	Kanada
+23	Maroko
+24	Chorvatsko
+25	Brazílie
+26	Srbsko
+27	Švýcarsko
+28	Kamerun
+29	Portugalsko
+30	Ghana
+31	Uruguay
+32	Jižní Korea

@@ -1,0 +1,134 @@
+ScriptType            RaceDataScript
+
+BaseModelFileName     "D:\Ymir Work\monster2\metinstone_golden_land\metinstone_golden_land.GR2"
+
+Group ShapeData
+{
+    PathName 		 ""
+    ShapeDataCount 		 0
+}
+Group AttachingData
+{
+    AttachingDataCount       7
+    
+    Group AttachingData00
+    {
+        AttachingDataType    1
+        
+        isAttaching          1
+        AttachingModelIndex  0
+        AttachingBoneName    "root"
+        
+        CollisionType        1
+        
+        SphereDataCount      1
+        Group SphereData00
+        {
+            Radius           186.000000
+            Position         0.000000 0.000000 100.000000
+        }
+    }
+    
+    Group AttachingData01
+    {
+        AttachingDataType    1
+        
+        isAttaching          1
+        AttachingModelIndex  0
+        AttachingBoneName    "root"
+        
+        CollisionType        3
+        
+        SphereDataCount      1
+        Group SphereData00
+        {
+            Radius           196.000000
+            Position         0.000000 0.000000 100.000000
+        }
+    }
+    
+    Group AttachingData02
+    {
+        AttachingDataType    1
+        
+        isAttaching          1
+        AttachingModelIndex  0
+        AttachingBoneName    "root"
+        
+        CollisionType        1
+        
+        SphereDataCount      1
+        Group SphereData00
+        {
+            Radius           136.000000
+            Position         0.000000 20.000000 335.000000
+        }
+    }
+    
+    Group AttachingData03
+    {
+        AttachingDataType    1
+        
+        isAttaching          1
+        AttachingModelIndex  0
+        AttachingBoneName    "root"
+        
+        CollisionType        3
+        
+        SphereDataCount      1
+        Group SphereData00
+        {
+            Radius           146.000000
+            Position         0.000000 20.000000 335.000000
+        }
+    }
+    
+    Group AttachingData04
+    {
+        AttachingDataType    2
+        
+        isAttaching          1
+        AttachingModelIndex  0
+        AttachingBoneName    "root"
+        
+        EffectScriptName     "D:\Ymir Work\effect\monster2\metinstone_golden_land_loop.mse"
+        EffectPosition       0.000000 0.000000 0.000000
+        EffectRotation       0.000000 0.000000 0.000000
+    }
+    
+    Group AttachingData05
+    {
+        AttachingDataType    1
+        
+        isAttaching          1
+        AttachingModelIndex  0
+        AttachingBoneName    "root"
+        
+        CollisionType        3
+        
+        SphereDataCount      1
+        Group SphereData00
+        {
+            Radius           107.000000
+            Position         0.000000 10.000000 535.000000
+        }
+    }
+    
+    Group AttachingData06
+    {
+        AttachingDataType    1
+        
+        isAttaching          1
+        AttachingModelIndex  0
+        AttachingBoneName    "root"
+        
+        CollisionType        1
+        
+        SphereDataCount      1
+        Group SphereData00
+        {
+            Radius           97.000000
+            Position         0.000000 10.000000 535.000000
+        }
+    }
+}

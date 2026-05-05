@@ -1,0 +1,5 @@
+[DELAY value;0]
+É possível ressuscitar um pet ao colocá-lo junto com [ENTER]
+a Ração de Proteína Premium.[ENTER]
+A quantidade de itens varia de acordo com a idade do pet.[ENTER]
+O pet será ressuscitado com 80% da sua idade original.

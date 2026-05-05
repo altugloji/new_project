@@ -1,0 +1,158 @@
+1	Pergaminho da Paz elimina o risco de destruição ao refinar equipamentos.
+2	Para saber sobre matrimônio, fale com a Senhora do Casamento na vila principal.
+3	O Teleportador pode te mover para outras regiões.
+4	Para saber sobre guildas, fale com o Guarda da Praça no centro da vila principal.
+5	Ao clicar em 'B' no mini-mapa, poderá entrar na Batalha Campal e visualizar informações.
+6	Por favor, mude a senha do seu armazém periodicamente.
+7	Poções podem ser criadas ao visitar Baek Go.
+8	A partir do nível 25, o Ajudante do Estábulo poderá te ensinar a cavalgar.
+9	É possível configurar seus atalhos em 'Opções de jogo'.
+10	PVP está disponível a partir do nível 15.
+11	Para saber sobre pescaria, fale com o Pescador na vila principal.
+12	O máximo de gold que um personagem pode carregar é 1,999,999,999.
+13	O máximo de won que um personagem pode carregar é 999.
+14	Cuidado ao alimentar o seu pet. Os itens dados ao pet não podem ser recuperados.
+15	Não é possível usar skills enquanto está transformado.
+16	Quests do Girab te recompensam com bônus permanente, ao contrário das demais.
+17	Personagens abaixo do nível 30 podem reiniciar suas skills com a Senhora do Casamento.
+18	Para casar, ambos os personagens devem ter níveis similares.
+19	Quanto maior o aprimoramento de um item, maior será seu brilho.
+20	Tenha cuidado ao tocar em uma Metin, ou poderá acabar morrendo.
+21	É possível proteger um item com o Pergaminho de Bloqueio.
+22	Bônus relacionados à animais ajudam na caça aos macacos.
+23	Os monstros da Gruta dos Macacos se regeneram rapidamente.
+24	É possível experienciar déjà-vu na Gruta dos Macacos.
+25	O mini-mapa não está disponível na Gruta dos Macacos.
+26	Aranhas são da categoria inseto.
+27	A Gruta Gomi pode ser acessada com o Anel do Teleporte.
+28	Cuidado com o veneno da Aranha Rainha, ele é muito poderoso.
+29	O Passaporte é necessário para acessar a Gruta Gomi2.
+30	Para acessar o ninho da Baronesa, é necessário a Chave Aracnídea
+31	Muitos não retornaram da Torre Demoníaca.
+32	É possível adquirir mais EXP e itens na Torre Demoníaca do que em outras dungeons.
+33	Um ferreiro te aguarda no 6º andar. Boa sorte...
+34	Os monstros da Torre Demoníaca são do elemento trevas.
+35	Os monstros da Caverna Demoníaca são do elemento trevas.
+36	A partir do 2º andar, a Caverna Demoníaca é uma dungeon.
+37	O mini-mapa não está disponível na Caverna Demoníaca.
+38	Cuide dos membros do seu grupo!
+39	Carniçal Maligno é o pet de Lord Gahnasel.
+40	Para acessar o 2º andar, é necessário ter a Insígnia Demoníaca.
+41	Monstros horríveis habitam a Gruta Chun.
+42	O Passaporte é necessário para acessar a Gruta Chun.
+43	É possível adquirir itens de alta qualidade na Gruta Chun.
+44	Há três andares na Gruta Chun e o Dragão da Água vive nessa dungeon.
+45	Para derrotar o Dragão da Água, é importante destruir as Metins.
+46	Os monstros da Gruta Chun são do elemento gelo.
+47	Para entrar no templo do Dragão da Água, é necessário estar em um grupo.
+48	Há um limite de 1 hora para derrotar o Dragão da Água.
+49	Purgatório Ardente é uma dungeon repleta de lava.
+50	É necessário passar por 7 áreas para encontrar o Yamacheon.
+51	Por conta de um poder misterioso no Purgatório Ardente, não é possível utilizar a maioria dos itens de teleporte.
+52	Os monstros do Purgatório Ardente são do elemento fogo.
+53	Há um limite de 1 hora para completar o Purgatório Ardente.
+54	Para concluir a Torre de Nemere, é necessário que haja Shaman e Ninja no grupo.
+55	Os monstros da Torre de Nemere são do elemento gelo.
+56	A Torre de Nemere tem 9 áreas e uma área misteriosa onde Nemere vive.
+57	Não é possível utilizar montaria na Torre de Nemere.
+58	Interaja com o Leão de Nemere para iniciar a batalha. O tempo limite é de 1 hora.
+59	Você é capaz de salvar as pessoas que desapareceram na Torre de Nemere?
+60	O Ent Guardião aparece em um lugar aleatório da dungeon.
+61	Após derrotar o Ent Guardião, um portal para a Floresta Encantada aparecerá.
+62	Os monstros da Floresta Encantada são do elemento vento.
+63	Jotun Thrym tem um poderoso exército.
+64	A Pedra das Dríades é necessária para acessar o Templo de Érebus.
+65	Ao derrotar Bagjanamu, Jotun Thrym aparecerá.
+66	A missão para receber a Pedra das Dríades é repetitível.
+67	Não é possível atacar a Meley, Rainha Dragão em seu Covil.
+68	Os monstros do Covil de Meley são do elemento fogo.
+69	O Anel de Fogo Dracônico pode ser adquirido através dos monstros do Covil de Meley.
+70	É necessário pontos de ranking para entrar no Covil com os membros da sua guilda.
+71	O ranking do Covil de Meley é baseado no tempo de conclusão e número de participantes no grupo.
+72	No modo guilda do Covil de Meley, é possível conseguir o pet Dragão Vermelho.
+73	No modo grupo do Covil de Meley, é necessário no mínimo 4 membros para participar.
+74	No Covil de Meley, modo grupo, é possível criar Elmos PVP. No modo guilda, é possível criar Elmos PVE.
+75	Há 12 dungeons diferentes no Templo do Zodíaco.
+76	Em cada dia da semana, uma dungeon diferente estará disponível.
+77	Os monstros do Templo do Zodíaco são abençoados com o elemento relacionado.
+78	Os monstros da dungeon Zi são do elemento trevas.
+79	Os monstros da dungeon Chou são do elemento terra.
+80	Os monstros da dungeon Yin são do elemento fogo.
+81	Os monstros da dungeon Mao são do elemento vento.
+82	Os monstros da dungeon Chen são do elemento trovão.
+83	Os monstros da dungeon Si são do elemento gelo.
+84	Os monstros da dungeon Wu são do elemento gelo.
+85	Os monstros da dungeon Wei são do elemento trovão.
+86	Os monstros da dungeon Shen são do elemento terra.
+87	Os monstros da dungeon You são do elemento vento.
+88	Os monstros da dungeon Xu são do elemento trevas.
+89	Os monstros da dungeon Hai são do elemento fogo.
+90	É possível obter Pingentes Elementais no Templo do Zodíaco, que podem ser muito úteis nas dungeons.
+91	É necessário mais de 12 Mármores da Vida para acessar o Templo do Zodíaco.
+92	A Pedra de Ressurreição é necessária para poder ressuscitar no Templo do Zodíaco.
+93	Pingentes podem ser refinados até o +200.
+94	Recompensas únicas podem ser recebidas no 40º andar do Templo do Zodíaco, mas gold será necessário.
+95	Possui a Pedra de Ressurreição? Use-a para ressuscitar membros do seu grupo.
+96	É possível entrar sem grupo na dungeon, mas as recompensas serão melhores caso esteja em um.
+97	Há um limite de 10 minutes por andar.
+98	Preparado(a) para iniciar a jornada?
+99	Há um limite de 25 minutos para completar a Onda de Defesa.
+100	Os monstros da Onda de Defesa são do elemento gelo.
+101	Inicie a batalha ao interagir com o Leme.
+102	Proteja o Pilar de Vela para chegar no Novo Continente.
+103	Derrote Mini Hidras para conseguir itens úteis para a batalha.
+104	Há uma Loja de Gaya no Novo Continente e é possível criar gemas com uma taxa de sucesso acima do normal.
+105	A partir da 2ª fase da Onda de Defesa, é necessário derrotar as Hidras para poder avançar.
+106	Você chegou no Novo Continente.
+107	Você tem sorte de ver essa dica.
+108	Ao completar a Missão Diária do Boss, receberá um Livro do Despertar com 100% de chance.
+109	Cada vez que completar a Missão da Fenda Temporal, há chance de obter o Livro do Despertar.
+110	Ao completar a Missão da Fenda Temporal 10 vezes, receberá o Livro do Despertar com 100% de chance.
+111	Os monstros das dungeons do Despertar são mais fortes que os da Fenda Temporal.
+112	Os bosses das dungeons do Despertar dropam Baús do Despertar.
+113	É possível obter Lasca de Pedra Dragão+ nas dungeons da Fenda Temporal e do Despertar.
+114	Não é possível obter itens dos monstros das dungeons da Fenda da Temporal.
+115	A Terra dos Espíritos é um local onde vários espíritos elementais vivem.
+116	Você pode ganhar materiais para efeitos de conjunto.
+117	Você pode ir para a Área Especial usando o Anel Espiritual.
+118	Existem vários espíritos poderosos.
+119	Na Área Especial, um poder desconhecido drena constantemente seu HP.
+120	Você precisa usar a Medalha Espiritual para se livrar da Maldição Espiritual.
+121	Quem será o último a sobreviver?
+122	Boas vindas ao modo Battle Royale.
+123	Perca Grelhada remove os debuffs que acontecem durante a batalha.
+124	Quando o número de mortes é 10 ou superior, recompensas especiais são entregues.
+125	Uma caixa especial de suprimentos aparece na segunda e quarta onda do Campo Elétrico.
+126	Quebrar a caixa de suprimento e caixa de equipamento restaura HP.
+127	No modo Battle Royale, expressões podem ser usadas livremente.
+128	Boas-vindas ao Novo Continente, Yohara.
+129	Cace inimigos poderosos e receba itens variados.
+130	Sua movimentação foi diminuída devido ao poder de Sung Mahi.
+131	Você pode adquirir novos itens na Planície Dongan.
+132	Você pode desbloquear o espaço para luvas através de uma missão.
+133	Luvas possuem atributos necessários para enfrentar Yohara.
+134	O Artesão Chi-Yeol pode manufaturar diversos itens.
+135	É possível conseguir bônus permanentes com a ajuda do Girab de Yohara.
+136	Relíquias concedem diversos bônus úteis para seu personagem.
+137	É possível aumentar novos atributos no nível Conquistador.
+138	O Ajudante do Estábulo perdeu seus cavalos, mas ainda exerce sua função.
+139	Há monstros poderosos na torre.
+140	É possível receber apenas uma recompensa por andar.
+141	Você tem apenas uma chance na Torre Infernal de Sung Mahi.
+142	O poder de Sung Mahi enfraquece os aventureiros.
+143	Caso seja derrotado, será movido para fora. Tenha cuidado.
+144	Você pode usar a passagem secreta em cada área para localizar o boss.
+145	Há um monge que comanda este local.
+146	Boas-vindas ao Calabouço Misterioso.
+147	É possível conseguir um poderoso talismã neste local.
+148	Você pode acessar o Templo da Serpente através do Guardião do Templo da Serpente.
+149	Procure a Estátua da Serpente caso queira explorar o Templo da Serpente.
+150	Há um monstro que se transforma em boss.
+151	Você pode entrar no Templo da Serpente através da Estátua da Serpente.
+152	Há um ferreiro especial no 6º andar que pode aprimorar suas luvas.
+153	Você pode encontrar o boss final do Templo da Serpente, a Rainha Serpente Nethis, no 7º andar.
+154	Você pode expandir o tempo do Templo da Serpente com a Poeira de Serpente.
+155	Derrote todos os monstros próximos do Portal de Sung Mahi para poder destruí-lo.
+156	Use as Flores do Poder para ajudar na batalha.
+157	A Flor Tempestuosa aumenta sua velocidade de movimento. 
+158	Ao derrotar o Akanor, há chance de ganhar uma Insígnia da Conquista.

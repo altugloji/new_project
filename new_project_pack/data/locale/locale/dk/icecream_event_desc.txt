@@ -1,0 +1,9 @@
+[DELAY value;0]
+[Event Beskrivelse][ENTER]
+[ENTER]
+Sommer Eventet er startet![ENTER]
+[ENTER]
+Bemærk venligst at kun Is Måleskeer i event UI kan blive byttet.[ENTER]
+[ENTER]
+Besøg Summer i byen for at bytte dine Is Måleskeer om til gode[ENTER]
+belønninger.

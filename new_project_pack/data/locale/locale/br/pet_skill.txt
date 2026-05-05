@@ -1,0 +1,23 @@
+1	Resistência (Guerreiro)	jijoong	PASSIVE	Resistência contra ataques de Guerreiros (passiva)	0
+2	Resistência (Shura)	jijoong	PASSIVE	Resistência contra ataques de Shuras (passiva)	0
+3	Resistência (Ninja)	jijoong	PASSIVE	Resistência contra ataques de Ninjas (passiva)	0
+4	Resistência (Shaman)	jijoong	PASSIVE	Resistência contra ataques de Shamans (passiva)	0
+5	Resistência (Lycan)	jijoong	PASSIVE	Resistência contra ataques de Lycans (passiva)	0
+6	Berserker	pacheon	PASSIVE	Aumento no valor de ataque (passiva)	0
+7	Anti-Magia	cheonryeong	PASSIVE	Reduz a resistência mágica do inimigo (passiva)	0
+8	Aceleração	banya	PASSIVE	Reduz o cooldown de skills (passiva)	0
+9	Penetração	choehoenbimu	PASSIVE	Aumenta a chance de golpes perfurantes (passiva)	0
+10	Cura	heal	AUTO	HP será restaurado quando ficar abaixo de 20%	480
+11	Vampirismo	stealhp	PASSIVE	Rouba HP do inimigo (passiva)	0
+12	Espiritualismo	stealmp	PASSIVE	Rouba MP do inimigo (passiva)	0
+13	Baluarte	block	PASSIVE	Bloqueia dano físico (passiva)	0
+14	Reflexão	reflect_melee	PASSIVE	Dano recebido é reletido de volta ao inimigo (passiva)	0
+15	Saqueador	gold_drop	PASSIVE	Taxa de drop de gold é aumentada (passiva)	0
+16	Alcance	bow_distance	PASSIVE	Alcance do golpe com arco e flecha é aumentado (passiva)	0
+17	Imortalidade	invincibility	AUTO	Chance de invencibilidade temporária	600
+18	Recuperação	removal	AUTO	Chance de remover os efeitos de sangramento, lentidão e veneno	480
+19	Poção	potion	PASSIVE	Aumenta o efeito de recuperação ao usar poções. (passiva)	0
+20	Caçador de Monstros	mob_bonus	PASSIVE	Aumenta o efeito de 'força contra monstros'. (passiva)	0
+21	Experiência	exp	PASSIVE	Recebe EXP adicional ao derrotar monstros. (passiva)	0
+22	Absorção de Vida	hp_recover	PASSIVE	Absorve HP ao derrotar monstros. (passiva)	0
+23	Passos Leves	feather	AUTO	Pet tem a chance de ativar skill Passos Leves por um curto período.	180

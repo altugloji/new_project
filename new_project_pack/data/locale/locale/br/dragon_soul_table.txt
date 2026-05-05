@@ -1,0 +1,216 @@
+Group VnumMapper										
+{										
+	# 시작 vnum.									
+	# 여기서 써야할 부분은 위에 설명한 FE에 해당하는 부분. 									
+	# FE를 써줄 것									
+	#--#	DragonSoulName	Type							
+	1	백룡석	11							
+	2	화룡석	12							
+	3	풍룡석	13							
+	4	철룡석	14							
+	5	뇌룡석	15							
+	6	흑룡석	16							
+}										
+										
+Group BasicApplys										
+{										
+	Group 백룡석									
+	{									
+	# 1부터 순서대로 부여된다.									
+		#--#	Apply_Type	Apply_value						
+		1	INT	10						
+		2	RESIST_ICE	10						
+		3	ENCHANT_ICE	10						
+	}									
+										
+	Group 화룡석									
+	{									
+		#--#	Apply_Type	Apply_value						
+		1	STR	10						
+		2	RESIST_FIRE	10						
+		3	ENCHANT_FIRE	10						
+	}									
+	Group 풍룡석									
+	{									
+		#--#	Apply_Type	Apply_value						
+		1	MAX_SP	500						
+		2	RESIST_WIND	10						
+		3	ENCHANT_WIND	10						
+	}									
+	Group 철룡석									
+	{									
+		#--#	Apply_Type	Apply_value						
+		1	DEX	10						
+		2	RESIST_EARTH	10						
+		3	ENCHANT_EARTH	10						
+	}									
+	Group 뇌룡석									
+	{									
+		#--#	Apply_Type	Apply_value						
+		1	MAX_HP	1500						
+		2	RESIST_ELEC	10						
+		3	ENCHANT_ELECT	10						
+	}									
+	Group 흑룡석									
+	{									
+		#--#	Apply_Type	Apply_value						
+		1	CON	10						
+		2	RESIST_DARK	10						
+		3	ENCHANT_DARK	10						
+	}									
+}										
+										
+Group AdditionalApplys										
+{										
+	Group 백룡석									
+	{									
+	# 앞의 첫 컬럼은 순서와 관계 없다. 철저히 확률에 따라 속성이 부여될 뿐이다.									
+		#--#	Apply_Type	Apply_value	Prob					
+		1	MAGIC_ATT_GRADE	15	10					
+		2	MAGIC_DEF_GRADE	15	10					
+		3	SKILL_DAMAGE_BONUS	15	10					
+		4	SKILL_DEFEND_BONUS	15	10					
+	}									
+	Group 화룡석									
+	{									
+		#--#	Apply_Type	Apply_value	Prob					
+		1	ATT_BONUS	300	10					
+		2	DEF_BONUS	200	10					
+		3	NORMAL_HIT_DAMAGE_BONUS	15	10					
+		4	NORMAL_HIT_DEFEND_BONUS	15	10					
+	}									
+	Group 풍룡석									
+	{									
+		#--#	Apply_Type	Apply_value	Prob					
+		1	MAX_HP	3000	10					
+		2	HP_REGEN	10	10					
+		3	STEAL_HP	10	10					
+		4	KILL_HP_RECOVER	5	10					
+		5	MAX_HP_PCT	20	10					
+	}									
+	Group 철룡석									
+	{									
+		#--#	Apply_Type	Apply_value	Prob					
+		1	ATT_BONUS_TO_WARRIOR	15	10					
+		2	ATT_BONUS_TO_ASSASSIN	15	10					
+		3	ATT_BONUS_TO_SURA	15	10					
+		4	ATT_BONUS_TO_SHAMAN	15	10					
+		5	ATT_BONUS_TO_WOLFMAN	15	10					
+		6	RESIST_WARRIOR	15	10					
+		7	RESIST_ASSASSIN	15	10					
+		8	RESIST_SURA	15	10					
+		9	RESIST_SHAMAN	15	10					
+		10	RESIST_WOLFMAN	15	10					
+	}									
+	Group 뇌룡석									
+	{									
+		#--#	Apply_Type	Apply_value	Prob					
+		1	MAX_SP	1500	10					
+		2	SP_REGEN	10	10					
+		3	STEAL_SP	10	10					
+		4	KILL_SP_RECOVER	5	10					
+		5	MAX_SP_PCT	20	10					
+	}									
+	Group 흑룡석									
+	{									
+		#--#	Apply_Type	Apply_value	Prob					
+		1	BLOCK	10	10					
+		2	DODGE	10	10					
+		3	REFLECT_MELEE	10	10					
+		4	RESIST_CRITICAL	10	10					
+		5	RESIST_PENETRATE	10	10					
+	}									
+}										
+										
+# 여기부터 Default를 둔다.										
+# Default 값을 모든 용혼석이 따르고, 										
+# 특정 값이 있는 용혼석은 Default를 바탕으로 그 값을 덮어쓴다.										
+# 등급에 따른 속성수										
+# 단, basis, add_max는 3보다 크면 안된다.										
+Group ApplyNumSettings										
+{										
+	Group Default									
+	{									
+		#--#	GRADE_NORMAL	GRADE_BRILLIANT	GRADE_RARE	GRADE_ANCIENT	GRADE_LEGENDARY	GRADE_MYTH		
+		basis	1	1	1	2	2	3		
+		add_min	0	0	0	0	0	0		
+		add_max	0	1	2	2	3	3		
+	}									
+#	Group 백룡석									
+#	{									
+#		#--#	GRADE_NORMAL	GRADE_BRILLIANT	GRADE_RARE	GRADE_ANCIENT	GRADE_LEGENDARY	GRADE_MYTH	
+#		basis	1	1	1	2	2			
+#	}									
+}										
+										
+# 용혼석 가중치 테이블.										
+# 이 테이블에서 값이 0이라면 그 이상의 강화는 불가능하다고 판단한다.										
+Group WeightTables										
+{										
+	Group Default									
+	{									
+		Group GRADE_NORMAL								
+		{								
+	#		단계	강화						
+			#--#	0	1	2	3	4	5	6
+			STEP_LOWEST	1	2	3	0	0	0	0
+			STEP_LOW	2	3	4	0	0	0	0
+			STEP_MID	3	4	5	6	0	0	0
+			STEP_HIGH	4	5	6	7	0	0	0
+			STEP_HIGHEST	5	6	7	8	10	0	0
+		}								
+		Group GRADE_BRILLIANT								
+		{								
+			STEP_LOWEST	3	4	5	6	0	0	0
+			STEP_LOW	4	5	6	8	0	0	0
+			STEP_MID	5	6	8	10	0	0	0
+			STEP_HIGH	6	8	10	12	15	0	0
+			STEP_HIGHEST	8	10	12	15	20	0	0
+		}								
+		Group GRADE_RARE								
+		{								
+			#--#	0	1	2	3	4	5	6
+			STEP_LOWEST	6	7	9	11	15	0	0
+			STEP_LOW	7	9	11	15	20	0	0
+			STEP_MID	9	11	15	20	25	0	0
+			STEP_HIGH	11	15	20	25	30	0	0
+			STEP_HIGHEST	15	20	25	30	40	0	0
+		}								
+		Group GRADE_ANCIENT								
+		{								
+			#--#	0	1	2	3	4	5	6
+			STEP_LOWEST	10	12	15	18	20	0	0
+			STEP_LOW	12	15	18	20	25	0	0
+			STEP_MID	15	18	20	25	35	0	0
+			STEP_HIGH	18	20	25	35	40	0	0
+			STEP_HIGHEST	20	25	35	40	60	80	0
+		}								
+		Group GRADE_LEGENDARY								
+		{								
+			#--#	0	1	2	3	4	5	6
+			STEP_LOWEST	30	35	40	45	50	0	0
+			STEP_LOW	35	40	45	50	55	0	0
+			STEP_MID	40	45	50	55	65	0	0
+			STEP_HIGH	45	50	55	65	75	90	0
+			STEP_HIGHEST	50	55	65	75	90	105	120
+		}								
+		Group GRADE_MYTH								
+		{								
+			#--#	0	1	2	3	4	5	6
+			STEP_LOWEST	35	40	45	50	55	0	0
+			STEP_LOW	45	50	55	60	65	0	0
+			STEP_MID	50	55	60	70	80	0	0
+			STEP_HIGH	65	75	85	95	105	120	0
+			STEP_HIGHEST	75	85	95	105	120	135	160
+		}								
+	}									
+#	Group 백룡석									
+#	{									
+#		Group GRADE_NORMAL								
+#		{								
+#			#--#	0	1	2	3	4	5	6
+#			STEP_LOWEST	10	20	53	0	0	0	0
+#			STEP_HIGHEST	50	60	37	18	10	0	0
+#		}								
+#	}									
+}										

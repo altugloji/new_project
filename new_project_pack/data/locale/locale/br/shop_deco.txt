@@ -1,0 +1,16 @@
+#	1	ÀÌ¸§	¸÷¹øÈ£
+#	2	ÀÌ¸§	°æ·Î	COLOR(»ö»óÇ¥, ¾øÀ»½Ã ±âº»°ª)
+1	Default	30000
+1	1001 Noites	30002
+1	Rei do Churras	30003
+1	Caçador de Tesouro	30004
+1	Chama Frugal	30005
+1	Armas Poderosas	30006
+1	Mercador de Armaduras	30007
+1	Alquimista	30008
+2	title1	d:/ymir work/ui/pattern/myshop/fire/p_fire	0xFF976D
+2	title2	d:/ymir work/ui/pattern/myshop/ice/p_ice	0xF9F4FF
+2	title3	d:/ymir work/ui/pattern/myshop/paper/p_paper	0xFFBF8B
+2	title4	d:/ymir work/ui/pattern/myshop/ribon/p_ribon	0xFFECD1
+2	title5	d:/ymir work/ui/pattern/myshop/wing/p_wing	0xF1ECE1
+

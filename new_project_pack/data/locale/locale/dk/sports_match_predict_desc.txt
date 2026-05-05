@@ -1,0 +1,5 @@
+[DELAY value;0]
+Hvis dit valgte hold vinder, vil du optjene flere[ENTER]
+belønninger, jo oftere du har heppet på dem.[ENTER]
+Lands Billet: Kan fås i bytte for VM Trofæet.[ENTER]
+Heppe Billet: Kan fås fra VM Kisten.

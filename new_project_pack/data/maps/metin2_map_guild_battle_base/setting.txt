@@ -1,0 +1,12 @@
+ScriptType	MapSetting
+
+CellScale	200
+HeightScale	0.500000
+
+ViewRadius	128
+
+MapSize	1	1
+BasePosition	307200	51200
+TextureSet	textureset\metin2_map_guild_battle.txt
+Environment	metin2_map_guild_battle_01.msenv
+

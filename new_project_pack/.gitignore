@@ -1,0 +1,14 @@
+*.eix
+*.epk
+
+### archives
+*.rar
+*.7z
+*.zip
+*.gz
+*.bz
+*.xz
+*.tar
+*.tgz
+*.tbz
+*.txz

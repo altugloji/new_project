@@ -1,0 +1,16 @@
+ScriptType            RaceDataScript
+
+BaseModelFileName     "D:\Ymir Work\halloween_2023_voodooist\halloween_2023_voodooist.GR2"
+
+Group ShapeData
+{
+    PathName 		 ""
+    ShapeDataCount 		 1
+    Group ShapeData00
+    {
+        ShapeIndex 		 0
+        Model 		 "D:\Ymir Work\npc_pet\halloween_2023_voodooist\halloween_2023_voodooist.GR2"
+        SourceSkin 		 "D:\Ymir Work\npc_pet\halloween_2023_voodooist\halloween_2023_voodooist_1.dds"
+        TargetSkin 		 "D:\Ymir Work\npc_pet\halloween_2023_voodooist\halloween_2023_voodooist_2.dds"
+    }
+}

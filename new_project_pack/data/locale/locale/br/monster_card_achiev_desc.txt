@@ -1,0 +1,42 @@
+1	Coleção de pelo de Lobo Alfa
+2	Lobo superior
+3	Coleção única de monstros
+4	Javali, Urso, Tigre
+5	Contra-ataque dos soldados brancos
+6	Contra-ataque dos bandidos
+7	Irmãos
+8	Família de vândalos
+9	Família bárbara
+10	Inumanos
+11	Guardas da Península
+12	Guardas de Nephrite
+13	Guardas do Trovão
+14	Guardas de Gautama
+15	Três irmãos macacos
+16	Guardiões das cavernas
+17	Habitantes demoníacos
+18	Ajudantes de Sung Mahi
+19	Do fogo ao gelo
+20	Guardiões da Floresta
+21	4 Generais de Sung Mahi
+22	Deuses Zodiacais do Relâmpago
+23	Deuses Zodiacais do Fogo
+24	Deuses Zodiacais do Gelo
+25	Deuses Zodiacais do Vento
+26	Deuses Zodiacais da Terra
+27	Deuses Zodiacais das Trevas
+28	Guardiões da planície
+29	Servos de Sung Mahi
+30	Soberano meio humano
+31	Guardiões da planície nevada
+32	Três irmãos da caverna
+33	Serpentes comandantes
+34	Fogo da torre
+35	Gelo da torre
+36	Relâmpago da torre
+37	Vento da torre
+38	Terra da torre
+39	Trevas da torre
+40	Expurgo do dragão branco
+
+

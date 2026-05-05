@@ -1,0 +1,16 @@
+Arabic 1256 ae
+Czech 1250 cz
+Danish 1252 dk
+Dutch 1252 nl
+English 1252 en
+French 1252 fr
+German 1252 de
+Greek 1253 gr
+Hungarian 1250 hu
+Italian 1252 it
+Polish 1250 pl
+Portuguese 1252 pt
+Romanian 1250 ro
+Russian 1251 ru
+Spanish 1252 es
+Turkish 1254 tr

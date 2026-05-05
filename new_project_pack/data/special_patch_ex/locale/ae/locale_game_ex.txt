@@ -1,0 +1,26 @@
+TOOLTIP_TIPS_SPLIT_ITEM	г гЌ«—»жд  гядж{}{}—»ж
+GAME_PICK_CHEQUE	бёѕ Ќ’б  Џбн %d жжд. 
+DROP_CHEQUE_FAILURE_1000_OVER	нгядя «бё«Ѕ 999 жд »Ќѕ «ё’н 
+DO_YOU_DROP_CHEQUE	еб  —џ» Ён «бё«Ѕ %d жжд њ 
+CHEQUE_SYSTEM_UNIT_WON	жжд 
+CHEQUE_ONLY_VALUE	нгядя «ѕќ«б ёнг… ЁёЎ 
+CHEQUE_NO_ADD_SALE_PRICE	нћ» Џбня ≈ѕќ«б ”Џ— »нЏ ж«Ќѕ Џбм «б√ёб. ≈–« яд  б«  —нѕ  Ќѕнѕ «б”Џ—° Ё√ѕќб "0".
+CHEQUE_SYSTEM_SELL_PRICE	[”Џ— «б»нЏ] 
+CHEQUE_SYSTEM_YANG	%s 
+CHEQUE_SYSTEM_WON	%s 
+DO_YOU_SELL_ITEM1	еб  —џ» Ён »нЏ %s гё«»б %s н«дџ њ 
+DO_YOU_SELL_ITEM2	еб  —џ» Ён »нЏ %s (%s «бягн…) гё«»б %s н«дџњ 
+CHEQUE_SYSTEM_DO_NOT_DROP_MONEY	б«нгядя «бё«Ѕ «б«гж«б 
+CHEQUE_SYSTEM_UNIT_CHEQUE	жжд 
+CHEQUE_SYSTEM_UNIT_YANG	н«дџ 
+CHEQUE_SYSTEM_CHEQUE	%s жжд 
+SHOP_NOT_ENOUGH_CHEQUE	б« г бя г«няЁн гд «бжжд 
+SHOP_NOT_ENOUGH_MONEY_CHEQUE	б« г бя г«няЁн гд «бжжд «ж «бн«дџ 
+DO_YOU_BUY_ITEM1_CHEQUE	еб  —џ» Ён ‘—«Ѕ %s гё«»б %s жжд ж %s н«дџ њ 
+DO_YOU_BUY_ITEM2_CHEQUE	еб  —џ» Ён ‘—«Ѕ %s (%s «бягн…) гё«»б %s жжд ж %s н«дџ њ 
+DO_YOU_DROP_CHEQUE	еб  —џ» Ён «бё«Ѕ %d жждњ 
+DO_YOU_BUY_ITEM1_CHEQUE1	еб  —џ» Ён ‘—«Ѕ %s гё«»б %s ж 0 н«дџ њ 
+DO_YOU_BUY_ITEM2_CHEQUE1	еб  —џ» Ён ‘—«Ѕ %s (%s «бягн…) гё«»б %s ж 0 н«дџ њ 
+WONEXCHANGE_CONFIRM_QUESTION_1	еб  —џ» Ён »нЏ %d жжд гё«»б %s н«дџ 
+WONEXCHANGE_CONFIRM_QUESTION_2	еб  —џ» Ён ‘—«Ѕ %d жжд гё«»б %s н«дџ њ
+WONEXCHANGE_CONFIRM_QUESTION_3	г «»Џењ 

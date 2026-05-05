@@ -1,0 +1,174 @@
+TextureSet
+
+TextureCount 17
+
+Start Texture001
+    "d:\ymir work\terrainmaps\b\field\field 01.dds"
+    5.000000
+    5.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture001
+Start Texture002
+    "d:\ymir work\terrainmaps\b\field\field 03.dds"
+    5.000000
+    5.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture002
+Start Texture003
+    "d:\ymir work\terrainmaps\elemental_01\elemental_03_04.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    1
+    0
+    0
+End Texture003
+Start Texture004
+    "d:\ymir work\terrainmaps\treasure_hunt\treasure_hunt_field_02.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture004
+Start Texture005
+    "d:\ymir work\terrainmaps\capedragonhead\capedragon_grass002.dds"
+    3.000000
+    3.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture005
+Start Texture006
+    "d:\ymir work\terrainmaps\treasure_hunt\treasure_hunt_grass002.dds"
+    2.000000
+    2.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture006
+Start Texture007
+    "d:\ymir work\terrainmaps\b\grass\grass 03.dds"
+    9.000000
+    9.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture007
+Start Texture008
+    "d:\ymir work\terrainmaps\b\stone\stone04.dds"
+    3.000000
+    3.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture008
+Start Texture009
+    "d:\ymir work\terrainmaps\treasure_hunt\treasure_hunt_stone04.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture009
+Start Texture010
+    "d:\ymir work\terrainmaps\treasure_hunt\treasure_hunt_field_02_1.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    1
+    0
+    0
+End Texture010
+Start Texture011
+    "d:\ymir work\terrainmaps\b\stone\stone03.dds"
+    3.000000
+    3.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture011
+Start Texture012
+    "d:\ymir work\terrainmaps\a\beach\beach water.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    1
+    0
+    0
+End Texture012
+Start Texture013
+    "d:\ymir work\terrainmaps\treasure_hunt\treasure_hunt_tile_01.dds"
+    2.000000
+    2.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture013
+Start Texture014
+    "d:\ymir work\terrainmaps\b\beach\beach sand 01.dds"
+    5.000000
+    5.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture014
+Start Texture015
+    "d:\ymir work\terrainmaps\b\beach\beach sand 02.dds"
+    5.000000
+    5.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture015
+Start Texture016
+    "d:\ymir work\terrainmaps\b\beach\beach sand 03.dds"
+    5.000000
+    5.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture016
+Start Texture017
+    "d:\ymir work\terrainmaps\guild_battle\guild_tile_002.dds"
+    3.000000
+    3.000000
+    0.000000
+    0.000000
+    0
+    0
+    0
+End Texture017

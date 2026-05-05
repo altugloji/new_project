@@ -1,0 +1,9 @@
+[DELAY value;0]
+As recompensas sao entregues diariamente na hora do reinicio[ENTER][ENTER]
+1º - Pacote-Premium(itens) x10
+[ENTER]
+2º - Pacote-Premium(itens) x5
+[ENTER]
+3º - Pacote-Premium(itens) x3
+[ENTER]
+4º ~ 10º - Pacote-Premium(itens) x1

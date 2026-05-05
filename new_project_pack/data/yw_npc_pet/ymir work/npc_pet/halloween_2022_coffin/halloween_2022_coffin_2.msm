@@ -1,0 +1,16 @@
+ScriptType            RaceDataScript
+
+BaseModelFileName     "D:\Ymir Work\npc_pet\halloween_2022_coffin\halloween_2022_coffin.GR2"
+
+Group ShapeData
+{
+    PathName 		 ""
+    ShapeDataCount 		 1
+    Group ShapeData00
+    {
+        ShapeIndex 		 0
+        Model 		 "D:\Ymir Work\npc_pet\halloween_2022_coffin\halloween_2022_coffin.GR2"
+        SourceSkin 		 "D:\Ymir Work\npc_pet\halloween_2022_coffin\halloween_2022_coffin_1.dds"
+        TargetSkin 		 "D:\Ymir Work\npc_pet\halloween_2022_coffin\halloween_2022_coffin_2.dds"
+    }
+}

@@ -1,0 +1,10 @@
+[DELAY value;0]
+[Evenementomschrijving][ENTER]
+[ENTER]
+Het Zomer Evenement is begonnen![ENTER]
+[ENTER]
+Let a.u.b. op dat IJs Bolletjes alleen ingewisseld kunnen worden in het[ENTER]
+evenementscherm.[ENTER]
+[ENTER]
+Bezoek Summer in de stad om jouw IJs Bolletjes om te ruilen voor[ENTER]
+grandioze beloningen.

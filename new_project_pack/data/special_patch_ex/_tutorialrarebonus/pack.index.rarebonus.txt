@@ -1,0 +1,3 @@
+########## at the top after PACK:
+*
+special_patch_rarebonus

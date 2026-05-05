@@ -1,0 +1,5 @@
+[DELAY value;0]
+<Descrição do Evento>[ENTER][ENTER]
+O Historiador Sr.Lorey está compartilhando seu conhecimento, celebrando o Ramadã. Você receberá diversas informações ao falar com ele.[ENTER]
+[ENTER]
+Ao coletar Pão de Rosca ou Figo, eles serão estocados na interface do evento.[ENTER]

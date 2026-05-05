@@ -1,0 +1,6 @@
+[DELAY value;0]
+Descripción de evento[ENTER]
+¡Comienza el Evento del Mundial! Las Pelotas de fútbol[ENTER]
+ya no aparecerán en el inventario. Reúne todas las que[ENTER]
+puedas y cámbiaselas a Yu-Hwan por Balones de oro o[ENTER]
+úsalas para obtener objetos.

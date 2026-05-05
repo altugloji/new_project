@@ -1,0 +1,9 @@
+[DELAY value;0]
+RAMADAN EVENT[ENTER]
+[ENTER]
+Besøg Historikeren regelmæssigt, og optjen[ENTER]
+nogen værdifulde genstande til dig selv for[ENTER]
+din dedikation i slutningen af Ramadan.[ENTER]
+[ENTER]
+Hvis du modtager Brød eller Velsignelses[ENTER]
+Frugt, vil disse blive gemt i event UI.

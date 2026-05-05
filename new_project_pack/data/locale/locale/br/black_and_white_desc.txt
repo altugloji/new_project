@@ -1,0 +1,41 @@
+[DELAY value;0]
+<Descrição>
+[ENTER]
+Duelo de Videntes
+[ENTER]
+1. Através da missão de evento, é possível aceitar a missão[ENTER]Duelo de Videntes.
+[ENTER]
+2. É possível aceitar a missão 5 vezes por dia.[ENTER]
+[ENTER]
+<Mecânica do Jogo>
+[ENTER]
+1. Você receberá 9 cartas de 0 ~ 8.
+[ENTER]
+2. Durante o seu turno, poderá escolher uma carta.
+[ENTER]
+3. Não é possível ver as cartas do adversário.
+[ENTER]
+4. Jogue uma carta com um número maior que a de seu adversário para[ENTER]ganhar, uma menor para perder ou uma de igual valor para empatar.
+[ENTER]
+5. Caso vença o jogo, receberá Moedas da Clarividência extras de[ENTER]acordo com a diferença entre a sua pontuação e a do seu adversário.[ENTER]
+[ENTER]
+<Recompensa e Ranking>
+[ENTER]
+1. É possível trocar sua recompensa e competir no ranking através[ENTER]da interface do evento.
+[ENTER]
+2. É possível comprar baús valiosos utilizando Moedas da Clarividência ao clicar no botão 'Trocar Prêmio' na interface do evento.
+[ENTER]
+3. Através da interface do ranking, é possível doar[ENTER]Moedas da Clarividência.
+[ENTER]
+4. Há recompensas disponíveis até a 20ª colocação.
+[ENTER]
+5. 1ª: Asa Noturna (30d), 2ª~3ª: Ajna Flamejante (30d)[ENTER]4ª~10ª: Baú da Vidência (Ouro) x5,[ENTER]11ª~20ª: Baú da Vidência (Ouro) x2
+[ENTER]
+<Observações>
+[ENTER]
+1. Não receberá recompensa caso teletransporte ou[ENTER]desconecte o personagem enquanto estiver jogando o mini-game.
+[ENTER]
+2. Por favor, teletransporte apenas após fechar o mini-game.
+[ENTER]
+3. Ao teletransportar ou mover de mapa perderá a partida.
+[ENTER]

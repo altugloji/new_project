@@ -1,0 +1,15 @@
+Group Info
+{
+
+	on_off	0
+}
+
+Group Banner
+{
+	
+	Group Link_Metin2_Account_With_Steam
+	{
+		text		"Прощай, Steam! Переезжаем в клиент Gameforge"
+		url			"https://ru.metin2.gameforge.com/steam/moveingame"
+	}
+}

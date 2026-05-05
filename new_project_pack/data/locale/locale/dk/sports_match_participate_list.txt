@@ -1,0 +1,32 @@
+1	Qatar
+2	Ecuador
+3	Senegal
+4	Holland
+5	England
+6	Iran
+7	USA
+8	Wales
+9	Argentina
+10	Saudi Arabien
+11	Mexico
+12	Polen
+13	Frankrig
+14	Australien
+15	Danmark
+16	Tunesien
+17	Spanien
+18	Costa Rica
+19	Tyskland
+20	Japan
+21	Belgien
+22	Canada
+23	Marokko
+24	Kroatien
+25	Brasilien
+26	Serbien
+27	Schweiz
+28	Cameroun
+29	Portugal
+30	Ghana
+31	Uruguay
+32	Sydkorea
