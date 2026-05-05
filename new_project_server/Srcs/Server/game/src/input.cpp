@@ -208,6 +208,23 @@ int CInputHandshake::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 	if (bHeader == 10)
 		return 0;
 
+#ifdef HANDSHAKE_PACKET_ANTI_FLOOD
+	if (d)
+	{
+		if (thecore_pulse() > d->GetPacketAntiFloodPulse() + PASSES_PER_SEC(1))
+		{
+			d->SetPacketAntiFloodCount(0);
+			d->SetPacketAntiFloodPulse(thecore_pulse());
+		}
+		if (d->IncreasePacketAntiFloodCount() >= 100)
+		{
+			sys_err("<Flood packet> header(%d) host(%s:%u)", bHeader, d->GetHostName(), d->GetPort());
+			d->SetPhase(PHASE_CLOSE);
+			return 0;
+		}
+	}
+#endif
+
 	if (bHeader == HEADER_CG_TEXT)
 	{
 #ifdef ENABLE_PORT_SECURITY

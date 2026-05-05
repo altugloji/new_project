@@ -63,6 +63,12 @@ void DESC::Initialize()
 
 	m_pkPingEvent = nullptr;
 	m_lpCharacter = nullptr;
+
+#ifdef HANDSHAKE_PACKET_ANTI_FLOOD
+	m_dwPacketAntiFloodPulse = 0;
+	m_dwPacketAntiFloodCount = 0;
+#endif
+
 	memset( &m_accountTable, 0, sizeof(m_accountTable) );
 
 	memset( &m_SockAddr, 0, sizeof(m_SockAddr) );
@@ -128,6 +134,11 @@ void DESC::Destroy()
 
 	event_cancel(&m_pkPingEvent);
 	event_cancel(&m_pkDisconnectEvent);
+
+#ifdef HANDSHAKE_PACKET_ANTI_FLOOD
+	m_dwPacketAntiFloodPulse = 0;
+	m_dwPacketAntiFloodCount = 0;
+#endif
 
 	if (!g_bAuthServer)
 	{

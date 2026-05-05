@@ -280,6 +280,17 @@ class DESC
 		void RawPacket(const void * c_pvData, int iSize);
 		void ChatPacket(BYTE type, const char * format, ...);
 
+#ifdef HANDSHAKE_PACKET_ANTI_FLOOD
+	private:
+		int				m_dwPacketAntiFloodPulse;
+		DWORD			m_dwPacketAntiFloodCount;
+	public:
+		int				GetPacketAntiFloodPulse()				{ return m_dwPacketAntiFloodPulse; }
+		DWORD			IncreasePacketAntiFloodCount()			{ return ++m_dwPacketAntiFloodCount; }
+		void			SetPacketAntiFloodPulse(int dwPulse)	{ m_dwPacketAntiFloodPulse=dwPulse; }
+		void			SetPacketAntiFloodCount(DWORD dwCount)	{ m_dwPacketAntiFloodCount=dwCount; }
+#endif
+
 };
 
 #endif

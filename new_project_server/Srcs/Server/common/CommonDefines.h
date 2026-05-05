@@ -127,6 +127,7 @@ enum eCommonDefines {
 #define DISABLE_PARTY_EXP_WITH_LEVEL								// Grup exp bug fix
 #define DISABLE_ITEM_LEVEL_FOR_GM									// GM her level itemi giyebilir.
 #define FAST_PACKET_BLOCK											// Paket buglarını önlemek için süre engelleri
+#define HANDSHAKE_PACKET_ANTI_FLOOD									// Auth / Game socket attack fix
 #define PARTY_EXP_FIX												// Grup bugu. Karakteri ortaya alma.
 
 #endif
