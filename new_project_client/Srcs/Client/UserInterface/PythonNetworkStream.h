@@ -183,6 +183,9 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		bool SendShopEndPacket();
 		bool SendShopBuyPacket(BYTE byCount);
 		bool SendShopSellPacket(BYTE bySlot);
+#ifdef ENABLE_EXCHANGE_LOG
+		bool RecvExchangeLog();
+#endif
 		bool SendShopSellPacketNew(BYTE bySlot, BYTE byCount);
 
 		// Exchange
@@ -758,5 +761,12 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		void __BettingGuildWar_Initialize();
 		void __BettingGuildWar_SetObserverCount(UINT uObserverCount);
 		void __BettingGuildWar_SetBettingMoney(UINT uBettingMoney);
+
+#ifdef KYGN_CHEST_INFO
+	public:
+		bool	SendCGGetChestRewards(DWORD dwVnum);
+	private:
+		bool	RecvChestInfoPacket();
+#endif
 };
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

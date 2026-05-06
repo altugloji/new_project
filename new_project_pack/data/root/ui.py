@@ -1799,6 +1799,17 @@ class SlotWindow(Window):
 	def SetSlotCountNew(self, slotNumber, grade, count):
 		wndMgr.SetSlotCountNew(self.hWnd, slotNumber, grade, count)
 
+	@staticmethod
+	def FindRefine(text):
+		refineLevel = 0
+		text = text.replace(" ", "")
+		if text.find("+"):
+			try:
+				refineLevel = int(text[text.find("+"):])
+			except:
+				refineLevel = 0
+		return refineLevel
+
 	def SetItemSlot(self, renderingSlotNumber, ItemIndex, ItemCount = 0, diffuseColor = (1.0, 1.0, 1.0, 1.0)):
 		if 0 == ItemIndex or None == ItemIndex:
 			wndMgr.ClearSlot(self.hWnd, renderingSlotNumber)
@@ -1809,6 +1820,14 @@ class SlotWindow(Window):
 
 		item.SelectItem(ItemIndex)
 		(width, height) = item.GetItemSize()
+
+		if app.ITEM_SLOT_REFINE_TEXT:
+			(itemType, itemSubType) = (item.GetItemType(), item.GetItemSubType())
+			if itemType == item.ITEM_TYPE_WEAPON:
+				if itemSubType >= item.WEAPON_SWORD and itemSubType <= item.WEAPON_FAN:
+					ItemCount = 2147483000 + self.FindRefine(item.GetItemName())
+			elif itemType == item.ITEM_TYPE_ARMOR or itemType == item.ITEM_TYPE_ROD or itemType == item.ITEM_TYPE_BELT or itemType == item.ITEM_TYPE_PICK or itemType == item.ITEM_TYPE_METIN:
+				ItemCount = 2147483000 + self.FindRefine(item.GetItemName())
 
 		wndMgr.SetSlot(self.hWnd, renderingSlotNumber, ItemIndex, width, height, itemIcon, diffuseColor)
 		wndMgr.SetSlotCount(self.hWnd, renderingSlotNumber, ItemCount)
@@ -3713,6 +3732,11 @@ class PythonScriptLoader(object):
 				parent.Children[Index].SetParent(parent)
 				self.LoadElementListBox(parent.Children[Index], ElementValue, parent)
 
+			elif Type == "listbox_new":
+				parent.Children[Index] = ListBoxNew()
+				parent.Children[Index].SetParent(parent)
+				self.LoadElementListBox(parent.Children[Index], ElementValue, parent)
+
 			elif Type == "listbox2":
 				parent.Children[Index] = ListBox2()
 				parent.Children[Index].SetParent(parent)
@@ -4464,6 +4488,80 @@ if app.ENABLE_UI_MOVING:
 
 		def SetScalePivotCenter(self, flag):
 			wndMgr.SetScalePivotCenter(self.hWnd, flag)
+
+if app.ENABLE_EXCHANGE_LOG:
+	class ListBoxNew(Window):
+		def __del__(self):
+			Window.__del__(self)
+		def Destroy(self):
+			for item in self.itemList:
+				item.Destroy()
+			self.itemList=[]
+			self.scrollBar=None
+			self.basePos=0
+			self.scrollLen=0
+			self.scrollLenExtra=0
+			self.isHorizontal= 0
+		def __init__(self, isHorizontal = False):
+			Window.__init__(self)
+			self.itemList=[]
+			self.Destroy()
+			self.isHorizontal= isHorizontal
+		def RemoveAllItems(self):
+			for item in self.itemList:
+				item.Destroy()
+			self.itemList=[]
+			if self.scrollBar:
+				self.scrollBar.SetPos(0)
+			self.RefreshAll()
+		def SetExtraScrollLen(self, extraLen):
+			self.scrollLenExtra=extraLen
+		def GetItems(self):
+			return self.itemList
+		def AppendItem(self, newItem):
+			self.itemList.append(newItem)
+		def SetScrollBar(self, scrollBar):
+			scrollBar.SetScrollEvent(__mem_func__(self.__OnScroll))
+			self.scrollBar=scrollBar
+		def OnMouseWheel(self, nLen):
+			if self.scrollBar:
+				if self.scrollBar.IsShow():
+					if nLen > 0:
+						self.scrollBar.OnUp()
+					else:
+						self.scrollBar.OnDown()
+					return True
+			return False
+		def __OnScroll(self):
+			self.SetBasePos(int(self.scrollBar.GetPos()*self.scrollLen))
+		def RefreshAll(self):
+			windowHeight = self.GetHeight()
+			scrollBar = self.scrollBar
+			screenSize = 0
+			for child in self.itemList:
+				if child.exPos[1] > screenSize:
+					screenSize = child.exPos[1]
+			if screenSize > windowHeight:
+				scrollLen = screenSize-windowHeight
+				if scrollLen != 0:
+					scrollLen += self.scrollLenExtra
+				self.scrollLen = scrollLen
+				scrollBar.SetMiddleBarSize(float(windowHeight-5)/float(screenSize))
+			else:
+				scrollBar.SetMiddleBarSize(1.0)
+		def Render(self,basePos):
+			for item in self.itemList:
+				(ex,ey) = item.exPos
+				if self.isHorizontal:
+					item.SetPosition(ex-(basePos), ey)
+				else:
+					item.SetPosition(ex, ey-(basePos))
+				item.OnRender()
+		def SetBasePos(self, basePos):
+			if self.basePos == basePos:
+				return
+			self.Render(basePos)
+			self.basePos=basePos
 
 def MakeSlotBar(parent, x, y, width, height):
 	slotBar = SlotBar()

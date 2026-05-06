@@ -1,3 +1,25 @@
+LOGIN_LANGUAGE_SELECT_TITLE	Sélection de la langue
+LOGIN_BTN_DISCORD	Discord
+LOGIN_BTN_WEBSITE	Site web
+LOGIN_BTN_PATCH_NOTES	Note de mise à jour
+EXCHANGELOG_TITLE	Journaux d'échange
+EXCHANGELOG_OWNERNAME	Nom du propriétaire
+EXCHANGELOG_TARGETNAME	Nom de la cible
+EXCHANGELOG_GOLDTRADED	Yang échangé
+EXCHANGELOG_DATE	Date
+EXCHANGELOG_IP	IP
+EXCHANGELOG_CONTENT	Contenu
+EXCHANGELOG_DELETESELECTED	Supprimer la sélection
+EXCHANGELOG_DELETEALL	Tout supprimer
+EXCHANGELOG_CHANGEPASS	Changer le mot de passe
+EXCHANGELOG_FAKETITLE	%s vers %s
+EXCHANGELOG_LOADING	Chargement
+EXCHANGELOG_INPUTTITLE	Supprimer le journal
+EXCHANGELOG_INPUTDESC	Entrez le code de suppression du personnage
+EXCHANGELOG_INPUT_NOT_NUMBER	Veuillez entrer un nombre
+EXCHANGELOG_INPUT_NOT_ENOUGHT_SIZE	Veuillez entrer le bon code de suppression du personnage
+EXCHANGELOG_INPUT_NOT_SAME_CODE	Ce code est incorrect
+EXCHANGELOG_INPUT_NOT_HAS_LOG	Aucun journal à supprimer.
 ACCE_ABSORB_COST	Coûts de combi : %d
 ACCE_ALREADY_REGISTER	Cet objet a déjà été utilisé.
 ACCE_DEL_ABSORDITEM	Absorber et détruire l'objet ?

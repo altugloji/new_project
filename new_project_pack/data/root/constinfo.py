@@ -4,6 +4,9 @@ import item
 import net
 import player
 
+if app.KYGN_CHEST_INFO:
+	CD_CUR_CHEST_CELL = 753
+
 # EXTRA BEGIN
 ENABLE_NEW_LEVELSKILL_SYSTEM = False # loads 5 (B,M,G,P,F) skills .mse
 ENABLE_RANDOM_CHANNEL_SEL = False # don't set a random channel when you open the client
@@ -367,3 +370,19 @@ def IS_PET_SEAL(itemVnum):
 	itemType = item.GetItemType()
 	# itemSubType = item.GetItemSubType()
 	return item.ITEM_TYPE_PET == itemType
+
+if app.ENABLE_EXCHANGE_LOG:
+	_game_instance = None
+	def GetGameInstance():
+		global _game_instance
+		return _game_instance
+	def SetGameInstance(instance):
+		global _game_instance
+		if _game_instance:
+			del _game_instance
+		_game_instance = instance
+	def GetInterfaceInstance():
+		global _game_instance
+		if _game_instance:
+			return _game_instance.interface
+		return None

@@ -1,3 +1,25 @@
+LOGIN_LANGUAGE_SELECT_TITLE	Seleção de Idioma
+LOGIN_BTN_DISCORD	Discord
+LOGIN_BTN_WEBSITE	Site
+LOGIN_BTN_PATCH_NOTES	Nota de Atualização
+EXCHANGELOG_TITLE	Registos de Troca
+EXCHANGELOG_OWNERNAME	Nome do Dono
+EXCHANGELOG_TARGETNAME	Nome do Alvo
+EXCHANGELOG_GOLDTRADED	Yang Trocado
+EXCHANGELOG_DATE	Data
+EXCHANGELOG_IP	IP
+EXCHANGELOG_CONTENT	Conteúdo
+EXCHANGELOG_DELETESELECTED	Eliminar Selecionado
+EXCHANGELOG_DELETEALL	Eliminar Tudo
+EXCHANGELOG_CHANGEPASS	Alterar Palavra-passe
+EXCHANGELOG_FAKETITLE	%s para %s
+EXCHANGELOG_LOADING	A carregar
+EXCHANGELOG_INPUTTITLE	Eliminar Registo
+EXCHANGELOG_INPUTDESC	Insere o código de eliminação da personagem
+EXCHANGELOG_INPUT_NOT_NUMBER	Por favor, insere um número
+EXCHANGELOG_INPUT_NOT_ENOUGHT_SIZE	Por favor, insere o código correto de eliminação da personagem
+EXCHANGELOG_INPUT_NOT_SAME_CODE	Este código está incorreto
+EXCHANGELOG_INPUT_NOT_HAS_LOG	Não existem registos para eliminar.
 ACCE_ABSORB_COST	Custos da combinação: %d
 ACCE_ALREADY_REGISTER	Este item já foi usado.
 ACCE_DEL_ABSORDITEM	Absorver item, destruindo-o no processo?

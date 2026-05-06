@@ -12555,3 +12555,11 @@
 711212	ETC	icon/item/71119.tga
 711213	ETC	icon/item/71119.tga
 711214	ETC	icon/item/71119.tga
+50290	ETC	icon/item/book_skill_01.tga
+50291	ETC	icon/item/book_skill_02.tga
+50292	ETC	icon/item/book_skill_03.tga
+50293	ETC	icon/item/book_skill_04.tga
+50294	ETC	icon/item/book_skill_05.tga
+50295	ETC	icon/item/book_skill_06.tga
+50296	ETC	icon/item/book_skill_07.tga
+50297	ETC	icon/item/book_skill_08.tga

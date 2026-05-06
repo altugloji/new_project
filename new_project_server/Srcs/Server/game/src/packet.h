@@ -96,6 +96,10 @@ enum
 	HEADER_CG_SCRIPT_SELECT_ITEM	= 114,
 	// END_OF_SCRIPT_SELECT_ITEM
 
+#ifdef KYGN_CHEST_INFO
+	HEADER_CG_GET_CHEST_INFO		= 119,
+#endif
+
 	HEADER_CG_DRAGON_SOUL_REFINE	= 205,
 	HEADER_CG_STATE_CHECKER			= 206,
 
@@ -264,11 +268,18 @@ enum
 	HEADER_GC_GUILD_TOKEN						= 161,
 #endif
 
+#ifdef KYGN_CHEST_INFO
+	HEADER_GC_SET_CHEST_REWARDS					= 170,
+#endif
+
 	HEADER_GC_SPECIFIC_EFFECT					= 208,
 
 	HEADER_GC_DRAGON_SOUL_REFINE				= 209,
 	HEADER_GC_RESPOND_CHANNELSTATUS				= 210,
 
+#ifdef ENABLE_EXCHANGE_LOG
+	HEADER_GC_EXCHANGE_LOG						= 235,
+#endif
 	/////////////////////////////////////////////////////////////////////////////
 
 	HEADER_GG_LOGIN								= 1,
@@ -2347,6 +2358,43 @@ typedef struct SPacketGGDCP2PUpdate
 	BYTE	byHeader;
 	char	szName[CHARACTER_NAME_MAX_LEN + 1];
 } TPacketGGDCP2PUpdate;
+#endif
+
+#ifdef ENABLE_EXCHANGE_LOG
+typedef struct SPacketGCExchangeLog
+{
+	BYTE	header;
+	DWORD	size;
+} TPacketGCExchangeLog;
+enum
+{
+	SUB_EXCHANGELOG_LOAD,
+	SUB_EXCHANGELOG_LOAD_ITEM,
+};
+#endif
+
+#ifdef KYGN_CHEST_INFO
+typedef struct SPacketCGGetChestInfo
+{
+	BYTE	bHeader;
+	DWORD	dwChestVnum;
+} TPacketCGGetChestInfo;
+
+struct TChestRewards
+{
+	DWORD	dwVnum;
+	int		iCount;
+
+	TChestRewards() : dwVnum(0), iCount(0) {}
+	TChestRewards(DWORD _dwVnum, int _iCount) : dwVnum(_dwVnum), iCount(_iCount) {}
+};
+
+typedef struct SPacketGCSetChestRewards
+{
+	BYTE	bHeader;
+	WORD	wSize;
+	DWORD	dwVnum;
+} TPacketGCSetChestRewards;
 #endif
 
 #pragma pack()

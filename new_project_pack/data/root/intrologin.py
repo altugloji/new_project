@@ -27,6 +27,14 @@ SKIP_LOGIN_PHASE = False
 SKIP_LOGIN_PHASE_SUPPORT_CHANNEL = False
 FULL_BACK_IMAGE = False
 
+LANG_DROPDOWN_LIST_PAD = 6
+LANG_DROPDOWN_ROW_BTN_H = 22
+LANG_DROPDOWN_ROW_GAP = 8
+
+LOGIN_FOOTER_MARGIN_X = 30
+LOGIN_FOOTER_MARGIN_BOTTOM = 30
+LOGIN_FOOTER_BTN_GAP = 8
+
 VIRTUAL_KEYBOARD_NUM_KEYS = 46
 VIRTUAL_KEYBOARD_RAND_KEY = True
 
@@ -176,9 +184,16 @@ class LoginWindow(ui.ScriptWindow):
 		
 		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
 			self.language_list = []
-			self.flag_button_list = []
 			self.language_board = None
 			self.language_popup = None
+			self.lang_drop_list_open = False
+			self.lang_title_text = None
+			self.lang_header_btn = None
+			self.lang_header_flag = None
+			self.lang_header_arrow = None
+			self.lang_header_name_text = None
+			self.lang_list_board = None
+			self.lang_row_entries = []
 			self.__LoadLocaleListFile()
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 			self.anon_mode_board = None
@@ -190,6 +205,8 @@ class LoginWindow(ui.ScriptWindow):
 		self.timeOutMsg = False
 		self.timeOutOk = False
 		# @fixme001 END
+
+		self.login_footer_buttons = []
 
 	def __del__(self):
 		net.ClearPhaseWindow(net.PHASE_WINDOW_LOGIN, self)
@@ -351,11 +368,19 @@ class LoginWindow(ui.ScriptWindow):
 		self.inputDialog = None
 		self.connectingDialog = None
 		self.loadingImage = None
+		self.login_footer_buttons = []
 		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
 			self.language_list = []
-			self.flag_button_list = []
 			self.language_board = None
 			self.language_popup = None
+			self.lang_drop_list_open = False
+			self.lang_title_text = None
+			self.lang_header_btn = None
+			self.lang_header_flag = None
+			self.lang_header_arrow = None
+			self.lang_header_name_text = None
+			self.lang_list_board = None
+			self.lang_row_entries = []
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 			self.anon_mode_board = None
 			self.anon_mode_text = None
@@ -812,32 +837,15 @@ class LoginWindow(ui.ScriptWindow):
 			self.virtualKeyboard		= self.GetChild2("VirtualKeyboard")
 			
 			if app.__BL_MULTI_LANGUAGE_PREMIUM__:
-				self.language_board = ui.ThinBoard()
-				self.language_board.SetParent(self)
-				self.language_board.SetSize(wndMgr.GetScreenWidth(), 35)
-				self.language_board.SetPosition(0, 20)
-				self.language_board.Show()
-				
-				step = wndMgr.GetScreenWidth() / len(self.language_list)
-				x = 0
-				for i, lang in enumerate(self.language_list):
-					img_path = "D:/ymir work/ui/intro/login/server_flag_{}.sub".format(lang["locale"])
-					btn = ui.Button()
-					btn.SetParent(self.language_board)
-					btn.SetPosition(x + 15, 10)
-					btn.SetUpVisual(img_path)
-					btn.SetOverVisual(img_path)
-					btn.SetDownVisual(img_path)
-					btn.SetToolTipText(lang["name"])
-					btn.SetEvent(ui.__mem_func__(self.__ClickLanguage), i)
-					btn.Show()
-					self.flag_button_list.append(btn)
-					x += step
+				self.__BuildLanguageDropdown()
 			if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+				panel_width1 = 160
+				screen_width1 = wndMgr.GetScreenWidth()
 				self.anon_mode_board = ui.ThinBoard()
 				self.anon_mode_board.SetParent(self)
-				self.anon_mode_board.SetSize(160, 35)
-				self.anon_mode_board.SetPosition(0, 20 + self.language_board.GetHeight())
+				self.anon_mode_board.SetSize(160, 35) 
+				# self.anon_mode_board.SetPosition(0, 20 + self.language_board.GetHeight()) # sol koseye
+				self.anon_mode_board.SetPosition((screen_width1 - panel_width1) / 2, 10)
 				self.anon_mode_board.Show()
 
 				self.anon_mode_text = ui.TextLine()
@@ -915,7 +923,49 @@ class LoginWindow(ui.ScriptWindow):
 		if IsFullBackImage():
 			self.GetChild("bg1").Show()
 			self.GetChild("bg2").Hide()
+		self.__BuildLoginFooterButtons()
 		return 1
+
+	def __OnClickLoginFooterLink(self, url):
+		if not url:
+			return
+		try:
+			import os
+			os.startfile(url)
+		except:
+			import dbg
+			dbg.TraceError("LoginWindow.__OnClickLoginFooterLink failed: %s" % (url,))
+
+	def __BuildLoginFooterButtons(self):
+		self.login_footer_buttons = []
+
+		btn_path = "d:/ymir work/ui/public/large_button_%02d.sub"
+		screen_h = wndMgr.GetScreenHeight()
+		cursor_y = screen_h - LOGIN_FOOTER_MARGIN_BOTTOM
+
+		# Links (edit URLs here): opened with os.startfile on Windows
+		link_specs = (
+			("https://discord.gg/ayazmt2", getattr(localeInfo, "LOGIN_BTN_DISCORD", "Discord")),
+			("https://ayazmt2.com", getattr(localeInfo, "LOGIN_BTN_WEBSITE", "Website")),
+			("https://ayazmt2.com", getattr(localeInfo, "LOGIN_BTN_PATCH_NOTES", "Patch notes")),
+		)
+
+		for url, label in link_specs:
+			btn = ui.Button()
+			btn.SetParent(self)
+			btn.SetUpVisual(btn_path % 1)
+			btn.SetOverVisual(btn_path % 2)
+			btn.SetDownVisual(btn_path % 3)
+			btn_h = btn.GetHeight()
+			cursor_y -= btn_h
+			btn.SetPosition(LOGIN_FOOTER_MARGIN_X, cursor_y)
+			btn.SetText(label)
+			url = url.strip()
+			if url:
+				btn.SetEvent(ui.__mem_func__(self.__OnClickLoginFooterLink), url)
+			btn.Show()
+			self.login_footer_buttons.append(btn)
+			cursor_y -= LOGIN_FOOTER_BTN_GAP
 
 	def __VirtualKeyboard_SetKeys(self, keyCodes):
 		uiDefFontBackup = localeInfo.UI_DEF_FONT
@@ -1030,6 +1080,182 @@ class LoginWindow(ui.ScriptWindow):
 				self.anon_mode_checkbox.Hide()
 
 	if app.__BL_MULTI_LANGUAGE_PREMIUM__:
+		def __OnClickLanguageDropdownHeader(self):
+			self.__ToggleLangList()
+
+		def __ToggleLangList(self):
+			if not self.language_list:
+				return
+			self.lang_drop_list_open = not self.lang_drop_list_open
+			if self.lang_drop_list_open:
+				self.__LayoutLangListBoard()
+				if self.lang_list_board:
+					self.lang_list_board.Show()
+					self.lang_list_board.SetTop()
+			elif self.lang_list_board:
+				self.lang_list_board.Hide()
+
+		def __CloseLangList(self):
+			self.lang_drop_list_open = False
+			if self.lang_list_board:
+				self.lang_list_board.Hide()
+
+		def __GetCurrentLanguageRowIndex(self):
+			cur_locale = app.GetLocaleName()
+			for idx, lang_entry in enumerate(self.language_list):
+				if lang_entry["locale"] == cur_locale:
+					return idx
+			return 0
+
+		def __ApplyLanguageHeader(self):
+			if not self.language_list:
+				return
+			if self.lang_header_flag:
+				active = self.language_list[self.__GetCurrentLanguageRowIndex()]
+				img_path = "d:/ymir work/ui/intro/login/server_flag_{}.sub".format(active["locale"])
+				try:
+					self.lang_header_flag.LoadImage(img_path)
+				except:
+					import dbg
+					dbg.TraceError("LoginWindow: missing lang flag {}".format(active["locale"]))
+			if self.lang_header_name_text:
+				active = self.language_list[self.__GetCurrentLanguageRowIndex()]
+				self.lang_header_name_text.SetText(active["name"])
+
+		def __LayoutLangListBoard(self):
+			if not self.lang_list_board or not self.language_list:
+				return
+			row_count = len(self.language_list)
+			body_h = (
+				row_count * LANG_DROPDOWN_ROW_BTN_H
+				+ max(0, row_count - 1) * LANG_DROPDOWN_ROW_GAP
+			)
+			list_panel_height = LANG_DROPDOWN_LIST_PAD * 2 + body_h
+			self.lang_list_board.SetSize(self.lang_panel_w, list_panel_height)
+			screen_x, screen_y = self.language_board.GetGlobalPosition()
+			self.lang_list_board.SetPosition(screen_x, screen_y + self.language_board.GetHeight())
+
+		def __OnLanguageRowButton(self, row_index):
+			self.__CloseLangList()
+			self.__ClickLanguage(row_index)
+
+		def __BuildLanguageDropdown(self):
+			self.lang_row_entries = []
+			self.lang_drop_list_open = False
+
+			panel_width = 260
+			screen_width = wndMgr.GetScreenWidth()
+			content_margin = 12
+			top_pad = 6
+			title_band = 20
+			header_y = top_pad + title_band + 2
+
+			self.language_board = ui.ThinBoard()
+			self.language_board.SetParent(self)
+			self.language_board.SetPosition((screen_width - panel_width) / 2, 50)
+
+			self.lang_panel_w = panel_width
+			self.lang_row_inner_w = panel_width - content_margin * 2
+
+			self.lang_title_text = ui.TextLine()
+			self.lang_title_text.SetParent(self.language_board)
+			self.lang_title_text.SetPosition(content_margin, top_pad + 2)
+			self.lang_title_text.SetHorizontalAlignLeft()
+			self.lang_title_text.SetFontName(localeInfo.UI_DEF_FONT_LARGE)
+			self.lang_title_text.SetPackedFontColor(0xffffffff)
+			try:
+				self.lang_title_text.SetText(localeInfo.LOGIN_LANGUAGE_SELECT_TITLE)
+			except:
+				self.lang_title_text.SetText("Language selection")
+			self.lang_title_text.Show()
+
+			self.lang_header_btn = ui.Button()
+			self.lang_header_btn.SetParent(self.language_board)
+			self.lang_header_btn.SetUpVisual("d:/ymir work/ui/public/xlarge_button_01.sub")
+			self.lang_header_btn.SetOverVisual("d:/ymir work/ui/public/xlarge_button_02.sub")
+			self.lang_header_btn.SetDownVisual("d:/ymir work/ui/public/xlarge_button_03.sub")
+			header_btn_height = self.lang_header_btn.GetHeight()
+			self.lang_header_btn.SetPosition(content_margin, header_y)
+			self.lang_header_btn.SetSize(self.lang_row_inner_w, header_btn_height)
+			self.lang_header_btn.SetEvent(ui.__mem_func__(self.__OnClickLanguageDropdownHeader))
+			self.lang_header_btn.Show()
+
+			self.lang_header_flag = ui.ImageBox()
+			self.lang_header_flag.SetParent(self.language_board)
+			self.lang_header_flag.AddFlag("not_pick")
+			self.lang_header_flag.SetPosition(content_margin + 10, header_y + 4)
+			self.lang_header_flag.Show()
+
+			self.lang_header_arrow = ui.ImageBox()
+			self.lang_header_arrow.SetParent(self.language_board)
+			self.lang_header_arrow.AddFlag("not_pick")
+			self.lang_header_arrow.LoadImage("d:/ymir work/ui/chat/chattingoption_dropdown_arrow_01.sub")
+			arr_w = self.lang_header_arrow.GetWidth()
+			arr_h = self.lang_header_arrow.GetHeight()
+			self.lang_header_arrow.SetPosition(
+				content_margin + self.lang_row_inner_w - arr_w - 6,
+				header_y + (header_btn_height - arr_h) / 2
+			)
+			self.lang_header_arrow.Show()
+
+			self.lang_header_name_text = ui.TextLine()
+			self.lang_header_name_text.SetParent(self.language_board)
+			self.lang_header_name_text.AddFlag("not_pick")
+			self.lang_header_name_text.SetPosition(content_margin + 44, header_y + 5)
+			self.lang_header_name_text.SetHorizontalAlignLeft()
+			self.lang_header_name_text.SetFontName(localeInfo.UI_DEF_FONT_LARGE)
+			self.lang_header_name_text.SetPackedFontColor(0xffffffff)
+			self.lang_header_name_text.Show()
+
+			board_height = header_y + header_btn_height + top_pad + 6
+			self.language_board.SetSize(panel_width, board_height)
+			self.language_board.Show()
+
+			self.lang_list_board = ui.ThinBoard("TOP_MOST")
+			self.lang_list_board.SetParent(self)
+			self.lang_list_board.Hide()
+
+			row_inner = self.lang_row_inner_w - LANG_DROPDOWN_LIST_PAD * 2
+			row_step = LANG_DROPDOWN_ROW_BTN_H + LANG_DROPDOWN_ROW_GAP
+
+			for row_index, lang_entry in enumerate(self.language_list):
+				row_top = LANG_DROPDOWN_LIST_PAD + row_index * row_step
+				row_btn = ui.Button()
+				row_btn.SetParent(self.lang_list_board)
+				row_btn.SetPosition(LANG_DROPDOWN_LIST_PAD, row_top)
+				row_btn.SetUpVisual("d:/ymir work/ui/public/xlarge_button_01.sub")
+				row_btn.SetOverVisual("d:/ymir work/ui/public/xlarge_button_02.sub")
+				row_btn.SetDownVisual("d:/ymir work/ui/public/xlarge_button_03.sub")
+				row_btn.SetSize(row_inner, LANG_DROPDOWN_ROW_BTN_H)
+				row_btn.SetEvent(ui.__mem_func__(self.__OnLanguageRowButton), row_index)
+				row_btn.Show()
+
+				row_flag = ui.ImageBox()
+				row_flag.SetParent(self.lang_list_board)
+				row_flag.AddFlag("not_pick")
+				try:
+					row_flag.LoadImage(
+						"d:/ymir work/ui/intro/login/server_flag_{}.sub".format(lang_entry["locale"])
+					)
+				except:
+					pass
+				row_flag.SetPosition(LANG_DROPDOWN_LIST_PAD + 5, row_top + 3)
+				row_flag.Show()
+
+				row_label = ui.TextLine()
+				row_label.SetParent(self.lang_list_board)
+				row_label.AddFlag("not_pick")
+				row_label.SetPosition(LANG_DROPDOWN_LIST_PAD + 38, row_top + 5)
+				row_label.SetHorizontalAlignLeft()
+				row_label.SetFontName(localeInfo.UI_DEF_FONT)
+				row_label.SetPackedFontColor(0xffffffff)
+				row_label.SetText(lang_entry["name"])
+				row_label.Show()
+
+				self.lang_row_entries.append({"btn": row_btn, "flag": row_flag, "text": row_label})
+
+			self.__ApplyLanguageHeader()
+
 		def __LoadLocaleListFile(self):
 			try:
 				with open("locale_list.txt", "rt") as file:
@@ -1073,11 +1299,14 @@ class LoginWindow(ui.ScriptWindow):
 		def __ClickLanguage(self, index):
 			if index >= len(self.language_list):
 				return
-			
+
+			self.__CloseLangList()
+
 			lang = self.language_list[index]
 			self.__SaveLoca(lang["code_page"], lang["locale"])
 			app.SetReloadLocale(lang["locale"] != app.GetLocaleName())
-			
+			self.__ApplyLanguageHeader()
+
 			if not self.language_popup:
 				self.language_popup = uiCommon.PopupDialog()
 			self.language_popup.SetText(uiScriptLocale.LANGUAGE_WILL_CHANGE)

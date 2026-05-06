@@ -131,6 +131,10 @@ enum
 	HEADER_CG_SCRIPT_SELECT_ITEM				= 114,
 	HEADER_CG_LOGIN4							= 115,
 
+#ifdef KYGN_CHEST_INFO
+	HEADER_CG_GET_CHEST_INFO					= 119,
+#endif
+
 	HEADER_CG_DRAGON_SOUL_REFINE				= 205,
 	HEADER_CG_STATE_CHECKER						= 206,
 
@@ -294,9 +298,18 @@ enum
 	HEADER_GC_GUILD_TOKEN						= 161,
 #endif
 
+#ifdef KYGN_CHEST_INFO
+	HEADER_GC_SET_CHEST_REWARDS					= 170,
+#endif
+
 	HEADER_GC_SPECIFIC_EFFECT					= 208,
 	HEADER_GC_DRAGON_SOUL_REFINE				= 209,
 	HEADER_GC_RESPOND_CHANNELSTATUS				= 210,
+
+#ifdef ENABLE_EXCHANGE_LOG
+	HEADER_GC_EXCHANGE_LOG						= 235,
+#endif
+
 
 	HEADER_GC_HANDSHAKE_OK						= 0xfc, // 252
 	HEADER_GC_PHASE								= 0xfd,	// 253
@@ -2752,6 +2765,65 @@ typedef struct SAcceResult
 	DWORD	dwMinAbs;
 	DWORD	dwMaxAbs;
 } TAcceResult;
+#endif
+
+#ifdef ENABLE_EXCHANGE_LOG
+typedef struct SPacketGCExchangeLog
+{
+	BYTE	header;
+	DWORD	size;
+} TPacketGCExchangeLog;
+enum
+{
+	SUB_EXCHANGELOG_LOAD,
+	SUB_EXCHANGELOG_LOAD_ITEM,
+};
+typedef struct SExchangeLog
+{
+	char	owner[CHARACTER_NAME_MAX_LEN + 1];
+	DWORD	ownerPID;
+	DWORD	ownerGold;
+	char	ownerIP[15 + 1];
+	char	target[CHARACTER_NAME_MAX_LEN + 1];
+	DWORD	targetPID;
+	DWORD	targetGold;
+	char	targetIP[15 + 1];
+	char	date[25];
+	bool	itemsLoaded;
+}TExchangeLog;
+typedef struct SExchangeLogItem
+{
+	BYTE	pos;
+	DWORD	vnum;
+	WORD	count;
+	long	alSockets[ITEM_SOCKET_SLOT_MAX_NUM];
+	TPlayerItemAttribute    aAttr[ITEM_ATTRIBUTE_SLOT_MAX_NUM];
+	bool	isOwnerItem;
+}TExchangeLogItem;
+#endif
+
+#ifdef KYGN_CHEST_INFO
+typedef struct SPacketCGGetChestInfo
+{
+	BYTE	bHeader;
+	DWORD	dwChestVnum;
+} TPacketCGGetChestInfo;
+
+struct TChestRewards
+{
+	DWORD	dwVnum;
+	int		iCount;
+
+	TChestRewards() : dwVnum(0), iCount(0) {}
+	TChestRewards(DWORD _dwVnum, int _iCount) : dwVnum(_dwVnum), iCount(_iCount) {}
+};
+
+typedef struct SPacketGCSetChestRewards
+{
+	BYTE	bHeader;
+	WORD	wSize;
+	DWORD	dwVnum;
+} TPacketGCSetChestRewards;
 #endif
 
 #pragma pack(pop)

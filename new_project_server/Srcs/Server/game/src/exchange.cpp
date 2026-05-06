@@ -15,6 +15,11 @@
 #include "DragonSoul.h"
 #include "questmanager.h" // @fixme150
 
+#ifdef ENABLE_EXCHANGE_LOG
+	#include "quest.h"
+	#include "questmanager.h"
+#endif
+
 void exchange_packet(LPCHARACTER ch, BYTE sub_header, bool is_me, DWORD arg1, TItemPos arg2, DWORD arg3, void * pvData = nullptr);
 
 void exchange_packet(LPCHARACTER ch, BYTE sub_header, bool is_me, DWORD arg1, TItemPos arg2, DWORD arg3, void * pvData)
@@ -121,6 +126,9 @@ CExchange::CExchange(LPCHARACTER pOwner)
 	}
 
 	m_lGold = 0;
+#ifdef ENABLE_EXCHANGE_LOG
+	logIndex = -1;
+#endif
 #ifdef ENABLE_CHEQUE_SYSTEM
 	m_lCheque = 0;
 #endif
@@ -414,6 +422,10 @@ bool CExchange::Done()
 
 	const LPCHARACTER	victim = GetCompany()->GetOwner();
 
+#ifdef ENABLE_EXCHANGE_LOG
+	char szQuery[QUERY_MAX_LEN];
+#endif
+
 	for (i = 0; i < EXCHANGE_ITEM_MAX_NUM; ++i)
 	{
 		if (!(item = m_apItems[i]))
@@ -429,6 +441,21 @@ bool CExchange::Done()
 		}
 
 		assert(empty_pos >= 0);
+
+#ifdef ENABLE_EXCHANGE_LOG
+		int iLen = snprintf(szQuery, sizeof(szQuery), "INSERT INTO log.exchange_log_items(id, pid, item_id, pos, vnum, count");
+		for (BYTE j=0;j< ITEM_SOCKET_MAX_NUM;++j)
+			iLen += snprintf(szQuery+iLen, sizeof(szQuery)-iLen,", socket%u",j);
+		for (BYTE j = 0; j < ITEM_ATTRIBUTE_MAX_NUM; ++j)
+			iLen += snprintf(szQuery + iLen, sizeof(szQuery) - iLen, ", attrtype%u, attrvalue%u", j, j);
+		iLen += snprintf(szQuery + iLen, sizeof(szQuery) - iLen, ") VALUES(%d, %u, %u, %d, %d, %d", logIndex, GetOwner()->GetPlayerID(), item->GetID(), m_abItemDisplayPos[i], item->GetVnum(), item->GetCount());
+		for (BYTE j = 0; j < ITEM_SOCKET_MAX_NUM; ++j)
+			iLen += snprintf(szQuery + iLen, sizeof(szQuery) - iLen, ", %ld", item->GetSocket(j));
+		for (BYTE j = 0; j < ITEM_ATTRIBUTE_MAX_NUM; ++j)
+			iLen += snprintf(szQuery + iLen, sizeof(szQuery) - iLen, ", %u, %d", item->GetAttributeType(j), item->GetAttributeValue(j));
+		iLen += snprintf(szQuery + iLen, sizeof(szQuery) - iLen, ")");
+		std::unique_ptr<SQLMsg> msg(DBManager::instance().DirectQuery(szQuery));
+#endif
 
 		m_pOwner->SyncQuickslot(QUICKSLOT_TYPE_ITEM, item->GetCell(), 255);
 
@@ -553,30 +580,89 @@ bool CExchange::Accept(bool bAccept)
 			goto EXCHANGE_END;
 		}
 
-		if (Done())
 		{
-			if (m_lGold)
-				GetOwner()->Save();
+#ifdef ENABLE_EXCHANGE_LOG
+			TExchangeLog p;
+			strlcpy(p.owner, victim->GetName(), sizeof(p.owner));
+			p.ownerPID = victim->GetPlayerID();
+			p.ownerGold = GetCompany()->m_lGold;
+			strlcpy(p.ownerIP, victim->GetDesc()->GetHostName(), sizeof(p.ownerIP));
 
-#ifdef ENABLE_CHEQUE_SYSTEM
-			if (m_lCheque)
-				GetOwner()->Save();
-#endif
+			strlcpy(p.target, GetOwner()->GetName(), sizeof(p.target));
+			p.targetPID = GetOwner()->GetPlayerID();
+			p.targetGold = m_lGold;
+			strlcpy(p.targetIP, GetOwner()->GetDesc()->GetHostName(), sizeof(p.targetIP));
+			p.itemsLoaded = false;
 
-			if (GetCompany()->Done())
+			const time_t curr_time = time(0);
+			const tm* curr_tm = localtime(&curr_time);
+			strftime(p.date, 50, "%T - %d/%m/%y", curr_tm);
+
+
+			const bool isGameMasterExchange = (GetOwner()->IsGM() || victim->IsGM()) ? true : false;
+			const int newLogID = quest::CQuestManager::instance().GetEventFlag("ex_log_index") + 1;
+
+			char szQuery[QUERY_MAX_LEN];
+			snprintf(szQuery, sizeof(szQuery),
+				"INSERT INTO log.exchange_log(id, owner, owner_pid, owner_gold, owner_ip, target, target_pid, target_gold, target_ip, date, owner_delete, target_delete) "
+				"VALUES(%d, '%s', %u, %u, '%s', '%s', %u, %u, '%s', from_unixtime(%d), %d, %d)",
+				newLogID,
+				p.owner,
+				p.ownerPID,
+				p.ownerGold,
+				p.ownerIP,
+				p.target,
+				p.targetPID,
+				p.targetGold,
+				p.targetIP,
+				curr_time,
+				isGameMasterExchange,
+				isGameMasterExchange
+			);
+
+			// delete DBManager::instance().DirectQuery(szQuery);
+			DBManager::instance().DirectQuery(szQuery);
+
+			quest::CQuestManager::instance().RequestSetEventFlag("ex_log_index", newLogID);
+
+			logIndex = newLogID;
+			GetCompany()->logIndex = newLogID;
+
+			if (!isGameMasterExchange)
 			{
-				if (GetCompany()->m_lGold)
-					victim->Save();
+				if (GetOwner()->GetProtectTime("ExchangeLogLoaded") == 1)
+					GetOwner()->SendExchangeLogPacket(SUB_EXCHANGELOG_LOAD, newLogID, &p);
 
-#ifdef ENABLE_CHEQUE_SYSTEM
-				if (GetCompany()->m_lCheque)
-					victim->Save();
-#endif
+				if (victim->GetProtectTime("ExchangeLogLoaded") == 1)
+					victim->SendExchangeLogPacket(SUB_EXCHANGELOG_LOAD, newLogID, &p);
+			}
+		#endif
 
-				// INTERNATIONAL_VERSION
+			if (Done())
+			{
+				if (m_lGold)
+					GetOwner()->Save();
+
+		#ifdef ENABLE_CHEQUE_SYSTEM
+				if (m_lCheque)
+					GetOwner()->Save();
+		#endif
+
+				if (GetCompany()->Done())
+				{
+					if (GetCompany()->m_lGold)
+						victim->Save();
+
+		#ifdef ENABLE_CHEQUE_SYSTEM
+					if (GetCompany()->m_lCheque)
+						victim->Save();
+		#endif
+
+					// INTERNATIONAL_VERSION
 				GetOwner()->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("%s 님과의 교환이 성사 되었습니다."), victim->GetName());
 				victim->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("%s 님과의 교환이 성사 되었습니다."), GetOwner()->GetName());
-				// END_OF_INTERNATIONAL_VERSION
+					// END_OF_INTERNATIONAL_VERSION
+				}
 			}
 		}
 

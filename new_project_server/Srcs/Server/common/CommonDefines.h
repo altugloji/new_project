@@ -129,6 +129,9 @@ enum eCommonDefines {
 #define FAST_PACKET_BLOCK											// Paket buglarını önlemek için süre engelleri
 #define HANDSHAKE_PACKET_ANTI_FLOOD									// Auth / Game socket attack fix
 #define PARTY_EXP_FIX												// Grup bugu. Karakteri ortaya alma.
+// #define __AUTO_SKILL_READER__
+#define ENABLE_EXCHANGE_LOG
+#define KYGN_CHEST_INFO												// Sandık İçeriğini Görme
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

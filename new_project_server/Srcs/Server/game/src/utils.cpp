@@ -2,6 +2,16 @@
 #include "utils.h"
 #include <msl/msl.h>
 
+#ifdef __AUTO_SKILL_READER__
+	#include <boost/algorithm/string/classification.hpp> // Include boost::for is_any_of
+	#include <boost/algorithm/string/split.hpp>
+
+void split_argument_ex(const char* argument, std::vector<std::string>& vecArgs, const char* arg)
+{
+	boost::split(vecArgs, argument, boost::is_any_of(arg), boost::token_compress_on);
+}
+#endif
+
 static int global_time_gap = 0;
 
 time_t get_global_time()

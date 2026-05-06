@@ -2132,6 +2132,52 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		void				SetPacketLastTime() { m_iPacketTime = thecore_pulse(); }
 #endif
 
+#ifdef __AUTO_SKILL_READER__
+	public:
+		BYTE			GetSkillGradeByLevel(BYTE bLevel);
+		void			GetAutoSkill(BYTE skillIdx, bool status, bool isFromEvent = false);
+		bool			ReadSkill(BYTE skillIdx);
+		bool			SkillToBook(BYTE skillIdx, DWORD& itemIdx, DWORD& socket0, DWORD& exorcismIdx, DWORD& concentratedIdx);
+		void			SetAutoSkillEvent(LPEVENT _event) { m_pkAutoSkill = _event; }
+		BYTE			GetSelectedSkillIndex() { return m_bSelectedSkillIdx; }
+	protected:
+		enum EAutoSkillRead
+		{
+			// ! Don't touch !
+			SKILL_GRADE_MASTER = 0,
+			SKILL_GRADE_GRAND_MASTER = 1,
+			SKILL_GRADE_PERFECT_MASTER = 2,
+			SKILL_GRADE_L_MASTER = 3,
+			// ! Don't touch !
+
+			USE_YMIR_50300_SKILLBOOK = 1,// if the 0 system will search the manuel books example: 50401
+			
+			USE_COOLTIME_ON_BOOKS = 1,
+			USE_COOLTIME_ON_SOULSTONE = 1,
+
+			USE_DECREASE_ALIGNMENT_SOULSTONE = 1,
+			USE_ZEN_BEAN_SOULSTONE = 1,
+
+		};
+		bool			m_bAutoSkillStatus;
+		BYTE			m_bSelectedSkillIdx;
+		LPEVENT			m_pkAutoSkill;
+#endif
+
+#ifdef ENABLE_EXCHANGE_LOG
+public:
+	void	SetProtectTime(const std::string& flagname, int value);
+	int		GetProtectTime(const std::string& flagname) const;
+	void	LoadExchangeLog();
+	bool	LoadExchangeLogItem(DWORD logID);
+	void	DeleteExchangeLog(DWORD logID);
+	void	SendExchangeLogPacket(BYTE subHeader, DWORD id = 0, const TExchangeLog* exchangeLog = NULL);
+
+protected:
+	std::map<DWORD, std::pair<TExchangeLog, std::vector<TExchangeLogItem>>> m_mapExchangeLog;
+	std::map<std::string, int>  m_protection_Time;
+#endif
+
 };
 
 ESex GET_SEX(LPCHARACTER ch);

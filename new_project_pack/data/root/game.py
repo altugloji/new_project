@@ -48,6 +48,9 @@ import musicInfo
 import debugInfo
 import stringCommander
 
+if app.KYGN_CHEST_INFO:
+	import cri
+
 from _weakref import proxy
 
 # SCREENSHOT_CWDSAVE
@@ -66,6 +69,8 @@ class GameWindow(ui.ScriptWindow):
 		ui.ScriptWindow.__init__(self, "GAME")
 		self.SetWindowName("game")
 		net.SetPhaseWindow(net.PHASE_WINDOW_GAME, self)
+		if app.KYGN_CHEST_INFO:
+			cri.SetGameWindow(self)
 		player.SetGameWindow(self)
 
 		self.quickSlotPageIndex = 0
@@ -101,6 +106,9 @@ class GameWindow(ui.ScriptWindow):
 		self.mapNameShower = uiMapNameShower.MapNameShower()
 		self.affectShower = uiAffectShower.AffectShower()
 
+		if app.ENABLE_EXCHANGE_LOG:
+			constInfo.SetGameInstance(self)
+
 		self.playerGauge = uiPlayerGauge.PlayerGauge(self)
 		self.playerGauge.Hide()
 
@@ -117,6 +125,8 @@ class GameWindow(ui.ScriptWindow):
 	def __del__(self):
 		player.SetGameWindow(0)
 		net.ClearPhaseWindow(net.PHASE_WINDOW_GAME, self)
+		if app.KYGN_CHEST_INFO:
+			cri.SetGameWindow(0)
 		ui.ScriptWindow.__del__(self)
 
 	def Open(self):
@@ -293,6 +303,10 @@ class GameWindow(ui.ScriptWindow):
 		player.ResetCameraRotation()
 
 		self.KillFocus()
+
+		if app.ENABLE_EXCHANGE_LOG:
+			constInfo.SetGameInstance(None)
+
 		app.HideCursor()
 
 		constInfo.SET_ITEM_QUESTION_DIALOG_STATUS(0)
@@ -316,6 +330,12 @@ class GameWindow(ui.ScriptWindow):
 		onPressKeyDict[app.DIK_F2]	= lambda : self.__PressQuickSlot(5)
 		onPressKeyDict[app.DIK_F3]	= lambda : self.__PressQuickSlot(6)
 		onPressKeyDict[app.DIK_F4]	= lambda : self.__PressQuickSlot(7)
+
+		if app.ENABLE_EXCHANGE_LOG:
+			onPressKeyDict[app.DIK_F5]	= lambda : self.interface.OpenExchangeLog()
+
+		if app.__AUTO_SKILL_READER__:
+			onPressKeyDict[app.DIK_X]	= lambda : self.interface.OpenAutoSkillReader()
 
 		onPressKeyDict[app.DIK_LALT]		= lambda : self.ShowName()
 		onPressKeyDict[app.DIK_LCONTROL]	= lambda : self.ShowMouseImage()
@@ -1945,6 +1965,9 @@ class GameWindow(ui.ScriptWindow):
 			# END_OF_PRIVATE_SHOP_PRICE_LIST
 		}
 
+		if app.__AUTO_SKILL_READER__:
+			serverCommandList.update({"AutoSkillStatus" : self.interface.AutoSkillStatus})
+
 		self.serverCommander=stringCommander.Analyzer()
 		for serverCommandItem in serverCommandList.items():
 			self.serverCommander.SAFE_RegisterCallBack(
@@ -2245,3 +2268,24 @@ class GameWindow(ui.ScriptWindow):
 		def LanguageChangeAnonymous(self):
 			if self.interface:
 				self.interface.LanguageChangeAnonymous()
+
+	if app.ENABLE_EXCHANGE_LOG:
+		def ExchangeLogClear(self, playerCode):
+			self.interface.ExchangeLogClear(playerCode)
+		def ExchangeLogRefresh(self, isLogItemRefresh):
+			self.interface.ExchangeLogRefresh(isLogItemRefresh)
+		def ExchangeLogAppend(self, logID, ownerName, ownerGold, ownerIP, targetName, targetGold, targetIP, date):
+			self.interface.ExchangeLogAppend(logID, ownerName, ownerGold, ownerIP, targetName, targetGold, targetIP, date)
+		def ExchangeLogItemAppend(self, logID, itemPos, itemVnum, itemCount, metinSlot, attrType, attrValue, isOwnerItem):
+			self.interface.ExchangeLogItemAppend(logID, itemPos, itemVnum, itemCount, metinSlot, attrType, attrValue, isOwnerItem)
+
+	if app.KYGN_CHEST_INFO:
+		def ClearChestRewardData(self):
+			if self.interface:
+				self.interface.ClearChestRewardData()
+		def SetChestRewardData(self, vnum, count):
+			if self.interface:
+				self.interface.SetChestRewardData(vnum, count)
+		def ShowChestRewardData(self):
+			if self.interface:
+				self.interface.ShowChestRewardData()

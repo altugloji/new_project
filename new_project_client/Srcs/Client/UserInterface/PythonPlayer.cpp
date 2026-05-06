@@ -1747,4 +1747,40 @@ TPacketAffectElement CPythonPlayer::GetAffectData(DWORD dwType, BYTE bApplyOn)
 	return ret;
 }
 #endif
+
+#ifdef __AUTO_SKILL_READER__
+DWORD CPythonPlayer::GetItemCountByVnumNew(DWORD dwVnum, int socket0)
+{
+	DWORD dwCount = 0;
+	for (int i = 0; i < c_Inventory_Count; ++i)
+	{
+		const TItemData& c_rItemData = m_playerStatus.aItem[i];
+		if (c_rItemData.vnum == dwVnum && c_rItemData.alSockets[0] == socket0)
+			dwCount += c_rItemData.count;
+	}
+	return dwCount;
+}
+int CPythonPlayer::GetSkillLevelNew(DWORD dwSkillIndex)
+{
+	DWORD dwSlotIndex;
+	if (!GetSkillSlotIndex(dwSkillIndex, &dwSlotIndex))
+		return 0;
+
+	if (dwSlotIndex >= SKILL_MAX_NUM)
+		return 0;
+	return m_playerStatus.aSkill[dwSlotIndex].iLevel;
+}
+
+int CPythonPlayer::GetSkillGradeNew(DWORD dwSkillIndex)
+{
+	DWORD dwSlotIndex;
+	if (!GetSkillSlotIndex(dwSkillIndex, &dwSlotIndex))
+		return 0;
+
+	if (dwSlotIndex >= SKILL_MAX_NUM)
+		return 0;
+	return m_playerStatus.aSkill[dwSlotIndex].iGrade;
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

@@ -65,6 +65,15 @@ if app.__BL_OFFICIAL_LOOT_FILTER__:
 if app.__BL_MULTI_LANGUAGE_PREMIUM__:
 	import net
 
+if app.__AUTO_SKILL_READER__:
+	import uiAutoSkillReader
+
+if app.ENABLE_EXCHANGE_LOG:
+	import uiExchangeLog
+
+if app.KYGN_CHEST_INFO:
+	import uikygnchestinfo
+
 IsQBHide = 0
 class Interface(object):
 	CHARACTER_STATUS_TAB = 1
@@ -77,6 +86,9 @@ class Interface(object):
 		self.inputDialog = None
 		self.tipBoard = None
 		self.bigBoard = None
+
+		if app.ENABLE_EXCHANGE_LOG:
+			self.wndExchangeLog = None
 
 		# ITEM_MALL
 		self.mallPageDlg = None
@@ -114,7 +126,11 @@ class Interface(object):
 				net.EMPIRE_B : localeInfo.EMPIRE_B, 
 				net.EMPIRE_C : localeInfo.EMPIRE_C 
 			}
+		if app.__AUTO_SKILL_READER__:
+			self.wndAutoSkillReader = None
 
+		if app.KYGN_CHEST_INFO:
+			self.wndKygnChestInfo = None
 	def __del__(self):
 		systemSetting.DestroyInterfaceHandler()
 		event.SetInterfaceWindow(None)
@@ -241,6 +257,10 @@ class Interface(object):
 
 		if app.__BL_OFFICIAL_LOOT_FILTER__:
 			self.wndLootFilter = uilootingsystem.LootingSystem()
+
+		if app.KYGN_CHEST_INFO:
+			self.wndKygnChestInfo = uikygnchestinfo.KygnChestInfo()
+			self.wndInventory.SetChestRewardWindow(self.wndKygnChestInfo)
 
 	def __MakeDialogs(self):
 		self.dlgExchange = uiExchange.ExchangeDialog()
@@ -377,6 +397,9 @@ class Interface(object):
 			self.wndAcceCombine.SetItemToolTip(self.tooltipItem)
 			self.wndAcceAbsorption.SetItemToolTip(self.tooltipItem)
 
+		if app.KYGN_CHEST_INFO and self.wndKygnChestInfo:
+			self.wndKygnChestInfo.SetItemToolTip(self.tooltipItem)
+
 		# ITEM_MALL
 		self.wndMall.SetItemToolTip(self.tooltipItem)
 		# END_OF_ITEM_MALL
@@ -501,6 +524,9 @@ class Interface(object):
 			self.wndWonExchange.Destroy()
 			self.wndWonExchange = None
 
+		if app.KYGN_CHEST_INFO and self.wndKygnChestInfo:
+			self.wndKygnChestInfo.Close()
+
 		if self.wndCubeResult:
 			self.wndCubeResult.Destroy()
 
@@ -562,6 +588,8 @@ class Interface(object):
 			del self.wndDragonSoul
 		if self.wndDragonSoulRefine:
 			del self.wndDragonSoulRefine
+		if app.KYGN_CHEST_INFO and self.wndKygnChestInfo:
+			del self.wndKygnChestInfo
 		del self.dlgExchange
 		del self.dlgPointReset
 		del self.dlgShop
@@ -597,6 +625,18 @@ class Interface(object):
 		if app.__BL_OFFICIAL_LOOT_FILTER__:
 			if self.wndLootFilter:
 				del self.wndLootFilter
+
+		if app.__AUTO_SKILL_READER__:
+			if self.wndAutoSkillReader:
+				self.wndAutoSkillReader.Close()
+				self.wndAutoSkillReader.Destroy()
+				self.wndAutoSkillReader = None
+
+		if app.ENABLE_EXCHANGE_LOG:
+			if self.wndExchangeLog:
+				self.wndExchangeLog.Close()
+				self.wndExchangeLog.Destroy()
+				self.wndExchangeLog = None
 
 		self.questButtonList = []
 		self.whisperButtonList = []
@@ -639,6 +679,10 @@ class Interface(object):
 			self.wndEnergyBar.RefreshStatus()
 		if app.ENABLE_DRAGON_SOUL_SYSTEM:
 			self.wndDragonSoul.RefreshStatus()
+		if app.__AUTO_SKILL_READER__:
+			if self.wndAutoSkillReader:
+				if self.wndAutoSkillReader.IsShow():
+					self.wndAutoSkillReader.Refresh()
 
 	def RefreshStamina(self):
 		self.wndTaskBar.RefreshStamina()
@@ -652,6 +696,12 @@ class Interface(object):
 		self.wndInventory.RefreshItemSlot()
 		if app.ENABLE_DRAGON_SOUL_SYSTEM:
 			self.wndDragonSoul.RefreshItemSlot()
+		if app.__AUTO_SKILL_READER__:
+			if self.wndAutoSkillReader:
+				if self.wndAutoSkillReader.IsShow():
+					self.wndAutoSkillReader.Refresh()
+		if app.KYGN_CHEST_INFO and self.wndKygnChestInfo:
+			self.wndKygnChestInfo.CheckChestPos()
 
 	def RefreshCharacter(self):
 		self.wndCharacter.RefreshCharacter()
@@ -1830,3 +1880,56 @@ class Interface(object):
 		def LanguageChangeAnonymous(self):
 			if self.dlgSystem:
 				self.dlgSystem.LanguageChangeAnonymous()
+
+	if app.__AUTO_SKILL_READER__:
+		def OpenAutoSkillReader(self):
+			if self.wndAutoSkillReader == None:
+				self.wndAutoSkillReader = uiAutoSkillReader.Window()
+			if self.wndAutoSkillReader.IsShow():
+				self.wndAutoSkillReader.Close()
+			else:
+				self.wndAutoSkillReader.Open()
+		def AutoSkillStatus(self, status):
+			if self.wndAutoSkillReader:
+				self.wndAutoSkillReader.ServerSetStatus(status)
+
+	if app.ENABLE_EXCHANGE_LOG:
+		def MakeExchangeLogWindow(self):
+			if self.wndExchangeLog == None:
+				self.wndExchangeLog = uiExchangeLog.ExchangeLog()
+		def OpenExchangeLog(self):
+			self.MakeExchangeLogWindow()
+			if self.wndExchangeLog.IsShow():
+				self.wndExchangeLog.Close()
+			else:
+				self.wndExchangeLog.Open()
+		def ExchangeLogClear(self, playerCode):
+			if self.wndExchangeLog:
+				self.wndExchangeLog.Clear(playerCode)
+		def ExchangeLogRefresh(self, isLogItemRefresh):
+			if self.wndExchangeLog:
+				if isLogItemRefresh:
+					self.wndExchangeLog.RefreshItems(isLogItemRefresh)
+				else:
+					self.wndExchangeLog.Refresh()
+		def ExchangeLogAppend(self, logID, ownerName, ownerGold, ownerIP, targetName, targetGold, targetIP, date):
+			if self.wndExchangeLog:
+				self.wndExchangeLog.ExchangeLogAppend(logID, ownerName, ownerGold, ownerIP, targetName, targetGold, targetIP, date)
+		def ExchangeLogItemAppend(self, logID, itemPos, itemVnum, itemCount, metinSlot, attrType, attrValue, isOwnerItem):
+			if self.wndExchangeLog:
+				self.wndExchangeLog.ExchangeLogItemAppend(logID, itemPos, itemVnum, itemCount, metinSlot, attrType, attrValue, isOwnerItem)
+
+	if app.KYGN_CHEST_INFO:
+		def ShowChestRewardsWithVnum(self, chestVnum):
+			if self.wndKygnChestInfo:
+				self.wndKygnChestInfo.ShowChestRewardsWithVnum(chestVnum)
+
+		def ClearChestRewardData(self):
+			if self.wndKygnChestInfo:
+				self.wndKygnChestInfo.ClearChest()
+		def SetChestRewardData(self, vnum, count):
+			if self.wndKygnChestInfo:
+				self.wndKygnChestInfo.AddItem(vnum, count)
+		def ShowChestRewardData(self):
+			if self.wndKygnChestInfo:
+				self.wndKygnChestInfo.Open()

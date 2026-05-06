@@ -20,6 +20,9 @@ import ime
 import wndMgr
 import dbg
 
+if app.KYGN_CHEST_INFO:
+	import chr
+
 if app.ENABLE_CHEQUE_SYSTEM:
 	import uiToolTip
 	import uiPickETC
@@ -288,6 +291,9 @@ class InventoryWindow(ui.ScriptWindow):
 		if app.ENABLE_ACCE_COSTUME_SYSTEM:
 			self.wndAcceCombine = None
 			self.wndAcceAbsorption = None
+
+		if app.KYGN_CHEST_INFO:
+			self.KygnChestReward = None
 
 		self.__LoadWindow()
 
@@ -1392,6 +1398,11 @@ class InventoryWindow(ui.ScriptWindow):
 				acce.Add(player.INVENTORY, slotIndex, 255)
 				return
 
+		if app.KYGN_CHEST_INFO and self.KygnChestReward and (app.IsPressed(app.DIK_LCONTROL) or app.IsPressed(app.DIK_RCONTROL)):
+			if chr.IsGameMaster(player.GetMainCharacterIndex()) and player.IsGiftBox(slotIndex) == 1:
+				self.KygnChestReward.ShowChestRewards(slotIndex)
+				return
+
 		self.__UseItem(slotIndex)
 		mouseModule.mouseController.DeattachObject()
 		self.OverOutItem()
@@ -1469,3 +1480,7 @@ class InventoryWindow(ui.ScriptWindow):
 				if self.wndAcceAbsorption.IsShow():
 					return 1
 			return 0
+
+	if app.KYGN_CHEST_INFO:
+		def SetChestRewardWindow(self, wndPage):
+			self.KygnChestReward = wndPage

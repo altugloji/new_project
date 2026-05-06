@@ -191,6 +191,9 @@ CPacketInfoCG::CPacketInfoCG()
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 	Set(HEADER_CG_ACCE, sizeof(TPacketAcce), "Acce", true);
 #endif
+#ifdef KYGN_CHEST_INFO
+	Set(HEADER_CG_GET_CHEST_INFO,	sizeof(TPacketCGGetChestInfo),	"CGGetChestInfo",	false);
+#endif
 }
 
 CPacketInfoCG::~CPacketInfoCG()

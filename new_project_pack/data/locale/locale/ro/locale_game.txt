@@ -1,3 +1,21 @@
+EXCHANGELOG_TITLE	Jurnale de schimb
+EXCHANGELOG_OWNERNAME	Numele proprietarului
+EXCHANGELOG_TARGETNAME	Numele ?intei
+EXCHANGELOG_GOLDTRADED	Yang schimbat
+EXCHANGELOG_DATE	Data
+EXCHANGELOG_IP	IP
+EXCHANGELOG_CONTENT	Con?inut
+EXCHANGELOG_DELETESELECTED	?terge selectate
+EXCHANGELOG_DELETEALL	?terge tot
+EXCHANGELOG_CHANGEPASS	Schimba parola
+EXCHANGELOG_FAKETITLE	%s catre %s
+EXCHANGELOG_LOADING	Se încarca
+EXCHANGELOG_INPUTTITLE	?terge jurnal
+EXCHANGELOG_INPUTDESC	Introdu codul de ?tergere al caracterului
+EXCHANGELOG_INPUT_NOT_NUMBER	Te rugam sa introduci un numar
+EXCHANGELOG_INPUT_NOT_ENOUGHT_SIZE	Te rugam sa introduci codul corect de ?tergere al caracterului
+EXCHANGELOG_INPUT_NOT_SAME_CODE	Acest cod este gre?it
+EXCHANGELOG_INPUT_NOT_HAS_LOG	Nu exista jurnale de ?ters.
 ACCE_ABSORB_COST	Costuri combinaþie: %d
 ACCE_ALREADY_REGISTER	Acest obiect a fost deja folosit.
 ACCE_DEL_ABSORDITEM	Absorbi obiectul, distrugandu-l inaces proces?

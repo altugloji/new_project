@@ -660,6 +660,10 @@ class CharacterWindow(ui.ScriptWindow):
 		else:
 			self.toolTipSkill.SetSkillNew(srcSlotIndex, skillIndex, skillGrade, skillLevel)
 
+		if app.__AUTO_SKILL_READER__:
+			self.toolTipSkill.AppendSpace(5)
+			self.toolTipSkill.AppendTextLine("|Eemoji/key_x|e Open Auto Skill Reader")
+
 	def OverOutItem(self):
 		if 0 != self.toolTipSkill:
 			self.toolTipSkill.HideToolTip()

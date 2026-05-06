@@ -2935,6 +2935,21 @@ int CInputMain::MyShop(LPCHARACTER ch, const char * c_pData, size_t uiBytes) con
 	return (iExtraLen);
 }
 
+#ifdef KYGN_CHEST_INFO
+void CInputMain::CGGetChestInfo(LPCHARACTER ch, const char* c_pData)
+{
+	if (!ch || !ch->IsPC() || ch->GetGMLevel() != GM_IMPLEMENTOR)
+		return;
+
+	TPacketCGGetChestInfo* p = (TPacketCGGetChestInfo*)c_pData;
+	DWORD dwChestVnum = p->dwChestVnum;
+
+	sys_log(0, "[CInputMain::CGGetChestInfo] %s Requesting Drop Information (Chest Vnum: %u)", ch->GetName(), dwChestVnum);
+
+	ITEM_MANAGER::instance().SendChestRewardsPacket(ch, dwChestVnum);
+}
+#endif
+
 void CInputMain::Refine(LPCHARACTER ch, const char* c_pData) const
 {
 	const auto p = reinterpret_cast<const TPacketCGRefine*>(c_pData);
@@ -3280,6 +3295,12 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			if ((iExtraLen = MyShop(ch, c_pData, m_iBufferLeft)) < 0)
 				return -1;
 			break;
+
+#ifdef KYGN_CHEST_INFO
+		case HEADER_CG_GET_CHEST_INFO:
+			CGGetChestInfo(ch, c_pData);
+			break;
+#endif
 
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 		case HEADER_CG_ACCE:

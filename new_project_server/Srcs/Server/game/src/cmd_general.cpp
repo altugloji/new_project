@@ -2446,4 +2446,67 @@ ACMD(DoChangeChannel)
 	ch->ChangeChannel(channel);
 }
 #endif
+
+#ifdef __AUTO_SKILL_READER__
+ACMD(do_auto_skill_reader)
+{
+	std::vector<std::string> vecArgs;
+	split_argument_ex(argument, vecArgs);
+	if (vecArgs.size() < 2) { return; }
+	else if (vecArgs[1] == "status")
+	{
+		if (vecArgs.size() < 4) { return; }
+		BYTE skillIdx, status;
+		if (!str_to_number(skillIdx, vecArgs[2].c_str()) || !str_to_number(status, vecArgs[3].c_str()))
+			return;
+		ch->GetAutoSkill(skillIdx, status ? true : false);
+	}
+}
+#endif
+
+#ifdef ENABLE_EXCHANGE_LOG
+ACMD(do_ex_log)
+{
+	char arg1[256], arg2[256], arg3[256];
+	const char* rest = two_arguments(argument, arg1, sizeof(arg1), arg2, sizeof(arg2));
+	one_argument(rest, arg3, sizeof(arg3));
+
+	if (!*arg1)
+		return;
+
+	if (!strcmp(arg1, "load"))
+		ch->SendExchangeLogPacket(SUB_EXCHANGELOG_LOAD);
+	else if (!strcmp(arg1, "load_item"))
+	{
+		if (!*arg2)
+			return;
+		DWORD logID;
+		str_to_number(logID, arg2);
+		ch->SendExchangeLogPacket(SUB_EXCHANGELOG_LOAD_ITEM, logID);
+	}
+	else if (!strcmp(arg1, "delete"))
+	{
+		if (!*arg2 || !*arg3)
+			return;
+		const std::string playerCode(ch->GetDesc()->GetAccountTable().social_id);
+		if (playerCode != arg2)
+			return;
+		if (!strcmp(arg3, "all"))
+			ch->DeleteExchangeLog(0);
+		else
+		{
+			std::vector<std::string> vecArgs;
+			split_argument(argument, vecArgs);
+			for (DWORD j = 2; j < vecArgs.size(); ++j)
+			{
+				DWORD logID;
+				str_to_number(logID, vecArgs[j].c_str());
+				ch->DeleteExchangeLog(logID);
+			}
+		}
+	}
+}
+#endif
+
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

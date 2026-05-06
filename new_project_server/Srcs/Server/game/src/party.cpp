@@ -1652,7 +1652,7 @@ int CParty::ComputePartyBonusExpPercent(
 	int iBonusPartyExpFromItem = 0;
 
 	// UPGRADE_PARTY_BONUS
-	const int iMemberCount=MIN(8, GetNearMemberCount());
+	int iMemberCount=MIN(8, GetNearMemberCount());
 
 #ifdef PARTY_EXP_FIX
 	if (memberCount > 0)

@@ -1,3 +1,25 @@
+LOGIN_LANGUAGE_SELECT_TITLE	Sprogvalg
+LOGIN_BTN_DISCORD	Discord
+LOGIN_BTN_WEBSITE	Hjemmeside
+LOGIN_BTN_PATCH_NOTES	Opdateringsnote
+EXCHANGELOG_TITLE	Handelslogfiler
+EXCHANGELOG_OWNERNAME	Ejernavn
+EXCHANGELOG_TARGETNAME	Målnavn
+EXCHANGELOG_GOLDTRADED	Handlet Yang
+EXCHANGELOG_DATE	Dato
+EXCHANGELOG_IP	IP
+EXCHANGELOG_CONTENT	Indhold
+EXCHANGELOG_DELETESELECTED	Slet valgte
+EXCHANGELOG_DELETEALL	Slet alle
+EXCHANGELOG_CHANGEPASS	Skift adgangskode
+EXCHANGELOG_FAKETITLE	%s til %s
+EXCHANGELOG_LOADING	Indlæser
+EXCHANGELOG_INPUTTITLE	Slet log
+EXCHANGELOG_INPUTDESC	Indtast din karakter-slettekode
+EXCHANGELOG_INPUT_NOT_NUMBER	Indtast venligst et tal
+EXCHANGELOG_INPUT_NOT_ENOUGHT_SIZE	Indtast venligst den korrekte karakter-slettekode
+EXCHANGELOG_INPUT_NOT_SAME_CODE	Denne kode er forkert
+EXCHANGELOG_INPUT_NOT_HAS_LOG	Der er ingen logfiler at slette.
 ACCE_ABSORB_COST	Kombinations omkostninger: %d
 ACCE_ALREADY_REGISTER	Denne genstand er allerede blevet brugt.
 ACCE_DEL_ABSORDITEM	Absorber genstand, øde læg det i processen?

@@ -284,6 +284,13 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 		DWORD	GetItemFlags(TItemPos Cell);
 		DWORD	GetItemCount(TItemPos Cell);
 		DWORD	GetItemCountByVnum(DWORD dwVnum) const;
+
+#ifdef __AUTO_SKILL_READER__
+		DWORD	GetItemCountByVnumNew(DWORD dwVnum, int socket0);
+		int		GetSkillLevelNew(DWORD dwSkillIndex);
+		int		GetSkillGradeNew(DWORD dwSkillIndex);
+#endif
+
 		DWORD	GetItemMetinSocket(TItemPos Cell, DWORD dwMetinSocketIndex) const;
 		void	GetItemAttribute(TItemPos Cell, DWORD dwAttrSlotIndex, BYTE * pbyType, short * psValue) const;
 		void	SendClickItemPacket(DWORD dwIID);

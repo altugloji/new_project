@@ -95,7 +95,7 @@
 #define ENABLE_MOUSEWHEEL_EVENT // if you want use SetMouseWheelScrollEvent or you want use mouse wheel to move the scrollbar
 #define ENABLE_EMOJI_SYSTEM // it shows emojis in the textlines
 #define __ENABLE_STEALTH_FIX__ // effects while hidden won't show up
-#define ENABLE_MINIMAP_WHITEMARK_CIRCLE // circle dots in minimap instead of squares
+// #define ENABLE_MINIMAP_WHITEMARK_CIRCLE // circle dots in minimap instead of squares
 // #define ENABLE_PRINT_RECV_PACKET_DEBUG // for debug: print received packets
 #define ENABLE_MINIMAP_TELEPORT_CLICK // click on minimap as gm to warp directly
 #define ENABLE_ATLAS_MARK_ON_WARP_SCROLLS // warp scrolls tooltips will show the mark on the atlas
@@ -132,6 +132,10 @@
 
 #define GUILD_LARGE_ICON
 #define TASKBAR_SKILL_COOLDOWN_TEXT
+#define ITEM_SLOT_REFINE_TEXT
+#define __AUTO_SKILL_READER__
+#define ENABLE_EXCHANGE_LOG
+#define KYGN_CHEST_INFO													// Sandık İçeriğini Görme
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

@@ -1345,9 +1345,9 @@ class ItemToolTip(ToolTip):
 		itemType = item.GetItemType()
 		itemSubType = item.GetItemSubType()
 
-		if app.ENABLE_EMOJI_SYSTEM and item.IsFlag(item.ITEM_FLAG_STACKABLE) and window_type in (player.INVENTORY,):
-			if player.GetItemCount(window_type, slotIndex) > 1:
-				self.AppendTextLine(localeInfo.TOOLTIP_TIPS_SPLIT_ITEM.format(Emoji("icon\emoji\key_shift.png"), Emoji("icon\emoji\key_lclick.png")))
+		if app.KYGN_CHEST_INFO and window_type in (player.INVENTORY,) and slotIndex >= 0:
+			if chr.IsGameMaster(0) and player.IsGiftBox(slotIndex) == 1:
+				self.AppendTextLine(localeInfo.TOOLTIP_CHEST_ITEM.format(Emoji("icon\emoji\key_ctrl.png"), Emoji("icon\emoji\key_rclick.png")))
 
 		if chr.IsGameMaster(0):
 			self.AppendSpace(5)

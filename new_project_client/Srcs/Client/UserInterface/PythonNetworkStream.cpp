@@ -93,6 +93,10 @@ class CMainPacketHeaderMap : public CNetworkPacketHeaderMap
 
 			Set(HEADER_GC_PING,			CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCPing), STATIC_SIZE_PACKET));
 
+#ifdef ENABLE_EXCHANGE_LOG
+			Set(HEADER_GC_EXCHANGE_LOG, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCExchangeLog), DYNAMIC_SIZE_PACKET));
+#endif
+
 			Set(HEADER_GC_SCRIPT,			CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCScript), DYNAMIC_SIZE_PACKET));
 			Set(HEADER_GC_QUEST_CONFIRM,	CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCQuestConfirm), STATIC_SIZE_PACKET));
 
@@ -177,6 +181,11 @@ class CMainPacketHeaderMap : public CNetworkPacketHeaderMap
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 			Set(HEADER_GC_ACCE, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketAcce), STATIC_SIZE_PACKET));
 #endif
+
+#ifdef KYGN_CHEST_INFO
+			Set(HEADER_GC_SET_CHEST_REWARDS, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCSetChestRewards), DYNAMIC_SIZE_PACKET));
+#endif
+
 		}
 };
 

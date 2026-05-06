@@ -1,3 +1,25 @@
+LOGIN_LANGUAGE_SELECT_TITLE	Sprachauswahl
+LOGIN_BTN_DISCORD	Discord
+LOGIN_BTN_WEBSITE	Webseite
+LOGIN_BTN_PATCH_NOTES	Update-Hinweis
+EXCHANGELOG_TITLE	Handelsprotokolle
+EXCHANGELOG_OWNERNAME	Name des Besitzers
+EXCHANGELOG_TARGETNAME	Name des Ziels
+EXCHANGELOG_GOLDTRADED	Gehandeltes Yang
+EXCHANGELOG_DATE	Datum
+EXCHANGELOG_IP	IP
+EXCHANGELOG_CONTENT	Inhalt
+EXCHANGELOG_DELETESELECTED	Ausgewählte löschen
+EXCHANGELOG_DELETEALL	Alle löschen
+EXCHANGELOG_CHANGEPASS	Passwort ändern
+EXCHANGELOG_FAKETITLE	%s zu %s
+EXCHANGELOG_LOADING	Wird geladen
+EXCHANGELOG_INPUTTITLE	Protokoll löschen
+EXCHANGELOG_INPUTDESC	Gib den Löschcode deines Charakters ein
+EXCHANGELOG_INPUT_NOT_NUMBER	Bitte gib eine Zahl ein
+EXCHANGELOG_INPUT_NOT_ENOUGHT_SIZE	Bitte gib den richtigen Charakter-Löschcode ein
+EXCHANGELOG_INPUT_NOT_SAME_CODE	Dieser Code ist falsch
+EXCHANGELOG_INPUT_NOT_HAS_LOG	Es gibt keine Protokolle zum Löschen.
 ACCE_ABSORB_COST	Kombinationskosten: %d
 ACCE_ALREADY_REGISTER	Dieser Gegenstand wurde bereits verwendet.
 ACCE_DEL_ABSORDITEM	Gegenstand aufnehmen und damit zerstören?

@@ -1,3 +1,25 @@
+LOGIN_LANGUAGE_SELECT_TITLE	Wybór jezyka
+LOGIN_BTN_DISCORD	Discord
+LOGIN_BTN_WEBSITE	Strona internetowa
+LOGIN_BTN_PATCH_NOTES	Notatka aktualizacji
+EXCHANGELOG_TITLE	Logi wymiany
+EXCHANGELOG_OWNERNAME	Nazwa wlasciciela
+EXCHANGELOG_TARGETNAME	Nazwa celu
+EXCHANGELOG_GOLDTRADED	Wymieniony Yang
+EXCHANGELOG_DATE	Data
+EXCHANGELOG_IP	IP
+EXCHANGELOG_CONTENT	Zawartosc
+EXCHANGELOG_DELETESELECTED	Usun zaznaczone
+EXCHANGELOG_DELETEALL	Usun wszystko
+EXCHANGELOG_CHANGEPASS	Zmien haslo
+EXCHANGELOG_FAKETITLE	%s do %s
+EXCHANGELOG_LOADING	Ladowanie
+EXCHANGELOG_INPUTTITLE	Usun log
+EXCHANGELOG_INPUTDESC	Wprowadz kod usuwania postaci
+EXCHANGELOG_INPUT_NOT_NUMBER	Prosze wprowadzic liczbe
+EXCHANGELOG_INPUT_NOT_ENOUGHT_SIZE	Prosze wprowadzic prawidlowy kod usuwania postaci
+EXCHANGELOG_INPUT_NOT_SAME_CODE	Ten kod jest nieprawidlowy
+EXCHANGELOG_INPUT_NOT_HAS_LOG	Brak logów do usuniecia.
 ACCE_ABSORB_COST	Koszty po³¹czenia: %d
 ACCE_ALREADY_REGISTER	Przedmiot ten zosta³ ju¿ u¿yty.
 ACCE_DEL_ABSORDITEM	Absorbowaæ i tym samym zniszczyæ przedmiot?

@@ -514,6 +514,10 @@ namespace UI
 			BOOL SetDownVisual(const char * c_szFileName);
 			BOOL SetDisableVisual(const char * c_szFileName);
 
+#ifdef ENABLE_EXCHANGE_LOG
+			void SetRenderingRect(float fLeft, float fTop, float fRight, float fBottom);
+#endif
+
 			const char * GetUpVisualFileName() const;
 			const char * GetOverVisualFileName() const;
 			const char * GetDownVisualFileName() const;

@@ -26,6 +26,10 @@
 
 #include "ProcessCRC.h"
 
+#ifdef KYGN_CHEST_INFO
+	#include "PythonChestInfo.h"
+#endif
+
 BOOL gs_bEmpireLanuageEnable = TRUE;
 
 void CPythonNetworkStream::__RefreshAlignmentWindow() const
@@ -587,6 +591,18 @@ void CPythonNetworkStream::GamePhase()
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 			case HEADER_GC_ACCE:
 				ret = RecvAccePacket();
+				break;
+#endif
+
+#ifdef ENABLE_EXCHANGE_LOG
+		case HEADER_GC_EXCHANGE_LOG:
+			ret = RecvExchangeLog();
+			break;
+#endif
+
+#ifdef KYGN_CHEST_INFO
+			case HEADER_GC_SET_CHEST_REWARDS:
+				ret = RecvChestInfoPacket();
 				break;
 #endif
 
@@ -1973,6 +1989,9 @@ bool CPythonNetworkStream::RecvQuestInfoPacket()
 			return false;
 
 		szTitle[30]='\0';
+#if defined(__BL_CLIENT_LOCALE_STRING__)
+		CPythonLocale::Instance().FormatString(szTitle, sizeof(szTitle));
+#endif
 	}
 	if (0 != (c_rFlag & QUEST_SEND_CLOCK_NAME))
 	{
@@ -1980,6 +1999,9 @@ bool CPythonNetworkStream::RecvQuestInfoPacket()
 			return false;
 
 		szClockName[16]='\0';
+#if defined(__BL_CLIENT_LOCALE_STRING__)
+		CPythonLocale::Instance().FormatString(szClockName, sizeof(szClockName));
+#endif
 	}
 	if (0 != (c_rFlag & QUEST_SEND_CLOCK_VALUE))
 	{
@@ -4672,4 +4694,129 @@ void CPythonNetworkStream::Discord_Close() const
 	Discord_Shutdown();
 }
 #endif
+
+#ifdef ENABLE_EXCHANGE_LOG
+bool CPythonNetworkStream::RecvExchangeLog()
+{
+	TPacketGCExchangeLog p;
+	if (!Recv(sizeof(TPacketGCExchangeLog), &p))
+		return false;
+	
+	BYTE subIndex;
+	if (!Recv(sizeof(BYTE), &subIndex))
+		return false;
+
+	if (subIndex == SUB_EXCHANGELOG_LOAD)
+	{
+		char playerCode[19];
+		if (!Recv(sizeof(playerCode), &playerCode))
+			return false;
+
+		bool isNeedClean;
+		if (!Recv(sizeof(bool), &isNeedClean))
+			return false;
+
+		WORD logCount;
+		if (!Recv(sizeof(WORD), &logCount))
+			return false;
+
+		if (isNeedClean)
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "ExchangeLogClear", Py_BuildValue("(s)", playerCode));
+		for (DWORD j = 0; j < logCount; ++j)
+		{
+			DWORD logID;
+			if (!Recv(sizeof(DWORD), &logID))
+				return false;
+			TExchangeLog logData;
+			if (!Recv(sizeof(TExchangeLog), &logData))
+				return false;
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "ExchangeLogAppend", Py_BuildValue("(isississ)", logID, logData.owner, logData.ownerGold, logData.ownerIP, logData.target, logData.targetGold, logData.targetIP, logData.date));
+		}
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "ExchangeLogRefresh", Py_BuildValue("(i)", 0));
+	}
+	else if (subIndex == SUB_EXCHANGELOG_LOAD_ITEM)
+	{
+		WORD logItemCount;
+		if (!Recv(sizeof(WORD), &logItemCount))
+			return false;
+		DWORD logID;
+		if (!Recv(sizeof(DWORD), &logID))
+			return false;
+		if (logItemCount)
+		{
+			std::vector<TExchangeLogItem> m_vecLogItems;
+			m_vecLogItems.resize(logItemCount);
+			if (!Recv(logItemCount * sizeof(TExchangeLogItem), m_vecLogItems.data()))
+				return false;
+			for (DWORD j = 0; j < m_vecLogItems.size(); ++j)
+			{
+				const TExchangeLogItem& logItem = m_vecLogItems[j];
+				PyObject* poSockets = PyList_New(0);
+				for(DWORD x=0;x<ITEM_SOCKET_SLOT_MAX_NUM;++x)
+					PyList_Append(poSockets, PyInt_FromLong(logItem.alSockets[x]));
+				PyObject* poAttrType = PyList_New(0);
+				PyObject* poAttrValue = PyList_New(0);
+				for (DWORD x = 0; x < ITEM_ATTRIBUTE_SLOT_MAX_NUM; ++x)
+				{
+					PyList_Append(poAttrType, PyInt_FromLong(logItem.aAttr[x].bType));
+					PyList_Append(poAttrValue, PyInt_FromLong(logItem.aAttr[x].sValue));
+				}
+				PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "ExchangeLogItemAppend", Py_BuildValue("(iiiiOOOi)", logID, logItem.pos, logItem.vnum, logItem.count, poSockets, poAttrType, poAttrValue, logItem.isOwnerItem));
+				
+				Py_DECREF(poSockets);
+				Py_DECREF(poAttrType);
+				Py_DECREF(poAttrValue);
+			}
+		}
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "ExchangeLogRefresh", Py_BuildValue("(i)", logID));
+	}
+	return true;
+}
+#endif
+
+#ifdef KYGN_CHEST_INFO
+bool CPythonNetworkStream::SendCGGetChestRewards(DWORD dwVnum)
+{
+	TPacketCGGetChestInfo packet{};
+	packet.bHeader = HEADER_CG_GET_CHEST_INFO;
+	packet.dwChestVnum = dwVnum;
+
+	if (!Send(sizeof(packet), &packet))
+		return false;
+	return true;
+}
+
+bool CPythonNetworkStream::RecvChestInfoPacket()
+{
+	TPacketGCSetChestRewards chestInfo{};
+
+	if (!Recv(sizeof(TPacketGCSetChestRewards), &chestInfo))
+	{
+		Tracen("Recv Chest Info Packet Error");
+		return false;
+	}
+
+	WORD wSize = chestInfo.wSize - sizeof(TPacketGCSetChestRewards);
+
+	const DWORD dwVnum = chestInfo.dwVnum;
+	constexpr int needSize = sizeof(TChestRewards);
+
+	CPythonChestInfo& rkChestRewards = CPythonChestInfo::Instance();
+	while (wSize >= needSize)
+	{
+		wSize -= needSize;
+
+		TChestRewards infoPacket{};
+		if (!Recv(sizeof(TChestRewards), &infoPacket))
+			return false;
+
+		rkChestRewards.AddChestRewardInfo(dwVnum, infoPacket);
+	}
+
+	rkChestRewards.SortChestRewardList(dwVnum);
+	rkChestRewards.SetChestRewardData(dwVnum);
+	return true;
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

@@ -681,6 +681,36 @@ PyObject * playerGetSkillLevel(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildValue("i", CPythonPlayer::Instance().GetSkillLevel(iSlotIndex));
 }
 
+#ifdef __AUTO_SKILL_READER__
+PyObject* playerGetSkillLevelNew(PyObject* poSelf, PyObject* poArgs)
+{
+	int iSlotIndex;
+	if (!PyTuple_GetInteger(poArgs, 0, &iSlotIndex))
+		return Py_BuildException();
+
+	return Py_BuildValue("i", CPythonPlayer::Instance().GetSkillLevelNew(iSlotIndex));
+}
+PyObject* playerGetSkillGradeNew(PyObject* poSelf, PyObject* poArgs)
+{
+	int iSlotIndex;
+	if (!PyTuple_GetInteger(poArgs, 0, &iSlotIndex))
+		return Py_BuildException();
+
+	return Py_BuildValue("i", CPythonPlayer::Instance().GetSkillGradeNew(iSlotIndex));
+}
+PyObject* playerGetItemCountByVnumNew(PyObject* poSelf, PyObject* poArgs)
+{
+	int ivnum;
+	if (!PyTuple_GetInteger(poArgs, 0, &ivnum))
+		return Py_BuildException();
+
+	int iSocket0;
+	if (!PyTuple_GetInteger(poArgs, 1, &iSocket0))
+		return Py_BuildException();
+	return Py_BuildValue("i", CPythonPlayer::Instance().GetItemCountByVnumNew(ivnum, iSocket0));
+}
+#endif
+
 PyObject * playerGetSkillCurrentEfficientPercentage(PyObject* poSelf, PyObject* poArgs)
 {
 	int iSlotIndex;
@@ -2162,6 +2192,34 @@ PyObject* playerCheckAffect(PyObject* poSelf, PyObject* poArgs)
 }
 #endif
 
+#ifdef KYGN_CHEST_INFO
+PyObject* playerIsGiftBox(PyObject* poSelf, PyObject* poArgs)
+{
+	TItemPos SlotIndex;
+	switch (PyTuple_Size(poArgs))
+	{
+		case 1:
+			if (!PyTuple_GetInteger(poArgs, 0, &SlotIndex.cell))
+				return Py_BuildException();
+			break;
+		case 2:
+			if (!PyTuple_GetInteger(poArgs, 0, &SlotIndex.window_type))
+				return Py_BuildException();
+			if (!PyTuple_GetInteger(poArgs, 1, &SlotIndex.cell))
+				return Py_BuildException();
+			break;
+		default:
+			return Py_BuildException();
+	}
+
+	const int iItemIndex = CPythonPlayer::Instance().GetItemIndex(SlotIndex);
+	CItemManager::Instance().SelectItemData(iItemIndex);
+	const CItemData* pItemData = CItemManager::Instance().GetSelectedItemDataPointer();
+
+	return Py_BuildValue("i", pItemData && (pItemData->GetType() == CItemData::ITEM_TYPE_GIFTBOX || pItemData->GetType() == CItemData::ITEM_TYPE_TREASURE_BOX));
+}
+#endif
+
 void initPlayer()
 {
 	static PyMethodDef s_methods[] =
@@ -2216,6 +2274,13 @@ void initPlayer()
 		{ "GetSkillSlotIndex",					playerGetSkillSlotIndex,					METH_VARARGS },
 		{ "GetSkillGrade",						playerGetSkillGrade,						METH_VARARGS },
 		{ "GetSkillLevel",						playerGetSkillLevel,						METH_VARARGS },
+
+#ifdef __AUTO_SKILL_READER__
+		{ "GetSkillLevelNew",						playerGetSkillLevelNew,					METH_VARARGS },
+		{ "GetSkillGradeNew",						playerGetSkillGradeNew,					METH_VARARGS },
+		{ "GetItemCountByVnumNew",					playerGetItemCountByVnumNew,			METH_VARARGS },
+#endif
+
 		{ "GetSkillCurrentEfficientPercentage",	playerGetSkillCurrentEfficientPercentage,	METH_VARARGS },
 		{ "GetSkillNextEfficientPercentage",	playerGetSkillNextEfficientPercentage,		METH_VARARGS },
 		{ "ClickSkillSlot",						playerClickSkillSlot,						METH_VARARGS },
@@ -2342,6 +2407,11 @@ void initPlayer()
 #ifdef ENABLE_PLAYER_CHECKAFFECT
 		{ "CheckAffect",				playerCheckAffect,					METH_VARARGS },
 #endif
+
+#ifdef KYGN_CHEST_INFO
+		{ "IsGiftBox",					playerIsGiftBox,					METH_VARARGS },
+#endif
+
 		{nullptr, nullptr},
 	};
 

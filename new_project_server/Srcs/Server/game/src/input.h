@@ -166,6 +166,10 @@ class CInputMain : public CInputProcessor
 		void		Hack(LPCHARACTER ch, const char * c_pData) const;
 		int			MyShop(LPCHARACTER ch, const char * c_pData, size_t uiBytes) const;
 
+#ifdef KYGN_CHEST_INFO
+		void		CGGetChestInfo(LPCHARACTER ch, const char* c_pData);
+#endif
+
 		void		Refine(LPCHARACTER ch, const char* c_pData) const;
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 		void		Acce(LPCHARACTER pkChar, const char* c_pData) const;

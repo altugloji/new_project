@@ -176,6 +176,13 @@ void CHARACTER::Initialize()
 
 	m_tSyncTime = {};
 	m_dwPlayerID = 0;
+
+#ifdef __AUTO_SKILL_READER__
+	m_pkAutoSkill = NULL;
+	m_bSelectedSkillIdx = 0;
+	m_bAutoSkillStatus = 0;
+#endif
+
 	m_dwKillerPID = 0;
 
 	m_iMoveCount = 0;
@@ -445,6 +452,11 @@ void CHARACTER::Create(const char * c_pszName, DWORD vid, bool isPC)
 void CHARACTER::Destroy()
 {
 	CloseMyShop();
+
+#ifdef __AUTO_SKILL_READER__
+	if(m_pkAutoSkill)
+		event_cancel(&m_pkAutoSkill);
+#endif
 
 	if (m_pkRegen)
 	{
@@ -8132,4 +8144,591 @@ void CHARACTER::SendGuildToken()
 	CGuildManager::instance().SendGuildToken(this, GetGuildToken());
 }
 #endif
+
+#ifdef __AUTO_SKILL_READER__
+// BYTE GetSkillGradeByLevel(BYTE bLevel)
+BYTE CHARACTER::GetSkillGradeByLevel(BYTE bLevel)
+{
+	BYTE bGrade = SKILL_NORMAL;
+	if (bLevel >= 40)
+		bGrade = SKILL_PERFECT_MASTER;
+	else if (bLevel >= 30)
+		bGrade = SKILL_GRAND_MASTER;
+	else if (bLevel >= 20)
+		bGrade = SKILL_MASTER;
+
+	return bGrade;
+}
+bool CHARACTER::SkillToBook(BYTE skillIdx, DWORD& itemIdx, DWORD& socket0, DWORD& exorcismIdx, DWORD& concentratedIdx)
+{
+	const BYTE skillLevel = GetSkillLevel(skillIdx);
+	const BYTE skillGrade = GetSkillGradeByLevel(skillLevel);
+	if (skillIdx <= 111)
+	{
+		if (skillGrade <= 2)
+		{
+			exorcismIdx = 71001;
+			concentratedIdx = 76034;
+		}
+
+		if (skillGrade == 1)
+		{
+			itemIdx = USE_YMIR_50300_SKILLBOOK ? 50300 : 50400 + skillIdx;
+			socket0 = skillIdx;
+			return true;
+		}
+		else if (skillGrade == 2)
+		{
+			itemIdx = 50513;
+			return true;
+		}
+	}
+	else
+	{
+		const std::map<BYTE, std::pair<DWORD, DWORD>> m_mapExorcismandConcentrated = {
+			//{SKILL_IDX, {exorcismIdx, exorcismIdx}},
+			{SKILL_COMBO, {71001, 76034}},
+			{SKILL_LEADERSHIP, {71001, 76034}},
+			{SKILL_POLYMORPH, {71001, 76034}},
+			{SKILL_MINING, {71001, 76034}},
+		};
+		const auto itNew = m_mapExorcismandConcentrated.find(skillIdx);
+		if (itNew != m_mapExorcismandConcentrated.end())
+		{
+			exorcismIdx = itNew->second.first;
+			concentratedIdx = itNew->second.second;
+		}
+
+		//if skill has 1 book put here
+		const std::map<BYTE, DWORD> __skillBookItemList ={
+			//{ SKILL_IDX, BOOK_ITEM_IDX },
+			{ SKILL_COMBO, 50304 },
+			{ SKILL_MINING, 50600 },
+		};
+		const auto it = __skillBookItemList.find(skillIdx);
+		if (it != __skillBookItemList.end())
+		{
+			itemIdx = it->second;
+			return true;
+		}
+
+		//#if skill different book for every stage(M | G | P)
+		const std::map<BYTE, std::map<BYTE, DWORD>> __skillBookItemListEx = {
+			{
+				SKILL_LEADERSHIP, //skillIdx
+				{
+					//book via grade
+					{SKILL_GRADE_MASTER, 50301},
+					{SKILL_GRADE_GRAND_MASTER, 50302},
+					{SKILL_GRADE_PERFECT_MASTER, 50303},
+				}
+			},
+			{
+				SKILL_POLYMORPH,//skillIdx
+				{
+					//book via grade
+					{SKILL_GRADE_MASTER, 50314},
+					{SKILL_GRADE_GRAND_MASTER, 50315},
+					{SKILL_GRADE_PERFECT_MASTER, 50316},
+				}
+			},
+		};
+		const auto itEx = __skillBookItemListEx.find(skillIdx);
+		if (itEx != __skillBookItemListEx.end())
+		{
+			const auto itExEx = itEx->second.find(skillGrade);
+			if (itExEx != itEx->second.end())
+			{
+				itemIdx = itExEx->second;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+bool CHARACTER::ReadSkill(BYTE skillIdx)
+{
+	if (!GetSkillGroup() || IsPolymorphed())
+		return false;
+	const CSkillProto* pkSk = CSkillManager::instance().Get(skillIdx);
+	if (!pkSk)
+		return false;
+	DWORD itemIdx = 0, exorcismIdx = 0, concentratedIdx = 0, socket0 = 0;
+	if (!SkillToBook(skillIdx, itemIdx, socket0, exorcismIdx, concentratedIdx))
+		return false;
+
+	LPITEM book = NULL;
+
+	if (itemIdx == 50300)
+	{
+		for (WORD i = 0; i < INVENTORY_MAX_NUM; ++i)
+		{
+			book = GetInventoryItem(i);
+			if (!book || book->GetVnum() != itemIdx || (socket0 != 0 && socket0 != book->GetSocket(0)))
+				continue;
+			break;
+		}
+	}
+	else
+		book = FindSpecifyItem(itemIdx);
+
+	if (!book)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Not has enought specific item!");
+		return false;
+	}
+
+	const time_t now = get_global_time();
+	const BYTE skillLevel = GetSkillLevel(skillIdx);
+	const BYTE skillGrade = GetSkillGradeByLevel(skillLevel);
+
+	// SOUL_STONE
+	if (itemIdx == 50513)
+	{
+		if (now < GetSkillNextReadTime(skillIdx))
+		{
+			if (!FindAffect(AFFECT_SKILL_NO_BOOK_DELAY))
+			{
+				const TItemTable* itemTable = ITEM_MANAGER::Instance().GetTable(exorcismIdx);
+				if (!itemTable || CountSpecifyItem(exorcismIdx) <= 0)
+				{
+					SkillLearnWaitMoreTimeMessage(GetSkillNextReadTime(skillIdx) - now);
+					return false;
+				}
+				RemoveSpecifyItem(exorcismIdx);
+				AddAffect(itemTable->alValues[0], aApplyInfo[itemTable->alValues[1]].bPointType, itemTable->alValues[2], 0, itemTable->alValues[3], 0, false);
+			}
+			else
+				RemoveAffect(AFFECT_SKILL_NO_BOOK_DELAY);
+		}
+
+		int needAlignment = (1000 + 500 * (skillLevel - 30));
+		const int currentAlignment = (GetRealAlignment() / 10);
+		int resultAlignment = (-19000 + needAlignment);
+
+		if (USE_DECREASE_ALIGNMENT_SOULSTONE)
+		{
+			if (currentAlignment < 0)
+			{
+				needAlignment *= 2;
+				resultAlignment = (-19000 - needAlignment);
+			}
+
+			if (currentAlignment > resultAlignment)
+			{
+				int needZenBeanCount = needAlignment / 500;
+				if (needZenBeanCount < 0)
+					needZenBeanCount = 0 - needZenBeanCount;
+
+				if (currentAlignment < 0)
+				{
+					if (!USE_ZEN_BEAN_SOULSTONE)
+					{
+						ChatPacket(1, "You can't do that with this alignment.");
+						return false;
+					}
+
+					if (CountSpecifyItem(70102) < needZenBeanCount)
+					{
+						ChatPacket(1, "You not has enought zen bean.");
+						return false;
+					}
+
+					UpdateAlignment(MIN(-GetAlignment(), 500) * needZenBeanCount);
+					RemoveSpecifyItem(70102, needZenBeanCount);
+				}
+			}
+		}
+		
+		if (!FindAffect(AFFECT_SKILL_BOOK_BONUS))
+		{
+			const TItemTable* itemTable = ITEM_MANAGER::Instance().GetTable(concentratedIdx);
+			if (itemTable)
+			{
+				if (CountSpecifyItem(concentratedIdx))
+				{
+					RemoveSpecifyItem(concentratedIdx);
+					AddAffect(itemTable->alValues[0], aApplyInfo[itemTable->alValues[1]].bPointType, itemTable->alValues[2], 0, itemTable->alValues[3], 0, false);
+				}
+			}
+		}
+		book->SetCount(book->GetCount() - 1);
+		if (USE_DECREASE_ALIGNMENT_SOULSTONE)
+			UpdateAlignment((needAlignment < 0) ? needAlignment * 10 : -needAlignment * 10);
+		LearnGrandMasterSkill(skillIdx);
+		SetSkillNextReadTime(skillIdx, USE_COOLTIME_ON_SOULSTONE ?  now + number(SKILLBOOK_DELAY_MIN, SKILLBOOK_DELAY_MAX) : 0);
+		return true;
+	}
+
+	int iPct = 0;
+	switch (skillIdx)
+	{
+		case SKILL_COMBO:
+		{
+			const int playerLevel = GetLevel();
+			if (skillLevel == 0 && playerLevel < 30)
+			{
+				ChatPacket(CHAT_TYPE_INFO, "You need to have a minimum level of 30 to understand this book.");
+				return false;
+			}
+			else if (skillLevel == 1 && playerLevel < 50)
+			{
+				ChatPacket(CHAT_TYPE_INFO, "You need a minimum level of 50 to understand this book.");
+				return false;
+			}
+			else if (skillLevel >= 2)
+			{
+				ChatPacket(CHAT_TYPE_INFO, "You can't train any more Combos.");
+				return false;
+			}
+			iPct = book->GetValue(0);
+		}
+		break;
+		case SKILL_LEADERSHIP:
+		{
+			if (skillLevel < book->GetValue(0))
+			{
+				ChatPacket(CHAT_TYPE_INFO, "It isn't easy to understand this book.");
+				return false;
+			}
+			else if (skillLevel >= book->GetValue(1))
+			{
+				ChatPacket(CHAT_TYPE_INFO, "This book will not help you.");
+				return false;
+			}
+		}
+		break;
+		case SKILL_POLYMORPH:
+		{
+			if (GetLevel() < book->GetValue(3))
+			{
+				ChatPacket(CHAT_TYPE_INFO, "You have to improve your Level to read this Book.");
+				return false;
+			}
+			else if (skillLevel >= 40)
+			{
+				ChatPacket(CHAT_TYPE_INFO, "You cannot train this skill.");
+				return false;
+			}
+			else if (skillLevel < book->GetValue(0))
+			{
+				ChatPacket(CHAT_TYPE_INFO, "It isn't easy to understand this book.");
+				return false;
+			}
+			else if (skillLevel >= book->GetValue(1))
+			{
+				ChatPacket(CHAT_TYPE_INFO, "You cannot train with this Book any more.");
+				return false;
+			}
+			iPct = MINMAX(0, book->GetValue(2), 100);
+		}
+		break;
+		case SKILL_MINING:
+		{
+			if (skillLevel >= 40)
+			{
+				ChatPacket(CHAT_TYPE_INFO, "You cannot train this skill.");
+				return false;
+			}
+			iPct = MINMAX(0, book->GetValue(1), 100);
+		}
+		break;
+	}
+
+	if (now < GetSkillNextReadTime(skillIdx))
+	{
+		if (!FindAffect(AFFECT_SKILL_NO_BOOK_DELAY))
+		{
+			const TItemTable* itemTable = ITEM_MANAGER::Instance().GetTable(exorcismIdx);
+			if (!itemTable || CountSpecifyItem(exorcismIdx) <= 0)
+			{
+				SkillLearnWaitMoreTimeMessage(GetSkillNextReadTime(skillIdx) - now);
+				return false;
+			}
+			RemoveSpecifyItem(exorcismIdx);
+			AddAffect(itemTable->alValues[0], aApplyInfo[itemTable->alValues[1]].bPointType, itemTable->alValues[2], 0, itemTable->alValues[3], 0, false);
+		}
+	}
+	if (!FindAffect(AFFECT_SKILL_BOOK_BONUS))
+	{
+		const TItemTable* itemTable = ITEM_MANAGER::Instance().GetTable(concentratedIdx);
+		if (itemTable)
+		{
+			if (CountSpecifyItem(concentratedIdx))
+			{
+				RemoveSpecifyItem(concentratedIdx);
+				AddAffect(itemTable->alValues[0], aApplyInfo[itemTable->alValues[1]].bPointType, itemTable->alValues[2], 0, itemTable->alValues[3], 0, false);
+			}
+		}
+	}
+	if (LearnSkillByBook(skillIdx, iPct))
+	{
+		book->SetCount(book->GetCount() - 1);
+		SetSkillNextReadTime(skillIdx, USE_COOLTIME_ON_BOOKS ? now + number(SKILLBOOK_DELAY_MIN, SKILLBOOK_DELAY_MAX) : 0);
+		return true;
+	}
+	return false;
+}
+EVENTFUNC(auto_skill_read_event)
+{
+	char_event_info* info = dynamic_cast<char_event_info*>(event->info);
+	if (info == NULL)
+	{
+		sys_err("auto_skill_read_event> <Factor> Null pointer");
+		return 0;
+	}
+	LPCHARACTER	ch = info->ch;
+	if (ch == NULL)
+		return 0;
+	if (ch->ReadSkill(ch->GetSelectedSkillIndex()))
+		return PASSES_PER_SEC(0.5);
+	ch->GetAutoSkill(ch->GetSelectedSkillIndex(), false, true);
+	return 0;
+}
+void CHARACTER::GetAutoSkill(BYTE skillIdx, bool status, bool isFromEvent)
+{
+	const CSkillProto* pkSk = CSkillManager::instance().Get(skillIdx);
+	if (!pkSk)
+		return;
+	if (status)
+	{
+		ChatPacket(CHAT_TYPE_COMMAND, "AutoSkillStatus 1");
+		m_bSelectedSkillIdx = skillIdx;
+		char_event_info* info = AllocEventInfo<char_event_info>();
+		info->ch = this;
+		m_pkAutoSkill = event_create(auto_skill_read_event, info, PASSES_PER_SEC(0.0));
+	}
+	else
+	{
+		m_bSelectedSkillIdx = 0;
+		if (m_pkAutoSkill)
+		{
+			if(!isFromEvent)
+				event_cancel(&m_pkAutoSkill);
+			m_pkAutoSkill = NULL;
+		}
+		ChatPacket(CHAT_TYPE_COMMAND, "AutoSkillStatus 0");
+	}
+}
+#endif
+
+#ifdef ENABLE_EXCHANGE_LOG
+void CHARACTER::SetProtectTime(const std::string& flagname, int value)
+{
+	itertype(m_protection_Time) it = m_protection_Time.find(flagname);
+	if (it != m_protection_Time.end())
+		it->second = value;
+	else
+		m_protection_Time.insert(make_pair(flagname, value));
+}
+int CHARACTER::GetProtectTime(const std::string& flagname) const
+{
+	itertype(m_protection_Time) it = m_protection_Time.find(flagname);
+	if (it != m_protection_Time.end())
+		return it->second;
+	return 0;
+}
+bool CHARACTER::LoadExchangeLogItem(DWORD logID)
+{
+	const auto it = m_mapExchangeLog.find(logID);
+	if (it != m_mapExchangeLog.end())
+	{
+		if (!it->second.first.itemsLoaded)
+		{
+			it->second.second.clear();
+			char szQuery[124];
+			snprintf(szQuery, sizeof(szQuery), "SELECT * FROM log.exchange_log_items WHERE id = %u AND (pid = %u OR pid = %u)", logID, it->second.first.ownerPID, it->second.first.targetPID);
+			std::unique_ptr<SQLMsg> pMsg(DBManager::instance().DirectQuery(szQuery));
+			if (pMsg && pMsg->Get() && pMsg->Get()->uiNumRows != 0)
+			{
+				std::vector<TExchangeLogItem> logItemVector;
+				MYSQL_ROW row;
+				while (NULL != (row = mysql_fetch_row(pMsg->Get()->pSQLResult)))
+				{
+					DWORD itemOwnerPID;
+					TExchangeLogItem logItem;
+					BYTE col = 0;
+					col++;//log_id
+					str_to_number(itemOwnerPID, row[col++]);
+					col++;//item_id
+					str_to_number(logItem.pos, row[col++]);
+					str_to_number(logItem.vnum, row[col++]);
+					str_to_number(logItem.count, row[col++]);
+					for (BYTE j = 0; j < ITEM_SOCKET_MAX_NUM; ++j)
+						str_to_number(logItem.alSockets[j], row[col++]);
+					for (BYTE j = 0; j < ITEM_ATTRIBUTE_MAX_NUM; ++j) {
+						str_to_number(logItem.aAttr[j].bType, row[col++]);
+						str_to_number(logItem.aAttr[j].sValue, row[col++]);
+					}
+					logItem.isOwnerItem = it->second.first.ownerPID == itemOwnerPID;
+					it->second.second.emplace_back(logItem);
+				}
+			}
+
+			const WORD logItemCount = it->second.second.size();
+			const BYTE subHeader = SUB_EXCHANGELOG_LOAD_ITEM;
+
+			TPacketGCExchangeLog p;
+			p.header = HEADER_GC_EXCHANGE_LOG;
+			p.size = sizeof(TPacketGCExchangeLog) + sizeof(BYTE) + sizeof(WORD) + sizeof(DWORD) + (logItemCount*sizeof(TExchangeLogItem));
+
+			TEMP_BUFFER buf;
+			buf.write(&p, sizeof(TPacketGCExchangeLog));
+			buf.write(&subHeader, sizeof(BYTE));
+			buf.write(&logItemCount, sizeof(WORD));
+			buf.write(&logID, sizeof(DWORD));
+			if(logItemCount)
+				buf.write(it->second.second.data(), logItemCount * sizeof(TExchangeLogItem));
+			GetDesc()->Packet(buf.read_peek(), buf.size());
+
+			return true;
+		}
+	}
+	return false;
+}
+void CHARACTER::DeleteExchangeLog(DWORD logID)
+{
+	if (logID == 0)
+	{
+		for (auto it = m_mapExchangeLog.begin(); it != m_mapExchangeLog.end(); ++it)
+		{
+			char szQuery[124];
+			snprintf(szQuery, sizeof(szQuery), "UPDATE log.exchange_log SET %s = 1 WHERE id = %u", it->second.first.ownerPID == GetPlayerID() ? "owner_delete" : "target_delete", it->first);
+			std::unique_ptr<SQLMsg> pMsg(DBManager::instance().DirectQuery(szQuery));
+		}
+		m_mapExchangeLog.clear();
+	}
+	else
+	{
+		auto it = m_mapExchangeLog.find(logID);
+		if (it != m_mapExchangeLog.end())
+		{
+			char szQuery[124];
+			snprintf(szQuery, sizeof(szQuery), "UPDATE log.exchange_log SET %s = 1 WHERE id = %u", it->second.first.ownerPID == GetPlayerID() ? "owner_delete" : "target_delete", logID);
+			std::unique_ptr<SQLMsg> pMsg(DBManager::instance().DirectQuery(szQuery));
+			m_mapExchangeLog.erase(it);
+		}
+	}
+}
+void CHARACTER::LoadExchangeLog()
+{
+	if (GetProtectTime("ExchangeLogLoaded") == 1)
+		return;
+	m_mapExchangeLog.clear();
+
+	char szQuery[524];
+	snprintf(szQuery, sizeof(szQuery), "SELECT id, owner, owner_pid, owner_gold, owner_ip, target, target_pid, target_gold, target_ip, UNIX_TIMESTAMP(date) FROM log.exchange_log WHERE (owner_pid = %d AND owner_delete = 0) OR (target_pid = %d AND target_delete = 0)", GetPlayerID(), GetPlayerID());
+	std::unique_ptr<SQLMsg> pMsg(DBManager::instance().DirectQuery(szQuery));
+
+	if (pMsg && pMsg->Get()->uiNumRows != 0)
+	{
+		std::vector<TExchangeLogItem> logItemVector;
+		MYSQL_ROW row;
+		while (NULL != (row = mysql_fetch_row(pMsg->Get()->pSQLResult)))
+		{
+			TExchangeLog exchangeLog;
+			BYTE col = 0;
+			DWORD logID;
+			str_to_number(logID, row[col++]);
+			strlcpy(exchangeLog.owner, row[col++], sizeof(exchangeLog.owner));
+			str_to_number(exchangeLog.ownerPID, row[col++]);
+			str_to_number(exchangeLog.ownerGold, row[col++]);
+			strlcpy(exchangeLog.ownerIP, row[col++], sizeof(exchangeLog.ownerIP));
+
+			strlcpy(exchangeLog.target, row[col++], sizeof(exchangeLog.target));
+			str_to_number(exchangeLog.targetPID, row[col++]);
+			str_to_number(exchangeLog.targetGold, row[col++]);
+			strlcpy(exchangeLog.targetIP, row[col++], sizeof(exchangeLog.targetIP));
+
+			int curr_time = 0;
+			str_to_number(curr_time, row[col++]);
+			const tm* curr_tm = localtime(&curr_time);
+			strftime(exchangeLog.date, 50, "%T - %d/%m/%y", curr_tm);
+			
+			//strlcpy(exchangeLog.date, row[col++], sizeof(exchangeLog.date));
+
+			exchangeLog.itemsLoaded = false;
+			m_mapExchangeLog.emplace(logID, std::make_pair(exchangeLog, logItemVector));
+		}
+	}
+
+	const WORD logCount = m_mapExchangeLog.size();
+	const BYTE subHeader = SUB_EXCHANGELOG_LOAD;
+	const bool isNeedClean = true;
+	char playerCode[19];
+	snprintf(playerCode, sizeof(playerCode), "%s", GetDesc()->GetAccountTable().social_id);
+
+	TPacketGCExchangeLog p;
+	p.header = HEADER_GC_EXCHANGE_LOG;
+	p.size = sizeof(TPacketGCExchangeLog)
+		+ sizeof(BYTE)                 // subHeader
+		+ sizeof(playerCode)           // playerCode[19]
+		+ sizeof(bool)                 // isNeedClean
+		+ sizeof(WORD)                 // logCount
+		+ (logCount * (sizeof(DWORD) + sizeof(TExchangeLog)));
+
+	TEMP_BUFFER buf;
+	buf.write(&p, sizeof(TPacketGCExchangeLog));
+	buf.write(&subHeader, sizeof(BYTE));
+	buf.write(&playerCode, sizeof(playerCode));
+	buf.write(&isNeedClean, sizeof(bool));
+	buf.write(&logCount, sizeof(WORD));
+	for (auto it = m_mapExchangeLog.begin(); it != m_mapExchangeLog.end(); ++it)
+	{
+		buf.write(&it->first, sizeof(DWORD));
+		buf.write(&it->second.first, sizeof(TExchangeLog));
+	}
+	GetDesc()->Packet(buf.read_peek(), buf.size());
+
+	SetProtectTime("ExchangeLogLoaded", 1);
+}
+void CHARACTER::SendExchangeLogPacket(BYTE subHeader, DWORD id, const TExchangeLog* exchangeLog)
+{
+	if (!GetDesc())
+		return;
+
+	if (SUB_EXCHANGELOG_LOAD_ITEM == subHeader)
+		LoadExchangeLogItem(id);
+	else if (SUB_EXCHANGELOG_LOAD == subHeader)
+	{
+		if (exchangeLog)
+		{
+			if (GetProtectTime("ExchangeLogLoaded") != 1)
+				return;
+			std::vector<TExchangeLogItem> logItemVector;
+			TExchangeLog exchangeLogEx;
+			thecore_memcpy(&exchangeLogEx, exchangeLog, sizeof(exchangeLogEx));
+			m_mapExchangeLog.emplace(id, std::make_pair(exchangeLogEx, logItemVector));
+
+			const WORD logCount = 1;
+			const bool isNeedClean = false;
+			char playerCode[19];
+			snprintf(playerCode, sizeof(playerCode),"%s", GetDesc()->GetAccountTable().social_id);
+
+			TPacketGCExchangeLog p;
+			p.header = HEADER_GC_EXCHANGE_LOG;
+			p.size = sizeof(TPacketGCExchangeLog)
+				+ sizeof(BYTE)                 // subHeader
+				+ sizeof(playerCode)           // playerCode[19]
+				+ sizeof(bool)                 // isNeedClean
+				+ sizeof(WORD)                 // logCount
+				+ (logCount * (sizeof(DWORD) + sizeof(TExchangeLog)));
+
+			TEMP_BUFFER buf;
+			buf.write(&p, sizeof(TPacketGCExchangeLog));
+			buf.write(&subHeader, sizeof(BYTE));
+			buf.write(&playerCode, sizeof(playerCode));
+			buf.write(&isNeedClean, sizeof(bool));
+			buf.write(&logCount, sizeof(WORD));
+			buf.write(&id, sizeof(DWORD));
+			buf.write(&exchangeLogEx, sizeof(TExchangeLog));
+			GetDesc()->Packet(buf.read_peek(), buf.size());
+		}
+		else
+			LoadExchangeLog();
+	}
+}
+#endif
+
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

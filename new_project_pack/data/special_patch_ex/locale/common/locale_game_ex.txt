@@ -20,6 +20,7 @@ UI_UNDER_FONT	Tahoma:12u
 UI_UNDER_FONT_LARGE	Tahoma:14u
 UI_UNDER_FONT_SMALL	Tahoma:9u
 TOOLTIP_TIPS_SPLIT_ITEM	{} + {} Split Item
+TOOLTIP_CHEST_ITEM	{} + {} Sandýk Aynasý
 GAME_PICK_CHEQUE	You have received %d Won.
 DROP_CHEQUE_FAILURE_1000_OVER	You can drop a maximum of 999 Won.
 DO_YOU_DROP_CHEQUE	Do you want drop %d Won?

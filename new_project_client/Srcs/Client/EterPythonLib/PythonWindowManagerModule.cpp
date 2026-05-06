@@ -2066,6 +2066,15 @@ PyObject * wndImageSetRenderingRect(PyObject * poSelf, PyObject * poArgs)
 	if (!PyTuple_GetFloat(poArgs, 4, &fBottom))
 		return Py_BuildException();
 
+#ifdef ENABLE_EXCHANGE_LOG
+	else if (pWindow->IsType(UI::CButton::Type()))
+		((UI::CButton*)pWindow)->SetRenderingRect(fLeft, fTop, fRight, fBottom);
+	else if (pWindow->IsType(UI::CRadioButton::Type()))
+		((UI::CRadioButton*)pWindow)->SetRenderingRect(fLeft, fTop, fRight, fBottom);
+	else if (pWindow->IsType(UI::CToggleButton::Type()))
+		((UI::CToggleButton*)pWindow)->SetRenderingRect(fLeft, fTop, fRight, fBottom);
+#endif
+
 	if (pWindow->IsType(UI::CExpandedImageBox::Type()))
 		((UI::CExpandedImageBox*)pWindow)->SetRenderingRect(fLeft, fTop, fRight, fBottom);
 	else if (pWindow->IsType(UI::CAniImageBox::Type()))

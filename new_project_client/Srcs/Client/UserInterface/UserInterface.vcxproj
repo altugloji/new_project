@@ -191,6 +191,7 @@
     <ClCompile Include="PythonCharacterManager.cpp" />
     <ClCompile Include="PythonCharacterManagerModule.cpp" />
     <ClCompile Include="PythonCharacterModule.cpp" />
+    <ClCompile Include="PythonChestInfo.cpp" />
     <ClCompile Include="PythonEffectModule.cpp" />
     <ClCompile Include="PythonEventManager.cpp" />
     <ClCompile Include="PythonEventManagerModule.cpp" />
@@ -278,6 +279,7 @@
     <ClInclude Include="PythonAcce.h" />
     <ClInclude Include="PythonBackground.h" />
     <ClInclude Include="PythonCharacterManager.h" />
+    <ClInclude Include="PythonChestInfo.h" />
     <ClInclude Include="PythonEventManager.h" />
     <ClInclude Include="PythonItem.h" />
     <ClInclude Include="PythonLocale.h" />

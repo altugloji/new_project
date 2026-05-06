@@ -435,7 +435,15 @@ void CSlotWindow::SetSlotCount(DWORD dwIndex, DWORD dwCount)
 	else
 	{
 		char szCount[16+1];
-		_snprintf(szCount, sizeof(szCount), "%d", dwCount);
+#ifdef ITEM_SLOT_REFINE_TEXT
+		if (dwCount >= 2147483000)
+		{
+			dwCount -= 2147483000;
+			_snprintf(szCount, sizeof(szCount), "+%d", dwCount);
+		}
+		else
+#endif
+			_snprintf(szCount, sizeof(szCount), "%d", dwCount);
 
 		if (!pSlot->pNumberLine)
 		{

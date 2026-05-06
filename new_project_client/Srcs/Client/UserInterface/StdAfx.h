@@ -81,6 +81,9 @@ void initMessenger();
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 void initAcce();
 #endif
+#ifdef KYGN_CHEST_INFO
+	void initChestRewardInfo();
+#endif
 
 #ifdef ENABLE_BL_TRACEBACK
 extern void PrintTraceStack();

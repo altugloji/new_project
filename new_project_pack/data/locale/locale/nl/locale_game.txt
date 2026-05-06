@@ -1,3 +1,25 @@
+LOGIN_LANGUAGE_SELECT_TITLE	Taalkeuze
+LOGIN_BTN_DISCORD	Discord
+LOGIN_BTN_WEBSITE	Website
+LOGIN_BTN_PATCH_NOTES	Update-opmerking
+EXCHANGELOG_TITLE	Handelslogs
+EXCHANGELOG_OWNERNAME	Naam eigenaar
+EXCHANGELOG_TARGETNAME	Naam doelwit
+EXCHANGELOG_GOLDTRADED	Verhandelde Yang
+EXCHANGELOG_DATE	Datum
+EXCHANGELOG_IP	IP
+EXCHANGELOG_CONTENT	Inhoud
+EXCHANGELOG_DELETESELECTED	Selectie verwijderen
+EXCHANGELOG_DELETEALL	Alles verwijderen
+EXCHANGELOG_CHANGEPASS	Wachtwoord wijzigen
+EXCHANGELOG_FAKETITLE	%s naar %s
+EXCHANGELOG_LOADING	Laden
+EXCHANGELOG_INPUTTITLE	Log verwijderen
+EXCHANGELOG_INPUTDESC	Voer je personage-verwijdercode in
+EXCHANGELOG_INPUT_NOT_NUMBER	Voer een nummer in
+EXCHANGELOG_INPUT_NOT_ENOUGHT_SIZE	Voer de juiste personage-verwijdercode in
+EXCHANGELOG_INPUT_NOT_SAME_CODE	Deze code is onjuist
+EXCHANGELOG_INPUT_NOT_HAS_LOG	Er zijn geen logs om te verwijderen.
 ACCE_ABSORB_COST	Combinatiekosten: %d
 ACCE_ALREADY_REGISTER	Dit item is al gebruikt.
 ACCE_DEL_ABSORDITEM	Item absorberen, waarmee het dus vernietigd wordt?

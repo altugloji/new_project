@@ -21,6 +21,10 @@
 #include "DragonSoul.h"
 #include "cube.h"
 
+#ifdef KYGN_CHEST_INFO
+	#include "buffer_manager.h"
+#endif
+
 ITEM_MANAGER::ITEM_MANAGER()
 	: m_iTopOfTable(0), m_dwVIDCount(0), m_dwCurrentID(0)
 {
@@ -716,6 +720,47 @@ int GetDropPerKillPct(int iMinimum, int iDefault, int iDeltaPercent, const char 
 
 	return (40000 * iDeltaPercent / iVal);
 }
+
+#ifdef KYGN_CHEST_INFO
+void ITEM_MANAGER::SendChestRewardsPacket(LPCHARACTER ch, DWORD dwChestVnum)
+{
+	if (!ch || !ch->GetDesc())
+		return;
+
+	TEMP_BUFFER rewardBuff			{};
+	if (auto it = m_map_pkSpecialItemGroup.find(dwChestVnum); it != m_map_pkSpecialItemGroup.end())
+	{
+		const auto& items =			it->second->GetVector();
+
+		for (const auto& rewardItem : items)
+		{
+			TChestRewards rewardTab	{};
+			rewardTab.dwVnum =		rewardItem.vnum;
+			rewardTab.iCount =		rewardItem.count;
+
+			rewardBuff.write(&rewardTab, sizeof(TChestRewards));
+		}
+	}
+
+	const size_t buffSize = rewardBuff.size();
+
+	if (buffSize <= 0)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CHEST_IS_EMPTY"));
+		return;
+	}
+
+	TPacketGCSetChestRewards p		{};
+	p.bHeader =						HEADER_GC_SET_CHEST_REWARDS;
+	p.wSize =						sizeof(TPacketGCSetChestRewards) + buffSize;
+	p.dwVnum =						dwChestVnum;
+
+	sys_log(0, "[ITEM_MANAGER::SendChestRewardsPacket] Reward packet send to %s (Packet Size: %d)", ch->GetName(), p.wSize);
+
+	ch->GetDesc()->BufferedPacket(&p, sizeof(TPacketGCSetChestRewards));
+	ch->GetDesc()->Packet(rewardBuff.read_peek(), buffSize);
+}
+#endif
 
 bool ITEM_MANAGER::GetDropPct(LPCHARACTER pkChr, LPCHARACTER pkKiller, OUT int& iDeltaPercent, OUT int& iRandRange) const
 {

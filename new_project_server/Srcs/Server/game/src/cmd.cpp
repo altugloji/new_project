@@ -273,6 +273,14 @@ ACMD(DoChangeChannel);
 ACMD(do_won_exchange);
 #endif
 
+#ifdef __AUTO_SKILL_READER__
+ACMD(do_auto_skill_reader);
+#endif
+
+#ifdef ENABLE_EXCHANGE_LOG
+ACMD(do_ex_log);
+#endif
+
 struct command_info cmd_info[] =
 {
 	{ "!RESERVED!", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	},
@@ -583,6 +591,15 @@ struct command_info cmd_info[] =
 #if defined(ENABLE_CHEQUE_SYSTEM) && defined(ENABLE_WON_EXCHANGE_WINDOW)
 	{ "won_exchange",		do_won_exchange,			0,			POS_DEAD,	GM_PLAYER	},
 #endif
+
+#ifdef __AUTO_SKILL_READER__
+	{ "auto_skill_reader",	do_auto_skill_reader,		0,			POS_DEAD,	GM_PLAYER },
+#endif
+
+#ifdef ENABLE_EXCHANGE_LOG
+	{ "ex_log",	do_ex_log,		0,		POS_DEAD,	GM_PLAYER },
+#endif
+
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}
 };
 

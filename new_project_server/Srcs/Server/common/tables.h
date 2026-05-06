@@ -1332,6 +1332,31 @@ typedef struct SChannelStatus
 	BYTE bStatus;
 } TChannelStatus;
 
+#ifdef ENABLE_EXCHANGE_LOG
+typedef struct SExchangeLog
+{
+	char	owner[CHARACTER_NAME_MAX_LEN + 1];
+	DWORD	ownerPID;
+	DWORD	ownerGold;
+	char	ownerIP[15 + 1];
+	char	target[CHARACTER_NAME_MAX_LEN + 1];
+	DWORD	targetPID;
+	DWORD	targetGold;
+	char	targetIP[15 + 1];
+	char	date[25];
+	bool	itemsLoaded;
+}TExchangeLog;
+typedef struct SExchangeLogItem
+{
+	BYTE	pos;
+	DWORD	vnum;
+	WORD	count;
+	long	alSockets[ITEM_SOCKET_MAX_NUM];
+	TPlayerItemAttribute    aAttr[ITEM_ATTRIBUTE_MAX_NUM];
+	bool	isOwnerItem;
+}TExchangeLogItem;
+#endif
+
 #pragma pack()
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

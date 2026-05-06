@@ -2055,6 +2055,15 @@ namespace UI
 		PyCallClassMemberFunc(m_poHandler, "HideToolTip", BuildEmptyTuple());
 	}
 
+#ifdef ENABLE_EXCHANGE_LOG
+	void CButton::SetRenderingRect(float fLeft, float fTop, float fRight, float fBottom)
+	{
+		(void)fLeft;
+		(void)fTop;
+		(void)fRight;
+		(void)fBottom;
+	}
+#endif
 	void CButton::SetCurrentVisual(CGraphicImageInstance * pVisual)
 	{
 		m_pcurVisual = pVisual;

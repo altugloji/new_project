@@ -49,6 +49,10 @@
 #include "PythonLocale.h"
 #endif
 
+#ifdef KYGN_CHEST_INFO
+	#include "PythonChestInfo.h"
+#endif
+
 class CPythonApplication : public CMSApplication, public CInputKeyboard, public IAbstractApplication
 {
 	public:
@@ -358,6 +362,10 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 		CGuildMarkDownloader		m_kGuildMarkDownloader;
 		CGuildMarkUploader			m_kGuildMarkUploader;
 		CAccountConnector			m_kAccountConnector;
+
+#ifdef KYGN_CHEST_INFO
+		CPythonChestInfo			m_pyChestInfo;
+#endif
 
 		CGraphicDevice				m_grpDevice;
 		CNetworkDevice				m_netDevice;

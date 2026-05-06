@@ -154,6 +154,10 @@ class CSpecialItemGroup
 			return m_vecProbs.size();
 		}
 
+#ifdef KYGN_CHEST_INFO
+		const std::vector<CSpecialItemInfo> & GetVector() { return m_vecItems; }
+#endif
+
 		DWORD m_dwVnum;
 		BYTE	m_bType;
 		std::vector<int> m_vecProbs;
@@ -395,6 +399,10 @@ class ITEM_MANAGER : public singleton<ITEM_MANAGER>
 
 			return GetTable(outVnum) && i > 0;
 		}
+
+#ifdef KYGN_CHEST_INFO
+		void			SendChestRewardsPacket(LPCHARACTER ch, DWORD dwChestVnum);
+#endif
 
 		bool			GetDropPct(LPCHARACTER pkChr, LPCHARACTER pkKiller, OUT int& iDeltaPercent, OUT int& iRandRange) const;
 		bool			CreateDropItem(LPCHARACTER pkChr, LPCHARACTER pkKiller, std::vector<LPITEM> & vec_item);

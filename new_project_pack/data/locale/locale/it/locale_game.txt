@@ -1,3 +1,25 @@
+LOGIN_LANGUAGE_SELECT_TITLE	Selezione Lingua
+LOGIN_BTN_DISCORD	Discord
+LOGIN_BTN_WEBSITE	Sito web
+LOGIN_BTN_PATCH_NOTES	Nota di aggiornamento
+EXCHANGELOG_TITLE	Registri degli Scambi
+EXCHANGELOG_OWNERNAME	Nome Proprietario
+EXCHANGELOG_TARGETNAME	Nome Destinatario
+EXCHANGELOG_GOLDTRADED	Yang Scambiato
+EXCHANGELOG_DATE	Data
+EXCHANGELOG_IP	IP
+EXCHANGELOG_CONTENT	Contenuto
+EXCHANGELOG_DELETESELECTED	Elimina Selezionato
+EXCHANGELOG_DELETEALL	Elimina Tutto
+EXCHANGELOG_CHANGEPASS	Cambia Password
+EXCHANGELOG_FAKETITLE	%s verso %s
+EXCHANGELOG_LOADING	Caricamento
+EXCHANGELOG_INPUTTITLE	Elimina Registro
+EXCHANGELOG_INPUTDESC	Inserisci il codice di eliminazione del personaggio
+EXCHANGELOG_INPUT_NOT_NUMBER	Inserisci un numero
+EXCHANGELOG_INPUT_NOT_ENOUGHT_SIZE	Inserisci il codice corretto di eliminazione del personaggio
+EXCHANGELOG_INPUT_NOT_SAME_CODE	Questo codice non è corretto
+EXCHANGELOG_INPUT_NOT_HAS_LOG	Non ci sono registri da eliminare.
 ACCE_ABSORB_COST	Costo combinazione: %d
 ACCE_ALREADY_REGISTER	Questo oggetto è stato già usato.
 ACCE_DEL_ABSORDITEM	Assorbire e distruggere l'oggetto?

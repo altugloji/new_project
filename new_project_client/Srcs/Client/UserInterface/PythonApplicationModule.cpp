@@ -1960,5 +1960,29 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "TASKBAR_SKILL_COOLDOWN_TEXT", 0);
 #endif
 
+#ifdef ITEM_SLOT_REFINE_TEXT
+	PyModule_AddIntConstant(poModule, "ITEM_SLOT_REFINE_TEXT", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ITEM_SLOT_REFINE_TEXT", 0);
+#endif
+
+#ifdef __AUTO_SKILL_READER__
+	PyModule_AddIntConstant(poModule, "__AUTO_SKILL_READER__", 1);
+#else
+	PyModule_AddIntConstant(poModule, "__AUTO_SKILL_READER__", 0);
+#endif
+
+#ifdef ENABLE_EXCHANGE_LOG
+	PyModule_AddIntConstant(poModule, "ENABLE_EXCHANGE_LOG", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_EXCHANGE_LOG", 0);
+#endif
+
+#ifdef KYGN_CHEST_INFO
+	PyModule_AddIntConstant(poModule, "KYGN_CHEST_INFO", 1);
+#else
+	PyModule_AddIntConstant(poModule, "KYGN_CHEST_INFO", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

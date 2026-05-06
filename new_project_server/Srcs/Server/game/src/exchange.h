@@ -52,6 +52,11 @@ class CExchange
 		long		m_lCheque = 0;
 #endif
 		CGrid *		m_pGrid;
+
+#ifdef ENABLE_EXCHANGE_LOG
+		int			logIndex;
+#endif
+
 };
 
 #endif

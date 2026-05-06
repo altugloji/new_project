@@ -1,3 +1,25 @@
+LOGIN_LANGUAGE_SELECT_TITLE	Nyelvválasztás
+LOGIN_BTN_DISCORD	Discord
+LOGIN_BTN_WEBSITE	Weboldal
+LOGIN_BTN_PATCH_NOTES	Frissítési megjegyzés
+EXCHANGELOG_TITLE	Kereskedési naplók
+EXCHANGELOG_OWNERNAME	Tulajdonos neve
+EXCHANGELOG_TARGETNAME	Célpont neve
+EXCHANGELOG_GOLDTRADED	Elcserélt Yang
+EXCHANGELOG_DATE	Dátum
+EXCHANGELOG_IP	IP
+EXCHANGELOG_CONTENT	Tartalom
+EXCHANGELOG_DELETESELECTED	Kijelölt törlése
+EXCHANGELOG_DELETEALL	Összes törlése
+EXCHANGELOG_CHANGEPASS	Jelszó módosítása
+EXCHANGELOG_FAKETITLE	%s -> %s
+EXCHANGELOG_LOADING	Betöltés
+EXCHANGELOG_INPUTTITLE	Napló törlése
+EXCHANGELOG_INPUTDESC	Írd be a karaktertörlési kódot
+EXCHANGELOG_INPUT_NOT_NUMBER	Kérjük, számot adj meg
+EXCHANGELOG_INPUT_NOT_ENOUGHT_SIZE	Kérjük, add meg a helyes karaktertörlési kódot
+EXCHANGELOG_INPUT_NOT_SAME_CODE	Ez a kód hibás
+EXCHANGELOG_INPUT_NOT_HAS_LOG	Nincs törölheto napló.
 ACCE_ABSORB_COST	Kombinálás ára: %d
 ACCE_ALREADY_REGISTER	Ez a tárgy már felhasználásra került.
 ACCE_DEL_ABSORDITEM	Tárgy abszorbeálása és annak megsemmisítése?
