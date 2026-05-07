@@ -1831,3 +1831,7 @@
 1952	You have received a secret reward for participating in the Treasure Hunt %d times.
 1953	Rank %d Treasure Hunt Reward
 1954	You have received a reward for reaching rank %d in the Treasure Hunt.
+2101	<Blacksmith> Player %s obtained %s!
+2102	<Blacksmith> Player %s burned %s!
+2103	<Blessing> Player %s obtained %s!
+2104	<Blessing> Player %s had item %s downgraded to level %s!

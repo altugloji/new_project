@@ -821,6 +821,23 @@ class CPythonNonPlayer : public CSingleton<CPythonNonPlayer>
 		bool				IsAggressive(DWORD dwVnum);
 #endif
 
+#ifdef ENABLE_SEND_TARGET_INFO
+		// TARGET_INFO
+		DWORD				GetMonsterMaxHP(DWORD dwVnum);
+		DWORD				GetMonsterRaceFlag(DWORD dwVnum);
+		DWORD				GetMonsterDamage1(DWORD dwVnum);
+		DWORD				GetMonsterDamage2(DWORD dwVnum);
+		DWORD				GetMonsterExp(DWORD dwVnum);
+		float				GetMonsterDamageMultiply(DWORD dwVnum);
+		DWORD				GetMonsterST(DWORD dwVnum);
+		DWORD				GetMonsterDX(DWORD dwVnum);
+		bool				IsMonsterStone(DWORD dwVnum);
+		DWORD				GetMobResist(DWORD dwVnum, BYTE bResistNum);
+		BYTE				GetMobRegenCycle(DWORD dwVnum);
+		BYTE				GetMobRegenPercent(DWORD dwVnum);
+		BYTE				GetMobLevel(DWORD dwVnum);
+#endif
+
 		// Function for outer
 		void				GetMatchableMobList(int iLevel, int iInterval, TMobTableList * pMobTableList) const;
 

@@ -1831,3 +1831,7 @@
 1952	Kaptál egy titkos jutalmat, amiért részt vettél a Kincsvadászat rendezvényen %d alkalommal.
 1953	Kincsvadászat %d. helyezés jutalma
 1954	Jutalmat kaptál a Kincsvadászaton elért %d. helyezésért.
+2101	<Kovács> %s játékos megszerezte: %s!
+2102	<Kovács> %s játékos elégette: %s!
+2103	<Áldás> %s játékos megszerezte: %s!
+2104	<Áldás> %s játékos %s tárgya %s szintre csökkent!

@@ -1831,3 +1831,7 @@
 1952	Du har modtaget en hemmelig belønning for at deltage i Skattejagten %d gange.
 1953	Rang %d Skattejagts Belønning
 1954	Du har modtaget en belønning for at nå op til rang %d i Skattejagten.
+2101	<Smed> Spilleren %s fik %s!
+2102	<Smed> Spilleren %s brændte %s!
+2103	<Velsignelse> Spilleren %s fik %s!
+2104	<Velsignelse> Spilleren %s fik sit item %s sænket til niveau %s!

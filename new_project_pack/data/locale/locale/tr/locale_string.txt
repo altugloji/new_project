@@ -1831,3 +1831,7 @@
 1952	Hazine avýna %d kez katýldýðýn için gizli bir ödül kazandýn.
 1953	Hazine avý %d. sýra ödülü
 1954	Hazine avýnda %d. sýrada olduðun için bir ödül kazandýn.
+2101	<Demirci> %s isimli oyuncu %s elde etti!
+2102	<Demirci> %s isimli oyuncu %s yakti!
+2103	<Kutsama> %s isimli oyuncu %s elde etti!
+2104	<Kutsama> %s isimli oyuncu %s itemini %s seviyesine düþürdü!

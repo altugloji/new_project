@@ -194,6 +194,10 @@ CPacketInfoCG::CPacketInfoCG()
 #ifdef KYGN_CHEST_INFO
 	Set(HEADER_CG_GET_CHEST_INFO,	sizeof(TPacketCGGetChestInfo),	"CGGetChestInfo",	false);
 #endif
+#ifdef __SEND_TARGET_INFO__
+	Set(HEADER_CG_TARGET_INFO_LOAD, sizeof(TPacketCGTargetInfoLoad), "TargetInfoLoad", true);
+#endif
+
 }
 
 CPacketInfoCG::~CPacketInfoCG()

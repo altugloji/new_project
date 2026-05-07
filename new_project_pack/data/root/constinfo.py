@@ -7,6 +7,9 @@ import player
 if app.KYGN_CHEST_INFO:
 	CD_CUR_CHEST_CELL = 753
 
+if app.ENABLE_SEND_TARGET_INFO:
+	MONSTER_INFO_DATA = {}
+
 # EXTRA BEGIN
 ENABLE_NEW_LEVELSKILL_SYSTEM = False # loads 5 (B,M,G,P,F) skills .mse
 ENABLE_RANDOM_CHANNEL_SEL = False # don't set a random channel when you open the client

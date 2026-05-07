@@ -250,6 +250,7 @@ class MarkSelectDialog(ui.ScriptWindow):
 		self.__AppendFileList("bmp")
 		self.__AppendFileList("tga")
 		self.__AppendFileList("jpg")
+		self.__AppendFileList("png")
 
 	def __ClearFileList(self):
 		self.markListBox.RemoveAllItems()

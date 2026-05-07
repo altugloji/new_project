@@ -1831,3 +1831,7 @@
 1952	Du erhältst eine geheime Belohnung dafür, dass du %d Mal an der Schatzsuche teilgenommen hast.
 1953	Belohnung für Schatzsuchen-Rang %d
 1954	Du erhältst eine Belohnung dafür, dass du Rang %d bei der Schatzsuche erreicht hast.
+2101	<Schmied> Spieler %s hat %s erhalten!
+2102	<Schmied> Spieler %s hat %s verbrannt!
+2103	<Segnung> Spieler %s hat %s erhalten!
+2104	<Segnung> Das Item %s von Spieler %s wurde auf Stufe %s herabgesetzt!

@@ -1984,5 +1984,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "KYGN_CHEST_INFO", 0);
 #endif
 
+
+#ifdef ENABLE_SEND_TARGET_INFO
+	PyModule_AddIntConstant(poModule, "ENABLE_SEND_TARGET_INFO",	1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_SEND_TARGET_INFO",	0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

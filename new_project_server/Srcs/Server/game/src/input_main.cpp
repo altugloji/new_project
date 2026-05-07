@@ -3308,6 +3308,14 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			break;
 #endif
 
+#ifdef __SEND_TARGET_INFO__
+		case HEADER_CG_TARGET_INFO_LOAD:
+			{
+				TargetInfoLoad(ch, c_pData);
+			}
+			break;
+#endif
+
 		case HEADER_CG_REFINE:
 			Refine(ch, c_pData);
 			break;
@@ -3387,4 +3395,46 @@ int CInputDead::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 
 	return (iExtraLen);
 }
+
+#ifdef __SEND_TARGET_INFO__
+void CInputMain::TargetInfoLoad(LPCHARACTER ch, const char* c_pData)
+{
+	if (!ch || !ch->GetDesc())
+		return;
+
+	TPacketCGTargetInfoLoad* p = (TPacketCGTargetInfoLoad*)c_pData;
+	TPacketGCTargetInfo pInfo;
+	pInfo.header = HEADER_GC_TARGET_INFO;
+	static std::vector<ITEM_MANAGER::STargetInfoData> s_vec_item;
+	s_vec_item.clear();
+	// LPITEM pkInfoItem;
+	LPCHARACTER m_pkChrTarget = CHARACTER_MANAGER::instance().Find(p->dwVID);
+
+	if (ITEM_MANAGER::instance().CreateDropItemVector(m_pkChrTarget, ch, s_vec_item) && (m_pkChrTarget->IsMonster() || m_pkChrTarget->IsStone()))
+	{
+		if (s_vec_item.size() == 0);
+		else if (s_vec_item.size() == 1)
+		{
+			pInfo.dwVID	= m_pkChrTarget->GetVID();
+			pInfo.race = m_pkChrTarget->GetRaceNum();
+			pInfo.dwVnum = s_vec_item[0].iVnum;
+			pInfo.count = s_vec_item[0].iCount;
+			ch->GetDesc()->Packet(&pInfo, sizeof(TPacketGCTargetInfo));
+		}
+		else
+		{
+			int iItemIdx = s_vec_item.size() - 1;
+			while (iItemIdx >= 0)
+			{
+				ITEM_MANAGER::STargetInfoData pkInfoItem = s_vec_item[iItemIdx--];
+				pInfo.dwVID	= m_pkChrTarget->GetVID();
+				pInfo.race = m_pkChrTarget->GetRaceNum();
+				pInfo.dwVnum = pkInfoItem.iVnum;
+				pInfo.count = pkInfoItem.iCount;
+				ch->GetDesc()->Packet(&pInfo, sizeof(TPacketGCTargetInfo));
+			}
+		}
+	}
+}
+#endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

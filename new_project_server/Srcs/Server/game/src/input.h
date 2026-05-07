@@ -174,6 +174,10 @@ class CInputMain : public CInputProcessor
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 		void		Acce(LPCHARACTER pkChar, const char* c_pData) const;
 #endif
+
+#ifdef __SEND_TARGET_INFO__
+		void		TargetInfoLoad(LPCHARACTER ch, const char* c_pData);
+#endif
 };
 
 class CInputDead : public CInputMain

@@ -86,6 +86,155 @@ PyObject * nonplayerLoadNonPlayerData(PyObject * poSelf, PyObject * poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_SEND_TARGET_INFO
+PyObject* nonplayerGetMonsterMaxHP(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	return Py_BuildValue("i", rkNonPlayer.GetMonsterMaxHP(race));
+}
+
+PyObject* nonplayerGetRaceNumByVID(PyObject* poSelf, PyObject* poArgs)
+{
+	int iVirtualID;
+	if (!PyTuple_GetInteger(poArgs, 0, &iVirtualID))
+		return Py_BuildException();
+
+	CInstanceBase* pInstance = CPythonCharacterManager::Instance().GetInstancePtr(iVirtualID);
+
+	if (!pInstance)
+		return Py_BuildValue("i", -1);
+
+	const CPythonNonPlayer::TMobTable* pMobTable = CPythonNonPlayer::Instance().GetTable(pInstance->GetVirtualNumber());
+
+	if (!pMobTable)
+		return Py_BuildValue("i", -1);
+
+	return Py_BuildValue("i", pMobTable->dwVnum);
+}
+
+PyObject* nonplayerGetMonsterLevel(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	return Py_BuildValue("i", rkNonPlayer.GetMonsterLevel(race));
+}
+
+PyObject* nonplayerGetMonsterDamage(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	DWORD dmg1 = rkNonPlayer.GetMonsterDamage1(race);
+	DWORD dmg2 = rkNonPlayer.GetMonsterDamage2(race);
+
+	return Py_BuildValue("ii", dmg1, dmg2);
+}
+
+PyObject* nonplayerGetMonsterExp(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	return Py_BuildValue("i", rkNonPlayer.GetMonsterExp(race));
+}
+
+PyObject* nonplayerGetMonsterDamageMultiply(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	return Py_BuildValue("f", rkNonPlayer.GetMonsterDamageMultiply(race));
+}
+
+PyObject* nonplayerGetMonsterST(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	return Py_BuildValue("i", rkNonPlayer.GetMonsterST(race));
+}
+
+PyObject* nonplayerGetMonsterDX(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	return Py_BuildValue("i", rkNonPlayer.GetMonsterDX(race));
+}
+
+PyObject* nonplayerIsMonsterStone(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	return Py_BuildValue("i", rkNonPlayer.IsMonsterStone(race) ? 1 : 0);
+}
+
+PyObject* nonplayerGetMobRegenCycle(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	return Py_BuildValue("i", rkNonPlayer.GetMobRegenCycle(race));
+}
+
+PyObject* nonplayerGetMobRegenPercent(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	return Py_BuildValue("i", rkNonPlayer.GetMobRegenPercent(race));
+}
+
+PyObject* nonplayerGetMobResist(PyObject* poSelf, PyObject* poArgs)
+{
+	int race;
+	if (!PyTuple_GetInteger(poArgs, 0, &race))
+		return Py_BuildException();
+
+	BYTE resistNum;
+	if (!PyTuple_GetInteger(poArgs, 1, &resistNum))
+		return Py_BuildException();
+
+	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
+
+	return Py_BuildValue("i", rkNonPlayer.GetMobResist(race, resistNum));
+}
+#endif
+
 #if defined(WJ_SHOW_MOB_INFO_EX) || defined(ENABLE_ELEMENTAL_TARGET)
 PyObject * nonplayerGetVnumByVID(PyObject * poSelf, PyObject * poArgs)
 {
@@ -363,6 +512,21 @@ void initNonPlayer()
 
 		{ "LoadNonPlayerData",			nonplayerLoadNonPlayerData,			METH_VARARGS },
 
+#ifdef ENABLE_SEND_TARGET_INFO
+		{ "GetRaceNumByVID", nonplayerGetRaceNumByVID, METH_VARARGS },
+		{ "GetMonsterMaxHP", nonplayerGetMonsterMaxHP, METH_VARARGS },
+		{ "GetMonsterLevel", nonplayerGetMonsterLevel, METH_VARARGS },
+		{ "GetMonsterDamage", nonplayerGetMonsterDamage, METH_VARARGS },
+		{ "GetMonsterExp", nonplayerGetMonsterExp, METH_VARARGS },
+		{ "GetMonsterDamageMultiply", nonplayerGetMonsterDamageMultiply, METH_VARARGS },
+		{ "GetMonsterST", nonplayerGetMonsterST, METH_VARARGS },
+		{ "GetMonsterDX", nonplayerGetMonsterDX, METH_VARARGS },
+		{ "IsMonsterStone", nonplayerIsMonsterStone, METH_VARARGS },
+		{"GetMobRegenCycle", nonplayerGetMobRegenCycle, METH_VARARGS},
+		{"GetMobRegenPercent", nonplayerGetMobRegenPercent, METH_VARARGS},
+		{"GetResist", nonplayerGetMobResist, METH_VARARGS},
+#endif
+
 #if defined(WJ_SHOW_MOB_INFO_EX) || defined(ENABLE_ELEMENTAL_TARGET)
 		{ "GetVnumByVID",				nonplayerGetVnumByVID,				METH_VARARGS },
 		{ "GetMonsterRaceFlag",			nonplayerGetMonsterRaceFlag,		METH_VARARGS },
@@ -400,6 +564,21 @@ void initNonPlayer()
 	PyModule_AddIntConstant(poModule, "S_KNIGHT", 3);
 	PyModule_AddIntConstant(poModule, "BOSS", 4);
 	PyModule_AddIntConstant(poModule, "KING", 5);
+
+#ifdef ENABLE_SEND_TARGET_INFO
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_SWORD", CPythonNonPlayer::MOB_RESIST_SWORD);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_TWOHAND", CPythonNonPlayer::MOB_RESIST_TWOHAND);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_DAGGER", CPythonNonPlayer::MOB_RESIST_DAGGER);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_BELL", CPythonNonPlayer::MOB_RESIST_BELL);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_FAN", CPythonNonPlayer::MOB_RESIST_FAN);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_BOW", CPythonNonPlayer::MOB_RESIST_BOW);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_FIRE", CPythonNonPlayer::MOB_RESIST_FIRE);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_ELECT", CPythonNonPlayer::MOB_RESIST_ELECT);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_MAGIC", CPythonNonPlayer::MOB_RESIST_MAGIC);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_WIND", CPythonNonPlayer::MOB_RESIST_WIND);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_POISON", CPythonNonPlayer::MOB_RESIST_POISON);
+	PyModule_AddIntConstant(poModule, "MOB_RESIST_MAX_NUM", CPythonNonPlayer::MOB_RESISTS_MAX_NUM);
+#endif
 
 #if defined(WJ_SHOW_MOB_INFO_EX) || defined(ENABLE_ELEMENTAL_TARGET)
 	PyModule_AddIntConstant(poModule, "AIFLAG_AGGRESSIVE", CPythonNonPlayer::AIFLAG_AGGRESSIVE);

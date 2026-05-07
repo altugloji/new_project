@@ -1831,3 +1831,7 @@
 1952	Otrzymujesz sekretn¹ nagrodê za wziêcie udzia³u %d razy w poszukiwaniu skarbów.
 1953	Nagroda za rangê poszukiwania skarbów %d
 1954	Otrzymujesz nagrodê za osi¹gniêcie rangi %d podczas poszukiwania skarbów.
+2101	<Kowal> Gracz %s zdobyl %s!
+2102	<Kowal> Gracz %s spalil %s!
+2103	<Blogoslawienstwo> Gracz %s zdobyl %s!
+2104	<Blogoslawienstwo> Przedmiot %s gracza %s zostal obnizony do poziomu %s!

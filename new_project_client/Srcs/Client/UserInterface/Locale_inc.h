@@ -136,6 +136,8 @@
 #define __AUTO_SKILL_READER__
 #define ENABLE_EXCHANGE_LOG
 #define KYGN_CHEST_INFO													// Sandık İçeriğini Görme
+#define ENABLE_SEND_TARGET_INFO											// Mob target info
+
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

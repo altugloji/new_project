@@ -1831,3 +1831,7 @@
 1952	Recebeste uma recompensa secreta por teres participado na Caça ao Tesouro %d vezes.
 1953	Recompensa da posição %d na Caça ao Tesouro
 1954	Recebeste uma recompensa por teres atingido a posição %d na Caça ao Tesouro.
+2101	<Ferreiro> O jogador %s obteve %s!
+2102	<Ferreiro> O jogador %s queimou %s!
+2103	<Bênção> O jogador %s obteve %s!
+2104	<Bênção> O item %s do jogador %s foi reduzido para o nível %s!

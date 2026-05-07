@@ -1831,3 +1831,7 @@
 1952	Obdržel jsi tajnou odmìnu za úèast na lovu pokladù %dx.
 1953	Odmìna za lov pokladu - poøadí %d.
 1954	Obdržel jsi odmìnu za umístìní %d pøi lovu pokladù
+2101	<Kovár> Hrác %s získal predmet %s!
+2102	<Kovár> Hrác %s spálil predmet %s!
+2103	<Pozehnání> Hrác %s získal predmet %s!
+2104	<Pozehnání> Hráci %s byl predmet %s snízen na úroven %s!

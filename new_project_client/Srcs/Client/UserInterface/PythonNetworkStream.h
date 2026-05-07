@@ -500,6 +500,13 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		bool RecvViewEquipPacket();
 		bool RecvDamageInfoPacket();
 
+#ifdef ENABLE_SEND_TARGET_INFO
+	public:
+		bool SendTargetInfoLoadPacket(DWORD dwVID);
+	protected:
+		bool RecvTargetInfoPacket();
+#endif
+
 		// Mount
 		bool RecvMountPacket();
 

@@ -1831,3 +1831,7 @@
 1952	Je hebt een geheime beloning ontvangen voor %d keer deelnemen aan de Schattenjacht.
 1953	Rang %d Schattenjachtbeloning
 1954	Je hebt een beloning ontvangen voor het behalen van rang %d in de Schattenjacht.
+2101	<Smid> Speler %s heeft %s verkregen!
+2102	<Smid> Speler %s heeft %s verbrand!
+2103	<Zegening> Speler %s heeft %s verkregen!
+2104	<Zegening> Het item %s van speler %s is verlaagd naar niveau %s!

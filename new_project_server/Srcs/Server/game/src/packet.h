@@ -96,6 +96,11 @@ enum
 	HEADER_CG_SCRIPT_SELECT_ITEM	= 114,
 	// END_OF_SCRIPT_SELECT_ITEM
 
+#ifdef __SEND_TARGET_INFO__
+	HEADER_CG_TARGET_INFO_LOAD		= 116,
+#endif
+
+
 #ifdef KYGN_CHEST_INFO
 	HEADER_CG_GET_CHEST_INFO		= 119,
 #endif
@@ -266,6 +271,10 @@ enum
 
 #ifdef ENABLE_GUILD_TOKEN_AUTH
 	HEADER_GC_GUILD_TOKEN						= 161,
+#endif
+
+#ifdef __SEND_TARGET_INFO__
+	HEADER_GC_TARGET_INFO						= 163,
 #endif
 
 #ifdef KYGN_CHEST_INFO
@@ -2395,6 +2404,23 @@ typedef struct SPacketGCSetChestRewards
 	WORD	wSize;
 	DWORD	dwVnum;
 } TPacketGCSetChestRewards;
+#endif
+
+#ifdef __SEND_TARGET_INFO__
+typedef struct packet_target_info_load
+{
+	BYTE header;
+	DWORD dwVID;
+} TPacketCGTargetInfoLoad;
+
+typedef struct packet_target_info
+{
+	BYTE	header;
+	DWORD	dwVID;
+	DWORD	race;
+	DWORD	dwVnum;
+	BYTE	count;
+} TPacketGCTargetInfo;
 #endif
 
 #pragma pack()

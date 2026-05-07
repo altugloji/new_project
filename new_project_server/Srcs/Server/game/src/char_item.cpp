@@ -930,6 +930,15 @@ bool CHARACTER::DoRefine(LPITEM item, bool bMoneyOnly)
 			ITEM_MANAGER::instance().RemoveItem(item, "REMOVE (REFINE SUCCESS)");
 			// END_OF_DETAIL_REFINE_LOG
 
+#ifdef UPDATE_ITEM_MESSAGE
+			if (pkNewItem->GetRefineLevel() >= 7 && pkNewItem->GetLevelLimit() >= 30) 
+			{
+				char szNoticeRefine[128];
+				snprintf(szNoticeRefine, sizeof(szNoticeRefine), LC_TEXT("<Demirci> %s isimli oyuncu %s elde etti!"), GetName(), pkNewItem->GetName()); 
+				BroadcastNotice(szNoticeRefine);
+			}
+#endif
+
 			pkNewItem->AddToCharacter(this, TItemPos(INVENTORY, bCell));
 			ITEM_MANAGER::instance().FlushDelayedSave(pkNewItem);
 
@@ -955,6 +964,15 @@ bool CHARACTER::DoRefine(LPITEM item, bool bMoneyOnly)
 		NotifyRefineFail(this, item, IsRefineThroughGuild() ? "GUILD" : "POWER");
 		item->AttrLog();
 		ITEM_MANAGER::instance().RemoveItem(item, "REMOVE (REFINE FAIL)");
+
+#ifdef UPDATE_ITEM_MESSAGE
+		if (item && item->GetRefineLevel() >= 7 && item->GetLevelLimit() >= 30) 
+		{
+			char gelistirmeduyuru[128];
+			snprintf(gelistirmeduyuru, sizeof(gelistirmeduyuru), LC_TEXT("<Demirci> %s isimli oyuncu %s yakti!"), GetName(), item->GetName());
+			BroadcastNotice(gelistirmeduyuru);
+		}
+#endif
 
 		//PointChange(POINT_GOLD, -cost);
 		PayRefineFee(cost);
@@ -1164,6 +1182,15 @@ bool CHARACTER::DoRefineWithScroll(LPITEM item)
 			DBManager::instance().SendMoneyLog(MONEY_LOG_REFINE, item->GetVnum(), -prt->cost);
 			ITEM_MANAGER::instance().RemoveItem(item, "REMOVE (REFINE SUCCESS)");
 
+#ifdef UPDATE_ITEM_MESSAGE
+			if (pkNewItem && pkNewItem->GetRefineLevel() >= 7 && pkNewItem->GetLevelLimit() >= 30) 
+			{
+				char szNoticeRefine[128];
+				snprintf(szNoticeRefine, sizeof(szNoticeRefine), LC_TEXT("<Kutsama> %s isimli oyuncu %s elde etti!"), GetName(), pkNewItem->GetName()); 
+				BroadcastNotice(szNoticeRefine);
+			}
+#endif
+
 			pkNewItem->AddToCharacter(this, TItemPos(INVENTORY, bCell));
 			ITEM_MANAGER::instance().FlushDelayedSave(pkNewItem);
 			pkNewItem->AttrLog();
@@ -1190,6 +1217,15 @@ bool CHARACTER::DoRefineWithScroll(LPITEM item)
 			DBManager::instance().SendMoneyLog(MONEY_LOG_REFINE, item->GetVnum(), -prt->cost);
 			NotifyRefineFail(this, item, szRefineType, -1);
 			ITEM_MANAGER::instance().RemoveItem(item, "REMOVE (REFINE FAIL)");
+
+#ifdef UPDATE_ITEM_MESSAGE
+			if (item->GetRefineLevel() >= 7 && item->GetLevelLimit() >= 30) 
+			{
+				char gelistirmeduyuru[QUERY_MAX_LEN];
+				snprintf(gelistirmeduyuru, sizeof(gelistirmeduyuru), LC_TEXT("<Kutsama> %s isimli oyuncu %s itemini %s seviyesine dusurdu!"), GetName(), item->GetName(), pkNewItem->GetName());
+				BroadcastNotice(gelistirmeduyuru);
+			}
+#endif
 
 			pkNewItem->AddToCharacter(this, TItemPos(INVENTORY, bCell));
 			ITEM_MANAGER::instance().FlushDelayedSave(pkNewItem);

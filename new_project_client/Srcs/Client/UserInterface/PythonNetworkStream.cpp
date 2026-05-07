@@ -186,6 +186,10 @@ class CMainPacketHeaderMap : public CNetworkPacketHeaderMap
 			Set(HEADER_GC_SET_CHEST_REWARDS, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCSetChestRewards), DYNAMIC_SIZE_PACKET));
 #endif
 
+#ifdef ENABLE_SEND_TARGET_INFO
+			Set(HEADER_GC_TARGET_INFO,	CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCTargetInfo), STATIC_SIZE_PACKET));
+#endif
+
 		}
 };
 

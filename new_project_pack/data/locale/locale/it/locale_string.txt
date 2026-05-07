@@ -1832,3 +1832,7 @@ l'Alchimia delle Pietre del drago.
 1952	Ricevi una ricompensa segreta per aver partecipato %d volta/e alla caccia al tesoro.
 1953	Ricompensa per il rango Caccia al Tesoro %d
 1954	Ricevi una ricompensa per aver raggiunto il rango %d nella Caccia al Tesoro.
+2101	<Fabbro> Il giocatore %s ha ottenuto %s!
+2102	<Fabbro> Il giocatore %s ha bruciato %s!
+2103	<Benedizione> Il giocatore %s ha ottenuto %s!
+2104	<Benedizione> L'oggetto %s del giocatore %s è sceso al livello %s!

@@ -1831,3 +1831,7 @@
 1952	Vous recevez une récompense secrète pour avoir participé %d fois à la chasse au trésor.
 1953	Récompense pour le rang %d de chasseur de trésors
 1954	Vous recevez une récompense pour avoir atteint le rang %d au classement de la chasse au trésor.
+2101	<Forgeron> Le joueur %s a obtenu %s !
+2102	<Forgeron> Le joueur %s a brûlé %s !
+2103	<Bénédiction> Le joueur %s a obtenu %s !
+2104	<Bénédiction> L'objet %s du joueur %s a été rétrogradé au niveau %s !

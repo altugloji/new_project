@@ -520,6 +520,10 @@ class ItemToolTip(ToolTip):
 
 	FONT_COLOR = grp.GenerateColor(0.7607, 0.7607, 0.7607, 1.0)
 
+	if app.ENABLE_SEND_TARGET_INFO:
+		isStone = False
+		isBook = False
+
 	def __init__(self, *args, **kwargs):
 		ToolTip.__init__(self, *args, **kwargs)
 		self.itemVnum = 0
@@ -610,6 +614,39 @@ class ItemToolTip(ToolTip):
 					self.AppendSellingPrice(player.GetISellItemPrice(window_type, slotIndex))
 
 		self.AddItemData(itemVnum, metinSlot, attrSlot, 0, 0, window_type, slotIndex)
+
+	if app.ENABLE_SEND_TARGET_INFO:
+		def SetItemToolTipStone(self, itemVnum):
+			self.itemVnum = itemVnum
+			item.SelectItem(itemVnum)
+			itemType = item.GetItemType()
+
+			itemDesc = item.GetItemDescription()
+			itemSummary = item.GetItemSummary()
+			attrSlot = 0
+			self.__AdjustMaxWidth(attrSlot, itemDesc)
+			itemName = item.GetItemName()
+			realName = itemName[:itemName.find("+")]
+			self.SetTitle(realName + " +0 - +4")
+
+			## Description ###
+			self.AppendDescription(itemDesc, 26)
+			self.AppendDescription(itemSummary, 26, self.CONDITION_COLOR)
+
+			if item.ITEM_TYPE_METIN == itemType:
+				self.AppendMetinInformation()
+				self.AppendMetinWearInformation()
+
+			for i in xrange(item.LIMIT_MAX_NUM):
+				(limitType, limitValue) = item.GetLimit(i)
+
+				if item.LIMIT_REAL_TIME_START_FIRST_USE == limitType:
+					self.AppendRealTimeStartFirstUseLastTime(item, metinSlot, i)
+
+				elif item.LIMIT_TIMER_BASED_ON_WEAR == limitType:
+					self.AppendTimerBasedOnWearLastTime(metinSlot)
+
+			self.ShowToolTip()
 
 	def SetShopItem(self, slotIndex):
 		itemVnum = shop.GetItemID(slotIndex)
@@ -874,7 +911,15 @@ class ItemToolTip(ToolTip):
 		self.SetTitle(itemName)
 
 	def __SetNormalItemTitle(self):
-		self.SetTitle(item.GetItemName())
+		if app.ENABLE_SEND_TARGET_INFO:
+			if self.isStone:
+				itemName = item.GetItemName()
+				realName = itemName[:itemName.find("+")]
+				self.SetTitle(realName + " +0 - +4")
+			else:
+				self.SetTitle(item.GetItemName())
+		else:
+			self.SetTitle(item.GetItemName())
 
 	def __SetSpecialItemTitle(self):
 		self.AppendTextLine(item.GetItemName(), self.SPECIAL_TITLE_COLOR)

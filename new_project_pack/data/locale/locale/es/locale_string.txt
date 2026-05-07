@@ -1831,3 +1831,7 @@
 1952	Recibirás una recompensa secreta por participar %d veces en la búsqueda de tesoros.
 1953	Recompensa para el rango de búsqueda de tesoros %d
 1954	Recibirás una recompensa por haber alcanzado el rango %d en la búsqueda de tesoros.
+2101	<Herrero> ¡El jugador %s ha obtenido %s!
+2102	<Herrero> ¡El jugador %s ha quemado %s!
+2103	<Bendición> ¡El jugador %s ha obtenido %s!
+2104	<Bendición> ¡El objeto %s del jugador %s bajó al nivel %s!

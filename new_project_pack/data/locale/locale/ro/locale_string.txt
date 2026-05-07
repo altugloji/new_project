@@ -1831,3 +1831,7 @@
 1952	Ai primit o recompensã secretã pentru participarea la Vânãtoarea de Comori de %d ori.
 1953	Rang %d Recompensã Vânãtoare de Comori
 1954	Ai primit o recompensã pentru rang %d la Vânãtoarea de Comori.
+2101	<Fierar> Jucatorul %s a ob?inut %s!
+2102	<Fierar> Jucatorul %s a ars %s!
+2103	<Binecuvântare> Jucatorul %s a ob?inut %s!
+2104	<Binecuvântare> Obiectul %s al jucatorului %s a fost redus la nivelul %s!
