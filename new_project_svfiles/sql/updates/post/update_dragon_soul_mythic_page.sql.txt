@@ -1,0 +1,17 @@
+
+/*8x4=32 slot per page
+32x5=160 slot per class -> 192 with mythic
+160x6=960 slot in total -> 192x6=1152 with mythic*/
+
+-- UPDATE `srv1_player`.`item` SET `pos` = `pos`+160 WHERE `window` = 'DRAGON_SOUL_INVENTORY' AND `pos` BETWEEN 800 AND 960;
+-- UPDATE `srv1_player`.`item` SET `pos` = `pos`+128 WHERE `window` = 'DRAGON_SOUL_INVENTORY' AND `pos` BETWEEN 640 AND 799;
+-- UPDATE `srv1_player`.`item` SET `pos` = `pos`+96 WHERE `window` = 'DRAGON_SOUL_INVENTORY' AND `pos` BETWEEN 480 AND 639;
+-- UPDATE `srv1_player`.`item` SET `pos` = `pos`+64 WHERE `window` = 'DRAGON_SOUL_INVENTORY' AND `pos` BETWEEN 320 AND 479;
+-- UPDATE `srv1_player`.`item` SET `pos` = `pos`+32 WHERE `window` = 'DRAGON_SOUL_INVENTORY' AND `pos` BETWEEN 160 AND 319;
+
+/* pedantic vnum check */
+UPDATE `srv1_player`.`item` SET `pos` = `pos`+160 WHERE `window` = 'DRAGON_SOUL_INVENTORY' AND `pos` BETWEEN 800 AND 960 AND `vnum` BETWEEN 160000 AND 169999;
+UPDATE `srv1_player`.`item` SET `pos` = `pos`+128 WHERE `window` = 'DRAGON_SOUL_INVENTORY' AND `pos` BETWEEN 640 AND 799 AND `vnum` BETWEEN 150000 AND 159999;
+UPDATE `srv1_player`.`item` SET `pos` = `pos`+96 WHERE `window` = 'DRAGON_SOUL_INVENTORY' AND `pos` BETWEEN 480 AND 639 AND `vnum` BETWEEN 140000 AND 149999;
+UPDATE `srv1_player`.`item` SET `pos` = `pos`+64 WHERE `window` = 'DRAGON_SOUL_INVENTORY' AND `pos` BETWEEN 320 AND 479 AND `vnum` BETWEEN 130000 AND 139999;
+UPDATE `srv1_player`.`item` SET `pos` = `pos`+32 WHERE `window` = 'DRAGON_SOUL_INVENTORY' AND `pos` BETWEEN 160 AND 319 AND `vnum` BETWEEN 120000 AND 129999;

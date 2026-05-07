@@ -1,0 +1,6 @@
+ScriptType               MotionData
+
+MotionFileName           "d:/ymir work/npc/gm/run.gr2"
+MotionDuration           1.000000
+
+Accumulation	0.0000 -1200.0000 0.0000

@@ -1,0 +1,5 @@
+ScriptType               MotionData
+
+MotionFileName           "d:/ymir work/monster2/redthief_general/walk.gr2"
+MotionDuration           1.200000
+Accumulation	0.0000 -275.7610 0.0000

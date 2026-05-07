@@ -1,0 +1,5 @@
+ScriptType               MotionData
+
+MotionFileName           "d:/ymir work/npc/reindeer_female/run.gr2"
+MotionDuration           0.666666
+Accumulation             0.00	-477.082336	0.00

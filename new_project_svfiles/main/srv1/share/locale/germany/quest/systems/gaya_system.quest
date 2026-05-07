@@ -1,0 +1,233 @@
+define GAYA_MERCHANT_VNUM    20504
+define WARRIOR_STATUE_VNUM   20505
+define GAYA_TRANSMUTER_VNUM  20506
+define GLIMMERSTONE_VNUM     50926
+define TRANSMUTER_ITEM_VNUM  50935
+define GAYA_BAG_VNUM         70608
+define GEM_MAX_VALUE         999999
+define GEM_REWARD             3
+define YANG_COST              15000
+
+quest gaya_system begin
+	state start begin
+
+		------------------------------------------------------------
+		-- Part 1: NPC Shop Open
+		------------------------------------------------------------
+
+		when GAYA_MERCHANT_VNUM.chat.LC(1462) begin -- Do you want to open the Gaya Market now?
+			setskin(NOWINDOW)
+			command("gem open")
+		end
+
+		when WARRIOR_STATUE_VNUM.chat.LC(1462) begin -- Do you want to open the Gaya Market now?
+			setskin(NOWINDOW)
+			command("gem open")
+		end
+
+		when GAYA_TRANSMUTER_VNUM.chat.LC(1462) begin -- Do you want to open the Gaya Market now?
+			setskin(NOWINDOW)
+			command("gem open")
+		end
+
+		------------------------------------------------------------
+		-- Part 2: NPC Crafting
+		------------------------------------------------------------
+
+		when GAYA_MERCHANT_VNUM.chat.IN(50926) begin -- Glimmerstone
+			local catalyst_count = 30
+			local rate = 30
+			local yang_cost = YANG_COST
+
+			say(LC(1466, catalyst_count)) -- I need %d Glimmerstones, 15,000 Yang plus
+			say(LC(1468)) -- in order to craft 3 valuable Gaya.
+			say("")
+			say(LC(1469, rate, yang_cost)) -- My success rate is %d%%... oh, and it'll cost you %s Yang.
+			say("")
+			say(LC(1470)) -- Shall I continue?
+
+			local s = select(LC(1475), LC(1476)) -- Yes / No
+			if s == 2 then
+				return
+			end
+
+			if pc.get_gem() + GEM_REWARD > GEM_MAX_VALUE then
+				say(LC(1472)) -- Your Gaya balance is already full to bursting.
+				return
+			end
+
+			if pc.count_item(GLIMMERSTONE_VNUM) < catalyst_count then
+				say(LC(1474, catalyst_count)) -- Please gather some more Glimmerstones. You need %d.
+				return
+			end
+
+			if pc.get_gold() < yang_cost then
+				say(LC(1471)) -- You don't have enough Yang.
+				return
+			end
+
+			pc.remove_item(GLIMMERSTONE_VNUM, catalyst_count)
+			pc.change_gold(-yang_cost)
+
+			if math.random(1, 100) <= rate then
+				pc.give_gem(GEM_REWARD)
+				syschat(LS(173)) -- [Gaya] Cutting successful.
+			else
+				syschat(LS(174)) -- [Gaya] Cutting failed.
+			end
+		end
+
+		when WARRIOR_STATUE_VNUM.chat.IN(50926) begin -- Glimmerstone
+			local catalyst_count = 30
+			local rate = 70
+			local yang_cost = YANG_COST
+
+			say(LC(1466, catalyst_count)) -- I need %d Glimmerstones, 15,000 Yang plus
+			say(LC(1468)) -- in order to craft 3 valuable Gaya.
+			say("")
+			say(LC(1469, rate, yang_cost)) -- My success rate is %d%%... oh, and it'll cost you %s Yang.
+			say("")
+			say(LC(1470)) -- Shall I continue?
+
+			local s = select(LC(1475), LC(1476)) -- Yes / No
+			if s == 2 then
+				return
+			end
+
+			if pc.get_gem() + GEM_REWARD > GEM_MAX_VALUE then
+				say(LC(1472)) -- Your Gaya balance is already full to bursting.
+				return
+			end
+
+			if pc.count_item(GLIMMERSTONE_VNUM) < catalyst_count then
+				say(LC(1474, catalyst_count)) -- Please gather some more Glimmerstones. You need %d.
+				return
+			end
+
+			if pc.get_gold() < yang_cost then
+				say(LC(1471)) -- You don't have enough Yang.
+				return
+			end
+
+			pc.remove_item(GLIMMERSTONE_VNUM, catalyst_count)
+			pc.change_gold(-yang_cost)
+
+			if math.random(1, 100) <= rate then
+				pc.give_gem(GEM_REWARD)
+				syschat(LS(173)) -- [Gaya] Cutting successful.
+			else
+				syschat(LS(174)) -- [Gaya] Cutting failed.
+			end
+		end
+
+		when GAYA_TRANSMUTER_VNUM.chat.IN(50935) begin -- Gaya Transmuter
+			local catalyst_count = 10
+			local converter_count = 1
+			local yang_cost = YANG_COST
+
+			say(LC(1466, catalyst_count)) -- I need %d Glimmerstones, 15,000 Yang plus
+			say(LC(1467)) -- a level +0, +1, +2 or +3 Spirit Stone
+			say(LC(1468)) -- in order to craft 3 valuable Gaya.
+			say("")
+			say(LC(1469, 100, yang_cost)) -- My success rate is %d%%... oh, and it'll cost you %s Yang.
+			say("")
+			say(LC(1470)) -- Shall I continue?
+
+			local s = select(LC(1475), LC(1476)) -- Yes / No
+			if s == 2 then
+				return
+			end
+
+			if pc.get_gem() + GEM_REWARD > GEM_MAX_VALUE then
+				say(LC(1472)) -- Your Gaya balance is already full to bursting.
+				return
+			end
+
+			if pc.count_item(GLIMMERSTONE_VNUM) < catalyst_count then
+				say(LC(1474, catalyst_count)) -- Please gather some more Glimmerstones. You need %d.
+				return
+			end
+
+			if pc.count_item(TRANSMUTER_ITEM_VNUM) < converter_count then
+				say(LC(1465, converter_count)) -- Please give me this amount of Glimmerstones: %d
+				return
+			end
+
+			if pc.get_gold() < yang_cost then
+				say(LC(1471)) -- You don't have enough Yang.
+				return
+			end
+
+			pc.remove_item(GLIMMERSTONE_VNUM, catalyst_count)
+			pc.remove_item(TRANSMUTER_ITEM_VNUM, converter_count)
+			pc.change_gold(-yang_cost)
+
+			pc.give_gem(GEM_REWARD)
+			syschat(LS(173)) -- [Gaya] Cutting successful.
+		end
+
+		------------------------------------------------------------
+		-- Part 3: Gaya Bag
+		-- Socket 0: real-time expiry timestamp (engine-managed)
+		-- Socket 1: stored gem count (0-9999)
+		------------------------------------------------------------
+
+		when GAYA_BAG_VNUM.use begin
+			local stored = item.get_socket(1)
+
+			if stored > 0 then
+				-- Withdraw mode
+				say_title(LC(14222)) -- Gaya Bag
+
+				if pc.get_gem() + stored >= GEM_MAX_VALUE then
+					say(LC(14215)) -- You can't own any more Gaya.
+					return
+				end
+
+				pc.give_gem(stored)
+				item.set_socket(1, 0)
+			else
+				-- Fill mode
+				say_title(LC(14222)) -- Gaya Bag
+				say(LC(14211)) -- You can store up to 9,999 Gaya in this bag.
+
+				local v = input()
+
+				if v == "" then
+					say(LC(14216)) -- Only use numbers.
+					return
+				end
+
+				local amount = tonumber(v)
+
+				if amount == nil or amount ~= math.floor(amount) then
+					say(LC(14216)) -- Only use numbers.
+					return
+				end
+
+				amount = math.floor(amount)
+
+				if amount < 1 or amount > 9999 then
+					say(LC(14216)) -- Only use numbers.
+					return
+				end
+
+				if pc.get_gem() < amount then
+					say(LC(14214)) -- You don't have enough Gaya.
+					return
+				end
+
+				say(LC(14219, amount)) -- Amount of Gaya: %d -- Is this number correct?
+
+				local s = select(LC(14220), LC(14221)) -- OK / Cancel
+				if s == 2 then
+					return
+				end
+
+				pc.change_gem(-amount)
+				item.set_socket(1, amount)
+			end
+		end
+
+	end
+end

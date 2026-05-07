@@ -1,0 +1,212 @@
+#######################################
+# Quest Category Mapping
+# 0 = Main Quests
+# 1 = Side Quests
+# 2 = Hunting/LevelUp
+# 3 = Event
+# 4 = Collection (Biologist)
+# 5 = System
+# 6 = Scroll
+# 7 = Daily
+#######################################
+
+# Main Quests (0)
+0	main_quest_lv1
+0	main_quest_lv2
+0	main_quest_lv3
+0	main_quest_lv6
+0	main_quest_lv7
+0	main_quest_lv9
+0	main_quest_lv10
+0	main_quest_lv12
+0	main_quest_lv14
+0	main_quest_lv15
+0	main_quest_lv16
+0	main_quest_lv27
+0	main_quest_lv30
+0	main_quest_lv32
+0	main_quest_lv40
+0	main_quest_lv47
+0	main_quest_lv50
+0	main_quest_lv55
+0	main_quest_lv60
+0	main_quest_lv66
+0	main_quest_lv72
+0	main_quest_lv78
+0	main_quest_lv84
+0	main_quest_lv90
+0	main_quest_lv91
+0	main_quest_lv92
+0	main_quest_lv93
+0	main_quest_lv94
+0	main_quest_lv95
+0	main_quest_lv96
+0	main_quest_lv97
+0	main_quest_lv98
+0	main_quest_flame_lv99
+0	main_quest_flame_lv100
+0	main_quest_flame_lv101
+0	main_quest_flame_lv102
+0	main_quest_flame_lv103
+0	main_quest_flame_lv104
+0	main_quest_flame_lv105
+
+# Side Quests (1)
+1	subquest_1
+1	subquest_2
+1	subquest_3
+1	subquest_4
+1	subquest_5
+1	subquest_6
+1	subquest_7
+1	subquest_8
+1	subquest_9
+1	subquest_10
+1	subquest_11
+1	subquest_12
+1	subquest_13
+1	subquest_15
+1	subquest_16
+1	subquest_17
+1	subquest_18
+1	subquest_19
+1	subquest_20
+1	subquest_21
+1	subquest_22
+1	subquest_23
+1	subquest_24
+1	subquest_25
+1	subquest_26
+1	subquest_27
+1	subquest_30
+1	subquest_31
+1	subquest_32
+1	subquest_33
+1	subquest_34
+1	subquest_36
+1	subquest_37
+1	subquest_38
+1	subquest_39
+1	subquest_40
+1	subquest_41
+1	subquest_42
+1	subquest_44
+1	subquest_45
+1	subquest_46
+1	subquest_47
+1	subquest_48
+1	subquest_49
+1	new_quest_lv17
+1	new_quest_lv22
+1	new_quest_lv26
+1	new_quest_lv28
+1	new_quest_lv29
+1	new_quest_lv42
+1	new_quest_lv43
+1	new_quest_lv52
+1	new_quest_lv54
+1	new_quest_lv75
+1	new_quest_lv80
+1	patrol_townaround
+1	ghost_story
+1	find_brother_article
+1	find_senior_soldier
+1	find_squareguard
+
+# LevelUp (2)
+2	levelup
+
+# Events (3)
+3	christmas_santa
+3	christmas_tree
+3	forked_road
+3	oxevent_manager
+
+# Collection / Biologist (4)
+4	make_herb_lv4
+4	make_herb_lv7
+4	make_herb_lv10
+4	make_herb_lv15
+4	make_herb_lv20
+4	make_herb_lv25
+4	collect_quest_lv30
+4	collect_quest_lv40
+4	collect_quest_lv50
+4	collect_quest_lv60
+4	collect_quest_lv70
+4	collect_quest_lv80
+4	collect_quest_lv85
+4	collect_quest_lv90
+4	collect_quest_lv92
+4	collect_quest_lv94
+4	collect_quest_lv96
+4	check_collect_reward
+
+# System (5)
+5	arena_manager
+5	blacksmith
+5	buy_fishrod
+5	change_empire
+5	change_guild_master
+5	change_name
+5	cube
+5	cube_opener_list
+5	dragon_soul_refine
+5	dragon_soul_shop
+5	energy_system
+5	fisher
+5	fortune_telling
+5	game_option
+5	gaya_system
+5	give_basic_weapon
+5	mining
+5	npc_talk
+5	priv_empire
+5	sash
+5	skill_group
+5	skill_reset2
+5	upgrade_refine_scroll
+5	stash
+5	item_change_sex
+5	book_packs
+5	reset_scroll
+5	reset_status
+5	training_grandmaster_skill
+5	check_trans_ticket
+5	goto_empire_castle
+5	map_warp
+5	neutral_warp
+5	ring_warp
+5	spider_dungeon_2floor
+5	devilcatacomb_zone
+5	deviltower_zone
+5	flame_dungeon
+5	guild_building
+5	guild_building_melt
+5	guild_building_npc
+5	alter_of_power
+5	guild_ranking
+5	guild_war_bet
+5	guild_war_join
+5	guild_war_observer
+5	horse_guard
+5	horse_levelup
+5	horse_menu
+5	horse_revive
+5	horse_ride
+5	horse_summon
+5	horse_upgrade
+5	horse_upgrade2
+5	pony_buy
+5	pony_levelup
+5	couple_ring
+5	marriage_manage
+
+# Scroll (6)
+6	questscroll1
+6	questscroll2
+6	questscroll3
+6	questscroll4
+6	questscroll5
+
+# Daily (7)

@@ -1,0 +1,5 @@
+ScriptType               MotionData
+
+MotionFileName           "d:/ymir work/npc_pet/pet_otherworld_bird/walk.gr2"
+MotionDuration           1.166667
+Accumulation             0.00	-314.00	0.00

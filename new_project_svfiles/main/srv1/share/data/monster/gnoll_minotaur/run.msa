@@ -1,0 +1,5 @@
+ScriptType               MotionData
+
+MotionFileName           "d:/ymir work/monster2/gnoll_minotaur/run.gr2"
+MotionDuration	1.0000
+Accumulation	0.0000 -599.9996 0.0000

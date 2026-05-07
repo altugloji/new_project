@@ -1,0 +1,6 @@
+/*
+DON'T RUN THIS QUERY IF YOU DON'T KNOW WHAT IT DOES:
+
+use player;
+update item set window='BELT_INVENTORY', pos=pos-152 where window='INVENTORY' and pos between 152 and 167;
+*/

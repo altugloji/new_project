@@ -1,0 +1,128 @@
+r1
+- default official quests
+- default official regens
+- default official maps
+- fixed /goto warps in settings.lua
+- added gf, mijago, syreldar, marty lua libs in quest/libraries
+- added disabled/ and samples/ marty quests
+- added cz/de/dk/en/es/fr/gr/hu/it/nl/pl/pt/ro/ru/tr translations
+- updated the svf scripts
+
+r2
+- added ae translation
+- added customizable quest/systems/give_basic_weapon.quest
+- fixed spammy states for check_trans_ticket.quest, spider_dungeon_2floor.quest
+- fixed the updated svf scripts for windows
+
+r3
+- fixed some translate.lua syntaxes (like \" to ')
+- fixed clear.py for *.core
+- added admin_panel fullrestart option
+
+r4
+- fixed auth id in the generated serverinfo.py (inside gen.py)
+
+r5
+- fixed story/levelup.quest translations and scroll image position
+- added skill_proto.sql patches for v22 client
+
+r6
+- fixed accents for romanian translation
+- added some missing strings in locale_string (only english)
+- added input prompt for systems/items/change_name.quest
+- added define ENABLE_SAY inside systems/give_basic_weapon.quest
+- translated skill_proto.sql in english (instead of italian)
+- translated systems/give_basic_weapon.quest in all languages
+- translated systems/sash.quest in all languages
+- translated systems/items/change_name.quest in all languages
+
+r7
+- translated biology/collect_quest_lv96.quest in all languages
+- fixed gen.py serverinfo generation for 2+ channels
+
+r8
+- added missing cor draconis chests 50256,50257,50258,50259 in special_item_group.txt
+- added sql/base/db_prefix_remove.sh to remove the "srv_" prefix from the databases automatically + regranting
+
+r9
+- added missing log.acce table
+- adjusted quotes for AE collect_quest_lv96.msg03 string
+
+r10
+- fixed levelup.quest trigger at login
+- fixed innodb engine for account tables
+- fixed mariadb106 load
+
+r11
+- fixed strange npc coordinates in snowm map
+- fixed mt2_user load for different mysql versions (5.6 5.7 8.0 and mariadb)
+
+r12
+- removed guild_create.quest because it wasn't used
+- fixed "Found a guild" menu in guild_manage.quest if you already had a guild
+- fixed the item vnum (70058) inside ring_warp.quest
+- added dropped gold string in locale_string.txt for all languages
+- added player.cheque field in sql/player.sql
+- removed useless files in data/monster
+
+r13
+- added SQL_LOG in gen_settings.py for db/conf.txt
+- added player_deleted.cheque field
+- added won exchange strings tl for ae/en
+- added shaman cure 109 with party flag
+- added unsigned flag to item_proto type fields
+
+r14
+- removed log.acce default value
+- removed again shaman cure 109 with party flag (use the synchronized skill_proto.txt)
+
+r15
+- fixed MariaDB missing flag set-gtid-purged for baks/db
+- changed 'make dump' to 'gmake dump' for executing baks/db
+- fixed admin_panel.py when providing no arguments
+- fixed admin_panel.py symlink option for windows (edit the path matching your structure)
+
+r16
+- updated share/data/monster files with new mobs
+- added share/data/monster/sanitize_msa.py for future uses
+
+r17
+- added the config ENABLE_CLEAN_UP_OLD_GEN in gen.py to clean up the old db/auth*/chan/logs folders without touching share/
+- cleaned up some lines about windows for gen.py
+- added TimeFormatDMHS TimeFormatN functions inside questlib_extra.lua
+- updated syreldar's libraries (functions.lua globals.lua) to latest (2024/02)
+- refactored the backup scripts with python3
+
+r18
+- updated readmes
+- fixed the load of the warp ring 70058 from special_item_group.txt
+
+r19
+- changed player.gold from int to bigint (v6+ yang 64bit)
+- changed item/item_award/shop_item.count from tinyint to int (v6+ item count 32bit)
+- changed player.stat_reset_count and player_deleted.stat_reset_count from tinyint (-128 127) to smallint (-32768 32767)
+- added a dragon soul player.item.pos inventory converter pre-to-mythic
+- added a draft for gacha item drops (v6 ITEM_GACHA)
+- updated backup db scripts for improved mysql detection, and redundant auto_increment
+- fixed skill_reset2.quest missing horse_level
+
+r20
+- changed player.stat_reset_count and player_deleted.stat_reset_count from smallint to int in sql/player.sql
+- fixed change_empire._240_stringFormat log format string in every locale to prevent quest string.format crash
+
+r21
+- removed KR item names from special_item_group.txt
+- added qc.py 1.0.1, python port of Metin2's quest compiler (byte-equivalent to qc.exe, ENABLE_NUMBER_ADJUSTMENT on by default)
+- updated pre_qc.py to 2.1.0 with refactored docs and documented known issues (group-define syntax previously added)
+- fixed main_quest_lv90/94/95/96/97/98 stringFormat/sayReward keys set to empty table in 13 locales (CZ DK EN ES GR HU IT NL PL PT RO RU TR) to prevent quest string.format crash
+
+r22
+- added Gaya system data files (gem.txt with 99 shop items, 3 craft recipes, per-slot expansion costs)
+- added Gaya Merchant (20503) and Gaya Market (20504) NPCs in a1, b1, c1 maps
+- added Gaya Chest (83015) to special_item_group.txt
+- added player.gem column, player_deleted.gem column, and gaya_shop_items table to player.sql
+- added sql/updates/player__gaya_system.sql migration
+- added gaya_system.quest with crafting, shop, and Gaya Bag (70608) support, fully localized with client locale tags
+- added LC(), LOX(), LF(), LS(), IN(), MN() locale helper functions in questlib_extra.lua
+- added questcategory.txt for quest category system (ENABLE_QUEST_CATEGORY)
+- fixed gaya_system.quest bugs: pc.gold->pc.get_gold(), pc.give_gem->pc.change_gem for deposits, gem cap check before consuming materials

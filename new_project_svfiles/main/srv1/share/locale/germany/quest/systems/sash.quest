@@ -1,0 +1,41 @@
+define NPC_VNUM 60003
+quest sash begin
+	state start begin
+		when NPC_VNUM.chat.gameforge.sash.title_sash begin
+			say_title(mob_name(NPC_VNUM))
+			say("")
+			say(gameforge.sash.msg_sash01)
+			say("")
+			say(gameforge.sash.msg_sash02)
+			say("")
+		end
+
+		when NPC_VNUM.chat.gameforge.sash.title_combination begin
+			say_title(mob_name(NPC_VNUM))
+			say("")
+			say(gameforge.sash.msg_comb01)
+			say("")
+			local confirm = select(gameforge.locale.yes, gameforge.locale.no)
+			if confirm == 2 then
+				return
+			end
+
+			setskin(NOWINDOW)
+			pc.open_sash(true)
+		end
+
+		when NPC_VNUM.chat.gameforge.sash.title_absorption begin
+			say_title(mob_name(NPC_VNUM))
+			say("")
+			say(gameforge.sash.msg_abso01)
+			say("")
+			local confirm = select(gameforge.locale.yes, gameforge.locale.no)
+			if confirm == 2 then
+				return
+			end
+
+			setskin(NOWINDOW)
+			pc.open_sash(false)
+		end
+	end
+end

@@ -39,7 +39,7 @@ a.out
 
 .pre_qc/
 pre_qc/
-object/
+object*/
 
 !baks/db
 log.txt
