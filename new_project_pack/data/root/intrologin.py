@@ -1112,7 +1112,8 @@ class LoginWindow(ui.ScriptWindow):
 				return
 			if self.lang_header_flag:
 				active = self.language_list[self.__GetCurrentLanguageRowIndex()]
-				img_path = "d:/ymir work/ui/intro/login/server_flag_{}.sub".format(active["locale"])
+				# img_path = "d:/ymir work/ui/intro/login/server_flag_{}.sub".format(active["locale"])
+				img_path = "d:/ymir work/flags/server_flag_{}.png".format(active["locale"])
 				try:
 					self.lang_header_flag.LoadImage(img_path)
 				except:
@@ -1235,11 +1236,12 @@ class LoginWindow(ui.ScriptWindow):
 				row_flag.AddFlag("not_pick")
 				try:
 					row_flag.LoadImage(
-						"d:/ymir work/ui/intro/login/server_flag_{}.sub".format(lang_entry["locale"])
+						# "d:/ymir work/ui/intro/login/server_flag_{}.sub".format(lang_entry["locale"])
+						"d:/ymir work/flags/server_flag_{}.png".format(lang_entry["locale"])
 					)
 				except:
 					pass
-				row_flag.SetPosition(LANG_DROPDOWN_LIST_PAD + 5, row_top + 3)
+				row_flag.SetPosition(LANG_DROPDOWN_LIST_PAD + 6, row_top + 6)
 				row_flag.Show()
 
 				row_label = ui.TextLine()

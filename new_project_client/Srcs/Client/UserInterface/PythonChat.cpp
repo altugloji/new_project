@@ -12,8 +12,10 @@
 #if defined(__BL_MULTI_LANGUAGE_PREMIUM__)
 #include "../eterPack/EterPackManager.h"
 
-constexpr float c_fFlagTargetX = 22.0f * 0.9f;
-constexpr float c_fFlagTargetY = 17.0f * 0.8f;
+constexpr float c_fFlagTargetX = 5.0f;
+constexpr float c_fFlagTargetY = 5.0f;
+constexpr float c_fEmpireFlagOffsetY = 4.5f;
+
 
 static int gs_mx = 0;
 static int gs_my = 0;
@@ -234,7 +236,8 @@ void CPythonChat::UpdateViewMode(DWORD dwID)
 			}
 			else
 			{
-				pChatLine->pEmpireFlagImageInstance->SetPosition(pChatSet->m_ix + iWidth, pChatSet->m_iy + iHeight);
+				pChatLine->pEmpireFlagImageInstance->SetPosition(pChatSet->m_ix + iWidth, pChatSet->m_iy + iHeight + c_fEmpireFlagOffsetY);
+				
 				iWidth += c_fFlagTargetX + 2;
 			}
 
@@ -321,7 +324,7 @@ void CPythonChat::UpdateEditMode(DWORD dwID)
 			}
 			else
 			{
-				pChatLine->pEmpireFlagImageInstance->SetPosition(pChatSet->m_ix + iWidth, pChatSet->m_iy + iHeight);
+				pChatLine->pEmpireFlagImageInstance->SetPosition(pChatSet->m_ix + iWidth, pChatSet->m_iy + iHeight + c_fEmpireFlagOffsetY);
 				iWidth += c_fFlagTargetX + 2;
 			}
 
@@ -388,7 +391,7 @@ void CPythonChat::UpdateLogMode(DWORD dwID)
 			}
 			else
 			{
-				pChatLine->pEmpireFlagImageInstance->SetPosition(pChatSet->m_ix + iWidth, pChatSet->m_iy + iHeight);
+				pChatLine->pEmpireFlagImageInstance->SetPosition(pChatSet->m_ix + iWidth, pChatSet->m_iy + iHeight + c_fEmpireFlagOffsetY);
 				iWidth += c_fFlagTargetX + 2;
 			}
 
@@ -690,28 +693,10 @@ void CPythonChat::AppendChat(int iType, const char* c_szChat, BYTE bSpecialColor
 	pChatLine->Instance.SetTextPointer(pkDefaultFont);
 	// END_OF_DEFAULT_FONT
 #if defined(__BL_MULTI_LANGUAGE_PREMIUM__)
-	if (!countryName.empty())
-	{
-		char buffer[256];
-		snprintf(buffer, sizeof(buffer), "D:/ymir work/ui/intro/login/server_flag_%s.sub", countryName.c_str());
-		if (CEterPackManager::Instance().isExist(buffer))
-		{
-			CGraphicSubImage* pkGrpImgFlag = (CGraphicSubImage*)CResourceManager::Instance().GetResourcePointer(buffer);
-			if (pkGrpImgFlag)
-			{
-				pChatLine->pCountryFlagImageInstance = CGraphicExpandedImageInstance::New();
-				pChatLine->pCountryFlagImageInstance->SetImagePointer(pkGrpImgFlag);
-				pChatLine->pCountryFlagImageInstance->SetScale(c_fFlagTargetX / pChatLine->pCountryFlagImageInstance->GetWidth(),
-					c_fFlagTargetY / pChatLine->pCountryFlagImageInstance->GetHeight());
-				pChatLine->strCountry = countryName;
-			}
-		}
-	}
-
 	if (bEmpire)
 	{
 		char buffer[256];
-		snprintf(buffer, sizeof(buffer), "D:/ymir work/ui/intro/empire_01/empireflag_%c.sub", (bEmpire + 96));
+		snprintf(buffer, sizeof(buffer), "D:/ymir work/flags/empireflag_%c.png", (bEmpire + 96));
 		if (CEterPackManager::Instance().isExist(buffer))
 		{
 			CGraphicSubImage* pkGrpImgFlag = (CGraphicSubImage*)CResourceManager::Instance().GetResourcePointer(buffer);

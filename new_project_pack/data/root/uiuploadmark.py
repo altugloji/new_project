@@ -25,9 +25,9 @@ class MarkItem(ui.ListBoxEx.Item):
 		textLine=ui.TextLine()
 		textLine.SetParent(self)
 		if localeInfo.IsARABIC():
-			textLine.SetPosition(6*len(fileName) + 20, 0)
+			textLine.SetPosition(6*len(fileName) + 30, 0)
 		else:
-			textLine.SetPosition(20, 0)
+			textLine.SetPosition(30, 0)
 		textLine.SetText(fileName)
 		textLine.Show()
 		return textLine
@@ -47,7 +47,7 @@ class MarkItem(ui.ListBoxEx.Item):
 				imgBox = ui.ImageBox()
 				imgBox.AddFlag("not_pick")
 				imgBox.SetParent(self)
-				imgBox.SetPosition(0, 2)
+				imgBox.SetPosition(0, 1)
 				imgBox.LoadImage(fileName)
 				imgBox.Show()
 				return imgBox

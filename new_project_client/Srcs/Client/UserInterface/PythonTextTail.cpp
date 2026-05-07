@@ -22,9 +22,9 @@ const D3DXCOLOR c_TextTail_Chat_Color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 const D3DXCOLOR c_TextTail_Info_Color = D3DXCOLOR(1.0f, 0.785f, 0.785f, 1.0f);
 const D3DXCOLOR c_TextTail_Guild_Name_Color = 0xFFEFD3FF;
 constexpr float c_TextTail_Name_Position = -10.0f;
-constexpr float c_fxMarkPosition = 1.5f;
+constexpr float c_fxMarkPosition = 3.5f;
 constexpr float c_fyGuildNamePosition = 15.0f;
-constexpr float c_fyMarkPosition = 15.0f + 11.0f;
+constexpr float c_fyMarkPosition = 15.0f + 11.0f + 2.0f; //Guild
 BOOL bPKTitleEnable = TRUE;
 
 // TEXTTAIL_LIVINGTIME_CONTROL
@@ -274,7 +274,7 @@ void CPythonTextTail::ArrangeTextTail()
 				if (GetDefaultCodePage() == CP_ARABIC)
 					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iTitleWidth - iLevelWidth - pCountryFlag->GetWidth() - 7.0f, pTextTail->y - pCountryFlag->GetHeight() + 3.7f);
 				else
-					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iTitleWidth - iLevelWidth - pCountryFlag->GetWidth() + 1.0f, pTextTail->y - pCountryFlag->GetHeight() + 5.7f);
+					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iTitleWidth - iLevelWidth - pCountryFlag->GetWidth() - 7.0f, pTextTail->y - pCountryFlag->GetHeight() + 1.7f);
 			}
 #endif
 		}
@@ -309,7 +309,7 @@ void CPythonTextTail::ArrangeTextTail()
 				if (GetDefaultCodePage() == CP_ARABIC)
 					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iLevelWidth - pCountryFlag->GetWidth() - 3.0f, pTextTail->y - pCountryFlag->GetHeight() + 3.7f);
 				else
-					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iLevelWidth - pCountryFlag->GetWidth() - 1.0f, pTextTail->y - pCountryFlag->GetHeight() + 5.7f);
+					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iLevelWidth - pCountryFlag->GetWidth() - 7.0f, pTextTail->y - pCountryFlag->GetHeight() + 1.7f);
 			}
 #endif
 		}
@@ -1019,7 +1019,8 @@ void CPythonTextTail::AttachFlag(DWORD dwVID, const std::string& countryName)
 	if (!bPKTitleEnable)
 		return;
 
-	const std::string path = "D:/ymir work/ui/intro/login/server_flag_" + countryName + ".sub";
+	// const std::string path = "D:/ymir work/ui/intro/login/server_flag_" + countryName + ".sub";
+	const std::string path = "D:/ymir work/flags/server_flag_" + countryName + ".png";
 	if (!CEterPackManager::Instance().isExist(path.c_str()))
 	{
 		DetachFlag(dwVID);
@@ -1040,7 +1041,7 @@ void CPythonTextTail::AttachFlag(DWORD dwVID, const std::string& countryName)
 			prFlag = CGraphicExpandedImageInstance::New();
 
 		prFlag->SetImagePointer(pkGrpImgFlag);
-		prFlag->SetScale(0.8f, 0.8f);
+		// prFlag->SetScale(1.0f, 1.0f);
 	}
 }
 

@@ -1,1 +1,2 @@
-0507 00:12:03421 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
+0507 11:56:03069 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
+0507 11:56:05388 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error

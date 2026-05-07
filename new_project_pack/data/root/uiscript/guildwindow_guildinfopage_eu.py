@@ -204,8 +204,8 @@ window = {
 				{
 					"name" : "LargeGuildMarkSlot",
 					"type" : "slotbar",
-					"x" : 5,
-					"y" : 24,
+					"x" : 3,
+					"y" : 22,
 					"width" : 48+1,
 					"height" : 36+1,
 					"children" :
@@ -226,7 +226,7 @@ window = {
 		{
 			"name" : "UploadGuildMarkButton",
 			"type" : "button",
-			"x" : 260,
+			"x" : 260+7,
 			"y" : 33,
 			"text" : uiScriptLocale.GUILD_INFO_UPLOAD_MARK,
 			"default_image" : "d:/ymir work/ui/public/large_button_01.sub",
@@ -236,7 +236,7 @@ window = {
 		{
 			"name" : "UploadGuildSymbolButton",
 			"type" : "button",
-			"x" : 260,
+			"x" : 260+7,
 			"y" : 33 + 23,
 			"text" : uiScriptLocale.GUILD_INFO_UPLOAD_SYMBOL,
 			"default_image" : "d:/ymir work/ui/public/large_button_01.sub",
