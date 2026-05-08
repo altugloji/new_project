@@ -281,6 +281,11 @@ ACMD(do_auto_skill_reader);
 ACMD(do_ex_log);
 #endif
 
+#ifdef ENABLE_USER_REPORT_SYSTEM
+ACMD(do_report_user);
+ACMD(do_report_list);
+#endif
+
 struct command_info cmd_info[] =
 {
 	{ "!RESERVED!", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	},
@@ -598,6 +603,11 @@ struct command_info cmd_info[] =
 
 #ifdef ENABLE_EXCHANGE_LOG
 	{ "ex_log",	do_ex_log,		0,		POS_DEAD,	GM_PLAYER },
+#endif
+
+#ifdef ENABLE_USER_REPORT_SYSTEM
+	{ "report_user", do_report_user, 0, POS_DEAD, GM_PLAYER },
+	{ "report_list", do_report_list, 0, POS_DEAD, GM_LOW_WIZARD },
 #endif
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}

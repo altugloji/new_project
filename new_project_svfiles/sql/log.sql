@@ -259,6 +259,20 @@ CREATE TABLE `vcard_log` (
   `taker_ip` varbinary(15) DEFAULT NULL
 );
 
+DROP TABLE IF EXISTS `report_user_log`;
+CREATE TABLE `report_user_log`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `time` datetime NOT NULL,
+  `reporter_pid` int(11) NOT NULL,
+  `reporter_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `reporter_ip` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `target_pid` int(11) NOT NULL DEFAULT 0,
+  `target_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `reason` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `assigned` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+
 /* NEW FEATURE: CHAT_LOG - new log table to store player/staff chat logs */
 DROP TABLE IF EXISTS `chat_log`;
 CREATE TABLE `chat_log` (

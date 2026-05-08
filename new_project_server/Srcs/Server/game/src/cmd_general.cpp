@@ -2508,5 +2508,95 @@ ACMD(do_ex_log)
 }
 #endif
 
+#ifdef ENABLE_USER_REPORT_SYSTEM
+ACMD(do_report_user)
+{
+	char arg1[256], arg2[256];
+	two_arguments(argument, arg1, sizeof(arg1), arg2, sizeof(arg2));
+
+	if (!*arg1 || !*arg2)
+		return;
+
+	if (!ch->GetDesc())
+		return;
+
+	const std::string& targetName = arg1;
+	const std::string& reportType = arg2;
+	const LPCHARACTER targetCh = CHARACTER_MANAGER::instance().FindPC(targetName.c_str());
+
+	if (!targetCh)
+		return;
+
+	const DWORD targetPID = targetCh->GetPlayerID();
+
+	const bool isValidReason =
+		(reportType == "yang_sell") ||
+		(reportType == "farm_bot") ||
+		(reportType == "fish_bot") ||
+		(reportType == "reklam") ||
+		(reportType == "diger");
+
+	if (!isValidReason)
+		return;
+
+	char escapedReportType[32];
+	DBManager::Instance().EscapeString(escapedReportType, sizeof(escapedReportType), reportType.c_str(), reportType.length());
+
+	char szCheckQuery[512];
+	snprintf(szCheckQuery, sizeof(szCheckQuery),
+		"SELECT 1 FROM log.report_user_log WHERE reporter_pid=%u AND target_pid=%u AND reason='%s' LIMIT 1",
+		ch->GetPlayerID(), targetPID, escapedReportType);
+
+	auto pCheckMsg = DBManager::Instance().DirectQuery(szCheckQuery);
+	if (pCheckMsg && pCheckMsg->Get() && pCheckMsg->Get()->uiNumRows > 0)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "You already reported this player for the same reason.");
+		return;
+	}
+
+	LogManager::Instance().ReportUserLog(
+		ch->GetPlayerID(),
+		ch->GetName(),
+		ch->GetDesc()->GetHostName(),
+		targetPID,
+		targetCh->GetName(),
+		reportType.c_str()
+	);
+}
+
+ACMD(do_report_list)
+{
+	if (!ch || !ch->IsGM())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "You are not authorized to use this command.");
+		return;
+	}
+
+	char szQuery[512];
+	snprintf(szQuery, sizeof(szQuery),
+		"SELECT id, reporter_name, target_name, reason, time "
+		"FROM log.report_user_log WHERE assigned='%s' ORDER BY time DESC LIMIT 50",
+		ch->GetName());
+
+	auto pMsg = DBManager::Instance().DirectQuery(szQuery);
+	if (!pMsg || pMsg->Get()->uiNumRows == 0)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "You have no assigned reports.");
+		return;
+	}
+
+	while (auto row = mysql_fetch_row(pMsg->Get()->pSQLResult))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO,
+			"[#%s] %s reported %s for \"%s\" at %s",
+			row[0], // id
+			row[1], // reporter_name
+			row[2], // target_name
+			row[3], // reason
+			row[4]  // time
+		);
+	}
+}
+#endif
 
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

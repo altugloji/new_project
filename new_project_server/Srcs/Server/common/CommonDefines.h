@@ -15,7 +15,7 @@
 #define ENABLE_FULL_NOTICE
 #define ENABLE_NEWSTUFF
 #define ENABLE_PORT_SECURITY
-#define ENABLE_BELT_INVENTORY_EX
+// #define ENABLE_BELT_INVENTORY_EX
 #define ENABLE_CMD_WARP_IN_DUNGEON
 // #define ENABLE_ITEM_ATTR_COSTUME
 #define ENABLE_PLAYER_PER_ACCOUNT5
@@ -33,10 +33,10 @@
 #define ENABLE_CHECK_SELL_PRICE
 #define ENABLE_GOTO_LAG_FIX
 #define ENABLE_MOUNT_COSTUME_EX_SYSTEM
-#define ENABLE_PENDANT_SYSTEM
-#define ENABLE_GLOVE_SYSTEM
+// #define ENABLE_PENDANT_SYSTEM
+// #define ENABLE_GLOVE_SYSTEM
 #define ENABLE_MOVE_CHANNEL
-#define ENABLE_QUIVER_SYSTEM
+// #define ENABLE_QUIVER_SYSTEM
 #define ENABLE_REDUCED_ENTITY_VIEW
 #define ENABLE_GUILD_TOKEN_AUTH
 #define ENABLE_ITEM_AUTOSTACK_EX
@@ -48,7 +48,7 @@
 #define ENABLE_DB_SQL_LOG
 #define ENABLE_ITEM_SAFE_FLUSH
 #define ENABLE_ITEM_GROUND_EX
-#define NEW_SELECT_CHARACTER
+// #define NEW_SELECT_CHARACTER
 #define __BL_CLIENT_LOCALE_STRING__
 #define ENABLE_BUFFER_SECURITY
 
@@ -64,7 +64,7 @@ enum eCommonDefines {
 	MAP_ALLOW_LIMIT = 32, // 32 default
 };
 
-#define ENABLE_WOLFMAN_CHARACTER
+// #define ENABLE_WOLFMAN_CHARACTER
 #ifdef ENABLE_WOLFMAN_CHARACTER
 // #define DISABLE_WOLFMAN_ON_CREATE
 #define USE_MOB_BLEEDING_AS_POISON
@@ -86,7 +86,7 @@ enum eCommonDefines {
 //////////////////////////////////////////////////////////////////////////
 // ### Ex Features ###
 #define DISABLE_STOP_RIDING_WHEN_DIE //	if DISABLE_TOP_RIDING_WHEN_DIE is defined, the player doesn't lose the horse after dying
-#define ENABLE_ACCE_COSTUME_SYSTEM //fixed version
+// #define ENABLE_ACCE_COSTUME_SYSTEM //fixed version
 // #define USE_ACCE_ABSORB_WITH_NO_NEGATIVE_BONUS //enable only positive bonus in acce absorb
 #define ENABLE_HIGHLIGHT_NEW_ITEM //if you want to see highlighted a new item when dropped or when exchanged
 #define ENABLE_KILL_EVENT_FIX //if you want to fix the 0 exp problem about the when kill lua event (recommended)
@@ -103,7 +103,7 @@ enum eCommonDefines {
 // #define __PREMIUM_LOOT_FILTER__ // Enable Premium Usage of the Loot Filter System
 #endif
 
-#define ENABLE_CHEQUE_SYSTEM
+// #define ENABLE_CHEQUE_SYSTEM
 #ifdef ENABLE_CHEQUE_SYSTEM
 #define ENABLE_SHOP_USE_CHEQUE
 #define DISABLE_CHEQUE_DROP
@@ -129,11 +129,12 @@ enum eCommonDefines {
 #define FAST_PACKET_BLOCK											// Paket buglarını önlemek için süre engelleri
 #define HANDSHAKE_PACKET_ANTI_FLOOD									// Auth / Game socket attack fix
 #define PARTY_EXP_FIX												// Grup bugu. Karakteri ortaya alma.
-// #define __AUTO_SKILL_READER__
+#define __AUTO_SKILL_READER__
 #define ENABLE_EXCHANGE_LOG
 #define KYGN_CHEST_INFO												// Sandık İçeriğini Görme
 #define __SEND_TARGET_INFO__										// Mob target info
 #define UPDATE_ITEM_MESSAGE
+#define ENABLE_USER_REPORT_SYSTEM 					//Official User Report System
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

@@ -9,9 +9,9 @@
 // ### Default Ymir Macros ###
 #define LOCALE_SERVICE_EUROPE
 #define ENABLE_COSTUME_SYSTEM
-#define ENABLE_ENERGY_SYSTEM
-#define ENABLE_DRAGON_SOUL_SYSTEM
-#define ENABLE_NEW_EQUIPMENT_SYSTEM
+// #define ENABLE_ENERGY_SYSTEM
+// #define ENABLE_DRAGON_SOUL_SYSTEM
+// #define ENABLE_NEW_EQUIPMENT_SYSTEM
 // ### Default Ymir Macros ###
 //////////////////////////////////////////////////////////////////////////
 
@@ -36,12 +36,12 @@
 #define ENABLE_LOCALE_COMMON
 #define ENABLE_NO_DSS_QUALIFICATION
 //#define ENABLE_NO_SELL_PRICE_DIVIDED_BY_5
-#define ENABLE_PENDANT_SYSTEM
-#define ENABLE_GLOVE_SYSTEM
+// #define ENABLE_PENDANT_SYSTEM
+// #define ENABLE_GLOVE_SYSTEM
 #define ENABLE_MOVE_CHANNEL
-#define ENABLE_QUIVER_SYSTEM
+// #define ENABLE_QUIVER_SYSTEM
 #define ENABLE_RACE_HEIGHT
-#define ENABLE_ELEMENTAL_TARGET
+// #define ENABLE_ELEMENTAL_TARGET
 #define ENABLE_INGAME_CONSOLE
 #define ENABLE_4TH_AFF_SKILL_DESC
 #define ENABLE_GUILD_TOKEN_AUTH
@@ -52,7 +52,7 @@
 #define ENABLE_MESSENGER_REMOVE_SYNC
 // #define ENABLE_MODEL_LOD_LOAD
 #define ENABLE_ITEM_GROUND_EX
-#define NEW_SELECT_CHARACTER
+// #define NEW_SELECT_CHARACTER
 
 #define ENABLE_NEW_EVENT_STRUCT
 #ifdef ENABLE_NEW_EVENT_STRUCT
@@ -66,7 +66,7 @@
 #define WJ_SHOW_MOB_INFO_EX
 #endif
 
-#define ENABLE_WOLFMAN_CHARACTER
+// #define ENABLE_WOLFMAN_CHARACTER
 #ifdef ENABLE_WOLFMAN_CHARACTER
 // #define DISABLE_WOLFMAN_ON_CREATE
 #endif
@@ -76,7 +76,7 @@
 
 //////////////////////////////////////////////////////////////////////////
 // ### New System Defines - Extended Version ###
-#define ENABLE_ACCE_COSTUME_SYSTEM
+// #define ENABLE_ACCE_COSTUME_SYSTEM
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 // #define USE_ACCE_ABSORB_WITH_NO_NEGATIVE_BONUS
 #endif
@@ -101,7 +101,7 @@
 #define ENABLE_ATLAS_MARK_ON_WARP_SCROLLS // warp scrolls tooltips will show the mark on the atlas
 
 // enable the won system as a currency
-#define ENABLE_CHEQUE_SYSTEM
+// #define ENABLE_CHEQUE_SYSTEM
 #ifdef ENABLE_CHEQUE_SYSTEM
 #define DISABLE_CHEQUE_DROP
 #define ENABLE_WON_EXCHANGE_WINDOW
@@ -121,7 +121,7 @@
 #define __BL_FLY_TARGET_POSITION__
 #define __BL_CLIENT_LOCALE_STRING__
 #define ENABLE_AREA_OPTIMIZATION
-#define ENABLE_DYNAMIC_SHADOW
+//#define ENABLE_DYNAMIC_SHADOW
 
 //ML_Full
 #define __BL_MULTI_LANGUAGE__
@@ -137,7 +137,7 @@
 #define ENABLE_EXCHANGE_LOG
 #define KYGN_CHEST_INFO													// Sandık İçeriğini Görme
 #define ENABLE_SEND_TARGET_INFO											// Mob target info
-
+#define ENABLE_USER_REPORT_SYSTEM 										//Official User Report System
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

@@ -548,6 +548,18 @@ class TargetBoard(ui.ThinBoard):
 		closeButton.SetEvent(ui.__mem_func__(self.OnPressedCloseButton))
 		closeButton.Show()
 
+		if app.ENABLE_USER_REPORT_SYSTEM:
+			reportButton = ui.Button()
+			reportButton.SetParent(self)
+			reportButton.SetUpVisual("d:/ymir work/ui/game/user_report/target_bar_report_button_default.sub")
+			reportButton.SetOverVisual("d:/ymir work/ui/game/user_report/target_bar_report_button_over.sub")
+			reportButton.SetDownVisual("d:/ymir work/ui/game/user_report/target_bar_report_button_down.sub")
+			reportButton.SetPosition(50, 13)
+			reportButton.SetToolTipText(localeInfo.USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT)
+			reportButton.SetWindowHorizontalAlignRight()
+			reportButton.SetEvent(ui.__mem_func__(self.OnReportPlayer))
+			reportButton.Hide()
+
 		self.buttonDict = {}
 		self.showingButtonList = []
 		for buttonName in self.BUTTON_NAME_LIST:
@@ -598,6 +610,10 @@ class TargetBoard(ui.ThinBoard):
 			self.vnum = 0
 
 		self.closeButton = closeButton
+
+		if app.ENABLE_USER_REPORT_SYSTEM:
+			self.reportButton = reportButton
+
 		self.nameString = 0
 		self.nameLength = 0
 		self.vid = 0
@@ -622,6 +638,10 @@ class TargetBoard(ui.ThinBoard):
 	def Destroy(self):
 		self.eventWhisper = None
 		self.closeButton = None
+
+		if app.ENABLE_USER_REPORT_SYSTEM:
+			self.reportButton = None
+
 		self.showingButtonList = None
 		self.buttonDict = None
 		self.name = None
@@ -683,6 +703,11 @@ class TargetBoard(ui.ThinBoard):
 			self.SetTargetName(name)
 			self.Show()
 
+		if app.ENABLE_USER_REPORT_SYSTEM:
+			if chr.GetInstanceType(self.vid) == chr.INSTANCE_TYPE_PLAYER:
+				if not player.IsMainCharacterIndex(vid) and self.reportButton:
+					self.reportButton.Show()
+
 	def Refresh(self):
 		if self.IsShow():
 			if self.IsShowButton():
@@ -735,6 +760,8 @@ class TargetBoard(ui.ThinBoard):
 		self.name.SetHorizontalAlignCenter()
 		self.name.SetWindowHorizontalAlignCenter()
 		self.hpGauge.Hide()
+		if app.ENABLE_USER_REPORT_SYSTEM:
+			self.reportButton.Hide()
 		if app.ENABLE_ELEMENTAL_TARGET:
 			self.elementImage.Hide()
 		if app.ENABLE_SEND_TARGET_INFO:
@@ -1001,3 +1028,11 @@ class TargetBoard(ui.ThinBoard):
 			else:
 				if distance < self.EXCHANGE_LIMIT_RANGE:
 					self.RefreshButton()
+
+	if app.ENABLE_USER_REPORT_SYSTEM:
+		def OnReportPlayer(self):
+			import uiTargetUserReport
+			self.userReportWindow = uiTargetUserReport.UserReportWindow()
+
+			self.userReportWindow.SetTargetName(self.nameString)
+			self.userReportWindow.Open()

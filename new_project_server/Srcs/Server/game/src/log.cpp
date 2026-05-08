@@ -345,4 +345,25 @@ void LogManager::AcceLog(DWORD dwPID, DWORD x, DWORD y, DWORD item_vnum, DWORD i
 	Query("INSERT INTO acce%s (pid, time, x, y, item_vnum, item_uid, item_count, item_abs_chance, success) VALUES(%u, NOW(), %u, %u, %u, %u, %d, %d, %d)", get_table_postfix(), dwPID, x, y, item_vnum, item_uid, item_count, abs_chance, success ? 1 : 0);
 }
 #endif
+
+#ifdef ENABLE_USER_REPORT_SYSTEM
+void LogManager::ReportUserLog(DWORD reporterPID, const char* reporterName, const char* reporterIP, DWORD targetPID, const char* targetName, const char* reason)
+{
+	char escapedReason[512];
+	char escapedTarget[512];
+	char escapedReporter[512];
+	char escapedReporterIP[128];
+
+	m_sql.EscapeString(escapedReason, sizeof(escapedReason), reason, strlen(reason));
+	m_sql.EscapeString(escapedTarget, sizeof(escapedTarget), targetName, strlen(targetName));
+	m_sql.EscapeString(escapedReporter, sizeof(escapedReporter), reporterName, strlen(reporterName));
+	m_sql.EscapeString(escapedReporterIP, sizeof(escapedReporterIP), reporterIP, strlen(reporterIP));
+
+	Query(
+		"INSERT INTO report_user_log (time, reporter_pid, reporter_name, reporter_ip, target_pid, target_name, reason) "
+		"VALUES (NOW(), %u, '%s', '%s', %u, '%s', '%s')",
+		reporterPID, escapedReporter, escapedReporterIP, targetPID, escapedTarget, escapedReason
+	);
+}
+#endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

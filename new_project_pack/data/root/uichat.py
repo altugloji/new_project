@@ -737,7 +737,8 @@ class ChatWindow(ui.Window):
 		if self.IsShow():
 			self.btnChatSizing.Show()
 			if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-				self.flag_bar.Show()
+				self.flag_bar.Hide()
+				# self.flag_bar.Show() #chat flag bar gizleme
 
 		self.Refresh()
 

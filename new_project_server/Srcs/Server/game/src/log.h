@@ -77,6 +77,10 @@ class LogManager : public singleton<LogManager>
 		void		AcceLog(DWORD dwPID, DWORD x, DWORD y, DWORD item_vnum, DWORD item_uid, int item_count, int abs_chance, bool success);
 #endif
 
+#ifdef ENABLE_USER_REPORT_SYSTEM
+		void		ReportUserLog(DWORD reporterPID, const char* reporterName, const char* reporterIP, DWORD targetPID, const char* targetName, const char* reason);
+#endif
+
 		size_t EscapeString(char* dst, size_t dstSize, const char *src, size_t srcSize);
 
 		template<typename... Args>

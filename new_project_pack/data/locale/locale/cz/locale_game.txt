@@ -1,3 +1,21 @@
+CHARACTER_NAME	Jméno
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Zrušit
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Odeslat
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Opravdu chceš nahlásit tuto postavu?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Vybraná postava
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	Falešná hlášení mohou mít následky.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Tuto postavu jsi již nahlásil.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	Tuto funkci nemùžeš použít, když jsi mrtvý.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	GM postavy nemohou tuto funkci používat.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	Než odešleš hlášení, musíš vybrat dùvod.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Tato postava je momentálnì offline.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	Pro použití této funkce musíš mít dokonèený úkol Biologa na úrovni 30.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Hlášení bylo úspìšnì odesláno.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Zkus to prosím pozdìji.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Bot obchod
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Botování a podvádìní
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Prodej yangù
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Nahlásit hráèe
 LOGIN_LANGUAGE_SELECT_TITLE	Vyber jazyka
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Webová stránka
@@ -347,7 +365,7 @@ COMB_NOT_FULL_BOOK	Ne, takhle obchody dìlat nebudu. Jak jsem ti již øekl, budu s
 COMB_NOT_ITEM_IN_INVENTORY	Nemùžeš použít používaný pøedmìt.
 COMB_NOT_MEDIUM_ITEM	Tento pøedmìt nelze použít.
 COMB_WILL_REMOVE_MATERIAL	Zdrojový pøedmìt bude pøi úspìchu znièen.
-CREATE_ERROR_GM_NAME	V názvu postavy nesmíš použít ,GM‘.
+CREATE_ERROR_GM_NAME	V názvu postavy nesmíš použít ,GM'.
 CREATE_ERROR_INSULT_NAME	Toto jméno je nepøípustné.
 CREATE_ERROR_LIMIT_LEVEL	Tvá postava musí být alespoò úrovnì 80.
 CREATE_ERROR_TIME_LIMIT	Postavu mùžeš vytvoøit pouze jednou za 30 vteøin.
@@ -1865,7 +1883,7 @@ MERCENARY_MISSION_NAME_PUNITIVE_NONE	Žádná
 MERCENARY_MISSION_NAME_PUNITIVE_UPPER	Conquest (tìžká)
 MERCENARY_MISSION_REFRESH_FAIL_MERCENARY	Nelze aktualizovat, protože neexistují žádní žoldáci.
 MERCENARY_MISSION_STATE_COMPLETE_1	%s%s byl dokonèen.
-MERCENARY_MISSION_STATE_COMPLETE_2	Zvol „Výsledky“
+MERCENARY_MISSION_STATE_COMPLETE_2	Zvol „Výsledky"
 MERCENARY_MISSION_STATE_END	Operace dokonèena
 MERCENARY_MISSION_STATE_GIVEUP	Nemùžeš znovu zkoušet operaci, kterou jsi vzdal.
 MERCENARY_MISSION_STATE_NONE	Nyní mùžeš spustit operaci.
@@ -2010,7 +2028,7 @@ MINI_GAME_CATCHKING_TOOLTIP_SCORE2	%s: 400 až 549:
 MINI_GAME_CATCHKING_TOOLTIP_SCORE3	%s: 10 až 399:
 MINI_GAME_CATCHKING_TOOLTIP_SCORE4	Pokud otoèíš všechny karty v øádce, získáš bonus 10 bodù.
 MINI_GAME_GIVEUP_QUESTION	Opravdu chceš ukonèit hru? Nezískáš žádnou odmìnu.
-MINI_GAME_NOTICE_1	Klikni na ‚Hodit‘ pro urèení, kdo zaène.
+MINI_GAME_NOTICE_1	Klikni na ‚Hodit' pro urèení, kdo zaène.
 MINI_GAME_NOTICE_2	Hodit Tyèky Yut.
 MINI_GAME_NOTICE_3	Poèítaè háže Tyèky Yut, aby urèil, kdo zaène.
 MINI_GAME_NOTICE_4	Máte shodné skóre nebo poèítaè hodil nižší. Poèítaè zaène.
@@ -2199,7 +2217,7 @@ PASSIVE_JOB_FIRST_ACTIVATE_POPUP2	Pøedmìt bude ztracen. Jsi si jistý?
 PASSIVE_JOB_LEFT_TIME	Zbývající èas: %s
 PASSIVE_JOB_MAX_TIME	Maximální èas relikvie: %s
 PASSWORD_TITLE	Heslo ke skladišti
-PET_ATTR_CHANGE_DIALOG_TEXT	Chtìl bys teï zmìnit atributy mazlíka?\nJe na to potøeba pøedmìt ‘Zaèarovat mazlíka’.\nProces mùže selhat.
+PET_ATTR_CHANGE_DIALOG_TEXT	Chtìl bys teï zmìnit atributy mazlíka?\nJe na to potøeba pøedmìt 'Zaèarovat mazlíka'.\nProces mùže selhat.
 PET_ATTR_CHANGE_USE	Akci nelze provést, pokud se modifikují atributy mazlíka.
 PET_ATTR_DETERMINE_TYPE1	Typ mazlíka 1: nemotorný. Není moc silný.\nJeho schopnosti mùžeš èasem vylepšovat.
 PET_ATTR_DETERMINE_TYPE2	Typ mazlíka 2: zvìdavý. Není moc silný.\nJeho schopnosti se bìhem èasu zlepší.

@@ -1,3 +1,21 @@
+CHARACTER_NAME	Nome
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Annulla
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Invia
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Sei sicuro di voler segnalare questo personaggio?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Personaggio selezionato
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	Le false segnalazioni possono avere conseguenze.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Hai già segnalato questo personaggio.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	Non puoi usare questa funzione mentre sei morto.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	I personaggi GM non possono usare questa funzione.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	Devi selezionare un motivo prima di inviare la segnalazione.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Questo personaggio è attualmente offline.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	Devi completare la missione del Biologo di livello 30 per usare questa funzione.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Segnalazione inviata con successo.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Riprova più tardi.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Negozio Bot
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Bot e cheat
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Vendita Yang
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Segnala giocatore
 LOGIN_LANGUAGE_SELECT_TITLE	Selezione Lingua
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Sito web
@@ -347,7 +365,7 @@ COMB_NOT_FULL_BOOK	No, non ci siamo. Come ti ho già spiegato, sono disposto a fa
 COMB_NOT_ITEM_IN_INVENTORY	Non puoi utilizzare oggetti già in uso.
 COMB_NOT_MEDIUM_ITEM	Questo oggetto non può essere utilizzato.
 COMB_WILL_REMOVE_MATERIAL	In caso di successo, l'originale verrà distrutto.
-CREATE_ERROR_GM_NAME	Nel nome del personaggio non puoi usare ,GM‘.
+CREATE_ERROR_GM_NAME	Nel nome del personaggio non puoi usare ,GM'.
 CREATE_ERROR_INSULT_NAME	Questo nome non è consentito.
 CREATE_ERROR_LIMIT_LEVEL	Il tuo personaggio deve aver raggiunto almeno il livello 80.
 CREATE_ERROR_TIME_LIMIT	Puoi solo creare un personaggio ogni 30 secondi.
@@ -1616,7 +1634,7 @@ MAP_EMPIREWAR02	Battaglia per il Castello
 MAP_EMPIREWAR03	Battaglia per il Castello
 MAP_FARMING_DUNGEON	Dungeon Misterioso
 MAP_FLAME	Doyyumhwan
-MAP_GOLDEN_LAND	Terra d'Oro – Ingresso
+MAP_GOLDEN_LAND	Terra d'Oro - Ingresso
 MAP_GOLDEN_LAND_STAGE	Terra d'Oro
 MAP_GUILD_01	Jungrang
 MAP_GUILD_02	Waryong
@@ -1635,8 +1653,8 @@ MAP_MAZE_DUNGEON_02	Caverne Gnoll livello 2
 MAP_MAZE_DUNGEON_03	Caverne Gnoll livello 3
 MAP_MILGYO	Tempio Hwang
 MAP_MILGYO_A	
-MAP_MINIBOSS_01	Dungeon blu – liv. 40-80
-MAP_MINIBOSS_02	Dungeon rosso – dal liv. 81
+MAP_MINIBOSS_01	Dungeon blu - liv. 40-80
+MAP_MINIBOSS_02	Dungeon rosso - dal liv. 81
 MAP_MISTS_OF_ISLAND	Isole Nebulose
 MAP_MONKEY_DUNGEON	Hasun Dong
 MAP_MONKEY_DUNGEON2	Jungsun Dong
@@ -1828,8 +1846,8 @@ MERCENARY_CURE_IMMEDIATELY_ASK	Vuoi guarire %s in modo immediato?
 MERCENARY_CURE_IMMEDIATELY_NEED_ITEM	Ti serve una Guarigione Mercenaria immediata.
 MERCENARY_CURE_NOT_INJURY	Questo mercenario è stato ferito.
 MERCENARY_CURE_WILL_DONE	Non puoi curare i mercenari che sono attualmente in fase di cura lenta.
-MERCENARY_DECREASE_INJURY_PCT	Rischio di ferimento – %.1f%%
-MERCENARY_DECREASE_TIME	Durata della missione – %.1f%%
+MERCENARY_DECREASE_INJURY_PCT	Rischio di ferimento - %.1f%%
+MERCENARY_DECREASE_TIME	Durata della missione - %.1f%%
 MERCENARY_EXP	EXP Mercenario:
 MERCENARY_EXP_MAX	Max.
 MERCENARY_FIRA_DISPATCH	Non puoi estromettere mercenari che sono in missione.
@@ -2279,7 +2297,7 @@ PREMIUM_PRIVATE_SHOP_NO_BUFF	Questo pulsante è per il Negozio Premium Privato. P
 PREMIUM_PRIVATE_SHOP_PASSWORD_DESC1	Digita la password
 PREMIUM_PRIVATE_SHOP_PASSWORD_DESC2	per aprire il Negozio Premium Privato.
 PREMIUM_PRIVATE_SHOP_PASSWORD_TITLE	Password
-PREMIUM_PRIVATE_SHOP_POSITION	%s (%d,%d) – CH-%d
+PREMIUM_PRIVATE_SHOP_POSITION	%s (%d,%d) - CH-%d
 PREMIUM_PRIVATE_SHOP_USE_ITEM	Vuoi utilizzare l'oggetto "Negozio Premium Privato"?
 PREMIUM_PRIVATE_TAX_ADJUSTMENT_LIMIT_WON	Non puoi ritirare i soldi, altrimenti super il limite di 999 Won.
 PREMIUM_PRIVATE_TAX_ADJUSTMENT_LIMIT_YANG	Non puoi ritirare i soldi, altrimenti super il limite di 2 milioni di Yang.

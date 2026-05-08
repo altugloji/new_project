@@ -1,3 +1,26 @@
+USER_REPORT_SYSTEM_TOOLTIP_YANG_SELL	Yang Satýþý
+USER_REPORT_SYSTEM_TOOLTIP_FARM_BOT	Farm Botu
+USER_REPORT_SYSTEM_TOOLTIP_FISH_BOT	Balýk Botu
+USER_REPORT_SYSTEM_TOOLTIP_REKLAM	Reklam
+USER_REPORT_SYSTEM_TOOLTIP_DIGER	Diðer
+CHARACTER_NAME	Ýsim
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Ýptal et
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Gönder
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Bu karakteri rapor etmek istediðinden emin misin?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Seçilen karakter
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	Sahte ihbarlarýn sonuçlarý olabilir.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Bu karakteri zaten rapor ettin.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	Ölüyken bu özelliði kullanamazsýn.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	GM karakterleri bu özelliði kullanamaz.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	Raporunu gönderebilmek için önce bir neden seçmelisin.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Bu karakter þu anda çevrimdýþý.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	Bu özelliði kullanabilmek için Biyolog görevini (seviye 30) tamamlamýþ olmalýsýn.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Rapor baþarýyla gönderildi.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Lütfen daha sonra tekrar dene.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Bot Dükkaný
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Botlama ve Hile
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Yang satýþý
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Oyuncuyu rapor et
 TARGET_INFO_REGEN_INFO	Can yenileme %d%%, her %d san.
 TARGET_INFO_RESISTS_LINE0	Kýlýç: %d%% Çiftel: %d%% Çan: %d%%
 TARGET_INFO_RESISTS_LINE1	Býçak: %d%% Yelpaze: %d%% Yay: %d%%
@@ -887,11 +910,11 @@ GOLDEN_LAND_CHAT_MESSAGE_FIND_CARD_NOT_ENOUGH_YELLOW_FRUIT	Yeterince altýn dutun
 GOLDEN_LAND_CHAT_MESSAGE_MINE_TOWER_GUARD_CREATED	Patlama korumasý etkinleþtirildi. Bir sonraki patlayýcý kulesine karþý korumalýsýn.
 GOLDEN_LAND_CHAT_MESSAGE_MINE_TOWER_SKILL_GUARDED	Patlayýcý korumasý seni korudu ve harcandý. Artýk patlayýcý kuleler sana yine zarar verebilir.
 GOLDEN_LAND_CHAT_MESSAGE_NOTICE_BATTLE_STAGE_START	Bir sonraki kata ýþýnlanacaksýn.
-GOLDEN_LAND_CHAT_MESSAGE_NOTICE_DUNGEON_REMAIN_TIME_MIN	%d dakika daha Altýn Topraklar’da kalabilirsin.
+GOLDEN_LAND_CHAT_MESSAGE_NOTICE_DUNGEON_REMAIN_TIME_MIN	%d dakika daha Altýn Topraklar'da kalabilirsin.
 GOLDEN_LAND_CHAT_MESSAGE_NOTICE_EVENT_END	Primordis keþfi sona erdi.
-GOLDEN_LAND_CHAT_MESSAGE_NOTICE_EVENT_START	Primordis keþfi baþladý! Primordis Bekçisi’ni alt et ve Altýn Topraklar’a yolculuk et.
-GOLDEN_LAND_CHAT_MESSAGE_NOTICE_OASIS_SHOP	Kervan Tüccarý’ndan eþyalar satýn alabilirsin.
-GOLDEN_LAND_CHAT_MESSAGE_NOTICE_OASIS_STAGE_START	Vaha’ya ýþýnlanacaksýn.
+GOLDEN_LAND_CHAT_MESSAGE_NOTICE_EVENT_START	Primordis keþfi baþladý! Primordis Bekçisi'ni alt et ve Altýn Topraklar'a yolculuk et.
+GOLDEN_LAND_CHAT_MESSAGE_NOTICE_OASIS_SHOP	Kervan Tüccarý'ndan eþyalar satýn alabilirsin.
+GOLDEN_LAND_CHAT_MESSAGE_NOTICE_OASIS_STAGE_START	Vaha'ya ýþýnlanacaksýn.
 GOLDEN_LAND_CHAT_MESSAGE_NOTICE_STONE_SPAWN_AFTER_10SEC	Primoridis heykelleri 10 saniye içinde belirecek.
 GOLDEN_LAND_CHAT_MESSAGE_NOT_ENOUGH_LEVEL	Seviyen çok düþük olduðu için bu eþyayý kullanamazsýn.
 GOLDEN_LAND_CHAT_MESSAGE_RESET_ALREADY_RESET	Bunu zaten sýfýrladýn.
@@ -1663,8 +1686,8 @@ MAP_MAZE_DUNGEON_02	Gnoll Cehennemleri Kat 2
 MAP_MAZE_DUNGEON_03	Gnoll Cehennemleri Kat 3
 MAP_MILGYO	Hwang Tapýnaðý
 MAP_MILGYO_A	
-MAP_MINIBOSS_01	Mavi zindan – Sv 40-80
-MAP_MINIBOSS_02	Kýrmýzý zindan – Sv 81 itibarýyla
+MAP_MINIBOSS_01	Mavi zindan - Sv 40-80
+MAP_MINIBOSS_02	Kýrmýzý zindan - Sv 81 itibarýyla
 MAP_MISTS_OF_ISLAND	Sis Adalarý
 MAP_MONKEY_DUNGEON	Hasun Dong
 MAP_MONKEY_DUNGEON2	Jungsun Dong
@@ -2472,7 +2495,7 @@ REFINE_SUCCESS_PROBALITY	Yükseltme þansý %%%d
 REFINE_WARNING2	Bu geliþtirmeye devam etmek istiyor musun?
 RESTART_HERE_BUTTON_TEXT_SUNGMAHEE_GATE	Tesadüfi canlandýrma
 RESTART_POPUP_GIVEUP_ELEMENTAL_DUNGEON	Öldün. \nElementer dünyasýndan geri dön!
-RESTART_POPUP_GIVEUP_GOLDEN_LAND_STAGE	Öldüðünde Altýn Topraklar’a geri ýþýnlanýrsýn.\n\n Ýpucu: Bir patlatýcý koruma bileti kullanarak patlayýcý kulenin seni öldürmesini engelleyebilirsin.\n
+RESTART_POPUP_GIVEUP_GOLDEN_LAND_STAGE	Öldüðünde Altýn Topraklar'a geri ýþýnlanýrsýn.\n\n Ýpucu: Bir patlatýcý koruma bileti kullanarak patlayýcý kulenin seni öldürmesini engelleyebilirsin.\n
 RESTART_POPUP_GIVEUP_MIST_ISLAND	Beþ Tapýnaðýn Savaþý'nda þehit düþtün.\n Þimdi köyüne geri dönüyorsun.
 RESTART_POPUP_GIVEUP_OTHER_WORLD_DUNGEON	Karakterin öldü. \nYakýnda þehre ýþýnlanacaksýn.
 RESTART_POPUP_GIVEUP_SUNGMAHEE_TOWER	Aðýr bir maðlubiyet! Yolun sonu.
@@ -2752,15 +2775,15 @@ STAT_TOOLTIP_TAB_CHARACTER	Karakter
 STAT_TOOLTIP_TAB_EMOTICON	Duygular
 STAT_TOOLTIP_TAB_QUEST	Görevler
 STAT_TOOLTIP_TAB_SKILL	Beceriler
-SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_0	Bu kupa Yongan Bölgesi’ndeki SungMa Ýstila Portalý’nda kazanýlabilir.
-SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_1	Bu kupa Joan Bölgesi’ndeki SungMa Ýstila Portalý’nda kazanýlabilir.
-SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_2	Bu kupa Pyungmoo Bölgesi’ndeki SungMa Ýstila Portalý’nda kazanýlabilir.
-SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_3	Bu kupa Seungryong Vadisi’ndeki SungMa Ýstila Portalý’nda kazanýlabilir.
-SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_4	Bu kupa Yongbi Çölü’ndeki SungMa Ýstila Portalý’nda kazanýlabilir.
-SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_5	Bu kupa Doyyumhwan (Ateþ Diyarý)’ndaki SungMa Ýstila Portalý’nda kazanýlabilir.
-SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_6	Bu kupa Sohan Daðý’ndaki SungMa Ýstila Portalý’nda kazanýlabilir.
-SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_7	Bu kupa Þeytan Katakombu’ndaki SungMa Ýstila Portalý’nda kazanýlabilir.
-SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_8	Bu kupa Efsunlu Orman’daki SungMa Ýstila Portalý’nda kazanýlabilir.
+SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_0	Bu kupa Yongan Bölgesi'ndeki SungMa Ýstila Portalý'nda kazanýlabilir.
+SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_1	Bu kupa Joan Bölgesi'ndeki SungMa Ýstila Portalý'nda kazanýlabilir.
+SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_2	Bu kupa Pyungmoo Bölgesi'ndeki SungMa Ýstila Portalý'nda kazanýlabilir.
+SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_3	Bu kupa Seungryong Vadisi'ndeki SungMa Ýstila Portalý'nda kazanýlabilir.
+SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_4	Bu kupa Yongbi Çölü'ndeki SungMa Ýstila Portalý'nda kazanýlabilir.
+SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_5	Bu kupa Doyyumhwan (Ateþ Diyarý)'ndaki SungMa Ýstila Portalý'nda kazanýlabilir.
+SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_6	Bu kupa Sohan Daðý'ndaki SungMa Ýstila Portalý'nda kazanýlabilir.
+SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_7	Bu kupa Þeytan Katakombu'ndaki SungMa Ýstila Portalý'nda kazanýlabilir.
+SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_8	Bu kupa Efsunlu Orman'daki SungMa Ýstila Portalý'nda kazanýlabilir.
 SUNGMAHEE_GATE_ALREADY_OPEN	[SungMa Ýstila Portalý] Bir SungMa Ýstila Portalý açýldý. Acele et ve içeri gir! (%s daha açýk)
 SUNGMAHEE_GATE_ALREADY_OPEN_1M	[SungMa Ýstila Portalý] Bir SungMa Ýstila Portalý açýldý. Acele et ve onu imha et! (1 dakikadan daha kýsa açýk)
 SUNGMAHEE_GATE_MAP_ELEMENT_DARK	Karanlýk
@@ -2773,10 +2796,10 @@ SUNGMAHEE_GATE_MAP_ELEMENT_WIND	Rüzgar
 SUNGMAHEE_GATE_MESSAGE_CANNOT_OPEN_ACHIEV_CONQUEROR_LEVEL	Bunu açabilmek için bir þampiyon seviyesine eriþmelisin.
 SUNGMAHEE_GATE_MESSAGE_CANNOT_OPEN_ACHIEV_IN_BATTLE_ROYALE	Bunu bu bölgede açamazsýn.
 SUNGMAHEE_GATE_MESSAGE_DUNGEON_ELEMENT_INFO	Bu bölgenin etkisi altýnda olduðu element: %s
-SUNGMAHEE_GATE_MESSAGE_NOTICE_BEFORE_OPEN_1	Yakýnda Dongan Ovasý’nda bir SungMa Ýstila Portalý açýlacak.
+SUNGMAHEE_GATE_MESSAGE_NOTICE_BEFORE_OPEN_1	Yakýnda Dongan Ovasý'nda bir SungMa Ýstila Portalý açýlacak.
 SUNGMAHEE_GATE_MESSAGE_NOTICE_BEFORE_OPEN_2	Her krallýðýn mevcut yerlerini görmek için genel görünüm haritasýný açabilirsin.
 SUNGMAHEE_GATE_MESSAGE_NOTICE_DUNGEON_END_TIME	Süre doldu ve buradan dýþarý ýþýnlanacaksýn.
-SUNGMAHEE_GATE_MESSAGE_NOTICE_DUNGEON_REMAIN_TIME	SungMa Ýstila Portalý’nýn kapanýþýna kalan süre %d dakika.
+SUNGMAHEE_GATE_MESSAGE_NOTICE_DUNGEON_REMAIN_TIME	SungMa Ýstila Portalý'nýn kapanýþýna kalan süre %d dakika.
 SUNGMAHEE_GATE_MESSAGE_NOTICE_END	Tüm SungMa Ýstila Portallarý kapanýyor.
 SUNGMAHEE_GATE_MESSAGE_NOTICE_ENTRY_CLOSE	SungMa Ýstila Portalý kapandý.
 SUNGMAHEE_GATE_MESSAGE_NOTICE_ENTRY_OPEN	Bir SungMa Ýstila Portalý açýldý ve giriþ yapýlabilir durumda. Saat %d:%d'a kadar açýk.
@@ -2918,7 +2941,7 @@ TOOLTIP_AFFECT_SAFEBOX_BUFF_03	Depo bonusu\n+%1 hayat puaný	SNA
 TOOLTIP_AFFECT_SAFEBOX_BUFF_04	Depo bonusu\n+%3 canavarlara karþý güçlü	SNA
 TOOLTIP_AFFECT_SECRET_DUNGEON_BUFF_A	Yýlan Tapýnaðý'ný veya Kuzey Rüzgar Derinlikleri'ni baþarýyla tamamlarsan ek bir hazine sandýðý alýrsýn.	SNA
 TOOLTIP_AFFECT_SECRET_DUNGEON_BUFF_B	Jotun Thrym'i yener veya Zodyak Tapýnaðý'ný baþarýyla tamamlarsan ek bir hazine sandýðý alýrsýn.	SNA
-TOOLTIP_AFFECT_SECRET_DUNGEON_BUFF_C	Azrail veya Beran-Setaou’i alt edersen ekstra bir hazine sandýðý alýrsýn.	SNA
+TOOLTIP_AFFECT_SECRET_DUNGEON_BUFF_C	Azrail veya Beran-Setaou'i alt edersen ekstra bir hazine sandýðý alýrsýn.	SNA
 TOOLTIP_AFFECT_SECRET_DUNGEON_BUFF_POINT_A	Ýlerleme Enigma Tapýnaðý Bonus A: %d	SA
 TOOLTIP_AFFECT_SECRET_DUNGEON_BUFF_POINT_B	Ýlerleme Enigma Tapýnaðý Bonus B: %d	SA
 TOOLTIP_AFFECT_SECRET_DUNGEON_BUFF_POINT_C	Ýlerleme Enigma Tapýnaðý Bonus C: %d	SA
