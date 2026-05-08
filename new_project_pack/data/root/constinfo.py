@@ -4,6 +4,10 @@ import item
 import net
 import player
 
+if app.ENABLE_ITEM_SHOP_SYSTEM:
+	ITEM_SEARCH_DATA = []
+	ITEM_DATA = {}#for item shop
+
 if app.KYGN_CHEST_INFO:
 	CD_CUR_CHEST_CELL = 753
 

@@ -295,6 +295,14 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 		void	GetItemAttribute(TItemPos Cell, DWORD dwAttrSlotIndex, BYTE * pbyType, short * psValue) const;
 		void	SendClickItemPacket(DWORD dwIID);
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+		DWORD	GetDragonCoin();
+		DWORD	GetDragonMark();
+
+		void	SetDragonCoin(DWORD amount);
+		void	SetDragonMark(DWORD amount);
+#endif
+
 		void	RequestAddLocalQuickSlot(DWORD dwLocalSlotIndex, DWORD dwWndType, DWORD dwWndItemPos) const;
 		void	RequestAddToEmptyLocalQuickSlot(DWORD dwWndType, DWORD dwWndItemPos);
 		void	RequestMoveGlobalQuickSlotToLocalQuickSlot(DWORD dwGlobalSrcSlotIndex, DWORD dwLocalDstSlotIndex) const;
@@ -631,6 +639,11 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 		// System
 		BOOL					m_sysIsCoolTime;
 		BOOL					m_sysIsLevelLimit;
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+		DWORD					m_dwDragonCoin;
+		DWORD					m_dwDragonMark;
+#endif
 
 	protected:
 		// Game Cursor Data

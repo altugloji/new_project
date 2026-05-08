@@ -699,6 +699,19 @@ PyObject* itemGetApplyPoint(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildValue("i", GetApplyPoint(iApply));
 }
 
+#ifdef __RENEWAL_SKILL_BOOK__
+PyObject* itemGetImagePtr(PyObject* poSelf, PyObject* poArgs)
+{
+	char* iconFile;
+	if (!PyTuple_GetString(poArgs, 0, &iconFile))
+		return Py_BadArgument();
+	CGraphicImage* pImage = (CGraphicImage*)CResourceManager::Instance().GetResourcePointer(iconFile);
+	if (!pImage)
+		return Py_BuildValue("i", 0);
+	return Py_BuildValue("i", pImage);
+}
+#endif
+
 void initItem()
 {
 	static PyMethodDef s_methods[] =
@@ -752,6 +765,10 @@ void initItem()
 
 #if defined(__BL_OFFICIAL_LOOT_FILTER__)
 		{ "SaveLootingSettings", itemSaveLootingSettings, METH_VARARGS },
+#endif
+
+#ifdef __RENEWAL_SKILL_BOOK__
+		{"GetImagePtr", itemGetImagePtr, METH_VARARGS},
 #endif
 
 		{nullptr, nullptr},

@@ -32,6 +32,9 @@
 #include "unique_item.h"
 #include "threeway_war.h"
 #include "log.h"
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	#include "item_shop.h"
+#endif
 #include "../../common/VnumHelper.h"
 
 ACMD(do_user_horse_ride)
@@ -2596,6 +2599,62 @@ ACMD(do_report_list)
 			row[4]  // time
 		);
 	}
+}
+#endif
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+ACMD(do_nesne_market)
+{
+	if (!ch || !ch->GetDesc())
+		return;
+
+	if (ch->IsStun() || ch->IsHack())
+		return;
+
+	if (ch->GetExchange() || ch->GetMyShop() || ch->GetShopOwner() || ch->IsOpenSafebox() || ch->IsCubeOpen() || ch->IsDead())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Acik Pencereleri Kapat!");
+		return;
+	}
+
+	if (quest::CQuestManager::instance().GetPCForce(ch->GetPlayerID())->IsRunning() == true)
+		return;
+
+	char arg1[256], arg2[256];
+	two_arguments(argument, arg1, sizeof(arg1), arg2, sizeof(arg2));
+
+	DWORD id = 0;
+	DWORD count = 0;
+
+	if (!*arg1 || !*arg2)
+		return;
+
+	str_to_number(id, arg1);
+	str_to_number(count, arg2);
+
+	bool bRes = CItemShopManager::instance().Buy(ch, id, count);
+	if (bRes)
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketbasarili"));
+}
+
+ACMD(do_nesneyenile)
+{
+	if (!ch || !ch->GetDesc())
+		return;
+
+	if (ch->IsStun() || ch->IsHack())
+		return;
+
+	if (ch->GetExchange() || ch->GetMyShop() || ch->GetShopOwner() || ch->IsOpenSafebox() || ch->IsCubeOpen() || ch->IsDead())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Acik Pencereleri Kapat!");
+		return;
+	}
+
+	if (quest::CQuestManager::instance().GetPCForce(ch->GetPlayerID())->IsRunning() == true)
+		return;
+
+	CItemShopManager::instance().SendClientPacket(ch); // buy func
 }
 #endif
 

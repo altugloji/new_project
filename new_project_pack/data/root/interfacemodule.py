@@ -74,6 +74,9 @@ if app.ENABLE_EXCHANGE_LOG:
 if app.KYGN_CHEST_INFO:
 	import uikygnchestinfo
 
+if app.ENABLE_ITEM_SHOP_SYSTEM:
+	import uiItemShop, net
+
 IsQBHide = 0
 class Interface(object):
 	CHARACTER_STATUS_TAB = 1
@@ -186,8 +189,10 @@ class Interface(object):
 		else:
 			self.wndTaskBar.SetToggleButtonEvent(uiTaskBar.TaskBar.BUTTON_CHAT, ui.__mem_func__(self.ToggleChat))
 
+		if app.ENABLE_ITEM_SHOP_SYSTEM:
+			self.wndTaskBar.BindInterface(self)
+
 		self.wndEnergyBar = None
-		import app
 		if app.ENABLE_ENERGY_SYSTEM:
 			wndEnergyBar = uiTaskBar.EnergyBar()
 			wndEnergyBar.LoadWindow()
@@ -314,6 +319,13 @@ class Interface(object):
 		self.wndHelp.SetCloseEvent(ui.__mem_func__(self.CloseHelpWindow))
 		self.wndHelp.Hide()
 
+		if app.ENABLE_ITEM_SHOP_SYSTEM:
+			self.ItemShop = uiItemShop.ItemShopWindow(self)
+			self.ItemShop.LoadWindow()
+			self.ItemShop.Close()
+		else:
+			self.ItemShop = None
+
 	def __MakeTipBoard(self):
 		self.tipBoard = uiTip.TipBoard()
 		self.tipBoard.Hide()
@@ -417,6 +429,9 @@ class Interface(object):
 		self.dlgExchange.SetItemToolTip(self.tooltipItem)
 		self.privateShopBuilder.SetItemToolTip(self.tooltipItem)
 
+		if app.ENABLE_ITEM_SHOP_SYSTEM:
+			self.ItemShop.SetItemToolTip(self.tooltipItem)
+
 		self.__InitWhisper()
 		self.DRAGON_SOUL_IS_QUALIFIED = True if app.ENABLE_NO_DSS_QUALIFICATION else False
 
@@ -469,6 +484,13 @@ class Interface(object):
 
 		if self.wndDragonSoulRefine:
 			self.wndDragonSoulRefine.Destroy()
+
+		if app.ENABLE_ITEM_SHOP_SYSTEM:
+			if self.ItemShop:
+				self.ItemShop.Close()
+				self.ItemShop.Destroy()
+				self.ItemShop = None
+				del self.ItemShop
 
 		if self.dlgExchange:
 			self.dlgExchange.Destroy()
@@ -1854,6 +1876,19 @@ class Interface(object):
 
 	def EmptyFunction(self):
 		pass
+
+	if app.ENABLE_ITEM_SHOP_SYSTEM:
+		def RefreshItemShop(self):
+			constInfo.ITEM_DATA = {}
+			constInfo.ITEM_SEARCH_DATA = []
+			if self.ItemShop:
+				self.ItemShop.RefreshProcess()
+				# self.ItemShop.Destroy()
+		def OpenItemShop(self):
+			if self.ItemShop:
+				self.ItemShop.LoadWindow()
+				net.SendChatPacket("/nesneyenile")
+				self.ItemShop.Open()
 
 	if app.__BL_MULTI_LANGUAGE__:
 		def LanguageChange(self):

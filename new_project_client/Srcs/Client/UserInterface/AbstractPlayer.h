@@ -36,6 +36,11 @@ class IAbstractPlayer : public TAbstractSingleton<IAbstractPlayer>
 		virtual DWORD	GetItemFlags(TItemPos itemPos) = 0;
 		virtual DWORD	GetItemCount(TItemPos itemPos) = 0;
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+		virtual void	SetDragonCoin(DWORD amount) = 0;
+		virtual	void	SetDragonMark(DWORD amount) = 0;
+#endif
+
 		virtual bool	IsEquipItemInSlot(TItemPos itemPos) = 0;
 
 		virtual void	AddQuickSlot(int QuickslotIndex, char IconType, char IconPosition) = 0;

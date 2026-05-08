@@ -240,6 +240,10 @@ CPacketInfoGG::CPacketInfoGG()
 	Set(HEADER_GG_MONARCH_TRANSFER,		sizeof(TPacketMonarchGGTransfer),	"MonarchTransfer", false);
 	Set(HEADER_GG_CHECK_AWAKENESS,		sizeof(TPacketGGCheckAwakeness),	"CheckAwakeness",		false);
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	Set(HEADER_GG_NESNE,				sizeof(TPacketGGNesne),				"Nesne");
+#endif
+
 #ifdef DC_P2P_UPDATE
 	Set(HEADER_GG_DC_P2P_UPDATE,		sizeof(TPacketGGDCP2PUpdate),		"GGDCP2PUpdate",	false);
 #endif

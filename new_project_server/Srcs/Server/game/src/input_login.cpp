@@ -29,6 +29,10 @@
 #include "MarkManager.h"
 #include "../../common/CommonDefines.h"
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	#include "item_shop.h"
+#endif
+
 #ifdef ENABLE_WOLFMAN_CHARACTER
 
 // #define USE_LYCAN_CREATE_POSITION
@@ -647,6 +651,11 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 	building::CManager::instance().SendLandList(d, ch->GetMapIndex());
 
 	marriage::CManager::instance().Login(ch);
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	CItemShopManager::instance().SendClientPacket(ch);
+	ch->RefreshDragonCoin();
+#endif
 
 	TPacketGCTime p;
 	p.bHeader = HEADER_GC_TIME;

@@ -48,6 +48,9 @@ import musicInfo
 import debugInfo
 import stringCommander
 
+if app.ENABLE_ITEM_SHOP_SYSTEM:
+	import uiItemShop
+
 if app.KYGN_CHEST_INFO:
 	import cri
 
@@ -1960,6 +1963,9 @@ class GameWindow(ui.ScriptWindow):
 			"PlayMusic"				: self.__PlayMusic,
 			# END_OF_WEDDING
 
+			"ItemShopDataClear"		:self.BINARY_ITEM_SHOP_DATA_CLEAR,
+
+
 			# PRIVATE_SHOP_PRICE_LIST
 			"MyShopPriceList"		: self.__PrivateShop_PriceList,
 			# END_OF_PRIVATE_SHOP_PRICE_LIST
@@ -2335,3 +2341,35 @@ class GameWindow(ui.ScriptWindow):
 
 		def BINARY_RefreshTargetMonsterDropInfo(self, raceNum):
 			self.targetBoard.RefreshMonsterInfoBoard()
+
+	if app.ENABLE_ITEM_SHOP_SYSTEM:
+		def BINARY_ITEM_SHOP_DATA_CLEAR(self):
+			self.interface.RefreshItemShop()
+
+		def BINARY_ITEM_SHOP_DATA(self, id, category, sub_category, vnum, count, coinsold, coins, socketzero, mark , socket0, socket1, socket2, socket3, socket4, socket5, type0, value0, type1, value1, type2, value2, type3, value3, type4, value4, type5, value5, type6, value6):
+			if not constInfo.ITEM_DATA.has_key(category):
+				constInfo.ITEM_DATA[category] = {}
+
+			if not constInfo.ITEM_DATA[category].has_key(sub_category):
+				constInfo.ITEM_DATA[category][sub_category] = []
+				
+			metinSlot = [socket0, socket1, socket2, socket3, socket4, socket5]
+			attrslot = [(type0, value0), (type1, value1), (type2, value2), (type3, value3), (type4, value4), (type5, value5), (type6, value6)]
+			
+			item.SelectItem(vnum)
+			constInfo.ITEM_DATA[category][sub_category].append((None, id, vnum,coins, coinsold, count, socketzero, mark, metinSlot, attrslot))
+			constInfo.ITEM_SEARCH_DATA.append((self.toLower(item.GetItemName()), id, vnum,coins, coinsold, count, socketzero, mark, metinSlot, attrslot))
+
+		def toLower(self,string):
+			alphabetList = {
+				'İ' : 'i',
+				'O' : 'o',
+				'Ü' : 'u',
+				'Ç' : 'c',
+				'Ş' : 's',
+			}
+
+			for (key, item) in alphabetList.iteritems():
+				string = string.replace(key, item)
+
+			return string.lower()

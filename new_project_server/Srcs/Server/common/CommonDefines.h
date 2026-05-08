@@ -135,6 +135,7 @@ enum eCommonDefines {
 #define __SEND_TARGET_INFO__										// Mob target info
 #define UPDATE_ITEM_MESSAGE
 #define ENABLE_USER_REPORT_SYSTEM 					//Official User Report System
+#define ENABLE_ITEM_SHOP_SYSTEM										// Nesne market
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

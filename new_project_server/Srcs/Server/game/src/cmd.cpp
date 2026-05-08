@@ -286,6 +286,11 @@ ACMD(do_report_user);
 ACMD(do_report_list);
 #endif
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+ACMD(do_nesne_market);
+ACMD(do_nesneyenile);
+#endif
+
 struct command_info cmd_info[] =
 {
 	{ "!RESERVED!", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	},
@@ -608,6 +613,13 @@ struct command_info cmd_info[] =
 #ifdef ENABLE_USER_REPORT_SYSTEM
 	{ "report_user", do_report_user, 0, POS_DEAD, GM_PLAYER },
 	{ "report_list", do_report_list, 0, POS_DEAD, GM_LOW_WIZARD },
+#endif
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	{ "nesne_marke",			do_inputall,				0,		POS_DEAD,	GM_PLAYER	},
+	{ "nesne_market",			do_nesne_market,			0,		POS_DEAD,	GM_PLAYER	},
+	{ "nesneyenil",				do_inputall,				0,		POS_DEAD,	GM_PLAYER	},
+	{ "nesneyenile",			do_nesneyenile,				0,		POS_DEAD,	GM_PLAYER	},
 #endif
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}

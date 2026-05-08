@@ -521,6 +521,10 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		// Guild
 		bool RecvGuild();
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+		bool RecvItemShopData();
+#endif
+
 		// Party
 		bool RecvPartyInvite();
 		bool RecvPartyAdd();

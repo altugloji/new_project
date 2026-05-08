@@ -530,6 +530,28 @@ const TItemData * CPythonPlayer::GetItemData(TItemPos Cell) const
 	}
 }
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+DWORD CPythonPlayer::GetDragonCoin()
+{
+	return m_dwDragonCoin;
+}
+
+DWORD CPythonPlayer::GetDragonMark()
+{
+	return m_dwDragonMark;
+}
+
+void CPythonPlayer::SetDragonCoin(DWORD amount)
+{
+	m_dwDragonCoin = amount;
+}
+
+void CPythonPlayer::SetDragonMark(DWORD amount)
+{
+	m_dwDragonMark = amount;
+}
+#endif
+
 void CPythonPlayer::SetItemData(TItemPos Cell, const TItemData & c_rkItemInst)
 {
 	if (!Cell.IsValidCell())
@@ -1628,6 +1650,11 @@ void CPythonPlayer::Clear()
 	m_inGuildAreaID = 0xffffffff;
 #ifdef ENABLE_PLAYER_CHECKAFFECT
 	m_mapAffectData.clear();
+#endif
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	m_dwDragonCoin = 0;
+	m_dwDragonMark = 0;
 #endif
 
 	__ClearAutoAttackTargetActorID();

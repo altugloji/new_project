@@ -2010,6 +2010,34 @@ class SlotWindow(Window):
 	def SetSlot(self, slotIndex, itemIndex, width, height, icon, diffuseColor = (1.0, 1.0, 1.0, 1.0)):
 		wndMgr.SetSlot(self.hWnd, slotIndex, itemIndex, width, height, icon, diffuseColor)
 
+	if app.__RENEWAL_SKILL_BOOK__:
+		def SetSkillBookSlot(self, slotNumber, skillVnum, count):
+			file_name = ""
+			if skillVnum >= 106:
+				file_name = "icon/item/book_skill_08.tga"
+			elif skillVnum >= 91:
+				file_name = "icon/item/book_skill_07.tga"
+			elif skillVnum >= 76:
+				file_name = "icon/item/book_skill_06.tga"
+			elif skillVnum >= 61:
+				file_name = "icon/item/book_skill_05.tga"
+			elif skillVnum >= 46:
+				file_name = "icon/item/book_skill_04.tga"
+			elif skillVnum >= 31:
+				file_name = "icon/item/book_skill_03.tga"
+			elif skillVnum >= 16:
+				file_name = "icon/item/book_skill_02.tga"
+			elif skillVnum >= 1:
+				file_name = "icon/item/book_skill_01.tga"
+
+			image = item.GetImagePtr(file_name) if file_name != "" else None
+			if not image:
+				return False
+
+			self.SetSlot(slotNumber, 1, 1, 1, image)
+			self.SetSlotCount(slotNumber, count)
+			return True
+
 	def SetSlotCount(self, slotNumber, count):
 		wndMgr.SetSlotCount(self.hWnd, slotNumber, count)
 

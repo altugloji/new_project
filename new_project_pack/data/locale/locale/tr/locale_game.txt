@@ -1,3 +1,6 @@
+DO_YOU_BUY_ITEM_C	Adet: %d Fiyat(EP): %s
+DO_YOU_BUY_ITEM_M	Adet: %d Fiyat(EM): %s
+ASK_BUY_ITEM_TEXT	Satýn alma iþlemine devam etmek istiyor musun ? (Eþya: %s)
 USER_REPORT_SYSTEM_TOOLTIP_YANG_SELL	Yang Satýþý
 USER_REPORT_SYSTEM_TOOLTIP_FARM_BOT	Farm Botu
 USER_REPORT_SYSTEM_TOOLTIP_FISH_BOT	Balýk Botu

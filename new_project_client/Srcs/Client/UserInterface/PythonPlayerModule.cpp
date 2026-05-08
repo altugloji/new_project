@@ -2125,6 +2125,18 @@ PyObject * playerIsAvailableBeltInventoryCell(PyObject* poSelf, PyObject* poArgs
 }
 #endif
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+PyObject* playerGetDragonCoin(PyObject* poSelf, PyObject* poArgs)
+{
+	return Py_BuildValue("i", CPythonPlayer::Instance().GetDragonCoin());
+}
+
+PyObject* playerGetDragonMark(PyObject* poSelf, PyObject* poArgs)
+{
+	return Py_BuildValue("i", CPythonPlayer::Instance().GetDragonMark());
+}
+#endif
+
 PyObject* playerSendDragonSoulRefine(PyObject* poSelf, PyObject* poArgs)
 {
 	BYTE bSubHeader;
@@ -2297,6 +2309,10 @@ void initPlayer()
 		{ "MoveItem",							playerMoveItem,								METH_VARARGS },
 		{ "SendClickItemPacket",				playerSendClickItemPacket,					METH_VARARGS },
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+		{"GetDragonCoin", playerGetDragonCoin, METH_VARARGS},
+		{"GetDragonMark", playerGetDragonMark, METH_VARARGS},
+#endif
 		///////////////////////////////////////////////////////////////////////////////////////////
 
 		{ "GetName",					playerGetName,						METH_VARARGS },

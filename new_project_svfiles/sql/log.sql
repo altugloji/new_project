@@ -191,6 +191,19 @@ CREATE TABLE `loginlog2` (
   `id` int(11) DEFAULT NULL COMMENT 'maybe primary'
 );
 
+DROP TABLE IF EXISTS `nesne_market`;
+CREATE TABLE `nesne_market`  (
+  `id` int(15) NOT NULL,
+  `alan` varchar(255) NOT NULL,
+  `pid` int(15) NULL DEFAULT NULL,
+  `account_id` int(15) NULL DEFAULT NULL,
+  `item_isim` varchar(50) NULL DEFAULT NULL,
+  `item_kod` int(15) NULL DEFAULT NULL,
+  `count` int(15) NULL DEFAULT 1,
+  `tarih` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+);
+
 DROP TABLE IF EXISTS `money_log`;
 CREATE TABLE `money_log` (
   `time` datetime DEFAULT NULL,

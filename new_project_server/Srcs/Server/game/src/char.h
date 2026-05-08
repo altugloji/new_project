@@ -2124,6 +2124,15 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		void SendGuildToken();
 #endif
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	public:
+		DWORD			GetDragonCoin();
+		DWORD			GetDragonMark();
+		void			SetDragonCoin(DWORD amount);
+		void			SetDragonMark(DWORD amount);
+		void			RefreshDragonCoin();
+#endif
+
 #ifdef FAST_PACKET_BLOCK
 	private:
 		int					m_iPacketTime;

@@ -64,6 +64,10 @@
 #include <execinfo.h>
 #endif
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	#include "item_shop.h"
+#endif
+
 extern void WriteVersion();
 
 #if !defined(__WIN32__) && defined(ENABLE_ASAN)
@@ -328,6 +332,10 @@ int main(int argc, char **argv)
 	CDragonLairManager	dl_manager;
 	DSManager dsManager;
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	CItemShopManager	itemShopManager;
+#endif
+
 	if (!start(argc, argv)) {
 		CleanUpForEarlyExit();
 		return 0;
@@ -356,6 +364,10 @@ int main(int argc, char **argv)
 	{
 		sys_err("Failed to Load ClientPackageCryptInfo File(%s)", strPackageCryptInfoDir.c_str());
 	}
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	CItemShopManager::instance().LoadItemShopTable();
+#endif
 
 	while (idle());
 

@@ -628,6 +628,9 @@ struct FuncUpdateAndResetChatCounter
 	{
 		ch->ResetChatCounter();
 		ch->CFSM::Update();
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+		ch->RefreshDragonCoin();
+#endif
 	}
 };
 

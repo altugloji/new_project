@@ -1996,5 +1996,17 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_USER_REPORT_SYSTEM", 0);
 #endif
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	PyModule_AddIntConstant(poModule, "ENABLE_ITEM_SHOP_SYSTEM", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_ITEM_SHOP_SYSTEM", 0);
+#endif
+
+#if defined(__RENEWAL_SKILL_BOOK__)
+	PyModule_AddIntConstant(poModule, "__RENEWAL_SKILL_BOOK__", true);
+#else
+	PyModule_AddIntConstant(poModule, "__RENEWAL_SKILL_BOOK__", false);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

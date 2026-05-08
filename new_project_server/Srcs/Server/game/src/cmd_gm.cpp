@@ -35,6 +35,10 @@
 #include "DragonSoul.h"
 #include "../../common/CommonDefines.h"
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	#include "item_shop.h"
+#endif
+
 extern bool DropEvent_RefineBox_SetValue(const std::string& name, int value);
 
 // ADD_COMMAND_SLOW_STUN
@@ -2385,6 +2389,19 @@ ACMD(do_reload)
 				break;
 				//END_RELOAD_ADMIN
 			case 'c':	// cube
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+			case 'n':
+			{
+				CItemShopManager::instance().LoadItemShopTable();
+				ch->ChatPacket(CHAT_TYPE_INFO, "|cffffcc00[GM] Nesne Marketi basariyla yenilediniz");
+
+				TPacketGGNesne pggnesne	{};
+				pggnesne.bHeader =		HEADER_GG_NESNE;
+				P2P_MANAGER::instance().Send(&pggnesne, sizeof(TPacketGGNesne));
+				break;
+			}
+#endif
 
 				Cube_init ();
 				break;

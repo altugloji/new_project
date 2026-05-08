@@ -425,6 +425,8 @@ class TaskBar(ui.ScriptWindow):
 
 		self.lastUpdateQuickSlot = 0
 		self.SetWindowName("TaskBar")
+		if app.ENABLE_ITEM_SHOP_SYSTEM:
+			self.interface = None
 
 	def __del__(self):
 		#print "---------------------------------------------------------------------------- DELETE TASKBAR"
@@ -585,14 +587,22 @@ class TaskBar(ui.ScriptWindow):
 		self.rampageGauge2.Show()
 		self.rampageGauge1.Hide()
 
+	if app.ENABLE_ITEM_SHOP_SYSTEM:
+		def BindInterface(self, interface):
+			self.interface = interface
+
 	def __RampageGauge_OverOut(self):
 		print("rampage_over_out")
 		self.rampageGauge2.Hide()
 		self.rampageGauge1.Show()
 
 	def __RampageGauge_Click(self):
-		print("rampage_up")
-		net.SendChatPacket("/in_game_mall")
+		print "rampage_up"
+		if app.ENABLE_ITEM_SHOP_SYSTEM:
+			# constInfo.OPEN_ISHOP = 1
+			self.interface.OpenItemShop()
+		else:
+			net.SendChatPacket("/in_game_mall")
 		# gift icon hide when click mall icon
 		self.wndGiftBox.Hide()
 

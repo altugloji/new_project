@@ -146,7 +146,12 @@ class SystemDialog(ui.ScriptWindow):
 
 	def __ClickInGameShopButton(self):
 		self.Close()
-		net.SendChatPacket("/in_game_mall")
+		if app.ENABLE_ITEM_SHOP_SYSTEM:
+			# constInfo.OPEN_ISHOP = 1
+			if self.interface:
+				self.interface.OpenItemShop()
+		else:
+			net.SendChatPacket("/in_game_mall")
 
 	def Close(self):
 		self.Hide()

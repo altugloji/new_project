@@ -138,6 +138,8 @@
 #define KYGN_CHEST_INFO													// Sandık İçeriğini Görme
 #define ENABLE_SEND_TARGET_INFO											// Mob target info
 #define ENABLE_USER_REPORT_SYSTEM 										//Official User Report System
+#define ENABLE_ITEM_SHOP_SYSTEM											// Nesne Market Sistemi
+#define __RENEWAL_SKILL_BOOK__
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

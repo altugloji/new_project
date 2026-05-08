@@ -277,6 +277,10 @@ enum
 	HEADER_GC_TARGET_INFO						= 163,
 #endif
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	HEADER_GC_ITEM_SHOP							= 167,
+#endif
+
 #ifdef KYGN_CHEST_INFO
 	HEADER_GC_SET_CHEST_REWARDS					= 170,
 #endif
@@ -319,6 +323,10 @@ enum
 	HEADER_GG_CHECK_AWAKENESS					= 29,
 #ifdef ENABLE_FULL_NOTICE
 	HEADER_GG_BIG_NOTICE						= 30,
+#endif
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	HEADER_GG_NESNE								= 34,
 #endif
 
 #ifdef DC_P2P_UPDATE
@@ -2421,6 +2429,22 @@ typedef struct packet_target_info
 	DWORD	dwVnum;
 	BYTE	count;
 } TPacketGCTargetInfo;
+#endif
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+typedef struct SPacketGGNesne
+{
+	BYTE	bHeader;
+} TPacketGGNesne;
+
+typedef struct SPacketItemShopData
+{
+	BYTE	header;
+	DWORD	id,category,sub_category, vnum, count, coinsold, coins, socketzero, mark;
+	DWORD	socket0, socket1, socket2, socket3, socket4, socket5;
+	DWORD	type0, type1, type2, type3, type4, type5, type6;
+	DWORD	value0, value1, value2, value3, value4, value5, value6;
+} TPacketItemShopData;
 #endif
 
 #pragma pack()

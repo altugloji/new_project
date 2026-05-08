@@ -737,6 +737,15 @@ def HOW_MANY_ITEM_DO_YOU_DROP(dropItemName, dropItemCount) :
 	else :
 		return HOW_MANY_ITEM_DO_YOU_DROP1 % (dropItemName)
 
+if app.ENABLE_ITEM_SHOP_SYSTEM:
+	def DO_YOU_BUY_ITEM_COINS(buyItemCount, buyItemPrice) :
+		return DO_YOU_BUY_ITEM_C % ( buyItemCount, buyItemPrice )
+	def PrettyNumber(n) :
+		if n <= 0 :
+			return "0"
+
+		return "%s" % ('.'.join([ i-3<0 and str(n)[:i] or str(n)[i-3:i] for i in range(len(str(n))%3, len(str(n))+1, 3) if i ]))
+
 def FISHING_NOTIFY(isFish, fishName) :
 	if isFish :
 		return FISHING_NOTIFY1 % ( fishName )

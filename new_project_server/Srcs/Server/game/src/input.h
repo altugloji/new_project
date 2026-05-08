@@ -342,6 +342,10 @@ class CInputP2P : public CInputProcessor
 		void		BlockChat(const char * c_pData) const;
 		void		IamAwake(LPDESC d, const char * c_pData) const;
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+		void		NesneMarket(const char * c_pData);
+#endif
+
 #ifdef DC_P2P_UPDATE
 		void		GGDCP2PUpdate(const char * c_pData);
 #endif

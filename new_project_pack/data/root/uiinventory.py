@@ -668,6 +668,12 @@ class InventoryWindow(ui.ScriptWindow):
 				itemCount = 0
 
 			itemVnum = getItemVNum(slotNumber)
+
+			if app.__RENEWAL_SKILL_BOOK__:
+				if itemVnum == 50300:
+					if self.wndItem.SetSkillBookSlot(i, player.GetItemMetinSocket(slotNumber, 0), itemCount):
+						continue
+
 			setItemVNum(i, itemVnum, itemCount)
 
 			if constInfo.IS_AUTO_POTION(itemVnum):
@@ -731,9 +737,6 @@ class InventoryWindow(ui.ScriptWindow):
 
 		if self.wndBelt:
 			self.wndBelt.RefreshSlot()
-
-
-
 
 	if app.ENABLE_HIGHLIGHT_NEW_ITEM:
 		def HighlightSlot(self, slot):
