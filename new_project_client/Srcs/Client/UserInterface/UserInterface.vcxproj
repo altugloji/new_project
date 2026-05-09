@@ -209,6 +209,7 @@
     <ClCompile Include="PythonPlayerModule.cpp" />
     <ClCompile Include="PythonPlayerSkill.cpp" />
     <ClCompile Include="PythonQuest.cpp" />
+    <ClCompile Include="PythonRenderTargetModule.cpp" />
     <ClCompile Include="PythonSkill.cpp" />
     <ClCompile Include="PythonChat.cpp" />
     <ClCompile Include="PythonChatModule.cpp" />
@@ -261,6 +262,7 @@
     <ClCompile Include="PythonNetworkStreamPhaseLogin.cpp" />
     <ClCompile Include="PythonNetworkStreamPhaseOffline.cpp" />
     <ClCompile Include="PythonNetworkStreamPhaseSelect.cpp" />
+    <ClCompile Include="PythonWiki.cpp" />
     <ClCompile Include="ServerStateChecker.cpp" />
     <ClCompile Include="ServerStateCheckerModule.cpp" />
     <ClCompile Include="CheckLatestFiles.cpp" />
@@ -304,6 +306,7 @@
     <ClInclude Include="GuildMarkUploader.h" />
     <ClInclude Include="MarkImage.h" />
     <ClInclude Include="MarkManager.h" />
+    <ClInclude Include="PythonWiki.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="AbstractApplication.h" />
     <ClInclude Include="AbstractCharacterManager.h" />

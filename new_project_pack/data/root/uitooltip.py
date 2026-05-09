@@ -788,6 +788,32 @@ class ItemToolTip(ToolTip):
 
 		self.AddItemData(itemVnum, metinSlot, attrSlot)
 
+	if app.ENABLE_WIKI:
+		def SetItemToolTipWiki(self, itemVnum):
+			self.itemVnum = itemVnum
+			item.SelectItem(itemVnum)
+			metinSlot = [0 for i in xrange(player.METIN_SOCKET_MAX_NUM)]
+			attrSlot = [(0,0) for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM)]
+			for i in xrange(item.LIMIT_MAX_NUM):
+				(limitType, limitValue) = item.GetLimit(i)
+				if item.LIMIT_TIMER_BASED_ON_WEAR == limitType:
+					metinSlot[0] = limitValue
+				elif item.LIMIT_REAL_TIME == limitType or item.LIMIT_REAL_TIME_START_FIRST_USE == limitType:
+					metinSlot[0] = app.GetGlobalTimeStamp()+limitValue
+			self.SetTitle(item.GetItemName())
+			self.AppendDescription(item.GetItemDescription(), 26)
+			self.AppendDescription(item.GetItemSummary(), 26, self.CONDITION_COLOR)
+			self.__AppendAffectInformation()
+			self.__AppendAttributeInformation(attrSlot)
+			self.AppendWearableInformation()
+			for i in xrange(item.LIMIT_MAX_NUM):
+				(limitType, limitValue) = item.GetLimit(i)
+				if item.LIMIT_REAL_TIME == limitType:
+					if metinSlot[0] > 0:
+						self.AppendMallItemLastTime(metinSlot[0])
+					break
+			self.ShowToolTip()
+
 	def __AppendAttackSpeedInfo(self, item):
 		atkSpd = item.GetValue(0)
 
@@ -2429,6 +2455,15 @@ class SkillToolTip(ToolTip):
 	def __del__(self):
 		ToolTip.__del__(self)
 
+	def __AppendGMSkillIndex(self, skillIndex):
+		if not chr.IsGameMaster(0):
+			return
+		if 0 == skillIndex:
+			return
+		self.AppendSpace(5)
+		self.AppendTextLine("SKILL_INDEX: {}".format(skillIndex), 0xFFf863ff)
+		self.AppendSpace(3)
+
 	def SetSkill(self, skillIndex, skillLevel = -1):
 
 		if 0 == skillIndex:
@@ -2461,6 +2496,7 @@ class SkillToolTip(ToolTip):
 			self.AppendSkillDataNew(slotIndex, skillIndex, skillGrade, skillLevel, skillCurrentPercentage, skillNextPercentage)
 			self.AppendSkillRequirement(skillIndex, skillLevel)
 
+		self.__AppendGMSkillIndex(skillIndex)
 		self.ShowToolTip()
 
 	def SetSkillNew(self, slotIndex, skillIndex, skillGrade, skillLevel):
@@ -2532,6 +2568,7 @@ class SkillToolTip(ToolTip):
 			self.AppendSkillDataNew(slotIndex, skillIndex, skillGrade, skillLevel, skillCurrentPercentage, skillNextPercentage)
 			self.AppendSkillRequirement(skillIndex, skillLevel)
 
+		self.__AppendGMSkillIndex(skillIndex)
 		self.ShowToolTip()
 
 	def __SetSkillTitle(self, skillIndex, skillGrade):
@@ -2556,6 +2593,7 @@ class SkillToolTip(ToolTip):
 		self.__SetSkillTitle(skillIndex, skillGrade)
 		self.AppendDefaultData(skillIndex, skillGrade)
 		self.AppendSkillConditionData(skillIndex)
+		self.__AppendGMSkillIndex(skillIndex)
 		self.ShowToolTip()
 
 	def AppendDefaultData(self, skillIndex, skillGrade = 0):

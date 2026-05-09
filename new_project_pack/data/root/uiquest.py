@@ -265,7 +265,7 @@ class QuestDialog(ui.ScriptWindow):
 		if skin == 3:
 			event.SetRestrictedCount(idx,36)
 		else:
-			event.SetRestrictedCount(idx,60)
+			event.SetRestrictedCount(idx,72)
 
 		QuestCurtain.BarHeight = (wndMgr.GetScreenHeight()-wndMgr.GetScreenWidth()*9/16)/2
 

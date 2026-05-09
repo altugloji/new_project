@@ -1012,7 +1012,7 @@ void CSlotWindow::OnUpdate()
 	if (m_bEnableMask)
 	{
 		if (m_pMaskWindow)
-			m_rMaskRect = m_pMaskWindow->GetRect();
+			m_rMaskRect = GetClipMaskRect();
 
 		#ifdef ENABLE_HIGHLIGHT_NEW_ITEM
 		for (int i = 0; i < SLOT_ACTIVE_EFFECT_COUNT; ++i)

@@ -95,6 +95,18 @@ class CPythonNonPlayer : public CSingleton<CPythonNonPlayer>
 			MOB_RESISTS_MAX_NUM
 		};
 
+#ifdef ENABLE_WIKI
+		enum EMobRank
+		{
+			MOB_RANK_PAWN = 0,
+			MOB_RANK_S_PAWN,
+			MOB_RANK_KNIGHT,
+			MOB_RANK_S_KNIGHT,
+			MOB_RANK_BOSS,
+			MOB_RANK_KING,
+		};
+#endif
+
 		enum EMobMaxNum
 		{
 			MOB_ATTRIBUTE_MAX_NUM = 12,
@@ -836,6 +848,13 @@ class CPythonNonPlayer : public CSingleton<CPythonNonPlayer>
 		BYTE				GetMobRegenCycle(DWORD dwVnum);
 		BYTE				GetMobRegenPercent(DWORD dwVnum);
 		BYTE				GetMobLevel(DWORD dwVnum);
+#endif
+
+#ifdef ENABLE_WIKI
+		DWORD				GetMonsterPrice1(DWORD dwVnum);
+		DWORD				GetMonsterPrice2(DWORD dwVnum);
+		TNonPlayerDataMap	GetMonsterData() {return m_NonPlayerDataMap;}
+		char				GetMonsterResist(DWORD dwVnum, BYTE byResist);
 #endif
 
 		// Function for outer

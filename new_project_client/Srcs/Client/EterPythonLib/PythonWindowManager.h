@@ -98,6 +98,9 @@ namespace UI
 			CWindow *	RegisterMoveImageBox(PyObject * po, const char * c_szLayer);
 			CWindow *	RegisterMoveScaleImageBox(PyObject * po, const char * c_szLayer);
 #endif
+#ifdef ENABLE_RENDER_TARGET
+			CWindow *	RegisterRenderTarget(PyObject* po, const char* c_szLayer);
+#endif
 
 			void		DestroyWindow(CWindow * pWin);
 			void		NotifyDestroyWindow(CWindow * pWindow);

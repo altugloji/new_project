@@ -44,6 +44,20 @@ class CRaceData
 			RACE_MAX_NUM,
 		};
 
+#ifdef ENABLE_WIKI
+		enum GetRaceIndex
+		{
+			JOB_WARRIOR = 0,
+			JOB_ASSASSIN = 1,
+			JOB_SURA = 2,
+			JOB_SHAMAN = 3,
+#ifdef ENABLE_WOLFMAN
+			JOB_WOLFMAN = 4,
+#endif
+			JOB_MAX_NUM,
+		};
+#endif
+
 		enum
 		{
 			SMOKE_NUM = 4,

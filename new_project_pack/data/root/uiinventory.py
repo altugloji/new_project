@@ -1373,6 +1373,9 @@ class InventoryWindow(ui.ScriptWindow):
 	def ShowToolTip(self, slotIndex):
 		if None != self.tooltipItem:
 			self.tooltipItem.SetInventoryItem(slotIndex)
+			if app.ENABLE_WIKI:
+				self.tooltipItem.AppendSpace(5)
+				self.tooltipItem.AppendTextLine("|Eemoji/key_ctrl|e + |Eemoji/key_x|e Open Wiki")
 
 	def OnTop(self):
 		if None != self.tooltipItem:
@@ -1413,6 +1416,15 @@ class InventoryWindow(ui.ScriptWindow):
 	def __UseItem(self, slotIndex):
 		ItemVNum = player.GetItemIndex(slotIndex)
 		item.SelectItem(ItemVNum)
+		
+		if app.ENABLE_WIKI:
+			if app.IsPressed(app.DIK_LCONTROL) and app.IsPressed(app.DIK_Z):
+				if not self.interface.wndWiki:
+					self.interface.MakeWiki()
+				self.interface.wndWiki.ShowItemInfo(player.GetItemIndex(slotIndex), 0)
+				self.interface.wndWiki.Open()
+				return
+		
 		if item.IsFlag(item.ITEM_FLAG_CONFIRM_WHEN_USE):
 			self.questionDialog = uiCommon.QuestionDialog()
 			self.questionDialog.SetText(localeInfo.INVENTORY_REALLY_USE_ITEM)

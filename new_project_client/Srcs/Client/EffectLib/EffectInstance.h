@@ -90,5 +90,28 @@ class CEffectInstance : public CGraphicObjectInstance
 	public:
 		static CDynamicPool<CEffectInstance>	ms_kPool;
 		static int ms_iRenderingEffectCount;
+#ifdef ENABLE_WIKI
+public:
+	void SetWikiIgnoreFrustum(bool flag)
+	{
+		m_wikiIgnoreFrustum = flag;
+		FWikiEffectFrustum f2(m_wikiIgnoreFrustum);
+		std::for_each(m_ParticleInstanceVector.begin(), m_ParticleInstanceVector.end(), f2);
+		std::for_each(m_MeshInstanceVector.begin(), m_MeshInstanceVector.end(), f2);
+		std::for_each(m_LightInstanceVector.begin(), m_LightInstanceVector.end(), f2);
+	}
+protected:
+	struct FWikiEffectFrustum
+	{
+		FWikiEffectFrustum(bool igno) : wikiIgnoreFrustum(igno) {}
+		void operator () (CEffectElementBaseInstance* pInstance)
+		{
+			pInstance->SetWikiIgnoreFrustum(wikiIgnoreFrustum);
+		}
+		bool wikiIgnoreFrustum;
+	};
+	bool m_wikiIgnoreFrustum;
+#endif
+
 };
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

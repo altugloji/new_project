@@ -614,6 +614,12 @@ bool RunMainScript(CPythonLauncher& pyLauncher, const char* lpCmdLine)
 #ifdef KYGN_CHEST_INFO
 	initChestRewardInfo();
 #endif
+#ifdef ENABLE_WIKI
+	initWiki();
+#endif
+#ifdef ENABLE_RENDER_TARGET
+	initRenderTarget();
+#endif
 #ifdef __USE_CYTHON__
 	// don't add this line if you're implementing cython via .pyd:
 	// initrootlibManager();

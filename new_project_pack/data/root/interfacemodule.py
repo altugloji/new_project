@@ -77,6 +77,9 @@ if app.KYGN_CHEST_INFO:
 if app.ENABLE_ITEM_SHOP_SYSTEM:
 	import uiItemShop, net
 
+if app.ENABLE_WIKI:
+	import uiWiki
+
 IsQBHide = 0
 class Interface(object):
 	CHARACTER_STATUS_TAB = 1
@@ -84,6 +87,8 @@ class Interface(object):
 
 	def __init__(self):
 		systemSetting.SetInterfaceHandler(self)
+		if app.ENABLE_WIKI:
+			self.wndWiki = None
 		self.windowOpenPosition = 0
 		self.dlgWhisperWithoutTarget = None
 		self.inputDialog = None
@@ -441,11 +446,20 @@ class Interface(object):
 			type = tokens[0]
 			if "item" == type:
 				self.hyperlinkItemTooltip.SetHyperlinkItem(tokens)
+			elif app.ENABLE_WIKI and type == "wiki":
+				self.MakeWiki()
+				self.wndWiki.RunHistoryArgument(str(tokens[1]))
+				self.wndWiki.Open()
 
 	## Make Windows & Dialogs
 	################################
 
 	def Close(self):
+		if app.ENABLE_WIKI:
+			if self.wndWiki:
+				self.wndWiki.Close()
+				self.wndWiki.Destroy()
+				self.wndWiki=None
 		if self.dlgWhisperWithoutTarget:
 			self.dlgWhisperWithoutTarget.Destroy()
 			del self.dlgWhisperWithoutTarget
@@ -1968,3 +1982,15 @@ class Interface(object):
 		def ShowChestRewardData(self):
 			if self.wndKygnChestInfo:
 				self.wndKygnChestInfo.Open()
+	
+	if app.ENABLE_WIKI:
+		def MakeWiki(self):
+			if self.wndWiki == None:
+				self.wndWiki = uiWiki.EncyclopediaofGame()
+				self.wndWiki.LoadGuidePage()
+		def OpenWikiWindow(self):
+			self.MakeWiki()
+			if self.wndWiki.IsShow():
+				self.wndWiki.Close()
+			else:
+				self.wndWiki.Open()

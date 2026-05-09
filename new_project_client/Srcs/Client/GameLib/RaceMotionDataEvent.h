@@ -105,7 +105,7 @@ namespace NMotionEvent
 			{
 				isFollowing = FALSE;
 			}
-			StringPath(strEffectFileName); // @fixme026
+			CFileNameHelper::StringPath(strEffectFileName); // @fixme026
 			dwEffectIndex = GetCaseCRC32(strEffectFileName.c_str(), strEffectFileName.length());
 			CEffectManager::Instance().RegisterEffect(strEffectFileName.c_str());
 
@@ -148,7 +148,7 @@ namespace NMotionEvent
 			{
 				isFishingEffect = FALSE;
 			}
-			StringPath(strEffectFileName); // @fixme026
+			CFileNameHelper::StringPath(strEffectFileName); // @fixme026
 			dwEffectIndex = GetCaseCRC32(strEffectFileName.c_str(), strEffectFileName.length());
 			CEffectManager::Instance().RegisterEffect(strEffectFileName.c_str()); // @fixme026 outside debug mode
 
@@ -188,7 +188,7 @@ namespace NMotionEvent
 			if (!rTextFileLoader.GetTokenPosition("flyposition", &v3FlyPosition))
 				return false;
 
-			StringPath(strFlyFileName); //@fixme030
+			CFileNameHelper::StringPath(strFlyFileName); //@fixme030
 			dwFlyIndex = GetCaseCRC32(strFlyFileName.c_str(), strFlyFileName.length());
 
 			// Register Fly

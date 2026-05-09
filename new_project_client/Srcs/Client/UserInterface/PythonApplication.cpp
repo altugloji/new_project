@@ -203,12 +203,18 @@ void CPythonApplication::RenderGame()
 		const float fAspect=m_kWndMgr.GetAspect();
 		const float fFarClip=m_pyBackground.GetFarClip();
 
+#ifdef ENABLE_RENDER_TARGET
+		m_kRenderTarget.RenderBackgrounds();
+#endif
+
 		m_pyGraphic.SetPerspective(30.0f, fAspect, 100.0, fFarClip);
 
 		CCullingManager::Instance().Process();
 
 		m_kChrMgr.Deform();
-
+#ifdef ENABLE_RENDER_TARGET
+		m_kRenderTarget.DeformModels();
+#endif
 		m_pyBackground.RenderCharacterShadowToTexture();
 
 		m_pyGraphic.SetGameRenderState();
@@ -231,7 +237,9 @@ void CPythonApplication::RenderGame()
 
 		m_pyBackground.SetCharacterDirLight();
 		m_kChrMgr.Render();
-
+#ifdef ENABLE_RENDER_TARGET
+		m_kRenderTarget.RenderModels();
+#endif
 		m_pyBackground.SetBackgroundDirLight();
 		m_pyBackground.RenderWater();
 		m_pyBackground.RenderSnow();
@@ -380,6 +388,10 @@ void CPythonApplication::UpdateGame()
 	const DWORD t5=ELTimer_GetMSec();
 	m_GameEventManager.SetCenterPosition(kPPosMainActor.x, kPPosMainActor.y, kPPosMainActor.z);
 	m_GameEventManager.Update();
+
+#ifdef ENABLE_RENDER_TARGET
+	m_kRenderTarget.UpdateModels();
+#endif
 
 	const DWORD t6=ELTimer_GetMSec();
 	m_kChrMgr.Update();
@@ -545,8 +557,17 @@ bool CPythonApplication::Process()
 				CPythonBackground& rkBG = CPythonBackground::Instance();
 				rkBG.ReleaseCharacterShadowTexture();
 
+#ifdef ENABLE_RENDER_TARGET
+				m_kRenderTarget.ReleaseRenderTargetTextures();
+#endif
+
 				if (m_pyGraphic.RestoreDevice())
+				{
+#ifdef ENABLE_RENDER_TARGET
+					m_kRenderTarget.CreateRenderTargetTextures();
+#endif
 					rkBG.CreateCharacterShadowTexture();
+				}
 				else
 					canRender = false;
 			}
@@ -931,6 +952,10 @@ bool LoadLocaleData(const char* localePath)
 	}
 #endif
 
+#ifdef ENABLE_WIKI
+	CPythonWiki::Instance().ReadData(localePath);
+#endif
+
 	return true;
 }
 
@@ -1246,6 +1271,10 @@ void CPythonApplication::Destroy()
 	DestroyCollisionInstanceSystem();
 
 	m_pySystem.SaveInterfaceStatus();
+
+#ifdef ENABLE_RENDER_TARGET
+	m_kRenderTarget.Destroy();
+#endif
 
 	m_pyEventManager.Destroy();
 	m_FlyingManager.Destroy();

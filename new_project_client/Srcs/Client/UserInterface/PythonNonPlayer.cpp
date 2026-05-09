@@ -3,6 +3,9 @@
 #include "pythonnonplayer.h"
 #include "InstanceBase.h"
 #include "PythonCharacterManager.h"
+#ifdef ENABLE_WIKI
+#include "PythonWiki.h"
+#endif
 
 bool CPythonNonPlayer::LoadNonPlayerData(const char * c_szFileName)
 {
@@ -59,6 +62,10 @@ bool CPythonNonPlayer::LoadNonPlayerData(const char * c_szFileName)
 		return false;
 	}
 
+#ifdef ENABLE_WIKI
+	CPythonWiki& wikiMngr = CPythonWiki::Instance();
+#endif
+
     for (DWORD i = 0; i < dwElements; ++i)
 	{
 #ifdef ENABLE_PROTOSTRUCT_AUTODETECT
@@ -71,11 +78,15 @@ bool CPythonNonPlayer::LoadNonPlayerData(const char * c_szFileName)
 
 		auto pNonPlayerData = new TMobTable;
 		memcpy(pNonPlayerData, pTable, sizeof(TMobTable));
-
+#ifdef ENABLE_WIKI
+		wikiMngr.LoadMonster(pNonPlayerData);
+#endif
 		//TraceError("%d : %s type[%d] color[%d]", pNonPlayerData->dwVnum, pNonPlayerData->szLocaleName, pNonPlayerData->bType, pNonPlayerData->dwMonsterColor);
 		m_NonPlayerDataMap.insert(TNonPlayerDataMap::value_type(pNonPlayerData->dwVnum, pNonPlayerData));
 	}
-
+#ifdef ENABLE_WIKI
+	wikiMngr.ListReverse();
+#endif
 	delete [] pbData;
 	return true;
 }
@@ -373,4 +384,30 @@ CPythonNonPlayer::~CPythonNonPlayer(void)
 {
 	Destroy();
 }
+
+#ifdef ENABLE_WIKI
+DWORD CPythonNonPlayer::GetMonsterPrice1(DWORD dwVnum)
+{
+	const CPythonNonPlayer::TMobTable* c_pTable = GetTable(dwVnum);
+	if (!c_pTable)
+		return 0;
+	return c_pTable->dwGoldMin;
+}
+DWORD CPythonNonPlayer::GetMonsterPrice2(DWORD dwVnum)
+{
+	const CPythonNonPlayer::TMobTable* c_pTable = GetTable(dwVnum);
+	if (!c_pTable)
+		return 0;
+	return c_pTable->dwGoldMax;
+}
+char CPythonNonPlayer::GetMonsterResist(DWORD dwVnum, BYTE byResist)
+{
+	if (byResist >= MOB_RESISTS_MAX_NUM)
+		return 0;
+	const CPythonNonPlayer::TMobTable* c_pTable = GetTable(dwVnum);
+	if (!c_pTable)
+		return 0;
+	return c_pTable->cResists[byResist];
+}
+#endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

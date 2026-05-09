@@ -193,6 +193,7 @@ namespace UI
 			virtual bool	OnMouseWheelButtonDown();
 #endif
 #if defined(__BL_CLIP_MASK__)
+			virtual RECT	GetClipMaskRect();
 			virtual void	SetClippingMaskRect(const RECT& rMask);
 			virtual void	SetClippingMaskWindow(CWindow* pMaskWindow);
 #endif
@@ -701,6 +702,20 @@ namespace UI
 
 		float m_fMaxScale, m_fMaxScaleRate, m_fScaleDistance, m_fAdditionalScale;
 		D3DXVECTOR2 m_v2CurScale;
+	};
+#endif
+
+#ifdef ENABLE_RENDER_TARGET
+	class CUiRenderTarget : public CWindow
+	{
+	public:
+		CUiRenderTarget(PyObject* ppyObject);
+		virtual ~CUiRenderTarget();
+		bool SetRenderTarget(int index);
+	protected:
+		void OnUpdate();
+		void OnRender();
+		DWORD m_dwIndex;
 	};
 #endif
 };

@@ -677,4 +677,14 @@ void CActorInstance::AttachAcce(DWORD dwItemIndex, DWORD dwParentPartIndex, DWOR
 	AttachAcce(dwParentPartIndex, CRaceData::PART_ACCE, pItemData);
 }
 #endif
+
+#ifdef ENABLE_WIKI
+void CActorInstance::RenderAllAttachingEffectWiki()
+{
+	CEffectManager& effMngr = CEffectManager::Instance();
+	for (const auto& it : m_AttachingEffectList)
+		effMngr.RenderOneWiki(it.dwEffectIndex);
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

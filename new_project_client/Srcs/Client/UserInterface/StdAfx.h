@@ -84,6 +84,13 @@ void initAcce();
 #ifdef KYGN_CHEST_INFO
 	void initChestRewardInfo();
 #endif
+#ifdef ENABLE_WIKI
+void initWiki();
+#endif
+#ifdef ENABLE_RENDER_TARGET
+void initRenderTarget();
+#endif
+
 
 #ifdef ENABLE_BL_TRACEBACK
 extern void PrintTraceStack();

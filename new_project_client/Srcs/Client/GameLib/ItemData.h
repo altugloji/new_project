@@ -821,6 +821,10 @@ class CItemData
 		BOOL IsFlag(DWORD dwFlag) const;
 		BOOL IsWearableFlag(DWORD dwFlag) const;
 		BOOL HasNextGrade() const;
+#ifdef ENABLE_WIKI
+		WORD GetRefinedSet() const;
+		DWORD GetRefinedVnum() const;
+#endif
 		DWORD GetWearFlags() const;
 		DWORD GetIBuyItemPrice() const;
 		DWORD GetISellItemPrice() const;

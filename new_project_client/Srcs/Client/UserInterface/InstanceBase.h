@@ -1008,7 +1008,6 @@ class CInstanceBase
 		BYTE					m_byPKMode;
 		bool					m_isKiller;
 		bool					m_isPartyMember;
-
 		// Movement
 		int						m_iRotatingDirection;
 
@@ -1167,6 +1166,24 @@ class CInstanceBase
 #ifdef ENABLE_RACE_HEIGHT
 	public:
 		float					GetBaseHeight() const;
+#endif
+
+#ifdef ENABLE_WIKI
+public:
+	void AttachWikiAffect(DWORD effectIndex);
+	void RemoveWikiAffect(DWORD effectIndex);
+	void ClearWikiAffect();
+protected:
+	std::vector<DWORD> m_vecWikiEffects;
+#endif
+#ifdef ENABLE_RENDER_TARGET
+public:
+	void SetAlwaysRender(bool bFlag) { m_bAlwaysRender = bFlag; }
+	bool IsAlwaysRender() { return m_bAlwaysRender; }
+
+	bool SetMotionIndex(DWORD motionIndex);
+protected:
+	bool m_bAlwaysRender;
 #endif
 };
 

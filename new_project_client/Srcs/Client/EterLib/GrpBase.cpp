@@ -426,6 +426,21 @@ float CGraphicBase::GetFOV() const
 	return ms_fFieldOfView;
 }
 
+#ifdef ENABLE_RENDER_TARGET
+float CGraphicBase::GetAspect() const
+{
+	return ms_fAspect;
+}
+float CGraphicBase::GetNear() const
+{
+	return ms_fNearY;
+}
+float CGraphicBase::GetFar() const
+{
+	return ms_fFarY;
+}
+#endif
+
 void CGraphicBase::PushMatrix() const
 {
 	ms_lpd3dMatStack->Push();

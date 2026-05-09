@@ -51,7 +51,9 @@ class CItemManager : public CSingleton<CItemManager>
 #endif
 
 		CItemData *		MakeItemData(DWORD dwIndex);
-
+#ifdef ENABLE_WIKI
+		std::map<DWORD, CItemData*>			GetItemsVector() { return m_ItemMap; }
+#endif
 	protected:
 		TItemMap m_ItemMap;
 		std::vector<CItemData*>  m_vec_ItemRange;

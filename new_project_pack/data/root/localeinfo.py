@@ -779,3 +779,21 @@ def MoneyFormat(n):
 if app.ENABLE_EXCHANGE_LOG:
 	def MoneyFormat(n):
 		return "%s" % ('.'.join([ i-3<0 and str(n)[:i] or str(n)[i-3:i] for i in range(len(str(n))%3, len(str(n))+1, 3) if i ])) 
+
+if app.ENABLE_WIKI:
+	def SecondToHMS(time):
+		if time <= 0:
+			return "0 " + SECOND
+		second = int(time % 60)
+		minute = int((time / 60) % 60)
+		hour = int((time / 60) / 60) % 24
+		text = ""
+		if hour > 0:
+			text += str(hour) + " " + HOUR
+			text += " "
+		if minute > 0:
+			text += str(minute) + " " + MINUTE
+			text += " "
+		if second > 0:
+			text += str(second) + " " + SECOND
+		return text

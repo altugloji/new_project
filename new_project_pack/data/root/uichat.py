@@ -293,6 +293,13 @@ class ChatLine(ui.EditLine):
 			self.__NextLastSentenceStack()
 			return True
 		# END_OF_LAST_SENTENCE_STACK
+		
+		if app.ENABLE_WIKI:
+			if 88 == key and app.IsPressed(app.DIK_LCONTROL):
+				result = self.interface.wndWiki.GetHyperlinkData() if self.interface.wndWiki else ""
+				if result != "":
+					ime.PasteString(result)
+				return TRUE
 
 		ui.EditLine.OnIMEKeyDown(self, key)
 

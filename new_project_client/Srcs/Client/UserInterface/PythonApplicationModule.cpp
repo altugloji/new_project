@@ -2008,5 +2008,17 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "__RENEWAL_SKILL_BOOK__", false);
 #endif
 
+#ifdef ENABLE_WIKI
+	PyModule_AddIntConstant(poModule, "ENABLE_WIKI", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_WIKI", 0);
+#endif
+
+#ifdef ENABLE_RENDER_TARGET
+	PyModule_AddIntConstant(poModule, "ENABLE_RENDER_TARGET", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_RENDER_TARGET", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

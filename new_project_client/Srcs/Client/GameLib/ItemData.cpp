@@ -12,6 +12,17 @@ CItemData* CItemData::New()
 	return ms_kPool.Alloc();
 }
 
+#ifdef ENABLE_WIKI
+WORD CItemData::GetRefinedSet() const
+{
+	return m_ItemTable.wRefineSet;
+}
+DWORD CItemData::GetRefinedVnum() const
+{
+	return m_ItemTable.dwRefinedVnum;
+}
+#endif
+
 void CItemData::Delete(CItemData* pkItemData)
 {
 	pkItemData->Clear();

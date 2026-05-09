@@ -79,7 +79,11 @@ bool CActorInstance::SetRace(DWORD eRace)
 
 	CGraphicThingInstance::Clear();
 
-	if( IsPC())
+#ifdef ENABLE_RENDER_TARGET
+	if (IsPC() || eRace <= 7)
+#else
+	if (IsPC())
+#endif
 	{
 		CGraphicThingInstance::ReserveModelThing(CRaceData::PART_MAX_NUM);
 		CGraphicThingInstance::ReserveModelInstance(CRaceData::PART_MAX_NUM);

@@ -43,5 +43,11 @@ class CEffectElementBaseInstance
 
 	private:
 		CEffectElementBase *					m_pBase;
+#ifdef ENABLE_WIKI
+public:
+	void SetWikiIgnoreFrustum(bool flag) { m_wikiIgnoreFrustum = flag; }
+protected:
+	bool m_wikiIgnoreFrustum;
+#endif
 };
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

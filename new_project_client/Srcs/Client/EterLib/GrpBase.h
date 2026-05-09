@@ -163,6 +163,11 @@ class CGraphicBase
 		void		SetOrtho3D(float hres, float vres, float zmin, float zmax) const;
 		void		SetPerspective(float fov, float aspect, float nearz, float farz) const;
 		float		GetFOV() const;
+#ifdef ENABLE_RENDER_TARGET
+		float		GetAspect() const;
+		float		GetNear() const;
+		float		GetFar() const;
+#endif
 		void		GetClipPlane(float * fNearY, float * fFarY) const
 		{
 			*fNearY = ms_fNearY;

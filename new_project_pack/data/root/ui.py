@@ -216,6 +216,20 @@ class Window(object):
 		if app.ENABLE_MOUSEWHEEL_EVENT:
 			self.onMouseWheelEvent=None
 		self.RegisterWindow(layer)
+		
+		if app.ENABLE_WIKI:
+			self.exPos = (0, 0)
+			self.sortIndex = 0
+			self.mouseRightButtonUpEvent = None
+			self.mouseRightButtonUpArgs = None
+			self.mouseRightButtonDownEvent = None
+			self.mouseRightButtonDownArgs = None
+			
+			self.mouseLeftButtonUpEvent = None
+			self.mouseLeftButtonUpArgs = None
+
+			self.mouseLeftButtonDownEvent = None
+			self.mouseLeftButtonDownArgs = None
 
 		if app.ENABLE_SEND_TARGET_INFO:
 			self.SetWindowName("NONAME_Window")
@@ -245,6 +259,38 @@ class Window(object):
 
 	def RegisterWindow(self, layer):
 		self.hWnd = wndMgr.Register(self, layer)
+
+	if app.ENABLE_WIKI:
+		def SetMouseLeftButtonUpEvent(self, event, *args):
+			self.mouseLeftButtonUpEvent = event
+			self.mouseLeftButtonUpArgs = args
+		def OnMouseLeftButtonUp(self):
+			if self.mouseLeftButtonUpEvent:
+				apply(self.mouseLeftButtonUpEvent, self.mouseLeftButtonUpArgs)
+
+		def SetMouseLeftButtonDownEvent(self, event, *args):
+			self.mouseLeftButtonDownEvent = event
+			self.mouseLeftButtonDownArgs = args
+		def OnMouseLeftButtonDown(self):
+			if self.mouseLeftButtonDownEvent:
+				apply(self.mouseLeftButtonDownEvent, self.mouseLeftButtonDownArgs)
+
+		def SetMouseRightButtonUpEvent(self, event, *args):
+			self.mouseRightButtonUpEvent = event
+			self.mouseRightButtonUpArgs = args
+		def OnMouseRightButtonUp(self):
+			if self.mouseRightButtonUpEvent:
+				apply(self.mouseRightButtonUpEvent, self.mouseRightButtonUpArgs)
+
+		def SetMouseRightButtonDownEvent(self, event, *args):
+			self.mouseRightButtonDownEvent = event
+			self.mouseRightButtonDownArgs = args
+		def OnMouseRightButtonDown(self):
+			if self.mouseRightButtonDownEvent:
+				apply(self.mouseRightButtonDownEvent, self.mouseRightButtonDownArgs)
+				
+
+
 
 	@WindowDestroy
 	def Destroy(self):
@@ -364,8 +410,14 @@ class Window(object):
 	def GetRect(self):
 		return wndMgr.GetWindowRect(self.hWnd)
 
-	def SetPosition(self, x, y):
-		wndMgr.SetWindowPosition(self.hWnd, x, y)
+	if app.ENABLE_WIKI:
+		def SetPosition(self, x, y, flag = False):
+			if flag == True:
+				self.exPos = (x,y)
+			wndMgr.SetWindowPosition(self.hWnd, x, y)
+	else:
+		def SetPosition(self, x, y):
+			wndMgr.SetWindowPosition(self.hWnd, x, y)
 
 	def SetLeft(self, x):
 		wndMgr.SetWindowPosition(self.hWnd, x, self.GetTop())
@@ -400,13 +452,6 @@ class Window(object):
 	def IsIn(self):
 		return wndMgr.IsIn(self.hWnd)
 
-	def SetOnMouseLeftButtonUpEvent(self, event):
-		self.onMouseLeftButtonUpEvent = event
-
-	def OnMouseLeftButtonUp(self):
-		if self.onMouseLeftButtonUpEvent:
-			self.onMouseLeftButtonUpEvent()
-
 	if app.ENABLE_MOUSEWHEEL_EVENT:
 		def SetMouseWheelEvent(self, event):
 			self.onMouseWheelEvent = event
@@ -423,6 +468,9 @@ class Window(object):
 
 		def SetClippingMaskWindow(self, clipping_mask_window):
 			wndMgr.SetClippingMaskWindow(self.hWnd, clipping_mask_window.hWnd)
+
+		def SetInsideRender(self, val):
+			wndMgr.SetInsideRender(self.hWnd, val)
 
 
 class ListBoxEx(Window):
@@ -957,6 +1005,11 @@ class EditLine(TextLine):
 		self.useIME = True
 
 		self.bCodePage = False
+		
+		if app.ENABLE_WIKI:
+			self.infoMsg = ""
+			self.backText=None
+			self.isNeedEmpty=True
 
 		self.candidateWindowClass = None
 		self.candidateWindow = None
@@ -971,11 +1024,35 @@ class EditLine(TextLine):
 		self.eventReturn = Window.NoneMethod
 		self.eventEscape = Window.NoneMethod
 		self.eventTab = None
+		
+		if app.ENABLE_WIKI:
+			self.infoMsg = ""
+			self.backText=None
+			self.isNeedEmpty=False
 
 
 	def SetCodePage(self, codePage):
 		candidateWindowClass=EditLine.candidateWindowClassDict.get(codePage, EmptyCandidateWindow)
 		self.__SetCandidateClass(candidateWindowClass)
+
+	if app.ENABLE_WIKI:
+		def SetInfoMessage(self, msg):
+			self.infoMsg = msg
+			if self.backText == None:
+				self.backText = TextLine()
+				self.backText.SetParent(self)
+				self.backText.SetPosition(0,0)
+				self.backText.SetFontColor(128,128,128)
+
+			self.backText.SetText(msg)
+
+			if self.isNeedEmpty:
+				if len(self.GetText()) > 0:
+					self.backText.Hide()
+				else:
+					self.backText.Show()
+			else:
+				self.backText.Show()
 
 	def __SetCandidateClass(self, candidateWindowClass):
 		if self.candidateWindowClass==candidateWindowClass:
@@ -1126,6 +1203,16 @@ class EditLine(TextLine):
 		snd.PlaySound("sound/ui/type.wav")
 		TextLine.SetText(self, ime.GetText(self.bCodePage))
 
+		if app.ENABLE_WIKI:
+			if self.backText:
+				if self.isNeedEmpty:
+					if len(self.GetText()) > 0:
+						self.backText.Hide()
+					else:
+						self.backText.Show()
+				else:
+					self.backText.Show()
+
 	def OnIMETab(self):
 		if self.eventTab:
 			self.eventTab()
@@ -1268,6 +1355,10 @@ class ImageBox(Window):
 
 		if len(self.eventDict)!=0:
 			print("LOAD IMAGE", self, self.eventDict)
+
+	if app.ENABLE_WIKI:
+		def SetDiffuseColor(self, r, g, b, a):
+			wndMgr.SetDiffuseColor(self.hWnd, r, g, b, a)
 
 	def SetAlpha(self, alpha):
 		wndMgr.SetDiffuseColor(self.hWnd, 1.0, 1.0, 1.0, alpha)
@@ -4824,6 +4915,54 @@ if app.ENABLE_EXCHANGE_LOG:
 				return
 			self.Render(basePos)
 			self.basePos=basePos
+
+if app.ENABLE_RENDER_TARGET:
+	class RenderTarget(Window):
+		def __init__(self, layer = "UI"):
+			Window.__init__(self, layer)
+			self.eventDict={}
+			self.eventFunc = {"mouse_click" : None, "mouse_over_in" : None, "mouse_over_out" : None}
+			self.eventArgs = {"mouse_click" : None, "mouse_over_in" : None, "mouse_over_out" : None}
+		def Destroy(self):
+			self.eventDict={}
+			self.eventFunc = 0
+			self.eventArgs = 0
+			self.renderIndex = 0
+		def __del__(self):
+			Window.__del__(self)
+		def RegisterWindow(self, layer):
+			self.hWnd = wndMgr.RegisterRenderTarget(self, layer)
+		def SetRenderTarget(self, number):
+			wndMgr.SetRenderTarget(self.hWnd, number)
+			self.renderIndex = number
+		def SetRenderingRect(self, left, top, right, bottom):
+			wndMgr.SetRenderingRect(self.hWnd, left, top, right, bottom)
+		def SetEvent(self, func, *args):
+			result = self.eventFunc.has_key(args[0])
+			if result:
+				self.eventFunc[args[0]] = func
+				self.eventArgs[args[0]] = args
+		def OnMouseLeftButtonUp(self) :
+			if self.eventFunc["mouse_click"] :
+				apply(self.eventFunc["mouse_click"], self.eventArgs["mouse_click"])
+		def OnMouseOverIn(self):
+			try:
+				if self.eventFunc["mouse_over_in"]:
+					if self.eventArgs:
+						apply(self.eventFunc["mouse_over_in"], self.eventArgs["mouse_over_in"])
+					else:
+						self.eventFunc["mouse_over_in"]()
+			except KeyError:
+				pass
+		def OnMouseOverOut(self):
+			try:
+				if self.eventFunc["mouse_over_out"]:
+					if self.eventArgs:
+						apply(self.eventFunc["mouse_over_out"], self.eventArgs["mouse_over_out"])
+					else:
+						self.eventFunc["mouse_over_out"]()
+			except KeyError:
+				pass
 
 def MakeSlotBar(parent, x, y, width, height):
 	slotBar = SlotBar()

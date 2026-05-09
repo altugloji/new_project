@@ -69,9 +69,17 @@ class CParticleSystemInstance : public CEffectElementBaseInstance
 				for (; itor != m_ParticleInstanceListVector[dwFrameIndex].end(); ++itor)
 				{
 #ifdef ENABLE_RENDER_PREVIEW_EFFECTS
-					if (!GetIgnoreFrustrumFlag() && !InFrustum(*itor))
+					if (!GetIgnoreFrustrumFlag() && !InFrustum(*itor)
+#ifdef ENABLE_WIKI
+						&& !m_wikiIgnoreFrustum
+#endif
+					)
 #else
-					if (!InFrustum(*itor))
+					if (!InFrustum(*itor)
+#ifdef ENABLE_WIKI
+						&& !m_wikiIgnoreFrustum
+#endif
+					)
 #endif
 					{
 						bAbort = true;

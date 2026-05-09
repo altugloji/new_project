@@ -396,3 +396,8 @@ if app.ENABLE_EXCHANGE_LOG:
 		if _game_instance:
 			return _game_instance.interface
 		return None
+
+if app.ENABLE_WIKI:
+	def GetWikiInterface():
+		interface = GetInterfaceInstance()
+		return interface.wndWiki if interface != None else None

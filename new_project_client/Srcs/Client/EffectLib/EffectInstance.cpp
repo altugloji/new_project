@@ -273,6 +273,9 @@ void CEffectInstance::__Initialize()
 {
 	m_isAlive = FALSE;
 	m_dwFrame = 0;
+#ifdef ENABLE_WIKI
+	m_wikiIgnoreFrustum = false;
+#endif
 	m_pSoundInstanceVector = nullptr;
 	m_fBoundingSphereRadius = 0.0f;
 	m_v3BoundingSpherePosition.x = m_v3BoundingSpherePosition.y = m_v3BoundingSpherePosition.z = 0.0f;

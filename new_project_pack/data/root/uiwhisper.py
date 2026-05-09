@@ -6,8 +6,6 @@ import app
 import localeInfo
 import ime
 import chr
-if app.__BL_MULTI_LANGUAGE_PREMIUM__:
-	import systemSetting
 
 class WhisperButton(ui.Button):
 	def __init__(self):
@@ -104,6 +102,8 @@ class WhisperDialog(ui.ScriptWindow):
 		self.scrollBar.SetScrollEvent(ui.__mem_func__(self.OnScroll))
 		self.chatLine.SetReturnEvent(ui.__mem_func__(self.SendWhisper))
 		self.chatLine.SetEscapeEvent(ui.__mem_func__(self.Minimize))
+		if app.ENABLE_WIKI:
+			self.chatLine.OnIMEKeyDown = ui.__mem_func__(self.OnIMEKeyDown)
 		self.chatLine.SetMultiLine()
 		self.sendButton.SetEvent(ui.__mem_func__(self.SendWhisper))
 		self.titleNameEdit.SetReturnEvent(ui.__mem_func__(self.AcceptTarget))
@@ -127,6 +127,17 @@ class WhisperDialog(ui.ScriptWindow):
 		self.resizeButton.Show()
 
 		self.ResizeWhisperDialog()
+
+	if app.ENABLE_WIKI:
+		def OnIMEKeyDown(self, key):
+			if 88 == key and app.IsPressed(app.DIK_LCONTROL):
+				interface = constInfo.GetInterfaceInstance()
+				if interface:
+					result = interface.wndWiki.GetHyperlinkData() if interface.wndWiki else ""
+					if result != "":
+						ime.PasteString(result)
+					return TRUE
+			return ui.EditLine.OnIMEKeyDown(self.chatLine, key)
 
 	@ui.WindowDestroy
 	def Destroy(self):
@@ -294,15 +305,7 @@ class WhisperDialog(ui.ScriptWindow):
 			net.SendWhisperPacket(self.targetName, text)
 			self.chatLine.SetText("")
 
-			if app.__BL_MULTI_LANGUAGE_PREMIUM__:
-				country = app.GetLocaleName()
-				empire = net.GetEmpireID()
-				if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-					if systemSetting.GetAnonymousCountryMode():
-						country = "eu"
-				chat.AppendWhisper(chat.WHISPER_TYPE_CHAT, self.targetName, player.GetName() + " : " + text, empire, country)
-			else:
-				chat.AppendWhisper(chat.WHISPER_TYPE_CHAT, self.targetName, player.GetName() + " : " + text)
+			chat.AppendWhisper(chat.WHISPER_TYPE_CHAT, self.targetName, player.GetName() + " : " + text)
 
 	def OnTop(self):
 		self.chatLine.SetFocus()
@@ -312,23 +315,9 @@ class WhisperDialog(ui.ScriptWindow):
 
 	def OnMouseLeftButtonDown(self):
 		hyperlink = ui.GetHyperlink()
-		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
-			country = chat.GetCountry()
-			empire = chat.GetEmpire()
-			if hyperlink:
-				if app.IsPressed(app.DIK_LALT):
-					link = chat.GetLinkFromHyperlink(hyperlink)
-					ime.PasteString(link)
-				else:
-					self.interface.MakeHyperlinkTooltip(hyperlink)
-			elif country:
-				self.interface.MakeCountryTooltip(country)
-			elif empire:
-				self.interface.MakeEmpireTooltip(empire)
-		else:
-			if hyperlink:
-				if app.IsPressed(app.DIK_LALT):
-					link = chat.GetLinkFromHyperlink(hyperlink)
-					ime.PasteString(link)
-				else:
-					self.interface.MakeHyperlinkTooltip(hyperlink)
+		if hyperlink:
+			if app.IsPressed(app.DIK_LALT):
+				link = chat.GetLinkFromHyperlink(hyperlink)
+				ime.PasteString(link)
+			else:
+				self.interface.MakeHyperlinkTooltip(hyperlink)

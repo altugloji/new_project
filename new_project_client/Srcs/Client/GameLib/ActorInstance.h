@@ -479,6 +479,10 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		void		RenderCollisionData();
 		void		RenderToShadowMap();
 
+#ifdef ENABLE_WIKI
+		void		RenderAllAttachingEffectWiki();
+#endif
+
 	protected:
 		void		__AdjustCollisionMovement(const CGraphicObjectInstance * c_pGraphicObjectInstance);
 

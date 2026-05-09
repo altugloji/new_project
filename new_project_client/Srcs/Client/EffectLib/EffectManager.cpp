@@ -461,5 +461,20 @@ CEffectManager::~CEffectManager()
 	Destroy();
 }
 
+#ifdef ENABLE_WIKI
+void CEffectManager::RenderOneWiki(DWORD id)
+{
+	STATEMANAGER.SetTexture(0, NULL);
+	STATEMANAGER.SetTexture(1, NULL);
+	const auto& pEffectInstance = m_kEftInstMap.find(id);
+	if (pEffectInstance != m_kEftInstMap.end())
+	{
+		pEffectInstance->second->SetWikiIgnoreFrustum(true);
+		pEffectInstance->second->Show();
+		pEffectInstance->second->Render();
+	}
+}
+#endif
+
 // just for map effect
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

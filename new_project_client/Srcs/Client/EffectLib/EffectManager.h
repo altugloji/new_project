@@ -32,7 +32,9 @@ class CEffectManager : public CScreen, public CSingleton<CEffectManager>
 		void GetInfo(std::string* pstInfo) const;
 
 		bool IsAliveEffect(DWORD dwInstanceIndex);
-
+#ifdef ENABLE_WIKI
+		void RenderOneWiki(DWORD id);
+#endif
 		// Register
 		BOOL RegisterEffect(const char * c_szFileName,bool isExistDelete=false,bool isNeedCache=false);
 		BOOL RegisterEffect2(const char * c_szFileName, DWORD* pdwRetCRC, bool isNeedCache=false);

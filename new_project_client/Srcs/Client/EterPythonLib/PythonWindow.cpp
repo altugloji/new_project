@@ -4,6 +4,10 @@
 #include "PythonSlotWindow.h"
 #include "PythonWindowManager.h"
 
+#ifdef ENABLE_RENDER_TARGET
+#include "../EterLib/CRenderTargetManager.h"
+#endif
+
 BOOL g_bOutlineBoxEnable = FALSE;
 
 namespace UI
@@ -314,6 +318,18 @@ namespace UI
 	{
 		m_pChildList.push_back(pWin);
 		pWin->m_pParent = this;
+#if defined(__BL_CLIP_MASK__)
+		CWindow* pWinNew = this;
+		while (pWinNew)
+		{
+			if (pWinNew->m_pMaskWindow)
+			{
+				pWin->SetClippingMaskWindow(pWinNew->m_pMaskWindow);
+				break;
+			}
+			pWinNew = pWinNew->GetParent();
+		}
+#endif
 	}
 
 	CWindow * CWindow::GetRoot()
@@ -790,6 +806,20 @@ namespace UI
 #endif
 
 #if defined(__BL_CLIP_MASK__)
+	RECT CWindow::GetClipMaskRect()
+	{
+		CWindow* parentWnd = GetParent();
+		if (parentWnd && parentWnd != m_pMaskWindow)
+		{
+			static RECT multipleMaskRect;
+			::IntersectRect(&multipleMaskRect, &parentWnd->GetRect(), &m_pMaskWindow->GetRect());
+			return multipleMaskRect;
+		}
+		else
+		{
+			return m_pMaskWindow->GetRect();
+		}
+	}
 	void CWindow::SetClippingMaskRect(const RECT& rMask)
 	{
 		m_bEnableMask = true;
@@ -932,7 +962,7 @@ namespace UI
 			return;
 
 		if (m_bEnableMask && m_pMaskWindow)
-			m_rMaskRect = m_pMaskWindow->GetRect();
+			m_rMaskRect = GetClipMaskRect();
 
 		CWindow::OnUpdate();
 	}
@@ -1119,7 +1149,7 @@ namespace UI
 			return;
 
 		if (m_bEnableMask && m_pMaskWindow)
-			m_rMaskRect = m_pMaskWindow->GetRect();
+			m_rMaskRect = GetClipMaskRect();
 
 		m_TextInstance.Update();
 	}
@@ -1268,7 +1298,7 @@ namespace UI
 			return;
 
 		if (m_bEnableMask && m_pMaskWindow)
-			m_rMaskRect = m_pMaskWindow->GetRect();
+			m_rMaskRect = GetClipMaskRect();
 
 		CWindow::OnUpdate();
 	}
@@ -1406,7 +1436,7 @@ namespace UI
 		if (!m_pMaskWindow)
 			return;
 
-		m_rMaskRect = m_pMaskWindow->GetRect();
+		m_rMaskRect = GetClipMaskRect();
 	}
 	void CImageBox::OnRender()
 	{
@@ -1525,7 +1555,7 @@ namespace UI
 		if (!m_pMaskWindow)
 			return;
 
-		m_rMaskRect = m_pMaskWindow->GetRect();
+		m_rMaskRect = GetClipMaskRect();
 	}
 
 	void CMarkBox::OnRender()
@@ -1636,7 +1666,7 @@ namespace UI
 		if (!m_pMaskWindow)
 			return;
 
-		m_rMaskRect = m_pMaskWindow->GetRect();
+		m_rMaskRect = GetClipMaskRect();
 	}
 	void CExpandedImageBox::OnRender()
 	{
@@ -1757,7 +1787,7 @@ namespace UI
 	{
 #if defined(__BL_CLIP_MASK__)
 		if (m_bEnableMask && m_pMaskWindow)
-			m_rMaskRect = m_pMaskWindow->GetRect();
+			m_rMaskRect = GetClipMaskRect();
 #endif
 		++m_bycurDelay;
 		if (m_bycurDelay < m_byDelay)
@@ -1956,7 +1986,7 @@ namespace UI
 		if (!m_pMaskWindow)
 			return;
 
-		m_rMaskRect = m_pMaskWindow->GetRect();
+		m_rMaskRect = GetClipMaskRect();
 	}
 	void CButton::OnRender()
 	{
@@ -2617,6 +2647,60 @@ namespace UI
 
 			m_pImageInstance->SetPosition(m_v2NextPos.x, m_v2NextPos.y);
 		}
+	}
+#endif
+
+#ifdef ENABLE_RENDER_TARGET
+	CUiRenderTarget::CUiRenderTarget(PyObject* ppyObject) : CWindow(ppyObject), m_dwIndex(-1){}
+	CUiRenderTarget::~CUiRenderTarget() {
+		if (m_dwIndex != 1)
+		{
+			std::shared_ptr<CRenderTarget> t = CRenderTargetManager::Instance().GetRenderTarget(m_dwIndex);
+			if (t)
+				t->ResetModel();
+		}
+	};
+
+	bool CUiRenderTarget::SetRenderTarget(int index)
+	{
+		if (!CRenderTargetManager::Instance().GetRenderTarget(index))
+		{
+			if (!CRenderTargetManager::Instance().CreateRenderTarget(index, GetWidth(), GetHeight()))
+			{
+				TraceError("CRenderTargetManager could not create the texture. w %d h %d", GetWidth(), GetHeight());
+				return false;
+			}
+		}
+		m_dwIndex = index;
+		UpdateRect();
+		return true;
+	}
+	void CUiRenderTarget::OnUpdate()
+	{
+		if (m_dwIndex == -1)
+			return;
+		std::shared_ptr<CRenderTarget> target = CRenderTargetManager::Instance().GetRenderTarget(m_dwIndex);
+		if (!target)
+			return;
+#if defined(__BL_CLIP_MASK__)
+		if (m_bEnableMask && m_pMaskWindow)
+			m_rMaskRect = GetClipMaskRect();
+#endif
+		static PyObject* poFuncName_OnUpdate = PyString_InternFromString("OnUpdate");
+		PyCallClassMemberFunc_ByPyString(m_poHandler, poFuncName_OnUpdate, BuildEmptyTuple());
+	}
+	void CUiRenderTarget::OnRender()
+	{
+		if (m_dwIndex == -1)
+			return;
+		auto target = CRenderTargetManager::Instance().GetRenderTarget(m_dwIndex);
+		if (!target)
+			return;
+		target->SetRenderingRect(&m_rect);
+		if (m_bEnableMask && m_pMaskWindow)
+			target->RenderTexture(&m_rect, &m_rMaskRect);
+		else
+			target->RenderTexture(&m_rect, NULL);
 	}
 #endif
 };

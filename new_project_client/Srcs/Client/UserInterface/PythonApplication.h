@@ -53,6 +53,13 @@
 	#include "PythonChestInfo.h"
 #endif
 
+#ifdef ENABLE_WIKI
+#include "PythonWiki.h"
+#endif
+#ifdef ENABLE_RENDER_TARGET
+#include "../EterLib/CRenderTargetManager.h"
+#endif
+
 class CPythonApplication : public CMSApplication, public CInputKeyboard, public IAbstractApplication
 {
 	public:
@@ -209,7 +216,9 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 		void SetUpDirCameraSpeed(float fSpeed);
 		float GetRotation() const;
 		float GetPitch() const;
-
+#ifdef ENABLE_RENDER_TARGET
+		float GetCameraZoomSpeed() { return m_fCameraZoomSpeed; }
+#endif
 		void SetFPS(int iFPS);
 		void SetServerTime(time_t tTime);
 		time_t GetServerTime() const;
@@ -354,6 +363,12 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 
 		CPythonSafeBox				m_pySafeBox;
 		CPythonGuild				m_pyGuild;
+#ifdef ENABLE_WIKI
+		CPythonWiki					m_pyWiki;
+#endif
+#ifdef ENABLE_RENDER_TARGET
+		CRenderTargetManager		m_kRenderTarget;
+#endif
 #ifdef __BL_CLIENT_LOCALE_STRING__
 		CPythonLocale				m_pyLocale;
 #endif

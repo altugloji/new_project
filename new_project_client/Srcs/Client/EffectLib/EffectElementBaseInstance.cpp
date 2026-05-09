@@ -76,7 +76,9 @@ void CEffectElementBaseInstance::Initialize()
 	m_fLocalTime = 0.0f;
 	m_dwStartTime = 0;
 	m_fElapsedTime = 0.0f;
-
+#ifdef ENABLE_WIKI
+	m_wikiIgnoreFrustum = false;
+#endif
 	m_bStart = false;
 	m_fRemainingTime = 0.0f;
 

@@ -493,7 +493,10 @@ class GameWindow(ui.ScriptWindow):
 		if app.IsPressed(app.DIK_LCONTROL) or app.IsPressed(app.DIK_RCONTROL):
 			net.SendChatPacket("/user_horse_ride")
 		else:
-			self.interface.OpenHelpWindow()
+			if app.ENABLE_WIKI:
+				self.interface.OpenWikiWindow()
+			else:
+				self.interface.OpenHelpWindow()
 
 	def	__PressBKey(self):
 		if app.IsPressed(app.DIK_LCONTROL) or app.IsPressed(app.DIK_RCONTROL):

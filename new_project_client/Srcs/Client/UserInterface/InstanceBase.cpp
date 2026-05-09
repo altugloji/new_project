@@ -2538,6 +2538,10 @@ bool CInstanceBase::__IsInViewFrustum()
 
 bool CInstanceBase::__CanRender()
 {
+#ifdef ENABLE_RENDER_TARGET
+	if (IsAlwaysRender())
+		return true;
+#endif
 	if (!__IsInViewFrustum())
 		return false;
 
@@ -2656,7 +2660,11 @@ void CInstanceBase::SetHair(DWORD eHair)
 	if (!HAIR_COLOR_ENABLE)
 		return;
 
-	if (IsPC()==false)
+#ifdef ENABLE_RENDER_TARGET
+	if (!IsPC() && GetRace() > 7)
+#else
+	if (IsPC() == false)
+#endif
 		return;
 	m_awPart[CRaceData::PART_HAIR] = eHair;
 
@@ -2718,7 +2726,11 @@ void CInstanceBase::SetArmor(DWORD dwArmor)
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 bool CInstanceBase::SetAcce(DWORD dwAcce)
 {
+#ifdef ENABLE_RENDER_TARGET
+	if ((!IsPC() && GetRace() > 7) || IsPoly() || IsWearingDress() || __IsShapeAnimalWear())
+#else
 	if (!IsPC() || IsPoly() || IsWearingDress() || __IsShapeAnimalWear())
+#endif
 		return false;
 
 	if (dwAcce % 1000 >= 500)
@@ -3291,6 +3303,10 @@ void CInstanceBase::__Initialize()
 	m_dwRace = 0;
 	m_dwVirtualNumber = 0;
 
+#ifdef ENABLE_RENDER_TARGET
+	m_bAlwaysRender = false;
+#endif
+
 	m_dwBaseCmdTime=0;
 	m_dwBaseChkTime=0;
 	m_dwSkipTime=0;
@@ -3414,4 +3430,32 @@ float CInstanceBase::GetBaseHeight() const
 	return fRaceHeight;
 }
 #endif
+
+#ifdef ENABLE_WIKI
+void CInstanceBase::AttachWikiAffect(DWORD effectIndex)
+{
+	const DWORD newAffect = __AttachEffect(effectIndex);
+	m_vecWikiEffects.push_back(newAffect);
+}
+void CInstanceBase::RemoveWikiAffect(DWORD effectIndex)
+{
+	const auto it = std::find(m_vecWikiEffects.begin(), m_vecWikiEffects.end(), effectIndex);
+	if (it != m_vecWikiEffects.end())
+	{
+		__DetachEffect(effectIndex);
+		m_vecWikiEffects.erase(it);
+	}
+}
+void CInstanceBase::ClearWikiAffect()
+{
+	for (const auto& effectIndex : m_vecWikiEffects)
+		__DetachEffect(effectIndex);
+	m_vecWikiEffects.clear();
+}
+bool CInstanceBase::SetMotionIndex(DWORD motionIndex)
+{
+	return m_GraphicThingInstance.InterceptOnceMotion(motionIndex);
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

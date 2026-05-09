@@ -109,7 +109,7 @@ class AtlasWindow(ui.ScriptWindow):
 		self.infoGuildMark.SetParent(self.board)
 		self.SetPosition(wndMgr.GetScreenWidth() - 136 - 256 - 10, 0)
 		if app.ENABLE_MINIMAP_TELEPORT_CLICK:
-			self.board.SetOnMouseLeftButtonUpEvent(ui.__mem_func__(self.OnMouseLeftButtonUpEvent))
+			self.board.SetMouseLeftButtonUpEvent(ui.__mem_func__(self.OnMouseLeftButtonUpEvent))
 		self.Hide()
 
 		miniMap.RegisterAtlasWindow(self)

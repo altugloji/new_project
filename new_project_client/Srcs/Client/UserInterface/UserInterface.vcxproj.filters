@@ -93,6 +93,8 @@
     <ClCompile Include="PythonEventManagerModule.cpp" />
     <ClCompile Include="PythonLocale.cpp" />
     <ClCompile Include="PythonChestInfo.cpp" />
+    <ClCompile Include="PythonRenderTargetModule.cpp" />
+    <ClCompile Include="PythonWiki.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AffectFlagContainer.h" />
@@ -148,6 +150,7 @@
     <ClInclude Include="Test.h" />
     <ClInclude Include="PythonLocale.h" />
     <ClInclude Include="PythonChestInfo.h" />
+    <ClInclude Include="PythonWiki.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Cursors\cursor.cur">

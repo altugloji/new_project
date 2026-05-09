@@ -2604,6 +2604,17 @@ PyObject* wndMgrSetClippingMaskWindow(PyObject* poSelf, PyObject* poArgs)
 	pWindow->SetClippingMaskWindow(pMaskWindow);
 	return Py_BuildNone();
 }
+PyObject* wndMgrSetInsideRender(PyObject* poSelf, PyObject* poArgs)
+{
+	UI::CWindow* pWin;
+	if (!PyTuple_GetWindow(poArgs, 0, &pWin))
+		return Py_BuildException();
+	bool bVal;
+	if (!PyTuple_GetBoolean(poArgs, 1, &bVal))
+		return Py_BuildException();
+	pWin->SetClippingMaskWindow(pWin);
+	return Py_BuildNone();
+}
 #endif
 
 #ifdef ENABLE_AUTO_L2R
@@ -2624,6 +2635,32 @@ PyObject* wndButtonLeftRightReverse(PyObject* poSelf, PyObject* poArgs)
 		return Py_BuildException();
 
 	((UI::CButton*)pWindow)->LeftRightReverse();
+	return Py_BuildNone();
+}
+#endif
+
+#ifdef ENABLE_RENDER_TARGET
+PyObject* wndMgrRegisterRenderTarget(PyObject* poSelf, PyObject* poArgs)
+{
+	PyObject* po;
+	if (!PyTuple_GetObject(poArgs, 0, &po))
+		return Py_BuildException();
+	char* szLayer;
+	if (!PyTuple_GetString(poArgs, 1, &szLayer))
+		return Py_BuildException();
+	UI::CWindow* pWindow = UI::CWindowManager::Instance().RegisterRenderTarget(po, szLayer);
+	return Py_BuildValue("i", pWindow);
+}
+PyObject* wndRenderTargetSetRenderTarget(PyObject* poSelf, PyObject* poArgs)
+{
+	UI::CWindow* pWindow;
+	if (!PyTuple_GetWindow(poArgs, 0, &pWindow))
+		return Py_BuildException();
+	int index;
+	if (!PyTuple_GetInteger(poArgs, 1, &index))
+		return Py_BuildException();
+	if (pWindow->IsType(UI::CUiRenderTarget::Type()))
+		((UI::CUiRenderTarget*)pWindow)->SetRenderTarget(index);
 	return Py_BuildNone();
 }
 #endif
@@ -2854,6 +2891,7 @@ void initwndMgr()
 #if defined(__BL_CLIP_MASK__)
 		{ "SetClippingMaskRect",		wndMgrSetClippingMaskRect,			METH_VARARGS },
 		{ "SetClippingMaskWindow",		wndMgrSetClippingMaskWindow,		METH_VARARGS },
+		{ "SetInsideRender",			wndMgrSetInsideRender,				METH_VARARGS },
 #endif
 #ifdef ENABLE_AUTO_L2R
 		// ImageBox
@@ -2861,6 +2899,11 @@ void initwndMgr()
 
 		// Button
 		{ "LeftRightReverse",			wndButtonLeftRightReverse,			METH_VARARGS },
+#endif
+
+#ifdef ENABLE_RENDER_TARGET
+		{ "RegisterRenderTarget", wndMgrRegisterRenderTarget, METH_VARARGS },
+		{ "SetRenderTarget", wndRenderTargetSetRenderTarget, METH_VARARGS },
 #endif
 		{nullptr, nullptr},
 	};
