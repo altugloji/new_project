@@ -1,3 +1,6 @@
+DO_YOU_BUY_ITEM_C	Cantidad: %d Precio (EP): %s
+DO_YOU_BUY_ITEM_M	Cantidad: %d Precio (EM): %s
+ASK_BUY_ITEM_TEXT	¿Quieres comprar este objeto? (Objeto: %s)
 CHARACTER_NAME	Nombre
 USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Cancelar
 USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Enviar

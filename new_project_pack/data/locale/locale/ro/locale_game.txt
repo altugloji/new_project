@@ -1,3 +1,6 @@
+DO_YOU_BUY_ITEM_C	Cantitate: %d Preþ (EP): %s
+DO_YOU_BUY_ITEM_M	Cantitate: %d Preþ (EM): %s
+ASK_BUY_ITEM_TEXT	Vrei sã cumperi acest obiect? (Obiect: %s)
 CHARACTER_NAME	Nume
 USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Anuleazã
 USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Trimite

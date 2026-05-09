@@ -1,3 +1,21 @@
+CHARACTER_NAME	Name
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Cancel
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Send
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Are you sure you want to report this character?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Selected Character
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	False reports may have consequences.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	You have already reported this character.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	You cannot use this feature while dead.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	GM characters cannot use this feature.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	You must select a reason before sending your report.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	This character is currently offline.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	You must complete the Biologist quest at level 30 to use this feature.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Report sent successfully.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Please try again later.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Bot Shop
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Botting and Cheating
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Yang Selling
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Report Player
 LOGIN_LANGUAGE_SELECT_TITLE	Language Selection
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Website
@@ -1635,8 +1653,8 @@ MAP_MAZE_DUNGEON_02	Gnoll Caves Level 2
 MAP_MAZE_DUNGEON_03	Gnoll Caves Level 3
 MAP_MILGYO	Hwang Temple
 MAP_MILGYO_A	
-MAP_MINIBOSS_01	Blue Dungeon – Lvl 40-80
-MAP_MINIBOSS_02	Red Dungeon – Lvl 81+
+MAP_MINIBOSS_01	Blue Dungeon - Lvl 40-80
+MAP_MINIBOSS_02	Red Dungeon - Lvl 81+
 MAP_MISTS_OF_ISLAND	Isle of Mist
 MAP_MONKEY_DUNGEON	Hasun Dong
 MAP_MONKEY_DUNGEON2	Jungsun Dong
@@ -2237,7 +2255,7 @@ PET_INFO_NEXT_ITEM_EXP	Remaining item EXP
 PET_MSG_NOT_ENOUGH_MONEY	You do not have enough Yang.
 PET_NAME_CHANGE_ACCEPT	Do you want to change your pet's name to %s?
 PET_NAME_MIN	The name entered is too short.
-PET_REVIVE_FAIL_EMPTY_PET_SLOT	There’s no pet to revive.
+PET_REVIVE_FAIL_EMPTY_PET_SLOT	There's no pet to revive.
 PET_REVIVE_FAIL_NOT_ENOUGHT_MATERIAL	You do not have enough material.
 PET_REVIVE_UI_MATERIAL_COUNT	%d/%d
 PET_SKILL_DELETE_QUESTION_DLG_MSG	Skills are now available.

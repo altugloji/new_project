@@ -1,3 +1,6 @@
+DO_YOU_BUY_ITEM_C	Count: %d Price (EP): %s
+DO_YOU_BUY_ITEM_M	Count: %d Price (EM): %s
+ASK_BUY_ITEM_TEXT	Do you want to buy this item? (Item: %s)
 CHARACTER_NAME	Name
 USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Cancel
 USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Send

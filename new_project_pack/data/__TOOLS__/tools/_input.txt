@@ -1,0 +1,59 @@
+[CZ]
+DO_YOU_BUY_ITEM_C	Počet: %d Cena (EP): %s
+DO_YOU_BUY_ITEM_M	Počet: %d Cena (EM): %s
+ASK_BUY_ITEM_TEXT	Chceš koupit tento předmět? (Předmět: %s)
+
+[DE]
+DO_YOU_BUY_ITEM_C	Anzahl: %d Preis (EP): %s
+DO_YOU_BUY_ITEM_M	Anzahl: %d Preis (EM): %s
+ASK_BUY_ITEM_TEXT	Möchtest du dieses Item kaufen? (Item: %s)
+
+[DK]
+DO_YOU_BUY_ITEM_C	Antal: %d Pris (EP): %s
+DO_YOU_BUY_ITEM_M	Antal: %d Pris (EM): %s
+ASK_BUY_ITEM_TEXT	Vil du købe dette item? (Item: %s)
+
+[EN]
+DO_YOU_BUY_ITEM_C	Count: %d Price (EP): %s
+DO_YOU_BUY_ITEM_M	Count: %d Price (EM): %s
+ASK_BUY_ITEM_TEXT	Do you want to buy this item? (Item: %s)
+
+[ES]
+DO_YOU_BUY_ITEM_C	Cantidad: %d Precio (EP): %s
+DO_YOU_BUY_ITEM_M	Cantidad: %d Precio (EM): %s
+ASK_BUY_ITEM_TEXT	¿Quieres comprar este objeto? (Objeto: %s)
+
+[FR]
+DO_YOU_BUY_ITEM_C	Quantité : %d Prix (EP) : %s
+DO_YOU_BUY_ITEM_M	Quantité : %d Prix (EM) : %s
+ASK_BUY_ITEM_TEXT	Veux-tu acheter cet objet ? (Objet : %s)
+
+[HU]
+DO_YOU_BUY_ITEM_C	Mennyiség: %d Ár (EP): %s
+DO_YOU_BUY_ITEM_M	Mennyiség: %d Ár (EM): %s
+ASK_BUY_ITEM_TEXT	Meg szeretnéd venni ezt a tárgyat? (Tárgy: %s)
+
+[IT]
+DO_YOU_BUY_ITEM_C	Quantità: %d Prezzo (EP): %s
+DO_YOU_BUY_ITEM_M	Quantità: %d Prezzo (EM): %s
+ASK_BUY_ITEM_TEXT	Vuoi comprare questo oggetto? (Oggetto: %s)
+
+[NL]
+DO_YOU_BUY_ITEM_C	Aantal: %d Prijs (EP): %s
+DO_YOU_BUY_ITEM_M	Aantal: %d Prijs (EM): %s
+ASK_BUY_ITEM_TEXT	Wil je dit item kopen? (Item: %s)
+
+[PL]
+DO_YOU_BUY_ITEM_C	Ilość: %d Cena (EP): %s
+DO_YOU_BUY_ITEM_M	Ilość: %d Cena (EM): %s
+ASK_BUY_ITEM_TEXT	Czy chcesz kupić ten przedmiot? (Przedmiot: %s)
+
+[PT]
+DO_YOU_BUY_ITEM_C	Quantidade: %d Preço (EP): %s
+DO_YOU_BUY_ITEM_M	Quantidade: %d Preço (EM): %s
+ASK_BUY_ITEM_TEXT	Queres comprar este item? (Item: %s)
+
+[RO]
+DO_YOU_BUY_ITEM_C	Cantitate: %d Preț (EP): %s
+DO_YOU_BUY_ITEM_M	Cantitate: %d Preț (EM): %s
+ASK_BUY_ITEM_TEXT	Vrei să cumperi acest obiect? (Obiect: %s)

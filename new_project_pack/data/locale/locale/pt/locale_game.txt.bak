@@ -1,3 +1,21 @@
+CHARACTER_NAME	Nome
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Cancelar
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Enviar
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Tens a certeza de que queres denunciar esta personagem?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Personagem selecionada
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	Denúncias falsas podem ter consequências.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Já denunciaste esta personagem.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	Não podes usar esta função enquanto estiveres morto.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	Personagens GM não podem usar esta função.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	Tens de selecionar um motivo antes de enviar a denúncia.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Esta personagem está offline neste momento.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	Tens de completar a missão do Biólogo de nível 30 para usar esta função.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Denúncia enviada com sucesso.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Por favor, tenta novamente mais tarde.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Loja Bot
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Bot e batota
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Venda de Yang
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Denunciar jogador
 LOGIN_LANGUAGE_SELECT_TITLE	Seleção de Idioma
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Site
@@ -347,7 +365,7 @@ COMB_NOT_FULL_BOOK	Não, não podemos fazer negócio assim. Como já te disse, apena
 COMB_NOT_ITEM_IN_INVENTORY	Não podes usar itens equipados.
 COMB_NOT_MEDIUM_ITEM	Este item não pode ser usado.
 COMB_WILL_REMOVE_MATERIAL	O item de origem será destruído com um sucesso.
-CREATE_ERROR_GM_NAME	Não podes usar ,GM‘ no nome da tua personagem.
+CREATE_ERROR_GM_NAME	Não podes usar ,GM' no nome da tua personagem.
 CREATE_ERROR_INSULT_NAME	Este nome é inválido.
 CREATE_ERROR_LIMIT_LEVEL	A tua personagem tem de ser pelo menos nível 80.
 CREATE_ERROR_TIME_LIMIT	Apenas podes criar uma personagem a cada 30 segundos.

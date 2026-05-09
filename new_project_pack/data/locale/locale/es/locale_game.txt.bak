@@ -1,3 +1,21 @@
+CHARACTER_NAME	Nombre
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Cancelar
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Enviar
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	¿Seguro que quieres reportar este personaje?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Personaje seleccionado
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	Los reportes falsos pueden tener consecuencias.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Ya has reportado este personaje.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	No puedes usar esta función estando muerto.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	Los personajes GM no pueden usar esta función.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	Debes seleccionar un motivo antes de enviar el reporte.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Este personaje está desconectado actualmente.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	Debes completar la misión del Biólogo de nivel 30 para usar esta función.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Reporte enviado correctamente.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Inténtalo de nuevo más tarde.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Tienda Bot
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Bot y trampas
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Venta de Yang
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Reportar jugador
 LOGIN_LANGUAGE_SELECT_TITLE	Selección de Idioma
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Sitio web
@@ -43,14 +61,14 @@ ATTR_6TH_7TH_ADD_QUESTION1	No puedes utilizar este objeto mientras se está añadi
 ATTR_6TH_7TH_ADD_QUESTION2	¿Seguro que quieres añadir la bonificación?
 ATTR_6TH_7TH_CHANGE_FAIL	No puedes modificar la bonificación.
 ATTR_6TH_7TH_DESC1	a) Debes introducir los materiales necesarios para el objeto para poder añadir la 6.ª y 7.ª bonificación.
-ATTR_6TH_7TH_DESC2	b) Cada fragmento aumenta la tasa de éxito en un 2 %.
+ATTR_6TH_7TH_DESC2	b) Cada fragmento aumenta la tasa de éxito en un 2 %.
 ATTR_6TH_7TH_DESC3	c) Utiliza una ampliación para aumentar la tasa de éxito de forma adicional.
 ATTR_6TH_7TH_DESC4	d) Hacen falta 24 horas para añadir la bonificación. El PNJ se quedará con el objeto al que se añadirá la bonificación. En cuanto el proceso haya finalizado, podrás volver a recogerlo.
 ATTR_6TH_7TH_POSSIBILITY	Puedes añadir una bonificación adicional.
 ATTR_6TH_7TH_TOTAL_SUCCESS_PERCENT	Probabilidad de éxito: %.1f%%
 AURA_CLEAR_CANNOT_USE_SEALED_ITEM	No es posible modificar los atributos de un objeto vinculado al alma.
 AURA_CLEAR_QUESTION_WHEN_USE	¿Quieres eliminar los atributos aplicados? No se podrán restaurar.
-AURA_DRAIN_PER	Tasa de absorción %.1f %%
+AURA_DRAIN_PER	Tasa de absorción %.1f %%
 AURA_EVOLUTION_GOLD	[Aura] No hay suficiente Yang para desarrollar.
 AURA_IMPOSSIBLE_ABSORBITEM	[Aura] No es posible transferir más bonificaciones.
 AURA_IMPOSSIBLE_EQUIPITEM	[Aura] No se pueden utilizar objetos equipados.
@@ -69,8 +87,8 @@ AURA_POSSIBLE_REGISTER_AURAITEM	[Aura] Primero tienes que asignar la Vestimenta 
 AURA_TITLE_ABSORB	Transferir valores a la Vestimenta del aura
 AURA_TITLE_EVOLUTION	Desarrollar la Vestimenta del aura
 AURA_TITLE_GROWTH	Mejorar la Vestimenta del aura
-AURA_TOOLTIP_EXP	EXP (%d %% / 100 %%)
-AURA_TOOLTIP_LEVEL	Nv. %d (nivel %d) (Tasa de absorción %.1f %%)
+AURA_TOOLTIP_EXP	EXP (%d %% / 100 %%)
+AURA_TOOLTIP_LEVEL	Nv. %d (nivel %d) (Tasa de absorción %.1f %%)
 AURA_TOOLTIP_NEED_YANG	%s Yang
 AURA_TOOLTIP_NEXT	Nuevo
 AURA_TOOLTIP_NOW	Novedad
@@ -93,10 +111,10 @@ BATTLE_MAP_NAME_AREA_7	Zona 7
 BATTLE_MAP_NAME_AREA_8	Zona 8
 BATTLE_MAP_NAME_AREA_9	Zona 9
 BATTLE_POINT	Puntos de combate
-BATTLE_ROYALE_ALIVE_COUNT	Supervivientes: %d
+BATTLE_ROYALE_ALIVE_COUNT	Supervivientes: %d
 BATTLE_ROYALE_APPLICATION_TITLE	Battle Royale
 BATTLE_ROYALE_CANNOT_OPEN_MALL	Eso no se puede abrir aquí.
-BATTLE_ROYALE_KILL_COUNT	Adversarios derrotados: %d
+BATTLE_ROYALE_KILL_COUNT	Adversarios derrotados: %d
 BATTLE_ROYALE_MAINBUTTON_APPLICATION	Participar
 BATTLE_ROYALE_MAINBUTTON_CANCEL	Cancelar
 BATTLE_ROYALE_MAINBUTTON_EXIT	Abandonar
@@ -107,7 +125,7 @@ BATTLE_ROYALE_NOTIFY_STARTABLE	Ya puedes acceder a Battle Royale. Para participa
 BATTLE_ROYALE_NOTIFY_WINNER	¡Victoria!
 BATTLE_ROYALE_PERSONAL_RANK	Puesto personal: %d
 BATTLE_ROYALE_QUESTION_USE_INFINITE_STAMINA	¿Quieres activar resistencia infinita?
-BATTLE_ROYALE_WHO_KILLED	Te ha derrotado: %s
+BATTLE_ROYALE_WHO_KILLED	Te ha derrotado: %s
 BATTLE_ROYALE_WINNER_1	¡Has ganado el Battle Royale!
 BATTLE_ROYALE_WINNER_2	Se te teletransportará a la aldea en un momento.
 BEAD	Esfera ánima
@@ -375,7 +393,7 @@ CUBE_CATEGORY_WEAPON	Arma
 CUBE_CATEGOR_SKILL_BOOK	Manual de habilidad
 CUBE_DO_NOT_SAME_ALCHEMY_KINDS	Utiliza una Runa forjada del tipo adecuado.
 CUBE_FAIL	No ha salido bien.
-CUBE_LIST_TEXT_ITEM_INFO	%s (%d %%)
+CUBE_LIST_TEXT_ITEM_INFO	%s (%d %%)
 CUBE_LIST_TEXT_MAKE_QUANTITY	[%d]
 CUBE_MAKE_CONFIRM_QUESTION_1	Al menos un objeto utilizado es especialmente valioso (tiene más de %d bonificaciones).
 CUBE_MAKE_CONFIRM_QUESTION_2	¿Seguro que quieres continuar?
@@ -770,7 +788,7 @@ EQUIPMENT_ADDITIONAL_PAGE_ACTIVE	La página de equipamiento adicional se ha activ
 EQUIPMENT_ALREADY_USE_ITEM	No puede volver a usarse.
 EQUIPMENT_CANNOT_ADDITIONAL_EQUIPMENT_PAGE	No puedes cambiar la página de equipamiento mientras estás ocupado haciendo otra cosa.
 EQUIPMENT_CANNOT_ADDITIONAL_EQUIPMENT_PAGE_ITEM	No puedes cambiar de página de equipamiento mientras tengas equipado un objeto no permitido.
-EQUIPMENT_CHANGE_PAGE_COOLTIME_FAIL	Vuelve a intentarlo en 1 minuto.
+EQUIPMENT_CHANGE_PAGE_COOLTIME_FAIL	Vuelve a intentarlo en 1 minuto.
 EQUIPMENT_CHANGE_PAGE_SUCCESS	Se ha cambiado la página de equipamiento.
 EQUIPMENT_TITLE_NAME	Ventana de equipamiento
 EXCHANGE_CANNOT_GIVE	Este objeto no puede ser comerciado.
@@ -1007,7 +1025,7 @@ GUILDWINDOW_SP_RECOVER	Fuerza Dragón
 GUILDWINDOW_UPGRADE_ALTEROFPOWER	Expansión de altar
 GUILDWINDOW_UPGRADE_GUILDBANK	Expansión de banco
 GUILD_ATTENDANCE_FAIL_ALREADY	Hoy ya has participado.
-GUILD_ATTENDANCE_FAIL_JOIN_TIME	Ahora no puedes participar. La participación se restablece a las 5:00 h.
+GUILD_ATTENDANCE_FAIL_JOIN_TIME	Ahora no puedes participar. La participación se restablece a las 5:00 h.
 GUILD_BANKINFO_CLOSE	Cerrar
 GUILD_BANKINFO_NAME	Miembro
 GUILD_BANKINFO_TYPE	Objeto/Moneda
@@ -1019,7 +1037,7 @@ GUILD_BATTLE_AREA_INFO_TEXT	Tiempo restante: %s\nMonstruos restantes (%d/61)\nAz
 GUILD_BATTLE_AREA_INFO_TEXT_FONT	Tahoma:14b
 GUILD_BATTLE_AREA_UNDER_ATTCK_MESSAGE	Están atacando a los monstruos en %s.
 GUILD_BATTLE_CANNOT_APPLY_TIME_MESSAGE	La Batalla Gremial ya está llena, así que no puedes unirte. ¡Vuelve a intentarlo la próxima vez!
-GUILD_BATTLE_CANNOT_ENTER_JOIN_TIME	Todavía no puedes participar. Tiempo restante: %d minuto/s.
+GUILD_BATTLE_CANNOT_ENTER_JOIN_TIME	Todavía no puedes participar. Tiempo restante: %d minuto/s.
 GUILD_BATTLE_CANNOT_ENTER_MAP_MESSAGE	Solo se puede entrar desde la primera aldea o desde la Llanura Dongan.
 GUILD_BATTLE_CANNOT_ENTER_NOT_MATCHING_MESSAGE	No se ha encontrado rival adecuado para tu gremio. Vuelve a intentarlo la próxima vez.
 GUILD_BATTLE_CANNOT_GET_REWARD_NOT_ENOUGH_INEVENTORY	No tienes suficiente espacio en el inventario.
@@ -1084,7 +1102,7 @@ GUILD_BATTLE_USE_TICKET_CANCEL_MESSAGE	Se ha cancelado tu inscripción en la Bata
 GUILD_BOARD_ID	Miembro
 GUILD_BOARD_TEXT	Mensaje
 GUILD_BUILDING_FIX_CHANGE	¿De verdad quieres cambiar la posición?
-GUILD_BUILDING_FIX_CHANGE_GOLD	Costes: 1 000 000 de Yang
+GUILD_BUILDING_FIX_CHANGE_GOLD	Costes: 1 000 000 de Yang
 GUILD_BUILDING_FIX_DELETE	¿De verdad quieres borrar el objeto?
 GUILD_BUILDING_FIX_NEED_BUILDING	No hay ningún edificio.
 GUILD_BUILDING_GRADE	Rank
@@ -1159,15 +1177,15 @@ GUILD_OBJECT_POSSIBLE_NEWWORLD	Este edificio solo está disponible en el continen
 GUILD_OFFER_EXP	Invertir experiencia
 GUILD_SELECT_ONE	Selecciona a un miembro del gremio.
 GUILD_SHORT_EXP	No hay suficiente puntos de experiencia.
-GUILD_SITE_AUCTION_END_TIME	Subasta de terrenos: %02d/%02d (mes/día) a las %02d:%02d h
+GUILD_SITE_AUCTION_END_TIME	Subasta de terrenos: %02d/%02d (mes/día) a las %02d:%02d h
 GUILD_SITE_AUCTION_END_TIME_DEFAULT	Subasta de terreno: n/a
 GUILD_SITE_AUCTION_INFO	Terreno que se oferta: %s / %d,%d
 GUILD_SITE_AUCTION_INFO_DEFAULT	Terreno que se oferta: n/a
-GUILD_SITE_AUCTION_MAP_INFO	Fecha (mes/día): %02d/%02d; Hora: %02d:%02d h
+GUILD_SITE_AUCTION_MAP_INFO	Fecha (mes/día): %02d/%02d; Hora: %02d:%02d h
 GUILD_SITE_AUCTION_STATE_NONE	Todas las ofertas se han vendido.
 GUILD_SITE_AUCTION_STATE_REGIST	En %s, se subasta el terreno %s, %s. Solo los líderes del gremio pueden registrarse en la subasta de terrenos.
-GUILD_SITE_AUCTION_STATE_RUN	La subasta de terrenos finalizará el %02d/%02d (mes/día) a las %02d:%02d h.
-GUILD_SITE_AUCTION_STATE_WAIT	El %02d/%02d (mes/día) a las %02d:%02d h comenzará la subasta de terrenos para %s, terreno %d,%d.
+GUILD_SITE_AUCTION_STATE_RUN	La subasta de terrenos finalizará el %02d/%02d (mes/día) a las %02d:%02d h.
+GUILD_SITE_AUCTION_STATE_WAIT	El %02d/%02d (mes/día) a las %02d:%02d h comenzará la subasta de terrenos para %s, terreno %d,%d.
 GUILD_SITE_AUTO_ABNDON_TIME	Cesión de terreno automática: %s
 GUILD_SITE_TAX_INFO	El terreno del gremio se abandonará en %s. Se borrarán todos los objetos en el almacén del gremio.
 GUILD_TILE_BASEINFO	Información del terreno
@@ -1224,7 +1242,7 @@ HORSE_LEVEL4	Caballo de batalla poderoso
 HOUR	h
 HOW_MANY_ITEM_DO_YOU_DROP1	¿Deseas tirar %s?
 HOW_MANY_ITEM_DO_YOU_DROP2	¿Deseas tirar %s %d?
-ICECREAM_EVENT_EXCHANGE_SCOOP_SUCCESS	Has transferido %d Bolas de hielo al nuevo menú de evento.
+ICECREAM_EVENT_EXCHANGE_SCOOP_SUCCESS	Has transferido %d Bolas de hielo al nuevo menú de evento.
 ICECREAM_EVENT_GET_SCOOP	Has obtenido una Bola de hielo.
 ICECREAM_EVENT_SCOOP_MAX_COUNT	No puedes obtener más Bolas de hielo.
 INPUT_MATRIX_CARD_NUMBER	Introduce código de Tarjeta Matrix.
@@ -1240,7 +1258,7 @@ INVENTORY_REALLY_USE_PET_FEEDSTUFF_ITEM	¿Quieres alimentar con %s a %s?
 IS_NOT_PET_CHANGE_ITEM	Este no es el objeto Hechizar mascota.
 IS_NOT_PET_ITEM	Eso no es una mascota.
 ITEM_CANNOT_REFINE	Este objeto no se puede mejorar.
-ITEM_TOOLTIP_DESC_GEM_BAG_DEFAULT	Úsala para meter hasta 9999 Gaya. | Desaparece después de 30 días.\nLa Bolsa de Gaya es comerciable.
+ITEM_TOOLTIP_DESC_GEM_BAG_DEFAULT	Úsala para meter hasta 9999 Gaya. | Desaparece después de 30 días.\nLa Bolsa de Gaya es comerciable.
 ITEM_TOOLTIP_DESC_GEM_BAG_HAVE_GEM	Bolsa de Gaya (%d Gaya, comerciable). \nAl abrir la bolsa, obtendrás %d Gaya.
 ITEM_TOOLTIP_DESC_GEM_BAG_REWARD	La recompensa por animar al equipo ganador es la Bolsa deportiva de Gaya.\nNo es comerciable.
 ITEM_TOOLTIP_DESC_GEM_BAG_REWARD_HAVE_GEM	Bolsa deportiva de Gaya (%d Gaya, no es comerciable). \nAl abrir la bolsa deportiva, obtendrás %d Gaya.
@@ -1792,7 +1810,7 @@ MERCENARY_CHAT_DRAIN_MAIN_EXP_MERCENARY	Este mercenario solo puede utilizarse pa
 MERCENARY_CHAT_DRAIN_MAX_LEVEL	Este mercenario ya ha alcanzado el nivel máximo.
 MERCENARY_CHAT_DRAIN_MERCENARY_REGISTER	Selecciona al mercenario al que deseas entrenar y a los que deberían utilizarse para el entrenamiento.
 MERCENARY_CHAT_DRAIN_NEED_MAIN	Seleccionar mercenario en entrenamiento
-MERCENARY_CHAT_DRAIN_SUB_MAX_COUNT	Puedes registrar a un máximo de 10 mercenarios
+MERCENARY_CHAT_DRAIN_SUB_MAX_COUNT	Puedes registrar a un máximo de 10 mercenarios
 MERCENARY_CHAT_EXIST_COMPLETE_MISSION	[Mercenario] Tienes más misiones completadas.
 MERCENARY_CHAT_GIVEUP	Se han cancelado %s misiones
 MERCENARY_CHAT_MAIN_DRAIN_MERCENARY_WARNING	Uno de los mercenarios seleccionados está herido.
@@ -1988,17 +2006,17 @@ MINI_GAME_BNW_RESULT_LOSE1	Tu cifra es inferior.
 MINI_GAME_BNW_RESULT_LOSE2	¡Derrota!
 MINI_GAME_BNW_RESULT_WIN1	Tu cifra es superior.
 MINI_GAME_BNW_RESULT_WIN2	¡Victoria!
-MINI_GAME_BNW_START_QUESTION	Para jugar necesitas 30 000 Yang y una Baraja de tarot. ¿Quieres participar en la Competición de videntes?
+MINI_GAME_BNW_START_QUESTION	Para jugar necesitas 30 000 Yang y una Baraja de tarot. ¿Quieres participar en la Competición de videntes?
 MINI_GAME_CATCHKING_CHALLENGE_TOOLTIP1	Si utilizas más de una %s, obtendrás el mismo número de Baúles como premio.
 MINI_GAME_CATCHKING_CHALLENGE_TOOLTIP2	Podrás hacer uso de un máximo de %d Barajas del rey.
 MINI_GAME_CATCHKING_HELP_MSG1	¡Vaya! Tu carta vale menos.\nNo recibirás puntos. Escoge una nueva carta de tu baraja.
 MINI_GAME_CATCHKING_HELP_MSG2	¡Bien hecho! Las cartas tienen el mismo valor.\n Ha acabado tu turno. Escoge una nueva carta de tu baraja.
 MINI_GAME_CATCHKING_HELP_MSG3	¡Sigue así! Tu carta vale más.\nDescubre otra carta.
 MINI_GAME_CATCHKING_HELP_MSG4	Hay un [5] al alcance en tus cartas descubiertas.\nLo sentimos, pero no recibirás puntos. Elige a tu rey [K].
-MINI_GAME_CATCHKING_POPUP_CATCH_FAIL	¡El rey se te ha escapado! La partida ha concluido. \nSi has logrado al menos 10 puntos, ahora puedes canjear tus premios.
+MINI_GAME_CATCHKING_POPUP_CATCH_FAIL	¡El rey se te ha escapado! La partida ha concluido. \nSi has logrado al menos 10 puntos, ahora puedes canjear tus premios.
 MINI_GAME_CATCHKING_POPUP_REWARD_FAIL	No puedes canjear ningún premio.
 MINI_GAME_CATCHKING_SEARCH_NUMBER5	Hay un [5] cerca de ti.
-MINI_GAME_CATCHKING_START_QUESTION	Te retiraremos %d Yang así como %s: %d unidades para participar en esta ronda\n¿Quieres jugar?
+MINI_GAME_CATCHKING_START_QUESTION	Te retiraremos %d Yang así como %s: %d unidades para participar en esta ronda\n¿Quieres jugar?
 MINI_GAME_CATCHKING_TOOLTIP_CARD1	Puede atrapar a las siguientes cartas: [1]
 MINI_GAME_CATCHKING_TOOLTIP_CARD2	Puede atrapar a las siguientes cartas: [1], [2]
 MINI_GAME_CATCHKING_TOOLTIP_CARD3	Puede atrapar a las siguientes cartas: [1], [2], [3]
@@ -2008,7 +2026,7 @@ MINI_GAME_CATCHKING_TOOLTIP_CARD6	Puede atrapar a las siguientes cartas: [K]
 MINI_GAME_CATCHKING_TOOLTIP_SCORE1	%s: 550 o más
 MINI_GAME_CATCHKING_TOOLTIP_SCORE2	%s: entre 400 y 549
 MINI_GAME_CATCHKING_TOOLTIP_SCORE3	%s: entre 10 y 399
-MINI_GAME_CATCHKING_TOOLTIP_SCORE4	Obtendrás 10 puntos adicionales cuando descubras todas las cartas de una serie.
+MINI_GAME_CATCHKING_TOOLTIP_SCORE4	Obtendrás 10 puntos adicionales cuando descubras todas las cartas de una serie.
 MINI_GAME_GIVEUP_QUESTION	¿Seguro que quieres interrumpir la partida? Si lo haces renunciarás a tu recompensa.
 MINI_GAME_NOTICE_1	Haz clic en "Tirar" para decidir el jugador inicial.
 MINI_GAME_NOTICE_2	Tirar palos iut.
@@ -2035,10 +2053,10 @@ MINI_GAME_YUTNORI_SCORE_FONT	Tahoma:24b
 MINI_GAME_YUTNORI_START_QUESTION	Para comenzar el Iutnori necesitas %d Yang y %d tablero de Iutnori. \n¿Quieres jugar?
 MINUTE	min
 MISTS_ISLAND_BUFF_MSG_01	Energía +2
-MISTS_ISLAND_BUFF_MSG_02	Tasa de obtención de botín de objetos +10 %
+MISTS_ISLAND_BUFF_MSG_02	Tasa de obtención de botín de objetos +10 %
 MISTS_ISLAND_BUFF_MSG_03	Fuerza, inteligencia, vitalidad, destreza +3
-MISTS_ISLAND_BUFF_MSG_04	Porcentaje de caída de Yang +10 %
-MISTS_ISLAND_BUFF_MSG_05	Bonificaciones de atuendo +3 %
+MISTS_ISLAND_BUFF_MSG_04	Porcentaje de caída de Yang +10 %
+MISTS_ISLAND_BUFF_MSG_05	Bonificaciones de atuendo +3 %
 MISTS_ISLAND_INFO_01	Tu nivel es demasiado bajo.
 MISTS_ISLAND_INFO_02	No tienes suficiente Yang.
 MISTS_ISLAND_INFO_03	En este momento no hay ninguna batalla.
@@ -2097,7 +2115,7 @@ OPTION_ESCAPE_FAR_DISTANCE	No puedes liberarte, ya que te has movido más de 10 m
 OPTION_ESCAPE_QUESTION_ANSWER_NO	No te has liberado.
 OPTION_ESCAPE_QUESTION_MESSAGE	Se te teletransportará a un lugar libre o a la aldea.\n ¿Quieres liberar a tu personaje?
 OPTION_ESCAPE_SYSTEM_BUTTON_TOOLTIP	Utiliza esta opción si te atascas.
-OPTION_ESCAPE_WAIT_MESSAGE	Se te liberará en %d segundo/s.
+OPTION_ESCAPE_WAIT_MESSAGE	Se te liberará en %d segundo/s.
 OPTION_PVPMODE_CANNOT_SET_GUILD_MODE	No puedes activar el Modo Gremio cuando no perteneces a ningún gremio.
 OPTION_PVPMODE_NOT_SUPPORT	No puedes elegir esta configuración en modo PvP.
 OPTION_PVPMODE_PROTECT	Tienes que tener al menos el nivel %d para poder cambiar el modo PvP.
@@ -2121,9 +2139,9 @@ PARTY_ANSWER_TIMEOVER	Se ha rechazado la invitación.
 PARTY_BONUS_ATTACKER	Valor de ataque: +%d	SA
 PARTY_BONUS_BERSERKER	Velocidad de ataque: +%d	SA
 PARTY_BONUS_BUFFER	Duración de Habilidad: +%d	SA
-PARTY_BONUS_DEFENDER	Defensa +%d %%	SA
+PARTY_BONUS_DEFENDER	Defensa +%d %%	SA
 PARTY_BONUS_EXP	Bono EXP: %d%%	SA
-PARTY_BONUS_SKILL_MASTER	Recuperación de HP por asesinato +%d %%	SA
+PARTY_BONUS_SKILL_MASTER	Recuperación de HP por asesinato +%d %%	SA
 PARTY_BONUS_TANKER	Max. HP: +%d	SA
 PARTY_BREAK_UP	Borrar Grupo
 PARTY_DO_YOU_ACCEPT	 quiere unirse al Grupo.
@@ -2174,10 +2192,10 @@ PARTY_SET_TANKER	Constituir como luchador con hoja.
 PARTY_SKILL_ATTACKER	Valor de ataque básico del atacante +%.0f
 PARTY_SKILL_BERSERKER	Velocidad de ataque de Berserker +%.0f
 PARTY_SKILL_BUFFER	Bloqueador de Duración de Habilidad +%.0f
-PARTY_SKILL_DEFENDER	Defensa como defensor +%.0f %%
+PARTY_SKILL_DEFENDER	Defensa como defensor +%.0f %%
 PARTY_SKILL_HP_REGEN	HP Regeneración +%.0f%%
 PARTY_SKILL_PARTY_AREA	Alcance del grupo +%d%%
-PARTY_SKILL_SKILL_MASTER	Regeneración de HP como maestro de habilidad +%.0f %%
+PARTY_SKILL_SKILL_MASTER	Regeneración de HP como maestro de habilidad +%.0f %%
 PARTY_SKILL_SP_REGEN	SP Regeneración +%.0f%%
 PARTY_SKILL_TANKER	Max. HP Luchador con hoja +%.0f
 PARTY_SKILL_WARP	Posible llamar a miembros de grupo
@@ -2246,8 +2264,8 @@ PET_SKILL_DELETE_QUESTION_DLG_MSG2	¿Deseas continuar?
 PET_SKILL_LEARN_FAIL_CONDITIONS	Tu mascota no tiene la edad o el nivel suficiente. Solamente las mascotas heroicas pueden aprender habilidades.
 PET_SKILL_LEARN_QUESTION_DLG_MSG	¿Quieres comenzar el entrenamiento heroico de "%s"?
 PET_SKILL_TOOLTIP_COOLTIME	Tiempo de carga: %d s
-PET_SKILL_TOOLTIP_DURATION	Duración: %d s
-PET_SKILL_TOOLTIP_FEATHER	La mascota activa Camino pluma con una probabilidad de un %d %% durante %.1f segundos.\n Ataque %d - %d	SAAAA
+PET_SKILL_TOOLTIP_DURATION	Duración: %d s
+PET_SKILL_TOOLTIP_FEATHER	La mascota activa Camino pluma con una probabilidad de un %d %% durante %.1f segundos.\n Ataque %d - %d	SAAAA
 PET_SKILL_TOOLTIP_HEAL	Si tus HP disminuyen por debajo de 20%%, tienes un \n %d%% de probabilidad de aumentar tus HP en un %d.	SAA
 PET_SKILL_TOOLTIP_INVINVIBILITY	Tu personaje tiene un %d%% de probabilidad de volverse invencible\n al disminuir tus HP por debajo de 10%%. \n Duración del efecto: %.1f s.	SAA
 PET_SKILL_TOOLTIP_REMOVAL	Elimina de inmediato todos los efectos de veneno, \n retardo o sangrado sobre tu personaje\n con una probabilidad de un %d%%.	SAN
@@ -2269,8 +2287,8 @@ PICK_MONEY_TITLE	Suma
 POPUP_NOTICE_CHECKBOX_TEXT	No volver a mostar hoy
 PREMIUM_PRIVATE_ITEM_ADD_LIMIT_WON	Los objetos que vendes no pueden superar el valor total permitido.
 PREMIUM_PRIVATE_ITEM_ADD_LIMIT_YANG	Los objetos que vendes no pueden superar el valor total permitido.
-PREMIUM_PRIVATE_MODIFY_LIMIT_WON	Eso son más de 999 Won. Primero recoge el dinero.
-PREMIUM_PRIVATE_MODIFY_LIMIT_YANG	Eso son más de 2 mil millones de Yang. Primero recoge el dinero.
+PREMIUM_PRIVATE_MODIFY_LIMIT_WON	Eso son más de 999 Won. Primero recoge el dinero.
+PREMIUM_PRIVATE_MODIFY_LIMIT_YANG	Eso son más de 2 mil millones de Yang. Primero recoge el dinero.
 PREMIUM_PRIVATE_SHOP_CANNOT_OPEN_MAP	Eso no se puede abrir en este mapa.
 PREMIUM_PRIVATE_SHOP_CLOSE_QUESTIONG	¿Quieres cerrar tu tienda personal?
 PREMIUM_PRIVATE_SHOP_DURATION	Duración: %s
@@ -2281,8 +2299,8 @@ PREMIUM_PRIVATE_SHOP_PASSWORD_DESC2	para abrir la Tienda prémium personal.
 PREMIUM_PRIVATE_SHOP_PASSWORD_TITLE	Contraseña
 PREMIUM_PRIVATE_SHOP_POSITION	%s (%d,%d) - CA-%d
 PREMIUM_PRIVATE_SHOP_USE_ITEM	¿Quieres usar el objeto "Tienda prémium personal"?
-PREMIUM_PRIVATE_TAX_ADJUSTMENT_LIMIT_WON	No puedes recoger el dinero porque ya tienes más de 999 Won.
-PREMIUM_PRIVATE_TAX_ADJUSTMENT_LIMIT_YANG	No puedes recoger el dinero porque ya tienes más de 2 mil millones de Yang.
+PREMIUM_PRIVATE_TAX_ADJUSTMENT_LIMIT_WON	No puedes recoger el dinero porque ya tienes más de 999 Won.
+PREMIUM_PRIVATE_TAX_ADJUSTMENT_LIMIT_YANG	No puedes recoger el dinero porque ya tienes más de 2 mil millones de Yang.
 PREMIUM_PRIVATE_TAX_ADJUSTMENT_NONE	No hay dinero que recoger.
 PREMIUM_PRIVATE_TAX_ADJUSTMENT_OVERFLOW_WON	Has depositado más Won del que puedes sacar.
 PREMIUM_PRIVATE_TAX_ADJUSTMENT_OVERFLOW_YANG	Has depositado más Yang del que puedes sacar.
@@ -2456,7 +2474,7 @@ SAFEBOX_ERROR	Has introducido una contraseña incorrecta.
 SAFEBOX_NEED_CHANGE_PASSWORD	Tu contraseña ha expirado.\nPor favor, elige una nueva.
 SAFEBOX_SELL_DISABLE_SAFEITEM	No puedes vender ninguno de los objetos guardados.
 SAFEBOX_UNAVILABLE_PASSWORD_01	No puedes utilizar esta contraseña.
-SAFEBOX_UNAVILABLE_PASSWORD_02	La contraseña ha de tener al menos %d caracteres.
+SAFEBOX_UNAVILABLE_PASSWORD_02	La contraseña ha de tener al menos %d caracteres.
 SAFEBOX_UNAVILABLE_PASSWORD_03	Has introducido tu contraseña actual. Selecciona una nueva.
 SAFEBOX_UNAVILABLE_PASSWORD_04	La contraseña no puede tener %d números iguales o seguidos.
 SAFEBOX_UNAVILABLE_PASSWORD_05	No se permiten caracteres especiales. Caracteres permitidos: a-z, A-Z, 0-9
@@ -2511,7 +2529,7 @@ SERVER_STATUS_NEW	NUEVO
 SERVER_STATUS_SPECIAL	ESPECIAL
 SERVER_STATUS_STANDBY	CERRADO
 SET_ITEM_CLEAR_CONFIRM_QUESTION	¿Quieres eliminar el efecto de set?
-SET_ITEM_CLEAR_CONFIRM_QUESTION_1	Este objeto tiene %d bonificaciones/Piedras espíritu.
+SET_ITEM_CLEAR_CONFIRM_QUESTION_1	Este objeto tiene %d bonificaciones/Piedras espíritu.
 SET_ITEM_CLEAR_CONFIRM_QUESTION_2	¿Seguro?
 SET_ITEM_DO_NOT_EQUIP_ITEM	No puedes añadir un efecto de set a objetos equipados.
 SET_ITEM_DO_NOT_SEAL_ITEM	No puedes hacer eso con un objeto vinculado al alma.
@@ -2734,7 +2752,7 @@ SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_6	Este trofeo se obtiene en el Portal de in
 SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_7	Este trofeo se obtiene en el Portal de invasión de Sung Ma de la Catacumba del Diablo.
 SUNGMAHEE_GATE_ACHIEV_TOOLTIP_ACHIEV_8	Este trofeo se obtiene en el Portal de invasión de Sung Ma del Bosque Encantado.
 SUNGMAHEE_GATE_ALREADY_OPEN	[Portal de invasión de SungMa] Se ha abierto un Portal de SungMa. ¡Date prisa y crúzalo! (Sigue abierto: %s).
-SUNGMAHEE_GATE_ALREADY_OPEN_1M	[Portal de invasión de Sung Ma] Un Portal de invasión de Sung Ma se ha abierto. ¡Date prisa y destrúyelo! (Queda menos de 1 minuto para que cierre)
+SUNGMAHEE_GATE_ALREADY_OPEN_1M	[Portal de invasión de Sung Ma] Un Portal de invasión de Sung Ma se ha abierto. ¡Date prisa y destrúyelo! (Queda menos de 1 minuto para que cierre)
 SUNGMAHEE_GATE_MAP_ELEMENT_DARK	Oscuridad
 SUNGMAHEE_GATE_MAP_ELEMENT_EARTH	Tierra
 SUNGMAHEE_GATE_MAP_ELEMENT_ELECT	Relámpago
@@ -2748,13 +2766,13 @@ SUNGMAHEE_GATE_MESSAGE_DUNGEON_ELEMENT_INFO	Esta área está bajo los efectos de e
 SUNGMAHEE_GATE_MESSAGE_NOTICE_BEFORE_OPEN_1	Pronto se abrirá un Portal de invasión de Sung Ma en la Llanura Dongan.
 SUNGMAHEE_GATE_MESSAGE_NOTICE_BEFORE_OPEN_2	Puedes abrir el mapa grande para ver los lugares disponibles en cada Reino.
 SUNGMAHEE_GATE_MESSAGE_NOTICE_DUNGEON_END_TIME	Se ha acabado el tiempo y se te teletransportará fuera de aquí.
-SUNGMAHEE_GATE_MESSAGE_NOTICE_DUNGEON_REMAIN_TIME	Quedan aún %d minutos hasta el cierre del Portal de invasión de Sung Ma.
+SUNGMAHEE_GATE_MESSAGE_NOTICE_DUNGEON_REMAIN_TIME	Quedan aún %d minutos hasta el cierre del Portal de invasión de Sung Ma.
 SUNGMAHEE_GATE_MESSAGE_NOTICE_END	Se cerrarán todos los Portales de invasión de Sung Ma.
 SUNGMAHEE_GATE_MESSAGE_NOTICE_ENTRY_CLOSE	El Portal de invasión de Sung Ma se ha cerrado.
-SUNGMAHEE_GATE_MESSAGE_NOTICE_ENTRY_OPEN	Se ha abierto un Portal de invasión de Sung Ma. Está accesible. Permanecerá abierto hasta las %d:%d h.
+SUNGMAHEE_GATE_MESSAGE_NOTICE_ENTRY_OPEN	Se ha abierto un Portal de invasión de Sung Ma. Está accesible. Permanecerá abierto hasta las %d:%d h.
 SUNGMAHEE_GATE_MESSAGE_REGION_ACHIEVED_SUCCESS	¡Has obtenido el trofeo de %s!
-SUNGMAHEE_GATE_REMAIN_TIME_TO_OPEN	[Portal de invasión de Sung Ma] Se abrirá un Portal de invasión de Sung Ma \n en %s minutos.
-SUNGMAHEE_GATE_REMAIN_TIME_TO_OPEN_1M	[Portal de invasión de Sung Ma] Queda menos de 1 minuto para que se abra un Portal de invasión de Sung Ma\n.
+SUNGMAHEE_GATE_REMAIN_TIME_TO_OPEN	[Portal de invasión de Sung Ma] Se abrirá un Portal de invasión de Sung Ma \n en %s minutos.
+SUNGMAHEE_GATE_REMAIN_TIME_TO_OPEN_1M	[Portal de invasión de Sung Ma] Queda menos de 1 minuto para que se abra un Portal de invasión de Sung Ma\n.
 SUNGMAHEE_TOWER_ENTER_FAIL_FLOOR	Primero tienes que completar el nivel inferior.
 SUNGMAHEE_TOWER_ENTER_RESULT_FAIL_MOUNT	No se puede entrar a lomos de una montura.
 SUNGMAHEE_TOWER_ENTER_RESULT_FAIL_NOT_ENOUGH_CONQUEROR_LEVEL	Para entrar, tienes que haber subido a un nivel de campeón determinado.
@@ -2824,19 +2842,19 @@ TOOLTIP_AFFECT_FISHING_MOVE_SPEED_DOWN	Ropa mojada\nVelocidad de movimiento -50	
 TOOLTIP_AFFECT_FLAG_CANNOT_ATTACK	Ataques normales bloqueados
 TOOLTIP_AFFECT_FLAG_CANNOT_USE_SKILL	Habilidades bloqueadas
 TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION	Efecto de Flor poderosa
-TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_ANIMAL	Efecto de Flor poderosa: Fuerza contra animales: +%d %%	SA
-TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_DARK	Efecto de Flor poderosa: Fuerza contra la oscuridad +%d %%	SA
-TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_EARTH	Efecto de Flor poderosa: Fuerza contra la tierra+%d %%	SA
-TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_ELECT	Efecto de Flor poderosa: Fuerza contra el relámpago +%d %%	SA
-TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_FIRE	Efecto de Flor poderosa: Fuerza contra el fuego +%d %%	SA
-TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_ICE	Efecto de Flor poderosa: Fuerza contra el hielo +%d %%	SA
-TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_WIND	Efecto de Flor poderosa: Fuerza contra el viento +%d %%	SA
+TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_ANIMAL	Efecto de Flor poderosa: Fuerza contra animales: +%d %%	SA
+TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_DARK	Efecto de Flor poderosa: Fuerza contra la oscuridad +%d %%	SA
+TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_EARTH	Efecto de Flor poderosa: Fuerza contra la tierra+%d %%	SA
+TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_ELECT	Efecto de Flor poderosa: Fuerza contra el relámpago +%d %%	SA
+TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_FIRE	Efecto de Flor poderosa: Fuerza contra el fuego +%d %%	SA
+TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_ICE	Efecto de Flor poderosa: Fuerza contra el hielo +%d %%	SA
+TOOLTIP_AFFECT_FLOWER_OF_DESTRUCTION_WIND	Efecto de Flor poderosa: Fuerza contra el viento +%d %%	SA
 TOOLTIP_AFFECT_FLOWER_OF_GALE	Efecto de Flor tormentosa: Velocidad de movimiento +%d	SA
 TOOLTIP_AFFECT_GARRISON_BUFF	Inmunidad a la influencia de Sung Mahi	SNA
 TOOLTIP_AFFECT_GARRISON_DEBUFF	Influencia de Sung Mahi	SNA
-TOOLTIP_AFFECT_ICECREAM	Bolsa de hielo\nVelocidad de movimiento +10\nAtaque mágico/cuerpo a cuerpo +5 %\nEXP +10 %\n	SNA
+TOOLTIP_AFFECT_ICECREAM	Bolsa de hielo\nVelocidad de movimiento +10\nAtaque mágico/cuerpo a cuerpo +5 %\nEXP +10 %\n	SNA
 TOOLTIP_AFFECT_IMMUNE_MINE_TOWER_SKILL	Tique polvoprotector	SNA
-TOOLTIP_AFFECT_INCREASE_REFINE_PCT	Bendición que al activarse activa la probabilidad de éxito del siguiente refinamiento en un %d %%.	SA
+TOOLTIP_AFFECT_INCREASE_REFINE_PCT	Bendición que al activarse activa la probabilidad de éxito del siguiente refinamiento en un %d %%.	SA
 TOOLTIP_AFFECT_IRON_DRAGON_BLESS	Cargas restantes de 10%% de reducción de daño: %d
 TOOLTIP_AFFECT_LATE_SUMMER_EVENT_BUFF	Almas (%d/20)	SA
 TOOLTIP_AFFECT_LATE_SUMMER_EVENT_PRIMIUM_BUFF	Almas valiosas (%d/150)	SA
@@ -2873,14 +2891,14 @@ TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_SUNGMA_MOVE	Voluntad de SungMa (RES)	SNA
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_SUNGMA_STR	Voluntad de SungMa (STR)	SNA
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_TO_STRONG	Cabalgar	SNA
 TOOLTIP_AFFECT_NO_FALLEN	Resistencia contra caídas	SNA
-TOOLTIP_AFFECT_OTHER_WORLD_DEAD_SOUL	Los HP máximos de Asmodeus han disminuido un %d %%.	SA
+TOOLTIP_AFFECT_OTHER_WORLD_DEAD_SOUL	Los HP máximos de Asmodeus han disminuido un %d %%.	SA
 TOOLTIP_AFFECT_OTHER_WORLD_GOBLIN_PROTECTION	La maldición de Asmodeus en Condena no te afecta.	SNA
-TOOLTIP_AFFECT_OTHER_WORLD_YEOMWANG_CURSE	El daño causado a monstruos disminuye en un 30 %.	SNA
-TOOLTIP_AFFECT_PASWAE	Reduce la defensa y la velocidad de movimiento durante 5 segundos.
+TOOLTIP_AFFECT_OTHER_WORLD_YEOMWANG_CURSE	El daño causado a monstruos disminuye en un 30 %.	SNA
+TOOLTIP_AFFECT_PASWAE	Reduce la defensa y la velocidad de movimiento durante 5 segundos.
 TOOLTIP_AFFECT_POLYMORPH	Polimorfismo	SNA
 TOOLTIP_AFFECT_PREMIUM_PRIVATE_SHOP	Tienda prémium personal	SNA
 TOOLTIP_AFFECT_RCAST_SPEED	Aumentar tiempo de carga	SNA
-TOOLTIP_AFFECT_RED_DRAGONLAIR_BUFF	Resistencia contra daño de habilidad +15 % | Resistencia contra daños de ataque normales +15 %	SNA
+TOOLTIP_AFFECT_RED_DRAGONLAIR_BUFF	Resistencia contra daño de habilidad +15 % | Resistencia contra daños de ataque normales +15 %	SNA
 TOOLTIP_AFFECT_REFINE_FREE_MATERIAL	Bendición que al activarse hace que en el siguiente refinamiento no se consuman materiales.	SNA
 TOOLTIP_AFFECT_RESEARCHER_ELIXIR	Elixir del investigador	SNA
 TOOLTIP_AFFECT_RHP_REGEN	No es posible la recuperación	SNA
@@ -2905,8 +2923,8 @@ TOOLTIP_AFFECT_SNOWFLAKE_STICK_EVENT_RANK_BUFF_ACQUIRED	: Obtenido\n
 TOOLTIP_AFFECT_SNOWFLAKE_STICK_EVENT_RANK_BUFF_NOT_ACQUIRED	: No obtenido\n
 TOOLTIP_AFFECT_SNOWFLAKE_STICK_EVENT_SNOWFLAKE_BUFF_1	Magia de los copos de nieve	SNA
 TOOLTIP_AFFECT_SNOWFLAKE_STICK_EVENT_SNOWFLAKE_BUFF_2	Recibirás Bolas de nieve y Ramas de muñeco de nieve de monstruos vencidos.
-TOOLTIP_AFFECT_SUNGMAHEE_TOWER_CURSE	Maldición de Sung Mahi (apilada %d veces). Por cada pila, tus HP disminuyen cada 10 segundos en un 10 %%. Se puede apilar hasta 10 veces.	SA
-TOOLTIP_AFFECT_SUNGMA_ALL	Incrementa todos los valores de SungMa en un 10 %.	SNA
+TOOLTIP_AFFECT_SUNGMAHEE_TOWER_CURSE	Maldición de Sung Mahi (apilada %d veces). Por cada pila, tus HP disminuyen cada 10 segundos en un 10 %%. Se puede apilar hasta 10 veces.	SA
+TOOLTIP_AFFECT_SUNGMA_ALL	Incrementa todos los valores de SungMa en un 10 %.	SNA
 TOOLTIP_AFFECT_SUNGMA_DESC	La voluntad de Sung Mahi envuelve este lugar.
 TOOLTIP_AFFECT_SUNGMA_HP	Voluntad de SungMa (VIT): %d
 TOOLTIP_AFFECT_SUNGMA_HP_BUFF	Aumenta tu voluntad de SungMa (VIT) en +%d.	SA
@@ -2914,12 +2932,12 @@ TOOLTIP_AFFECT_SUNGMA_IMMUNE	Voluntad de SungMa (INT): %d
 TOOLTIP_AFFECT_SUNGMA_IMMUNE_BUFF	Aumenta tu voluntad de SungMa (INT) en +%d.	SA
 TOOLTIP_AFFECT_SUNGMA_MOVE	Voluntad de SungMa (RES): %d
 TOOLTIP_AFFECT_SUNGMA_MOVE_BUFF	Aumenta tu voluntad de SungMa (RES) en +%d.	SA
-TOOLTIP_AFFECT_SUNGMA_MOVE_DEBUFF	-20 de voluntad de SungMa (RES)	SNA
+TOOLTIP_AFFECT_SUNGMA_MOVE_DEBUFF	-20 de voluntad de SungMa (RES)	SNA
 TOOLTIP_AFFECT_SUNGMA_STR	Voluntad de SungMa (STR): %d
 TOOLTIP_AFFECT_SUNGMA_STR_BUFF	Aumenta tu voluntad de SungMa (STR) en +%d.	SA
-TOOLTIP_AFFECT_SUNGMA_STR_DEBUFF	-20 de voluntad de SungMa (STR)	SNA
+TOOLTIP_AFFECT_SUNGMA_STR_DEBUFF	-20 de voluntad de SungMa (STR)	SNA
 TOOLTIP_AFFECT_WHITE_DRAGON_BLESS	Cargas restantes de 10%% de bonificación de daño: %d
-TOOLTIP_AFFECT_WORLD_BOSS_DAILY_REWARD	Bonificación por misión diaria del evento de superjefe\n Valor de ataque +%d %%	SA
+TOOLTIP_AFFECT_WORLD_BOSS_DAILY_REWARD	Bonificación por misión diaria del evento de superjefe\n Valor de ataque +%d %%	SA
 TOOLTIP_AFFECT_WORLD_BOSS_REWARD	Bonificación por clasificación del evento de superjefe\n Caída de objetos +%d	SA
 TOOLTIP_ALIGNMENT_DAMAGE_BONUS	En caso de contar con pocos puntos de clasificación, el daño infligido aumentará.	SNA
 TOOLTIP_ANTI_CRITICAL_PCT	Resistencia contra golpe crítico +%d%%	SA
@@ -2956,17 +2974,17 @@ TOOLTIP_APPLY_CRITICAL_PCT	Probabilidad de golpes críticos +%d%%	SA
 TOOLTIP_APPLY_DAMAGE_SP_RECOVER	%d%% Probabilidad de recuperar SP al golpear	SA
 TOOLTIP_APPLY_DODGE	Probabilidad de evitar Flechas %d%%	SA
 TOOLTIP_APPLY_ENCHANT_DARK	Poder de la oscuridad +%d%%	SA
-TOOLTIP_APPLY_ENCHANT_DARK2	Poder de la oscuridad +%d %% ~ +%d %%
+TOOLTIP_APPLY_ENCHANT_DARK2	Poder de la oscuridad +%d %% ~ +%d %%
 TOOLTIP_APPLY_ENCHANT_EARTH	Poder de la tierra +%d%%	SA
-TOOLTIP_APPLY_ENCHANT_EARTH2	Poder de la tierra +%d %% ~ +%d %%
+TOOLTIP_APPLY_ENCHANT_EARTH2	Poder de la tierra +%d %% ~ +%d %%
 TOOLTIP_APPLY_ENCHANT_ELECT	Poder del relámpago +%d%%	SA
-TOOLTIP_APPLY_ENCHANT_ELECT2	Poder del relámpago +%d %% ~ +%d %%
+TOOLTIP_APPLY_ENCHANT_ELECT2	Poder del relámpago +%d %% ~ +%d %%
 TOOLTIP_APPLY_ENCHANT_FIRE	Poder del fuego +%d%%	SA
-TOOLTIP_APPLY_ENCHANT_FIRE2	Poder del fuego +%d %% ~ +%d %%
+TOOLTIP_APPLY_ENCHANT_FIRE2	Poder del fuego +%d %% ~ +%d %%
 TOOLTIP_APPLY_ENCHANT_ICE	Poder del hielo +%d%%	SA
-TOOLTIP_APPLY_ENCHANT_ICE2	Poder del hielo +%d %% ~ +%d %%
+TOOLTIP_APPLY_ENCHANT_ICE2	Poder del hielo +%d %% ~ +%d %%
 TOOLTIP_APPLY_ENCHANT_WIND	Poder del viento +%d%%	SA
-TOOLTIP_APPLY_ENCHANT_WIND2	Poder del viento +%d %% ~ +%d %%
+TOOLTIP_APPLY_ENCHANT_WIND2	Poder del viento +%d %% ~ +%d %%
 TOOLTIP_APPLY_EXP_DOUBLE_BONUS	%d%% Probabilidad de bonus EXP	SA
 TOOLTIP_APPLY_GOLD_DOUBLE_BONUS	%d%% Probabilidad de obtener el doble de Yang.	SA
 TOOLTIP_APPLY_IMMUNE_BLEEDING100	Inmune a sangrado	SNA
@@ -3013,23 +3031,23 @@ TOOLTIP_APPLY_STUN_PCT	Probabilidad de desmayo %d%%	SA
 TOOLTIP_ARMOR	Armadura
 TOOLTIP_ARROW	Flecha
 TOOLTIP_ASSASSIN	Ninja
-TOOLTIP_ATTBONUS_PER_ANIMAL	Fuerza contra animales (+%d %% del valor total)	SA
-TOOLTIP_ATTBONUS_PER_CZ	Fuerte contra monstruos del zodíaco (+%d %% del valor total)	SA
-TOOLTIP_ATTBONUS_PER_DESERT	Fuerte contra monstruos del desierto (+%d %% del valor total)	SA
-TOOLTIP_ATTBONUS_PER_DEVIL	Fuerza contra demonios (+%d %% del valor total)	SA
-TOOLTIP_ATTBONUS_PER_HUMAN	Fuerza contra mediohumanos (+%d %% del valor total)	SA
-TOOLTIP_ATTBONUS_PER_INSECT	Fuerza contra insectos (+%d %% del valor total)	SA
-TOOLTIP_ATTBONUS_PER_MILGYO	Fuerza contra místicos (+%d %% del valor total)	SA
-TOOLTIP_ATTBONUS_PER_MONSTER	Fuerza contra monstruos (+%d %% del valor total)	SA
-TOOLTIP_ATTBONUS_PER_ORC	Fuerza contra orcos (+%d %% del valor total)	SA
-TOOLTIP_ATTBONUS_PER_STONE	Fuerza contra Piedras Metin (+%d %% del valor total)	SA
-TOOLTIP_ATTBONUS_PER_UNDEAD	Fuerza contra muertos vivientes (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_ANIMAL	Fuerza contra animales (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_CZ	Fuerte contra monstruos del zodíaco (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_DESERT	Fuerte contra monstruos del desierto (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_DEVIL	Fuerza contra demonios (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_HUMAN	Fuerza contra mediohumanos (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_INSECT	Fuerza contra insectos (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_MILGYO	Fuerza contra místicos (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_MONSTER	Fuerza contra monstruos (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_ORC	Fuerza contra orcos (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_STONE	Fuerza contra Piedras Metin (+%d %% del valor total)	SA
+TOOLTIP_ATTBONUS_PER_UNDEAD	Fuerza contra muertos vivientes (+%d %% del valor total)	SA
 TOOLTIP_ATTBONUS_STONE	+%d%% de fuerza contra piedras Metin	SA
 TOOLTIP_ATT_GRADE	Valor de Ataque +%d	SA
 TOOLTIP_ATT_SPEED	Velocidad de Ataque +%d%%	SA
 TOOLTIP_ATT_SPEED_SLOW	Velocidad de ataque reducida	SNA
 TOOLTIP_AUTO_DAMAGE_POTION_REST	Tiempo restante: %d
-TOOLTIP_AUTO_PICKUP	Tienes una probabilidad de un %d %% de recoger objetos cercanos de forma automática durante 30 segundos.	SA
+TOOLTIP_AUTO_PICKUP	Tienes una probabilidad de un %d %% de recoger objetos cercanos de forma automática durante 30 segundos.	SA
 TOOLTIP_AUTO_POTION_HP	Elixir del Sol
 TOOLTIP_AUTO_POTION_REST	Cantidad restante: %.2f%%
 TOOLTIP_AUTO_POTION_SP	Elixir de la Luna
@@ -3045,8 +3063,8 @@ TOOLTIP_CAST_SPEED	Velocidad de Hechizo +%d%%	SA
 TOOLTIP_CON	Vitalidad +%d	SA
 TOOLTIP_COSTUME_ATTR_BONUS	Bonificación por atuendo %d%%	SA
 TOOLTIP_CURSE_OF_ELEMENTAL	Maldición elemental (x%d). Tus HP disminuyen constantemente. Se puede apilar hasta 10 veces.	SA
-TOOLTIP_DAMAGE_HP_RECOVERY	Absorbe daño en %d %% en forma de HP	SA
-TOOLTIP_DAMAGE_SP_RECOVERY	Absorbe daño en %d %% en forma de SP	SA
+TOOLTIP_DAMAGE_HP_RECOVERY	Absorbe daño en %d %% en forma de HP	SA
+TOOLTIP_DAMAGE_SP_RECOVERY	Absorbe daño en %d %% en forma de SP	SA
 TOOLTIP_DEF_GRADE	Defensa +%d	SA
 TOOLTIP_DEX	Destreza +%d	SA
 TOOLTIP_DISMOUNT_MOVE_SPEED_BONUS_PER	Al bajarse de una montura, la velocidad de movimiento se incrementa durante 10 segundos en un %d%%.	SA
@@ -3055,17 +3073,17 @@ TOOLTIP_DRAGON_SOUL_DECK2	Tierra	SNA
 TOOLTIP_DS_SET	Efecto de set de SPD	SNA
 TOOLTIP_DURATION	Duración
 TOOLTIP_EAR	Pendientes
-TOOLTIP_ENCHANT_PER_DARK	Poder de la oscuridad (+%d %% del valor total)	SA
-TOOLTIP_ENCHANT_PER_EARTH	Poder de la tierra (+%d %% del valor total)	SA
-TOOLTIP_ENCHANT_PER_ELECT	Poder del relámpago (+%d %% del valor total)	SA
-TOOLTIP_ENCHANT_PER_FIRE	Poder del fuego (+%d %% del valor total)	SA
-TOOLTIP_ENCHANT_PER_ICE	Poder del hielo (+%d %% del valor total)	SA
-TOOLTIP_ENCHANT_PER_WIND	Poder del viento (+%d %% del valor total)	SA
+TOOLTIP_ENCHANT_PER_DARK	Poder de la oscuridad (+%d %% del valor total)	SA
+TOOLTIP_ENCHANT_PER_EARTH	Poder de la tierra (+%d %% del valor total)	SA
+TOOLTIP_ENCHANT_PER_ELECT	Poder del relámpago (+%d %% del valor total)	SA
+TOOLTIP_ENCHANT_PER_FIRE	Poder del fuego (+%d %% del valor total)	SA
+TOOLTIP_ENCHANT_PER_ICE	Poder del hielo (+%d %% del valor total)	SA
+TOOLTIP_ENCHANT_PER_WIND	Poder del viento (+%d %% del valor total)	SA
 TOOLTIP_ENERGY	Energía %d	SA
 TOOLTIP_ETC	y así sucesivamente
 TOOLTIP_EXP_BONUS_EVENT	EXP +%d%%	SA
-TOOLTIP_FIFTH_ATTRIBUTE_BONUS	5.ª bonificación añadida + %d %%	SA
-TOOLTIP_FIRST_ATTRIBUTE_BONUS	1.ª bonificación añadida +%d %%	SA
+TOOLTIP_FIFTH_ATTRIBUTE_BONUS	5.ª bonificación añadida + %d %%	SA
+TOOLTIP_FIRST_ATTRIBUTE_BONUS	1.ª bonificación añadida +%d %%	SA
 TOOLTIP_FISHINGROD_EXP	Puntos %d / %d
 TOOLTIP_FISHINGROD_LEVEL	Nivel: %d
 TOOLTIP_FISHINGROD_UPGRADE1	Dale al pescador
@@ -3073,9 +3091,9 @@ TOOLTIP_FISHINGROD_UPGRADE2	para obtener una
 TOOLTIP_FISHINGROD_UPGRADE3	Caña de Pescar mejor.
 TOOLTIP_FISH_LEN	Altura: %.2fcm
 TOOLTIP_FLOWER_EVENT_SHOOT_ENVELOPE	Semilla floral
-TOOLTIP_FOURTH_ATTRIBUTE_BONUS	4.ª bonificación añadida +%d %%	SA
+TOOLTIP_FOURTH_ATTRIBUTE_BONUS	4.ª bonificación añadida +%d %%	SA
 TOOLTIP_GLOVE	Guantes
-TOOLTIP_GLOVE_BASE_EFFECT_INCREASE	El atributo básico de tus guantes aumenta en un +%d %%.	SA
+TOOLTIP_GLOVE_BASE_EFFECT_INCREASE	El atributo básico de tus guantes aumenta en un +%d %%.	SA
 TOOLTIP_GOLDEN_LAND_OASIS_SHOP_MERCH_REMAIN_COUNT	Compras restantes: %d
 TOOLTIP_GUILD_SKILL_ACCEL	Aceleración +%d	SA
 TOOLTIP_GUILD_SKILL_BLESS	Bendición del Dios Dragón +%d	SA
@@ -3105,8 +3123,8 @@ TOOLTIP_HIT_BUFF_SUNGMA_IMMUNE	Incrementa la Voluntad de SungMa (INT) en combate
 TOOLTIP_HIT_BUFF_SUNGMA_MOVE	Incrementa la Voluntad de SungMa (RES) en combate durante %d segundos en 15.	SA
 TOOLTIP_HIT_BUFF_SUNGMA_STR	Incrementa la Voluntad de SungMa (STR) en combate durante %d segundos en 15.	SA
 TOOLTIP_HIT_PCT	Precisión +%d	SA
-TOOLTIP_HIT_STONE_ATTBONUS_STONE	Al atacar una Piedra Metin, recibes durante 5 segundos +%d %% de daño (fuerza contra Piedras Metin).	SA
-TOOLTIP_HIT_STONE_DEF_GRADE_BONUS	Al atacar una Piedra Metin, recibes durante 5 segundos +%d de defensa.	SA
+TOOLTIP_HIT_STONE_ATTBONUS_STONE	Al atacar una Piedra Metin, recibes durante 5 segundos +%d %% de daño (fuerza contra Piedras Metin).	SA
+TOOLTIP_HIT_STONE_DEF_GRADE_BONUS	Al atacar una Piedra Metin, recibes durante 5 segundos +%d de defensa.	SA
 TOOLTIP_HP_REGEN	Regeneración de HP +%d%%	SA
 TOOLTIP_INSIGHT_SKILL_LEVEL	Nivel actual: %d
 TOOLTIP_INT	Inteligencia +%d	SA
@@ -3131,7 +3149,7 @@ TOOLTIP_ITEM_SLOW	Lento
 TOOLTIP_ITEM_VERY_FAST	Muy rápido
 TOOLTIP_ITEM_VERY_SLOW	Muy lento
 TOOLTIP_ITEM_WEARABLE_JOB	[ Equipable ]
-TOOLTIP_KILL_BOSS_ITEM_BONUS	Al derrotar a un jefe, tu probabilidad de botín aumenta en un %d %%.	SA
+TOOLTIP_KILL_BOSS_ITEM_BONUS	Al derrotar a un jefe, tu probabilidad de botín aumenta en un %d %%.	SA
 TOOLTIP_LOTTERY_STEP_NUMBER	%d
 TOOLTIP_LOTTO_NUMBER	Número de la suerte: %d
 TOOLTIP_MAGIC_ATTBONUS_PER	Ataque mágico +%d%%	SA
@@ -3150,7 +3168,7 @@ TOOLTIP_MALL_GOLDBONUS	Probabilidad de obtener botín de Yang incrementada en un 
 TOOLTIP_MALL_GOLDBONUS_STATIC	Doble probabilidad de obtener botín de Yang	SNA
 TOOLTIP_MALL_ITEMBONUS	Probabilidad de caída de objetos incrementada en un %d%%	SA
 TOOLTIP_MALL_ITEMBONUS_P_STATIC	Probabilidad de iCafe de conseguir botines de objetos mas %.1f%%	SA
-TOOLTIP_MALL_ITEMBONUS_STATIC	Probabilidad de caída de objetos incrementada en un 200 %.	SNA
+TOOLTIP_MALL_ITEMBONUS_STATIC	Probabilidad de caída de objetos incrementada en un 200 %.	SNA
 TOOLTIP_MALL_MARRIAGE_FAST	Los puntos de amor aumentan más rápido.	SNA
 TOOLTIP_MALL_SAFEBOX	Tu almacén obtiene 2 áreas de almacenaje más	SNA
 TOOLTIP_MAX_HP	Max. HP +%d	SA
@@ -3161,10 +3179,10 @@ TOOLTIP_MAX_STAMINA	Max. Resistencia +%d	SA
 TOOLTIP_MELEE_MAGIC_ATTBONUS_PER	Ataque mágico/cuerpo a cuerpo +%d%%	SA
 TOOLTIP_MEMORIZED_POSITION	%s(%d, %d)
 TOOLTIP_MEMORIZED_POSITION_ERROR	GPS ERROR(%d, %d)
-TOOLTIP_MOB_HIT_MOB_AGGRESSIVE	Al atacar, hay una probabilidad de un %d %% de que todos los monstruos a tu alrededor te ataquen (Capa de valor).	SA
-TOOLTIP_MORE_THEN_HP90_DAMAGE_REDUCE	Si cuentas con más de 90 %% HP, el daño que recibas se reducirá en %d %%.	SA
-TOOLTIP_MOUNT_MELEE_MAGIC_ATTBONUS_PER	Al subir a una montura, el daño se incrementa durante 10 segundos en un +%d %%.	SA
-TOOLTIP_MOUNT_NO_KNOCKBACK	Al atacar desde una montura, hay una probabilidad de un %d %% de pisotear al adversario durante 20 segundos.	SA
+TOOLTIP_MOB_HIT_MOB_AGGRESSIVE	Al atacar, hay una probabilidad de un %d %% de que todos los monstruos a tu alrededor te ataquen (Capa de valor).	SA
+TOOLTIP_MORE_THEN_HP90_DAMAGE_REDUCE	Si cuentas con más de 90 %% HP, el daño que recibas se reducirá en %d %%.	SA
+TOOLTIP_MOUNT_MELEE_MAGIC_ATTBONUS_PER	Al subir a una montura, el daño se incrementa durante 10 segundos en un +%d %%.	SA
+TOOLTIP_MOUNT_NO_KNOCKBACK	Al atacar desde una montura, hay una probabilidad de un %d %% de pisotear al adversario durante 20 segundos.	SA
 TOOLTIP_MOUNT_UPGRADE_SKILLBOOK_USE	¿Quieres aprender la habilidad de montura %s?
 TOOLTIP_MOUNT_UPGRADE_SKILL_LEVEL_UP	¿Quieres mejorar la habilidad de tu caballo? \n Se necesitan Gaya y Yang: %d Gaya, %d Yang
 TOOLTIP_MOV_SPEED	Veloc. Movim. %d%%	SA
@@ -3178,13 +3196,13 @@ TOOLTIP_NEED_SP	SP Requerido: %d
 TOOLTIP_NEED_SP_PER_SEC	SP / seg.: %d
 TOOLTIP_NEXT_SKILL_LEVEL_1	Siguiente Nivel: %d (Max. %d)
 TOOLTIP_NEXT_SKILL_LEVEL_2	Siguiente Nivel: %d (Max. %d-%d)
-TOOLTIP_NORMAL_DAMAGE_GUARD	Bloqueo de daño de ataque con probabilidad del %d %%	SA
+TOOLTIP_NORMAL_DAMAGE_GUARD	Bloqueo de daño de ataque con probabilidad del %d %%	SA
 TOOLTIP_NORMAL_HIT_DAMAGE_BONUS	Daño de Media %d%%	SA
-TOOLTIP_NORMAL_HIT_DAMAGE_BONUS_BOSS_OR_MORE	Daño de ataque contra jefes +%d %%	SA
+TOOLTIP_NORMAL_HIT_DAMAGE_BONUS_BOSS_OR_MORE	Daño de ataque contra jefes +%d %%	SA
 TOOLTIP_NORMAL_HIT_DEFEND_BONUS	Resistencia de Daño de Media %d%%	SA
-TOOLTIP_NORMAL_HIT_DEFEND_BONUS_BOSS_OR_MORE	Daño de ataque de jefes -%d %%	SA
-TOOLTIP_NO_DEATH_AND_HP_RECOVERY30	Tienes una probabilidad de un %d %% de evitar quedarte fuera de combate y recuperar un 30 %% de tus HP totales.	SA
-TOOLTIP_NO_FALLEN	Tienes una probabilidad del %d %% de recibir en combate resistencia contra caídas durante 15 segundos.	SA
+TOOLTIP_NORMAL_HIT_DEFEND_BONUS_BOSS_OR_MORE	Daño de ataque de jefes -%d %%	SA
+TOOLTIP_NO_DEATH_AND_HP_RECOVERY30	Tienes una probabilidad de un %d %% de evitar quedarte fuera de combate y recuperar un 30 %% de tus HP totales.	SA
+TOOLTIP_NO_FALLEN	Tienes una probabilidad del %d %% de recibir en combate resistencia contra caídas durante 15 segundos.	SA
 TOOLTIP_PARTY_INFO_GRADE_UP1	Más de %d Miembros de Grupo
 TOOLTIP_PARTY_INFO_GRADE_UP2	Nivel de Ataque +%d
 TOOLTIP_PARTY_INFO_GRADE_UP3	Nivel de Defensa +%d
@@ -3211,22 +3229,22 @@ TOOLTIP_PICK_UPGRADE2	para obtener
 TOOLTIP_PICK_UPGRADE3	un pico mejor.
 TOOLTIP_POTION_CURE	Cura efectos negativos.
 TOOLTIP_POTION_MIN	Min.
-TOOLTIP_POTION_OF_ELEMENTAL	Poción protectora de los elementos. +5 % de ataque mágico y cuerpo a cuerpo | +10 % de resistencia elemental	SNA
+TOOLTIP_POTION_OF_ELEMENTAL	Poción protectora de los elementos. +5 % de ataque mágico y cuerpo a cuerpo | +10 % de resistencia elemental	SNA
 TOOLTIP_POTION_PLUS_ATTACK_SPEED	Velocidad de ataque +%d
-TOOLTIP_POTION_PLUS_ATTBONUS_MONSTER	BONI. ATQ. MONSTRUO: +%d %%
+TOOLTIP_POTION_PLUS_ATTBONUS_MONSTER	BONI. ATQ. MONSTRUO: +%d %%
 TOOLTIP_POTION_PLUS_ATT_POINT	ATQ: +%d
-TOOLTIP_POTION_PLUS_ATT_POINT_PER	ATQ: +%d %%
+TOOLTIP_POTION_PLUS_ATT_POINT_PER	ATQ: +%d %%
 TOOLTIP_POTION_PLUS_DEF_POINT	DEF: +%d
 TOOLTIP_POTION_PLUS_DEX_POINT	DEX: +%d
-TOOLTIP_POTION_PLUS_EXP_BONUS	EXP: +%d %%
-TOOLTIP_POTION_PLUS_HIT_DEFEND_POINT	RES. AL DAÑO: +%d %%
+TOOLTIP_POTION_PLUS_EXP_BONUS	EXP: +%d %%
+TOOLTIP_POTION_PLUS_HIT_DEFEND_POINT	RES. AL DAÑO: +%d %%
 TOOLTIP_POTION_PLUS_HP_PERCENT	HP +%d%%
 TOOLTIP_POTION_PLUS_HP_POINT	HP +%d
 TOOLTIP_POTION_PLUS_MOVING_SPEED	Velocidad de movimiento +%d
-TOOLTIP_POTION_PLUS_RESIST_DARK	RES. A OSCURIDAD: +%d %%
-TOOLTIP_POTION_PLUS_RESIST_EARTH	RES. A TIERRA: +%d %%
-TOOLTIP_POTION_PLUS_RESIST_ICE	RES. A HIELO: +%d %%
-TOOLTIP_POTION_PLUS_RESIST_MAGIC	RES. A MAGIA: +%d %%
+TOOLTIP_POTION_PLUS_RESIST_DARK	RES. A OSCURIDAD: +%d %%
+TOOLTIP_POTION_PLUS_RESIST_EARTH	RES. A TIERRA: +%d %%
+TOOLTIP_POTION_PLUS_RESIST_ICE	RES. A HIELO: +%d %%
+TOOLTIP_POTION_PLUS_RESIST_MAGIC	RES. A MAGIA: +%d %%
 TOOLTIP_POTION_PLUS_SP_PERCENT	SP +%d%%
 TOOLTIP_POTION_PLUS_SP_POINT	SP +%d
 TOOLTIP_POTION_PLUS_STR_POINT	STR: +%d
@@ -3248,21 +3266,21 @@ TOOLTIP_RESIST_FIRE	Resistencia de Fuego %d%%	SA
 TOOLTIP_RESIST_ICE	Resistencia de hielo +%d%%	SA
 TOOLTIP_RESIST_MAGIC	Resistencia de Magia %d%%	SA
 TOOLTIP_RESIST_MAGIC_REDUCTION	Aumenta la penetración mágica en un %d%%	SA
-TOOLTIP_RESIST_PER_DARK	Resistencia a la oscuridad (+%d %% del valor total)	SA
-TOOLTIP_RESIST_PER_EARTH	Resistencia a la tierra (+%d %% del valor total)	SA
-TOOLTIP_RESIST_PER_ELEC	Resistencia al relámpago (+%d %% del valor total)	SA
-TOOLTIP_RESIST_PER_FIRE	Resistencia al fuego (+%d %% del valor total)	SA
-TOOLTIP_RESIST_PER_HUMAN	Resistencia a mediohumanos (+%d %% del valor total)	SA
-TOOLTIP_RESIST_PER_ICE	Resistencia al hielo (+%d %% del valor total)	SA
-TOOLTIP_RESIST_PER_MAGIC	Resistencia a la magia (+%d %% del valor total)	SA
-TOOLTIP_RESIST_PER_WIND	Resistencia al viento (+%d %% del valor total)	SA
+TOOLTIP_RESIST_PER_DARK	Resistencia a la oscuridad (+%d %% del valor total)	SA
+TOOLTIP_RESIST_PER_EARTH	Resistencia a la tierra (+%d %% del valor total)	SA
+TOOLTIP_RESIST_PER_ELEC	Resistencia al relámpago (+%d %% del valor total)	SA
+TOOLTIP_RESIST_PER_FIRE	Resistencia al fuego (+%d %% del valor total)	SA
+TOOLTIP_RESIST_PER_HUMAN	Resistencia a mediohumanos (+%d %% del valor total)	SA
+TOOLTIP_RESIST_PER_ICE	Resistencia al hielo (+%d %% del valor total)	SA
+TOOLTIP_RESIST_PER_MAGIC	Resistencia a la magia (+%d %% del valor total)	SA
+TOOLTIP_RESIST_PER_WIND	Resistencia al viento (+%d %% del valor total)	SA
 TOOLTIP_REST_USABLE_COUNT	Restante: %d
-TOOLTIP_ROLE_PROFICIENCY_LEADER_EFFECT	Bonificación de líder: %d %%
+TOOLTIP_ROLE_PROFICIENCY_LEADER_EFFECT	Bonificación de líder: %d %%
 TOOLTIP_ROLE_PROFICIENCY_SKILL_LEVEL	Nivel actual: %d
 TOOLTIP_SEALED	Unión al alma
-TOOLTIP_SEASON_PVE_BUFF	Aumenta el daño JcE en un 40 % durante 10 min.	SNA
-TOOLTIP_SEASON_RANKING_BUFF	Aumenta los puntos de clasificación en un 20 % durante 10 min.	SNA
-TOOLTIP_SECOND_ATTRIBUTE_BONUS	2.ª bonificación añadida +%d %%	SA
+TOOLTIP_SEASON_PVE_BUFF	Aumenta el daño JcE en un 40 % durante 10 min.	SNA
+TOOLTIP_SEASON_RANKING_BUFF	Aumenta los puntos de clasificación en un 20 % durante 10 min.	SNA
+TOOLTIP_SECOND_ATTRIBUTE_BONUS	2.ª bonificación añadida +%d %%	SA
 TOOLTIP_SECRET_DUNGEON_SCROLL_INFO	%s : %d, %d
 TOOLTIP_SECRET_DUNGEON_SCROLL_PLACE_INFO	Aquí puedes utilizar un objeto:
 TOOLTIP_SELLPRICE	Precio: %s
@@ -3287,41 +3305,41 @@ TOOLTIP_SKILL_AFFECT_MOV_SPEED	Velocidad de Movimiento: +
 TOOLTIP_SKILL_AFFECT_REFLECT_MELEE	Probabilidad de reflejar ataques de cuerpo a cuerpo:
 TOOLTIP_SKILL_AFFECT_RESIST_NORMAL	Resistencia contra Daños Corporales:
 TOOLTIP_SKILL_COOL_TIME	Tiempo de carga: 
-TOOLTIP_SKILL_DAMAGE_AMSEOP	Daño de Emboscada +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_BIPABU	Daño de Talismán volador +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_AMSEOP	Daño de Emboscada +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_BIPABU	Daño de Talismán volador +%d %%	SA
 TOOLTIP_SKILL_DAMAGE_BONUS	Daño de Habilidad %d%%	SA
-TOOLTIP_SKILL_DAMAGE_BONUS_BOSS_OR_MORE	Daño de habilidad contra jefes +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_BYEURAK	Daño de Llamada del relámpago +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_CHAIN	Daño de Garra del relámpago +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_CHARYUN	Daño de Daga rodante +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_CHAYEOL	Daño de Desgarrar +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_GEOMPUNG	Daño de Golpe de espada +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_GIGONGCHAM	Daño de Pulso espiritual +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_GIGUNG	Daño de Flecha venenosa +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_GONGDAB	Daño de Salto lobuno +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_GUNGSIN	Daño de Ataque rápido +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_GYOKSAN	Daño de Golpe +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_HWAJO	Daño de Flecha de fuego +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_HWAYEOMPOK	Daño de Golpe de llama +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_KWANKYEOK	Daño de Lluvia de flechas +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_MAHWAN	Daño de Orbe oscuro +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_MARYUNG	Daño de Golpe oscuro +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_NOEJEON	Daño de Tiro relámpago +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_PABEOB	Daño de Anular magia +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_PAERYONG	Daño de Rugido del dragón +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_PALBANG	Daño de Giro de espada +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_PASWAE	Daño de Garras lobunas +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_SALPOONG	Daño de Aliento del lobo +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_SAMYEON	Daño de Corte de tres maneras +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_SANGONG	Daño de Nube tóxica +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_SWAERYUNG	Daño de Golpe de dedo +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_TANHWAN	Daño de Rociada +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_YEONSA	Daño de Disparo repetido +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_YONGBI	Daño de Disparo de Dragón +%d %%	SA
-TOOLTIP_SKILL_DAMAGE_YONGKWON	Daño de Remolino de Dragón +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_BONUS_BOSS_OR_MORE	Daño de habilidad contra jefes +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_BYEURAK	Daño de Llamada del relámpago +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_CHAIN	Daño de Garra del relámpago +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_CHARYUN	Daño de Daga rodante +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_CHAYEOL	Daño de Desgarrar +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_GEOMPUNG	Daño de Golpe de espada +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_GIGONGCHAM	Daño de Pulso espiritual +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_GIGUNG	Daño de Flecha venenosa +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_GONGDAB	Daño de Salto lobuno +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_GUNGSIN	Daño de Ataque rápido +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_GYOKSAN	Daño de Golpe +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_HWAJO	Daño de Flecha de fuego +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_HWAYEOMPOK	Daño de Golpe de llama +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_KWANKYEOK	Daño de Lluvia de flechas +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_MAHWAN	Daño de Orbe oscuro +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_MARYUNG	Daño de Golpe oscuro +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_NOEJEON	Daño de Tiro relámpago +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_PABEOB	Daño de Anular magia +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_PAERYONG	Daño de Rugido del dragón +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_PALBANG	Daño de Giro de espada +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_PASWAE	Daño de Garras lobunas +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_SALPOONG	Daño de Aliento del lobo +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_SAMYEON	Daño de Corte de tres maneras +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_SANGONG	Daño de Nube tóxica +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_SWAERYUNG	Daño de Golpe de dedo +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_TANHWAN	Daño de Rociada +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_YEONSA	Daño de Disparo repetido +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_YONGBI	Daño de Disparo de Dragón +%d %%	SA
+TOOLTIP_SKILL_DAMAGE_YONGKWON	Daño de Remolino de Dragón +%d %%	SA
 TOOLTIP_SKILL_DEFEND_BONUS	Resistencia contra Daño de Habilidad %d%%	SA
-TOOLTIP_SKILL_DEFEND_BONUS_BOSS_OR_MORE	Daño de habilidad de jefes -%d %%	SA
-TOOLTIP_SKILL_DURATION	Duración: %d s
+TOOLTIP_SKILL_DEFEND_BONUS_BOSS_OR_MORE	Daño de habilidad de jefes -%d %%	SA
+TOOLTIP_SKILL_DURATION	Duración: %d s
 TOOLTIP_SKILL_DURATION_INCREASE_EUNHYUNG	Duración de Camuflaje +%d segundos.	SA
 TOOLTIP_SKILL_DURATION_INCREASE_GEOMKYUNG	Duración de Aura de espada +%d segundos.	SA
 TOOLTIP_SKILL_DURATION_INCREASE_GYEONGGONG	Duración de Camino pluma +%d segundos.	SA
@@ -3336,88 +3354,88 @@ TOOLTIP_SOCKET_REFINABLE_ITEM	[Objeto con socket]
 TOOLTIP_SP_REGEN	Regeneración de SP +%d%%	SA
 TOOLTIP_STR	Fuerza +%d	SA
 TOOLTIP_SUNGMA_ATTR_PRIMIUM	Potenciador de voluntad de SungMa	SNA
-TOOLTIP_SUNGMA_HP	%d de voluntad de SungMa (VIT)	SA
-TOOLTIP_SUNGMA_IMMUNE	%d de voluntad de SungMa (INT)	SA
-TOOLTIP_SUNGMA_MOVE	%d de voluntad de SungMa (RES)	SA
-TOOLTIP_SUNGMA_PER_HP	%d %% de voluntad de SungMa (VIT)	SA
-TOOLTIP_SUNGMA_PER_IMMUNE	%d %% de voluntad de SungMa (INT)	SA
-TOOLTIP_SUNGMA_PER_MOVE	%d %% de voluntad de SungMa (RES)	SA
-TOOLTIP_SUNGMA_PER_STR	%d %% de voluntad de SungMa (STR)	SA
-TOOLTIP_SUNGMA_STR	%d de voluntad de SungMa (STR)	SA
+TOOLTIP_SUNGMA_HP	%d de voluntad de SungMa (VIT)	SA
+TOOLTIP_SUNGMA_IMMUNE	%d de voluntad de SungMa (INT)	SA
+TOOLTIP_SUNGMA_MOVE	%d de voluntad de SungMa (RES)	SA
+TOOLTIP_SUNGMA_PER_HP	%d %% de voluntad de SungMa (VIT)	SA
+TOOLTIP_SUNGMA_PER_IMMUNE	%d %% de voluntad de SungMa (INT)	SA
+TOOLTIP_SUNGMA_PER_MOVE	%d %% de voluntad de SungMa (RES)	SA
+TOOLTIP_SUNGMA_PER_STR	%d %% de voluntad de SungMa (STR)	SA
+TOOLTIP_SUNGMA_STR	%d de voluntad de SungMa (STR)	SA
 TOOLTIP_SURA	Sura
-TOOLTIP_THIRD_ATTRIBUTE_BONUS	3.ª bonificación añadida +%d %%	SA
+TOOLTIP_THIRD_ATTRIBUTE_BONUS	3.ª bonificación añadida +%d %%	SA
 TOOLTIP_TIME_CHARGER_FIX	Recarga de tiempo %d seg.	SA
 TOOLTIP_TIME_CHARGER_PER	Recarga de tiempo %d%%	SA
 TOOLTIP_UNIQUE	Único
 TOOLTIP_UNSEAL_LEFT_TIME	Separación del alma en: %d h %d min
-TOOLTIP_USE_SKILL_AMSEOP_HP_ABSORB	Absorbe %d %% HP al utilizar Emboscada	SA
-TOOLTIP_USE_SKILL_BIPABU_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Talismán volador: -%d s con probabilidad del 10 %%	SA
-TOOLTIP_USE_SKILL_BIPABU_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Talismán volador: -%d s con probabilidad del 20 %%	SA
-TOOLTIP_USE_SKILL_BYEURAK_HP_ABSORB	Absorberás hasta %d %% de HP al utilizar Llamada del relámpago.	SA
-TOOLTIP_USE_SKILL_CHAIN_HP_ABSORB	Absorbe %d %% HP al utilizar Garra del relámpago	SA
-TOOLTIP_USE_SKILL_CHARYUN_STUN	Daga rodante aturde al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_AMSEOP_HP_ABSORB	Absorbe %d %% HP al utilizar Emboscada	SA
+TOOLTIP_USE_SKILL_BIPABU_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Talismán volador: -%d s con probabilidad del 10 %%	SA
+TOOLTIP_USE_SKILL_BIPABU_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Talismán volador: -%d s con probabilidad del 20 %%	SA
+TOOLTIP_USE_SKILL_BYEURAK_HP_ABSORB	Absorberás hasta %d %% de HP al utilizar Llamada del relámpago.	SA
+TOOLTIP_USE_SKILL_CHAIN_HP_ABSORB	Absorbe %d %% HP al utilizar Garra del relámpago	SA
+TOOLTIP_USE_SKILL_CHARYUN_STUN	Daga rodante aturde al enemigo con una probabilidad del %d %%	SA
 TOOLTIP_USE_SKILL_CHAYEOL_CRITICAL_PCT	Aumenta la probabilidad de ataque crítico durante %d segundos al utilizar Desgarrar	SA
-TOOLTIP_USE_SKILL_CHAYEOL_HP_ABSORB	Absorbe %d %% HP al utilizar Desgarrar	SA
+TOOLTIP_USE_SKILL_CHAYEOL_HP_ABSORB	Absorbe %d %% HP al utilizar Desgarrar	SA
 TOOLTIP_USE_SKILL_CHEONGRANG_CASTING_SPEED	Aumenta la velocidad de hechizo durante %d segundos al utilizar Alma lobuna índigo	SA
 TOOLTIP_USE_SKILL_CHEONGRANG_MOV_SPEED	Aumenta la velocidad de movimiento durante %d segundos al utilizar Alma lobuna índigo	SA
-TOOLTIP_USE_SKILL_CHEONUN_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Escudo etéreo, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
+TOOLTIP_USE_SKILL_CHEONUN_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Escudo etéreo, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
 TOOLTIP_USE_SKILL_CHUNKEON_CASTING_SPEED	Aumenta la velocidad de hechizo durante %d segundos al utilizar Cuerpo fuerte	SA
-TOOLTIP_USE_SKILL_COOLTIME_DECREASE_ALL	Restaura el tiempo de carga de tus habilidades con una probabilidad de un %d %%.	SA
-TOOLTIP_USE_SKILL_FINISH_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Terremoto, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
-TOOLTIP_USE_SKILL_GEOMAGGWI_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Golpe infernal, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
-TOOLTIP_USE_SKILL_GEOMPUNG_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Golpe de espada: -%d s con probabilidad del 10 %%	SA
-TOOLTIP_USE_SKILL_GEOMPUNG_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Golpe de espada: -%d segundos con probabilidad del 20 %%	SA
+TOOLTIP_USE_SKILL_COOLTIME_DECREASE_ALL	Restaura el tiempo de carga de tus habilidades con una probabilidad de un %d %%.	SA
+TOOLTIP_USE_SKILL_FINISH_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Terremoto, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
+TOOLTIP_USE_SKILL_GEOMAGGWI_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Golpe infernal, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
+TOOLTIP_USE_SKILL_GEOMPUNG_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Golpe de espada: -%d s con probabilidad del 10 %%	SA
+TOOLTIP_USE_SKILL_GEOMPUNG_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Golpe de espada: -%d segundos con probabilidad del 20 %%	SA
 TOOLTIP_USE_SKILL_GICHEON_ATT_GRADE_BONUS	Recibirás una bonificación de ataque durante %d segundos al utilizar Ayuda del dragón	SA
-TOOLTIP_USE_SKILL_GIGONGCHAM_STUN	Pulso espiritual aturde al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_GIGONGCHAM_STUN	Pulso espiritual aturde al enemigo con una probabilidad del %d %%	SA
 TOOLTIP_USE_SKILL_GIGUNG_ATT_GRADE_BONUS	Recibirás una bonificación de ataque durante %d segundos al utilizar Flecha venenosa	SA
 TOOLTIP_USE_SKILL_GIHYEOL_ATT_GRADE_BONUS	Recibirás una bonificación de ataque durante %d segundos al utilizar Deseo de vivir	SA
-TOOLTIP_USE_SKILL_GONGDAB_KNOCKBACK	Salto lobuno contraataca al enemigo con una probabilidad del %d %%	SA
-TOOLTIP_USE_SKILL_GONGDAB_STUN	Salto lobuno aturde al enemigo con una probabilidad del %d %%	SA
-TOOLTIP_USE_SKILL_GUNGSIN_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Ataque rápido: -%d s con probabilidad del 10 %%	SA
-TOOLTIP_USE_SKILL_GUNGSIN_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Ataque rápido: -%d s con probabilidad del 20 %%	SA
+TOOLTIP_USE_SKILL_GONGDAB_KNOCKBACK	Salto lobuno contraataca al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_GONGDAB_STUN	Salto lobuno aturde al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_GUNGSIN_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Ataque rápido: -%d s con probabilidad del 10 %%	SA
+TOOLTIP_USE_SKILL_GUNGSIN_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Ataque rápido: -%d s con probabilidad del 20 %%	SA
 TOOLTIP_USE_SKILL_GWIGEOM_DEF_BONUS	Recibirás una bonificación de defensa durante %d segundos al utilizar Hoja encantada	SA
-TOOLTIP_USE_SKILL_GYOKSAN_KNOCKBACK	Golpe contraataca al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_GYOKSAN_KNOCKBACK	Golpe contraataca al enemigo con una probabilidad del %d %%	SA
 TOOLTIP_USE_SKILL_HOSIN_DEF_BONUS	Recibirás una bonificación de defensa durante %d segundos al utilizar Bendición	SA
-TOOLTIP_USE_SKILL_HWAYEOMPOK_KNOCKBACK	Golpe de llama contraataca al enemigo con una probabilidad del %d %%	SA
-TOOLTIP_USE_SKILL_ILGWANGPYO_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Estrellas luz, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
-TOOLTIP_USE_SKILL_ILIPUNGU_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Golpe de garra, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
+TOOLTIP_USE_SKILL_HWAYEOMPOK_KNOCKBACK	Golpe de llama contraataca al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_ILGWANGPYO_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Estrellas luz, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
+TOOLTIP_USE_SKILL_ILIPUNGU_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Golpe de garra, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
 TOOLTIP_USE_SKILL_JEOKRANG_DEF_BONUS	Recibirás una bonificación de defensa durante %d segundos al utilizar Alma lobuna escarlata	SA
 TOOLTIP_USE_SKILL_JEONGEOP_ATT_GRADE_BONUS	Recibirás una bonificación de ataque durante %d segundos al utilizar Curación	SA
 TOOLTIP_USE_SKILL_JEUNGRYEOK_DEF_BONUS	Recibirás una bonificación de defensa durante %d segundos al utilizar Ataque+	SA
-TOOLTIP_USE_SKILL_KWANKYEOK_KNOCKBACK	Lluvia de flechas contraataca al enemigo con una probabilidad del %d %%	SA
-TOOLTIP_USE_SKILL_KWANKYEOK_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Lluvia de flechas: -%d s con probabilidad del 10 %%	SA
-TOOLTIP_USE_SKILL_KWANKYEOK_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Lluvia de flechas: -%d s con probabilidad del 20 %%	SA
-TOOLTIP_USE_SKILL_MABEOBAGGWI_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Onda letal, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
-TOOLTIP_USE_SKILL_MAHWAN_STUN	Orbe oscuro aturde al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_KWANKYEOK_KNOCKBACK	Lluvia de flechas contraataca al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_KWANKYEOK_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Lluvia de flechas: -%d s con probabilidad del 10 %%	SA
+TOOLTIP_USE_SKILL_KWANKYEOK_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Lluvia de flechas: -%d s con probabilidad del 20 %%	SA
+TOOLTIP_USE_SKILL_MABEOBAGGWI_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Onda letal, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
+TOOLTIP_USE_SKILL_MAHWAN_STUN	Orbe oscuro aturde al enemigo con una probabilidad del %d %%	SA
 TOOLTIP_USE_SKILL_MANASHILED_CASTING_SPEED	Aumenta la velocidad de hechizo durante %d segundos al utilizar Protección oscura	SA
-TOOLTIP_USE_SKILL_MARYUNG_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Golpe oscuro: -%d s con probabilidad del 10 %%	SA
-TOOLTIP_USE_SKILL_MARYUNG_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Golpe oscuro: -%d s con probabilidad del 20 %%	SA
-TOOLTIP_USE_SKILL_METEO_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Meteoro, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
+TOOLTIP_USE_SKILL_MARYUNG_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Golpe oscuro: -%d s con probabilidad del 10 %%	SA
+TOOLTIP_USE_SKILL_MARYUNG_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Golpe oscuro: -%d s con probabilidad del 20 %%	SA
+TOOLTIP_USE_SKILL_METEO_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Meteoro, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
 TOOLTIP_USE_SKILL_MUYEONG_ATT_GRADE_BONUS	Recibirás una bonificación de ataque durante %d segundos al utilizar Espíritu de la llama	SA
 TOOLTIP_USE_SKILL_NOEGEOM_ATT_GRADE_BONUS	Recibirás una bonificación de ataque durante %d segundos al utilizar Círculo de espada	SA
-TOOLTIP_USE_SKILL_NOEJEON_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Tiro relámpago: -%d s con probabilidad del 10 %%	SA
-TOOLTIP_USE_SKILL_NOEJEON_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Tiro relámpago: -%d s con probabilidad del 20 %%	SA
-TOOLTIP_USE_SKILL_PABEOB_STUN	Anular magia aturde al enemigo con una probabilidad del %d %%	SA
-TOOLTIP_USE_SKILL_PAERYONG_HP_ABSORB	Absorbe %d %% HP al utilizar Rugido del dragón	SA
-TOOLTIP_USE_SKILL_PALBANG_HP_ABSORB	Absorbe %d %% HP al utilizar Giro de espada	SA
-TOOLTIP_USE_SKILL_PASWAE_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Garra de lobo: -%d s con probabilidad del 10 %%	SA
-TOOLTIP_USE_SKILL_PASWAE_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Garra de lobo: -%d s con probabilidad del 20 %%	SA
-TOOLTIP_USE_SKILL_PASWAE_SP_ABSORB	Absorbe %d %% SP al utilizar Garra de lobo	SA
-TOOLTIP_USE_SKILL_PUNGLOEPO_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Tiro tempestad, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
-TOOLTIP_USE_SKILL_SALPOONG_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Aliento del lobo: -%d s con probabilidad del 10 %%	SA
-TOOLTIP_USE_SKILL_SALPOONG_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Aliento del lobo: -%d s con probabilidad del 20 %%	SA
-TOOLTIP_USE_SKILL_SAMYEON_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Corte de tres maneras: -%d s con probabilidad del 10 %%	SA
-TOOLTIP_USE_SKILL_SAMYEON_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Corte de tres maneras: -%d s con probabilidad del 20 %%	SA
-TOOLTIP_USE_SKILL_SAMYEON_STUN	Corte de tres maneras aturde al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_NOEJEON_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Tiro relámpago: -%d s con probabilidad del 10 %%	SA
+TOOLTIP_USE_SKILL_NOEJEON_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Tiro relámpago: -%d s con probabilidad del 20 %%	SA
+TOOLTIP_USE_SKILL_PABEOB_STUN	Anular magia aturde al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_PAERYONG_HP_ABSORB	Absorbe %d %% HP al utilizar Rugido del dragón	SA
+TOOLTIP_USE_SKILL_PALBANG_HP_ABSORB	Absorbe %d %% HP al utilizar Giro de espada	SA
+TOOLTIP_USE_SKILL_PASWAE_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Garra de lobo: -%d s con probabilidad del 10 %%	SA
+TOOLTIP_USE_SKILL_PASWAE_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Garra de lobo: -%d s con probabilidad del 20 %%	SA
+TOOLTIP_USE_SKILL_PASWAE_SP_ABSORB	Absorbe %d %% SP al utilizar Garra de lobo	SA
+TOOLTIP_USE_SKILL_PUNGLOEPO_NEXT_COOLTIME_DECREASE_PCT	Al utilizar Tiro tempestad, tienes un %d %% de probabilidades de reducir el siguiente tiempo de carga en 5 segundos.	SA
+TOOLTIP_USE_SKILL_SALPOONG_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Aliento del lobo: -%d s con probabilidad del 10 %%	SA
+TOOLTIP_USE_SKILL_SALPOONG_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Aliento del lobo: -%d s con probabilidad del 20 %%	SA
+TOOLTIP_USE_SKILL_SAMYEON_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Corte de tres maneras: -%d s con probabilidad del 10 %%	SA
+TOOLTIP_USE_SKILL_SAMYEON_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Corte de tres maneras: -%d s con probabilidad del 20 %%	SA
+TOOLTIP_USE_SKILL_SAMYEON_STUN	Corte de tres maneras aturde al enemigo con una probabilidad del %d %%	SA
 TOOLTIP_USE_SKILL_SANGONG_ATT_GRADE_BONUS	Recibirás una bonificación de ataque durante %d segundos al utilizar Nube tóxica	SA
-TOOLTIP_USE_SKILL_SEOMJEON_KNOCKBACK	Veneno lento contraataca al enemigo con una probabilidad del %d %%	SA
-TOOLTIP_USE_SKILL_SWAERYUNG_KNOCKBACK	Golpe de dedo contraataca al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_SEOMJEON_KNOCKBACK	Veneno lento contraataca al enemigo con una probabilidad del %d %%	SA
+TOOLTIP_USE_SKILL_SWAERYUNG_KNOCKBACK	Golpe de dedo contraataca al enemigo con una probabilidad del %d %%	SA
 TOOLTIP_USE_SKILL_TERROR_ATT_GRADE_BONUS	Recibirás una bonificación de ataque durante %d segundos al utilizar Miedo	SA
-TOOLTIP_USE_SKILL_TUSOK_HP_ABSORB	Absorbe %d %% HP al utilizar Golpe espiritual	SA
-TOOLTIP_USE_SKILL_YEONSA_HP_ABSORB	Absorbe %d %% HP al utilizar Disparo repetido	SA
-TOOLTIP_USE_SKILL_YONGBI_HP_ABSORB	Absorbe %d %% HP al utilizar Disparo de dragón	SA
-TOOLTIP_USE_SKILL_YONGKWON_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Remolino del dragón: -%d s con probabilidad del 10 %%	SA
-TOOLTIP_USE_SKILL_YONGKWON_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Remolino del dragón: -%d s con probabilidad del 20 %%	SA
+TOOLTIP_USE_SKILL_TUSOK_HP_ABSORB	Absorbe %d %% HP al utilizar Golpe espiritual	SA
+TOOLTIP_USE_SKILL_YEONSA_HP_ABSORB	Absorbe %d %% HP al utilizar Disparo repetido	SA
+TOOLTIP_USE_SKILL_YONGBI_HP_ABSORB	Absorbe %d %% HP al utilizar Disparo de dragón	SA
+TOOLTIP_USE_SKILL_YONGKWON_NEXT_COOLTIME_DECREASE_10PER	Tiempo de carga de Remolino del dragón: -%d s con probabilidad del 10 %%	SA
+TOOLTIP_USE_SKILL_YONGKWON_NEXT_COOLTIME_DECREASE_20PER	Tiempo de carga de Remolino del dragón: -%d s con probabilidad del 20 %%	SA
 TOOLTIP_WARRIOR	Guerrero
 TOOLTIP_WEAPON	Arma
 TOOLTIP_WOLFMAN	Lícano
@@ -3443,7 +3461,7 @@ TREASURE_HUNT_DUNGEON_REPLAY_ESCORT	Esta Caja del tesoro no es la correcta. ¡Esc
 TREASURE_HUNT_EVENT_ACCUMULATE_COUNT_RANKING_BUTTON	Clasificación de ronda
 TREASURE_HUNT_EVENT_ACCUMULATE_COUNT_TOOLTIP	Debes reunir 9 recompensas para completar 1 ronda.
 TREASURE_HUNT_EVENT_BUFF_TITLE	Bendición de refinamiento
-TREASURE_HUNT_EVENT_CANNOT_ENTER_DUNGEON_LEVEL	Para entrar tienes que haber subido al menos al nivel 70.
+TREASURE_HUNT_EVENT_CANNOT_ENTER_DUNGEON_LEVEL	Para entrar tienes que haber subido al menos al nivel 70.
 TREASURE_HUNT_EVENT_CANNOT_ENTER_DUNGEON_MAX_GOLD	Has recibido %s doblones. Canjéalos para volver a participar.
 TREASURE_HUNT_EVENT_CANNOT_ENTER_DUNGEON_PARTY	No se puede entrar si se forma parte de un grupo.
 TREASURE_HUNT_EVENT_CANNOT_ENTER_DUNGEON_TIME_OVER	Ya no puedes acceder porque el evento ya ha terminado.
@@ -3462,7 +3480,7 @@ TREASURE_HUNT_EVENT_GOLD_COUNT	%d
 TREASURE_HUNT_EVENT_GOLD_ICON_TOOLTIP_1	Se puede obtener en la Isla de los Tesoros si proteges al Goblin de los tesoros.
 TREASURE_HUNT_EVENT_GOLD_ICON_TOOLTIP_2	Puedes obtener el tique tesoro en todos los tipos de cajas del tesoro. Cantidad máxima de doblones: %d
 TREASURE_HUNT_EVENT_INCREASE_ACCUMULATED_COUNT	[Búsqueda de tesoros] ¡Has alcanzado una nueva ronda!
-TREASURE_HUNT_EVENT_INCREASE_REFINE_PCT_BUFF_TOOLTIP	Aumenta la probabilidad de éxito del siguiente refinamiento en un 10 %. (Se puede utilizar 1 vez por evento)
+TREASURE_HUNT_EVENT_INCREASE_REFINE_PCT_BUFF_TOOLTIP	Aumenta la probabilidad de éxito del siguiente refinamiento en un 10 %. (Se puede utilizar 1 vez por evento)
 TREASURE_HUNT_EVENT_LAST_ACCUMULATED_COUNT_REWARD_POPUP	A partir de la ronda %d solamente podrás recibir recompensas de la ronda %d.
 TREASURE_HUNT_EVENT_NOTICE_CAN_GET_ACCUMULATED_REWARD	Recibe las recompensas de la ronda en la ventana de la Búsqueda de tesoros.
 TREASURE_HUNT_EVENT_NOTICE_EXHAUSTED_BUFF	Para los %d. En la Búsqueda de tesoros no hay más bendiciones.
@@ -3525,7 +3543,7 @@ USE_ITEM_QUESTION_01	¿Quieres participar en la Batalla de los Cinco Santuarios?
 USE_ITEM_QUESTION_02	¿Quieres volver al lugar en el que quedaste fuera de combate?\n Te costará %s Yang.
 USE_ITEM_QUESTION_03	Se te teletransportará a una ubicación al azar. ¿Quieres acceder?
 USE_ITEM_QUESTION_04	En cuanto accedas a la Batalla de los Cinco Santuarios se desactivarán todos tus potenciadores.\nSe te teletransportará a una ubicación al azar.\n¿Quieres acceder?
-USE_ITEM_QUESTION_05	En cuanto accedas a la Batalla de los Cinco Santuarios se desactivarán todos tus potenciadores.\n¿Quieres regresar al lugar donde quedaste fuera de combate?\nCoste: %s Yang.
+USE_ITEM_QUESTION_05	En cuanto accedas a la Batalla de los Cinco Santuarios se desactivarán todos tus potenciadores.\n¿Quieres regresar al lugar donde quedaste fuera de combate?\nCoste: %s Yang.
 USE_SKILL_ERROR_UNKNOWN	Error de habilidad desconocido: %s
 VALENTINE_DAY_EVENT_MESSAGE_ADD_CHOCOLATE	Has conseguido 1 Chocolate.
 VALENTINE_DAY_EVENT_MESSAGE_ADD_ROSE	Has conseguido 1 Rosa.
@@ -3549,7 +3567,7 @@ VALENTINE_DAY_EVENT_MESSAGE_WRAP_SUCCESS_CHOCOLATE	Has envuelto Chocolate.
 VALENTINE_DAY_EVENT_MESSAGE_WRAP_SUCCESS_ROSE	Has envuelto Rosas.
 WHISPER_QUEST_BLOCK	¿Quieres bloquear a %s?
 WHISPER_QUEST_FRIEND	¿Quieres añadir a %s a tu lista de amigos?
-WHITE_DRAGON_CAVE_COOLING_CURSE	Por carga un {1} % de los HP máximos de daño cada {0} segundos. - Cargas actuales: {2}
+WHITE_DRAGON_CAVE_COOLING_CURSE	Por carga un {1} % de los HP máximos de daño cada {0} segundos. - Cargas actuales: {2}
 WORLD_BOSS_STATE_BOSS_KILLED	Ha huido
 WORLD_BOSS_STATE_BOSS_SPAWNED	Ha aparecido
 WORLD_BOSS_STATE_BREAK_TIME	Tiempo de carga

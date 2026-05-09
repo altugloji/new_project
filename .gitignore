@@ -6,3 +6,5 @@ new_project_pack/client/metin2client.map
 new_project_pack/client/metin2client.pdb
 new_project_pack/client/metin2client.exe
 new_project_pack/client/syserr.txt
+*.edata
+new_project_pack/client/syserr.txt

@@ -39,6 +39,6 @@ UPDATE `skill_proto` SET `szCooldownPoly` = '10' WHERE `dwVnum` = 96;
 UPDATE `skill_proto` SET `szCooldownPoly` = '8' WHERE `dwVnum` = 106;
 UPDATE `skill_proto` SET `szCooldownPoly` = '10' WHERE `dwVnum` = 107;
 UPDATE `skill_proto` SET `szCooldownPoly` = '9' WHERE `dwVnum` = 108;
-UPDATE `skill_proto` SET `szCooldownPoly` = '10' WHERE `dwVnum` = 109;
+UPDATE `skill_proto` SET `szCooldownPoly` = '14' WHERE `dwVnum` = 109;
 UPDATE `skill_proto` SET `szCooldownPoly` = '10' WHERE `dwVnum` = 110;
 UPDATE `skill_proto` SET `szCooldownPoly` = '10' WHERE `dwVnum` = 111;

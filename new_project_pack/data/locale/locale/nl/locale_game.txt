@@ -1,3 +1,6 @@
+DO_YOU_BUY_ITEM_C	Aantal: %d Prijs (EP): %s
+DO_YOU_BUY_ITEM_M	Aantal: %d Prijs (EM): %s
+ASK_BUY_ITEM_TEXT	Wil je dit item kopen? (Item: %s)
 CHARACTER_NAME	Naam
 USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Annuleren
 USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Verzenden

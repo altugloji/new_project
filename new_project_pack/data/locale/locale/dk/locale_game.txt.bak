@@ -1,3 +1,21 @@
+CHARACTER_NAME	Navn
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Annuller
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Send
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Er du sikker på, at du vil rapportere denne karakter?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Valgt karakter
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	Falske rapporter kan få konsekvenser.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Du har allerede rapporteret denne karakter.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	Du kan ikke bruge denne funktion, mens du er død.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	GM-karakterer kan ikke bruge denne funktion.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	Du skal først vælge en grund, før du kan sende rapporten.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Denne karakter er i øjeblikket offline.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	Du skal have fuldført Biolog-missionen på niveau 30 for at bruge denne funktion.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Rapporten blev sendt.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Prøv venligst igen senere.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Bot-butik
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Botting og snyd
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Yang-salg
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Rapportér spiller
 LOGIN_LANGUAGE_SELECT_TITLE	Sprogvalg
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Hjemmeside
@@ -1635,8 +1653,8 @@ MAP_MAZE_DUNGEON_02	Gnoll Huler Level 2
 MAP_MAZE_DUNGEON_03	Gnoll Huler Level 3
 MAP_MILGYO	Hwang Tempel
 MAP_MILGYO_A	
-MAP_MINIBOSS_01	Blåt Fangehul – Lvl 40-80
-MAP_MINIBOSS_02	Rødt Fangehul – Lvl 81+
+MAP_MINIBOSS_01	Blåt Fangehul - Lvl 40-80
+MAP_MINIBOSS_02	Rødt Fangehul - Lvl 81+
 MAP_MISTS_OF_ISLAND	Tågens Ø
 MAP_MONKEY_DUNGEON	Hasun Dong
 MAP_MONKEY_DUNGEON2	Jungsun Dong

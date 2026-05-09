@@ -1,10 +1,30 @@
-0509 01:30:03869 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
-0509 01:30:03871 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=137) - Strange Skill Need Weapon(CLAW)
-0509 01:30:03871 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=139) - Strange Skill Need Weapon(CLAW)
-0509 01:30:03871 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=171, strType=wolfman).STRANGE_SKILL_TYPE
-0509 01:30:03871 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=172, strType=wolfman).STRANGE_SKILL_TYPE
-0509 01:30:03871 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=175, strType=wolfman).STRANGE_SKILL_TYPE
-0509 01:30:03872 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=183, strType=wolfman).STRANGE_SKILL_TYPE
-0509 01:30:03872 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=170, strType=wolfman).STRANGE_SKILL_TYPE
-0509 01:30:03872 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=173, strType=wolfman).STRANGE_SKILL_TYPE
-0509 01:30:03872 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=174, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:02963 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
+0509 12:33:02966 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=137) - Strange Skill Need Weapon(CLAW)
+0509 12:33:02966 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=139) - Strange Skill Need Weapon(CLAW)
+0509 12:33:02966 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=171, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:02966 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=172, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:02966 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=175, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:02966 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=183, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:02966 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=170, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:02966 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=173, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:02966 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=174, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:28680 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
+0509 12:33:28682 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=137) - Strange Skill Need Weapon(CLAW)
+0509 12:33:28682 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=139) - Strange Skill Need Weapon(CLAW)
+0509 12:33:28682 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=171, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:28682 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=172, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:28682 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=175, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:28682 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=183, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:28682 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=170, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:28682 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=173, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:28682 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=174, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:39801 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
+0509 12:33:39803 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=137) - Strange Skill Need Weapon(CLAW)
+0509 12:33:39803 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=139) - Strange Skill Need Weapon(CLAW)
+0509 12:33:39803 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=171, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:39803 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=172, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:39803 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=175, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:39804 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=183, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:39804 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=170, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:39804 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=173, strType=wolfman).STRANGE_SKILL_TYPE
+0509 12:33:39804 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=174, strType=wolfman).STRANGE_SKILL_TYPE

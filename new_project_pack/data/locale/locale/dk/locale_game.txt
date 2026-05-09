@@ -1,3 +1,6 @@
+DO_YOU_BUY_ITEM_C	Antal: %d Pris (EP): %s
+DO_YOU_BUY_ITEM_M	Antal: %d Pris (EM): %s
+ASK_BUY_ITEM_TEXT	Vil du købe dette item? (Item: %s)
 CHARACTER_NAME	Navn
 USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Annuller
 USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Send

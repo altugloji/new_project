@@ -1,3 +1,21 @@
+CHARACTER_NAME	Nazwa
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Anuluj
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Wyœlij
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Czy na pewno chcesz zg³osiæ tê postaæ?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Wybrana postaæ
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	Fa³szywe zg³oszenia mog¹ mieæ konsekwencje.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Ta postaæ zosta³a ju¿ przez ciebie zg³oszona.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	Nie mo¿esz u¿ywaæ tej funkcji, gdy jesteœ martwy.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	Postacie GM nie mog¹ u¿ywaæ tej funkcji.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	Musisz najpierw wybraæ powód, aby wys³aæ zg³oszenie.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Ta postaæ jest obecnie offline.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	Aby u¿yæ tej funkcji, musisz ukoñczyæ misjê Biologa na poziomie 30.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Zg³oszenie zosta³o wys³ane pomyœlnie.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Spróbuj ponownie póŸniej.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Sklep Bot
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Botowanie i cheatowanie
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Sprzeda¿ Yang
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Zg³oœ gracza
 LOGIN_LANGUAGE_SELECT_TITLE	Wybór jezyka
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Strona internetowa
@@ -347,7 +365,7 @@ COMB_NOT_FULL_BOOK	Nie, tak to nie ubijemy interesu. Ju¿ ci przecie¿ wyt³umaczy³
 COMB_NOT_ITEM_IN_INVENTORY	Nie mo¿esz u¿ywaæ za³o¿onych przedmiotów.
 COMB_NOT_MEDIUM_ITEM	Nie mo¿na u¿yæ tego przedmiotu.
 COMB_WILL_REMOVE_MATERIAL	Orygina³ zostanie zniszczony w przypadku sukcesu.
-CREATE_ERROR_GM_NAME	Nie jesteœ upowa¿niony do u¿ycia ,GM‘ w swojej nazwie postaci.
+CREATE_ERROR_GM_NAME	Nie jesteœ upowa¿niony do u¿ycia ,GM' w swojej nazwie postaci.
 CREATE_ERROR_INSULT_NAME	Ta nazwa jest niepoprawna.
 CREATE_ERROR_LIMIT_LEVEL	Twoja postaæ musi znajdowaæ siê przynajmniej na poziomie 80.
 CREATE_ERROR_TIME_LIMIT	Mo¿esz tworzyæ now¹ postaæ tylko co 30 sek.
@@ -1071,7 +1089,7 @@ GUILD_BATTLE_QUALIFICATION	Aby wzi¹æ udzia³, pokonaj Króla Smoków\nalbo u¿yj bil
 GUILD_BATTLE_RELOAD_BUTTON_COOLTIME_MESSAGE	Spróbuj ponownie.
 GUILD_BATTLE_RESULT_BOARD_REMAIN_TIME_MESSAGE	Zostaniesz teleportowany za %s.
 GUILD_BATTLE_REVIVE_USE_SCROLL_MESSAGE	Zosta³eœ wskrzeszony za pomoc¹ wskrzeszenia gildii.
-GUILD_BATTLE_START_MESSAGE	Bitwa gildii rozpoczê³a siê! Podejmij wyzwanie, klikaj¹c „WejdŸ” w menu bitwy gildii!
+GUILD_BATTLE_START_MESSAGE	Bitwa gildii rozpoczê³a siê! Podejmij wyzwanie, klikaj¹c „WejdŸ" w menu bitwy gildii!
 GUILD_BATTLE_STATUS_BOARD_PK	Uœmiercenia SC: %d
 GUILD_BATTLE_STATUS_BOARD_REMAIN_MONSTER_COUNT	%s: %d / %d
 GUILD_BATTLE_TEAM_NAME_BLUE	Niebieska
@@ -1084,7 +1102,7 @@ GUILD_BATTLE_USE_TICKET_CANCEL_MESSAGE	Twoja rejestracja do bitwy gildii zosta³a
 GUILD_BOARD_ID	Cz³onek gildii
 GUILD_BOARD_TEXT	Wiadomoœæ
 GUILD_BUILDING_FIX_CHANGE	Czy naprawdê chcesz zmieniæ pozycjê?
-GUILD_BUILDING_FIX_CHANGE_GOLD	Koszt: 1 000 000 Yang
+GUILD_BUILDING_FIX_CHANGE_GOLD	Koszt: 1 000 000 Yang
 GUILD_BUILDING_FIX_DELETE	Czy naprawdê chcesz skasowaæ obiekt?
 GUILD_BUILDING_FIX_NEED_BUILDING	Brak budynku.
 GUILD_BUILDING_GRADE	Ranga
@@ -1616,7 +1634,7 @@ MAP_EMPIREWAR02	Walka o Zamek
 MAP_EMPIREWAR03	Walka o Zamek
 MAP_FARMING_DUNGEON	Tajemnicza Instancja
 MAP_FLAME	Doyyumhwan
-MAP_GOLDEN_LAND	Z³ota Kraina – Wejœcie
+MAP_GOLDEN_LAND	Z³ota Kraina - Wejœcie
 MAP_GOLDEN_LAND_STAGE	Z³ota Kraina
 MAP_GUILD_01	Jungrang
 MAP_GUILD_02	Waryong
@@ -1635,8 +1653,8 @@ MAP_MAZE_DUNGEON_02	Jaskinie Gnolli Poziom 2
 MAP_MAZE_DUNGEON_03	Jaskinie Gnolli Poziom 3
 MAP_MILGYO	Œwi¹tynia Hwang
 MAP_MILGYO_A	
-MAP_MINIBOSS_01	Niebieski loch – pz. 40-80
-MAP_MINIBOSS_02	Czerwony loch – od pz. 81
+MAP_MINIBOSS_01	Niebieski loch - pz. 40-80
+MAP_MINIBOSS_02	Czerwony loch - od pz. 81
 MAP_MISTS_OF_ISLAND	Wyspa Mg³y
 MAP_MONKEY_DUNGEON	Hasun Dong
 MAP_MONKEY_DUNGEON2	Jungsun Dong
@@ -1988,7 +2006,7 @@ MINI_GAME_BNW_RESULT_LOSE1	Twoja karta jest s³absza.
 MINI_GAME_BNW_RESULT_LOSE2	Pora¿ka!
 MINI_GAME_BNW_RESULT_WIN1	Twoja karta jest silniejsza.
 MINI_GAME_BNW_RESULT_WIN2	Zwyciêstwo!
-MINI_GAME_BNW_START_QUESTION	Aby zagraæ potrzebujesz 30 000 Yang i taliê kart tarota. Czy chcesz wzi¹æ udzia³ w Bitwie Proroków?
+MINI_GAME_BNW_START_QUESTION	Aby zagraæ potrzebujesz 30 000 Yang i taliê kart tarota. Czy chcesz wzi¹æ udzia³ w Bitwie Proroków?
 MINI_GAME_CATCHKING_CHALLENGE_TOOLTIP1	Jeœli u¿yjesz kilku przedmiotów: %s, otrzymasz w nagrodê liczbê skrzyñ odpowiadaj¹c¹ liczbie u¿ytych talii.
 MINI_GAME_CATCHKING_CHALLENGE_TOOLTIP2	Maksymalna liczba talii królewskich, których mo¿na u¿yæ: %d.
 MINI_GAME_CATCHKING_HELP_MSG1	Wielka szkoda! Twoja karta jest ni¿sza.\nNie otrzymujesz punktów. Wybierz now¹ kartê ze swojej talii.

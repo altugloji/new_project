@@ -1,3 +1,21 @@
+CHARACTER_NAME	Név
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Mégse
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Küldés
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Biztosan jelenteni szeretnéd ezt a karaktert?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Kiválasztott karakter
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	A hamis jelentéseknek következményei lehetnek.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Ezt a karaktert már jelentetted.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	Halott állapotban nem használhatod ezt a funkciót.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	GM karakterek nem használhatják ezt a funkciót.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	A jelentés elküldése elõtt ki kell választanod egy okot.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Ez a karakter jelenleg offline.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	A funkció használatához teljesítened kell a 30-as szintû Biológus küldetést.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	A jelentés sikeresen elküldve.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Kérjük, próbáld újra késõbb.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Bot bolt
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Botozás és csalás
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Yang eladás
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Játékos jelentése
 LOGIN_LANGUAGE_SELECT_TITLE	Nyelvválasztás
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Weboldal
@@ -1635,8 +1653,8 @@ MAP_MAZE_DUNGEON_02	Gnoll barlang 2. szint
 MAP_MAZE_DUNGEON_03	Gnoll barlang 3. szint
 MAP_MILGYO	Hwang templom
 MAP_MILGYO_A	
-MAP_MINIBOSS_01	Kék kazamata – 40-80. szint
-MAP_MINIBOSS_02	Vörös kazamata – 81. szinttõl
+MAP_MINIBOSS_01	Kék kazamata - 40-80. szint
+MAP_MINIBOSS_02	Vörös kazamata - 81. szinttõl
 MAP_MISTS_OF_ISLAND	Köd szigete
 MAP_MONKEY_DUNGEON	Hasun Dong
 MAP_MONKEY_DUNGEON2	Jungsun Dong

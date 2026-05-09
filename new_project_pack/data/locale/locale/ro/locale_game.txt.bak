@@ -1,3 +1,21 @@
+CHARACTER_NAME	Nume
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Anuleazã
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Trimite
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Eºti sigur cã vrei sã raportezi acest caracter?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Caracter selectat
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	Raportãrile false pot avea consecinþe.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Ai raportat deja acest caracter.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	Nu poþi folosi aceastã funcþie când eºti mort.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	Caracterele GM nu pot folosi aceastã funcþie.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	Trebuie sã selectezi mai întâi un motiv pentru a trimite raportarea.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Acest caracter este momentan offline.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	Trebuie sã finalizezi misiunea Biologului de nivel 30 pentru a folosi aceastã funcþie.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Raportarea a fost trimisã cu succes.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Te rugãm sã încerci din nou mai târziu.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Magazin Bot
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Bot ºi cheat
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Vânzare Yang
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Raporteazã jucãtor
 EXCHANGELOG_TITLE	Jurnale de schimb
 EXCHANGELOG_OWNERNAME	Numele proprietarului
 EXCHANGELOG_TARGETNAME	Numele ?intei
@@ -343,7 +361,7 @@ COMB_NOT_FULL_BOOK	Nu, nu putem face afaceri in acest fel. Ti-am spus deja ca fa
 COMB_NOT_ITEM_IN_INVENTORY	Nu poti folosi obiectele echipate.
 COMB_NOT_MEDIUM_ITEM	Acest articol nu poate fi folosit.
 COMB_WILL_REMOVE_MATERIAL	Obiectul sursã va fi distrus în transferul cu succes.
-CREATE_ERROR_GM_NAME	Nu poþi folosi ,GM‘ la numele caracterului.
+CREATE_ERROR_GM_NAME	Nu poþi folosi ,GM' la numele caracterului.
 CREATE_ERROR_INSULT_NAME	Acest nume este invalid.
 CREATE_ERROR_LIMIT_LEVEL	Caracterul tau trebuie sa aiba cel putin nivelul 80.
 CREATE_ERROR_TIME_LIMIT	Poti crea un singur caracter la fiecare 30 de secunde.

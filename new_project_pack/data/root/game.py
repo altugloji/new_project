@@ -87,6 +87,9 @@ class GameWindow(ui.ScriptWindow):
 		self.mapNameShower = None
 		self.affectShower = None
 		self.playerGauge = None
+		if constInfo.TEST_BUILD_WATERMARK_ENABLE:
+			self.testBuildMark = None
+			self.testBuildMark2 = None
 
 		self.stream=stream
 		self.interface = interfaceModule.Interface()
@@ -186,6 +189,35 @@ class GameWindow(ui.ScriptWindow):
 			self.testAlignment.SetFeather()
 			self.testAlignment.SetOutline()
 			self.testAlignment.Show()
+
+		if constInfo.TEST_BUILD_WATERMARK_ENABLE:
+			self.testBuildMark = ui.TextLine()
+			self.testBuildMark.SetParent(self)
+			self.testBuildMark.SetFontName("Tahoma:25")
+			self.testBuildMark.SetPosition(0, 110)
+			self.testBuildMark.SetWindowHorizontalAlignCenter()
+			# self.testBuildMark.SetWindowVerticalAlignCenter()
+			self.testBuildMark.SetHorizontalAlignCenter()
+			# self.testBuildMark.SetVerticalAlignCenter()
+			self.testBuildMark.SetFeather()
+			self.testBuildMark.SetOutline()
+			self.testBuildMark.SetPackedFontColor(0x80FF4444)
+			self.testBuildMark.SetText(constInfo.TEST_BUILD_WATERMARK_TEXT)
+			self.testBuildMark.Show()
+
+			self.testBuildMark2 = ui.TextLine()
+			self.testBuildMark2.SetParent(self)
+			self.testBuildMark2.SetFontName("Tahoma:22")
+			self.testBuildMark2.SetPosition(0, 140)
+			self.testBuildMark2.SetWindowHorizontalAlignCenter()
+			# self.testBuildMark.SetWindowVerticalAlignCenter()
+			self.testBuildMark2.SetHorizontalAlignCenter()
+			# self.testBuildMark.SetVerticalAlignCenter()
+			self.testBuildMark2.SetFeather()
+			self.testBuildMark2.SetOutline()
+			self.testBuildMark2.SetPackedFontColor(0xcffffff00)
+			self.testBuildMark2.SetText(constInfo.TEST_BUILD_WATERMARK_TEXT2)
+			self.testBuildMark2.Show()
 
 		self.__BuildKeyDict()
 		self.__BuildDebugInfo()

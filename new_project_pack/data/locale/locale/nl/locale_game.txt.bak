@@ -1,3 +1,21 @@
+CHARACTER_NAME	Naam
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Annuleren
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Verzenden
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Weet je zeker dat je dit personage wilt rapporteren?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Geselecteerd personage
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	Valse meldingen kunnen gevolgen hebben.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Je hebt dit personage al gerapporteerd.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	Je kunt deze functie niet gebruiken terwijl je dood bent.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	GM-personages kunnen deze functie niet gebruiken.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	Je moet eerst een reden kiezen voordat je de melding kunt verzenden.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Dit personage is momenteel offline.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	Je moet de Bioloog-missie van level 30 hebben voltooid om deze functie te gebruiken.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Melding succesvol verzonden.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Probeer het later opnieuw.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Botwinkel
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Botten en cheaten
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Yang-verkoop
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Speler rapporteren
 LOGIN_LANGUAGE_SELECT_TITLE	Taalkeuze
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Website
@@ -347,7 +365,7 @@ COMB_NOT_FULL_BOOK	Nee, zo doen we geen zaken. Zoals ik al zei: ik sta alleen op
 COMB_NOT_ITEM_IN_INVENTORY	Je kunt geen items gebruiken die je aan hebt.
 COMB_NOT_MEDIUM_ITEM	Dit item kan niet gebruikt worden.
 COMB_WILL_REMOVE_MATERIAL	Het bron-item wordt vernietigd bij succes.
-CREATE_ERROR_GM_NAME	Het is niet toegestaan om ,GM‘ in je karakter naam te gebruiken.
+CREATE_ERROR_GM_NAME	Het is niet toegestaan om ,GM' in je karakter naam te gebruiken.
 CREATE_ERROR_INSULT_NAME	Deze naam is ongeldig.
 CREATE_ERROR_LIMIT_LEVEL	Jouw karakter moet minstens level 80 zijn.
 CREATE_ERROR_TIME_LIMIT	Je kunt slechts één karakter per 30 seconden aanmaken.
@@ -1635,8 +1653,8 @@ MAP_MAZE_DUNGEON_02	Gnol Grotten Niveau 2
 MAP_MAZE_DUNGEON_03	Gnol Grotten Niveau 3
 MAP_MILGYO	Hwang Tempel
 MAP_MILGYO_A	
-MAP_MINIBOSS_01	Blauwe Kerker – Lvl 40-80
-MAP_MINIBOSS_02	Rode Kerker – Lvl 81+
+MAP_MINIBOSS_01	Blauwe Kerker - Lvl 40-80
+MAP_MINIBOSS_02	Rode Kerker - Lvl 81+
 MAP_MISTS_OF_ISLAND	Eiland van Mist
 MAP_MONKEY_DUNGEON	Hasun Dong
 MAP_MONKEY_DUNGEON2	Jungsun Dong

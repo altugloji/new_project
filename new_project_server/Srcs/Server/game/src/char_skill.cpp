@@ -1329,9 +1329,8 @@ struct FuncSplashDamage
 #ifdef ENABLE_NULLIFYAFFECT_LIMIT
 				int iLevel = m_pkChr->GetLevel();
 				int yLevel = pkChrVictim->GetLevel();
-				// const float k = 1.0 * m_pkChr->GetSkillPower(m_pkSk->dwVnum, bSkillLevel) * m_pkSk->bMaxLevel / 100;
-				int iDifLev = 9;
-				if ((iLevel-iDifLev <= yLevel) && (iLevel+iDifLev >= yLevel))
+				int iDifLev = 15;
+				if (iLevel >= yLevel || (yLevel - iLevel) <= iDifLev)
 #endif
 				{
 					const int iAmount2 = (int) m_pkSk->kPointPoly2.Eval();

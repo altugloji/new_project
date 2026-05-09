@@ -1,3 +1,6 @@
+DO_YOU_BUY_ITEM_C	Poèet: %d Cena (EP): %s
+DO_YOU_BUY_ITEM_M	Poèet: %d Cena (EM): %s
+ASK_BUY_ITEM_TEXT	Chceš koupit tento pøedmìt? (Pøedmìt: %s)
 CHARACTER_NAME	Jméno
 USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Zrušit
 USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Odeslat

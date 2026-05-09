@@ -1,3 +1,21 @@
+CHARACTER_NAME	Name
+USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Abbrechen
+USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Senden
+USER_REPORT_SYSTEM_DIALOG_REPORT_SURE	Möchtest du diesen Charakter wirklich melden?
+USER_REPORT_SYSTEM_DIALOG_TITLE	Ausgewählter Charakter
+USER_REPORT_SYSTEM_DIALOG_WARN_SANCTIONS	Falsche Meldungen können Konsequenzen haben.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_ALREADY_REPORTED	Du hast diesen Charakter bereits gemeldet.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_DEAD	Diese Funktion kannst du nicht benutzen, wenn du tot bist.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_GM	GM-Charaktere können diese Funktion nicht benutzen.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_NOT_SELECTED	Du musst zuerst einen Grund auswählen, bevor du die Meldung senden kannst.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_OFFLINE	Dieser Charakter ist derzeit offline.
+USER_REPORT_SYSTEM_FAIL_MESSAGE_UNDER_30	Du musst die Biologen-Quest ab Stufe 30 abgeschlossen haben, um diese Funktion zu nutzen.
+USER_REPORT_SYSTEM_MESSAGE_REPORT_SUCCESS	Meldung erfolgreich gesendet.
+USER_REPORT_SYSTEM_MESSAGE_USE_LATER	Bitte versuche es später erneut.
+USER_REPORT_SYSTEM_TOOLTIP_BOT_USING	Bot-Shop
+USER_REPORT_SYSTEM_TOOLTIP_CHEATING	Botting und Cheating
+USER_REPORT_SYSTEM_TOOLTIP_ILLEGAL_SELLER	Yang-Verkauf
+USER_REPORT_SYSTEM_TOOLTIP_USER_REPORT	Spieler melden
 LOGIN_LANGUAGE_SELECT_TITLE	Sprachauswahl
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Webseite
@@ -347,7 +365,7 @@ COMB_NOT_FULL_BOOK	Nein, so werden wir nicht ins Geschäft kommen. Wie ich dir be
 COMB_NOT_ITEM_IN_INVENTORY	Du kannst keine ausgerüsteten Gegenstände verwenden.
 COMB_NOT_MEDIUM_ITEM	Dieser Gegenstand kann nicht verwendet werden.
 COMB_WILL_REMOVE_MATERIAL	Original wird bei Erfolg zerstört.
-CREATE_ERROR_GM_NAME	Du darfst im Charakternamen nicht ,GM‘ verwenden.
+CREATE_ERROR_GM_NAME	Du darfst im Charakternamen nicht ,GM' verwenden.
 CREATE_ERROR_INSULT_NAME	Dieser Name ist nicht zulässig.
 CREATE_ERROR_LIMIT_LEVEL	Dein Charakter muss mindestens Level 80 besitzen.
 CREATE_ERROR_TIME_LIMIT	Du kannst nur alle 30 Sek. einen Charakter erstellen.
@@ -1635,8 +1653,8 @@ MAP_MAZE_DUNGEON_02	Gnollhöhlen Ebene 2
 MAP_MAZE_DUNGEON_03	Gnollhöhlen Ebene 3
 MAP_MILGYO	Hwang-Tempel
 MAP_MILGYO_A	None8
-MAP_MINIBOSS_01	Blauer Dungeon – Lvl 40-80
-MAP_MINIBOSS_02	Roter Dungeon – ab Lvl 81
+MAP_MINIBOSS_01	Blauer Dungeon - Lvl 40-80
+MAP_MINIBOSS_02	Roter Dungeon - ab Lvl 81
 MAP_MISTS_OF_ISLAND	Inseln des Nebels
 MAP_MONKEY_DUNGEON	Hasun Dong
 MAP_MONKEY_DUNGEON2	Jungsun Dong

@@ -1,3 +1,6 @@
+DO_YOU_BUY_ITEM_C	Mennyiség: %d Ár (EP): %s
+DO_YOU_BUY_ITEM_M	Mennyiség: %d Ár (EM): %s
+ASK_BUY_ITEM_TEXT	Meg szeretnéd venni ezt a tárgyat? (Tárgy: %s)
 CHARACTER_NAME	Név
 USER_REPORT_SYSTEM_DIALOG_BUTTON_NO	Mégse
 USER_REPORT_SYSTEM_DIALOG_BUTTON_YES	Küldés
