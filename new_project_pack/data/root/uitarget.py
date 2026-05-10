@@ -209,7 +209,7 @@ class TargetBoard(ui.ThinBoard):
 				self.Hide()
 
 			def __LoadInformation(self, race):
-				self.yPos = 35
+				self.yPos = 7
 				self.children = []
 				self.race = race
 				self.stoneImg = None

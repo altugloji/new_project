@@ -12,7 +12,7 @@
 
 #include "PythonMiniMap.h"
 
-constexpr long c_lNormal_Waiting_Time = 10;
+constexpr long c_lNormal_Waiting_Time = 2;
 constexpr int c_fLine_Temp = 16;
 
 void ShowArgument(script::TArgList & rArgumentList)

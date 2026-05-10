@@ -458,7 +458,7 @@ elif app.ENABLE_EXTEND_INVEN_SYSTEM and not app.ENABLE_CHEQUE_SYSTEM:
 						"x" : 10,
 						"y" : 33,
 
-						"image" : "d:/ymir work/ui/equipment_bg_without_ring.tga",
+						"image" : "d:/ymir work/ui/equipment_bg_old.tga",
 
 						"children" :
 						(
@@ -479,10 +479,10 @@ elif app.ENABLE_EXTEND_INVEN_SYSTEM and not app.ENABLE_CHEQUE_SYSTEM:
 											{"index":item.EQUIPMENT_SHOES, "x":39, "y":145, "width":32, "height":32},
 											{"index":item.EQUIPMENT_WRIST, "x":75, "y":67, "width":32, "height":32},
 											{"index":item.EQUIPMENT_WEAPON, "x":3, "y":3, "width":32, "height":96},
-											{"index":item.EQUIPMENT_NECK, "x":114, "y":67, "width":32, "height":32},
-											{"index":item.EQUIPMENT_EAR, "x":114, "y":35, "width":32, "height":32},
-											{"index":item.EQUIPMENT_UNIQUE1, "x":2, "y":144, "width":32, "height":32},
-											{"index":item.EQUIPMENT_UNIQUE2, "x":74, "y":144, "width":32, "height":32},
+											{"index":item.EQUIPMENT_NECK, "x":114, "y":83, "width":32, "height":32},
+											{"index":item.EQUIPMENT_EAR, "x":114, "y":51, "width":32, "height":32},
+											{"index":item.EQUIPMENT_UNIQUE1, "x":2, "y":113, "width":32, "height":32},
+											{"index":item.EQUIPMENT_UNIQUE2, "x":75, "y":113, "width":32, "height":32},
 											{"index":item.EQUIPMENT_ARROW, "x":114, "y":2, "width":32, "height":32},
 											{"index":item.EQUIPMENT_SHIELD, "x":75, "y":35, "width":32, "height":32},
 											# {"index":item.EQUIPMENT_BELT, "x":39, "y":106, "width":32, "height":32},
@@ -491,33 +491,33 @@ elif app.ENABLE_EXTEND_INVEN_SYSTEM and not app.ENABLE_CHEQUE_SYSTEM:
 										),
 							},
 							## Dragon Soul Button
-							{
-								"name" : "DSSButton",
-								"type" : "button",
+							# {
+								# "name" : "DSSButton",
+								# "type" : "button",
 
-								"x" : 114,
-								"y" : 107,
+								# "x" : 114,
+								# "y" : 107,
 
-								"tooltip_text" : uiScriptLocale.TASKBAR_DRAGON_SOUL,
+								# "tooltip_text" : uiScriptLocale.TASKBAR_DRAGON_SOUL,
 
-								"default_image" : "d:/ymir work/ui/dragonsoul/dss_inventory_button_01.tga",
-								"over_image" : "d:/ymir work/ui/dragonsoul/dss_inventory_button_02.tga",
-								"down_image" : "d:/ymir work/ui/dragonsoul/dss_inventory_button_03.tga",
-							},
+								# "default_image" : "d:/ymir work/ui/dragonsoul/dss_inventory_button_01.tga",
+								# "over_image" : "d:/ymir work/ui/dragonsoul/dss_inventory_button_02.tga",
+								# "down_image" : "d:/ymir work/ui/dragonsoul/dss_inventory_button_03.tga",
+							# },
 							## MallButton
-							{
-								"name" : "MallButton",
-								"type" : "button",
+							# {
+								# "name" : "MallButton",
+								# "type" : "button",
 
-								"x" : 118,
-								"y" : 148,
+								# "x" : 118,
+								# "y" : 148,
 
-								"tooltip_text" : uiScriptLocale.MALL_TITLE,
+								# "tooltip_text" : uiScriptLocale.MALL_TITLE,
 
-								"default_image" : "d:/ymir work/ui/game/TaskBar/Mall_Button_01.tga",
-								"over_image" : "d:/ymir work/ui/game/TaskBar/Mall_Button_02.tga",
-								"down_image" : "d:/ymir work/ui/game/TaskBar/Mall_Button_03.tga",
-							},
+								# "default_image" : "d:/ymir work/ui/game/TaskBar/Mall_Button_01.tga",
+								# "over_image" : "d:/ymir work/ui/game/TaskBar/Mall_Button_02.tga",
+								# "down_image" : "d:/ymir work/ui/game/TaskBar/Mall_Button_03.tga",
+							# },
 							## CostumeButton
 							{
 								"name" : "CostumeButton",

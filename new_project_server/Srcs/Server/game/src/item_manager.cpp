@@ -778,6 +778,7 @@ bool ITEM_MANAGER::CreateDropItemVector(LPCHARACTER pkChr, LPCHARACTER pkKiller,
 	long lMapIndex = pkKiller->GetRealMapIndex();
 #endif
 
+#ifdef COMMON_DROP_ITEM_ENABLE
 	BYTE bRank = pkChr->GetMobRank();
 	// LPITEM item = NULL;
 
@@ -817,6 +818,7 @@ bool ITEM_MANAGER::CreateDropItemVector(LPCHARACTER pkChr, LPCHARACTER pkKiller,
 		if (item) vec_item.push_back(item);
 */
 	}
+#endif
 
 	// Drop Item Group
 	{

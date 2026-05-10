@@ -73,11 +73,11 @@ if app.ENABLE_WEAPON_COSTUME_SYSTEM:
 								"height" : 175,
 
 								"slot" : (
-											{"index":COSTUME_START_INDEX+0, "x":62, "y":45, "width":32, "height":64},
-											{"index":COSTUME_START_INDEX+1, "x":62, "y": 9, "width":32, "height":32},
-											{"index":COSTUME_START_INDEX+2, "x":13, "y":126, "width":32, "height":32},
-											{"index":COSTUME_START_INDEX+3, "x":62, "y":126, "width":32, "height":32},
-											{"index":item.COSTUME_SLOT_WEAPON, "x":13, "y":13, "width":32, "height":96},
+											{"index":COSTUME_START_INDEX+0, "x":37, "y":51, "width":32, "height":64},	#zırh
+											{"index":COSTUME_START_INDEX+1, "x":37, "y":14, "width":32, "height":32},	#kask
+											{"index":COSTUME_START_INDEX+2, "x":37, "y":126, "width":32, "height":32},	#binek
+											# {"index":COSTUME_START_INDEX+3, "x":37, "y":126, "width":32, "height":32},
+											# {"index":item.COSTUME_SLOT_WEAPON, "x":13, "y":13, "width":32, "height":96}, #silah
 										),
 							},
 						),

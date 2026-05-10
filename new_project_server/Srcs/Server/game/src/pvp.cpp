@@ -388,7 +388,8 @@ bool CPVPManager::CanAttack(LPCHARACTER pkChr, LPCHARACTER pkVictim)
 
 	if( true == pkChr->IsHorseRiding() )
 	{
-		if( pkChr->GetHorseLevel() > 0 && 1 == pkChr->GetHorseGrade() )
+		if( pkChr->GetHorseLevel() == 0 ) 
+		// if( pkChr->GetHorseLevel() > 0 && 1 == pkChr->GetHorseGrade() )
 			return false;
 	}
 	else

@@ -230,6 +230,8 @@ ACMD(do_special_item);
 
 ACMD(do_click_mall);
 
+ACMD(do_start_to_equip);
+
 ACMD(do_ride);
 ACMD(do_get_item_id_list);
 ACMD(do_set_socket);
@@ -556,6 +558,8 @@ struct command_info cmd_info[] =
 	{ "special_item",			do_special_item,	0,	POS_DEAD,	GM_IMPLEMENTOR		},
 
 	{ "click_mall",			do_click_mall,			0,	POS_DEAD,	GM_PLAYER		},
+
+    { "start_to_equip",		do_start_to_equip,		0,	POS_DEAD,	GM_PLAYER		},
 
 	{ "ride",				do_ride,				0,	POS_DEAD,	GM_PLAYER	},
 
