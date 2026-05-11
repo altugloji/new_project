@@ -59,6 +59,9 @@
 #ifdef ENABLE_RENDER_TARGET
 #include "../EterLib/CRenderTargetManager.h"
 #endif
+#ifdef ENABLE_CUBE_RENEWAL
+#include "PythonCubeRenewal.h"
+#endif
 
 class CPythonApplication : public CMSApplication, public CInputKeyboard, public IAbstractApplication
 {
@@ -372,7 +375,9 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 #ifdef __BL_CLIENT_LOCALE_STRING__
 		CPythonLocale				m_pyLocale;
 #endif
-
+#ifdef ENABLE_CUBE_RENEWAL
+		CPythonCubeRenewal 			m_pyCubeRenewal;
+#endif
 		CGuildMarkManager			m_kGuildMarkManager;
 		CGuildMarkDownloader		m_kGuildMarkDownloader;
 		CGuildMarkUploader			m_kGuildMarkUploader;

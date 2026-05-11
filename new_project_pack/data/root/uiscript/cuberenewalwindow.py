@@ -13,24 +13,24 @@ window = {
 	"name" : "CubeRenewalWindow",
 	"style" : ("movable", "float", ),
 	
-	"x" : 0,
-	"y" : 0,
+	"x" : 430,
+	"y" : 230,
 	
 	"width" : 336,
-	"height" : 488,
+	"height" : 500,
 	
 	"children" :
 	[
 		{
 			"name" : "board",
 			"type" : "board_with_titlebar",
-			"style" : ("attach", ),
+			"style" : ("ltr", "attach", ),
 			
 			"x" : 0,
 			"y" : 0,
 			
 			"width" : 336,
-			"height" : 488,
+			"height" : 500,
 			"title" : uiScriptLocale.CUBE_RENEWAL_TITLE,
 			
 			"children" :
@@ -39,7 +39,7 @@ window = {
 				{
 					"name" : "item_list_board",
 					"type" : "window",
-					"style": ("ltr", "attach", ),
+					"style": ("ltr",),
 
 					"x" : 10,
 					"y" : 32,
@@ -163,9 +163,9 @@ window = {
 					"name" : "cube_list_scroll_bar",
 					"type" : "scrollbar",
 
-					"x" : 26,
-					"y" : 34,
-					"size" : 248,
+					"x" : 25,
+					"y" : 38,
+					"size" : 250,
 					"horizontal_align" : "right",
 				},
 			
@@ -380,7 +380,7 @@ window = {
 					"name" : "yang_icon",
 					"type" : "image",
 					"style" : ("ltr", ),
-					"x" : 216,
+					"x" : 216-40,
 					"y" : 430,
 					
 					"image" : ROOT_PATH + "cube_yang_icon.sub",
@@ -390,10 +390,10 @@ window = {
 					"name" : "yang_textbg",
 					"type" : "image",
 					"style" : ("ltr", ),
-					"x" : 233,
+					"x" : 233-35,
 					"y" : 427,
 					
-					"image" : ROOT_PATH + "cube_yang_textbg.sub",
+					"image" : "d:/ymir work/ui/public/parameter_slot_05.sub",
 					
 					"children" :
 					(
@@ -411,44 +411,6 @@ window = {
 						},
 					),
 				},
-				
-				## Gem
-				{
-					"name" : "gem_icon",
-					"type" : "image",
-					"style" : ("ltr", ),
-					"x" : 106,
-					"y" : 430,
-					
-					"image" : ROOT_PATH + "cube_gem_icon.sub",
-				},
-				
-				{
-					"name" : "gem_textbg",
-					"type" : "image",
-					"style" : ("ltr", ),
-					"x" : 123,
-					"y" : 427,
-					
-					"image" : ROOT_PATH + "cube_yang_textbg.sub",
-					
-					"children" :
-					(
-						{
-							"name" : "gem_text",
-							"type" : "text",
-
-							"x" : 7,
-							"y" : 3,
-
-							"horizontal_align" : "right",
-							"text_horizontal_align" : "right",
-
-							"text" : "",
-						},
-					),
-				},
-				
 				{
 					"name" : "imporve_slot",
 					"type" : "image",
@@ -492,7 +454,7 @@ window = {
 					"type" : "button",
 
 					"x" : 141,
-					"y" : 453,
+					"y" : 470,
 
 					"text" : uiScriptLocale.OK,
 
@@ -506,7 +468,7 @@ window = {
 					"type" : "button",
 
 					"x" : 229,
-					"y" : 453,
+					"y" : 470,
 
 					"text" : uiScriptLocale.CANCEL,
 

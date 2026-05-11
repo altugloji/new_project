@@ -620,6 +620,9 @@ bool RunMainScript(CPythonLauncher& pyLauncher, const char* lpCmdLine)
 #ifdef ENABLE_RENDER_TARGET
 	initRenderTarget();
 #endif
+#ifdef ENABLE_CUBE_RENEWAL
+	intcuberenewal();
+#endif
 #ifdef __USE_CYTHON__
 	// don't add this line if you're implementing cython via .pyd:
 	// initrootlibManager();

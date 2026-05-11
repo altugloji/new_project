@@ -19,7 +19,11 @@
 
 #include "../../common/VnumHelper.h"
 #include "DragonSoul.h"
+#ifndef ENABLE_CUBE_RENEWAL
 #include "cube.h"
+#else
+#include "cuberenewal.h"
+#endif
 
 #ifdef KYGN_CHEST_INFO
 	#include "buffer_manager.h"

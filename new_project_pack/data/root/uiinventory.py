@@ -275,7 +275,8 @@ class InventoryWindow(ui.ScriptWindow):
 	dlgPickMoney = None
 	if app.ENABLE_CHEQUE_SYSTEM:
 		dlgPickETC = None
-
+	if app.ENABLE_CUBE_RENEWAL:
+		wndCubeRenewal = None
 	sellingSlotNumber = -1
 	isLoaded = 0
 	isOpenedCostumeWindowWhenClosingInventory = 0
@@ -1499,3 +1500,14 @@ class InventoryWindow(ui.ScriptWindow):
 	if app.KYGN_CHEST_INFO:
 		def SetChestRewardWindow(self, wndPage):
 			self.KygnChestReward = wndPage
+				
+	if app.ENABLE_CUBE_RENEWAL:
+		def SetCubeRenewalDlg(self, wndCubeRenewal):
+			self.wndCubeRenewal = wndCubeRenewal
+		
+		def isShowCubeRenewalDlg(self):
+			if self.wndCubeRenewal:
+				if self.wndCubeRenewal.IsShow():
+					return 1
+					
+			return 0

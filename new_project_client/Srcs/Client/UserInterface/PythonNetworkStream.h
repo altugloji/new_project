@@ -779,5 +779,11 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 	private:
 		bool	RecvChestInfoPacket();
 #endif
+#ifdef ENABLE_CUBE_RENEWAL
+public:
+	bool CubeRenewalMakeItem(int index_item, int count_item, int index_item_improve);
+	bool CubeRenewalClose();
+	bool RecvCubeRenewalPacket();
+#endif
 };
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

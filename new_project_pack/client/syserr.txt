@@ -1,10 +1,107 @@
-0510 20:15:02891 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
-0510 20:15:02894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=137) - Strange Skill Need Weapon(CLAW)
-0510 20:15:02894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=139) - Strange Skill Need Weapon(CLAW)
-0510 20:15:02894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=171, strType=wolfman).STRANGE_SKILL_TYPE
-0510 20:15:02894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=172, strType=wolfman).STRANGE_SKILL_TYPE
-0510 20:15:02894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=175, strType=wolfman).STRANGE_SKILL_TYPE
-0510 20:15:02894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=183, strType=wolfman).STRANGE_SKILL_TYPE
-0510 20:15:02894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=170, strType=wolfman).STRANGE_SKILL_TYPE
-0510 20:15:02894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=173, strType=wolfman).STRANGE_SKILL_TYPE
-0510 20:15:02894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=174, strType=wolfman).STRANGE_SKILL_TYPE
+0511 11:25:03534 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
+0511 11:25:03537 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=137) - Strange Skill Need Weapon(CLAW)
+0511 11:25:03537 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=139) - Strange Skill Need Weapon(CLAW)
+0511 11:25:03537 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=171, strType=wolfman).STRANGE_SKILL_TYPE
+0511 11:25:03537 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=172, strType=wolfman).STRANGE_SKILL_TYPE
+0511 11:25:03537 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=175, strType=wolfman).STRANGE_SKILL_TYPE
+0511 11:25:03537 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=183, strType=wolfman).STRANGE_SKILL_TYPE
+0511 11:25:03537 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=170, strType=wolfman).STRANGE_SKILL_TYPE
+0511 11:25:03537 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=173, strType=wolfman).STRANGE_SKILL_TYPE
+0511 11:25:03537 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=174, strType=wolfman).STRANGE_SKILL_TYPE
+0511 11:25:23890 :: Cannot find item by 50345
+0511 11:25:23890 :: filename=uicuberenewal.py, name=LoadInfo, line=228
+0511 11:25:23890 :: filename=uicuberenewal.py, name=AppendSubCategorias, line=165
+0511 11:25:23890 :: filename=uicuberenewal.py, name=LoadSubCategoria, line=501
+0511 11:25:23890 :: filename=uicuberenewal.py, name=BINARY_CUBE_RENEWAL_LOADING, line=430
+0511 11:25:23890 :: filename=prototype.py, name=RunApp, line=51
+0511 11:25:23890 :: filename=prototype.py, name=<module>, line=59
+0511 11:25:23890 :: filename=system.py, name=execfile, line=249
+0511 11:25:23890 :: filename=system.py, name=RunMainScript, line=289
+0511 11:25:23890 :: filename=system.py, name=<module>, line=317
+0511 11:25:23892 :: Cannot find item by 50345
+0511 11:25:23892 :: filename=uicuberenewal.py, name=LoadInfo, line=274
+0511 11:25:23892 :: filename=uicuberenewal.py, name=AppendSubCategoriaObjects, line=234
+0511 11:25:23892 :: filename=uicuberenewal.py, name=LoadSubObjects, line=509
+0511 11:25:23892 :: filename=uicuberenewal.py, name=BINARY_CUBE_RENEWAL_LOADING, line=431
+0511 11:25:23892 :: filename=prototype.py, name=RunApp, line=51
+0511 11:25:23892 :: filename=prototype.py, name=<module>, line=59
+0511 11:25:23892 :: filename=system.py, name=execfile, line=249
+0511 11:25:23892 :: filename=system.py, name=RunMainScript, line=289
+0511 11:25:23892 :: filename=system.py, name=<module>, line=317
+0511 11:26:44046 :: ui:2675: RuntimeWarning: tp_compare didn't return -1 or -2 for exception
+
+0511 11:26:44046 :: Traceback (most recent call last):
+
+0511 11:26:44046 ::   File "ui.py", line 2232, in OnOverInItem
+
+0511 11:26:44046 ::   File "ui.py", line 166, in __call__
+
+0511 11:26:44046 ::   File "ui.py", line 157, in __call__
+
+0511 11:26:44046 ::   File "uicuberenewal.py", line 804, in OverInItem
+
+0511 11:26:44046 ::   File "uiToolTip.py", line 1021, in AddItemData
+
+0511 11:26:44046 ::   File "uiToolTip.py", line 1424, in AdditionalTips
+
+0511 11:26:44046 ::   File "uiToolTip.py", line 130, in AppendSpace
+
+0511 11:26:44046 ::   File "uiToolTip.py", line 259, in ResizeToolTip
+
+0511 11:26:44046 ::   File "ui.py", line 2675, in SetSize
+
+0511 11:26:44046 :: RuntimeError
+0511 11:26:44046 :: : 
+0511 11:26:44046 :: skill.GetSkillName - Failed to find skill by 0
+0511 11:26:44046 :: 
+
+0511 11:28:36345 :: Traceback (most recent call last):
+
+0511 11:28:36345 ::   File "ui.py", line 2232, in OnOverInItem
+
+0511 11:28:36345 ::   File "ui.py", line 166, in __call__
+
+0511 11:28:36345 ::   File "ui.py", line 157, in __call__
+
+0511 11:28:36345 ::   File "uicuberenewal.py", line 804, in OverInItem
+
+0511 11:28:36345 ::   File "uiToolTip.py", line 1021, in AddItemData
+
+0511 11:28:36345 ::   File "uiToolTip.py", line 1424, in AdditionalTips
+
+0511 11:28:36345 ::   File "uiToolTip.py", line 130, in AppendSpace
+
+0511 11:28:36345 ::   File "uiToolTip.py", line 259, in ResizeToolTip
+
+0511 11:28:36345 ::   File "ui.py", line 2675, in SetSize
+
+0511 11:28:36345 :: RuntimeError
+0511 11:28:36345 :: : 
+0511 11:28:36345 :: skill.GetSkillName - Failed to find skill by 0
+0511 11:28:36345 :: 
+
+0511 11:28:36790 :: Traceback (most recent call last):
+
+0511 11:28:36790 ::   File "ui.py", line 2232, in OnOverInItem
+
+0511 11:28:36790 ::   File "ui.py", line 166, in __call__
+
+0511 11:28:36790 ::   File "ui.py", line 157, in __call__
+
+0511 11:28:36790 ::   File "uicuberenewal.py", line 804, in OverInItem
+
+0511 11:28:36790 ::   File "uiToolTip.py", line 1021, in AddItemData
+
+0511 11:28:36790 ::   File "uiToolTip.py", line 1424, in AdditionalTips
+
+0511 11:28:36790 ::   File "uiToolTip.py", line 130, in AppendSpace
+
+0511 11:28:36790 ::   File "uiToolTip.py", line 259, in ResizeToolTip
+
+0511 11:28:36790 ::   File "ui.py", line 2675, in SetSize
+
+0511 11:28:36790 :: RuntimeError
+0511 11:28:36790 :: : 
+0511 11:28:36790 :: skill.GetSkillName - Failed to find skill by 0
+0511 11:28:36790 :: 
+

@@ -136,7 +136,7 @@ enum eCommonDefines {
 #define UPDATE_ITEM_MESSAGE
 #define ENABLE_USER_REPORT_SYSTEM 					//Official User Report System
 #define ENABLE_ITEM_SHOP_SYSTEM										// Nesne market
-
+#define ENABLE_CUBE_RENEWAL									//CUBE
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

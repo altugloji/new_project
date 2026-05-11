@@ -193,7 +193,9 @@ class CMainPacketHeaderMap : public CNetworkPacketHeaderMap
 #ifdef ENABLE_SEND_TARGET_INFO
 			Set(HEADER_GC_TARGET_INFO,	CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCTargetInfo), STATIC_SIZE_PACKET));
 #endif
-
+#ifdef ENABLE_CUBE_RENEWAL
+			Set(HEADER_GC_CUBE_RENEWAL, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCCubeRenewalReceive), STATIC_SIZE_PACKET));
+#endif
 		}
 };
 

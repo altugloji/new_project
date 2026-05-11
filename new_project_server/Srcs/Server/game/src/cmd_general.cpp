@@ -2104,7 +2104,30 @@ ACMD(do_gift)
 {
 	ch->ChatPacket(CHAT_TYPE_COMMAND, "gift");
 }
+#ifdef ENABLE_CUBE_RENEWAL
+ACMD(do_cube)
+{
+	const char* line;
+	char arg1[256], arg2[256], arg3[256];
+	line = two_arguments(argument, arg1, sizeof(arg1), arg2, sizeof(arg2));
+	one_argument(line, arg3, sizeof(arg3));
 
+	if (0 == arg1[0])
+	{
+		return;
+	}
+
+	switch (LOWER(arg1[0]))
+	{
+	case 'o':	// open
+		Cube_open(ch);
+		break;
+
+	default:
+		return;
+	}
+}
+#else
 ACMD(do_cube)
 {
 	if (!ch->CanDoCube())
@@ -2211,7 +2234,7 @@ ACMD(do_cube)
 			return;
 	}
 }
-
+#endif
 ACMD(do_in_game_mall)
 {
 	if (LC_IsEurope() == true)

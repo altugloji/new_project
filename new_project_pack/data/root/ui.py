@@ -1003,6 +1003,7 @@ class EditLine(TextLine):
 		self.eventTab = None
 		self.numberMode = False
 		self.useIME = True
+		self.canEdit = True
 
 		self.bCodePage = False
 		
@@ -1099,6 +1100,11 @@ class EditLine(TextLine):
 
 	def SetIMEFlag(self, flag):
 		self.useIME = flag
+	def CanEdit(self, is_enable):
+		self.canEdit = is_enable
+		
+	def IsCanEdit(self):
+		return self.canEdit
 
 	def SetText(self, text):
 		wndMgr.SetText(self.hWnd, text)
@@ -1214,9 +1220,10 @@ class EditLine(TextLine):
 					self.backText.Show()
 
 	def OnIMETab(self):
-		if self.eventTab:
-			self.eventTab()
-			return True
+		if self.IsCanEdit():
+			if self.eventTab:
+				self.eventTab()
+				return True
 
 		return False
 

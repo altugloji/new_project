@@ -1954,6 +1954,12 @@ class GameWindow(ui.ScriptWindow):
 		self.__GuildWar_CloseAskDialog()
 
 		return 1
+		
+	if app.ENABLE_CUBE_RENEWAL:
+		def BINARY_CUBE_RENEWAL_OPEN(self):
+			if self.interface:
+				self.interface.BINARY_CUBE_RENEWAL_OPEN()
+		
 	## BINARY CALLBACK
 	######################################################################################
 

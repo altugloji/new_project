@@ -79,7 +79,8 @@ if app.ENABLE_ITEM_SHOP_SYSTEM:
 
 if app.ENABLE_WIKI:
 	import uiWiki
-
+if app.ENABLE_CUBE_RENEWAL:
+	import uicuberenewal
 IsQBHide = 0
 class Interface(object):
 	CHARACTER_STATUS_TAB = 1
@@ -127,6 +128,8 @@ class Interface(object):
 			self.wndWonExchange = None
 		if app.__BL_OFFICIAL_LOOT_FILTER__:
 			self.wndLootFilter = None
+		if app.ENABLE_CUBE_RENEWAL:
+			self.wndCubeRenewal = None
 		event.SetInterfaceWindow(self)
 		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
 			self.EMPIRE_NAME = {
@@ -345,6 +348,14 @@ class Interface(object):
 			self.wndWeb.LoadWindow()
 			self.wndWeb.Hide()
 
+	if app.ENABLE_CUBE_RENEWAL:
+		def __MakeCubeRenewal(self):
+			self.wndCubeRenewal = uicuberenewal.CubeRenewalWindows()
+			self.wndCubeRenewal.Hide()
+			self.wndCubeRenewal.BindInterfaceClass(self)
+			if self.wndInventory:
+				self.wndInventory.SetCubeRenewalDlg(self.wndCubeRenewal)
+
 	def __MakeCubeWindow(self):
 		self.wndCube = uiCube.CubeWindow()
 		self.wndCube.LoadWindow()
@@ -392,7 +403,8 @@ class Interface(object):
 		self.__MakeCubeResultWindow()
 		if app.ENABLE_ACCE_COSTUME_SYSTEM:
 			self.__MakeAcceWindow()
-
+		if app.ENABLE_CUBE_RENEWAL:
+			self.__MakeCubeRenewal()
 		# ACCESSORY_REFINE_ADD_METIN_STONE
 		self.__MakeItemSelectWindow()
 		# END_OF_ACCESSORY_REFINE_ADD_METIN_STONE
@@ -498,6 +510,13 @@ class Interface(object):
 
 		if self.wndDragonSoulRefine:
 			self.wndDragonSoulRefine.Destroy()
+
+		if app.ENABLE_CUBE_RENEWAL:
+			if self.wndCubeRenewal:
+				self.wndCubeRenewal.Hide()
+				self.wndCubeRenewal.Destroy()
+				self.wndCubeRenewal = None
+				del self.wndCubeRenewal
 
 		if app.ENABLE_ITEM_SHOP_SYSTEM:
 			if self.ItemShop:
@@ -1876,6 +1895,13 @@ class Interface(object):
 
 	def BULID_ExitGuildArea(self, areaID):
 		self.wndGameButton.HideBuildButton()
+
+	if app.ENABLE_CUBE_RENEWAL:
+		def BINARY_CUBE_RENEWAL_OPEN(self):
+			if self.wndCubeRenewal.IsShow():
+				self.wndCubeRenewal.Close()
+			else:
+				self.wndCubeRenewal.Show()
 
 	#####################################################################################
 

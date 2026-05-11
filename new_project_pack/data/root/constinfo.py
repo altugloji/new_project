@@ -14,6 +14,10 @@ if app.KYGN_CHEST_INFO:
 if app.ENABLE_SEND_TARGET_INFO:
 	MONSTER_INFO_DATA = {}
 
+if app.ENABLE_CUBE_RENEWAL:
+	CUBE_RENEWAL_IS_OPENED = 0
+	cube_count_items = {}
+
 # EXTRA BEGIN
 ENABLE_NEW_LEVELSKILL_SYSTEM = False # loads 5 (B,M,G,P,F) skills .mse
 ENABLE_RANDOM_CHANNEL_SEL = False # don't set a random channel when you open the client

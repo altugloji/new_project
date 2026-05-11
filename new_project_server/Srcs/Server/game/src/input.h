@@ -178,6 +178,9 @@ class CInputMain : public CInputProcessor
 #ifdef __SEND_TARGET_INFO__
 		void		TargetInfoLoad(LPCHARACTER ch, const char* c_pData);
 #endif
+#ifdef ENABLE_CUBE_RENEWAL
+	void 		CubeRenewalSend(LPCHARACTER ch, const char* data);
+#endif
 };
 
 class CInputDead : public CInputMain

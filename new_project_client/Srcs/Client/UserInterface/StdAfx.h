@@ -95,7 +95,9 @@ void initRenderTarget();
 #ifdef ENABLE_BL_TRACEBACK
 extern void PrintTraceStack();
 #endif
-
+#ifdef ENABLE_CUBE_RENEWAL
+void intcuberenewal();
+#endif
 extern const std::string& ApplicationStringTable_GetString(DWORD dwID);
 extern const std::string& ApplicationStringTable_GetString(DWORD dwID, LPCSTR szKey);
 

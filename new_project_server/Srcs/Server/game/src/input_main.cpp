@@ -86,7 +86,30 @@ void SendBlockChatInfo(LPCHARACTER ch, int sec)
 
 	ch->ChatPacket(CHAT_TYPE_INFO, buf);
 }
+#ifdef ENABLE_CUBE_RENEWAL
+void CInputMain::CubeRenewalSend(LPCHARACTER ch, const char* data)
+{
+	struct packet_send_cube_renewal* pinfo = (struct packet_send_cube_renewal*) data;
+	switch (pinfo->subheader)
+	{
+	case CUBE_RENEWAL_SUB_HEADER_MAKE_ITEM:
+	{
+		int index_item = pinfo->index_item;
+		int count_item = pinfo->count_item;
+		int index_item_improve = pinfo->index_item_improve;
 
+		Cube_Make(ch, index_item, count_item, index_item_improve);
+	}
+	break;
+
+	case CUBE_RENEWAL_SUB_HEADER_CLOSE:
+	{
+		Cube_close(ch);
+	}
+	break;
+	}
+}
+#endif
 EVENTINFO(spam_event_info)
 {
 	char host[MAX_HOST_LENGTH+1];
@@ -3125,7 +3148,11 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			if (!ch->IsObserverMode())
 				ItemDrop2(ch, c_pData);
 			break;
-
+#ifdef ENABLE_CUBE_RENEWAL
+		case HEADER_CG_CUBE_RENEWAL:
+			CubeRenewalSend(ch, c_pData);
+			break;
+#endif
 		case HEADER_CG_ITEM_MOVE:
 			if (!ch->IsObserverMode())
 				ItemMove(ch, c_pData);

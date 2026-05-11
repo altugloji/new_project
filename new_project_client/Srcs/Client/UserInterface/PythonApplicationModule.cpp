@@ -2020,5 +2020,11 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_RENDER_TARGET", 0);
 #endif
 
+#ifdef ENABLE_CUBE_RENEWAL
+	PyModule_AddIntConstant(poModule, "ENABLE_CUBE_RENEWAL", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_CUBE_RENEWAL", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

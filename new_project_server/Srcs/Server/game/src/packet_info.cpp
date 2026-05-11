@@ -197,7 +197,9 @@ CPacketInfoCG::CPacketInfoCG()
 #ifdef __SEND_TARGET_INFO__
 	Set(HEADER_CG_TARGET_INFO_LOAD, sizeof(TPacketCGTargetInfoLoad), "TargetInfoLoad", true);
 #endif
-
+#ifdef ENABLE_CUBE_RENEWAL
+	Set(HEADER_CG_CUBE_RENEWAL, sizeof(TPacketCGCubeRenewalSend), "CubeRenewalSend",false);
+#endif
 }
 
 CPacketInfoCG::~CPacketInfoCG()
