@@ -97,7 +97,7 @@ quest collect_quest_lv90  begin
 				if  is_test_server()  then 
 					pc.setqf("duration",get_time()+2) 
 				else
-					pc.setqf("duration",get_time()+60*60*22) 
+					pc.setqf("duration",get_time()+60*60*20) 
 				end
 				wait()
 				

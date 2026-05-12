@@ -90,6 +90,10 @@ void initWiki();
 #ifdef ENABLE_RENDER_TARGET
 void initRenderTarget();
 #endif
+#ifdef __GEM_SHOP__
+void initgem();
+#endif
+
 
 
 #ifdef ENABLE_BL_TRACEBACK

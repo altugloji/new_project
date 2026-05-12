@@ -53,24 +53,38 @@ PyObject* GetCubeRenewalDates(PyObject* poSelf, PyObject* poArgs)
 
 	const CPythonCubeRenewal::TInfoStrucCubeRenewal& CRItemVector = CPythonCubeRenewal::Instance().GetList();
 	if (DWORD(index) >= CRItemVector.size())
-		return Py_BuildValue("iibiiiiiiiiiLis", 0, 0, false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "None");
+		return Py_BuildValue("iiiiiiiiiiiiiiiiiiiiiiiLis",
+			0, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			0LL, 0, "None");
 
 	const TInfoDateCubeRenewal& CRenewalItemVector = CRItemVector[index];
-		return Py_BuildValue("iibiiiiiiiiiiLis",
-
-		CRenewalItemVector.vnum_reward,
+	// Use int for stackable (not 'b'): C++ bool in ... is promoted wider than char; 'b' misaligned all following fields (gold showed 0).
+	// Tuple: vnum_reward, count_reward, stackable(0/1), 10x(vnum,count), gold, percent, category -> matches uicuberenewal FReturnInfo.
+	return Py_BuildValue("iiiiiiiiiiiiiiiiiiiiiiiLis",
+		(int)CRenewalItemVector.vnum_reward,
 		CRenewalItemVector.count_reward,
-		CRenewalItemVector.item_reward_stackable,
-		CRenewalItemVector.vnum_material_1,
+		CRenewalItemVector.item_reward_stackable ? 1 : 0,
+		(int)CRenewalItemVector.vnum_material_1,
 		CRenewalItemVector.count_material_1,
-		CRenewalItemVector.vnum_material_2,
+		(int)CRenewalItemVector.vnum_material_2,
 		CRenewalItemVector.count_material_2,
-		CRenewalItemVector.vnum_material_3,
+		(int)CRenewalItemVector.vnum_material_3,
 		CRenewalItemVector.count_material_3,
-		CRenewalItemVector.vnum_material_4,
+		(int)CRenewalItemVector.vnum_material_4,
 		CRenewalItemVector.count_material_4,
-		CRenewalItemVector.vnum_material_5,
+		(int)CRenewalItemVector.vnum_material_5,
 		CRenewalItemVector.count_material_5,
+		(int)CRenewalItemVector.vnum_material_6,
+		CRenewalItemVector.count_material_6,
+		(int)CRenewalItemVector.vnum_material_7,
+		CRenewalItemVector.count_material_7,
+		(int)CRenewalItemVector.vnum_material_8,
+		CRenewalItemVector.count_material_8,
+		(int)CRenewalItemVector.vnum_material_9,
+		CRenewalItemVector.count_material_9,
+		(int)CRenewalItemVector.vnum_material_10,
+		CRenewalItemVector.count_material_10,
 		CRenewalItemVector.gold,
 		CRenewalItemVector.percent,
 		CRenewalItemVector.category

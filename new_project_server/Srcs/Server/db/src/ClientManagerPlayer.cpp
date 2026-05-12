@@ -117,6 +117,9 @@ size_t CreatePlayerSaveQuery(char * pszQuery, size_t querySize, TPlayerTable * p
 			#ifdef ENABLE_CHEQUE_SYSTEM
 			"cheque = %d, "
 			#endif
+#ifdef __GEM_SYSTEM__
+			"gem = %d, "
+#endif
 			,
 		GetTablePostfix(),
 		pkTab->job,
@@ -164,6 +167,9 @@ size_t CreatePlayerSaveQuery(char * pszQuery, size_t querySize, TPlayerTable * p
 		#ifdef ENABLE_CHEQUE_SYSTEM
 		, pkTab->cheque
 		#endif
+#ifdef __GEM_SYSTEM__
+		, pkTab->gem
+#endif
 	);
 
 	static char text[8192 + 1];
@@ -371,6 +377,9 @@ void CClientManager::QUERY_PLAYER_LOAD(CPeer * peer, DWORD dwHandle, TPlayerLoad
 #ifdef ENABLE_CHEQUE_SYSTEM
 				", cheque "
 #endif
+#ifdef __GEM_SYSTEM__
+				", gem "
+#endif
 				" FROM player%s WHERE id=%d",
 				GetTablePostfix(), packet->player_id);
 
@@ -523,6 +532,9 @@ bool CreatePlayerTableFromRes(MYSQL_RES * res, TPlayerTable * pkTab)
 	str_to_number(pkTab->horse_skill_point, row[col++]);
 #ifdef ENABLE_CHEQUE_SYSTEM
 	str_to_number(pkTab->cheque, row[col++]);
+#endif
+#ifdef __GEM_SYSTEM__
+	str_to_number(pkTab->gem, row[col++]);
 #endif
 	// reset sub_skill_point
 	{

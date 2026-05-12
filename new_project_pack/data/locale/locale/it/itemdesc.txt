@@ -2763,7 +2763,7 @@
 27988	Mappa del Tesoro	Una mappa consunta che rivela il luogo dove è sepolto un antico tesoro.
 27989	Bussola per Metin	La bussola ti indica la direzione e la distanza del Metin più vicino a te. Più sarà luminosa e più sarai vicino. Può essere attivata massimo 6 volte.
 27990	Pezzo di pietra	Grazie alla sua ridotta grandezza, si lascia facilmente trasportare ed è utilizzabile in svariati modi.
-27991	Pietra Acquatica	Una pietra dura e grossolana usata per affilare armi e utensili da cucina.
+27991	Pietra d'Acqua	Un minerale prezioso del mare.
 27992	Perla bianca	Una perla bianco neve. | Le donne l'adorano
 27993	Perla blu	Una magnifica perla blu. | Le donne l'adorano
 27994	Perla rossa	Un prezioso tesoro dal colore fulvo proveniente dal cuore di un'ostrica.
@@ -2931,7 +2931,7 @@
 30153	Fiori	Fiori sconosciuti, che con il loro profumo fanno ricordare molti pensieri.
 30154	Libro Segreto del Tempio	L'analisi della dottrina e storia del Tempio Oscuro.
 30155	Pendente di Mirine	Un pendaglio per una collana. Sul retro c'è il nome.
-30156	Libro Segreto del Tempio	Questo prezioso volume contiene l'analisi della dottrina e storia del Tempio Oscuro.
+30156	Libro Viola	Un libro che contiene le ricette dei libri abilità. Può essere creato dall'Alchimista.
 30157	Punta di Freccia	Queste punte di freccia avvelenate saranno un valido aiuto nella difesa del Regno.
 30177	Olio al muschio	L'olio al muschio è utilizzato da un mercante d'armi in una quest. L'item non ha nessun'altra funzione.
 30179	Chiave a spirale	Questa chiave magica attiva il portale che conduce al Tempio del Drago.
@@ -2993,16 +2993,16 @@
 30269	Pezzo di Medaglia (5)	Il quinto frammento di una Medaglia dell'Eroe
 30270	Scheggia Pietra d. drago	Il frammento di una Pietra del drago particolare
 30271	Scheggia pietra drago+	Il frammento di una Pietra del drago particolare
-30272	Reliquia anima – guerr.	Permette di aggiungere un Bonus Reliquia. Si possono attivare al massimo 4 bonus contemporaneamente. I bonus non possono essere modificati fino alla loro scadenza.
-30273	Reliquia anima – ninja	Permette di aggiungere un Bonus Reliquia. Si possono attivare al massimo 4 bonus contemporaneamente. I bonus non possono essere modificati fino alla loro scadenza.
-30274	Reliquia anima – sura	Permette di aggiungere un Bonus Reliquia. Si possono attivare al massimo 4 bonus contemporaneamente. I bonus non possono essere modificati fino alla loro scadenza.
-30275	Reliquia anima – shamani	Permette di aggiungere un Bonus Reliquia. Si possono attivare al massimo 4 bonus contemporaneamente. I bonus non possono essere modificati fino alla loro scadenza.
-30276	Reliquia anima – lican	Permette di aggiungere un Bonus Reliquia. Si possono attivare al massimo 4 bonus contemporaneamente. I bonus non possono essere modificati fino alla loro scadenza.
-30280	Fram. reliquia – guerr.	Con questo frammento, Chaegirab può realizzare una Reliquia dell'anima per guerrieri.
-30281	Fram. reliquia – ninja	Con questo frammento, Chaegirab può realizzare una Reliquia dell'anima per ninja.
-30282	Fram. reliquia – sura	Con questo frammento, Chaegirab può realizzare una Reliquia dell'anima per sura.
-30283	Fram. reliquia – shamani	Con questo frammento, Chaegirab può realizzare una Reliquia dell'anima per shamani.
-30284	Fram. reliquia – lican	Con questo frammento, Chaegirab può realizzare una Reliquia dell'anima per lican.
+30272	Reliquia anima - guerr.	Permette di aggiungere un Bonus Reliquia. Si possono attivare al massimo 4 bonus contemporaneamente. I bonus non possono essere modificati fino alla loro scadenza.
+30273	Reliquia anima - ninja	Permette di aggiungere un Bonus Reliquia. Si possono attivare al massimo 4 bonus contemporaneamente. I bonus non possono essere modificati fino alla loro scadenza.
+30274	Reliquia anima - sura	Permette di aggiungere un Bonus Reliquia. Si possono attivare al massimo 4 bonus contemporaneamente. I bonus non possono essere modificati fino alla loro scadenza.
+30275	Reliquia anima - shamani	Permette di aggiungere un Bonus Reliquia. Si possono attivare al massimo 4 bonus contemporaneamente. I bonus non possono essere modificati fino alla loro scadenza.
+30276	Reliquia anima - lican	Permette di aggiungere un Bonus Reliquia. Si possono attivare al massimo 4 bonus contemporaneamente. I bonus non possono essere modificati fino alla loro scadenza.
+30280	Fram. reliquia - guerr.	Con questo frammento, Chaegirab può realizzare una Reliquia dell'anima per guerrieri.
+30281	Fram. reliquia - ninja	Con questo frammento, Chaegirab può realizzare una Reliquia dell'anima per ninja.
+30282	Fram. reliquia - sura	Con questo frammento, Chaegirab può realizzare una Reliquia dell'anima per sura.
+30283	Fram. reliquia - shamani	Con questo frammento, Chaegirab può realizzare una Reliquia dell'anima per shamani.
+30284	Fram. reliquia - lican	Con questo frammento, Chaegirab può realizzare una Reliquia dell'anima per lican.
 30311	Chiave Crist. d. Anime	Questa chiave lavorata in filigrana con un Cristallo delle Anime incastonato apre la porta per il 2° piano della Catacomba del Diavolo.
 30312	Totem della Smorfia	Questa tavola di legno con una smorfia scolpita serve come chiave per il 6° piano della Catacomba del Diavolo.
 30315	Pane	Pane per interrompere il digiuno.
@@ -3123,20 +3123,20 @@
 30586		
 30600	Cartamodello	
 30601	Design d'armatura	
-30602	Tintura blu	
-30603	Tintura rossa	
-30604	Tintura grigia	
+30602	Tintura Blu	Tintura necessaria per la creazione.
+30603	Tintura Rossa	Tintura necessaria per la creazione.
+30604	Tintura Grigia	Tintura necessaria per la creazione.
 30605	Lamine d'oro	
 30606	Lamine d'argento	
 30607	Lamine di rame	
 30608	Lamine d'acciaio	
 30609	Lamine di bronzo	
-30610	Mithril	
+30610	Mithril	Si ottiene fondendo minerali. Può essere usato in varie creazioni. Può essere creato dall'Alchimista.
 30611	Cinghie resistenti	
 30612	Corde robuste	
 30613	Pietra delle Driadi	In questa misteriosa pietra che riluce di verde è contenuta l'anima di una Driade, uno spirito arboreo. Le Driadi conoscono le parole segrete che permettono l'accesso a Erebos.
-30614	Tintura nera	
-30615	Tintura bianca	
+30614	Tintura Nera	Tintura necessaria per la creazione.
+30615	Tintura Bianca	Tintura necessaria per la creazione.
 30616	Titanio diossido	Il cristallo prismatico serve per il raffinamento di un elemento dell'equipaggiamento.
 30617	Agata	La misteriosa gemma splendente serve per il raffinamento di un elemento dell'equipaggiamento.
 30618	Pietra lunare	La pietra preziosa a forma di goccia racchiude in sé una scintilla di luce lunare. Serve per il raffinamento di un elemento dell'equipaggiamento.
@@ -3216,7 +3216,7 @@
 31032	Perle del leviatano	Capsule rinforzanti efficacissime provenienti dalla Luce interiore di esseri MITICI e dall'Essenza millenium.
 31033	Mantello del capo	Questo mantello rappresenta per i Ladri Rossi il simbolo dell'invincibilità.
 31034	Totem dei Giganti	Il totem ha la forma di una grossa ambra.
-31035	Pietra nera	Questa pietra misteriosa è stata estratta dai Ciclopi dai Monti Tonanti.
+31035	Pietra Nera	Si ottiene fondendo pietre. Può essere usata in varie creazioni. Può essere creata dall'Alchimista.
 31036	Oro nero	Il minerale nero avente dei poteri magici si trova nei Monti Tonanti.
 31037	Borsa di pelle	Hai preso questa borsa dal Capitano Shrack. È stato più semplice di quanto non ti aspettassi...
 31038	Terra sacra	Questa sacca piena di Terra sacra serve come mezzo per l'evocazione di morti.
@@ -5412,7 +5412,7 @@
 50341	Ispirazione del novizio	Il primo dei tre libri sulla battaglia di formazione. Può aumentare l'ispirazione di chi lo possiede. Il libro sparisce al termine della lettura.
 50342	Ispirazione dell'adepto	Il secondo dei tre libri sulla battaglia di formazione. Può aumentare l'ispirazione di chi lo possiede. Il libro sparisce al termine della lettura.
 50343	Ispirazione dell'esperto	Il terzo dei tre libri sulla battaglia di formazione. Può aumentare l'ispirazione di chi lo possiede. Il libro sparisce al termine della lettura.
-50401	Libro Taglio a Tre Vie	La lettura di questo libro consente di apprendere l’abilità Taglio a tre vie. Il libro sparisce dopo la lettura.
+50401	Libro Taglio a Tre Vie	La lettura di questo libro consente di apprendere l'abilità Taglio a tre vie. Il libro sparisce dopo la lettura.
 50402	Libro Vortice Spada	La lettura di questo libro consente di apprendere l'abilità Vortice spada.  Il libro sparisce dopo la lettura.
 50403	Libro Estasi Combattim.	La lettura di questo libro consente di apprendere l'abilità Estasi combattimento. Il libro sparisce dopo la lettura.
 50404	Libro Aura della Spada	La lettura di questo libro consente di apprendere l'abilità Aura della spada.  Il libro sparisce dopo la lettura.
@@ -5627,8 +5627,8 @@
 50853	Elisir Res. oscurità oro	Questo potente elisir conferisce, a chi lo beve, +20% di Resistenza all'oscurità.
 50901	Bottiglia vuota	Serve per preparare le pozioni
 50902	Ricetta Principiante	Ricetta con istruzioni facili da seguire che può essere eseguita anche dagli inesperti.
-50903	Ricetta	Una ricetta che richiede un minimo di esperienza.
-50904	Ricetta Professionale	Una ricetta che può essere eseguita solo da esperti.
+50903	Schema Potenziamento	Schema necessario per la creazione.
+50904	Schema Incanta Oggetto	Schema necessario per la creazione.
 50905	Ricetta Acqua Sim	Descrive dettagliatamente la creazione dell'acqua composta da Succo di Fiori di Pesco e Lillà.
 50906	Ricetta Acqua Dok	Descrive dettagliatamente la creazione dell'acqua composta da Succo di Campanula e Lillà.
 50907	Ricetta Acqua Bo	Descrive dettagliatamente la creazione dell'acqua composta da Succo di Fiori di Caco e Funghi Tue.
@@ -5658,7 +5658,7 @@
 50938	Scrigno Veggenza rosso	Contiene 105 Carte Tarot per la Contesa dei veggenti.
 50939	Scrigno Veggenza blu	Contiene 21 Carte Tarot per la Contesa dei veggenti.
 50940	Scrigno Veggenza rosa	Ottieni 5 Set tarot per la Contesa dei veggenti.
-51001	Scaglia di energia	Scaglie di un Cristallo di energia. Fondendone 30 si ottiene un Cristallo di Energia.
+51001	Frammento di Energia	Si ottiene fondendo oggetti preziosi. Può essere usato in varie creazioni. Può essere creato dall'Alchimista.
 51002	Cristallo di energia	Questo cristallo aumenta i tuoi bonus per due ore.
 51501	Cor draconis (grezzo)	Il cuore di drago cristallizzato contiene una Pietra del drago, scelta dalla sorte, della classe "grezzo".
 51502	Cor draconis (grezzo)	Il cuore di drago cristallizzato contiene una Pietra del drago, scelta dalla sorte, della classe "grezzo".

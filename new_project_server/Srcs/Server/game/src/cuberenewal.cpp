@@ -315,11 +315,8 @@ bool Cube_InformationInitialize()
 		}
 
 		const CUBE_RENEWAL_VALUE& reward = rewards.at(0);
-		const WORD& npcVNUM = cubeData->npc_vnum.at(0);
-		//bool bComplicate = false;
-		
+
 		TCubeMapByNPC& cubeMap = cube_info_map;
-		TCubeResultList& resultList = cubeMap[npcVNUM];
 		SCubeMaterialInfo materialInfo;
 
 		materialInfo.reward = reward;
@@ -328,7 +325,14 @@ bool Cube_InformationInitialize()
 		materialInfo.material = cubeData->item;
 		materialInfo.category = cubeData->category;
 
-		resultList.push_back(materialInfo);
+		// Register this recipe under every NPC line in the section (not only npc_vnum[0]).
+		// Otherwise / cube open <vnum> works for FN_check_valid_npc but cube_info_map has no rows for secondary NPCs.
+		for (size_t ni = 0; ni < cubeData->npc_vnum.size(); ++ni)
+		{
+			const WORD npcVNUM = cubeData->npc_vnum.at(ni);
+			TCubeResultList& resultList = cubeMap[npcVNUM];
+			resultList.push_back(materialInfo);
+		}
 	}
 
 	//s_isInitializedCubeMaterialInformation = true;
@@ -336,27 +340,23 @@ bool Cube_InformationInitialize()
 }
 
 
-void Cube_open (LPCHARACTER ch)
+void Cube_open (LPCHARACTER ch, DWORD dwRecipeNpcRace)
 {
+	if (!ch)
+		return;
+
 	LPCHARACTER	npc= ch->GetQuestNPC();
 
 	if (!npc)
 		return;
 
-	DWORD npcVNUM = npc->GetRaceNum();
-
-	if (NULL==npc)
-	{
-		if (test_server)
-			sys_log(0, "cube_npc is NULL");
-		return;
-	}
+	DWORD npcVNUM = (dwRecipeNpcRace != 0) ? dwRecipeNpcRace : npc->GetRaceNum();
 
 	if ( FN_check_valid_npc(npcVNUM) == false )
 	{
 		if ( test_server == true )
 		{
-			sys_log(0, "cube not valid NPC");
+			sys_log(0, "cube not valid NPC (recipe race %u)", npcVNUM);
 		}
 		return;
 	}
@@ -414,6 +414,7 @@ void Cube_open (LPCHARACTER ch)
 	SendDateCubeRenewalPackets(ch,CUBE_RENEWAL_SUB_HEADER_DATES_LOADING);
 	SendDateCubeRenewalPackets(ch,CUBE_RENEWAL_SUB_HEADER_OPEN_RECEIVE);
 
+	ch->SetCubeRenewalRecipeNpc(npcVNUM);
 	ch->SetCubeNpc(npc);
 	
 }
@@ -421,6 +422,7 @@ void Cube_open (LPCHARACTER ch)
 void Cube_close(LPCHARACTER ch)
 {
 	ch->SetCubeNpc(NULL);
+	ch->SetCubeRenewalRecipeNpc(0);
 }
 
 void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve)
@@ -439,9 +441,45 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 	{
 		return;
 	}
-	
-	if (count_item == 0)
+
+	DWORD recipeNpcRace = ch->GetCubeRenewalRecipeNpc();
+	if (recipeNpcRace == 0)
+		recipeNpcRace = npc->GetRaceNum();
+
+	const auto cube_it = cube_info_map.find(recipeNpcRace);
+	if (cube_it == cube_info_map.end())
+	{
+		sys_log(1, "CUBE_RENEWAL Make: no recipe table for npc race %u (%s)", recipeNpcRace, ch->GetName());
 		return;
+	}
+	const TCubeResultList& resultList = cube_it->second;
+
+	if (index < 0 || static_cast<size_t>(index) >= resultList.size())
+	{
+		sys_log(1, "CUBE_RENEWAL Make: invalid recipe index %d (size %zu) char %s", index, resultList.size(), ch->GetName());
+		return;
+	}
+
+	if (count_item < 1)
+		return;
+
+	{
+		const long distMk = DISTANCE_APPROX(ch->GetX() - npc->GetX(), ch->GetY() - npc->GetY());
+		if (distMk >= CUBE_MAX_DISTANCE)
+		{
+			sys_log(1, "CUBE_RENEWAL Make: TOO_FAR %s dist %ld", ch->GetName(), distMk);
+			return;
+		}
+	}
+
+	if (index_item_improve != -1)
+	{
+		if (index_item_improve < 0 || index_item_improve >= INVENTORY_AND_EQUIP_SLOT_MAX)
+		{
+			sys_log(1, "CUBE_RENEWAL Make: invalid improve slot %d (%s)", index_item_improve, ch->GetName());
+			index_item_improve = -1;
+		}
+	}
 	
 #ifdef ENABLE_CUBE_ATTR_SOCKET
 	bool canCopy = false;
@@ -460,7 +498,6 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 
 #endif
 
-	const TCubeResultList& resultList = cube_info_map[npc->GetRaceNum()];
 	for (TCubeResultList::const_iterator iter = resultList.begin(); resultList.end() != iter; ++iter)
 	{
 		if (index_value == index)
@@ -535,6 +572,11 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 				}
 
 				pItem = ITEM_MANAGER::instance().CreateItem(materialInfo.reward.vnum,(materialInfo.reward.count*count_item));
+				if (!pItem)
+				{
+					sys_err("CUBE_RENEWAL: CreateItem failed vnum %u count %d", materialInfo.reward.vnum, materialInfo.reward.count * count_item);
+					return;
+				}
 				iEmptyPos = pItem->IsDragonSoul() ? ch->GetEmptyDragonSoulInventory(pItem) : ch->GetEmptyInventory(pItem->GetSize());
 
 				if (pItem->IsDragonSoul())
@@ -615,11 +657,10 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 					ch->RemoveSpecifyItem(materialInfo.material[i].vnum, (materialInfo.material[i].count*count_item));
 				}
 
-				if (materialInfo.gold != 0){
-					// ch->PointChange(POINT_GOLD, -static_cast<long long>(materialInfo.gold*count_item), false);
-
+				if (materialInfo.gold != 0)
+				{
+					sys_err("[Cube_Make] PlayerName: %s - Old Money: %lld", ch->GetName(), ch->GetGold());
 					ch->PointChange(POINT_GOLD, -static_cast<long long>(materialInfo.gold*count_item), false);
-
 				}
 
 #ifdef ENABLE_BATTLE_PASS
@@ -644,6 +685,12 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 				}
 
 				pItem = ITEM_MANAGER::instance().CreateItem(materialInfo.reward.vnum,(materialInfo.reward.count*total_items_give));
+
+				if (!pItem)
+				{
+					sys_err("CUBE_RENEWAL: CreateItem (after roll) failed vnum %u count %d char %s", materialInfo.reward.vnum, materialInfo.reward.count * total_items_give, ch->GetName());
+					return;
+				}
 
 				if (pItem->IsStackable() && !IS_SET(pItem->GetAntiFlag(), ITEM_ANTIFLAG_STACK))
 				{
@@ -685,6 +732,7 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 								M2_DESTROY_ITEM(pItem);
 								if (item2->GetType() == ITEM_QUEST)
 									quest::CQuestManager::instance().PickupItem (ch->GetPlayerID(), item2);
+								ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CUBE_RENEWAL_SUCCESS"));
 								return;
 							}
 						}
@@ -723,6 +771,7 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 							if (bCount == 0)
 							{
 								M2_DESTROY_ITEM(pItem);
+								ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CUBE_RENEWAL_SUCCESS"));
 								return;
 							}
 						}
@@ -769,6 +818,7 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 							if (bCount == 0)
 							{
 								M2_DESTROY_ITEM(pItem);
+								ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CUBE_RENEWAL_SUCCESS"));
 								return;
 							}
 						}
@@ -806,6 +856,7 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 							if (bCount == 0)
 							{
 								M2_DESTROY_ITEM(pItem);
+								ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CUBE_RENEWAL_SUCCESS"));
 								return;
 							}
 						}
@@ -923,6 +974,21 @@ void SendDateCubeRenewalPackets(LPCHARACTER ch, BYTE subheader, DWORD npcVNUM)
 
 			pack.date_cube_renewal.vnum_material_5 = FN_check_cube_item_vnum_material(materialInfo,5);
 			pack.date_cube_renewal.count_material_5 = FN_check_cube_item_count_material(materialInfo,5);
+
+			pack.date_cube_renewal.vnum_material_6 = FN_check_cube_item_vnum_material(materialInfo,6);
+			pack.date_cube_renewal.count_material_6 = FN_check_cube_item_count_material(materialInfo,6);
+
+			pack.date_cube_renewal.vnum_material_7 = FN_check_cube_item_vnum_material(materialInfo,7);
+			pack.date_cube_renewal.count_material_7 = FN_check_cube_item_count_material(materialInfo,7);
+
+			pack.date_cube_renewal.vnum_material_8 = FN_check_cube_item_vnum_material(materialInfo,8);
+			pack.date_cube_renewal.count_material_8 = FN_check_cube_item_count_material(materialInfo,8);
+
+			pack.date_cube_renewal.vnum_material_9 = FN_check_cube_item_vnum_material(materialInfo,9);
+			pack.date_cube_renewal.count_material_9 = FN_check_cube_item_count_material(materialInfo,9);
+
+			pack.date_cube_renewal.vnum_material_10 = FN_check_cube_item_vnum_material(materialInfo,10);
+			pack.date_cube_renewal.count_material_10 = FN_check_cube_item_count_material(materialInfo,10);
 
 			pack.date_cube_renewal.gold = materialInfo.gold;
 

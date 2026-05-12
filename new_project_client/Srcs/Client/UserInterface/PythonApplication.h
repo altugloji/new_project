@@ -63,6 +63,10 @@
 #include "PythonCubeRenewal.h"
 #endif
 
+#ifdef __GEM_SHOP__
+#include "PythonGem.h"
+#endif
+
 class CPythonApplication : public CMSApplication, public CInputKeyboard, public IAbstractApplication
 {
 	public:
@@ -391,7 +395,9 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 		CNetworkDevice				m_netDevice;
 
 		CPythonSystem				m_pySystem;
-
+#ifdef __GEM_SHOP__
+		CPythonGem					m_pyGem;
+#endif
 		PyObject *					m_poMouseHandler;
 		D3DXVECTOR3					m_v3CenterPosition;
 

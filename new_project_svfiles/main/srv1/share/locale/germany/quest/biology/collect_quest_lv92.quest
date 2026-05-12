@@ -102,7 +102,7 @@ quest collect_quest_lv92 begin
 			if is_test_server() then 
 				pc.setqf("duration", get_time()+10) -- 테스트서버 10초
 			else
-				pc.setqf("duration", get_time()+60*60*6) -- 일반 6시간
+				pc.setqf("duration", get_time()+60*60*22) -- 일반 6시간
 			end
 
 			wait()

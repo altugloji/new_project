@@ -177,6 +177,12 @@ void CHARACTER::Initialize()
 	m_tSyncTime = {};
 	m_dwPlayerID = 0;
 
+#ifdef __GEM_SYSTEM__
+	m_bGemShop = false;
+	m_bGemConvertShop = false;
+	m_bGemShopLoaded = false;
+#endif
+
 #ifdef __AUTO_SKILL_READER__
 	m_pkAutoSkill = NULL;
 	m_bSelectedSkillIdx = 0;
@@ -1166,7 +1172,9 @@ void CHARACTER::CreatePlayerProto(TPlayerTable & tab)
 #ifdef ENABLE_CHEQUE_SYSTEM
 	tab.cheque = GetCheque();
 #endif
-
+#ifdef __GEM_SYSTEM__
+	tab.gem = GetGem();
+#endif
 	const DWORD dwPlayedTime = (get_dword_time() - m_dwPlayStartTime);
 
 	if (dwPlayedTime > 60000)
@@ -1597,7 +1605,9 @@ void CHARACTER::PointsPacket() const
 	pack.points[POINT_GOLD]		= GetGold();
 	pack.points[POINT_STAMINA]		= GetStamina();
 	pack.points[POINT_MAX_STAMINA]	= GetMaxStamina();
-
+#ifdef __GEM_SYSTEM__
+	pack.points[POINT_GEM] = GetGem();
+#endif
 	for (int i = POINT_ST; i < POINT_MAX_NUM; ++i)
 		pack.points[i] = GetPoint(i);
 
@@ -1784,6 +1794,9 @@ void CHARACTER::SetPlayerProto(const TPlayerTable * t)
 	SetGold(t->gold);
 #ifdef ENABLE_CHEQUE_SYSTEM
 	SetCheque(t->cheque);
+#endif
+#ifdef __GEM_SYSTEM__
+	SetGem(t->gem);
 #endif
 
 	SetMapIndex(t->lMapIndex);
@@ -2274,6 +2287,9 @@ void CHARACTER::ComputePoints()
 		SetPoint(POINT_ATT_SPEED,	100);
 		PointChange(POINT_ATT_SPEED, GetPoint(POINT_PARTY_HASTE_BONUS));
 		SetPoint(POINT_CASTING_SPEED,	100);
+#ifdef __GEM_SYSTEM__
+		SetPoint(POINT_GEM, GetGem());
+#endif
 	}
 	else
 	{
@@ -3310,7 +3326,20 @@ void CHARACTER::PointChange(BYTE type, int amount, bool bAmount, bool bBroadcast
 		}
 		break;
 #endif
-
+#ifdef __GEM_SYSTEM__
+		case POINT_GEM:
+		{
+			const int64_t nTotalGem = static_cast<int64_t>(GetGem()) + static_cast<long long>(amount);
+			if (GEM_MAX <= nTotalGem)
+			{
+				sys_err("[OVERFLOW_GEM] OriGem %d AddedGem %lld id %u Name %s ", GetGem(), amount, GetPlayerID(), GetName());
+				return;
+			}
+			SetGem(GetGem() + amount);
+			val = GetGem();
+		}
+		break;
+#endif
 		case POINT_GOLD:
 			{
 				const int64_t nTotalMoney = static_cast<int64_t>(GetGold()) + static_cast<int64_t>(amount);

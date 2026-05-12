@@ -264,6 +264,25 @@ typedef struct SItemPos
 		return (window_type < rhs.window_type) || ((window_type == rhs.window_type) && (cell < rhs.cell));
 	}
 } TItemPos;
+
+#ifdef __GEM_SHOP__
+typedef struct SGemItem
+{
+	BYTE	bPos;
+	DWORD	dwVnum;
+	DWORD	dwCount;
+	DWORD	dwPrice;
+	bool	bBuyed;
+}TGemItem;
+typedef struct SGemConvertItem
+{
+	BYTE bPos;
+	DWORD dwVnum;
+	DWORD dwCount;
+	DWORD dwPrice;
+} TGemConvertItem;
+#endif
+
 #pragma pack(pop)
 
 constexpr DWORD c_QuickBar_Line_Count = 3;

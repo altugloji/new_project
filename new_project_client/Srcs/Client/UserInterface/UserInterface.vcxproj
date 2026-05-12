@@ -197,6 +197,7 @@
     <ClCompile Include="PythonEventManager.cpp" />
     <ClCompile Include="PythonEventManagerModule.cpp" />
     <ClCompile Include="PythonGameEventManagerModule.cpp" />
+    <ClCompile Include="PythonGem.cpp" />
     <ClCompile Include="PythonItem.cpp" />
     <ClCompile Include="PythonItemModule.cpp" />
     <ClCompile Include="PythonLocale.cpp" />
@@ -285,6 +286,7 @@
     <ClInclude Include="PythonChestInfo.h" />
     <ClInclude Include="PythonCubeRenewal.h" />
     <ClInclude Include="PythonEventManager.h" />
+    <ClInclude Include="PythonGem.h" />
     <ClInclude Include="PythonItem.h" />
     <ClInclude Include="PythonLocale.h" />
     <ClInclude Include="PythonNonPlayer.h" />

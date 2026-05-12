@@ -8,6 +8,10 @@
 #include "../../common/PulseManager.h"
 // #define ENABLE_BLOCK_CMD_SHORTCUT
 
+#ifdef __GEM_SYSTEM__
+ACMD(do_gem);
+#endif
+
 ACMD(do_user_horse_ride);
 ACMD(do_user_horse_back);
 ACMD(do_user_horse_feed);
@@ -624,6 +628,10 @@ struct command_info cmd_info[] =
 	{ "nesne_market",			do_nesne_market,			0,		POS_DEAD,	GM_PLAYER	},
 	{ "nesneyenil",				do_inputall,				0,		POS_DEAD,	GM_PLAYER	},
 	{ "nesneyenile",			do_nesneyenile,				0,		POS_DEAD,	GM_PLAYER	},
+#endif
+
+#ifdef __GEM_SYSTEM__
+	{ "gem",	do_gem,		0,		POS_DEAD,	GM_PLAYER },
 #endif
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}

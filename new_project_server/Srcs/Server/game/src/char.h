@@ -10,13 +10,13 @@
 #include "constants.h"
 #include "affect.h"
 #include "affect_flag.h"
+#include "../../common/CommonDefines.h"
 #ifndef ENABLE_CUBE_RENEWAL
-#include "cube.h"
+	#include "cube.h"
 #else
-#include "cuberenewal.h"
+	#include "cuberenewal.h"
 #endif
 #include "mining.h"
-#include "../../common/CommonDefines.h"
 #include <array>
 #include <utility>
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
@@ -354,6 +354,9 @@ enum EPointTypes
 #ifdef ENABLE_WOLFMAN_CHARACTER
 	POINT_ATTBONUS_CLAW			= 161, //unk
 #endif
+#ifdef __GEM_SYSTEM__
+	POINT_GEM 					= 162,
+#endif
 
 	POINT_MAX,
 };
@@ -435,6 +438,9 @@ typedef struct character_point
 #ifdef ENABLE_CHEQUE_SYSTEM
 	int				cheque;
 #endif
+#ifdef __GEM_SYSTEM__
+	int				gem;
+#endif
 	int				hp;
 	int				sp;
 
@@ -465,6 +471,9 @@ typedef struct character_point_instant
 	DWORD			parts[PART_MAX_NUM]; // @fixme502
 
 	LPCHARACTER		pCubeNpc;
+#ifdef ENABLE_CUBE_RENEWAL
+	DWORD			dwCubeRenewalRecipeNpc; // cube_info_map key; 0 = use quest NPC race
+#endif
 	LPCHARACTER		battle_victim;
 
 	BYTE			gm_level;
@@ -1915,6 +1924,10 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		LPITEM*	GetCubeItem() const { return (m_PlayerSlots) ? m_PlayerSlots->pCubeItems.data() : nullptr; }
 		bool IsCubeOpen () const	{ return (m_pointsInstant.pCubeNpc); }
 		void SetCubeNpc(LPCHARACTER npc)	{ m_pointsInstant.pCubeNpc = npc; }
+#ifdef ENABLE_CUBE_RENEWAL
+		void SetCubeRenewalRecipeNpc(DWORD v) { m_pointsInstant.dwCubeRenewalRecipeNpc = v; }
+		DWORD GetCubeRenewalRecipeNpc() const { return m_pointsInstant.dwCubeRenewalRecipeNpc; }
+#endif
 		bool CanDoCube() const;
 
 	private:
@@ -2191,6 +2204,37 @@ protected:
 	std::map<std::string, int>  m_protection_Time;
 #endif
 
+#ifdef __GEM_SYSTEM__
+public:
+	int				GetGem() const { return m_points.gem; }
+	void			SetGem(int iVal) { m_points.gem = iVal; }
+
+	void			SetGemData(bool bSave);
+
+	int				GetGemSlotCount();
+	void			SetGemSlotCount(int iVal);
+
+	int				GetGemTime();
+	void			SetGemTime(int iVal);
+
+	void			SetGemShop(bool bFlag) { m_bGemShop = bFlag; }
+	bool			GetGemShop() { return m_bGemShop; }
+
+	void			SetGemConvertShop(bool bFlag) { m_bGemShop = bFlag; }
+	bool			GetGemConvertShop() { return m_bGemShop; }
+
+	void			OpenGemSlot();
+	void			SendGemData();
+
+	bool			IsGemSlotOpened(BYTE bPos);
+	TGemItem*		GetGemItem(BYTE bPos);
+	void			BuyGemItem(BYTE bPos);
+protected:
+	std::vector<TGemItem> m_vecGemItems;
+	bool m_bGemShop;
+	bool m_bGemConvertShop;
+	bool m_bGemShopLoaded;
+#endif
 };
 
 ESex GET_SEX(LPCHARACTER ch);

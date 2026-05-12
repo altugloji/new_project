@@ -31,6 +31,11 @@ void CClientManager::SetEventFlag(TPacketSetEventFlag* p)
 {
 	ForwardPacket(HEADER_DG_SET_EVENT_FLAG, p, sizeof(TPacketSetEventFlag));
 
+#ifdef __GEM_SYSTEM__
+	if (std::string(p->szFlagName) == "gaya_reload")
+		return;
+#endif
+
 	bool bChanged = false;
 
 	typeof(m_map_lEventFlag.begin()) it = m_map_lEventFlag.find(p->szFlagName);

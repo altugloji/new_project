@@ -8906,3 +8906,7 @@ gameforge.collect_quest_lv96.msg15 = "Oh!! You brought them...[ENTER]Let me exam
 gameforge.collect_quest_lv96.bonus1 = "Health +2000"
 gameforge.collect_quest_lv96.bonus2 = "Defense +700"
 gameforge.collect_quest_lv96.bonus3 = "Attack +300"
+gameforge.cube_npc_1 = "[LC;21301] "
+gameforge.cube_npc_2 = "[LC;21302] "
+gameforge.cube_npc_3 = "[LC;21303] "
+gameforge.cube_npc_4 = "[LC;21304] "

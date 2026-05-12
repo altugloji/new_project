@@ -2636,7 +2636,7 @@
 27122	Czerwona Mikstura (M)	Uzupe³nia 300 Punktów ¯ycia. Niezdatna do handlu.
 27123	Zielona Mikstura (M)	Zwiêksza Twoj¹ Szybkoœæ Ataku o +10 na okres 10 minut. Niezdatna do handlu.
 27124	Opatrunek	Natychmiast zatrzymuje krwawienie.
-27125	Mikstura Pojedynku	Potê¿na mikstura, która zwiêksza twoje punkty ataku i obrony i daje ci 50 000 pkt ¿ycia (tylko w Strefie Walki).
+27125	Mikstura Pojedynku	Potê¿na mikstura, która zwiêksza twoje punkty ataku i obrony i daje ci 50 000 pkt ¿ycia (tylko w Strefie Walki).
 27126	Mikstura Mocy Smoka	Ta mikstura wzmacnia ciê na 10 minut moc¹ smoka. Mo¿na u¿yæ jedynie w Schronieniu Meley.
 27128	Tajemnica Yutnori	Daje ci przez 30 minut | 20% PD | 5% drop przedmiotu | 10% si³y w walce z potworami
 27201	Czerwona Mikstura (M)	Niezdatna do handlu
@@ -2763,7 +2763,7 @@
 27988	Mapa Skarbów	Tajemnicza mapa zawieraj¹ca po³o¿enie staro¿ytnego skarbu.
 27989	Wykrywacz Kamieni Metin	Wykrywacz pokazuje po³o¿enie i odleg³oœæ do najbli¿szego Kamienia Metin. Im jaœniejsza strza³ka kierunku, tym bli¿ej jesteœ. Mo¿e byæ uaktywniony 6 razy.
 27990	Kawa³ek Kamienia	Z powodu ma³ych wymiarów, przedmiot ten mo¿na bardzo ³atwo transportowaæ. Ma wiele zastosowañ.
-27991	Kamieñ Wodny	Twardy i szorstki kamieñ, który mo¿e byæ u¿ywany do szlifowania broni albo sprzêtu kuchennego.
+27991	Kamieñ Wody	Cenny minera³ z morza.
 27992	Bia³a Per³a	Idealnie bia³a per³a. |Kobiety je kochaj¹.
 27993	Niebieska Per³a	Niebieska per³a. |Kobiety je kochaj¹.
 27994	Krwawa Per³a	Krwawo-czerwona per³a. |Kobiety je kochaj¹.
@@ -2931,7 +2931,7 @@
 30153	Kwiaty	Bukiet rzadkich kwiatów. Zapach kojarzy Ci siê z czymœ z przesz³oœci.
 30154	Sekretna Ksiêga Œwi¹tyni	Analiza historii i doktryny Sekretnej Œwi¹tyni.
 30155	Amulet Mirine	Naszyjnik. Na odwrocie wygrawerowane jest jakieœ imiê...
-30156	Sekretna Ksiêga Œwi¹tyni	Analiza historii i doktryny Sekretnej Œwi¹tyni.
+30156	Fioletowa Ksiêga	Ksiêga zawieraj¹ca przepisy na ksiêgi umiejêtnoœci. Mo¿na j¹ wytworzyæ u Alchemika.
 30157	Grot Strza³y	Te zatrute Groty Strza³ pomog¹ w obronie królestwa.
 30177	Olejek Pi¿mowy	Olejek Pi¿mowy jest u¿ywany przez Sprzedawcê Broni podczas misji. Przedmiot ten nie ma innego zastosowania.
 30179	Krêty Klucz	Ten magiczny klucz aktywuje portal do Œwi¹tyni Smoka.
@@ -3123,20 +3123,20 @@
 30586		
 30600	Wzór Kroju	
 30601	Plan Zbroi	
-30602	Niebieski Barwnik	
-30603	Czerwony Barwnik	
-30604	Szary Barwnik	
+30602	Niebieski barwnik	Barwnik wymagany do wytwarzania.
+30603	Czerwony barwnik	Barwnik wymagany do wytwarzania.
+30604	Szary barwnik	Barwnik wymagany do wytwarzania.
 30605	Z³ote P³yty	
 30606	Srebrne P³yty	
 30607	Miedziane P³yty	
 30608	Stalowe P³yty	
 30609	Br¹zowe P³yty	
-30610	Mithril	
+30610	Mithril	Otrzymywany przez przetapianie rud. Mo¿e byæ u¿ywany w ró¿nych przepisach. Mo¿na go wytworzyæ u Alchemika.
 30611	Ciê¿kie Pasy	
 30612	Stabilne Sznury	
 30613	Kamieñ Driad	W tym tajemniczym zielonkawym kamieniu jest zamkniêta dusz driady, drzewnego duszka. Driada ta zna zaklête s³owa, które umo¿liwi¹ ci wstêp do Erebu.
-30614	Czarny Barwnik	
-30615	Bia³y Barwnik	
+30614	Czarny barwnik	Barwnik wymagany do wytwarzania.
+30615	Bia³y barwnik	Barwnik wymagany do wytwarzania.
 30616	Dwutlenek Tytanu	Ten pryzmatyczny kryszta³ s³u¿y do uszlachetnienia przedmiotu wyposa¿enia.
 30617	Agat	Ten tajemniczo po³yskuj¹cy kamyk s³u¿y do uszlachetnienia przedmiotu wyposa¿enia.
 30618	Kamieñ Ksiê¿ycowy	Ten szlachetny kamieñ w kszta³cie ³zy zawiera w sobie iskierkê œwiat³a ksiê¿yca. S³u¿y do uszlachetnienia przedmiotu wyposa¿enia.
@@ -3216,7 +3216,7 @@
 31032	Per³y Syriusza	Skuteczne kapsu³ki wzmacniaj¹ce zrobione ze Wewnêtrznego Œwiat³a mitycznych stworzeñ i Esencji Milenium.
 31033	Peleryna Wodza	Peleryna ta symbolizuje, ¿e Bandy Czerwonych nie mo¿na pokonaæ.
 31034	Totem Gigantów	Totem przypomina swoim kszta³tem wielki bursztyn.
-31035	Czarny Kamieñ	Ten tajemniczy kamieñ wydobywaj¹ cyklopi w Gromistych Górach.
+31035	Czarny Kamieñ	Otrzymywany przez przetapianie kamieni. Mo¿e byæ u¿ywany w ró¿nych przepisach. Mo¿na go wytworzyæ u Alchemika.
 31036	Czarne Z³oto	Ta czarna ruda o magicznej mocy wystêpuje w Gromistych Górach.
 31037	Skórzana Sakiewka	Sakiewka ta nale¿a³a do Kapitana Shracka. Jest jakoœ dziwnie lekka...
 31038	Poœwiêcona Ziemia	Ten woreczek z poœwiêcon¹ ziemi¹ to rodzaj medium s³u¿¹cy do wskrzeszanie zmar³ych.
@@ -5627,8 +5627,8 @@
 50853	Z³. Eliksir Odp. na Mrok	Ten niezwykle potê¿ny eliksir obdarza tego, który go wypije +20% odpornoœci na mrok.
 50901	Pusta Butelka	Niezbêdna do wytwarzania mikstur.
 50902	Przepis Dla Pocz¹tkuj¹c.	Przepis, który mo¿e zostaæ wykorzystany nawet przez pocz¹tkuj¹cych.
-50903	Przepis	Przepis, który mo¿e zostaæ wykorzystany tylko przez doœwiadczonych graczy.
-50904	Przepis Dla Profesjonal.	Przepis, którym mog¹ siê pos³u¿yæ tylko profesjonaliœci.
+50903	Schemat Wzmocnienia	Schemat wymagany do wytwarzania.
+50904	Schemat Zaczarowania Przedmiotu	Schemat wymagany do wytwarzania.
 50905	Przepis Na Wodê Sim	Opisuje jak wytworzyæ Wodê z Soku z Kwiatu Brzoskwini i Bzu.
 50906	Przepis Na Wodê Dok	Opisuje jak wytworzyæ Wodê z Soku z Pokrzywy i Bzu.
 50907	Przepis Na Wodê Bo	Opisuje jak wytworzyæ Wodê z Soku Z Kwiatów Kaki i Grzyba Tue.
@@ -5650,15 +5650,15 @@
 50928	Z³oty £up Królewski	Liczba punktów zdobytych w "Schwytaj Króla": 550 lub wiêcej. Otwórz swoj¹ nagrodê i sprawdŸ, co uda³o ci siê wygraæ.
 50929	Srebrny £up Królewski	Liczba punktów zdobytych w "Schwytaj Króla": 400-549. Otwórz swoj¹ nagrodê i sprawdŸ, co uda³o ci siê wygraæ.
 50930	Br¹zowy £up Królewski	Liczba punktów zdobytych w "Schwytaj Króla": 10-399. Otwórz swoj¹ nagrodê i sprawdŸ, co uda³o ci siê wygraæ.
-50931	Pakiet kart (czerwony)	Otrzymujesz 5 królewskich talii. Kliknij prawym przyciskiem, aby otworzyæ interfejs „Schwytaj Króla” i dodaæ tam swoje talie kart. Po zakoñczeniu eventu otrzymanie talii kart nie bêdzie mo¿liwe, a jeszcze istniej¹ce zostan¹ usuniête.
-50932	Pakiet kart (niebieski)	Otrzymujesz 1 królewsk¹ taliê. Kliknij prawym przyciskiem, aby otworzyæ interfejs „Schwytaj Króla” i dodaæ tam swoj¹ taliê kart. Po zakoñczeniu eventu otrzymanie talii kart nie bêdzie mo¿liwe, a jeszcze istniej¹ce zostan¹ usuniête.
-50933	Pakiet kart (ró¿owy)	Otrzymujesz 7 królewskich kart. Kliknij prawym przyciskiem, aby otworzyæ interfejs „Schwytaj Króla” i dodaæ tam swoje karty. Po zakoñczeniu eventu otrzymanie kart nie bêdzie mo¿liwe, a jeszcze istniej¹ce zostan¹ usuniête.
+50931	Pakiet kart (czerwony)	Otrzymujesz 5 królewskich talii. Kliknij prawym przyciskiem, aby otworzyæ interfejs „Schwytaj Króla" i dodaæ tam swoje talie kart. Po zakoñczeniu eventu otrzymanie talii kart nie bêdzie mo¿liwe, a jeszcze istniej¹ce zostan¹ usuniête.
+50932	Pakiet kart (niebieski)	Otrzymujesz 1 królewsk¹ taliê. Kliknij prawym przyciskiem, aby otworzyæ interfejs „Schwytaj Króla" i dodaæ tam swoj¹ taliê kart. Po zakoñczeniu eventu otrzymanie talii kart nie bêdzie mo¿liwe, a jeszcze istniej¹ce zostan¹ usuniête.
+50933	Pakiet kart (ró¿owy)	Otrzymujesz 7 królewskich kart. Kliknij prawym przyciskiem, aby otworzyæ interfejs „Schwytaj Króla" i dodaæ tam swoje karty. Po zakoñczeniu eventu otrzymanie kart nie bêdzie mo¿liwe, a jeszcze istniej¹ce zostan¹ usuniête.
 50934	Woreczek z Kamykami	Woreczek pe³en kamyków, które potrzebujesz do produkcji Gaya.
-50935	Konwerter Gaya	Jeœli przeci¹gniesz ten przedmiot na swoje kamyki, mo¿esz je przemieniaæ w Gaya ze 100%iger prawdopodobieñstwem po kursie 10:1. 10 kamyków potrzebuj¹ przy tym 1 konwertera, aby staæ siê 1 Gaya.| W ten sposób mo¿esz otrzymaæ do 20 Gaya naraz, je¿eli u¿yjesz 200 kamyków i 20 konwerterów.| Potrzebujesz co najmniej 10 kamyków do przemiany.| Jedna przemiana kosztuje 15 000 Yang.
+50935	Konwerter Gaya	Jeœli przeci¹gniesz ten przedmiot na swoje kamyki, mo¿esz je przemieniaæ w Gaya ze 100%iger prawdopodobieñstwem po kursie 10:1. 10 kamyków potrzebuj¹ przy tym 1 konwertera, aby staæ siê 1 Gaya.| W ten sposób mo¿esz otrzymaæ do 20 Gaya naraz, je¿eli u¿yjesz 200 kamyków i 20 konwerterów.| Potrzebujesz co najmniej 10 kamyków do przemiany.| Jedna przemiana kosztuje 15 000 Yang.
 50938	Czerw. Skrzynia Proroka	Zawiera 105 kart tarota do Bitwy Proroków.
 50939	Nieb. Skrzynia Proroka	Zawiera 21 kart tarota do Bitwy Proroków.
 50940	Ró¿owa Skrzynia Proroka	Zawiera 5 kart tarota do Bitwy Proroków.
-51001	Od³amek Energii	Od³amek kryszta³u energii - z 30 sztuk mo¿na stworzyæ kryszta³ energii.
+51001	Fragment Energii	Otrzymywany przez przetapianie cennych przedmiotów. Mo¿e byæ u¿ywany w ró¿nych przepisach. Mo¿na go wytworzyæ u Alchemika.
 51002	Kryszta³ Energii	Kryszta³ ten zwiêksza twoje bonusy na dwie godziny.
 51501	Cor Draconis (surowe)	Kryszta³owe smocze serce zawiera losowy Smoczy Kamieñ klasy surowej.
 51502	Cor Draconis (surowe)	Kryszta³owe smocze serce zawiera losowy Smoczy Kamieñ klasy surowej.
@@ -6188,7 +6188,7 @@
 53594	Pude³ko Mini Krab	Twój zwierzak Mini Krab stuka swoimi szczypcami w pokrywkê od pude³ka, ¿eby go wypuœciæ.
 53595	Sarkofag Mumii Szamotki	Twoja Mumia Szamotka tak d³ugo bêdzie siê szamotaæ w tym sarkofagu, dopóki jej nie wypuœcisz.
 53596	Sarkofag Mumii Kiwaczek	Twoja Mumia Kiwaczek tak d³ugo bêdzie siê kiwaæ w tym sarkofagu, dopóki jej nie wypuœcisz.
-53597	Sarkofag Mumii Potrz¹ski	Twoja Mumia Potrz¹ska chce wyjœæ ze swojego sarkofagu. Ju¿ za d³ugo czeka ona na ciebie – wypuœæ j¹!
+53597	Sarkofag Mumii Potrz¹ski	Twoja Mumia Potrz¹ska chce wyjœæ ze swojego sarkofagu. Ju¿ za d³ugo czeka ona na ciebie - wypuœæ j¹!
 53598	Zielona Szkatu³ka Enta	Przepiêkna drewniana szkatu³ka pomalowana na zielono | Ozdobiona wyrzeŸbionym wzorkiem drzewa.
 53599	Sêkata Szkatu³ka Enta	Przepiêkna drewniana szkatu³ka pomalowana na zielono | Ozdobiona wyrzeŸbionym wzorkiem drzewa.
 53600	Ma³a Szkatu³ka Enta	Przepiêkna drewniana szkatu³ka pomalowana na zielono | Ozdobiona wyrzeŸbionym wzorkiem drzewa.
@@ -6324,13 +6324,13 @@
 55713	Dowódca Bobas	Przywo³aj swojego zwierzaka prawym przyciskiem myszki. Nastêpnie naciœnij klawisz "P", aby wyœwietliæ interfejs zwierzaka.
 56000	Appaloosa	Pieczêæ ta przywo³uje twojego ³agodnego kucyka Appaloosa. Obdarza swoich jeŸdŸców +10 szybkoœci¹ ruchu.
 56001	Bilet Podró¿niczy	Zwój teleportuje ciê tam i z powrotem miêdzy dwoma wioskami twojego królestwa. Mo¿na j¹ u¿yæ 5 razy i jest dostêpna od poziomu 10.
-56002	Zwój Ognia	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc Ognia.
-56003	Zwój Lodu	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc Lodu.
-56004	Zwój B³yskawicy	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc B³yskawicy.
-56005	Zwój Wiatru	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc Wiatru.
-56006	Zwój Ziemi	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc Ziemi.
-56007	Zwój Mroku	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc Mroku.
-56008	Zwój Kl¹twy	Zwój mo¿e zmniejszyæ o jeden poziom zaczarowanie ¿ywio³u broni od +7 za 10 000 000 Yang. Zaczarowanie ¿ywio³u poziomu 1 zostanie w ten sposób usuniête.
+56002	Zwój Ognia	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc Ognia.
+56003	Zwój Lodu	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc Lodu.
+56004	Zwój B³yskawicy	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc B³yskawicy.
+56005	Zwój Wiatru	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc Wiatru.
+56006	Zwój Ziemi	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc Ziemi.
+56007	Zwój Mroku	Zwój ten mo¿e dodaæ do broni od +7 za 3 000 000 Yang zaczarowanie ¿ywio³u. | Przy sukcesie broñ otrzyma Moc Mroku.
+56008	Zwój Kl¹twy	Zwój mo¿e zmniejszyæ o jeden poziom zaczarowanie ¿ywio³u broni od +7 za 10 000 000 Yang. Zaczarowanie ¿ywio³u poziomu 1 zostanie w ten sposób usuniête.
 56009	Zwój Zmiany	Zwój mo¿e zmieniæ zaczarowanie ¿ywio³u broni od +7. Sam mo¿esz wybraæ nowy ¿ywio³. Poziom zaczarowania ¿ywio³u pozostanie zachowany.
 56011	Œredni Kupon Wp³aty	Œrednia wp³ata PD gildii. Mo¿esz wp³acaæ do trzech razy na dzieñ.
 56012	Wysoki Kupon Wp³aty	Wysoka wp³ata PD gildii. Mo¿esz wp³acaæ do trzech razy na dzieñ.
@@ -6862,11 +6862,11 @@
 72723	Eliksir S³oñca (M)	Automatycznie regeneruje twoje P¯. Zawiera 1.000.000 P¯.
 72724	Eliksir S³oñca (Œ)	Automatycznie regeneruje twoje P¯. Zawiera 3.000.000 P¯.
 72725	Eliksir S³oñca (D)	Automatycznie regeneruje twoje P¯. Zawiera 7.000.000 P¯.
-72726	Eliksir S³oñca (S)	Zawiera 10 000 000 P¯. Automatycznie regeneruje twoje P¯ i dodatkowo ma pozytywny efekt na twoje maks. P¯. Przedmiot ten jest zdatny do handlu.
+72726	Eliksir S³oñca (S)	Zawiera 10 000 000 P¯. Automatycznie regeneruje twoje P¯ i dodatkowo ma pozytywny efekt na twoje maks. P¯. Przedmiot ten jest zdatny do handlu.
 72727	Eliksir Ksiê¿yca (M)	Automatycznie regeneruje twoje PE. Zawiera 100.000 PE.
 72728	Eliksir Ksiê¿yca (Œ)	Automatycznie regeneruje twoje PE. Zawiera 300.000 PE.
 72729	Eliksir Ksiê¿yca (D)	Automatycznie regeneruje twoje PE. Zawiera 700.000 PE.
-72730	Eliksir Ksiê¿yca (S)	Zawiera 1 000 000 PE. Automatycznie regeneruje twoje PE i dodatkowo ma pozytywny efekt na twoje maks. PE. Przedmiot ten jest zdatny do handlu.
+72730	Eliksir Ksiê¿yca (S)	Zawiera 1 000 000 PE. Automatycznie regeneruje twoje PE i dodatkowo ma pozytywny efekt na twoje maks. PE. Przedmiot ten jest zdatny do handlu.
 72734	Nieb. Skrzyneczka Losu	Kliknij dwukrotnie, aby otworzyæ. Teraz masz 2 mo¿liwoœci: | 1. Kliknij "Przyjmij przedmiot", by otrzymaæ widoczny przedmiot. | 2. U¿yj "Szczêœliwego Trafu", by otrzymaæ inny, losowy przedmiot. | Mo¿esz wykonaæ maks. 15 prób, p³ac¹c za nie Yang. | Je¿eli nie masz wystarczaj¹co du¿o Yang na koncie, nie mo¿esz wybraæ nowego przedmiotu. | Otwartej skrzynki nie mo¿na zresetowaæ ani zamkn¹æ.
 72735	Czerw. Skrzyneczka Losu	Kliknij dwukrotnie, aby otworzyæ. Teraz masz 2 mo¿liwoœci: | 1. Kliknij "Przyjmij przedmiot", by otrzymaæ widoczny przedmiot. | 2. U¿yj "Szczêœliwego Trafu", by otrzymaæ inny, losowy przedmiot. | Mo¿esz wykonaæ maks. 15 prób, p³ac¹c za nie Yang. | Je¿eli nie masz wystarczaj¹co du¿o Yang na koncie, nie mo¿esz wybraæ nowego przedmiotu. | Otwartej skrzynki nie mo¿na zresetowaæ ani zamkn¹æ.
 72737	Zielona Skrzyneczka Losu	Kliknij dwukrotnie, aby otworzyæ. Teraz masz 2 mo¿liwoœci: | 1. Kliknij "Przyjmij przedmiot", by otrzymaæ widoczny przedmiot. | 2. U¿yj "Szczêœliwego Trafu", by otrzymaæ inny, losowy przedmiot. | Mo¿esz wykonaæ maks. 15 prób, p³ac¹c za nie Yang. | Je¿eli nie masz wystarczaj¹co du¿o Yang na koncie, nie mo¿esz wybraæ nowego przedmiotu. | Otwartej skrzynki nie mo¿na zresetowaæ ani zamkn¹æ. | Jeœli gra zostanie zamkniêta, otrzymasz wyœwietlony przedmiot.
@@ -7252,8 +7252,8 @@
 79513	Talia Kart Tarota	Mo¿esz rozpocz¹æ Bitwê Proroków u¿ywaj¹c do tego tej mistycznej talii kart.
 79514	Moneta Proroka	Nagroda z Bitwy Proroków, któr¹ mo¿esz wymieniæ na cenne przedmioty.
 79602	Kompas Stra¿nika	Ten kompas zdradza ci lokalizacjê stra¿nika. Mo¿na u¿yæ jedynie w Œwi¹tyni Ochao. Mo¿na u¿yæ 6 razy.
-79603	Karta królewska	Kliknij prawym przyciskiem, aby otworzyæ interfejs „Schwytaj Króla” i dodaæ tam swoj¹ królewsk¹ kartê. 25 kart zostaje tam automatycznie po³¹czonych z królewsk¹ tali¹. Po zakoñczeniu eventu otrzymanie zestawów kart nie bêdzie mo¿liwe, a jeszcze istniej¹ce zostan¹ usuniête.
-79604	Talia królewska	Kliknij prawym przyciskiem, aby otworzyæ interfejs „Schwytaj Króla”, dodaæ tam swoj¹ królewsk¹ taliê i rozpocz¹æ rundê „Schwytaj Króla!”. Po zaczêciu gry talia kart zostanie automatycznie usuniêta. Po zakoñczeniu eventu otrzymanie zestawów kart nie bêdzie mo¿liwe, a jeszcze istniej¹ce zostan¹ usuniête.
+79603	Karta królewska	Kliknij prawym przyciskiem, aby otworzyæ interfejs „Schwytaj Króla" i dodaæ tam swoj¹ królewsk¹ kartê. 25 kart zostaje tam automatycznie po³¹czonych z królewsk¹ tali¹. Po zakoñczeniu eventu otrzymanie zestawów kart nie bêdzie mo¿liwe, a jeszcze istniej¹ce zostan¹ usuniête.
+79604	Talia królewska	Kliknij prawym przyciskiem, aby otworzyæ interfejs „Schwytaj Króla", dodaæ tam swoj¹ królewsk¹ taliê i rozpocz¹æ rundê „Schwytaj Króla!". Po zaczêciu gry talia kart zostanie automatycznie usuniêta. Po zakoñczeniu eventu otrzymanie zestawów kart nie bêdzie mo¿liwe, a jeszcze istniej¹ce zostan¹ usuniête.
 79605	1* Runa Wykuwania Pasów	Zwiêksza szansê na powodzenie podczas wytwarzania pasów o 1%.
 79606	2* Runa Wykuwania Pasów	Zwiêksza szansê na powodzenie podczas wytwarzania pasów o 2%.
 79607	3* Runa Wykuwania Pasów	Zwiêksza szansê na powodzenie podczas wytwarzania pasów o 5%.

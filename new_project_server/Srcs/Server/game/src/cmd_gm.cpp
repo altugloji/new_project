@@ -1573,6 +1573,9 @@ namespace DoSetTypes{
 		#ifdef ENABLE_CHEQUE_SYSTEM
 		, CHEQUE, WON
 		#endif
+#ifdef __GEM_SYSTEM__
+		, GEM
+#endif
 	} do_set_types_t;
 }
 
@@ -1599,6 +1602,9 @@ const struct set_struct
 #ifdef ENABLE_CHEQUE_SYSTEM
 	{ "cheque",		NUMBER,	nullptr	},
 	{ "won",		NUMBER,	nullptr	},
+#endif
+#ifdef __GEM_SYSTEM__
+	{ "gem",		NUMBER,	nullptr	},
 #endif
 	{ "\n",			MISC, nullptr}
 };
@@ -1781,6 +1787,17 @@ ACMD(do_set)
 			str_to_number(cheque, arg3);
 			tch->PointChange(POINT_CHEQUE, cheque, true);
 			tch->ChatPacket(CHAT_TYPE_INFO, "Cheque: ADD[%d] TOTAL[%d]", cheque, tch->GetCheque());
+		}
+		break;
+#endif
+
+#ifdef __GEM_SYSTEM__
+		case DoSetTypes::GEM:
+		{
+			int gem = 0;
+			str_to_number(gem, arg3);
+			tch->PointChange(POINT_GEM, gem, true);
+			tch->ChatPacket(CHAT_TYPE_INFO, "Gem: ADD[%d] TOTAL[%d]", gem, tch->GetGem());
 		}
 		break;
 #endif

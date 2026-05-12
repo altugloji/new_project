@@ -1495,3 +1495,48 @@ if app.ENABLE_CHEQUE_SYSTEM:
 
 	ReplaceElement("Money_Slot", slot, window)
 	AppendChildren("board", children, window)
+
+if app.__GEM_SHOP__:
+	window["y"] -= 20
+
+	board_dict = window["children"][0]
+	board_dict["height"] += 20
+	money_slot_x, money_slot_y = 0, 0
+	for child in board_dict["children"]:
+		if child["name"] == "Money_Slot":
+			money_slot_x = child["x"]
+			money_slot_y = child["y"]
+			child["y"] += 20
+			break
+	board_dict["children"] += ({
+		"name":"Gem_Slot",
+		"type":"button",
+		"x":money_slot_x,
+		"y":money_slot_y,
+		"horizontal_align":"center",
+		"vertical_align":"bottom",
+		"default_image" : "d:/ymir work/ui/public/parameter_slot_05.sub",
+		"over_image" : "d:/ymir work/ui/public/parameter_slot_05.sub",
+		"down_image" : "d:/ymir work/ui/public/parameter_slot_05.sub",
+		"children" :
+		(
+			{
+				"name":"Gem_Icon",
+				"type":"image",
+
+				"x":-18,
+				"y":2,
+
+				"image":"d:/ymir work/ui/gemshop/gemshop_gemicon.sub",
+			},
+			{
+				"name" : "Gem",
+				"type" : "text",
+				"x" : 3,
+				"y" : 3,
+				"horizontal_align" : "right",
+				"text_horizontal_align" : "right",
+				"text" : "123456789",
+			},
+		),
+	},)

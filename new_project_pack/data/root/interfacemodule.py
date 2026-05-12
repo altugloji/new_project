@@ -81,6 +81,10 @@ if app.ENABLE_WIKI:
 	import uiWiki
 if app.ENABLE_CUBE_RENEWAL:
 	import uicuberenewal
+
+if app.__GEM_SHOP__:
+	import uiGem
+
 IsQBHide = 0
 class Interface(object):
 	CHARACTER_STATUS_TAB = 1
@@ -88,6 +92,9 @@ class Interface(object):
 
 	def __init__(self):
 		systemSetting.SetInterfaceHandler(self)
+		if app.__GEM_SHOP__:
+			self.wndGemShop = None
+			self.wndGemConvertShop = None
 		if app.ENABLE_WIKI:
 			self.wndWiki = None
 		self.windowOpenPosition = 0
@@ -467,6 +474,13 @@ class Interface(object):
 	################################
 
 	def Close(self):
+		if app.__GEM_SHOP__:
+			if self.wndGemConvertShop:
+				self.wndGemConvertShop.Destroy()
+				self.wndGemConvertShop=None
+			if self.wndGemShop:
+				self.wndGemShop.Destroy()
+				self.wndGemShop=None
 		if app.ENABLE_WIKI:
 			if self.wndWiki:
 				self.wndWiki.Close()
@@ -757,6 +771,10 @@ class Interface(object):
 					self.wndAutoSkillReader.Refresh()
 		if app.KYGN_CHEST_INFO and self.wndKygnChestInfo:
 			self.wndKygnChestInfo.CheckChestPos()
+		
+		if app.__GEM_SHOP__:
+			self.RefreshGemConvert(False)
+			self.RefreshGem(False)
 
 	def RefreshCharacter(self):
 		self.wndCharacter.RefreshCharacter()
@@ -2020,3 +2038,22 @@ class Interface(object):
 				self.wndWiki.Close()
 			else:
 				self.wndWiki.Open()
+
+	if app.__GEM_SHOP__:
+		def RefreshGemConvert(self, force_show):
+			if not self.wndGemConvertShop:
+				self.wndGemConvertShop = uiGem.ConvertWindow()
+			if self.wndGemConvertShop.IsShow():
+				self.wndGemConvertShop.Refresh()
+				return
+			if force_show:
+				self.wndGemConvertShop.Open()
+
+		def RefreshGem(self, force_show):
+			if not self.wndGemShop:
+				self.wndGemShop = uiGem.ShopWindow()
+			if self.wndGemShop.IsShow():
+				self.wndGemShop.Refresh()
+				return
+			if force_show:
+				self.wndGemShop.Open()

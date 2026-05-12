@@ -1,3 +1,7 @@
+21301	Crafting
+21302	Mithril Crafting
+21303	Black Stone Crafting
+21304	Purple Book Crafting
 1	A special cloth
 2	I've already told you all about the powers we'll[ENTER]need to confront Sung Mahi.[ENTER][ENTER]Hurry along and find the Captain.[ENTER][ENTER]Return when you have the necessary cloth.
 3	Increase your power
@@ -951,7 +955,7 @@
 952	Ah, I sense the Power of the Dragon Eye within[ENTER]you. As a mark of my deep respect, I would like[ENTER]to present you with this Cor Draconis.[ENTER]One stone a day - I am afraid I cannot spare any[ENTER]more.
 953	Here you go, your Cor Draconis. You're welcome.
 954	I'm very sorry, I cannot spare more than one a[ENTER]day. Come again tomorrow. Perhaps I will have a[ENTER]new Cor Draconis for you then.
-955	GM: Daily Quest – Settings
+955	GM: Daily Quest - Settings
 956	Start time
 957	End time
 958	Enter following format for date and time:[ENTER]yy.mm.dd[ENTER]hh.mm
@@ -1041,7 +1045,7 @@
 1042	I have hidden Easter Eggs all over the place![ENTER]Find them and bring them to me and I'll give you[ENTER]a reward.
 1043	Unfortunately you haven't collected any Easter[ENTER]Eggs yet! Come back when you've got some Easter[ENTER]Eggs in your inventory.
 1044	I have found Easter Eggs!
-1045	Very good! I’ll exchange your Easter Eggs for %d[ENTER]of these:
+1045	Very good! I'll exchange your Easter Eggs for %d[ENTER]of these:
 1046	You have brought me the following amount of eggs:[ENTER]%d
 1047	Did you find some Easter Eggs?
 1048	You have to give me %d eggs for that!
@@ -1335,7 +1339,7 @@
 1336	The group will be teleported from the Red Dragon[ENTER]Fortress in ten seconds.
 1337	Awaken the Am-heh Gorge
 1338	Only the leader may awaken the Am-heh Gorge!
-1339	The Am-heh Gorge has been awoken. Now nobody can[ENTER]come in – or out.
+1339	The Am-heh Gorge has been awoken. Now nobody can[ENTER]come in - or out.
 1340	The gates to the Red Dragon Fortress will close[ENTER]for an hour.
 1341	Time remaining: 60 minute(s)
 1342	Task: venture into the Demon's Ring and emerge[ENTER]the victor.
@@ -3666,7 +3670,7 @@
 3667	Spiders that normally live peacefully in the[ENTER]Yongbi Desert have suddenly started attacking and[ENTER]killing travellers recently. Apart from the fact[ENTER]that the victims aren't particularly thrilled[ENTER]about it, these attacks are bad for our kingdom's[ENTER]business. Please put an end to this.
 3668	Disciples of the Black Faith 2
 3669	Kill 20 Esoteric Arahan Fighters and 25 Chief[ENTER]Esoteric Arahans.
-3670	Finally we have received the order to eliminate[ENTER]the most dangerous sect in the whole kingdom –[ENTER]the esoteric sect in the Valley of Seungryong. Go[ENTER]there and sort them out. But don't make the[ENTER]mistake of underestimating them. Even if they[ENTER]talk a lot of unintelligible nonsense sometimes,[ENTER]they are still very experienced fighters.
+3670	Finally we have received the order to eliminate[ENTER]the most dangerous sect in the whole kingdom -[ENTER]the esoteric sect in the Valley of Seungryong. Go[ENTER]there and sort them out. But don't make the[ENTER]mistake of underestimating them. Even if they[ENTER]talk a lot of unintelligible nonsense sometimes,[ENTER]they are still very experienced fighters.
 3671	Emergence of the Grey Wolves 2
 3672	Kill 30 Alpha Grey Wolves.
 3673	Have you heard about the Alpha Grey Wolves? They[ENTER]used to stroll around on their own, but because[ENTER]of the influence of the evil chi in the past few[ENTER]weeks, they have begun to hunt travellers in[ENTER]packs. Could you eliminate these Alpha Grey[ENTER]Wolves? I'm sure you won't go unrewarded for it.
@@ -3753,7 +3757,7 @@
 3754	Not too long ago, the child of a nobleman who[ENTER]went into the Fireland was killed by a Flame[ENTER]Warrior. If you kill the Flame Warriors, you'll[ENTER]be rewarded. Why don't you give it a try?
 3755	Examine the Ghost Trees
 3756	Destroy 30 Ghost Trees.
-3757	Usually, they look just like trees – and then,[ENTER]all of a sudden, they come alive and attack[ENTER]animals and humans. Find out how we can destroy[ENTER]the Ghost Trees.
+3757	Usually, they look just like trees - and then,[ENTER]all of a sudden, they come alive and attack[ENTER]animals and humans. Find out how we can destroy[ENTER]the Ghost Trees.
 3758	The Secret of the Ghost Forest
 3759	Kill 40 Ghost Stumps and 30 Dryads.
 3760	Research has shown that the Ghost Forest is an[ENTER]area populated by Ghost Stumps and Dryads. If you[ENTER]eliminate them, you might be able to put an end[ENTER]to the spreading of the Ghost Trees.
@@ -4658,7 +4662,7 @@
 4659	
 4660	Here, you're welcome.
 4661	Hastily written words:
-4662	Yak-Hwan, I will not return alive, but I hope[ENTER]that this letter will get to you. I have come[ENTER]across a fortress in Fireland that is not marked[ENTER]on any map. Its ruler is a powerful Fireland[ENTER]demon – a unique aura surrounds him just as all[ENTER]the other demons in his following.[ENTER]His roar is deafening and he seems to be guarding[ENTER]something. But what that is, I cannot say.[ENTER]Forgive me, I have failed...
+4662	Yak-Hwan, I will not return alive, but I hope[ENTER]that this letter will get to you. I have come[ENTER]across a fortress in Fireland that is not marked[ENTER]on any map. Its ruler is a powerful Fireland[ENTER]demon - a unique aura surrounds him just as all[ENTER]the other demons in his following.[ENTER]His roar is deafening and he seems to be guarding[ENTER]something. But what that is, I cannot say.[ENTER]Forgive me, I have failed...
 4663	We have to find out what is being hidden in this[ENTER]fortress.[ENTER]Look here, on the inside of the Riveted Necklace[ENTER]there is an engraving. I will ask Yon-I-Walker[ENTER]for advice. He will be in touch with you should[ENTER]he need your help.
 4664	Decipher the Engraving
 4665	Yon-I-Walker is looking for you. Go to him.
@@ -4699,7 +4703,7 @@
 4700	Are you giving up already? The army of Ember[ENTER]Flame Demons in the fortress is still too strong.[ENTER]Keep fighting!
 4701	You have defeated the army of Ember Flame Demons.[ENTER]Report to Yak-Hwan.
 4702	Return to Yak-Hwan.
-4703	You are back – and from what I can see, you were[ENTER]successful! What can you tell me?
+4703	You are back - and from what I can see, you were[ENTER]successful! What can you tell me?
 4704	
 4705	A powerful flame demon, you say? That is Razador,[ENTER]Ruler of Fire! If the Servants have sent him,[ENTER]there must be something of great value in the[ENTER]fortress. Perhaps even the legendary red dragon![ENTER]I will talk with my advisers. Here, take this[ENTER]Passage Ticket and look after it. You will need[ENTER]it later.
 4706	Black Matter
@@ -4722,7 +4726,7 @@
 4723	Black Matter Neutralisation
 4724	Good news! I have found out how the power of[ENTER]Black Matter can be neutralised.
 4725	
-4726	All powers of nature have a counterpart – light[ENTER]and dark, fire and water, good and evil. Even[ENTER]Black Matter has a counterpart, something which[ENTER]has the power to neutralise it: Pure Lumen!
+4726	All powers of nature have a counterpart - light[ENTER]and dark, fire and water, good and evil. Even[ENTER]Black Matter has a counterpart, something which[ENTER]has the power to neutralise it: Pure Lumen!
 4727	To produce Pure Lumen, you need to melt Energy[ENTER]Fragments in Mong Water. Could you gather 50[ENTER]bottles of Mong Water as well as 100 Energy[ENTER]Fragments and then take them to Yu-Hwan? Thank[ENTER]you.
 4728	I'm on it.
 4729	Gather 50 bottles of Mong Water as well as 100[ENTER]Energy Fragments and take them to Yu-Hwan.
@@ -4821,10 +4825,10 @@
 4822	Talk to Yon-I-Walker.
 4823	Go to Yon-I-Walker and find out how Razador can[ENTER]be defeated for good.
 4824	You haven't been to see Yon-I-Walker yet? How do[ENTER]you propose to defeat Razador?! Go! What are you[ENTER]waiting for!
-4825	Yes, it is true. Razador is back – and even more[ENTER]agitated than ever before. We only have one[ENTER]option to stop the Servants of the Darkness from[ENTER]carrying out their plan...
+4825	Yes, it is true. Razador is back - and even more[ENTER]agitated than ever before. We only have one[ENTER]option to stop the Servants of the Darkness from[ENTER]carrying out their plan...
 4826	Razador will not rest before he has completed his[ENTER]task and has freed the red dragon. To stop this,[ENTER]we will have to banish the dragon.
 4827	
-4828	The element of the red dragon is fire... and fire[ENTER]can be best fought with – fire! Every Ember Flame[ENTER]Demon wears a ring of magma around their heart.[ENTER]Bring me five of these Magma Rings!
+4828	The element of the red dragon is fire... and fire[ENTER]can be best fought with - fire! Every Ember Flame[ENTER]Demon wears a ring of magma around their heart.[ENTER]Bring me five of these Magma Rings!
 4829	Storm the Red Dragon Fortress and gather Magma[ENTER]Rings.
 4830	Gather Magma Rings from the Ember Flame Demons.[ENTER]Yon-I-Walker needs five of them. As they cool[ENTER]quickly, you should gather more than the required[ENTER]amount.
 4831	That is not quite enough Magma Rings. I require[ENTER]%d more.
@@ -4847,11 +4851,11 @@
 4848	Now I need Manticore Leather from the wing skin[ENTER]of Martyaxwar, leader of the manticores. Gather[ENTER]five of them!
 4849	Gather five pieces of Manticore Leather from[ENTER]Martyaxwar. Bring it to Yon-I-Walker.
 4850	Gather five pieces of Manticore Leather from[ENTER]Martyaxwar. Bring it to Yon-I-Walker.
-4851	We are so close to our goal – don't give up now.[ENTER]Bring me the Manticore Leather!
+4851	We are so close to our goal - don't give up now.[ENTER]Bring me the Manticore Leather!
 4852	Perfect, now I have everything that I need. Wait[ENTER]a second... ah, the Ring of Samael! A powerful[ENTER]artefact that will banish the red dragon. Here,[ENTER]take these three rings and bring them to[ENTER]Yak-Hwan.[ENTER]Additionally, here is a Passage Ticket from[ENTER]myself. Look after it well, for you will have use[ENTER]of it later.
 4853	You have gathered all pieces of Manticore Leather.[ENTER]Bring them to Yon-I-Walker.
 4854	Battle Begins
-4855	Get ready – the battle is beginning. Yak-Hwan has[ENTER]a final briefing for you.
+4855	Get ready - the battle is beginning. Yak-Hwan has[ENTER]a final briefing for you.
 4856	It is time. Our troops are ready. The battle can[ENTER]start. Do you have the Ring of Samael with you?
 4857	Yep, here it is.
 4858	Ah very good. I will explain how you can use it[ENTER]later. But first we need to break through the[ENTER]newly formed flame demon defence lines. Head to[ENTER]the Red Dragon Fortress and defeat:[ENTER]10 Ember Flame Kings[ENTER]10 Ember Flame Beards[ENTER]10 Ember Flame Trolls[ENTER]10 Ember Flame Generals[ENTER]10 Ember Flame Chieftains
@@ -4864,14 +4868,14 @@
 4865	We have not yet been able to break through the[ENTER]enemy defence lines. Defeat all of the required[ENTER]Ember Flame Demons.
 4866	You have defeated all of the Ember Flame Demons.[ENTER]Report back to Yak-Hwan.
 4867	Return to Yak-Hwan.
-4868	You have done well. We have gotten another step[ENTER]closer to our goal – the red dragon will not be a[ENTER]threat to us for much longer!
+4868	You have done well. We have gotten another step[ENTER]closer to our goal - the red dragon will not be a[ENTER]threat to us for much longer!
 4869	Old Grudge, New Battle
 4870	Your arch-enemy, Razador, seems to resent the[ENTER]fact that you killed him. His roar sounds louder[ENTER]than ever before across the plains of Doyyumhwan.
 4871	It is time to silence him once again. As he[ENTER]stands, with eagle eyes, above the gate behind[ENTER]which the red dragon is held. Be wary of him! He[ENTER]will have learnt from his defeat and will not[ENTER]make the same mistakes twice.
 4872	Defeat Razador, Ruler of Fire.
 4873	Play with Fire
 4874	Defeat Razador, Ruler of Fire, in the Red Dragon[ENTER]Fortress.
-4875	Was Razador too much for you this time? I can[ENTER]hardly believe it! You managed it once – you will[ENTER]manage it this time too!
+4875	Was Razador too much for you this time? I can[ENTER]hardly believe it! You managed it once - you will[ENTER]manage it this time too!
 4876	Razador has been defeated. Report back to[ENTER]Yak-Hwan.
 4877	I knew that you would be able to do it! I will[ENTER]now make preparations for the banishment ritual.[ENTER]As soon as we are ready, I will call for you.
 4878	The Red Dragon
@@ -4883,14 +4887,14 @@
 4884	Throw the Ring of Samael on the Taramor[ENTER]Gravestone to banish the red dragon.
 4885	Taramor Gravestone: 1 piece
 4886	Spectacle of Fire
-4887	Was that all, you worm?! That was at most a[ENTER]tickle – you haven't banished me with that! I[ENTER]will fetch Razador back from the realms of the[ENTER]dead once again. He will free me from my[ENTER]imprisonment and you will get to feel my wrath!
+4887	Was that all, you worm?! That was at most a[ENTER]tickle - you haven't banished me with that! I[ENTER]will fetch Razador back from the realms of the[ENTER]dead once again. He will free me from my[ENTER]imprisonment and you will get to feel my wrath!
 4888	The banishment of the red dragon failed.[ENTER]Report to Yak-Hwan.
 4889	The ritual failed? The red dragon must be more[ENTER]powerful than we first thought...
 4890	
 4891	You did some great work, there's no blame on you.[ENTER]I will not rest until we have found a way to[ENTER]banish the red dragon! But that will take time. I[ENTER]thank you for all that you have done for us.
 4892	Run into the Fire
 4893	Yak-Hwan is looking for you. Go to him and find[ENTER]out what he wants.
-4894	Welcome back! We should have been granted even[ENTER]just the smallest of breaks – the Servants of[ENTER]Darkness are back in action. That cannot be good.
+4894	Welcome back! We should have been granted even[ENTER]just the smallest of breaks - the Servants of[ENTER]Darkness are back in action. That cannot be good.
 4895	
 4896	However, my information is very vague. All we[ENTER]know is that they are holed up in Fireland.
 4897	We have already sent out a scout. But recently he[ENTER]broke off contact with us and I am very[ENTER]concerned.[ENTER]Can you take a look for him on your way to[ENTER]Fireland?
@@ -4922,7 +4926,7 @@
 4923	Yon-I-Walker is looking for you. Go to him to[ENTER]find out more.
 4924	Ah, there you are! The aura is treacherous and is[ENTER]clouding my mind.[ENTER]I need Sun Herbs to lighten my mind and to[ENTER]continue my investigations. Can you get me some?
 4925	Sure.
-4926	The Sun Herbs grow in hot, dry locations – they[ENTER]can be found in Fireland all year round. I'll[ENTER]mark the last location I found some on the map.[ENTER]Although I'm not entirely certain that was the[ENTER]actual location...
+4926	The Sun Herbs grow in hot, dry locations - they[ENTER]can be found in Fireland all year round. I'll[ENTER]mark the last location I found some on the map.[ENTER]Although I'm not entirely certain that was the[ENTER]actual location...
 4927	I'll head out there right away.
 4928	Go to the marked location in Fireland and search[ENTER]for Sun Herbs.
 4929	Sun Herbs
@@ -5845,8 +5849,8 @@
 5846	You are back! Did you find Bae-Yong?
 5847	Yes, but...
 5848	But?[ENTER]Oh no. Is he dead?
-5849	I couldn't do anymore for him. My condolences. He[ENTER]was a brave man – he defended the final piece of[ENTER]the letter with is life. Here it is.
-5850	The loss of Bae-Yong hurts us badly. But I am[ENTER]very proud of him. He completed his mission – we[ENTER]now have all the pieces of the letter.
+5849	I couldn't do anymore for him. My condolences. He[ENTER]was a brave man - he defended the final piece of[ENTER]the letter with is life. Here it is.
+5850	The loss of Bae-Yong hurts us badly. But I am[ENTER]very proud of him. He completed his mission - we[ENTER]now have all the pieces of the letter.
 5851	I thank you for everything. Here, take this here[ENTER]as a reward.[ENTER]I'm going to light a incense stick in the temple[ENTER]for Bae-Yong now.[ENTER]I'll call on you later.
 5852	Go to Admiral Angmur.
 5853	Decrypt the Red Thief Letter
@@ -5994,7 +5998,7 @@
 5995	You have defeated the Red Chief.
 5996	Take his cape and bring it to Admiral Angmur.
 5997	Admiral Angmur is waiting for you.
-5998	The cape! I knew you would do it. We'll hang it[ENTER]up near to their camp so that they can see it –[ENTER]that'll unnerve the Red Thief Gang.[ENTER]My people will take care of it. That way you can[ENTER]recover.
+5998	The cape! I knew you would do it. We'll hang it[ENTER]up near to their camp so that they can see it -[ENTER]that'll unnerve the Red Thief Gang.[ENTER]My people will take care of it. That way you can[ENTER]recover.
 5999	Weaken the Cyclops
 6000	Admiral Angmur wants to talk to you.
 6001	Our plan is working: when the Red Thieves saw the[ENTER]cape a great amount of disruption broke out. In[ENTER]the end, the demons and humans ended up fighting[ENTER]each other. Now this gang is completely[ENTER]disorganised.[ENTER]Next up for us are the Cyclops.
@@ -6071,7 +6075,7 @@
 6072	Aye, so you were able to hold your ground against[ENTER]Captain Hooks. What's that? A letter? Show me!
 6073	
 6074	Curses. Captain Hooks has already passed on the[ENTER]Black Gold to the Banshee.[ENTER]The last sentence poses a puzzle: The curse of[ENTER]life will be summoned from the fog of time by the[ENTER]army of darkness.
-6075	We have to stop the delivery! We think that the[ENTER]Banshee's hideout is to the west on Gautama Cliff[ENTER]– a godless place, constantly enclosed in thick[ENTER]fog.[ENTER]Ogres and Lemures dwell there.
+6075	We have to stop the delivery! We think that the[ENTER]Banshee's hideout is to the west on Gautama Cliff[ENTER]- a godless place, constantly enclosed in thick[ENTER]fog.[ENTER]Ogres and Lemures dwell there.
 6076	
 6077	As soon as I know which route will be used to[ENTER]bring the Black Gold to the Banshee, I'll tell[ENTER]you.
 6078	Head off the Delivery
@@ -6108,7 +6112,7 @@
 6109	Admiral Angmur has new information for you. Go to[ENTER]him.
 6110	We now know what is meant by the curse of life[ENTER]and the army of darkness. There once lived a[ENTER]horrible mage on Dark Dragon Rock. He had[ENTER]aspirations for domination over the entire[ENTER]continent and he literally stopped at nothing to[ENTER]achieve this: using black magic, he raised the[ENTER]dead and sent them into battle as his army.
 6111	
-6112	Summoning the dead – even the thought of it makes[ENTER]me cringe. The Servants of the Darkness are using[ENTER]the Black Gold to create an army of the undead.[ENTER]We have to stop them!
+6112	Summoning the dead - even the thought of it makes[ENTER]me cringe. The Servants of the Darkness are using[ENTER]the Black Gold to create an army of the undead.[ENTER]We have to stop them!
 6113	Search for the Lemures Magician in the old ruins[ENTER]at Gautama Cliff. He knows something about this[ENTER]curse. If you ask him nicely, I'm sure he'll tell[ENTER]you everything we need to know.
 6114	Ask nicely... ho hum. Understood.
 6115	Curse of Life
@@ -6130,7 +6134,7 @@
 6131	Three things are needed to awaken the dead:[ENTER]1. A human body[ENTER]2. Black Gold[ENTER]3. Tree Demon bark[ENTER]Only a magician with outstanding skills can[ENTER]summon the curse of life and maintain it. And[ENTER]when they die, the whole undead army falls with[ENTER]them.
 6132	So its for this reason that our cemeteries have[ENTER]been defiled and the corpses stolen from their[ENTER]graves. They are to be brought to life and[ENTER]marched against us as an undead army. What a[ENTER]sickening thought!
 6133	We need to stop this outrageous deed!
-6134	Aye, but time is working against us. Only the[ENTER]Banshee is powerful enough to summon a curse of[ENTER]this size – but we don't know where she is[ENTER]hiding.[ENTER]I will send out more men to find out the location[ENTER]of the dark high priestess. As soon as I hear[ENTER]something, I will let you know.
+6134	Aye, but time is working against us. Only the[ENTER]Banshee is powerful enough to summon a curse of[ENTER]this size - but we don't know where she is[ENTER]hiding.[ENTER]I will send out more men to find out the location[ENTER]of the dark high priestess. As soon as I hear[ENTER]something, I will let you know.
 6135	
 6136	The adventure continues as soon as you have[ENTER]reached level 96.
 6137	Report back to Admiral Angmur.
@@ -6173,7 +6177,7 @@
 6174	We need 100 Gold Coins. But I fear that not all[ENTER]of the coins that you will find will be used as a[ENTER]medium. There is a lot of work ahead of you.
 6175	No problem.
 6176	Hunt for Gold
-6177	Go up against the Ogres in battle and collect[ENTER]Coin Bags. Not all of the coins are mediums –[ENTER]have them checked by Yon-I-Walker.
+6177	Go up against the Ogres in battle and collect[ENTER]Coin Bags. Not all of the coins are mediums -[ENTER]have them checked by Yon-I-Walker.
 6178	Yep, I can clearly sense the dark magic here.
 6179	Fantastic, we now have all the gold coins that[ENTER]could be used as a medium. That certainly won't[ENTER]please the Banshee! Here, take this as a reward.[ENTER]Angmur will issue your next task.
 6180	There are still gold coins missing. Collect %d[ENTER]more.
@@ -6193,7 +6197,7 @@
 6194	Report back to Admiral Angmur.
 6195	Good to see you return unharmed! Were you[ENTER]successful? What?! The bark was already pulled[ENTER]from the Tree Demons and there were fresh signs[ENTER]of battle? The Servants of the Darkness must have[ENTER]gotten there before us.
 6196	
-6197	If they have the bark, then they will also find a[ENTER]way to summon the curse of life. It seems it is[ENTER]unavoidable – we are heading into war. The[ENTER]Banshee will not be able to hide from us much[ENTER]longer. My men are already on her tracks. I will[ENTER]call for you when we have found her.
+6197	If they have the bark, then they will also find a[ENTER]way to summon the curse of life. It seems it is[ENTER]unavoidable - we are heading into war. The[ENTER]Banshee will not be able to hide from us much[ENTER]longer. My men are already on her tracks. I will[ENTER]call for you when we have found her.
 6198	The adventure continues as soon as you have[ENTER]reached level 97.
 6199	Remaining
 6200	%s: %d pieces
@@ -6236,7 +6240,7 @@
 6237	Ah, the Fossil Earth. Very good, I shall get to[ENTER]work. I will report what I find out to the[ENTER]Admiral.
 6238	Through the back door
 6239	Admiral Angmur is looking for you.
-6240	We now know where the Temple Servant Yah-Ki is[ENTER]residing. But the base resembles a fortress –[ENTER]guard troops patrol there around the clock. A[ENTER]frontal attack at this time would be pure[ENTER]suicide.
+6240	We now know where the Temple Servant Yah-Ki is[ENTER]residing. But the base resembles a fortress -[ENTER]guard troops patrol there around the clock. A[ENTER]frontal attack at this time would be pure[ENTER]suicide.
 6241	For this reason, we want to attack in an ambush.[ENTER]My men are searching for a suitable location.[ENTER]Distract the guards to provide us with more time.
 6242	
 6243	The greatest danger comes from a troop of guards[ENTER]who call themselves the Brigade of Black Death.[ENTER]This brigade consists of Moghu, Carnifex and[ENTER]General Albus. Their leader is Skeletos.[ENTER]Eliminate them, before they uncover my scouting[ENTER]troop.
@@ -6258,7 +6262,7 @@
 6259	The decisive day has arrived. If we fall, the[ENTER]world falls with us. But if we are victorious,[ENTER]our deeds will still be sung in songs one hundred[ENTER]years from now. Stop the Servants of Darkness.[ENTER]Defeat the Temple Servant Yah-Ki!
 6260	Why are you here? The battle is not yet won![ENTER]Defeat the Temple Servant Yah-Ki. All our hopes[ENTER]rest on you.
 6261	You have brought your opponent to their knees and[ENTER]victory is yours!
-6262	There's no time for relaxing – the Temple Servant[ENTER]Yah-Ki is waiting for you.
+6262	There's no time for relaxing - the Temple Servant[ENTER]Yah-Ki is waiting for you.
 6263	You have won! With a bloodcurdling scream, Yah-Ki[ENTER]sinks to the ground.
 6264	Aaargh! This cannot be! Defeated by a mortal...[ENTER]oh, Banshee, forgive me! I have failed. I could[ENTER]not complete my ta...
 6265	You search amongst her lifeless body and find a[ENTER]sealed letter. Return with it to Admiral Angmur.
@@ -6451,7 +6455,7 @@
 6452	As you wish... See you soon!
 6453	Dark Dragon Rock
 6454	Recently a mysterious island has been discovered.[ENTER]It has been named Dark Dragon Rock. Those that[ENTER]wish to survive there need to have quite a bit of[ENTER]experience. For this reason, I will only take[ENTER]warriors who have reached level 90. Are you ready[ENTER]to undertake this journey?
-6455	You can only get to the island by ship – and the[ENTER]journey there is long and arduous. The higher[ENTER]your level, the more demanding the transport. For[ENTER]this reason, I have to ask for a higher fee from[ENTER]you.
+6455	You can only get to the island by ship - and the[ENTER]journey there is long and arduous. The higher[ENTER]your level, the more demanding the transport. For[ENTER]this reason, I have to ask for a higher fee from[ENTER]you.
 6456	This journey costs you %d Yang.
 6457	Map information
 6458	This is a fascinating place, isn't it? In other[ENTER]parts of the country, everything looks a little[ENTER]different! There are many interesting places I[ENTER]could teleport you to. As the powers of evil have[ENTER]got stronger again, time and space has been[ENTER]thrown into chaos. Your return might not always[ENTER]work. Do you want to be teleported anyway?
@@ -7877,7 +7881,7 @@
 7878	And the good news is: You can save loads with[ENTER]these packages!
 7879	A turning coin will show you the way to the[ENTER]packages.
 7880	Power of Wisdom
-7881	Hey, listen closely! I have finally found it –[ENTER]the Fount of Wisdom! It's power increases the[ENTER]gathering of experience for a certain period of[ENTER]time. I believe I can impart it upon you. If you[ENTER]are interested, come and chat with me at any[ENTER]time.
+7881	Hey, listen closely! I have finally found it -[ENTER]the Fount of Wisdom! It's power increases the[ENTER]gathering of experience for a certain period of[ENTER]time. I believe I can impart it upon you. If you[ENTER]are interested, come and chat with me at any[ENTER]time.
 7882	Power of Wisdom
 7883	So, you want to feel the Power of Wisdom?[ENTER]For %d hrs. it will ensure that you are able to[ENTER]gather %d%% more experience.
 7884	Are you ready? Good, I will now bestow the Power[ENTER]of Wisdom upon you.[ENTER]...[ENTER]It is done!
@@ -7922,7 +7926,7 @@
 7923	PvP Tournament Registration
 7924	You can participate in the tournament if your[ENTER]level is between %d and %d.
 7925	Unfortunately, all places in the PvP tournament[ENTER]are occupied.
-7926	Welcome to the PvP tournament! Challenge worthy[ENTER]opponents and give it your best – may the Dragon[ENTER]God be with you.
+7926	Welcome to the PvP tournament! Challenge worthy[ENTER]opponents and give it your best - may the Dragon[ENTER]God be with you.
 7927	How about it? Do you dare to challenge? Then[ENTER]register for the tournament now.
 7928	Yes, of course!
 7929	No, I'd rather not.
@@ -7945,7 +7949,7 @@
 7946	GM: PvP tournament start/end
 7947	Start/end PvP tournament
 7948	Start: Specify the registration duration in[ENTER]minutes.
-7949	GM: PvP tournament – Settings
+7949	GM: PvP tournament - Settings
 7950	Minimum level (Min: 15)
 7951	Maximum level (Max: 120)
 7952	You haven't reached the minimum level.
@@ -10167,8 +10171,8 @@
 10168	Done it! Return to Monk Milbon and collect your[ENTER]gift.
 10169	Thank you. The temple is secure again for the[ENTER]time being. Here is your gift. The energy level[ENTER]will rise again, however. Come back in 24 hours[ENTER]and reduce the energy level with Animaspheres[ENTER]once more. I'll reward you again for doing so, of[ENTER]course.
 10171	I want to learn to ride.
-10172	Don’t get ahead of yourself! You are not ready to[ENTER]improve your riding skills yet. Please come back[ENTER]again later!
-10173	Psst, have you heard? The Stable Boy’s memory can[ENTER]be wiped with a Scroll of Forgetfulness. This[ENTER]helps you increase your riding level more[ENTER]quickly! Do you want to apply the Scroll of[ENTER]Forgetfulness?
+10172	Don't get ahead of yourself! You are not ready to[ENTER]improve your riding skills yet. Please come back[ENTER]again later!
+10173	Psst, have you heard? The Stable Boy's memory can[ENTER]be wiped with a Scroll of Forgetfulness. This[ENTER]helps you increase your riding level more[ENTER]quickly! Do you want to apply the Scroll of[ENTER]Forgetfulness?
 10174	You're already using the effect.
 10175	Open Yut Nori Shop
 10176	Grey
@@ -11064,7 +11068,7 @@
 11821	Seon-Pyeong's Research (Level 92)
 11822	Seon-Pyeong's Research (Level 94)
 11823	What is the Aura Outfit?
-11824	The Aura Outfit can be improved and can reach[ENTER]higher stages through evolution. This increases[ENTER]the absorption rate. You can improve your Aura[ENTER]Outfit using Aura Ice Runes, which are dropped by[ENTER]monsters. The opportunity for evolution is[ENTER]unlocked on particular levels (49, 99, 149, 199,[ENTER]249). The values’ absorption rate varies[ENTER]depending on each level. Armband, Necklace,[ENTER]Earring and Shield values can be transmitted onto[ENTER]the Aura Outfit. The item whose values are[ENTER]transmitted is destroyed during this procedure.
+11824	The Aura Outfit can be improved and can reach[ENTER]higher stages through evolution. This increases[ENTER]the absorption rate. You can improve your Aura[ENTER]Outfit using Aura Ice Runes, which are dropped by[ENTER]monsters. The opportunity for evolution is[ENTER]unlocked on particular levels (49, 99, 149, 199,[ENTER]249). The values' absorption rate varies[ENTER]depending on each level. Armband, Necklace,[ENTER]Earring and Shield values can be transmitted onto[ENTER]the Aura Outfit. The item whose values are[ENTER]transmitted is destroyed during this procedure.
 11825	Aura Outfit: Transmit values
 11826	Do you want to transmit the values of Armbands,[ENTER]Necklaces, Earrings and Shields onto the Aura[ENTER]Outfit?
 11827	Aura Outfit: Improvement

@@ -2104,28 +2104,32 @@ ACMD(do_gift)
 {
 	ch->ChatPacket(CHAT_TYPE_COMMAND, "gift");
 }
+
 #ifdef ENABLE_CUBE_RENEWAL
 ACMD(do_cube)
 {
-	const char* line;
-	char arg1[256], arg2[256], arg3[256];
-	line = two_arguments(argument, arg1, sizeof(arg1), arg2, sizeof(arg2));
-	one_argument(line, arg3, sizeof(arg3));
+	char arg1[256], arg2[256];
+	two_arguments(argument, arg1, sizeof(arg1), arg2, sizeof(arg2));
 
 	if (0 == arg1[0])
 	{
 		return;
 	}
 
-	switch (LOWER(arg1[0]))
+	if (strcmp(arg1, "open") != 0)
 	{
-	case 'o':	// open
-		Cube_open(ch);
-		break;
-
-	default:
 		return;
 	}
+
+	DWORD dwRecipeNpcRace = 0;
+	if (arg2[0] && isdigit((unsigned char)arg2[0]))
+	{
+		int tmpRace = 0;
+		str_to_number(tmpRace, arg2);
+		if (tmpRace > 0)
+			dwRecipeNpcRace = (DWORD)tmpRace;
+	}
+	Cube_open(ch, dwRecipeNpcRace);
 }
 #else
 ACMD(do_cube)

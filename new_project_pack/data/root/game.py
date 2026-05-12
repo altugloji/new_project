@@ -54,6 +54,9 @@ if app.ENABLE_ITEM_SHOP_SYSTEM:
 if app.KYGN_CHEST_INFO:
 	import cri
 
+if app.__GEM_SHOP__:
+	import gem
+
 from _weakref import proxy
 
 # SCREENSHOT_CWDSAVE
@@ -264,6 +267,9 @@ class GameWindow(ui.ScriptWindow):
 
 	def Close(self):
 		self.Hide()
+		
+		if app.__GEM_SHOP__:
+			gem.Clear()
 
 		global cameraDistance, cameraPitch, cameraRotation, cameraHeight
 		(cameraDistance, cameraPitch, cameraRotation, cameraHeight) = app.GetCamera()
@@ -2414,3 +2420,9 @@ class GameWindow(ui.ScriptWindow):
 				string = string.replace(key, item)
 
 			return string.lower()
+
+	if app.__GEM_SHOP__:
+		def BINARY_RefreshGemConvert(self, force_show):
+			self.interface.RefreshGemConvert(force_show)
+		def BINARY_RefreshGem(self, force_show):
+			self.interface.RefreshGem(force_show)

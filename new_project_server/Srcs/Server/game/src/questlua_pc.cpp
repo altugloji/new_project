@@ -31,6 +31,10 @@
 #include "party.h"
 #endif
 
+#ifdef __GEM_SYSTEM__
+#include "gaya.h"
+#endif
+
 #include <cctype>
 #undef sys_err
 #ifndef __WIN32__
@@ -3470,6 +3474,45 @@ teleport_area:
 	}
 #endif
 
+#ifdef __GEM_SYSTEM__
+	ALUA(pc_open_gemshop)
+	{
+		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
+		if (!ch)
+			return 0;
+		ch->SendGemData();
+		return 0;
+	}
+	ALUA(pc_open_gemconvertshop)
+	{
+		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
+		if (!ch)
+			return 0;
+		CGayaManager::Instance().OpenConvertShop(ch);
+		return 0;
+	}
+	ALUA(pc_get_gem)
+	{
+		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
+		lua_pushnumber(L, ch?ch->GetGem():0);
+		return 1;
+	}
+	ALUA(pc_change_gem)
+	{
+		int gem = (int)lua_tonumber(L, -1);
+
+		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
+		if (!ch)
+			return 0;
+
+		if (gem + ch->GetGem() < 0)
+			sys_err("QUEST wrong ChangeGem %d (now %d)", gem, ch->GetGem());
+		else
+			ch->PointChange(POINT_GEM, gem, true);
+		return 0;
+	}
+#endif
+
 	void RegisterPCFunctionTable()
 	{
 		luaL_reg pc_functions[] =
@@ -3781,6 +3824,12 @@ teleport_area:
 #ifdef ENABLE_CHEQUE_SYSTEM
 			{ "set_cheque",		pc_set_cheque },
 			{ "get_cheque",		pc_get_cheque },
+#endif
+#ifdef __GEM_SYSTEM__
+			{ "open_gemshop", pc_open_gemshop },
+			{ "open_gemconvertshop", pc_open_gemconvertshop },
+			{ "get_gem", pc_get_gem },
+			{ "change_gem", pc_change_gem },
 #endif
 			{nullptr, nullptr}
 		};

@@ -11,6 +11,7 @@ quest baslangic begin
 
 			command("start_to_equip")
 			pc.give_item2(70058,1)		-- Iþýnlanma yüzüðü
+			pc.give_item2(50051,1)		-- Iþýnlanma yüzüðü
 			pc.give_item2(50187,1)		-- Çýrak Sandýðý
 
 			---------------------------------------------------------------------------

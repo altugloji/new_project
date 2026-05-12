@@ -1,3 +1,7 @@
+21301	Fremstilling
+21302	Fremstilling af Mithril
+21303	Fremstilling af Sort sten
+21304	Fremstilling af Lilla bog
 1	Et specielt klædestykke
 2	Jeg har allerede fortalt dig om de kræfter vi[ENTER]behøver for at konfrontere Sung Mahi.[ENTER][ENTER]Skynd dig og find kaptajnen.[ENTER][ENTER]Kom tilbage når du har det nødvendige tøj.
 3	Forøg din kraft
@@ -7922,7 +7926,7 @@
 7923	PvP Turnering Registrering
 7924	Du kan deltage i turneringen hvis dit level er[ENTER]mellem %d og %d.
 7925	Desværre, er alle pladser i PvP turneringen[ENTER]optaget.
-7926	Velkommen til PvP turneringen! Udfordre værdige[ENTER]modstandere og giv den dit bedste – må Drageguden[ENTER]være med dig.
+7926	Velkommen til PvP turneringen! Udfordre værdige[ENTER]modstandere og giv den dit bedste - må Drageguden[ENTER]være med dig.
 7927	Hvad er der med det? Vover du at udfordre? Så[ENTER]registrer dig til turneringen nu.
 7928	Ja, selvfølgelig!
 7929	Nej, jeg vil helst ikke.
@@ -7945,7 +7949,7 @@
 7946	GM: PvP turnering start/slut
 7947	Start/slut PvP turnering
 7948	Start: Angiv registrerings varigheden i minutter.
-7949	GM: PvP turnering – Indstillinger
+7949	GM: PvP turnering - Indstillinger
 7950	Minimum level (Min: 15)
 7951	Maksimum level (Maks: 120)
 7952	Du har ikke nået minimum level.

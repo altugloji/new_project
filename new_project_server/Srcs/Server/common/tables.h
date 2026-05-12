@@ -426,6 +426,9 @@ typedef struct SPlayerTable
 	DWORD	logoff_interval;
 
 	int		aiPremiumTimes[PREMIUM_MAX_NUM];
+#ifdef __GEM_SYSTEM__
+	int			gem;
+#endif
 } TPlayerTable;
 
 typedef struct SMobSkillLevel
@@ -1355,6 +1358,24 @@ typedef struct SExchangeLogItem
 	TPlayerItemAttribute    aAttr[ITEM_ATTRIBUTE_MAX_NUM];
 	bool	isOwnerItem;
 }TExchangeLogItem;
+#endif
+
+#ifdef __GEM_SYSTEM__
+typedef struct SGemItem
+{
+	BYTE bPos;
+	DWORD dwVnum;
+	DWORD dwCount;
+	DWORD dwPrice;
+	bool bBuyed;
+} TGemItem;
+typedef struct SGemConvertItem
+{
+	BYTE bPos;
+	DWORD dwVnum;
+	DWORD dwCount;
+	DWORD dwPrice;
+} TGemConvertItem;
 #endif
 
 #pragma pack()

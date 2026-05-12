@@ -2763,7 +2763,7 @@
 27988	Harta Comorii	O hartã uzatã care indicã locul unei vechi comori.
 27989	Busola Pietrei Metin	Busola iti indica directia catre urmatoarea piatra Metin. Cu cat straluceste mai tare cu atat esti mai aproape. Poate sa fie activata de 6 ori.
 27990	Bucatã de piatrã	Datorita dimensiunilor mici, poate fi transportata usor. Poate fi folosita in foarte multe feluri.
-27991	Piatrã acvaticã	O piatra grea, neprelucrata, ce se foloseste la ascutirea armelor sau a ustensilelor de bucatarie.
+27991	Piatrã de Apã	Un mineral valoros din mare.
 27992	Perla Alba	O perlã albã ca zãpada din interiorul unei scoici.
 27993	Perla Albastra	O superbã perlã albastrã din interiorul unei scoici.
 27994	Perla Visinie	O perlã viºinie din interiorul unei scoici.
@@ -2931,7 +2931,7 @@
 30153	Flori	Flori necunoscute, care prin mireasma lor te adâncesc în amintiri.
 30154	Cartea secretã din templ	Analiza învãþãturii ºi istoriei templului secret.
 30155	Brelocul lui Mirine	Breloc pentru un colier. Pe spate este gravat numele Mirine.
-30156	Cartea Templului Secret	Analiza istoriei si doctrina templului secret.
+30156	Carte Mov	O carte care conþine reþete pentru cãrþi de competenþã. Poate fi creatã la Alchimist.
 30157	Vârf de sãgeatã	Aceste vârfuri de sãgeatã otrãvite vor fi de folos pentru a învinge imperiul.
 30177	Esenþã de Mosc	Esenþa de Mosc folositã de Negustorul de arme in timpul unei misiuni. Acest obiect nu are alte functionalitaþi.
 30179	Cheie Rãsucitã	Aceastã cheie magicã activeazã portalul cãtre Templul Dragonului.
@@ -3123,20 +3123,20 @@
 30586		
 30600	Model Cusut	
 30601	Design Armurã	
-30602	Vopsea Albastrã	
-30603	Vopsea Roºie	
-30604	Vopsea Gri	
+30602	Vopsea Albastrã	Vopsea necesarã pentru creare.
+30603	Vopsea Roºie	Vopsea necesarã pentru creare.
+30604	Vopsea Gri	Vopsea necesarã pentru creare.
 30605	Foi de Aur	
 30606	Foi de Argint	
 30607	Foi de Cupru	
 30608	Foi de Oþel	
 30609	Foi de Bronz	
-30610	Mithril	
+30610	Mithril	Se obþine prin topirea minereurilor. Poate fi folosit în diverse reþete. Poate fi creat la Alchimist.
 30611	Curele Dure	
 30612	Frânghii Rezistente	
 30613	Piatra Driadelor	Învãluitã de o strãlucire verde, aceastã piatrã misterioasã îmbracã sufletul unei driade, un spirit copac. Driadele cunosc cuvintele secrete pentru a putea avea acces la temniþa Erebus.
-30614	Vopsea Neagrã	
-30615	Vopsea Albã	
+30614	Vopsea Neagrã	Vopsea necesarã pentru creare.
+30615	Vopsea Albã	Vopsea necesarã pentru creare.
 30616	Dioxid de Titan	Acest cristal prismatic este folosit pentru rafinarea unei piese din echipament.
 30617	Agate	Piatra preþioasã strãlucitoare este folositã pentru rafinarea unei piese din echipament.
 30618	Piatra Lunii	O scânteie din lumina lunii este prinsã în aceastã bijuterie în formã de lacrimã. Folositã pentru rafinarea unei piese din echipament.
@@ -3216,7 +3216,7 @@
 31032	Perla Leviatanului	Capsule reconfortante create din Lumina Interioara a existentei mitice si Esenta Eternitatii.
 31033	Mantia Conducatorului	Aceasta mantie este simbolul invulnerabilitãþii pentru Tâlharii Roºii.
 31034	Totem Gigant	Totemul are forma gigantica a unei piese de chihlimbar.
-31035	Piatra Neagra	Aceasta piatra misterioasa a fost descoperita de Cyclopi in Muntii Thunder.
+31035	Piatrã Neagrã	Se obþine prin topirea pietrelor. Poate fi folositã în diverse reþete. Poate fi creatã la Alchimist.
 31036	Aur Negru	Acest minereu negru cu proprietati magice poate fi gasit in Muntii Thunder.
 31037	Punga din Piele	Ai luat aceasta punga de la Capitanul Shruk. Se pare ca e mai usoara decat te asteptai...
 31038	Teren Sfant	Aceasta desaga plina cu Teren Sfant foloseste drept medium pentru a-i chema pe cei morti.
@@ -5627,8 +5627,8 @@
 50853	Rezist Aur Elixir Întun.	Acest elixir extrem de puternic oferã oricui îl bea + 20% rezistenþã la întuneric.
 50901	Sticlã goalã	Se foloseºte pentru producerea de licori.
 50902	Reþetã pentru începãtori	O reþetã ce poate fi obþinutã uºor de cãtre începãtori.
-50903	Reþetã	O reþetã ce are nevoie de putina practica.
-50904	Reþetã pt. profesioniºti	O reteta ce poate fi facuta corect numai de experti.
+50903	Schemã de Îmbunãtãþire	Schemã necesarã pentru creare.
+50904	Schemã de Vrãjire Obiect	Schemã necesarã pentru creare.
 50905	Reteta pentru apa Sim	O apa obtinuta din Suc de floare de piersic si Liliac.
 50906	Reteta pentru apa Dok	O apa obtinuta din Suc de Floare Clopotel si Liliac.
 50907	Reteta pentru apa Bo	O apa obtinuta din Suc de Floare Kaki si Ciuperci Tue.
@@ -5658,7 +5658,7 @@
 50938	Cufãr Profet Roºu	Conþine 105 Cãrþi de Tarot pentru Duelul Profeþilor.
 50939	Cufãr Profet Albastru	Conþine 21 Cãrþi de Tarot pentru Duelul Profeþilor.
 50940	Cufãr Profet Roz	Conþine 5 Cãrþi de Tarot pentru Duelul Profeþilor.
-51001	Fragment de Energie	Fragment pentru un Cristal de Energie. 30 de bucati pot fi topite si unite intr-un cristal.
+51001	Fragment de Energie	Se obþine prin topirea obiectelor valoroase. Poate fi folosit în diverse reþete. Poate fi creat la Alchimist.
 51002	Cristal de Energie	Cristalul iti mareste bonusurile pentru doua ore.
 51501	Cor Draconis (Brut)	Cristalul Inima de Dragon contine o Piatra Dragon aleatoare din clasa bruta.
 51502	Cor Draconis (Brut)	Cristalul Inima de Dragon contine o Piatra Dragon aleatoare din clasa bruta.

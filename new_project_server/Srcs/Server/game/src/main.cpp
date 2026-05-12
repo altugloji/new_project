@@ -68,6 +68,10 @@
 	#include "item_shop.h"
 #endif
 
+#ifdef __GEM_SYSTEM__
+#include "gaya.h"
+#endif
+
 extern void WriteVersion();
 
 #if !defined(__WIN32__) && defined(ENABLE_ASAN)
@@ -334,6 +338,10 @@ int main(int argc, char **argv)
 
 #ifdef ENABLE_ITEM_SHOP_SYSTEM
 	CItemShopManager	itemShopManager;
+#endif
+
+#ifdef __GEM_SYSTEM__
+	CGayaManager	gayaManager;
 #endif
 
 	if (!start(argc, argv)) {

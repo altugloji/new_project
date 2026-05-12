@@ -205,6 +205,9 @@ enum
 	HEADER_GC_MOUNT								= 61,
 	HEADER_GC_OWNERSHIP                         = 62,
     HEADER_GC_TARGET                            = 63,
+#ifdef __GEM_SHOP__
+	HEADER_GC_GEM 								= 64,
+#endif
 	HEADER_GC_WARP								= 65,
 	HEADER_GC_ADD_FLY_TARGETING                 = 69,
 
@@ -1688,7 +1691,9 @@ enum EPointTypes
 #ifdef ENABLE_WOLFMAN_CHARACTER
 	POINT_ATTBONUS_CLAW			= 161,
 #endif
-
+#ifdef __GEM_SHOP__
+	POINT_GEM = 162,
+#endif
 	POINT_MIN_WEP = 200,
 	POINT_MAX_WEP,
 	POINT_MIN_MAGIC_WEP,
@@ -2909,6 +2914,16 @@ typedef struct dates_cube_renewal
 	int		count_material_4;
 	DWORD	vnum_material_5;
 	int		count_material_5;
+	DWORD	vnum_material_6;
+	int		count_material_6;
+	DWORD	vnum_material_7;
+	int		count_material_7;
+	DWORD	vnum_material_8;
+	int		count_material_8;
+	DWORD	vnum_material_9;
+	int		count_material_9;
+	DWORD	vnum_material_10;
+	int		count_material_10;
 	long long 	gold;
 	int 	percent;
 	char 	category[100];
@@ -2924,6 +2939,23 @@ typedef struct packet_receive_cube_renewal
 	TInfoDateCubeRenewal	date_cube_renewal;
 }TPacketGCCubeRenewalReceive;
 #endif
+
+#ifdef __GEM_SHOP__
+enum EGemPacket
+{
+	GEM_SUBHEADER_GC_LOAD,
+	GEM_SUBHEADER_GC_SLOT_COUNT,
+	GEM_SUBHEADER_GC_BUYED_SLOT,
+	GEM_SUBHEADER_GC_CONVERT_LOAD,
+};
+typedef struct SPacketGCGem
+{
+	BYTE		header;
+	WORD		size;
+	BYTE		sub_header;
+} TPacketGCGem;
+#endif
+
 
 
 #pragma pack(pop)

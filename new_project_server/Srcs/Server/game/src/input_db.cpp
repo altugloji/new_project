@@ -41,6 +41,10 @@
 #include "map_location.h"
 #include "DragonSoul.h"
 
+#ifdef __GEM_SYSTEM__
+#include "gaya.h"
+#endif
+
 #include "../../common/CommonDefines.h"
 
 #define MAPNAME_DEFAULT	"none"
@@ -949,6 +953,9 @@ void CInputDB::Boot(const char* data) const
 
 	signal_timer_enable(30);
 
+#ifdef __GEM_SYSTEM__
+	CGayaManager::Instance().Load(true);
+#endif
 	if (test_server)
 		CMobManager::instance().DumpRegenCount("mob_count");
 

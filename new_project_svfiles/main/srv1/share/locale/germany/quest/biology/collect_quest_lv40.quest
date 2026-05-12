@@ -78,7 +78,7 @@ quest collect_quest_lv40  begin
 					say_title(gameforge.collect_herb_lv10._50_sayTitle)
 					say(gameforge.collect_quest_lv40._150_say)
 					pc.remove_item(30047, 1)
-					pc.setqf("duration",get_time()+60*60*22)--------------22Stunde
+					pc.setqf("duration",get_time()+60*60*8)--------------22Stunde
 					wait()
 
 					local pass_percent

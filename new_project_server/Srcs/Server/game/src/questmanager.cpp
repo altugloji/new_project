@@ -18,6 +18,10 @@
 #include "locale_service.h"
 #include "dungeon.h"
 
+#ifdef __GEM_SYSTEM__
+#include "gaya.h"
+#endif
+
 DWORD g_GoldDropTimeLimitValue = 0;
 #ifdef ENABLE_NEWSTUFF
 DWORD g_ItemDropTimeLimitValue = 0;
@@ -1327,6 +1331,14 @@ namespace quest
 	{
 		static auto DROPEVENT_CHARTONE_NAME		= "drop_char_stone";
 		static const int	DROPEVENT_CHARTONE_NAME_LEN = strlen(DROPEVENT_CHARTONE_NAME);
+
+#ifdef __GEM_SYSTEM__
+		if (name == "gaya_reload")
+		{
+			CGayaManager::Instance().Load(true);
+			return;
+		}
+#endif
 
 		const int prev_value = m_mapEventFlag[name];
 

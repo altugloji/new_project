@@ -96,6 +96,7 @@
     <ClCompile Include="PythonRenderTargetModule.cpp" />
     <ClCompile Include="PythonWiki.cpp" />
     <ClCompile Include="PythonCubeRenewal.cpp" />
+    <ClCompile Include="PythonGem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AffectFlagContainer.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="PythonChestInfo.h" />
     <ClInclude Include="PythonWiki.h" />
     <ClInclude Include="PythonCubeRenewal.h" />
+    <ClInclude Include="PythonGem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Cursors\cursor.cur">

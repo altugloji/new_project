@@ -1,0 +1,174 @@
+--[[
+Server Files Author : Oðuzhan Altuð
+--]]
+quest move_ring begin
+	state start begin
+		when 40002.use begin
+		local max_use = 3
+		local n = item.get_socket(0)
+
+		if n >= max_use then
+			say_reward("Bu yüzüðün kullaným hakký bitti.")
+			item.remove()
+			return
+		end
+		say(string.format(gameforge.ring_warp._030_say, max_use -n))
+
+		local s = select("Köyler","Orman Bölgeleri ","Örümcek Zindaný ","Diðer Bölgeler","Kapat ")
+
+		if s == 1 then
+			-- addimage(1, -31, "teleport_ring_flags_yangan.png")
+			local ss = select(
+			"Kýrmýzý Bayrak (1.Köy)",
+			"Kýrmýzý Bayrak (2.Köy)",
+			"Sarý Bayrak (1.Köy)",
+			"Sarý Bayrak (2.Köy)",
+			"Mavi Bayrak (1.Köy)",
+			"Mavi Bayrak (2.Köy)",
+			"Vazgeç ")
+			if ss == 1 then
+				pc.warp(474292,954511)
+			elseif ss == 2 then
+				pc.warp(360800,877600)
+			elseif ss == 3 then
+				pc.warp(63800,166161)
+			elseif ss == 4 then
+				pc.warp(138500,234900)
+			elseif ss == 5 then
+				pc.warp(959700,268600)
+			elseif ss == 6 then
+				pc.warp(873100,242600)
+			end
+
+
+		elseif s == 2 then
+			local sss = select("Hayalet Orman","Kýzýl Orman","Vazgeç ")
+			if sss == 1 then
+				if pc.level < 60 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 60")
+					select("Kapat ")
+					return
+				end
+				pc.warp(288700,5700)
+			elseif sss == 2 then
+				if pc.level < 65 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 65")
+					select("Kapat ")
+					return
+				end
+				pc.warp(1119900,70800)
+			end
+
+
+		elseif s == 3 then
+			local zindan = select("1. Kat Baþý ", "1. Kat Sonu ","Vazgeç ")
+			if zindan == 1 then
+				if pc.level < 40 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 40")
+					select("Kapat ")
+					return
+				end
+				pc.warp(59800,497300)
+			elseif zindan == 2 then
+				if pc.level < 40 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 40")
+					select("Kapat ")
+					return
+				end
+				pc.warp(90000,525300)
+			end
+
+
+		elseif s == 4 then
+			local sssssss = select(
+			"Seungryong Vadisi",
+			"Sohan Daðý ",
+			"Yongbi Çölü ",
+			"Doyyumhwan",
+			"Devler Diyarý ",
+			"Þeytan Kulesi",
+			"Katacomb",
+			"Katacomb",
+			"Katacomb",
+			"Vazgeç "
+			)
+			if sssssss == 1 then --Vadi
+				if pc.level < 20 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 20")
+					select("Kapat ")
+					return
+				end
+				pc.warp(1079400, 1089900)
+				--pc.warp(335500, 755100)
+			elseif sssssss == 2 then --Sohan
+				if pc.level < 40 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 40")
+					return
+				end
+				pc.warp(436400,215600)
+			elseif sssssss == 3 then --Çöl
+				if pc.level < 20 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 20")
+					return
+				end
+				pc.warp(296800,547400)
+			elseif sssssss == 4 then -- Doyum
+				if pc.level < 55 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 55")
+					select("Kapat ")
+					return
+				end
+				pc.warp(600800,687400)
+
+			elseif sssssss == 5 then -- Devler Diyarý
+				if pc.level < 60 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 60")
+					select("Kapat ")
+					return
+				end
+				pc.warp(829900,763300)
+
+			elseif sssssss == 6 then -- Þeytan Kulesi
+				pc.warp(590500,110500)
+
+			elseif sssssss == 7 then -- Katakomb
+				if pc.level < 75 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 75")
+					select("Kapat ")
+					return
+				end
+				pc.warp(591200,99400)
+
+			elseif sssssss == 8 then -- Katakomb
+				if pc.level < 75 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 75")
+					select("Kapat ")
+					return
+				end
+				pc.warp(591200,99400)
+
+			elseif sssssss == 9 then -- Katakomb
+				if pc.level < 75 then
+					say_reward("Haritaya giriþ için levelin yetersiz!")
+					say_reward("Giriþ seviyesi: 75")
+					select("Kapat ")
+					return
+				end
+				pc.warp(591200,99400)
+			end
+		elseif s == 5 then
+			end
+		end
+	end
+end

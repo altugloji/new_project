@@ -177,7 +177,9 @@ enum
 	HEADER_GC_MOUNT								= 61,
 	HEADER_GC_OWNERSHIP							= 62,
 	HEADER_GC_TARGET			 				= 63,
-
+#ifdef __GEM_SYSTEM__
+	HEADER_GC_GEM 								= 64,
+#endif
 	HEADER_GC_WARP								= 65,
 
 	HEADER_GC_ADD_FLY_TARGETING					= 69,
@@ -2490,6 +2492,16 @@ typedef struct dates_cube_renewal
 	int		count_material_4;
 	DWORD	vnum_material_5;
 	int		count_material_5;
+	DWORD	vnum_material_6;
+	int		count_material_6;
+	DWORD	vnum_material_7;
+	int		count_material_7;
+	DWORD	vnum_material_8;
+	int		count_material_8;
+	DWORD	vnum_material_9;
+	int		count_material_9;
+	DWORD	vnum_material_10;
+	int		count_material_10;
 	long long 	gold;
 	int 	percent;
 	char 	category[100];
@@ -2504,6 +2516,22 @@ typedef struct packet_receive_cube_renewal
 	BYTE subheader;
 	TInfoDateCubeRenewal	date_cube_renewal;
 }TPacketGCCubeRenewalReceive;
+#endif
+
+#ifdef __GEM_SYSTEM__
+enum EGemPacket
+{
+	GEM_SUBHEADER_GC_LOAD,
+	GEM_SUBHEADER_GC_SLOT_COUNT,
+	GEM_SUBHEADER_GC_BUYED_SLOT,
+	GEM_SUBHEADER_GC_CONVERT_LOAD,
+};
+typedef struct SPacketGCGem
+{
+	BYTE		header;
+	WORD		size;
+	BYTE		sub_header;
+} TPacketGCGem;
 #endif
 
 #pragma pack()

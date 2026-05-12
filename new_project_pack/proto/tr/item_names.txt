@@ -6496,7 +6496,7 @@ VNUM	LOCALE_NAME
 30153	Çiçekler
 30154	Tapýnaðýn Gizli Kitabý
 30155	Mirinenin Dini Kolyesi
-30156	Tapýnaðýn Gizli Kitabý
+30156	Mor Kitap
 30157	Ok Ucu
 30158	Yaþ Pasta
 30159	Kýyafet
@@ -6716,9 +6716,9 @@ VNUM	LOCALE_NAME
 30586	NoNAme
 30600	Kesim Örneði
 30601	Zýrh Planý
-30602	mavi boya
-30603	kýrmýzý boya
-30604	gri boya
+30602	Mavi boya
+30603	Kýrmýzý boya
+30604	Gri boya
 30605	Altýn Plakalar
 30606	Gümüþ Plakalar
 30607	Bakýr Plakalar
@@ -6728,8 +6728,8 @@ VNUM	LOCALE_NAME
 30611	Aðýr Kemerler
 30612	Saðlam Ýpler
 30613	Orman Perisi Taþý
-30614	siyah boya
-30615	beyaz boya
+30614	Siyah boya
+30615	Beyaz boya
 30616	Titandiyoksit
 30617	Akik
 30618	Ay Taþý
@@ -9219,8 +9219,8 @@ VNUM	LOCALE_NAME
 50853	A. Karanlýða k. d. özütü
 50901	Boþ Þiþe
 50902	Acemiler Ýçin Reçete
-50903	Reçete
-50904	Uzman Reçetesi
+50903	Arttýrma Kaðýdý Þemasý
+50904	Efsun Nesnesi Þemasý
 50905	Sim Suyu Reçetesi
 50906	Dok Suyu Reçetesi
 50907	Bo Suyu Reçetesi
@@ -11425,4 +11425,12 @@ VNUM	LOCALE_NAME
 165100	Mitsi ejderha oniksi
 165200	Mitsi ejderha oniksi
 165300	Mitsi ejderha oniksi
-165400	Mitsi ejderha oniksi
+165400	Mitsi ejderha oniksi30400	Gemstones
+30401	Piece of Gem
+30402	Gem Coupon (1)
+30403	Gem Coupon (5)
+30404	Gem Coupon (10)
+30405	Gem Coupon (15)
+30406	Gem Coupon (25)
+30407	Gem Coupon (50)
+30408	Gem Coupon (100)

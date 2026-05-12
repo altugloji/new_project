@@ -18,6 +18,7 @@ if app.__BL_MULTI_LANGUAGE__:
 		localeDict["CUBE_INFO_TITLE"] = "Recipe"
 		localeDict["CUBE_REQUIRE_MATERIAL"] = "Requirements"
 		localeDict["CUBE_REQUIRE_MATERIAL_OR"] = "or"
+		localeDict["CUBE_RENEWAL_SEARCH"] = "Search..."
 		
 		try:
 			lines = open(srcFileName, "r").readlines()

@@ -10,6 +10,9 @@
 
 //////////////////////////////////////////////////////////////////////////
 // ### New Features ###
+#define __GEM_SYSTEM__
+
+
 #define ENABLE_NO_MOUNT_CHECK
 #define ENABLE_D_NJGUILD
 #define ENABLE_FULL_NOTICE

@@ -7,6 +7,7 @@
 
 #define ENABLE_RENDER_TARGET
 #define ENABLE_WIKI
+#define __GEM_SHOP__
 
 //////////////////////////////////////////////////////////////////////////
 // ### Default Ymir Macros ###

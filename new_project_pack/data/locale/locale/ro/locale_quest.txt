@@ -1,3 +1,7 @@
+21301	Creare
+21302	Creare Mithril
+21303	Creare Piatrã Neagrã
+21304	Creare Carte Mov
 1	Un material special
 2	Ti-am spus deja despre puterile pe care le are[ENTER]Sung Mahi.[ENTER][ENTER]Grabeste-te si cauta-l pe Capitan.[ENTER][ENTER]Intoarce-te cand ai materialul necesar.
 3	Mãreºte-þi puterea
@@ -893,7 +897,7 @@
 894	Ai nevoie de încã %s nivele.
 895	%s are nevoie de încãrcãri.
 896	Ai nevoie de mai multe încãrcãri.
-897	Ai suficiente încãrcãri.[ENTER]Apasã pe „Intrã” pentru a intra.
+897	Ai suficiente încãrcãri.[ENTER]Apasã pe „Intrã" pentru a intra.
 898	Încãrcare completã.
 899	Te rugãm sã alegi cum doreºti sã încarci.
 900	Nu ai obiectele necesare de încãrcare.
@@ -2507,7 +2511,7 @@
 2508	Ceva ghinion.
 2509	Astazi e o zi proasta. O zi in care tot ce vei[ENTER]face va fi egal cu zero. Astazi vei avea[ENTER]"Ghinion" si ai grija pe unde mergi si ce faci.[ENTER]Te-as putea ajuta vanzandu-ti un Talisman pentru[ENTER]a te feri de rele. Esti interesat?
 2510	Ghinion.
-2511	Aceasta este una dintre cele mai proaste zile din[ENTER]viaþa ta. Toþi Zeii Cerului ºi ai Pãmântului[ENTER]aruncã cu blesteme asupra ta. Indiferent ce vei[ENTER]face astãzi nu-þi va merge bine. Dacã vrei sã[ENTER]aprinzi un foc va ploua, dacã îþi va fi sete[ENTER]soarele va dogorî asupra ta. Vei munci la fel de[ENTER]mult ca ºi ceilalþi dar nu te vei alege cu nimic.[ENTER]Eºti pe cale sã ai parte de „foarte mare[ENTER]ghinion“![ENTER]Fãrã un Talisman vei avea vremuri grele.[ENTER]Doreºti sã cumperi unul?
+2511	Aceasta este una dintre cele mai proaste zile din[ENTER]viaþa ta. Toþi Zeii Cerului ºi ai Pãmântului[ENTER]aruncã cu blesteme asupra ta. Indiferent ce vei[ENTER]face astãzi nu-þi va merge bine. Dacã vrei sã[ENTER]aprinzi un foc va ploua, dacã îþi va fi sete[ENTER]soarele va dogorî asupra ta. Vei munci la fel de[ENTER]mult ca ºi ceilalþi dar nu te vei alege cu nimic.[ENTER]Eºti pe cale sã ai parte de „foarte mare[ENTER]ghinion"![ENTER]Fãrã un Talisman vei avea vremuri grele.[ENTER]Doreºti sã cumperi unul?
 2512	Mare ghinion.
 2513	Incizie Tripla
 2514	Atacul Sabiei
@@ -12745,10 +12749,10 @@
 13544	Intrã: Adâncul Nordic (uºor)
 13545	Intrã: Adâncul Nordic (greu)
 13546	Gardian Fantomã
-13547	Doreºti sã generezi instanþa „Adâncul Nordic[ENTER](uºor)”?
-13548	Doreºti sã generezi instanþa „Adâncul Nordic[ENTER](greu)”?
-13549	Eºti gata sã intri în instanþa „Adâncul Nordic[ENTER](uºor)”?
-13550	Eºti gata sã intri în instanþa „Adâncul Nordic[ENTER](greu)”?
+13547	Doreºti sã generezi instanþa „Adâncul Nordic[ENTER](uºor)"?
+13548	Doreºti sã generezi instanþa „Adâncul Nordic[ENTER](greu)"?
+13549	Eºti gata sã intri în instanþa „Adâncul Nordic[ENTER](uºor)"?
+13550	Eºti gata sã intri în instanþa „Adâncul Nordic[ENTER](greu)"?
 13551	Creeazã
 13552	Intrã
 13553	Anuleazã
@@ -12760,19 +12764,19 @@
 13559	Nu eºti într-un grup.
 13560	Acest lucru este disponibil numai pentru liderul grupului.
 13561	Grupul tãu trebuie sã fie format din cel puþin 4 jucãtori.
-13562	%s nu a finalizat încã misiunea „Puterea lui Confucius” sau alte aventuri în Yohara.
+13562	%s nu a finalizat încã misiunea „Puterea lui Confucius" sau alte aventuri în Yohara.
 13563	%s nu are suficiente Chei Îngheþate.
 13564	Nu toþi membrii grupului se aflã în aceeaºi zonã.
 13565	%s nu poate intra în instanþã în timp ce este transformat.
 13566	%s Nivelul de campion nu este suficient de mare.
 13567	%s are încã recompense care trebuie colectate înainte de a putea participa.
-13568	%s trebuie sã finalizeze cu succes „Adâncul Nordic (uºor)” mai întâi.
-13569	Nu ai finalizat încã misiunea „Puterea lui Confucius” sau alte aventuri în Yohara.
+13568	%s trebuie sã finalizeze cu succes „Adâncul Nordic (uºor)" mai întâi.
+13569	Nu ai finalizat încã misiunea „Puterea lui Confucius" sau alte aventuri în Yohara.
 13570	Nu ai suficiente Chei Îngheþate.
 13571	Nu poþi intra cât timp eºti transformat.
 13572	Nivelul Campion nu este suficient de mare.
 13573	Nu ai adunat încã toate recompensele.
-13574	Mai întâi trebuie sã finalizezi cu succes „Adâncul Nordic (uºor)”.
+13574	Mai întâi trebuie sã finalizezi cu succes „Adâncul Nordic (uºor)".
 13575	Adunã Recompense
 13576	L-am auzit pe Alastor rãcnind în adâncurile[ENTER]Adãpostului Nordic. Aici pentru tine.
 13577	Ai primit 8x Cufãr Dragon Alb (Uºor)

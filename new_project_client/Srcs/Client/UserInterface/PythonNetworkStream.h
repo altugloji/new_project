@@ -261,6 +261,10 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		bool RecvMallItemSetPacket();
 		bool RecvMallItemDelPacket();
 
+#ifdef __GEM_SHOP__
+		// Gem
+		bool RecvGem();
+#endif
 		// Lover
 		bool RecvLoverInfoPacket();
 		bool RecvLovePointUpdatePacket();

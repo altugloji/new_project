@@ -78,7 +78,7 @@ quest collect_quest_lv50  begin
 					say_title(gameforge.collect_herb_lv10._50_sayTitle)
 					say(gameforge.collect_quest_lv50._160_say)
 					pc.remove_item(30015, 1)
-					pc.setqf("duration",get_time()+60*60*22) ----------------22Stunden
+					pc.setqf("duration",get_time()+60*60*10) ----------------22Stunden
 					wait()
 
 					local pass_percent
@@ -208,7 +208,8 @@ quest collect_quest_lv50  begin
 			say_title(gameforge.collect_quest_lv30._340_sayTitle)
 			say(gameforge.collect_quest_lv50._320_say)
 			say_reward(gameforge.collect_quest_lv50._330_sayReward)
-						affect.add_collect(apply.DEF_GRADE_BONUS,60,60*60*24*365*60) --60Jahre
+						-- affect.add_collect(apply.DEF_GRADE_BONUS,60,60*60*24*365*60) --60Jahre
+						affect.add_collect(1, 1000, 60*60*24*365*60) -- hp apply index == 1
 
 			pc.give_item2(50111)
 			clear_letter()

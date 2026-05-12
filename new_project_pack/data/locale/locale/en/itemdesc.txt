@@ -2763,7 +2763,7 @@
 27988	Treasure Map	A worn out map which reveals the location of an ancient treasure.
 27989	Compass for Metin Stones	The compass shows you the position and distance to the next Metin Stone. The brighter it glows, the closer you are. It can be activated 6 times.
 27990	Piece of Stone	Because of the small size it can be transported very well. It can be used in many different ways.
-27991	Water Stone	A hard, coarse stone which can be used to grind weapons or kitchen utensils.
+27991	Water Stone	A valuable mineral from the sea.
 27992	White Pearl	The pure white treasure found inside a seashell.
 27993	Blue Pearl	A magnificent deep blue pearl found inside a seashell.
 27994	Blood-Red Pearl	The tawny-coloured treasure from the inside of a seashell.
@@ -2931,7 +2931,7 @@
 30153	Flowers	A rare flower, its scent reminds you of something from the past.
 30154	Secret Temple Book	The analysis of the history and doctrine of the secret temple.
 30155	Mirine's Pendant	A necklace pendant. Engraved on the reverse side, is the name "Mirine".
-30156	Secret Temple Book	The analysis of the history and doctrine of the secret temple.
+30156	Purple Book	A book containing recipes for skill books. Can be crafted at the Alchemist.
 30157	Arrowhead	These poisonous arrowheads will help to defend the kingdom.
 30177	Musk Oil	Musk Oil is used by the Weapon Shop Dealer during a quest. The item does not have any further functions.
 30179	Twisted Key	This magic key activates the portal to the Dragon's Temple.
@@ -3123,20 +3123,20 @@
 30586		
 30600	Sewing Pattern	
 30601	Armour Design	
-30602	Blue Dye	
-30603	Red Dye	
-30604	Grey Dye	
+30602	Blue Dye	Dye required for crafting.
+30603	Red Dye	Dye required for crafting.
+30604	Gray Dye	Dye required for crafting.
 30605	Gold Sheets	
 30606	Silver Sheets	
 30607	Copper Sheets	
 30608	Steel Sheets	
 30609	Bronze Sheets	
-30610	Mithril	
+30610	Mithril	Obtained by melting ores. Can be used in various crafting recipes. Can be crafted at the Alchemist.
 30611	Tough Straps	
 30612	Sturdy Cords	
 30613	Stone of the Dryads	Shrouded in a green shimmer, this mysterious stone encases the soul of a dryad, a tree spirit. The dryads know the secret words which will grant you access to the Erebus dungeon.
-30614	Black Dye	
-30615	White Dye	
+30614	Black Dye	Dye required for crafting.
+30615	White Dye	Dye required for crafting.
 30616	Titanium Dioxide	This prismatic crystal is used for refining a piece of equipment.
 30617	Agate	This mysterious shimmering gemstone is used for refining a piece of equipment.
 30618	Moonstone	A spark of moonlight is encapsulated within this teardrop-shaped jewel. Used for refining a piece of equipment.
@@ -3216,7 +3216,7 @@
 31032	Leviathan Pearls	Effective strengthening capsules made from the Inner Light of mythical beings and the Millennium Essence.
 31033	Chief's Cape	This cape is the symbol of their invulnerability for the Red Thieves.
 31034	Giants' Totem	The totem has the form of a giant piece of amber.
-31035	Black Stone	This mysterious stone is being mined by the Cyclops in the Thunder Mountains.
+31035	Black Stone	Obtained by melting stones. Can be used in various crafting recipes. Can be crafted at the Alchemist.
 31036	Black Gold	This black ore with magical properties can be found in the Thunder Mountains.
 31037	Leather Bag	You took this bag from Captain Shruk. It seems to be lighter than you expected...
 31038	Holy Ground	This bag full of Holy Ground serves as a medium for summoning the dead.
@@ -5627,8 +5627,8 @@
 50853	G Darkness Resist Elixir	This extremely powerful elixir gives whoever drinks it +20% darkness resistance.
 50901	Empty Bottle	Used to manufacture potions
 50902	Recipe for Beginners	An easy to get recipe which can also be done by greenhorns.
-50903	Recipe	A recipe that needs a bit of practice.
-50904	Expert's Recipe	A recipe that can only be done correctly by experts.
+50903	Enhancement Scroll Design	A design required for crafting.
+50904	Enchant Item Design	A design required for crafting.
 50905	Recipe for Sim Water	It describes the exact manufacture of the water made from Peach Blossom Juice and Lilac.
 50906	Recipe for Dok Water	It describes the exact manufacture of the water made from Harebell Juice and Lilac.
 50907	Recipe for Bo Water	It describes the exact manufacture of the water made from Kaki Blossom Juice and Tue Fungi.
@@ -5658,7 +5658,7 @@
 50938	Red Seer Chest	Contains 105 Tarot Cards for the Duel of the Seers.
 50939	Blue Seer Chest	Contains 21 Tarot Cards for the Duel of the Seers.
 50940	Pink Seer Chest	Contains 5 Tarot Cards for the Duel of the Seers.
-51001	Energy Fragment	Fragment from an Energy Crystal. 30 pieces can be melted into a crystal.
+51001	Energy Fragment	Obtained by melting valuable items. Can be used in various crafting recipes. Can be crafted at the Alchemist.
 51002	Energy Crystal	This crystal increases your bonuses for two hours.
 51501	Cor Draconis (Rough)	The crystal dragon heart contains a random Dragon Stone from the rough class.
 51502	Cor Draconis (Rough)	The crystal dragon heart contains a random Dragon Stone from the rough class.
@@ -7251,7 +7251,7 @@
 79512	Tarot Card	Event item for the Duel of the Seers. Collect 18 Tarot Cards and combine them to make a Tarot Set.
 79513	Tarot Set	You can start a Duel of the Seers with this mystical set of cards.
 79514	Seer Coin	A reward from the Duel of the Seers which can be exchanged for valuable items.
-79602	Guard Compass	This compass gives you the guard’s location. Can only be used in the Temple of the Ochao. Can be used 6 times.
+79602	Guard Compass	This compass gives you the guard's location. Can only be used in the Temple of the Ochao. Can be used 6 times.
 79603	King Card	Right-click to open the Catch the King! interface and add your King Card there. Twenty-five cards will be automatically merged into a King Deck. When the event ends, you cannot receive any more card sets, and any remaining ones will be removed.
 79604	King Deck	Right-click to open the Catch the King! interface, add your King Deck and play a round of Catch the King! The card deck will automatically be removed after starting the game. When the event ends, you cannot receive any more card sets, and any remaining ones will be removed.
 79605	1* Belt Catalyst	Increases the chance of success when crafting belts by 1%.

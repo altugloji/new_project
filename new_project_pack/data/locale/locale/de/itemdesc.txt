@@ -2680,9 +2680,9 @@
 27811	Regenbogenforelle	Ein Fisch mit einem regenbogenfarbenen Rücken.
 27812	Flussforelle	Ein Süßwasserfisch, der in dieser Gegend sehr verbreitet ist.
 27813	Rotfeder	Ein schwarmlebender, rötlich schimmernder Fisch.
-27814	Barsch	Ein Fisch, der als „Hai der Seen“ bekannt ist.
+27814	Barsch	Ein Fisch, der als „Hai der Seen" bekannt ist.
 27815	Tenchi	Eine Barbenart, die nur in sauberen Gewässern lebt.
-27816	Wels	Ein Fisch mit charakteristisch großem Maul und katzenartigen „Schnurrhaaren“.
+27816	Wels	Ein Fisch mit charakteristisch großem Maul und katzenartigen „Schnurrhaaren".
 27817	Schmerle	Ein Fisch, der gewöhnlich in seichten, schlammigen Gewässern lebt.
 27818	Lotusfisch	Ein großer Süßwasserfisch, der von Mischnahrung lebt.
 27819	Ayu	Ein dem Stint verwandter Fisch, der in Küstennähe und in Mündungsgebieten lebt.
@@ -2763,7 +2763,7 @@
 27988	Schatzkarte	Eine abgegriffene Karte, auf welcher der Lagerort eines alten Schatzes verzeichnet ist.
 27989	Kompass des Metinsteins	Der Kompass zeigt dir Richtung und Entfernung des nächsten Metin-Steins an. Je heller er leuchtet, desto näher bist du. Er kann 6 Mal aktiviert werden.
 27990	Steinstück	Durch seine geringe Größe lässt sich dieses Stück leicht transportieren, kann aber dennoch vielseitig verwendet werden.
-27991	Wasserstein	Ein harter, grobkörniger Stein, der zum Schleifen von Waffen und Küchengeräten verwendet wird.
+27991	Wasserstein	Ein wertvolles Mineral aus dem Meer.
 27992	Weiße Perle	Der schneeweiße Schatz aus dem Inneren einer Muschel.
 27993	Blaue Perle	Ein prachtvoller, tiefblauer Schatz aus dem Inneren einer Muschel.
 27994	Blutrote Perle	Der lohfarbene Schatz aus dem Inneren einer Muschel.
@@ -2931,7 +2931,7 @@
 30153	Blumen	Der Geruch dieser seltenen Blüten erinnern an etwas, das weit in der Vergangenheit liegt.
 30154	Geheimes Tempelbuch	Das wertvolle Buch enthält die Analyse der Lehre und der Geschichte des geheimen Tempels.
 30155	Mirines Anhänger	Ein Anhänger für eine Halskette. Auf seiner Rückseite ist der Name "Mirine" eingraviert.
-30156	Geheimes Tempelbuch	Das wertvolle Buch enthält die Analyse der Lehre und der Geschichte des geheimen Tempels.
+30156	Violettes Buch	Ein Buch mit Rezepten für Fertigkeitsbücher. Kann beim Alchemisten hergestellt werden.
 30157	Pfeilspitze	Diese vergifteten Pfeilspitzen werden helfen, das Reich zu verteidigen.
 30177	Moschusöl	Das Moschusöl wird vom Waffenhändler in einer Quest verwendet. Das Item hat keine weitere Funktion.
 30179	Gewundener Schlüssel	Dieser magische Schlüssel aktiviert das Portal zum Tempel des Drachen.
@@ -3123,20 +3123,20 @@
 30586	Glatter Schmuck(purpur)	
 30600	Schnittmuster	
 30601	Rüstungsplan	
-30602	Blauer Farbstoff	
-30603	Roter Farbstoff	
-30604	Grauer Farbstoff	
+30602	Blaue Farbe	Farbe, die für die Herstellung benötigt wird.
+30603	Rote Farbe	Farbe, die für die Herstellung benötigt wird.
+30604	Graue Farbe	Farbe, die für die Herstellung benötigt wird.
 30605	Goldplatten	
 30606	Silberplatten	
 30607	Kupferplatten	
 30608	Stahlplatten	
 30609	Bronzeplatten	
-30610	Mithril	
+30610	Mithril	Wird durch das Einschmelzen von Erzen gewonnen. Kann für verschiedene Herstellungsprozesse verwendet werden. Kann beim Alchemisten hergestellt werden.
 30611	Schwere Gurte	
 30612	Stabile Schnüre	
 30613	Stein der Dryaden	In diesem geheimnisvoll grün-schimmernden Stein ist die Seele einer Dryade, eines Baumgeistes, eingeschlossen. Die Dryade kennt die geheimen Worte, die dir den Zutritt zum Erebos ermöglichen.
-30614	Schwarzer Farbstoff	
-30615	Weißer Farbstoff	
+30614	Schwarze Farbe	Farbe, die für die Herstellung benötigt wird.
+30615	Weiße Farbe	Farbe, die für die Herstellung benötigt wird.
 30616	Titandioxid	Der prismatische Kristall dient zur Veredelung eines Ausrüstungsgegenstandes.
 30617	Achat	Der geheimnisvoll schimmernder Schmuckstein dient zur Veredelung eines Ausrüstungsgegenstandes.
 30618	Mondstein	Der tropfenförmige Edelstein hält einen Funken Mondlicht in sich gefangen. Dient zur Veredelung eines Ausrüstungsgegenstandes.
@@ -3216,7 +3216,7 @@
 31032	Perlen des Leviathan	Wirkungsvolle Stärkungskapseln aus dem Inneren Licht mythischer Wesen und der Millennium-Essenz.
 31033	Umhang des Häuptlings	Dieser Umhang ist für die Rotdiebe das Symbol ihrer Unbesiegbarkeit.
 31034	Totem der Giganten	Das Totem hat die Form eines großen Bernsteins.
-31035	Schwarzes Gestein	Dieser geheimnisvolle Stein wird von den Zyklopen in den Donnerbergen abgebaut.
+31035	Schwarzer Stein	Wird durch das Einschmelzen von Steinen gewonnen. Kann für verschiedene Herstellungsprozesse verwendet werden. Kann beim Alchemisten hergestellt werden.
 31036	Schwarzes Gold	Das schwarze Erz mit magischen Kräften kommt in den Donnerbergen vor.
 31037	Lederbeutel	Diesen Beutel hast du Kapitän Shrack abgenommen. Er ist leichter als du erwartet hattest ...
 31038	Geweihte Erde	Dieser Beutel voller geweihter Erde dient als Medium für die Totenbeschwörung.
@@ -5627,8 +5627,8 @@
 50853	G. Finsterwdst.-Elixier	Dieses äußerst mächtige Elixier verleiht dem, der es trinkt +20 % Widerstand gegen Dunkelheit.
 50901	Leere Flasche	Ein Abfüllgefäß für Tränke.
 50902	Anfängerrezept	Eine leicht zu befolgende Anweisung, die auch von Unerfahrenen bewältigt werden kann.
-50903	Rezept	Eine Rezeptanweisung, die ein wenig Übung erfordert.
-50904	Expertenrezept	Eine Rezeptanweisung, die nur von Geübten korrekt ausgeführt werden kann.
+50903	Segensschrift-Schablone	Eine Schablone, die für die Herstellung benötigt wird.
+50904	Gegenstand-Verzaubern-Schablone	Eine Schablone, die für die Herstellung benötigt wird.
 50905	Rezept Sim-Wasser	Es beschreibt die genaue Herstellung des Wassers aus Pfirsichblütensaft und Flieder.
 50906	Rezept Dok-Wasser	Es beschreibt die genaue Herstellung des Wassers aus Glockenblumensaft und Flieder.
 50907	Rezept Bo-Wasser	Es beschreibt die genaue Herstellung des Wassers aus Kakiblütensaft und Tue-Pilzen.
@@ -5658,7 +5658,7 @@
 50938	Rote Sehertruhe	Enthält 105 Tarotkarten für den Seherwettstreit.
 50939	Blaue Sehertruhe	Enthält 21 Tarotkarten für den Seherwettstreit.
 50940	Rosa Sehertruhe	Enthält 5 Tarotkarten für den Seherwettstreit.
-51001	Energiesplitter	Splitter eines Energiekristalls. 30 Stück lassen sich zu einem Kristall schmelzen.
+51001	Energiesplitter	Wird durch das Einschmelzen wertvoller Gegenstände gewonnen. Kann für verschiedene Herstellungsprozesse verwendet werden. Kann beim Alchemisten hergestellt werden.
 51002	Energiekristall	Dieser Kristall erhöht für zwei Stunden deine Boni.
 51501	Cor Draconis (Roh)	Das kristallene Drachenherz beinhaltet einen zufälligen Drachenstein der Klasse Roh.
 51502	Cor Draconis (Roh)	Das kristallene Drachenherz beinhaltet einen zufälligen Drachenstein der Klasse Roh.
@@ -6765,7 +6765,7 @@
 72031	Drachengott-Angriff	Erhöht deinen Angriffswert 30 Minuten lang um 15%.
 72032	Drachengott-Angriff	Erhöht deinen Angriffswert 30 Minuten lang um 15%.
 72033	Drachengott-Angriff	Erhöht deinen Angriffswert 30 Minuten lang um 15%.
-72034	Drachengott-Verteidigung	Verringert den Schaden, den du bei der Verteidigung erleidest, um 12-15 %.
+72034	Drachengott-Verteidigung	Verringert den Schaden, den du bei der Verteidigung erleidest, um 12-15 %.
 72035	Drachengott-Verteidigung	Verringert den Schaden, den du bei der Verteidigung erleidest, um 12-15 %.
 72036	Drachengott-Verteidigung	Verringert den Schaden, den du bei der Verteidigung erleidest, um 12-15 %.
 72037	Drachengott-Leben	Erhöht deine maximalen TP 30 Minuten lang um 20%.

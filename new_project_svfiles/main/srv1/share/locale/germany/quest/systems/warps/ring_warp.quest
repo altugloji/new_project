@@ -1,148 +1,88 @@
---[[
-Server Files Author : Oğuzhan Altuğ
---]]
-quest move_ring begin
+quest ring_warp begin
 	state start begin
 		when 70058.use begin
-		local max_use = 50
-		local n = item.get_socket(0)
+            local empire = pc.get_empire()
 
-		if n >= max_use then
-			say_reward("Bu yüzüğün kullanım hakkı bitti.")
-			item.remove()
-			return
-		end
-		say(string.format(gameforge.ring_warp._030_say, max_use -n))
-
-		local s = select("Köyler","Orman Bölgeleri ","Örümcek Zindanı ","Diğer Bölgeler","Kapat ")
-
-		if s == 1 then
-			-- addimage(1, -31, "teleport_ring_flags_yangan.png")
-			local ss = select(
-			"Kırmızı Bayrak (1.Köy)",
-			"Kırmızı Bayrak (2.Köy)",
-			"Sarı Bayrak (1.Köy)",
-			"Sarı Bayrak (2.Köy)",
-			"Mavi Bayrak (1.Köy)",
-			"Mavi Bayrak (2.Köy)",
-			"Vazgeç ")
-			if ss == 1 then
-				pc.warp(474292,954511)
-			elseif ss == 2 then
-				pc.warp(360800,877600)
-			elseif ss == 3 then
-				pc.warp(63800,166161)
-			elseif ss == 4 then
-				pc.warp(138500,234900)
-			elseif ss == 5 then
-				pc.warp(959700,268600)
-			elseif ss == 6 then
-				pc.warp(873100,242600)
+			local max_use = item.get_value(0)
+			local n = item.get_socket (0)
+			if n >= max_use then
+				say (gameforge.ring_warp._010_say)
+				return
 			end
 
+			local t = item.get_socket(1)
+			if t > get_global_time() then
+				say (string.format(gameforge.ring_warp._020_say, (t - get_global_time()) / 60 ))
+				return
+			end
+			say(string.format(gameforge.ring_warp._030_say, max_use -n))
+			local sub_set = 0
 
-		elseif s == 2 then
-			local sss = select("Hayalet Orman","Kızıl Orman","Vazgeç ")
-			if sss == 1 then
-				if pc.level < 60 then
-					say_reward("Haritaya giriş için levelin yetersiz!")
-					say_reward("Giriş seviyesi: 60")
-					select("Kapat ")
-					return
-				end
-				pc.warp(288700,5700)
-			elseif sss == 2 then
-				if pc.level < 65 then
-					say_reward("Haritaya giriş için levelin yetersiz!")
-					say_reward("Giriş seviyesi: 65")
-					select("Kapat ")
-					return
-				end
-				pc.warp(1119900,70800)
+			local town1={
+					gameforge.functions._100_say,
+					gameforge.functions._110_say,
+					gameforge.functions._120_say,
+				}
+
+			local town2={
+					gameforge.functions._130_say,
+					gameforge.functions._140_say,
+					gameforge.functions._150_say,
+				}
+			sub_set = select(town1[empire], town2[empire], locale.map_name[64], locale.map_name[63], locale.map_name[61], locale.map_name[62], gameforge.locale.cancel)
+			if sub_set == 7 then
+				return
 			end
 
+			local warp = {
+				{ -- empire town -1
 
-		elseif s == 3 then
-			local zindan = select("1. Kat Başı ", "1. Kat Sonu ","Vazgeç ")
-			if zindan == 1 then
-				if pc.level < 40 then
-					say_reward("Haritaya giriş için levelin yetersiz!")
-					say_reward("Giriş seviyesi: 40")
-					select("Kapat ")
-					return
-				end
-				pc.warp(59800,497300)
-			elseif zindan == 2 then
-				if pc.level < 40 then
-					say_reward("Haritaya giriş için levelin yetersiz!")
-					say_reward("Giriş seviyesi: 40")
-					select("Kapat ")
-					return
-				end
-				pc.warp(90000,525300)
+					{ 474300 , 954800 },
+					{ 63800 , 166400 },
+					{ 959900 , 269200 },
+				},
+				{ -- empire town -2
+					{ 353100 , 882900},
+					{ 145500 , 240000 },
+					{ 863900 , 246000 },
+
+				},
+				-- 64 map_n_threeway
+				{
+					{ 402100, 673900 },
+					{ 270400, 739900 },
+					{ 321300, 808000 },
+				},
+				-- 63 metin2_map_n_desert_01
+				{
+					{ 217800, 627200 },
+					{ 221900, 502700 },
+					{ 344000, 502500 },
+				},
+				-- 61 map_n_snowm_01
+				{
+					{ 434200, 290600 },
+					{ 375200, 174900 },
+					{ 491800, 173600 },
+				},
+				-- 62 metin2_map_n_flame_01
+				{
+					{ 599400, 756300 },
+					{ 597800, 622200 },
+					{ 730700, 689800 },
+				},
+			}
+
+			if not pc.warp(warp[sub_set][empire][1], warp[sub_set][empire][2]) then
+				return
 			end
 
-
-		elseif s == 4 then
-			local sssssss = select(
-			"Seungryong Vadisi",
-			"Sohan Dağı ",
-			"Yongbi Çölü ",
-			"Doyyumhwan",
-			"Devler Diyarı ",
-			"Şeytan Kulesi",
-			"Katacomb",
-			"Vazgeç "
-			)
-			if sssssss == 1 then --Vadi
-				if pc.level < 20 then
-					say_reward("Haritaya giriş için levelin yetersiz!")
-					say_reward("Giriş seviyesi: 20")
-					select("Kapat ")
-					return
-				end
-				pc.warp(1079400, 1089900)
-				--pc.warp(335500, 755100)
-			elseif sssssss == 2 then --Sohan
-				if pc.level < 40 then
-					say_reward("Haritaya giriş için levelin yetersiz!")
-					say_reward("Giriş seviyesi: 40")
-					return
-				end
-				pc.warp(436400,215600)
-			elseif sssssss == 3 then --Çöl
-				if pc.level < 20 then
-					say_reward("Haritaya giriş için levelin yetersiz!")
-					say_reward("Giriş seviyesi: 20")
-					return
-				end
-				pc.warp(296800,547400)
-			elseif sssssss == 4 then --Doyum
-				if pc.level < 55 then
-					say_reward("Haritaya giriş için levelin yetersiz!")
-					say_reward("Giriş seviyesi: 55")
-					return
-				end
-				pc.warp(600800,687400)
-			elseif sssssss == 5 then --Devler D
-				if pc.level < 60 then
-					say_reward("Haritaya giriş için levelin yetersiz!")
-					say_reward("Giriş seviyesi: 60")
-					return
-				end
-				pc.warp(829900,763300)
-			elseif sssssss == 6 then --Kule
-				pc.warp(590500,110500)
-			elseif sssssss == 7 then --Katakomb
-				if pc.level < 75 then
-					say_reward("Haritaya giriş için levelin yetersiz!")
-					say_reward("Giriş seviyesi: 75")
-					return
-				end
-				pc.warp(591200,99400)
+			item.set_socket(1, get_global_time() + item.get_value(1))
+			if n == max_use - 1 then
+				item.remove()
+			else
+				item.set_socket(0, n + 1)
 			end
-		elseif s == 5 then
-			end
-		end
-	end
-end
+		end --when
+ 	end -- end_of_state
+end -- end_of_quest

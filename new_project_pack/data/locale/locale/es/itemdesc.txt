@@ -2488,7 +2488,7 @@
 21945	Garra de cuervo	Ningún cuervo resultó dañado durante la fabricación de esta arma.
 21946	Garras del destino	Desgarran carne, sueños y destinos.
 21950	Legado de Balmung	Balmung y su legado son hojas legendarias... al menos tienen algo en común.
-21951	Hada de muerte	Pequeña y de aspecto inofensiva, pero 100 % letal.
+21951	Hada de muerte	Pequeña y de aspecto inofensiva, pero 100 % letal.
 21952	Susurrador de titanes	Con el sonido del rebote parece que se oyen palabras aciagas.
 21953	Trueno	¡Si blandes tu espada en el campo de batalla, sonarán bombos y trompetas!
 21954	Furia cantante	¡Ay de quien interrumpa sus operáticos himnos!
@@ -2595,7 +2595,7 @@
 23089	Guantes serpen.(INT)+9	
 25040	Pergamino Bendición	Elimina el riesgo de destruir un objeto si la mejora falla. El coste de esto es que la calidad es reducida en 1 punto.
 25041	Piedra mágica	Un pedazo del metal legendario puede aumentar la probabilidad de mejorar un objeto. El objeto mejorado no podrá ser destruido ni reducido de nivel.
-25042	Piedra del ritual	Una piedra mística brillante que aumenta mucho la probabilidad de mejorar un objeto correctamente. Además, el objeto mejorado no disminuirá de nivel ni quedará destruido. Funciona solo con objetos a partir del nivel 80.
+25042	Piedra del ritual	Una piedra mística brillante que aumenta mucho la probabilidad de mejorar un objeto correctamente. Además, el objeto mejorado no disminuirá de nivel ni quedará destruido. Funciona solo con objetos a partir del nivel 80.
 25043	Sello de los dioses	Aumenta mucho la probabilidad de mejora de objetos. Además, el objeto no resultará destruido ni bajará de nivel. | Para usarlo, arrástralo sobre el objeto que quieras mejorar. | Sin límite de nivel.
 25100	Pergam. Piedra Espíritu	El pergamino te permite extraer la Piedra Espíritu de un arma o armadura. Deja una marca de extracción.
 25101	Trozo de tarta	Este delicioso postre otorga una bonificación de EXP de un 100% durante 30 minutos.
@@ -2636,8 +2636,8 @@
 27122	Poción roja (P)	Rellena 300 puntos de vida. No comerciable.
 27123	Poción verde (P)	Aumenta tu velocidad de ataque en +10 durante 10 minutos. No comerciable.
 27124	Vendaje	Detiene el sangrado de inmediato.
-27125	Poción de batalla	Una poción potente que aumenta tus puntos de ataque y defensa y te confiere 50 000 puntos de vida (solo en la zona de combate).
-27126	Poción Fuerza Dragón	Esta poción te refuerza con el Poder del Dragón durante 10 minutos. Solo puedes usarla en el Refugio de Meley.
+27125	Poción de batalla	Una poción potente que aumenta tus puntos de ataque y defensa y te confiere 50 000 puntos de vida (solo en la zona de combate).
+27126	Poción Fuerza Dragón	Esta poción te refuerza con el Poder del Dragón durante 10 minutos. Solo puedes usarla en el Refugio de Meley.
 27128	Secreto de Iutnori	Otorga durante 30 minutos | 20% de EXP | 5% de caída de objetos | 10% de fuerza contra monstruos
 27201	Poción roja (P)	No es comerciable
 27202	Poción roja (M)	No es comerciable
@@ -2745,15 +2745,15 @@
 27876	Barbo Asado	Restaura algo de SP inmediatamente.
 27877	Locha Asado	Te hace invisible durante 5 minutos.
 27878	Pez Loto Asado	Recupera algo de HP inmediatamente.
-27879	Ayu asado	Incrementa la ganancia de experiencia en un 10 %.
-27880	Eperlano asado	Aumenta la fuerza contra monstruos en un 5 %.
-27881	Shiri asado	Aumenta el ataque mágico o cuerpo a cuerpo en un 3 %.
-27882	Carpa espejo asada	Restablece al instante 1000 HP.
-27883	Carpa dorada asada	Incrementa la ganancia de experiencia en un 50 %.
-27884	Channa asado	Aumenta la resistencia a tierra en un 10 %.
-27885	Miracielo asado	Aumenta la resistencia a hielo en un 10 %.
-27886	Cangrejo gigante asado	Aumenta la resistencia a oscuridad en un 10 %.
-27887	Langosta yabbie asada	Incrementa la ganancia de experiencia en un 100 %.
+27879	Ayu asado	Incrementa la ganancia de experiencia en un 10 %.
+27880	Eperlano asado	Aumenta la fuerza contra monstruos en un 5 %.
+27881	Shiri asado	Aumenta el ataque mágico o cuerpo a cuerpo en un 3 %.
+27882	Carpa espejo asada	Restablece al instante 1000 HP.
+27883	Carpa dorada asada	Incrementa la ganancia de experiencia en un 50 %.
+27884	Channa asado	Aumenta la resistencia a tierra en un 10 %.
+27885	Miracielo asado	Aumenta la resistencia a hielo en un 10 %.
+27886	Cangrejo gigante asado	Aumenta la resistencia a oscuridad en un 10 %.
+27887	Langosta yabbie asada	Incrementa la ganancia de experiencia en un 100 %.
 27888	Perca sol asada	
 27889	Carpín asado	
 27890	Perca aucha asada	
@@ -2763,7 +2763,7 @@
 27988	Mapa del Tesoro	Un mapa usado que desvela la localización de un antiguo tesoro.
 27989	Brújula para Metins	La brújula te muestra la posición y la distancia del próximo Metin. Cuanto más brilla, más cerca estás. Puede ser activada 6 veces.
 27990	Trozo de Piedra	Debido a su pequeño tamaño, puede transportarse muy bien. Puede ser usada de muchas formas diferentes.
-27991	Piedra Agua	Una piedra áspera y dura que puede ser usada para afilar armas o utensilios de cocina.
+27991	Piedra de Agua	Un mineral valioso del mar.
 27992	Perla Blanca	El inmaculado tesoro blanco encontrado dentro de una concha marina.
 27993	Perla Azul	Una magnífica perla azul oscuro encontrada dentro de una concha marina.
 27994	Perla roja	Una perla de color rojo del interior de una concha marina.
@@ -2931,7 +2931,7 @@
 30153	Flores	Una flor rara, su aroma te recuerda algo del pasado.
 30154	Libro Secreto Temple	El análisis de la historia y dogma del templo secreto.
 30155	Colgante de Mirine	Un colgante de collar. Grabado en el reverso, está el nombre "Mirine".
-30156	Libro Secreto Temple	Este valioso libro contiene el análisis de la historia y el dogma del templo secreto.
+30156	Libro Morado	Un libro que contiene recetas para libros de habilidad. Se puede fabricar en el Alquimista.
 30157	Punta de Flecha	Estas puntas de flechas envenenadas servirán de ayuda en la defensa del Reino.
 30177	Almizcle	El Almizcle lo usa el Vendedor de la Tienda de Armas durante una misión. Este objeto no tiene ninguna otra función.
 30179	Llave en Espiral	Esta llave mágica activa el portal del Templo del Dragón.
@@ -3123,20 +3123,20 @@
 30586		
 30600	Patrón	
 30601	Diseño de armadura	
-30602	Tinte azul	
-30603	Tinte rojo	
-30604	Tinte gris	
+30602	Tinte Azul	Tinte necesario para la fabricación.
+30603	Tinte Rojo	Tinte necesario para la fabricación.
+30604	Tinte Gris	Tinte necesario para la fabricación.
 30605	Placas de oro	
 30606	Placas de plata	
 30607	Placas de cobre	
 30608	Placas de acero	
 30609	Placas de bronce	
-30610	Mitrilo	
+30610	Mithril	Se obtiene fundiendo minerales. Puede usarse en varias fabricaciones. Se puede fabricar en el Alquimista.
 30611	Bandas resistentes	
 30612	Cordones sólidos	
 30613	Piedra de la dríada	Esta misteriosa piedra que emite un brillo verdoso contiene el alma de una dríada, un espíritu arbóreo. La dríada conoce las palabras secretas que permiten acceder al Érebo.
-30614	Tinte negro	
-30615	Tinte blanco	
+30614	Tinte Negro	Tinte necesario para la fabricación.
+30615	Tinte Blanco	Tinte necesario para la fabricación.
 30616	Dióxido de titanio	El cristal prismático sirve para refinar objetos de equipamiento.
 30617	Ágata	La misteriosa gema brillante sirve para refinar objetos de equipamiento.
 30618	Adularia	Esta gema en forma de gota encierra luz de luna resplandeciente. Sirve para refinar un objeto de equipamiento.
@@ -3178,7 +3178,7 @@
 30662	Garras del salvador	Material necesario para invocar al Fénix de la salvación.
 30663	Pluma de cola ostentosa	Material necesario para invocar al Fénix de la salvación.
 30664	Melena de Asmodeus	Material para fabricar un Escudo de condena.
-30665	Talismán del Otro Mundo	Te protege de la maldición de Asmodeus en Condena. l El talismán se obtiene como botín del Mensajero del viento. l La protección dura 20 minutos.
+30665	Talismán del Otro Mundo	Te protege de la maldición de Asmodeus en Condena. l El talismán se obtiene como botín del Mensajero del viento. l La protección dura 20 minutos.
 30666	Escamas de titanio	Material necesario para la fabricación de un Cinturón de titanio.
 30667	Cordel resistente+	Material necesario para la mejora de un Cinturón de titanio.
 30668	Nudo resistente+	Material necesario para la mejora de un Cinturón de titanio.
@@ -3216,7 +3216,7 @@
 31032	Perla de Leviatán	Cápsulas potenciadoras fabricadas con la Luz interior de seres míticos y la Esencia milenaria.
 31033	Capa del general	Para los Ladrones rojos, esta capa simboliza su invencibilidad.
 31034	Tótem de los gigantes	Este Tótem tiene la forma de una gran piedra de ámbar.
-31035	Piedra negra	Los Cíclopes extrajeron esta misteriosa piedra de la Montañas Trueno.
+31035	Piedra Negra	Se obtiene fundiendo piedras. Puede usarse en varias fabricaciones. Se puede fabricar en el Alquimista.
 31036	Oro negro	Este mineral con poderes mágicos procede de las Montañas Trueno.
 31037	Bolsa de cuero	Le has arrebatado esta Bolsa al Capitán Shrak. Es más ligera de lo que esperabas...
 31038	Tierra bendita	Esta bolsa llena de tierra bendita sirve como medio para invocar a los muertos.
@@ -3289,11 +3289,11 @@
 31105	Madera para barcos	Material para construir un barco
 31106	Timón	Material para construir un barco
 31107	Madera para reparar	Restaura los HP del mástil. Durante la reparación no puedes moverte pero se te protege de ataques de monstruos.
-31108	Litoimpulso pequeño	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 2 %.
-31109	Litoimpulso refinado	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 5 %.
-31110	Litoimpulso pulido	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 10 %.
-31111	Litoimpulso precioso	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 15 %.
-31112	Litoimpulso potente	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 25 %.
+31108	Litoimpulso pequeño	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 2 %.
+31109	Litoimpulso refinado	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 5 %.
+31110	Litoimpulso pulido	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 10 %.
+31111	Litoimpulso precioso	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 15 %.
+31112	Litoimpulso potente	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 25 %.
 31113	Alma del impulso	Material de refinamiento
 31114	Cuero simple	Material de refinamiento
 31115	Yunque	Material de refinamiento
@@ -3458,20 +3458,20 @@
 34067		
 34068		
 34069		
-34150	Perturbador gélido	Con este sello invocas a tu Perturbador gélido. Te otorga | +1500 HP | +10 % de tasa de obtención de botín
-34151	Perturbador tóxico	Con este sello invocas a tu Perturbador tóxico. Te otorga | +5 de precisión | +5 de voluntad de SungMa (VIT)
+34150	Perturbador gélido	Con este sello invocas a tu Perturbador gélido. Te otorga | +1500 HP | +10 % de tasa de obtención de botín
+34151	Perturbador tóxico	Con este sello invocas a tu Perturbador tóxico. Te otorga | +5 de precisión | +5 de voluntad de SungMa (VIT)
 35000	Hierbas Medicinales+	Una colección de hierbas medicinales secas. Por desgracia, están un poco polvorientas.
 35001	Hígado de un Tigre+	El hígado marrón rojizo grande como una mano de un felino adulto.
 35002	Rosa amarilla	Esta flor suele ser un símbolo de afecto y romanticismo. Para personajes masculinos y femeninos.
 38007	Cupón de Dr (1000)	Cupón por valor de 1000 Monedas Dragón. No se puede comerciar con el objeto.
-38008	Espíritu del tigre	Recibes un 20 % más de puntos de clasificación durante 10 minutos. (La duración del efecto se acumula).
-38009	Fuerza del tigre	Infliges un 40 % más de daño JcE durante 10 minutos. (La duración del efecto se acumula).
+38008	Espíritu del tigre	Recibes un 20 % más de puntos de clasificación durante 10 minutos. (La duración del efecto se acumula).
+38009	Fuerza del tigre	Infliges un 40 % más de daño JcE durante 10 minutos. (La duración del efecto se acumula).
 38010	Paquete de Yang	Canjea el Paquete para llenar las bolsas de tu botín de guerra de Yang. No es comerciable.
 38011	Paquete de Yang	Canjea el Paquete para llenar las bolsas de tu botín de guerra de Yang. No es comerciable.
-38015	Cupón de Mt (10)	Cupón por valor de 10 Monedas tigre.
-38016	Cupón de Mt (20)	Cupón por valor de 20 Monedas tigre.
-38017	Cupón de Mt (50)	Cupón por valor de 50 Monedas tigre.
-38018	Cupón de Mt (100)	Cupón por valor de 100 Monedas tigre.
+38015	Cupón de Mt (10)	Cupón por valor de 10 Monedas tigre.
+38016	Cupón de Mt (20)	Cupón por valor de 20 Monedas tigre.
+38017	Cupón de Mt (50)	Cupón por valor de 50 Monedas tigre.
+38018	Cupón de Mt (100)	Cupón por valor de 100 Monedas tigre.
 38050	Baúl del Poder	El Baúl es sorprendentemente liviano, como si estuviera vacío...
 38051	Cristal del Tigre Real	Hacen falta unas artes mágicas considerables para someter espíritus malvados de animales. Este Cristal contiene uno de cinco Sellos de Tigre Real posibles.
 38052	Baúl de los Reyes	Este fastuoso baúl esconde un tesoro verdaderamente regio en su interior. Este objeto es comerciable.
@@ -3482,7 +3482,7 @@
 38057	Baúl del norte	Este baúl reluce en un azul frío y contiene un objeto aleatorio.
 38058	Poción de sabiduría (3h)	Con esta poción obtendrás un 100% más de experiencia durante tres horas de juego.
 38059	Máscara de las emociones	Gracias a esta máscara puedes dar rienda suelta a tus sentimientos durante 15 días.
-38060	Bolsa de emociones	Contiene una emoción aleatoria que se puede utilizar durante 12 h.
+38060	Bolsa de emociones	Contiene una emoción aleatoria que se puede utilizar durante 12 h.
 38100	Supercomida (7 días)	Prorroga 7 días la vida de tu Supermontura.
 38101	Supercomida (15 días)	Prorroga 15 días la vida de tu Supermontura.
 38102	Supercomida (30 días)	Prorroga 30 días la vida de tu Supermontura.
@@ -3492,7 +3492,7 @@
 38305	Escritura	Se guarda en el banco del gremio para disfrutar de terrenos de gremio bien situados. Deja de tener valor tras la redistribución de terrenos a principios de 2020.
 38306	Pág. equip. adicional	Puedes llevar 2 conjuntos de equipamiento diferentes cambiando la página de equipamiento. | Encontrarás la habilidad correspondiente en las habilidades secundarias. | El objeto no es comerciable.
 39001	Piedra Mágica	Esta piedra otorga una enorme probabilidad de mejorar objetos correctamente. Además, el objeto no resultará destruido ni bajará de nivel. Este objeto es comerciable.
-39002	Anillo de exp. (1 h)	Aumenta la ganancia de experiencia en un 50% durante 60 minutos. Este objeto es comerciable.
+39002	Anillo de exp. (1 h)	Aumenta la ganancia de experiencia en un 50% durante 60 minutos. Este objeto es comerciable.
 39003	Vino flor melocotón	Bebida que te permitirá regenerar inmediatamente tus puntos de vida (HP) en 500 puntos. Este objeto es comerciable.
 39004	Bola bendición	Esta bola legendaria le añade a los objetos un quinto atributo si estos ya poseen cuatro. Sin embargo, la adición puede fallar. Este objeto es comerciable.
 39005	Mineral de Cobre Mágico	Con este mineral y un Pergamino Bendición se puede crear un Pergamino de la Guerra donde el herrero. Este objeto es comerciable.
@@ -3528,10 +3528,10 @@
 39035	Cristal de entendimiento	Te permite mostrarle a otro jugador los objetos de tu inventario. El cristal se quiebra durante la operación. Este objeto es comerciable.
 39036	Zapatos viento	Mientras estén equipados, aumentan tu velocidad de movimiento en 30 durante horas de juego. Este objeto es comerciable.
 39037	Elixir del Sol (P)	Rellena automáticamente tus HP. Contiene 1 000 000 SP. Este objeto es comerciable.
-39038	Elixir del Sol (M)	Rellena automáticamente tus HP. Contiene 3 000 000 SP. Este objeto es comerciable.
+39038	Elixir del Sol (M)	Rellena automáticamente tus HP. Contiene 3 000 000 SP. Este objeto es comerciable.
 39039	Elixir del Sol (G)	Rellena automáticamente tus HP. Contiene 7 000 000 SP. Este objeto es comerciable.
-39040	Elixir de la Luna (P)	Rellena automáticamente tus SP. Contiene 100 000 SP. Este objeto es comerciable.
-39041	Elixir de la Luna (M)	Rellena automáticamente tus SP. Contiene 300 000 SP. Este objeto es comerciable.
+39040	Elixir de la Luna (P)	Rellena automáticamente tus SP. Contiene 100 000 SP. Este objeto es comerciable.
+39041	Elixir de la Luna (M)	Rellena automáticamente tus SP. Contiene 300 000 SP. Este objeto es comerciable.
 39042	Elixir de la Luna (G)	Rellena automáticamente tus SP. Contiene 700 000 SP. Este objeto es comerciable.
 39043	Pergamino de Ubicación	El pergamino te permite volver a la última ubicación que marcaste. Este objeto es comerciable.
 39044	Baúl de los Lícanos (P)	Paquete de equipamiento con objetos útiles para Lícanos
@@ -3575,38 +3575,38 @@
 39085	Fragmento casco div. I	Material para un Fragmento de casco divino II.
 39086	Fragmento casco luj. I	Material para un Fragmento de casco lujoso II.
 39087	Fragmento casco ref. I	Material para un Fragmento de casco refinado II.
-39088	Fragmento casco div. II	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set divino.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+5 % de EXP| |[3 objetos]|+1500 HP|+15 % de EXP
-39089	Fragmento casco luj. II	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set lujoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+3 de velocidad de movimiento| |[3 objetos]|+1500 HP|+7 de velocidad de movimiento
-39090	Fragmento casco ref. II	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set refinado o bien para un Fragmento de casco ostentoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+1 % de fuerza contra monstruos| |[3 objetos]|+1500 HP|+5 % de fuerza contra monstruos
+39088	Fragmento casco div. II	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set divino.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+5 % de EXP| |[3 objetos]|+1500 HP|+15 % de EXP
+39089	Fragmento casco luj. II	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set lujoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+3 de velocidad de movimiento| |[3 objetos]|+1500 HP|+7 de velocidad de movimiento
+39090	Fragmento casco ref. II	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set refinado o bien para un Fragmento de casco ostentoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+1 % de fuerza contra monstruos| |[3 objetos]|+1500 HP|+5 % de fuerza contra monstruos
 39091	Fragmento armad. div. I	Material para un Fragmento de armadura divino II.
 39092	Fragmento armad. luj. I	Material para un Fragmento de armadura lujoso II.
 39093	Fragmento armad. ref. I	Material para un Fragmento de armadura refinado II.
-39094	Fragmento armad. div. II	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set divino.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+5 % de EXP| |[3 objetos]|+1500 HP|+15 % de EXP
-39095	Fragmento armad. luj. II	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set lujoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+3 de velocidad de movimiento| |[3 objetos]|+1500 HP|+7 de velocidad de movimiento
-39096	Fragmento armad. ref. II	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set refinado o bien para un Fragmento de armadura ostentoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+1 % de fuerza contra monstruos| |[3 objetos]|+1500 HP|+5 % de fuerza contra monstruos
+39094	Fragmento armad. div. II	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set divino.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+5 % de EXP| |[3 objetos]|+1500 HP|+15 % de EXP
+39095	Fragmento armad. luj. II	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set lujoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+3 de velocidad de movimiento| |[3 objetos]|+1500 HP|+7 de velocidad de movimiento
+39096	Fragmento armad. ref. II	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set refinado o bien para un Fragmento de armadura ostentoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+1 % de fuerza contra monstruos| |[3 objetos]|+1500 HP|+5 % de fuerza contra monstruos
 39097	Fragmento arma div. I	Material para un Fragmento de arma divino II.
 39098	Fragmento arma luj. I	Material para un Fragmento de arma lujoso II.
 39099	Fragmento arma ref. I	Material para un Fragmento de arma refinado II.
-39100	Fragmento arma div. II	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set divino.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+5 % de EXP| |[3 objetos]|+1500 HP|+15 % de EXP
-39101	Fragmento arma luj. II	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set lujoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+3 de velocidad de movimiento| |[3 objetos]|+1500 HP|+7 de velocidad de movimiento
-39102	Fragmento arma ref. II	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set refinado o bien para un Fragmento de arma ostentoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+1 % de fuerza contra monstruos| |[3 objetos]|+1500 HP|+5 % de fuerza contra monstruos
-39103	Fragmento casco ost. II	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set ostentoso o bien para un Fragmento de casco majestuoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+2500 HP|+10 % de ataque mágico y cuerpo a cuerpo|+5 de velocidad de movimiento
-39104	Fragmento armad. ost. II	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set ostentoso o bien para un Fragmento de armadura majestuoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+2500 HP|+10 % de ataque mágico y cuerpo a cuerpo|+5 de velocidad de movimiento
-39105	Fragmento arma ost. II	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set ostentoso o bien para un Fragmento de arma majestuoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+2500 HP|+10 % de ataque mágico y cuerpo a cuerpo|+5 de velocidad de movimiento
-39106	Fragmento casco maj. II	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set majestuoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+3500 HP|+15 % de ataque mágico y cuerpo a cuerpo|+7 de velocidad de movimiento
-39107	Fragmento armad. maj. II	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set majestuoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+3500 HP|+15 % de ataque mágico y cuerpo a cuerpo|+7 de velocidad de movimiento
-39108	Fragmento arma maj. II	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set majestuoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+3500 HP|+15 % de ataque mágico y cuerpo a cuerpo|+7 de velocidad de movimiento
+39100	Fragmento arma div. II	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set divino.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+5 % de EXP| |[3 objetos]|+1500 HP|+15 % de EXP
+39101	Fragmento arma luj. II	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set lujoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+3 de velocidad de movimiento| |[3 objetos]|+1500 HP|+7 de velocidad de movimiento
+39102	Fragmento arma ref. II	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set refinado o bien para un Fragmento de arma ostentoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set. La fuerza del efecto dependerá del número de objetos equipados a la vez.| |[2 objetos]|+500 HP|+1 % de fuerza contra monstruos| |[3 objetos]|+1500 HP|+5 % de fuerza contra monstruos
+39103	Fragmento casco ost. II	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set ostentoso o bien para un Fragmento de casco majestuoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+2500 HP|+10 % de ataque mágico y cuerpo a cuerpo|+5 de velocidad de movimiento
+39104	Fragmento armad. ost. II	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set ostentoso o bien para un Fragmento de armadura majestuoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+2500 HP|+10 % de ataque mágico y cuerpo a cuerpo|+5 de velocidad de movimiento
+39105	Fragmento arma ost. II	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set ostentoso o bien para un Fragmento de arma majestuoso II.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+2500 HP|+10 % de ataque mágico y cuerpo a cuerpo|+5 de velocidad de movimiento
+39106	Fragmento casco maj. II	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set majestuoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+3500 HP|+15 % de ataque mágico y cuerpo a cuerpo|+7 de velocidad de movimiento
+39107	Fragmento armad. maj. II	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set majestuoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+3500 HP|+15 % de ataque mágico y cuerpo a cuerpo|+7 de velocidad de movimiento
+39108	Fragmento arma maj. II	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set majestuoso.| |Utiliza simultáneamente varios objetos con este efecto de set para disfrutar de una bonificación de set.| |[3 objetos]|+3500 HP|+15 % de ataque mágico y cuerpo a cuerpo|+7 de velocidad de movimiento
 39110	Patrón de set: casco	Material que el Herrero de set utiliza para imbuir un casco de un efecto de set.
 39111	Patrón de set: armadura	Material que el Herrero de set utiliza para imbuir una armadura de un efecto de set.
 39112	Patrón de set: arma	Material que el Herrero de set utiliza para imbuir un arma de un efecto de set.
 39113	Orden elemental	Al equipar el artículo en la Meseta de los Elementos, disfrutarás de inmunidad a la maldición elemental durante 10 minutos. Solo puedes conservar el anillo durante un tiempo limitado en el inventario.
 39114	Anillo elemental	Utiliza este anillo en el Mundo Elemental para teletransportarte a la Meseta de los Elementos con una cierta probabilidad.
 39115	Borrar efecto de set	Se arrastra a un objeto con efecto de set para quitarle el efecto.
-39116	Anillo elemental (100 %)	Utiliza este anillo en el Mundo Elemental para teletransportarte a la Meseta de los Elementos de forma garantizada.
+39116	Anillo elemental (100 %)	Utiliza este anillo en el Mundo Elemental para teletransportarte a la Meseta de los Elementos de forma garantizada.
 39117	Cupón mascota elemental	Crea la mascota elemental que elijas con la estatua en el puerto.
-39118	Poción protec. elementos	Esta poción solo funciona en el Mundo Elemental. Otorga +5 % de ataque mágico y cuerpo a cuerpo | +10 % de resistencia elemental
-39119	Piedra poder elemental	Un amuleto reluciente que otorga +10 % de fuerza de todos los elementos.
-39120	Piedra guarda elemental	Un amuleto reluciente que otorga +10 % de resistencia a todos los elementos.
+39118	Poción protec. elementos	Esta poción solo funciona en el Mundo Elemental. Otorga +5 % de ataque mágico y cuerpo a cuerpo | +10 % de resistencia elemental
+39119	Piedra poder elemental	Un amuleto reluciente que otorga +10 % de fuerza de todos los elementos.
+39120	Piedra guarda elemental	Un amuleto reluciente que otorga +10 % de resistencia a todos los elementos.
 40101	Espada dentada	Un aspecto para tu arma que transforma tu espada en una motosierra para Halloween.
 40102	Daga dentada	Un aspecto para tu arma que transforma tu daga en una motosierra para Halloween.
 40103	Arco dentado	Un aspecto para tu arma que transforma tu arco en una motosierra doble para Halloween.
@@ -5255,8 +5255,8 @@
 50104	Petardos	Los fuegos artificiales cubren el cielo durante un festival. (Verde)
 50105	Petardos	Los fuegos artificiales cubren el cielo durante un festival.(Blanco)
 50106	Petardo de Navidad	Los fuegos artificiales de Navidad son más espléndidos que los normales y también duran más.
-50107	Petardos chinos	Explota en el suelo con fuerza. | | Probabilidad de aturdimiento: 5 % | Duración: 10 minutos
-50108	Peonza explosiva	Una peonza hecha a mano de la que salen chispas; los niños se divierten mucho mirándola mientras gira. | | Probabilidad de aturdimiento: 5 % | Duración: 10 minutos
+50107	Petardos chinos	Explota en el suelo con fuerza. | | Probabilidad de aturdimiento: 5 % | Duración: 10 minutos
+50108	Peonza explosiva	Una peonza hecha a mano de la que salen chispas; los niños se divierten mucho mirándola mientras gira. | | Probabilidad de aturdimiento: 5 % | Duración: 10 minutos
 50118		
 50119		
 50120	Cofre de Hierro	Este contenedor resistente proviene de la Gruta del Exilio.
@@ -5328,7 +5328,7 @@
 50212	Baúl de Aprendiz I	Tu regalo de bienvenida contiene todo el equipamiento que necesitas para iniciar tu aventura con buen pie.
 50213	Baúl de Aprendiz I	Tu regalo de bienvenida contiene todo el equipamiento que necesitas para iniciar tu aventura con buen pie.
 50215	Cofre de Halloween	Un cofre marcado con una calabaza en el lateral. Su tapa se abre con un chirrido que parece una risilla malvada.
-50216	Vino Caliente	Una bebida caliente hecha con vino y especias que te proporciona +10 % de velocidad de movimiento, +5 % de ataque cuerpo a cuerpo y mágico y +10 % de experiencia. Tiene una duración de 30 minutos.
+50216	Vino Caliente	Una bebida caliente hecha con vino y especias que te proporciona +10 % de velocidad de movimiento, +5 % de ataque cuerpo a cuerpo y mágico y +10 % de experiencia. Tiene una duración de 30 minutos.
 50218	Baúl de la victoria (P)	Un baúl que se obtiene en la Batalla Gremial. | Para abrirlo con clic derecho se necesita una Llave de la victoria.
 50219	Baúl de la victoria (M)	Un baúl que se obtiene en la Batalla Gremial. | Para abrirlo con clic derecho se necesita una Llave de la victoria.
 50220	Baúl de la victoria (G)	Un baúl que se obtiene en la Batalla Gremial. | Para abrirlo con clic derecho se necesita una Llave de la victoria.
@@ -5349,8 +5349,8 @@
 50264	Pergamino de separación	Disuelve la unión entre un objeto y tu alma.
 50265	Balón de oro	La pelota es redonda y dorada.
 50266	Baúl de Jotun Thrym	El baúl de Jotun Thrym. Con un candado tan robusto, debe de contener algo muy valioso.
-50267	Baúl okey de oro	Para ganar este premio, consigue 400 o más puntos en una ronda okey. Aprovecha la oportunidad de obtener una tienda prémium personal (1 día).
-50268	Baúl okey de plata	Para ganar este premio, consigue entre 300 y 399 puntos en una ronda okey. Aprovecha la oportunidad de obtener una tienda prémium personal (1 día).
+50267	Baúl okey de oro	Para ganar este premio, consigue 400 o más puntos en una ronda okey. Aprovecha la oportunidad de obtener una tienda prémium personal (1 día).
+50268	Baúl okey de plata	Para ganar este premio, consigue entre 300 y 399 puntos en una ronda okey. Aprovecha la oportunidad de obtener una tienda prémium personal (1 día).
 50269	Baúl okey de bronce	Para ganar este premio, consigue 299 o menos puntos en una ronda okey.
 50270	Baúl de la reina Meley	Este baúl se sacó del refugio de la reina dragona Meley. Alberga un tesoro auténticamente real. Este objeto es comerciable.
 50271	Baúl guardianes dragón	Este baúl contiene tesoros extraordinarios de los incontables guardianes del dragón que se creían desaparecidos desde hace siglos. Este objeto es comerciable.
@@ -5360,7 +5360,7 @@
 50275	Baúl okey de oro	Para ganar este premio, consigue 400 o más puntos en una ronda okey.
 50276	Baúl okey de plata	Para ganar este premio, consigue entre 300 y 399 puntos en una ronda okey.
 50277	Baúl okey de bronce	Para ganar este premio, consigue 299 o menos puntos en una ronda okey.
-50278	Bolsa de hielo	Esta Bolsa de hielo tiene un efecto especial: velocidad de movimiento + 10, daño +5%, EXP +10%. Tiene una duración de 30 minutos. Consúmela o canjea una vez al día 3 Bolsas de hielo por un Cuenco de cristal.
+50278	Bolsa de hielo	Esta Bolsa de hielo tiene un efecto especial: velocidad de movimiento + 10, daño +5%, EXP +10%. Tiene una duración de 30 minutos. Consúmela o canjea una vez al día 3 Bolsas de hielo por un Cuenco de cristal.
 50279	Bolas de hielo	Reúne Bolas de hielo para Summer. Necesita 10 Bolas de hielo para una Bolsa de hielo.
 50280	Cuenco de cristal	Este exclusivo Cuenco de hielo te ofrece muchas posibilidades para presentar tus creaciones de hielo de manera creativa. Ve a la ciudad a ver a Summer para canjear 3 Cuencos de cristal por un Pastel de hielo.
 50281	Pastel de hielo	Ve a pedirle a Summer una bolsa de frío para tu Pastel de hielo.
@@ -5593,42 +5593,42 @@
 50810	Jugo Thistle	Este zumo está hecho de cardos.
 50811	Resumen fecha	Este zumo está hecho de dátiles.
 50812	Jugo Planta Sam-Zi	Zumo hecho con plantas Sam-Zi
-50813	Agua sim	Una poción hecha con Jugo flor melocotón y Lilas que aumenta la probabilidad de asestar un golpe penetrante en un 10 %.
-50814	Agua dok	Una poción hecha con Jugo harebell y Lilas que aumenta la probabilidad de asestar un golpe crítico en un 10 %.
+50813	Agua sim	Una poción hecha con Jugo flor melocotón y Lilas que aumenta la probabilidad de asestar un golpe penetrante en un 10 %.
+50814	Agua dok	Una poción hecha con Jugo harebell y Lilas que aumenta la probabilidad de asestar un golpe crítico en un 10 %.
 50815	Agua Bo	Poción hecha con zumo Flor Kaki + Seta-Tue. Incrementa inteligencia
 50816	Agua Joven	Poción hecha con Raíz-Gango + Seta-tue. Aumenta destreza
 50817	Agua Zin	Una poción hecha de Agua Sim y Rosas Alpinas, que aumenta tu valor de ataque en 50 puntos durante 3 minutos.
 50818	Agua SamBO	Una poción hecha de Agua Dok y Rosas Alpinas, que aumenta tu defensa en 70 puntos durante 3 minutos.
 50819	Agua Mong	Una poción hecha de Agua Bo y Moras, que aumenta tu defensa mágica en un 10% durante 3 minutos.
 50820	Agua Hwal	Una poción hecha de Agua Joven y Moras, que aumenta tu velocidad de ataque en 3 puntos durante 3 minutos.
-50830	Elixir fuerza llamas	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder del fuego.
-50831	Elixir fuerza escarcha	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder del hielo.
-50832	Elixir fuerza trueno	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder del relámpago.
-50833	Elixir fuerza tramontana	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder del viento.
-50834	Elixir fuerza tierra	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder de la tierra.
-50835	Elixir fuerza oscuridad	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder de la oscuridad.
-50836	Elixir res. llamas	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia al fuego.
-50837	Elixir res. escarcha	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia al hielo.
-50838	Elixir res. trueno	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia al relámpago.
-50839	Elixir res. tramontana	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia al viento.
-50840	Elixir res. tierra	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia a la tierra.
-50841	Elixir res. oscuridad	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia a la oscuridad.
-50842	Elixir fuerza llamas D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder del fuego.
-50843	Elixir fuerza escarcha D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder del hielo.
-50844	Elixir fuerza trueno D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder del relámpago.
-50845	Elixir fuerza tramon. D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder del viento.
-50846	Elixir fuerza tierra D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder de la tierra.
-50847	Elixir fuerza oscu. D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder de la oscuridad.
-50848	Elixir res. llamas D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia al fuego.
-50849	Elixir res. escarcha D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia al hielo.
-50850	Elixir res. trueno D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia al relámpago.
-50851	Elixir res. tramon. D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia al viento.
-50852	Elixir res. tierra D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia a la tierra.
-50853	Elixir res. oscuridad D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia a la oscuridad.
+50830	Elixir fuerza llamas	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder del fuego.
+50831	Elixir fuerza escarcha	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder del hielo.
+50832	Elixir fuerza trueno	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder del relámpago.
+50833	Elixir fuerza tramontana	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder del viento.
+50834	Elixir fuerza tierra	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder de la tierra.
+50835	Elixir fuerza oscuridad	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de poder de la oscuridad.
+50836	Elixir res. llamas	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia al fuego.
+50837	Elixir res. escarcha	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia al hielo.
+50838	Elixir res. trueno	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia al relámpago.
+50839	Elixir res. tramontana	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia al viento.
+50840	Elixir res. tierra	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia a la tierra.
+50841	Elixir res. oscuridad	Este poderoso elixir otorga a quien lo bebe un + 8-20 % de resistencia a la oscuridad.
+50842	Elixir fuerza llamas D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder del fuego.
+50843	Elixir fuerza escarcha D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder del hielo.
+50844	Elixir fuerza trueno D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder del relámpago.
+50845	Elixir fuerza tramon. D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder del viento.
+50846	Elixir fuerza tierra D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder de la tierra.
+50847	Elixir fuerza oscu. D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de poder de la oscuridad.
+50848	Elixir res. llamas D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia al fuego.
+50849	Elixir res. escarcha D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia al hielo.
+50850	Elixir res. trueno D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia al relámpago.
+50851	Elixir res. tramon. D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia al viento.
+50852	Elixir res. tierra D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia a la tierra.
+50853	Elixir res. oscuridad D	Este elixir extremadamente poderoso otorga a quien lo bebe un +20 % de resistencia a la oscuridad.
 50901	Botella Vacía	Necesaria para preparar pociones
 50902	Receta para Princip.	Una tarea fácil que también puede hacerse por novatos.
-50903	Receta	Una tarea que necesita un poco de práctica.
-50904	Receta para Prof.	Una tarea que sólo puede ser correctamente hecha por expertos.
+50903	Diseño de Mejora	Diseño necesario para la fabricación.
+50904	Diseño de Encantar Objeto	Diseño necesario para la fabricación.
 50905	Receta para Agua Sim	Describe la creación exacta del agua de Jugo de Flor Melocoton y Lila.
 50906	Receta para Agua Dok	Describe la creación exacta del agua de Jugo Harebell y Lila.
 50907	Receta para Agua Bo	Describe la creación exacta del agua de Jugo de Flor Kaki y Fungicida.
@@ -5647,18 +5647,18 @@
 50925	Caja de Iutnori bronce	Recibes 7 Troncos de abedul. Haz clic secundario para abrir la interfaz de Iutnori y añadirlos. Cuando termine el evento, dejarás de recibir troncos y los que tengas desaparecerán.
 50926	Gema	Reúne Gemas y pídele al Comerciante de Gaya que las pula y las convierta en valioso Gaya.
 50927	Baúl de la Fuerza Dragón	Abre esta caja para obtener una selección de los siguientes objetos: | Mascota: Minidall | Elixir de la Luna (E) | Elixir del Sol (E) | Poción Fuerza Dragón
-50928	Botín del rey de oro	Has obtenido 550 puntos o más en Atrapa al rey. Abre la recompensa y descubre qué has ganado.
-50929	Botín del rey de plata	Has obtenido entre 400 y 549 puntos en Atrapa al rey. Abre la recompensa y descubre qué has ganado.
-50930	Botín del rey de bronce	Has obtenido entre 10 y 399 puntos en Atrapa al rey. Abre la recompensa y descubre qué has ganado.
+50928	Botín del rey de oro	Has obtenido 550 puntos o más en Atrapa al rey. Abre la recompensa y descubre qué has ganado.
+50929	Botín del rey de plata	Has obtenido entre 400 y 549 puntos en Atrapa al rey. Abre la recompensa y descubre qué has ganado.
+50930	Botín del rey de bronce	Has obtenido entre 10 y 399 puntos en Atrapa al rey. Abre la recompensa y descubre qué has ganado.
 50931	Caja de cartas (roja)	Recibes 5 Barajas del rey. Haz clic secundario para abrir la interfaz de Atrapa al Rey y añadirlas. Cuando termine el evento, dejarás de recibir barajas y las que tengas desaparecerán.
 50932	Caja de cartas (azul)	Recibes 1 Baraja del rey. Haz clic secundario para abrir la interfaz de Atrapa al Rey y añadirla. Cuando termine el evento, dejarás de recibir barajas y las que tengas desaparecerán.
 50933	Caja de cartas (rosa)	Recibes 7 Cartas del rey. Haz clic secundario para abrir la interfaz de Atrapa al Rey y añadirlas. Cuando termine el evento, dejarás de recibir cartas y las que tengas desaparecerán.
 50934	Bolsa de gemas	Una bolsa llena de gemas necesarias para fabricar Gaya.
-50935	Transformador de Gaya	Al arrastrar este objeto a tus Gemas, tienes una probabilidad de un 100 %iger de cambiar tus Gemas por Gaya (cambio de 10:1).| Se requiere 1 comerciante para que 10 Gemas se conviertan en 1 Gaya.| Así, podrás obtener hasta 20 Gaya a la vez si usas 200 Gemas y 20 comerciantes.| Para la transformación necesitas al menos 10 Gemas.| Cada transformación cuesta 15 000 Yang.
+50935	Transformador de Gaya	Al arrastrar este objeto a tus Gemas, tienes una probabilidad de un 100 %iger de cambiar tus Gemas por Gaya (cambio de 10:1).| Se requiere 1 comerciante para que 10 Gemas se conviertan en 1 Gaya.| Así, podrás obtener hasta 20 Gaya a la vez si usas 200 Gemas y 20 comerciantes.| Para la transformación necesitas al menos 10 Gemas.| Cada transformación cuesta 15 000 Yang.
 50938	Baúl vidente rojo	Contiene 105 Cartas de tarot para la Competición de videntes.
 50939	Baúl vidente azul	Contiene 21 Cartas de tarot para la Competición de videntes.
 50940	Baúl vidente rosa	Contiene 5 Cartas de tarot para la Competición de videntes.
-51001	Fragmento de energía	Fragmento de un Cristal de Energía. Con 30 fragmentos puedes crear un Cristal completo.
+51001	Fragmento de Energía	Se obtiene fundiendo objetos valiosos. Puede usarse en varias fabricaciones. Se puede fabricar en el Alquimista.
 51002	Cristal de Energía	Este Cristal aumenta tus bonos durante dos horas.
 51501	Cor Draconis (en bruto)	El cristalino corazón de dragón contiene una Piedra dragón aleatoria de la clase "en bruto".
 51502	Cor Draconis (en bruto)	El cristalino corazón de dragón contiene una Piedra dragón aleatoria de la clase "en bruto".
@@ -6209,8 +6209,8 @@
 53616	Caja verde de Brioso	Dentro de este regalo de Navidad espera el navideño y dulce Brioso de jengibre, que está deseando galopar a tu lado.
 53617	Caja verde de Rodolfo	Dentro de este regalo de Navidad espera el navideño y dulce Rodolfo de jengibre, que está deseando galopar a tu lado.
 53618	Caja pequeña de Brioso	Dentro de este regalo de Navidad espera el navideño y dulce Minibrioso de jengibre, que está deseando galopar a tu lado.
-53619	Caja dragontina lujosa	Aquí dentro aguarda el Dragón amoroso simpático: ¡está deseando salir! Te otorga | +1500 HP | +10 % de tasa de obtención de botín
-53620	Caja dragontina adornada	Aquí dentro aguarda el Dragón amoroso juguetón: ¡está deseando salir! Te otorga | +1500 HP | +15 % de fuerza contra monstruos
+53619	Caja dragontina lujosa	Aquí dentro aguarda el Dragón amoroso simpático: ¡está deseando salir! Te otorga | +1500 HP | +10 % de tasa de obtención de botín
+53620	Caja dragontina adornada	Aquí dentro aguarda el Dragón amoroso juguetón: ¡está deseando salir! Te otorga | +1500 HP | +15 % de fuerza contra monstruos
 53621	Caja dragontina pequeña	Aquí dentro aguarda el Minidragón amoroso: ¡está deseando salir!
 53622	Trasportín gato blanco	Llama a tu adorable y suave gato angora blanco para que salga de su cómodo trasportín.
 53623	Trasportín gato marrón	Llama a tu adorable y suave gato angora marrón para que salga de su cómodo trasportín.
@@ -6279,7 +6279,7 @@
 55051	Cabalgar (EXP)	Aumenta la bonificación de EXP mientras cabalgas
 55052	Cabalgar (Tormentón)	Aumenta la velocidad de ataque al cabalgar un momento.
 55053	Cabalgar (Camino pluma)	Activa Camino pluma mientras NO cabalgues.
-55054	Cabalgar (Invencible)	Tu personaje se vuelve invencible durante 3 segundos al disminuir tus HP por debajo de 30 %
+55054	Cabalgar (Invencible)	Tu personaje se vuelve invencible durante 3 segundos al disminuir tus HP por debajo de 30 %
 55055	Cabalgar (Sin retroceso)	Al atacar a un monstruo, no lo empujas hacia atrás durante un tiempo limitado.
 55056	Cabalgar (aleatorio)	Otorga una habilidad de montura al azar.
 55057	Cabalgar (Guerreros)	Fuerza contra Guerreros
@@ -6324,13 +6324,13 @@
 55713	Comandante bebé	Llama a tu mascota con un clic secundario. Después pulsa la tecla "P" para abrir la interfaz de mascota.
 56000	Appaloosa	Este sello invoca a tu bondadoso pony Appaloosa. Confiere a su jinete +10 de velocidad de movimiento.
 56001	Tiq. de viaje p. pueblos	El pergamino te teletransporta entre los dos pueblos de tu Reino. Se puede utilizar 5 veces y es válido a partir del nivel 10.
-56002	Pergamino del fuego	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder del fuego.
-56003	Pergamino del hielo	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder del hielo.
-56004	Pergamino del relámpago	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder del relámpago.
-56005	Pergamino del viento	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder del viento.
-56006	Pergamino de la tierra	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder de la tierra.
-56007	Pergamino de oscuridad	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder de la oscuridad.
-56008	Pergamino de maldición	Este pergamino permite disminuir un nivel el encantamiento elemental de un arma a partir de +7 por 10 000 000 de Yang. Así, los encantamientos elementales de nivel 1 se eliminarán por completo.
+56002	Pergamino del fuego	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder del fuego.
+56003	Pergamino del hielo	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder del hielo.
+56004	Pergamino del relámpago	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder del relámpago.
+56005	Pergamino del viento	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder del viento.
+56006	Pergamino de la tierra	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder de la tierra.
+56007	Pergamino de oscuridad	Este pergamino permite añadir un encantamiento elemental a una arma a partir de +7 por 3 000 000 de Yang. | Si el proceso se realiza correctamente, el arma se reforzará con el poder de la oscuridad.
+56008	Pergamino de maldición	Este pergamino permite disminuir un nivel el encantamiento elemental de un arma a partir de +7 por 10 000 000 de Yang. Así, los encantamientos elementales de nivel 1 se eliminarán por completo.
 56009	Pergamino del cambio	Este pergamino permite modificar el encantamiento elemental de un arma a partir de +7. El nuevo elemento lo eliges tú. El nivel del encantamiento elemental se mantiene.
 56011	Donativo mediano	Una donación mediana de EXP de gremio. Puedes donar hasta tres veces al día.
 56012	Donativo grande	Una donación grande de EXP de gremio. Puedes donar hasta tres veces al día.
@@ -6346,7 +6346,7 @@
 70002	Tercera Mano	Una mano que recoge el Yang automáticamente.
 70003	Libro del Líder	Mientras el líder de un grupo esté equipado con este libro, todos los miembros del grupo obtendrán un 30% más de puntos de experiencia.
 70004	Medalla a la Diligencia	Recompensa por tus esfuerzos en el día del trabajo. Concede el 20% más de puntos de experiencia.
-70005	Anillo de exp. (1 h)	Aumenta la ganancia de experiencia en un 50% durante 60 minutos.
+70005	Anillo de exp. (1 h)	Aumenta la ganancia de experiencia en un 50% durante 60 minutos.
 70006	Anillo del Idioma	Un anillo usado para la diplomacia en épocas antiguas que permitía hablar con gentes de otros reinos.
 70008	Bandera Blanca	Bandera blanca que indica la rendición.
 70009	Caja Tesoro	Un cofre decorado con muchos adornos. Sólo puede ser abierto con una llave especial.
@@ -6357,8 +6357,8 @@
 70015	Cepillo Barato	Un cepillo común y robusto con un sólido mango de madera.
 70020	Vino flor melocotón	Bebida que te permitirá regenerar inmediatamente tus puntos de vida (HP) en 500 puntos.
 70024	Bola bendición	Una bola legendaria bendita. Si un objeto tiene 4 atributos, esta bola le añade otro atributo.
-70027	Herrero	Apuntes del herrero con los pasos necesarios durante la mejora de objetos. Aumenta la probabilidad de mejorar un objeto de +4 a +5 al 100 %.
-70028	Hombre Sabio	Apuntes del herrero con los pasos necesarios durante la mejora de objetos. Aumenta la probabilidad de mejorar un objeto de +5 a +6 al 100 %.
+70027	Herrero	Apuntes del herrero con los pasos necesarios durante la mejora de objetos. Aumenta la probabilidad de mejorar un objeto de +4 a +5 al 100 %.
+70028	Hombre Sabio	Apuntes del herrero con los pasos necesarios durante la mejora de objetos. Aumenta la probabilidad de mejorar un objeto de +5 a +6 al 100 %.
 70031	Panfleto de Contención	Este tratado fundamental sobre la artesanía de armas se ocupa, entre otras cosas, de las posibilidades y de los puntos débiles de la anatomía humana.
 70035	Mineral de Cobre Mágico	Con este mineral y un Pergamino Bendición se puede crear un Pergamino de la Guerra donde el herrero.
 70037	Libro del olvido	Gracias a este libro, el personaje conseguirá olvidar una habilidad aprendida. Así es posible redistribuir 1 punto de habilidad.
@@ -6425,9 +6425,9 @@
 70425	Fragmento serp. viento	Parece encajar en la Cabeza de serpiente de viento.
 70426	Fragmento serp. tierra	Parece encajar en la Cabeza de serpiente de tierra.
 70427	Llave de calabozo	Parece abrir algún calabozo.
-70428	Polvo de serpiente	Añade 1 minuto al cronómetro de la mazmorra. Material para mejorar el equipamiento serpentino.
+70428	Polvo de serpiente	Añade 1 minuto al cronómetro de la mazmorra. Material para mejorar el equipamiento serpentino.
 70429	Tesoro serpentino	Tesoro rescatado de lo más profundo del Templo Serpentino.
-70430	Acceso Templo Serpentino	Restaura tus accesos al Templo Serpentino a 5.
+70430	Acceso Templo Serpentino	Restaura tus accesos al Templo Serpentino a 5.
 70432	Pergamino tesoro (C)	Con este Pergamino puedes ir a un lugar secreto si tienes un nivel de 75 a 90. Atención: En cuanto llegues al Templo Enigma, se iniciará una fase de preparación de 1 minuto hasta el comienzo de la ronda. A partir de ese momento, tendrás 4 minutos para iniciar la batalla o saldrás del templo automáticamente.
 70433	Pergamino tesoro (B)	Con este Pergamino puedes ir a un lugar secreto si tienes un nivel de 91 a 120. Atención: En cuanto llegues al Templo Enigma, se iniciará una fase de preparación de 1 minuto hasta el comienzo de la ronda. A partir de ese momento, tendrás 4 minutos para iniciar la batalla o saldrás del templo automáticamente. 
 70434	Pergamino tesoro (A)	Con este Pergamino puedes ir a un lugar secreto si has subido al nivel de campeón. Atención: En cuanto llegues al Templo Enigma, se iniciará una fase de preparación de 1 minuto hasta el comienzo de la ronda. A partir de ese momento, tendrás 4 minutos para iniciar la batalla o saldrás del templo automáticamente.
@@ -6458,12 +6458,12 @@
 70604	Baúl del Mundial	Un baúl con diversos tesoros del Evento del Mundial. Podría tocarte un Tique de vítores.
 70605	Baúl de tique	El baúl solo se puede abrir durante el Evento del Mundial. Te pueden tocar 3 Tiques de fútbol.
 70606	Trofeo del Mundial	Un trofeo con distintas recompensas. Canjéalo por más Tiques de país. |Una vez concluya el Evento del Mundial ya no podrás hacerte con más Tiques de país.
-70607	Emblema del Mundial	Un emblema poderoso que se puede utilizar con otros objetos únicos. |+50 % de EXP |+10 % de tasa de obtención de botín |+20 de velocidad de hechizo y de ataque |+35 % de ataque mágico y cuerpo a cuerpo |+10 % de HP y SP máximos
-70608	Bolsa de Gaya	Sirve para guardar hasta 9999 Gaya. | La Bolsa de Gaya desaparece después de 30 días. Es comerciable.
+70607	Emblema del Mundial	Un emblema poderoso que se puede utilizar con otros objetos únicos. |+50 % de EXP |+10 % de tasa de obtención de botín |+20 de velocidad de hechizo y de ataque |+35 % de ataque mágico y cuerpo a cuerpo |+10 % de HP y SP máximos
+70608	Bolsa de Gaya	Sirve para guardar hasta 9999 Gaya. | La Bolsa de Gaya desaparece después de 30 días. Es comerciable.
 70609	Tique de país	Sirve para seleccionar el país al que se quiera animar.
 70610	Tique de vítores	Sirve para animar al país seleccionado.
 70611	Bolsa deportiva de Gaya	Una bolsa deportiva llena de Gaya que se entrega como recompensa. La Bolsa deportiva de Gaya no es comerciable.
-70612	Vara de copos de nieve	Sirve para transformar monstruos cercanos de tu franja de nivel en Muñecos de nieve. | No tiene efecto sobre monstruos jefe ni Piedras Metin. El tiempo de carga son 30 minutos. | ¡Atención! ¡Se consumirá aunque no haya monstruos transformables cerca!
+70612	Vara de copos de nieve	Sirve para transformar monstruos cercanos de tu franja de nivel en Muñecos de nieve. | No tiene efecto sobre monstruos jefe ni Piedras Metin. El tiempo de carga son 30 minutos. | ¡Atención! ¡Se consumirá aunque no haya monstruos transformables cerca!
 70613	Baúl de copos de nieve	Un baúl de un muñeco de nieve que contiene diferentes recompensas. No es comerciable.
 70614	Cometa de nieve	Con este sello puedes invocar a un reno del evento de Copos de Nieve.
 70615	Bambi de nieve	Con este sello puedes invocar a un reno joven del evento de Copos de Nieve. Te otorga:
@@ -6484,8 +6484,8 @@
 71011	Máscara de las emociones	Mediante esta máscara puedes dar rienda suelta a tus sentimientos.
 71012	Libro del Líder	Tan pronto como el líder del grupo esté equipado con este libro, todos los miembros adquirirán un 30% más de experiencia durante 3 horas.
 71013	Petardos	Misil, que ilumina el cielo para todos. (no comerciable).
-71014	Poción de ataque +10	Incrementa tu velocidad de ataque en un 10 %.
-71015	Anillo de experiencia	Acumulas un 50 % más de puntos de experiencia en combate.
+71014	Poción de ataque +10	Incrementa tu velocidad de ataque en un 10 %.
+71015	Anillo de experiencia	Acumulas un 50 % más de puntos de experiencia en combate.
 71016	Guantes de ladrón	Duplica la probabilidad de saquear objetos.
 71017	Medalla de la suerte	Incrementa la probabilidad de conseguir Yang.
 71018	Bendición de la Vida	Una bendición con la cual tu HP será recuperado al 100% inmediatamente.
@@ -6497,14 +6497,14 @@
 71024	Retorno de la Fuerza	Devuelve los puntos de Fuerza al valor básico permitiendote redistribuirlos de nuevo.
 71025	Piedra del Herrero	Con esta Piedra y un Pergamino Bendición se puede crear un Manual del Herrero donde el herrero.
 71026	Mineral de hierro mágico	Con este mineral y un Pergamino Bendición se puede crear un Pergamino Dragón donde el herrero.
-71027	Vida del Dios Dragón	Incrementa tus HP máximos en un 20 %.
-71028	Ataque del Dios Dragón	Incrementa tu valor de ataque en un 20 %.
-71029	Intel. del Dios Dragón	Incrementa tus SP máximos en un 20 %.
-71030	Defensa del Dios Dragón	Reduce en un 20 % el daño recibido en combate.
+71027	Vida del Dios Dragón	Incrementa tus HP máximos en un 20 %.
+71028	Ataque del Dios Dragón	Incrementa tu valor de ataque en un 20 %.
+71029	Intel. del Dios Dragón	Incrementa tus SP máximos en un 20 %.
+71030	Defensa del Dios Dragón	Reduce en un 20 % el daño recibido en combate.
 71031	Ayuda Dios Dragón	La vitalidad, fuerza, inteligencia y destreza de tu personaje se quintuplicará temporalmente.
 71032	Pergamino Dragón	Elimina el riesgo de destruir un objeto si la mejora falla. Sólo la calidad se reduce un paso. Además la probabilidad de una mejora exitosa se incrementa un 10%.
 71033	Máscara de las Emociones	Mediante esta máscara puedes dar rienda suelta a tus sentimientos.
-71034	Poción de ataque +15	Incrementa tu velocidad de ataque en un 15 %.
+71034	Poción de ataque +15	Incrementa tu velocidad de ataque en un 15 %.
 71035	Elixir del Investigador	Mejora la calidad de los objetos de investigación que has reunido y, por consiguiente, incrementa la probabilidad de que sean aceptados. No sirve para las misiones de Yohara.
 71036	Invoc.- Principal Orco	Hace aparecer un Oberork al lado de tu personaje. Pero atención: ¡Es un monstruo jefe!
 71037	Invoc. - Lider Esotérico	Invocará a un Líder Esotérico cerca de tu personaje. ¡Ten cuidado! ¡Es un monstruo jefe!
@@ -6514,8 +6514,8 @@
 71041	Invoc - Nueve-Colas	Hace aparecer un nueve colas cerca de tu personaje. Pero atención: ¡Es un monstruo Jefe!
 71042	Invoc. - Rey Demonio	Hace aparecer un Rey Demonio Soberbio cerca de tu personaje. Pero atención: ¡es un monstruo Jefe!
 71043	Pergam. - Tigre Fantasma	Hace aparecer un espíritu de tigre amarillo al lado de tu personaje. Pero atención: ¡Es un monstruo Jefe!
-71044	Lucha crítica	Incrementa la probabilidad de asestar un golpe crítico en combate en un 20 %.
-71045	Lucha perforadora	Incrementa la probabilidad de asestar un golpe penetrante en combate en un 20 %.
+71044	Lucha crítica	Incrementa la probabilidad de asestar un golpe crítico en combate en un 20 %.
+71045	Lucha perforadora	Incrementa la probabilidad de asestar un golpe penetrante en combate en un 20 %.
 71047	Tinte piedra fantasmal	Elimina una piedra de uno de tus objetos.
 71048	Modificación Encanto	Este encanto puede cambiar el sexo de tu personaje.
 71049	Paquete Seda	Con este paquete puedes abrir una tienda privada durante 10 días libre de cargos.
@@ -6565,8 +6565,8 @@
 71096	Pasaje a Bordo	Esta medalla te permite pasar a por una puerta.
 71099	Anillo de Emplazamiento	Permite al lider de un gremio establecer un sustituto.
 71100	Cert. de reaprendizaje	Puedes dejar atrás tus conocimientos y comentar un entrenamiento nuevo. Para ello necesitas estar por lo menos en el nivel 31.
-71101	Poción de prisa	Esta poción reduce el tiempo de carga de tus habilidades en un 20 %.
-71102	Poción de prisa+	Incrementa tu velocidad de hechizo en un 30 %.
+71101	Poción de prisa	Esta poción reduce el tiempo de carga de tus habilidades en un 20 %.
+71102	Poción de prisa+	Incrementa tu velocidad de hechizo en un 30 %.
 71103	Redistribución (VIT)	Pone tu vitalidad de nuevo en 1 y te permite redistribuir tus puntos.
 71104	Redistribución (INT)	Pone tu inteligencia de nuevo en 1 y te permite redistribuir tus puntos.
 71105	Redistribución (STR)	Pone tu fuerza de nuevo en 1 y te permite redistribuir tus puntos.
@@ -6605,20 +6605,20 @@
 71140	Tigre real (verde)	La magia del sello invoca a tu montura, el majestuoso Tigre real (verde). Aumenta la ganancia de experiencia en un 30%.
 71141	Tigre real (gris)	La magia del sello invoca a tu montura, el majestuoso Tigre real (gris). Aumenta la ganancia de experiencia en un 30%.
 71142	Tigre real (blanco)	La magia del sello invoca a tu montura, el majestuoso Tigre real (blanco). Aumenta la ganancia de experiencia en un 30%.
-71143	Anillo del Júbilo	Anillo opulentamente adornado con jade y turquesas. Concede las siguientes bonificaciones: |+50 % de EXP |+30 % de fuerza contra monstruos |+20 % de velocidad de ataque |+20 % de velocidad de hechizo |+10 % de HP máximos |+10 % de SP máximos
+71143	Anillo del Júbilo	Anillo opulentamente adornado con jade y turquesas. Concede las siguientes bonificaciones: |+50 % de EXP |+30 % de fuerza contra monstruos |+20 % de velocidad de ataque |+20 % de velocidad de hechizo |+10 % de HP máximos |+10 % de SP máximos
 71144	Baúl de Navidad	Un regalo navideño empaquetado cuidadosamente que contiene una sorpresa.
-71145	Amuleto del Amor Eterno	Un colgante en forma de corazón engastado de joyas mágicas. Te otorga | +30 % de EXP | +10 de velocidad de ataque | +10 de velocidad de hechizo | +5 % de HP y SP | +10 % de fuerza contra monstruos
+71145	Amuleto del Amor Eterno	Un colgante en forma de corazón engastado de joyas mágicas. Te otorga | +30 % de EXP | +10 de velocidad de ataque | +10 de velocidad de hechizo | +5 % de HP y SP | +10 % de fuerza contra monstruos
 71146	Baúl de Cupido (rosa)	Baúl en forma de corazón que contiene 5 sorpresas. Se puede abrir cada 30 minutos.
 71147	Baúl de Cupido (azul)	Baúl en forma de corazón que contiene 5 sorpresas. Se puede abrir cada 30 minutos.
-71148	Anillo de la Voluntad	Te otorga mientras dura un 30 %+ de EXP, un 20 %+ de opción de defensa contra Guerreros, un 20 %+ de opción de defensa contra Ninjas, un 20 %+ de opción de defensa contra Lícanos, un 30 %+ de fuerza contra monstruos, un 10 %+ de HP máximos y un 10 %+ de SP máximos.
-71149	Anillo del Poder Mortal	Te otorga durante un tiempo un 30 % más de EXP, un 20 % más de probabilidad de defensa contra Suras, un 20 % más de probabilidad de defensa contra Chamanes, un 20 % más de probabilidad de defensa contra Lícanos, un 30 % más de fuerza contra monstruos, un 10 % más de HP máximos y un 10 % más de SP máximos.
+71148	Anillo de la Voluntad	Te otorga mientras dura un 30 %+ de EXP, un 20 %+ de opción de defensa contra Guerreros, un 20 %+ de opción de defensa contra Ninjas, un 20 %+ de opción de defensa contra Lícanos, un 30 %+ de fuerza contra monstruos, un 10 %+ de HP máximos y un 10 %+ de SP máximos.
+71149	Anillo del Poder Mortal	Te otorga durante un tiempo un 30 % más de EXP, un 20 % más de probabilidad de defensa contra Suras, un 20 % más de probabilidad de defensa contra Chamanes, un 20 % más de probabilidad de defensa contra Lícanos, un 30 % más de fuerza contra monstruos, un 10 % más de HP máximos y un 10 % más de SP máximos.
 71150	Huevo mágico	Este cofre oval, bellamente ornamentado, contiene más de un regalo de Pascua que irá desvelando poco a poco.
 71151	Magia Verde	Elimina los bonos de uno de tus objetos y añade nuevos. Solamente se puede utilizar en armas y armaduras de hasta nivel 40. Objeto del Baúl de Nivel, no comerciable.
 71152	Fuerza Verde	Con algo de suerte añade un bonus a uno de tus objetos (hasta un máximo de 4 bonificaciones). Solamente se puede utilizar en armas y armaduras de hasta nivel 40. Objeto del Baúl de Nivel, no comerciable.
 71153	Poción de la Sabiduría	Con esta poción podrás reunir en una hora de juego un 100% más de experiencia. No comerciable.
 71154	Poción del ascenso (3 h)	Esta poción te permite acumular un 80% más de experiencia durante tres horas de juego. No es comerciable.
 71155	Poción de sabiduría (3h)	Con esta poción obtendrás un 100% más de experiencia en tres horas de juego. No comerciable.
-71156	Poción de espíritu	Incrementa la ganancia de experiencia en un 150 %.
+71156	Poción de espíritu	Incrementa la ganancia de experiencia en un 150 %.
 71157		
 71158	Medalla del Héroe	Te otorga un 50% más de EXP, 30% más de daño físico, 20% más de velocidad de ataque, 20% más de velocidad de hechizo, 10% más de HP y 10% más de SP.
 71159	Baúl de Milon	Un baúl para auténticos héroes. Contiene un objeto aleatorio como recompensa por tu triunfo.
@@ -6637,7 +6637,7 @@
 71178	Enciclop. de la Luna (P)	Paquete con 10 Manuales de habilidad aleatorios para Lícanos
 71179	Enciclop. de la Luna (G)	Paquete con 25 Manuales de habilidad aleatorios para Lícanos
 71180	Poción del ascenso (3 h)	Esta poción te permite acumular un 80% más de experiencia durante tres horas de juego. No es comerciable.
-71181	Poción de la sabiduría	Esta poción te permite acumular un 100 % más de experiencia durante un tiempo determinado. No es comerciable.
+71181	Poción de la sabiduría	Esta poción te permite acumular un 100 % más de experiencia durante un tiempo determinado. No es comerciable.
 71182	Muffin (marrón)	Con este sello puedes invocar a Muffin, el temible pollo de combate. Aumenta tu velocidad de movimiento en 20.
 71183	Nugget (castaño)	Con este sello puedes invocar a Nugget, el enorme pollo de combate. Aumenta tu velocidad de movimiento en 20.
 71184	Muffin (azul)	Con este sello puedes invocar a Muffin, el temible pollo de combate. Aumenta tu velocidad de movimiento en 20.
@@ -6655,7 +6655,7 @@
 71196	Caja okey de bronce	Recibes 6 Cartas okey. Haz clic secundario para abrir la interfaz de Okey y añadirlas. Cuando termine el evento, dejarás de recibir cartas y las que tengas desaparecerán.
 71197	Nugget (azul marino)	Con este sello puedes invocar a Nugget, el terrorífico pollo de combate.
 71198	Muffin (rosa)	Con este sello puedes invocar a Muffin, el temible pollo de combate.
-71199	Amuleto de chocolate	Este fantástico Amuleto de chocolate te endulzará la batalla. Te otorga | +50 % de EXP | +20 de velocidad de ataque | +20 de velocidad de hechizo | +10 % de fuerza contra monstruos | +10 % de HP máximo | +10 % de SP máximo | Junto con Valentino o Valentinia disfrutarás de una bonificación de set extra de EXP.
+71199	Amuleto de chocolate	Este fantástico Amuleto de chocolate te endulzará la batalla. Te otorga | +50 % de EXP | +20 de velocidad de ataque | +20 de velocidad de hechizo | +10 % de fuerza contra monstruos | +10 % de HP máximo | +10 % de SP máximo | Junto con Valentino o Valentinia disfrutarás de una bonificación de set extra de EXP.
 71201	Tique de entrada (Meley)	Si le das el Tique de entrada al respectivo guardián, podrás acceder al Refugio de Meley. Este objeto es comerciable.
 71202	Amuleto de Nazar	Colgante con el que el Ojo de Fátima te bendice con un 50% más EXP, 20 puntos más de velocidad de ataque, 20 puntos más de velocidad de hechizo, un 10% más de fuerza contra monstruos, así como un 30% más de daño físico y mágico.
 71203	Enciclop. de Saturno (P)	Paquete con 10 Manuales de habilidad aleatorios para Guerreros Corporales
@@ -6675,7 +6675,7 @@
 71217	Enciclop. de Venus (P)	Paquete con 10 Manuales de habilidad aleatorios para Chamanes Curación
 71218	Enciclop. de Venus (G)	Paquete con 25 Manuales de habilidad aleatorios para Chamanes Curación
 71219		Aumenta la acumulación de experiencia en un 5% y otorga un 5% más de probabilidad de conseguir botines de objetos. Se puede utilizar durante 3 días sin limitaciones. Las bonificaciones se activan con un clic y duran 1 hora.
-71220	Caballo de Kyzaghan	Gracias a este sello podrás utilizar el corcel de Kyzaghan. Disfrutarás de un 5 % más de experiencia, HP máx. +1500 y +20 de velocidad de movimiento de movimiento.
+71220	Caballo de Kyzaghan	Gracias a este sello podrás utilizar el corcel de Kyzaghan. Disfrutarás de un 5 % más de experiencia, HP máx. +1500 y +20 de velocidad de movimiento de movimiento.
 71221	Paquete de cachemira	Con este paquete puedes darle un aspecto individual a tu tienda privada.
 71222	Dragón nirvana	El sello invoca al Dragón nirvana. Te otorga un 20% mas de velocidad de movimiento y 1500 HP.
 71223	Dragón samsara	El sello invoca al Dragón samsara. Te otorga un 20% mas de velocidad de movimiento y 1500 HP.
@@ -6685,7 +6685,7 @@
 71227	Camello de guerra negro	Con este sello invocas a tu camello de guerra negro. Le otorga a su jinete 20 puntos más de velocidad de movimiento y 1500 HP.
 71228	Lagarto de cueva de lava	Con este sello invocas a tu fogoso lagarto de monta. Te otorga un 15% de fuerza contra monstruos e incrementa tu velocidad de movimiento en 20.
 71229	Lagarto de cueva helada	Con este sello invocas a tu gélido lagarto de monta. Te otorga un 15% de fuerza contra monstruos e incrementa tu velocidad de movimiento en 20.
-71230	Dragón de magma	Este sello invoca a un poderoso Dragón de magma para que montéis en él. Te otorga: | +25 de velocidad de movimiento | +1500 HP | +3 % de fuerza contra monstruos
+71230	Dragón de magma	Este sello invoca a un poderoso Dragón de magma para que montéis en él. Te otorga: | +25 de velocidad de movimiento | +1500 HP | +3 % de fuerza contra monstruos
 71231	Conejo blanco	Con este sello puedes invocar a tu enigmático Conejo blanco. Te otorga un 15% de fuerza contra monstruos y +20 de velocidad de movimiento.
 71232	Conejo de luna	Con este sello puedes invocar a tu mítico Conejo de luna. Te otorga un 15% de fuerza contra monstruos y +20 de velocidad de movimiento.
 71233	Bernie	¡Invoca a tu San Bernardo! Le otorga a su jinete: | +15% a la fuerza contra monstruos | +1500 HP
@@ -6732,9 +6732,9 @@
 71274	Escoba embrujada	El sello invoca a tu Escoba embrujada.
 71275	Caballo de legión noble	El sello invoca al Caballo de legión noble.
 71276	Caballo de legión oscuro	El sello invoca al Caballo de legión oscuro.
-72001	Anillo de exp. (10 h)	Aumenta la ganancia de experiencia en un 50% durante 10 horas.
-72002	Anillo de exp. (30 min)	Aumenta la ganancia de experiencia en un 50% durante 30 minutos.
-72003	Anillo de exp. (3 h)	Aumenta la ganancia de experiencia en un 50% durante 3 horas.
+72001	Anillo de exp. (10 h)	Aumenta la ganancia de experiencia en un 50% durante 10 horas.
+72002	Anillo de exp. (30 min)	Aumenta la ganancia de experiencia en un 50% durante 30 minutos.
+72003	Anillo de exp. (3 h)	Aumenta la ganancia de experiencia en un 50% durante 3 horas.
 72004	Guantes de ladrón	Duplican tus posibilidades de capturar objetos durante 10 horas.
 72005	Guantes de ladrón	Duplican tus posibilidades de capturar objetos durante 30 minutos.
 72006	Guantes de ladrón	Duplican tus posibilidades de capturar objetos durante 3 horas.
@@ -6756,9 +6756,9 @@
 72022	Moneda Dorada Suerte	Duplica tus posibilidades de capturar Yang durante 10 horas.
 72023	Moneda Dorada Suerte	Duplica tus posibilidades de capturar Yang durante 30 minutos.
 72024	Moneda Dorada Suerte	Duplica tus posibilidades de capturar Yang durante 3 horas.
-72025	Lucha perforadora	Incrementa la probabilidad de asestar un golpe penetrante en combate en un 10 %.
-72026	Lucha perforadora	Incrementa la probabilidad de asestar un golpe penetrante en combate en un 10 %.
-72027	Lucha perforadora	Incrementa la probabilidad de asestar un golpe penetrante en combate en un 10 %.
+72025	Lucha perforadora	Incrementa la probabilidad de asestar un golpe penetrante en combate en un 10 %.
+72026	Lucha perforadora	Incrementa la probabilidad de asestar un golpe penetrante en combate en un 10 %.
+72027	Lucha perforadora	Incrementa la probabilidad de asestar un golpe penetrante en combate en un 10 %.
 72028	Máscara las emociones	Puedes usar aciones emocionales.
 72029	Máscara las emociones	Puedes usar aciones emocionales.
 72030	Máscara las emociones	Puedes usar aciones emocionales.
@@ -6777,24 +6777,24 @@
 72043	Libro del Líder	Cuando el lider de un partido se equipa con el, se incrementa la EXP de los miembros del partido y del lider en un 30%.
 72044	Libro del Líder	Cuando el lider de un partido se equipa con el, se incrementa la EXP de los miembros del partido y del lider en un 30%.
 72045	Libro del Líder	Cuando el lider de un partido se equipa con el, se incrementa la EXP de los miembros del partido y del lider en un 30%.
-72046	Lucha crítica	Incrementa la probabilidad de asestar un golpe crítico en combate en un 10 %.
-72047	Lucha crítica	Incrementa la probabilidad de asestar un golpe crítico en combate en un 10 %.
-72048	Lucha crítica	Incrementa la probabilidad de asestar un golpe crítico en combate en un 10 %.
+72046	Lucha crítica	Incrementa la probabilidad de asestar un golpe crítico en combate en un 10 %.
+72047	Lucha crítica	Incrementa la probabilidad de asestar un golpe crítico en combate en un 10 %.
+72048	Lucha crítica	Incrementa la probabilidad de asestar un golpe crítico en combate en un 10 %.
 72051	Invocac. Bruja h. pot.	Hace aparecer a una Bruja de hielo poderosa junto a tu personaje. Pero atención: ¡Es un monstruo jefe!
 72052	Invocac. General Yonghan	Hace aparecer al General Yonghan junto a tu personaje. Pero atención: ¡Es un monstruo jefe!
 72053	Contrato de gremios	Haz clic sobre el contrato para restablecer todas las habilidades de tu gremio.
 72054	Amuleto de guardianes	El amuleto protector te otorga | +30% de daño físico y mágico | +20 de velocidad de ataque | +20 de velocidad de hechizo | +10% de resistencia contra mediohumanos | +10% de resistencia contra habilidades
-72057	Anillo de exp. doble	Aumenta durante 36 horas la experiencia obtenida en un 100 %.
+72057	Anillo de exp. doble	Aumenta durante 36 horas la experiencia obtenida en un 100 %.
 72058	Fardo piedras espíritu	Contiene una Piedra espíritu al azar.
 72059	Libro del líder+	Mientras el líder de un grupo esté equipado con este libro, todos los miembros del grupo obtendrán un 100% más de puntos de experiencia durante 2 horas.
 72060	Libro del líder+	Mientras el líder de un grupo esté equipado con este libro, todos los miembros del grupo obtendrán un 100% más de puntos de experiencia durante 3 horas.
 72061	Medalla del dragón+	Te protege de la pérdida de experiencia cuando seas revivido. La duración es de 3 horas.
 72062	Anillo de exp. +200	Aumenta la ganancia de experiencia en un 200% durante 3 horas.
 72063	Piedra Metin(L)	Hace aparecer una sencilla Piedra Metin cerca de tu personaje
-72064	Ampliación pequeña	Aumenta la probabilidad de añadir una bonificación en hasta un 5 %. Para aumento máximo se necesita: | 5 Ampliaciones pequeñas | 10 Fragmentos
-72065	Ampliación mediana	Aumenta la probabilidad de añadir una bonificación en hasta un 10 %. Para aumento máximo se necesita: | 5 Ampliaciones medianas | 10 Fragmentos
-72066	Ampliación grande	Aumenta la probabilidad de añadir una bonificación en hasta un 20 %. Para aumento máximo se necesita: | 5 Ampliaciones grandes | 10 Fragmentos
-72067	Ampliación potente	Aumenta la probabilidad de añadir una bonificación en hasta un 50 %. Para aumento máximo se necesita: | 5 Ampliaciones potentes | 10 Fragmentos
+72064	Ampliación pequeña	Aumenta la probabilidad de añadir una bonificación en hasta un 5 %. Para aumento máximo se necesita: | 5 Ampliaciones pequeñas | 10 Fragmentos
+72065	Ampliación mediana	Aumenta la probabilidad de añadir una bonificación en hasta un 10 %. Para aumento máximo se necesita: | 5 Ampliaciones medianas | 10 Fragmentos
+72066	Ampliación grande	Aumenta la probabilidad de añadir una bonificación en hasta un 20 %. Para aumento máximo se necesita: | 5 Ampliaciones grandes | 10 Fragmentos
+72067	Ampliación potente	Aumenta la probabilidad de añadir una bonificación en hasta un 50 %. Para aumento máximo se necesita: | 5 Ampliaciones potentes | 10 Fragmentos
 72068	Nueva voluntad (STR)	Restaura tu voluntad de SunMa (STR) y recupera los puntos distribuidos.
 72069	Nueva voluntad (VIT)	Restaura tu voluntad de SunMa (VIT) y recupera los puntos distribuidos.
 72070	Nueva voluntad (RES)	Restaura tu voluntad de SunMa (RES) y recupera los puntos distribuidos.
@@ -6804,14 +6804,14 @@
 72303	Anillo de experiencia	Aumenta la acumulación de experiencia en un 50% durante 1 hora.
 72304	Bola bendición	Esta bola legendaria añade un quinto atributo a los objetos que ya poseen cuatro. Sin embargo, la adición puede fallar.
 72305	Espejo desaparición	Espejo desaparición
-72306	Anotaciones del herrero	Apuntes del herrero con los pasos necesarios durante la mejora de objetos. Aumenta la probabilidad de mejorar un objeto de +4 a +5 al 100 %.
-72307	Anotaciones del sabio	Apuntes del herrero con los pasos necesarios durante la mejora de objetos. Aumenta la probabilidad de mejorar un objeto de +5 a +6 al 100 %.
+72306	Anotaciones del herrero	Apuntes del herrero con los pasos necesarios durante la mejora de objetos. Aumenta la probabilidad de mejorar un objeto de +4 a +5 al 100 %.
+72307	Anotaciones del sabio	Apuntes del herrero con los pasos necesarios durante la mejora de objetos. Aumenta la probabilidad de mejorar un objeto de +5 a +6 al 100 %.
 72308	Mineral de Cobre Mágico	Con este mineral y un Pergamino Bendición se puede crear un Pergamino de la Guerra donde el herrero.
 72309	Manual del herrero	Este libro está vinculado con el alma de un herrero del pasado. Si se utiliza, aumenta la probabilidad de mejorar con éxito un objeto.
 72310	Pergamino de Exorcismo	Te libera de la maldición del espíritu malvado si el aprendizaje falla. Con ayuda de este pergamino puedes leer otro documento de habilidad en un mismo día.
 72311	Bendición del Dragón	Una bendición que recupera tus HP y SP por completo de forma instantánea.
-72312	Ataque del Dios Dragón	Incrementa tu valor de ataque en un 20 %.
-72313	Defensa del Dios Dragón	Reduce en un 20 % el daño recibido en combate.
+72312	Ataque del Dios Dragón	Incrementa tu valor de ataque en un 20 %.
+72313	Defensa del Dios Dragón	Reduce en un 20 % el daño recibido en combate.
 72314	Pergamino Dragón	Elimina el riesgo de destruir un objeto si la mejora falla. Por desgracia, la calidad disminuye un nivel. Además la probabilidad de mejora con éxito aumenta un 10%.
 72319	Amplia. inventario (com)	Utiliza este objeto para ampliar el tamaño de tu inventario. Comerciable.
 72320	Ampliación de inventario	Utiliza este objeto para ampliar el tamaño de tu inventario. No es comerciable.
@@ -6839,9 +6839,9 @@
 72343	Marca transformación I	Devuelve la apariencia de la montura a su forma original. Pasa la marca de transformación sobre la montura de la que deseas restablecer la apariencia.
 72344	Marca transformación II	Se puede utilizar para modificar la apariencia de una montura. La marca establece en 0 el coste de la transformación.
 72346	Bendición	Elimina las bonificaciones de uno de tus objetos y añade otras nuevas. Solo sirve para las bonificaciones 6 y 7.
-72347	Acelerador (10%)	Reduce en un 10 % el tiempo de espera necesario para poder entregar de nuevo un objeto de misión al personaje que te haya encomendado la misión (p. ej. con las misiones del Biólogo).
-72348	Acelerador (20%)	Reduce en un 20 % el tiempo de espera necesario para poder entregar de nuevo un objeto de misión al personaje que te haya encomendado la misión (p. ej. con las misiones del Biólogo).
-72349	Acelerador (30 %)	Reduce en un 30 % el tiempo de espera necesario para poder entregar de nuevo un objeto de misión al personaje que te haya encomendado la misión (p. ej. con las misiones del Biólogo).
+72347	Acelerador (10%)	Reduce en un 10 % el tiempo de espera necesario para poder entregar de nuevo un objeto de misión al personaje que te haya encomendado la misión (p. ej. con las misiones del Biólogo).
+72348	Acelerador (20%)	Reduce en un 20 % el tiempo de espera necesario para poder entregar de nuevo un objeto de misión al personaje que te haya encomendado la misión (p. ej. con las misiones del Biólogo).
+72349	Acelerador (30 %)	Reduce en un 30 % el tiempo de espera necesario para poder entregar de nuevo un objeto de misión al personaje que te haya encomendado la misión (p. ej. con las misiones del Biólogo).
 72350	Pergamino investigador	Restablece la misión "Investigación de Seon-Pyeong" en nivel 92 o 94 para poder completarla de nuevo. También sirve para las misiones en el nuevo continente de Yohara.
 72351	Bendición pequeña	Modifica una 6.ª o una 7.ª bonificación con cierta probabilidad.
 72352	Licencia de guantes	Permite equipar guantes.
@@ -6859,25 +6859,25 @@
 72710	Pendientes Hueso Dragón	Aumenta tu valor de defensa en 300 puntos durante 20 horas (el tiempo solo avanza mientras el objeto esté equipado).
 72711	Brazalete Hueso Tigre	El daño causado por tus habilidades aumenta 30 puntos durante 20 horas (el tiempo solo avanza mientras el objeto esté equipado).
 72712	Brazalete Hueso Dragón	Tu defensa ante habilidades aumenta 30 puntos durante 20 horas (el tiempo solo avanza mientras el objeto esté equipado).
-72723	Elixir del Sol (P)	Rellena automáticamente tus HP. Contiene 1 000 000 HP.
+72723	Elixir del Sol (P)	Rellena automáticamente tus HP. Contiene 1 000 000 HP.
 72724	Elixir del Sol (M)	Rellena automáticamente tus HP. Contiene 3 000 000 HP.
 72725	Elixir del Sol (G)	Rellena automáticamente tus HP. Contiene 7 000 000 HP.
-72726	Elixir del Sol (E)	Contiene 10 000 000 HP. Rellena automáticamente tus HP y tiene un efecto positivo sobre los HP máximos. Este objeto es comerciable.
+72726	Elixir del Sol (E)	Contiene 10 000 000 HP. Rellena automáticamente tus HP y tiene un efecto positivo sobre los HP máximos. Este objeto es comerciable.
 72727	Elixir de la Luna (P)	Rellena automáticamente tus SP. Contiene 100 000 SP.
 72728	Elixir de la Luna (M)	Rellena automáticamente tus SP. Contiene 300 000 SP.
-72729	Elixir de la Luna (G)	Rellena automáticamente tus SP. Contiene 700 000 SP.
-72730	Elixir de la Luna (E)	Contiene 1 000 000 SP. Rellena automáticamente tus SP y tiene un efecto positivo sobre los SP máximos. Este objeto es comerciable.
+72729	Elixir de la Luna (G)	Rellena automáticamente tus SP. Contiene 700 000 SP.
+72730	Elixir de la Luna (E)	Contiene 1 000 000 SP. Rellena automáticamente tus SP y tiene un efecto positivo sobre los SP máximos. Este objeto es comerciable.
 72734	Cajita de suerte azul	Doble clic para abrir. Ahora tienes 2 posibilidades: | 1. Haz clic en "Aceptar objeto" para obtener directamente el objeto mostrado. | 2. Utiliza "Probar suerte con el objeto" para recibir otro objeto aleatorio. | Tienes un máximo de 15 intentos a cambio de una tasa de Yang. | Si ya no tienes suficiente Yang en tu cuenta, no podrás seleccionar un nuevo objeto. | Una vez abierta, la caja no podrá restablecerse o volver a cerrarse.
 72735	Cajita de suerte roja	Doble clic para abrir. Ahora tienes 2 posibilidades: | 1. Haz clic en "Aceptar objeto" para obtener directamente el objeto mostrado. | 2. Utiliza "Probar suerte con el objeto" para recibir otro objeto aleatorio. | Tienes un máximo de 15 intentos a cambio de una tasa de Yang. | Si ya no tienes suficiente Yang en tu cuenta, no podrás seleccionar un nuevo objeto. | Una vez abierta, la caja no podrá restablecerse o volver a cerrarse.
 72737	Cajita de suerte verde	Doble clic para abrir. Ahora tienes 2 posibilidades: | 1) Haz clic en "Aceptar objeto" para obtener directamente el objeto mostrado. | 2) Utiliza "Probar suerte con el objeto" para recibir otro objeto aleatorio. | Tienes un máximo de 15 intentos a cambio de una tasa de Yang. | Si ya no tienes suficiente Yang en tu cuenta, no podrás seleccionar un nuevo objeto. | Una vez abierta, la caja no podrá restablecerse o volver a cerrarse. | Si se cierra el juego, recibirás el objeto mostrado.
 72738	Baúl de la suerte de Dr	Contiene distintas recompensas, como por ejemplo Cupones de Dr, entre otras posibilidades.
 72740	Licencia de mercenario	Con esta licencia puedes contratar a un mercenario
-72749	Cura mercenario cons.	Con esto puedes curar a un mercenario herido de forma constante durante un tiempo. | La curación dura 72 h.
+72749	Cura mercenario cons.	Con esto puedes curar a un mercenario herido de forma constante durante un tiempo. | La curación dura 72 h.
 72750	Cura mercenario instan.	Con esto puedes curar a un mercenario herido de forma instantánea.
-72751	Refuerzo resist. (1000)	Aumenta la resistencia máxima en 1000 durante 7 días.
+72751	Refuerzo resist. (1000)	Aumenta la resistencia máxima en 1000 durante 7 días.
 72752	Esencia comand. legión	Obtendrás recompensas adicionales cuando tus mercenarios completen misiones con este objeto.
 72753	Carga resistencia (100)	Recarga 100 de resistencia.
-72754	Reducción resist. (30 %)	Reduce la resistencia necesaria para encargar una misión a los mercenarios.
+72754	Reducción resist. (30 %)	Reduce la resistencia necesaria para encargar una misión a los mercenarios.
 72755	Licencia de ampliación	Utilízalo para aumentar las casillas de mercenarios.
 72756	Pase de botines	Sirve para activar el Filtro de botines.
 72757	Tique polvoprotector	Protección de 3 minutos del siguiente Polvorín que ataques en la Tierra Dorada.
@@ -6886,7 +6886,7 @@
 72761	Manual rompemagia	Una vez aprendida esta habilidad, tu mascota te otorga la capacidad de disminuir la resistencia a la magia del enemigo. No es comerciable. No se puede vender en un almacén.
 72762	Manual de aceleración	Una vez aprendida esta habilidad, tu mascota disminuye el tiempo de carga de tus habilidades. No es comerciable. No se puede vender en un almacén.
 72763	Manual de perforación	Una vez aprendida esta habilidad, aumenta la probabilidad de golpe penetrante. No es comerciable. No se puede vender en un almacén.
-72764	Manual de recuperación	Una vez aprendida esta habilidad, tu mascota es capaz de restaurar tus HP si están por debajo de 20 %. El grado de recuperación depende del nivel y las habilidades de la mascota. No es comerciable. No se puede vender en un almacén.
+72764	Manual de recuperación	Una vez aprendida esta habilidad, tu mascota es capaz de restaurar tus HP si están por debajo de 20 %. El grado de recuperación depende del nivel y las habilidades de la mascota. No es comerciable. No se puede vender en un almacén.
 72765	Manual de vampirismo	Una vez aprendida esta habilidad, tu mascota te otorga la capacidad de absorber HP de los enemigos. No es comerciable. No se puede vender en un almacén.
 72766	Manual de espiritismo	Una vez aprendida esta habilidad, tu mascota te otorga la capacidad de absorber SP de los enemigos. No es comerciable. No se puede vender en un almacén.
 72767	Manual de bloqueo	Una vez aprendida esta habilidad, tu mascota te otorga la capacidad de bloquear daño físico. No es comerciable. No se puede vender en un almacén.
@@ -6904,7 +6904,7 @@
 72779	Cabalgar (EXP)	Aumenta la bonificación de EXP mientras cabalgas. No es comerciable. No se puede vender en un almacén.
 72780	Cabalgar (Tormentón)	Aumenta la velocidad de ataque al cabalgar un momento. No es comerciable. No se puede vender en un almacén.
 72781	Cabalgar (Camino pluma)	Activa Camino pluma mientras NO cabalgues. No es comerciable. No se puede vender en un almacén.
-72782	Cabalgar (Invencible)	Tu personaje se vuelve invencible durante 3 segundos al disminuir tus HP por debajo de 30 % No es comerciable. No se puede vender en un almacén.
+72782	Cabalgar (Invencible)	Tu personaje se vuelve invencible durante 3 segundos al disminuir tus HP por debajo de 30 % No es comerciable. No se puede vender en un almacén.
 72783	Cabalgar (Sin retroceso)	Al atacar a un monstruo, no lo empujas hacia atrás durante un tiempo limitado. No es comerciable. No se puede vender en un almacén.
 72784	Cabalgar (aleatorio)	Otorga una habilidad de montura al azar. No es comerciable. No se puede vender en un almacén.
 72785	Cabalgar (hab. montura)	Las habilidades poderosas hacen a tu caballo aún más útil. No es comerciable. No se puede vender en un almacén.
@@ -7175,7 +7175,7 @@
 76000	Vino flor melocotón	Bebida que te permitirá regenerar inmediatamente tus puntos de vida (HP) en 500 puntos. No comerciable.
 76001	Reseteo de Atributos	La aplicación de este objeto hace posible que redistribuyas tus atributos, por lo que puedes desarrollar tu personaje de otra manera. No comerciable.
 76002	Cabeza reducida	Esta cabeza de demonio reducida abre el sello al tercer piso de la Catacumba del Diablo. No comerciable.
-76003	Poción de prisa	Esta poción reduce el tiempo de carga de tus habilidades en un 20 %.
+76003	Poción de prisa	Esta poción reduce el tiempo de carga de tus habilidades en un 20 %.
 76004	Elixir de la Luna (P)	Rellena automáticamente tus SP. Contiene 10 000 SP. No comerciable.
 76005	Elixir de la Luna (M)	Rellena automáticamente tus SP. Contiene 300 000 SP. No comerciable.
 76006	Brújula para Metins	La brújula te muestra la posición y la distancia del próximo Metin. Cuanto más brilla, más cerca estás. Puede ser activada 6 veces. No comerciable.
@@ -7189,8 +7189,8 @@
 76014	Objeto Encantado (az.)	Elimina los bonos de uno de tus objetos y añade nuevos. Objeto del Baúl de Nivel, no comerciable.
 76015	Bola bendición	Una bola legendaria bendita. Si un objeto tiene 4 atributos, esta bola le añade otro atributo. Objeto del Baúl de Nivel, no comerciable.
 76016	Pergamino Bendición	Elimina el riesgo de destruir un objeto si la mejora falla. El coste de esto es que la calidad es reducida en 1 punto. Objeto del Baúl de Nivel, no comerciable.
-76017	Poción de ataque +15	Incrementa tu velocidad de ataque en un 15 %.
-76018	Poción de ataque +20	Incrementa tu velocidad de ataque en un 20 %.
+76017	Poción de ataque +15	Incrementa tu velocidad de ataque en un 15 %.
+76018	Poción de ataque +20	Incrementa tu velocidad de ataque en un 20 %.
 76019	Tique de entrada	Si le muestras este Tique de entrada al respectivo guardián, podrás acceder al siguiente piso de la mazmorra seleccionada. No es comerciable.
 76020	Elixir del Investigador	Mejora la calidad de los objetos de investigación que has reunido y, por consiguiente, incrementa la probabilidad de que sean aceptados. No sirve para las misiones de Yohara. No es comerciable.
 76021	Elixir del Sol (P)	Rellena automáticamente tus HP. Contiene 100 000 HP. No comerciable.
@@ -7202,12 +7202,12 @@
 76027	Piedra del herrero	Con esta Piedra y un Pergamino Bendición se puede crear un Manual del Herrero donde el herrero.
 76028	Manual de la piedra	Elimina todas las piedras rotas de un objeto. Así tendrás otra oportunidad de mejorar tu arma o armadura.
 76029	Alubia verde del dragón	La Alubia mágica aumenta el nivel de tu Piedra dragón. La mejora puede fallar.
-76030	Piruleta poderosa	La piruleta de ingredientes secretos otorga durante un tiempo limitado | +50 % de puntos de experiencia | +20 de velocidad de ataque | +20 de velocidad de hechizo | +10 % de fuerza contra monstruos | +10 % de HP máximos | +10 % de SP máximos
+76030	Piruleta poderosa	La piruleta de ingredientes secretos otorga durante un tiempo limitado | +50 % de puntos de experiencia | +20 de velocidad de ataque | +20 de velocidad de hechizo | +10 % de fuerza contra monstruos | +10 % de HP máximos | +10 % de SP máximos
 76031	Complemento proteico	Si tu mascota está agotada, aliméntala con este delicioso complemento de proteínas y se recuperará por completo. Si se lo das a una mascota muerta, resucitará con un 50% de su energía.
 76033	Vino flor melocotón+	Poción que regenera tus HP en 800 puntos instantáneamente.
 76034	Lectura concentrada	Multiplica por 2,5 la posibilidad de mejorar tu talento leyendo el próximo libro (o la Piedra Alma).
-76035	Vida del Dios Dragón	Incrementa tus HP máximos en un 20 %.
-76036	Ataque del Dios Dragón	Incrementa tu valor de ataque en un 20 %.
+76035	Vida del Dios Dragón	Incrementa tus HP máximos en un 20 %.
+76036	Ataque del Dios Dragón	Incrementa tu valor de ataque en un 20 %.
 76037	Guantes de ladrón	Duplica la probabilidad de saquear objetos.
 76038	Medalla de la suerte	Incrementa la probabilidad de conseguir Yang.
 76039	Baúl del dragón	Este baúl azur contiene once Cor Draconis normales.
@@ -7219,20 +7219,20 @@
 76046	Objeto encantado+	Elimina las bonificaciones de uno de tus objetos y añade otras nuevas. Las nuevas se mostrarán previamente. Puedes decidir si te interesan o no.
 76047	Piruleta poderosa (3 d)	La piruleta de ingredientes secretos otorga durante 3 días | +50% de puntos de experiencia | +20 de velocidad de ataque | +20 de velocidad de hechizo | +10% de fuerza contra monstruos | +10% de HP máximos | +10% de SP máximos
 76051	Anillo de secretos (7d)	Impide la acumulación de puntos de experiencia durante la caza de monstruos durante 7 días.
-76052	Zapatos viento (7d)	Mientras estén equipados, aumentan tu velocidad de movimiento en 30 durante 7 días.
-76053	Tercera mano (3d)	Una mano que recoge Yang de forma automática durante 3 días.
+76052	Zapatos viento (7d)	Mientras estén equipados, aumentan tu velocidad de movimiento en 30 durante 7 días.
+76053	Tercera mano (3d)	Una mano que recoge Yang de forma automática durante 3 días.
 76054	Máscara de las emo. (7d)	Gracias a esta máscara puedes dar rienda suelta a tus sentimientos durante 7 días.
 76055	Pág. equip. adicional c.	Puedes llevar 2 conjuntos de equipamiento diferentes cambiando la página de equipamiento. | Encontrarás la habilidad correspondiente en las habilidades secundarias. | El objeto es comerciable.
-76068	Acceso Invasión	Restaura tus accesos al Portal invasión Sung Ma a 4.
+76068	Acceso Invasión	Restaura tus accesos al Portal invasión Sung Ma a 4.
 79020	Resurrección gremial	Este objeto sirve para revivir durante la Batalla Gremial.
 79021	Tique de portal gremial	Este objeto sirve para teletransportarse a una zona conquistada durante la Batalla Gremial. Solo tienes que abrir la clasificación en el mapa de la Batalla Gremial.
-79022	Tique de Batalla Gremial	Sirve para participar en la Batalla Gremial. Lo puede usar el líder del gremio hasta 30 minutos antes de empezar.
-79023	Elixir dragón blanco (P)	Aumenta en 200 el daño de tus ataques. | Cada ataque consume una carga e incrementa el daño del ataque en un 10 %.
-79024	Elixir dragón blanco (M)	Aumenta en 1000 el daño de tus ataques. | Cada ataque consume una carga e incrementa el daño del ataque en un 10 %.
-79025	Elixir dragón blanco (G)	Aumenta en 5000 el daño de tus ataques. | Cada ataque consume una carga e incrementa el daño del ataque en un 10 %.
-79026	Elixir dragón hierro (P)	Disminuye en 200 el daño sufrido. | Cada ataque recibido consume una carga y reduce el daño del ataque en un 10 %.
-79027	Elixir dragón hierro (M)	Disminuye en 1000 el daño sufrido. | Cada ataque recibido consume una carga y reduce el daño del ataque en un 10 %.
-79028	Elixir dragón hierro (G)	Disminuye en 5000 el daño sufrido. | Cada ataque recibido consume una carga y reduce el daño del ataque en un 10 %.
+79022	Tique de Batalla Gremial	Sirve para participar en la Batalla Gremial. Lo puede usar el líder del gremio hasta 30 minutos antes de empezar.
+79023	Elixir dragón blanco (P)	Aumenta en 200 el daño de tus ataques. | Cada ataque consume una carga e incrementa el daño del ataque en un 10 %.
+79024	Elixir dragón blanco (M)	Aumenta en 1000 el daño de tus ataques. | Cada ataque consume una carga e incrementa el daño del ataque en un 10 %.
+79025	Elixir dragón blanco (G)	Aumenta en 5000 el daño de tus ataques. | Cada ataque consume una carga e incrementa el daño del ataque en un 10 %.
+79026	Elixir dragón hierro (P)	Disminuye en 200 el daño sufrido. | Cada ataque recibido consume una carga y reduce el daño del ataque en un 10 %.
+79027	Elixir dragón hierro (M)	Disminuye en 1000 el daño sufrido. | Cada ataque recibido consume una carga y reduce el daño del ataque en un 10 %.
+79028	Elixir dragón hierro (G)	Disminuye en 5000 el daño sufrido. | Cada ataque recibido consume una carga y reduce el daño del ataque en un 10 %.
 79100	Certificado reino (J-S)	Este certificado te permite cambiar tu pertenencia del reino Jinno al reino Shinsoo.
 79101	Certificado reino (J-C)	Este certificado te permite cambiar tu pertenencia del reino Jinno al reino Chunjo.
 79102	Certificado reino (C-J)	Este certificado te permite cambiar tu pertenencia del reino Chunjo al reino Jinno.
@@ -7251,64 +7251,64 @@
 79512	Carta de tarot	Objeto de evento de la Competición de videntes. Colecciona 18 Cartas de tarot y forma una Baraja de tarot con ellas.
 79513	Baraja de tarot	Esta baraja mítica te permitirá iniciar una Competición de videntes.
 79514	Moneda de vidente	Una recompensa de la Competición de videntes que puedes canjear por objetos muy útiles.
-79602	Brújula del Guardián	Esta brújula te indica la ubicación del Guardián. Solo puedes usarla en el Templo de los Ochao. Puedes utilizarla hasta 6 veces.
+79602	Brújula del Guardián	Esta brújula te indica la ubicación del Guardián. Solo puedes usarla en el Templo de los Ochao. Puedes utilizarla hasta 6 veces.
 79603	Cartas del rey	Haz clic secundario para abrir la interfaz de Atrapa al Rey y añadir las Cartas del rey. En ella, 25 Cartas se transformarán automáticamente en una Baraja del rey. Cuando termine el evento, dejarás de recibir sets y los que tengas desaparecerán.
 79604	Baraja del rey	Haz clic secundario para abrir la interfaz de Atrapa al Rey, añadir la Baraja del rey e iniciar una partida del juego. La baraja se eliminará automáticamente al comenzar el juego. Cuando termine el evento, dejarás de recibir sets y los que tengas desaparecerán.
-79605	Runa forjada 1: cinturón	Aumenta en un 1 % la probabilidad de éxito al fabricar cinturones.
-79606	Runa forjada 2: cinturón	Aumenta en un 2 % la probabilidad de éxito al fabricar cinturones.
-79607	Runa forjada 3: cinturón	Aumenta en un 5 % la probabilidad de éxito al fabricar cinturones.
-79608	Runa forjada 4: cinturón	Aumenta en un 10 % la probabilidad de éxito al fabricar cinturones.
-79609	Runa forjada 5: cinturón	Aumenta en un 20 % la probabilidad de éxito al fabricar cinturones.
-79610	Runa forjada 1: arma	Aumenta en un 1 % la probabilidad de éxito al fabricar armas.
-79611	Runa forjada 2: arma	Aumenta en un 2 % la probabilidad de éxito al fabricar armas.
-79612	Runa forjada 3: arma	Aumenta en un 5 % la probabilidad de éxito al fabricar armas.
-79613	Runa forjada 4: arma	Aumenta en un 10 % la probabilidad de éxito al fabricar armas.
-79614	Runa forjada 5: arma	Aumenta en un 20 % la probabilidad de éxito al fabricar armas.
-79615	Runa forjada 1: armadura	Aumenta en un 1 % la probabilidad de éxito al fabricar armaduras.
-79616	Runa forjada 2: armadura	Aumenta en un 2 % la probabilidad de éxito al fabricar armaduras.
-79617	Runa forjada 3: armadura	Aumenta en un 5 % la probabilidad de éxito al fabricar armaduras.
-79618	Runa forjada 4: armadura	Aumenta en un 10 % la probabilidad de éxito al fabricar armaduras.
-79619	Runa forjada 5: armadura	Aumenta en un 20 % la probabilidad de éxito al fabricar armaduras.
-79620	Runa forjada 1: varios	Aumenta en un 1 % la probabilidad de éxito al fabricar objetos varios.
-79621	Runa forjada 2: varios	Aumenta en un 2 % la probabilidad de éxito al fabricar objetos varios.
-79622	Runa forjada 3: varios	Aumenta en un 5 % la probabilidad de éxito al fabricar objetos varios.
-79623	Runa forjada 4: varios	Aumenta en un 10 % la probabilidad de éxito al fabricar objetos varios.
-79624	Runa forjada 5: varios	Aumenta en un 20 % la probabilidad de éxito al fabricar objetos varios.
-79625	Runa forjada 1: accesor.	Aumenta en un 1 % la probabilidad de éxito al fabricar accesorios.
-79626	Runa forjada 2: accesor.	Aumenta en un 2 % la probabilidad de éxito al fabricar accesorios.
-79627	Runa forjada 3: accesor.	Aumenta en un 5 % la probabilidad de éxito al fabricar accesorios.
-79628	Runa forjada 4: accesor.	Aumenta en un 10 % la probabilidad de éxito al fabricar accesorios.
-79629	Runa forjada 5: accesor.	Aumenta en un 20 % la probabilidad de éxito al fabricar accesorios.
-79630	Runa forjada 1: manual	Aumenta en un 1 % la probabilidad de éxito al fabricar manuales de habilidad.
-79631	Runa forjada 2: manual	Aumenta en un 2 % la probabilidad de éxito al fabricar manuales de habilidad.
-79632	Runa forjada 3: manual	Aumenta en un 5 % la probabilidad de éxito al fabricar manuales de habilidad.
-79633	Runa forjada 4: manual	Aumenta en un 10 % la probabilidad de éxito al fabricar manuales de habilidad.
-79634	Runa forjada 5: manual	Aumenta en un 20 % la probabilidad de éxito al fabricar manuales de habilidad.
-79635	Runa forjada 1: arma set	Aumenta en un 1 % la probabilidad de éxito al fabricar armas de set.
-79636	Runa forjada 2: arma set	Aumenta en un 2 % la probabilidad de éxito al fabricar armas de set.
-79637	Runa forjada 3: arma set	Aumenta en un 5 % la probabilidad de éxito al fabricar armas de set.
-79638	Runa forjada 4: arma set	Aumenta en un 10 % la probabilidad de éxito al fabricar armas de set.
-79639	Runa forjada 5: arma set	Aumenta en un 20 % la probabilidad de éxito al fabricar armas de set.
-79640	Runa forjada 1: cas. set	Aumenta en un 1 % la probabilidad de éxito al fabricar cascos de set.
-79641	Runa forjada 2: cas. set	Aumenta en un 2 % la probabilidad de éxito al fabricar cascos de set.
-79642	Runa forjada 3: cas. set	Aumenta en un 5 % la probabilidad de éxito al fabricar cascos de set.
-79643	Runa forjada 4: cas. set	Aumenta en un 10 % la probabilidad de éxito al fabricar cascos de set.
-79644	Runa forjada 5: cas. set	Aumenta en un 20 % la probabilidad de éxito al fabricar cascos de set.
-79645	Runa forjada 1: arm. set	Aumenta en un 1 % la probabilidad de éxito al fabricar armaduras de set.
-79646	Runa forjada 2: arm. set	Aumenta en un 2 % la probabilidad de éxito al fabricar armaduras de set.
-79647	Runa forjada 3: arm. set	Aumenta en un 5 % la probabilidad de éxito al fabricar armaduras de set.
-79648	Runa forjada 4: arm. set	Aumenta en un 10 % la probabilidad de éxito al fabricar armaduras de set.
-79649	Runa forjada 5: arm. set	Aumenta en un 20 % la probabilidad de éxito al fabricar armaduras de set.
-79650	Runa forjada 1: guante	Aumenta en un 1 % la probabilidad de éxito al fabricar guantes.
-79651	Runa forjada 2: guante	Aumenta en un 2 % la probabilidad de éxito al fabricar guantes.
-79652	Runa forjada 3: guante	Aumenta en un 5 % la probabilidad de éxito al fabricar guantes.
-79653	Runa forjada 4: guante	Aumenta en un 10 % la probabilidad de éxito al fabricar guantes.
-79654	Runa forjada 5: guante	Aumenta en un 20 % la probabilidad de éxito al fabricar guantes.
-79655	Runa forjada 1: mascota	Aumenta en un 1 % la probabilidad de éxito al fabricar objetos para mascotas.
-79656	Runa forjada 2: mascota	Aumenta en un 2 % la probabilidad de éxito al fabricar objetos para mascotas.
-79657	Runa forjada 3: mascota	Aumenta en un 5 % la probabilidad de éxito al fabricar objetos para mascotas.
-79658	Runa forjada 4: mascota	Aumenta en un 10 % la probabilidad de éxito al fabricar objetos para mascotas.
-79659	Runa forjada 5: mascota	Aumenta en un 20 % la probabilidad de éxito al fabricar objetos para mascotas.
+79605	Runa forjada 1: cinturón	Aumenta en un 1 % la probabilidad de éxito al fabricar cinturones.
+79606	Runa forjada 2: cinturón	Aumenta en un 2 % la probabilidad de éxito al fabricar cinturones.
+79607	Runa forjada 3: cinturón	Aumenta en un 5 % la probabilidad de éxito al fabricar cinturones.
+79608	Runa forjada 4: cinturón	Aumenta en un 10 % la probabilidad de éxito al fabricar cinturones.
+79609	Runa forjada 5: cinturón	Aumenta en un 20 % la probabilidad de éxito al fabricar cinturones.
+79610	Runa forjada 1: arma	Aumenta en un 1 % la probabilidad de éxito al fabricar armas.
+79611	Runa forjada 2: arma	Aumenta en un 2 % la probabilidad de éxito al fabricar armas.
+79612	Runa forjada 3: arma	Aumenta en un 5 % la probabilidad de éxito al fabricar armas.
+79613	Runa forjada 4: arma	Aumenta en un 10 % la probabilidad de éxito al fabricar armas.
+79614	Runa forjada 5: arma	Aumenta en un 20 % la probabilidad de éxito al fabricar armas.
+79615	Runa forjada 1: armadura	Aumenta en un 1 % la probabilidad de éxito al fabricar armaduras.
+79616	Runa forjada 2: armadura	Aumenta en un 2 % la probabilidad de éxito al fabricar armaduras.
+79617	Runa forjada 3: armadura	Aumenta en un 5 % la probabilidad de éxito al fabricar armaduras.
+79618	Runa forjada 4: armadura	Aumenta en un 10 % la probabilidad de éxito al fabricar armaduras.
+79619	Runa forjada 5: armadura	Aumenta en un 20 % la probabilidad de éxito al fabricar armaduras.
+79620	Runa forjada 1: varios	Aumenta en un 1 % la probabilidad de éxito al fabricar objetos varios.
+79621	Runa forjada 2: varios	Aumenta en un 2 % la probabilidad de éxito al fabricar objetos varios.
+79622	Runa forjada 3: varios	Aumenta en un 5 % la probabilidad de éxito al fabricar objetos varios.
+79623	Runa forjada 4: varios	Aumenta en un 10 % la probabilidad de éxito al fabricar objetos varios.
+79624	Runa forjada 5: varios	Aumenta en un 20 % la probabilidad de éxito al fabricar objetos varios.
+79625	Runa forjada 1: accesor.	Aumenta en un 1 % la probabilidad de éxito al fabricar accesorios.
+79626	Runa forjada 2: accesor.	Aumenta en un 2 % la probabilidad de éxito al fabricar accesorios.
+79627	Runa forjada 3: accesor.	Aumenta en un 5 % la probabilidad de éxito al fabricar accesorios.
+79628	Runa forjada 4: accesor.	Aumenta en un 10 % la probabilidad de éxito al fabricar accesorios.
+79629	Runa forjada 5: accesor.	Aumenta en un 20 % la probabilidad de éxito al fabricar accesorios.
+79630	Runa forjada 1: manual	Aumenta en un 1 % la probabilidad de éxito al fabricar manuales de habilidad.
+79631	Runa forjada 2: manual	Aumenta en un 2 % la probabilidad de éxito al fabricar manuales de habilidad.
+79632	Runa forjada 3: manual	Aumenta en un 5 % la probabilidad de éxito al fabricar manuales de habilidad.
+79633	Runa forjada 4: manual	Aumenta en un 10 % la probabilidad de éxito al fabricar manuales de habilidad.
+79634	Runa forjada 5: manual	Aumenta en un 20 % la probabilidad de éxito al fabricar manuales de habilidad.
+79635	Runa forjada 1: arma set	Aumenta en un 1 % la probabilidad de éxito al fabricar armas de set.
+79636	Runa forjada 2: arma set	Aumenta en un 2 % la probabilidad de éxito al fabricar armas de set.
+79637	Runa forjada 3: arma set	Aumenta en un 5 % la probabilidad de éxito al fabricar armas de set.
+79638	Runa forjada 4: arma set	Aumenta en un 10 % la probabilidad de éxito al fabricar armas de set.
+79639	Runa forjada 5: arma set	Aumenta en un 20 % la probabilidad de éxito al fabricar armas de set.
+79640	Runa forjada 1: cas. set	Aumenta en un 1 % la probabilidad de éxito al fabricar cascos de set.
+79641	Runa forjada 2: cas. set	Aumenta en un 2 % la probabilidad de éxito al fabricar cascos de set.
+79642	Runa forjada 3: cas. set	Aumenta en un 5 % la probabilidad de éxito al fabricar cascos de set.
+79643	Runa forjada 4: cas. set	Aumenta en un 10 % la probabilidad de éxito al fabricar cascos de set.
+79644	Runa forjada 5: cas. set	Aumenta en un 20 % la probabilidad de éxito al fabricar cascos de set.
+79645	Runa forjada 1: arm. set	Aumenta en un 1 % la probabilidad de éxito al fabricar armaduras de set.
+79646	Runa forjada 2: arm. set	Aumenta en un 2 % la probabilidad de éxito al fabricar armaduras de set.
+79647	Runa forjada 3: arm. set	Aumenta en un 5 % la probabilidad de éxito al fabricar armaduras de set.
+79648	Runa forjada 4: arm. set	Aumenta en un 10 % la probabilidad de éxito al fabricar armaduras de set.
+79649	Runa forjada 5: arm. set	Aumenta en un 20 % la probabilidad de éxito al fabricar armaduras de set.
+79650	Runa forjada 1: guante	Aumenta en un 1 % la probabilidad de éxito al fabricar guantes.
+79651	Runa forjada 2: guante	Aumenta en un 2 % la probabilidad de éxito al fabricar guantes.
+79652	Runa forjada 3: guante	Aumenta en un 5 % la probabilidad de éxito al fabricar guantes.
+79653	Runa forjada 4: guante	Aumenta en un 10 % la probabilidad de éxito al fabricar guantes.
+79654	Runa forjada 5: guante	Aumenta en un 20 % la probabilidad de éxito al fabricar guantes.
+79655	Runa forjada 1: mascota	Aumenta en un 1 % la probabilidad de éxito al fabricar objetos para mascotas.
+79656	Runa forjada 2: mascota	Aumenta en un 2 % la probabilidad de éxito al fabricar objetos para mascotas.
+79657	Runa forjada 3: mascota	Aumenta en un 5 % la probabilidad de éxito al fabricar objetos para mascotas.
+79658	Runa forjada 4: mascota	Aumenta en un 10 % la probabilidad de éxito al fabricar objetos para mascotas.
+79659	Runa forjada 5: mascota	Aumenta en un 20 % la probabilidad de éxito al fabricar objetos para mascotas.
 80001	MPote Dinero	Una bolsita oscura y ya utilizada tejida con cuero.
 80002	Papel en Blanco	Un pergamino sin usar de buena calidad.
 80008	Terrón Oro	Terrón del oro que nunca se ha hecho a mano. Se vende en una tienda con un alto precio.
@@ -7318,10 +7318,10 @@
 80017	Cupón de Dr (50)	Cupón por valor de 50 Monedas Dragón. Este objeto es comerciable.
 80019	Tela delicada	Este material sirve para fabricar Estolas.
 80021	Ymir CashPack	Only for Ymir (may only be distributed by QA).
-80022	Cupón de Dr (50)	Cupón por valor de 50 Monedas Dragón. El objeto no es comerciable.
-80023	Cupón de Dr (100)	Cupón por valor de 100 Monedas Dragón. El objeto no es comerciable.
-80024	Cupón de Dr (500)	Cupón por valor de 500 Monedas Dragón. El objeto no es comerciable.
-80025	Cupón de Dr (1000)	Cupón por valor de 1000 Monedas Dragón. El objeto no es comerciable.
+80022	Cupón de Dr (50)	Cupón por valor de 50 Monedas Dragón. El objeto no es comerciable.
+80023	Cupón de Dr (100)	Cupón por valor de 100 Monedas Dragón. El objeto no es comerciable.
+80024	Cupón de Dr (500)	Cupón por valor de 500 Monedas Dragón. El objeto no es comerciable.
+80025	Cupón de Dr (1000)	Cupón por valor de 1000 Monedas Dragón. El objeto no es comerciable.
 81000	Talismán voluntad STR+0	Este objeto encierra la voluntad de SungMa.
 81001	Talismán voluntad STR+1	Este objeto encierra la voluntad de SungMa.
 81002	Talismán voluntad STR+2	Este objeto encierra la voluntad de SungMa.
@@ -7409,17 +7409,17 @@
 83035	Caja monstruosa bronce	Tu recompensa cuando hayas necesitado 25 o más intentos para descubrir todos los tríos de cartas de monstruo.
 83036	Caja carta monstr. plata	Puede contener una carta de monstruo
 83037	Caja carta monstr. oro	Contiene una carta de monstruo
-83038	Baúl con pociones	Obtiene 1 de 8 pociones distintas.
+83038	Baúl con pociones	Obtiene 1 de 8 pociones distintas.
 83039	Regalo diario	Obtiene objetos útiles para el día a día.
 83040	Caja monstruosa vip	La recompensa vip puede contener entre 2 y 5 cajas de carta de monstruo de oro.
 83041	Baúl vidente de oro	La recompensa grande de la Competición de videntes. Adivina qué contiene...
 83042	Baúl vidente de plata	La recompensa intermedia de la Competición de videntes. Adivina qué contiene...
 83043	Baúl vidente de bronce	La recompensa pequeña de la Competición de videntes. Adivina qué contiene...
-83044	Baúl elemental del poder	Este baúl decorado contiene | 1 Cupón mascota elemental | 3 Anillos de hidra | 3 Anillos elementales (100 %) | 20 Pociones protec. elementos | 1 Piedra poder elemental
-83045	Baúl elem. de la guarda	Este baúl decorado contiene | 1 Cupón mascota elemental | 3 Anillos de hidra | 3 Anillos elementales (100 %) | 20 Pociones protec. elementos | 1 Piedra guarda elemental
-83046	Caja de poder elemental	Contiene una Piedra de poder elemental que otorga +10 % de fuerza de todos los elementos.
-83047	Caja de guarda elemental	Contiene una Piedra de guarda elemental que otorga +10 % de resistencia a todos los elementos.
-83048	Caja de ampliación boni.	La caja contiene | 20 Cajas fragmen. adornadas | 5 Cajas fragmen. brillantes | 3 Aceleradores (30 %)
+83044	Baúl elemental del poder	Este baúl decorado contiene | 1 Cupón mascota elemental | 3 Anillos de hidra | 3 Anillos elementales (100 %) | 20 Pociones protec. elementos | 1 Piedra poder elemental
+83045	Baúl elem. de la guarda	Este baúl decorado contiene | 1 Cupón mascota elemental | 3 Anillos de hidra | 3 Anillos elementales (100 %) | 20 Pociones protec. elementos | 1 Piedra guarda elemental
+83046	Caja de poder elemental	Contiene una Piedra de poder elemental que otorga +10 % de fuerza de todos los elementos.
+83047	Caja de guarda elemental	Contiene una Piedra de guarda elemental que otorga +10 % de resistencia a todos los elementos.
+83048	Caja de ampliación boni.	La caja contiene | 20 Cajas fragmen. adornadas | 5 Cajas fragmen. brillantes | 3 Aceleradores (30 %)
 83049	Baúl de la suerte grande	Contiene un Baúl de la suerte de Dr.
 83050	Provisiones para caballo	Contiene 50 raciones de Comida para caballos, 5 unidades Ginseng rojo (prémium) y 1 ramillete de Hierba noble.
 83051	Baúl: talismán perfecto	Este baúl bien cerrado contiene un talismán. Para abrirlo se necesita una llave perfecta.
@@ -7440,8 +7440,8 @@
 83066	Llave aleatoria	¡Esta misteriosa llave se transforma en otra al utilizarla! Sin probarla, es imposible saber cuál.
 83067	Baúl: pulsera perfecta	Este baúl bien cerrado contiene una pulsera. Para abrirlo se necesita una llave perfecta.
 83072	Baúl invasión de Sung Ma	Este baúl se puede obtener al completar un Portal de invasión de Sung Ma. Obtendrás un objeto poderoso cuando lo abras.
-83073	Caja cartas mons. Yohara	Contiene una carta de monstruo de Yohara con una probabilidad del 100 %.
-83074	Caja platino cart. mons.	Contiene una carta de monstruo de todas las cartas posibles con una probabilidad del 100 %.
+83073	Caja cartas mons. Yohara	Contiene una carta de monstruo de Yohara con una probabilidad del 100 %.
+83074	Caja platino cart. mons.	Contiene una carta de monstruo de todas las cartas posibles con una probabilidad del 100 %.
 83075	Baúl de frutos ácidos	Este baúl contiene Frutos ácidos. Solo se puede abrir durante el evento.
 83076	Baúl de frutos dorados	Este baúl contiene Frutos dorados. Solo se puede abrir durante el evento.
 83100	Recomp. Valle Seungr.	Un baúl encontrado en una misión en el Valle de Seungryong.
@@ -7491,8 +7491,8 @@
 85022	Estola aniversario (ele)	La Estola absorbe un 5% de las bonificaciones del arma o armadura que selecciones para ello.
 85023	Estola aniversario (nob)	La Estola absorbe un 10% de las bonificaciones del arma o armadura que selecciones para ello.
 85024	Estola aniversario (per)	La Estola absorbe entre un 11% y un 25% de las bonificaciones del arma o armadura que selecciones para ello.
-85025	Estola señorial+ (pers.)	Esta cinta absorbe entre un 20 % y un 25 % de las bonificaciones del arma o armadura que selecciones para ello.
-85028	Estola señorial+ (pers.)	Esta cinta absorbe entre un 20 % y un 25 % de las bonificaciones del arma o armadura que selecciones para ello.
+85025	Estola señorial+ (pers.)	Esta cinta absorbe entre un 20 % y un 25 % de las bonificaciones del arma o armadura que selecciones para ello.
+85028	Estola señorial+ (pers.)	Esta cinta absorbe entre un 20 % y un 25 % de las bonificaciones del arma o armadura que selecciones para ello.
 86001	Cinta del Zi (simple)	Esta cinta absorbe un 1% de las bonificaciones del arma o armadura que selecciones para ello.
 86002	Cinta del Zi (elegante)	Esta cinta absorbe un 5% de las bonificaciones del arma o armadura que selecciones para ello.
 86003	Cinta del Zi (noble)	Esta cinta absorbe un 10% de las bonificaciones del arma o armadura que selecciones para ello.
@@ -7541,10 +7541,10 @@
 86056	Cinta del Hai (elegante)	Esta cinta absorbe un 5% de las bonificaciones del arma o armadura que selecciones para ello.
 86057	Cinta del Hai (noble)	Esta cinta absorbe un 10% de las bonificaciones del arma o armadura que selecciones para ello.
 86058	Cinta del Hai (pers.)	Esta cinta absorbe entre un 11% y un 25% de las bonificaciones del arma o armadura que selecciones para ello.
-86061	Estola amorosa (simple)	Esta cinta absorbe un 1 % de las bonificaciones del arma o armadura que selecciones para ello.
-86062	Estola amorosa (eleg.)	Esta cinta absorbe un 5 % de las bonificaciones del arma o armadura que selecciones para ello.
-86063	Estola amorosa (noble)	Esta cinta absorbe un 10 % de las bonificaciones del arma o armadura que selecciones para ello.
-86064	Estola amorosa (pers.)	Esta cinta absorbe entre un 11 % y un 20 % de las bonificaciones del arma o armadura que selecciones para ello.
+86061	Estola amorosa (simple)	Esta cinta absorbe un 1 % de las bonificaciones del arma o armadura que selecciones para ello.
+86062	Estola amorosa (eleg.)	Esta cinta absorbe un 5 % de las bonificaciones del arma o armadura que selecciones para ello.
+86063	Estola amorosa (noble)	Esta cinta absorbe un 10 % de las bonificaciones del arma o armadura que selecciones para ello.
+86064	Estola amorosa (pers.)	Esta cinta absorbe entre un 11 % y un 20 % de las bonificaciones del arma o armadura que selecciones para ello.
 89999	Manuscrito de aura+	Este objeto te permite cambiar los atributos aplicados a una Vestimenta de aura.
 90000	Título de retroceso	Utiliza el Título de retroceso para eliminar bonificaciones de una Estola.
 90001	Botella Agua Vacía	Un recipiente de viaje para transportar agua - por desgracia, esta vacío ahora mismo.
@@ -7610,21 +7610,21 @@
 91045	Zapatos de alción (caja)	
 91046	Esc. tres empera. (caja)	
 91047	Flecha de plata	
-91050	Poción morada (P)	Aumenta tu velocidad de movimiento en 30 durante 30 segundos. No es comerciable.
-91051	Poción morada (M)	Aumenta tu velocidad de movimiento en 45 puntos durante 30 segundos. No es comerciable.
-91052	Poción morada (G)	Aumenta tu velocidad de movimiento en 60 puntos durante 30 segundos. No es comerciable.
-91053	Poción verde (P)	Aumenta tu velocidad de ataque en 10 durante +30 segundos. No es comerciable.
+91050	Poción morada (P)	Aumenta tu velocidad de movimiento en 30 durante 30 segundos. No es comerciable.
+91051	Poción morada (M)	Aumenta tu velocidad de movimiento en 45 puntos durante 30 segundos. No es comerciable.
+91052	Poción morada (G)	Aumenta tu velocidad de movimiento en 60 puntos durante 30 segundos. No es comerciable.
+91053	Poción verde (P)	Aumenta tu velocidad de ataque en 10 durante +30 segundos. No es comerciable.
 91054	Perca asada	Elimina la penalización que recibes en Battle Royale.
 91055	Vendaje	Detiene el sangrado de inmediato.
-91056	Cerbero (1 uso)	Con este sello saltas sobre tu poderoso can infernal.
-91057	Mani (1 uso)	Con este sello invocas a tu mamut fortachón.
-91058	Dragón rubí (1 uso)	Con este sello invocas a tu montura dragontina roja.
+91056	Cerbero (1 uso)	Con este sello saltas sobre tu poderoso can infernal.
+91057	Mani (1 uso)	Con este sello invocas a tu mamut fortachón.
+91058	Dragón rubí (1 uso)	Con este sello invocas a tu montura dragontina roja.
 91059	Resistencia infinita	No pierdes resistencia durante la partida de Battle Royale. | Utiliza 1 unidad al acceder a Battle Royale para disfrutar del potenciador.
 100000	Elixir del tiempo (P)	Completa la duración de una Piedra dragón.
 100001	Elixir del tiempo (M)	Completa la duración de una Piedra dragón.
 100002	Elixir del tiempo (G)	Completa la duración de una Piedra dragón.
 100100	Tenaza de dragón	Un herramienta útil que aumenta la probabilidad de éxito al retirar una Piedra dragón.
-100101	Tenaza de dragón+	Un herramienta útil que garantiza un 100 % de probabilidad de éxito al retirar una Piedra dragón.
+100101	Tenaza de dragón+	Un herramienta útil que garantiza un 100 % de probabilidad de éxito al retirar una Piedra dragón.
 100200	Tenaza del tiempo	Extrae la duración de la Piedra dragón.
 100300	Alubia verde del dragón	La Alubia mágica aumenta el nivel de tu Piedra dragón. La mejora puede fallar.
 100400	Alubia azul del dragón	La Alubia mágica aumenta las probabilidades de mejorar con éxito en un nivel la Piedra dragón.

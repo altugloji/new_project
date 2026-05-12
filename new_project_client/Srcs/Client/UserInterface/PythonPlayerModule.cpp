@@ -2232,6 +2232,13 @@ PyObject* playerIsGiftBox(PyObject* poSelf, PyObject* poArgs)
 }
 #endif
 
+#ifdef __GEM_SHOP__
+PyObject* playerGetGem(PyObject* poSelf, PyObject* poArgs)
+{
+	return Py_BuildValue("i", CPythonPlayer::Instance().GetStatus(POINT_GEM));
+}
+#endif
+
 void initPlayer()
 {
 	static PyMethodDef s_methods[] =
@@ -2426,6 +2433,10 @@ void initPlayer()
 
 #ifdef KYGN_CHEST_INFO
 		{ "IsGiftBox",					playerIsGiftBox,					METH_VARARGS },
+#endif
+
+#ifdef __GEM_SHOP__
+		{ "GetGem",						playerGetGem,						METH_VARARGS },
 #endif
 
 		{nullptr, nullptr},
@@ -2689,5 +2700,8 @@ void initPlayer()
 	PyModule_AddIntConstant(poModule, "DS_SUB_HEADER_DO_UPGRADE",	DS_SUB_HEADER_DO_UPGRADE);
 	PyModule_AddIntConstant(poModule, "DS_SUB_HEADER_DO_IMPROVEMENT",	DS_SUB_HEADER_DO_IMPROVEMENT);
 	PyModule_AddIntConstant(poModule, "DS_SUB_HEADER_DO_REFINE",	DS_SUB_HEADER_DO_REFINE);
+#ifdef __GEM_SHOP__
+	PyModule_AddIntConstant(poModule, "GEM", POINT_GEM);
+#endif
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

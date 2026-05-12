@@ -624,7 +624,11 @@ void CPythonNetworkStream::GamePhase()
 				ret = RecvCubeRenewalPacket();
 				break;
 #endif
-
+#ifdef __GEM_SHOP__
+		case HEADER_GC_GEM:
+			ret = RecvGem();
+			break;
+#endif
 			default:
 				ret = RecvDefaultPacket(header);
 				break;
@@ -1571,6 +1575,16 @@ bool CPythonNetworkStream::RecvPointChange()
 		{
 			if (PointChange.amount > 0)
 				PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "OnPickCheque", Py_BuildValue("(i)", PointChange.amount));
+		}
+#endif
+
+#ifdef __GEM_SHOP__
+		else if (POINT_GEM == PointChange.Type)
+		{
+			if (PointChange.amount > 0)
+			{
+				PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "OnPickGem", Py_BuildValue("(i)", PointChange.amount));
+			}
 		}
 #endif
 	}
@@ -4983,4 +4997,83 @@ bool CPythonNetworkStream::RecvCubeRenewalPacket()
 	return true;
 }
 #endif
+
+#ifdef __GEM_SHOP__
+#include "PythonGem.h"
+bool CPythonNetworkStream::RecvGem()
+{
+	TPacketGCGem pack;
+	if (!Recv(sizeof(TPacketGCGem), &pack))
+	{
+		Tracen("Recv RecvGem Packet Error");
+		return false;
+	}
+
+	CPythonGem& gemMngr = CPythonGem::Instance();
+
+	if (pack.sub_header == GEM_SUBHEADER_GC_LOAD)
+	{
+		int iSlotCount;
+		if (!Recv(sizeof(int), &iSlotCount))
+			return false;
+
+		int iRefreshTime;
+		if (!Recv(sizeof(int), &iRefreshTime))
+			return false;
+
+		BYTE bItemCount;
+		if (!Recv(sizeof(BYTE), &bItemCount))
+			return false;
+
+		gemMngr.SetRefreshTime(CPythonApplication::Instance().GetServerTimeStamp() + iRefreshTime);
+		gemMngr.SetSlotCount(iSlotCount);
+
+		std::vector<TGemItem>& item_vector = gemMngr.GetItemVector();
+		item_vector.resize(bItemCount);
+		if (bItemCount > 0)
+		{
+			if (!Recv(bItemCount * sizeof(TGemItem), item_vector.data()))
+				return false;
+		}
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_RefreshGem", Py_BuildValue("(i)", 1));
+	}
+	else if (pack.sub_header == GEM_SUBHEADER_GC_SLOT_COUNT)
+	{
+		int iSlotCount;
+		if (!Recv(sizeof(int), &iSlotCount))
+			return false;
+		gemMngr.SetSlotCount(iSlotCount);
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_RefreshGem", Py_BuildValue("(i)", 0));
+	}
+	else if (pack.sub_header == GEM_SUBHEADER_GC_BUYED_SLOT)
+	{
+		BYTE bSlotIndex;
+		if (!Recv(sizeof(BYTE), &bSlotIndex))
+			return false;
+
+		TGemItem* pItem = gemMngr.GetItem(bSlotIndex);
+		if (pItem)
+		{
+			pItem->bBuyed = true;
+		}
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_RefreshGem", Py_BuildValue("(i)", 0));
+	}
+	else if (pack.sub_header == GEM_SUBHEADER_GC_CONVERT_LOAD)
+	{
+		BYTE bItemCount;
+		if (!Recv(sizeof(BYTE), &bItemCount))
+			return false;
+		std::vector<TGemConvertItem>& item_vector = gemMngr.GetConvertItemVector();
+		item_vector.resize(bItemCount);
+		if (bItemCount > 0)
+		{
+			if (!Recv(bItemCount * sizeof(TGemConvertItem), item_vector.data()))
+				return false;
+		}
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_RefreshGemConvert", Py_BuildValue("(i)", 1));
+	}
+	return true;
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

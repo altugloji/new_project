@@ -2763,7 +2763,7 @@
 27988	Mapa pokladu	Ohmataná mapa, na které je vyznaèené umístìní starého pokladu.
 27989	Kompas kamene Metin	Kompas ti ukáe intenzitou šipky smìr a vzdálenost nejblišího kamene Metin. Èím více svítí, tím jsi blíe. Mue bıt aktivován šestkrát.
 27990	Kousek kamene	Díky malé velikosti se tento kousek lehce transportuje, pøitom se ale dá na ledacos vyuít.
-27991	Vodní kámen	Tvrdı, hrubozrnnı kámen, kterı se pouívá k broušení zbraní a kuchyòskıch pøedmìtù.
+27991	Vodní kámen	Cennı minerál z moøe.
 27992	Bílá perla	Snìhobílı poklad z vnitra mušle.
 27993	Modrá perla	Nádhernı, hluboce modrı poklad z vnitra mušle.
 27994	Krvavì rudá perla	Rudì zabarvenı poklad z vnitra mušle.
@@ -2931,7 +2931,7 @@
 30153	Kytky	Neznámé kytky, které tì svou vùní unesou do svìta vzpomínek.
 30154	Tajná kniha chrámu	Analıza uèení a historie tajného chrámu.
 30155	Mirinin pøívìsek	Pøívìsek k náhrdelníku. Na zadní stranì je vyryté jméno "Mirine".
-30156	Tajná kniha chrámu	Analıza uèení a historie tajného chrámu.
+30156	Fialová kniha	Kniha obsahující recepty na knihy schopností. Lze vyrobit u Alchymisty.
 30157	Špièka šípu	Tyto otrávené špièky šípù pomohou ubránit království.
 30177	Pimovı olej	Pymovı olej je pouíván obchodníkem se zbranìmi bìhem úkolù. Nemá ádné další vyuití.
 30179	Kroucenı klíè	Tento magickı klíè aktivuje portál do Draèího chrámu.
@@ -3123,20 +3123,20 @@
 30586		
 30600	Šicí vzor	
 30601	Design brnìní	
-30602	Modré barvivo	
-30603	Èervené barvivo	
-30604	Šedé barvivo	
+30602	Modré barvivo	Barvivo potøebné k vırobì.
+30603	Èervené barvivo	Barvivo potøebné k vırobì.
+30604	Šedé barvivo	Barvivo potøebné k vırobì.
 30605	Zlaté listy	
 30606	Støíbrné listy	
 30607	Mìdìnné listy	
 30608	Ocelové listy	
 30609	Bronzové listy	
-30610	Mithril	
+30610	Mithril	Získává se tavením rud. Lze pouít v rùznıch vırobách. Lze vyrobit u Alchymisty.
 30611	Teké popruhy	
 30612	Stabilní šòùry	
 30613	Kámen Dryád	Zahalenı v zeleném lesku tento tajemnı kámen obaluje duši Dryády, ducha stromu. Dryády znají tajná slova, která ti poskytnou pøístup do jeskynì Ereba.
-30614	Èerné barvivo	
-30615	Bílé barvivo	
+30614	Èerné barvivo	Barvivo potøebné k vırobì.
+30615	Bílé barvivo	Barvivo potøebné k vırobì.
 30616	Oxid titanièitı	Tento køišál ve tvaru hranolu se pouívá pro zušlechtìní èásti vıbavy.
 30617	Ornament	Tento tajemnı tøpytivı drahokam se pouívá pro zušlechtìní èásti vıbavy.
 30618	Kámen Mìsíce	Uvnitø tohoto drahokamu ve tvaru slzy je zapouzdøena jiskra mìsíèního svìtla. Pouívá se pro zušlechtìní vıbavy.
@@ -3216,7 +3216,7 @@
 31032	Leviatanské perly	Efektnì posilující kapsle, vyrobené z Vnitøního svìtla tajemnıch bytostí a Esence milénia.
 31033	Šéfovská kápì	Tato kápì je pro Èervené zlodìje symbolem nezranitelnosti
 31034	Totem gigantù	Tento totem svım tvarem pøipomíná gigantickı kus jantaru.
-31035	Èernı kámen	Tento tajemnı kámen tìí Kyklopové v Bouønıch horách.
+31035	Èernı kámen	Získává se tavením kamenù. Lze pouít v rùznıch vırobách. Lze vyrobit u Alchymisty.
 31036	Èerné zlato	Tuto èernou rudu s magickımi vlastnostmi mùeš nalézt v Bouønıch horách.
 31037	Koenı pytel	Sebral jsi tento pytel kapitánovi Shrukovi. Zdá se, e je lehèí, ne jsi oèekával...
 31038	Posvátná zemina	Tento pytel plnı Posvátné zeminy slouí jako médium pro vyvolávání mrtvıch.
@@ -5627,8 +5627,8 @@
 50853	V. el. odol. proti temn.	Tento mocnı elixír pøidá kadému, kdo jej vypije, +20 % odolnosti proti temnotì.
 50901	Prázdná láhev	Je potøeba k vırobì elixíru.
 50902	Recept pro zaèáteèníky	Jednoduchı návod, kterı pochopí i nezkušenı.
-50903	Recept	Návod na recept, pøí kterım je nutno trocha cviku.
-50904	Recept pro profíky	Návod na recept, kterı mohou vykonat správnì jen cvièení lidé.
+50903	Schéma Posílení	Schéma potøebné k vırobì.
+50904	Schéma Zaèarování pøedmìtu	Schéma potøebné k vırobì.
 50905	Recept na vodu Sim	Popisuje pøesnì vırobu vody ze šávy z broskvového kvìtù a šeøíku.
 50906	Recept na vodu Dok	Popisuje pøesnì vırobu vody ze zvonkové šávy a šeøíku.
 50907	Recept na vodu Bo	Popisuje pøesnì vırobu vody ze kakikvìtové šávy a hub tue.
@@ -5658,7 +5658,7 @@
 50938	Èervená truhla vìštce	Obsahuje 105 Tarotovıch karet pro Souboj vìštcù.
 50939	Modrá truhla vìštce	Obsahuje 21 Tarotovıch karet pro Souboj vìštcù.
 50940	Rùová truhla vìštce	Obsahuje 5 Tarotovıch karet pro Souboj vìštcù.
-51001	Fragment energie	Fragment z Energetického krystalu. 30 kusù lze rozpustit a vytvoøit tak celı krystal.
+51001	Energetickı úlomek	Získává se tavením cennıch pøedmìtù. Lze pouít v rùznıch vırobách. Lze vyrobit u Alchymisty.
 51002	Energetickı krystal	Krystal zvyšuje tvé bonusy po dobu dvou hodin.
 51501	Cor Draconis (surové)	Køišálové draèí srdce obsahuje náhodnı surovı Draèí kámen.
 51502	Cor Draconis (surové)	Køišálové draèí srdce obsahuje náhodnı surovı Draèí kámen.
@@ -6842,7 +6842,7 @@
 72347	Èasová spirála (10 %)	Sniuje èekací dobu na odevzdání dalšího pøedmìtu zadavateli úkolu 10 % (napøíklad u biologa).
 72348	Èasová spirála (20 %)	Sniuje èekací dobu na odevzdání dalšího pøedmìtu zadavateli úkolu 20 % (napøíklad u biologa).
 72349	Èasová spirála (30 %)	Sniuje èekací dobu na odevzdání dalšího pøedmìtu zadavateli úkolu 30 % (napøíklad u biologa).
-72350	Vızkumníkùv pergamen	Resetuje úkol 'Seon-Pyeongùv vızkum‘ pro úroveò 92 nebo 94, take jej budeš moci dokonèit ještì jednou. Také ho lze aplikovat na úkoly na kontinentu Yohara.
+72350	Vızkumníkùv pergamen	Resetuje úkol 'Seon-Pyeongùv vızkum' pro úroveò 92 nebo 94, take jej budeš moci dokonèit ještì jednou. Také ho lze aplikovat na úkoly na kontinentu Yohara.
 72351	Malá modlitba	Poskytuje malou šanci na zmìnu 6. a 7. bonusu.
 72352	Licence na rukavice	Okamitì ti umoní nasadit si rukavice.
 72353	Topaz vùle	Materiál pouitı pro vylepšování talismanù vùle.

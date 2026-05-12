@@ -2082,6 +2082,7 @@ Group	lv1(sura_warrior)
 	10	72040	2	100
 	11	72026	5	100
 	12	72027	5	100
+	13	76025	1	100
 }
 Group	lv1(assassin)
 {

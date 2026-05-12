@@ -1,9 +1,381 @@
-#복숭아꽃진액
+#demirci
 section
-npc	20018
-item	50721	1
-reward	50801	1
+npc	20016
+item	25040	1
+item	71025	1
+item	30610	1
+reward	70039	1
 percent	100
+gold	5000000
+end
+
+#demirci
+section
+npc	20016
+item	50904	1
+item	30602	2
+item	31035	2
+item	30156	10
+item	27991	2
+item	51001	30
+item	30610	2
+reward	71085	1
+percent	100
+gold	1500000
+end
+
+#demirci
+section
+npc	20016
+item	50903	1
+item	30603	2
+item	30156	5
+item	51001	30
+reward	71084	1
+percent	100
+gold	700000
+end
+
+#demirci
+section
+npc	20016
+item	50903	5
+item	30603	1
+reward	71084	1
+percent	100
+gold	700000
+end
+
+#demirci
+section
+npc	20016
+item	71085	2
+item	30604	2
+item	31035	3
+item	30156	20
+item	27991	5
+item	51001	50
+item	30610	3
+reward	70024	1
+percent	100
+gold	7000000
+end
+
+#simyaci-cevher
+section
+npc	20378
+item	50601	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+#simyaci-cevher
+section
+npc	20378
+item	50603	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+#simyaci-cevher
+section
+npc	20378
+item	50604	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+#simyaci-cevher
+section
+npc	20378
+item	50605	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+#simyaci-cevher
+section
+npc	20378
+item	50606	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+#simyaci-cevher
+section
+npc	20378
+item	50607	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+#simyaci-cevher
+section
+npc	20378
+item	50608	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+#simyaci-cevher
+section
+npc	20378
+item	50609	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+#simyaci-cevher
+section
+npc	20378
+item	50610	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+
+#simyaci-cevher
+section
+npc	20378
+item	50611	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+
+#simyaci-cevher
+section
+npc	20378
+item	50612	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+#simyaci-cevher
+section
+npc	20378
+item	50613	120
+reward	31035	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28430	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28431	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28432	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28433	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28434	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28435	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28436	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28437	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28438	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28439	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28440	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28441	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28442	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-tas
+section
+npc	20376
+item	28443	1
+reward	30610	1
+percent	70
+gold	30000
+end
+
+#simyaci-bk
+section
+npc	20001
+item	50300	2
+reward	30156	1
+percent	50
+gold	10000
+end
+
+#simyaci-bk
+section
+npc	20001
+item	50301	1
+reward	30156	1
+percent	50
+gold	10000
+end
+
+#simyaci-bk
+section
+npc	20001
+item	50302	1
+reward	30156	1
+percent	50
+gold	10000
+end
+
+#simyaci-bk
+section
+npc	20001
+item	50303	1
+reward	30156	1
+percent	50
+gold	10000
+end
+
+#simyaci-bk
+section
+npc	20001
+item	50300	1
+reward	70057	1
+percent	50
+gold	10000
+end
+
+#simyaci-bk
+section
+npc	20001
+item	50300	3
+reward	27989	1
+percent	50
+gold	10000
+end
+
+#balikci
+section
+npc	9009
+item	27803	2
+reward	27991	1
+percent	100
+gold	1
+end
+
+#balikci
+section
+npc	9009
+item	27803	10
+reward	27799	1
+percent	100
+gold	1
+end
+
+#balikci
+section
+npc	9009
+item	27991	10
+reward	27987	1
+percent	50
+gold	1
 end
 
 #도라지진액
@@ -11,6 +383,7 @@ section
 npc	20018
 item	50722	1
 reward	50802	1
+gold	1000
 percent	100
 end
 
@@ -19,6 +392,7 @@ section
 npc	20018
 item	50723	1
 reward	50803	100
+gold	1000
 percent	100
 end
 
@@ -27,6 +401,7 @@ section
 npc	20018
 item	50724	1
 reward	50804	100
+gold	1000
 percent	100
 end
 
@@ -35,6 +410,7 @@ section
 npc	20017
 item	50721	1
 reward	50801	1
+gold	1000
 percent	100
 end
 
@@ -43,6 +419,7 @@ section
 npc	20017
 item	50722	1
 reward	50802	1
+gold	1000
 percent	100
 end
 
@@ -51,6 +428,7 @@ section
 npc	20017
 item	50723	1
 reward	50803	100
+gold	10000
 percent	100
 end
 
@@ -59,6 +437,7 @@ section
 npc	20017
 item	50724	1
 reward	50804	100
+gold	1000
 percent	100
 end
 
@@ -68,6 +447,7 @@ npc	20017
 item	50801	1
 item	50725	1
 reward	50813	1
+gold	1000
 percent	100
 end
 
@@ -77,6 +457,7 @@ npc	20017
 item	50802	1
 item	50725	1
 reward	50814	1
+gold	1000
 percent	100
 end
 
@@ -86,6 +467,7 @@ npc	20017
 item	50803	100
 item	50726	1
 reward	50815	100
+gold	1000
 percent	100
 end
 
@@ -95,6 +477,7 @@ npc	20017
 item	50804	100
 item	50726	1
 reward	50816	100
+gold	1000
 percent	100
 end
 
@@ -104,6 +487,7 @@ section
 npc	20022
 item	50721	1
 reward	50801	1
+gold	1000
 percent	100
 end
 
@@ -112,6 +496,7 @@ section
 npc	20022
 item	50722	1
 reward	50802	1
+gold	1000
 percent	100
 end
 
@@ -120,6 +505,7 @@ section
 npc	20022
 item	50723	1
 reward	50803	100
+gold	1000
 percent	100
 end
 
@@ -128,6 +514,7 @@ section
 npc	20022
 item	50724	1
 reward	50804	100
+gold	1000
 percent	100
 end
 
@@ -137,6 +524,7 @@ npc	20022
 item	50801	1
 item	50725	1
 reward	50813	1
+gold	1000
 percent	100
 end
 
@@ -146,6 +534,7 @@ npc	20022
 item	50802	1
 item	50725	1
 reward	50814	1
+gold	1000
 percent	100
 end
 
@@ -155,6 +544,7 @@ npc	20022
 item	50803	100
 item	50726	1
 reward	50815	100
+gold	1000
 percent	100
 end
 
@@ -164,6 +554,7 @@ npc	20022
 item	50804	100
 item	50726	1
 reward	50816	100
+gold	1000
 percent	100
 end
 
@@ -174,6 +565,7 @@ npc	20022
 item	50813	1
 item	50727	1
 reward	50817	1
+gold	1000
 percent	100
 end
 
@@ -183,6 +575,7 @@ npc	20022
 item	50814	1
 item	50727	1
 reward	50818	1
+gold	1000
 percent	100
 end
 
@@ -192,6 +585,7 @@ npc	20022
 item	50815	100
 item	50728	1
 reward	50819	1
+gold	1000
 percent	100
 end
 
@@ -201,6 +595,7 @@ npc	20022
 item	50816	100
 item	50728	1
 reward	50820	1
+gold	1000
 percent	100
 end
 
@@ -210,6 +605,7 @@ npc	20022
 item	50901	10
 item	50814	20
 reward	50821	10
+gold	100000
 percent	100
 end
 
@@ -219,6 +615,7 @@ npc	20022
 item	50901	10
 item	50813	20
 reward	50822	10
+gold	100000
 percent	100
 end
 
@@ -228,6 +625,7 @@ npc	20022
 item	50901	10
 item	50820	20
 reward	50823	10
+gold	100000
 percent	100
 end
 
@@ -237,6 +635,7 @@ npc	20022
 item	50901	10
 item	50819	20
 reward	50824	10
+gold	100000
 percent	100
 end
 
@@ -246,6 +645,7 @@ npc	20022
 item	50901	10
 item	50817	20
 reward	50825	10
+gold	100000
 percent	100
 end
 
@@ -255,837 +655,123 @@ npc	20022
 item	50901	10
 item	50818	20
 reward	50826	10
+gold	100000
 percent	100
 end
 
-#경험의물약테스트
-#section
-#npc	20018
-#item	51001	100
-#reward	71157	1
-#gold	100000
-#percent	10
-#end
-
-#용신지검
-section
-npc	20383
-item	145	1
-item	30500	10
-item	30505	10
-reward	460	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	146	1
-item	30500	10
-item	30505	10
-reward	460	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	147	1
-item	30500	10
-item	30505	10
-reward	460	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	148	1
-item	30500	10
-item	30505	10
-reward	460	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	149	1
-item	30500	10
-item	30505	10
-reward	460	1
-gold	100000
-percent	50
-end
-
-#파멸지검
-section
-npc	20383
-item	155	1
-item	30503	10
-item	30502	10
-reward	470	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	156	1
-item	30503	10
-item	30502	10
-reward	470	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	157	1
-item	30503	10
-item	30502	10
-reward	470	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	158	1
-item	30503	10
-item	30502	10
-reward	470	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	159	1
-item	30503	10
-item	30502	10
-reward	470	1
-gold	100000
-percent	50
-end
-
-#오행도
-section
-npc	20383
-item	1105	1
-item	30506	10
-item	30507	10
-reward	1340	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	1106	1
-item	30506	10
-item	30507	10
-reward	1340	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	1107	1
-item	30506	10
-item	30507	10
-reward	1340	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	1108	1
-item	30506	10
-item	30507	10
-reward	1340	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	1109	1
-item	30506	10
-item	30507	10
-reward	1340	1
-gold	100000
-percent	50
-end
-
-
-#천룡지궁
-section
-npc	20383
-item	2145	1
-item	30501	10
-item	30506	10
-reward	2370	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	2146	1
-item	30501	10
-item	30506	10
-reward	2370	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	2147	1
-item	30501	10
-item	30506	10
-reward	2370	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	2148	1
-item	30501	10
-item	30506	10
-reward	2370	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	2149	1
-item	30501	10
-item	30506	10
-reward	2370	1
-gold	100000
-percent	50
-end
-
-
-#태양검
-section
-npc	20383
-item	3145	1
-item	30504	10
-item	30508	10
-reward	3190	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	3146	1
-item	30504	10
-item	30508	10
-reward	3190	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	3147	1
-item	30504	10
-item	30508	10
-reward	3190	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	3148	1
-item	30504	10
-item	30508	10
-reward	3190	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	3149	1
-item	30504	10
-item	30508	10
-reward	3190	1
-gold	100000
-percent	50
-end
-
-
-#용신령
-section
-npc	20383
-item	5105	1
-item	30507	10
-item	30503	10
-reward	5340	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	5106	1
-item	30507	10
-item	30503	10
-reward	5340	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	5107	1
-item	30507	10
-item	30503	10
-reward	5340	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	5108	1
-item	30507	10
-item	30503	10
-reward	5340	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	5109	1
-item	30507	10
-item	30503	10
-reward	5340	1
-gold	100000
-percent	50
-end
-
-
-#무아지선
-section
-npc	20383
-item	7145	1
-item	30508	10
-item	30504	10
-reward	7370	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	7146	1
-item	30508	10
-item	30504	10
-reward	7370	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	7147	1
-item	30508	10
-item	30504	10
-reward	7370	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	7148	1
-item	30508	10
-item	30504	10
-reward	7370	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	7149	1
-item	30508	10
-item	30504	10
-reward	7370	1
-gold	100000
-percent	50
-end
-
-
-#태을갑
-section
-npc	20383
-item	11295	1
-item	30509	10
-item	30516	10
-item	30514	10
-reward	20000	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	11296	1
-item	30509	10
-item	30516	10
-item	30514	10
-reward	20000	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	11297	1
-item	30509	10
-item	30516	10
-item	30514	10
-reward	20000	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	11298	1
-item	30509	10
-item	30516	10
-item	30514	10
-reward	20000	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	11299	1
-item	30509	10
-item	30516	10
-item	30514	10
-reward	20000	1
-gold	100000
-percent	50
-end
-
-
-#영보
-section
-npc	20383
-item	11495	1
-item	30512	10
-item	30513	10
-item	30517	10
-reward	20250	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	11496	1
-item	30512	10
-item	30513	10
-item	30517	10
-reward	20250	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	11497	1
-item	30512	10
-item	30513	10
-item	30517	10
-reward	20250	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	11498	1
-item	30512	10
-item	30513	10
-item	30517	10
-reward	20250	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	11499	1
-item	30512	10
-item	30513	10
-item	30517	10
-reward	20250	1
-gold	100000
-percent	50
-end
-
-
-#현천갑
-section
-npc	20383
-item	11695	1
-item	30515	10
-item	30510	10
-item	30511	10
-reward	20500	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	11696	1
-item	30515	10
-item	30510	10
-item	30511	10
-reward	20500	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	11697	1
-item	30515	10
-item	30510	10
-item	30511	10
-reward	20500	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	11698	1
-item	30515	10
-item	30510	10
-item	30511	10
-reward	20500	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	11699	1
-item	30515	10
-item	30510	10
-item	30511	10
-reward	20500	1
-gold	100000
-percent	50
-end
-
-
-#삼관의
-section
-npc	20383
-item	11895	1
-item	30509	10
-item	30517	10
-item	30510	10
-reward	20750	1
-gold	100000
-percent	5
-end
-
-section
-npc	20383
-item	11896	1
-item	30509	10
-item	30517	10
-item	30510	10
-reward	20750	1
-gold	100000
-percent	10
-end
-
-section
-npc	20383
-item	11897	1
-item	30509	10
-item	30517	10
-item	30510	10
-reward	20750	1
-gold	100000
-percent	30
-end
-
-section
-npc	20383
-item	11898	1
-item	30509	10
-item	30517	10
-item	30510	10
-reward	20750	1
-gold	100000
-percent	40
-end
-
-section
-npc	20383
-item	11899	1
-item	30509	10
-item	30517	10
-item	30510	10
-reward	20750	1
-gold	100000
-percent	50
-end
-
-#홍옥계열
-section
-npc	20383
-item	50635	3
-item	30518	10
-item	30523	10
-reward	14500	1
-gold	100000
-percent	80
-end
-
-section
-npc	20383
-item	50635	3
-item	30519	10
-item	30520	10
-reward	16500	1
-gold	100000
-percent	80
-end
-
-section
-npc	20383
-item	50635	3
-item	30520	10
-item	30521	10
-reward	17500	1
-gold	100000
-percent	80
-end
-
-
-#석류계열
-section
-npc	20383
-item	50636	3
-item	30518	10
-item	30522	10
-reward	14520	1
-gold	100000
-percent	80
-end
-
-section
-npc	20383
-item	50636	3
-item	30519	10
-item	30521	10
-reward	16520	1
-gold	100000
-percent	80
-end
-
-section
-npc	20383
-item	50636	3
-item	30520	10
-item	30523	10
-reward	17520	1
-gold	100000
-percent	80
-end
-
-
-#녹주계열
-section
-npc	20383
-item	50637	3
-item	30518	10
-item	30521	10
-reward	14540	1
-gold	100000
-percent	80
-end
-
+#deokbae
 section
-npc	20383
-item	50637	3
-item	30519	10
-item	30523	10
-reward	16540	1
-gold	100000
-percent	80
+npc	20015
+item	50601	100
+reward	50621	1
+gold	210000
+percent	70
 end
 
+#deokbae
 section
-npc	20383
-item	50637	3
-item	30520	10
-item	30522	10
-reward	17540	1
-gold	100000
-percent	80
+npc	20015
+item	50602	100
+reward	50622	1
+gold	210000
+percent	70
 end
 
-#청옥계열
+#deokbae
 section
-npc	20383
-item	50638	3
-item	30518	10
-item	30519	10
-reward	14560	1
-gold	100000
-percent	80
+npc	20015
+item	50603	100
+reward	50623	1
+gold	210000
+percent	70
 end
 
+#deokbae
 section
-npc	20383
-item	50638	3
-item	30519	10
-item	30522	10
-reward	16560	1
-gold	100000
-percent	80
+npc	20015
+item	50604	100
+reward	50624	1
+gold	210000
+percent	70
 end
 
+#deokbae
 section
-npc	20383
-item	50638	3
-item	30520	10
-item	30518	10
-reward	17560	1
-gold	100000
-percent	80
+npc	20015
+item	50605	100
+reward	50625	1
+gold	210000
+percent	70
 end
 
-#밸트
+#deokbae
 section
-npc	20017
-item	50624	10
-item	27992	2
-item	51001	30
-reward	18000	1
-gold	10000
-percent	80
+npc	20015
+item	50606	100
+reward	50626	1
+gold	210000
+percent	70
 end
 
+#deokbae
 section
-npc	20017
-item	50625	10
-item	27992	2
-item	51001	50
-reward	18010	1
-gold	10000
-percent	80
+npc	20015
+item	50607	100
+reward	50627	1
+gold	210000
+percent	70
 end
 
+#deokbae
 section
-npc	20017
-item	50626	10
-item	27993	2
-item	51001	70
-reward	18020	1
-gold	30000
-percent	80
+npc	20015
+item	50608	100
+reward	50628	1
+gold	210000
+percent	70
 end
 
+#deokbae
 section
-npc	20017
-item	50630	10
-item	27993	2
-item	51001	100
-reward	18030	1
-gold	30000
-percent	80
+npc	20015
+item	50609	100
+reward	50629	1
+gold	210000
+percent	70
 end
 
+#deokbae
 section
-npc	20383
-item	50636	10
-item	27994	2
-item	30518	5
-item	30524	10
-reward	18040	1
-gold	50000
-percent	80
+npc	20015
+item	50610	100
+reward	50630	1
+gold	210000
+percent	70
 end
 
+#deokbae
 section
-npc	20383
-item	50635	10
-item	27994	2
-item	30519	5
-item	30525	10
-reward	18050	1
-gold	50000
-percent	80
+npc	20015
+item	50611	100
+reward	50631	1
+gold	210000
+percent	70
 end
-
-section
-npc	20383
-item	50637	10
-item	27994	2
-item	30522	5
-item	30524	10
-reward	18060	1
-gold	50000
-percent	80
-end
-
-section
-npc	20383
-item	50638	10
-item	27994	2
-item	30523	5
-item	30525	10
-reward	18070	1
-gold	50000
-percent	80
-end
-
 
+#deokbae
 section
-npc	20383
-item	50634	10
-item	27994	2
-item	30550	20
-item	51001	100
-reward	18080	1
-gold	50000
-percent	80
+npc	20015
+item	50612	100
+reward	50632	1
+gold	210000
+percent	70
 end
 
+#deokbae
 section
-npc	20383
-item	51001	50
-item	27992	1
-item	27993	1
-item	27994	1
-reward	18900	1
-gold	50000
-percent	80
+npc	20015
+item	50613	100
+reward	50633	1
+gold	210000
+percent	70
 end

@@ -789,6 +789,9 @@ class InventoryWindow(ui.ScriptWindow):
 			cheque = player.GetCheque()
 			self.wndCheque.SetText(localeInfo.NumberToGoldNotText(cheque))
 
+		if app.__GEM_SHOP__:
+			self.GetChild("Gem").SetText(localeInfo.NumberToString(player.GetGem()))
+
 	def SetItemToolTip(self, tooltipItem):
 		self.tooltipItem = tooltipItem
 

@@ -366,4 +366,12 @@ void LogManager::ReportUserLog(DWORD reporterPID, const char* reporterName, cons
 	);
 }
 #endif
+
+#ifdef __GEM_SYSTEM__
+void LogManager::GemLog(DWORD dwPlayerID, const char* from, const char* where, const char* reason)
+{
+	Query("INSERT INTO log.gem (`player_id`, `player_name`, `date`, `where`, `reason`) VALUES(%u, '%s', NOW(), '%s', '%s')", dwPlayerID, from, where, reason);
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

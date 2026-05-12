@@ -82,7 +82,7 @@ quest collect_quest_lv30  begin
 				say_title(gameforge.collect_herb_lv10._150_sayTitle)
 				say(gameforge.collect_quest_lv30._150_say)
 				pc.remove_item("30006", 1)
-				pc.setqf("duration",get_time()+60*60*22) ---22Stunden
+				pc.setqf("duration",get_time()+60*60*6) ---22Stunden
 				wait()
 
 				local pass_percent
@@ -95,8 +95,6 @@ quest collect_quest_lv30  begin
 						pass_percent=90
 					end
 				end
-
-				notice(pass_percent)
 
 				local s= number(1,100)
 				if s <= pass_percent  then

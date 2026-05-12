@@ -1,3 +1,7 @@
+21301	Üretim
+21302	Mitril Üretimi
+21303	Siyah Taþ Üretimi
+21304	Mor Kitap Üretimi
 1	Özel bir kumaþ
 2	Sung Mahi'ye karþý savaþmak için ihtiyaç[ENTER]duyduðumuz güçleri sana anlatmýþtým.[ENTER][ENTER]Acele et ve Yüzbaþý'yý bul.[ENTER][ENTER]Gerekli kumaþlarý bulunca geri dön.
 3	Kendi gücünü artýr
@@ -841,8 +845,8 @@
 842	15 dakika kaldý
 843	Bütün mühürler imha edildi. 5. kata git.[ENTER]5. kattaki tüm canavarlarý öldür. Burayý gururlu[ENTER]Þeytan Kralý koruyor.
 844	Mührü açtýn! %s kaldý.
-845	Gururlu Þeytan Kralý’ný baþarýyla alt ettin.
-846	Gururlu Þeytan Kralý’ný öldürdün. Þimdi[ENTER]Demirci’ye git ve ödülünü al, senin için[ENTER]istediðin bir eþyayý yükseltecek. Yükseltmek[ENTER]istediðin eþyayý demircinin üzerine sürükle.
+845	Gururlu Þeytan Kralý'ný baþarýyla alt ettin.
+846	Gururlu Þeytan Kralý'ný öldürdün. Þimdi[ENTER]Demirci'ye git ve ödülünü al, senin için[ENTER]istediðin bir eþyayý yükseltecek. Yükseltmek[ENTER]istediðin eþyayý demircinin üzerine sürükle.
 847	Üst katlar
 848	Kulenin 7. katýna mý çýkmak istiyorsun? Bu katla[ENTER]mücadele etmek muhteþem beceriler ve büyük bir[ENTER]tecrübe gerektirir.[ENTER]Sadece 75. seviyeye ulastýysan seni oraya[ENTER]ýþýnlayabilirim.
 849	Þeytan kulesinin bekçisi:
@@ -964,12 +968,12 @@
 965	Eþya, benim bulduðum teknikle tahrip edilir ve[ENTER]enerji parçalarýna ayrýlýr. Bu parçalarýn 30[ENTER]tanesi birleþtirilince de güçlü bir enerji[ENTER]kristali elde edilir! Bir mücevher içerisinde[ENTER]toplanmýþ saf ve filtrelenmemiþ bir enerji. Bu[ENTER]güç tüm teçhizatýna iþler.[ENTER]Ýlgini çekiyor mu?
 966	Avlanýrken bulduðun silah, taký ve kýyafet gibi[ENTER]teçhizat malzemelerini bana getir. Onlarý iþleyip[ENTER]enerji parçalarýna ayýracaðým.[ENTER]Krallýðýmýzýn geleceði ve umudu bu tekniðe baðlý.[ENTER]Yenilmez olacaðýz!
 967	Enerji parçasý elde et
-968	Yapabildin mi? Enerji parçasý elde edebildin mi?[ENTER]Simya yardýmýyla parçalayabileceðim daha fazla[ENTER]eþya getir bana.[ENTER]Tekniðim henüz mükemmelleþmedi.[ENTER]Bu yüzden ne kadar parça elde edileceðine dair[ENTER]bir garanti veremeyeceðim.
-969	Tek bir þart var: Kendi seviyen ve eþyanýn[ENTER]seviyesi en az 35 olmalý. Hým, bir göz atalým[ENTER]bakalým...
-970	Henüz yeterince güçlü deðilsin! En az 35.[ENTER]seviyeye ulaþtýðýnda tekrar gel.
+968	Enerji parçasý elde etmek için parçalayabileceðim eþya getir bana.[ENTER] [ENTER]Ne kadar parça elde edileceðine dair bir garanti veremeyeceðim.
+969	Tek bir þart var: Kendi seviyen ve eþyanýn seviyesi en az 35 olmalý.[ENTER][ENTER]Eþyanýn deðerine göre sana 1-10 arasýnda Enerji Parçasý vereceðim.
+970	Henüz yeterince güçlü deðilsin![ENTER][ENTER]En az 35.seviyeye ulaþtýðýnda tekrar gel.
 971	Ah süper! Güçlü ve tecrübelisin.[ENTER]Ýþlenecek eþyayý ver bakalým.
 972	Enerji parçalarýnýn içerdiði güce hakim olacak[ENTER]kadar güçlü deðilsin.[ENTER]En az 35. seviyeye ulaþtýðýnda tekrar gel.
-973	Bu eþya benim tekniðim için elveriþli deðil. Bana[ENTER]baþka bir þey getir.
+973	Bu eþya benim tekniðim için elveriþli deðil. [ENTER]Bana baþka bir þey getir.
 974	Bu eþya yeterli enerjiye sahip deðil.[ENTER]Bana seviyesi en az 35 olan bir tane getirirsen[ENTER]tekniðimle içindeki gücü çýkarabilirim.
 975	Bu eþyayý tahrip edeyim mi?
 976	Evet!
@@ -2342,7 +2346,7 @@
 2343	Bir sonraki av görevinde, iki hangisini[ENTER]öldüreceðini seçebilirsin.
 2344	%s avla: %d defa
 2345	Tamam! Hadi baþla!
-2346	Þu mücadeleyi kabul ettin: %s avla – %d defa
+2346	Þu mücadeleyi kabul ettin: %s avla - %d defa
 2347	%s öldür
 2348	Av görevin: %d defa %s öldür
 2349	tane daha öldürmen gereken:
@@ -6071,7 +6075,7 @@
 6072	Aa, demek Kaptan Kanca'ya karþý kendini[ENTER]kanýtladýn. Bu ne? Mektup mu? Hemen göster!
 6073	
 6074	Lanet olsun. Kaptan Kanca kara altýný Banshee'ye[ENTER]göndermiþ bile. Son cümlesi bulmaca gibi: Hayat[ENTER]laneti Karanlýk Ordusu'nu zamanýn sisinden[ENTER]kurtaracak.
-6075	Nakliyatý durdurmalýyýz! Banshee sýðýnaðýnýn[ENTER]doðudaki Gautama Uçurumu'nda olduðunu tahmin[ENTER]ediyoruz – koyu bir sisle kaplý, terk edilmiþ bir[ENTER]yer.[ENTER]Burada Öcüler ve Lemur'lar dolaþýr.
+6075	Nakliyatý durdurmalýyýz! Banshee sýðýnaðýnýn[ENTER]doðudaki Gautama Uçurumu'nda olduðunu tahmin[ENTER]ediyoruz - koyu bir sisle kaplý, terk edilmiþ bir[ENTER]yer.[ENTER]Burada Öcüler ve Lemur'lar dolaþýr.
 6076	
 6077	Kara altýnýn hangi rota üzerinden Banshee'lere[ENTER]getirileceðini öðrenir öðrenmez sana haber[ENTER]vereceðim.
 6078	Nakliyatý yakala
@@ -6130,7 +6134,7 @@
 6131	Ölüleri diriltmek için üç þey gerekir:[ENTER]1. insansý bir beden[ENTER]2. kara altýn[ENTER]3. Aðaç Þeytaný'nýn kabuðu[ENTER]Sadece üstün yeteneklere sahip bir büyücü hayat[ENTER]lanetini yapabilir ve devam ettirebilir.[ENTER]Öldüðündeyse tüm namevter ordusu onunla birlikte[ENTER]ölür.
 6132	Bu yüzden son zamanlarda mezarlýklarýmýza zarar[ENTER]veriliyor ve mezardaki cesetler çalýnýyor. Demek[ENTER]ki hayata döndürülüp namevtler ordusu olarak[ENTER]üzerimize yürütülecekler. Ne iðrenç bir fikir!
 6133	Bu alçakça planýn önüne geçmeliyiz!
-6134	Zamana karþý yarýþmamýz lazým. Sadece Banshee bu[ENTER]denli büyük bir laneti yapabilecek güçte – ama[ENTER]nerede saklandýðýný bilmiyoruz. Karanlýk Ulu[ENTER]Rahibe'nin sýðýnaðýný bulmak için birkaç adamýmý[ENTER]göndereceðim. Yeni bir þey duyar duymaz seni[ENTER]çaðýrtýrým.
+6134	Zamana karþý yarýþmamýz lazým. Sadece Banshee bu[ENTER]denli büyük bir laneti yapabilecek güçte - ama[ENTER]nerede saklandýðýný bilmiyoruz. Karanlýk Ulu[ENTER]Rahibe'nin sýðýnaðýný bulmak için birkaç adamýmý[ENTER]göndereceðim. Yeni bir þey duyar duymaz seni[ENTER]çaðýrtýrým.
 6135	
 6136	Seviye 96'ya ulaþtýðýn anda macera devam edecek.
 6137	Amiral Angmur'a rapor ver.
@@ -6173,7 +6177,7 @@
 6174	100 altýn paraya ihtiyacýmýz var. Ama korkarým[ENTER]her bulduðun araç olarak kullanýlmaya uygun[ENTER]olmayacak.[ENTER]Yani zorlu bir uðraþ seni bekliyor.
 6175	Sorun deðil.
 6176	Altýn Avý
-6177	Öcüler'e karþý savaþ ve para keseleri topla. Her[ENTER]altý para araç olarak kullanýlamaz – bunlarý[ENTER]Yon-I Gezgini'ne incelet.
+6177	Öcüler'e karþý savaþ ve para keseleri topla. Her[ENTER]altý para araç olarak kullanýlamaz - bunlarý[ENTER]Yon-I Gezgini'ne incelet.
 6178	Evet, kara büyüyü þu kýsýmda belirgin þekilde[ENTER]hissedebiliyorum.
 6179	Harika, araç olarak kullanýlabilecek durumda olan[ENTER]tüm altýn paralarý bulduk. Bu Banshee'nin hiç[ENTER]hoþuna gitmeyecek! Al, bu ödülün. Angmur sana[ENTER]sonraki görevini verecek.
 6180	Altýn paralar hala eksik. %d tane daha topla.
@@ -6451,7 +6455,7 @@
 6452	Nasýl istersen... Sonra görüþürüz!
 6453	Karanlýk Ejderha Kayasý
 6454	Kýsa bir süre önce gizemli bir ada keþfedildi.[ENTER]Adý Karanlýk Ejderha Kayasý konuldu. Orada[ENTER]hayatta kalmak için yeterli tecrübeye sahip olmak[ENTER]gerekir.[ENTER]O yüzden sadece seviye 90 üzeri oyuncularý[ENTER]götüreceðim. Yolculuða katýlmaya hazýr mýsýn?
-6455	Adaya ulaþým sadece gemilerle saðlanýyor –[ENTER]yolculuksa uzun ve yorucu. Seviyen ne kadar[ENTER]yüksekse nakliye o kadar zorludur. Bu nedenle[ENTER]senden daha yüksek bir ücret talep etmek[ENTER]zorundayým.
+6455	Adaya ulaþým sadece gemilerle saðlanýyor -[ENTER]yolculuksa uzun ve yorucu. Seviyen ne kadar[ENTER]yüksekse nakliye o kadar zorludur. Bu nedenle[ENTER]senden daha yüksek bir ücret talep etmek[ENTER]zorundayým.
 6456	Yolculuk için %d Yang harcanýr.
 6457	Harita Bilgisi
 6458	Burasý büyüleyici, deðil mi? Ülkenin diðer[ENTER]bölgeleri çok farklý görünüyor! Seni[ENTER]ýþýnlayabileceðim bir sürü ilginç yer var. Ancak[ENTER]kötülüðün güçleri yeniden güçlendikçe uzay ve[ENTER]zaman kaosa sürüklendi. Bu nedenle geri[ENTER]dönemeyebilirsin. Oraya ýþýnlanmak istiyor musun?
@@ -6689,7 +6693,7 @@
 6690	Yaþlý Kadýn'ýn kardeþine gitmek istiyorum.
 6691	Yaþlý Kadýn senin geleceðini haber vermiþti.[ENTER]Senden bu yolculuk için para almamamý, çünkü ona[ENTER]bir iyilik yaptýðýný söyledi. Genellikle birlikte[ENTER]çay içeriz ve ona yardýmcý olmaktan memnun[ENTER]olurum. Ancak bu ücretsiz yolculuðun sürekli[ENTER]devam edeceðini sanma! Oralarda kendine dikkat et[ENTER]çünkü yabancý krallýklardan gelen savaþçýlar pek[ENTER]iyi karþýlanmaz.
 6692	Ho ho ho!
-6693	Ah, sen miydin![ENTER]Uzun zaman oldu görüþmeyeli.[ENTER]Bir yýl geçti üzerinden, ho ho![ENTER]Belki neden köyde olduðumu merak ediyorsundur.[ENTER]Sana anlatacaðým …
+6693	Ah, sen miydin![ENTER]Uzun zaman oldu görüþmeyeli.[ENTER]Bir yýl geçti üzerinden, ho ho![ENTER]Belki neden köyde olduðumu merak ediyorsundur.[ENTER]Sana anlatacaðým ...
 6694	Zaman zor. Artýk kimse kitap ve benzeri þeyler[ENTER]almak istemiyor.[ENTER]Hele þu ileri yaþýmda ren geyikli kýzaðýmla[ENTER]havada uçmak benim için çok yorucu.[ENTER]Bu nedenle bu sene noeli burada, köyde kutlamaya[ENTER]karar verdim.
 6695	Baþka sorun varsa, istediðin zaman bana[ENTER]gelebilirsin. Mutlu Noeller!
 6696	Bir punç ister misin?
@@ -6708,7 +6712,7 @@
 6709	Ne kadar tatlý deðil mi?[ENTER]Üstelik mükemmel bir koku alma duyusu var.[ENTER]Çorap bulmada uzman![ENTER]2 saat boyunca yanýnda kalýr ve aramada sana[ENTER]yardýmcý olur. Sonra yorulur ve ancak 24 saat[ENTER]sonra devam edebilir. Eðer o kadar beklemek[ENTER]istemezsen sol alt tarafta dönen paranýn arkasýna[ENTER]bak - orada baþka bir ren geyiði yavrusunun daha[ENTER]beklediðini duydum. Ama ertesi gün beni ziyaret[ENTER]etmene de sevinirim!
 6710	Sana çorap getiririm!
 6711	Bana en az 5 çorap getirirsen bir ödül[ENTER]kazanýrsýn. Iðð giyilmiþ çoraplarýn kokusuna[ENTER]tahammül etmek çok zor! Yeterince topladýðýnda[ENTER]tekrar gel. Ýyi Noeller!
-6712	Ho ho ho, yeterince çorap topladýn.[ENTER]Öyleyse bir bakayým.[ENTER]Öðð bu koku … Bunlar doðru çoraplar![ENTER]Mutlu Noeller!
+6712	Ho ho ho, yeterince çorap topladýn.[ENTER]Öyleyse bir bakayým.[ENTER]Öðð bu koku ... Bunlar doðru çoraplar![ENTER]Mutlu Noeller!
 6713	Ren Geyiði Yavrusu
 6714	Bugün benden bir Ren Geyiði Yavrusu Mührü aldýn[ENTER]zaten. Korkarým bu küçük Ren Geyiði Yavrusu'nun[ENTER]önce küçük bir molaya ihtiyacý var. Ancak yarýn[ENTER]aramaya devam edebilir. Eðer o kadar beklemek[ENTER]istemiyorsun aþaðýda dönen paranýn arkasýna bak -[ENTER]orada bir Ren Geyiði Yavrusu daha olduðunu[ENTER]duydum. Ama beni yarýn bir kez daha ziyaret[ENTER]etmene de çok sevinirim!
 6715	Çoraplarýný bugün bana getirdin bile. Sadece 24[ENTER]saatte bir çorap teslim edebileceðini unutma.
@@ -7945,7 +7949,7 @@
 7946	GM: PvP Turnuvasý Baþladý/Bitti
 7947	PvP turnuvasýný baþlat/bitir
 7948	Baþlat: Kayýt süresini dakika olarak gir.
-7949	GM: PvP Turnuvasý – Ayarlar
+7949	GM: PvP Turnuvasý - Ayarlar
 7950	Minimum Seviye (Min.: 15)
 7951	Maksimum seviye (Maks: 120)
 7952	Minimum seviyede deðilsin.
@@ -10264,7 +10268,7 @@
 10938	Ben kýyafet ya da yiyecek konusunda basit[ENTER]hýrslarý olan bir insaným.
 10939	Ben de diðer herkes kadar sýký çalýþýyorum!
 10940	Nasýl olur da, benim bir dilenci olduðumu iddia[ENTER]edersin?
-10941	Kusura bakma…
+10941	Kusura bakma...
 10942	Baþýna bu iþleri açtýðým için üzgünüm. Tam da[ENTER]birbirimizi tanýmaya baþlýyorduk...
 10943	Sana biraz destek olmak istiyorum.
 10944	Yardýma ihtiyacým var.
@@ -10315,7 +10319,7 @@
 10989	Hmm, sanýrým bu çok kolay?
 10990	Ýyi, güzel. Bana gençliðimi hatýrlatýyor.
 10991	Dürüst bir adamdým.
-10992	(…Bana bunu neden anlattýðýný bilmiyorum...)
+10992	(...Bana bunu neden anlattýðýný bilmiyorum...)
 10993	Aha! Gergin görünüyorsun.
 10994	Yoksa görevim çok mu kolay?
 10995	Bir kaç yaban domuzuna ne dersin?
@@ -10330,7 +10334,7 @@
 11004	Þimdi bir de yaban domuzu öldürmeyi öneriyor.
 11005	Þaþkýn yüz ifademden dolayý þimdi de bunu[ENTER]yapacaðýmý düþünüyor.
 11006	
-11007	Ne gündü ama…
+11007	Ne gündü ama...
 11008	30 yaban domuzu öldür.
 11009	Kalan:
 11010	Yaban domuzu görevi tamamlandý
@@ -10428,7 +10432,7 @@
 11102	
 11103	
 11104	Suþi balýðý
-11105	Hm…
+11105	Hm...
 11106	Bu balýk ne yazýk ki yeterince iyi deðil.
 11107	Bu ancak balýk çorbasý için uygun.
 11108	Ýþime yaramadýðý için sende kalabilir.
@@ -10484,15 +10488,15 @@
 11158	Ah, teþekkürler! Adý Tanaka.
 11159	Þimdi þehri kolaçan edeceðim.
 11160	Bana onun kulaðýný getir!
-11161	Hmm… Nerede olduðu fark etmez, aslolan vatandýr.
-11162	Bence böyle…
+11161	Hmm... Nerede olduðu fark etmez, aslolan vatandýr.
+11162	Bence böyle...
 11163	Krallýðýn geleceði için ne yapmalýyýz?
 11164	Tanaka'yý neden öldürmüyorsun?
 11165	Ülkemde dedikodular yayan Tanaka.
 11166	Onu yok et.
 11167	Tanaka'nýn kulaðýný al ve onu Yonah'a götür.
 11168	Tanaka'yý sor.
-11169	Tanaka bayaðý hýzlý kaçýyor. Ah…
+11169	Tanaka bayaðý hýzlý kaçýyor. Ah...
 11170	Onu aðýr zýrhla yakalamak neredeyse imkansýz.
 11171	Sanýrým küçük bir zýrh geliþtirmesi iþe[ENTER]yarayabilir.
 11172	Ah, ne oldu?
@@ -10506,17 +10510,17 @@
 11180	Pes eiyorum.
 11181	Çok çalýþýyorsun ve bunu takdir ediyorum.
 11182	Bir karþýlýk beklemiyorum.
-11183	Ülkeyi seviyorum…
+11183	Ülkeyi seviyorum...
 11184	Pes etmek ve tekrar baþlamak istiyorum.
 11185	Yapacaðým.
 11186	Tekrar ediyorum, senden bir ödül beklemiyorum.
 11187	Ýþte Dakana'nýn Kulaðý.
 11188	Ah, onu gerçekten yakaladýn!
-11189	O halde, vataným ve diðer ülkeler…
+11189	O halde, vataným ve diðer ülkeler...
 11190	Nesiller ve milletleri düþünüyorum...
 11191	Ancak ülke þu anda bölünmüþ olsa da, bu topraklar[ENTER]bize ait.
 11192	
-11193	Hmm…
+11193	Hmm...
 11194	Çabalarýn için teþekkür ederim.
 11195	Sana küçük bir ödül vermek istiyorum. Buyur.
 11196	Yonah'tan bir tecrübe yüzüðü aldýn.
@@ -10655,7 +10659,7 @@
 11409	Gir
 11410	Belki sonra
 11411	ZÇ: Razadör yok edildi.
-11412	ZÇ: Kýrmýzý Ejderha Kalesi’nden dýþarý[ENTER]ýþýnlanýyorsun.
+11412	ZÇ: Kýrmýzý Ejderha Kalesi'nden dýþarý[ENTER]ýþýnlanýyorsun.
 11413	Kýrmýzý ejderha kalesi (TS) için giriþ süresi 1[ENTER]saat.
 11414	Sadece gruplar girebilir
 11415	Kalan:
@@ -10680,7 +10684,7 @@
 11434	TS Korun koruyucusu Ýgnatör yok edildi.
 11435	TS: Cehennem Ateþi Metini yok edildi.
 11436	TS: Razadör yok edildi.
-11437	TS: TS: Kýrmýzý Ejderha Kalesi’nden dýþarý[ENTER]ýþýnlanýyorsun.
+11437	TS: TS: Kýrmýzý Ejderha Kalesi'nden dýþarý[ENTER]ýþýnlanýyorsun.
 11438	Grup, sürenin sonunda kaleden dýþarý ýþýnlanýr.
 11439	Nemere Gözlemevi (ZÇ)
 11440	Nemere Gözlemevi (ZÇ) için giriþ süresi 1 saat.
@@ -10758,8 +10762,8 @@
 11512	Patron odasý
 11513	Kalan süre: %d dakika
 11514	Süre dolduktan sonra ýþýnlanýrsýn.
-11515	Efsunlu Orman’da (TS) süre doldu.
-11516	Birazdan TS Efsunlu Orman’a ýþýnlanacaksýn
+11515	Efsunlu Orman'da (TS) süre doldu.
+11516	Birazdan TS Efsunlu Orman'a ýþýnlanacaksýn
 11517	Süre dolarsa, ýþýnlanýrsýn.
 11518	Zaman Çatlaðý'nýn Ýlk Keþfi
 11519	ZÇ: Orman bekçisi seni her yerde aradý. Ona git[ENTER]ve anlattýklarýný dinle.
@@ -11122,7 +11126,7 @@
 11879	<Tamamlandý> Kahin Yarýþmasý
 11880	Yaralý
 11881	Dongan ovasýna git ve yaralýyý bul.
-11882	Gaah… iyi misin?[ENTER]O cani, köylüleri yaraladý.[ENTER]Birkaç gün önce buraya kýrmýzý bir ejderha geldi[ENTER]ve köyümüzü yakýp yýktý. Çok sayýda insan[ENTER]yaralandý.[ENTER]Ben kurtuldum. Ama diðerlerinin taþa dönüþtüðünü[ENTER]gördüm. Bu yüzden kaçtým...
+11882	Gaah... iyi misin?[ENTER]O cani, köylüleri yaraladý.[ENTER]Birkaç gün önce buraya kýrmýzý bir ejderha geldi[ENTER]ve köyümüzü yakýp yýktý. Çok sayýda insan[ENTER]yaralandý.[ENTER]Ben kurtuldum. Ama diðerlerinin taþa dönüþtüðünü[ENTER]gördüm. Bu yüzden kaçtým...
 11883	Öhö, öhö...[ENTER]Sanýrým çok fazla konuþtum... Keþke bir ilacým[ENTER]olsaydý.
 11884	Yakýnlarda bir ilaç olup olmadýðýný kontrol[ENTER]edebilir misin?
 11885	Etrafta ipucu aramalýyým.
@@ -11189,7 +11193,7 @@
 11946	Uriel kýsa bir süre sonra uyanýr.
 11947	Uriel'i kurtarmak için daha fazla ilaca ihtiyacým[ENTER]var.[ENTER]Metin taþlarýný yok edersem daha fazla ilaç[ENTER]bulabilirim.
 11948	Uriel
-11949	Gaah…[ENTER]Kendimi berbat hissediyorum.[ENTER]Sanýrým çok yaþlýyým.
+11949	Gaah...[ENTER]Kendimi berbat hissediyorum.[ENTER]Sanýrým çok yaþlýyým.
 11950	(Uriel hikayeni dinliyor)[ENTER]Anladým. Bu iblislerin nereye gittiðini[ENTER]öðrenmeliyiz.[ENTER][ENTER]Evet! Chaegirab, bu garip olaylar hakkýnda bilgi[ENTER]edinebilir.[ENTER][ENTER]Yýllardýr sakladýðým bir mücevher parçam var, ama[ENTER]buna ihtiyacýn olabileceðini düþünüyorum.[ENTER][ENTER]Buyur, alabilirsin.
 11951	Teþekkürler, Uriel! Hemen Chaegirab'a gidiyorum.
 11952	Chaegirab'ý kurtar
@@ -11200,7 +11204,7 @@
 11957	Chaegirab kýsa bir süre sonra uyanýr.
 11958	Chaegirab'ý kurtarmak için daha fazla ilaca[ENTER]ihtiyacým var.[ENTER]Metin taþlarýný yok edersem daha fazla ilaç[ENTER]bulabilirim.
 11959	Chaegirab
-11960	Neredeyim ben?[ENTER]Ah… Köyümde.[ENTER](Chaegirab hikayeni dinliyor)[ENTER]Ve bu gerçekten böyle mi oldu?[ENTER]Hiçbir þey hatýrlamýyorum.
+11960	Neredeyim ben?[ENTER]Ah... Köyümde.[ENTER](Chaegirab hikayeni dinliyor)[ENTER]Ve bu gerçekten böyle mi oldu?[ENTER]Hiçbir þey hatýrlamýyorum.
 11961	Neden her yer kýrmýzý?[ENTER]Bu külün ne olduðunu bilmiyorum.[ENTER]Ayrýca bana ne olduðunu da öðrenmeliyim.
 11962	Öncelikle bu kýrmýzý kül hakkýnda daha fazla[ENTER]bilgi edinmeliyiz.[ENTER]Bunun için çok fazlasýna ihtiyacým olacak.[ENTER]Onlarý benim için toplar mýsýn?
 11963	Bunu nasýl yapacaðým?
@@ -12177,7 +12181,7 @@
 12975	Yeni bir bölgenin kilidi açýldý. Yýlan bekçisine[ENTER]git
 12976	Hey, ne duruyorsun burada? Dongan ovasýna[ENTER]gidersen, oradan yeni bölgeye geçebilirsin.
 12977	Yýlan bekçisiyle tanýþmak için yeni bölgeye git.
-12978	Sen de kimsin? Hah, seni Konfüçyus mu gönderdi?[ENTER]Ciddi olamazsýn… Neden senin gibi bir çaylaðý[ENTER]böyle zorlu bir ülkeye yolladý ki?
+12978	Sen de kimsin? Hah, seni Konfüçyus mu gönderdi?[ENTER]Ciddi olamazsýn... Neden senin gibi bir çaylaðý[ENTER]böyle zorlu bir ülkeye yolladý ki?
 12979	Konfüçyüs, buraya geldiðinde sana bunu vermemi[ENTER]söyledi. Daha sonra tekrar gel, hala tamamlaman[ENTER]gereken görevler var.
 12980	Yýlan Tapýnaðý nerede?
 12981	Gizli tapýnaðý bulmak için yýlan bekçisiyle[ENTER]konuþmalýyým.
@@ -13200,9 +13204,9 @@
 14047	Yenilen canavarlardan þampiyon EXP kazanýldýðýnda[ENTER]otomatik olarak elde edilir.
 14048	Mavi kurt karaciðeri olmadan ilaç hazýrlayamam.[ENTER]Lütfen bunu bana getir!
 14063	Ekstra ekipman sayfasýný etkinleþtir.
-14064	Bu eþyayý sadece Gnoll Maðaralarý’nda Ahtrin[ENTER]Büyük Üstadý yenenler elde eder.
-14065	Ahtrin Büyük Üstad’a git ve ekstra ekipman[ENTER]sayfasýný kap!
-14066	Ahtrin Büyük Üstad’ý yendin ve ekstra ekipman[ENTER]sayfasýný elde ettin.
+14064	Bu eþyayý sadece Gnoll Maðaralarý'nda Ahtrin[ENTER]Büyük Üstadý yenenler elde eder.
+14065	Ahtrin Büyük Üstad'a git ve ekstra ekipman[ENTER]sayfasýný kap!
+14066	Ahtrin Büyük Üstad'ý yendin ve ekstra ekipman[ENTER]sayfasýný elde ettin.
 14067	Envanterinde yer aç ve tekrar dene.
 14068	Envanterinde yeterli alan yok.
 14069	Grubun üyeleri giriþ þartlarýný karþýlamýyor.
@@ -13217,30 +13221,30 @@
 14078	Kabul et
 14079	Ýptal et
 14080	Envanterinde yer aç ve tekrar dene.
-14081	2 milyar Yang’dan fazlasýna sahip olamazsýn.
+14081	2 milyar Yang'dan fazlasýna sahip olamazsýn.
 14082	Listeyi gör
 14083	Kupalar kazanabilirsin.
 14084	Gir
 14085	Ýptal et
-14086	Bununla SungMa Ýstila Portalý’na ulaþabilirsin.
-14087	SungMa Ýstila Portalý’na mý gitmek istyorsun?
+14086	Bununla SungMa Ýstila Portalý'na ulaþabilirsin.
+14087	SungMa Ýstila Portalý'na mý gitmek istyorsun?
 14088	Evet
 14089	Hayýr
 14090	Buraya þu anda giremezsin.
 14091	SungMa Ýstilasý Portalý aþamasý kurulmadý.[ENTER]Lütfen tekrar dene.
 14092	Tüm giriþ haklarýný tükettin.[ENTER]Giriþ haklarý her pazartesi sýfýrlanýr.
 14093	Bu istila portalý sadece %s Krallýðý tarafýndan[ENTER]kullanýlabilir.
-14094	SungMa Ýstila Portalý’nýn imhasý
-14095	SungMa Ýstila Portalý’nýn imhasý görevi otomatik[ENTER]olarak kabul edildi.
-14096	“SungMa Ýstila Portalý’nýn imhasý” görevi iptal edildi.
-14097	SungMa Ýstila Portalý’ndaki canavarlarý yen ve[ENTER]Ýstilacý Komutan’ý yen![ENTER]Kalan canavarlar: %d
+14094	SungMa Ýstila Portalý'nýn imhasý
+14095	SungMa Ýstila Portalý'nýn imhasý görevi otomatik[ENTER]olarak kabul edildi.
+14096	"SungMa Ýstila Portalý'nýn imhasý" görevi iptal edildi.
+14097	SungMa Ýstila Portalý'ndaki canavarlarý yen ve[ENTER]Ýstilacý Komutan'ý yen![ENTER]Kalan canavarlar: %d
 14098	Kalan canavarlar
-14099	SungMa Ýstila Portalý’ndaki canavarlarý yen. Kalan canavarlar: %d
-14100	SungMa Ýstila Portalý’nýn imhasý görevi[ENTER]tamamlandý. Ödülü görev penceresi üzerinden al.
-14101	[Tamamlandý] SungMa Ýstila Portalý’nýn imhasý
-14102	SungMa Ýstila Portalý’nýn imhasý için ödülünü al.
+14099	SungMa Ýstila Portalý'ndaki canavarlarý yen. Kalan canavarlar: %d
+14100	SungMa Ýstila Portalý'nýn imhasý görevi[ENTER]tamamlandý. Ödülü görev penceresi üzerinden al.
+14101	[Tamamlandý] SungMa Ýstila Portalý'nýn imhasý
+14102	SungMa Ýstila Portalý'nýn imhasý için ödülünü al.
 14104	Envanterin dolu olduðu için ödülünü alamazsýn.
-14105	“SungMa Ýstila Portalý’nýn imhasý” görevi[ENTER]tamamlandý.
+14105	"SungMa Ýstila Portalý'nýn imhasý" görevi[ENTER]tamamlandý.
 14106	%d kazandýn.
 14108	Kalan buz toplarýný takas et
 14109	Geçen yazdan kalma buz toplarýn var mý?[ENTER]Envanterindeki buz toplarýný etkinlikte[ENTER]kullanabileceðin yeni buz toplarýyla takas[ENTER]edebilirim.
@@ -13261,10 +13265,10 @@
 14124	Ýptal et
 14125	Geri
 14126	Daha fazla bilgi
-14127	Sadece bu portal üzerinden SungMa Ýstila[ENTER]Portalý’na ulaþabilirsin.[ENTER]Krallýðýna ait olan tek bir portal[ENTER]kullanabilirsin.[ENTER]Krallýðýna ait portalý renk yardýmýyla bulmak ve[ENTER]buraya giriþ yapmak için 10 dakikan var.
+14127	Sadece bu portal üzerinden SungMa Ýstila[ENTER]Portalý'na ulaþabilirsin.[ENTER]Krallýðýna ait olan tek bir portal[ENTER]kullanabilirsin.[ENTER]Krallýðýna ait portalý renk yardýmýyla bulmak ve[ENTER]buraya giriþ yapmak için 10 dakikan var.
 14128	Giriþ yaptýktan sonra bu bölgenin bir yerinde bir[ENTER]SungMa Ýstila Portalý belirecek.[ENTER]6 SungMa Ýstila Portalý imha ettikten sonra[ENTER]Ýstilacý Komutan ortaya çýkacak. Savaþý[ENTER]kolaylaþtýrabilirsin,[ENTER]yakýnýnda yeþeren güç çiçeklerini kullan.
-14129	Hadi Summer’in yanýna
-14130	SungMa Ýstila Portalý’na git
+14129	Hadi Summer'in yanýna
+14130	SungMa Ýstila Portalý'na git
 14131	Yutnori oyun tahtalarýyla takas et
 14132	Yutnori
 14133	Yutnori oyun tahtasýný Yutnori gizemiyle takas[ENTER]edebilirsin. Takas için 50,000 Yang'a ihtiyacýn[ENTER]var.
@@ -13285,15 +13289,15 @@
 14148	Hayýr, görevden vazgeçmek istemiyorum.
 14149	Primordis keþfi
 14150	Altýn Portal
-14151	Altýn Topraklar’a giriþ yapmak ister misin?
+14151	Altýn Topraklar'a giriþ yapmak ister misin?
 14152	Gir
 14153	Ýptal et
-14154	Giriþ yapmak için en az seviye 70’e ulaþmýþ olman[ENTER]gerekir.
-14155	Etkinlik bitmiþ olduðu için Altýn Topraklar’a[ENTER]giriþ yapamazsýn.
-14156	Bu bölgedeki Altýn Topraklar’a giriþ yapamazsýn.
+14154	Giriþ yapmak için en az seviye 70'e ulaþmýþ olman[ENTER]gerekir.
+14155	Etkinlik bitmiþ olduðu için Altýn Topraklar'a[ENTER]giriþ yapamazsýn.
+14156	Bu bölgedeki Altýn Topraklar'a giriþ yapamazsýn.
 14157	Primordis keþfi nasýl çalýþýr?
 14158	Primordis keþfi nasýl çalýþýr?
-14159	Altýn Topraklar’a hoþ geldin. Buradan katlara[ENTER]yolculuk yapabilirsin. Toplamda 12 katý baþarman[ENTER]gerekir ve aralarda vahalara ulaþýrsýn. Katlarda[ENTER]acý dutlar topla ve bunlarý Kervan Tüccarý’nda[ENTER]altýn dutlarla takas et. Bu altýn dutlarý Altýn[ENTER]Palmiye’de altýn dut avýna katýlmak ve harika[ENTER]ödüller kazanmak için kullanabilirsin. Ancak[ENTER]katlarda seni öldürebilen patlayýcý kuleler de[ENTER]bulabilirsin. Bu yüzden Vaha’daki Kervan[ENTER]Tüccarý’ndan patlayýcý koruma bileti satýn[ENTER]aldýðýndan emin ol.
+14159	Altýn Topraklar'a hoþ geldin. Buradan katlara[ENTER]yolculuk yapabilirsin. Toplamda 12 katý baþarman[ENTER]gerekir ve aralarda vahalara ulaþýrsýn. Katlarda[ENTER]acý dutlar topla ve bunlarý Kervan Tüccarý'nda[ENTER]altýn dutlarla takas et. Bu altýn dutlarý Altýn[ENTER]Palmiye'de altýn dut avýna katýlmak ve harika[ENTER]ödüller kazanmak için kullanabilirsin. Ancak[ENTER]katlarda seni öldürebilen patlayýcý kuleler de[ENTER]bulabilirsin. Bu yüzden Vaha'daki Kervan[ENTER]Tüccarý'ndan patlayýcý koruma bileti satýn[ENTER]aldýðýndan emin ol.
 14160	Kata giriþ yap
 14161	Kata giriþ yap
 14162	1. kata giriþ mi yapmak istiyorsun? Kalan[ENTER]giriþler: %d/%d
@@ -13302,17 +13306,17 @@
 14165	Dönüþmüþ halde giremezsin.
 14167	Bir grupla birlikteyken giriþ yapamazsýn.
 14168	Tüm altýn dut tarlalarýný bulduðun için artýk[ENTER]giriþ yapamazsýn.
-14169	Altýn Topraklar’dan çýk
-14170	Altýn Topraklar’dan çýk
+14169	Altýn Topraklar'dan çýk
+14170	Altýn Topraklar'dan çýk
 14171	Þehre geri dönmek ister misin?
 14172	Altýn dut avý
 14173	Kata giriþ yap
 14174	Kata giriþ yap
 14175	Bir sonraki kata giriþ yapmak ister misin?
-14176	Tüm katlarý tamamladýn. Altýn Topraklar’a geri[ENTER]dönmek için Altýn Monoliti kullan.
+14176	Tüm katlarý tamamladýn. Altýn Topraklar'a geri[ENTER]dönmek için Altýn Monoliti kullan.
 14177	Bu bölgeden çýk
 14178	Bu bölgeden çýk
-14179	Altýn Topraklar’a geri dönmek ister misin?
+14179	Altýn Topraklar'a geri dönmek ister misin?
 14180	Marketi aç
 14181	%d Yang verildi.
 14182	SungMa Ýstila Portalý için giriþlerini sýfýrla.
@@ -13326,7 +13330,7 @@
 14190	Maksimum sayýyý aþacaðý için bunu kullanamazsýn.
 14191	Yardým
 14192	Altýn Palmiye
-14193	Þimdiye kadar Primordis keþiflerinde bulduðun[ENTER]altýn dutlarý kullanarak altýn dut tarlalarý ara.[ENTER]Tüm oyun tahtasýnda 2 altýn dut alaný bulunur.[ENTER]Ýkisini de bulduðun anda ödülün posta yoluyla[ENTER]sana gönderilecek. Ýki alaný da bulduðunda[ENTER]yeniden baþlamak için “sýfýrla”yý kullan.
+14193	Þimdiye kadar Primordis keþiflerinde bulduðun[ENTER]altýn dutlarý kullanarak altýn dut tarlalarý ara.[ENTER]Tüm oyun tahtasýnda 2 altýn dut alaný bulunur.[ENTER]Ýkisini de bulduðun anda ödülün posta yoluyla[ENTER]sana gönderilecek. Ýki alaný da bulduðunda[ENTER]yeniden baþlamak için "sýfýrla"yý kullan.
 14194	Baþka bir bölgeye gitmek istiyor musun?
 14195	Evet
 14196	Hayýr
@@ -13334,13 +13338,13 @@
 14199	Çorap takas ederim.
 14200	Punç takas ederim.
 14201	Bana en az 5 çorap getirirsen bir ödül kazanýrsýn.Iðð giyilmiþ çoraplarýn kokusuna tahammül etmek[ENTER]çok zor! Yeterince topladýðýnda tekrar gel. Mutlu[ENTER]yýllar!
-14202	Ho ho ho, yeterince çorap topladýn.[ENTER]Öyleyse bir bakayým.[ENTER]Öðð bu koku … Bunlar doðru çoraplar![ENTER]Mutlu yýllar!
+14202	Ho ho ho, yeterince çorap topladýn.[ENTER]Öyleyse bir bakayým.[ENTER]Öðð bu koku ... Bunlar doðru çoraplar![ENTER]Mutlu yýllar!
 14203	Bana 6 bardak punç veya 5 çorap getirirsen,[ENTER]büyüleyici bir ödül alýrsýn. Mutlu yýllar!
 14204	Bu harika içecek içini ýsýtacak. Afiyet olsun ve[ENTER]mutlu yýllar!
 14205	Zaten Kar Tanesi Sihri'ni aldýn. Daha sonra[ENTER]tekrar gel.
 14206	Çorap avý þu anda aktif deðil.
 14207	Kýþ etkinliði þu anda aktif deðil.
-14208	Kar Tanesi Sihri'ni almak için en az seviye 60’a[ENTER]ulaþmýþ olman gerekir.
+14208	Kar Tanesi Sihri'ni almak için en az seviye 60'a[ENTER]ulaþmýþ olman gerekir.
 14209	Kar Tanesi Etkinliði sona erdi.
 14210	Noel Baba
 14211	Bu kesede 9.999 Gaya'ya kadar saklayabilirsin.
@@ -13411,3 +13415,7 @@
 14311	Envanterde yeterli alan yok.
 14312	Envanterde yeterli alan yok.
 14320	1.500.000 Yang'ýn yok.
+21301	Üretim
+21302	Mitril Üretimi
+21303	Siyah Taþ Üretimi
+21304	Mor Kitap Üretimi

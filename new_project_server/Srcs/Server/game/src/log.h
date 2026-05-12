@@ -81,6 +81,10 @@ class LogManager : public singleton<LogManager>
 		void		ReportUserLog(DWORD reporterPID, const char* reporterName, const char* reporterIP, DWORD targetPID, const char* targetName, const char* reason);
 #endif
 
+#ifdef __GEM_SYSTEM__
+		void		GemLog(DWORD dwPlayerID, const char* from, const char* where, const char* reason);
+#endif
+
 		size_t EscapeString(char* dst, size_t dstSize, const char *src, size_t srcSize);
 
 		template<typename... Args>
