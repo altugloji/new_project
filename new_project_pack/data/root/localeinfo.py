@@ -478,6 +478,10 @@ try:
 	GM_CALL_CANCEL
 except NameError:
 	GM_CALL_CANCEL = "Hayir"
+try:
+	WHISPER_GM_TRANSFER
+except NameError:
+	WHISPER_GM_TRANSFER = "Warp"
 
 if app.ENABLE_CHEQUE_SYSTEM:
 	def NumberToGold(n) :

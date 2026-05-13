@@ -189,6 +189,19 @@ window = {
 							"multi_line" : 1,
 						},
 						{
+							"name" : "transferbutton",
+							"type" : "button",
+
+							"x" : 280 - 145,
+							"y" : 10,
+
+							"text" : "",
+
+							"default_image" : "d:/ymir work/ui/public/small_thin_button_01.sub",
+							"over_image" : "d:/ymir work/ui/public/small_thin_button_02.sub",
+							"down_image" : "d:/ymir work/ui/public/small_thin_button_03.sub",
+						},
+						{
 							"name" : "sendbutton",
 							"type" : "button",
 

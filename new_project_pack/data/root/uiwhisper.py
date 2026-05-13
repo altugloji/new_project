@@ -86,6 +86,7 @@ class WhisperDialog(ui.ScriptWindow):
 			self.reportViolentWhisperButton = GetObject("reportviolentwhisperbutton")
 			self.acceptButton = GetObject("acceptbutton")
 			self.sendButton = GetObject("sendbutton")
+			self.transferButton = GetObject("transferbutton")
 			self.board = GetObject("board")
 			self.editBar = GetObject("editbar")
 			self.gamemasterMark = GetObject("gamemastermark")
@@ -106,6 +107,9 @@ class WhisperDialog(ui.ScriptWindow):
 			self.chatLine.OnIMEKeyDown = ui.__mem_func__(self.OnIMEKeyDown)
 		self.chatLine.SetMultiLine()
 		self.sendButton.SetEvent(ui.__mem_func__(self.SendWhisper))
+		self.transferButton.SetText(localeInfo.WHISPER_GM_TRANSFER)
+		self.transferButton.SetEvent(ui.__mem_func__(self.__OnClickGmTransfer))
+		self.transferButton.Hide()
 		self.titleNameEdit.SetReturnEvent(ui.__mem_func__(self.AcceptTarget))
 		self.titleNameEdit.SetEscapeEvent(ui.__mem_func__(self.Close))
 		self.ignoreButton.SetToggleDownEvent(ui.__mem_func__(self.IgnoreTarget))
@@ -157,6 +161,7 @@ class WhisperDialog(ui.ScriptWindow):
 		self.ignoreButton = None
 		self.reportViolentWhisperButton = None
 		self.acceptButton = None
+		self.transferButton = None
 		self.minimizeButton = None
 		self.textRenderer = None
 		self.board = None
@@ -194,6 +199,7 @@ class WhisperDialog(ui.ScriptWindow):
 				self.textRenderer.SetPosition(width-20, 28)
 				self.scrollBar.SetPosition(width-25+self.scrollBar.GetWidth(), 35)
 				self.editBar.SetPosition(10 + self.editBar.GetWidth(), height-60)
+				self.transferButton.SetPosition(width - 145 + self.transferButton.GetWidth(), 10)
 				self.sendButton.SetPosition(width - 80 + self.sendButton.GetWidth(), 10)
 				self.minimizeButton.SetPosition(width-42 + self.minimizeButton.GetWidth(), 12)
 				self.closeButton.SetPosition(width-24+self.closeButton.GetWidth(), 12)
@@ -203,6 +209,7 @@ class WhisperDialog(ui.ScriptWindow):
 				self.textRenderer.SetPosition(20, 28)
 				self.scrollBar.SetPosition(width-25, 35)
 				self.editBar.SetPosition(10, height-60)
+				self.transferButton.SetPosition(width - 145, 10)
 				self.sendButton.SetPosition(width-80, 10)
 				self.minimizeButton.SetPosition(width-42, 12)
 				self.closeButton.SetPosition(width-24, 12)
@@ -222,6 +229,18 @@ class WhisperDialog(ui.ScriptWindow):
 		if text:
 			self.chatLine.SetText(GetSplitingTextLine(text, max, 0))
 
+	def __RefreshGmTransferButton(self):
+		if self.transferButton:
+			if chr.IsGameMaster(player.GetMainCharacterIndex()) and self.targetName and self.targetName != 0:
+				self.transferButton.Show()
+			else:
+				self.transferButton.Hide()
+
+	def __OnClickGmTransfer(self):
+		if not self.targetName or self.targetName == 0:
+			return
+		net.SendChatPacket("/warp " + str(self.targetName))
+
 	def OpenWithTarget(self, targetName):
 		chat.CreateWhisper(targetName)
 		chat.SetWhisperBoxSize(targetName, self.GetWidth() - 60, self.GetHeight() - 90)
@@ -238,6 +257,7 @@ class WhisperDialog(ui.ScriptWindow):
 		self.acceptButton.Hide()
 		self.gamemasterMark.Hide()
 		self.minimizeButton.Show()
+		self.__RefreshGmTransferButton()
 
 	def OpenWithoutTarget(self, event):
 		self.eventAcceptTarget = event
@@ -251,10 +271,13 @@ class WhisperDialog(ui.ScriptWindow):
 		self.acceptButton.Show()
 		self.minimizeButton.Hide()
 		self.gamemasterMark.Hide()
+		if self.transferButton:
+			self.transferButton.Hide()
 
 	def SetGameMasterLook(self):
 		self.gamemasterMark.Show()
 		self.reportViolentWhisperButton.Hide()
+		self.__RefreshGmTransferButton()
 
 	def Minimize(self):
 		self.titleNameEdit.KillFocus()
