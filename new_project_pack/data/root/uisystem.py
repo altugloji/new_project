@@ -27,7 +27,7 @@ class SystemDialog(ui.ScriptWindow):
 		ui.ScriptWindow.__del__(self)
 
 	def __Initialize(self):
-		self.eventOpenHelpWindow = None
+		self.eventOpenGmCallDialog = None
 		self.systemOptionDlg = None
 		self.gameOptionDlg = None
 		self.interface = None
@@ -50,7 +50,7 @@ class SystemDialog(ui.ScriptWindow):
 		self.GetChild("change_button").SAFE_SetEvent(self.__ClickChangeCharacterButton)
 		self.GetChild("logout_button").SAFE_SetEvent(self.__ClickLogOutButton)
 		self.GetChild("exit_button").SAFE_SetEvent(self.__ClickExitButton)
-		self.GetChild("help_button").SAFE_SetEvent(self.__ClickHelpButton)
+		self.GetChild("gm_call_button").SAFE_SetEvent(self.__ClickGmCallButton)
 		self.GetChild("cancel_button").SAFE_SetEvent(self.Close)
 
 		if constInfo.IN_GAME_SHOP_ENABLE:
@@ -68,7 +68,7 @@ class SystemDialog(ui.ScriptWindow):
 		self.GetChild("game_option_button").SAFE_SetEvent(self.__ClickGameOptionButton)
 		self.GetChild("change_button").SAFE_SetEvent(self.__ClickChangeCharacterButton)
 		self.GetChild("exit_button").SAFE_SetEvent(self.__ClickExitButton)
-		self.GetChild("help_button").SAFE_SetEvent(self.__ClickHelpButton)
+		self.GetChild("gm_call_button").SAFE_SetEvent(self.__ClickGmCallButton)
 		self.GetChild("cancel_button").SAFE_SetEvent(self.Close)
 
 	@ui.WindowDestroy
@@ -83,8 +83,8 @@ class SystemDialog(ui.ScriptWindow):
 
 		self.__Initialize()
 
-	def SetOpenHelpWindowEvent(self, event):
-		self.eventOpenHelpWindow = event
+	def SetOpenGmCallDialogEvent(self, event):
+		self.eventOpenGmCallDialog = event
 
 	def OpenDialog(self):
 		self.Show()
@@ -138,11 +138,11 @@ class SystemDialog(ui.ScriptWindow):
 			if self.interface:
 				self.interface.ToggleMoveChannelWindow()
 
-	def __ClickHelpButton(self):
+	def __ClickGmCallButton(self):
 		self.Close()
 
-		if None != self.eventOpenHelpWindow:
-			self.eventOpenHelpWindow()
+		if None != self.eventOpenGmCallDialog:
+			self.eventOpenGmCallDialog()
 
 	def __ClickInGameShopButton(self):
 		self.Close()

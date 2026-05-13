@@ -1,15 +1,10 @@
-0513 12:02:03856 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
-0513 12:02:03859 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=137) - Strange Skill Need Weapon(CLAW)
-0513 12:02:03859 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=139) - Strange Skill Need Weapon(CLAW)
-0513 12:02:03859 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=171, strType=wolfman).STRANGE_SKILL_TYPE
-0513 12:02:03859 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=172, strType=wolfman).STRANGE_SKILL_TYPE
-0513 12:02:03859 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=175, strType=wolfman).STRANGE_SKILL_TYPE
-0513 12:02:03860 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=183, strType=wolfman).STRANGE_SKILL_TYPE
-0513 12:02:03860 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=170, strType=wolfman).STRANGE_SKILL_TYPE
-0513 12:02:03860 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=173, strType=wolfman).STRANGE_SKILL_TYPE
-0513 12:02:03860 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=174, strType=wolfman).STRANGE_SKILL_TYPE
-0513 12:03:55395 :: LocaleInfoWrapper AttributeError localeInfo.INVENTORY_FULL
-0513 12:03:56913 :: LocaleInfoWrapper AttributeError localeInfo.INVENTORY_FULL
-0513 12:03:57096 :: LocaleInfoWrapper AttributeError localeInfo.INVENTORY_FULL
-0513 12:03:57278 :: LocaleInfoWrapper AttributeError localeInfo.INVENTORY_FULL
-0513 12:03:57475 :: LocaleInfoWrapper AttributeError localeInfo.INVENTORY_FULL
+0513 22:27:04525 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
+0513 22:27:04528 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=137) - Strange Skill Need Weapon(CLAW)
+0513 22:27:04528 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=139) - Strange Skill Need Weapon(CLAW)
+0513 22:27:04528 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=171, strType=wolfman).STRANGE_SKILL_TYPE
+0513 22:27:04528 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=172, strType=wolfman).STRANGE_SKILL_TYPE
+0513 22:27:04529 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=175, strType=wolfman).STRANGE_SKILL_TYPE
+0513 22:27:04529 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=183, strType=wolfman).STRANGE_SKILL_TYPE
+0513 22:27:04529 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=170, strType=wolfman).STRANGE_SKILL_TYPE
+0513 22:27:04529 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=173, strType=wolfman).STRANGE_SKILL_TYPE
+0513 22:27:04529 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=174, strType=wolfman).STRANGE_SKILL_TYPE

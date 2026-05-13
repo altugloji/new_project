@@ -7,6 +7,7 @@ import wndMgr
 import chat
 import app
 import player
+import net
 import uiTaskBar
 
 import uiInventory
@@ -62,9 +63,6 @@ if app.ENABLE_WON_EXCHANGE_WINDOW:
 if app.__BL_OFFICIAL_LOOT_FILTER__:
 	import uilootingsystem
 
-if app.__BL_MULTI_LANGUAGE_PREMIUM__:
-	import net
-
 if app.__AUTO_SKILL_READER__:
 	import uiAutoSkillReader
 
@@ -75,7 +73,7 @@ if app.KYGN_CHEST_INFO:
 	import uikygnchestinfo
 
 if app.ENABLE_ITEM_SHOP_SYSTEM:
-	import uiItemShop, net
+	import uiItemShop
 
 if app.ENABLE_WIKI:
 	import uiWiki
@@ -127,6 +125,9 @@ class Interface(object):
 		if app.WJ_NEW_DROP_DIALOG:
 			self.deleteitem = None
 		self.listGMName = {}
+		self.dlgGmCall = None
+		self._gmCallSuppressUntil = 0
+		self._gmCallSuppressNames = None
 		self.wndQuestWindow = {}
 		self.wndQuestWindowNewKey = 0
 		self.privateShopAdvertisementBoardDict = {}
@@ -305,7 +306,7 @@ class Interface(object):
 
 		self.dlgSystem = uiSystem.SystemDialog()
 		self.dlgSystem.LoadDialog()
-		self.dlgSystem.SetOpenHelpWindowEvent(ui.__mem_func__(self.OpenHelpWindow))
+		self.dlgSystem.SetOpenGmCallDialogEvent(ui.__mem_func__(self.OpenGmCallDialog))
 		self.dlgSystem.BindInterface(self)
 		self.dlgSystem.Hide()
 
@@ -503,6 +504,9 @@ class Interface(object):
 			self.dlgWhisperWithoutTarget.Destroy()
 			del self.dlgWhisperWithoutTarget
 
+		if self.dlgGmCall:
+			self._DestroyGmCallDialog()
+
 		if uiQuest.QuestDialog.__dict__.has_key("QuestCurtain"):
 			uiQuest.QuestDialog.QuestCurtain.Close()
 			del uiQuest.QuestDialog.QuestCurtain #@fixme016 it's recreated only if it's deleted from scope
@@ -634,6 +638,9 @@ class Interface(object):
 		if self.wndGuildBuilding:
 			self.wndGuildBuilding.Destroy()
 
+		if self.dlgGmCall:
+			self._DestroyGmCallDialog()
+
 		if self.wndGameButton:
 			self.wndGameButton.Destroy()
 
@@ -699,6 +706,7 @@ class Interface(object):
 		del self.wndCubeResult
 		del self.privateShopBuilder
 		del self.inputDialog
+		del self.dlgGmCall
 		del self.wndChatLog
 		del self.dlgRefineNew
 		del self.wndGuildBuilding
@@ -1317,6 +1325,107 @@ class Interface(object):
 		player.SetPlayTime(1)
 		self.CheckGameButton()
 		self.OpenHelpWindow()
+
+	def _DestroyGmCallDialog(self):
+		if not self.dlgGmCall:
+			return
+		self.dlgGmCall.Close()
+		self.dlgGmCall.ClearDictionary()
+		self.dlgGmCall = None
+
+	def _GetGmCallManualTargets(self):
+		try:
+			raw = str(localeInfo.GM_CALL_MANUAL_NAMES).strip()
+		except:
+			raw = ""
+		names = [s.strip() for s in raw.split("|") if s.strip()] if raw else []
+		if not names:
+			names = ["Admin", "Admin2"]
+		return names
+
+	def _GmCallSuppressWindowActive(self):
+		if not self._gmCallSuppressNames:
+			return False
+		if app.GetTime() > self._gmCallSuppressUntil:
+			self._gmCallSuppressUntil = 0
+			self._gmCallSuppressNames = None
+			return False
+		return True
+
+	def ShouldSuppressGmCallWhisperFeedback(self, mode, name):
+		# C++ WHISPER_TYPE_NOT_EXIST == 1 (not routed as SYSTEM on this client).
+		if mode != 1:
+			return False
+		if not self._GmCallSuppressWindowActive():
+			return False
+		if not name:
+			return False
+		return name.lower() in self._gmCallSuppressNames
+
+	def ShouldSuppressGmCallWhisperSystemMessage(self, mode, name, line):
+		# WHISPER_TYPE_ERROR == 4 can use the system-message path in RecvWhisperPacket.
+		if mode != 4:
+			return False
+		if not self._GmCallSuppressWindowActive():
+			return False
+		if not name:
+			return False
+		return name.lower() in self._gmCallSuppressNames
+
+	def _OnGmCallAccept(self):
+		self._DestroyGmCallDialog()
+		targets = self._GetGmCallManualTargets()
+		if not targets:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.GM_CALL_NO_GM)
+			return True
+		text = localeInfo.GM_CALL_WHISPER_TEXT
+		try:
+			msg = text % player.GetName()
+		except TypeError:
+			try:
+				msg = text % (player.GetName(), "", "")
+			except TypeError:
+				msg = text
+		if net.IsInsultIn(msg):
+			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.CHAT_INSULT_STRING)
+			return True
+		self._gmCallSuppressUntil = app.GetTime() + 12.0
+		self._gmCallSuppressNames = set()
+		for gmName in targets:
+			self._gmCallSuppressNames.add(gmName.lower())
+			net.SendWhisperPacket(gmName, msg)
+		sent = localeInfo.GM_CALL_SENT
+		if "%" in sent:
+			try:
+				sent = sent % ", ".join(targets)
+			except TypeError:
+				pass
+		chat.AppendChat(chat.CHAT_TYPE_INFO, sent)
+
+	def _OnGmCallCancel(self):
+		self._DestroyGmCallDialog()
+		return True
+
+	def _SplitGmCallBodyLines(self, body):
+		# Each non-empty line in GM_CALL_CONFIRM_BODY becomes one UI row (max 6).
+		raw = body.replace("\r\n", "\n").replace("\r", "\n")
+		return [s.strip() for s in raw.split("\n") if s.strip()]
+
+	def OpenGmCallDialog(self):
+		self._DestroyGmCallDialog()
+		dlg = uiCommon.GmCallWarnDialog()
+		dlg.SetTitle(localeInfo.GM_CALL_CONFIRM_TITLE)
+		dlg.titleLine.SetPackedFontColor(0xffff3333)
+		for w in dlg.bodyLines:
+			w.SetHorizontalAlignCenter()
+			w.SetVerticalAlignTop()
+		dlg.SetManualBodyLines(self._SplitGmCallBodyLines(localeInfo.GM_CALL_CONFIRM_BODY))
+		dlg.SetAcceptText(localeInfo.GM_CALL_ACCEPT)
+		dlg.SetCancelText(localeInfo.GM_CALL_CANCEL)
+		dlg.SetAcceptEvent(ui.__mem_func__(self._OnGmCallAccept))
+		dlg.SetCancelEvent(ui.__mem_func__(self._OnGmCallCancel))
+		dlg.Open()
+		self.dlgGmCall = dlg
 
 	def __OnClickBuildButton(self):
 		self.BUILD_OpenWindow()

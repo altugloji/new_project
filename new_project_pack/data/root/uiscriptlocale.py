@@ -168,3 +168,8 @@ if app.ENABLE_LOCALE_COMMON:
 				LoadLocaleFile(filename, globals())
 	TryLoadLocaleFile("locale/common/locale_interface_ex.txt")
 	TryLoadLocaleFile("%s/locale_interface_ex.txt" % app.GetLocalePath())
+
+try:
+	GAME_GM_CALL
+except NameError:
+	GAME_GM_CALL = "GM INVITE"

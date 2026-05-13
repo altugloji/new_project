@@ -274,6 +274,74 @@ class QuestionDialog(ui.ScriptWindow):
 		self.Close()
 		return True
 
+class GmCallWarnDialog(ui.ScriptWindow):
+
+	def __init__(self):
+		ui.ScriptWindow.__init__(self)
+		self.acceptEvent = None
+		self.cancelEvent = None
+		self.__Load()
+
+	def __del__(self):
+		ui.ScriptWindow.__del__(self)
+
+	def __Load(self):
+		pyScrLoader = ui.PythonScriptLoader()
+		pyScrLoader.LoadScriptFile(self, "uiscript/gmcallwarndialog.py")
+		self.board = self.GetChild("board")
+		self.titleLine = self.GetChild("title")
+		self.bodyLines = []
+		for i in xrange(1, 7):
+			w = self.GetChild("body_line_%d" % i)
+			self.bodyLines.append(w)
+		self.acceptButton = self.GetChild("accept")
+		self.cancelButton = self.GetChild("cancel")
+
+	def Open(self):
+		self.SetCenterPosition()
+		self.SetTop()
+		self.Show()
+
+	def Close(self):
+		self.Hide()
+
+	def SetTitle(self, text):
+		self.titleLine.SetText(text)
+
+	def SetManualBodyLines(self, lines):
+		# One TextLine per row; no word-wrap. lines = list of str (max 6).
+		maxLines = len(self.bodyLines)
+		if len(lines) > maxLines:
+			merged = " ".join(lines[maxLines - 1:])
+			lines = lines[: maxLines - 1] + [merged]
+		for idx in xrange(maxLines):
+			w = self.bodyLines[idx]
+			if idx < len(lines) and lines[idx]:
+				w.SetText(lines[idx])
+				w.Show()
+			else:
+				w.SetText("")
+				w.Hide()
+
+	def SetAcceptText(self, text):
+		self.acceptButton.SetText(text)
+
+	def SetCancelText(self, text):
+		self.cancelButton.SetText(text)
+
+	def SetAcceptEvent(self, event):
+		self.acceptEvent = event
+		self.acceptButton.SetEvent(event)
+
+	def SetCancelEvent(self, event):
+		self.cancelEvent = event
+		self.cancelButton.SetEvent(event)
+
+	def OnPressEscapeKey(self):
+		if self.cancelEvent:
+			self.cancelEvent()
+		return True
+
 class QuestionDialog2(QuestionDialog):
 
 	def __init__(self):

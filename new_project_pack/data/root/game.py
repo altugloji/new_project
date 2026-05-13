@@ -42,7 +42,7 @@ import consoleModule
 import localeInfo
 
 import playerSettingModule
-import interfaceModule
+import interfacemodule as interfaceModule
 
 import musicInfo
 import debugInfo
@@ -922,10 +922,14 @@ class GameWindow(ui.ScriptWindow):
 			self.interface.RecvWhisper(name)
 
 	def OnRecvWhisperSystemMessage(self, mode, name, line):
+		if self.interface and self.interface.ShouldSuppressGmCallWhisperSystemMessage(mode, name, line):
+			return
 		chat.AppendWhisper(chat.WHISPER_TYPE_SYSTEM, name, line)
 		self.interface.RecvWhisper(name)
 
 	def OnRecvWhisperError(self, mode, name, line):
+		if self.interface and self.interface.ShouldSuppressGmCallWhisperFeedback(mode, name):
+			return
 		if localeInfo.WHISPER_ERROR.has_key(mode):
 			chat.AppendWhisper(chat.WHISPER_TYPE_SYSTEM, name, localeInfo.WHISPER_ERROR[mode](name))
 		else:

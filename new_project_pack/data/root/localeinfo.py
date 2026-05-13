@@ -439,6 +439,45 @@ if app.ENABLE_LOCALE_COMMON:
 	TryLoadLocaleFile("locale/common/locale_game_ex.txt")
 	TryLoadLocaleFile("%s/locale_game_ex.txt" % app.GetLocalePath())
 
+try:
+	GM_CALL_CONFIRM_TITLE
+except NameError:
+	GM_CALL_CONFIRM_TITLE = "[UYARI]"
+try:
+	GM_CALL_CONFIRM_BODY
+except NameError:
+	# One screen row per line break below (max 6 rows). No auto word-wrap.
+	GM_CALL_CONFIRM_BODY = (
+		"Yalnýzca acil durumlarda veya yetkili ekibin anlýk müdahalesini gerektiren durumlarda kullanýlmalýdýr.\n"
+		"Deneme amacýyla kullaným yasaktýr. Gereksiz kullanýmlarda otomatik cezai iþlem uygulanabilir.\n"
+		"Eðer aktif yönetici var ise anlýk olarak yanýnýza ýþýnlacaktýr.\n"
+		"Onaylamanýz halinde GM ekibine bildirim gönderilecektir.\n"
+		"Devam etmek istiyor musunuz?\n"
+	)
+try:
+	GM_CALL_NO_GM
+except NameError:
+	GM_CALL_NO_GM = "GM cagri nick listesi bos. locale_game icinde GM_CALL_MANUAL_NAMES tanimlayin."
+try:
+	GM_CALL_MANUAL_NAMES
+except NameError:
+	GM_CALL_MANUAL_NAMES = "Admin|Admin2"
+try:
+	GM_CALL_WHISPER_TEXT
+except NameError:
+	GM_CALL_WHISPER_TEXT = "[GM CAGRISI KULLANILDI]"
+try:
+	GM_CALL_SENT
+except NameError:
+	GM_CALL_SENT = "GM cagri mesaji gonderildi."
+try:
+	GM_CALL_ACCEPT
+except NameError:
+	GM_CALL_ACCEPT = "Evet"
+try:
+	GM_CALL_CANCEL
+except NameError:
+	GM_CALL_CANCEL = "Hayir"
 
 if app.ENABLE_CHEQUE_SYSTEM:
 	def NumberToGold(n) :

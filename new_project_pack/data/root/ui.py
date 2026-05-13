@@ -4449,6 +4449,11 @@ class PythonScriptLoader(object):
 		if value.has_key("outline"):
 			if value["outline"]:
 				window.SetOutline()
+		if value.has_key("limit_width"):
+			window.SetLimitWidth(int(value["limit_width"]))
+		if value.has_key("multi_line"):
+			if value["multi_line"]:
+				window.SetMultiLine()
 		if True == value.has_key("text"):
 			window.SetText(value["text"])
 
