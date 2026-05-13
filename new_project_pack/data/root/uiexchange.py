@@ -4,6 +4,7 @@ import net
 import localeInfo
 import chat
 import item
+import constInfo
 
 import ui
 import mouseModule
@@ -218,8 +219,8 @@ class ExchangeDialog(ui.ScriptWindow):
 			self.OwnerCheque.SetText(str(exchange.GetChequeFromSelf()))
 			self.TargetCheque.SetText(str(exchange.GetChequeFromTarget()))
 		else:
-			self.OwnerMoney.SetText(str(exchange.GetElkFromSelf()))
-			self.TargetMoney.SetText(str(exchange.GetElkFromTarget()))
+			self.OwnerMoney.SetText(constInfo.intWithCommas(int(exchange.GetElkFromSelf())))
+			self.TargetMoney.SetText(constInfo.intWithCommas(int(exchange.GetElkFromTarget())))
 
 		if True == exchange.GetAcceptFromSelf():
 			self.OwnerAcceptLight.Down()

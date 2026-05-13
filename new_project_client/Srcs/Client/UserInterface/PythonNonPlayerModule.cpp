@@ -125,7 +125,8 @@ PyObject* nonplayerGetMonsterLevel(PyObject* poSelf, PyObject* poArgs)
 
 	CPythonNonPlayer& rkNonPlayer = CPythonNonPlayer::Instance();
 
-	return Py_BuildValue("i", rkNonPlayer.GetMonsterLevel(race));
+	//return Py_BuildValue("i", rkNonPlayer.GetMonsterLevel(race));
+	return Py_BuildValue("i", (int)rkNonPlayer.GetMobLevel(race));
 }
 
 PyObject* nonplayerGetMonsterDamage(PyObject* poSelf, PyObject* poArgs)

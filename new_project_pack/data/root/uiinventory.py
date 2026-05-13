@@ -5,8 +5,8 @@ import net
 import app
 import snd
 import item
-import player
 import chat
+import exchange
 import grp
 import uiScriptLocale
 import uiRefine
@@ -18,7 +18,6 @@ import localeInfo
 import constInfo
 import ime
 import wndMgr
-import dbg
 
 if app.KYGN_CHEST_INFO:
 	import chr
@@ -29,6 +28,7 @@ if app.ENABLE_CHEQUE_SYSTEM:
 
 if app.ENABLE_ACCE_COSTUME_SYSTEM:
 	import acce
+from grid_delete import Grid
 from _weakref import proxy
 
 ITEM_MALL_BUTTON_ENABLE = True
@@ -1391,6 +1391,44 @@ class InventoryWindow(ui.ScriptWindow):
 		self.Close()
 		return True
 
+	def __TryExchangeRightClickAdd(self, globalSlotIndex):
+		if not getattr(self, "interface", None):
+			return False
+		dlgExchange = self.interface.dlgExchange
+		if not dlgExchange or not dlgExchange.IsShow():
+			return False
+		if mouseModule.mouseController.isAttached():
+			return False
+		if player.IsEquipmentSlot(globalSlotIndex) or player.IsCostumeSlot(globalSlotIndex):
+			return False
+		if app.ENABLE_NEW_EQUIPMENT_SYSTEM and player.IsBeltInventorySlot(globalSlotIndex):
+			return False
+		if uiPrivateShopBuilder.IsBuildingPrivateShop():
+			return False
+		itemVnum = player.GetItemIndex(globalSlotIndex)
+		if itemVnum == 0:
+			return False
+		item.SelectItem(itemVnum)
+		if item.IsAntiFlag(item.ANTIFLAG_GIVE):
+			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.EXCHANGE_CANNOT_GIVE)
+			return True
+		addW, addH = item.GetItemSize()
+		exGrid = Grid(4, 3)
+		for i in xrange(exchange.EXCHANGE_ITEM_MAX_NUM):
+			ev = exchange.GetItemVnumFromSelf(i)
+			if ev == 0:
+				continue
+			item.SelectItem(ev)
+			w, h = item.GetItemSize()
+			exGrid.put(i, w, h, i)
+		item.SelectItem(itemVnum)
+		dstSlot = exGrid.find_blank(addW, addH)
+		if dstSlot == -1:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.INVENTORY_FULL)
+			return True
+		net.SendExchangeItemAddPacket(player.INVENTORY, globalSlotIndex, dstSlot)
+		return True
+
 	def UseItemSlot(self, slotIndex):
 		curCursorNum = app.GetCursor()
 		if app.SELL == curCursorNum:
@@ -1419,6 +1457,11 @@ class InventoryWindow(ui.ScriptWindow):
 			if self.isShowDeleteItemDlg():
 				self.wndItemDelete.AddItemWithoutMouse(player.INVENTORY, slotIndex)
 				return
+
+		if self.__TryExchangeRightClickAdd(slotIndex):
+			mouseModule.mouseController.DeattachObject()
+			self.OverOutItem()
+			return
 
 		self.__UseItem(slotIndex)
 		mouseModule.mouseController.DeattachObject()
