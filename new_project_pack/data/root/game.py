@@ -372,11 +372,14 @@ class GameWindow(ui.ScriptWindow):
 		onPressKeyDict[app.DIK_F3]	= lambda : self.__PressQuickSlot(6)
 		onPressKeyDict[app.DIK_F4]	= lambda : self.__PressQuickSlot(7)
 
+		if app.WJ_NEW_DROP_DIALOG:
+			onPressKeyDict[app.DIK_F5]	= lambda : self.interface.OpenDeleteItem()
+
 		if app.ENABLE_EXCHANGE_LOG:
-			onPressKeyDict[app.DIK_F5]	= lambda : self.interface.OpenExchangeLog()
+			onPressKeyDict[app.DIK_F6]	= lambda : self.interface.OpenExchangeLog()
 
 		if app.__AUTO_SKILL_READER__:
-			onPressKeyDict[app.DIK_X]	= lambda : self.interface.OpenAutoSkillReader()
+			onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenAutoSkillReader()
 
 		onPressKeyDict[app.DIK_LALT]		= lambda : self.ShowName()
 		onPressKeyDict[app.DIK_LCONTROL]	= lambda : self.ShowMouseImage()

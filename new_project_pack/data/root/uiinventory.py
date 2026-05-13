@@ -277,6 +277,8 @@ class InventoryWindow(ui.ScriptWindow):
 		dlgPickETC = None
 	if app.ENABLE_CUBE_RENEWAL:
 		wndCubeRenewal = None
+	if app.WJ_NEW_DROP_DIALOG:
+		wndItemDelete = None
 	sellingSlotNumber = -1
 	isLoaded = 0
 	isOpenedCostumeWindowWhenClosingInventory = 0
@@ -1413,6 +1415,11 @@ class InventoryWindow(ui.ScriptWindow):
 				self.KygnChestReward.ShowChestRewards(slotIndex)
 				return
 
+		if app.WJ_NEW_DROP_DIALOG:
+			if self.isShowDeleteItemDlg():
+				self.wndItemDelete.AddItemWithoutMouse(player.INVENTORY, slotIndex)
+				return
+
 		self.__UseItem(slotIndex)
 		mouseModule.mouseController.DeattachObject()
 		self.OverOutItem()
@@ -1511,6 +1518,17 @@ class InventoryWindow(ui.ScriptWindow):
 		def isShowCubeRenewalDlg(self):
 			if self.wndCubeRenewal:
 				if self.wndCubeRenewal.IsShow():
+					return 1
+					
+			return 0
+			
+	if app.WJ_NEW_DROP_DIALOG:
+		def SetDeleteItemDlg(self, wndItemDelete):
+			self.wndItemDelete = wndItemDelete
+			
+		def isShowDeleteItemDlg(self):
+			if self.wndItemDelete:
+				if self.wndItemDelete.IsShow():
 					return 1
 					
 			return 0

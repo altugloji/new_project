@@ -1,3 +1,7 @@
+21301	Creazione
+21302	Creazione Mithril
+21303	Creazione Pietra Nera
+21304	Creazione Libro Viola
 1	Una stoffa particolare
 2	Ti ho già spiegato quanta forza ci serve per[ENTER]combattere contro Sung Mahi.[ENTER][ENTER]Non perdere altro tempo e vai a cercare il[ENTER]comandante.[ENTER][ENTER]Torna indietro solo quando avrai tutte le stoffe[ENTER]necessarie.
 3	Aumenta la tua forza
@@ -187,7 +191,7 @@
 187	Richiesta di accesso
 188	Koe-Pung:
 189	Fermo! Sono Koe-Pung, dell'Ordine dei Draghi, e[ENTER]sono il guardiano del portale. Solo con il[ENTER]permesso dell'Ordine e solo se possiedi[ENTER]un'ematite potrai entrare!
-190	Puoi ottenere ematiti solo a partire dal[ENTER]livello 75!
+190	Puoi ottenere ematiti solo a partire dal[ENTER]livello 75!
 191	Dove trovo una pietra del genere?
 192	Fatti da parte o sarai morto!
 193	Solo chi appartiene all'Ordine dei Draghi e si è[ENTER]comportato dignitosamente al cospetto del Dio[ENTER]Drago riceverà questa preziosa pietra. Ne[ENTER]esistono solo pochi esemplari.
@@ -951,7 +955,7 @@
 952	Ah, avverto in te il potere dell'Occhio del drago.In segno del profondo rispetto che provo per te[ENTER]voglio regalarti questo Cor draconis.[ENTER]Una pietra al giorno - di più purtroppo non[ENTER]riesco a risparmiare.
 953	Prego, ecco il tuo Cor draconis!
 954	Mi dispiace, non riesco a risparmiarne più di una[ENTER]al giorno. Torna domani. Forse avrò un Cor[ENTER]draconis per te.
-955	GM: Daily Quest – Impostazioni
+955	GM: Daily Quest - Impostazioni
 956	Ora di inizio
 957	Ora di fine
 958	Inserisci il seguente formato per data e ora:[ENTER]jj.mm.tt[ENTER]hh.mm
@@ -1185,12 +1189,12 @@
 1186	La produzione è impegnativa e il caldo[ENTER]sicuramente non mi aiuta. Torna domani, abbia[ENTER]pazienza.
 1187	Congelatore
 1188	Fa caldo oggi! Che desideri?
-1189	Cavallo nero per 7 giorni – 150 Palline di gelato
-1190	Cavallo nero per 15 giorni – 350 Palline di gelato
-1191	Cavallo nero per 30 giorni – 550 Palline di gelato
+1189	Cavallo nero per 7 giorni - 150 Palline di gelato
+1190	Cavallo nero per 15 giorni - 350 Palline di gelato
+1191	Cavallo nero per 30 giorni - 550 Palline di gelato
 1192	Ehi, raggio di sole! Adoro questo albero...[ENTER]Purtroppo però neanche la sua ombra porta[ENTER]frescura. Darei qualsiasi cosa pur di avere un[ENTER]gelato! Allora, che ne dici?
 1193	Summer ti sta cercando. Vai da lei e scopri cosa[ENTER]vuole. Non ti preoccupare. Anche con questo caldo[ENTER]la tua bellezza non viene minimamente scalfita![ENTER][ENTER]Ammazza i mostri per ottenere delle Palline di[ENTER]gelato.
-1194	Cavallo nero per 60 giorni – 950 Palline di gelato
+1194	Cavallo nero per 60 giorni - 950 Palline di gelato
 1195	Voglio realizzare la più grande Torta gelato del[ENTER]mondo. Per farla mi servono tantissime Palline di[ENTER]gelato. Te ne sono rimaste? In cambio ti darò una[ENTER]ricompensa. Più Palline di gelato mi dai e più[ENTER]potrai tenerti il Cavallo nero.
 1196	Hai già acquisito il tuo Cavallo nero, Credi[ENTER]forse che l'abbia dimenticato? Il caldo non mi ha[ENTER]fatto ancora impazzire. Fai una cosa... I[ENTER]giochini di furbizia tentateli da un'altra parte!
 1197	Cavallo nero nobile
@@ -1598,8 +1602,8 @@
 1599	Tronco: %d
 1600	Compensato: %d
 1601	Vuoi ampliare il Magazzino della Gilda?
-1602	Conto della gilda – Versa
-1603	Conto della gilda – Preleva
+1602	Conto della gilda - Versa
+1603	Conto della gilda - Preleva
 1604	Digita l'importo di Yang che desideri versare sul[ENTER]conto della gilda:
 1605	Digita l'importo di Yang che desideri prelevare[ENTER]dal conto della gilda:
 1606	Non hai abbastanza Yang da versare.
@@ -1697,7 +1701,7 @@
 1698	Bene allora.[ENTER][ENTER]Scioglierò la tua gilda.
 1699	Fondare gilda
 1700	Fondare gilda
-1701	[ENTER]Nei primi giorni che seguono la tua uscita dalla gilda non ne potrai fondare una nuova.
+1701	[ENTER]Nei primi giorni che seguono la tua uscita dalla gilda non ne potrai fondare una nuova.
 1702	Fondare...
 1703	Prego, inserisci il nome del membro di cui vuoi[ENTER]informazioni.
 1704	Hai già sciolto una gilda, per i prossimi giorni[ENTER]non ne potrai fondare altre.
@@ -2601,9 +2605,9 @@
 2602	Cosa succede?
 2603	Il tuo livello è troppo basso per essere a capo[ENTER]di una gilda.
 2604	Secondo la mia lista, hai già comprato un[ENTER]biglietto per questa guerra tra gilde. Ne puoi[ENTER]comprare solo uno per guerra.
-2605	A quanto pare la gilda 
-2606	vincerà contro la gilda con
-2607	punti di differenza.[ENTER][ENTER]Su quale gilda vuoi scommettere?
+2605	A quanto pare la gilda 
+2606	vincerà contro la gilda con
+2607	punti di differenza.[ENTER][ENTER]Su quale gilda vuoi scommettere?
 2608	È tutto pronto. Se avrai fatto la scelta giusta,[ENTER]sarai ripagato quando lo scontro sarà finito.[ENTER]Buona fortuna!
 2609	La scommessa. Compra un biglietto per il tuo[ENTER]regno.[ENTER]1. Ad ogni guerra tra gilde, ci sarà un[ENTER]preannunciato vantaggio sulla possibile gilda[ENTER]vincente più probabile.[ENTER][ENTER]2. Comprando un biglietto potrai scommettere[ENTER]sulla gilda data per vincente o meno.[ENTER][ENTER]3. Le quote vengono decise al banco delle[ENTER]scommesse. Una volta terminata la guerra verrai[ENTER]informato sul risultato.[ENTER][ENTER]Il 10% dei profitti va al regno.
 2610	La scommessa sulla guerra tra gilde
@@ -3637,7 +3641,7 @@
 3638	Distruggi la Roccia Metin del dolore
 3639	Distruggi 2 Metin del dolore
 3640	Ultimamente, dal cielo piovono delle rocce con un[ENTER]influsso negativo. Ricerche dimostrano che tale[ENTER]influsso fa impazzire gli animali. Distruggi[ENTER]quelle rocce.[ENTER]Ti supplico. Ovviamente verrai ricompensato.
-3641	Il segreto del sotterraneo delle scimmie normali 1
+3641	Il segreto del sotterraneo delle scimmie normali 1
 3642	Uccidi 30 scimmie soldato e 30 scimmie[ENTER]lanciatrici.
 3643	La posizione del Sotterraneo delle Scimmie[ENTER]normali, nel deserto, è stata finalmente trovata.[ENTER]In genere, queste scimmie non rappresentano un[ENTER]pericolo, ma se dovessero coalizzarsi lo[ENTER]diventerebbero seriamente. Vai al sotterraneo[ENTER]delle scimmie normali ed indaga sulla situazione.
 3644	Il segreto delle scimmie facili 1
@@ -4325,7 +4329,7 @@
 4326	La lettera del mercante:[ENTER]Non so più cosa fare.[ENTER]La gemma del demone + è stata rubata, ed io sarò[ENTER]rovinato se non la ripagherò.[ENTER]Potresti aiutarmi? Ho davvero bisogno del tuo[ENTER]aiuto.
 4327	Il mercante ambulante:[ENTER]Davvero ce l'hai fatta? Vieni tra le mie braccia,[ENTER]mia amata pietra![ENTER]Ti ringrazio. Non puoi nemmeno immaginare quanto[ENTER]mi senta sollevato.
 4328	Cerca la pietra preziosa demone+.
-4329	L'opuscolo dice:[ENTER]Stiamo reclutando uomini coraggiosi e donne[ENTER]disposte a combattere per la pace del regno e[ENTER]della sua gente![ENTER][ENTER]Requisiti per il reclutamento: livello 5.
+4329	L'opuscolo dice:[ENTER]Stiamo reclutando uomini coraggiosi e donne[ENTER]disposte a combattere per la pace del regno e[ENTER]della sua gente![ENTER][ENTER]Requisiti per il reclutamento: livello 5.
 4330	Qui alleniamo i ninja che si sanno nascondere[ENTER]bene e che sono abili nel tendere imboscate. Essi[ENTER]si concentrano sull'uso del pugnale e dei veleni.[ENTER]Solo i ninja a partire dal livello 5 possono[ENTER]accedere. Non appena avrai raggiunto questo[ENTER]livello otterrai una lettera per il reclutamento.[ENTER]Se sei pronto a muoverti di soppiatto su sentieri[ENTER]oscuri, proprio come un vero ninja, allora vieni[ENTER]a cercarmi.[ENTER]Approfondiremo la cosa.
 4331	Qui alleniamo i ninja che si sanno nascondere[ENTER]bene e che sono abili nel tendere imboscate. Essi[ENTER]si concentrano sull'uso del pugnale e dei veleni.[ENTER]Se sei pronto a muoverti di soppiatto su sentieri[ENTER]oscuri, proprio come un vero ninja, sarai sempre[ENTER]il benvenuto.
 4332	Qui vengono formati i ninja arcieri: vengono[ENTER]insegnate abilità relative all'uso dell'arco,[ENTER]come ad esempio il lanciare una pioggia di frecce[ENTER]su dei nemici molto distanti. Possono partecipare[ENTER]solo ninja apprendisti al di sopra del livello 5.[ENTER]Appena raggiungi questo livello ricevi un invito[ENTER]al reclutamento. Se sei interessato, passa da me.
@@ -4937,7 +4941,7 @@
 4938	Trova il Guardiano della città
 4939	Se vuoi parlare con il Guardiano della città,[ENTER]cliccaci sopra. È uno degli NPC. Lo riconoscerai[ENTER]perché è indicato da una freccia rossa. Se non lo[ENTER]vedi, è probabile che sia troppo lontano. Segui[ENTER]il cerchio lampeggiante sulla mappa fino a quando[ENTER]non avrai trovato il Guardiano della città.
 4940	Guardiano della città:
-4941	Sembri essere nuovo da queste parti. Vedo che non[ENTER]hai ancora appreso appieno l’arte del[ENTER]combattimento. Hai già svolto qualche[ENTER]addestramento? Secondo me non hai ben chiara la[ENTER]situazione. A guardarti, direi che non hai mai[ENTER]imbracciato un'arma in vita tua![ENTER]Bene, ascoltami! Dovrai concentrarti se vorrai[ENTER]sopravvivere a questa guerra. Resterò al tuo[ENTER]fianco finché non avrai raggiunto il livello 10.[ENTER]E ricorda: sarà tutt'altro che una passeggiata.[ENTER]E ora... datti da fare!
+4941	Sembri essere nuovo da queste parti. Vedo che non[ENTER]hai ancora appreso appieno l'arte del[ENTER]combattimento. Hai già svolto qualche[ENTER]addestramento? Secondo me non hai ben chiara la[ENTER]situazione. A guardarti, direi che non hai mai[ENTER]imbracciato un'arma in vita tua![ENTER]Bene, ascoltami! Dovrai concentrarti se vorrai[ENTER]sopravvivere a questa guerra. Resterò al tuo[ENTER]fianco finché non avrai raggiunto il livello 10.[ENTER]E ricorda: sarà tutt'altro che una passeggiata.[ENTER]E ora... datti da fare!
 4942	Mettiti in cammino e vedi di apprendere i[ENTER]fondamentali della caccia e dell'arte del[ENTER]combattimento.[ENTER]Non appena avrai raggiunto il livello successivo,[ENTER]torna nel villaggio e ricontattami.[ENTER]Cosa ci fai ancora qui? Datti una mossa!
 4943	Vai dal Comandante
 4944	Ricevi 9.500 punti esperienza.[ENTER]Ricevi 2.000 Yang.
@@ -6265,7 +6269,7 @@
 6266	Ah, sia ringraziato il Dio Drago! Ce l'hai fatta[ENTER]a tornare! E... sei incolume! Hai sconfitto la[ENTER]Servitrice del tempio?
 6267	Sì, l'ho rispedita all'inferno. In punto di[ENTER]morte, ha implorato perdono alla Banshee per il[ENTER]suo fallimento. Aveva questa con sé.
 6268	Una lettera con un sigillo. Fai un po' vedere!
-6269	Mia Signora, sono caduti nella nostra trappola.[ENTER]Il nostro piano procede bene. L'evocazione della[ENTER]Vostra Armata dei Non-morti continua e niente e[ENTER]nessuno sarà in grado di fermarci. Non appena i[ENTER]corpi senz'anima cominceranno a marciare,[ENTER]assalteremo il Capo Fuoco del Drago e[ENTER]sotterreremo i suoi abitanti. Infine, ci[ENTER]insedieremo sulla terraferma e Vi incontreremo[ENTER]nella Terra di Fuoco. Il mondo si incendierà ad[ENTER]ogni nostro passo.[ENTER]Mi inchino a Voi con profonda reverenza – La[ENTER]Vostra eterna Servitrice
+6269	Mia Signora, sono caduti nella nostra trappola.[ENTER]Il nostro piano procede bene. L'evocazione della[ENTER]Vostra Armata dei Non-morti continua e niente e[ENTER]nessuno sarà in grado di fermarci. Non appena i[ENTER]corpi senz'anima cominceranno a marciare,[ENTER]assalteremo il Capo Fuoco del Drago e[ENTER]sotterreremo i suoi abitanti. Infine, ci[ENTER]insedieremo sulla terraferma e Vi incontreremo[ENTER]nella Terra di Fuoco. Il mondo si incendierà ad[ENTER]ogni nostro passo.[ENTER]Mi inchino a Voi con profonda reverenza - La[ENTER]Vostra eterna Servitrice
 6270	Un messaggio per la Banshee! Ah, l'infame strega[ENTER]aspetta invano la sua Armata delle tenebre nella[ENTER]Terra di Fuoco.[ENTER]Ti ringrazio. Senza il tuo aiuto, il Capo e i[ENTER]suoi abitanti sarebbero stati annientati[ENTER]dall'Armata dei Non-morti. Non solo ci hai[ENTER]salvato, ma hai anche placato le anime dei nostri[ENTER]antenati. Ti consegno questa ricompensa a nome di[ENTER]tutti noi.
 6271	L'avventura continuerà non appena avrai raggiunto[ENTER]il livello 98.
 6272	Ci è voluto molto tempo prima di scoprire dove si[ENTER]trovasse la base. Ora non possiamo permetterci di[ENTER]perdere altro tempo!
@@ -7586,29 +7590,29 @@
 7587	Gara OX: inizio[ENTER]In questo modo, la gara OX avrà inizio.Vuoi[ENTER]davvero iniziare?
 7588	Inizia
 7589	Punto di pattugliamento 5
-7590	Hai raggiunto il punto di pattugliamento numero 3.
+7590	Hai raggiunto il punto di pattugliamento numero 3.
 7591	Punto di pattugliamento 2
-7592	Vai al punto di pattugliamento numero 2
-7593	Hai raggiunto il punto di pattugliamento numero 2
+7592	Vai al punto di pattugliamento numero 2
+7593	Hai raggiunto il punto di pattugliamento numero 2
 7594	Punto di pattugliamento 1
-7595	Vai al punto di pattugliamento numero 1
-7596	Hai raggiunto il punto di pattugliamento numero 1
-7597	Vai al punto di pattugliamento numero 5
-7598	Hai raggiunto il punto di pattugliamento numero 4
-7599	Vai al punto di pattugliamento numero 3.
-7600	Vai al punto di pattugliamento numero 5.
-7601	Hai raggiunto il punto di pattugliamento numero 3.
+7595	Vai al punto di pattugliamento numero 1
+7596	Hai raggiunto il punto di pattugliamento numero 1
+7597	Vai al punto di pattugliamento numero 5
+7598	Hai raggiunto il punto di pattugliamento numero 4
+7599	Vai al punto di pattugliamento numero 3.
+7600	Vai al punto di pattugliamento numero 5.
+7601	Hai raggiunto il punto di pattugliamento numero 3.
 7602	Vai al punto ti pattugliamento numero 2.
-7603	Hai raggiunto il punto di pattugliamento numero 2.
-7604	Vai al punto di pattugliamento numero 1.
-7605	Hai raggiunto il punto di pattugliamento numero 1.
+7603	Hai raggiunto il punto di pattugliamento numero 2.
+7604	Vai al punto di pattugliamento numero 1.
+7605	Hai raggiunto il punto di pattugliamento numero 1.
 7606	Trova il Punto di pattugliamento 5
 7607	Vai alla pattuglia numero 5.
-7608	Hai raggiunto il punto di pattugliamento numero 5.
+7608	Hai raggiunto il punto di pattugliamento numero 5.
 7609	Trova Punto di pattugliamento 6
-7610	Vai al punto di pattugliamento numero 6.
-7611	Hai raggiunto il punto di pattugliamento numero 5.
-7612	Hai raggiunto il punto di pattugliamento numero 6.
+7610	Vai al punto di pattugliamento numero 6.
+7611	Hai raggiunto il punto di pattugliamento numero 5.
+7612	Hai raggiunto il punto di pattugliamento numero 6.
 7613	Punto di pattugliamento 3[ENTER]Vai al Punto di pattugliamento.
 7614	Punto di pattugliamento 5.[ENTER][ENTER]Vai al Punto di pattugliamento.
 7615	Punto di pattugliamento 6[ENTER]Vai al Punto di pattugliamento.
@@ -7626,9 +7630,9 @@
 7627	Pattugliamento terminato.
 7628	Come ricompensa per il pattugliamento, ricevi un[ENTER]bonus esperienza.
 7629	
-7630	Trova il punto di pattugliamento numero 4.
+7630	Trova il punto di pattugliamento numero 4.
 7631	Vai al Punto di pattugliamento.
-7632	Hai raggiunto il punto di pattugliamento numero 4.
+7632	Hai raggiunto il punto di pattugliamento numero 4.
 7633	Punto di pattugliamento 3
 7634	Vai al Punto di pattugliamento.
 7635	
@@ -10126,7 +10130,7 @@
 10127	1° posto: 10 Bottini reali oro
 10128	2° posto: 5 Bottini reali oro
 10129	3° posto: 3 Bottini reali oro
-10130	4° — 10° posto: 1 Bottino reale oro
+10130	4° - 10° posto: 1 Bottino reale oro
 10131	Punteggio totale
 10132	1º posto: %s, %d
 10133	2º posto: %s, %d
@@ -10315,7 +10319,7 @@
 10989	Hmm, non è troppo facile?
 10990	Bene. Mi riporta ai tempi della mia giovinezza.
 10991	Ero un tipo davvero onesto. Un tipo sincero.
-10992	(… Non capisco perché me lo stia raccontando...)
+10992	(... Non capisco perché me lo stia raccontando...)
 10993	Aha! Sembri nervoso.
 10994	O l'incarico ti sembra troppo semplice per te?
 10995	Che ne dici di spassartela un po' con qualche[ENTER]cinghiale?
@@ -11038,9 +11042,9 @@
 11795	Al momento non puoi utilizzare questo oggetto!
 11796	Con questo oggetto puoi cambiare regno.
 11797	Puoi cambiare regno solo una volta.
-11798	GM – Resettare il timeout?
+11798	GM - Resettare il timeout?
 11799	No
-11800	GM – Resettare il timeout?
+11800	GM - Resettare il timeout?
 11801	Non si può utilizzare perché i regni sono diversi.
 11802	I personaggi sposati non possono cambiare regno.
 11803	Se ti sposi non puoi più cambiare regno. Solo i[ENTER]personaggi non sposati possono cambiare regno.
@@ -13093,7 +13097,7 @@
 13938	Usa Anima defunta
 13939	Puoi ridurre gli HP di Asmodeus utilizzando le[ENTER]Anime defunte.[ENTER](Quantità max.: %d)
 13940	Effetto delle Anime defunte utilizzate:
-13941	20 – Gli HP max. di Asmodeus si riducono del 20%[ENTER]40 – Gli HP max. di Asmodeus si riducono del 40%[ENTER]60 – Gli HP max. di Asmodeus si riducono del 60%[ENTER]80 – Gli HP max. di Asmodeus si riducono del 90%
+13941	20 - Gli HP max. di Asmodeus si riducono del 20%[ENTER]40 - Gli HP max. di Asmodeus si riducono del 40%[ENTER]60 - Gli HP max. di Asmodeus si riducono del 60%[ENTER]80 - Gli HP max. di Asmodeus si riducono del 90%
 13942	Vuoi usarlo?
 13943	(Quantità delle Anime defunte utilizzate: %d)
 13944	Non ne puoi più utilizzare.

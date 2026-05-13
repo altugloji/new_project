@@ -13415,3 +13415,6 @@
 14311	Nincs elég helyed a leltáradban.
 14312	Nincs elég helyed a leltáradban.
 14320	Nincs nálad 1.500.000 Yang.
+21310	Gaya bolt
+21311	Gaya átváltó bolt
+21312	10 Gaya pont hozzáadva a karakteredhez.

@@ -3669,3 +3669,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	You receive Yut Nori Board(s).
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	You receive 1 Birch Branch.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	You don't have sufficient items or money to play.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	You cannot receive any more Yut Nori Boards.
+SHOP_NOT_ENOUGH_ITEM	Not enough items
+GEMSHOP_TITLE	Gaya Shop
+GEMSHOP_SECOND_TITLE	Convert items to Gaya points
+GEMSHOP_CONVERT_SELECTED	Convert Selected x{}
+GEMSHOP_CONVERT_QUESTION	Do you want to convert {} x{} to {} Gaya points?
+GEMSHOP_TITLE2	Gaya Shop
+GEMSHOP_HAS_TOOLTIP	You have: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	You already bought this!
+GEMSHOP_OPEN_SLOT_QUESTION	Do you want to open this slot?
+GEMSHOP_BUY_QUESTION	Do you want to buy {} for {} Gaya?
+GEMSHOP_REFRESH_QUESTION	Do you want to refresh the items?

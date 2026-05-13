@@ -297,6 +297,10 @@ ACMD(do_nesne_market);
 ACMD(do_nesneyenile);
 #endif
 
+#ifdef ENABLE_GM_MOB_FIND_CMD
+ACMD(do_mob_find);
+#endif
+
 struct command_info cmd_info[] =
 {
 	{ "!RESERVED!", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	},
@@ -628,6 +632,10 @@ struct command_info cmd_info[] =
 	{ "nesne_market",			do_nesne_market,			0,		POS_DEAD,	GM_PLAYER	},
 	{ "nesneyenil",				do_inputall,				0,		POS_DEAD,	GM_PLAYER	},
 	{ "nesneyenile",			do_nesneyenile,				0,		POS_DEAD,	GM_PLAYER	},
+#endif
+
+#ifdef ENABLE_GM_MOB_FIND_CMD
+	{ "mob_find",				do_mob_find,				0,		POS_DEAD,	GM_LOW_WIZARD	},
 #endif
 
 #ifdef __GEM_SYSTEM__

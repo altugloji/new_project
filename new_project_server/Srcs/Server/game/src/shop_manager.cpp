@@ -433,6 +433,11 @@ bool ConvertToShopItemTable(IN CGroupNode* pNode, OUT TShopTableEx& shopTable)
 		#ifdef ENABLE_CHEQUE_SYSTEM
 		pItemGroup->GetValue(i, "won", shopItems[i].cheque);
 		#endif
+#ifdef ENABLE_MULTISHOP
+		pItemGroup->GetValue(i, "multishop_price_vnum", shopItems[i].wPriceVnum);
+		pItemGroup->GetValue(i, "multishop_price_count", shopItems[i].wPrice);
+		pItemGroup->GetValue(i, "gem_price", shopItems[i].gem_price);
+#endif
 	}
 	std::string stSort;
 	if (!pNode->GetValue("sort", 0, stSort))

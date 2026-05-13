@@ -1133,7 +1133,10 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		bool			DropItem(TItemPos Cell,  BYTE bCount=0);
 		bool			GiveRecallItem(LPITEM item);
 		void			ProcessRecallItem(LPITEM item);
-
+#ifdef WJ_NEW_DROP_DIALOG
+		bool			DeleteItem(TItemPos Cell);
+		bool			SellItem(TItemPos Cell);
+#endif
 		//	void			PotionPacket(int iPotionType);
 		void			EffectPacket(int enumEffectType);
 		void			SpecificEffectPacket(const std::string_view filename) noexcept;

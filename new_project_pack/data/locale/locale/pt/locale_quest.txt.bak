@@ -1,3 +1,7 @@
+21301	Criação
+21302	Criação de Mithril
+21303	Criação de Pedra Negra
+21304	Criação de Livro Roxo
 1	Um tecido especial
 2	Já te disse tudo sobre os poderes que iremos[ENTER]precisar para confrontarmos Sung Mahi.[ENTER][ENTER]Despacha-te a ir ter com o Capitão.[ENTER][ENTER]Volta quando tiveres o tecido necessário.
 3	Aumenta o teu poder
@@ -951,7 +955,7 @@
 952	Ah, sinto em ti o Poder do Olho do Dragão. Como[ENTER]sinal do meu profundo respeito, gostaria de te[ENTER]presentear com este Cor Draconis.[ENTER]Uma pedra por dia - lamento, mas não posso[ENTER]dispensar mais.
 953	Aqui tens o teu Cor Draconis. De nada.
 954	Lamento muito, mas não posso dispensar mais de um[ENTER]por dia. Volta de novo amanhã. Talvez então eu[ENTER]tenha um novo Cor Draconis para ti.
-955	GM: Missão diária – Definições
+955	GM: Missão diária - Definições
 956	Hora de início
 957	Hora de fim
 958	Introduz o seguinte formato para data e hora:[ENTER]aa.mm.dd[ENTER]hh.mm
@@ -1185,12 +1189,12 @@
 1186	É um processo relativamente complicado e este[ENTER]calor está a começar a afectar-me. Por favor,[ENTER]volta de novo amanhã.
 1187	Caixa de Refrigeração
 1188	Hoje está muito calor! O que queres?
-1189	Cavalo Preto durante 7 dias – 150 Bolas de Gelado
-1190	Cavalo Preto durante 15 dias – 350 Bolas de Gelado
-1191	Cavalo Preto durante 30 dias – 550 Bolas de Gelado
+1189	Cavalo Preto durante 7 dias - 150 Bolas de Gelado
+1190	Cavalo Preto durante 15 dias - 350 Bolas de Gelado
+1191	Cavalo Preto durante 30 dias - 550 Bolas de Gelado
 1192	Olá, raio de sol! Embora adore esta árvore, este[ENTER]calor é insuportável mesmo à sombra. Fazia[ENTER]qualquer coisa por um gelado! E tu?
 1193	A Summer está à tua procura. Visita-a e descobre[ENTER]o que ela quer. Não te preocupes! Mesmo com esta[ENTER]onda de calor manténs o teu ar absolutamente[ENTER]fabuloso![ENTER][ENTER]Mata monstros para recolheres Bolas de Gelado.
-1194	Cavalo Preto durante 60 dias – 950 Bolas de Gelado
+1194	Cavalo Preto durante 60 dias - 950 Bolas de Gelado
 1195	Quero criar o maior bolo de gelado do mundo. Mas[ENTER]para isso vou precisar de muitas bolas de gelado.[ENTER]Tens algumas que me possas dar? Irei dar-te uma[ENTER]recompensa por elas. Quantas mais bolas de gelado[ENTER]me deres, durante mais tempo poderás ficar com o[ENTER]Cavalo Preto.
 1196	Já recebeste o teu Cavalo Preto. Não penses que[ENTER]me esqueci! Pode estar muito calor, mas ainda não[ENTER]estou a alucinar com uma insolação. Boa[ENTER]tentativa!
 1197	O Nobre Cavalo Preto
@@ -1335,7 +1339,7 @@
 1336	O grupo será transportado para fora do Forte do[ENTER]Dragão Vermelho dentro de 10 segundos.
 1337	Acorda o Desfiladeiro de Am-heh
 1338	Apenas o líder pode acordar o Desfiladeiro de[ENTER]Am-heh!
-1339	O Desfiladeiro de Am-heh foi acordado. Agora[ENTER]ninguém pode entrar – ou sair.
+1339	O Desfiladeiro de Am-heh foi acordado. Agora[ENTER]ninguém pode entrar - ou sair.
 1340	Os portões para o Forte do Dragão Vermelho irão[ENTER]fechar durante 1 hora.
 1341	Tempo restante: 60 minuto(s)
 1342	Tarefa: aventura-te no Anel dos Demónios e emerge[ENTER]vitorioso.
@@ -5845,8 +5849,8 @@
 5846	Estás de volta! Encontraste o Bae-Yong?
 5847	Sim, mas...
 5848	Mas?[ENTER]Oh não... Ele está morto?
-5849	Não podia faz mais por ele. Os meus pêsames. Ele[ENTER]era um homem corajoso – ele defendeu o último[ENTER]pedaço da carta com a sua vida. Aqui está.
-5850	A perda do Bae-Yong irá afectar-nos imenso. Mas[ENTER]tenho imenso orgulho nele. Ele completou a sua[ENTER]missão – temos agora todos os pedaços da carta.
+5849	Não podia faz mais por ele. Os meus pêsames. Ele[ENTER]era um homem corajoso - ele defendeu o último[ENTER]pedaço da carta com a sua vida. Aqui está.
+5850	A perda do Bae-Yong irá afectar-nos imenso. Mas[ENTER]tenho imenso orgulho nele. Ele completou a sua[ENTER]missão - temos agora todos os pedaços da carta.
 5851	Agradeço-te por tudo. Toma, aceita isto como[ENTER]recompensa.[ENTER]Vou agora acender algum incenso no templo pelo[ENTER]Bae-Yong. Mandarei chamar-te mais tarde.
 5852	Vai ter com o Almirante Angmur.
 5853	Descodifica a Carta dos Ladrões Rubros
@@ -6108,7 +6112,7 @@
 6109	O Almirante Angmur tem novas informações para ti.[ENTER]Vai ter com ele.
 6110	Já sabemos o que significam a maldição da vida e[ENTER]exército da escuridão. Outrora viveu um mago[ENTER]horrível na Rocha do Dragão Negro. Ele sonhava[ENTER]com o domínio completo sobre o continente e não[ENTER]olhava literalmente a meios para o conseguir:[ENTER]através de magia negra ele ergueu os mortos e[ENTER]enviou-os para o combate como um exército seu.
 6111	
-6112	Invocar os mortos – só pensar nisso faz-me[ENTER]estremecer. Os Servos das Trevas estão a usar o[ENTER]Ouro Negro para criar um exército de[ENTER]mortos-vivos. Temos de os travar!
+6112	Invocar os mortos - só pensar nisso faz-me[ENTER]estremecer. Os Servos das Trevas estão a usar o[ENTER]Ouro Negro para criar um exército de[ENTER]mortos-vivos. Temos de os travar!
 6113	Procura o Mago Lémure nas velhas ruínas da[ENTER]Falésia de Gautama. Ele sabe qualquer coisa sobre[ENTER]esta maldição. Se lhe pedires com jeitinho tenho[ENTER]a certeza que te irá dizer tudo o que precisas de[ENTER]saber.
 6114	Pedir com jeitinho... hum. Entendido.
 6115	Maldição da Vida
@@ -6130,7 +6134,7 @@
 6131	São necessárias três coisas para acordar os[ENTER]mortos:[ENTER]1. Um corpo humano[ENTER]2. Ouro Negro[ENTER]3. Casca de Árvore Demónio[ENTER]Apenas um mago com habilidade fantástica é capaz[ENTER]de invocar a Maldição da Vida e a manter. E[ENTER]quando morrer, todo o exército de mortos-vivos[ENTER]cairá consigo.
 6132	Então é por isto que os nossos cemitérios foram[ENTER]profanados e os corpos roubados dos túmulos.[ENTER]Pretendem trazê-los de volta à vida e enviá-los[ENTER]contra nós num exército de mortos-vivos. Que[ENTER]ideia horripilante!
 6133	Precisamos de travar este ultraje!
-6134	Aye, mas o tempo está contra nós. Apenas a[ENTER]Banshee é capaz de invocar uma maldição deste[ENTER]tamanho – mas não fazemos ideia de onde ela se[ENTER]esconde. Irei enviar mais homens para encontrar a[ENTER]localização da grande sacerdotisa negra. Assim[ENTER]que souber algo aviso-te.
+6134	Aye, mas o tempo está contra nós. Apenas a[ENTER]Banshee é capaz de invocar uma maldição deste[ENTER]tamanho - mas não fazemos ideia de onde ela se[ENTER]esconde. Irei enviar mais homens para encontrar a[ENTER]localização da grande sacerdotisa negra. Assim[ENTER]que souber algo aviso-te.
 6135	
 6136	A aventura continuará assim que tiveres atingido[ENTER]o nível 96.
 6137	Regressa ao Almirante Angmur.
@@ -6173,7 +6177,7 @@
 6174	Precisamos de 100 Moedas Douradas. Mas nem todas[ENTER]as moedas que vais encontrar podem ser usadas[ENTER]como medium. Tens muito trabalho pela frente.
 6175	Não tem problema.
 6176	Caça ao Ouro
-6177	Vai combater os Ogres e recolher Sacos de Moedas.[ENTER]Nem todas as moedas são mediums – analisa-as com[ENTER]o o Yon-I-Walker.
+6177	Vai combater os Ogres e recolher Sacos de Moedas.[ENTER]Nem todas as moedas são mediums - analisa-as com[ENTER]o o Yon-I-Walker.
 6178	Sim, consigo sentir aqui a magia negra.
 6179	Fantástico, agora temos todas as moedas que podem[ENTER]ser usadas como medium. Isto não irá deixar a[ENTER]Banshee muito alegre certamente![ENTER]Toma, aceita isto como recompensa. O Angmur irá[ENTER]dar-te a tua próxima tarefa.
 6180	Ainda há moedas douradas em falta. Recolhe mais[ENTER]%d.
@@ -6193,7 +6197,7 @@
 6194	Regressa ao Almirante Angmur.
 6195	É bom ver que regressas inteiro! Tiveste sucesso?[ENTER]O quê?! A casca já tinha sido arrancada às[ENTER]Árvores Demónio e havia sinais de um combate[ENTER]recente? Os Servos das Trevas devem ter chegado[ENTER]lá antes de nós.
 6196	
-6197	Se eles têm a casca, então eles também irão[ENTER]encontrar uma forma de invocar a Maldição da[ENTER]Vida.[ENTER]Parece ser inevitável – vamos para a guerra. A[ENTER]Banshee não se poderá esconder de nós por muito[ENTER]mais tempo. Os meus homens já se encontram no seu[ENTER]rasto. Irei mandar-te chamar quando a tivermos[ENTER]encontrado.
+6197	Se eles têm a casca, então eles também irão[ENTER]encontrar uma forma de invocar a Maldição da[ENTER]Vida.[ENTER]Parece ser inevitável - vamos para a guerra. A[ENTER]Banshee não se poderá esconder de nós por muito[ENTER]mais tempo. Os meus homens já se encontram no seu[ENTER]rasto. Irei mandar-te chamar quando a tivermos[ENTER]encontrado.
 6198	A aventura continuará assim que tiveres atingido[ENTER]o nível 97.
 6199	Em falta
 6200	%s: %d peças
@@ -6236,7 +6240,7 @@
 6237	Ah, a Terra Fóssil. Muito bem, vou deitar mãos ao[ENTER]trabalho. Irei reportar o que descobrir ao[ENTER]Almirante.
 6238	Pela porta das traseiras
 6239	O Almirante Angmur está à tua procura.
-6240	Já sabemos onde reside a Serva do Templo Yah-Ki.[ENTER]Mas a base parece um forte – tropas patrulham-na[ENTER]o dia todo. Desta vez um ataque directo seria[ENTER]puro suicídio.
+6240	Já sabemos onde reside a Serva do Templo Yah-Ki.[ENTER]Mas a base parece um forte - tropas patrulham-na[ENTER]o dia todo. Desta vez um ataque directo seria[ENTER]puro suicídio.
 6241	Por esta razão queremos atacar numa emboscada.[ENTER]Os meus homens estão à procura do local[ENTER]apropriado. Distrai os guardas para nos dares[ENTER]mais tempo.
 6242	
 6243	O maior perigo provém de uma tropa de guardas que[ENTER]se auto-intitulam Brigada da Morte Negra. Esta[ENTER]Brigada é composta por: Moghu, Carnifex e General[ENTER]Albus. O seu líder é o Skeletos.[ENTER]Elimina-os antes que eles descubram o meu[ENTER]exército de batedores.
@@ -6258,7 +6262,7 @@
 6259	O dia decisivo chegou. Se cairmos, o mundo cairá[ENTER]connosco. Mas se formos vitoriosos, os nossos[ENTER]feitos serão cantados mesmo daqui a 100 anos.[ENTER]Trava os Servos das Trevas. Derrota a Serva do[ENTER]Templo, Yah-Ki!
 6260	O que estás aqui a fazer? A batalha ainda não[ENTER]está ganha! Derrota a Serva do Templo, Yah-Ki.[ENTER]Todas as nossas esperanças estão contigo.
 6261	Deitaste o teu adversário por terra e a vitória é[ENTER]tua!
-6262	Não há tempo para descansar – a Serva do Templo,[ENTER]Yah-Ki, espera-te.
+6262	Não há tempo para descansar - a Serva do Templo,[ENTER]Yah-Ki, espera-te.
 6263	Venceste! Com um grito de gelar o sangue, a[ENTER]Yah-Ki cai por terra.
 6264	Aaargh! Isto não é possível! Derrotada por um[ENTER]mortal... oh, Banshee, perdoai-me! Falhei. Não[ENTER]consegui completar a minha tare...
 6265	Revistas o seu corpo sem vida e encontras uma[ENTER]carta selada. Regressa com ela ao Almirante[ENTER]Angmur.
@@ -6451,7 +6455,7 @@
 6452	Como quiseres... Vejo-te em breve!
 6453	Rocha do Dragão Negro
 6454	Recentemente foi descoberta uma nova ilha[ENTER]misteriosa. Foi designada como Rocha do Dragão[ENTER]Negro. Todos os que queiram sobreviver a esse[ENTER]lugar têm de ter bastante experiência. Por essa[ENTER]razão, apenas poderei transportar quem já tenha[ENTER]atingido o nível 90.[ENTER]Estás preparado para fazer esta viagem?
-6455	Apenas podes chegar à ilha de navio – e a viagem[ENTER]para lá é longa e árdua. Quanto mais alto for o[ENTER]teu nível, mais exigente será o transporte. Por[ENTER]esta razão tenho que te cobrar uma taxa mais[ENTER]alta.
+6455	Apenas podes chegar à ilha de navio - e a viagem[ENTER]para lá é longa e árdua. Quanto mais alto for o[ENTER]teu nível, mais exigente será o transporte. Por[ENTER]esta razão tenho que te cobrar uma taxa mais[ENTER]alta.
 6456	A viagem irá custar-te %d Yang.
 6457	Informações do mapa
 6458	Este sítio é fascinante, não é? Noutras partes do[ENTER]reino tudo é diferente! Há muitos sítios[ENTER]interessantes para onde te posso teleportar. Como[ENTER]os poderes do mal estão de novo mais fortes, o[ENTER]espaço e o tempo estão num caos. Nem sempre[ENTER]poderás regressar. Queres ser transportado?
@@ -8190,7 +8194,7 @@
 8191	Dentro de alguns segundos serás transportado para[ENTER]o terceiro andar.
 8192	Era a chave errada. Descobre a correcta!
 8193	Derrota todos os inimigos! A Bênção irá encher-te[ENTER]de poder para a segunda vaga.
-8194	Abre os selos no Cubo Ártico na ordem[ENTER]correcta para chegares ao próximo andar.
+8194	Abre os selos no Cubo Ártico na ordem[ENTER]correcta para chegares ao próximo andar.
 8195	Derrota os monstros da geada e obtém a sua[ENTER]Estrela Polar para abrires os selos!
 8196	Conseguiste! Agora abre o segundo selo.
 8197	Conseguiste! Agora abre o terceiro selo.
@@ -10634,7 +10638,7 @@
 11388	Ainda não foram derrotados todos os demónios.
 11389	Tarefa: Encontra a Roda Dentada Dourada (FT) e[ENTER]usa-a para activares o mecanismo escondido na[ENTER]Estela de Isfet.
 11390	A Roda Dentada Dourada (FT) pode ser pilhada de[ENTER]demónios.
-11391	O Desfiladeiro de Am-heh (FT) foi acordado. Agora[ENTER]ninguém pode entrar – ou sair.
+11391	O Desfiladeiro de Am-heh (FT) foi acordado. Agora[ENTER]ninguém pode entrar - ou sair.
 11392	A Estela de Isfet (FT) foi destruída.
 11393	Esta Roda Dentada Dourada (FT) era uma[ENTER]falsificação e foi destruída. Encontra a[ENTER]original.
 11394	O mecanismo na Estela de Isfet (FT) apenas pode[ENTER]ser activado com a Roda Dentada Dourada (FT).[ENTER]Volta quando a tarefa tiver sido completada.
@@ -10664,7 +10668,7 @@
 11418	Visita o Desfiladeiro de Am-heh (DT) para abrires[ENTER]mais uma Fechadura do Destino.
 11419	Gostarias de atravessar o Desfiladeiro de Am-heh[ENTER](DT) e enfrentar o teu destino?
 11420	Acorda o Desfiladeiro de Am-heh (DT)
-11421	O Desfiladeiro de Am-heh (DT) foi acordado. Agora[ENTER]ninguém pode entrar – ou sair.
+11421	O Desfiladeiro de Am-heh (DT) foi acordado. Agora[ENTER]ninguém pode entrar - ou sair.
 11422	Tarefa: Aventura-te no Anel dos Demónios (DT) e[ENTER]emerge vitorioso.
 11423	Tarefa: Encontra a Roda Dentada Dourada (DT) e[ENTER]usa-a para activares o mecanismo escondido na[ENTER]Estela de Isfet.
 11424	A Roda Dentada Dourada (DT) pode ser pilhada de[ENTER]demónios.

@@ -325,6 +325,47 @@ PyObject* shopGetItemCheque(PyObject* poSelf, PyObject* poArgs)
 }
 #endif
 
+#ifdef ENABLE_MULTISHOP
+PyObject * shopGetBuyWithItem(PyObject * poSelf, PyObject * poArgs)
+{
+	int nPos;
+	if (!PyTuple_GetInteger(poArgs, 0, &nPos))
+		return Py_BuildException();
+
+	const TShopItemData * c_pItemData;
+	if (CPythonShop::Instance().GetItemData(nPos, &c_pItemData))
+		return Py_BuildValue("i", c_pItemData->wPriceVnum);
+
+	return Py_BuildValue("i", 0);
+}
+
+PyObject * shopGetBuyWithItemCount(PyObject * poSelf, PyObject * poArgs)
+{
+	int nPos;
+	if (!PyTuple_GetInteger(poArgs, 0, &nPos))
+		return Py_BuildException();
+
+	const TShopItemData * c_pItemData;
+	if (CPythonShop::Instance().GetItemData(nPos, &c_pItemData))
+		return Py_BuildValue("i", c_pItemData->wPrice);
+
+	return Py_BuildValue("i", 0);
+}
+
+PyObject * shopGetItemGemPrice(PyObject * poSelf, PyObject * poArgs)
+{
+	int nPos;
+	if (!PyTuple_GetInteger(poArgs, 0, &nPos))
+		return Py_BuildException();
+
+	const TShopItemData * c_pItemData;
+	if (CPythonShop::Instance().GetItemData(nPos, &c_pItemData))
+		return Py_BuildValue("i", c_pItemData->gem_price);
+
+	return Py_BuildValue("i", 0);
+}
+#endif
+
 PyObject * shopGetItemMetinSocket(PyObject * poSelf, PyObject * poArgs)
 {
 	int iIndex;
@@ -494,6 +535,11 @@ void initshop()
 #ifdef ENABLE_CHEQUE_SYSTEM
 		{ "GetItemCheque",				shopGetItemCheque,				METH_VARARGS },
 		{ "GetPrivateShopItemCheque",	shopGetPrivateShopItemCheque,	METH_VARARGS },
+#endif
+#ifdef ENABLE_MULTISHOP
+		{ "GetBuyWithItem",				shopGetBuyWithItem,				METH_VARARGS },
+		{ "GetBuyWithItemCount",		shopGetBuyWithItemCount,		METH_VARARGS },
+		{ "GetItemGemPrice",			shopGetItemGemPrice,				METH_VARARGS },
 #endif
 		{nullptr, nullptr},
 	};

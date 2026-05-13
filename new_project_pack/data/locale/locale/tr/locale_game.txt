@@ -1,14 +1,15 @@
-GEMSHOP_TITLE	[Test] Gem Points
-GEMSHOP_SECOND_TITLE	Gem point convert items
-GEMSHOP_CONVERT_SELECTED	Convert Selected x{}
-GEMSHOP_CONVERT_QUESTION	Do you want {} x{} to {} gem point?
-GEMSHOP_TITLE2	Gaya Shop
-GEMSHOP_HAS_TOOLTIP	You has: {}
-GEMSHOP_POINT_TOOLTIP	Gem: {}
-GEMSHOP_YOU_ALREADY_BUYED	You already buyed!
-GEMSHOP_OPEN_SLOT_QUESTION	Do you want open slot?
-GEMSHOP_BUY_QUESTION	Do you want buy {} for {} gaya?
-GEMSHOP_REFRESH_QUESTION	Do you want refresh items?
+SHOP_NOT_ENOUGH_ITEM	Yetersiz eþya
+GEMSHOP_TITLE	Gaya Dükkaný
+GEMSHOP_SECOND_TITLE	Eþyalarý Gaya puanýna çevir
+GEMSHOP_CONVERT_SELECTED	Seçilenleri Çevir x{}
+GEMSHOP_CONVERT_QUESTION	{} x{} eþyasýný {} Gaya puanýna çevirmek istiyor musun?
+GEMSHOP_TITLE2	Gaya Dükkaný
+GEMSHOP_HAS_TOOLTIP	Sende var: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	Bunu zaten satýn aldýn!
+GEMSHOP_OPEN_SLOT_QUESTION	Slotu açmak istiyor musun?
+GEMSHOP_BUY_QUESTION	{} eþyasýný {} Gaya karþýlýðýnda satýn almak istiyor musun?
+GEMSHOP_REFRESH_QUESTION	Eþyalarý yenilemek istiyor musun?
 WIKI_UNKOWN_MOB	Bilinmeyen Mob: %d
 WIKI_UNKOWN_ITEM	Bilinmeyen eþya: %d
 WIKI_TITLE	Wiki Sistemi

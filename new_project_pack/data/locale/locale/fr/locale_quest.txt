@@ -13415,3 +13415,6 @@
 14311	Vous n'avez pas suffisamment de place dans votre[ENTER]inventaire.
 14312	Vous n'avez pas suffisamment de place dans votre[ENTER]inventaire.
 14320	Vous n'avez pas 1 500 000 Yangs.
+21310	Boutique Gaya
+21311	Boutique de conversion Gaya
+21312	10 points Gaya ont été ajoutés à ton personnage.

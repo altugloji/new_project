@@ -2655,7 +2655,7 @@
 27214	Elixír: Sung Ma a. (VIT)	Ez a bájital +5 Sung Ma akaratot (VIT) biztosít neked.
 27215	Elixír: Sung Ma a. (ELL)	Ez a bájital +5 Sung Ma akaratot (ELL) biztosít neked.
 27216	Elixír: Sung Ma a. (INT)	Ez a bájital +5 Sung Ma akaratot (INT) biztosít neked.
-27591	Szénszálas horgászbot	Ez egy jó minõségû, szénszálból készült horgászbot. Tökéletes eszköz a nagyobb halak kifogására – hatékonyabb, mint a hagyományos Horgászbot.
+27591	Szénszálas horgászbot	Ez egy jó minõségû, szénszálból készült horgászbot. Tökéletes eszköz a nagyobb halak kifogására - hatékonyabb, mint a hagyományos Horgászbot.
 27600	Tábortûz	Fa darabok, amiket egy tábortûzhöz aprítottak.
 27610	Horgászgömb	Ez a horgászgömb elárulja, milyen a hal akadt a horogra.
 27620	Horgászkönyv	Könyv, amivel 3 napig dupla mennyiségû ritka halat fogsz.
@@ -2763,7 +2763,7 @@
 27988	Kincs térkép	Elnyûtt térkép, amely egy õsi kincs helyét mutatja.
 27989	Metinkõ iránytû	Az iránytû megmutatja a következõ Metin kõ irányát és távolságát. Minél fényesebben fénylik, annál közelebb vagy. 6-szor aktiválható.
 27990	Kõdarab	A kis méretébõl kifolyólag ezt a darabot jól lehet szállítani, és ennek ellenére sokoldalúan fel lehet használni.
-27991	Aquakõ	Egy kemény, nagyszemcséjû kõ, amit fegyverek és konyhai felszerelés csiszolására használják.
+27991	Vízkõ	A tenger értékes ásványa.
 27992	Fehér Gyöngy	Hófehér kincs egy kagylóból.
 27993	Kék Gyöngy	Pompás mélykék kincs egy kagylóból.
 27994	Vérvörös Gyöngy	Vérvörös kincs egy kagylóból.
@@ -2931,7 +2931,7 @@
 30153	Virágok	Ismeretlen virág, aminek illata emlékeket ébreszt benned.
 30154	Titkos templomi könyv	A Titkos templom tanításának és történetének taglalása.
 30155	Mirine medálja	Nyaklánc medál, amelynek hátoldalára a "Mirine" név van gravírozva.
-30156	Titkos templomi könyv	A Titkos templom tanításának és történetének elemzése.
+30156	Lila könyv	Egy könyv, amely képességkönyvek receptjeit tartalmazza. Az Alkimistánál elkészíthetõ.
 30157	Nyílhegy	Ezek a mérgezett nyilhegyek segítenek megvédeni a birodalmat.
 30177	Pézsmaolaj	A Pézsmaolajat a Fegyverkereskedõ használja egy küldetés során. A tárgynak nincs más funkciója.
 30179	Csavart kulcs	Ez a mágikus kulcs aktiválja a portált a Sárkány Templomába.
@@ -3123,20 +3123,20 @@
 30586		
 30600	Hímzésminta	
 30601	Páncélterv	
-30602	Kék festék	
-30603	Piros festék	
-30604	Szürke festék	
+30602	Kék festék	Gyártáshoz szükséges festék.
+30603	Piros festék	Gyártáshoz szükséges festék.
+30604	Szürke festék	Gyártáshoz szükséges festék.
 30605	Aranylemezek	
 30606	Ezüstlemezek	
 30607	Rézlemezek	
 30608	Acéllemezek	
 30609	Bronzlemezek	
-30610	Mithril	
+30610	Mithril	Ércek olvasztásával szerezhetõ. Különbözõ gyártásokhoz használható. Az Alkimistánál elkészíthetõ.
 30611	Kemény szíjak	
 30612	Masszív zsinórok	
 30613	Tündérek köve	Zöldesen csillogó ködbe burkolózva ez a titokzatos kõ magába zárja egy tündér lelkét, egy fa szellemet. A tündérek ismerik a titkos szavakat, melyek hozzáférést biztosítanak számodra az Erebos kazamatába.
-30614	Fekete festék	
-30615	Fehér festék	
+30614	Fekete festék	Gyártáshoz szükséges festék.
+30615	Fehér festék	Gyártáshoz szükséges festék.
 30616	Titán-dioxid	Ezt a prizmaszerû kristályt felszerelések nemesítéséhez használják.
 30617	Achát	Ezt a misztikus, csillogó drágakövet felszerelések nemesítéséhez használják.
 30618	Holdkõ	Ebbe a könnycsepp alakú ékszerbe csapdába ejtették a holdfényt. Felszerelések nemesítéséhez használják.
@@ -3216,7 +3216,7 @@
 31032	Leviatán gyöngyök	Legendás lények belsõ fényébõl és Millennium-esszenciából készült hatékony erõsítõ kapszulák.
 31033	A Fõnök köpenye	Ez a köpeny a Vörös tolvajok sérthetetlenségének szimbóluma.
 31034	Az Óriások toteme	A totem egy hatalmas méretû borostyánt formáz.
-31035	Fekete kõ	Ezt a titokzatos követ a Küklopszok bányásszák a Mennydörgés-hegységben.
+31035	Fekete kõ	Kövek olvasztásával szerezhetõ. Különbözõ gyártásokhoz használható. Az Alkimistánál elkészíthetõ.
 31036	Fekete arany	Ez a mágikus tulajdonságokkal rendelkezõ fekete érc a Mennydörgés-hegységben található.
 31037	Bõrtáska	Ezt a táskát Shruk kapitánytól vetted el.Könnyebbnek tûnik, mint vártad...
 31038	Szentelt föld	Ez a Szentelt földdel teli tasak szellemidézésre szolgál médiumként.
@@ -5627,8 +5627,8 @@
 50853	N. sötétség ell. elixír	Aki megissza ezt a rendkívül erõs elixírt, annak 20%-kal növekszik a Sötétség ellenállása.
 50901	Üres üveg	Italok készítéséhez szükséges.
 50902	Recept kezdõknek	Könnyen szerzett recept ami zöld szarvakkal is megcsinálható.
-50903	Recept	Egy recept amihez szükséges egy kis gyakorlás.
-50904	Recept profiknak	Recept, amit csak profik tudnak elkészíteni rendesen.
+50903	Erõsítés tervrajza	Gyártáshoz szükséges tervrajz.
+50904	Tárgy elvarázslás tervrajza	Gyártáshoz szükséges tervrajz.
 50905	Sim-víz recept	Leírja a pontos elkészítését a víznek, Barack virág lébõ és Orgonából.
 50906	Dok-víz recept	Leírja a víz pontos elkészítését, Orgonából és Harangvirág lébõl.
 50907	Bo-víz recept	Leírja a víz pontos elkészítését Datolyaszilva virág lébõl és Tue gombából.
@@ -5658,7 +5658,7 @@
 50938	Vörös látók ládája	105 Tarot kártyát tartalmaz a Látók párbajához.
 50939	Kék látók ládája	21 Tarot kártyát tartalmaz a Látók párbajához.
 50940	Rózsaszín látók ládája	5 Tarot kártyát tartalmaz a Látók párbajához.
-51001	Energia-töredék	Egy Energia-kristály töredéke. 30 darab összeolvasztható egy kristállyá.
+51001	Energia darab	Értékes tárgyak olvasztásával szerezhetõ. Különbözõ gyártásokhoz használható. Az Alkimistánál elkészíthetõ.
 51002	Energia-kristály	A kristály megnöveli bónuszaidat két órára.
 51501	Cor Draconis (Nyers)	A kristály sárkányszív egy véletlenszerû Sárkánykövet tartalmaz a nyers osztályból.
 51502	Cor Draconis (Nyers)	A kristály sárkányszív egy véletlenszerû Sárkánykövet tartalmaz a nyers osztályból.

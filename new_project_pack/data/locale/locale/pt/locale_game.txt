@@ -3668,3 +3668,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Recebeste Tabuleiro(s) de Yut Nori.
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	Recebeste 1 Ramo de Bétula.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	Não tens itens ou dinheiro suficiente para jogar.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Não podes receber mais Tabuleiros de Yut Nori.
+SHOP_NOT_ENOUGH_ITEM	Itens insuficientes
+GEMSHOP_TITLE	Loja Gaya
+GEMSHOP_SECOND_TITLE	Converter itens em pontos Gaya
+GEMSHOP_CONVERT_SELECTED	Converter selecionados x{}
+GEMSHOP_CONVERT_QUESTION	Queres converter {} x{} em {} pontos Gaya?
+GEMSHOP_TITLE2	Loja Gaya
+GEMSHOP_HAS_TOOLTIP	Tens: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	Já compraste isto!
+GEMSHOP_OPEN_SLOT_QUESTION	Queres abrir o slot?
+GEMSHOP_BUY_QUESTION	Queres comprar {} por {} Gaya?
+GEMSHOP_REFRESH_QUESTION	Queres atualizar os itens?

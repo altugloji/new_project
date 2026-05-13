@@ -1835,3 +1835,4 @@
 2102	<Demirci> %s isimli oyuncu %s yakti!
 2103	<Kutsama> %s isimli oyuncu %s elde etti!
 2104	<Kutsama> %s isimli oyuncu %s itemini %s seviyesine düþürdü!
+2150	%s nesnesi baþarýyla silindi."

@@ -6613,8 +6613,8 @@
 71148	Ýrade Gücü Yüzüðü	Sana kullaným süresi boyunca +%30 EXP, +%20 savaþçýlara karþý savunma þansý, +%20 Ninjalara karþý savunma þansý, +%20 Lycanlara karþý savunma þansý, +%30 canavarlara karþý güç, +%10 maksimum HP ile +%10 maksimum SP saðlar.
 71149	Ölümcül Gücün Yüzüðü	Sana bir süre boyunca +%30 EXP, +%20 Suralara karþý savunma þansý, +%20 Þamanlara karþý savunma þansý, +%20 Lycanlara karþý savunma þansý, +%30 canavarlara karþý güç, +%10 maksimum HP ile +%10 maksimum SP saðlar.
 71150	Büyülü Yumurta	Birden fazla paskalya sürprizi içeren ve onlarý teker teker açýða çýkaran ustaca iþlenmiþ oval bir sandýk.
-71151	Yeþil Efsun	Nesnelerinden birinin bonuslarýný siler ve yenilerini ekler. Yalnýzca 40. seviye ve altýndaki silahlara ve zýrhlara uygulanabilir. Ticareti yok.
-71152	Yeþil Güç	Biraz þansýn yardýmýyla nesnelerinden birine yeni bir bonus ekler (maks. 4 bonus). Yalnýzca 40. seviye ve altýndaki silahlara ve zýrhlara uygulanabilir. Ticareti yok.
+71151	Yeþil Efsun	Ýtemin bonusunu deðiþtirir.| |18. seviye altý zýrh ve silaha atýlýr.|1. seviye iç itemlere atýlýr.
+71152	Yeþil Güç	Ýteme yeni bir bonus ekler.| |18. seviye altý zýrh ve silaha atýlýr.|1. seviye iç itemlere atýlýr.
 71153	Bilgelik Ýksiri	Bu iksirle bir saatlik oyun süresinde %100 daha fazla deneyim toplarsýn. Ticareti yok.
 71154	Yükseliþ Ýksiri (3 sa.)	Bu iksirle üç saatlik bir oyun süresi içerisinde %80 daha fazla tecrübe kazanýrsýn. Ticareti yok.
 71155	Bilgelik Ýksiri (3 sa.)	Bu iksirle üç saatlik bir oyun süresinde %100 daha fazla tecrübe toplarsýn. Ticareti yok.
@@ -6862,11 +6862,11 @@
 72723	Güneþ Özütü (K)	HP'ni otomatik olarak yeniler. 1.000.000 HP içerir.
 72724	Güneþ Özütü (O)	HP'ni otomatik olarak yeniler. 3.000.000 HP içerir.
 72725	Güneþ Özütü (B)	HP'ni otomatik olarak yeniler. 7.000.000 HP içerir.
-72726	Güneþ Özütü (Ö)	10.000.000 HP içerir. HP'ni otomatik olarak doldurur ve ek olarak maks HP'n üzerinde olumlu etkisi olur. Bu eþyanýn ticareti yapýlabilir.
+72726	Güneþ Özütü (Ö)	10.000.000 HP içerir. HP'ni otomatik olarak doldurur. | Ekstra +1000 HP verir.
 72727	Ay Özütü (K)	SP'ni otomatik olarak yeniler. 100.000 SP içerir.
 72728	Ay Özütü (O)	SP'ni otomatik olarak yeniler. 300.000 SP içerir.
 72729	Ay Özütü (B)	SP'ni otomatik olarak yeniler. 700.000 SP içerir.
-72730	Ay Özütü (Ö)	1.000.000 SP içerir. SP'ni otomatik olarak doldurur ve ek olarak maks SP'n üzerinde olumlu etkisi olur. Bu eþyanýn ticareti yapýlabilir.
+72730	Ay Özütü (Ö)	1.000.000 SP içerir. SP'ni otomatik olarak doldurur. | Ekstra +1000 SP verir.
 72734	Mavi þans kutusu	Açmak için çift týkla. Burada 2 seçeneðin var: | 1. görüntülenen eþyayý doðrudan almak için "Eþyayý kabul et". | 2. Baþka bir rastgele eþya almak için "Yeni eþya þansý" seçeneðini dene. | Yang bedeli karþýlýðýnda maksimum 15 deneme hakkýn var. | Hesabýnda yeterli Yang yoksa, yeni bir eþya seçemezsin. | Açýlan kutu sýfýrlanamaz veya kapatýlamaz.
 72735	Kýrmýzý þans kutusu	Açmak için çift týkla. Burada 2 seçeneðin var: | 1. görüntülenen eþyayý doðrudan almak için "Eþyayý kabul et". | 2. Baþka bir rastgele eþya almak için "Yeni eþya þansý" seçeneðini dene. | Yang bedeli karþýlýðýnda maksimum 15 deneme hakkýn var. | Hesabýnda yeterli Yang yoksa, yeni bir eþya seçemezsin. | Açýlan kutu sýfýrlanamaz veya kapatýlamaz.
 72737	Yeþil þans kutusu	Açmak için çift týkla. Burada 2 seçeneðin var: | 1. Görüntülenen eþyayý doðrudan almak için "Eþyayý kabul et". | 2. Baþka bir rastgele eþya almak için "Yeni eþya þansý" seçeneðini dene. | Yang bedeli karþýlýðýnda maksimum 15 deneme hakkýn var. | Hesabýnda yeterli Yang yoksa, yeni bir eþya seçemezsin. | Açýlan kutu sýfýrlanamaz veya kapatýlamaz. | Oyun kapanýrsa, görüntülenen eþyayý alýrsýn.

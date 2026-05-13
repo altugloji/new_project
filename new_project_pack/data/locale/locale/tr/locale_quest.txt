@@ -13419,3 +13419,6 @@
 21302	Mitril Üretimi
 21303	Siyah Taþ Üretimi
 21304	Mor Kitap Üretimi
+21310	Gaya Dükkaný
+21311	Gaya Çevirme Dükkaný
+21312	Karakterine 10 Gaya puaný eklendi.

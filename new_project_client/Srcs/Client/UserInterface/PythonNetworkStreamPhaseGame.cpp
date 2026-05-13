@@ -1830,6 +1830,15 @@ bool CPythonNetworkStream::RecvShopPacket()
 			break;
 #endif
 
+#ifdef ENABLE_MULTISHOP
+		case SHOP_SUBHEADER_GC_NOT_ENOUGH_ITEM:
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "OnShopError", Py_BuildValue("(s)", "NOT_ENOUGH_ITEM"));
+			break;
+		case SHOP_SUBHEADER_GC_NOT_ENOUGH_GEM:
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "OnShopError", Py_BuildValue("(s)", "NOT_ENOUGH_GEM"));
+			break;
+#endif
+
 		case SHOP_SUBHEADER_GC_SOLDOUT:
 			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "OnShopError", Py_BuildValue("(s)", "SOLDOUT"));
 			break;

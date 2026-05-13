@@ -2763,7 +2763,7 @@
 27988	Schatkaart	Een aftandse map die de plek van een oeroude schat aangeeft.
 27989	Metin Steen Kompas	De kompas laat je de positie en afstand zien tot de volgende Metin Steen. Hoe feller het gloeit, hoe dichterbij je bent. Het kan 6 keer geactiveerd worden.
 27990	Stuk Steen	Door de kleine grootte kan het makkelijk mee worden gedragen. Het wordt op vele manieren gebruikt.
-27991	Water Steen	Een harde, effen steen dat gebruikt kan worden om wapens of keukengerei te schuren.
+27991	Watersteen	Een waardevol mineraal uit de zee.
 27992	Witte Parel	Een puur witte Parel. Vrouwen zijn er gek op.
 27993	Blauwe Parel	Een kleurrijke blauwe Parel. Vrouwen zijn er gek op.
 27994	Bloedrode Parel	Een bloed rode Parel. Vrouwen zijn er gek op.
@@ -2931,7 +2931,7 @@
 30153	Bloemen	Een zeldzame bloem, wiens geur je doet denken aan iets in je verleden.
 30154	Geheime Tempel Boek	De analyse van de geschiedenis en leer van de Geheime Tempel.
 30155	Mirines Hanger	Een hanger die aan een ketting vastgemaakt kan worden. Op de achterkant staat er "Mirine" gegraveerd.
-30156	Geheime Tempel Boek	De analyse van de geschiedenis en leer van de Geheime Tempel.
+30156	Paars Boek	Een boek met recepten voor vaardigheidsboeken. Kan bij de Alchemist worden gemaakt.
 30157	Pijl Punt	Deze giftige pijlpunten zullen helpen met het keizerrijk verdedigen.
 30177	Muskus Olie	Muskus Olie word gebruikt  door de Wapen Winkeleigenaar tijdens een quest. Dit voorwerp heeft geen verdere functies.
 30179	Gedraaide Sleutel	Deze magische sleutel activeert de portaal naar de Draken Tempel
@@ -3123,20 +3123,20 @@
 30586		
 30600	Naaipatroon	
 30601	Pantserontwerp	
-30602	Blauwe Verfstof	
-30603	Rode Verfstof	
-30604	Grijze Verfstof	
+30602	Blauwe verf	Verf die nodig is voor crafting.
+30603	Rode verf	Verf die nodig is voor crafting.
+30604	Grijze verf	Verf die nodig is voor crafting.
 30605	Gouden Platen	
 30606	Zilveren Platen	
 30607	Koperen Platen	
 30608	Stalen Platen	
 30609	Bronzen Platen	
-30610	Mithril	
+30610	Mithril	Wordt verkregen door ertsen te smelten. Kan voor verschillende craftingrecepten worden gebruikt. Kan bij de Alchemist worden gemaakt.
 30611	Stugge Riemen	
 30612	Sterke Koorden	
 30613	Steen van de Dryaden	Gehuld in een groene glinster omhult deze mysterieuze steen de ziel van een dryade, een boomgeest. De dryaden kennen de geheime woorden die je toegang geven tot de Erebus-kerker.
-30614	Zwarte Verfstof	
-30615	Witte Verfstof	
+30614	Zwarte verf	Verf die nodig is voor crafting.
+30615	Witte verf	Verf die nodig is voor crafting.
 30616	Titanium Dioxide	Dit prismatische kristal wordt gebruikt voor het upgraden van een uitrustingsstuk.
 30617	Agaat	Deze mysterieuze, glimmende edelsteen wordt gebruikt voor het upgraden van een uitrustingsstuk.
 30618	Maansteen	Een vleugje maanlicht is opgesloten in dit traanvormig juweel. Gebruikt voor het upgraden van een uitrustingsstuk.
@@ -3216,7 +3216,7 @@
 31032	Leviathan Parels	Effectieve Versterkende capsules gemaakt van het Innerlijk Licht van mythische wezens en het Millennium Essence.
 31033	Cape van de Leider	Deze cape is het symbool voor de onkwetsbaarheid van de Rode Dieven.
 31034	Totem van de Reuzen	De totem heeft de vorm van een reusachtig stuk amber.
-31035	Zwarte Steen	Deze mysterieuze steen wordt gemijnd door de cyclopen in het Donder Gebergte.
+31035	Zwarte Steen	Wordt verkregen door stenen te smelten. Kan voor verschillende craftingrecepten worden gebruikt. Kan bij de Alchemist worden gemaakt.
 31036	Zwart Goud	Deze zwarte erts met magische eigenschappen kan gevonden worden in het Donder Gebergte.
 31037	Leren Zak	Je hebt deze zak afgepakt van Kaptein Shruk. Hij is een stuk lichter dan verwacht...
 31038	Heilige Grond	Een zak vol met heilige grond is een middel om dode op te roepen.
@@ -5627,8 +5627,8 @@
 50853	G. Duisterweerst. Elixer	Dit extreem krachtige elixer geeft eenieder die het drinkt +20% duisternisweerstand.
 50901	Lege Fles	Wordt gebruikt om brouwsel te maken.
 50902	Recept voor Beginners	Een gemakkelijk recept die ook gedaan kan worden door nieuwelingen.
-50903	Recept	Een recept dat een beetje ervaring vereist.
-50904	Recept voor Specialist	Een recept dat alleen correct gedaan kan worden door experts.
+50903	Versterkingsontwerp	Een ontwerp dat nodig is voor crafting.
+50904	Betover Voorwerp-ontwerp	Een ontwerp dat nodig is voor crafting.
 50905	Recept voor Sim Water	Het verteld de exacte procedure voor het water gemaakt van Peryiken Bloesem Sap en Seringen.
 50906	Recept voor Dok Water	Het beschrijft de de exacte procedure om het water gemaakt van Weideklokjes sap en Seringen te maken.
 50907	Recept voor Bo Water	Het beschrijft de exacte procedure om het water gemaakt van Kaki Bloesem Sap en Tue Paddestoelen te maken.
@@ -5658,7 +5658,7 @@
 50938	Rode Ziener Kist	Bevat 105 Tarotkaarten voor het Duel van de Zieners.
 50939	Blauwe Ziener Kist	Bevat 21 Tarotkaarten voor het Duel van de Zieners.
 50940	Roze Ziener Kist	Bevat vijf Tarotsets voor het Duel van de Zieners.
-51001	Energie Fragment	Fragment uit een Energie Kristal. 30 stuks kunnen worden gesmolten in een kristal.
+51001	Energiefragment	Wordt verkregen door waardevolle voorwerpen te smelten. Kan voor verschillende craftingrecepten worden gebruikt. Kan bij de Alchemist worden gemaakt.
 51002	Energie Kristal	Dit Kristal verhoogd je bonussen voor twee uren.
 51501	Cor Draconis (Ruw)	Het kristallen drakenhart bevat een willekeurige Drakensteen van de klasse Ruw.
 51502	Cor Draconis (Ruw)	Het kristallen drakenhart bevat een willekeurige Drakensteen van de klasse Ruw.

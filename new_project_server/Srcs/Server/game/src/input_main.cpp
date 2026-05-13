@@ -947,7 +947,23 @@ void CInputMain::ItemDrop2(LPCHARACTER ch, const char * data) const
 	else
 		ch->DropItem(pinfo->Cell, pinfo->count);
 }
+#ifdef WJ_NEW_DROP_DIALOG
+void CInputMain::ItemDelete(LPCHARACTER ch, const char* data)
+{
+	struct command_item_delete* pinfo = (struct command_item_delete*) data;
 
+	if (ch)
+		ch->DeleteItem(pinfo->Cell);
+}
+
+void CInputMain::ItemSell(LPCHARACTER ch, const char* data)
+{
+	struct command_item_sell* pinfo = (struct command_item_sell*) data;
+
+	if (ch)
+		ch->SellItem(pinfo->Cell);
+}
+#endif
 void CInputMain::ItemMove(LPCHARACTER ch, const char * data) const
 {
 #ifdef FAST_PACKET_BLOCK
@@ -3151,6 +3167,17 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 #ifdef ENABLE_CUBE_RENEWAL
 		case HEADER_CG_CUBE_RENEWAL:
 			CubeRenewalSend(ch, c_pData);
+			break;
+#endif
+#ifdef WJ_NEW_DROP_DIALOG
+		case HEADER_CG_ITEM_DELETE:
+			if (!ch->IsObserverMode())
+				ItemDelete(ch, c_pData);
+			break;
+
+		case HEADER_CG_ITEM_SELL:
+			if (!ch->IsObserverMode())
+				ItemSell(ch, c_pData);
 			break;
 #endif
 		case HEADER_CG_ITEM_MOVE:

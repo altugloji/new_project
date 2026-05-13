@@ -1,3 +1,7 @@
+21301	Herstellung
+21302	Mithril-Herstellung
+21303	Schwarzer-Stein-Herstellung
+21304	Violettes-Buch-Herstellung
 1	Ein besonderer Stoff
 2	Ich habe dir bereits alles über die Kräfte[ENTER]erzählt, die wir brauchen, um gegen Sung Mahi zu[ENTER]kämpfen.[ENTER][ENTER]Beeile dich und suche den Hauptmann auf.[ENTER][ENTER]Kehre zurück, wenn du die benötigten Tücher hast.
 3	Eigene Kraft verstärken
@@ -951,7 +955,7 @@
 952	Ah, ich spüre die Macht des Drachenauges in dir.[ENTER]Als Zeichen meines tiefen Respekts möchte ich dir[ENTER]diesen Cor Draconis schenken.[ENTER]Einen Stein am Tag - mehr kann ich leider nicht[ENTER]entbehren.
 953	Bitte, hier ist dein Cor Draconis.
 954	Tut mir leid, mehr als einen pro Tag kann ich[ENTER]nicht entbehren. Komme morgen wieder. Vielleicht[ENTER]habe ich da einen neuen Cor Draconis für dich.
-955	GM: Daily Quest – Einstellung
+955	GM: Daily Quest - Einstellung
 956	Startzeit
 957	Endzeit
 958	Gib folgendes Format für Datum und Zeit ein:[ENTER]jj.mm.tt[ENTER]hh.mm
@@ -1080,7 +1084,7 @@
 1081	Nein
 1082	Jack Pumpkin
 1083	Wo bin ich? Und wer bist du?
-1084	Pass auf, was du sagst! Ich bin kein[ENTER]Kürbisschädel! Mein Name ist Jack Pumpkin. Und[ENTER]das hier ist nur mein Kostüm. Ich bin etwas[ENTER]verwirrt, denn eben war ich noch auf einer[ENTER]Halloween-Party und auf einmal hat sich alles um[ENTER]mich herum gedreht. Und nun bin ich hier …
+1084	Pass auf, was du sagst! Ich bin kein[ENTER]Kürbisschädel! Mein Name ist Jack Pumpkin. Und[ENTER]das hier ist nur mein Kostüm. Ich bin etwas[ENTER]verwirrt, denn eben war ich noch auf einer[ENTER]Halloween-Party und auf einmal hat sich alles um[ENTER]mich herum gedreht. Und nun bin ich hier ...
 1085	Jetzt lass mich in Ruhe Halloween feiern!
 1086	Kürbismasken-Karte eintauschen
 1087	Du schon wieder! Soll ich dir was verraten? In[ENTER]der Halloween-Truhe kannst du mit ein bisschen[ENTER]Glück eine Kürbismasken-Karte finden.
@@ -1197,13 +1201,13 @@
 1198	Abkühlung gefällig?
 1199	Du hast es geschafft! Mmmh, in Schokoladeneis[ENTER]könnte ich baden... Hier, wie versprochen, der[ENTER]Rappe ist nun dein. Im Jagdgalopp wird dir[ENTER]sicherlich auch ein kühler Wind um die Nase[ENTER]wehen!
 1200	Überlege dir aber gut, wieviele Eiskugeln du mir[ENTER]für den Rappen gibst. Ich habe nämlich nur ein[ENTER]einziges Exemplar dieses edlen Tieres für dich.
-1201	Cool – im wahrsten Sinne des Wortes.
+1201	Cool - im wahrsten Sinne des Wortes.
 1202	Ich brauche allerdings deine Hilfe, denn das[ENTER]beste Eis gibt es nun mal bei den Monstern. Nein,[ENTER]ich habe keinen Sonnenstich! Kannst du losziehen[ENTER]und ihnen ein paar Eiskugeln abjagen?
 1203	Eiskugeln besorgen und zu dir bringen ... So gut[ENTER]wie erledigt!
 1204	Verbleibend: %d
 1205	Du hast den Monstern Eiskugeln gestohlen. Mach[ENTER]Summer damit eine Freude.
-1206	Oh, du hattest noch keinen Erfolg? Beeil dich,[ENTER]sonst schmelzen die Kugeln … und Eispfützen[ENTER]lassen sich so schlecht transportieren.
-1207	Du hast es geschafft! Hier, deinen Anteil hast du[ENTER]dir redlich verdient. Aber Finger weg vom[ENTER]Schokoladeneis, das gehört mir allein. Genieß den[ENTER]Sommer – und komm zurück, wenn du Lust auf eine[ENTER]zweite Portion hast.
+1206	Oh, du hattest noch keinen Erfolg? Beeil dich,[ENTER]sonst schmelzen die Kugeln ... und Eispfützen[ENTER]lassen sich so schlecht transportieren.
+1207	Du hast es geschafft! Hier, deinen Anteil hast du[ENTER]dir redlich verdient. Aber Finger weg vom[ENTER]Schokoladeneis, das gehört mir allein. Genieß den[ENTER]Sommer - und komm zurück, wenn du Lust auf eine[ENTER]zweite Portion hast.
 1208	Warum weinst du?
 1209	Ablehnen
 1210	Natürlich helfe ich dir. Die Aufgabe ist nicht[ENTER]allzu schwer zu bewerkstelligen und ich kann gut[ENTER]verstehen, dass du das Andenken zurückhaben[ENTER]willst. Bis bald!
@@ -1335,7 +1339,7 @@
 1336	In zehn Sekunden wird die Gruppe aus der[ENTER]Rotdrachenfestung teleportiert.
 1337	Schlund des Am-heh erwecken
 1338	Lediglich der Anführer darf den Schlund des[ENTER]Am-heh erwecken!
-1339	Der Schlund des Am-heh wurde erweckt. Nun kommt[ENTER]niemand mehr herein – oder heraus.
+1339	Der Schlund des Am-heh wurde erweckt. Nun kommt[ENTER]niemand mehr herein - oder heraus.
 1340	Die Tore der Rotdrachenfestung schließen sich für[ENTER]eine Stunde.
 1341	Verbleibende Zeit: 60 Minute(n)
 1342	Aufgabe: Wagt euch in den Ring der Dämonen und[ENTER]geht als Sieger hervor.
@@ -1465,7 +1469,7 @@
 1466	Ich benötige %d Schmucksteine, 15000 Yang sowie
 1467	einen Geiststein der Stufe +0, +1, +2 oder +3,
 1468	um 3 kostbare Gaya herstellen zu können.
-1469	Meine Erfolgsrate liegt bei %d%% – ach, und die[ENTER]Kosten betragen %s Yang.
+1469	Meine Erfolgsrate liegt bei %d%% - ach, und die[ENTER]Kosten betragen %s Yang.
 1470	Soll ich fortfahren?
 1471	Du besitzt nicht genug Yang.
 1472	Dein Gayakonto ist prall gefüllt. Du könntest[ENTER]keinen weiteren mehr aufnehmen.
@@ -1598,8 +1602,8 @@
 1599	Stamm: %d
 1600	Sperrholz: %d
 1601	Möchtest du das Gildenlager vergrößern?
-1602	Gildenkonto – Einzahlen
-1603	Gildenkonto – Abheben
+1602	Gildenkonto - Einzahlen
+1603	Gildenkonto - Abheben
 1604	Gib den Yang-Betrag ein, den du auf das[ENTER]Gildenkonto einzahlen möchtest:
 1605	Gib den Yang-Betrag ein, den du vom Gildenkonto[ENTER]abheben möchtest:
 1606	Für diese Einzahlung steht dir nicht genug Yang[ENTER]zur Verfügung.
@@ -1758,12 +1762,12 @@
 1759	Do you want to close the dungeon forcibly?
 1760	Input guild name that you want to close.
 1761	Die Drachen des Sung Mahi?
-1762	Ich fürchte, viele werden den morgigen Tag nicht[ENTER]überleben. Sung Mahi, Gott aller Dämonen, ist[ENTER]erneut erwacht … und mit ihm seine drei Drachen.
-1763	Sie ernähren sich von den Seelen der Menschen![ENTER]Wenn sie genügend davon gefressen haben, stärken[ENTER]sie Sung Mahis Macht. Das bedeutet … das Ende.[ENTER]Für uns alle.
+1762	Ich fürchte, viele werden den morgigen Tag nicht[ENTER]überleben. Sung Mahi, Gott aller Dämonen, ist[ENTER]erneut erwacht ... und mit ihm seine drei Drachen.
+1763	Sie ernähren sich von den Seelen der Menschen![ENTER]Wenn sie genügend davon gefressen haben, stärken[ENTER]sie Sung Mahis Macht. Das bedeutet ... das Ende.[ENTER]Für uns alle.
 1764	Change Level
 1765	Wir dürfen das nicht zulassen! Doch es braucht[ENTER]mehr als einen einzelnen tapferen Kämpfer. Nur[ENTER]Gilden können sich diesen Schuppenbiestern[ENTER]stellen.
 1766	Kannst du helfen? Kennst du Abenteurer, die so[ENTER]mutig sind wie du? Doch sei gewarnt: Es gibt[ENTER]beunruhigende Geschichten über jene, die sich den[ENTER]Drachen entgegenstellten.
-1767	Sie kehrten niemals zurück …
+1767	Sie kehrten niemals zurück ...
 1768	Registrierung
 1769	Welchen Hort möchtet ihr betreten?
 1770	Meleys Hort
@@ -3753,7 +3757,7 @@
 3754	Vor Kurzem wurde das Kind eines Adligen, das sich[ENTER]in das Feuerland begab, von einem Flammenkrieger[ENTER]erschlagen. Wenn du die Flammenkrieger tötest,[ENTER]erhältst du eine Belohnung. Warum forderst du sie[ENTER]nicht heraus?
 3755	Untersuche die Geisterbäume
 3756	Fälle 30 Geisterbäume.
-3757	Sie stehen wie normale, etwas finster aussehende[ENTER]Bäume in der Landschaft herum – doch dann werden[ENTER]sie plötzlich lebendig und greifen Tiere und[ENTER]Menschen an.[ENTER]Finde heraus, wie die Geisterbäume vernichtet[ENTER]werden können.
+3757	Sie stehen wie normale, etwas finster aussehende[ENTER]Bäume in der Landschaft herum - doch dann werden[ENTER]sie plötzlich lebendig und greifen Tiere und[ENTER]Menschen an.[ENTER]Finde heraus, wie die Geisterbäume vernichtet[ENTER]werden können.
 3758	Das Geheimnis des Geisterwaldes
 3759	Töte 40 Geisterbaumstümpfe und 30 Dryaden.
 3760	Nachforschungen haben ergeben, dass der[ENTER]Geisterwald ein Gebiet ist, das von[ENTER]Geisterbaumstumpf und Dryade dominiert wird. Wenn[ENTER]du sie vernichtest, kannst du vielleicht[ENTER]verhindern, dass sich die Geisterbäume weiter[ENTER]ausbreiten.
@@ -4658,7 +4662,7 @@
 4659	
 4660	Hier, bitte.
 4661	Hastig geschriebene Worte:
-4662	Yak-Hwan, lebend werde ich nicht mehr heimkehren,[ENTER]doch ich hoffe, dieser Brief erreicht dich. Ich[ENTER]bin im Feuerland auf eine Festung gestoßen, die[ENTER]auf keiner Karte verzeichnet ist. Ihr Herrscher[ENTER]ist ein mächtiger Feuerland-Dämon – eine[ENTER]eigenartige Aura umgibt ihn so wie alle Dämonen[ENTER]seines Gefolges.[ENTER]Sein Gebrüll ist ohrenbetäubend und er scheint[ENTER]etwas zu bewachen. Doch was, kann ich nicht[ENTER]sagen.[ENTER]Verzeiht, ich habe versagt ...
+4662	Yak-Hwan, lebend werde ich nicht mehr heimkehren,[ENTER]doch ich hoffe, dieser Brief erreicht dich. Ich[ENTER]bin im Feuerland auf eine Festung gestoßen, die[ENTER]auf keiner Karte verzeichnet ist. Ihr Herrscher[ENTER]ist ein mächtiger Feuerland-Dämon - eine[ENTER]eigenartige Aura umgibt ihn so wie alle Dämonen[ENTER]seines Gefolges.[ENTER]Sein Gebrüll ist ohrenbetäubend und er scheint[ENTER]etwas zu bewachen. Doch was, kann ich nicht[ENTER]sagen.[ENTER]Verzeiht, ich habe versagt ...
 4663	Wir müssen herausfinden, was sich in dieser[ENTER]Festung verbirgt.[ENTER]Sieh her, auf der Innenseite des Nietenhalsbandes[ENTER]ist eine Gravur. Ich werde Yon-I-Walker um Rat[ENTER]fragen. Er wird dich wissen lassen, sobald er[ENTER]deine Hilfe braucht.
 4664	Gravur entziffern
 4665	Yon-I-Walker sucht nach dir. Gehe zu ihm.
@@ -4699,7 +4703,7 @@
 4700	Gibst du schon auf? Das Heer der[ENTER]Glut-Flammendämonen in der Festung ist noch zu[ENTER]stark. Kämpfe weiter!
 4701	Du hast das Heer der Glut-Flammendämonen besiegt.[ENTER]Erstatte Yak-Hwan Bericht.
 4702	Kehre zu Yak-Hwan zurück.
-4703	Du bist zurück – und wie ich sehe, hattest du[ENTER]Erfolg! Was kannst du mir berichten?
+4703	Du bist zurück - und wie ich sehe, hattest du[ENTER]Erfolg! Was kannst du mir berichten?
 4704	
 4705	Ein mächtiger Flammendämon, sagst du? Das ist[ENTER]Razador, Herrscher des Feuers! Wenn die Diener[ENTER]ihn geschickt haben, muss sich etwas von[ENTER]Bedeutung in der Festung befinden. Womöglich der[ENTER]legendäre Rotdrache! Ich werde mich nun mit[ENTER]meinen Beratern besprechen. Hier, nimm diesen[ENTER]Passierschein und bewahre in gut auf. Du wirst[ENTER]ihn später brauchen.
 4706	Schwarze Materie
@@ -4722,7 +4726,7 @@
 4723	Neutralisierung der Schwarzen Materie
 4724	Gute Neuigkeiten! Ich habe herausgefunden, wie[ENTER]sich die Kraft der Schwarzen Materie[ENTER]neutralisieren lässt.
 4725	
-4726	Alle Kräfte der Natur besitzen ein Gegengewicht –[ENTER]Licht und Schatten, Feuer und Wasser, Gut und[ENTER]Böse. Auch die Schwarze Materie hat einen[ENTER]Gegenspieler, der die Macht hat, sie zu[ENTER]neutralisieren: Reines Lumen!
+4726	Alle Kräfte der Natur besitzen ein Gegengewicht -[ENTER]Licht und Schatten, Feuer und Wasser, Gut und[ENTER]Böse. Auch die Schwarze Materie hat einen[ENTER]Gegenspieler, der die Macht hat, sie zu[ENTER]neutralisieren: Reines Lumen!
 4727	Um Reines Lumen zu produzieren, muss man[ENTER]Energiesplitter in Mong-Wasser schmelzen. Kannst[ENTER]du bitte 50 Flaschen Mong-Wasser sowie 100[ENTER]Energiesplitter holen und sie zu Yu-Hwan bringen?[ENTER]Danke.
 4728	Wird gemacht.
 4729	Sammle 50 Flaschen Mong-Wasser sowie 100[ENTER]Energiesplitter und bringe sie zu Yu-Hwan.
@@ -4821,10 +4825,10 @@
 4822	Sprich mit Yon-I-Walker.
 4823	Gehe zu Yon-I-Walker und erfahre, wie Razador[ENTER]endgültig besiegt werden kann.
 4824	Du warst noch nicht bei Yon-I-Walker? Wie willst[ENTER]du dann Razador besiegen? Los, worauf wartest du[ENTER]noch!
-4825	Ja, es ist wahr. Razador ist zurück – und noch[ENTER]schlechter gelaunt als vorher. Um zu verhindern,[ENTER]dass die Diener der Dunkelheit ihren Plan[ENTER]ausführen können, bleibt uns nur eine Möglichkeit[ENTER]...
+4825	Ja, es ist wahr. Razador ist zurück - und noch[ENTER]schlechter gelaunt als vorher. Um zu verhindern,[ENTER]dass die Diener der Dunkelheit ihren Plan[ENTER]ausführen können, bleibt uns nur eine Möglichkeit[ENTER]...
 4826	Razador wird nicht ruhen, ehe er seinen Auftrag[ENTER]erledigt und den Rotdrachen befreit hat. Um dies[ENTER]zu verhindern, werden wir den Drachen in die[ENTER]Verbannung schicken.
 4827	
-4828	Das Element des Rotdrachen ist das Feuer ... und[ENTER]Feuer bekämpft man am besten mit – Feuer! Jeder[ENTER]Glut-Flammendämon trägt einen Ring aus Magma um[ENTER]sein Herz. Bringe mir fünf dieser Magmaringe!
+4828	Das Element des Rotdrachen ist das Feuer ... und[ENTER]Feuer bekämpft man am besten mit - Feuer! Jeder[ENTER]Glut-Flammendämon trägt einen Ring aus Magma um[ENTER]sein Herz. Bringe mir fünf dieser Magmaringe!
 4829	Stürme die Rotdrachenfestung und erbeute[ENTER]Magmaringe.
 4830	Erbeute Magmaringe der Glut-Flammendämonen.[ENTER]Yon-I-Walker benötigt fünf Stück. Da sie schnell[ENTER]erkalten, sammle mehr als die erforderliche[ENTER]Anzahl.
 4831	Das sind noch nicht genügend Magmaringe. Ich[ENTER]benötige noch %d.
@@ -4847,11 +4851,11 @@
 4848	Nun benötige ich noch Mantikorleder aus der[ENTER]Flügelhaut Martyaxwars, Häuptling der Mantikore.[ENTER]Erbeute fünf Stücke davon!
 4849	Erbeute fünf Stücke Manitkorleder von Martyaxwar.[ENTER]Bringe sie Yon-I-Walker.
 4850	Erbeute fünf Stücke Manitkorleder von Martyaxwar.[ENTER]Bringe sie Yon-I-Walker.
-4851	Wir sind so dicht am Ziel – gib jetzt nicht auf.[ENTER]Bringe mir das Mantikorleder!
+4851	Wir sind so dicht am Ziel - gib jetzt nicht auf.[ENTER]Bringe mir das Mantikorleder!
 4852	Perfekt, nun habe ich alles, was ich brauche.[ENTER]Warte einen Moment ... Ah, der Ring des Samael![ENTER]Ein mächtiges Artefakt, das den Rotdrachen[ENTER]verbannen wird. Hier, nimm drei dieser Ringe an[ENTER]dich und bringe sie Yak-Hwan. Außerdem bekommst[ENTER]du einen Passierschein von mir. Bewahre ihn gut[ENTER]auf, denn du wirst ihn später benötigen.
 4853	Du hast alle Stücke des Mantikorleders erbeutet.[ENTER]Bringe sie zu Yon-I-Walker.
 4854	Beginn der Schlacht
-4855	Mach dich bereit – die Schlacht beginnt. Yak-Hwan[ENTER]wird dir letzte Anweisungen geben.
+4855	Mach dich bereit - die Schlacht beginnt. Yak-Hwan[ENTER]wird dir letzte Anweisungen geben.
 4856	Es ist soweit. Unsere Truppen stehen bereit. Der[ENTER]Kampf kann beginnen. Hast du den Ring des Samael[ENTER]dabei?
 4857	Ja, hier ist er.
 4858	Ah, sehr gut. Ich werde dir später erklären, wie[ENTER]man ihn verwendet. Doch zunächst müssen wir die[ENTER]neu aufgestellte Verteidigungslinie der[ENTER]Flammendämonen durchbrechen. Kehre zur[ENTER]Rotdrachenfestung zurück und besiege:[ENTER]10 Glut-Flammenkönige[ENTER]10 Glut-Flammenbärte[ENTER]10 Glut-Flammentrolle[ENTER]10 Glut-Flammengeneräle[ENTER]10 Glut-Flammenfürste
@@ -4864,14 +4868,14 @@
 4865	Wir können die feindliche Verteidigungslinie noch[ENTER]nicht durchbrechen. Besiege das Heer der[ENTER]Glut-Flammendämonen.
 4866	Du hast alle Glut-Flammendämonen besiegt.[ENTER]Erstatte Yak-Hwan Bericht.
 4867	Kehre zu Yak-Hwan zurück.
-4868	Du hast gute Arbeit geleistet. Wir sind unserem[ENTER]Ziel ein ganzes Stück näher gekommen – der[ENTER]Rotdrache wird nicht mehr lange eine Bedrohung[ENTER]für uns sein!
+4868	Du hast gute Arbeit geleistet. Wir sind unserem[ENTER]Ziel ein ganzes Stück näher gekommen - der[ENTER]Rotdrache wird nicht mehr lange eine Bedrohung[ENTER]für uns sein!
 4869	Alter Groll, neuer Kampf
 4870	Dein Erzfeind, Razador, scheint es dir[ENTER]übelgenommen zu haben, dass du ihn getötet hast.[ENTER]Sein Gebrüll schallt lauter denn je über die[ENTER]Ebenen Doyyumhwans.
 4871	Es wird Zeit, ihn ein weiteres Mal in die[ENTER]Schranken zu weisen. Denn er wacht mit Argusaugen[ENTER]über das Tor, hinter dem der Rotdrache gefangen[ENTER]ist. Nimm dich in Acht! Er wird aus seiner[ENTER]Niederlage gelernt haben und die gleichen Fehler[ENTER]nicht noch einmal begehen.
 4872	Besiege Razador, Herrscher des Feuers.
 4873	Spiel mit dem Feuer
 4874	Besiege Razador, Herrscher des Feuers, in der[ENTER]Rotdrachenfestung.
-4875	Ist dir Razador diesmal überlegen? Das kann ich[ENTER]fast nicht glauben! Du hast es einmal geschafft –[ENTER]und wirst auch diesmal siegen!
+4875	Ist dir Razador diesmal überlegen? Das kann ich[ENTER]fast nicht glauben! Du hast es einmal geschafft -[ENTER]und wirst auch diesmal siegen!
 4876	Razador wurde vernichtet. Erstatte Yak-Hwan[ENTER]Bericht.
 4877	Ich wusste, du kannst es schaffen! Ich werde nun[ENTER]die letzten Vorbereitungen für das[ENTER]Verbannungsritual treffen. Sobald wir bereit[ENTER]sind, lass ich dich rufen.
 4878	Der Rotdrache
@@ -4883,14 +4887,14 @@
 4884	Wirf den Ring des Samael auf den Grabstein des[ENTER]Taramor, um den Rotdrachen zu verbannen.
 4885	Grabstein des Taramor: 1 Stück
 4886	Flammenschauspiel
-4887	War das schon alles, du Wurm?! Das hat höchstens[ENTER]gekitzelt – verbannt hast du mich damit nicht![ENTER]Ich werde Razador erneut aus dem Reich der Toten[ENTER]zurückholen. Er wird mich aus der Gefangenschaft[ENTER]befreien und ihr werdet meinen Zorn zu spüren[ENTER]bekommen!
+4887	War das schon alles, du Wurm?! Das hat höchstens[ENTER]gekitzelt - verbannt hast du mich damit nicht![ENTER]Ich werde Razador erneut aus dem Reich der Toten[ENTER]zurückholen. Er wird mich aus der Gefangenschaft[ENTER]befreien und ihr werdet meinen Zorn zu spüren[ENTER]bekommen!
 4888	Die Verbannung des Rotdrachen ist fehlgeschlagen.[ENTER]Erstatte Yak-Hwan Bericht.
 4889	Das Ritual ist fehlgeschlagen? Der Rotdrache muss[ENTER]sogar noch mächtiger sein, als wir dachten ...
 4890	
 4891	Du hast gute Arbeit geleistet, dich trifft keine[ENTER]Schuld. Ich werde nicht eher ruhen, bis wir den[ENTER]Rotdrachen verbannt haben. Doch das wird Zeit[ENTER]brauchen. Ich danke dir für alles, was du für uns[ENTER]getan hast.
 4892	Lauf ins Feuer
 4893	Yak-Hwan sucht nach dir. Gehe zu ihm und bringe[ENTER]in Erfahrung, was er möchte.
-4894	Willkommen zurück! Uns sollte nur eine kurze[ENTER]Ruhepause vergönnt sein – die Diener der[ENTER]Dunkelheit sind wieder in Bewegung. Das bedeutet[ENTER]nichts Gutes.
+4894	Willkommen zurück! Uns sollte nur eine kurze[ENTER]Ruhepause vergönnt sein - die Diener der[ENTER]Dunkelheit sind wieder in Bewegung. Das bedeutet[ENTER]nichts Gutes.
 4895	
 4896	Allerdings sind meine Informationen nur sehr vage.Wir wissen, dass sie sich nun im Feuerland[ENTER]aufhalten.
 4897	Wir haben bereits einen Späher dorthin geschickt.[ENTER]Doch vor kurzem brach der Kontakt ab und ich bin[ENTER]sehr beunruhigt. Kannst du auf deinem Weg ins[ENTER]Feuerland nach ihm Ausschau halten?
@@ -4922,7 +4926,7 @@
 4923	Yon-I-Walker sucht nach dir. Gehe zu ihm, um[ENTER]Genaueres zu erfahren.
 4924	Ah, da bist du ja! Die Aura ist tückisch und[ENTER]trübt meinen Verstand.[ENTER]Ich benötige Sonnenkräuter, um ihn wieder zu[ENTER]erhellen und die Untersuchungen fortzuführen.[ENTER]Kannst du mir welche besorgen?
 4925	Natürlich.
-4926	Die Sonnenkräuter wachsen an heißen, trockenen[ENTER]Orten – im Feuerland sind sie ganzjährig zu[ENTER]finden. Ich markiere dir meinen letzten Fundort[ENTER]auf der Karte. Obwohl ich mir gerade nicht mehr[ENTER]so sicher bin, ob das tatsächlich auch dort war[ENTER]...
+4926	Die Sonnenkräuter wachsen an heißen, trockenen[ENTER]Orten - im Feuerland sind sie ganzjährig zu[ENTER]finden. Ich markiere dir meinen letzten Fundort[ENTER]auf der Karte. Obwohl ich mir gerade nicht mehr[ENTER]so sicher bin, ob das tatsächlich auch dort war[ENTER]...
 4927	Ich mache mich sofort auf den Weg.
 4928	Gehe zum markierten Ort im Feuerland und suche[ENTER]nach Sonnenkräutern.
 4929	Sonnenkräuter
@@ -4957,7 +4961,7 @@
 4958	Es werden einige Herausforderungen auf dich[ENTER]zukommen, also sei bereit.[ENTER]Kennst du die Geschichte der drei Reiche vom[ENTER]Kontinent des Strahlenden Himmels? Du kennst sie[ENTER]nicht? Was bringen die Ausbilder den jungen[ENTER]Leuten heutzutage nur bei? Sollte ich dich[ENTER]wirklich so Grundlegendes lehren müssen?
 4959	Also gut. Dies ist wichtig, denn es ist die[ENTER]Geschichte des Kontinents. Ich werde es für dich[ENTER]zusammenfassen.[ENTER]Einst gab es ein vereintes Reich.[ENTER]Dann kamen die Metinsteine und führten Krieg und[ENTER]Zwietracht mit sich. Das Land wurde geteilt:[ENTER]Shinsoo ist das Reich des Handels, Chunjo das[ENTER]Reich der Religion, und Jinno das Reich des[ENTER]Militärs.
 4960	Jedes Reich versucht, sich von den Unruhen zu[ENTER]erholen, die nach Einschlag der Metinsteine über[ENTER]die Ländereien hereinbrachen. Viele wünschen sich[ENTER]die Vereinigung des Kontinents.[ENTER]Das ist etwas, für das auch du einstehen[ENTER]solltest! Vergiss das niemals.
-4961	Ich werde dir nun deinen ersten Auftrag erteilen.[ENTER]Entspanne dich, es ist eine leicht zu[ENTER]bewältigende Aufgabe.[ENTER]Im Nachbardorf lebt ein Musiker namens Yu-Hwan.[ENTER]Die Leute sind der Überzeugung, er habe den[ENTER]Armeedienst quittiert, um Musiker zu werden. Aber[ENTER]in Wahrheit arbeitet er als geheimer Späher, um[ENTER]wichtige Dokumente zu beschaffen. Es gibt eines,[ENTER]das ich von ihm benötige. Bringe es mir – und[ENTER]vergiss nicht, dass dies ein geheimer Auftrag[ENTER]ist.
+4961	Ich werde dir nun deinen ersten Auftrag erteilen.[ENTER]Entspanne dich, es ist eine leicht zu[ENTER]bewältigende Aufgabe.[ENTER]Im Nachbardorf lebt ein Musiker namens Yu-Hwan.[ENTER]Die Leute sind der Überzeugung, er habe den[ENTER]Armeedienst quittiert, um Musiker zu werden. Aber[ENTER]in Wahrheit arbeitet er als geheimer Späher, um[ENTER]wichtige Dokumente zu beschaffen. Es gibt eines,[ENTER]das ich von ihm benötige. Bringe es mir - und[ENTER]vergiss nicht, dass dies ein geheimer Auftrag[ENTER]ist.
 4962	Drücke die M-Taste, um herauszufinden, wie du in[ENTER]das nächste Dorf auf der Karte gelangst. Benutze[ENTER]das Teleportationsportal, das den entsprechenden[ENTER]Dorfnamen trägt.[ENTER]Beeile dich! Yu-Hwan ist ein hochgewachsener Kerl[ENTER]- aber du wirst ihn an seinem Musikinstrument[ENTER]erkennen.
 4963	Der Hauptmann hat eine neue Aufgabe für dich.[ENTER]Gehe zu ihm.
 4964	Alpha-Grauwölfe töten:
@@ -5358,7 +5362,7 @@
 5359	Dreizehnte Buchseite:
 5360	Wir sind endlich angekommen.[ENTER]Nach all den Strapazen folgt nun die große[ENTER]Aufgabe: Wir müssen die Zeremonie abhalten und[ENTER]den alten Zauber der Schwarzen Hexerei[ENTER]aktivieren. Ich hoffe nur, wir sind stark genug.[ENTER]Viele von uns schwanken bereits im Stehen, weil[ENTER]sie so erschöpft sind von der langen Reise und[ENTER]der stetigen Flucht vor Lee Seops Kriegern.[ENTER]Dennoch müssen wir es versuchen, oder unser Reich[ENTER]wird untergehen.
 5361	Fortsetzung der dreizehnten Buchseite:
-5362	Sieben Leute sind wir. Wir haben unsere besten[ENTER]Kleider angelegt, auch wenn selbst diese[ENTER]inzwischen wie Lumpen aussehen.[ENTER]Wir werden uns im Kreis aufstellen und uns an den[ENTER]Händen fassen, so dass die Kraftlinien[ENTER]geschlossen sind. Dann werden wir den steten[ENTER]Singsang der magischen Worte beginnen und hoffen,[ENTER]dass die Schwarze Hexerei keine weiteren Opfer[ENTER]von uns verlangt.[ENTER][ENTER]…
+5362	Sieben Leute sind wir. Wir haben unsere besten[ENTER]Kleider angelegt, auch wenn selbst diese[ENTER]inzwischen wie Lumpen aussehen.[ENTER]Wir werden uns im Kreis aufstellen und uns an den[ENTER]Händen fassen, so dass die Kraftlinien[ENTER]geschlossen sind. Dann werden wir den steten[ENTER]Singsang der magischen Worte beginnen und hoffen,[ENTER]dass die Schwarze Hexerei keine weiteren Opfer[ENTER]von uns verlangt.[ENTER][ENTER]...
 5363	... Es ist vorbei ...[ENTER]Der Anfang war vielversprechend. Der Raum füllte[ENTER]sich mit Energie und Gesang, aber plötzlich[ENTER]überkam mich ein seltsames Gefühl. Meine sechs[ENTER]Mitstreiter gingen in die Knie. Der Tempel begann[ENTER]zu beben. Dann gab es einen Lichblitz und wir[ENTER]wurden rückwärts geschleudert. Die Kraftlinien[ENTER]brachen...[ENTER]Nun ist es still. Meine Kameraden liegen tot am[ENTER]Boden. Der Zauber ist misslungen.[ENTER]Wir haben versagt.
 5364	Was? Das ist alles?!?[ENTER]Da soll mich doch der Schlag treffen! Die ganze[ENTER]Mühe umsonst? Wir sind gereist, haben gekämpft,[ENTER]haben stundenlang übersetzt und nachgedacht. Für[ENTER]nichts! Wir sind genauso schlau wie vorher.[ENTER]Na jedenfalls scheint es besser zu sein, wenn wir[ENTER]die Finger von der Schwarzen Hexerei lassen. Habe[ENTER]ich ja von Anfang an vermutet. Aber wissen ist[ENTER]besser als glauben, nicht wahr?
 5365	Wir machen jetzt erstmal Pause. Ich habe schon[ENTER]Kopfschmerzen und du bist sicher auch recht[ENTER]mitgenommen. Ich muss mir das alles noch einmal[ENTER]durch den Kopf gehen lassen. Wenn ich damit[ENTER]fertig bin, reden wir weiter.[ENTER]Trotz allem hast du mir einen unglaublich[ENTER]wertvollen Dienst erwiesen. Das soll nicht ohne[ENTER]Belohnung bleiben!
@@ -5845,8 +5849,8 @@
 5846	Du bist zurück! Hast du Bae-Yong gefunden?
 5847	Ja, aber ...
 5848	Aber?[ENTER]Oh nein. Er ist tot?
-5849	Ich konnte nichts mehr für ihn tun. Mein Beileid.[ENTER]Er war ein mutiger Mann – das letzte Briefstück[ENTER]hat er mit seinem Leben verteidigt. Hier ist es.
-5850	Der Verlust von Bae-Yong schmerzt uns sehr. Doch[ENTER]ich bin sehr stolz auf ihn. Er hat seine Mission[ENTER]erfüllt – wir haben nun alle Teile des Briefes.
+5849	Ich konnte nichts mehr für ihn tun. Mein Beileid.[ENTER]Er war ein mutiger Mann - das letzte Briefstück[ENTER]hat er mit seinem Leben verteidigt. Hier ist es.
+5850	Der Verlust von Bae-Yong schmerzt uns sehr. Doch[ENTER]ich bin sehr stolz auf ihn. Er hat seine Mission[ENTER]erfüllt - wir haben nun alle Teile des Briefes.
 5851	Ich danke dir für alles. Hier, nimm das hier als[ENTER]Belohnung.[ENTER]Nun werde ich im Tempel ein Räucherstäbchen für[ENTER]Bae-Yong anzünden.[ENTER]Ich melde mich später bei dir.
 5852	Geh zu Admiral Angmur.
 5853	Rotdieb-Brief entschlüsseln
@@ -5939,7 +5943,7 @@
 5940	Alles klar.
 5941	Das Abenteuer geht weiter, sobald du Level 94[ENTER]erreicht hast.
 5942	%s: %d Stück, %s: %d Stück,[ENTER]%s: %d Stück
-5943	Ich habe ein Gasthaus zu führen und nicht alle[ENTER]Zeit der Welt. Bringe mir alle fehlenden Zutaten[ENTER]– und beeile dich bitte.
+5943	Ich habe ein Gasthaus zu führen und nicht alle[ENTER]Zeit der Welt. Bringe mir alle fehlenden Zutaten[ENTER]- und beeile dich bitte.
 5944	Du hast alle nötigen Zutaten für die[ENTER]Millennium-Essenz gefunden.
 5945	Kehre zu Octavio zurück.
 5946	Perlen des Leviathan
@@ -5994,7 +5998,7 @@
 5995	Du hast den Roten Häuptling besiegt.
 5996	Nimm seinen Umhang und bring ihn Admiral Angmur.
 5997	Admiral Angmur erwartet dich.
-5998	Der Umhang! Ich wusste, dass du es schaffst. Als[ENTER]Nächstes werden wir ihn sichtbar in der Nähe[ENTER]ihres Lagers aufhängen – das wird die[ENTER]Rotdieb-Bande verunsichern.[ENTER]Meine Leute werden das übernehmen. Dann kannst du[ENTER]dich erholen.
+5998	Der Umhang! Ich wusste, dass du es schaffst. Als[ENTER]Nächstes werden wir ihn sichtbar in der Nähe[ENTER]ihres Lagers aufhängen - das wird die[ENTER]Rotdieb-Bande verunsichern.[ENTER]Meine Leute werden das übernehmen. Dann kannst du[ENTER]dich erholen.
 5999	Zyklopen schwächen
 6000	Admiral Angmur möchte mit dir sprechen.
 6001	Unser Plan ist aufgegangen: Als die Rotdiebe den[ENTER]Umhang gesehen haben, ist große Unruhe zwischen[ENTER]ihnen ausgebrochen. Am Ende haben sich Dämonen[ENTER]und Menschen gegenseitig angegriffen. Nun ist[ENTER]diese Bande völlig unorganisiert.[ENTER]Als Nächstes kümmern wir uns um die Zyklopen.
@@ -6071,7 +6075,7 @@
 6072	Aye, du konntest dich also gegen Kapitän Huk[ENTER]behaupten. Was ist das? Ein Brief? Zeig her!
 6073	
 6074	Verflucht. Kapitän Huk hat das Schwarze Gold[ENTER]bereits der Banshee übersandt.[ENTER]Der letzte Satz gibt mir Rätsel auf: Der Fluch[ENTER]des Lebens wird die Armee der Finsternis aus den[ENTER]Nebeln der Zeit heraufbeschwören.
-6075	Wir müssen die Lieferung aufhalten! Das Versteck[ENTER]der Banshee vermuten wir am Gautamakliff im[ENTER]Westen – ein gottverlassener Ort, stets in[ENTER]dichten Nebel gehüllt. Oger und Lemuren hausen[ENTER]dort.
+6075	Wir müssen die Lieferung aufhalten! Das Versteck[ENTER]der Banshee vermuten wir am Gautamakliff im[ENTER]Westen - ein gottverlassener Ort, stets in[ENTER]dichten Nebel gehüllt. Oger und Lemuren hausen[ENTER]dort.
 6076	
 6077	Sobald ich weiß, auf welcher Route das Schwarze[ENTER]Gold zur Banshee gebracht wird, gebe ich dir[ENTER]Bescheid.
 6078	Lieferung abfangen
@@ -6108,7 +6112,7 @@
 6109	Admiral Angmur hat neue Informationen für dich.[ENTER]Geh zu ihm.
 6110	Wir wissen nun, was mit dem Fluch des Lebens und[ENTER]der Armee der Finsternis gemeint ist. Einst lebte[ENTER]ein ruchloser Magier auf dem Fels der Dunklen[ENTER]Drachen. Er strebte die Herrschaft über den[ENTER]gesamten Kontinent an und ging dafür buchstäblich[ENTER]über Leichen: Durch einen schwarzen Zauber, Fluch[ENTER]des Lebens genannt, ließ er die Toten auferstehen[ENTER]und als seine Armee in die Schlacht ziehen.
 6111	
-6112	Totenbeschwörung – die bloße Vorstellung lässt[ENTER]mich erschaudern. Die Diener der Dunkelheit[ENTER]stellen mithilfe des Schwarzen Goldes eine Armee[ENTER]aus Untoten auf. Wir müssen sie aufhalten!
+6112	Totenbeschwörung - die bloße Vorstellung lässt[ENTER]mich erschaudern. Die Diener der Dunkelheit[ENTER]stellen mithilfe des Schwarzen Goldes eine Armee[ENTER]aus Untoten auf. Wir müssen sie aufhalten!
 6113	Suche bei den alten Ruinen am Gautamakliff nach[ENTER]dem Lemuren-Magier. Er weiß etwas über diesen[ENTER]Fluch.[ENTER]Wenn du ihn nett bittest, wird er dir mit[ENTER]Sicherheit alles verraten.
 6114	Nett bitten, soso. Verstanden.
 6115	Fluch des Lebens
@@ -6130,7 +6134,7 @@
 6131	Drei Dinge sind vonnöten, um die Toten erwachen[ENTER]zu lassen:[ENTER]1. ein menschlicher Körper[ENTER]2. Schwarzes Gold[ENTER]3. die Rinde von Baumdämonen[ENTER]Nur ein Magier mit herausragenden Fähigkeiten[ENTER]kann den Fluch des Lebens hinaufbeschwören und[ENTER]aufrechterhalten. Und wenn er stirbt, fällt die[ENTER]gesamte Armee der Untoten mit ihm.
 6132	Deswegen werden in letzter Zeit unsere Friedhöfe[ENTER]geschändet und die Leichen aus den Gräbern[ENTER]gestohlen. Sie sollen zum Leben erweckt werden[ENTER]und als untote Armee gegen uns marschieren. Welch[ENTER]abscheuliche Vorstellung!
 6133	Wir müssen diese frevelhafte Tat aufhalten!
-6134	Aye, doch die Zeit spielt gegen uns. Nur die[ENTER]Banshee selbst ist mächtig genug, um einen Fluch[ENTER]dieser Größe zu beschwören – doch wir wissen[ENTER]nicht, wo sie sich versteckt. Ich werde noch mehr[ENTER]Männer ausschicken, um das Versteck der dunklen[ENTER]Hohepriesterin ausfindig zu machen. Sobald ich[ENTER]Neues erfahre, werde ich dich rufen lassen.
+6134	Aye, doch die Zeit spielt gegen uns. Nur die[ENTER]Banshee selbst ist mächtig genug, um einen Fluch[ENTER]dieser Größe zu beschwören - doch wir wissen[ENTER]nicht, wo sie sich versteckt. Ich werde noch mehr[ENTER]Männer ausschicken, um das Versteck der dunklen[ENTER]Hohepriesterin ausfindig zu machen. Sobald ich[ENTER]Neues erfahre, werde ich dich rufen lassen.
 6135	
 6136	Das Abenteuer geht weiter, sobald du Level 96[ENTER]erreicht hast.
 6137	Erstatte Admiral Angmur Bericht.
@@ -6173,7 +6177,7 @@
 6174	Wir brauchen 100 Goldmünzen. Doch ich fürchte,[ENTER]nicht alle, die du finden wirst, werden als[ENTER]Medium verwendet. Es liegt also eine Menge Arbeit[ENTER]vor dir.
 6175	Kein Problem.
 6176	Jagd nach Gold
-6177	Ziehe gegen die Oger in den Kampf und sammle[ENTER]Münzbeutel. Nicht alle Goldmünzen darin dienen[ENTER]als Medium – lasse sie von Yon-I-Walker prüfen.
+6177	Ziehe gegen die Oger in den Kampf und sammle[ENTER]Münzbeutel. Nicht alle Goldmünzen darin dienen[ENTER]als Medium - lasse sie von Yon-I-Walker prüfen.
 6178	Ja, hier kann ich deutlich die dunkle Magie[ENTER]spüren.
 6179	Phantastisch, wir haben nun alle Goldmünzen, die[ENTER]als Medium dienen können. Das wird der Banshee[ENTER]mit Sicherheit nicht gefallen! Hier, nimm das als[ENTER]Belohnung. Angmur wird dir deine nächste Aufgabe[ENTER]erteilen.
 6180	Es fehlen noch Goldmünzen. Sammle %d weitere.
@@ -6193,7 +6197,7 @@
 6194	Erstatte Admiral Angmur Bericht.
 6195	Schön, du bist unversehrt zurück! Hattest du[ENTER]Erfolg?[ENTER]Was?! Die Rinde aller Baumdämonen war bereits[ENTER]abgezogen und es gab frische Kampfspuren? Dann[ENTER]müssen uns die Diener der Dunkelheit[ENTER]zurvorgekommen sein.
 6196	
-6197	Wenn sie die Rinde haben, finden sie bestimmt[ENTER]auch einen Weg, den Fluch des Lebens zu[ENTER]beschwören.[ENTER]Dann ist es also unvermeidbar – wir ziehen in den[ENTER]Krieg. Die Banshee wird sich nicht mehr lange vor[ENTER]uns verstecken können. Meine Männer sind ihr[ENTER]schon auf der Spur. Ich lasse dich rufen, sobald[ENTER]wir sie gefunden haben.
+6197	Wenn sie die Rinde haben, finden sie bestimmt[ENTER]auch einen Weg, den Fluch des Lebens zu[ENTER]beschwören.[ENTER]Dann ist es also unvermeidbar - wir ziehen in den[ENTER]Krieg. Die Banshee wird sich nicht mehr lange vor[ENTER]uns verstecken können. Meine Männer sind ihr[ENTER]schon auf der Spur. Ich lasse dich rufen, sobald[ENTER]wir sie gefunden haben.
 6198	Das Abenteuer geht weiter, sobald du Level 97[ENTER]erreicht hast.
 6199	Verbleibend
 6200	%s: %d Stück
@@ -6236,7 +6240,7 @@
 6237	Ah, die Fossilerde. Sehr gut, dann mache ich mich[ENTER]jetzt ans Werk. Das Ergebnis werde ich dem[ENTER]Admiral mitteilen.
 6238	Durch die Hintertür
 6239	Admiral Angmur sucht nach dir.
-6240	Wir kennen nun den Aufenthaltsort der[ENTER]Tempeldienerin Yah-Ki. Doch die Basis gleicht[ENTER]einer Festung – Wachtruppen patroullieren dort[ENTER]rund um die Uhr. Ein Frontalangriff wäre zu[ENTER]diesem Zeitpunkt reiner Selbstmord.
+6240	Wir kennen nun den Aufenthaltsort der[ENTER]Tempeldienerin Yah-Ki. Doch die Basis gleicht[ENTER]einer Festung - Wachtruppen patroullieren dort[ENTER]rund um die Uhr. Ein Frontalangriff wäre zu[ENTER]diesem Zeitpunkt reiner Selbstmord.
 6241	Deswegen wollen wir aus dem Hinterhalt angreifen.[ENTER]Meine Männer sind auf der Suche nach einer[ENTER]geeigneten Stelle. Lenke die Wachen ab, um uns[ENTER]mehr Zeit zu verschaffen.
 6242	
 6243	Die größte Gefahr geht von einem Wachtrupp, der[ENTER]sich die Brigade des Schwarzen Todes nennt, aus.[ENTER]Diese Brigade besteht aus Moghu, Carnifex und[ENTER]General Albus. Ihr Anführer ist Skeletos.[ENTER]Beseitige sie, bevor sie meinen Spähtrupp[ENTER]entdecken.
@@ -6258,7 +6262,7 @@
 6259	Der Tag der Entscheidung ist gekommen. Wenn wir[ENTER]fallen, fällt die ganze Welt. Doch wenn wir[ENTER]siegreich sind, werden unsere Taten noch[ENTER]Jahrhunderte später in Liedern besungen werden.[ENTER]Halte die Diener der Dunkelheit auf. Vernichte[ENTER]die Tempeldienerin Yah-Ki!
 6260	Warum bist du hier? Der Kampf ist noch nicht[ENTER]gewonnen! Besiege die Tempeldienerin Yah-Ki. All[ENTER]unsere Hoffnungen liegen auf dir.
 6261	Du hast deinen Gegner in die Knie gezwungen und[ENTER]der Sieg ist dein!
-6262	Dir bleibt keine Zeit zum Ausruhen – die[ENTER]Tempeldienerin Yah-Ki erwartet dich schon.
+6262	Dir bleibt keine Zeit zum Ausruhen - die[ENTER]Tempeldienerin Yah-Ki erwartet dich schon.
 6263	Du hast gesiegt! Mit einem markerschütternden[ENTER]Schrei sinkt Yah-Ki zu Boden.
 6264	Ahhhhh! Das kann nicht sein! Geschlagen von einem[ENTER]Sterblichen ... Oh, Banshee, verzeih! Ich habe[ENTER]versagt. Meine Aufgabe konnte ich nicht erf...
 6265	Du durchsuchst ihren leblosen Körper und findest[ENTER]einen versiegelten Brief. Kehre damit zu Admiral[ENTER]Angmur zurück.
@@ -6451,7 +6455,7 @@
 6452	Wenn du meinst... Bis bald!
 6453	Fels der Dunklen Drachen
 6454	Vor kurzem wurde eine geheimnisvolle Insel[ENTER]entdeckt. Sie wird der Fels der Dunklen Drachen[ENTER]genannt. Doch wer dort überleben möchte, muss[ENTER]einiges an Erfahrung besitzen. Aus diesem Grund[ENTER]werde ich nur Kämpfer ab Level 90 hinbringen.[ENTER]Bist du bereit, diese Reise anzutreten?
-6455	Auf die Insel kommt man nur per Schiff – und die[ENTER]Fahrt dorthin ist lange und anstrengend. Je[ENTER]größer dein Level, desto anspruchsvoller wird der[ENTER]Transport. Aus diesem Grund muss ich eine höhere[ENTER]Gebühr von dir verlangen.
+6455	Auf die Insel kommt man nur per Schiff - und die[ENTER]Fahrt dorthin ist lange und anstrengend. Je[ENTER]größer dein Level, desto anspruchsvoller wird der[ENTER]Transport. Aus diesem Grund muss ich eine höhere[ENTER]Gebühr von dir verlangen.
 6456	Diese Reise kostet dich %d Yang.
 6457	Map-Information
 6458	Dies ist eine faszinierende Gegend, nicht wahr?[ENTER]In anderen Teilen des Landes sieht es mitunter[ENTER]ganz anders aus! Es gibt viele interessante Orte,[ENTER]an die ich dich teleportieren könnte. Da jedoch[ENTER]die Kräfte des Bösen wieder stärker geworden[ENTER]sind, wurden Raum und Zeit ins Chaos gestürzt.[ENTER]Deshalb kann es passieren, dass deine Rückkehr[ENTER]nicht funktioniert. Möchtest du dennoch[ENTER]teleportiert werden?
@@ -6689,11 +6693,11 @@
 6690	Ich möchte zur Schwester der Alten Frau.
 6691	Die Alte Frau hat mir schon gesagt, dass du[ENTER]kommen würdest. Sie sagte, ich solle dir nichts[ENTER]berechnen für diese Reise, weil du ihr einen[ENTER]Gefallen tust. Wir trinken öfter mal einen Tee[ENTER]zusammen und ich mache das gern für sie. Aber[ENTER]bilde dir nicht ein, dass das auch in Zukunft so[ENTER]bleibt![ENTER]Pass auf dich auf dort drüben, Angehörige fremder[ENTER]Reiche sind nicht unbedingt gern gesehen.
 6692	Ho ho ho!
-6693	Ah, du bist es![ENTER]Wir haben uns ja schon lange nicht mehr gesehen.[ENTER]Es ist nun schon ein Jahr her, ho ho![ENTER]Vielleicht fragst du dich, warum ich wieder im[ENTER]Dorf bin.[ENTER]Ich will es dir erklären …
+6693	Ah, du bist es![ENTER]Wir haben uns ja schon lange nicht mehr gesehen.[ENTER]Es ist nun schon ein Jahr her, ho ho![ENTER]Vielleicht fragst du dich, warum ich wieder im[ENTER]Dorf bin.[ENTER]Ich will es dir erklären ...
 6694	Die Zeiten sind hart. Niemand möchte in diesen[ENTER]Tagen Bücher oder andere Sachen kaufen.[ENTER]Und in meinem fortgeschrittenen Alter ist es viel[ENTER]zu mühselig, ständig im Rentierschlitten durch[ENTER]die Lüfte zu fliegen. Deswegen habe ich[ENTER]beschlossen, Weihnachten dieses Jahr hier im Dorf[ENTER]zu feiern.
 6695	Wenn du noch Fragen hast, kannst du jederzeit zu[ENTER]mir kommen. Fröhliche Weihnachten!
 6696	Möchtest du einen Glühwein?
-6697	Ho ho ho! Du weißt doch bestimmt, was das ist,[ENTER]oder? Es gibt kein besseres Getränk für die[ENTER]Winterzeit! Man nehme einen guten Wein, eine[ENTER]Prise Zimt, ein paar Nelken … mmmmmh!
+6697	Ho ho ho! Du weißt doch bestimmt, was das ist,[ENTER]oder? Es gibt kein besseres Getränk für die[ENTER]Winterzeit! Man nehme einen guten Wein, eine[ENTER]Prise Zimt, ein paar Nelken ... mmmmmh!
 6698	Bei dieser Kälte wird dir ein Schluck Glühwein[ENTER]guttun! Er verleiht dir Kraft und du kannst dich[ENTER]schneller bewegen. Möchtest du probieren? Sehr[ENTER]schön, er kommt sofort!
 6699	Der Glühwein scheint dir gut zu schmecken, ho ho![ENTER]Spürst du, wie er dich von innen wärmt? Und[ENTER]dieser Geschmack, so süß und fruchtig. Fröhliche[ENTER]Weihnachten!
 6700	Mehr Glühwein, bitte!
@@ -6708,7 +6712,7 @@
 6709	Ist es nicht niedlich?[ENTER]Und es hat einen ausgezeichneten Geruchssinn. Ein[ENTER]Spezialist im Sockenfinden![ENTER]Es bleibt 2 Stunden lang bei dir und hilft dir[ENTER]bei der Suche. Danach ist es müde und kann erst[ENTER]nach 24 Stunden weitermachen.[ENTER]Wenn du nicht so lange warten möchtest, dann[ENTER]schau mal unten links hinter der drehenden Münze[ENTER]- ich habe gehört, da wartet ein weiteres[ENTER]Rentierjunges. Ich freue mich aber auch, wenn du[ENTER]mich morgen wieder besuchen kommst!
 6710	Ich bringe dir Socken!
 6711	Bring mir mindestens 5 Socken, dann erhältst du[ENTER]eine Belohnung.[ENTER]Urrgh, der Geruch von getragenen Socken ist[ENTER]unerträglich! Komm wieder, wenn du genügend[ENTER]gesammelt hast. Fröhliche Weihnachten!
-6712	Ho ho ho, du hast genügend Socken gesammelt.[ENTER]Dann lass mich mal sehen.[ENTER]Urrgh, dieser Geruch … Das sind auf jeden Fall[ENTER]die richtigen Socken![ENTER]Fröhliche Weihnachten!
+6712	Ho ho ho, du hast genügend Socken gesammelt.[ENTER]Dann lass mich mal sehen.[ENTER]Urrgh, dieser Geruch ... Das sind auf jeden Fall[ENTER]die richtigen Socken![ENTER]Fröhliche Weihnachten!
 6713	Rentierjunges
 6714	Heute hast du bereits ein Rentierjunges-Siegel[ENTER]von mir erhalten. Ich fürchte, das kleine Rentier[ENTER]braucht jetzt eine Pause. Es kann erst morgen[ENTER]weitersuchen. Wenn du nicht so lange warten[ENTER]möchtest, dann schau mal unten links hinter der[ENTER]drehenden Münze - ich habe gehört, da wartet ein[ENTER]weiteres Rentierjunges. Ich freue mich aber auch,[ENTER]wenn du mich morgen wieder besuchen kommst!
 6715	Du hast mir heute schon deine Socken gebracht.[ENTER]Denke daran, dass du nur alle 24 Stunden welche[ENTER]abgeben kannst.
@@ -7241,10 +7245,10 @@
 7242	Eine Buchseite... eingefroren in den Überresten[ENTER]des Unterwelt-Eisgolems...
 7243	Ich kann auch nicht sagen, wonach wir genau[ENTER]suchen. Sieh dich einfach um und komm wieder zu[ENTER]mir, wenn du etwas gefunden hast.
 7244	Was hast du da? Lass mich sehen!
-7245	Eine Notiz… was ist das für eine Schrift? Sie[ENTER]muss ziemlich alt sein. Es könnte sein, dass du[ENTER]wirklich etwas Wichtiges gefunden hast. Das, was[ENTER]hier geschrieben steht, kommt mir bekannt vor. Es[ENTER]sieht so aus, als wäre diese Seite früher einmal[ENTER]Teil eines Buches gewesen.
+7245	Eine Notiz... was ist das für eine Schrift? Sie[ENTER]muss ziemlich alt sein. Es könnte sein, dass du[ENTER]wirklich etwas Wichtiges gefunden hast. Das, was[ENTER]hier geschrieben steht, kommt mir bekannt vor. Es[ENTER]sieht so aus, als wäre diese Seite früher einmal[ENTER]Teil eines Buches gewesen.
 7246	Wenn wir mehr Seiten finden würden, könnte das[ENTER]alles einen Sinn ergeben. Halte Ausschau, auch[ENTER]nach weiteren Hinweisen!
 7247	Da bist du ja wieder. Du hast etwas gefunden?[ENTER]Erzähl!
-7248	Ein toter Sura… es könnte sein, dass er es ist,[ENTER]oder einer aus seinem Gefolge. Aber wir brauchen[ENTER]mehr Beweise, um sicher zu sein. Suche nach[ENTER]weiteren Hinweisen, von denen man auf seine[ENTER]Identität schließen kann. Waffen, Schmuck...[ENTER]vielleicht Notizen oder Ähnliches.
+7248	Ein toter Sura... es könnte sein, dass er es ist,[ENTER]oder einer aus seinem Gefolge. Aber wir brauchen[ENTER]mehr Beweise, um sicher zu sein. Suche nach[ENTER]weiteren Hinweisen, von denen man auf seine[ENTER]Identität schließen kann. Waffen, Schmuck...[ENTER]vielleicht Notizen oder Ähnliches.
 7249	Die Leiche eines Sura und eine Buchseite? Lass[ENTER]mich einen Blick auf das Pergament werfen...[ENTER]Hmm, es könnte tatsächlich sein, dass du Akumas[ENTER]Überreste gefunden hast. Allerdings brauchen wir[ENTER]noch mehr Beweise. Schau bitte nach, ob du[ENTER]weitere Buchseiten finden kannst.
 7250	Ich habe bereits einen Anhaltspunkt gefunden, bin[ENTER]mir aber nicht sicher, ob dieser legendäre Sura[ENTER]wirklich hier gewesen ist. Ich brauche mehr[ENTER]Informationen.
 7251	Gut.
@@ -7258,7 +7262,7 @@
 7259	Die Schrift auf dem vergilbten Pergament ist[ENTER]verblasst und zittrig, so als stamme sie von[ENTER]einem sehr alten oder sehr schwachen Menschen:[ENTER]"...Wesen aus Eis. Selbst meine Fähigkeiten als[ENTER]Sura haben mir nicht geholfen, sie alle zu[ENTER]besiegen. Einige von ihnen streifen noch durch[ENTER]diese Höhlen und wehe, sollten sie mich finden.[ENTER]Bisher bietet mir mein Versteck Schutz, doch[ENTER]bald..." An dieser Stelle verblasst die Schrift.
 7260	Auch diese Seite ist durch ihr Alter stark in[ENTER]Mitleidenschaft gezogen. An dem Datum in der[ENTER]oberen Ecke erkennst du, dass es sich um eine Art[ENTER]Tagebuch handelt: "Nicht zum ersten Mal wünsche[ENTER]ich mir, damals anders gehandelt zu haben, als[ENTER]ich die Grotte suchte. Wie stolz war ich, wie[ENTER]prahlerisch und selbstverliebt! All jene[ENTER]Eigenschaft haben mich hierher geführt, in meinen[ENTER]sicheren Tod..." Das letzte Wort ist mehrmals[ENTER]dick unterstrichen.
 7261	Die Pergamentseite weist starke Beschädigungen[ENTER]auf, teilweise sind Stücke herausgerissen worden.[ENTER]Du kannst nur Teile der Botschaft entziffern:[ENTER]"...Hof des Kaisers... als die Gelehrten mir[ENTER]beibrachten, was ich so innig zu wissen[ENTER]begehrte... leicht, die Portale zu öffnen,[ENTER]doch... Tod und Schrecken in der Dunkelh..." Ein[ENTER]dicker, gezackter Riss verbirgt den Rest der[ENTER]Worte vor dir.
-7262	Auf dieser Pergamentseite findest du eine[ENTER]Zeichnung: Das lächelnde Gesicht einer Frau.[ENTER]Darunter stehen Worte in der Schrift geschrieben,[ENTER]die dir bereits bekannt ist. Nur scheint sie[ENTER]dieses Mal noch zittriger und unsicherer zu sein:[ENTER]"Der Tod hat Klauen – ich weiß es seit gestern.[ENTER]Nur einen Blick habe ich auf die Kreatur[ENTER]geworfen, ehe die Angst mich hierher zurück[ENTER]trieb. Oh meine geliebte Sunmi, wenn ich gewusst[ENTER]hätte! Wenn ich dieses unsägliche Grauen zuvor[ENTER]gekannt hätte, niemals wäre ich hier herab[ENTER]gestiegen!"
+7262	Auf dieser Pergamentseite findest du eine[ENTER]Zeichnung: Das lächelnde Gesicht einer Frau.[ENTER]Darunter stehen Worte in der Schrift geschrieben,[ENTER]die dir bereits bekannt ist. Nur scheint sie[ENTER]dieses Mal noch zittriger und unsicherer zu sein:[ENTER]"Der Tod hat Klauen - ich weiß es seit gestern.[ENTER]Nur einen Blick habe ich auf die Kreatur[ENTER]geworfen, ehe die Angst mich hierher zurück[ENTER]trieb. Oh meine geliebte Sunmi, wenn ich gewusst[ENTER]hätte! Wenn ich dieses unsägliche Grauen zuvor[ENTER]gekannt hätte, niemals wäre ich hier herab[ENTER]gestiegen!"
 7263	Während der Hee-Se Dynastie lebte ein legendärer[ENTER]Sura namens Akuma. Er war so talentiert im Kampf,[ENTER]dass sich mit der Zeit nur noch wenige Gegner[ENTER]fanden, an denen er sich messen konnte. So suchte[ENTER]er nach neuen Herausforderungen. Als ihm die[ENTER]Aufzeichnungen über einen lang versiegelten Ort[ENTER]in die Hände fielen, setzte er alles daran, um[ENTER]diesen zu finden. Es gelang ihm, zu erlernen, wie[ENTER]er ein Portal zu jenem Platz finden und öffnen[ENTER]konnte. Er versprach, mit der Kunde seiner neuen[ENTER]Taten zu seiner Liebsten, Sunmi,[ENTER]zurückzukehren... doch er wurde nie wieder[ENTER]gesehen.
 7264	Die Schrift wirkt altertümlich... zudem zittrig[ENTER]und ungleichmäßig, so als habe der Schreiber[ENTER]nicht genügend Kraft besessen...
 7265	Das ergibt keinen Sinn. Wir benötigen mehr[ENTER]Aufzeichnungen.
@@ -7448,10 +7452,10 @@
 7449	...es grünen alle Wälder, alle Höhn, fallera...[ENTER]Bist du auch ein Musikfreund? Ich singe in aller[ENTER]Abgeschiedenheit, um nicht in den Krieg[ENTER]verwickelt zu werden. Aber ohne ein Land, das[ENTER]mich beschützt, kann ich dieser Muße nicht[ENTER]frönen.
 7450	Warum liest du so viel?
 7451	Soon, der Bücherwurm:
-7452	Oh, Abenteurer! Die Welt ist voller Probleme. Nur[ENTER]mit dem nötigen Wissen kann man überleben.[ENTER]Darum halte deine Bücher immer in Ehren. In[ENTER]schlechten Zeiten – und die Zeiten sind[ENTER]heutzutage immer schlecht – werden sie dir[ENTER]weiterhelfen. Das kannst du mir ruhig glauben!
+7452	Oh, Abenteurer! Die Welt ist voller Probleme. Nur[ENTER]mit dem nötigen Wissen kann man überleben.[ENTER]Darum halte deine Bücher immer in Ehren. In[ENTER]schlechten Zeiten - und die Zeiten sind[ENTER]heutzutage immer schlecht - werden sie dir[ENTER]weiterhelfen. Das kannst du mir ruhig glauben!
 7453	Hast du eigentlich Kinder?
 7454	Hier riecht es aber gut...
-7455	Eigentlich wollte ich keine Kinder, aber...[ENTER]Ich sammle immer mal wieder Kakiblüten, weil man[ENTER]mit ihnen – bei richtiger Zubereitung – die[ENTER]magische Energie stärken kann. Baek-Go hat das[ENTER]herausgefunden. Er braucht nur eine einzige[ENTER]Blüte, um daraus 100 Tränke herzustellen.[ENTER]Leider hat die Kakiblüte auch eine Nebenwirkung.[ENTER]Wenn eine Frau eine Kette aus diesen Blüte um den[ENTER]Hals trägt, dann bekommt sie einen Sohn. Im[ENTER]Vertrauen: Meine Frau hat das schamlos[ENTER]ausgenutzt.
+7455	Eigentlich wollte ich keine Kinder, aber...[ENTER]Ich sammle immer mal wieder Kakiblüten, weil man[ENTER]mit ihnen - bei richtiger Zubereitung - die[ENTER]magische Energie stärken kann. Baek-Go hat das[ENTER]herausgefunden. Er braucht nur eine einzige[ENTER]Blüte, um daraus 100 Tränke herzustellen.[ENTER]Leider hat die Kakiblüte auch eine Nebenwirkung.[ENTER]Wenn eine Frau eine Kette aus diesen Blüte um den[ENTER]Hals trägt, dann bekommt sie einen Sohn. Im[ENTER]Vertrauen: Meine Frau hat das schamlos[ENTER]ausgenutzt.
 7456	Was ist mit deinem Fuß?
 7457	Handu-Up:
 7458	Es geht schon wieder. Beim Spazierengehen[ENTER]stolperte ich über eine Gango-Wurzel und[ENTER]verstauchte mir den Fuß. Zum Glück kenne ich den[ENTER]Heilkundigen Baek-Go. Er hat mich behandelt und[ENTER]mir einen Tipp gegeben: Zum Heilen kleinerer[ENTER]Wunden kann man aus eben dieser Gango-Wurzel[ENTER]einen Trank brauen. Also habe ich den kleinen[ENTER]Übeltäter in Tee verwandelt und er hat den[ENTER]Schaden, den er angerichtet hatte, auch wieder[ENTER]beseitigt...
@@ -7488,7 +7492,7 @@
 7489	Wer kauft bei dir?
 7490	Die meisten Kuchen verkaufe ich an Durchreisende.[ENTER]Einmal kam ein geheimnisvoller Reiter in Schwarz,[ENTER]der kein Yang hatte. Als Bezahlung gab er mir ein[ENTER]Rezept, mit dem man Zin-Wasser herstellen kann.[ENTER]Das ist ein Trank, der deine Angriffskraft[ENTER]verbessert. Ich habe das Rezept an Huahn-So[ENTER]verkauft. Wenn du Huahn-So ein Sim-Wasser und[ENTER]eine Alpenrose bringst, wird er dir Zin-Wasser[ENTER]herstellen.
 7491	Warum schaust du so traurig?
-7492	Oh, wer konnte ahnen, dass unsere süßen Träume so[ENTER]schnell so unbarmherzig zerstört werden würden...[ENTER]Mein armer Mann, er fiel im Krieg! … Bitte räche[ENTER]seinen Tod.
+7492	Oh, wer konnte ahnen, dass unsere süßen Träume so[ENTER]schnell so unbarmherzig zerstört werden würden...[ENTER]Mein armer Mann, er fiel im Krieg! ... Bitte räche[ENTER]seinen Tod.
 7493	Es fallen sehr viele im Krieg...
 7494	Da wir immer mehr Männer im Krieg verlieren,[ENTER]haben wir Frauen aus dem Dorf uns zusammen getan[ENTER]und Huahn-So gebeten, einen besseren Heiltrank[ENTER]herzustellen.[ENTER]Nach langer Forschung hat er einen Trank[ENTER]entwickelt, der statt dessen die Verteidigung[ENTER]erhöht, so dass weniger Heiltränke benötigt[ENTER]werden. Geh zu ihm. Er kann dir diesen Trank, den[ENTER]er SamBo-Wasser nennt, bestimmt herstellen. Er[ENTER]benötigt dafür ein Dok-Wasser und eine Alpenrose.
 7495	Das ist aber ein süßer Fratz...
@@ -7877,7 +7881,7 @@
 7878	Und die gute Nachricht ist: Mit den Paketen[ENTER]kannst du eine Menge sparen!
 7879	Eine drehende Münze wird dir den Weg zu den[ENTER]Paketen weisen.
 7880	Macht der Weisheit
-7881	Hey, hör mir gut zu! Endlich habe ich sie[ENTER]entdeckt – die Quelle der Weisheit! Ihre Macht[ENTER]steigert für eine gewisse Zeit das Sammeln von[ENTER]Erfahrung. Ich denke, ich kann sie dir verleihen.[ENTER]Wenn du interessiert bist, dann sprich mich[ENTER]jederzeit an.
+7881	Hey, hör mir gut zu! Endlich habe ich sie[ENTER]entdeckt - die Quelle der Weisheit! Ihre Macht[ENTER]steigert für eine gewisse Zeit das Sammeln von[ENTER]Erfahrung. Ich denke, ich kann sie dir verleihen.[ENTER]Wenn du interessiert bist, dann sprich mich[ENTER]jederzeit an.
 7882	Macht der Weisheit
 7883	Du möchtest also die Macht der Weisheit spüren?[ENTER]Sie sorgt dafür, dass du für %d Std. %d %% mehr[ENTER]Erfahrung sammeln kannst.
 7884	Bist du bereit? Gut, dann gewähre ich dir nun die[ENTER]Macht der Weisheit.[ENTER]...[ENTER]So, es ist vollbracht!
@@ -7922,7 +7926,7 @@
 7923	Anmeldung PvP-Turnier
 7924	Du darfst am Turnier teilnehmen, wenn dein Level[ENTER]zwischen %d und %d liegt.
 7925	Alle freien Plätze des PvP-Turniers sind leider[ENTER]belegt.
-7926	Willkommen im PvP-Turnier! Fordere ebenbürtige[ENTER]Gegner heraus und gib dein Bestes – möge der[ENTER]Drachengott mit dir sein.
+7926	Willkommen im PvP-Turnier! Fordere ebenbürtige[ENTER]Gegner heraus und gib dein Bestes - möge der[ENTER]Drachengott mit dir sein.
 7927	Wie sieht es aus? Wagst du die Herausforderung?[ENTER]Dann melde dich jetzt für das Turnier an.
 7928	Ja, klar!
 7929	Nein, lieber nicht.
@@ -7945,7 +7949,7 @@
 7946	GM: PvP-Turnier Start/Ende
 7947	PvP-Turnier starten/beenden
 7948	Start: Gib die Zeit der Registrierungsdauer in[ENTER]Minuten an.
-7949	GM: PvP-Turnier – Einstellungen
+7949	GM: PvP-Turnier - Einstellungen
 7950	Minimales Level (Min:15)
 7951	Maximales Level (Max:120)
 7952	Du hast nicht das Mindestlevel.
@@ -8756,7 +8760,7 @@
 8757	Gehe zum Hauptmann
 8758	Bericht über die gepanzerte Kavallerie
 8759	Hauptmann:
-8760	Hast du etwas herausfinden können? Erzähl![ENTER]… Hm, das ist sehr interessant. Es steckt also[ENTER]nicht mehr dahinter als starke Rüstungen und[ENTER]hartes Training? Dann wäre es machbar! Mit solch[ENTER]einer Armee könnten die drei Reiche wieder[ENTER]vereint werden!
+8760	Hast du etwas herausfinden können? Erzähl![ENTER]... Hm, das ist sehr interessant. Es steckt also[ENTER]nicht mehr dahinter als starke Rüstungen und[ENTER]hartes Training? Dann wäre es machbar! Mit solch[ENTER]einer Armee könnten die drei Reiche wieder[ENTER]vereint werden!
 8761	Allerdings bräuchte ich eine ganze Menge Geld.[ENTER]Und viele gute Schmiede. Und Rekruten, die[ENTER]freiwillig durch die Hölle gehen, um die Besten[ENTER]der Besten zu werden![ENTER]Nein, nein. Schau mich nicht so an. Keine Sorge,[ENTER]du hast vorerst genug getan.
 8762	Hier, nimm diese Belohnung und ruh dich aus.[ENTER]Wir sehen uns später!
 8763	Du erhältst 150.000 Erfahrungspunkte.[ENTER]Du erhältst 30.000 Yang.[ENTER]Du erhältst Goldohrringe.
@@ -8779,7 +8783,7 @@
 8780	Ariyoung:
 8781	Die Gemischtwarenhändlerin hatte schlechte[ENTER]Neuigkeiten. Geh zu Ariyoung und berichte ihr vom[ENTER]Tod ihres Ehemanns.
 8782	Dein Ehemann ist tot...
-8783	Was sagst du da?! Er… er wurde von der[ENTER]Schwarzwindbande getötet?[ENTER]Oh, nein... er ist tot... Ich weiß nicht, was ich[ENTER]ohne ihn tun soll!
+8783	Was sagst du da?! Er... er wurde von der[ENTER]Schwarzwindbande getötet?[ENTER]Oh, nein... er ist tot... Ich weiß nicht, was ich[ENTER]ohne ihn tun soll!
 8784	Es ist viel Zeit vergangen, seit ich etwas von[ENTER]meinem Mann gehört habe. Ich habe Angst um ihn.[ENTER]Hoffentlich ist ihm nichts passiert.[ENTER]Ich weiß: Es ist unnütz, sich Sorgen zu machen,[ENTER]wenn man doch nichts ändern kann. Aber mein Herz[ENTER]schlägt so furchtbar stark. Ich kann mich einfach[ENTER]nicht beruhigen.
 8785	Würdest du mir den Leichnam meines Mannes hierher[ENTER]bringen, bitte? Dann könnte ich mich von ihm[ENTER]verabschieden. Oder wenigstens ein Andenken?[ENTER]Die Goo-Pae von der Schwarzwindbande haben[ENTER]bestimmt etwas. Bitte, bring mir alles, was du[ENTER]finden kannst, solange es nur von ihm ist!
 8786	Ja, ich helfe dir.
@@ -9351,7 +9355,7 @@
 9352	Hmm, unterhalb der Felsen bei dem Alten Mann...[ENTER]Keine Ahnung. Ich sollte zuerst den Alten Mann[ENTER]fragen. Warum ist der Weg zu ihm so weit? Mist.
 9353	Alter Mann:
 9354	Wonach suchst du? Nach einem Schatz? Haha, da[ENTER]kannst du lange suchen! Zeig mal die Karte...[ENTER]Hm, das müsste dort drüben sein. Viel Glück,[ENTER]hihihi...
-9355	Das hier muss die Stelle sein. Hau ruck! … und[ENTER]weiter...[ENTER]Verdammt, der Boden ist ganz schön hart. Hrmpf...[ENTER][ENTER]Hey, ich kann eine Kiste sehen!
+9355	Das hier muss die Stelle sein. Hau ruck! ... und[ENTER]weiter...[ENTER]Verdammt, der Boden ist ganz schön hart. Hrmpf...[ENTER][ENTER]Hey, ich kann eine Kiste sehen!
 9356	Es gibt den Schatz wirklich!
 9357	Zurück zu Soon
 9358	Du hast an dem Ort gegraben, den die Karte der[ENTER]Tiergottheiten bezeichnete und dort tatsächlich[ENTER]eine Schatztruhe gefunden! Gehe zu Soon und[ENTER]berichte ihm von dem unerwarteten Erfolg.
@@ -10049,7 +10053,7 @@
 10050	Won zu Yang
 10051	
 10052	Im Fußballfieber
-10053	Hallo! Ich bin ein unglaublich großer Fußballfan.[ENTER]Fußball ist wie Schach – nur ohne Würfel, findest[ENTER]du nicht auch?
+10053	Hallo! Ich bin ein unglaublich großer Fußballfan.[ENTER]Fußball ist wie Schach - nur ohne Würfel, findest[ENTER]du nicht auch?
 10054	Du weißt ja, was man über Fußball sagt: "Es gibt[ENTER]nur eine Möglichkeit: Sieg, Unentschieden oder[ENTER]Niederlage!". Wie wahr, wie wahr ...
 10055	Gerade vorhin habe ich noch ein paar Bälle[ENTER]gekickt. Doch mal verliert man und mal gewinnen[ENTER]die anderen ... und ich bin wohl nicht sonderlich[ENTER]treffsicher. Ich kann keinen meiner Bälle mehr[ENTER]wiederfinden! Würdest du nach ihnen suchen? Als[ENTER]Belohnung werde ich dir %d Stück gegen einen[ENTER]goldenen Fußball eintauschen!
 10056	Ein Fußball!
@@ -10081,7 +10085,7 @@
 10082	Die Spuren am Kap des Drachenfeuers stammen[ENTER]eindeutig von Meley. Wo will sie nur hin?
 10083	Besuche %s im 1. Dorf deines Reiches, um mehr[ENTER]herauszufinden.
 10084	Sprich mit %s.
-10085	Ohne Frage – Meley war am Kap des Drachenfeuers.[ENTER]Doch ihre Spur verliert sich über dem Meer. Sie[ENTER]will den Ozean überqueren. Wir brauchen ein[ENTER]Schiff, um sie zu verfolgen! Gib mir etwas Zeit,[ENTER]um nach einem Schiff zu suchen. Lass uns später[ENTER]reden.
+10085	Ohne Frage - Meley war am Kap des Drachenfeuers.[ENTER]Doch ihre Spur verliert sich über dem Meer. Sie[ENTER]will den Ozean überqueren. Wir brauchen ein[ENTER]Schiff, um sie zu verfolgen! Gib mir etwas Zeit,[ENTER]um nach einem Schiff zu suchen. Lass uns später[ENTER]reden.
 10086	Verfolgung der Drachenkönigin
 10087	Finde einen Weg, um Meley über den Ozean zu[ENTER]folgen. Sprich mit %s.
 10088	Ich konnte kein Schiff auftreiben, um Meley zu[ENTER]verfolgen! Dann müssen wir eben eines bauen. Gehe[ENTER]zum %s am Kap des Drachenfeuers. Nur er besitzt[ENTER]die Fertigkeiten, in so kurzer Zeit ein Schiff zu[ENTER]bauen.
@@ -10264,14 +10268,14 @@
 10938	Ich bin lediglich ein Mensch mit geringen[ENTER]Ambitionen auf Kleidung oder Essen.
 10939	Ich arbeite genauso hart wie jeder andere!
 10940	Wie kannst du behaupten, ich sei ein Bettler?
-10941	Entschuldigung…
-10942	Es ist mir unangenehm, dir so viele[ENTER]Schwierigkeiten zu bereiten, wo wir uns gerade[ENTER]erst kennengelernt haben…
-10943	Ich möchte dir etwas entgegenkommen….
+10941	Entschuldigung...
+10942	Es ist mir unangenehm, dir so viele[ENTER]Schwierigkeiten zu bereiten, wo wir uns gerade[ENTER]erst kennengelernt haben...
+10943	Ich möchte dir etwas entgegenkommen....
 10944	Ich könnte Hilfe gebrauchen.
 10945	Hmm. Zunächst muss ich deine Fähigkeiten testen.
 10946	Erlege 20 Wildhunde.
 10947	Ich weiß nicht, was du möchtest.
-10948	Es ist doch nicht so schwer…
+10948	Es ist doch nicht so schwer...
 10949	Los geht's, jage die Wildhunde!
 10950	Ignoriere es.
 10951	Finde den Betrunkenen Bürger
@@ -10308,14 +10312,14 @@
 10982	Verbleibend:
 10983	Ich habe alle 20 Wildhunde erlegt.
 10984	Es ist eine Weile her, dass ich so viele[ENTER]Wildhunde gejagt habe.
-10985	Aber wer weiß, wozu er mir diese Tests auferlegt…
+10985	Aber wer weiß, wozu er mir diese Tests auferlegt...
 10986	Nun, sobald ich wieder zu ihm zurückkehre, werde[ENTER]ich es vielleicht erfahren.
 10987	Frage nach der Quest.
 10988	Erlege zunächst die Wildhunde.
 10989	Hmm, das ist wohl zu einfach?
 10990	Nun gut. Erinnert mich an meine Jugend.
 10991	Ich war ein wahrlich aufrichtiger Kerl.
-10992	(…Ich weiß nicht, warum er mir das erzählt...)
+10992	(...Ich weiß nicht, warum er mir das erzählt...)
 10993	Aha! Du siehst nervös aus.
 10994	Oder ist dir meine Mission etwas zu einfach?
 10995	Wie wäre es mit ein paar Keilern?
@@ -10323,14 +10327,14 @@
 10997	Beeile dich lieber!
 10998	Die Zeit verrinnt, ohne dass du es bemerkst.
 10999	Scheint, als wärst du ziemlich beschäftigt.
-11000	Nun… Leb wohl.
+11000	Nun... Leb wohl.
 11001	2. Prüfung des Betrunkenen Bürgers
 11002	Weil ich mich dem Betrunkenen Bürger gegenüber so[ENTER]schlecht verhalten habe, habe ich die Mission[ENTER]erhalten, Wildhunde zu erlegen.
 11003	
 11004	Doch nun schlägt er vor, zusätzlich Keiler zu[ENTER]töten.
 11005	Und wegen meines verwirrten Gesichtsausdrucks,[ENTER]nimmt er nun wohl an, dass ich das erledige.
 11006	
-11007	Was für ein Tag…
+11007	Was für ein Tag...
 11008	Erlege 30 Keiler.
 11009	Verbleibend:
 11010	Mission der Keiler abgeschlossen
@@ -10362,7 +10366,7 @@
 11036	Ich werde das mit den Keilern vergessen.
 11037	Ich wollte erzählen, dass etwas in der Stadt vor[ENTER]sich geht.
 11038	Die Sache mit den Banden.
-11039	Wir kannten die Bandenmitglieder zwar, aber …
+11039	Wir kannten die Bandenmitglieder zwar, aber ...
 11040	Haben sie etwas Wertvolles zerstört?
 11041	Oder was ist passiert?
 11042	Haha. Ein echter Krieger gibt sich nicht mit[ENTER]solch persönlichen Gefühlen ab.
@@ -10428,7 +10432,7 @@
 11102	
 11103	
 11104	Fisch für Sushi
-11105	Hm…
+11105	Hm...
 11106	Dieser Fisch ist leider nicht gut genug.
 11107	Der eignet sich höchstens für Fischsuppe.
 11108	Weil ich ihn nicht gebrauchen kann, kannst du ihn[ENTER]behalten.
@@ -10465,7 +10469,7 @@
 11139	Oh! Was soll ich tun?
 11140	Ich muss ihn wirklich in die Finger kriegen.
 11141	Aber er ist so schnell, dass ich einfach nicht[ENTER]fangen kann.
-11142	Ich bin frustriert…
+11142	Ich bin frustriert...
 11143	Worüber machst du dir Sorgen?
 11144	In letzter Zeit macht mir ein Fremder[ENTER]Schwierigkeiten.
 11145	Doch er ist so schnell, dass ich ihn nicht fangen[ENTER]kann.
@@ -10484,15 +10488,15 @@
 11158	Oh, danke! Sein Name ist Tanaka.
 11159	Jetzt renne ich also durch die Stadt.
 11160	Bring mir sein Ohr!
-11161	Hmm… Egal wo er ist, es zählt nur das Land.
-11162	So sehe ich die Dinge…
+11161	Hmm... Egal wo er ist, es zählt nur das Land.
+11162	So sehe ich die Dinge...
 11163	Was sollen wir für die Zukunft des Reiches tun?
 11164	Warum vernichtest du Tanaka nicht?
 11165	Tanaka, der Gerüchte in meinem Land verbreitet.
 11166	Vernichte ihn.
 11167	Nimm Tanakas Ohr und bringe es zu Yonah.
 11168	Frage nach Tanaka.
-11169	Tanaka rennt ziemlich schnell davon. Oh…
+11169	Tanaka rennt ziemlich schnell davon. Oh...
 11170	Es ist nahezu unmöglich, ihn in schwerer Rüstung[ENTER]zu fangen.
 11171	Ich denke, eine kleine Rüstungsverbesserung wäre[ENTER]hilfreich.
 11172	Oh, aber was ist passiert?
@@ -10504,19 +10508,19 @@
 11178	Übrigens trägt er etwas Glänzendes in seiner[ENTER]Hand. Er zeigte es nicht, doch ich sah es.
 11179	Ich kann Tanaka nicht fangen.
 11180	Ich werde aufgeben.
-11181	Ich weiß deine harte Arbeit zu schätzen…
+11181	Ich weiß deine harte Arbeit zu schätzen...
 11182	Nun, ich bin nicht auf eine Entschädigung aus.
-11183	Ich liebe einfach das Land…
+11183	Ich liebe einfach das Land...
 11184	Ich möchte aufgeben und erneut starten.
 11185	Ich werde es tun.
 11186	Nochmals, ich erwarte keine Belohnung von dir.
 11187	Hier, Tanakas Ohr.
 11188	Oh, du hast ihn wirklich geschnappt!
-11189	Nun denn, mein Land, andere Länder…
-11190	Ich mache mir Gedanken über Blutlinien und[ENTER]Nationen…
+11189	Nun denn, mein Land, andere Länder...
+11190	Ich mache mir Gedanken über Blutlinien und[ENTER]Nationen...
 11191	Doch obwohl das Land nun geteilt ist, gehört[ENTER]dieses Land uns.
 11192	
-11193	Hmm…
+11193	Hmm...
 11194	Vielen Dank für deine Mühen.
 11195	Ich möchte dir eine kleine Belohnung überreichen.[ENTER]Bitteschön.
 11196	Du hast einen Erfahrungsring von Yonah erhalten.
@@ -10634,7 +10638,7 @@
 11388	Es wurden noch nicht alle Dämonen besiegt.
 11389	Aufgabe: Findet das ZR: goldene Zahnrad und löst[ENTER]damit den verborgenen Mechanismus in der Stele[ENTER]der Isfet aus.
 11390	Das goldene Zahnrad (ZR) kann von Dämonen[ENTER]erbeutet werden.
-11391	Der ZR: Schlund des Am-heh wurde erweckt. Nun[ENTER]kommt niemand mehr herein – oder heraus.
+11391	Der ZR: Schlund des Am-heh wurde erweckt. Nun[ENTER]kommt niemand mehr herein - oder heraus.
 11392	Die ZR: Stele der Isfet wurde zerstört.
 11393	Dieses goldene Zahnrad (EW) war eine Fälschung[ENTER]und wurde zerstört. Findet das Original.
 11394	Der Mechanismus in der ZR: Stele der Isfet kann[ENTER]nur mit dem ZR: goldenen Zahnrad ausgelöst[ENTER]werden. Kehre zurück, wenn die Aufgabe erfüllt[ENTER]wurde.
@@ -10664,7 +10668,7 @@
 11418	Sucht den EW: Schlund des Am-heh auf, um ein[ENTER]weiteres Schicksalsschloss zu öffnen.
 11419	Möchtest du durch den EW: Schlund des Am-heh[ENTER]gehen und deinem Schicksal begegnen?
 11420	EW: Schlund des Am-heh erwecken
-11421	Der EW: Schlund des Am-heh wurde erweckt. Nun[ENTER]kommt niemand mehr herein – oder heraus.
+11421	Der EW: Schlund des Am-heh wurde erweckt. Nun[ENTER]kommt niemand mehr herein - oder heraus.
 11422	Aufgabe: Wagt euch in den Ring der Dämonen (EW)[ENTER]und geht als Sieger hervor.
 11423	Aufgabe: Findet das EW: goldene Zahnrad und löst[ENTER]damit den verborgenen Mechanismus in der Stele[ENTER]der Isfet aus.
 11424	Das goldene Zahnrad (EW) kann von Dämonen[ENTER]erbeutet werden.
@@ -10976,7 +10980,7 @@
 11730	Stelle einen Gegenstand bei einem[ENTER]Herstellungs-NPC her.
 11731	Verwende eine Animasphäre im Zodiak-Tempel.
 11732	Drachensteinsplitter+?!
-11733	Gerüchte besagen, dass die Monster der[ENTER]Illusionen-Dungeons mysteriöse Steine bei sich[ENTER]tragen…
+11733	Gerüchte besagen, dass die Monster der[ENTER]Illusionen-Dungeons mysteriöse Steine bei sich[ENTER]tragen...
 11734	Lasst es uns herausfinden.
 11735	Abbrechen
 11736	Es gibt keine weiteren Drachensteinsplitter+.
@@ -11122,8 +11126,8 @@
 11879	<Abgeschlossen> Seherwettstreit
 11880	Verwundeter
 11881	Gehe zur Donganebene und finde den Verwundeten.
-11882	Gaah… geht es dir gut?[ENTER]Das Böse hat die Dorfbewohner verletzt.[ENTER]Ein roter Drache kam vor ein paar Tagen hierher[ENTER]und verwüstete unser Dorf. So viele Leute wurden[ENTER]verletzt.[ENTER]Mein Leben wurde verschont. Aber ich sah, wie die[ENTER]anderen in Stein verwandelt wurden. Also bin ich[ENTER]weggerannt...
-11883	Hust Hust…[ENTER]Ich glaube ich habe zu viel geredet… Ich wünschte[ENTER]ich hätte ein Heilmittel.
+11882	Gaah... geht es dir gut?[ENTER]Das Böse hat die Dorfbewohner verletzt.[ENTER]Ein roter Drache kam vor ein paar Tagen hierher[ENTER]und verwüstete unser Dorf. So viele Leute wurden[ENTER]verletzt.[ENTER]Mein Leben wurde verschont. Aber ich sah, wie die[ENTER]anderen in Stein verwandelt wurden. Also bin ich[ENTER]weggerannt...
+11883	Hust Hust...[ENTER]Ich glaube ich habe zu viel geredet... Ich wünschte[ENTER]ich hätte ein Heilmittel.
 11884	Könntest du nachschauen, ob es ein Heilmittel in[ENTER]der Nähe gibt?
 11885	Ich sollte mich in der Nähe nach Spuren umschauen.
 11886	Ich muss die Metins in der Nähe finden und[ENTER]zerstören.
@@ -11189,7 +11193,7 @@
 11946	Nach einem kurzen Moment erwacht Uriel.
 11947	Ich brauche mehr Medizin, um Uriel zu retten.[ENTER]Wenn ich Metinsteine zerstöre, kann ich weitere[ENTER]Heilmittel finden.
 11948	Uriel
-11949	Gaah…[ENTER]Ich fühle mich furchtbar.[ENTER]Ich schätze, ich bin wohl einfach zu alt.
+11949	Gaah...[ENTER]Ich fühle mich furchtbar.[ENTER]Ich schätze, ich bin wohl einfach zu alt.
 11950	(Uriel hört deiner Geschichte zu)[ENTER]Ich verstehe. Wir müssen herausfinden, wohin[ENTER]diese Dämonen verschwunden sind...[ENTER][ENTER]Ja! Chaegirab sollte in der Lage sein, etwas über[ENTER]diese merkwürdigen Vorkommnisse in Erfahrung zu[ENTER]bringen.[ENTER][ENTER]Ich habe ein Schmuckstück, das ich seit Jahren[ENTER]versteckt halte, aber ich denke, du wirst es[ENTER]brauchen können.[ENTER][ENTER]Hier hast du es.
 11951	Danke, Uriel! Ich werde sofort zu Chaegirab gehen.
 11952	Rette Chaegirab
@@ -11200,7 +11204,7 @@
 11957	Nach einem kurzen Moment erwacht Chaegirab.
 11958	Ich brauche mehr Medizin, um Chaegirab zu retten.[ENTER]Wenn ich Metinsteine zerstöre, kann ich weitere[ENTER]Heilmittel finden.
 11959	Chaegirab
-11960	Wo bin ich?[ENTER]Ah… In meinem Heimatdorf.[ENTER](Chaegirab hört deiner Geschichte zu.)[ENTER]Und das ist wirklich so passiert?[ENTER]Ich kann mich an überhaupt nichts mehr erinnern.
+11960	Wo bin ich?[ENTER]Ah... In meinem Heimatdorf.[ENTER](Chaegirab hört deiner Geschichte zu.)[ENTER]Und das ist wirklich so passiert?[ENTER]Ich kann mich an überhaupt nichts mehr erinnern.
 11961	Warum ist hier alles so rot?[ENTER]Ich habe keine Ahnung, was diese Asche ist.[ENTER]Außerdem muss ich herausfinden, was mit mir[ENTER]passiert ist.
 11962	Als Erstes sollten wir mehr über diese rote Asche[ENTER]in Erfahrung bringen.[ENTER]Um das zu tun, werde ich eine ganze Menge davon[ENTER]brauchen.[ENTER]Könntest du sie für mich sammeln?
 11963	Wie soll ich das anstellen?
@@ -11241,7 +11245,7 @@
 12001	Suche den Rüstungshändler auf dem neuen Kontinent[ENTER]auf, um dir eine Schutzseele zu verdienen.
 12002	Schutzseele (Wiederholbar)
 12003	Was? Du willst, dass ich dir eine weitere[ENTER]Schutzseele gebe, wo ich doch keine mehr übrig[ENTER]habe?[ENTER]Alle, die ich hatte, sind fort...[ENTER]Es dauert sehr lange, so etwas erneut[ENTER]anzufertigen.
-12004	Warum fragst du dann überhaupt? Es ist auch für[ENTER]mich höllisch viel Arbeit…
+12004	Warum fragst du dann überhaupt? Es ist auch für[ENTER]mich höllisch viel Arbeit...
 12005	Es wird schwierig, eine weitere Schutzseele[ENTER]herzustellen.[ENTER]Bringe mir 10 Schutzseelenfragmente und ich[ENTER]schaue, was ich für dich tun kann.
 12006	Jage Monster, um 10 Schutzseelenfragmente zu[ENTER]sammeln.
 12007	Sammle 10 Schutzseelenfragmente.
@@ -11363,7 +11367,7 @@
 12126	Nein.
 12127	Sehr gut! Geh und sprich mit Admiral Angmur, er[ENTER]war vor dir hier.[ENTER]Ich habe gehört, dass er auch große Probleme mit[ENTER]den Dämonen hat.
 12128	Sprich mit Admiral Angmur, der dir auf der Karte[ENTER]angezeigt wird.
-12129	Du fürchtest dich sicher… Ich fürchte mich auch[ENTER]vor den Dämonen.
+12129	Du fürchtest dich sicher... Ich fürchte mich auch[ENTER]vor den Dämonen.
 12130	Sprich mit Admiral Angmur, der dir auf der Karte[ENTER]angezeigt wird.
 12131	Bitte beeil dich und sprich mit Admiral Angmur.[ENTER]Er befindet sich dort mitten im Kampf.
 12132	Ich wusste, dass es du warst, der die Dämonen[ENTER]bekämpft.[ENTER]Was ich nicht wusste, ist dass die Dämonen auf[ENTER]einmal so weit ausschwärmen würden.
@@ -11948,8 +11952,8 @@
 12716	Zum Laden
 12717	Sung Mahis Macht ist hier so stark, dass normale[ENTER]Items wirkungslos sind.[ENTER]Du kannst im Turm nur das verwenden, was ich hier[ENTER]verkaufe.
 12718	This shell is top grade![ENTER]Please get me %d[ENTER]more of it.
-12719	This shell is top grade![ENTER]You brought all[ENTER]the shells… Impressive.[ENTER]Now you can get[ENTER]access to Dragon gate system.[ENTER]Please check[ENTER]it out in the stretched menu and use it well.
-12720	Oh my… Look at this[ENTER]All the shells are[ENTER]broken. Since I cannot use them, you have to[ENTER]bring me the new ones.
+12719	This shell is top grade![ENTER]You brought all[ENTER]the shells... Impressive.[ENTER]Now you can get[ENTER]access to Dragon gate system.[ENTER]Please check[ENTER]it out in the stretched menu and use it well.
+12720	Oh my... Look at this[ENTER]All the shells are[ENTER]broken. Since I cannot use them, you have to[ENTER]bring me the new ones.
 12721	I don't see any Dragon shells in your inventory..
 12722	I've collected all Dragon shells to open Dragon[ENTER]gate.[ENTER]Go back to Chaegirab.
 12723	Well, you need Dragon gate points in order to use[ENTER]Dragon gate system.[ENTER]Here. Take this.
@@ -12005,7 +12009,7 @@
 12773	Your inventory is full.
 12774	In order to learn Dragon gate system, you must[ENTER]pass a difficult test from Chaegirab.
 12775	Get Dragon shell through Alchemist.[ENTER]Dragon[ENTER]shell earned : %d
-12776	Well, well…You got the Dragon shells.[ENTER]Wait[ENTER]for a moment..[ENTER]Let me check them.
+12776	Well, well...You got the Dragon shells.[ENTER]Wait[ENTER]for a moment..[ENTER]Let me check them.
 12777	Während du reitest, kannst du nicht eintreten.
 12778	Verwandelt kannst du nicht eintreten.
 12779	Was ist los?
@@ -12177,7 +12181,7 @@
 12975	Ein neues Gebiet wurde freigeschaltet. Begib dich[ENTER]zum Schlangenwächter.
 12976	Hey, warum stehst du denn hier herum? Wenn du[ENTER]dich in die Donganebene begibst, kannst du von[ENTER]dort aus in das neue Gebiet gelangen.
 12977	Begib dich in das neue Gebiet, um dich mit dem[ENTER]Schlangenwächter zu treffen.
-12978	Wer bist du denn? Hah, hat Konfuzius dich[ENTER]geschickt? Das kann nicht dein Ernst sein… Warum[ENTER]hat er so einen Grünschnabel wie dich in so ein[ENTER]hartes Land wie dieses gesandt?
+12978	Wer bist du denn? Hah, hat Konfuzius dich[ENTER]geschickt? Das kann nicht dein Ernst sein... Warum[ENTER]hat er so einen Grünschnabel wie dich in so ein[ENTER]hartes Land wie dieses gesandt?
 12979	Konfuzius sagte, ich soll dir dies geben, wenn du[ENTER]herkommst. Komm später nochmal vorbei, du hast[ENTER]noch Aufräge zu erledigen.
 12980	Was ist der Schlangentempel?
 12981	Um den versteckten Tempel zu finden, sollte ich[ENTER]mit dem Schlangenwächter sprechen.
@@ -12221,7 +12225,7 @@
 13019	Dieses Tal ist sehr gefährlich. Also sei[ENTER]vorsichtig.
 13020	Wichtige Vorbereitungen
 13021	Ich sollte die Schlangenstatue finden, um den[ENTER]Schlangentempel zu betreten.
-13022	Du wirst verschiedenes brauchen, um in diesem[ENTER]unterirdischen Dungeon voranzukommen… ein Hut,[ENTER]eine Peitsche oder ein Sandsäckchen in[ENTER]Schatzgröße wären sicher praktisch. Ich kann[ENTER]diese Sachen für dich herstellen.
+13022	Du wirst verschiedenes brauchen, um in diesem[ENTER]unterirdischen Dungeon voranzukommen... ein Hut,[ENTER]eine Peitsche oder ein Sandsäckchen in[ENTER]Schatzgröße wären sicher praktisch. Ich kann[ENTER]diese Sachen für dich herstellen.
 13023	Aber wenn du den Tempel betreten willst, musst du[ENTER]mir %d Schlangenschuppen für die Ausrüstung[ENTER]besorgen. Und weil nur der bußfertige Held Erfolg[ENTER]haben kann, wird es dich %d Yang kosten. Kannst[ENTER]du mir beides bringen?
 13024	Die Schlangenstatue benötigt %d[ENTER]Schlangenschuppen. Du kannst sie bei Monstern in[ENTER]der Nähe finden.
 13025	Um den Schlangentempel zu betreten, muss ich die[ENTER]%d Schlangenschuppen besorgen, die die[ENTER]Schlangenstatue benötigt.[ENTER]Verbleibende Anzahl : %d
@@ -12474,7 +12478,7 @@
 13272	Wir Alchemisten sind sozusagen die Spezialisten,[ENTER]wenn es darum geht, böse Artefakte zu reinigen[ENTER]und für Gutes nutzbar zu machen. Ich kann diese[ENTER]Eisklingenschuppe für euch reinigen, damit ihr[ENTER]ihre Macht gegen Alastor einsetzen könnt. Ich[ENTER]möchte dir für dein Vertrauen danken. Es gibt[ENTER]leider nach wie vor Leute, die Alchemie für eine[ENTER]böse Kunst halten.
 13273	Gib mir einen Moment. Kannst du mir die Retorte[ENTER]reichen? Nein, das längliche- Ach, schon gut.[ENTER]Fertig! Hier, bitte. Ich hoffe, das wird dir bei[ENTER]deinem Kampf gegen den Drachen helfen.
 13274	Kehre zu Konfuzius zurück.
-13275	Ah, schon fertig? Unser Alchemist ist wirklich[ENTER]ein Meister seines Handwerks. Das sieht[ENTER]hervorragend aus. Du fragst dich bestimmt, was[ENTER]Alastor daran hindern wird, erneut[ENTER]zurückzukehren, falls- wenn du es geschafft hast,[ENTER]ihn zu bezwingen. Ich bin mir sicher, dass wir[ENTER]Alastor daran hindern können, indem wir das[ENTER]Ritual erneut durchführen – aber mit seinem Herz.
+13275	Ah, schon fertig? Unser Alchemist ist wirklich[ENTER]ein Meister seines Handwerks. Das sieht[ENTER]hervorragend aus. Du fragst dich bestimmt, was[ENTER]Alastor daran hindern wird, erneut[ENTER]zurückzukehren, falls- wenn du es geschafft hast,[ENTER]ihn zu bezwingen. Ich bin mir sicher, dass wir[ENTER]Alastor daran hindern können, indem wir das[ENTER]Ritual erneut durchführen - aber mit seinem Herz.
 13276	Mit der veredelten Eisklingenschuppe bist du vor[ENTER]einigen von Alastors finstersten Mächten[ENTER]geschützt. Behalte sie bei dir und besprich alles[ENTER]Weitere mit General Kohan.
 13277	Du hast dir 10x Segen des Drachen als[ENTER]Questbelohnung verdient.
 13278	Alastors Untergang
@@ -13334,7 +13338,7 @@
 14199	Ich tausche Socken.
 14200	Ich tausche Glühwein.
 14201	Bring mir mindestens 5 Socken, dann erhältst du[ENTER]eine Belohnung.[ENTER]Urrgh, der Geruch von getragenen Socken ist[ENTER]unerträglich! Komm wieder, wenn du genügend[ENTER]gesammelt hast. Fröhliche Weihnachten!
-14202	Ho ho ho, du hast genügend Socken gesammelt.[ENTER]Dann lass mich mal sehen.[ENTER]Urrgh, dieser Geruch … Das sind auf jeden Fall[ENTER]die richtigen Socken![ENTER]Fröhliche Weihnachten!
+14202	Ho ho ho, du hast genügend Socken gesammelt.[ENTER]Dann lass mich mal sehen.[ENTER]Urrgh, dieser Geruch ... Das sind auf jeden Fall[ENTER]die richtigen Socken![ENTER]Fröhliche Weihnachten!
 14203	Bring mir 6 Gläser Glühwein oder 5 Socken und dir[ENTER]winkt eine zauberhafte Belohnung. Fröhliche[ENTER]Weihnachten!
 14204	Dieses wunderbare Getränk wird dich so richtig[ENTER]durchwärmen. Lass es dir schmecken und fröhliche[ENTER]Weihnachten!
 14205	Du hast bereits den Schneeflocken-Zauber[ENTER]erhalten. Komm später wieder.

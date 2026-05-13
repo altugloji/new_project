@@ -621,6 +621,24 @@ class ItemToolTip(ToolTip):
 		self.toolTipWidth = self.TOOL_TIP_WIDTH
 		ToolTip.ClearToolTip(self)
 
+	if app.WJ_NEW_DROP_DIALOG:
+		def SetDeleteItem(self, invenType, invenPos, index):
+			itemVnum = player.GetItemIndex(invenType, invenPos)
+			if (itemVnum == 0):
+				return
+
+			item.SelectItem(itemVnum)
+			self.ClearToolTip()
+
+			metinSlot = []
+			for i in xrange(player.METIN_SOCKET_MAX_NUM):
+				metinSlot.append(player.GetItemMetinSocket(invenType, invenPos, i))
+			attrSlot = []
+			for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM):
+				attrSlot.append(player.GetItemAttribute(invenType, invenPos, i))
+
+			self.AddItemData(itemVnum, metinSlot, attrSlot)
+
 	def SetInventoryItem(self, slotIndex, window_type = player.INVENTORY):
 		itemVnum = player.GetItemIndex(window_type, slotIndex)
 		if 0 == itemVnum:
@@ -697,10 +715,22 @@ class ItemToolTip(ToolTip):
 		if app.ENABLE_CHEQUE_SYSTEM:
 			self.AppendSpace(5)
 			self.AppendTextLine(localeInfo.CHEQUE_SYSTEM_SELL_PRICE, grp.GenerateColor(1.0, 0.9686, 0.3098, 1.0))
-			self.AppendCheque(cheque)
-			self.AppendPrice(price)
+			if app.ENABLE_MULTISHOP and shop.GetItemGemPrice(slotIndex) > 0:
+				self.AppendGemPriceTextLine(shop.GetItemGemPrice(slotIndex))
+			else:
+				self.AppendCheque(cheque)
+				self.AppendPrice(price)
 		else:
-			self.AppendPrice(price)
+			if app.ENABLE_MULTISHOP and shop.GetItemGemPrice(slotIndex) > 0:
+				self.AppendSpace(5)
+				self.AppendGemPriceTextLine(shop.GetItemGemPrice(slotIndex))
+			elif app.ENABLE_MULTISHOP:
+				if shop.GetBuyWithItem(slotIndex) != 0:
+					self.AppendPriceTextLine(shop.GetBuyWithItemCount(slotIndex), shop.GetBuyWithItem(slotIndex))
+				else:
+					self.AppendPrice(price)
+			else:
+				self.AppendPrice(price)
 
 	def SetShopItemBySecondaryCoin(self, slotIndex):
 		itemVnum = shop.GetItemID(slotIndex)
@@ -719,7 +749,11 @@ class ItemToolTip(ToolTip):
 			attrSlot.append(shop.GetItemAttribute(slotIndex, i))
 
 		self.AddItemData(itemVnum, metinSlot, attrSlot)
-		self.AppendPriceBySecondaryCoin(price)
+		if app.ENABLE_MULTISHOP and shop.GetItemGemPrice(slotIndex) > 0:
+			self.AppendSpace(5)
+			self.AppendGemPriceTextLine(shop.GetItemGemPrice(slotIndex))
+		else:
+			self.AppendPriceBySecondaryCoin(price)
 
 	def SetExchangeOwnerItem(self, slotIndex):
 		itemVnum = exchange.GetItemVnumFromSelf(slotIndex)
@@ -1514,6 +1548,58 @@ class ItemToolTip(ToolTip):
 		else:
 			return ""
 
+	if app.ENABLE_MULTISHOP:
+		def AppendPriceTextLine(self, price, priceVnum):
+			item.SelectItem(priceVnum)
+			windowBack = ui.Window()
+			windowBack.SetParent(self)
+
+			textLine = ui.TextLine()
+			textLine.SetParent(windowBack)
+			textLine.SetFontName(self.defFontName)
+			textLine.SetPackedFontColor(self.FONT_COLOR)
+			textLine.SetText("%sx" % (localeInfo.TOOLTIP_BUYPRICE % int(price)))
+			textLine.SetOutline()
+			textLine.SetFeather(False)
+			textLine.SetPosition(0, 10)
+			textLine.Show()
+
+			itemImage = ui.ImageBox()
+			itemImage.SetParent(windowBack)
+			itemImage.LoadImage(item.GetIconImageFileName())
+			itemImage.SetPosition(textLine.GetTextSize()[0] + 2, 0)
+			itemImage.Show()
+
+			textLineName = ui.TextLine()
+			textLineName.SetParent(windowBack)
+			textLineName.SetFontName(self.defFontName)
+			textLineName.SetPackedFontColor(self.FONT_COLOR)
+			textLineName.SetText("%s" % item.GetItemName())
+			textLineName.SetOutline()
+			textLineName.SetFeather(False)
+			textLineName.SetPosition(textLine.GetTextSize()[0] + itemImage.GetWidth() + 4, 10)
+			textLineName.Show()
+
+			windowBack.SetPosition(0, self.toolTipHeight)
+			windowBack.SetSize(textLine.GetTextSize()[0] + itemImage.GetWidth() + textLineName.GetTextSize()[0] + 6, 32)
+			windowBack.SetWindowHorizontalAlignCenter()
+			windowBack.Show()
+
+			self.toolTipHeight += itemImage.GetHeight()
+
+			self.childrenList.append(textLine)
+			self.childrenList.append(textLineName)
+			self.childrenList.append(itemImage)
+			self.childrenList.append(windowBack)
+			self.ResizeToolTip()
+
+		def AppendGemPriceTextLine(self, gemAmount):
+			self.AppendSpace(5)
+			try:
+				line = localeInfo.TOOLTIP_SHOP_GEM_PRICE % int(gemAmount)
+			except BaseException:
+				line = "Fiyat: %s GAYA" % localeInfo.NumberToString(int(gemAmount))
+			self.AppendTextLine(line, 0xFF00cfb6)
 
 	def __IsHair(self, itemVnum):
 		return (self.__IsOldHair(itemVnum) or

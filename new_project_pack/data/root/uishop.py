@@ -412,7 +412,9 @@ class ShopDialog(ui.ScriptWindow):
 		itemName = item.GetItemName()
 
 		itemBuyQuestionDialog = uiCommon.QuestionDialog()
-		if app.ENABLE_CHEQUE_SYSTEM:
+		if app.ENABLE_MULTISHOP and shop.GetItemGemPrice(slotPos) > 0:
+			itemBuyQuestionDialog.SetText(localeInfo.DO_YOU_BUY_ITEM_GEM(itemName, itemCount, shop.GetItemGemPrice(slotPos)))
+		elif app.ENABLE_CHEQUE_SYSTEM:
 			if itemCheque > 0 and itemPrice <=0:
 				itemBuyQuestionDialog.SetText(localeInfo.DO_YOU_BUY_ITEM_CHEQUE_SIN_YANG(itemName, itemCount, localeInfo.NumberToCheque(itemCheque)))
 			elif itemCheque <= 0 and itemPrice > 0:
@@ -504,3 +506,27 @@ class MallPageDialog(ui.ScriptWindow):
 	def OnPressEscapeKey(self):
 		self.Close()
 		return True
+
+	def AskBuyItem(self, slotPos):
+		itemIndex = shop.GetItemID(slotPos)
+		itemPrice = shop.GetItemPrice(slotPos)
+		itemCount = shop.GetItemCount(slotPos)
+
+		item.SelectItem(itemIndex)
+		itemName = item.GetItemName()
+
+		itemBuyQuestionDialog = uiCommon.QuestionDialog()
+		if app.ENABLE_MULTISHOP and shop.GetItemGemPrice(slotPos) > 0:
+			itemBuyQuestionDialog.SetText(localeInfo.DO_YOU_BUY_ITEM_GEM(itemName, itemCount, shop.GetItemGemPrice(slotPos)))
+		elif app.ENABLE_MULTISHOP:
+			if shop.GetBuyWithItem(slotPos) != 0:
+				itemBuyQuestionDialog.SetText(localeInfo.DO_YOU_BUY_ITEM(itemName, itemCount, localeInfo.NumberToWithItemString(shop.GetBuyWithItemCount(slotPos), item.GetItemName())))
+			else:
+				itemBuyQuestionDialog.SetText(localeInfo.DO_YOU_BUY_ITEM(itemName, itemCount, localeInfo.NumberToMoneyString(itemPrice)))
+		else:
+			itemBuyQuestionDialog.SetText(localeInfo.DO_YOU_BUY_ITEM(itemName, itemCount, localeInfo.NumberToMoneyString(itemPrice)))
+		itemBuyQuestionDialog.SetAcceptEvent(lambda arg=TRUE: self.AnswerBuyItem(arg))
+		itemBuyQuestionDialog.SetCancelEvent(lambda arg=FALSE: self.AnswerBuyItem(arg))
+		itemBuyQuestionDialog.Open()
+		itemBuyQuestionDialog.pos = slotPos
+		self.itemBuyQuestionDialog = itemBuyQuestionDialog

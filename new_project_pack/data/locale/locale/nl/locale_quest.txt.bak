@@ -1,3 +1,7 @@
+21301	Crafting
+21302	Mithril craften
+21303	Zwarte Steen craften
+21304	Paars Boek craften
 1	Een bijzonder doek
 2	Ik heb je al verteld over de krachten die we[ENTER]nodig hebben om Sung Mahi te confronteren.[ENTER][ENTER]Haast je en zoek de Kapitein.[ENTER][ENTER]Keer terug wanneer je het benodigde doek hebt.
 3	Verhoog je kracht
@@ -951,7 +955,7 @@
 952	Ahhh ik voel de Kracht van het Drakenoog in jou.[ENTER]Als teken van mijn diepe respect, wil ik je deze[ENTER]Cor Draconis cadeau geven.[ENTER]Een steen per dag - ik ben bang dat ik er niet[ENTER]meer kan missen.
 953	Alsjeblieft, je Cor Draconis. Succes.
 954	Het spijt me, ik kan niet meer dan 1 per dag[ENTER]missen. Kom morgen terug, misschien heb ik dan[ENTER]een nieuwe Cor Draconis voor je.
-955	GM: Dagelijkse Missie – Instellingen
+955	GM: Dagelijkse Missie - Instellingen
 956	Starttijd
 957	Eindtijd
 958	Vul datum en tijd in volgens:[ENTER]jj.mm.dd[ENTER]uu.mm
@@ -1335,7 +1339,7 @@
 1336	Je groep zal geteleporteerd worden vanuit het[ENTER]Rode Draken Fort in 10 seconden.
 1337	Wek de Verslinder van Am-heh
 1338	Alleen de groepsleider mag de Verslinder van[ENTER]Am-heh wekken.
-1339	De Verslinder van Am-heh is gewekt. Nu kan[ENTER]niemand meer binnen komen – of er uit gaan.
+1339	De Verslinder van Am-heh is gewekt. Nu kan[ENTER]niemand meer binnen komen - of er uit gaan.
 1340	De poorten van het Rode Draken Fort blijven[ENTER]gesloten voor een uur.
 1341	Overgebleven tijd: 60 minuten
 1342	Taak: Reis door de Demonen Ring en kom naar[ENTER]buiten als overwinnaar.
@@ -4658,7 +4662,7 @@
 4659	
 4660	Hier, alsjeblieft.
 4661	Haastig geschreven woorden:
-4662	Yak-Hwan, ik zal niet levend terugkeren, maar ik[ENTER]hoop dat deze brief je zal bereiken. Ik ben een[ENTER]fort tegengekomen in Vuurland die op geen enkele[ENTER]kaart te vinden is. De heerser is een krachtige[ENTER]vuurland demon – een uniek aura straalt van hem[ENTER]af, net als van alle demonen die hem volgen.[ENTER]Zijn brul is oorverdovend en het lijkt alsof hij[ENTER]iets bewaakt. Maar wat dat is, kan ik je niet[ENTER]zeggen. Vergeef me, ik heb gefaald...
+4662	Yak-Hwan, ik zal niet levend terugkeren, maar ik[ENTER]hoop dat deze brief je zal bereiken. Ik ben een[ENTER]fort tegengekomen in Vuurland die op geen enkele[ENTER]kaart te vinden is. De heerser is een krachtige[ENTER]vuurland demon - een uniek aura straalt van hem[ENTER]af, net als van alle demonen die hem volgen.[ENTER]Zijn brul is oorverdovend en het lijkt alsof hij[ENTER]iets bewaakt. Maar wat dat is, kan ik je niet[ENTER]zeggen. Vergeef me, ik heb gefaald...
 4663	We moeten uitvinden wat er verborgen ligt in dat[ENTER]fort.[ENTER]Kijk hier, aan de binnenkant van de Geklonken[ENTER]Ketting staat iets gegraveerd. Ik zal[ENTER]Yon-I-Walker om advies vragen. Hij zal contact[ENTER]met je opnemen.
 4664	Ontcijfer de Gravering.
 4665	Yon-I-Walker zoekt je. Ga naar hem toe.
@@ -4699,7 +4703,7 @@
 4700	Geef je het al op? Het leger Sintel Vlamdemonen[ENTER]in het fort is nog te sterk. Blijf vechten!
 4701	Je hebt het leger Sintel Vlamdemonen verslagen.[ENTER]Rapporteer aan Yak-Hwan.
 4702	Keer terug naar Yak-Hwan.
-4703	Je bent terug – en van wat ik kan zien, is het je[ENTER]gelukt! Wat kan je me vertellen?
+4703	Je bent terug - en van wat ik kan zien, is het je[ENTER]gelukt! Wat kan je me vertellen?
 4704	
 4705	Een sterke Vlam Demon zeg je? Dat is Razador, de[ENTER]heerser van vuur! Als de Dienaren hem hebben[ENTER]gestuurd, moet er iets heel waardevols liggen in[ENTER]dat fort. Misschien zelfs wel de legendarische[ENTER]rode draak! Ik zal dit bespreken met mijn[ENTER]adviseurs. Hier neem dit Vrijbiljet je zal hem[ENTER]later nodig hebben.
 4706	Zwarte Materie
@@ -4722,7 +4726,7 @@
 4723	Zwarte Materie Neutraliseren
 4724	Goed nieuws! ik heb een manier gevonden hoe de[ENTER]kracht van de Zwarte Materie kan worden[ENTER]geneutraliseerd!
 4725	
-4726	Alle krachten uit de natuur hebben een[ENTER]tegenhanger – licht en donker, water en vuur,[ENTER]goed en kwaad.[ENTER]Zelfs Zwarte Materie heeft een tegenhanger, iets[ENTER]met de kracht om het te neutraliseren: Pure[ENTER]Lumen!
+4726	Alle krachten uit de natuur hebben een[ENTER]tegenhanger - licht en donker, water en vuur,[ENTER]goed en kwaad.[ENTER]Zelfs Zwarte Materie heeft een tegenhanger, iets[ENTER]met de kracht om het te neutraliseren: Pure[ENTER]Lumen!
 4727	Om Pure Lumen te maken, moet je Energie[ENTER]Fragmenten smelten in Mong Water. Kan je 50[ENTER]flessen Mong Water en 100 Energie Fragmenten[ENTER]verzamelen en ze naar Y-Hwan brengen? Dank je.
 4728	Ik ga aan de slag.
 4729	Verzamel 50 flessen Mong Water en 100 Energie[ENTER]Fragmenten en breng ze naar Yu-Hwan.
@@ -4821,10 +4825,10 @@
 4822	Praat met Yon-I-Walker.
 4823	Ga naar Yon-I-Walker en ontdek hoe je voor eens[ENTER]en altijd kan afrekenen met Razador.
 4824	Je hebt Yon-I-Walker nog niet gesproken? Hoe denk[ENTER]je zo Razador te kunnen verslaan?! Ga! Waar wacht[ENTER]je op!
-4825	Ja, het is waar. Razador is terug – en[ENTER]geïrriteerder dan ooit te voor. We hebben nog[ENTER]maar 1 manier om de Dienaren van het Duister te[ENTER]stoppen.
+4825	Ja, het is waar. Razador is terug - en[ENTER]geïrriteerder dan ooit te voor. We hebben nog[ENTER]maar 1 manier om de Dienaren van het Duister te[ENTER]stoppen.
 4826	Razador zal niet rusten tot hij zijn taak heeft[ENTER]voltooid en de rode draak heeft bevrijd. Om dit[ENTER]te stoppen moeten we de draak uitbannen.
 4827	
-4828	Het element van de rode draak is buur... en vuur[ENTER]kan het best bestreden worden met – vuur! Elke[ENTER]Sintel Vlamdemon heeft een ring van magma om hun[ENTER]hart. Breng me 5 van deze Magma ringen.
+4828	Het element van de rode draak is buur... en vuur[ENTER]kan het best bestreden worden met - vuur! Elke[ENTER]Sintel Vlamdemon heeft een ring van magma om hun[ENTER]hart. Breng me 5 van deze Magma ringen.
 4829	Bestorm het Rode Drakenfort en verzamel Magma[ENTER]Ringen.
 4830	Verzamel 5 Magma Ringen van de Sintel Vlamdemonen.Yon-I-Walker geeft er 5 nodig. Aangezien ze snel[ENTER]afkoelen moet je er meer dan de benodig[ENTER]hoeveelheid verzamelen.
 4831	Dat zijn niet genoeg Magma Ringen. Ik heb er nog[ENTER]%d nodig.
@@ -4847,11 +4851,11 @@
 4848	Nu heb ik Manticoor Leer nodig van de vleugelhuid[ENTER]van Martyaxwar, leider van de manticoren.[ENTER]Verzamel er 5 van.
 4849	Verzamel 5 stukken Manticoor Leer van Martyaxwar.[ENTER]Breng ze naar Yon-I-Walker.
 4850	Verzamel 5 stukken Manticoor Leer van Martyaxwar.[ENTER]Breng ze naar Yon-I-Walker.
-4851	We zijn zo dicht bij ons doel – geef niet op.[ENTER]Breng me het Manticoor Leer!
+4851	We zijn zo dicht bij ons doel - geef niet op.[ENTER]Breng me het Manticoor Leer!
 4852	Perfect, ik heb nu alles dat nodig is. Wacht[ENTER]even... ahh, de Ring van Samael! Een krachtig[ENTER]artefact dat de rode draak al uitbannen. Hier,[ENTER]neem deze 3 ringen en breng ze naar Yak-Hwan.[ENTER]Tevens wil ik je dit Vrijbiljet geven, die zal je[ENTER]later nodig gaan hebben.
 4853	Je hebt alle stukken Manticoor Leer verzameld.[ENTER]Breng ze naar Yon-I-Walker.
 4854	Het Gevecht Begint
-4855	Bereid je voor – het gevecht staat op het punt te[ENTER]beginnen. Yak-Hwan heeft een laatste briefing[ENTER]voor je.
+4855	Bereid je voor - het gevecht staat op het punt te[ENTER]beginnen. Yak-Hwan heeft een laatste briefing[ENTER]voor je.
 4856	Het is tijd. Onze troepen staan klaar. Het[ENTER]gevecht kan beginnen. Heb je de Ring van Samael[ENTER]bij je?
 4857	Ja, hier is hij.
 4858	Ah, heel goed. Ik zal je later vertellen hoe je[ENTER]het kan gebruiken. Maar eerst moeten we de[ENTER]nieuwgevormde verdedigingslinies van de[ENTER]vlammendemomen zien te doorbreken. Ga naar het[ENTER]Rode Draken Fort en versla:[ENTER]10 Sintel Vlammenkoningen[ENTER]10 Sintel Vlambaarden[ENTER]10 Sintel Vlamtrollen[ENTER]10 Sintel Vlamgeneraals[ENTER]10 Sintel Vlamleiders
@@ -4864,14 +4868,14 @@
 4865	Je bent nog niet door de vijandelijke linies heen[ENTER]gebroken. Versla alle benodigde Sintel Vlam[ENTER]Demonen.
 4866	Je hebt alle Sintel Vlam Demonen verslagen.[ENTER]Rapporteer aan Yak-Hwan.
 4867	Keer terug naar Yak-Hwan.
-4868	Dat heb je goed gedaan. Weer een stap dichter bij[ENTER]ons doel – de rode draak zal ons niet veel langer[ENTER]bedreigen!
+4868	Dat heb je goed gedaan. Weer een stap dichter bij[ENTER]ons doel - de rode draak zal ons niet veel langer[ENTER]bedreigen!
 4869	Oud Wrok, Nieuw Gevecht
 4870	Je aartsvijand, Razador, lijkt niet blij te zijn[ENTER]met het feit dat je hem hebt gedood. Zijn brul[ENTER]klinkt luider dan ooit te voor over de vlaktes[ENTER]van Doyyumhwan.
 4871	HEt is tijd om hem nogmaals de mond te snoeren.[ENTER]Zoals hij staat, met arendsogen, boven de poort[ENTER]waarachter de Rode Draak zich schuil houdt. Pas[ENTER]voor hem op! Hij heeft geleerd van zijn verlies[ENTER]en zal niet 2x de zelfde fout maken.
 4872	Versla Razador, heerser van vuur.
 4873	Speel met Vuur
 4874	Versla Razador, heerser van vuur, in het Rode[ENTER]Drakenfort.
-4875	Was Razador te zwaar voor je dit keer? Ik heb[ENTER]moeite om dat te geloven! Je hebt het al eens[ENTER]eerder gedaan – je kan hem nu ook aan!
+4875	Was Razador te zwaar voor je dit keer? Ik heb[ENTER]moeite om dat te geloven! Je hebt het al eens[ENTER]eerder gedaan - je kan hem nu ook aan!
 4876	Razador is verslagen. Rapporteer aan Yak-Hwan.
 4877	Ik wist dat het je zou lukken! Ik zal nu[ENTER]voorbereidingen treffen voor een[ENTER]verbanningsritueel. Zodra we klaar zijn zal ik je[ENTER]laten komen.
 4878	De Rode Draak
@@ -4883,14 +4887,14 @@
 4884	Gooi de Ring van Samael op Taramors Grafsteen om[ENTER]de Rode Draak te verbannen.
 4885	Taramors Grafsteen: 1 stuk
 4886	Vuurspektakel
-4887	Was dat alles, jij worm?! Dat kietelde niet eens[ENTER]– je hebt me niet verbannen daarmee! Ik zal[ENTER]Razador nogmaals terughalen uit het land van de[ENTER]doden. Hij zal mij bevrijden van mijn gevangenis[ENTER]en jij zal mijn wraak voelen!
+4887	Was dat alles, jij worm?! Dat kietelde niet eens[ENTER]- je hebt me niet verbannen daarmee! Ik zal[ENTER]Razador nogmaals terughalen uit het land van de[ENTER]doden. Hij zal mij bevrijden van mijn gevangenis[ENTER]en jij zal mijn wraak voelen!
 4888	De verbanning van de Rode Draak is mislukt.[ENTER]Rapporteer aan Yak-Hwan.
 4889	Het Ritueel is mislukt? De rode draak moet[ENTER]sterker zijn dan we dachten...
 4890	
 4891	Je hebt geweldig werk gedaan, en jou treft geen[ENTER]blaam.[ENTER]Ik zal niet rusten tot ik een manier heb gevonden[ENTER]om de Rode Draak te verbannen! Maar dat kost[ENTER]tijd.[ENTER]Ik wil je bedanken voor al wat je voor ons hebt[ENTER]gedaan.
 4892	Ren het vuur in
 4893	Yak-Hwan zoekt je. Ga naar hem toe en zoek uit[ENTER]zat hij wilt.
-4894	Welkom terug! We zouden je eigenlijk een korte[ENTER]pauze moeten gunnen – De Dienaren van het Duister[ENTER]zijn weer actief. Dat kan nooit goed zijn.
+4894	Welkom terug! We zouden je eigenlijk een korte[ENTER]pauze moeten gunnen - De Dienaren van het Duister[ENTER]zijn weer actief. Dat kan nooit goed zijn.
 4895	
 4896	Echter, mijn informatie is zeer vaag. Alles dat[ENTER]we weten is dat ze zich verscholen houden in[ENTER]Vuurland.
 4897	We hebben al een verkenner gestuurd. Maar al het[ENTER]contact is verbroken en ik ben heel erg bezorgd.[ENTER]Kan je kijken of je hem kan vinden op weg naar[ENTER]het Vuurtijd?
@@ -4922,7 +4926,7 @@
 4923	Yon-I-Walker zoekt je. Ga naar hem toe om meer te[ENTER]weten te komen.
 4924	Ah, daar ben je! Het Aura is verraderlijk en[ENTER]verdoezeld mijn geest.[ENTER]Ik heb Zonnekruiden nodig om mijn geest te[ENTER]verlichten en mijn onderzoek door te zetten. Kan[ENTER]jij er een aantal voor mij verkrijgen?
 4925	Tuurlijk.
-4926	De Zonnekruiden groeien op hete droge plekken –[ENTER]ze kunnen het hele jaar rond in Vuurland gevonden[ENTER]worden. Ik zal de plek waar ik ze voor het laatst[ENTER]heb gevonden op je kaart markeren.[ENTER]Al weet ik niet zeker of dit de exacte plek is.
+4926	De Zonnekruiden groeien op hete droge plekken -[ENTER]ze kunnen het hele jaar rond in Vuurland gevonden[ENTER]worden. Ik zal de plek waar ik ze voor het laatst[ENTER]heb gevonden op je kaart markeren.[ENTER]Al weet ik niet zeker of dit de exacte plek is.
 4927	Ik zal die richting op gaan.
 4928	Ga naar de plek gemarkeerd in Vuurland en zoek de[ENTER]Zonnekruiden.
 4929	Zonnekruiden
@@ -5663,7 +5667,7 @@
 5664	Ik had gehoopt dat je met beter nieuws zou komen.
 5665	De demonen op het eiland worden sterker en[ENTER]sterker. Als we Sung Mahi en de Dienaren van het[ENTER]Duister niet kunnen stoppen, kunnen we alleen nog[ENTER]maar hopen op de genade van de drakengod.
 5666	Ja, Ik geef toe dat het er slecht uit ziet.
-5667	Dat kan je wel zeggen ja… Lee Chung moet een[ENTER]belangrijke clue hebben ontdekt. Hij heeft me een[ENTER]brief gestuurd, maar die heb ik niet gekregen.[ENTER]Het bericht moet onderschept zijn door de[ENTER]Gnollen.
+5667	Dat kan je wel zeggen ja... Lee Chung moet een[ENTER]belangrijke clue hebben ontdekt. Hij heeft me een[ENTER]brief gestuurd, maar die heb ik niet gekregen.[ENTER]Het bericht moet onderschept zijn door de[ENTER]Gnollen.
 5668	We moeten deze brief vinden. Kan je ons helpen?
 5669	Maar natuurlijk, ik ben al onderweg.
 5670	Bedankt. De gnollen leven hier vlak bij.
@@ -5687,7 +5691,7 @@
 5688	Je hebt de Brief van Gnol bemachtigt.
 5689	Breng het naar Admiraal Angmur.
 5690	Praat met Admiraal Angmur.
-5691	Je hebt de brief! Eindelijk goed nieuws hè?[ENTER]Hmmm… Ik begrijp er geen woord van. De brief[ENTER]lijkt geëncrypt. Onze Geleerde weet wel het een[ENTER]an ander af van cryptologie. Ik zal hem direct[ENTER]opzoeken.[ENTER]Zodra ik meer weet, zal ik je het laten weten. We[ENTER]blijven in contact.
+5691	Je hebt de brief! Eindelijk goed nieuws hè?[ENTER]Hmmm... Ik begrijp er geen woord van. De brief[ENTER]lijkt geëncrypt. Onze Geleerde weet wel het een[ENTER]an ander af van cryptologie. Ik zal hem direct[ENTER]opzoeken.[ENTER]Zodra ik meer weet, zal ik je het laten weten. We[ENTER]blijven in contact.
 5692	
 5693	
 5694	De Brief van Gnol II
@@ -6071,7 +6075,7 @@
 6072	Aye, dus je hebt je staande weten te houden[ENTER]tegenover Kaptein Haken. Wat is dat? Een brief?[ENTER]Laat zien!
 6073	
 6074	Vervloekt! Kaptein Haken heeft het Zwarte Goud al[ENTER]aan de Banshee gegeven.[ENTER]De laatste zin is wel vreemd: De vloek van het[ENTER]leven zal worden opgeroepen vanuit de mist van[ENTER]tijd door het leger van duisternis.
-6075	We moeten deze levering stoppen! ik denk dat de[ENTER]schuilplaats van de Banshee in het Westen van[ENTER]Gautama Klif is – een goddeloze plek, constant[ENTER]gehuld in een dikke mist. Boemannen en Lemures[ENTER]leven daar.
+6075	We moeten deze levering stoppen! ik denk dat de[ENTER]schuilplaats van de Banshee in het Westen van[ENTER]Gautama Klif is - een goddeloze plek, constant[ENTER]gehuld in een dikke mist. Boemannen en Lemures[ENTER]leven daar.
 6076	
 6077	Zodra ik weet welke route gebruikt wordt om het[ENTER]Zwarte Goud naar de Banshee te brengen, zal ik[ENTER]het melden.
 6078	Wendt de Bezorging af.
@@ -6108,7 +6112,7 @@
 6109	Admiraal Angmur heeft nieuwe informatie voor je.[ENTER]Ga naar hem toe.
 6110	We weten nu wat er bedoeld wordt met de vloek van[ENTER]het leven en het leger van duisternis. Er leefde[ENTER]ooit een verschrikkelijke magiër op Donkere Draak[ENTER]Steen. En hij had ambities voor het overheersen[ENTER]van het gehele continent en hij stopte letterlijk[ENTER]nergens voor om dit te behalen: met gebruik van[ENTER]zwarte magie riep hij de doden op en stuurde hen[ENTER]ten strijde als zijn leger.
 6111	
-6112	Het oproepen van de Doden – alleen al de gedachte[ENTER]ervan doet me beven. De Dienaren van het Dusiter[ENTER]gebruiken het Zwarte Goud om een leger van[ENTER]ondoden te maken. We moeten ze tegenhouden!
+6112	Het oproepen van de Doden - alleen al de gedachte[ENTER]ervan doet me beven. De Dienaren van het Dusiter[ENTER]gebruiken het Zwarte Goud om een leger van[ENTER]ondoden te maken. We moeten ze tegenhouden!
 6113	Zoek naar de Lemures Magiër in de oude ruïne bij[ENTER]Gautama Klif Hij weet wel iets over deze vloek.[ENTER]Als je het aardig vraagt zal hij je zeker alles[ENTER]vertellen wat we willen weten.
 6114	Aardig vragen... ehh.... Begrepen.
 6115	Vloek van het Leven
@@ -6130,7 +6134,7 @@
 6131	Drie dingen zijn nodig om de Doden te laten[ENTER]ontwaken:[ENTER]1. Een menselijk lichaam[ENTER]2. Zwart Goud[ENTER]3. Schors van een Boomdemoon[ENTER]Alleen een Magiër met geweldige vaardigheden kan[ENTER]de Vloek van het Leven oproepen en onderhouden.[ENTER]En wanneer hij sterft, zal het hele leger van de[ENTER]ondoden sterven.
 6132	Dus dat is de reden dat onze begraafplaatsen zijn[ENTER]geplunderd en de lijken zijn gestolen uit hun[ENTER]graf.[ENTER]Ze moeten weer tot leven gebracht worden en tegen[ENTER]ons gestuurd worden als een leger van ondoden.[ENTER]Wat een ziekmakende gedachte.
 6133	We moeten deze verschrikkelijke daad stoppen!
-6134	Aye, maar tijd werkt ons tegen. Alleen de Banshee[ENTER]is sterk genoeg om een vloek van dit formaat op[ENTER]te roepen – maar we weten niet waar ze zich[ENTER]verbergt.[ENTER]Ik zal meer manschappen er op uitsturen om de[ENTER]locatie van de duistere hoge priesteres te[ENTER]vinden.[ENTER]Zodra ik iets hoor, zal ik het je laten weten.
+6134	Aye, maar tijd werkt ons tegen. Alleen de Banshee[ENTER]is sterk genoeg om een vloek van dit formaat op[ENTER]te roepen - maar we weten niet waar ze zich[ENTER]verbergt.[ENTER]Ik zal meer manschappen er op uitsturen om de[ENTER]locatie van de duistere hoge priesteres te[ENTER]vinden.[ENTER]Zodra ik iets hoor, zal ik het je laten weten.
 6135	
 6136	Het avontuur gaat verder zodra je level 96 hebt[ENTER]bereikt.
 6137	Rapporteer terug aan Admiraal Angmur.
@@ -6173,7 +6177,7 @@
 6174	We hebben 100 Gouden Munten nodig. Maar ik ben[ENTER]bang dat niet alle munten die je zal vinden als[ENTER]medium gebruikt kunnen worden. Er is veel werk[ENTER]aan de winkel.
 6175	Geen probleem.
 6176	Jacht op Goud.
-6177	Neem het op tegen de Boemannen in het gevecht en[ENTER]verzamel Geld Zakken. Niet alle munten zijn[ENTER]mediums – laat ze controleren door Yon-I-Walker.
+6177	Neem het op tegen de Boemannen in het gevecht en[ENTER]verzamel Geld Zakken. Niet alle munten zijn[ENTER]mediums - laat ze controleren door Yon-I-Walker.
 6178	Ja, ik kan duidelijk de duistere magie voelen.
 6179	Fantastisch, we hebben nu alle gouden munten die[ENTER]als medium gebruikt kunnen worden. Daar zal de[ENTER]Banshee niet blij mee zijn. Hier dit is je[ENTER]beloning.[ENTER]Angmur zal je de volgende taak geven.
 6180	Er missen nog steeds gouden munten. Verzamel er[ENTER]nog %d.
@@ -6193,7 +6197,7 @@
 6194	Rapporteer aan Admiraal Angmur.
 6195	Goed dat je ongeschonden terug bent! Is alles[ENTER]gelukt?[ENTER]WAT?! De schors was al van de Boom Demonen[ENTER]gehaald? De Dienaren van het Duister moeten ons[ENTER]voor geweest zijn.
 6196	
-6197	Als ze de schors hebben, dan zullen ze ook een[ENTER]manier vinden om de Vloek van het Leven op te[ENTER]roepen. Het lijkt onontkoombaar – we raken in[ENTER]oorlog. De Banshee zal zich niet langer schuil[ENTER]voor ons kunnen houden. Mijn mannen zijn haar al[ENTER]op het spoor. Ik zal je roepen wanneer we haar[ENTER]gevonden hebben.
+6197	Als ze de schors hebben, dan zullen ze ook een[ENTER]manier vinden om de Vloek van het Leven op te[ENTER]roepen. Het lijkt onontkoombaar - we raken in[ENTER]oorlog. De Banshee zal zich niet langer schuil[ENTER]voor ons kunnen houden. Mijn mannen zijn haar al[ENTER]op het spoor. Ik zal je roepen wanneer we haar[ENTER]gevonden hebben.
 6198	Het avontuur gaat verder wanneer je level 97 bent.
 6199	Overgebleven
 6200	%s: %d delen
@@ -6258,7 +6262,7 @@
 6259	De beslissende dag is aangekomen. Als we falen,[ENTER]faalt de wereld met ons. Maar als we overwinnen,[ENTER]zullen onze daden bezongen worden voor nog[ENTER]honderden haren. Stop de Dienaren van het[ENTER]Duister![ENTER]Versla de Tempel Dienares Yah-Ki!
 6260	Waarom ben je hier? Het gevecht is nog niet[ENTER]gewonnen! Versla de Tempel Dienares Yah-Ki. Jij[ENTER]bent onze enige hoop!
 6261	Je hebt je tegenstander op de knieën gebracht en[ENTER]de overwinning is de jouwe!
-6262	Er is geen tijd voor ontspanning – de Tempel[ENTER]Dienares Yah-Ki wacht op je.
+6262	Er is geen tijd voor ontspanning - de Tempel[ENTER]Dienares Yah-Ki wacht op je.
 6263	Je hebt gezonnen! Met een bloedstollende gil valt[ENTER]Yah-Ki neer op de grond.
 6264	Aargh! Dit kan niet! Verslagen door een[ENTER]sterveling...[ENTER]oh Banshee, vergeef me! Ik heb gefaald! Ik kon[ENTER]mijn taak niet volb...
 6265	Je doorzoekt haar levenloze lichaam en vindt een[ENTER]verzegelde brief. Breng deze naar Admiraal[ENTER]Angmur.
@@ -6451,7 +6455,7 @@
 6452	Zoals je wilt.. Tot snel weerziens!
 6453	Donkere Draak Steen
 6454	Recentelijk is er een mysterieus land ontdekt. We[ENTER]heb ben het Donkere Draak Steen genoemd. Zij die[ENTER]daar willen overleven hebben flink wat ervaring[ENTER]nodig. Daarom neem ik alleen krijgers mee die[ENTER]level 90 hebben bereikt. Ben je klaar om deze[ENTER]reis te ondernemen?
-6455	Je kan het eiland alleen per schip bereiken – en[ENTER]de reis is lang en zwaar. Des te hoger je level[ENTER]des te moeilijker het vervoer. Daarom vraag ik[ENTER]een hoger tarief van jou.
+6455	Je kan het eiland alleen per schip bereiken - en[ENTER]de reis is lang en zwaar. Des te hoger je level[ENTER]des te moeilijker het vervoer. Daarom vraag ik[ENTER]een hoger tarief van jou.
 6456	Deze reis kost je %d Yang.
 6457	Kaart Informatie
 6458	Dit is een fascinerende plek, of niet soms? Op[ENTER]andere plaatsen in het land ziet alles er net[ENTER]even een beetje anders uit! Er zijn vele[ENTER]interessante locaties waar ik je naartoe kan[ENTER]teleporteren. Nu de krachten van het kwaad weer[ENTER]sterker zijn geworden, is de tijd en ruimte[ENTER]opnieuw een chaos. Je terugkeer zal niet altijd[ENTER]willen lukken. Wil je toch geteleporteerd worden?
@@ -7877,7 +7881,7 @@
 7878	En het goede nieuws is: je kunt veel besparen met[ENTER]de pakketten!
 7879	Een draaiende munt zal je de weg wijzen naar de[ENTER]pakketten.
 7880	Kracht van Wijsheid
-7881	Hey, luister goed! Ik heb het eindelijk gevonden[ENTER]– de bron der wijsheid! Zijn kracht vergroot de[ENTER]hoeveelheid ervaring die je verzameld voor een[ENTER]bepaald periode.[ENTER]Ik denk dat ik dit aan jou kan toevertrouwen. Als[ENTER]je interesse hebt, kom dan een keer met mij[ENTER]praten.
+7881	Hey, luister goed! Ik heb het eindelijk gevonden[ENTER]- de bron der wijsheid! Zijn kracht vergroot de[ENTER]hoeveelheid ervaring die je verzameld voor een[ENTER]bepaald periode.[ENTER]Ik denk dat ik dit aan jou kan toevertrouwen. Als[ENTER]je interesse hebt, kom dan een keer met mij[ENTER]praten.
 7882	Kracht van Wijsheid
 7883	Dus, jij wilt de Kracht van Wijsheid voelen?[ENTER]Gedurende %d uur zorgt het ervoor dat je %d%%[ENTER]meer ervaring kunt verzamelen.
 7884	Ben je klaar? Mooi, ik zal je nu de Kracht van[ENTER]Wijsheid geven.[ENTER]...[ENTER]Het is gelukt!
@@ -7922,7 +7926,7 @@
 7923	PvP Toernooi Registratie
 7924	Je kunt deelnemen aan het toernooi als je level[ENTER]tussen %d en %d is.
 7925	Helaas, alle beschikbare plaatsen in het[ENTER]PvP-toernooi zijn vol.
-7926	Welkom bij het PvP-toernooi! Daag waardige[ENTER]tegenstanders uit en geef alles wat je in huis[ENTER]hebt – moge de Draken God met je zijn.
+7926	Welkom bij het PvP-toernooi! Daag waardige[ENTER]tegenstanders uit en geef alles wat je in huis[ENTER]hebt - moge de Draken God met je zijn.
 7927	Hoe denk je erover? Durf je de uitdaging aan?[ENTER]Registreer je dan nu voor het toernooi.
 7928	Ja, uiteraard!
 7929	Nee, liever niet.
@@ -7945,7 +7949,7 @@
 7946	GM: PvP-toernooi start/einde
 7947	PvP-toernooi starten/beëindigen
 7948	Starten: Geef de registratieduur aan in minuten.
-7949	GM: PvP-toernooi – Instellingen
+7949	GM: PvP-toernooi - Instellingen
 7950	Minimumlevel (Min: 15)
 7951	Maximumlevel (Max: 120)
 7952	Je hebt het minimale level nog niet bereikt.
@@ -10634,7 +10638,7 @@
 11388	Nog niet alle demonen zijn verslagen.
 11389	Taak: vind het TS: Gouden Tandrad en gebruik het[ENTER]om het verborgen mechanisme in Stele van Isfet te[ENTER]activeren.
 11390	Het Gouden Tandrad (TS) kan buitgemaakt worden[ENTER]van demonen.
-11391	De TS: Am-heh Verslinder is gewekt. Nu kan er[ENTER]niemand meer naar binnen – of naar buiten.
+11391	De TS: Am-heh Verslinder is gewekt. Nu kan er[ENTER]niemand meer naar binnen - of naar buiten.
 11392	De TS: Stele van Isfet is vernietigd.
 11393	Dit Gouden Tandrad (RX) was nep en is vernietigd.[ENTER]Vind het origineel.
 11394	Het mechanisme in de TS: Stele van Isfet kan[ENTER]alleen geactiveerd worden met het TS: Gouden[ENTER]Tandrad. Kom terug wanneer je de taak voltooid[ENTER]hebt.
@@ -10664,7 +10668,7 @@
 11418	Bezoek de RX: Am-heh Verslinder om een volgend[ENTER]Slot van het Lot te openen.
 11419	Wil je door de RX: Am-heh Verslinder gaan en je[ENTER]lot tegemoet gaan?
 11420	Wek de RX: Am-heh Verslinder
-11421	De RX: Am-heh Verslinder is gewekt. Nu kan er[ENTER]niemand meer naar binnen – of naar buiten.
+11421	De RX: Am-heh Verslinder is gewekt. Nu kan er[ENTER]niemand meer naar binnen - of naar buiten.
 11422	Taak: Reis door de Demonen Ring (RX) en kom naar[ENTER]buiten als overwinnaar.
 11423	Taak: vind het RX: Gouden Tandrad en gebruik het[ENTER]om het verborgen mechanisme in Stele van Isfet te[ENTER]activeren.
 11424	Het Gouden Tandrad (RX) kan buitgemaakt worden[ENTER]van demonen.
@@ -12184,7 +12188,7 @@
 12982	Hey, beginnertje. Ik weet nog altijd niet hoe[ENTER]vindingrijk je eigenlijk bent. Als je het dalpad[ENTER]recht achter me volgt, kom je een gigantische[ENTER]tempel tegen. Heb je weleens gehoord van de[ENTER]Serpententempel?
 12983	Je zal een stevig aantal levensgevaarlijke[ENTER]monsters tegen het lijf lopen. Ik durf te wedden[ENTER]dat het nog geen minuut zal duren voordat je de[ENTER]benen neemt. Maar als je dapper genoeg bent, vind[ENTER]je daar vast en zeker schatten.
 12984	Hoe kom ik er binnen?
-12985	Hahaha! Dat kan niet – tenzij ik je binnen laat.[ENTER]Ik zal je moed testen.
+12985	Hahaha! Dat kan niet - tenzij ik je binnen laat.[ENTER]Ik zal je moed testen.
 12986	Je ogen glinsteren positief met een stevige dorst[ENTER]naar actie! Ik weet zeker dat je hier vast wel[ENTER]een paar monsters uit de weg kan ruimen voor me![ENTER]Dit gebied onder controle houden begint wel een[ENTER]beetje af te matten.
 12987	Jaag op monsters in het gebied om de beproeving[ENTER]van de Serpent Wachter te doorstaan.
 12988	De Serpent Wachter wil dat je op %d monsters[ENTER]jaagt op de Yilad Pas.[ENTER]Resterende monsters: %d
@@ -12474,7 +12478,7 @@
 13272	Wij alchemisten zijn zogenoemde specialisten op[ENTER]het gebied van het zuiveren van kwaadaardige[ENTER]artefacten en ze bruikbaar maken voor goede[ENTER]bedoelingen. Ik kan deze IJsmes Schub voor je[ENTER]zuiveren zodat je diens kracht kunt inzetten[ENTER]tegen Alastor. Bedankt voor je vertrouwen in mij.[ENTER]Er zijn helaas nog steeds mensen die denken dat[ENTER]alchemie tot de duistere kunsten behoort.
 13273	Geef me een moment. Kun je me de alambiek[ENTER]aangeven? Nee, het is dat langwe- uh, het is al[ENTER]goed zo. Klaar! Hier, neem dit mee. Ik hoop dat[ENTER]dit je helpt in je strijd tegen de draak.
 13274	Keer terug naar Confucius.
-13275	Oh, al helemaal klaar? Onze alchemist is een ware[ENTER]meester in zijn vak. Dat ziet er voortreffelijk[ENTER]uit. Je moet je vast afvragen wat er voor gaat[ENTER]zorgen dat Alastor niet weer terugkomt als-[ENTER]wanneer je hem weet te verslaan. Ik ben ervan[ENTER]overtuigd dat we Alastor kunnen tegenhouden door[ENTER]het ritueel opnieuw uit te voeren – maar dit keer[ENTER]met zijn hart.
+13275	Oh, al helemaal klaar? Onze alchemist is een ware[ENTER]meester in zijn vak. Dat ziet er voortreffelijk[ENTER]uit. Je moet je vast afvragen wat er voor gaat[ENTER]zorgen dat Alastor niet weer terugkomt als-[ENTER]wanneer je hem weet te verslaan. Ik ben ervan[ENTER]overtuigd dat we Alastor kunnen tegenhouden door[ENTER]het ritueel opnieuw uit te voeren - maar dit keer[ENTER]met zijn hart.
 13276	De verbeterde IJsmes Schub biedt je bescherming[ENTER]tegen een aantal van Alastor's duistere krachten.[ENTER]Draag het bij je en bespreek alle verdere details[ENTER]met Generaal Kohan.
 13277	Je hebt 10x Zegening der Draken ontvangen als[ENTER]quest-beloning.
 13278	Alastor's Ondergang

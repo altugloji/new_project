@@ -84,7 +84,9 @@ if app.ENABLE_CUBE_RENEWAL:
 
 if app.__GEM_SHOP__:
 	import uiGem
-
+	
+if app.WJ_NEW_DROP_DIALOG:
+	import uiDeleteItem
 IsQBHide = 0
 class Interface(object):
 	CHARACTER_STATUS_TAB = 1
@@ -122,7 +124,8 @@ class Interface(object):
 		self.wndMiniMap = None
 		self.wndGuild = None
 		self.wndGuildBuilding = None
-
+		if app.WJ_NEW_DROP_DIALOG:
+			self.deleteitem = None
 		self.listGMName = {}
 		self.wndQuestWindow = {}
 		self.wndQuestWindowNewKey = 0
@@ -328,6 +331,13 @@ class Interface(object):
 		self.dlgRefineNew = uiRefine.RefineDialogNew()
 		self.dlgRefineNew.Hide()
 
+		if app.WJ_NEW_DROP_DIALOG:
+			self.deleteitem = uiDeleteItem.DeleteItem()
+			self.deleteitem.BindInterface(self)
+			self.deleteitem.Hide()
+			if self.wndInventory:
+				self.wndInventory.SetDeleteItemDlg(self.deleteitem)
+
 	def __MakeHelpWindow(self):
 		self.wndHelp = uiHelp.HelpWindow()
 		self.wndHelp.LoadDialog()
@@ -435,6 +445,9 @@ class Interface(object):
 
 		if app.KYGN_CHEST_INFO and self.wndKygnChestInfo:
 			self.wndKygnChestInfo.SetItemToolTip(self.tooltipItem)
+
+		if app.WJ_NEW_DROP_DIALOG:
+			self.deleteitem.SetItemToolTip(self.tooltipItem)
 
 		# ITEM_MALL
 		self.wndMall.SetItemToolTip(self.tooltipItem)
@@ -562,6 +575,13 @@ class Interface(object):
 
 		if self.wndSafebox:
 			self.wndSafebox.Destroy()
+
+		if app.WJ_NEW_DROP_DIALOG:
+			if self.deleteitem:
+				self.deleteitem.Hide()
+				self.deleteitem.Destroy()
+				self.deleteitem = None
+				del self.deleteitem
 
 		if self.wndWeb:
 			self.wndWeb.Destroy()
@@ -1934,6 +1954,14 @@ class Interface(object):
 
 	def EmptyFunction(self):
 		pass
+
+	if app.WJ_NEW_DROP_DIALOG:
+		def OpenDeleteItem(self):
+			if False == player.IsObserverMode():
+				if False == self.deleteitem.IsShow():
+					self.deleteitem.Open()
+				else:
+					self.deleteitem.Close()
 
 	if app.ENABLE_ITEM_SHOP_SYSTEM:
 		def RefreshItemShop(self):

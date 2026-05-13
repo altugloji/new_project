@@ -2763,7 +2763,7 @@
 27988	Skattekort	Et slidt kort, som viser lokationen på en gammel skat.
 27989	Metinstenens kompas	Kompasset viser dis retning og afstand til den næste Metin sten. Jo kraftigere den lyser, desto tættere er du på målet. Den kan aktiveres 6 gange.
 27990	Stykke af en sten	Stenstykke, der pga. dets lille størrelse er let at transporterer. Det kan bruges på mange måder.
-27991	Aquasten	En hård ru sten der kan bruges til at slibe våben eller køkkenredskaber.
+27991	Vandsten	Et værdifuldt mineral fra havet.
 27992	Hvid perle	En snehvid perle, som findes i en musling
 27993	Blå perle	En vidunderlig blå perle.
 27994	Blodrød perle	En blodrød perle.
@@ -2931,7 +2931,7 @@
 30153	Blomster	Ukendte blomster, der lugter af de gode gamle tider.
 30154	Hemmelig tempel bog	Analysen af historien, og Doktrinerne af det hemmelige tempel.
 30155	Mirines smykke	En vedhæng til en halskæde. På bagsiden er hendes navn "Mirine" indgraveret.
-30156	Hemmelig tempel bog	Den værdifulde bog indeholder analysen af læren og historien bag det hemmelige tempel.
+30156	Lilla bog	En bog med opskrifter på færdighedsbøger. Kan fremstilles hos Alkymisten.
 30157	Pilespids	Disse giftige pilespidser vil hjælpe med at forsvare riget.
 30177	Moskus olie	Moskus olie er brugt af Våben-handelsmanden under en mission. Genstanden har ingen yderligere funktion.
 30179	Forvredet nøgle	Denne magiske nøgle aktiverer portalen til Dragens Tempel.
@@ -3123,20 +3123,20 @@
 30586		
 30600	Symønster	
 30601	Rustning design	
-30602	Blå farve	
-30603	Rød farve	
-30604	Grå farve	
+30602	Blå farve	Farve, der kræves til fremstilling.
+30603	Rød farve	Farve, der kræves til fremstilling.
+30604	Grå farve	Farve, der kræves til fremstilling.
 30605	Guldplader	
 30606	Sølvplader	
 30607	Kobberplader	
 30608	Stålplader	
 30609	Bronceplader	
-30610	Mithril	
+30610	Mithril	Fås ved at smelte malm. Kan bruges i forskellige fremstillinger. Kan fremstilles hos Alkymisten.
 30611	Solide stropper	
 30612	Robuste snore	
 30613	Dryadernes Sten	Omgivet af et grønt skær, denne mystiske sten indeholder sjælen fra en Dryade, en træ ånd. Dryaderne kender de hemmelige ord, som vil give dig adgang til Erebus grotten.
-30614	Sort farve	
-30615	Hvid farve	
+30614	Sort farve	Farve, der kræves til fremstilling.
+30615	Hvid farve	Farve, der kræves til fremstilling.
 30616	Titandioxid	Denne prismatiske krystal bruges til raffinering af et stykke udstyr.
 30617	Agat	Denne mystiske skinnende ædelsten bruges til raffinering af et stykke udstyr.
 30618	Månesten	En gnist af måneskin er indkapslet i denne dråbeformede juvel. Bruges til raffinering af et stykke udstyr.
@@ -3216,7 +3216,7 @@
 31032	Leviathans Perler	Effektive styrkede kapsler lavet af mystiske væsners indre lys og Millenium essensen.
 31033	Høvdingens kappe	Dette kap er et symbol på deres usårlighed for Rød tyvene.
 31034	Gigantens totem	Denne totem har form af et kæmpe stykke rav.
-31035	Sort sten	Denne mystiske sten bliver udvundet af kykloperne i Tordenbjergene.
+31035	Sort sten	Fås ved at smelte sten. Kan bruges i forskellige fremstillinger. Kan fremstilles hos Alkymisten.
 31036	Sort guld	Denne sorte åre med magiske egenskaber kan findes i Tordenbjergene.
 31037	Læder taske	Du tog denne taske fra Kaptajn Shruk. Den ser ud til at være lettere, end du forventede...
 31038	Hellig jord	Denne taske med hellig jord tjener som medium til at tilkalde de døde.
@@ -5627,8 +5627,8 @@
 50853	G Mørke Modsta. Eliksir	Denne ekstremt kraftfulde eliksir, giver den der drikker det +20% mørke modstand.
 50901	Tom flaske	Bliver brugt til at fremstille eliksir.
 50902	Begynderrecept	En let at gå i gang med opgave, også for nybegyndere.
-50903	Recept	En opskrift-opgave, som kræver øvelse.
-50904	Proffessionel Recept	En opskrift-opgave, som kun kan udføres korrekt af experter.
+50903	Forstærkningsskema	Et skema, der kræves til fremstilling.
+50904	Bonusgenstand-skema	Et skema, der kræves til fremstilling.
 50905	Recept til Sim-vand	Den beskriver den nøjagtige måde at fremstille vand udfra ferskenblomst juice og syrener.
 50906	Recept til Dok-vand	Den beskriver den nøjagtige måde at fremstille vand fra klokkeblomst juice og syrener.
 50907	Recept til Bo-vand	Den beskriver den nøjagtige måde at fremstille vand fra kakiblomst juice og tue-svamp.
@@ -5658,7 +5658,7 @@
 50938	Rød Seers Kiste	Indeholder 105 Tarotkort til Seernes Duel.
 50939	Blå Seers Kiste	Indeholder 21 Tarotkort til Seernes Duel.
 50940	Lyserød Seers Kiste	Indeholder 5 Tarotkort til Seernes Duel.
-51001	Energi Fragment	Fragmenter fra en Energi Krystal. 30 styks kan smeltes sammen til en krystal.
+51001	Energistykke	Fås ved at smelte værdifulde genstande. Kan bruges i forskellige fremstillinger. Kan fremstilles hos Alkymisten.
 51002	Energi Krystal	Denne krystal forøger din bonus i to timer.
 51501	Cor Draconis (uslebet)	Krystal drage hjertet indeholder en tilfældig drage sten fra den uslebne klasse.
 51502	Cor Draconis (uslebet)	Krystal drage hjertet indeholder en tilfældig drage sten fra den uslebne klasse.

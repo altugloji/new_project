@@ -1,3 +1,7 @@
+21301	Wytwarzanie
+21302	Wytwarzanie Mithrilu
+21303	Wytwarzanie Czarnego Kamienia
+21304	Wytwarzanie Fioletowej Ksiêgi
 1	Wyj¹tkowy Materia³
 2	Ju¿ ci wszystko opowiedzia³em o mocach, które s¹[ENTER]nam potrzebne, by pokonaæ Sunga Mahi.[ENTER][ENTER]Pospiesz siê i odszukaj Kapitana.[ENTER][ENTER]Wróæ do mnie, gdy ju¿ zdobêdziesz potrzebne sukna.
 3	Wzmocnij W³asn¹ Si³ê
@@ -218,7 +222,7 @@
 218	Och, uda³o ci siê znaleŸæ![ENTER]Pozwól, ¿e rzucê okiem...
 219	Och!! Ten korzeñ jest doskona³ej jakoœci![ENTER]Przynieœ mi jeszcze %s szt. Spróbuj jakieœ[ENTER]znaleŸæ!
 220	Mam ju¿ wystarczaj¹c¹ iloœæ korzeni Gango. Dobra[ENTER]robota! Jako dowód mojej wdziêcznoœci otrzymasz[ENTER]trochê Yang i wynik moich badañ.
-221	W nagrodê od Biologa Chaegirab otrzymasz 25 000[ENTER]punktów doœwiadczenia i 10 000 Yang.[ENTER]Dodatkowo otrzymujesz miedziane kolczyki+3.
+221	W nagrodê od Biologa Chaegirab otrzymasz 25 000[ENTER]punktów doœwiadczenia i 10 000 Yang.[ENTER]Dodatkowo otrzymujesz miedziane kolczyki+3.
 222	Przykro mi, ale ten korzeñ Gango jest uszkodzony[ENTER]i nie przyda mi siê na nic.[ENTER]Przynieœ mi nowy.
 223	Uszlachetnienie
 224	Dobrze, ¿e jesteœ! Badam wszystkie rodzaje roœlin[ENTER]w tym królestwie. Mam mnóstwo spraw do[ENTER]za³atwienia i nie mam czasu wybraæ siê sam na[ENTER]wyprawê. Czy pomo¿esz mi?
@@ -231,7 +235,7 @@
 231	Biolog Chaegirab, uczeñ Uriela, pilnie ciê szuka.[ENTER]IdŸ do niego i zaoferuj swoj¹ pomoc.
 232	Och! Ten bez jest doskona³ej jakoœci![ENTER]Przynieœ mi jeszcze %s szt. Spróbuj jakieœ[ENTER]znaleŸæ!
 233	Mam ju¿ wystarczaj¹c¹ iloœæ kwiatów bzu! Dobra[ENTER]robota![ENTER]Jako dowód mojej wdziêcznoœci otrzymasz trochê[ENTER]Yang i wynik moich badañ.
-234	Od Biologa Chaegiraba otrzymasz w nagrodê 95 000[ENTER]punktów doœwiadczenia i 15 000 Yang.[ENTER]Dodatkowo otrzymujesz miedzian¹ bransoletê+3.
+234	Od Biologa Chaegiraba otrzymasz w nagrodê 95 000[ENTER]punktów doœwiadczenia i 15 000 Yang.[ENTER]Dodatkowo otrzymujesz miedzian¹ bransoletê+3.
 235	Przykro mi, ale ten kwiat bzu jest uszkodzony i[ENTER]nie przyda mi siê na nic.[ENTER]Przynieœ mi nowy.
 236	Dobrze, ¿e jesteœ! Badam obecnie kwiaty bzu i[ENTER]muszê przeprowadziæ kilka eksperymentów. Czy[ENTER]mo¿esz kilka dla mnie zdobyæ?[ENTER]Myœlê, ¿e 10 sztuk bzu mi wystarczy. Bêdê ci[ENTER]bardzo wdziêczny, jeœli mi pomo¿esz![ENTER]Zawsze przynoœ mi po jednym bzie, abym móg³ go[ENTER]dok³adnie zbadaæ!
 237	Zbierz bez
@@ -244,7 +248,7 @@
 244	Biolog Chaegirab, uczeñ Uriela, pilnie ciê szuka.[ENTER]IdŸ do niego i zaoferuj swoj¹ pomoc.
 245	Och! Ten grzyb Tue jest bardzo dobrej jakoœci![ENTER]Przynieœ mi jeszcze %s szt. Spróbuj jakieœ[ENTER]znaleŸæ!
 246	Mam ju¿ wystarczaj¹c¹ iloœæ grzybów. Dobra robota!Jako dowód mojej wdziêcznoœci otrzymasz trochê[ENTER]Yang i wynik moich badañ.
-247	W nagrodŸ od Biologa Chaegiraba otrzymujesz[ENTER]200 000 punktów doœwiadczenia i 20 000 Yang.[ENTER]Dodatkowo otrzymujesz he³m+2.
+247	W nagrodŸ od Biologa Chaegiraba otrzymujesz[ENTER]200 000 punktów doœwiadczenia i 20 000 Yang.[ENTER]Dodatkowo otrzymujesz he³m+2.
 248	¯elazny He³m+2
 249	Maska Kolcza+2
 250	Wyzywaj¹cy He³m+2
@@ -842,7 +846,7 @@
 843	Wszystkie pieczêcie zosta³y zniszczone. Udaj siê[ENTER]na 5. poziom.[ENTER]Zabij wszystkie potwory na 5. poziomie. Jest on[ENTER]strze¿ony przez dumnego Króla Demonów.
 844	Otworzy³eœ pieczêæ! Pozosta³o jeszcze: %s!
 845	Uda³o ci siê pokonaæ Dumnego Króla Demonów.
-846	Uda³o ci siê zabiæ Dumnego Króla Demonów. Teraz[ENTER]udaj siê do Kowala i odbierz tam swoj¹ nagrodê –[ENTER]Kowal ulepszy wybrany przez ciebie przedmiot. Po[ENTER]prostu przeci¹gnij na Kowala przedmiot, który[ENTER]chcesz ulepszyæ.
+846	Uda³o ci siê zabiæ Dumnego Króla Demonów. Teraz[ENTER]udaj siê do Kowala i odbierz tam swoj¹ nagrodê -[ENTER]Kowal ulepszy wybrany przez ciebie przedmiot. Po[ENTER]prostu przeci¹gnij na Kowala przedmiot, który[ENTER]chcesz ulepszyæ.
 847	Wy¿sze piêtra
 848	Chcesz dostaæ siê na 7. poziom wie¿y? Droga nie[ENTER]jest ³atwa, potrzebujesz wielkich umiejêtnoœci i[ENTER]sporego doœwiadczenia.[ENTER]Mogê ciê tam teleportowaæ, ale tylko wtedy, gdy[ENTER]osi¹gniesz 75. poziom.
 849	Stra¿nik Wie¿y Demonów:
@@ -907,10 +911,10 @@
 908	Zebrane materia³y
 909	Zebrano wszystkie materia³y
 910	Musisz zebraæ jeszcze %s szt. nastêpuj¹cych[ENTER]materia³ów:
-911	Uda³o ci siê zebraæ wszystkie potrzebne materia³y.Wróæ do Ducha Wojownika. Znajdziesz go na 2.[ENTER]piêtrze Groty Wygnañców. Potrzebujesz ponadto[ENTER]150 000 Yang, by otrzymaæ marmur.
+911	Uda³o ci siê zebraæ wszystkie potrzebne materia³y.Wróæ do Ducha Wojownika. Znajdziesz go na 2.[ENTER]piêtrze Groty Wygnañców. Potrzebujesz ponadto[ENTER]150 000 Yang, by otrzymaæ marmur.
 912	Nie uda³o ci siê zebraæ potrzebnych materia³ów w[ENTER]wyznaczonym czasie.
 913	Czy chcesz mi daæ %s szt. tego materia³u?
-914	Niestety, nie staæ ciê na moje us³ugi.[ENTER]Moja stawka to 150 000 Yang.
+914	Niestety, nie staæ ciê na moje us³ugi.[ENTER]Moja stawka to 150 000 Yang.
 915	Proszê, weŸ!
 916	Nie dziêkujê, zatrzymam je!
 917	Dziêkujê ci, to na pewno wymaga³o od ciebie sporo[ENTER]wysi³ku.[ENTER]Wszystko posz³o zgodnie z planem. Moje koœci[ENTER]jeszcze nie zerdzewia³y. WeŸ to:
@@ -951,7 +955,7 @@
 952	Ach, czujê w tobie Moc Smoczego Oka. Jako dowód[ENTER]mojego szacunku chcê ci podarowaæ ten oto Cor[ENTER]Draconis. Jeden kamieñ na dzieñ - obawiam siê, ¿e[ENTER]wiêcej nie dam rady.
 953	Proszê, oto twój Cor Draconis.
 954	Przykro mi, ale nie mogê ci wiêcej daæ ni¿ jeden[ENTER]na dzieñ. PrzyjdŸ jutro. Mo¿e bêdê mia³ dla[ENTER]ciebie nowy Cor Draconis.
-955	GM: Codzienna Misja – Ustawienia
+955	GM: Codzienna Misja - Ustawienia
 956	Czas rozpoczêcia
 957	Czas zakoñczenia
 958	Podaj nastêpuj¹cy zapis dla daty i godziny:[ENTER]jj.mm.tt[ENTER]hh.mm
@@ -1462,7 +1466,7 @@
 1463	Szlifuj Kamyki
 1464	Chcesz wyszlifowaæ swoje Kamyki, by stworzyæ 3[ENTER]Gaya?
 1465	Daj mi proszê nastêpuj¹c¹ iloœæ Kamyków: %d
-1466	Potrzebujê Kamyki (%d), 15 000 Yang oraz
+1466	Potrzebujê Kamyki (%d), 15 000 Yang oraz
 1467	Kamieñ Duszy poziomu +0, +1, +2 lub +3,
 1468	aby stworzyæ 3 drogocenne Gaya.
 1469	Szansa powodzenia wynosi %d%%, a koszty tej[ENTER]us³ugi opiewaj¹ siê na %s Yang.
@@ -1598,8 +1602,8 @@
 1599	Pieñ: %d
 1600	Dykta: %d
 1601	Czy chcesz powiêkszyæ magazyn gildii?
-1602	Konto gildii – wp³aæ
-1603	Konto gildii – wyp³aæ
+1602	Konto gildii - wp³aæ
+1603	Konto gildii - wyp³aæ
 1604	Podaj iloœæ Yang, któr¹ chcesz wp³aciæ na konto[ENTER]gildii:
 1605	Podaj iloœæ Yang, któr¹ chcesz wyp³aciæ z konta[ENTER]gildii:
 1606	Masz za ma³o Yang, aby wp³aciæ.
@@ -1725,14 +1729,14 @@
 1726	Nie jesteœ liderem gildii. Wróæ do mnie ponownie,[ENTER]gdy ju¿ bêdziesz liderem gildii.
 1727	Poziom gildii musi wynosiæ przynajmniej 6, by[ENTER]mo¿na by³o zarejestrowaæ nabór do gildii.
 1728	Trwa aktualizacja listy gildii. Spróbuj ponownie[ENTER]póŸniej.
-1729	Aby zaktualizowaæ nabór do gildii, zostanie[ENTER]odliczonych z konta gildii 50 000 Yang. SprawdŸ,[ENTER]czy posiadasz na koncie gildii wystarczaj¹c¹[ENTER]iloœci Yang.
+1729	Aby zaktualizowaæ nabór do gildii, zostanie[ENTER]odliczonych z konta gildii 50 000 Yang. SprawdŸ,[ENTER]czy posiadasz na koncie gildii wystarczaj¹c¹[ENTER]iloœci Yang.
 1730	Warto wiedzieæ: jeœli zaktualizujesz nabór do[ENTER]gildii, zostanie ona ponownie wyœwietlona na[ENTER]samej górze listy.
 1731	Czy szukasz kolejnych cz³onków gildii?
 1732	Wskazówka: aktualizacji twojej gildii nie jest[ENTER]natychmiast dostêpna, lecz dopiero z nastêpn¹[ENTER]aktualizacj¹.
 1733	
 1734	Czy chcesz zaktualizowaæ nabór do gildii?
 1735	Twój nabór do gildii zosta³ zaktualizowany.
-1736	Twoja gildia nie ma naboru, który mo¿na by by³o[ENTER]zaktualizowaæ. Kliknij na „Stwórz nabór do[ENTER]gildii”, by go utworzyæ.
+1736	Twoja gildia nie ma naboru, który mo¿na by by³o[ENTER]zaktualizowaæ. Kliknij na „Stwórz nabór do[ENTER]gildii", by go utworzyæ.
 1737	Tak
 1738	Nie
 1739	Podaj minimalny poziom dla kandydata (najni¿szy[ENTER]minimalny poziom, który mo¿na wybraæ to 30).
@@ -1744,7 +1748,7 @@
 1745	Stwórz nabór do gildii
 1746	Aktualizuj nabór do gildii
 1747	Anuluj
-1748	Aby stworzyæ nabór do twojej gildii, zostanie[ENTER]odliczonych z konta gildii 100 000 Yang. SprawdŸ,[ENTER]czy posiadasz na koncie gildii wystarczaj¹c¹[ENTER]iloœci Yang.
+1748	Aby stworzyæ nabór do twojej gildii, zostanie[ENTER]odliczonych z konta gildii 100 000 Yang. SprawdŸ,[ENTER]czy posiadasz na koncie gildii wystarczaj¹c¹[ENTER]iloœci Yang.
 1749	Pozycja twoja Gildii w rankingu jest nastêpuj¹ca:[ENTER][DELAY value;0][ENTER]|Nazwa |Punkty |Zwyciêstwa |Remisy |Pora¿ki[ENTER]%s[/DELAY][ENTER]
 1750	Ranking 8 przoduj¹cych gildii oraz wyniki z ich[ENTER]wojen gildii:[ENTER][DELAY value;0][ENTER]|Nazwa |Punkty |Zwyciêstwa |Remisy |Pora¿ki[ENTER]%s[/DELAY][ENTER]
 1751	Ranking twojej Gildii to %s.
@@ -2342,7 +2346,7 @@
 2343	W nastêpnym zadaniu bêdziesz móg³ wybraæ cel[ENTER]spoœród dwóch typów potworów.
 2344	Poluj na %s: %dx
 2345	Okej! Zaczynajmy!
-2346	Podejmujesz nastêpuj¹ce wyzwanie: zapoluj na %s – %dx
+2346	Podejmujesz nastêpuj¹ce wyzwanie: zapoluj na %s - %dx
 2347	%s zabij.
 2348	Polowanie: zabij %dx %s
 2349	sztuk:
@@ -4699,7 +4703,7 @@
 4700	Poddajesz siê ju¿? Armia Ognistych Demonów ¯aru w[ENTER]twierdzy nadal jest za silna. Kontynuuj walkê!
 4701	Uda³o ci siê pokonaæ armiê Ognistych Demonów ¯aru.[ENTER]Zdaj raport Yak-Hwan.
 4702	Wróæ do Yak-Hwan.
-4703	Jesteœ z powrotem – i jak widzê uda³o ci siê[ENTER]odnieœæ sukces! Opowiedz mi jak by³o?
+4703	Jesteœ z powrotem - i jak widzê uda³o ci siê[ENTER]odnieœæ sukces! Opowiedz mi jak by³o?
 4704	
 4705	Mówisz, ¿e to by³ potê¿ny Ognisty Demon? To by³[ENTER]Razador, w³adca ognia! Jeœli wys³ali go Wasale[ENTER]Mroku, to w twierdzy musi znajdowaæ siê coœ[ENTER]bardzo wa¿nego. Ca³kiem mo¿liwe, ¿e legendarny[ENTER]Czerwony Smok! Muszê teraz porozmawiaæ z moimi[ENTER]doradcami. Proszê, weŸ tê przepustkê i strze¿ j¹[ENTER]jak oka w g³owie. Z pewnoœci¹ bêdzie ci ona[ENTER]potrzebna.
 4706	Czarna Materia
@@ -4722,7 +4726,7 @@
 4723	Zneutralizowanie Czarnej Materii
 4724	Mam dobre nowiny! Dowiedzia³em siê, w jaki sposób[ENTER]mo¿emy zneutralizowaæ moc czarnej materii.
 4725	
-4726	Wszystkie si³y w przyrodzie posiadaj¹ swoj¹[ENTER]przeciwwagê – œwiat³o i ciemnoœæ, ogieñ i woda,[ENTER]dobro i z³o. Czarna materia równie¿ posiada swoje[ENTER]przeciwieñstwo, które jest w stanie j¹[ENTER]zneutralizowaæ - to czysty lumen.
+4726	Wszystkie si³y w przyrodzie posiadaj¹ swoj¹[ENTER]przeciwwagê - œwiat³o i ciemnoœæ, ogieñ i woda,[ENTER]dobro i z³o. Czarna materia równie¿ posiada swoje[ENTER]przeciwieñstwo, które jest w stanie j¹[ENTER]zneutralizowaæ - to czysty lumen.
 4727	Aby wyprodukowaæ czysty lumen, trzeba roztopiæ[ENTER]od³amek energii w wodzie Mong. Zdob¹dŸ 50 butelek[ENTER]wody Mong i 100 od³amków energii i zanieœ to[ENTER]wszystko do Yu-Hwan.[ENTER]Dziêkujê.
 4728	Z przyjemnoœci¹!
 4729	Zbierz 50 butelek wody Mong i 100 od³amków[ENTER]energii. Nastêpnie zanieœ to wszystko do Yu-Hwan.
@@ -4821,10 +4825,10 @@
 4822	Porozmawiaj z Yon-I-Walker.
 4823	IdŸ do Yon-I-Walker i dowiedŸ siê jak pokonaæ[ENTER]Razadora raz na zawsze.
 4824	Nie by³eœ jeszcze u Yon-I-Walker? To w jaki[ENTER]sposób chcesz pokonaæ Razadora? Ruszaj, na co[ENTER]czekasz!
-4825	Tak, to prawda. Razador powróci³ – jeszcze w[ENTER]gorszym nastroju ni¿ poprzednio. Pozosta³a nam[ENTER]tylko jeszcze jedna mo¿liwoœæ, aby powstrzymaæ[ENTER]Wasali Mroku...
+4825	Tak, to prawda. Razador powróci³ - jeszcze w[ENTER]gorszym nastroju ni¿ poprzednio. Pozosta³a nam[ENTER]tylko jeszcze jedna mo¿liwoœæ, aby powstrzymaæ[ENTER]Wasali Mroku...
 4826	Razador nie spocznie, dopóki nie wykona swojego[ENTER]zlecenia i nie uwolni Czerwonego Smoka. Aby temu[ENTER]zapobiec, musimy wpêdziæ smoka.
 4827	
-4828	¯ywio³em Czerwonego Smoka jest ogieñ... a ogieñ[ENTER]najlepiej zwalcza siê – ogniem! Ka¿dy z Ognistych[ENTER]Demonów ¯aru nosi na sercu pierœcieñ magmy.[ENTER]Przenieœ mi 5 takich pierœcieni magmy!
+4828	¯ywio³em Czerwonego Smoka jest ogieñ... a ogieñ[ENTER]najlepiej zwalcza siê - ogniem! Ka¿dy z Ognistych[ENTER]Demonów ¯aru nosi na sercu pierœcieñ magmy.[ENTER]Przenieœ mi 5 takich pierœcieni magmy!
 4829	Zaatakuj twierdzê Czerwonego Smoka i zdob¹dŸ[ENTER]pierœcienie magmy.
 4830	Zdob¹dŸ pierœcienie magmy Ognistych Demonów ¯aru.[ENTER]Yon-I-Walker potrzebuje 5 sztuk. A poniewa¿ one[ENTER]szybko siê oziêbiaj¹, zbierz lepiej wiêcej ni¿[ENTER]potrzeba.
 4831	Mam za ma³o pierœcieni magmy. Potrzebujê jeszcze[ENTER]%d.
@@ -4847,11 +4851,11 @@
 4848	Teraz potrzebujê jeszcze skóry Mantykory ze[ENTER]skrzyde³ Martyaxwara, dowódcy Mantykorów.[ENTER]Zdob¹dŸ dla mnie 5 sztuk.
 4849	Zdob¹dŸ 5 sztuk skóry Mantykory ze skrzyde³[ENTER]Martyaxwara.[ENTER]Nastêpnie zanieœ je do Yon-I-Walker.
 4850	Zdob¹dŸ 5 sztuk skóry Mantykory ze skrzyde³[ENTER]Martyaxwara.[ENTER]Nastêpnie zanieœ je do Yon-I-Walker.
-4851	Jesteœmy tak blisko celu – nie rezygnuj![ENTER]Przynieœ mi skóry Mantykory!
+4851	Jesteœmy tak blisko celu - nie rezygnuj![ENTER]Przynieœ mi skóry Mantykory!
 4852	Znakomicie. Mam ju¿ wszystko, co potrzebujê.[ENTER]Poczekaj chwilê... Oj, pierœcieñ Samaela![ENTER]Potê¿ny artefakt, który wypêdzi Czerwonego Smoka.[ENTER]WeŸ, trzy te pierœcienie i zanieœ je do Yak-Hwan.[ENTER]Dam ci jeszcze przepustkê. Strze¿ j¹ jak oka w[ENTER]g³owie, przyda ci siê póŸniej.
 4853	Uda³o ci siê zdobyæ wszystkie sztuki skóry[ENTER]Mantykory.[ENTER]Zanieœ je do Yon-I-Walker.
 4854	Pocz¹tek Bitwy
-4855	Przygotuj siê – rozpoczyna siê bitwa! Yak-Hwan[ENTER]przeka¿e ci ostatnie instrukcje.
+4855	Przygotuj siê - rozpoczyna siê bitwa! Yak-Hwan[ENTER]przeka¿e ci ostatnie instrukcje.
 4856	Nadesz³a pora. Nasze oddzia³y czekaj¹ gotowe.[ENTER]Bitwa mo¿e siê rozpocz¹æ. Czy masz przy sobie[ENTER]pierœcieñ Samaela?
 4857	Tak, tutaj jest.
 4858	Znakomicie. PóŸniej ci wyt³umaczê, jak siê go[ENTER]u¿ywa. Najpierw musimy jednak prze³amaæ nowe[ENTER]ustawienia linii obrony Ognistych Demonów. Wróæ[ENTER]do Twierdzy Czerwonego Smoka i pokonaj:[ENTER]10x Ognisty Król ¯aru[ENTER]10x Ognista Broda ¯aru[ENTER]10x Ognisty Troll ¯aru[ENTER]10x Ognisty Genera³ ¯aru[ENTER]10x Ognisty Ksi¹¿ê ¯aru
@@ -4864,14 +4868,14 @@
 4865	Nie mo¿emy jeszcze prze³amaæ linii obrony[ENTER]przeciwnika. Pokonaj wszystkie koniecznie do tego[ENTER]Ogniste Demony ¯aru.
 4866	Uda³o ci siê pokonaæ wszystkie Ogniste Demony[ENTER]¯aru. Zdaj raport Yak-Hwan.
 4867	Wróæ do Yak-Hwan.
-4868	Dobra robota! Znacznie przybli¿yliœmy siê do[ENTER]naszego celu – Czerwony Smok nie bêdzie stanowi³[ENTER]ju¿ dla nas zagro¿enia!
+4868	Dobra robota! Znacznie przybli¿yliœmy siê do[ENTER]naszego celu - Czerwony Smok nie bêdzie stanowi³[ENTER]ju¿ dla nas zagro¿enia!
 4869	Stara Uraza, Nowa Bitwa
 4870	Wygl¹da na to, ¿e twój zaciek³y wróg Razador,[ENTER]wzi¹³ ci za z³e, ¿e go zabi³eœ.[ENTER]Jego wycie odbija siê echem nad Równiny[ENTER]Doyyumhwan g³oœniej ni¿ kiedykolwiek.
 4871	Nadszed³ czas, aby go znowu przywo³aæ do[ENTER]porz¹dku. To on przygl¹da siê uwa¿nie bramie, za[ENTER]któr¹ uwiêziony jest Czerwony Smok. Miej siê na[ENTER]bacznoœci! On nie pope³nia dwa razy tego samego[ENTER]b³êdu.
 4872	Pokonaj Razadora, W³adcê Ognia.
 4873	Pobaw siê ogniem
 4874	Pokonaj w Twierdzy Czerwonego Smoka Razadora,[ENTER]w³adcê ognia.
-4875	Co? By³ Razador tym razem silniejszy? Nie wierzê[ENTER]w to! Ju¿ raz uda³o ci siê – i tym razem te¿ go[ENTER]pokonasz!
+4875	Co? By³ Razador tym razem silniejszy? Nie wierzê[ENTER]w to! Ju¿ raz uda³o ci siê - i tym razem te¿ go[ENTER]pokonasz!
 4876	Razador zosta³ zniszczony. Zdaj raport Yak-Hwan.
 4877	Wiedzia³em, ¿e podo³asz temu! Teraz zajmê siê[ENTER]ostatnimi przygotowaniami do przeprowadzenia[ENTER]rytua³u wygnania. Zawo³am ciê, jak tylko bêdziemy[ENTER]gotowi.
 4878	Czerwony Smok
@@ -4883,14 +4887,14 @@
 4884	Rzuæ pierœcieñ Samaela na Nagrobek Taramora, aby[ENTER]dokonaæ rytua³u wygnania Czerwonego Smoka.
 4885	Nagrobek Taramora: 1 sztuka
 4886	Ogniste widowisko
-4887	I to wszystko, co potrafisz, robaczku?! To mnie[ENTER]tylko po³askota³o – tym mnie nie ska¿esz na[ENTER]wygnanie![ENTER]Przyprowadzê Razadora z Królestwa Zmar³ych, a on[ENTER]uwolni mnie z wiêzienia. Wtedy poczujecie mój[ENTER]gniew!
+4887	I to wszystko, co potrafisz, robaczku?! To mnie[ENTER]tylko po³askota³o - tym mnie nie ska¿esz na[ENTER]wygnanie![ENTER]Przyprowadzê Razadora z Królestwa Zmar³ych, a on[ENTER]uwolni mnie z wiêzienia. Wtedy poczujecie mój[ENTER]gniew!
 4888	Wygnanie Czerwonego Smoka nie powiod³o siê.[ENTER]Zdaj raport Yak-Hwan.
 4889	Rytua³ nie powiód³ siê? Czerwony Smok posiada z[ENTER]pewnoœci¹ wiêksz¹ moc, ni¿ myœleliœmy...
 4890	
 4891	Uda³o ci siê odwaliæ kawa³ dobrej roboty. To nie[ENTER]twoja wina. Ale obiecujê, nie spocznê dopóki nie[ENTER]znajdziemy jakiegoœ sposobu na wygnanie[ENTER]Czerwonego Smoka. Dziêkujê ci za to, co dla nas[ENTER]zrobi³eœ.
 4892	Podró¿ do Ognistej Ziemi
 4893	Szuka ciê Yak-Hwan. IdŸ do niego i dowiedz siê,[ENTER]czego on chce.
-4894	Witaj! Bardzo ¿a³ujê, ale mo¿emy pozwoliæ sobie[ENTER]tylko na króciutk¹ przerwê – Wasale Mroku depcz¹[ENTER]nam ju¿ po piêtach. A to nie oznacza nic dobrego.
+4894	Witaj! Bardzo ¿a³ujê, ale mo¿emy pozwoliæ sobie[ENTER]tylko na króciutk¹ przerwê - Wasale Mroku depcz¹[ENTER]nam ju¿ po piêtach. A to nie oznacza nic dobrego.
 4895	
 4896	Niestety, moje informacje s¹ zbyt niedok³adne.[ENTER]Wiemy tylko tyle, ¿e zatrzymali siê teraz w[ENTER]Ognistej Ziemi.
 4897	Wys³aliœmy ju¿ tam naszego zwiadowcê.[ENTER]Jednak, niedawno straciliœmy kontakt z nim, co[ENTER]mnie bardzo niepokoi. Czy móg³byœ po drodze[ENTER]zajrzeæ do Ognistej Ziemi i poszukaæ go?
@@ -4968,9 +4972,9 @@
 4969	Zadanie Ukoñczone
 4970	Uda³o ci siê zabiæ wystarczaj¹c¹ iloœæ Szarych[ENTER]Alf Wilków. Wróæ do Kapitana i powiadom go o[ENTER]swoim sukcesie.
 4971	Zabi³eœ Szare Alfa Wilki? Dobra robota. Dziêki[ENTER]tobie bêdzie teraz ³atwiej zapewniæ[ENTER]bezpieczeñstwo w wiosce. Przynajmniej jedna dobra[ENTER]wiadomoœæ w tych ciê¿kich czasach wojny.
-4972	Otrzymujesz 24 000 punktów doœwiadczenia i 3500[ENTER]Yang.
+4972	Otrzymujesz 24 000 punktów doœwiadczenia i 3500[ENTER]Yang.
 4973	Kilka Szarych Alfa Wilków, które grasuj¹ tu¿ poza[ENTER]wiosk¹, wyrz¹dzi³o wielkie szkody. Wprawdzie by³y[ENTER]one zawsze dzikie, ale teraz sta³y siê[ENTER]nieobliczalne. Zaczynaj¹ atakowaæ wioskê i jej[ENTER]mieszkañców. Aby opanowaæ sytuacjê, musimy zabiæ[ENTER]kilka tych wilków. Pomo¿esz? Zabij dla nas 10[ENTER]Szarych Alfa Wilków.
-4974	W nagrodê otrzymasz 24 000 punktów doœwiadczenia[ENTER]oraz 3500 Yang.
+4974	W nagrodê otrzymasz 24 000 punktów doœwiadczenia[ENTER]oraz 3500 Yang.
 4975	Zabij 10 Szarych Alfa Wilków
 4976	Szare Alfa Wilki zak³ócaj¹ spokój w wiosce.[ENTER]Aby opanowaæ sytuacjê, musisz zabiæ 10 Szarych[ENTER]Alfa Wilków.
 4977	Do tej pory uda³o ci siê zabiæ %s szt.
@@ -4982,11 +4986,11 @@
 4983	Zadanie Ukoñczone
 4984	Uda³o ci siê zniszczyæ Metin Bitwy.[ENTER]Udaj siê do Kapitana i powiadom go o swoim[ENTER]sukcesie.
 4985	Œwietna robota! Sta³eœ siê naprawdê niezawodnym[ENTER]pomocnikiem! Teraz ju¿ wiem, ¿e mogê ci powierzyæ[ENTER]ka¿de zadanie. Proszê, oto twoja nagroda. Oby tak[ENTER]dalej!
-4986	Otrzymujesz 48 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.
+4986	Otrzymujesz 48 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.
 4987	Otrzymujesz jeden %s.
 4988	Wiem ju¿ o istnieniu mrocznej mocy Kamieni Metin.[ENTER]Poinformowa³ mnie o tym muzyk Yu-Hwan.[ENTER]Kamienie Metin sprawiaj¹, ¿e zwierzêta dziczej¹ i[ENTER]wszêdzie rozprzestrzenia siê zaraŸliwa choroba.
 4989	Jeœli nie zrobimy nic z tymi Kamieniami Metin, to[ENTER]zwierzêta zaczn¹ atakowaæ mieszkañców lub co[ENTER]gorsze rozprzestrzeni siê zaraza.[ENTER]Czy móg³byœ siê zaj¹æ Kamieniami Metin, które[ENTER]spadaj¹ poza wiosk¹?
-4990	W nagrodê otrzymasz 48 000 punktów doœwiadczenia,[ENTER]10 000 Yang oraz Kamieñ Duszy (+0 do +2).
+4990	W nagrodê otrzymasz 48 000 punktów doœwiadczenia,[ENTER]10 000 Yang oraz Kamieñ Duszy (+0 do +2).
 4991	Zniszcz Metin Bitwy
 4992	Kamienie Metin stanowi¹ bardzo powa¿ne[ENTER]zagro¿enie. Pomó¿ Kapitanowi i zniszcz Metin[ENTER]Bitwy.
 4993	Zadanie Ukoñczone
@@ -4996,7 +5000,7 @@
 4997	Jinno, nasze królestwo zawsze mia³o siln¹[ENTER]wojskow¹ tradycjê. Cesarz zjednoczy³ kontynent[ENTER]dziêki potê¿nej i doœwiadczonej w walce[ENTER]kawalerii.[ENTER]Nawet teraz, gdy jesteœmy podzieleni z powodu[ENTER]zamieszania, jakie spowodowa³y Kamienie Metin,[ENTER]nasze królestwo nadal ma prawn¹ moc Iryung.
 4998	Nadal mamy najpotê¿niejsz¹ armiê ze wszystkich[ENTER]trzech królestw, jednak mimo tego nie jesteœmy w[ENTER]stanie przeciwdzia³aæ Kamieniom Metin. Gdybyœmy[ENTER]naprawdê chcieli, moglibyœmy z ³atwoœci¹ podbiæ[ENTER]inne królestwa. Musisz wytrwale trenowaæ, by móc[ENTER]staæ siê dobrym ¿o³nierzem.
 4999	Mam dla ciebie nowe zadanie.[ENTER]Dostarcz amunicjê do Yu-Hwan, który znajduje siê[ENTER]w s¹siedniej wiosce. Dla bezpieczeñstwa[ENTER]przechowujemy amunicjê w ró¿nych miejscach, do[ENTER]których mamy szybki dostêp w razie potrzeby.[ENTER]Jeœli odszukasz Yu-Hwan, wzniesiesz ogromy wk³ad[ENTER]w dozbrojenie wioski.
-5000	Otrzymujesz 45 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.
+5000	Otrzymujesz 45 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.
 5001	Aktualna Sytuacja
 5002	Kapitan powierzy³ ci przesy³kê dla Yu-Hwan. Udaj[ENTER]siê do drugiej wioski i dostarcz mu j¹.
 5003	Niegdyœ dosz³o do krwawej bitwy pomiêdzy Sung[ENTER]Mahi i Bogiem Smoków. Od tej pory ludzie zaczêli[ENTER]walczyæ miêdzy sob¹ w niekoñcz¹cych siê[ENTER]wojnach...[ENTER]To znowu ty! Czego potrzebujesz tym razem?[ENTER]Kapitan ma coœ wa¿nego dla mnie? Dziêkujê.[ENTER]A teraz udaj siê ponownie w drogê. Nie chcê, aby[ENTER]ktoœ nas razem zobaczy³.
@@ -5012,11 +5016,11 @@
 5013	Mieszkañcy naszego kraju to ludzie g³êbokiej[ENTER]wiary, modl¹cy siê codziennie do Boga Smoków. Ten[ENTER]nasz dobroczyñca chroni nas przed[ENTER]zmartwychwstaniem Sunga Mahi. Z jego pomoc¹[ENTER]bêdziemy nadal broniæ siê przed atakami z[ENTER]zewn¹trz i pewnego dnia zjednoczymy kontynent[ENTER]nasz¹ wiar¹.
 5014	Mam dla ciebie nowe zadanie.[ENTER]Dostarcz ten kamienny pos¹¿ek Boga Smoków do[ENTER]Yu-Hwan, który przebywa w s¹siedniej wiosce.[ENTER]Nasze kraj jest bardzo religijny i g³êboka wiara[ENTER]w Boga Smoków jest dla nas bardzo wa¿na. Jeœli[ENTER]dostarczysz pos¹¿ek do Yu-Hwan, pog³êbisz tym[ENTER]wiarê naszych mieszañców.
 5015	Schwytaj Szpiega
-5016	Otrzymujesz 100 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 5000 Yang.
+5016	Otrzymujesz 100 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 5000 Yang.
 5017	Schwytaj Szpiega
 5018	W naszej wiosce jest wrogi szpieg. Kapitan[ENTER]posiada wiêcej informacji na ten temat.
 5019	Mam przeczucie, ¿e mamy szpiega w wiosce. Jeden z[ENTER]naszych mieszkañców pracuje dla Klanu Bia³ych[ENTER]Zaprzysiê¿onych. Potrzebuje w tej sprawie twojej[ENTER]pomoc: idŸ i zabij kilku z ¿o³nierzy z Klanu[ENTER]Bia³ych Zaprzysiê¿onych, mo¿e u nich znajdziesz[ENTER]jakiœ dowód na szpiega.
-5020	W nagrodê otrzymasz 100 000 punktów doœwiadczenia[ENTER]oraz 5000 Yang.
+5020	W nagrodê otrzymasz 100 000 punktów doœwiadczenia[ENTER]oraz 5000 Yang.
 5021	Zdemaskuj Szpiega
 5022	Kapitan przypuszcza, ¿e w wiosce znajduje siê[ENTER]szpieg z Klanu Bia³ych Zaprzysiê¿onych. Zabijaj[ENTER]tak d³ugo wojowniczki Klanu Bia³ych[ENTER]Zaprzysiê¿onych, a¿ znajdziesz dowód na istnienie[ENTER]szpiega.
 5023	Znalaz³eœ list.[ENTER]Zanieœ go do Kapitana.
@@ -5053,7 +5057,7 @@
 5054	Zniszczy³eœ Metin Czerni.[ENTER]Udaj siê do Kapitana i powiadom go o swoim[ENTER]sukcesie.
 5055	Czy uda³o ci siê zniszczyæ Kamieñ Metin? Tak?[ENTER]Wspaniale. Dziêki tobie wioska jest na razie[ENTER]bezpieczna![ENTER]Sk¹d siê wziê³y te Kamienie Metin? Nie ma o nich[ENTER]prawie ¿adnych informacji, a powoduj¹ tyle[ENTER]problemów. S³ysza³em, ¿e mêdrzec Uriel bada[ENTER]Kamienie Metin, ale nie wiem, co uda³o mu siê do[ENTER]tej pory ustaliæ.[ENTER]W ka¿dym razie uda³o ci siê wykonaæ œwietn¹[ENTER]robotê.
 5056	Nagroda:
-5057	Otrzymujesz 1 000 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 15 000 Yang.
+5057	Otrzymujesz 1 000 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 15 000 Yang.
 5058	Otrzymujesz: %s
 5059	Kamienie Metin powoduj¹ coraz wiêcej zniszczeñ.[ENTER]Kraj cierpi z tego powodu. Trzeba koniecznie[ENTER]zniszczyæ Kamienie Metin! IdŸ i zamelduj siê u[ENTER]Kapitana.
 5060	Kamienie Metin powoduj¹ coraz wiêcej zniszczeñ.[ENTER]Kraj cierpi z tego powodu. Trzeba koniecznie[ENTER]zniszczyæ Kamienie Metin! IdŸ i zamelduj siê u[ENTER]Kapitana.
@@ -5096,7 +5100,7 @@
 5097	Uriel:
 5098	Kapitan ju¿ raz ciê do mnie przys³a³. Wygl¹dasz[ENTER]na bardzo utalentowanego.[ENTER]Muszê poprosiæ ciê o przys³ugê.[ENTER]Zdajesz sobie sprawê z istnienia Kamieni Metin,[ENTER]prawda? Przyby³y one z niebios. Posiadaj¹[ENTER]diabelsk¹ energie i rozprzestrzeniaj¹ plagê, a do[ENTER]tego zwierzêta pod ich wp³ywem dziczej¹. Nie[ENTER]wiemy jak dosta³y siê do naszego œwiata lub z[ENTER]czego siê sk³adaj¹. To utrudnia moje badania.[ENTER]Ostatnio znalaz³em jednak klucz do tajemnicy[ENTER]Kamieni Metin.
 5099	Jest pewna tablica, pochodz¹ca ze staro¿ytnego[ENTER]królestwa. Znajdziesz j¹ w £atwym Lochu Ma³p.[ENTER]Myœlê, ¿e informacje na tej tablicy zawieraj¹[ENTER]sekret Kamieni Metin.[ENTER]Jeœli dostarczysz mi te informacje, byæ mo¿e bêdê[ENTER]w stanie odkryæ sekret Kamieni Metin.[ENTER]Dostarcz mi te informacje z tablicy kamiennego[ENTER]pomnika Hasuna, który znajdziesz w £atwym Lochu[ENTER]Ma³p!
-5100	Otrzymujesz 1 500 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 20 000 Yang.
+5100	Otrzymujesz 1 500 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 20 000 Yang.
 5101	Kamienny Pomnik w £atwym Lochu Ma³p
 5102	Wydaje siê, ¿e mêdrzec Uriel wpad³ na trop, który[ENTER]pomo¿e mu w rozwi¹zaniu tajemnicy Kamieni Metin.[ENTER]Udaj siê do £atwego Lochu Ma³p i odszukaj tam[ENTER]kamienny pomnik Hasuna.
 5103	Tajemnicza Ksi¹¿ka
@@ -5135,8 +5139,8 @@
 5136	Witaj! To co otrzyma³em ostatnim razem od ciebie[ENTER]by³o bardzo pomocne. Dziêki tobie by³em w stanie[ENTER]poczyniæ du¿y postêp w moich badaniach. Ale teraz[ENTER]mam problem.[ENTER]Podczas analizy niektórych informacji o[ENTER]meteorytach, uda³o mi siê odnaleŸæ star¹ ksiêgê.[ENTER]Jak siê mogê zorientowaæ, opisane s¹ tam ciekawe[ENTER]przypuszczenia o przyczynach zmian, które[ENTER]nawiedzi³y nasz kraj. A wiêc to bardzo wa¿ne.
 5137	Tutaj opisane s¹ stare historie o Smoczej[ENTER]Dolinie. Nawet ja znam kilka takich opowieœci.[ENTER]Byæ mo¿e nawet dzisiaj mo¿na znaleŸæ informacje[ENTER]lub dalsze strony pamiêtnika. Niestety nie wiem[ENTER]jak dotrzeæ do Doliny Smoka. Nigdy siê tym nie[ENTER]interesowa³em.[ENTER]IdŸ do £owcy Yang-Shin, który przebywa w[ENTER]s¹siedniej wiosce, on zna dobrze te okolice. Mo¿e[ENTER]wie, gdzie znajduje siê Smocza Dolina i czy warto[ENTER]tam szukaæ.
 5138	To takie ekscytuj¹ce! Och, zanim zapomnê: oto[ENTER]twoja nagroda za pierwsz¹ stronê!
-5139	Otrzymujesz 1 250 000 punktów doœwiadczenia.
-5140	Otrzymujesz 50 000 Yang.
+5139	Otrzymujesz 1 250 000 punktów doœwiadczenia.
+5140	Otrzymujesz 50 000 Yang.
 5141	Otrzymujesz £zê Bogini.
 5142	IdŸ do £owcy
 5143	Odszukaj £owcê Yang-Shin
@@ -5159,8 +5163,8 @@
 5160	Uda³o nam siê odnaleŸæ zwolenników czarnej magii.[ENTER]Ukrywali siê w Smoczej Dolinie. Dobrze znaj¹[ENTER]czarn¹ magiê, która by³a przekazywana z pokolenia[ENTER]na pokolenie.[ENTER]Przekonaliœmy ich, by nam pomogli dziêki groŸbom[ENTER]i pochlebstwom.[ENTER]A oto wynik naszych starañ: aby u¿yæ czarnej[ENTER]magii, potrzebne jest specjalne miejsce. Miejsce[ENTER]wype³nione z³¹ energi¹.[ENTER]Czas ponagla. Muszê jak najszybciej odnaleŸæ[ENTER]odpowiednie miejsce.
 5161	Hmmm, czarna magia wymaga miejsca, które jest[ENTER]przepe³nione z³¹ energi¹. Miejsce, gdzie ka¿dy[ENTER]wysi³ek, ka¿dy czar jest przetwarzany w z³¹[ENTER]energiê. Hmm... Gdzie mo¿e byæ takie miejsce?[ENTER]Na pewno jest to Œwi¹tynia Hwang![ENTER]Nie bez powodu ludzie nazywaj¹ j¹ Mroczn¹[ENTER]Œwi¹tyni¹. To jest miejsce, do którego nikt o[ENTER]dobrym sercu nie idzie chêtnie. Nawet zwierzêta[ENTER]go omijaj¹. A tajna sekta uprawia tam swoje[ENTER]rytua³y.
 5162	Na pewno istnieje zwi¹zek miêdzy czarn¹ magi¹ a[ENTER]tajn¹ sekt¹. W Œwi¹tyni Hwang znajdziesz klucz do[ENTER]tej zagadki.[ENTER]SprawdŸ, co siê tam dzieje i spróbuj znaleŸæ[ENTER]jakieœ inne strony ksiêgi![ENTER]Oto twoja nagroda za drug¹ stronê.
-5163	Otrzymujesz 1 250 000 punktów doœwiadczenia.
-5164	Otrzymujesz 50 000 Yang.
+5163	Otrzymujesz 1 250 000 punktów doœwiadczenia.
+5164	Otrzymujesz 50 000 Yang.
 5165	Otrzymujesz 10 Bia³ych Flag.
 5166	Trzecia Strona
 5167	Uda³o ci siê dostarczyæ Urielowi ju¿ dwie strony.[ENTER]Kolejna strona znajduje siê w Œwi¹tyni Hwang.
@@ -5169,8 +5173,8 @@
 5170	Odszukaj Strony Tajemnej Ksiêgi
 5171	Mêdrzec Uriel powiedzia³, ¿e s³ysza³ coœ o[ENTER]Domokr¹¿cy, który znalaz³ jak¹œ tajemnicz¹ stronê[ENTER]ksiêgi.[ENTER]Udaj siê do Domokr¹¿cy i zapytaj go o tê stronê[ENTER]ksiêgi. Domokr¹¿cê znajdziesz w drugiej wiosce.
 5172	Œwi¹tynia Ciemnoœci
-5173	Otrzymujesz 2 000 000 punktów doœwiadczenia.
-5174	Otrzymujesz 50 000 Yang.
+5173	Otrzymujesz 2 000 000 punktów doœwiadczenia.
+5174	Otrzymujesz 50 000 Yang.
 5175	Otrzymujesz B³ogos³awieñstwo ¯ycia.
 5176	Na Pustyni Yongbi
 5177	Poszukiwanie Pomnika
@@ -5195,7 +5199,7 @@
 5196	Muszê jak najszybciej znaleŸæ nowe miejsce.[ENTER]Jeszcze nic nie jest stracone.[ENTER]Spróbujê w Jaskini Paj¹ków. Aby siê nasze[ENTER]¿yczenie spe³ni³o...
 5197	Hm. A wiêc Loch Ma³p nie jest miejscem, którego[ENTER]szukamy. Musimy poszukaæ nowego! Zgodnie z tym,[ENTER]co jest tutaj napisane, musimy udaæ siê do[ENTER]Jaskini Paj¹ków.[ENTER]Jednak najpierw zajmijmy siê wa¿niejsz¹ spraw¹:[ENTER]Kapitan jest zaniepokojony, poniewa¿ po wiosce[ENTER]w³ócz¹ siê obcy i zadaj¹ dziwne pytania.[ENTER]Udaj siê do Kapitana i dowiedz siê, co siê dzieje.
 5198	Nie wiem czemu, ale nie mam najlepszego[ENTER]przeczucia odnoœnie tej sprawy. Zobaczmy, co[ENTER]powie nam Kapitan.[ENTER]Och, prawie zapomnia³em. Oto nagroda za czwart¹[ENTER]stronê.
-5199	Otrzymujesz 2 000 000 punktów doœwiadczenia.
+5199	Otrzymujesz 2 000 000 punktów doœwiadczenia.
 5200	Otrzymujesz B³ogos³awieñstwo Magii.
 5201	Przera¿aj¹cy Ludzie
 5202	ZnajdŸ Kapitana
@@ -5219,7 +5223,7 @@
 5220	Uda³o mi siê dotrzeæ tutaj wczeœniej ni¿ obcy i[ENTER]odebraæ pi¹t¹ stronê z pamiêtnika od jednego z[ENTER]Bestialskich Kapitanów. Na pewno znikn¹ teraz[ENTER]obcy z tej okolicy.[ENTER]Zaniosê stronê do Uriela, aby móg³ j¹ odszyfrowaæ.
 5221	Pi¹ta Strona
 5222	Wskazówka: pi¹t¹ stronê tej tajemniczej ksiêgi[ENTER]mo¿esz zanieœæ Urielowi dopiero po osi¹gniêciu[ENTER]poziomu 47. Do tego czasu dobrze ukryj stronê.
-5223	Otrzymujesz 750 000 punktów doœwiadczenia.
+5223	Otrzymujesz 750 000 punktów doœwiadczenia.
 5224	Trzecia Strona:
 5225	OdnaleŸliœmy miejsce, gdzie panuje z³a energia.[ENTER]Ale to za ma³o. To miejsce jest przesi¹kniête[ENTER]z³em, ale nie nadaje siê, by przeprowadzenia[ENTER]rytua³u czarnej magii. To bolesna pora¿ka dla[ENTER]nas.[ENTER]Nasi zwiadowcy poinformowali nas o sekretnym[ENTER]miejscu na Pustyni Yongbi, które mo¿e siê do tego[ENTER]nadawaæ.[ENTER]Pe³ni nadziei udamy siê tam teraz.
 5226	A wiêc, nie uda³o im siê osi¹gn¹æ celu w Smoczej[ENTER]Dolinie. Hmmm...[ENTER]A teraz Pustynia Yongbi? Zazwyczaj trudno spotkaæ[ENTER]tam jakiœ ludzi, a ca³y obszar nie zosta³ jeszcze[ENTER]przebadany. To nie bêdzie proste. Gdzie dok³adnie[ENTER]jest obszar, o którym oni mówi¹?[ENTER]Przypuszczam, ¿e chodzi o Loch Ma³p Junsun Dong.[ENTER]To g³êboka jaskinia, która nadaje siê do[ENTER]zgromadzenie negatywnej energii.
@@ -5236,8 +5240,8 @@
 5237	Ojej, tê stronê naprawdê trudno odszyfrowaæ.[ENTER]Na ni¹ bêdê potrzebowa³ wiêcej czasu. Wygl¹da na[ENTER]to, ¿e zawiera wa¿ne informacje. Ten znak[ENTER]symbolizuje tutaj "czarn¹ magiê". Trafiliœmy na[ENTER]dobry œlad.[ENTER]Chêtnie bym siê dowiedzia³, dlaczego czarna magia[ENTER]jest zakazana. Na pewno by³ jakiœ dobry powód...
 5238	Podczas gdy ja bêdê siê stara³ przet³umaczyæ tê[ENTER]stronê, ty mo¿esz iœæ do muzyka Yu-Hwana.[ENTER]S³ysza³em, ¿e ma on kilka informacji, które mog¹[ENTER]siê nam przydaæ. Gdy wrócisz, powiem ci, co jest[ENTER]napisane na stronie. Nagrodê za dostarczenie[ENTER]strony otrzymasz ju¿ teraz.
 5239	Na poziomie 40 uda³o ci siê zdobyæ od[ENTER]Bestialskich Kapitanów pi¹t¹ stronê z[ENTER]tajemniczego pamiêtnika. Teraz musisz zanieœæ j¹[ENTER]Urielowi.
-5240	Otrzymujesz 3 000 000 punktów doœwiadczenia.
-5241	Otrzymujesz 75 000 Yang.
+5240	Otrzymujesz 3 000 000 punktów doœwiadczenia.
+5241	Otrzymujesz 75 000 Yang.
 5242	Otrzymujesz B³ogos³awieñstwo Smoka.
 5243	Udaj siê do Yu-Hwan
 5244	ZnajdŸ Muzyka Yu-Hwan
@@ -5278,15 +5282,15 @@
 5279	Ósma Strona:
 5280	ZnaleŸliœmy odpowiednie ofiary. Mamy szczêœcie.[ENTER]Czy¿by to by³ znak? A teraz potrzebujemy[ENTER]ceremonialnego dzwoneczka. Jeœli mnie pamiêæ nie[ENTER]myli, widzia³em coœ takiego u paj¹ków. W drogê!
 5281	Znowu Loch Paj¹ków, dziwne. Musisz koniecznie siê[ENTER]tam udaæ i poszukaæ tego dzwoneczka. Bêdzie to[ENTER]jednak mêcz¹ca podró¿, odpocznij wiêc najpierw i[ENTER]wróæ póŸniej. Ja jeszcze coœ przemyœlê i[ENTER]przet³umaczê dalsze fragmenty. Jak wrócisz,[ENTER]powierzê ci nastêpne zdanie.[ENTER]I nie martw siê. Wynagrodzenie za ósm¹ stronê[ENTER]otrzymasz oczywiœcie ju¿ teraz.
-5282	Otrzymujesz 3 000 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 70 000 Yang.[ENTER]Otrzymujesz 20 Peleryn Mêstwa.[ENTER]Wskazówka: aby wykonaæ nastêpne zadanie, musisz[ENTER]osi¹gn¹æ co najmniej poziom 50.
+5282	Otrzymujesz 3 000 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 70 000 Yang.[ENTER]Otrzymujesz 20 Peleryn Mêstwa.[ENTER]Wskazówka: aby wykonaæ nastêpne zadanie, musisz[ENTER]osi¹gn¹æ co najmniej poziom 50.
 5283	Lee Seop dotar³ wraz ze sw¹ kawaleri¹ do[ENTER]królestwa Taejo i wygl¹da na to, ¿e chce tam[ENTER]zostaæ. Tymczasem na ziemiê spadaj¹ meteoryty.[ENTER]Przynosz¹ chaos, zniszczenie i niezgodê. Wielkie[ENTER]królestwo podzieli³o siê na trzy mniejsze[ENTER]królestwa, które wzajemnie walcz¹ miêdzy sob¹,[ENTER]zamiast wspólnie stawiæ czo³o z³u. Bóg Smoków ju¿[ENTER]do nas nie przemawia. Jego ³aska sp³ywa raz na[ENTER]jedno, raz na drugie królestwo. I tak oto wszyscy[ENTER]walcz¹ o jego ³askê, gdy tymczasem nieszczêœcie[ENTER]szerzy siê dalej...
 5284	Uriel:
 5285	Relacja naocznego œwiadka z pierwszych dni naszej[ENTER]ery. Absolutnie bezcenna! Ach w³aœnie, zap³ata.[ENTER]Oto twoja nagroda za znakomit¹ robotê! I jeszcze[ENTER]jedno: ktoœ wpad³ najwidoczniej na ten sam trop,[ENTER]co my. Nie mamy zatem czasu do stracenia. Pod[ENTER]koniec tej strony napisane jest, ¿e Lee Seop[ENTER]szuka³ z³ej energii w Lochu Paj¹ków.[ENTER]Jeœli tam coœ znajdziesz, wróæ natychmiast do[ENTER]mnie![ENTER]Jestem strasznie niecierpliwy!
 5286	Szósta Strona
 5287	Zabij Elitarnego Truj¹cego Paj¹ka
 5288	Hej, nie tak szybko! Nie zapomnij swojej nagrody[ENTER]za dziewi¹t¹ stronê!
-5289	Otrzymujesz 5 000 000 punktów doœwiadczenia.
-5290	Otrzymujesz 125 000 Yang.
+5289	Otrzymujesz 5 000 000 punktów doœwiadczenia.
+5290	Otrzymujesz 125 000 Yang.
 5291	Otrzymujesz Symbol Króla Przepowiedni.
 5292	Œlad na Lodowej Ziemi
 5293	Stare Pud³o z Papierami
@@ -5303,8 +5307,8 @@
 5304	Uda³o nam siê odeprzeæ pierwszy atak. Ale kolejna[ENTER]fala nied³ugo nadci¹gnie.[ENTER]Wprawdzie teren utrudnia poruszanie siê[ENTER]uzbrojonej kawalerii Lee Seopa, ale przybywa ich[ENTER]coraz wiêcej. Nie wygramy. Pozostaje nam ostatnia[ENTER]szansa, by zakoñczyæ badania nad czarn¹ magi¹.[ENTER]Pod ochron¹ nocy prze³amiemy liniê oporu wrogów i[ENTER]powrócimy do Jaskini Paj¹ków. Bêdê siê modli³.[ENTER]Nie o zwyciêstwo, a o odrobinê nadziei...
 5305	Oooch. Myœlê, ¿e jesteœmy ju¿ blisko celu![ENTER]W koñcu dowiemy siê czegoœ wiêcej o czarnej[ENTER]magii. Nie mogê siê doczekaæ! Wróæ do Lochu[ENTER]Paj¹ków. Gdzieœ tam musi byæ jedenasta strona.
 5306	Oto zas³u¿ona nagroda!
-5307	Otrzymujesz 5 500 000 punktów doœwiadczenia.
-5308	Otrzymujesz 137 500 Yang.
+5307	Otrzymujesz 5 500 000 punktów doœwiadczenia.
+5308	Otrzymujesz 137 500 Yang.
 5309	Otrzymujesz Rêkawicê Króla Przepowiedni.
 5310	Dziewi¹ta Strona
 5311	Zabij Szponiastego Truj¹cego Paj¹ka
@@ -5322,7 +5326,7 @@
 5323	Ju¿ by³eœ w Dolinie Seungryong. Wydaje mi siê, ¿e[ENTER]nie znajdziemy ju¿ tam informacji.[ENTER]Hmm, gdzie jeszcze moglibyœmy poszukaæ...[ENTER]Ju¿ wiem! W naszym dochodzeniu znacz¹c¹ rolê[ENTER]odgrywa³y pomniki. Istniej¹ pomniki, których[ENTER]jeszcze nie zbadaliœmy.[ENTER]Mianowicie te, w innych królestwach! Jest tam[ENTER]bardzo niebezpiecznie. Prawdopodobnie bêdziesz[ENTER]tam ci¹gle atakowany.[ENTER]Wiêc dobrze siê przygotuj i wróæ gdy bêdziesz[ENTER]gotowy.
 5324	IdŸ do Mêdrca Uriela
 5325	Ale najpierw otrzymasz nagrodê za jedenast¹[ENTER]stronê.
-5326	Otrzymujesz 6 000 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 150 000 Yang.[ENTER]Otrzymujesz Medal Smoka.[ENTER]Wskazówka: aby wykonaæ nastêpnego zadania, musisz[ENTER]osi¹gn¹æ co najmniej poziom 55.
+5326	Otrzymujesz 6 000 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 150 000 Yang.[ENTER]Otrzymujesz Medal Smoka.[ENTER]Wskazówka: aby wykonaæ nastêpnego zadania, musisz[ENTER]osi¹gn¹æ co najmniej poziom 55.
 5327	Odnaleziono Dziewi¹t¹ Stronê
 5328	Uda³o ci siê znaleŸæ dziewi¹t¹ stronê w Lochu[ENTER]Paj¹ków. Zanieœ j¹ mêdrcowi Urielowi.
 5329	Uda³o ci siê znaleŸæ kolejny œlad czarnej magii?[ENTER]Faktycznie, to dziewi¹ta strona! Jestem ciekawy,[ENTER]czy czar zadzia³a³. Zobaczmy. Hmm, tutaj jest[ENTER]napisane...
@@ -5339,8 +5343,8 @@
 5340	Tak niewiele dzieli nas od powstrzymania Lee Seop.Musimy udaæ siê do Œwi¹tyni Ciemnoœci, aby[ENTER]odprawiæ zakazany rytua³ czarnej magii.[ENTER]Nie zosta³o nas wielu, a ostatnie miesi¹ce da³y[ENTER]siê we znaki. Jednak nawet garstka zmêczonych[ENTER]ludzi mo¿e zmieniæ los ca³ego œwiata, jeœli[ENTER]posiada informacje.[ENTER]Nie straciliœmy z oczu naszego celu. Ruszajmy.
 5341	Ach, w koñcu odnaleŸli odpowiednie miejsce. Moje[ENTER]przeczucie siê sprawdzi³o! To naprawdê Œwi¹tynia[ENTER]Hwang. Na pewno pamiêtasz to mroczne miejsce, w[ENTER]którym by³o du¿o z³ej energii. Ju¿ od[ENTER]niepamiêtnych czasów odbywa³y siê tam rytua³y i[ENTER]ceremonie, o których zwykli obywatele nie powinni[ENTER]nic wiedzieæ.
 5342	Teraz w œrodku œwi¹tyni ¿yj¹ same potwory, ludzi[ENTER]ju¿ od dawien tam nie ma.[ENTER]Wprawdzie jest to niebezpieczne miejsce, ale[ENTER]jestem pewien, ¿e sobie poradzisz. IdŸ do Doliny[ENTER]Seungryong i poszukaj w Œwi¹tyni Hwang ostatniej[ENTER]strony. W³aœnie tam zakoñcza³a siê historia z[ENTER]pamiêtnika. Muszê wiedzieæ, jak siê koñczy.[ENTER]Powodzenia![ENTER]Och, poczekaj chwilkê, oto nagroda za dwunast¹[ENTER]stronê.
-5343	Otrzymujesz 7 500 000 punktów doœwiadczenia.
-5344	Otrzymujesz 162 500 Yang.
+5343	Otrzymujesz 7 500 000 punktów doœwiadczenia.
+5344	Otrzymujesz 162 500 Yang.
 5345	Uriel s¹dzi, ¿e potrzebne nam informacje o[ENTER]tajemniczej czarnej magii mog¹ znajdowaæ siê w[ENTER]pobli¿u pomników, które nie zosta³y jeszcze przez[ENTER]nas zbadane. Udaj siê do Królestwa Chunjo i[ENTER]zbadaj pomniki znajduj¹ce siê na obszarze Joan.
 5346	Ostatnia Strona
 5347	Zabij Straszyd³a w Œwi¹tyni
@@ -5362,11 +5366,11 @@
 5363	To koniec...[ENTER]Zapowiada³o siê bardzo obiecuj¹co. Pomieszczenie[ENTER]wype³ni³o siê energi¹ i s³owami zaklêcia, to by³o[ENTER]naprawdê dziwne. Moich szeœciu kompanów pad³o na[ENTER]kolana. Œwi¹tynia zaczê³a siê trz¹œæ. Potem[ENTER]uderzy³ piorun i zostaliœmy odrzuceni do ty³u.[ENTER]Linia si³ pêk³a...[ENTER]Teraz nasta³a niesamowita cisza. Moi przyjaciele[ENTER]le¿¹ zabici na ziemi. Magia nie zadzia³a³a.[ENTER]Zawiedliœmy.
 5364	Co? To wszystko?!?[ENTER]To szaleñstwo! Ca³a nasza praca na marne?[ENTER]Podró¿owaliœmy, walczyliœmy, godzinami[ENTER]t³umaczyliœmy teksty i zastanawialiœmy siê. I to[ENTER]na nic! Jesteœmy tak samo m¹drzy jak byliœmy[ENTER]wczeœniej.[ENTER]Jedyne czego siê nauczyliœmy to to, ¿e lepiej[ENTER]trzymaæ siê z daleka od czarnej magii.[ENTER]Przypuszcza³em to ju¿ od pocz¹tku. Ale byæ pewnym[ENTER]to lepiej ni¿ tylko przypuszczaæ, prawda?
 5365	Najpierw zrobimy sobie przerwê. Boli mnie g³owa,[ENTER]a ty pewnie jesteœ nieŸle zmêczony. Muszê siê[ENTER]zastanowiæ nad tym wszystkim. Kiedy odpocznê, to[ENTER]porozmawiamy.[ENTER]Mimo wszystko wyœwiadczy³eœ mi ogromn¹ przys³ugê.[ENTER]To nie zostaniesz bez nagrody!
-5366	Otrzymujesz 9 000 000 punktów doœwiadczenia.
-5367	Otrzymujesz 175 000 Yang.
+5366	Otrzymujesz 9 000 000 punktów doœwiadczenia.
+5367	Otrzymujesz 175 000 Yang.
 5368	Uriel s¹dzi, ¿e potrzebne nam informacje o[ENTER]tajemniczej czarnej magii mog¹ znajdowaæ siê w[ENTER]pobli¿u pomników, które nie zosta³y jeszcze przez[ENTER]nas zbadane. Udaj siê do królestwa Shinsoo i[ENTER]zbadaj pomniki znajduj¹ce siê na obszarze Yongan.
 5369	Otrzymujesz Ksi¹¿kê Lidera.
-5370	Otrzymujesz 5 500 000 punktów doœwiadczenia.
+5370	Otrzymujesz 5 500 000 punktów doœwiadczenia.
 5371	Oto on!
 5372	To ten pomnik, którego szuka³ Uriel! Pod[ENTER]pomnikiem le¿y z³o¿ona strona z pamiêtnika! Muszê[ENTER]j¹ natychmiast dostarczyæ Urielowi.
 5373	Odnaleziono Dwunast¹ Stronê
@@ -6236,7 +6240,7 @@
 6237	Ach, skamienia³a ziemia. Bardzo dobrze. To teraz[ENTER]biorê siê do pracy. Wynik przeka¿ê Admira³owi.
 6238	Tylnymi Drzwiami
 6239	Szuka ciê Admira³ Angmur.
-6240	Znamy ju¿ miejsce pobytu Kap³anki Œwi¹tynnej[ENTER]Yah-Ki. Niestety baza to przypomina potê¿n¹[ENTER]twierdzê – oddzia³y stra¿y na okr¹g³o patroluj¹[ENTER]okolicê. Obecnie atak frontalny by³by dla nas[ENTER]samobójstwem.
+6240	Znamy ju¿ miejsce pobytu Kap³anki Œwi¹tynnej[ENTER]Yah-Ki. Niestety baza to przypomina potê¿n¹[ENTER]twierdzê - oddzia³y stra¿y na okr¹g³o patroluj¹[ENTER]okolicê. Obecnie atak frontalny by³by dla nas[ENTER]samobójstwem.
 6241	Dlatego chcemy zaatakowaæ z zasadzki.[ENTER]Moi ludzie szukaj¹ ju¿ odpowiedniego miejsca.[ENTER]Odci¹gnij stra¿, abyœmy mieli wiêcej czasu.
 6242	
 6243	Najniebezpieczniejszy jest jeden z oddzia³ów[ENTER]stra¿niczych. Sami siebie nazywaj¹ Brygad¹[ENTER]Czarnej Œmierci.[ENTER]Brygada sk³ada siê Moghu, Carnifex i Genera³a[ENTER]Albusa. Ich przywódc¹ jest Szkieletor.[ENTER]Zlikwiduj ich wszystkich, zanim odkryj¹ mój[ENTER]oddzia³ zwiadowczy.
@@ -6258,7 +6262,7 @@
 6259	Nadszed³ dzieñ rozstrzygniêcia. Jeœli zginiemy,[ENTER]zginie z nami ca³y œwiat. Jednak, jeœli[ENTER]zwyciê¿ymy, o naszych chwalebnych czynach bêd¹[ENTER]œpiewane pieœni przez nastêpnych tysi¹c lat.[ENTER]Powstrzymaj Wasali Mroku. Zniszcz Kap³anka[ENTER]Œwi¹tynna Yah-Ki!
 6260	Dlaczego jesteœ tutaj? Walka siê jeszcze nie[ENTER]zakoñczy³a. Pokonaj Kap³ankê Œwi¹tynni Yah-Ki.[ENTER]Pok³adamy w tobie ca³¹ nasz¹ nadziejê.
 6261	Rzuci³eœ na kolana swojego przeciwnika.[ENTER]Zwyciêstwo nale¿y do ciebie!
-6262	Nie masz czasu na odpoczynek – Kap³anka Œwi¹tynna[ENTER]Yah-Ki czeka na ciebie.
+6262	Nie masz czasu na odpoczynek - Kap³anka Œwi¹tynna[ENTER]Yah-Ki czeka na ciebie.
 6263	Zwyciê¿y³eœ! Z przeraŸliwym krzykiem Yah-Ki upada[ENTER]na ziemiê.
 6264	Oj! To niemo¿liwe! Pokonana przez cz³owieka...[ENTER]Och, Banshee, wybacz! Zawiod³am ciê! Nie[ENTER]wykona³am mojego zada...
 6265	Przeszukujesz jej zw³oki i znajdujesz[ENTER]zapieczêtowany list. Wróæ z nim do Admira³a[ENTER]Angmura.
@@ -6595,9 +6599,9 @@
 6596	W porz¹dku...[ENTER]Mo¿e to bêdzie lepsza droga.[ENTER]PrzyjdŸ jak powa¿nie siê zastanowisz, ale wpierw[ENTER]musisz to potraktowaæ na serio.
 6597	Jeœli jesteœ pewien, dobrze: zaczynamy![ENTER]¯yczê Ci wszystkiego co najlepsze![ENTER][ENTER]Jednostronny Rozwód zosta³ przeprowadzony.
 6598	Zobacz nagrody
-6599	300 000 Yang
+6599	300 000 Yang
 6600	100 000 PD
-6601	500 000 PD
+6601	500 000 PD
 6602	Warunek: maks. 299 pkt
 6603	50 000 Yang
 6604	Ranking
@@ -6628,10 +6632,10 @@
 6629	Otrzymujesz %d.
 6630	Ju¿ otrzyma³eœ/aœ swoj¹ nagrodê.
 6631	Mo¿e zawieraæ nastêpuj¹ce przedmioty:
-6632	50 000 Yang
+6632	50 000 Yang
 6633	700 000 PD
-6634	500 000 Yang
-6635	700 000 Yang
+6634	500 000 Yang
+6635	700 000 Yang
 6636	Warunek: 300 do 399 pkt
 6637	100 000 Yang
 6638	Twoja nagroda
@@ -6662,11 +6666,11 @@
 6663	Niestety, nie uda³o ci siê uplasowaæ w topce.
 6664	Otrzymane nagrody: %d
 6665	Odebra³eœ ju¿ swoj¹ nagrodê.
-6666	100 000 PD
-6667	50 000 Yang
-6668	100 000 Yang
-6669	300 000 Yang
-6670	500 000 Yang
+6666	100 000 PD
+6667	50 000 Yang
+6668	100 000 Yang
+6669	300 000 Yang
+6670	500 000 Yang
 6671	Drwal Deokbae:
 6672	Twój Kilof nie mo¿e zostaæ ulepszony.[ENTER]Za ma³o trenowa³eœ!
 6673	Chcesz ulepszyæ swój kilof?[ENTER]Zobaczmy... teraz ma poziom %s.
@@ -6752,7 +6756,7 @@
 6753	Tak, by³ zachwycony!
 6754	Nie, wcale.
 6755	Cieszê siê! To wspania³e uczucie sprawiæ innym[ENTER]radoœæ. Oczywiœcie zostaniesz nagrodzony. Proszê[ENTER]przyjmij to!
-6756	Otrzymujesz 20 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 20 000 Yang.[ENTER]Otrzymujesz Bry³k¹ Z³ota.
+6756	Otrzymujesz 20 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 20 000 Yang.[ENTER]Otrzymujesz Bry³k¹ Z³ota.
 6757	Ok³ama³eœ Wonda-Rima i dlatego straci³eœ punkty[ENTER]rangi!
 6758	Nie przyj¹³ futer?[ENTER]Hmm, to nie by³ zbyt dobry pomys³, wys³aæ ciê na[ENTER]polowanie, mog³em udaæ siê sam. Nastêpnym razem[ENTER]post¹piê inaczej.
 6759	Ca³y twój trud przecie¿ nie mo¿e pójœæ na marne.[ENTER]IdŸ do Yang-Shina. Odkupi on od ciebie futra za[ENTER]dobr¹ cenê.
@@ -6760,7 +6764,7 @@
 6761	Co za rozczarowanie.[ENTER]Ale przynajmniej masz jeszcze futra. Udaj siê do[ENTER]myœliwego Yang-Shina, który przebywa w Bokjung i[ENTER]sprzedaj mu futra.
 6762	Co za rozczarowanie.[ENTER]Ale przynajmniej masz jeszcze futra. Udaj siê do[ENTER]myœliwego Yang-Shina, który przebywa w Bakra i[ENTER]sprzedaj mu futra.
 6763	Futra Mu-Rang? Na pewno przydadz¹ mi siê.[ENTER]Zrobiê sobie z nich now¹ bieliznê.[ENTER]Proszê, oto woreczek Yang za twój trud. Spójrz,[ENTER]znalaz³em wczoraj ksiêgê, mo¿e ci siê przyda.
-6764	Otrzymujesz 40 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.[ENTER]Otrzymujesz Ksiêgê Umiejêtnoœci.
+6764	Otrzymujesz 40 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.[ENTER]Otrzymujesz Ksiêgê Umiejêtnoœci.
 6765	Yang-Shin
 6766	Yang-Shin:
 6767	Stra¿nik Wioski
@@ -6810,13 +6814,13 @@
 6811	Dziêkujê za przyniesienie mi lekarstwa. Tak mnie[ENTER]wszystko swêdzi i ju¿ powoli wariujê.
 6812	Och, nieŸle smakuje! Czujê, ¿e przestaje mnie[ENTER]swêdziæ.
 6813	Zas³u¿y³eœ na wyj¹tkow¹ nagrodê!
-6814	Otrzymujesz 50 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 12 000 Yang.[ENTER]Otrzymujesz buty wyszywane z³otem+4.[ENTER]Otrzymujesz 5 fioletowych mikstur.
+6814	Otrzymujesz 50 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 12 000 Yang.[ENTER]Otrzymujesz buty wyszywane z³otem+4.[ENTER]Otrzymujesz 5 fioletowych mikstur.
 6815	Ble, co za okropieñstwo! Lekarstwo jest ju¿[ENTER]przeterminowane - ale d³ugo ci zesz³o. Smakuje[ENTER]jak skwaœnia³e mleko.
 6816	Hmm, czekaj... wydaje mi siê, ¿e jest lepiej.[ENTER]Tak, dzia³a! Nie bêdê pod³y i otrzymasz mimo to[ENTER]nagrodê.
 6817	Wygl¹da na to, ¿e zgubi³eœ lekarstwo. Udaj siê[ENTER]jeszcze raz na polowanie i dostarcz Baek-Gonowi[ENTER]sk³adniki potrzebne do przyrz¹dzenia nowego[ENTER]lekarstwa. W przeciwnym razie sam stanê siê[ENTER]demonem, bo d³u¿ej nie wytrzymam tego bólu.
-6818	Otrzymujesz 50 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 8000 Yang.
+6818	Otrzymujesz 50 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 8000 Yang.
 6819	Jak to, znowu zgubi³eœ lekarstwo? W ¿yciu nie[ENTER]spotka³em wiêkszej fajt³apy![ENTER]Ale có¿, mówi siê trudno i ¿yje siê dalej.
-6820	Otrzymujesz 25 000 punktów doœwiadczenia.
+6820	Otrzymujesz 25 000 punktów doœwiadczenia.
 6821	Yang-Shin
 6822	Yang-Shin:
 6823	Dezerter
@@ -6839,8 +6843,8 @@
 6840	Dolina Yonjang, gdzie Nakajima poca³owa³ po raz[ENTER]pierwszy Ah-Yu - do tej pory jest znakomitym[ENTER]terenem ³owieckim.
 6841	Yang-Shin bêdzie zadowolony, gdy us³yszy[ENTER]wiadomoœæ.[ENTER]Udaj siê do %s i przeka¿ mu zdobyte informacje.
 6842	Dolina Yonjang? To mo¿e byæ prawda. Jak do tej[ENTER]pory jeszcze nie s³ysza³em, aby tam pojawi³ siê[ENTER]kamieñ Metin i zatru³ tereny. Jestem pewien, ¿e[ENTER]nied³ugo upolujê wspania³¹ zdobycz! A oto[ENTER]zas³u¿ona nagroda.
-6843	Otrzymujesz 35 000 punktów doœwiadczenia.
-6844	Otrzymujesz 17 500 Yang.
+6843	Otrzymujesz 35 000 punktów doœwiadczenia.
+6844	Otrzymujesz 17 500 Yang.
 6845	Yu-Hwan
 6846	Muzyk Yu-Hwan potrzebuje twojej pomocy.[ENTER]Udaj siê natychmiast w drogê, aby sprawdziæ, co[ENTER]siê tam dzieje!
 6847	Zmartwienia Ah-Yu
@@ -6999,14 +7003,14 @@
 7000	Prosi³em ciê przecie¿, ¿ebyœ poczeka³ a¿ harpuny[ENTER]bêd¹ gotowe. PrzyjdŸ póŸniej.
 7001	Otrzyma³eœ od Kowala harpuny na wieloryby.[ENTER]Dostarcz je Rybakowi.
 7002	Wspaniale! Harpuny s¹ na prawdê imponuj¹ce! W[ENTER]koñcu mo¿emy siê broniæ przed atakami wielorybów.[ENTER]Przeka¿ Octavio, ¿e wkrótce mo¿e liczyæ na œwie¿e[ENTER]ryby!
-7003	Otrzymujesz 500 000 Yang.
+7003	Otrzymujesz 500 000 Yang.
 7004	Jako dowód uznania otrzymujesz 3x:
 7005	Mamy za ma³o harpunów, aby przepêdziæ wieloryba.[ENTER]Tym mo¿emy go tylko po³askotaæ po brzuchu!
 7006	Proszê, udaj siê jeszcze raz do Kowala i poproœ[ENTER]go, aby sporz¹dzi³ wiêcej harpunów.
 7007	Rybacy s¹ teraz dobrze wyposa¿eni i mog¹ wyp³yn¹æ[ENTER]na po³ów na pe³ne morze. Udaj siê do Octavio i[ENTER]uspokój go, powiedz mu, ¿e wkrótce otrzyma œwie¿¹[ENTER]dostawê.
 7008	Co powiedzia³eœ? £agodne wieloryby przeobrazi³y[ENTER]siê w krwio¿ercze potwory morskie? Straszne...[ENTER]Dziêkujê, ¿e pomog³eœ rybakom. Wiêkszoœæ moich[ENTER]potraw zale¿y od ich dostaw.
 7009	Wracaj¹c do twojego burcz¹cego brzucha, niestety[ENTER]nie mogê ci przyrz¹dziæ jeszcze zupy rybnej, ale[ENTER]co powiesz na sushi?
-7010	Otrzymujesz 750 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 2 porcje Sushi.
+7010	Otrzymujesz 750 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 2 porcje Sushi.
 7011	Wizyta u Wonda-Rima
 7012	Sierota
 7013	Wonda-Rim
@@ -7033,8 +7037,8 @@
 7034	Dziêkujê, ¿e przynios³eœ mi go. W koñcu wiem, co[ENTER]siê naprawdê wydarzy³o.
 7035	Muszê porozmawiaæ z Chaegirabem. Narazi³ siê na[ENTER]niebezpieczeñstwo, aby mnie uratowaæ. Postaram[ENTER]siê, byæ dla niego lepszym bratankiem. Do[ENTER]zobaczenia, przyjacielu!
 7036	Informacja:
-7037	Otrzymujesz 32 000 Yang.
-7038	Otrzymujesz 1 250 000 punktów doœwiadczenia.
+7037	Otrzymujesz 32 000 Yang.
+7038	Otrzymujesz 1 250 000 punktów doœwiadczenia.
 7039	Uda³o ci siê porozmawiaæ z moim wujkiem[ENTER]Chaegirabem? Wskazówka? O co ci chodzi? Jeœli nie[ENTER]posiadasz ¿adnych dowodów, zachowaj swoje domys³y[ENTER]dla siebie![ENTER][ENTER]Proszê spytaj siê jeszcze raz mojego wuja.[ENTER]W koñcu za to ci p³acê.
 7040	List od Kapitana
 7041	Wierny ziomek
@@ -7084,8 +7088,8 @@
 7085	... jeœli jestem wasz¹ ostatni¹ desk¹ ratunku, to[ENTER]rozprawie siê z Przyzywaczami oraz Drêczycielami!
 7086	Jeœli spróbujê, to bêdzie z pewnoœci¹ nawiedza³[ENTER]was jeszcze jeden duch.
 7087	No dobrze. Pozwól mi jednak podarowaæ ci trochê[ENTER]Yang za twój trud.
-7088	Otrzymujesz 20 000 punktów doœwiadczenia.
-7089	Otrzymujesz 25 000 Yang.
+7088	Otrzymujesz 20 000 punktów doœwiadczenia.
+7089	Otrzymujesz 25 000 Yang.
 7090	Rozmowa zosta³a zakoñczona.
 7091	Mia³em nadziejê, ¿e powiesz coœ takiego. Niestety[ENTER]nie wiem dok³adnie, który z Przyzywaczy lub[ENTER]Drêczycieli ich zabi³. Mam nadziejê, ¿e poczujê,[ENTER]jak jeden z duchów zostanie uwolniony.
 7092	Przyœlê ci list.[ENTER]Duchy powiedzia³y mi, ¿e zemsta musi byæ dokonana[ENTER]w Trójk¹cie Boga Smoka. Tam znajduj¹ siê trzy[ENTER]kolumny, które tworz¹ wierzcho³ki trójk¹ta.
@@ -7113,7 +7117,7 @@
 7114	Jestem ci wielce zobowi¹zany, mój synu.
 7115	Jestem ci dozgonnie wdziêczny.
 7116	Informacja:
-7117	Otrzymujesz 3 300 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 270 000 Yang.[ENTER]Otrzymujesz ksiêgê mistrza.
+7117	Otrzymujesz 3 300 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 270 000 Yang.[ENTER]Otrzymujesz ksiêgê mistrza.
 7118	To mo¿e póŸniej? Udaj siê do Baek-Go, gdy[ENTER]bêdziesz gotów!
 7119	Kapitan
 7120	Dodatkowe zaopatrzenie
@@ -7159,8 +7163,8 @@
 7160	Co, chcesz mnie przekupiæ tymi marnymi futrami? W[ENTER]ten sposób mój d³ug... wydaje mi siê, ¿e drogi[ENTER]nie bêd¹ nigdy bezpieczne.
 7161	Poluj tak d³ugo, a¿ zdobêdziesz %s futer!
 7162	To wszystko, a teraz szybko do Yang-Shin.
-7163	Otrzymujesz 3 750 000 punktów doœwiadczenia.
-7164	Otrzymujesz 125 000 Yang.
+7163	Otrzymujesz 3 750 000 punktów doœwiadczenia.
+7164	Otrzymujesz 125 000 Yang.
 7165	Octavio
 7166	Octavio:
 7167	Starsza Pani:
@@ -7290,8 +7294,8 @@
 7291	Tak.
 7292	Nie.
 7293	Ile ¿¹dasz Yang za ksi¹¿kê?
-7294	Haha... lubisz ¿artowaæ. Z tob¹ nie mo¿na robiæ[ENTER]dobrych interesów. Oto moja propozycja: dam ci[ENTER]500 000 Yang za ten legendarny pamiêtnik. Bierz[ENTER]albo nie. Twoja decyzja!
-7295	Wezmê 500 000 Yang.
+7294	Haha... lubisz ¿artowaæ. Z tob¹ nie mo¿na robiæ[ENTER]dobrych interesów. Oto moja propozycja: dam ci[ENTER]500 000 Yang za ten legendarny pamiêtnik. Bierz[ENTER]albo nie. Twoja decyzja!
+7295	Wezmê 500 000 Yang.
 7296	To nie zrobimy interesu!
 7297	Nie to nie!
 7298	Nie, za drogo dla mnie. Przykro mi!
@@ -7302,7 +7306,7 @@
 7303	A wiêc zgadujê, ¿e nie dojdziemy do porozumienia.
 7304	Jak chcesz...
 7305	To nie jest zbyt tanio. Ale ja bêd¹ szczodry.
-7306	Ze mn¹ nie mo¿na zbytnio handlowaæ. Za ten[ENTER]legendarny pamiêtnik dam ci 500 000 Yang.
+7306	Ze mn¹ nie mo¿na zbytnio handlowaæ. Za ten[ENTER]legendarny pamiêtnik dam ci 500 000 Yang.
 7307	Bierz albo nie. Twoja decyzja!
 7308	Nie to nie!
 7309	Szkoda. Mo¿e przemyœlisz to jeszcze raz.
@@ -7366,7 +7370,7 @@
 7367	Nie, w przeciwnym razie jeszcze coœ zrobi!
 7368	Oto czarny lód, zabierz go i zostaw mnie w[ENTER]spokoju!
 7369	Oczekujesz ode mnie podziêkowania? ZejdŸ mi z[ENTER]oczu!
-7370	Otrzymujesz 70 000 000 punktów doœwiadczenia.
+7370	Otrzymujesz 70 000 000 punktów doœwiadczenia.
 7371	Nie dostaniesz z powrotem lodu. Zatopiê w morzu -[ENTER]tam na pewno nikomu nie wyrz¹dzi szkody.
 7372	Nie odwa¿ysz siê! Oddaj mi moj¹ w³asnoœæ albo[ENTER]przeklnê ciê i ca³¹ twoj¹ rodzinê.
 7373	Rób co chcesz, ale nie pozwolê na to, abyœ mnie[ENTER]powstrzyma³.
@@ -7381,7 +7385,7 @@
 7382	Nagle pojawiaj¹ siê przed tob¹ nastêpuj¹ce[ENTER]przedmioty:
 7383	Kiedy podnosisz przedmioty, czujesz[ENTER]samozadowolenie i przepe³nia ciê uczucie, ¿e[ENTER]nale¿ycie post¹pi³eœ. Trzymasz w swoich rêkach[ENTER]podziêkowanie Boga Smoków.
 7384	Och nie! Zapomnia³em zabraæ czarny lód! Nie[ENTER]pozosta³o mi nic innego, jak pójœæ po niego i[ENTER]póŸniej tutaj wróciæ.
-7385	Ponadto otrzymujesz 120 000 000 punktów[ENTER]doœwiadczenia.
+7385	Ponadto otrzymujesz 120 000 000 punktów[ENTER]doœwiadczenia.
 7386	Handlarka Ró¿noœci
 7387	Otwórz sklep
 7388	Musisz polowaæ na:
@@ -7877,7 +7881,7 @@
 7878	A dobra wiadomoœæ jest taka, ¿e dziêki tym[ENTER]pakietom mo¿esz du¿o zaoszczêdziæ!
 7879	Obracaj¹ca siê moneta wska¿e ci drogê do pakietów.
 7880	Potêga m¹droœci
-7881	Hej, wys³uchaj mnie uwa¿nie! W koñcu uda³o mi siê[ENTER]je odkryæ – Ÿród³o m¹droœci! Jej potêga zwiêksza[ENTER]na pewien okres zbieranie doœwiadczenia. Wydaje[ENTER]mi siê, ¿e mogê ciê ni¹ obdarzyæ. Jeœli wzbudzi³a[ENTER]ona w tobie ciekawoœæ, to w ka¿dej chwili mo¿esz[ENTER]przyjœæ do mnie.
+7881	Hej, wys³uchaj mnie uwa¿nie! W koñcu uda³o mi siê[ENTER]je odkryæ - Ÿród³o m¹droœci! Jej potêga zwiêksza[ENTER]na pewien okres zbieranie doœwiadczenia. Wydaje[ENTER]mi siê, ¿e mogê ciê ni¹ obdarzyæ. Jeœli wzbudzi³a[ENTER]ona w tobie ciekawoœæ, to w ka¿dej chwili mo¿esz[ENTER]przyjœæ do mnie.
 7882	Potêga m¹droœci
 7883	A wiêc chcesz poczuæ potêgê m¹droœci?[ENTER]Dziêki niej mo¿esz zebraæ w ci¹gu %d godz. %d %%[ENTER]wiêcej doœwiadczenia.
 7884	Na pewno tego chcesz? Dobrze, to przyznam ci[ENTER]teraz potêgê m¹droœci.[ENTER]...[ENTER]Dokonane!
@@ -7922,7 +7926,7 @@
 7923	Rejestracja do turnieju PvP
 7924	Mo¿esz wzi¹æ udzia³ w turnieju, jeœli posiadasz[ENTER]poziom od %d do%d.
 7925	Wszystkie wolne miejsca w turnieju PvP s¹[ENTER]niestety zajête.
-7926	Witaj w turnieju PvP! Stañ oko w oko z równymi[ENTER]sobie przeciwnikami i daj z siebie wszystko –[ENTER]niech Bóg Smoków czuwa nad tob¹.
+7926	Witaj w turnieju PvP! Stañ oko w oko z równymi[ENTER]sobie przeciwnikami i daj z siebie wszystko -[ENTER]niech Bóg Smoków czuwa nad tob¹.
 7927	Wiêc, jak bêdzie? Przyjmiesz wyzwanie? Tak? To[ENTER]zarejestruj siê teraz do turnieju.
 7928	Jasne!
 7929	Nie, raczej nie...
@@ -7945,7 +7949,7 @@
 7946	GM: rozpoczêcie/zakoñczenie turnieju PvP
 7947	Rozpocznij/zakoñcz turniej PvP
 7948	Start: podaj czas trwania rejestracji w minutach.
-7949	GM: Turniej PvP – Ustawienia
+7949	GM: Turniej PvP - Ustawienia
 7950	Minimalny poziom (min: 15)
 7951	Maksymalny poziom (maks:120)
 7952	Nie masz minimalnego poziomu.
@@ -8500,7 +8504,7 @@
 8501	Wróæ do Handlarza Zbrojami
 8502	Kowal nied³ugo dostarczy!
 8503	A wiêc ju¿ prawie dokoñczy³ zbrojê?[ENTER]Dziêki, za twoj¹ pomoc.[ENTER]Proszê, a oto twoja nagroda.
-8504	Otrzymujesz 26 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 15 000 Yang.[ENTER]Otrzymujesz Nos Œwini.
+8504	Otrzymujesz 26 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 15 000 Yang.[ENTER]Otrzymujesz Nos Œwini.
 8505	Otrzymujesz Zbrojê P³ytow¹ Tygrysa+3.
 8506	Czy naprawdê chcesz zrezygnowaæ z tej misji?
 8507	Otrzymujesz Czerwone Ubranie+3.
@@ -8519,7 +8523,7 @@
 8520	Zdob¹dŸ kiszkê Szarego Wilka dla Octavio.[ENTER]Mo¿esz j¹ zdobyæ od Szarych Wilków.
 8521	Mam kiszkê wilka.
 8522	Dziêki tobie mogê w koñcu ugotowaæ tê rzadk¹[ENTER]potrawê. To bêdzie dopiero uczta![ENTER]Doceniam twoj¹ pomoc. Proszê, oto skromna nagroda[ENTER]za twój trud.
-8523	Otrzymujesz 12 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 5000 Yang.[ENTER]Otrzymujesz Szpon Wilka.
+8523	Otrzymujesz 12 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 5000 Yang.[ENTER]Otrzymujesz Szpon Wilka.
 8524	Potrzebujê kiszki Szarego Wilka.[ENTER]Proszê, przynieœ mi jedn¹.
 8525	Najlepsza Ksi¹¿ka Kucharska
 8526	Najlepsza Ksi¹¿ka Kucharska
@@ -8565,7 +8569,7 @@
 8566	Otrzymujesz od Yu-Rang ciastko ry¿owe.[ENTER]Zanieœæ je do Ah-Yu.[ENTER]Znajdziesz j¹ i jej dziecko w pierwszej wiosce.
 8567	Oto ciastko ry¿owe dla twojego dziecka.
 8568	Uda³o ci siê przynieœæ ciastko ry¿owe! Bardzo ci[ENTER]dziêkujê. Popatrz, moje dziecko przesta³o p³akaæ[ENTER]i chrupie z radoœci¹ ciastko ry¿owe. Uda³o ci[ENTER]siê! Dziêkujê za pomoc!
-8569	Otrzymujesz 26 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.
+8569	Otrzymujesz 26 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.
 8570	Ale... nie mogê odejœæ, bo dziecko ci¹gle[ENTER]terroryzuje ca³¹ okolicê swoim p³aczem...[ENTER]To nie potrwa d³ugo! Czy naprawdê nie masz czasu?
 8571	Ciastka Ry¿owe
 8572	Ciastka Ry¿owe
@@ -8581,7 +8585,7 @@
 8582	Znaleziono Z³oty Topór
 8583	Oto z³oty topór.
 8584	Dziêkujê! Jestem twoim d³u¿nikiem. Teraz ju¿ nie[ENTER]muszê siê martwiæ, co powiem Deokbae, gdy siê z[ENTER]nim zobaczê.
-8585	Otrzymujesz 36 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.[ENTER]Otrzymujesz Ornament.
+8585	Otrzymujesz 36 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.[ENTER]Otrzymujesz Ornament.
 8586	ZnajdŸ z³oty topór
 8587	ZnajdŸ Z³oty Topór
 8588	Szuka ciê Kowal! Ktoœ ukrad³ jego z³oty topór.
@@ -8607,7 +8611,7 @@
 8608	Mam twoj¹ spinka do w³osów.
 8609	Proszê, pos³uchaj mnie. Znajdujê siê w przykrej[ENTER]sytuacji. Opuœci³am na chwilê sklep, aby zrobiæ[ENTER]coœ wa¿nego. Podczas mojej nieobecnoœci, ktoœ mi[ENTER]ukrad³ spinkê.
 8610	Och, serdecznie dziêkujê.[ENTER]Bardzo mnie to cieszy. Jestem bardzo szczêœliwa,[ENTER]ostatecznie odzyska³am moj¹ ukochan¹ spinkê![ENTER]Ostatnio pomagasz mi zbyt czêsto. Jak ja ci siê[ENTER]odwdziêczê? Mam bilet na jazdê konn¹. To tylko[ENTER]drobnostka, ale ju¿ go nie potrzebujê, poniewa¿[ENTER]nie bêdê opuszcza³a sklepu tak czêsto. WeŸ to[ENTER]jako dowód mojej wdziêcznoœci.
-8611	Otrzymujesz 60 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.[ENTER]Otrzymujesz Bilet Na Jazdê Konn¹.
+8611	Otrzymujesz 60 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 10 000 Yang.[ENTER]Otrzymujesz Bilet Na Jazdê Konn¹.
 8612	Nie uda³o ci siê znaleŸæ jeszcze spinki?[ENTER]Mam nadziejê, ¿e j¹ kiedyœ znajdziesz.
 8613	Zrezygnuj
 8614	Naprawdê chcesz zrezygnowaæ?
@@ -8635,7 +8639,7 @@
 8636	Przeka¿ Mirine Nowiny
 8637	Nowiny o Bracie Mirine.
 8638	Och! Otrzyma³am list od mojego brata! Pisze, ¿e[ENTER]znalaz³ miejsce gdzie roœnie wiele zió³, dlatego[ENTER]te¿ potrwa to trochê zanim wróci.[ENTER]Wybacz! Nie powinnam by³a ciê prosiæ.[ENTER]Nie jest to du¿o, ale mam nadziejê, ¿e przyjmiesz[ENTER]to i wybaczysz.[ENTER]Dziêkujê za przybycie!
-8639	Otrzymujesz 122 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 5000 Yang.
+8639	Otrzymujesz 122 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 5000 Yang.
 8640	ZnajdŸ Mojego Brata.
 8641	ZnajdŸ mojego brata.
 8642	ZnajdŸ Mojego Brata.
@@ -8658,7 +8662,7 @@
 8659	Wróæ do Stra¿nika Wioski, by otrzymaæ nagrodê.
 8660	Zabi³em Mi-Jung.
 8661	Och! Jesteœ naprawdê taki dobry, jak s³ysza³em.[ENTER]Jesteœ zadziwiaj¹co dobry. Dziêki tobie[ENTER]rozwi¹zanie problemów z Klanem Zaprzysiê¿onych[ENTER]sta³o siê o wiele ³atwiejsze. Dobra robota!
-8662	Otrzymujesz 122 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 20 000 Yang.[ENTER]Otrzymujesz Srebrn¹ Bransoletkê.
+8662	Otrzymujesz 122 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 20 000 Yang.[ENTER]Otrzymujesz Srebrn¹ Bransoletkê.
 8663	PodejdŸ tu na moment.[ENTER]Jesteœ dobrym wojownikiem. Wiele s³ysza³em o[ENTER]tobie od Kapitana.
 8664	Zabij Mi-Jung
 8665	Zabij Mi-Jung
@@ -8697,7 +8701,7 @@
 8698	Mam wszystkie materia³y.[ENTER]IdŸ do Handlarza Broni¹.
 8699	Dobra robota. Jesteœ naprawdê zdolny i szybki.[ENTER]Teraz pozwól mi popracowaæ nad t¹ broni¹![ENTER]*Klep, klep.*[ENTER]Oto ona. To nowe typy broni.[ENTER]Da³em z siebie wszystko i mam nadziejê, ¿e podoba[ENTER]ci siê nowa broñ. Niech ci s³u¿y!
 8700	Nagroda:
-8701	Otrzymujesz 122 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 20 000 Yang.
+8701	Otrzymujesz 122 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 20 000 Yang.
 8702	Otrzymujesz szeroki miecz+3.
 8703	Otrzymujesz sztylet no¿ycowy+3.
 8704	Otrzymujesz pawi wachlarz+3.
@@ -8715,7 +8719,7 @@
 8716	Zabi³eœ Eun-Jung z Klanu Zaprzysiê¿onych.[ENTER]Wróæ do Stra¿nika Wioski i poinformuj go o tym.
 8717	Jesteœ wspania³y! Posz³o ci lepiej ni¿ siê[ENTER]spodziewa³em. Nie dalibyœmy sobie rady bez ciebie[ENTER]z tymi dwoma przywódcami Klanu Zaprzysiê¿onych.[ENTER]Ty jednak ich tak ³atwo pokona³eœ.
 8718	To niesamowite.[ENTER]Musisz otrzymaæ odpowiedni¹ nagrodê.[ENTER]Proszê, weŸ to, mam nadziejê, ¿e nadal bêdziesz[ENTER]pracowa³ dla zachowania pokoju w wiosce.
-8719	Otrzymujesz 150 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 25 000 Yang.[ENTER]Otrzymujesz z³oty naszyjnik+4.
+8719	Otrzymujesz 150 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 25 000 Yang.[ENTER]Otrzymujesz z³oty naszyjnik+4.
 8720	Zabij Eun-Jung
 8721	Zabij Eun-Jung
 8722	¯o³nierze Klanu Zaprzysiê¿onych oznaczaj¹ tylko[ENTER]k³opoty!
@@ -8759,7 +8763,7 @@
 8760	Uda³o ci siê czegoœ dowiedzieæ? Opowiadaj![ENTER]...Hm, to bardzo interesuj¹ce. Wymagane s¹[ENTER]jedynie wytrzyma³e zbroje oraz ciê¿ki trening,[ENTER]nic wiêcej? W takim razie jest to do zrobienia![ENTER]Taka armia mog³aby ponownie zjednoczyæ trzy[ENTER]królestwa!
 8761	Potrzebowa³bym jednak bardzo du¿o pieniêdzy.[ENTER]I wielu zdolnych kowali. I rekrutów, którzy[ENTER]dobrowolnie przeszliby przez piek³o, aby staæ siê[ENTER]najlepszymi z najlepszych![ENTER]Nie, nie. Nie spogl¹daj na mnie w ten sposób. Nie[ENTER]martw siê, na razie zrobi³eœ wystarczaj¹co du¿o.
 8762	WeŸ tê nagrodê i odpocznij.[ENTER]Zobaczymy siê póŸniej!
-8763	Otrzymujesz 150 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 30 000 Yang.[ENTER]Otrzymujesz z³ote kolczyki.
+8763	Otrzymujesz 150 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 30 000 Yang.[ENTER]Otrzymujesz z³ote kolczyki.
 8764	Uzbrojona Kawaleria
 8765	Dziêki zdobytym przez ciebie informacjom mo¿emy[ENTER]wzmocniæ si³ê uderzeniow¹ naszych wojsk. OdwiedŸ[ENTER]najpierw muzyka Yu-Hwan. Jestem pewien, ¿e ma on[ENTER]jakieœ informacje o uzbrojonej kawalerii.
 8766	Uzbrojona kawaleria
@@ -8804,8 +8808,8 @@
 8805	Misja wykonana!
 8806	Pójdê do handlarki.
 8807	Wieœci o twoich czynach dla Ariyoung roznosz¹ siê[ENTER]szybko po okolicy.[ENTER]Wiele osób docenia twoj¹ pomoc.
-8808	Otrzymujesz 300 000 punktów doœwiadczenia.
-8809	Otrzymujesz 10 000 Yang.
+8808	Otrzymujesz 300 000 punktów doœwiadczenia.
+8809	Otrzymujesz 10 000 Yang.
 8810	Historia mê¿a Ariyoung
 8811	Historia mê¿a Ariyoung
 8812	Ariyoung nie mo¿e znaleŸæ swojego mê¿a.
@@ -8836,7 +8840,7 @@
 8837	Oto jestem.
 8838	Wszystko posz³o po naszej myœli? Ocali³eœ moje[ENTER]¿ycie! WeŸ to, poszukiwaczu przygód. Tak jak[ENTER]obieca³em, wrêczam ci nagrodê.
 8839	Otrzymujesz 7000 punktów doœwiadczenia.
-8840	Otrzymujesz 10 000 Yang.
+8840	Otrzymujesz 10 000 Yang.
 8841	Wróæ do Aranyo i powiedz jej, gdzie znajduje siê[ENTER]Soon.
 8842	Zabawa w chowanego nie jest ³atwa.
 8843	Mój m¹¿ to moje najwiêksze utrapienie.[ENTER]Nazywa siebie uczonym![ENTER]Podczas gdy my walczymy ka¿dego dnia o chleb, on[ENTER]tylko czyta ksi¹¿ki.[ENTER]Widzia³eœ go mo¿e? Dlaczego poœlubi³am mola[ENTER]ksi¹¿kowego?
@@ -8878,7 +8882,7 @@
 8879	To zbroja. Jest stara, ale nadal do u¿ytku.[ENTER]Zawsze coœ!
 8880	To zbroja. Jednak pomimo twoich wielkich nadziei,[ENTER]jest ca³kowicie bezu¿yteczna.
 8881	Dam ci now¹.
-8882	Otrzymujesz 15 000 punktów doœwiadczenia.
+8882	Otrzymujesz 15 000 punktów doœwiadczenia.
 8883	Kurz pokrywa Kurz
 8884	Kurz pokrywa Kurz
 8885	Starsza Pani nie mo¿e uwolniæ siê od uporczywego[ENTER]kaszlu.
@@ -8919,7 +8923,7 @@
 8920	Zrezygnowa³eœ z poszukiwañ oszczepów mê¿a Ah-Yu.
 8921	Dziêkujê, ¿e siê nie poddajesz!
 8922	Och, odzyska³eœ je! Jestem bardzo szczêœliwa,[ENTER]dziêkujê. WeŸ. Nie jest to du¿o Yang, ale weŸ je.
-8923	Otrzymujesz 300 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 20 000 Yang.
+8923	Otrzymujesz 300 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 20 000 Yang.
 8924	Oszczepy
 8925	Oszczepy
 8926	Nie poznajê ciê. Zazwyczaj jesteœ przecie¿[ENTER]weso³a! Sta³o siê coœ?
@@ -8940,7 +8944,7 @@
 8941	Uda³o mi siê zdobyæ twoje lekarstwo!
 8942	Och, dziêkujê! ¯ycie uciekiniera nie jest ³atwe.[ENTER]Szczególnie wtedy, gdy jest siê chorym. Teraz[ENTER]jednak mogê w koñcu znowu odpocz¹æ. Dziêkujê ci.
 8943	Nagroda:
-8944	Otrzymujesz 1 900 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 30 000 Yang.
+8944	Otrzymujesz 1 900 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 30 000 Yang.
 8945	Tak strasznie swêdzi...
 8946	Balso Zdrajca
 8947	Balso Zdrajca
@@ -8962,9 +8966,9 @@
 8963	Uda³o mi siê znaleŸæ twój z³oty topór!
 8964	Drwal Deokbae:
 8965	Bez twojej pomocy nigdy nie odzyska³bym tego[ENTER]topora. Bardzo dziêkujê.[ENTER]Na przysz³oœæ bêdê bardziej uwa¿a³ i nosi³ go[ENTER]zawsze przy sobie.
-8966	Otrzymujesz 400 000 punktów doœwiadczenia.
+8966	Otrzymujesz 400 000 punktów doœwiadczenia.
 8967	Co siê tyczy twojego z³otego topora...
-8968	Otrzymujesz 30 000 Yang.
+8968	Otrzymujesz 30 000 Yang.
 8969	Z³oty Topór Deokbaea
 8970	Z³oty topór Deokbaea
 8971	Deokbae nie mo¿e znaleŸæ swojego z³otego topora.[ENTER]IdŸ do niego i dowiedz siê, w jaki sposób mo¿esz[ENTER]mu pomóc.
@@ -9009,7 +9013,7 @@
 9010	Dziêkujê, ¿e przynios³eœ mi ten ³añcuszek. Teraz[ENTER]wiem, co mu siê przytrafi³o. Gdyby nie twoja[ENTER]pomoc, nigdy bym siê nie dowiedzia³a, co siê[ENTER]sta³o.
 9011	Zaopiekujê siê wisiorkiem, sam ³añcuszek dam ci w[ENTER]podziêkowaniu. Z pewnoœci¹ ci siê przyda.[ENTER]Dziêkujê za twoj¹ pomoc. Teraz na pewno jest ju¿[ENTER]w niebie, nie uwa¿asz?
 9012	Martwiê siê o niego, nie ma ¿adnego kontaktu ze[ENTER]mn¹.[ENTER]Przepraszam, ale czy móg³byœ ponownie poszukaæ[ENTER]mojego brata?[ENTER]Mo¿e Yu-Hwan coœ wie.
-9013	Otrzymujesz 600 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 35 000 Yang.
+9013	Otrzymujesz 600 000 punktów doœwiadczenia.[ENTER]Otrzymujesz 35 000 Yang.
 9014	Zaginiony Brat
 9015	Zaginiony brat
 9016	Mirine martwi siê o swojego brata. IdŸ do niej,[ENTER]aby j¹ uspokoiæ.
@@ -9046,8 +9050,8 @@
 9047	Uda³o ci siê uratowaæ ciastko ry¿owe Yu-Rang[ENTER]przed paj¹kami. Zanieœ je jej.
 9048	Masz szczêœcie. Oto twoje ciastko ry¿owe.
 9049	Jesteœ œwietny! Nie wiem co powiedzieæ. Teraz[ENTER]mogê je na rynku jutro sprzedaæ![ENTER]Bardzo dziêkujê!
-9050	Otrzymujesz 900 000 punktów doœwiadczenia.
-9051	Otrzymujesz 25 000 Yang.
+9050	Otrzymujesz 900 000 punktów doœwiadczenia.
+9051	Otrzymujesz 25 000 Yang.
 9052	Skradzione Ciastko Ry¿owe
 9053	Skradzione ciastko ry¿owe
 9054	Kiedy ostatnio uda³o ci siê porozmawiaæ z[ENTER]Yu-Rang? No w³aœnie. Dlaczego nie idziesz[ENTER]natychmiast do niej?
@@ -9094,8 +9098,8 @@
 9095	W koñcu uda³o mi siê znaleŸæ ulubione kwiaty[ENTER]Ariyoung i zerwa³em kilka. Muszê zanieœæ je do[ENTER]Huahn-So, by móg³ Ariyoung wyznaæ swoj¹ mi³oœæ.
 9096	Oto ulubione kwiaty Ariyoung.
 9097	Och, to s¹ te kwiaty? Teraz mogê jej powiedzieæ,[ENTER]co do niej czujê! Myœlisz, ¿e to nadal za[ENTER]wczeœnie? To ju¿ niewa¿ne, czy jest za wczeœnie.[ENTER]Muszê jej to powiedzieæ, w przeciwnym razie[ENTER]zwariujê. Dziêkujê ci bardzo. Oto twoja nagroda!
-9098	Otrzymujesz 400 000 punktów doœwiadczenia.
-9099	Otrzymujesz 12 000 Yang.
+9098	Otrzymujesz 400 000 punktów doœwiadczenia.
+9099	Otrzymujesz 12 000 Yang.
 9100	Huahn-So
 9101	Huahn-So
 9102	Z³ó¿ wizytê Huahn-So!
@@ -9138,8 +9142,8 @@
 9139	No, to jest ¿abie udko ¿e hej! Za moich czasów[ENTER]by³y one nieco mniejsze. Ale to tutaj te¿ zapewne[ENTER]smakuje. Zaczekaj chwilê... To ju¿ nieŸle[ENTER]pachnie. Jeszcze szczypta soli... Gotowe! Oto[ENTER]twoja porcja. Hahaha, teraz mam znowu[ENTER]wystarczaj¹co du¿o si³y na ca³y tydzieñ pracy!
 9140	Proszê ciê, nie mów nikomu, ¿e ugotowa³em zupê.[ENTER]Mam tu na myœli szczególnie Dozorcê. On nie[ENTER]potrafi dotrzymaæ tajemnicy i jeœli inni dowiedz¹[ENTER]siê o niezwyk³ym dzia³aniu zupy, to nie bêdê mia³[ENTER]na nic czasu, bo ka¿dy bêdzie chcia³ spróbowaæ[ENTER]trochê zupy.
 9141	Ostatnio nie czujê siê najlepiej. Nie jestem ju¿[ENTER]taki silny, jak kiedyœ by³em. Za m³odu mog³em[ENTER]pracowaæ do póŸna w nocy i to codziennie. A przy[ENTER]tym jeszcze piæ alkohol. Ale teraz ledwo co[ENTER]potrafiê wstaæ rano z ³ó¿ka. Przyda³aby mi siê[ENTER]spora porcja zupy z ¿abich udek, aby znowu mieæ[ENTER]wystarczaj¹co energii.
-9142	Otrzymujesz 5 000 000 punktów doœwiadczenia.
-9143	Otrzymujesz 50 000 Yang.
+9142	Otrzymujesz 5 000 000 punktów doœwiadczenia.
+9143	Otrzymujesz 50 000 Yang.
 9144	Pomoc dla Dozorcy
 9145	Pomoc dla Dozorcy
 9146	Dozorca nie czuje siê najlepiej.
@@ -9183,8 +9187,8 @@
 9184	Sekretna ksiêga œwi¹tyni
 9185	Och, to jest to! Bardzo dziêkujê![ENTER]Oto twoja nagroda.[ENTER]A teraz zostaw mnie samego, muszê zacz¹æ czytaæ!
 9186	Tutaj, miêdzy ok³adkami tej ksi¹¿ki, pulsuje[ENTER]¿ycie! Ca³a wiedza na wyci¹gniêcie rêki! WyobraŸ[ENTER]sobie jak marne by³oby moje ¿ycie bez ksi¹¿ek...[ENTER]Szkoda tylko, ¿e moja ¿ona tego nie rozumie. Mo¿e[ENTER]j¹ o tym przekonaæ?
-9187	Otrzymujesz 850 000 punktów doœwiadczenia.
-9188	Otrzymujesz 20 000 Yang.
+9187	Otrzymujesz 850 000 punktów doœwiadczenia.
+9188	Otrzymujesz 20 000 Yang.
 9189	Hej...[ENTER]Jeszcze nie uda³o ci siê jej zdobyæ?[ENTER]Jeœli podejmujesz siê jakiegoœ zadania, to wypada[ENTER]je wykonaæ.[ENTER]A teraz wykonaj zadanie!
 9190	Nie lekcewa¿ Ezoterycznych Fanatyków. Spróbuj[ENTER]póŸniej jeszcze raz.
 9191	No có¿, w takim razie muszê kogoœ innego poprosiæ[ENTER]o pomoc. Bywaj.
@@ -9216,8 +9220,8 @@
 9217	Postaraj siê bardziej, a nied³ugo znajdziesz[ENTER]wystarczaj¹co rudy. Powodzenia!
 9218	O, widzê, ¿e ju¿ wszystko uda³o ci siê zebraæ![ENTER]Hahaha! Czujê, ¿e to wypali! Poczekaj chwilê, nie[ENTER]potrwa to zbyt d³ugo. Dobra, zaczynamy!
 9219	Hmm, jest perfekcyjna. Moje zdolnoœci ci¹gle mnie[ENTER]zaskakuj¹. Oto twoja broñ. Jest nowa, wiêc dobrze[ENTER]o ni¹ zadbaj!
-9220	Otrzymujesz 200 000 punktów doœwiadczenia.
-9221	Otrzymujesz 20 000 Yang.
+9220	Otrzymujesz 200 000 punktów doœwiadczenia.
+9221	Otrzymujesz 20 000 Yang.
 9222	Otrzymujesz srebrny miecz+3.
 9223	Otrzymujesz wodny wachlarz+3.
 9224	Chcia³bym wykuæ now¹ broñ, ale trudno znaleŸæ[ENTER]dobre materia³y. Zdobêdziesz je dla mnie?[ENTER]W nagrodê otrzymasz pierwszy egzemplarz tej broni.
@@ -9247,8 +9251,8 @@
 9248	Eh, a wiêc tak koñcz¹ siê plany zwi¹zane z now¹[ENTER]zbroj¹. Ten projekt móg³ zmieniæ œwiat![ENTER]Jaka szkoda...
 9249	Nie poddaj siê! Wiem, ¿e potrafisz tego dokonaæ!
 9250	Doskonale. Potrafisz zdobywaæ materia³y. Teraz[ENTER]uwa¿aj![ENTER]Tu... i tu... i jeszcze tylko szybko sch³odziæ...[ENTER]A to dla ciebie, za twoje starania.[ENTER]Na razie!
-9251	Otrzymujesz 200 000 punktów doœwiadczenia.
-9252	Otrzymujesz 20 000 Yang.
+9251	Otrzymujesz 200 000 punktów doœwiadczenia.
+9252	Otrzymujesz 20 000 Yang.
 9253	Otrzymujesz lwi¹ zbrojê p³ytow¹+3.
 9254	Otrzymujesz czerwone ubranie mrówki+3.
 9255	Otrzymujesz upiorn¹ zbrojê p³ytow¹+3.
@@ -9304,7 +9308,7 @@
 9305	Mam wszystkie materia³y.
 9306	Domokr¹¿ca:
 9307	Uda³o ci siê zdobyæ wszystkie materia³y? Poka¿[ENTER]no...[ENTER]Rzeczywiœcie, wszystko jest. Dziêki twojej pomocy[ENTER]mogê poszerzyæ swoj¹ ofertê, wspaniale![ENTER]Oto twoja dzia³ka. Niechaj ci dobrze pos³u¿y![ENTER]Do mnie ludzie, do mnie! Dla ka¿dego coœ dobrego!
-9308	Otrzymujesz 1 100 000 punktów doœwiadczenia.
+9308	Otrzymujesz 1 100 000 punktów doœwiadczenia.
 9309	Otrzymujesz z³ot¹ bransoletê, z³oty naszyjnik i[ENTER]z³ote kolczyki.
 9310	Hmm, przykro mi, ale nadal czegoœ brakuje.[ENTER]Niekompletnych dostaw nie przyjmujê. Bêdziesz[ENTER]nadal próbowa³?
 9311	Czy na pewno chcesz zrezygnowaæ z tej misji?
@@ -9358,8 +9362,8 @@
 9359	Znalaz³em skarb!
 9360	Cztery boskie potwory podzieli³y mapê na cztery[ENTER]czêœci i teraz ich strzeg¹. Nie wiem, czy to[ENTER]prawda. SprawdŸ, czy to siê zgadza. Nie wytrzymam[ENTER]tej niepewnoœci... B³agam ciê, pomó¿ mi!
 9361	Och! To ci niespodzianka! Poka¿...[ENTER]Niesamowite. Dok³adnie tak by³a opisywana[ENTER]szkatu³ka w starych ksiêgach. Teraz muszê jeszcze[ENTER]dowiedzieæ siê, jak j¹ otworzyæ.[ENTER]Ale to ju¿ nie twoje zmartwienie. Dziêki! Proszê,[ENTER]weŸ to na znak mojej wdziêcznoœci.
-9362	Otrzymujesz 1 400 000 punktów doœwiadczenia.
-9363	Otrzymujesz 25 000 Yang.
+9362	Otrzymujesz 1 400 000 punktów doœwiadczenia.
+9363	Otrzymujesz 25 000 Yang.
 9364	Otrzymujesz upiorn¹ maskê+1.
 9365	Otrzymujesz zamkowy he³m+1.
 9366	Otrzymujesz stalow¹ maskê+1.
@@ -9387,7 +9391,7 @@
 9388	Uda³o mi siê zabiæ genera³ów!
 9389	Hmm... Uda³o ci siê pokonaæ genera³ów. Dobrze.[ENTER]Mieliœmy prawdziwy zawrót g³owy z ich powodu, ale[ENTER]dziêki tobie ju¿ po wszystkim. Bez genera³ów to[ENTER]nic trudnego.[ENTER]Oto nagroda dla ciebie. Mam nadziejê, ¿e wkrótce[ENTER]siê zobaczymy!
 9390	Kapitan:
-9391	Otrzymujesz 1 000 000 punktów doœwiadczenia.
+9391	Otrzymujesz 1 000 000 punktów doœwiadczenia.
 9392	Otrzymujesz pierœcieñ jêzyka.
 9393	Zabij Genera³ów Gangu Czarnego Wiatru
 9394	Zabij genera³ów Gangu Czarnego Wiatru
@@ -9416,7 +9420,7 @@
 9417	Nie mam tyle energii.[ENTER]Chcê ci pomóc, ale nie mogê. Nie jestem doœæ[ENTER]silny.
 9418	Mam siano dla koni.
 9419	Uda³o ci siê zdobyæ siano? Och, dziêkujê.[ENTER]Brakowa³o pokarmu dla koni i powiedzia³em o tym[ENTER]Yonah. Jest on moim dobrym przyjacielem. Mia³em[ENTER]nadziejê, ¿e znajdzie on kogoœ i poprosi o pomoc.[ENTER]Nie myœla³em jednak, ¿e pomoc ta szybko[ENTER]nadejdzie. Spójrz tylko z jakim apetytem konie[ENTER]jedz¹!
-9420	Otrzymujesz 1 800 000 punktów doœwiadczenia.
+9420	Otrzymujesz 1 800 000 punktów doœwiadczenia.
 9421	Wróæ do Yonah
 9422	Wróæ do Yonah
 9423	Uda³o ci siê dostarczyæ Stajennemu 10 balotów[ENTER]siana dla g³odnych koni. Poinformuj Yonah o swoim[ENTER]sukcesie.
@@ -9461,8 +9465,8 @@
 9462	Dostarcz notatki do Yonah
 9463	Soon dotrzyma³ obietnicy i zapisa³ ci instrukcjê[ENTER]wytopu seledynowej porcelany. Dostarcz j¹ do[ENTER]Yonah.
 9464	Ooch!!! Tu jest wszystko o wyrobie seledynowej[ENTER]porcelany. Dziêki tym zapiskom przejdê do[ENTER]historii jako mistrz porcelany. Dziêkujê ci za[ENTER]pomoc. Wkrótce zaprezentujê ci najlepsz¹[ENTER]ceramikê! Zaufaj mi. Moja porcelana przetrwa[ENTER]wieki.
-9465	Otrzymujesz 2 500 000 punktów doœwiadczenia.
-9466	Otrzymujesz 35 000 Yang.
+9465	Otrzymujesz 2 500 000 punktów doœwiadczenia.
+9466	Otrzymujesz 35 000 Yang.
 9467	Otrzymujesz jadeitowe buty+3.
 9468	Sekret Seledynowej Porcelany
 9469	Sekret seledynowej porcelany
@@ -9481,8 +9485,8 @@
 9482	Uda³o ci siê odnaleŸæ ozdobiony ³uk ³owcy.[ENTER]Oddaj go Yang-Shin.
 9483	Oto ³uk!
 9484	Wow, to on! Mój ³uk! Mój honor zosta³ uratowany.[ENTER]Huuuh. D³ugo cierpia³em z powodu jego zguby.[ENTER]Jestem bardzo wdziêczny za pomoc. Honorem bêdzie[ENTER]wrêczenie ci tego.[ENTER]Mo¿e to niewiele, ale od serca. Proszê weŸ.[ENTER]Dziêki tobie mogê ¿yæ w spokoju!
-9485	Otrzymujesz 1 500 000 punktów doœwiadczenia.
-9486	Otrzymujesz 35 000 Yang.
+9485	Otrzymujesz 1 500 000 punktów doœwiadczenia.
+9486	Otrzymujesz 35 000 Yang.
 9487	Otrzymujesz pelerynê mêstwa.
 9488	Znalaz³eœ mój ³uk? I gdzie on teraz jest? Czy¿byœ[ENTER]go ju¿ zgubi³?
 9489	Bêdê szukaæ dalej.
@@ -9549,8 +9553,8 @@
 9550	Oto lekarstwo.
 9551	Przynosisz mi nowe lekarstwo? S¹ zatem jakieœ[ENTER]postêpy w medycynie?[ENTER]Wybacz, ¿e stwarzam ci tyle k³opotu. Od razu[ENTER]powinienem poprosiæ lekarza o radê. Ale có¿,[ENTER]teraz ju¿ nie mam wyboru, muszê wzi¹æ to[ENTER]lekarstwa.
 9552	Dziêkujê ci stokrotnie, ¿e poratowa³eœ mnie w[ENTER]biedzie. Nie mam zbyt du¿o przyjació³.[ENTER]WeŸ to, nie jest zbyt wiele, ale pochodzi od[ENTER]serca. Proszê, przyjmij. Gdyby kiedykolwiek uda³o[ENTER]mi siê odnieœæ wielki sukces, wiedz, ¿e o tobie[ENTER]nie zapomnê!
-9553	Otrzymujesz 4 000 000 punktów doœwiadczenia.
-9554	Otrzymujesz 65 000 Yang.
+9553	Otrzymujesz 4 000 000 punktów doœwiadczenia.
+9554	Otrzymujesz 65 000 Yang.
 9555	Przesy³ka dla Zdrajcy Balso
 9556	Przesy³ka dla zdrajcy Balso
 9557	Pogorszy³ siê stan zdrowia Balso. IdŸ do niego,[ENTER]gdy¿ pilnie potrzebuje twojej pomocy.
@@ -9574,8 +9578,8 @@
 9575	Oto 5000 grotów strza³!
 9576	Œwietna robota! Dziêki twojej pomocy mo¿emy siê[ENTER]przygotowywaæ na atak. Wydam od razu rozkaz, ¿eby[ENTER]rozpocz¹æ produkcjê strza³.[ENTER]Bardzo nam pomog³eœ. Mam nadziejê, ¿e w[ENTER]przysz³oœci równie¿ bêdziemy mogli na ciebie[ENTER]liczyæ.
 9577	Oto twoja nagroda. Nastêpnym razem, gdy bêdê mia³[ENTER]wa¿n¹ misjê bêdziesz pierwszym, którego[ENTER]poinformujê o niej. Powodzenia i do rych³ego[ENTER]zobaczenia!
-9578	Otrzymujesz 4 500 000 punktów doœwiadczenia.
-9579	Otrzymujesz 50 000 Yang.
+9578	Otrzymujesz 4 500 000 punktów doœwiadczenia.
+9579	Otrzymujesz 50 000 Yang.
 9580	Otrzymujesz 3x d³oñ krytyka.[ENTER]Otrzymujesz 3x d³oñ przebicia.
 9581	Wsparcie Wojenne
 9582	Wsparcie wojenne
@@ -9598,7 +9602,7 @@
 9599	Octavio:
 9600	Poka¿. Tak, dok³adnie sto sztuk, doskonale.[ENTER]Hum, zobaczmy...[ENTER]Mmhhh, gotowe! Chcesz spróbowaæ? Nie bój siê. To[ENTER]ciê nie zabije.
 9601	Hmm, hmm... có¿ za doœwiadczenie! Bardzo po¿ywne,[ENTER]ale nie za s³odkie... naprawdê niesamowity smak![ENTER]Wiedzia³em, ¿e by³o warto. Samemu nigdy by mi siê[ENTER]nie uda³o. Bardzo dziêkujê za twoj¹ pomoc!
-9602	Otrzymujesz 2 100 000 punktów doœwiadczenia.
+9602	Otrzymujesz 2 100 000 punktów doœwiadczenia.
 9603	O czym ty mówisz? To na pewno nie jest sto sztuk,[ENTER]wiem to nawet bez przeliczania! Zdob¹dŸ dla mnie[ENTER]wiêcej.
 9604	Hej, jak siê masz? W³aœnie przegl¹dam ksi¹¿kê[ENTER]kucharsk¹, któr¹ otrzyma³em od Soon. Znalaz³em w[ENTER]niej przepis na danie, które nazywa siê 'specja³[ENTER]z oczu paj¹ków'. Nigdy o czymœ takim nie[ENTER]s³ysza³em, a ty? Najprawdopodobniej jest to[ENTER]wyj¹tkowa potrawa pochodz¹ca z innego kraju.
 9605	Koniecznie chcê to przyrz¹dziæ.[ENTER]Niewa¿ne... dziêki. ¯egnaj i uwa¿aj na siebie.
@@ -9626,8 +9630,8 @@
 9627	Mam szal i doktrynê.
 9628	Znakomicie. Teraz mo¿emy uspokoiæ dusze poleg³ych[ENTER]¿o³nierzy. Œwietnie siê spisali, a teraz powinni[ENTER]spoczywaæ w pokoju.[ENTER]Pozwól, ¿e dam ci nagrodê za ten szlachetny czyn.
 9629	Trener Mocy Smoka:
-9630	Otrzymujesz 1 700 000 punktów doœwiadczenia.
-9631	Otrzymujesz 30 000 Yang.
+9630	Otrzymujesz 1 700 000 punktów doœwiadczenia.
+9631	Otrzymujesz 30 000 Yang.
 9632	Otrzymujesz 3 diamenty.
 9633	Znakomicie. Teraz mo¿emy uspokoiæ dusze poleg³ych[ENTER]¿o³nierzy. Œwietnie siê spisali, a teraz powinni[ENTER]spoczywaæ w pokoju.[ENTER]Pozwól, ¿e dam ci nagrodê za ten szlachetny czyn.
 9634	Za Pokój Poleg³ym
@@ -9668,8 +9672,8 @@
 9669	Taurean k³ama³.
 9670	A wiêc ok³ama³ mnie?[ENTER]Hmm, nie chodzi mi o k³amstwo.[ENTER]Rozumiem przecie¿, ¿e nikt nie chce byæ uwa¿any[ENTER]za niezdarê. Ale przynajmniej powinien spróbowaæ,[ENTER]to zrobiæ.[ENTER]Nie chcê byæ zaprzyjaŸniona z takim tchórzem.
 9671	Yu-Rang da ci nagrodê za twoj¹ szczeroœæ.
-9672	Otrzymujesz 30 000 Yang.
-9673	Otrzymujesz 350 000 punktów doœwiadczenia.
+9672	Otrzymujesz 30 000 Yang.
+9673	Otrzymujesz 350 000 punktów doœwiadczenia.
 9674	Dzwoneczek dla Paj¹ka
 9675	Udaj siê na pustyniê do M³odych Paj¹ków i spróbuj[ENTER]powiesiæ na jednym z nich dzwoneczek, który da³[ENTER]ci Taurean.
 9676	Z wzglêdu na dzwoneczek...
@@ -9687,8 +9691,8 @@
 9688	Yu-Rang uwierzy³a ci.
 9689	Przyjmij
 9690	Bardzo dziêkujê. Teraz Yu-Rang nie bêdzie mnie[ENTER]lekcewa¿yæ.[ENTER]Niech to bêdzie na zawsze nasza tajemnica![ENTER]Obiecujesz? Na razie!
-9691	Taurean daje ci nagrodê za pomoc w k³amaniu:[ENTER]otrzymujesz 30 000 Yang.
-9692	Otrzymujesz 700 000 punktów doœwiadczenia.
+9691	Taurean daje ci nagrodê za pomoc w k³amaniu:[ENTER]otrzymujesz 30 000 Yang.
+9692	Otrzymujesz 700 000 punktów doœwiadczenia.
 9693	Paj¹k z Dzwoneczkiem
 9694	Paj¹k z dzwoneczkiem
 9695	Szuka³a ciê Yu-Rang.
@@ -9704,8 +9708,8 @@
 9705	Przedmioty ze Œwi¹tyni Ciemnoœci
 9706	Ach, uda³o ci siê je znaleŸæ! Bardzo dziêkujê.[ENTER]Co siê tyczy istot w œwi¹tyni, to jest to prosta[ENTER]sprawa: one s¹ niebezpieczne. Ale odczu³eœ to na[ENTER]w³asnej skórze.[ENTER]Poza tym s³u¿¹ z³ym bogom.[ENTER]Nie znane mi s¹ szczegó³y ale podejrzewam, ¿e[ENTER]maj¹ niecne plany.
 9707	Teraz, posiadaj¹c niektóre z ich œwiêtych[ENTER]reliktów, powinienem dowiedzieæ siê wiêcej.[ENTER]Zacznê chyba od œwi¹tynnej doktryny.[ENTER]Chwila... hmmm... aha...[ENTER]Dlaczego nadal tu stoisz? Nie masz nic lepszego[ENTER]do roboty?
-9708	Otrzymujesz 7 000 000 punktów doœwiadczenia.
-9709	Otrzymujesz 70 000 Yang.
+9708	Otrzymujesz 7 000 000 punktów doœwiadczenia.
+9709	Otrzymujesz 70 000 Yang.
 9710	Otrzymujesz ksi¹¿kê lidera.
 9711	Co? Nie masz ich?[ENTER]Œpiesz siê, masz przecie¿ coœ do zrobienia![ENTER]No dalej, szybko!
 9712	Coœ siê szykujê w Œwi¹tyni Ciemnoœci. Wydaje mi[ENTER]siê, ¿e niebezpieczne istoty studiuj¹ tam[ENTER]archaiczn¹ magiê.[ENTER]Te tajemnice Œwi¹tyni Ciemnoœci s¹ trudne do[ENTER]zg³êbienia, nawet dla mnie. Ale jestem pewien, ¿e[ENTER]motywy tych istot nie s¹ szlachetne. Muszê[ENTER]dowiedzieæ siê wiêcej!
@@ -9732,8 +9736,8 @@
 9733	Sekret seledynowej porcelany.
 9734	Uda³o mi siê zebraæ materia³y.
 9735	Uda³o ci siê! Dziêkujê ci![ENTER]Za pomoc¹ specjalnej techniki oraz odpowiednich[ENTER]materia³ów mogê wytworzyæ przepiêkn¹ seledynow¹[ENTER]porcelanê. Dochody z jej sprzeda¿y wreszcie[ENTER]nape³ni¹ mi sakiewkê. WeŸ tê nagrodê. Zas³u¿y³eœ[ENTER]sobie na ni¹.[ENTER]A ja od razu zabieram siê do roboty!
-9736	Otrzymujesz 3 000 000 punktów doœwiadczenia.
-9737	Otrzymujesz 30 000 Yang.
+9736	Otrzymujesz 3 000 000 punktów doœwiadczenia.
+9737	Otrzymujesz 30 000 Yang.
 9738	Witaj, poszukiwaczu przygód! Czy to nie ty[ENTER]przynios³eœ mi ostatnio instrukcjê Soona na[ENTER]wytwarzanie seledynowej porcelany? Mam jednak[ENTER]jeszcze jeden problem... mimo i¿ ju¿ znam[ENTER]technikê, nie potrafiê wytworzyæ prawdziwej[ENTER]seledynowej porcelany.[ENTER]Prawdopodobnie dlatego, bo próbujê tego dokonaæ[ENTER]za pomoc¹ moich standardowych sk³adników, a nie[ENTER]tych zapisanych w instrukcji, które tak trudno[ENTER]zdobyæ.
 9739	Sekret Seledynowej Porcelany.
 9740	Sekret seledynowej porcelany.
@@ -9757,7 +9761,7 @@
 9758	W porz¹dku, ale szybko. Jeszcze ktoœ zacznie coœ[ENTER]podejrzewaæ...[ENTER][ENTER]GOWWIERO[ENTER]AN[ENTER]CIHONERYZO
 9759	I co? Co tam jest napisane?
 9760	Tak, masz racjê! Teraz te¿ to widzê.[ENTER]Jestem z ciebie dumny. Jesteœ jednym z naszych[ENTER]najlepszych ¿o³nierzy! Te zdanie jest uzgodnionym[ENTER]has³em. Oznacza to, ¿e Yu-Hwan zdemaskowa³[ENTER]wrogich szpiegów, którymi musimy siê zaj¹æ. Zaraz[ENTER]wydam odpowiednie rozkazy.
-9761	Otrzymujesz 1 300 000 punktów doœwiadczenia.
+9761	Otrzymujesz 1 300 000 punktów doœwiadczenia.
 9762	Czemu nic nie mówisz?[ENTER]Czy nie jesteœ w stanie tego odszyfrowaæ?
 9763	Wrogowie na horyzoncie.
 9764	Co siê tyczy sekretnej wiadomoœci...
@@ -9766,7 +9770,7 @@
 9767	Och! Czy to a¿ takie trudne? By³eœ moj¹ ostatni¹[ENTER]nadziej¹... Kto to teraz odszyfruje?
 9768	A wiêc, co to oznacza?
 9769	Tak, masz racjê! Teraz te¿ to widzê.[ENTER]Jestem z ciebie dumny. Jesteœ jednym z naszych[ENTER]najlepszych ¿o³nierzy! Te zdanie jest uzgodnionym[ENTER]has³em. Oznacza to, ¿e Yu-Hwan zdemaskowa³[ENTER]wrogich szpiegów, którymi musimy siê zaj¹æ. Zaraz[ENTER]wydam odpowiednie rozkazy.
-9770	Otrzymujesz 2 300 000 punktów doœwiadczenia.
+9770	Otrzymujesz 2 300 000 punktów doœwiadczenia.
 9771	Jakoœ sobie poradzisz. Wróæ, gdy poczujesz siê na[ENTER]si³ach!
 9772	Hmm, nic mi to nie mówi. Co on móg³ mieæ na[ENTER]myœli? Coœ siê tutaj nie zgadza. Pomyœl nad tym[ENTER]jeszcze raz.
 9773	Spróbujê ponownie.
@@ -9779,7 +9783,7 @@
 9780	Fa³szywi przyjaciele nie pomog¹
 9781	Nie wiem
 9782	Tak, masz racjê! Teraz te¿ to widzê.[ENTER]Jestem z ciebie dumny. Jesteœ jednym z naszych[ENTER]najlepszych ¿o³nierzy! Te zdanie jest uzgodnionym[ENTER]has³em. Oznacza to, ¿e Yu-Hwan zdemaskowa³[ENTER]wrogich szpiegów, którymi musimy siê zaj¹æ. Zaraz[ENTER]wydam odpowiednie rozkazy.
-9783	Otrzymujesz 20 000 Yang.
+9783	Otrzymujesz 20 000 Yang.
 9784	Jakoœ sobie poradzisz. Wróæ, gdy poczujesz siê na[ENTER]si³ach!
 9785	Odszyfruj Tajne Wiadomoœci
 9786	Odszyfruj tajne wiadomoœci
@@ -9812,9 +9816,9 @@
 9813	Niebezpieczna podró¿ do Joan w Królestwa Chunjo[ENTER]zakoñczy³a siê sukcesem: otrzyma³eœ raport od[ENTER]szpiega przebranego za rybaka.[ENTER]A teraz powróæ szybko do swojego królestwa i[ENTER]przeka¿ zdobyte informacje Kapitanowi.
 9814	Misja zakoñczona sukcesem!
 9815	To s¹ te dokumenty? Œwietnie! Dziêkujê ci. Teraz[ENTER]znamy plany naszych wrogów i mo¿emy poczyniæ[ENTER]odpowiednie przygotowania, by siê skutecznie[ENTER]broniæ. Wyœwiadczy³eœ swojemu królestwu ogromn¹[ENTER]przys³ugê!
-9816	Otrzymujesz 5 500 000 punktów doœwiadczenia.
+9816	Otrzymujesz 5 500 000 punktów doœwiadczenia.
 9817	Pewnie znasz muzyka o imieniu Yu-Hwan?[ENTER]Jest naszym szpiegiem, pracuje przebrany za[ENTER]muzyka. Jeden szpieg nie zdzia³a za wiele.[ENTER]Dlatego mamy kilku rozproszonych po ca³ym[ENTER]œwiecie. Jeden z nich, to rybak w pierwszej[ENTER]wiosce.
-9818	Otrzymujesz 50 000 Yang.
+9818	Otrzymujesz 50 000 Yang.
 9819	Poszukiwania Szpiega
 9820	ZnajdŸ szpiega
 9821	Kapitan ciê szuka!
@@ -9859,9 +9863,9 @@
 9860	Uda³o siê! Octavio przyrz¹dzi³ Bingsu z lodu z[ENTER]Góry Sohan. Teraz czym prêdzej do Taurean, zanim[ENTER]Bingsu siê roztopi.
 9861	Oto! Bingsu!
 9862	To jest Bingsu? Smaczne. S³odkie i ch³odne.[ENTER]Jeszcze nigdy nie jad³em czegoœ takiego,[ENTER]dziêkujê! Harang mia³a zatem racjê. Bêdê musia³[ENTER]j¹ przeprosiæ...
-9863	Otrzymujesz 6 000 000 punktów doœwiadczenia.
+9863	Otrzymujesz 6 000 000 punktów doœwiadczenia.
 9864	Dzisiaj pok³óci³em siê z Harang.[ENTER]Móg³bym j¹ normalnie...[ENTER]Twierdzi, ¿e jest coœ bardzo smacznego,[ENTER]przyrz¹dzane z drobno kruszonego lodu.[ENTER]Nazywa siê Bingsu.
-9865	Otrzymujesz 70 000 Yang.
+9865	Otrzymujesz 70 000 Yang.
 9866	Otrzymujesz zwój wojny.
 9867	Przynios³eœ mi Bingsu?
 9868	Ojej, zupe³nie o tym zapomnia³em! Hmm, mam nadal[ENTER]próbowaæ? Czy mo¿e sobie darowaæ?
@@ -9918,7 +9922,7 @@
 9919	Kontynuuj
 9920	Jeœli ulepszysz teraz mistrzowsk¹ umiejêtnoœæ,[ENTER]twoje punkty rangi mog¹ spaœæ w zakres negatywny,[ENTER]poniewa¿ obecnie posiadasz ich niewiele. Czy[ENTER]naprawdê chcesz ulepszyæ swoj¹ umiejêtnoœæ?
 9921	trenuj
-9922	Je¿eli nie chcesz ju¿ trenowaæ, wciœnij 'ENTER’.
+9922	Je¿eli nie chcesz ju¿ trenowaæ, wciœnij 'ENTER'.
 9923	Powodzenie!
 9924	Nie okreœli³eœ jeszcze swojej profesji.
 9925	Gratulacje! Uda³o siê!
@@ -10028,7 +10032,7 @@
 10029	Z powodów bezpieczeñstwa, powinieneœ je zmieniæ.[ENTER][ENTER]Mo¿esz pomyœleæ, ¿e 15. miejsc to za ma³o.[ENTER]Kto wie, mo¿e gdy poznamy siê lepiej dam Ci[ENTER]wiêcej miejsca. Hehe!
 10030	No có¿, nikogo przecie¿ nie zmuszam. Jak nie[ENTER]teraz to przyjdŸ najwy¿ej póŸniej.
 10031	Otwórz Magazyn
-10032	SprawdŸ swoje dane i spróbuj ponownie.[ENTER][ENTER]Maks. kwota Won = 999[ENTER]Maks. kwota Yang = 1 999 999 999
+10032	SprawdŸ swoje dane i spróbuj ponownie.[ENTER][ENTER]Maks. kwota Won = 999[ENTER]Maks. kwota Yang = 1 999 999 999
 10033	Czy naprawdê chcesz wymieniæ %d Won na %s Yang?
 10034	Wymieñ
 10035	Anuluj
@@ -10056,7 +10060,7 @@
 10057	Pi³ka no¿na jest najwa¿niejsz¹ wœród rzeczy[ENTER]niewa¿nych!
 10058	Kaczka, sraczka, padaczka... eee, wybacz,[ENTER]zamyœli³em siê. Dalej, przynieœ mi pi³ki!
 10059	O, pi³ka! Wielkie dziêki i pamiêtaj: mecz mo¿na[ENTER]wygraæ, przegraæ lub zremisowaæ. Maj¹c to na[ENTER]uwadze, nie mo¿esz zaprzestaæ swoich poszukiwañ.[ENTER]Przynieœ mi jeszcze %d szt., aby otrzymaæ[ENTER]nagrodê.
-10060	A, Moja pasja to futbol, na drugim miejscu[ENTER]umieœci³bym futbol, a na trzecim… futbol! Wielkie[ENTER]dziêki![ENTER]%d pi³ek wymieniê ci na prezent.[ENTER]Proszê bardzo, oto z³ota pi³ka.
+10060	A, Moja pasja to futbol, na drugim miejscu[ENTER]umieœci³bym futbol, a na trzecim... futbol! Wielkie[ENTER]dziêki![ENTER]%d pi³ek wymieniê ci na prezent.[ENTER]Proszê bardzo, oto z³ota pi³ka.
 10061	Tak, tak, po meczu jest przed meczem.[ENTER]Mimo to mam do oddania tylko jedn¹ z³ot¹ pi³kê[ENTER]dziennie.[ENTER]OdwiedŸ mnie ponownie jutro.
 10062	Wiêcej pi³ek!
 10063	Napali³eœ siê jak szczerbaty na suchary. Mówi³em[ENTER]ci ju¿ przecie¿, ¿e mogê wymieniæ tylko jedn¹[ENTER]z³ot¹ pi³kê dziennie. Wróæ do mnie jutro!
@@ -10081,7 +10085,7 @@
 10082	Œlady z Przyl¹dku Smoczego Ognia nale¿¹[ENTER]niew¹tpliwie do Meley. Dok¹d ona pod¹¿a?
 10083	OdwiedŸ NPC %s w 1. wiosce królestwa, aby[ENTER]dowiedzieæ siê wiêcej.
 10084	Porozmawiaj z NPC %s.
-10085	Nie ma w¹tpliwoœci – Meley by³a na Przyl¹dku[ENTER]Smoczego Ognia. Jednak jej œlad zanika nad[ENTER]morzem. Chce przemierzyæ ocean. Potrzebujemy[ENTER]statku, by za ni¹ pod¹¿yæ! Daj mi trochê czasu,[ENTER]by znaleŸæ odpowiedni¹ ³ajbê. Pogadamy póŸniej.
+10085	Nie ma w¹tpliwoœci - Meley by³a na Przyl¹dku[ENTER]Smoczego Ognia. Jednak jej œlad zanika nad[ENTER]morzem. Chce przemierzyæ ocean. Potrzebujemy[ENTER]statku, by za ni¹ pod¹¿yæ! Daj mi trochê czasu,[ENTER]by znaleŸæ odpowiedni¹ ³ajbê. Pogadamy póŸniej.
 10086	W Pogoni za Królow¹ Smoków
 10087	ZnajdŸ sposób, by pod¹¿aæ za Meley przez ocean.[ENTER]Porozmawiaj z NPC %s.
 10088	Nie uda³o mi siê znaleŸæ statku, by dorwaæ Meley![ENTER]W takim razie musimy zbudowaæ sami jak¹œ ³ajbê.[ENTER]Udaj siê do NPC %s na Przyl¹dku Smoczego Ognia.[ENTER]Tylko on posiada umiejêtnoœæ zbudowania statku w[ENTER]tak krótkim czasie.
@@ -10626,7 +10630,7 @@
 11375	Nagroda: %d/%d
 11381	Pozosta³y czas
 11382	Po³¹cz ksiêgi umiejêtnoœci
-11383	Mo¿esz otrzymaæ skrzyniê z od³amkiem w zamian za[ENTER]10 ksi¹g umiejêtnoœci i 100 000 Yang.
+11383	Mo¿esz otrzymaæ skrzyniê z od³amkiem w zamian za[ENTER]10 ksi¹g umiejêtnoœci i 100 000 Yang.
 11384	Limit czasu w Twierdzy Czerwonego Smoka (SZC)[ENTER]wynosi 1 godzinê.
 11385	Pozosta³y czas: 60 min.
 11386	ObudŸ Gardziel Am-heha (SZC).
@@ -11050,7 +11054,7 @@
 11807	Dopóki jesteœ cz³onkiem gildii, nie mo¿esz[ENTER]zmieniæ królestwa.
 11808	Dopiero po opuszczeniu gildii, mo¿esz u¿yæ tego[ENTER]przedmiotu.
 11809	Posiadasz za ma³o Yang, by zmieniæ królestwo.
-11810	U¿yj tego przedmiotu, dopiero wtedy gdy bêdziesz[ENTER]mia³ 500 000 Yang.
+11810	U¿yj tego przedmiotu, dopiero wtedy gdy bêdziesz[ENTER]mia³ 500 000 Yang.
 11811	Nale¿ysz do królestwa %s.
 11812	Czy chcesz zmieniæ na królestwo %s?
 11813	Shinsoo
@@ -11073,12 +11077,12 @@
 11830	Chcesz rozwin¹æ swoj¹ szatê aury?
 11831	Masz za niski poziom, aby wejœæ (poziom: %d).
 11832	Uszlachetnienie
-11833	Tylko za 5 000 000 Yang NPC Ulepszeñ mo¿e zmieniæ[ENTER]swoje umiejêtnoœci do twoich upodobañ. Jak¹[ENTER]profesjê ¿yczysz sobie?
+11833	Tylko za 5 000 000 Yang NPC Ulepszeñ mo¿e zmieniæ[ENTER]swoje umiejêtnoœci do twoich upodobañ. Jak¹[ENTER]profesjê ¿yczysz sobie?
 11834	Broñmistrz
 11835	Kowal Zbroi
 11836	Jubiler
 11837	Anuluj
-11838	Masz za ma³o Yang. Wróæ z 5 000 000 Yang.
+11838	Masz za ma³o Yang. Wróæ z 5 000 000 Yang.
 11839	Za kilka sekund zostaniesz teleportowany na[ENTER]zewn¹trz.
 11840	Sklep
 11841	Otwórz Smoczy Portal
@@ -11318,7 +11322,7 @@
 12081	Twoje parametry zosta³y zresetowane.
 12082	Nie posiadasz ¿adnych parametrów, które mo¿na by[ENTER]zresetowaæ.
 12083	WejdŸ do Królestwa ¯ywio³ów
-12084	Musisz posiadaæ co najmniej poziom 90 a cena[ENTER]dostêpu wynosi 5 000 000 Yang. Czy chcesz wejœæ[ENTER]do Królestwa ¯ywio³ów?
+12084	Musisz posiadaæ co najmniej poziom 90 a cena[ENTER]dostêpu wynosi 5 000 000 Yang. Czy chcesz wejœæ[ENTER]do Królestwa ¯ywio³ów?
 12085	Tak
 12086	Nie
 12087	Masz za niski poziom.
@@ -11857,7 +11861,7 @@
 12622	Warunek: poziom czempiona 1 lub wy¿szy
 12623	Masz za niski poziom. Musisz posiadaæ co najmniej[ENTER]poziom 70.
 12624	Bitwa siê ju¿ rozpoczê³a.
-12625	1 000 000 Yang
+12625	1 000 000 Yang
 12626	Dalej
 12627	Jadeit Mg³y
 12628	Jadeit S³oñca
@@ -11866,7 +11870,7 @@
 12633	Odbierz u¿yte Won
 12634	U¿y³eœ %d Won. Poniewa¿ nie uda³o ci siê wygraæ[ENTER]licytacji, mo¿esz j¹ odebraæ.
 12635	Dzier¿awa
-12636	Bie¿¹ca dzier¿awa: %d[ENTER]Za dzier¿awê obszaru gildii trzeba codziennie[ENTER]zap³aciæ 5 000 000 Yang. Pamiêtaj, ¿e musisz[ENTER]p³aciæ regularnie, w przeciwnym razie po 10[ENTER]dniach niep³acenia stracisz automatycznie obszar.
+12636	Bie¿¹ca dzier¿awa: %d[ENTER]Za dzier¿awê obszaru gildii trzeba codziennie[ENTER]zap³aciæ 5 000 000 Yang. Pamiêtaj, ¿e musisz[ENTER]p³aciæ regularnie, w przeciwnym razie po 10[ENTER]dniach niep³acenia stracisz automatycznie obszar.
 12637	Zap³aæ dzier¿awê
 12638	Zamknij
 12639	Trwa tworzenie: %s[ENTER]Materia³y: %s z %s[ENTER]oraz Kamieñ Duszy +0, +1, +2 lub +3
@@ -12474,7 +12478,7 @@
 13272	My, Alchemicy, jesteœmy specjalistami, jeœli[ENTER]chodzi o czyszczenie z³owrogich artefaktów i[ENTER]uczynienia z nich u¿ytecznymi dla dobra. Mogê[ENTER]oczyœciæ dla ciebie tê ³uskê lodowego ostrza,[ENTER]abyœ móg³ u¿yæ jej mocy przeciwko Alastorowi.[ENTER]Chcia³bym ci podziêkowaæ za twoje zaufanie.[ENTER]Niestety, ale wci¹¿ s¹ ludzie, którzy uwa¿aj¹[ENTER]alchemiê za z³owrog¹ sztukê.
 13273	Poczekaj chwilkê. Czy mo¿esz mi podaæ retortê?[ENTER]Nie, tê pod³u¿n¹... Ach, mo¿e byæ. Gotowe![ENTER]Proszê, weŸ! Mam nadziejê, ¿e to pomo¿e ci w[ENTER]walce ze smokiem.
 13274	Wróæ do Konfucjusza.
-13275	Ju¿ gotowe? Nasz Alchemik to prawdziwy mistrz[ENTER]swojego fachu. Wygl¹da œwietnie. Pewnie siê[ENTER]zastanawiasz, co powstrzyma Alastora, przed[ENTER]powrotem, jeœli... gdy uda ci siê go pokonaæ.[ENTER]Jestem pewny, ¿e mo¿emy powstrzymaæ Alastora,[ENTER]jeœli uda nam siê ponownie przeprowadziæ rytua³ –[ENTER]ale z jego sercem.
+13275	Ju¿ gotowe? Nasz Alchemik to prawdziwy mistrz[ENTER]swojego fachu. Wygl¹da œwietnie. Pewnie siê[ENTER]zastanawiasz, co powstrzyma Alastora, przed[ENTER]powrotem, jeœli... gdy uda ci siê go pokonaæ.[ENTER]Jestem pewny, ¿e mo¿emy powstrzymaæ Alastora,[ENTER]jeœli uda nam siê ponownie przeprowadziæ rytua³ -[ENTER]ale z jego sercem.
 13276	Uszlachetniona ³uska lodowego ostrza chroni ciê[ENTER]przed niektórymi mrocznymi mocami Alastora.[ENTER]Zatrzymaj j¹ przy sobie i omów dalsze[ENTER]postêpowanie z genera³em Kohanem.
 13277	Otrzymujesz w nagrodê za misjê 10x[ENTER]b³ogos³awieñstwo smoka.
 13278	Zag³ada Alastora
@@ -13326,7 +13330,7 @@
 14190	Nie mo¿esz tego u¿yæ, poniewa¿ wówczas zosta³aby przekroczona maksymalna liczba.
 14191	Pomoc
 14192	Z³ota Palma
-14193	Szukaj pól z³otych jagód, wykorzystuj¹c z³ote[ENTER]jagody znalezione do tej pory w trakcie[ENTER]Ekspedycji Primordisa. Na ca³ej planszy s¹ 2 pola[ENTER]z³otych jagód. Po znalezieniu obydwu otrzymasz[ENTER]nagrodê przes³an¹ poczt¹. Naciœnij „Zresetuj”,[ENTER]je¿eli uda³o ci siê znaleŸæ obydwa pola, aby[ENTER]zacz¹æ od nowa.
+14193	Szukaj pól z³otych jagód, wykorzystuj¹c z³ote[ENTER]jagody znalezione do tej pory w trakcie[ENTER]Ekspedycji Primordisa. Na ca³ej planszy s¹ 2 pola[ENTER]z³otych jagód. Po znalezieniu obydwu otrzymasz[ENTER]nagrodê przes³an¹ poczt¹. Naciœnij „Zresetuj",[ENTER]je¿eli uda³o ci siê znaleŸæ obydwa pola, aby[ENTER]zacz¹æ od nowa.
 14194	Chcesz udaæ siê w podró¿ do innej strefy?
 14195	Tak
 14196	Nie
@@ -13391,7 +13395,7 @@
 14291	Poœwiêæ 500 000 Yang, aby zwiêkszyæ punkty ¿ycia[ENTER]Goblina Skarbnika o 20%.
 14292	Poœwiêæ 500 000 Yang, aby zwiêkszyæ obronê[ENTER]Goblina Skarbnika o 50.
 14293	Poœwiêæ 500 000 Yang, aby uodporniæ Goblina[ENTER]Skarbnika na truciznê.
-14294	Poœwiêæ 1 500 000 Yang, aby zwiêkszyæ szybkoœæ[ENTER]ruchu Goblina Skarbnika o 100.
+14294	Poœwiêæ 1 500 000 Yang, aby zwiêkszyæ szybkoœæ[ENTER]ruchu Goblina Skarbnika o 100.
 14295	Goblin Skarbnik otrzyma³ b³ogos³awieñstwo[ENTER]"Witalnoœæ Goblina". To jest jednorazowy efekt.
 14296	Goblin Skarbnik otrzyma³ b³ogos³awieñstwo "Obrona[ENTER]Goblina". To jest jednorazowy efekt.
 14297	Goblin Skarbnik otrzyma³ b³ogos³awieñstwo[ENTER]"Odpornoœæ Goblina na Truciznê". To jest[ENTER]jednorazowy efekt.

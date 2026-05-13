@@ -590,7 +590,51 @@ bool CPythonNetworkStream::SendItemDropPacketNew(TItemPos pos, DWORD elk, DWORD 
 
 	return SendSequence();
 }
+#ifdef WJ_NEW_DROP_DIALOG
+bool CPythonNetworkStream::SendItemDeletePacket(TItemPos item_pos)
+{
+	if (!__CanActMainInstance())
+		return true;
 
+	TPacketCGItemDelete itemDeletePacket;
+	itemDeletePacket.header = HEADER_CG_ITEM_DELETE;
+	itemDeletePacket.item_pos = item_pos;
+
+	if (!Send(sizeof(TPacketCGItemDelete), &itemDeletePacket))
+	{
+		Tracen("SendItemDeletePacket Error");
+		return false;
+	}
+
+#ifdef _DEBUG
+	Tracef(" << SendItemDeletePacket(item_pos=%d)\n", item_pos);
+#endif
+
+	return SendSequence();
+}
+
+bool CPythonNetworkStream::SendItemSellPacket(TItemPos item_pos)
+{
+	if (!__CanActMainInstance())
+		return true;
+
+	TPacketCGItemSell itemSellPacket;
+	itemSellPacket.header = HEADER_CG_ITEM_SELL;
+	itemSellPacket.item_pos = item_pos;
+
+	if (!Send(sizeof(TPacketCGItemSell), &itemSellPacket))
+	{
+		Tracen("SendItemSellPacket Error");
+		return false;
+	}
+
+#ifdef _DEBUG
+	Tracef(" << SendItemSellPacket(item_pos=%d)\n", item_pos);
+#endif
+
+	return SendSequence();
+}
+#endif
 bool CPythonNetworkStream::__IsEquipItemInSlot(TItemPos uSlotPos) const
 {
 	IAbstractPlayer& rkPlayer=IAbstractPlayer::GetSingleton();

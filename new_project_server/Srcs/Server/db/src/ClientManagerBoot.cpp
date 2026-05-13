@@ -250,6 +250,11 @@ bool CClientManager::InitializeShopTable()
 		"shop.npc_vnum, "
 		"shop_item.item_vnum, "
 		"shop_item.count "
+#ifdef ENABLE_MULTISHOP
+		",shop_item.price_vnum "
+		",shop_item.price "
+		",shop_item.gem_price "
+#endif
 		"FROM shop LEFT JOIN shop_item "
 		"ON shop.vnum = shop_item.shop_vnum ORDER BY shop.vnum, shop_item.item_vnum";
 
@@ -299,6 +304,12 @@ bool CClientManager::InitializeShopTable()
 
 		str_to_number(pItem->vnum, data[col++]);
 		str_to_number(pItem->count, data[col++]);
+
+#ifdef ENABLE_MULTISHOP
+		str_to_number(pItem->wPriceVnum, data[col++]);
+		str_to_number(pItem->wPrice, data[col++]);
+		str_to_number(pItem->gem_price, data[col++]);
+#endif
 
 		++shop_table->byItemCount;
 	}

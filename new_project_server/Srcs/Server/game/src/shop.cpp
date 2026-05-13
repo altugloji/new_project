@@ -162,11 +162,22 @@ void CShop::SetShopItems(TShopItemTable * pTable, BYTE bItemCount)
 #ifdef ENABLE_CHEQUE_SYSTEM
 			item.cheque = pTable->cheque;
 #endif
+#ifdef ENABLE_MULTISHOP
+			item.wPriceVnum = pTable->wPriceVnum;
+			item.wPrice = pTable->wPrice;
+			item.gemPrice = pTable->gem_price;
+#endif
 		}
 		else
 		{
 			item.vnum = pTable->vnum;
 			item.count = pTable->count;
+#ifdef ENABLE_MULTISHOP
+			item.wPriceVnum = pTable->wPriceVnum;
+			item.wPrice = pTable->wPrice;
+			item.gemPrice = pTable->gem_price;
+#endif
+
 
 			if (IS_SET(item_table->dwFlags, ITEM_FLAG_COUNT_PER_1GOLD))
 			{
@@ -216,7 +227,12 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 		return SHOP_SUBHEADER_GC_NOT_ENOUGH_CHEQUE;
 	}
 #else
-	if (r_item.price <= 0)
+	if (r_item.price <= 0
+#ifdef ENABLE_MULTISHOP
+		&& r_item.gemPrice <= 0
+		&& r_item.wPriceVnum == 0
+#endif
+		)
 	{
 		LogManager::instance().HackLog("SHOP_BUY_GOLD_OVERFLOW", ch);
 		return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY;
@@ -252,30 +268,91 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 	DWORD dwCheque = r_item.cheque;
 #endif
 
+	DWORD dwWItemVnum = 0;
+	DWORD dwWItemPrice = 0;
+	DWORD dwGemPrice = 0;
+#ifdef ENABLE_MULTISHOP
+	dwWItemVnum = r_item.wPriceVnum;
+	dwWItemPrice = r_item.wPrice;
+	dwGemPrice = r_item.gemPrice;
+#endif
+
 	//if (it->second)	// if other empire, price is triple
 	//	dwPrice *= 3;
 
 #ifdef ENABLE_SHOP_USE_CHEQUE
-	if ((int)dwPrice > 0 && (int)dwCheque > 0) // Yang-Cheque
 	{
-		if (ch->GetGold() < (int)dwPrice || ch->GetCheque() < (int)dwCheque)
-			return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY_CHEQUE;
-	}
-	else if ((int)dwPrice > 0 && (int)dwCheque <= 0) // Yang
-	{
-		if (ch->GetGold() < (int)dwPrice)
-			return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY;
-	}
-	else if ((int)dwPrice <= 0 && (int)dwCheque > 0) // cheque
-	{
-		if (ch->GetCheque() < (int)dwCheque)
-			return SHOP_SUBHEADER_GC_NOT_ENOUGH_CHEQUE;
+		const bool bItemPay =
+#ifdef ENABLE_MULTISHOP
+			(dwGemPrice == 0 && dwWItemVnum > 0);
+#else
+			false;
+#endif
+#if defined(ENABLE_MULTISHOP) && defined(__GEM_SYSTEM__)
+		const bool bGemPay = (dwGemPrice > 0);
+#else
+		const bool bGemPay = false;
+#endif
+
+		if (bGemPay)
+		{
+#ifdef __GEM_SYSTEM__
+			if (ch->GetGem() < static_cast<int>(dwGemPrice))
+				return SHOP_SUBHEADER_GC_NOT_ENOUGH_GEM;
+#endif
+		}
+		else if (bItemPay)
+		{
+			if (ch->CountSpecifyItem(dwWItemVnum) < static_cast<int>(dwWItemPrice))
+				return SHOP_SUBHEADER_GC_NOT_ENOUGH_ITEM;
+		}
+		else if ((int)dwPrice > 0 && (int)dwCheque > 0) // Yang-Cheque
+		{
+			if (ch->GetGold() < (int)dwPrice || ch->GetCheque() < (int)dwCheque)
+				return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY_CHEQUE;
+		}
+		else if ((int)dwPrice > 0 && (int)dwCheque <= 0) // Yang
+		{
+			if (ch->GetGold() < (int)dwPrice)
+				return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY;
+		}
+		else if ((int)dwPrice <= 0 && (int)dwCheque > 0) // cheque
+		{
+			if (ch->GetCheque() < (int)dwCheque)
+				return SHOP_SUBHEADER_GC_NOT_ENOUGH_CHEQUE;
+		}
 	}
 #else
-	if (ch->GetGold() < (int) dwPrice)
 	{
-		sys_log(1, "Shop::Buy : Not enough money : %s has %d, price %d", ch->GetName(), ch->GetGold(), dwPrice);
-		return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY;
+		const bool bItemPay =
+#ifdef ENABLE_MULTISHOP
+			(dwGemPrice == 0 && dwWItemVnum > 0);
+#else
+			false;
+#endif
+#if defined(ENABLE_MULTISHOP) && defined(__GEM_SYSTEM__)
+		const bool bGemPay = (dwGemPrice > 0);
+#else
+		const bool bGemPay = false;
+#endif
+
+		if (bGemPay)
+		{
+#ifdef __GEM_SYSTEM__
+			if (ch->GetGem() < static_cast<int>(dwGemPrice))
+				return SHOP_SUBHEADER_GC_NOT_ENOUGH_GEM;
+#endif
+		}
+		else if (bItemPay)
+		{
+			if (ch->CountSpecifyItem(dwWItemVnum) < static_cast<int>(dwWItemPrice))
+				return SHOP_SUBHEADER_GC_NOT_ENOUGH_ITEM;
+		}
+		else if (ch->GetGold() < (int) dwPrice)
+		{
+			sys_log(1, "Shop::Buy : Not enough money : %s has %d, price %d", ch->GetName(), ch->GetGold(), dwPrice);
+			return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY;
+		}
 	}
 #endif
 
@@ -318,8 +395,21 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 		}
 	}
 
-	ch->PointChange(POINT_GOLD, -dwPrice, false);
+#if defined(ENABLE_MULTISHOP) && defined(__GEM_SYSTEM__)
+	if (dwGemPrice > 0)
+		ch->PointChange(POINT_GEM, -static_cast<int>(dwGemPrice), false);
+	else
+#endif
+#ifdef ENABLE_MULTISHOP
+	if (dwWItemVnum > 0)
+		ch->RemoveSpecifyItem(dwWItemVnum, dwWItemPrice);
+	else
+#endif
+		ch->PointChange(POINT_GOLD, -dwPrice, false);
 #ifdef ENABLE_SHOP_USE_CHEQUE
+#if defined(ENABLE_MULTISHOP) && defined(__GEM_SYSTEM__)
+	if (dwGemPrice == 0)
+#endif
 	ch->PointChange(POINT_CHEQUE, -dwCheque, false);
 #endif
 
@@ -464,6 +554,11 @@ bool CShop::AddGuest(LPCHARACTER ch, DWORD owner_vid, bool bOtherEmpire)
 		pack2.items[i].cheque = item.cheque;
 #endif
 		// END_REMOVED_EMPIRE_PRICE_LIFT
+#ifdef ENABLE_MULTISHOP
+		pack2.items[i].wPriceVnum = item.wPriceVnum;
+		pack2.items[i].wPrice = item.wPrice;
+		pack2.items[i].gem_price = item.gemPrice;
+#endif
 
 		pack2.items[i].count = item.count;
 
@@ -551,6 +646,12 @@ void CShop::BroadcastUpdateItem(BYTE pos)
 	pack2.item.count	= m_itemVector[pos].count;
 #ifdef ENABLE_CHEQUE_SYSTEM
 	pack2.item.cheque = m_itemVector[pos].cheque;
+#endif
+
+#ifdef ENABLE_MULTISHOP
+	pack2.item.wPriceVnum = m_itemVector[pos].wPriceVnum;
+	pack2.item.wPrice = m_itemVector[pos].wPrice;
+	pack2.item.gem_price = m_itemVector[pos].gemPrice;
 #endif
 
 	buf.write(&pack, sizeof(pack));

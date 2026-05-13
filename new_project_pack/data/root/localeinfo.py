@@ -33,7 +33,7 @@ VIRTUAL_KEY_ALPHABET_LOWERS  = r"[1234567890]/qwertyuiop\=asdfghjkl;`'zxcvbnm.,"
 VIRTUAL_KEY_ALPHABET_UPPERS  = r'{1234567890}?QWERTYUIOP|+ASDFGHJKL:~"ZXCVBNM<>'
 VIRTUAL_KEY_SYMBOLS    = '!@#$%^&*()_+|{}:"<>?~'
 VIRTUAL_KEY_NUMBERS    = "1234567890-=\[];',./`"
-VIRTUAL_KEY_SYMBOLS_BR    = '!@#$%^&*()_+|{}:"<>?~·‡„‚ÈËÍÌÏÛÚÙı˙˘Á'
+VIRTUAL_KEY_SYMBOLS_BR    = '!@#$%^&*()_+|{}:"<>?~ùùùùùùùùùùùùùùùù'
 
 __IS_ENGLISH	= "ENGLISH" == app.GetLocaleServiceName()
 __IS_HONGKONG	= "HONGKONG" == app.GetLocaleServiceName()
@@ -354,6 +354,16 @@ if app.__BL_MULTI_LANGUAGE__:
 		if app.ENABLE_CHEQUE_SYSTEM:
 			SHOP_ERROR_DICT["NOT_ENOUGH_CHEQUE"] = SHOP_NOT_ENOUGH_CHEQUE
 			SHOP_ERROR_DICT["NOT_ENOUGH_MONEY_CHEQUE"] = SHOP_NOT_ENOUGH_MONEY_CHEQUE
+
+		if app.ENABLE_MULTISHOP:
+			_d = {
+				"NOT_ENOUGH_ITEM" : SHOP_NOT_ENOUGH_ITEM,
+				}
+			try:
+				_d["NOT_ENOUGH_GEM"] = SHOP_NOT_ENOUGH_GEM
+			except NameError:
+				_d["NOT_ENOUGH_GEM"] = "Not enough gem points."
+			SHOP_ERROR_DICT.update(_d)
 
 		global STAT_MINUS_DESCRIPTION
 		STAT_MINUS_DESCRIPTION = {
@@ -693,6 +703,16 @@ if app.ENABLE_CHEQUE_SYSTEM:
 	SHOP_ERROR_DICT["NOT_ENOUGH_CHEQUE"] = SHOP_NOT_ENOUGH_CHEQUE
 	SHOP_ERROR_DICT["NOT_ENOUGH_MONEY_CHEQUE"] = SHOP_NOT_ENOUGH_MONEY_CHEQUE
 
+if app.ENABLE_MULTISHOP:
+	try:
+		SHOP_ERROR_DICT["NOT_ENOUGH_ITEM"] = SHOP_NOT_ENOUGH_ITEM
+	except NameError:
+		pass
+	try:
+		SHOP_ERROR_DICT["NOT_ENOUGH_GEM"] = SHOP_NOT_ENOUGH_GEM
+	except NameError:
+		SHOP_ERROR_DICT["NOT_ENOUGH_GEM"] = "Not enough gem points."
+
 STAT_MINUS_DESCRIPTION = {
 	"HTH-" : STAT_MINUS_CON,
 	"INT-" : STAT_MINUS_INT,
@@ -757,6 +777,22 @@ def FISHING_SUCCESS(isFish, fishName) :
 		return FISHING_SUCCESS1 % (fishName)
 	else :
 		return FISHING_SUCCESS2 % (fishName)
+
+if app.ENABLE_MULTISHOP:
+	def NumberToWithItemString(n,c):
+		if n <= 0:
+			return "0 %s" % (c)
+		return "%s %s" % ('.'.join([ i-3<0 and str(n)[:i] or str(n)[i-3:i] for i in range(len(str(n))%3, len(str(n))+1, 3) if i ]), c)
+
+	def DO_YOU_BUY_ITEM_GEM(buyItemName, buyItemCount, gemPrice):
+		try:
+			unit = GEM_POINT_UNIT
+		except NameError:
+			unit = "Gem"
+		priceStr = "%s %s" % (NumberToString(gemPrice), unit)
+		if buyItemCount > 1:
+			return DO_YOU_BUY_ITEM2 % (buyItemName, buyItemCount, priceStr)
+		return DO_YOU_BUY_ITEM1 % (buyItemName, priceStr)
 
 def NumberToString(n):
 	if n <= 0:

@@ -13415,3 +13415,6 @@
 14311	Je hebt niet genoeg ruimte in je inventaris.
 14312	Je hebt niet genoeg ruimte in je inventaris.
 14320	Je hebt geen 1.500.000 Yang.
+21310	Gaya Shop
+21311	Gaya Omzettingsshop
+21312	Er zijn 10 Gaya-punten toegevoegd aan je personage.

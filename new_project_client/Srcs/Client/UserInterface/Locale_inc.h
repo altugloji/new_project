@@ -145,6 +145,8 @@
 #define ENABLE_ITEM_SHOP_SYSTEM											// Nesne Market Sistemi
 #define __RENEWAL_SKILL_BOOK__
 #define ENABLE_CUBE_RENEWAL
+#define ENABLE_MULTISHOP
+#define WJ_NEW_DROP_DIALOG
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

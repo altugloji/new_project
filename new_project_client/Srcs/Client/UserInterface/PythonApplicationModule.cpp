@@ -2032,5 +2032,17 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "__GEM_SHOP__", 0);
 #endif
 
+#ifdef ENABLE_MULTISHOP
+	PyModule_AddIntConstant(poModule, "ENABLE_MULTISHOP", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_MULTISHOP", 0);
+#endif
+
+#ifdef WJ_NEW_DROP_DIALOG
+	PyModule_AddIntConstant(poModule, "WJ_NEW_DROP_DIALOG", 1);
+#else
+	PyModule_AddIntConstant(poModule, "WJ_NEW_DROP_DIALOG", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

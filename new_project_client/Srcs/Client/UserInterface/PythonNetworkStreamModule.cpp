@@ -696,7 +696,77 @@ PyObject* netSendItemDropPacket(PyObject* poSelf, PyObject* poArgs)
 	rkNetStream.SendItemDropPacket(Cell, 0);
 	return Py_BuildNone();
 }
+#ifdef WJ_NEW_DROP_DIALOG
+PyObject* netSendItemDeletePacket(PyObject* poSelf, PyObject* poArgs)
+{
+	TItemPos item_pos;
 
+	switch (PyTuple_Size(poArgs))
+	{
+	case 1:
+	{
+		if (!PyTuple_GetInteger(poArgs, 0, &item_pos.cell))
+			return Py_BuildException();
+
+		CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+		rkNetStream.SendItemDeletePacket(item_pos);
+		return Py_BuildNone();
+	}
+
+	case 2:
+	{
+		if (!PyTuple_GetInteger(poArgs, 0, &item_pos.cell))
+			return Py_BuildException();
+
+		if (!PyTuple_GetInteger(poArgs, 1, &item_pos.window_type))
+			return Py_BuildException();
+
+		CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+		rkNetStream.SendItemDeletePacket(item_pos);
+		return Py_BuildNone();
+	}
+
+	default:
+		return Py_BuildNone();
+	}
+	return Py_BuildNone();
+}
+
+PyObject* netSendItemSellPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	TItemPos item_pos;
+
+	switch (PyTuple_Size(poArgs))
+	{
+	case 1:
+	{
+		if (!PyTuple_GetInteger(poArgs, 0, &item_pos.cell))
+			return Py_BuildException();
+
+		CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+		rkNetStream.SendItemSellPacket(item_pos);
+		return Py_BuildNone();
+	}
+
+	case 2:
+	{
+		if (!PyTuple_GetInteger(poArgs, 0, &item_pos.cell))
+			return Py_BuildException();
+
+		if (!PyTuple_GetInteger(poArgs, 1, &item_pos.window_type))
+			return Py_BuildException();
+
+		CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+		rkNetStream.SendItemSellPacket(item_pos);
+		return Py_BuildNone();
+	}
+
+	default:
+		return Py_BuildNone();
+	}
+	return Py_BuildNone();
+}
+#endif
 PyObject* netSendItemDropPacketNew(PyObject* poSelf, PyObject* poArgs)
 {
 	TItemPos Cell;
@@ -1711,7 +1781,10 @@ void initnet()
 		{ "SendItemMovePacket",					netSendItemMovePacket,					METH_VARARGS },
 		{ "SendItemPickUpPacket",				netSendItemPickUpPacket,				METH_VARARGS },
 		{ "SendGiveItemPacket",					netSendGiveItemPacket,					METH_VARARGS },
-
+#ifdef WJ_NEW_DROP_DIALOG
+		{ "SendItemDeletePacket",				netSendItemDeletePacket,				METH_VARARGS },
+		{ "SendItemSellPacket",					netSendItemSellPacket,					METH_VARARGS },
+#endif
 		{ "SetOfflinePhase",					netSetOfflinePhase,						METH_VARARGS },
 		{ "Disconnect",							netDisconnect,							METH_VARARGS },
 		{ "IsConnect",							netIsConnect,							METH_VARARGS },

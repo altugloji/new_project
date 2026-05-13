@@ -3669,3 +3669,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Vous obtenez un ou plusieurs plateaux de jeu Yut
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	Vous recevez 1 tronc de bouleau.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	Vous n'avez pas assez d'objets pour d'argent pour jouer.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Vous ne pouvez pas obtenir d'autres plateaux de Yutnori.
+SHOP_NOT_ENOUGH_ITEM	Objets insuffisants
+GEMSHOP_TITLE	Boutique Gaya
+GEMSHOP_SECOND_TITLE	Convertir des objets en points Gaya
+GEMSHOP_CONVERT_SELECTED	Convertir la sélection x{}
+GEMSHOP_CONVERT_QUESTION	Veux-tu convertir {} x{} en {} points Gaya ?
+GEMSHOP_TITLE2	Boutique Gaya
+GEMSHOP_HAS_TOOLTIP	Tu as : {}
+GEMSHOP_POINT_TOOLTIP	Gaya : {}
+GEMSHOP_YOU_ALREADY_BUYED	Tu as déjà acheté ceci !
+GEMSHOP_OPEN_SLOT_QUESTION	Veux-tu ouvrir cet emplacement ?
+GEMSHOP_BUY_QUESTION	Veux-tu acheter {} pour {} Gaya ?
+GEMSHOP_REFRESH_QUESTION	Veux-tu actualiser les objets ?

@@ -123,6 +123,10 @@ class CInputMain : public CInputProcessor
 		void		ItemUse(LPCHARACTER ch, const char * data) const;
 		void		ItemDrop(LPCHARACTER ch, const char * data) const;
 		void		ItemDrop2(LPCHARACTER ch, const char * data) const;
+#ifdef WJ_NEW_DROP_DIALOG
+		void		ItemDelete(LPCHARACTER ch, const char* data);
+		void		ItemSell(LPCHARACTER ch, const char* data);
+#endif
 		void		ItemMove(LPCHARACTER ch, const char * data) const;
 		void		ItemPickup(LPCHARACTER ch, const char * data) const;
 		void		ItemToItem(LPCHARACTER ch, const char * pcData) const;

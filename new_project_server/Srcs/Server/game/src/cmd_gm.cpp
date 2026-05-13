@@ -4054,6 +4054,95 @@ ACMD(do_get_mob_count)
 	ch->ChatPacket(CHAT_TYPE_INFO, "MapIndex: %d MobCount %d", ch->GetMapIndex(), f.nCount);
 }
 
+#ifdef ENABLE_GM_MOB_FIND_CMD
+struct FMobFindByVnum
+{
+	DWORD dwVnum;
+	LPCHARACTER pkGM;
+	int nTotal;
+	int nPrinted;
+
+	enum { MAX_PRINT = 100 };
+
+	void operator()(LPENTITY ent)
+	{
+		if (!ent->IsType(ENTITY_CHARACTER))
+			return;
+
+		const LPCHARACTER c = static_cast<LPCHARACTER>(ent);
+		if (c->IsPC())
+			return;
+		if (c->GetRaceNum() != dwVnum)
+			return;
+
+		++nTotal;
+
+		if (nPrinted >= static_cast<int>(MAX_PRINT))
+			return;
+
+		const long gx = c->GetX() / 100;
+		const long gy = c->GetY() / 100;
+
+		pkGM->ChatPacket(CHAT_TYPE_INFO,
+			"[Mob_Find] vnum=%u name=%s warp=(%ld,%ld) vid=%u",
+			dwVnum, c->GetName(), gx, gy,
+			static_cast<DWORD>(c->GetVID()));
+		++nPrinted;
+	}
+};
+
+ACMD(do_mob_find)
+{
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (!*arg1)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Syntax: mob_find <vnum>");
+		return;
+	}
+
+	DWORD vnum = 0;
+	str_to_number(vnum, arg1);
+
+	if (vnum == 0)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Invalid vnum.");
+		return;
+	}
+
+	const LPSECTREE_MAP pMap = SECTREE_MANAGER::instance().GetMap(ch->GetMapIndex());
+	if (pMap == nullptr)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "[mob_find] invalid map index %ld.", ch->GetMapIndex());
+		return;
+	}
+
+	FMobFindByVnum f;
+	f.dwVnum = vnum;
+	f.pkGM = ch;
+	f.nTotal = 0;
+	f.nPrinted = 0;
+
+	pMap->for_each(f);
+
+	if (f.nTotal == 0)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "[mob_find] vnum %u: none on this map (mapIndex=%ld).",
+			vnum, ch->GetMapIndex());
+	}
+	else if (f.nTotal > f.nPrinted)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "[mob_find] vnum %u: %d found (showing first %d lines).",
+			vnum, f.nTotal, f.nPrinted);
+	}
+	else
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "[mob_find] vnum %u: %d found.", vnum, f.nTotal);
+	}
+}
+#endif
+
 ACMD(do_clear_land)
 {
 	const building::CLand* pLand = building::CManager::instance().FindLand(ch->GetMapIndex(), ch->GetX(), ch->GetY());

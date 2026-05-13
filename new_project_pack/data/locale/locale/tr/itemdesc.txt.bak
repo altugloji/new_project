@@ -2763,7 +2763,7 @@
 27988	Define Haritasý	Eski hazinelerin yerlerini açýða çýkaran yýpranmýþ harita.
 27989	Metin Taþý Dedektörü	Pusula sana sonraki metin taþýnýn yönünü ve mesafesini gösterir. Ne kadar parlaksa, o kadar yakýnsýn demektir. 6 kez kullanýlabilir.
 27990	Taþ Parçasý	Küçük boyutlarda olmasý çok rahat taþýnmasýný saðlar. Farklý þekillerde kullanýlabilir.
-27991	Su Taþý	Silah ve mutfak eþyalarýnýzý bilemeye yarayan sert ve kalýn taþ.
+27991	Su Taþý	Denizin deðerli madeni.
 27992	Beyaz Ýnci	Saf Beyaz inci|Bayanlar sever.
 27993	Mavi Ýnci	Mavi Renkli Ýnci |Bayanlar sever.
 27994	Kankýrmýzý Ýnci	Kan Kýrmýzý Ýnci |Bayanlar sever.
@@ -2931,7 +2931,7 @@
 30153	Çiçekler	Nadide çiçekler, kokularý size geçmiþten güzel þeyler hatýrlatýr.
 30154	Tapýnaðýn Gizli Kitabý	Tapýnaðýn ve öðretisinin tarihçesini içeren kitap.
 30155	Mirinenin Dini Kolyesi	Dini kolye, kiþinin inançlarýný yansýtýr ve koruduðuna inanýlýr.
-30156	Tapýnaðýn Gizli Kitabý	Gizli Tapýnaðýn öðretisini ve tarihçesini içeren kitap.
+30156	Mor Kitap	Beceri kitaplarýnýn tarifini içeren kitap. Simyacý'dan üretilebilir.
 30157	Ok Ucu	Bu zehirli ok uçlarý krallýðý savunmada kullanýlýr.
 30177	Misk Yaðý	Misk yaðý, silah tüccarlarý tarafýndan bir görevde kullanýldý. Bunun dýþýnda bir iþlevi yoktur.
 30179	Kývrýk Anahtar	Bu sihirli anahtar, Ejderha Tapýnaðý'na giden kapýyý etkinleþtiriyor.
@@ -3123,20 +3123,20 @@
 30586		
 30600	Kesim Örneði	
 30601	Zýrh Planý	
-30602	mavi boya	
-30603	kýrmýzý boya	
-30604	gri boya	
+30602	Mavi boya	Üretim için gerekli boya.
+30603	Kýrmýzý boya	Üretim için gerekli boya.
+30604	Gri boya	Üretim için gerekli boya.
 30605	Altýn Plakalar	
 30606	Gümüþ Plakalar	
 30607	Bakýr Plakalar	
 30608	Çelik Plakalar	
 30609	Tunç Plakalar	
-30610	Mitril	
+30610	Mitril	Maden cevherlerini eriterek elde edilir. Çeþitli üretimlerde kullanýlabilir. Simyacý'dan üretilebilir.
 30611	Aðýr Kemerler	
 30612	Saðlam Ýpler	
 30613	Orman Perisi Taþý	Gizemle ýþýldayan bu yeþil taþta aðaç ruhu olan bir Orman Perisi'nin ruhu kilitlidir. Orman Perisi Erebos'a giriþ yapýlabilmesini saðlayan gizli sözleri biliyor.
-30614	siyah boya	
-30615	beyaz boya	
+30614	Siyah boya	Üretim için gerekli boya.
+30615	Beyaz boya	Üretim için gerekli boya.
 30616	Titandiyoksit	Prizmatik kristal ekipman nesnesinin arýndýrýlmasýna yarar.
 30617	Akik	Gizemli ýþýldayan süs taþý ekipman nesnesinin arýndýrýlmasýna yarar.
 30618	Ay Taþý	Damla þeklindeki deðerli taþ bir kývýlcým ay ýþýðýný içinde taþýr. Bir ekipman nesnesinin arýndýrýlmasýna yarar.
@@ -3216,7 +3216,7 @@
 31032	Leviathan'ýn Ýncileri	Efsanevi yaratýklar ve milenyum esansýnýn içindeki ýþýktan oluþan etkili güçlendirici kapsüller.
 31033	Reis'in Pelerini	Bu pelerin Kýzýlhýrsýzlarýn yenilmezlik simgesidir.
 31034	Devlerin Totemi	Totem büyük bir kehribar þeklindedir.
-31035	Siyah Taþ	Bu gizemli taþ kikloplar tarafýndan Yýldýrým Daðlarý'nda çýkarýr.
+31035	Siyah Taþ	Taþlarý eriterek elde edilir. Çeþitli üretimlerde kullanýlabilir. Simyacý'dan üretilebilir.
 31036	Kara Altýn	Büyülü güçlere sahip bu kara maden Yýldýrým Daðlarý'nda görülür.
 31037	Deri Kese	Bu keseyi Kaptan Þrak'tan aldýn. Düþündüðünden daha hafifmiþ...
 31038	Kutsanmýþ Toprak	Kutsanmýþ toprakla dolu bu torba ölü çaðýrmaya yarar.
@@ -4476,38 +4476,38 @@
 41829	Seçkin Kar Mantosu+ (e)	Bu geleneksel kostüm þenlik havasýnda olmakla kalmýyor, ayný zamanda en koyu kýþta bile sana rahat bir sýcaklýk veriyor. Sana en az bir rastgele bonus saðlar.
 41830	Sýcak Kar Mantosu+ (k)	Bu geleneksel kostüm þenlik havasýnda olmakla kalmýyor, ayný zamanda en koyu kýþta bile sana rahat bir sýcaklýk veriyor. Sana en az bir rastgele bonus saðlar.
 41831	Seçkin Kar Mantosu+ (k)	Bu geleneksel kostüm þenlik havasýnda olmakla kalmýyor, ayný zamanda en koyu kýþta bile sana rahat bir sýcaklýk veriyor. Sana en az bir rastgele bonus saðlar.
-41832	B denizci üniformasý (e)	Bu kostüm seni bir Deniz Subayý’na dönüþtürür.
-41833	K denizci üniformasý (e)	Bu kostüm seni bir Deniz Subayý’na dönüþtürür.
-41834	B denizci üniformasý (k)	Bu kostüm seni bir Deniz Subayý’na dönüþtürür.
-41835	K denizci üniformasý (k)	Bu kostüm seni bir Deniz Subayý’na dönüþtürür.
-41836	B denizci üniformas+ (e)	Bu kostüm seni bir Deniz Subayý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-41837	K denizci üniformas+ (e)	Bu kostüm seni bir Deniz Subayý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-41838	B denizci üniformas+ (k)	Bu kostüm seni bir Deniz Subayý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-41839	K denizci üniformas+ (k)	Bu kostüm seni bir Deniz Subayý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-41840	Gece Kabu. Vampir Prensi	Bu kostüm seni ürkütücü Vampir Prensi’ne dönüþtürür. 
-41841	Kan Kýrm. Vampir Prensi	Bu kostüm seni ürkütücü Vampir Prensi’ne dönüþtürür. 
-41842	Gece Ka. Vampir Prensesi	Bu kostüm seni ürkütücü Vampir Prensesi’ne dönüþtürür.
-41843	Kan Kýr. Vampir Prensesi	Bu kostüm seni ürkütücü Vampir Prensesi’ne dönüþtürür.
-41844	Gece Kab. Vampir Prensi+	Bu kostüm seni ürkütücü Vampir Prensi’ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-41845	Kan Kýr. Vampir Prensi+	Bu kostüm seni ürkütücü Vampir Prensi’ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-41846	Gece K. Vampir Prensesi+	Bu kostüm seni ürkütücü Vampir Prensesi’ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-41847	Kan K. Vampir Prensesi+	Bu kostüm seni ürkütücü Vampir Prensesi’ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-41848	Kýrmýzý Kýþ Samurayý (e)	Bu kostüm seni güçlü bir kýrmýzý Kýþ Samurayý’na dönüþtürür.
-41849	Beyaz Kýþ Samurayý (e)	Bu kostüm seni güçlü bir beyaz Kýþ Samurayý’na dönüþtürür. 
-41850	Kýrmýzý Kýþ Samurayý (k)	Bu kostüm seni güçlü bir kýrmýzý Kýþ Samurayý’na dönüþtürür.
-41851	Beyaz Kýþ Samurayý (k)	Bu kostüm seni güçlü bir beyaz Kýþ Samurayý’na dönüþtürür.
-41852	Kýrmýzý Kýþ Samuray+ (e)	Bu kostüm seni güçlü bir kýrmýzý Kýþ Samurayý’na dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-41853	Beyaz Kýþ Samurayý+ (e)	Bu kostüm seni güçlü bir beyaz Kýþ Samurayý’na dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-41854	Kýrmýzý Kýþ Samuray+ (k)	Bu kostüm seni güçlü bir kýrmýzý Kýþ Samurayý’na dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-41855	Beyaz Kýþ Samurayý+ (k)	Bu kostüm seni güçlü bir beyaz Kýþ Samurayý’na dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-41856	Krm Çöldeki Ay Savaþçýsý	Bu kostüm seni gururlu bir Çöldeki Ay Savaþçýsý’na dönüþtürür.
-41857	Mvi Çöldeki Ay Savaþçýsý	Bu kostüm seni gururlu bir Çöldeki Ay Savaþçýsý’na dönüþtürür.
-41858	K Çöl. Ay Kad. Savaþçýsý	Bu kostüm seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý’na dönüþtürür.
-41859	M Çöl. Ay Kad. Savaþçýsý	Bu kostüm seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý’na dönüþtürür.
-41860	Km Çöldeki Ay Savaþçýsý+	Bu kostüm seni gururlu bir Çöldeki Ay Savaþçýsý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-41861	Mv Çöldeki Ay Savaþçýsý+	Bu kostüm seni gururlu bir Çöldeki Ay Savaþçýsý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-41862	K Çöl Ay Kad. Savaþçýsý+	Bu kostüm seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-41863	M Çöl Ay Kad. Savaþçýsý+	Bu kostüm seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+41832	B denizci üniformasý (e)	Bu kostüm seni bir Deniz Subayý'na dönüþtürür.
+41833	K denizci üniformasý (e)	Bu kostüm seni bir Deniz Subayý'na dönüþtürür.
+41834	B denizci üniformasý (k)	Bu kostüm seni bir Deniz Subayý'na dönüþtürür.
+41835	K denizci üniformasý (k)	Bu kostüm seni bir Deniz Subayý'na dönüþtürür.
+41836	B denizci üniformas+ (e)	Bu kostüm seni bir Deniz Subayý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+41837	K denizci üniformas+ (e)	Bu kostüm seni bir Deniz Subayý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+41838	B denizci üniformas+ (k)	Bu kostüm seni bir Deniz Subayý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+41839	K denizci üniformas+ (k)	Bu kostüm seni bir Deniz Subayý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+41840	Gece Kabu. Vampir Prensi	Bu kostüm seni ürkütücü Vampir Prensi'ne dönüþtürür. 
+41841	Kan Kýrm. Vampir Prensi	Bu kostüm seni ürkütücü Vampir Prensi'ne dönüþtürür. 
+41842	Gece Ka. Vampir Prensesi	Bu kostüm seni ürkütücü Vampir Prensesi'ne dönüþtürür.
+41843	Kan Kýr. Vampir Prensesi	Bu kostüm seni ürkütücü Vampir Prensesi'ne dönüþtürür.
+41844	Gece Kab. Vampir Prensi+	Bu kostüm seni ürkütücü Vampir Prensi'ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+41845	Kan Kýr. Vampir Prensi+	Bu kostüm seni ürkütücü Vampir Prensi'ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+41846	Gece K. Vampir Prensesi+	Bu kostüm seni ürkütücü Vampir Prensesi'ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+41847	Kan K. Vampir Prensesi+	Bu kostüm seni ürkütücü Vampir Prensesi'ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+41848	Kýrmýzý Kýþ Samurayý (e)	Bu kostüm seni güçlü bir kýrmýzý Kýþ Samurayý'na dönüþtürür.
+41849	Beyaz Kýþ Samurayý (e)	Bu kostüm seni güçlü bir beyaz Kýþ Samurayý'na dönüþtürür. 
+41850	Kýrmýzý Kýþ Samurayý (k)	Bu kostüm seni güçlü bir kýrmýzý Kýþ Samurayý'na dönüþtürür.
+41851	Beyaz Kýþ Samurayý (k)	Bu kostüm seni güçlü bir beyaz Kýþ Samurayý'na dönüþtürür.
+41852	Kýrmýzý Kýþ Samuray+ (e)	Bu kostüm seni güçlü bir kýrmýzý Kýþ Samurayý'na dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+41853	Beyaz Kýþ Samurayý+ (e)	Bu kostüm seni güçlü bir beyaz Kýþ Samurayý'na dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+41854	Kýrmýzý Kýþ Samuray+ (k)	Bu kostüm seni güçlü bir kýrmýzý Kýþ Samurayý'na dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+41855	Beyaz Kýþ Samurayý+ (k)	Bu kostüm seni güçlü bir beyaz Kýþ Samurayý'na dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+41856	Krm Çöldeki Ay Savaþçýsý	Bu kostüm seni gururlu bir Çöldeki Ay Savaþçýsý'na dönüþtürür.
+41857	Mvi Çöldeki Ay Savaþçýsý	Bu kostüm seni gururlu bir Çöldeki Ay Savaþçýsý'na dönüþtürür.
+41858	K Çöl. Ay Kad. Savaþçýsý	Bu kostüm seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý'na dönüþtürür.
+41859	M Çöl. Ay Kad. Savaþçýsý	Bu kostüm seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý'na dönüþtürür.
+41860	Km Çöldeki Ay Savaþçýsý+	Bu kostüm seni gururlu bir Çöldeki Ay Savaþçýsý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+41861	Mv Çöldeki Ay Savaþçýsý+	Bu kostüm seni gururlu bir Çöldeki Ay Savaþçýsý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+41862	K Çöl Ay Kad. Savaþçýsý+	Bu kostüm seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+41863	M Çöl Ay Kad. Savaþçýsý+	Bu kostüm seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
 41864	Havalý deniz kýyafet (e)	Bu havalý kostüm yazýn beach partileri için süper.
 41865	Rahat deniz kýyafet (e)	Bu rahat kostüm yazýn beach partileri için süper.
 41866	Havalý deniz kýyafet (k)	Bu havalý kostüm yazýn beach partileri için süper.
@@ -5085,22 +5085,22 @@
 45569	Seçkin Kar Þapkasý+ (e)	Bu geleneksel þapka harika bir þenlik havasý yaymakla kalmýyor, ayný zamanda kulaklarýnýn asla üþümemesini de saðlýyor. Sana en az bir rastgele bonus saðlar.
 45570	Sýcak Kar Þapkasý+ (k)	Bu geleneksel þapka harika bir þenlik havasý yaymakla kalmýyor, ayný zamanda kulaklarýnýn asla üþümemesini de saðlýyor. Sana en az bir rastgele bonus saðlar.
 45571	Seçkin Kar Þapkasý+ (k)	Bu geleneksel þapka harika bir þenlik havasý yaymakla kalmýyor, ayný zamanda kulaklarýnýn asla üþümemesini de saðlýyor. Sana en az bir rastgele bonus saðlar.
-45572	Byaz denizci bicorne (e)	Bu bicorne þapka seni Deniz Subayý’na dönüþtürür.
-45573	Krmz denizci bicorne (e)	Bu bicorne þapka seni Deniz Subayý’na dönüþtürür.
-45574	Byaz denizci bicorne (k)	Bu bicorne þapka seni Deniz Subayý’na dönüþtürür.
-45575	Krmz denizci bicorne (k)	Bu bicorne þapka seni Deniz Subayý’na dönüþtürür.
-45576	By. denizci bicorne+ (e)	Bu bicorne þapka seni Deniz Subayý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-45577	Krm denizci bicorne+ (e)	Bu bicorne þapka seni Deniz Subayý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-45578	By. denizci bicorne+ (k)	Bu bicorne þapka seni Deniz Subayý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-45579	Krm denizci bicorne+ (k)	Bu bicorne þapka seni Deniz Subayý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-45580	Kara Vampir Saçý (e)	Bu kostüm seni ürkütücü Vampir Prensi’ne dönüþtürür. 
-45581	Gri Vampir Saçý (e)	Bu kostüm seni ürkütücü Vampir Prensi’ne dönüþtürür. 
-45582	Kara Vampir Saçý (k)	Bu kostüm seni ürkütücü Vampir Prensesi’ne dönüþtürür.
-45583	Gri Vampir Saçý (k)	Bu kostüm seni ürkütücü Vampir Prensesi’ne dönüþtürür.
-45584	Kara Vampir Saçý+ (e)	Bu kostüm seni ürkütücü Vampir Prensi’ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-45585	Gri Vampir Saçý+ (e)	Bu kostüm seni ürkütücü Vampir Prensi’ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-45586	Kara Vampir Saçý+ (k)	Bu kostüm seni ürkütücü Vampir Prensesi’ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
-45587	Gri Vampir Saçý+ (k)	Bu kostüm seni ürkütücü Vampir Prensesi’ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+45572	Byaz denizci bicorne (e)	Bu bicorne þapka seni Deniz Subayý'na dönüþtürür.
+45573	Krmz denizci bicorne (e)	Bu bicorne þapka seni Deniz Subayý'na dönüþtürür.
+45574	Byaz denizci bicorne (k)	Bu bicorne þapka seni Deniz Subayý'na dönüþtürür.
+45575	Krmz denizci bicorne (k)	Bu bicorne þapka seni Deniz Subayý'na dönüþtürür.
+45576	By. denizci bicorne+ (e)	Bu bicorne þapka seni Deniz Subayý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+45577	Krm denizci bicorne+ (e)	Bu bicorne þapka seni Deniz Subayý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+45578	By. denizci bicorne+ (k)	Bu bicorne þapka seni Deniz Subayý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+45579	Krm denizci bicorne+ (k)	Bu bicorne þapka seni Deniz Subayý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+45580	Kara Vampir Saçý (e)	Bu kostüm seni ürkütücü Vampir Prensi'ne dönüþtürür. 
+45581	Gri Vampir Saçý (e)	Bu kostüm seni ürkütücü Vampir Prensi'ne dönüþtürür. 
+45582	Kara Vampir Saçý (k)	Bu kostüm seni ürkütücü Vampir Prensesi'ne dönüþtürür.
+45583	Gri Vampir Saçý (k)	Bu kostüm seni ürkütücü Vampir Prensesi'ne dönüþtürür.
+45584	Kara Vampir Saçý+ (e)	Bu kostüm seni ürkütücü Vampir Prensi'ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+45585	Gri Vampir Saçý+ (e)	Bu kostüm seni ürkütücü Vampir Prensi'ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+45586	Kara Vampir Saçý+ (k)	Bu kostüm seni ürkütücü Vampir Prensesi'ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
+45587	Gri Vampir Saçý+ (k)	Bu kostüm seni ürkütücü Vampir Prensesi'ne dönüþtürür. Sana en az bir rastgele bonus kazandýrýr.
 45588	Kýrmýzý Boynuz Kaský (e)	Bu maskeli kask, güçlü bir kýrmýzý Kýþ Samurayý'na dönüþmeni tamamlýyor. 
 45589	Beyaz Boynuz Kaský (e)	Bu maskeli kask, güçlü bir beyaz Kýþ Samurayý'na dönüþmeni tamamlýyor. 
 45590	Kýrmýzý Boynuz Kaský (k)	Bu maskeli kask, güçlü bir kýrmýzý Kýþ Samurayý'na dönüþmeni tamamlýyor. 
@@ -5109,14 +5109,14 @@
 45593	Beyaz Boynuz Kaský+ (e)	Bu maskeli kask, güçlü bir beyaz Kýþ Samurayý'na dönüþmeni tamamlýyor. Sana en az bir rastgele bonus kazandýrýr.
 45594	Kýrmýzý Boynuz Kask+ (k)	Bu maskeli kask, güçlü bir kýrmýzý Kýþ Samurayý'na dönüþmeni tamamlýyor. Sana en az bir rastgele bonus kazandýrýr.
 45595	Beyaz Boynuz Kaský+ (k)	Bu maskeli kask, güçlü bir beyaz Kýþ Samurayý'na dönüþmeni tamamlýyor. Sana en az bir rastgele bonus kazandýrýr.
-45596	K altýn kenar. kavuk (e)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Savaþçýsý’na dönüþtürür.
-45597	M altýn kenar. kavuk (e)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Savaþçýsý’na dönüþtürür.
-45598	K altýn kenar. kavuk (k)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý’na dönüþtürür.
-45599	M altýn kenar. kavuk (k)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý’na dönüþtürür.
-45600	K altýn kenr. kavuk+ (e)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Savaþçýsý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-45601	M altýn kenr. kavuk+ (e)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Savaþçýsý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-45602	K altýn kenr. kavuk+ (k)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
-45603	M altýn kenr. kavuk+ (k)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý’na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+45596	K altýn kenar. kavuk (e)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Savaþçýsý'na dönüþtürür.
+45597	M altýn kenar. kavuk (e)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Savaþçýsý'na dönüþtürür.
+45598	K altýn kenar. kavuk (k)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý'na dönüþtürür.
+45599	M altýn kenar. kavuk (k)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý'na dönüþtürür.
+45600	K altýn kenr. kavuk+ (e)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Savaþçýsý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+45601	M altýn kenr. kavuk+ (e)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Savaþçýsý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+45602	K altýn kenr. kavuk+ (k)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
+45603	M altýn kenr. kavuk+ (k)	Bu zarif kavuk seni gururlu bir Çöldeki Ay Kadýn Savaþçýsý'na dönüþtürür. Sana en az bir rastgele bonus saðlar.
 45604	Havalý deniz þapkasý (e)	Bu havalý þapka yazýn beach partileri için süper.
 45605	Rahat deniz þapkasý (e)	Bu rahat þapka yazýn beach partileri için süper.
 45606	Havalý deniz þapkasý (k)	Bu havalý þapka yazýn beach partileri için süper.
@@ -5627,8 +5627,8 @@
 50853	A. Karanlýða k. d. özütü	Bu son derece güçlü özüt, onu içenlere +%20 karanlýk direnci saðlar.
 50901	Boþ Þiþe	Ýksirleri hazýrlamak için gerekli.
 50902	Acemiler Ýçin Reçete	Kolay edinilebilen, acemilerce yapýlmýþ reçete.
-50903	Reçete	Biraz alýþtýrma gerektiren reçete.
-50904	Uzman Reçetesi	Doðru olarak yapýlmasý sadece uzmanlar tarafýndan mümkün olan reçete.
+50903	Arttýrma Kaðýdý Þemasý	Üretim için gerekli þema.
+50904	Efsun Nesnesi Þemasý	Üretim için gerekli þema.
 50905	Sim Suyu Reçetesi	Þeftali Çiçeði Suyu ve Leylak karýþýmýný anlatan reçete.
 50906	Dok Suyu Reçetesi	Çançiçeði suyu ve leylak karýþýmýný anlatan reçete.
 50907	Bo Suyu Reçetesi	Kaki çiçeði suyu ve Tue Mantarý karýþýmýný anlatan reçete.
@@ -5639,8 +5639,8 @@
 50912	Sazan Balýðý Suþi	Küçük parçalar halinde sunulan ve çið balýk ile soðutulmuþ pirinçten yapýlan özel bir yemek.
 50913	Som Balýðý Suþi	Küçük parçalar halinde sunulan ve çið balýk ile soðutulmuþ pirinçten yapýlan özel bir yemek. 60 saniye boyunca saldýrý deðerini 100 artýrýr.
 50914	Yayýn Balýðý Suþi	Küçük parçalar halinde sunulan ve çið balýk ile soðutulmuþ pirinçten yapýlan özel bir yemek. 60 saniye boyunca savunma deðerini 100 artýrýr.
-50920	Altýn Yutnori Paketi	Yutnori’de en az 220 puanla kazandýðýn zaferin ödülü. Paketi açýp ne kazandýðýný öðren.
-50921	Gümüþ Yutnori Paketi	Yutnori’de en az 150 ile 219 arasý puanla kazandýðýn zaferin ödülü. Paketi açýp ne kazandýðýný öðren.
+50920	Altýn Yutnori Paketi	Yutnori'de en az 220 puanla kazandýðýn zaferin ödülü. Paketi açýp ne kazandýðýný öðren.
+50921	Gümüþ Yutnori Paketi	Yutnori'de en az 150 ile 219 arasý puanla kazandýðýn zaferin ödülü. Paketi açýp ne kazandýðýný öðren.
 50922	Bronz Yutnori Paketi	Yutnori'ye katýlým ödülün. Paketi açýp ne kazandýðýný öðren.
 50923	Altýn Yutnori Kutusu	5 Yutnori oyun tahtasý alýrsýn. Yutnori arayüzünü açmak ve oyun tahtalarýný oraya eklemek için saða týkla. Etkinlik sona erdiðinde, artýk herhangi bir oyun tahtasý alamazsýn ve kalanlar kaldýrýlýr.
 50924	Gümüþ Yutnori Kutusu	1 Yutnori oyun tahtasý alýrsýn. Yutnori arayüzünü açmak ve oyun tahtaný oraya eklemek için saða týkla. Etkinlik sona erdiðinde, artýk herhangi bir oyun tahtasý alamazsýn ve kalanlar kaldýrýlýr.
@@ -5650,15 +5650,15 @@
 50928	Altýn kral ganimeti	Kralý yakala'da 550 veya üzeri puan aldýn. Ödülünü açýp ne kazandýðýný öðren.
 50929	Gümüþ kral ganimeti	Kralý yakala'da 400 - 549 arasý puan aldýn. Ödülünü açýp ne kazandýðýný öðren.
 50930	Bronz kral ganimeti	Kralý yakala'da 10 - 399 arasý puan aldýn. Ödülünü açýp ne kazandýðýný öðren.
-50931	Kart kutusu (kýrmýzý)	5 kral destesi alýrsýn. “Kralý yakala” arayüzünü açmak ve destelerini oraya eklemek için saða týkla. Etkinlik sona erdiðinde, artýk herhangi bir deste alamazsýn ve kalan desteler kaldýrýlýr.
-50932	Kart kutusu (mavi)	1 kral destesi aldýn. “Kralý yakala” arayüzünü açmak ve desteni oraya eklemek için saða týkla. Etkinlik sona erdiðinde, artýk herhangi bir deste alamazsýn ve kalan desteler kaldýrýlýr.
-50933	Kart kutusu (pembe)	7 kral kartý aldýn. “Kralý yakala” arayüzünü açmak ve kartlarýný oraya eklemek için saða týkla. Etkinlik sona erdiðinde, artýk kart alamazsýn ve kalanlar kaldýrýlýr.
+50931	Kart kutusu (kýrmýzý)	5 kral destesi alýrsýn. "Kralý yakala" arayüzünü açmak ve destelerini oraya eklemek için saða týkla. Etkinlik sona erdiðinde, artýk herhangi bir deste alamazsýn ve kalan desteler kaldýrýlýr.
+50932	Kart kutusu (mavi)	1 kral destesi aldýn. "Kralý yakala" arayüzünü açmak ve desteni oraya eklemek için saða týkla. Etkinlik sona erdiðinde, artýk herhangi bir deste alamazsýn ve kalan desteler kaldýrýlýr.
+50933	Kart kutusu (pembe)	7 kral kartý aldýn. "Kralý yakala" arayüzünü açmak ve kartlarýný oraya eklemek için saða týkla. Etkinlik sona erdiðinde, artýk kart alamazsýn ve kalanlar kaldýrýlýr.
 50934	Süs taþý kesesi	Gaya yapýmý için ihtiyacýn olan süs taþlarýyla dolu bir çanta.
 50935	Gaya dönüþtürücü	Bu nesneyi süs taþlarýnýn üzerine sürüklersen, onlarý %iger100 olasýlýkla 10:1 oranýnda Gaya'ya dönüþtürebilirsin.| 10 süs taþýný 1 Gaya'ya çevirmek için 1 dönüþtürücü gerekir.| Bu þekilde 200 süs taþý ve 20 dönüþtürücü kullanarak bir defada en fazla 20 Gaya elde edebilirsin.| Dönüþtürmek için en az 10 süs taþýna ihtiyacýn var.| Bir dönüþümün maliyeti 15.000 Yang'dýr.
 50938	Kýrmýzý kahin sandýðý	Kahin Yarýþmasý için 105 Tarot kartý içerir.
 50939	Mavi kahin sandýðý	Kahin Yarýþmasý için 21 Tarot kartý içerir.
 50940	Pembe kahin sandýðý	Kahin Yarýþmasý için 5 Tarot kartý içerir.
-51001	Enerji Parçasý	Enerji kristaline ait parça. 30 tanesiyle bir kristal üretilebilir.
+51001	Enerji Parçasý	Deðerli eþyalarý eriterek elde edilir. Çeþitli üretimlerde kullanýlabilir. Simyacý'dan üretilebilir.
 51002	Enerji Kristali	Bu kristal iki saat boyunca bonuslarýný artýrýr.
 51501	Cor Draconis (iþlenmemþ)	Kristal ejderha kalbi iþlenmemiþ sýnýfýndan rastgele bir ejderha taþý içerir.
 51502	Cor Draconis (iþlenmemþ)	Kristal ejderha kalbi iþlenmemiþ sýnýfýndan rastgele bir ejderha taþý içerir.
@@ -6128,8 +6128,8 @@
 53533	Hilal Sandýðý	Bu sandýktaki mavi Hilal kullanýlacaðý zamaný heyecanla bekliyor.
 53534	Hilal Sandýðý	Bu sandýktaki kýrmýzý Hilal kullanýlacaðý zamaný heyecanla bekliyor.
 53535	Yavru Huashin Sandýðý	Bu sandýkta General Huashin'in mini versiyonu serbest býrakýlmayý bekler.
-53536	Bruce’un sandýðý (yaðma)	Yarasa Bruce gündüzleri bu sandýkta dinlenir.
-53537	Wayne’in sandýðý (yaðma)	Yarasa Wayne gündüzleri bu sandýkta dinlenir.
+53536	Bruce'un sandýðý (yaðma)	Yarasa Bruce gündüzleri bu sandýkta dinlenir.
+53537	Wayne'in sandýðý (yaðma)	Yarasa Wayne gündüzleri bu sandýkta dinlenir.
 53538	Beyaz Kuzucuk Sandýðý	Bu sandýkta sana sadýk yoldaþ olmak için can atan bir Beyaz Kuzucuk bekliyor.
 53539	Mavi Koç Sandýðý	Bu sandýkta sana sadýk yoldaþ olmak için can atan bir Mavi Koç bekliyor.
 53540	Robin'in sandýðý (yaðma)	Yarasa Robin gündüzleri bu sandýkta dinlenir.
@@ -6357,8 +6357,8 @@
 70015	Ucuz Fýrça	Basit, sert aðaçtan sapý olan saðlam fýrça.
 70020	Þeftali Çiçeði Þurubu	HP'ni anýnda 500 puana çýkaran bir içecek.
 70024	Kutsama Küresi	Efsanevi kutsanmýþ küre. Bir nesne  4.seviyeye geldiði zaman, baþka bir seviye ekler.
-70027	Demircinin Notu	Eþyalarýný nasýl geliþtireceðini gösteren Silah Ustasý'na ait not. Bir nesneyi +4’ten +5’e geliþtirme þansýný %100 yükseltir.
-70028	Erdemli Adamýn Notu	Eþyalarýný nasýl geliþtireceðini gösteren Silah Ustasý'na ait not. Bir nesneyi +5’ten +6’ya geliþtirme þansýný %100 yükseltir.
+70027	Demircinin Notu	Eþyalarýný nasýl geliþtireceðini gösteren Silah Ustasý'na ait not. Bir nesneyi +4'ten +5'e geliþtirme þansýný %100 yükseltir.
+70028	Erdemli Adamýn Notu	Eþyalarýný nasýl geliþtireceðini gösteren Silah Ustasý'na ait not. Bir nesneyi +5'ten +6'ya geliþtirme þansýný %100 yükseltir.
 70031	Eskrim Broþürü	Bu broþür, diðer þeylerin yanýnda, insan anatomisinin potansiyeli ve zayýflýklarý konularýný içerir.
 70035	Büyülü Bakýr	Bu Büyülü Bakýr ve Kutsama Kaðýdý ile demircide Savaþ Kaðýdý üretilebilir.
 70037	Unutkanlýk kitabý	Kahraman bu kitapla, öðrendiði bir becerinin anýsýný hafýzasýndan siler. Böylece 1 beceri puaný taþýnabilir.
@@ -6428,13 +6428,13 @@
 70428	Yýlan tozu	Zindan sayacýna 1 dakika ekler. Yýlan zýrhýný geliþtirme malzemesi.
 70429	Yýlan hazinesi	Yýlan tapýnaðýnýn derinliklerinden koparýlan bir hazine.
 70430	Yýlan Tapýnaðý Giriþi	Yýlan Tapýnaðý için giriþ sayýný 5'e düþürür.
-70432	Hazine parþ. (Derece C)	Seviye 75-90'a ulaþtýðýnda bu parþömenle gizli bir yere gidebilirsin. Dikkat: Enigma Tapýnaðý’na ulaþtýðýn an tur baþlayana kadar 1 dakikalýk hazýrlýk süresi baþlar. Ardýndan yine tapýnaktan ýþýnlanmadan önce savaþý baþlatmak için 4 dakikan bulunur.
-70433	Hazine parþ. (Derece B)	Seviye 91-120'ye ulaþtýðýnda bu parþömenle gizli bir yere gidebilirsin. Dikkat: Enigma Tapýnaðý’na ulaþtýðýn an tur baþlayana kadar 1 dakikalýk hazýrlýk süresi baþlar. Ardýndan yine tapýnaktan ýþýnlanmadan önce savaþý baþlatmak için 4 dakikan bulunur. 
-70434	Hazine parþ. (Derece A)	Þampiyon seviyesine ulaþtýðýnda bu parþömenle gizli bir yere gidebilirsin. Dikkat: Enigma Tapýnaðý’na ulaþtýðýn an tur baþlayana kadar 1 dakikalýk hazýrlýk süresi baþlar. Ardýndan yine tapýnaktan ýþýnlanmadan önce savaþý baþlatmak için 4 dakikan bulunur.
+70432	Hazine parþ. (Derece C)	Seviye 75-90'a ulaþtýðýnda bu parþömenle gizli bir yere gidebilirsin. Dikkat: Enigma Tapýnaðý'na ulaþtýðýn an tur baþlayana kadar 1 dakikalýk hazýrlýk süresi baþlar. Ardýndan yine tapýnaktan ýþýnlanmadan önce savaþý baþlatmak için 4 dakikan bulunur.
+70433	Hazine parþ. (Derece B)	Seviye 91-120'ye ulaþtýðýnda bu parþömenle gizli bir yere gidebilirsin. Dikkat: Enigma Tapýnaðý'na ulaþtýðýn an tur baþlayana kadar 1 dakikalýk hazýrlýk süresi baþlar. Ardýndan yine tapýnaktan ýþýnlanmadan önce savaþý baþlatmak için 4 dakikan bulunur. 
+70434	Hazine parþ. (Derece A)	Þampiyon seviyesine ulaþtýðýnda bu parþömenle gizli bir yere gidebilirsin. Dikkat: Enigma Tapýnaðý'na ulaþtýðýn an tur baþlayana kadar 1 dakikalýk hazýrlýk süresi baþlar. Ardýndan yine tapýnaktan ýþýnlanmadan önce savaþý baþlatmak için 4 dakikan bulunur.
 70440	Hazine sandð. (Derece C)	Basit hazine sandýðý.
 70441	Hazine sandð. (Derece B)	Basit hazine sandýðý.
 70442	Hazine sandð. (Derece A)	Asil hazine sandýðý.
-70443	Gizli bonus sandýðý (C)	Azrail’in sandýðýný veya Beran Setaou’in sandýðýný alabilirsin.
+70443	Gizli bonus sandýðý (C)	Azrail'in sandýðýný veya Beran Setaou'in sandýðýný alabilirsin.
 70444	Gizli bonus sandýðý (B)	Jotun Thrym sandýðý, bir aureolin hazinesi veya bir aventurin hazinesi alabilirsin.
 70445	Gizli bonus sandýðý (A)	Yýlan hazinesi veya beyaz ejderha sandýðý (hafif) alabilirsin.
 70446	Lanetlenme Sandýðý	Sýkýca kilitli bu sandýkta bir lanetlenme kalkanýnýn malzemeleri bulunuyor. | Bunu açmak için bir lanetlenme anahtarý gerekiyor.
@@ -6613,8 +6613,8 @@
 71148	Ýrade Gücü Yüzüðü	Sana kullaným süresi boyunca +%30 EXP, +%20 savaþçýlara karþý savunma þansý, +%20 Ninjalara karþý savunma þansý, +%20 Lycanlara karþý savunma þansý, +%30 canavarlara karþý güç, +%10 maksimum HP ile +%10 maksimum SP saðlar.
 71149	Ölümcül Gücün Yüzüðü	Sana bir süre boyunca +%30 EXP, +%20 Suralara karþý savunma þansý, +%20 Þamanlara karþý savunma þansý, +%20 Lycanlara karþý savunma þansý, +%30 canavarlara karþý güç, +%10 maksimum HP ile +%10 maksimum SP saðlar.
 71150	Büyülü Yumurta	Birden fazla paskalya sürprizi içeren ve onlarý teker teker açýða çýkaran ustaca iþlenmiþ oval bir sandýk.
-71151	Yeþil Efsun	Nesnelerinden birinin bonuslarýný siler ve yenilerini ekler. Yalnýzca 40. seviye ve altýndaki silahlara ve zýrhlara uygulanabilir. Ticareti yok.
-71152	Yeþil Güç	Biraz þansýn yardýmýyla nesnelerinden birine yeni bir bonus ekler (maks. 4 bonus). Yalnýzca 40. seviye ve altýndaki silahlara ve zýrhlara uygulanabilir. Ticareti yok.
+71151	Yeþil Efsun	Ýtemin bonusunu deðiþtirir. Yalnýzca 18.seviye ve altýndaki itemlere uygulanabilir.
+71152	Yeþil Güç	Ýteme yeni bir bonus ekler. Yalnýzca 18.seviye ve altýndaki itemlere uygulanabilir.
 71153	Bilgelik Ýksiri	Bu iksirle bir saatlik oyun süresinde %100 daha fazla deneyim toplarsýn. Ticareti yok.
 71154	Yükseliþ Ýksiri (3 sa.)	Bu iksirle üç saatlik bir oyun süresi içerisinde %80 daha fazla tecrübe kazanýrsýn. Ticareti yok.
 71155	Bilgelik Ýksiri (3 sa.)	Bu iksirle üç saatlik bir oyun süresinde %100 daha fazla tecrübe toplarsýn. Ticareti yok.
@@ -6720,8 +6720,8 @@
 71262	Buz Mavisi Kitsune	Mühür, dokuz kuyruklu bineðini çaðýrýr.
 71263	Kýzýl Kar Kurdu	Bu mühür, kýzýl kar kurdunu çaðýrýr.
 71264	Mavi Kar Kurdu	Bu mühür, mavi kar kurdunu çaðýrýr.
-71265	Ay Iþýðý Deniz Atý	Bu mühür, Ay Iþýðý Deniz Atý’ný çaðýrýr.
-71266	Güneþ Iþýðý Deniz Atý	Bu mühür, Ay Iþýðý Deniz Atý’ný çaðýrýr.
+71265	Ay Iþýðý Deniz Atý	Bu mühür, Ay Iþýðý Deniz Atý'ný çaðýrýr.
+71266	Güneþ Iþýðý Deniz Atý	Bu mühür, Ay Iþýðý Deniz Atý'ný çaðýrýr.
 71267	Kara Gece Kabusu	Bu mühür kara gece kabusu bineðini çaðýrýr.
 71268	Altýn Gece Kabusu	Bu mühür altýn gece kabusu bineðini çaðýrýr.
 71269	Kýþ Fýrtýnasý Ren Geyiði	Kar beyazý ren geyiðini yanýna çaðýran bir mühür.
@@ -6804,8 +6804,8 @@
 72303	Tecrübe Yüzüðü	Tecrübe kazanýmýný bir saat boyunca %50 arttýrýr.
 72304	Kutsama Küresi	Bu efsanevi küre, dört öznitelikli bir eþyaya beþincisini ekler. Ancak ekleme baþarýsýz olabilir.
 72305	Gizlenme Aynasý	Gizlenme Aynasý.
-72306	Demircinin Notu	Eþyalarýný nasýl geliþtireceðini gösteren Silah Ustasý'na ait not. Bir nesneyi +4’ten +5’e geliþtirme þansýný %100 yükseltir.
-72307	Erdemli Adamýn Notu	Eþyalarýný nasýl geliþtireceðini gösteren Silah Ustasý'na ait not. Bir nesneyi +5’ten +6’ya geliþtirme þansýný %100 yükseltir.
+72306	Demircinin Notu	Eþyalarýný nasýl geliþtireceðini gösteren Silah Ustasý'na ait not. Bir nesneyi +4'ten +5'e geliþtirme þansýný %100 yükseltir.
+72307	Erdemli Adamýn Notu	Eþyalarýný nasýl geliþtireceðini gösteren Silah Ustasý'na ait not. Bir nesneyi +5'ten +6'ya geliþtirme þansýný %100 yükseltir.
 72308	Büyülü Bakýr	Bu bakýr ve kutsama kaðýdý ile demircide savaþ kaðýdý üretilebilir.
 72309	Demircinin El Kitabý	Yaþlý bir demircinin ruhuyla baðlý olan bir kitap. Kullanýlýrsa, yükseltme baþarýsý oranýný arttýrýr.
 72310	Kötü Ruh Kovma Kaðýdý	Öðrenme baþarýsýz olursa, seni kötü ruhun lanetinden korur. Bu kaðýdýn yardýmýyla ayný gün bir beceri belgesi daha okuyabilirsin.
@@ -6862,11 +6862,11 @@
 72723	Güneþ Özütü (K)	HP'ni otomatik olarak yeniler. 1.000.000 HP içerir.
 72724	Güneþ Özütü (O)	HP'ni otomatik olarak yeniler. 3.000.000 HP içerir.
 72725	Güneþ Özütü (B)	HP'ni otomatik olarak yeniler. 7.000.000 HP içerir.
-72726	Güneþ Özütü (Ö)	10.000.000 HP içerir. HP'ni otomatik olarak doldurur ve ek olarak maks HP'n üzerinde olumlu etkisi olur. Bu eþyanýn ticareti yapýlabilir.
+72726	Güneþ Özütü (Ö)	10.000.000 HP içerir. HP'ni otomatik olarak doldurur. | Ekstra +1000 HP verir.
 72727	Ay Özütü (K)	SP'ni otomatik olarak yeniler. 100.000 SP içerir.
 72728	Ay Özütü (O)	SP'ni otomatik olarak yeniler. 300.000 SP içerir.
 72729	Ay Özütü (B)	SP'ni otomatik olarak yeniler. 700.000 SP içerir.
-72730	Ay Özütü (Ö)	1.000.000 SP içerir. SP'ni otomatik olarak doldurur ve ek olarak maks SP'n üzerinde olumlu etkisi olur. Bu eþyanýn ticareti yapýlabilir.
+72730	Ay Özütü (Ö)	1.000.000 SP içerir. SP'ni otomatik olarak doldurur. | Ekstra +1000 SP verir.
 72734	Mavi þans kutusu	Açmak için çift týkla. Burada 2 seçeneðin var: | 1. görüntülenen eþyayý doðrudan almak için "Eþyayý kabul et". | 2. Baþka bir rastgele eþya almak için "Yeni eþya þansý" seçeneðini dene. | Yang bedeli karþýlýðýnda maksimum 15 deneme hakkýn var. | Hesabýnda yeterli Yang yoksa, yeni bir eþya seçemezsin. | Açýlan kutu sýfýrlanamaz veya kapatýlamaz.
 72735	Kýrmýzý þans kutusu	Açmak için çift týkla. Burada 2 seçeneðin var: | 1. görüntülenen eþyayý doðrudan almak için "Eþyayý kabul et". | 2. Baþka bir rastgele eþya almak için "Yeni eþya þansý" seçeneðini dene. | Yang bedeli karþýlýðýnda maksimum 15 deneme hakkýn var. | Hesabýnda yeterli Yang yoksa, yeni bir eþya seçemezsin. | Açýlan kutu sýfýrlanamaz veya kapatýlamaz.
 72737	Yeþil þans kutusu	Açmak için çift týkla. Burada 2 seçeneðin var: | 1. Görüntülenen eþyayý doðrudan almak için "Eþyayý kabul et". | 2. Baþka bir rastgele eþya almak için "Yeni eþya þansý" seçeneðini dene. | Yang bedeli karþýlýðýnda maksimum 15 deneme hakkýn var. | Hesabýnda yeterli Yang yoksa, yeni bir eþya seçemezsin. | Açýlan kutu sýfýrlanamaz veya kapatýlamaz. | Oyun kapanýrsa, görüntülenen eþyayý alýrsýn.
@@ -6880,7 +6880,7 @@
 72754	Dayanýklýlýk düþ. (%30)	Misyona paralý asker göndermek için gerekli dayanýklýlýðý azalt.
 72755	Geniþletme lisansý	Bununla paralý asker slotlarýný geniþlet.
 72756	Yaðma kartý	Bununla yaðma filtren etkinleþir.
-72757	Patlayýcý koruma bileti	Altýn Topraklar’da saldýracaðýn bir sonraki Patlama Kulesi’ne karþý seni 3 dakika boyunca korur.
+72757	Patlayýcý koruma bileti	Altýn Topraklar'da saldýracaðýn bir sonraki Patlama Kulesi'ne karþý seni 3 dakika boyunca korur.
 72758	Primordis yeniden baþl.	Hem kalan Altýn Topraklar giriþlerini hem de altýn dut avý oyun tahtasýný sýfýrlar.
 72760	Berserker Kitabý	Bu beceriyi öðrendikten sonra petin, saldýrý deðerini artýrýr. Ticareti yapýlamaz. Dükkanda satýlamaz
 72761	Büyü Bozma Kitabý	Bu beceriyi öðrendikten sonra petin sana rakibinin büyüsünü bozma yeteneði saðlar. Ticareti yapýlamaz. Dükkanda satýlamaz
@@ -7252,8 +7252,8 @@
 79513	Tarot seti	Bu mistik kart setiyle Kahin Yarýþmasý'ný baþlatabilirsin.
 79514	Kahin Jetonu	Deðerli nesnelerle takas edebileceðin bir Kahin Yarýþmasý ödülü.
 79602	Bekçi pusulasý	Bu pusula sana bekçinin konumunu gösterir. Sadece Ochao Tapýnaðý'nda kullanýlabilir. 6 defa kullanýlabilir.
-79603	Kral kartý	“Kralý yakala!” arayüzünü açmak ve Kral kartýný oraya eklemek için saða týkla. 25 kart orada otomatik olarak bir kral destesi olarak birleþtirilir. Etkinlik sona erdiðinde, artýk herhangi bir kart seti alamazsýn ve kalanlar kaldýrýlýr.
-79604	Kral destesi	“Kralý yakala!” arayüzünü açmak ve Kral kartýný oraya eklemek ve bir tur “kralý yakala!” baþlatmak için saða týkla. Deste oyun baþlangýcýndan sonra otomatik olarak silinir. Etkinlik sona erdiðinde, artýk herhangi bir kart seti alamazsýn ve kalanlar kaldýrýlýr.
+79603	Kral kartý	"Kralý yakala!" arayüzünü açmak ve Kral kartýný oraya eklemek için saða týkla. 25 kart orada otomatik olarak bir kral destesi olarak birleþtirilir. Etkinlik sona erdiðinde, artýk herhangi bir kart seti alamazsýn ve kalanlar kaldýrýlýr.
+79604	Kral destesi	"Kralý yakala!" arayüzünü açmak ve Kral kartýný oraya eklemek ve bir tur "kralý yakala!" baþlatmak için saða týkla. Deste oyun baþlangýcýndan sonra otomatik olarak silinir. Etkinlik sona erdiðinde, artýk herhangi bir kart seti alamazsýn ve kalanlar kaldýrýlýr.
 79605	1* Kemer-Demirci runiði	Kemer üretiminde baþarý olasýlýðýný %1 arttýrýr.
 79606	2* Kemer-Demirci runiði	Kemer üretiminde baþarý olasýlýðýný %2 arttýrýr.
 79607	3* Kemer-Demirci runiði	Kemer üretiminde baþarý olasýlýðýný %5 arttýrýr.

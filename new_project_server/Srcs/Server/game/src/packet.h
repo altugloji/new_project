@@ -32,7 +32,10 @@ enum
 	HEADER_CG_QUICKSLOT_SWAP		= 18,
 	HEADER_CG_WHISPER				= 19,
 	HEADER_CG_ITEM_DROP2			= 20,
-
+#ifdef WJ_NEW_DROP_DIALOG
+	HEADER_CG_ITEM_DELETE			= 21,
+	HEADER_CG_ITEM_SELL				= 22,
+#endif
 	HEADER_CG_ON_CLICK				= 26,
 	HEADER_CG_EXCHANGE				= 27,
 	HEADER_CG_CHARACTER_POSITION	= 28,
@@ -1238,6 +1241,10 @@ enum EPacketShopSubHeaders
 	SHOP_SUBHEADER_GC_NOT_ENOUGH_CHEQUE,
 	SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY_CHEQUE,
 #endif
+#ifdef ENABLE_MULTISHOP
+	SHOP_SUBHEADER_GC_NOT_ENOUGH_ITEM,
+	SHOP_SUBHEADER_GC_NOT_ENOUGH_GEM,
+#endif
 };
 
 typedef struct packet_shop_item
@@ -1246,6 +1253,11 @@ typedef struct packet_shop_item
 	DWORD       price;
 #ifdef ENABLE_CHEQUE_SYSTEM
 	DWORD		cheque;
+#endif
+#ifdef ENABLE_MULTISHOP
+	DWORD		wPriceVnum;
+	DWORD		wPrice;
+	DWORD		gem_price;
 #endif
 	BYTE        count;
 	BYTE		display_pos;
@@ -2532,6 +2544,20 @@ typedef struct SPacketGCGem
 	WORD		size;
 	BYTE		sub_header;
 } TPacketGCGem;
+#endif
+
+#ifdef WJ_NEW_DROP_DIALOG
+typedef struct command_item_delete
+{
+	BYTE	header;
+	TItemPos	Cell;
+} TPacketCGItemDelete;
+
+typedef struct command_item_sell
+{
+	BYTE		header;
+	TItemPos	Cell;
+} TPacketCGItemSell;
 #endif
 
 #pragma pack()

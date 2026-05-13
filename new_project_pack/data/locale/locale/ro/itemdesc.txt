@@ -6613,8 +6613,8 @@
 71148	Inel Vointa Puternica	Îþi oferã +30% EXP, +20% ºansã de apãrare împotriva Rãzboinicilor, +20% ºansã de apãrare împotriva Ninja, +20% ºansã de apãrare împotriva Lycanilor, +30% putere împotriva monºtrilor, +10% la maximum de PV ºi +10% la maximum de PM per duratã.
 71149	Inel Putere Mortala	Îþi oferã +30% EXP, +20% ºansã de apãrare împotriva Sura, +20% ºansã de apãrare împotriva ªamanilor, +20% ºansã de apãrare împotriva Lycanilor, +30% putere împotriva monºtrilor, +10% la maximul de PV ºi +10% la maximul de PM pentru o anumitã perioadã de timp.
 71150	Ou Magic	Un cufãr oval ºi frumos decorat ce conþine mai mult decât o surprizã de Paºte, îþi dezvãluie comoara puþin câte puþin.
-71151	Magie Verde	Înlãturã bonusurile unui obiect din echipament ºi adaugã altele noi. Poate fi folosit doar pe arme ºi armuri pânã la nivelul 40. Obiect de la cufãrul nivelului, nu se poate negocia.
-71152	Putere Verde	Cu puþin noroc, acest obiect va adãuga un nou bonus unuia dintre obiectele tale de echipament (max. 4 bonusuri). Poate fi folosit doar pe arme ºi armuri pânã la nivelul 40. Obiect de la cufãrul nivelului, nu se poate negocia.
+71151	Vrãjire Verde	Schimbã bonusul obiectului. Poate fi folosit doar pe obiecte de nivel 18 sau mai mic.
+71152	Putere Verde	Adaugã un bonus nou obiectului. Poate fi folosit doar pe obiecte de nivel 18 sau mai mic.
 71153	Licoarea Inþelepciunii	Aceasta licoare te ajuta sa castigi cu 100% mai multa experienta pe parcursul unei ore de joc. Nu se poate negocia.
 71154	Licoarea Cresterii (3h)	Aceasta licoare iti permite sa colectezi 80% mai multa experienta pe parcursul a trei ore de joc. Obiectul nu se poate negocia.
 71155	Lic. Inþelepciunii (3h)	Licoarea te ajutã sã câºtigi 100% mai multã experienþã în trei ore de joc. Nu se poate negocia.
@@ -6862,11 +6862,11 @@
 72723	Elixirul Soarelui (S)	Umplerea automata a PV-ului. Contine 1,000,000 de PV.
 72724	Elixirul Soarelui (M)	Umplerea automata a PV-ului. Contine 3,000,000 de PV.
 72725	Elixirul Soarelui (L)	Umplerea automata a PV-ului. Contine 7,000,000 de PV.
-72726	Elixirul Soarelui (E)	Conþine 10,000,000 PV. Umple automat PV ºi are un efect pozitiv adiþional la PV-ul maxim. Obiectul se poate negocia.
+72726	Elixirul Soarelui (M)	Conþine 10.000.000 HP. Îþi reface automat HP-ul. | Oferã extra +1000 HP.
 72727	Elixirul Lunii (S)	Umplerea automata a PM-ului. Contine 100,000 de PM.
 72728	Elixirul Lunii (M)	Umplerea automata a PM-ului. Contine 300,000 de PM.
 72729	Elixirul Lunii (L)	Umplerea automata a PM-ului. Contine 700,000 de PM.
-72730	Elixirul Lunii (E)	Conþine 1,000,000 PM. Umple automat PM ºi are un efect pozitiv adiþional la PM-ul maxim. Obiectul se poate negocia.
+72730	Elixirul Lunii (M)	Conþine 1.000.000 SP. Îþi reface automat SP-ul. | Oferã extra +1000 SP.
 72734	Cufãr Valoros Albastru	Dublu click pentru deschidere. Acum ai douã opþiuni: | 1. Apasã pe Acceptã Obiect pentru a primi obiectul vãzut. | 2. Foloseºte ªansã Obiect Nou pentru un alt obiect aleatoriu. | Poþi avea pânã la 15 încercãri dacã plãteºti o taxã de Yang. | Dacã nu ai Yang suficient în contul tãu, nu poþi alege un obiect nou. | Cutia nu poate fi resetatã sau închisã odatã ce a fost deschisã.
 72735	Cufãr Valoros Roºu	Dublu click pentru deschidere. Acum ai douã opþiuni: | 1. Apasã pe Acceptã Obiect pentru a primi obiectul vãzut. | 2. Foloseºte ªansã Obiect Nou pentru un alt obiect aleatoriu. | Poþi avea pânã la 15 încercãri dacã plãteºti o taxã de Yang. | Dacã nu ai Yang suficient în contul tãu, nu poþi alege un obiect nou. | Cutia nu poate fi resetatã sau închisã odatã ce a fost deschisã.
 72737	Cufãr Valoros Verde	Dublu click pentru deschidere. Acum ai douã opþiuni: | 1. Apasã pe Acceptã Obiect pentru a primi obiectul vãzut. | 2. Foloseºte ªansã Obiect Nou pentru un alt obiect aleatoriu. | Poþi avea pânã la 15 încercãri dacã plãteºti o taxã de Yang. | Dacã nu ai Yang suficient în contul tãu, nu poþi alege un obiect nou. | Cutia nu poate fi resetatã sau închisã odatã ce a fost deschisã. | Dacã vei închide jocul, vei primi obiectul afiºat.

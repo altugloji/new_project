@@ -19,6 +19,11 @@ class CShop
 #ifdef ENABLE_CHEQUE_SYSTEM
 			int		cheque = 0;
 #endif
+#ifdef ENABLE_MULTISHOP
+			DWORD	wPriceVnum;
+			DWORD	wPrice;
+			DWORD	gemPrice;
+#endif
 			BYTE	count;
 
 			LPITEM	pkItem;
@@ -28,6 +33,11 @@ class CShop
 			{
 				vnum = 0;
 				price = 0;
+#ifdef ENABLE_MULTISHOP
+				wPriceVnum = 0;
+				wPrice = 0;
+				gemPrice = 0;
+#endif
 				count = 0;
 				itemid = 0;
 				pkItem = nullptr;

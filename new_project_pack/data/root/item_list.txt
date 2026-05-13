@@ -12567,7 +12567,7 @@
 30401	ETC	icon/item/30401.tga
 30402	ETC	icon/item/30402.tga
 30403	ETC	icon/item/30402.tga
-30404	ETC	icon/item/30402.tga
+30404	ETC	icon/item/50935.tga
 30405	ETC	icon/item/30402.tga
 30406	ETC	icon/item/30402.tga
 30407	ETC	icon/item/30402.tga

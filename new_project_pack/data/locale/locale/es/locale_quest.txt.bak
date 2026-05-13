@@ -1,3 +1,7 @@
+21301	Fabricación
+21302	Fabricación de Mithril
+21303	Fabricación de Piedra Negra
+21304	Fabricación de Libro Morado
 1	Una tejido especial
 2	Ya te he hablado de los poderes que necesitamos[ENTER]para enfrentarnos a Sung Mahi.[ENTER][ENTER]Apresúrate, encuentra al Capitán.[ENTER][ENTER]Regresa cuando hayas conseguido el género[ENTER]necesario.
 3	Incrementar tu poder
@@ -855,7 +859,7 @@
 856	Encuentra la llave correcta. Necesitas la llave[ENTER]Zin-Bong-Ing para abrir el sello Sa-Soein y[ENTER]entrar al siguiente piso.
 857	Mata al líder de los demonios.
 858	Has completado con éxito la misión. Vas a ser[ENTER]teletransportado fuera en unos poco minutos.
-859	¡Te estaré esperando en la Catacumba del Diablo![ENTER]¡Mi ira descenderá sobre ti con la fuerza de mil[ENTER]terremotos![ENTER]Se te teletransportará fuera de aquí en 1 minuto.
+859	¡Te estaré esperando en la Catacumba del Diablo![ENTER]¡Mi ira descenderá sobre ti con la fuerza de mil[ENTER]terremotos![ENTER]Se te teletransportará fuera de aquí en 1 minuto.
 860	Esta torre está abarrotada de demonios. Sólo los[ENTER]más fuertes son capaces de alcanzar la cumbre. Se[ENTER]dice que ninguno de los que entró a la torre[ENTER]salió con vida de allí.[ENTER]No puedes entrar en la torre, ya que aún no has[ENTER]alcanzado el nivel 40.
 861	Esta torre está abarrotada de demonios. Sólo los[ENTER]luchadores más fuertes pueden alcanzar la cumbre.[ENTER]Sin embargo, se dice que ninguno de los que entró[ENTER]en esta torre salió de allí con vida. ¿Aún[ENTER]quieres entrar en la Torre Demoníaca?
 862	Estás en la puerta sellada del 4.º piso. Aquí te[ENTER]esperan numerosas piedras que intentarán[ENTER]confundirte,[ENTER]pero solo una de ellas es la Piedra Metin que[ENTER]buscas. Destrúyela o no podrás cruzar la puerta.
@@ -907,10 +911,10 @@
 908	Materiales reunidos
 909	Todos los materiales reunidos
 910	Todavía tienes que reunir %s unidades de los[ENTER]siguientes materiales:
-911	¡Has reunido todos los materiales necesarios![ENTER]Vuelve a ver al Fantasma del Guerrero. Se[ENTER]encuentra en el 2.º piso de la Gruta del Exilio.[ENTER]También necesitas 150 000 de Yang para recibir la[ENTER]bola.
+911	¡Has reunido todos los materiales necesarios![ENTER]Vuelve a ver al Fantasma del Guerrero. Se[ENTER]encuentra en el 2.º piso de la Gruta del Exilio.[ENTER]También necesitas 150 000 de Yang para recibir la[ENTER]bola.
 912	No has conseguido reunir todos los materiales[ENTER]necesarios en el tiempo previsto.
 913	¿Me das %s unidades de este material?
-914	No puedes permitirte mis servicios.[ENTER]Son 150 000 de Yang.
+914	No puedes permitirte mis servicios.[ENTER]Son 150 000 de Yang.
 915	¡Aquí tienes!
 916	No, gracias, ¡mejor me lo quedo!
 917	Gracias, te has esforzado mucho.[ENTER]Todo ha salido bien, no estoy tan desentrenado.[ENTER]Aquí tienes:
@@ -951,7 +955,7 @@
 952	Ah, siento el poder del Ojo de dragón en ti.[ENTER]Como signo de mi profundo respeto me gustaría[ENTER]regalarte este Cor Draconis.[ENTER]Una piedra por día: me temo que no puedo ofrecer[ENTER]más.
 953	Aquí tienes, tu Cor Draconis.
 954	Lo siento, pero no puedo ofrecer más de una[ENTER]piedra al día. Vuelve mañana: quizás tenga otro[ENTER]Cor Draconis para darte.
-955	GM: Misión diaria – Configuración
+955	GM: Misión diaria - Configuración
 956	Hora de inicio
 957	Hora de finalización
 958	Utiliza el siguiente formato para fecha y hora:[ENTER]aa.mm.dd[ENTER]hh.mm
@@ -1171,7 +1175,7 @@
 1172	Piénsatelo bien... todavía estaré un rato por[ENTER]aquí.
 1173	¡Gracias por tu dedicación y por tu generosidad!
 1174	Sello del caballo negro
-1175	¿Tienes menos de 5 Frutos de la bendición? Vaya,[ENTER]me hacen falta más. A lo mejor la próxima vez[ENTER]traes suficientes.
+1175	¿Tienes menos de 5 Frutos de la bendición? Vaya,[ENTER]me hacen falta más. A lo mejor la próxima vez[ENTER]traes suficientes.
 1176	El evento de Ramadán ha finalizado.
 1177	¿Entiendes de dulces? Esto se llama baklava.
 1178	Sí, lo conozco.
@@ -1185,12 +1189,12 @@
 1186	La fabricación es difícil y el calor me lo hace[ENTER]más difícil todavía. Por favor, vuelve mañana.
 1187	Arcón helado
 1188	¡Vaya calor hace hoy! ¿Qué se te ofrece?
-1189	Caballo negro 7 días - 150 Bolas de hielo
-1190	Caballo negro 15 días - 350 Bolas de hielo
-1191	Caballo negro 30 días - 550 Bolas de hielo
+1189	Caballo negro 7 días - 150 Bolas de hielo
+1190	Caballo negro 15 días - 350 Bolas de hielo
+1191	Caballo negro 30 días - 550 Bolas de hielo
 1192	¡Hola, mi sol! Me encanta este árbol, pero ni[ENTER]siquiera a su sombra refresca. ¡Daría lo que[ENTER]fuera por un helado! ¿Y tú cómo lo llevas?
 1193	Summer te anda buscando. Ve a verla y averigua[ENTER]qué es lo que le pasa. ¡No te preocupes, con[ENTER]calor y todo te ves genial![ENTER][ENTER]Mata monstruos para conseguir Bolas de hielo.
-1194	Caballo negro 60 días - 950 Bolas de hielo
+1194	Caballo negro 60 días - 950 Bolas de hielo
 1195	Quiero hacer el Pastel de hielo más grande del[ENTER]mundo. Para ello voy a necesitar infinidad de[ENTER]Bolas de hielo. ¿Te queda alguna? Sabré[ENTER]recompensarte. Cuantas más Bolas de hielo me des,[ENTER]más tiempo podrás usar el Caballo negro.
 1196	Ya has recibido tu Caballo negro. ¿Acaso pensabas[ENTER]que me había olvidado? Todavía no me ha dado[ENTER]ninguna insolación, ¿eh? ¡Buen intento!
 1197	El Caballo negro noble
@@ -1462,7 +1466,7 @@
 1463	Pulir Gemas
 1464	¿Quieres pulir tus Gemas para convertirlas en 3[ENTER]Gaya?
 1465	Por favor, dame la siguiente cantidad de Gemas: %d 
-1466	Necesito %d Gemas, 15 000 de Yang y
+1466	Necesito %d Gemas, 15 000 de Yang y
 1467	una Piedra espíritu de nivel +0, +1, +2 o +3
 1468	para poder fabricar 3 valiosos Gaya.
 1469	Mi tasa de éxito es de %d%%... ah, y tiene un[ENTER]coste de %s Yang.
@@ -1523,7 +1527,7 @@
 1524	Me basta con eso.
 1525	Gracias por prestarme atención. Los últimos mil[ENTER]años han estado llenos de soledad...
 1526	¿Cómo canjeo libros?
-1527	¡Te doy la bienvenida![ENTER]¿Quieres que te canjee libros? ¡Muy bien! Siempre[ENTER]estoy buscando Manuales de habilidades y Libros[ENTER]maestros. Si me traes 10 de ellos te daré un[ENTER]Manual de habilidad para tu clase.[ENTER]Es lo justo, ¿no? Ah, he olvidado mencionar que[ENTER]quiero una tasa de 1 000 000 de Yang por el[ENTER]cambio.
+1527	¡Te doy la bienvenida![ENTER]¿Quieres que te canjee libros? ¡Muy bien! Siempre[ENTER]estoy buscando Manuales de habilidades y Libros[ENTER]maestros. Si me traes 10 de ellos te daré un[ENTER]Manual de habilidad para tu clase.[ENTER]Es lo justo, ¿no? Ah, he olvidado mencionar que[ENTER]quiero una tasa de 1 000 000 de Yang por el[ENTER]cambio.
 1528	Canjear libros
 1529	No hay ninguna instancia de mazmorra activa.
 1530	Lista de las instancias de mazmorra de este mapa.
@@ -1725,7 +1729,7 @@
 1726	No eres líder del gremio. Vuelve a verme cuando[ENTER]lo seas.
 1727	Para poder insertar un anuncio del gremio, tienes[ENTER]que tener un nivel de gremio mínimo de 6.
 1728	La lista de gremios se está actualizando. Por[ENTER]favor, vuelve a intentarlo más tarde.
-1729	Para actualizar tu anuncio del gremio se[ENTER]extraerán 50 000 Yang de tu cuenta del gremio.[ENTER]Por favor, asegúrate de tener suficiente.
+1729	Para actualizar tu anuncio del gremio se[ENTER]extraerán 50 000 Yang de tu cuenta del gremio.[ENTER]Por favor, asegúrate de tener suficiente.
 1730	Consejo: si actualizas tu anuncio del gremio,[ENTER]vuelve a mostrarse en primer lugar.
 1731	¿Estás buscando más miembros del gremio?
 1732	Atención: El anuncio del gremio no se actualiza[ENTER]de inmediato sino que estará disponible a partir[ENTER]del siguiente intervalo de actualización.
@@ -1744,7 +1748,7 @@
 1745	Insertar anuncio del gremio
 1746	Actualizar anuncio del gremio
 1747	Cancelar
-1748	Para anunciar tu gremio se extraerán 100 000 Yang[ENTER]de tu cuenta del gremio. Por favor, asegúrate de[ENTER]tener suficiente.
+1748	Para anunciar tu gremio se extraerán 100 000 Yang[ENTER]de tu cuenta del gremio. Por favor, asegúrate de[ENTER]tener suficiente.
 1749	Aquí puedes comparar la clasificación de tu[ENTER]gremio con los gremios que están posicionados por[ENTER]encima y por debajo de tu gremio:[ENTER][DELAY value;0][ENTER]|Nombre del gremio |Puntos |Victorias |Empates[ENTER]|Derrotas[ENTER]%s[/DELAY][ENTER]
 1750	Aquí puedes ver a los ocho mejores gremios con[ENTER]sus resultados de la batalla de gremios:[ENTER][DELAY value;0][ENTER]|Nombre del gremio |Puntos |Victorias |Empates[ENTER]|Derrotas[ENTER]%s[/DELAY][ENTER]
 1751	La clasificación de tu gremio es %s
@@ -2310,7 +2314,7 @@
 2311	Canjear Paquete de Yang
 2312	¿Quieres transferir %s Yang a tu cuenta?
 2313	Se ha realizado la transferencia a tu cuenta de[ENTER]Yang.
-2314	Se ha cancelado el proceso. Tu saldo de Yang no[ENTER]puede ser superior a 1 999 999 999.
+2314	Se ha cancelado el proceso. Tu saldo de Yang no[ENTER]puede ser superior a 1 999 999 999.
 2315	Ten paciencia todavía durante %s segundo(s).
 2316	Solo los jugadores que tengan, por lo menos, el[ENTER]nivel 50 pueden cambiar su sexo.
 2317	%s
@@ -4968,9 +4972,9 @@
 4969	Tarea completada
 4970	Has matado el número necesario de Lobos Alfa[ENTER]Gris. Ahora vuelve con el Capitán e infórmale de[ENTER]tu éxito.
 4971	¿Has matado los Lobos Alfa Gris? Buen trabajo.[ENTER]Gracias a ti, ahora es mucho más fácil mantener[ENTER]la aldea a salvo. Eso son realmente buenas[ENTER]noticias de cambio en tiempos de guerra como[ENTER]éstos.
-4972	Recibes 24 000 puntos de experiencia y 3500 Yang.
+4972	Recibes 24 000 puntos de experiencia y 3500 Yang.
 4973	Varios lobos Alfa grises han estado causando[ENTER]daños justo en las afueras de la aldea. Han[ENTER]estado corriendo salvajes durante un tiempo,[ENTER]¡pero ahora ha ido demasiado lejos![ENTER]Hace poco, han estado atacando la aldea y a los[ENTER]aldeanos más a menudo. Necesitamos tener la[ENTER]situación bajo control. Tenemos que matar algunos[ENTER]de esos lobos Alfa grises. Parece que tratas[ENTER]bastante bien este tipo de cosas, así que estoy[ENTER]seguro de que podrás manejarlo. Ve y mata 10[ENTER]lobos Alfa grises por nosotros.
-4974	Como recompensa te esperan 24 000 puntos de[ENTER]experiencia y 3500 Yang.
+4974	Como recompensa te esperan 24 000 puntos de[ENTER]experiencia y 3500 Yang.
 4975	Mata 10 Lobos Alfa Gris
 4976	Los lobos Alfa grises están atacando la aldea.[ENTER]Para mantener la situación bajo control, tienes[ENTER]que matar 10 de ellos.
 4977	Hasta ahora, has matado %s lobos Alfa grises.
@@ -4982,11 +4986,11 @@
 4983	Tarea completada
 4984	Has destruido un Metin de Batalla. Ve con el[ENTER]Capitán e infórmale de tu éxito.
 4985	¡Buen trabajo! ¡Te has convertido en un ayudante[ENTER]de confianza! Ahora se que puedo confiar en ti[ENTER]para cualquier tarea. Estoy orgulloso de tenerte[ENTER]trabajando con nosotros. Aquí está tu recompensa,[ENTER]¡sigue así!
-4986	Recibes 48 000 puntos de experiencia.[ENTER]Recibes 10 000 Yang.
+4986	Recibes 48 000 puntos de experiencia.[ENTER]Recibes 10 000 Yang.
 4987	Has recibido 1 %s.
 4988	Sé cosas sobre las piedras Metin. El músico[ENTER]Yu-Hwan me ha informado de que las piedras Metin[ENTER]hacen que los animales se vuelvan locos. Además,[ENTER]difunden enfermedades.
 4989	Si no hacemos nada con las piedras Metin, los[ENTER]animales atacarán otra vez a los aldeanos. O[ENTER]incluso peor; ¡la enfermedad se puede propagar[ENTER]por toda la aldea! Ocúpate de las piedras Metin[ENTER]que están cayendo en el exterior de la aldea.[ENTER]Estoy seguro de que puedes manejarlo, viendo como[ENTER]sacaste a esos lobos Alfa grises.
-4990	Como recompensa te esperan 48 000 puntos de[ENTER]experiencia, 10 000 Yang y una Piedra espíritu[ENTER](+0 a +2).
+4990	Como recompensa te esperan 48 000 puntos de[ENTER]experiencia, 10 000 Yang y una Piedra espíritu[ENTER](+0 a +2).
 4991	Destruye el Metin de Batalla
 4992	Las Piedras Metin son un peligro serio. Ayuda al[ENTER]Capitán y destruye un Metin de Batalla.
 4993	Tarea completada.
@@ -4996,7 +5000,7 @@
 4997	Jinno: nuestro Reino tiene una tradición militar[ENTER]existente hace mucho tiempo. El rey unificó el[ENTER]continente usando su excelente y poderosa[ENTER]caballería. Incluso ahora que estamos divididos a[ENTER]causa de los problemas generados por las piedras[ENTER]Metin, nuestro reino aún tiene el poder legítimo[ENTER]de Iryung.
 4998	Aún tenemos la armada más poderosa de los tres[ENTER]reino, aunque no podemos hacer nada ahora mismo[ENTER]con las piedras Metin. Si quisieramos realmente,[ENTER]podríamos conquistar fácilmente los otros reinos.[ENTER]¡Debes entrenar duro para convertirte en un buen[ENTER]soldado!
 4999	Voy a darte una nueva tarea. Entrega esta[ENTER]munición a Yu-Hwan en la aldea vecina. Nuestro[ENTER]reino tiene una armada poderosa, pero tenemos que[ENTER]estar seguros de tener suficiente munición. Si[ENTER]entregas esto a Yu-Hwan, ayudarás a armar la[ENTER]aldea.
-5000	Recibes 45 000 puntos de experiencia.[ENTER]Recibes 10 000 Yang.
+5000	Recibes 45 000 puntos de experiencia.[ENTER]Recibes 10 000 Yang.
 5001	La situación actual
 5002	El Capitán te ha confiado una entrega para[ENTER]Yu-Hwan. Llévasela a la Segunda Aldea.
 5003	Érase una vez, una sangrienta batalla entre Sung[ENTER]Mahi y el Dios Dragón. Desde entonces, la gente[ENTER]ha estado dividida y compiten contra los otros en[ENTER]guerras interminables... ¡Tú otra vez! ¿Necesitas[ENTER]algo? ¿El Capitán me ha enviado algo importante?[ENTER]Gracias. Y ahora sigue tu camino otra vez - no es[ENTER]bueno que nos vean juntos.
@@ -5012,11 +5016,11 @@
 5013	La gente de nuestro país tiene una fe muy fuerte[ENTER]y rezan todos los días al Dios Dragón. El[ENTER]benevolente Dios Dragón nos está protegiendo de[ENTER]la resurrección de Sung Mahi. Debemos seguir[ENTER]defendiéndonos de los ataques bárbaros y[ENTER]reunificar el imperio bajo nuestro control.
 5014	Voy a darte una nueva tarea. Entrega esta estatua[ENTER]de piedra del Dios Dragón a Yu-Hwan en la aldea[ENTER]vecina. La religión y nuestra profunda fe en el[ENTER]Dios Dragón son muy importantes para nuestro[ENTER]reino. Si le entregas esto a Yu-Hwan, harás un[ENTER]gran favor a los aldeanos.
 5015	Captura al espía
-5016	Recibes 100 000 puntos de experiencia.[ENTER]Recibes 5000 Yang.
+5016	Recibes 100 000 puntos de experiencia.[ENTER]Recibes 5000 Yang.
 5017	Captura al espía
 5018	Hay un espía enemigo en nuestra aldea. El Capitán[ENTER]te dará más información sobre ello.
 5019	Tengo el presentimiento de que tenemos un espía[ENTER]entre nosotros.[ENTER]Uno de los aldeanos está confabulando con los[ENTER]Soldados del Juramento Blanco. Necesito tu ayuda[ENTER]en este asunto: Ve y mata Soldados Juramento[ENTER]Blanco, quizá puedas encontrar alguna información[ENTER]sobre el espía.
-5020	Como recompensa te esperan 100 000 puntos de[ENTER]experiencia y 5000 Yang.
+5020	Como recompensa te esperan 100 000 puntos de[ENTER]experiencia y 5000 Yang.
 5021	Descubre al espía
 5022	El Capitán tiene la sospecha de que hay un espía[ENTER]en la Aldea del Juramento Blanco. Mata Soldados[ENTER]Juramento Blanco hasta que encuentres alguna[ENTER]evidencia del espía.
 5023	Ha encontrado una carta. Llévasela al Capitán.
@@ -5053,7 +5057,7 @@
 5054	Has logrado destruir un Metin Negro. Ve adonde[ENTER]está el Capitán e infórmale sobre tu logro.
 5055	¿Has destruido la piedra Metin? ¡Gracias![ENTER]¡La aldea está a savlo! ¿De dónde vienen las[ENTER]Piedras? Casi no hay información sobre ellas.[ENTER]Aunque causan tantos problemas... he oido que[ENTER]Uriel el erudito está investigando las piedras[ENTER]Metin, pero no se que ha descubierto hasta ahora.[ENTER]Has hecho un gran trabajo.
 5056	Recompensa del encargo:
-5057	Recibes 1 000 000 puntos de experiencia.[ENTER]Recibes 15 000 Yang.
+5057	Recibes 1 000 000 puntos de experiencia.[ENTER]Recibes 15 000 Yang.
 5058	Has recibido: %s
 5059	La destrucción causada por las Piedras Metin está[ENTER]yendo a peor. Las Piedras Metin tienen que ser[ENTER]destruidas. Ve con el Capitán.
 5060	La destrucción causada por las Piedras Metin está[ENTER]yendo a peor. El país está sufriendo. ¡Las[ENTER]Piedras Metin deben ser destruidas! Ve con el[ENTER]Capitán.
@@ -5096,7 +5100,7 @@
 5097	Uriel:
 5098	El Capitán ya te envió conmigo una vez. Parece[ENTER]que tienes mucho talento. Tengo que pedirte un[ENTER]favor. Estás al tanto de las piedras Metin, ya[ENTER]que ya has destruido algunas. Las piedras Metin[ENTER]vinieron de los ielos. Poseen energía malvada,[ENTER]difunden plagas y los animales se vuelven[ENTER]salvajes. No sabemos como llegaron a nuestro[ENTER]mundo o lo que contienen. Eso dificulta mi[ENTER]investigación. Recientemente, he encontrado la[ENTER]clave de los secretos de las piedras Metin.
 5099	Hay una tabla, un monumento de un reino antiguo,[ENTER]en una cueva en la mazmorra de monos fácil. Creo[ENTER]que la información en la tabla es acerca de el[ENTER]secreto de las piedras Metin. Si me traes la[ENTER]información, puede que sea capaz de descubrir el[ENTER]secreto de las piedras Metin. Por favor, ¡tráeme[ENTER]la información del monumento de piedra Hasun en[ENTER]la Mazmorra de Monos Fácil!
-5100	Recibes 1 500 000 puntos de experiencia.[ENTER]Recibes 20 000 Yang.
+5100	Recibes 1 500 000 puntos de experiencia.[ENTER]Recibes 20 000 Yang.
 5101	Monumento de Piedra en la Mazmorra de Monos Fácil
 5102	Uriel el erudito cree que ha encontrado una pista[ENTER]que puede ayudarle a resolver el problema de las[ENTER]Piedras Metin.[ENTER]Ve a la Mazmorra de Monos Fácil y busca el[ENTER]Monumento de Piedra Hasun.
 5103	El libro secreto
@@ -5135,7 +5139,7 @@
 5136	Saludos.[ENTER]Tu trabajo la última vez fue de mucha ayuda. Con[ENTER]tu ayuda, fuí capaz de hacer verdaderos[ENTER]progresos. Pero ahora tengo un problema. Cuando[ENTER]investigaba la información sobre los meteoritos,[ENTER]encontré un libro antiguo.[ENTER]Por lo que puedo entender, hay especulaciones[ENTER]importantes sobre la causa de los cambios que[ENTER]están afectando a nuestro país. Es muy[ENTER]importante.
 5137	Se ha hablado mucho sobre las antiguas historias[ENTER]del Valle del Dragón. También conozco algunos[ENTER]cuentos sobre él. Quizá aún seamos capaces de[ENTER]encontrar información sobre él o averiguar más[ENTER]sobre las páginas del libro. Por desgracia, nunca[ENTER]he encontrado información sobre dónde se[ENTER]encuentra el valle. Ve con el cazador Yang-Shin[ENTER]en la aldea vecina, conoce muy bien los caminos.[ENTER]Puede que sepa dónde se encuentra el Valle del[ENTER]Dragón y si hay algo útil que podamos encontrar[ENTER]ahí.
 5138	¡Qué emocionante! Oh, antes de que se me olvide:[ENTER]¡Aquí está tu recompensa por tu primera página!
-5139	Recibes 1 250 000 puntos de experiencia.
+5139	Recibes 1 250 000 puntos de experiencia.
 5140	Has recibido 50.000 Yang.
 5141	Has recibido una Lágrima de Diosa.
 5142	Ve con el cazador
@@ -5159,7 +5163,7 @@
 5160	Se ha encontrado a los seguidores de la magia[ENTER]oscura. Estaban escondidos en el Valle del[ENTER]Dragón. Están muy informados sobre la brujería[ENTER]que ha pasado de generación en generación. Costó[ENTER]mucho persuadir, algunos tratos y algunos halagos[ENTER]hasta que accedieron a ayudarnos. Y el resultado[ENTER]fue: Necesitas un lugar especial para ejecutar la[ENTER]brujería prohibida. El lugar tiene que estar[ENTER]lleno de energía demoníaca. El tiempo se acaba,[ENTER]así que tengo que encontrar un lugar adecuado[ENTER]cuanto antes.
 5161	Hm, necesitamos un lugar lleno de energía[ENTER]negativa para la brujería oscura. Un lugar en el[ENTER]que todo puede ser convertido a energía[ENTER]demoníaca. Hmm... ¿Dónde podemos encontrar un[ENTER]lugar como ese? Hm... Hm... Lo sé, ¡puede ser el[ENTER]Templo Hwang! La gente no lo llama el templo de[ENTER]la oscuridad por nada. Es un lugar al que nadie[ENTER]de buen corazón quiere ir. Incluso los animales[ENTER]no quieren ir allí. Y la secta secreta no tiene[ENTER]buenas intenciones.
 5162	Además, hay una conexión entre la brujería[ENTER]prohibida y esta secta secreta. Puedes encontrar[ENTER]la clave para eso en el Templo Hwang. ¡Descubre[ENTER]qué está pasando en el Templo Hwang y mira si[ENTER]puedes encontrar más páginas del libro ahí![ENTER]Aquí está tu recompensa por la segunda página...
-5163	Recibes 1 250 000 puntos de experiencia.
+5163	Recibes 1 250 000 puntos de experiencia.
 5164	Yang: 50.000
 5165	Has obtenido 10 banderas blancas
 5166	La tercera página
@@ -5219,7 +5223,7 @@
 5220	Llegué allí antes que los extranjeros y cogí la[ENTER]quinta página del diario de los Capitanes[ENTER]Bestiales. Estoy seguro de que los extranjeros[ENTER]desaparecerán ahora que no les queda nada que[ENTER]encontrar aquí. Le llevaré la página a Uriel el[ENTER]erudito para que la pueda descifrar.
 5221	La quinta página
 5222	Pista: sólo puedes llevare la quinta página a[ENTER]Uriel una vez hayas alcanzado el nivel 47. Guarda[ENTER]la página hasta entonces.
-5223	Recibes 750 000 puntos de experiencia.
+5223	Recibes 750 000 puntos de experiencia.
 5224	Tercera página:
 5225	Hemos llegado al lugar donde se convierte la[ENTER]energía malvada. Pero no es suficiente... ¿Dónde[ENTER]puedes ejecutar esta brujería? La nueva[ENTER]información sugiere que hay un lugar oculto en el[ENTER]desierto Yongbi. Llenos de esperanza, vamos a[ENTER]teletransportarnos al desierto Yongbi.
 5226	Así que no fueron capaces de cumplir su objetivo[ENTER]en el Valle del Dragón. Hm... ¿El desierto[ENTER]Yongbi? No sueles encontrarte a nadie por allí y[ENTER]el área está en gran parte inexplorada. Pero todo[ENTER]esto es muy complicado. ¿Dónde está exactamente[ENTER]el área del que hablan? Supongo que se refieren a[ENTER]la Mazmorra de los Monos Junsun Dong. Es una[ENTER]cueva profunda muy bien equipada para acumular[ENTER]energía malvada.
@@ -5278,7 +5282,7 @@
 5279	Octava página:
 5280	Se han encontrado las víctimas necesarias.[ENTER]Tenemos suerte. Me pregunto si es una señal.[ENTER]Necesitamos una campana ceremonial. Si recuerdo[ENTER]bien, las arañas tienen algo parecido. Saldremos[ENTER]en camino ahora.
 5281	Ah, el Calabozo de las Araás de nuevo, curioso.[ENTER]Tienes que ir allí y buscar la campana. Va a ser[ENTER]un viaje agotador, así que relájate un poco[ENTER]primero y vuelve más tarde. Voy a reflexionar un[ENTER]poco y traducir algunos fragmentos más. Cuando[ENTER]vuelvas, te daré una nueva misión. Y no te[ENTER]preocupes, por supuesto obtendrás ahora tu[ENTER]recompensa por la octava página.
-5282	Recibes 3 000 000 de puntos de experiencia[ENTER]Recibes 70 000 Yang[ENTER]Recibes 20 Capas de valor[ENTER]Consejo: Para el siguiente encargo necesitas[ENTER]haber alcanzado al menos el nivel 50.
+5282	Recibes 3 000 000 de puntos de experiencia[ENTER]Recibes 70 000 Yang[ENTER]Recibes 20 Capas de valor[ENTER]Consejo: Para el siguiente encargo necesitas[ENTER]haber alcanzado al menos el nivel 50.
 5283	Lee Seop ha llegado al reino Taejo con su[ENTER]caballería pero parece querer quedarse allí por[ENTER]un tiempo. Mientras tanto meteoritos grandes y[ENTER]pequeños están cayendo sobre el país. Están[ENTER]causando caos, destrucción y conflictos. El[ENTER]extenso reino se ha dividido en tres reinos más[ENTER]pequeños. También están luchando entre ellos, en[ENTER]lugar de enfrentarse juntos al mal. El Dios[ENTER]Dragón ya no nos habla tampoco. A veces ayuda a[ENTER]un bando y a veces al otro. Así que todos están[ENTER]luchando por sus favores y mientras tanto el[ENTER]desastre sólo empeora...
 5284	Uriel:
 5285	Un relato presencial de los primeros días de[ENTER]nuestra era.[ENTER]¡Verdaderamente es incalculable! Oh sí, la paga.[ENTER]Aquí tienes una recompensa por tu excelente[ENTER]trabajo. Y algo más: alguien más está obviamente[ENTER]abordando las mismas investigaciones que[ENTER]nosotros. Así que no tenemos tiempo que perder.[ENTER]Al final de esta página dice que Lee Seop ha[ENTER]estado buscando energía malvada en el Calabozo de[ENTER]las Arañas. Si encuentras algo ahí, ven a verme[ENTER]inmediatamente.[ENTER]¡No puedo esperar!
@@ -5339,7 +5343,7 @@
 5340	Sólo nos queda una vía más para detener a Lee[ENTER]Seop. Tenemos que viajar al Templo de la[ENTER]oscuridad para poder ejecutar la brujería negra.[ENTER]No quedamos muchos y el esfuerzo de los últimos[ENTER]meses con seguridad ha tenido efectos negativos.[ENTER]Pero incluso un puñado de hombres cansados puede[ENTER]cambiar el destino del mundo cuando tienen[ENTER]información poderosa.[ENTER]No podemos perder de vista nuestro objetivo.[ENTER]Vamos.
 5341	Ah, así que encontraron el lugar correcto. ¡Yo[ENTER]tenía razón después de todo! Realmente es el[ENTER]Templo Hwang. Seguramente recuerdes ese lugar[ENTER]oscuro, que estaba vibrando con energía malvada.[ENTER]Desde lo que puede recordar cualquiera, se han[ENTER]llevado a cabo rituales y ceremonias allí, de los[ENTER]cuales deben alejarse los aldeanos honestos.
 5342	Actualmente, los monstruos son las únicas cosas[ENTER]viviendo en el Templo, no ha habido humanos allí[ENTER]durante mucho tiempo. Es muy peligroso, pero[ENTER]estoy seguro de que puedes hacerlo. Ve al Valle[ENTER]de Seungryong y busca la última página en el[ENTER]Templo Hwang. La historia que este diario ha[ENTER]estado contándonos termina allí. Tengo que[ENTER]averiguar cómo terminó. ¡Buena suerte! Oh, espera[ENTER]un momento, aquí está tu recompensa por la[ENTER]duodécima página.
-5343	Recibes 7 500 000 puntos de experiencia.
+5343	Recibes 7 500 000 puntos de experiencia.
 5344	Has recibido 162.500 Yang.
 5345	Como ya has encontrado varias páginas del Diario[ENTER]cerca de los monumentos, Uriel piensa que podrás[ENTER]encontrar más información sobre la brujería negra[ENTER]secreta cerca de los monumentos inexplorados. Ve[ENTER]al Reino Chunjo e investiga el monumento en el[ENTER]área Joan.
 5346	La última página
@@ -5362,11 +5366,11 @@
 5363	... Se acabó...[ENTER]Al principio todo era muy prometedor. La[ENTER]habitación se llenó de energía y canto, pero de[ENTER]repente me sentí realmente extraño. Mis seis[ENTER]compañeros cayeron de rodillas. El templo comenzó[ENTER]a temblar. Entonces cayó un rayo y fuimos[ENTER]lanzados hacia atrás. Y entonces las líneas de[ENTER]poder se rompieron...[ENTER]Ahora está tranquilo. Mis camaradas yacen muertos[ENTER]en el suelo. La magia no funcionó.[ENTER]Hemos fallado.
 5364	¿Qué? ¿¡¿Eso es todo?!?[ENTER]¡Es una locura! ¿Todo ese trabajo para nada? No[ENTER]puedo creerlo. Hemos viajado, luchado, traducido[ENTER]y reflexionado durante horas. ¡Todo para nada![ENTER]Sabemos tanto como al principio. Aunque parece[ENTER]mejor mantenernos alejados de la brujería negra,[ENTER]que es lo que yo pensaba desde el principio. Pero[ENTER]saber es mejor que creer, ¿no?
 5365	Vamos a descansar primero. Tengo dolor de cabeza[ENTER]y seguramente tu también estés bastante cansado.[ENTER]Tengo que procesar todo primero. Cuando haya[ENTER]terminado, hablaremos más. A pesar de todo, me[ENTER]has ofrecido un servicio inestimable. ¡No quedará[ENTER]sin recompensa!
-5366	Recibes 9 000 000 puntos de experiencia.
+5366	Recibes 9 000 000 puntos de experiencia.
 5367	Has recibido 175.000 Yang.
 5368	Como ya has encontrado varias páginas del Diario[ENTER]cerca de los monumentos, Uriel piensa que podrás[ENTER]encontrar más información sobre la brujería negra[ENTER]secreta cerca de los monumentos inexplorados. Ve[ENTER]al Reino Shinsoo e investiga el monumento en el[ENTER]área Yongan.
 5369	Obtienes un Libro del Líder.
-5370	Recibes 5 500 000 puntos de experiencia.
+5370	Recibes 5 500 000 puntos de experiencia.
 5371	¡Ahí está!
 5372	Este es el monumento que Uriel estaba buscando.[ENTER]¡También hay una página doblada! Debo llevársela[ENTER]rápidamente a Uriel.
 5373	Encontrada la duodécima página
@@ -6595,21 +6599,21 @@
 6596	Bien...[ENTER]Puede que sea mejor así. Si realmente tienes[ENTER]gana, vuelve otra vez, pero deberías ser serio[ENTER]con esto.
 6597	Ya que estas seguro, bien: allá vamos. ¡Te deseo[ENTER]todo lo mejor![ENTER][ENTER]Un divorcio unilateral ha sido realizado.
 6598	Ver los premios
-6599	300 000 Yang
-6600	100 000 de EXP
-6601	500 000 de EXP
-6602	Requisito: 299 puntos o menos
-6603	50 000 Yang
+6599	300 000 Yang
+6600	100 000 de EXP
+6601	500 000 de EXP
+6602	Requisito: 299 puntos o menos
+6603	50 000 Yang
 6604	Lista de los mejores
 6605	Premios gordos
 6606	Total de puntos
 6607	Mejor puntuación
 6608	Los 10 jugadores con mejores puntuaciones totales[ENTER]recibirán premios especiales.
 6609	Cerrar
-6610	Puesto 1: %s %d veces
-6611	Puesto 2: %s %d veces
-6612	Puesto 3: %s %d veces
-6613	Puestos 4 - 10: %s %d veces
+6610	Puesto 1: %s %d veces
+6611	Puesto 2: %s %d veces
+6612	Puesto 3: %s %d veces
+6613	Puestos 4 - 10: %s %d veces
 6614	1.er puesto: %s, %d
 6615	2.º puesto: %s, %d
 6616	3.er puesto: %s, %d
@@ -6628,12 +6632,12 @@
 6629	Recibes %d.
 6630	Ya has recibido tu premio.
 6631	Estos son los objetos que puedes conseguir:
-6632	50 000 Yang
-6633	700 000 de EXP
-6634	500 000 Yang
-6635	700 000 Yang
+6632	50 000 Yang
+6633	700 000 de EXP
+6634	500 000 Yang
+6635	700 000 Yang
 6636	Requisito: entre 300 y 399 puntos
-6637	100 000 Yang
+6637	100 000 Yang
 6638	Tu recompensa:
 6639	Clasificación
 6640	Recompensa por rango
@@ -6662,11 +6666,11 @@
 6663	Lo sentimos, pero no te has clasificado entre los[ENTER]mejores.
 6664	Recompensas recibidas: %d
 6665	Ya has recogido tu recompensa.
-6666	100 000 de EXP
-6667	50 000 Yang
-6668	100 000 Yang
-6669	300 000 Yang
-6670	500 000 Yang
+6666	100 000 de EXP
+6667	50 000 Yang
+6668	100 000 Yang
+6669	300 000 Yang
+6670	500 000 Yang
 6671	Leñador Deokbae:
 6672	Tu pico no puede ser mejorado. No tienes[ENTER]suficiente entrenamiento.
 6673	¿Quieres mejorar tu Pico? A ver...[ENTER]El nivel de tu pico es %s.
@@ -7526,7 +7530,7 @@
 7527	Eres muy enérgico para tu edad...
 7528	Medalla del Héroe
 7529	¡Ayuda!
-7530	Miserable hatajo de ladrones...[ENTER]¡Ayer por la noche me entrarron en casa![ENTER]Se llevaron la Medalla del Héroe. Un antepasado[ENTER]mío la recibió en su momentom tras correr 42 195[ENTER]quilómetros desde el campo de batalla hasta donde[ENTER]estaba su monarca para comunicarle la victoria.[ENTER]¡Y ahora ha desaparecido!
+7530	Miserable hatajo de ladrones...[ENTER]¡Ayer por la noche me entrarron en casa![ENTER]Se llevaron la Medalla del Héroe. Un antepasado[ENTER]mío la recibió en su momentom tras correr 42 195[ENTER]quilómetros desde el campo de batalla hasta donde[ENTER]estaba su monarca para comunicarle la victoria.[ENTER]¡Y ahora ha desaparecido!
 7531	Diantres... para mi familia es de un valor[ENTER]incalculable. ¿Qué hago ahora?
 7532	¿Me ayudarás?
 7533	Medalla del Héroe
@@ -7945,7 +7949,7 @@
 7946	GM: Torneo JcJ inicio/fin
 7947	Iniciar / finalizar torneo JcJ
 7948	Inicio: introduce el tiempo de duración de[ENTER]registro en minutos.
-7949	GM: Torneo JcJ – configuración
+7949	GM: Torneo JcJ - configuración
 7950	Nivel mínimo (mín.: 15)
 7951	Nivel máximo (máx.: 120)
 7952	No tienes el nivel mínimo.
@@ -9979,11 +9983,11 @@
 9980	7 días
 9981	15 días
 9982	30 días
-9983	Pergamino de Mutación + 200 000 Yang
+9983	Pergamino de Mutación + 200 000 Yang
 9984	Por desgracia, no posees la Supercomida necesaria[ENTER]para la duración que has seleccionado. ¡Pero[ENTER]puedes encontrarla detrás de la moneda giratoria!
-9985	¡El Pergamino de Mutación es extremadamente[ENTER]poderoso! Puede alargar la vida de tu montura[ENTER]valerosa en hasta cuatro días. Un intento te[ENTER]costará 200 000 Yang. Para ello, tu montura ha de[ENTER]estar exhausta y tener menos de un día de vida.[ENTER]¡Por supuesto, también el azar influye! Si la[ENTER]prórroga no tuviera éxito, simplemente dale[ENTER]Supercomida a tu montura. Puedes encontrarla[ENTER]detrás de la moneda giratoria.
+9985	¡El Pergamino de Mutación es extremadamente[ENTER]poderoso! Puede alargar la vida de tu montura[ENTER]valerosa en hasta cuatro días. Un intento te[ENTER]costará 200 000 Yang. Para ello, tu montura ha de[ENTER]estar exhausta y tener menos de un día de vida.[ENTER]¡Por supuesto, también el azar influye! Si la[ENTER]prórroga no tuviera éxito, simplemente dale[ENTER]Supercomida a tu montura. Puedes encontrarla[ENTER]detrás de la moneda giratoria.
 9986	Tu Supermontura aún se encuentra muy fuerte. El[ENTER]Pergamino de Mutación no tendría efecto. Vuelve[ENTER]por aquí cuando tenga menos de un día de vida.
-9987	No puedo ayudarte: o bien no llevas contigo el[ENTER]Pergamino de Mutación o bien no tienes los[ENTER]200 000 Yang necesarios.
+9987	No puedo ayudarte: o bien no llevas contigo el[ENTER]Pergamino de Mutación o bien no tienes los[ENTER]200 000 Yang necesarios.
 9988	Tiempo restante prolongado con éxito.
 9989	Fabricar pergamino del Dios de la Guerra
 9990	El intento de fabricar el manuscrito falló porque[ENTER]no tenías todos los materiales.
@@ -10028,12 +10032,12 @@
 10029	Deberías cambiarla por razones de seguridad.[ENTER][ENTER]A lo mejor piensas que 45 espacios no son[ENTER]suficientes. Pero, quién sabe, quizá te de más[ENTER]espacio si nos llevamos bien.
 10030	Bien, yo no quiero obligar a nadie. Si ahora no[ENTER]te apetece, vuelve más tarde.
 10031	Abrir Almacén
-10032	Por favor, comprueba las indicaciones e inténtalo[ENTER]de nuevo.[ENTER][ENTER]Cantidad máx. de Won = 999[ENTER]Cantidad máx. de Yang = 1 999 999 999
+10032	Por favor, comprueba las indicaciones e inténtalo[ENTER]de nuevo.[ENTER][ENTER]Cantidad máx. de Won = 999[ENTER]Cantidad máx. de Yang = 1 999 999 999
 10033	¿Seguro que quieres cambiar %d Won a %s Yang?
 10034	Cambiar
 10035	Cancelar
 10036	Yang a Won
-10037	¿Cuánto Won quieres obtener?[ENTER]1 Won = 100 000 000 Yang
+10037	¿Cuánto Won quieres obtener?[ENTER]1 Won = 100 000 000 Yang
 10038	Mín. 1 Won - Máx. 19 Won
 10039	Yang a Won
 10040	Tasas: %d %%
@@ -10044,7 +10048,7 @@
 10045	Won a Yang
 10046	Yang a Won
 10047	Won a Yang
-10048	¿Cuanto Won quieres cambiar a Yang?[ENTER]1 Won = 100 000 000 Yang
+10048	¿Cuanto Won quieres cambiar a Yang?[ENTER]1 Won = 100 000 000 Yang
 10049	Mín. 1 Won - Máx. 19 Won
 10050	Won a Yang
 10051	
@@ -10122,7 +10126,7 @@
 10123	Puntuación: 550 o más
 10124	Puntuación: entre 400 y 549
 10125	Puntuación: entre 10 y 399
-10126	Premios: 10 mejores
+10126	Premios: 10 mejores
 10127	Puesto 1: 10x Botín del rey de oro
 10128	Puesto 2: 5x Botín del rey de oro
 10129	Puesto 3: 3x Botín del rey de oro
@@ -10223,7 +10227,7 @@
 10856	Añadir bonificación: %s
 10857	No tienes suficiente espacio en el inventario.
 10858	El proceso de añadidura de bonificación ha[ENTER]finalizado. Ve a ver a Seon-Hae para recoger tu[ENTER]objeto.
-10859	Te queda 1 minuto para completar la mazmorra.
+10859	Te queda 1 minuto para completar la mazmorra.
 10860	Piedra dragón mít.: modificar bonificación
 10861	Solo la Llama del dragón tiene suficiente poder[ENTER]para modificar las bonificaciones de una Piedra[ENTER]dragón mítica. La cantidad de Llamas necesarias[ENTER]depende del grado de pureza de tu Piedra dragón.[ENTER]¿Seguro que quieres modificar la bonificación? No[ENTER]hay vuelta atrás.
 10862	Cazar atún dorado
@@ -10269,7 +10273,7 @@
 10943	Quiero compensártelo...
 10944	Me vendría bien algo de ayuda.
 10945	Hmm. Tengo que comprobar tus habilidades.
-10946	Mata 20 Perros de caza salvajes.
+10946	Mata 20 Perros de caza salvajes.
 10947	No sé lo que quieres.
 10948	No es tan difícil...
 10949	Vamos, ¡a por los Perros de caza salvajes!
@@ -10288,7 +10292,7 @@
 10962	El responsable dice que has trabajado muy duro.
 10963	He conseguido una Medalla a la diligencia.
 10964	Medalla a la diligencia
-10965	Con la Medalla a la diligencia obtienes 4 horas[ENTER]de EXP adicionales.
+10965	Con la Medalla a la diligencia obtienes 4 horas[ENTER]de EXP adicionales.
 10966	Ten en cuenta que una vez te pongas la medalla,[ENTER]no te la podrás quitar.
 10967	Ha terminado el Evento "Días del trabajo"
 10968	Nuevo intento: Evento "Días del trabajo"
@@ -10301,12 +10305,12 @@
 10975	Si encuentras al Peatón Lamentable, pregúntale[ENTER]por la misión.
 10976	
 10977	1.ª prueba del Peatón Lamentable
-10978	Por tu error con el Peatón Lamentable, ahora[ENTER]tienes que matar a 20 Perros de caza salvajes[ENTER]como misión.
+10978	Por tu error con el Peatón Lamentable, ahora[ENTER]tienes que matar a 20 Perros de caza salvajes[ENTER]como misión.
 10979	
 10980	
-10981	Mata 20 Perros de caza salvajes.
+10981	Mata 20 Perros de caza salvajes.
 10982	Restante:
-10983	He acabado con los 20 Perros de caza salvajes.
+10983	He acabado con los 20 Perros de caza salvajes.
 10984	Hacía una buena temporada que no cazaba tantos[ENTER]Perros salvajes.
 10985	Quién sabe por qué me pone estas pruebas...
 10986	A ver si me entero ahora cuando vuelva a verle.
@@ -10331,14 +10335,14 @@
 11005	La cara que puse le hizo pensar que podría[ENTER]conseguirlo.
 11006	
 11007	¡Menudo día!
-11008	Mata 30 Jabalíes.
+11008	Mata 30 Jabalíes.
 11009	Restante:
 11010	Misión de los jabalíes completada
 11011	Hasta un infante podría acabar con los jabalíes.
 11012	Completa la misión con rapidez y vuelve.
 11013	Mmh. Qué sorpresa. Pensaba que lo conseguirías[ENTER]más rápido.
 11014	Parece que no eres tan bueno como creías.
-11015	Si consigues acabar con 50 Osos podré hacerme una[ENTER]idea de tus habilidades. ¡Última oportunidad!
+11015	Si consigues acabar con 50 Osos podré hacerme una[ENTER]idea de tus habilidades. ¡Última oportunidad!
 11016	Completa la misión con rapidez y vuelve.
 11017	¿Cómo te atreves a hablarme así?
 11018	¡Eliminar Osos está chupado!
@@ -10350,7 +10354,7 @@
 11024	
 11025	Es la última prueba. Esperemos.
 11026	La completaré rápido.
-11027	Mata 50 Osos.
+11027	Mata 50 Osos.
 11028	Restante:
 11029	He acabado con todos los Osos.
 11030	Al fin lo he conseguido.
@@ -10379,7 +10383,7 @@
 11053	
 11054	Parece estar relacionado con ellos.
 11055	He decidido seguir con la misión.
-11056	Acaba con 100 Soldados del Juramento Blanco.
+11056	Acaba con 100 Soldados del Juramento Blanco.
 11057	Al final de la misión te esperan recompensas[ENTER]valiosas.
 11058	¡Ten un poco de paciencia!
 11059	He derrotado a todos los soldados.
@@ -10390,8 +10394,8 @@
 11064	
 11065	Parece estar relacionado con ellos.
 11066	He decidido seguir con la misión.
-11067	Acaba con 100 Soldados del Juramento Blanco[ENTER](completado)
-11068	Acaba con 100 Soldados Viento Negro (en proceso)
+11067	Acaba con 100 Soldados del Juramento Blanco[ENTER](completado)
+11068	Acaba con 100 Soldados Viento Negro (en proceso)
 11069	Restante:
 11070	¡Casi lo tienes!
 11071	Vuelve cuando hayas terminado todas las tareas.
@@ -10547,7 +10551,7 @@
 11221	No tienes ninguna Poción azul cielo.
 11222	Canjear Agua Bendita Azul.
 11223	No tienes Agua Bendita Azul.
-11224	Canjear 5x Agua Bendita Azul.
+11224	Canjear 5x Agua Bendita Azul.
 11225	Seleccionar
 11226	Hoja
 11227	Daga
@@ -10572,7 +10576,7 @@
 11295	No
 11296	No tienes suficiente espacio en el inventario
 11297	Has recibido un Manual del impulso
-11298	Has completado la misión 10 veces. Tengo una[ENTER]recompensa para ti.
+11298	Has completado la misión 10 veces. Tengo una[ENTER]recompensa para ti.
 11299	Colección de misiones de espaciotiempo terminada
 11300	Solo puedes acceder a través de la Meseta de las[ENTER]Ilusiones.
 11301	Un miembro del grupo ha avanzado demasiado lejos.
@@ -10584,7 +10588,7 @@
 11307	Fortaleza del Dragón Rojo
 11308	Torre de vigilancia de Nemere
 11309	Bosque Encantado
-11310	Tiempo restante: %d minuto(s)
+11310	Tiempo restante: %d minuto(s)
 11311	Cuando transcurra el tiempo, el grupo se[ENTER]teletransportará fuera.
 11312	Se te ha terminado el tiempo.
 11313	Se te teletransportará fuera en diez segundos.
@@ -10597,17 +10601,17 @@
 11320	Progreso (O:Listo X:En curso)
 11321	Arrador: %s Nemere: %s Jotun Thrym: %s
 11322	Encuentra la Estatua de las ilusiones en la aldea[ENTER]y recoge tu recompensa.
-11323	¡Hasta dentro de 24 horas!
+11323	¡Hasta dentro de 24 horas!
 11324	Progreso de misión ET
 11325	Beran-Setaou ET: %s Arrador ET: %s Nemere ET: %s[ENTER]Jotun Thrym ET: %s
 11326	Encuentra la Estatua del espaciotiempo en la[ENTER]Meseta de las Ilusiones y recoge tu recompensa.
 11327	Seleccionar mazmorra
 11328	Para superar la Torre de Vigilancia de Nemere[ENTER](ET) hay que llevar Ninjas y Chamanes en el[ENTER]grupo.
-11329	Tiempo restante: %d min.
+11329	Tiempo restante: %d min.
 11330	Cerrar
-11331	Reduce el tiempo de espera en un 10 %
-11332	Reduce el tiempo de espera en un 20 %
-11333	Reduce el tiempo de espera en un 30 %
+11331	Reduce el tiempo de espera en un 10 %
+11332	Reduce el tiempo de espera en un 20 %
+11333	Reduce el tiempo de espera en un 30 %
 11334	Volver a utilizar
 11335	Teletranspor. a la Meseta de las Ilusiones
 11336	Nivel mín. para Meseta de las Ilusiones: %d
@@ -10626,9 +10630,9 @@
 11375	Recompensa: %d/%d
 11381	Tiempo restante
 11382	Combinar manuales de habilidad
-11383	Puedes obtener una caja de fragmentos a cambio de[ENTER]10 manuales de habilidad y 100 000 Yang.
-11384	El tiempo de entrada a la Fortaleza del Dragón[ENTER]Rojo (ET) es de 1 hora.
-11385	Tiempo restante: 60 min
+11383	Puedes obtener una caja de fragmentos a cambio de[ENTER]10 manuales de habilidad y 100 000 Yang.
+11384	El tiempo de entrada a la Fortaleza del Dragón[ENTER]Rojo (ET) es de 1 hora.
+11385	Tiempo restante: 60 min
 11386	Despertar el ET: Abismo de Am-heh
 11387	Misión: Entrar en el anillo de los Demonios (ET)[ENTER]y vencer.
 11388	Aún no se ha derrotado a todos los demonios.
@@ -10656,7 +10660,7 @@
 11410	Quizá más tarde
 11411	ET: Arrador ha sido aniquilado.
 11412	Se te teletransportará fuera de la ET: Fortaleza[ENTER]del Dragón Rojo.
-11413	El tiempo de entrada a la Fortaleza del Dragón[ENTER]Rojo (IM) es de 1 hora.
+11413	El tiempo de entrada a la Fortaleza del Dragón[ENTER]Rojo (IM) es de 1 hora.
 11414	Solo pueden entrar grupos
 11415	Restante:
 11416	Aún no se ha vencido a IM: Ignidor. Tendréis que[ENTER]esforzaros más u os enfrentaréis a una condena[ENTER]eterna. Volved cuando hayáis completado la[ENTER]misión.
@@ -10683,7 +10687,7 @@
 11437	Se te teletransportará fuera de la IM: Fortaleza[ENTER]del Dragón Rojo.
 11438	Cuando transcurra el tiempo, el grupo se[ENTER]teletransportará fuera de la Fortaleza.
 11439	Torre de Vigilancia de Nemere (ET)
-11440	El tiempo de entrada a la Torre de Vigilancia de[ENTER]Nemere (ET) es de 1 hora.
+11440	El tiempo de entrada a la Torre de Vigilancia de[ENTER]Nemere (ET) es de 1 hora.
 11441	¡Derrotad a todos los enemigos! Bendición os[ENTER]otorgará un gran poder en la segunda oleada.
 11442	En solo unos segundos os teletransportaréis al[ENTER]sexto piso.
 11443	En solo unos segundos os teletransportaréis al[ENTER]noveno piso.
@@ -10715,14 +10719,14 @@
 11469	No entrar
 11470	Venced a Nemere (ET), el rey del hielo y la[ENTER]escarcha.
 11471	Todos los luchadores se teletransportarán en un[ENTER]minuto.
-11472	Tiempo restante: %d minuto(s)
+11472	Tiempo restante: %d minuto(s)
 11473	Cuando transcurra el tiempo, el grupo se[ENTER]teletransportará fuera de la Fortaleza.
 11474	Se te ha terminado el tiempo.
 11475	En solo unos segundos os teletransportaréis fuera.
 11476	Cuando transcurra el tiempo, el grupo se[ENTER]teletransportará fuera de la Fortaleza.
 11477	Cuando transcurra el tiempo, el grupo se[ENTER]teletransportará fuera de la Fortaleza.
 11478	Torre de Vigilancia de Nemere (IM)
-11479	El tiempo de entrada a la Torre de Vigilancia de[ENTER]Nemere (IM) es de 1 hora.
+11479	El tiempo de entrada a la Torre de Vigilancia de[ENTER]Nemere (IM) es de 1 hora.
 11480	Algunos monstruos de hielo llevan consigo Llaves[ENTER]de escarcha (IM). ¡Quitádselas y encontrad la[ENTER]llave adecuada! Solo la podrá utilizar un Chamán.
 11481	Derrotad a todos los monstruos de hielo y[ENTER]destruid el Metin de Frío (IM). Solo pueden[ENTER]dañarlo los Chamanes.
 11482	Encontrad y venced a Esgel (IM), el señor del[ENTER]hielo y el frío. Solo podréis vencerle si lucháis[ENTER]con la Ayuda del Dragón.
@@ -10730,11 +10734,11 @@
 11484	Destruid la Columna del Dragón Norte (IM). Solo[ENTER]pueden dañarla los Ninjas y los Chamanes.
 11485	¿Estáis listos para enfrentaros a Nemere (IM), el[ENTER]rey de la escarcha?
 11486	Todos los luchadores se teletransportarán en un[ENTER]minuto.
-11487	Tiempo restante: %d minuto(s)
+11487	Tiempo restante: %d minuto(s)
 11488	Cuando transcurra el tiempo, el grupo se[ENTER]teletransportará fuera de la Fortaleza.
 11489	Se te ha terminado el tiempo.
 11490	En solo unos segundos os teletransportaréis fuera.
-11491	Tiempo restante: %d min
+11491	Tiempo restante: %d min
 11492	Cuando transcurra el tiempo, el grupo se[ENTER]teletransportará fuera de la mazmorra.
 11493	Se te ha terminado el tiempo.
 11494	En solo unos segundos os teletransportaréis fuera.
@@ -10744,19 +10748,19 @@
 11498	Sí, por favor.
 11499	No, me quedaré aquí.
 11500	¡El Dragón Azul (ET) ha regresado!
-11501	Tiempo restante: %d minuto(s)
+11501	Tiempo restante: %d minuto(s)
 11502	Cuando transcurra el tiempo, el grupo se[ENTER]teletransportará fuera de la mazmorra.
 11503	Se te ha terminado el tiempo.
 11504	En solo unos segundos os teletransportaréis fuera.
 11505	Cuando transcurra el tiempo, el grupo se[ENTER]teletransportará fuera de la mazmorra.
 11506	¡El Dragón Azul (IM) ha regresado!
-11507	Tiempo restante: %d minuto(s)
+11507	Tiempo restante: %d minuto(s)
 11508	Cuando transcurra el tiempo, el grupo se[ENTER]teletransportará fuera de la Fortaleza.
 11509	Se te ha acabado el tiempo en el Bosque Encantado[ENTER](ET).
 11510	Todos los luchadores se teletransportarán en unos[ENTER]segundos.
 11511	Cuando se acabe el tiempo de acceso, se os[ENTER]teletransportará de vuelta.
 11512	Sala de jefe
-11513	Tiempo restante: %d minuto(s)
+11513	Tiempo restante: %d minuto(s)
 11514	Al acabarse el tiempo te teletransportarás
 11515	Tiempo finalizado: Bosque Encantado (IM).
 11516	Teletransporte a Bosque Enc. (IM) en breve
@@ -10955,7 +10959,7 @@
 11709	Refuerza un objeto.
 11710	Mejora una piedra.
 11711	Elimina a monstruos de tu rango de nivel.
-11712	Has recibido 0,03 % EXP por completar la misión.
+11712	Has recibido 0,03 % EXP por completar la misión.
 11713	Elimina jefes o monstruos dentro de tu rango de[ENTER]nivel.
 11714	Destruye Piedras Metin en tu rango de nivel.
 11715	Elimina a jugadores en la zona de combate.
@@ -10969,8 +10973,8 @@
 11723	Descompón un objeto en el alquimista.
 11724	Refuerza un objeto.
 11725	Refina mena con ayuda del Alquimista en el[ENTER]terreno del gremio. Necesitarás mena en bruto,[ENTER]Yang y una Piedra espíritu.
-11726	Has recibido 5000 Yang por completar la misión.
-11727	Cómprale 100x Poción roja (G) a la vendedora de[ENTER]la Tienda general.
+11726	Has recibido 5000 Yang por completar la misión.
+11727	Cómprale 100x Poción roja (G) a la vendedora de[ENTER]la Tienda general.
 11728	Utiliza un Teletransportador.
 11729	Compra un objeto en la Tienda general.
 11730	Fabrica un objeto con ayuda de un PNJ de[ENTER]manufactura.
@@ -11016,7 +11020,7 @@
 11770	Puesto 9: %s x %d
 11771	Puesto 10: %s x %d
 11772	Mi puesto: %d
-11773	Necesitas 4000 almas para poderlo utilizar.
+11773	Necesitas 4000 almas para poderlo utilizar.
 11774	Transformación de montura
 11775	No puedes hacer eso mientras llamas a tu caballo.
 11776	Puedes restablecer la misión "Investigación de[ENTER]Seon-Pyeong" en nivel 92 o 94 siempre que ya la[ENTER]hayas completado antes.
@@ -11050,7 +11054,7 @@
 11807	No puedes cambiar de reino mientras formes parte[ENTER]de un gremio.
 11808	Podrás utilizar este objeto cuando abandones el[ENTER]gremio.
 11809	No puedes cambiar de reino porque no tienes[ENTER]suficiente Yang.
-11810	Podrás utilizar este objeto en cuanto tengas[ENTER]500 000 de Yang.
+11810	Podrás utilizar este objeto en cuanto tengas[ENTER]500 000 de Yang.
 11811	Perteneces al reino de %s.
 11812	¿Quieres cambiarte al reino de %s?
 11813	Shinsoo
@@ -11073,12 +11077,12 @@
 11830	¿Quieres desarrollar tu Vestimenta del aura?
 11831	Tu nivel es demasiado bajo para acceder (nivel:[ENTER]%d).
 11832	Refinamiento
-11833	El PNJ de mejora adaptará sus habilidades como le[ENTER]indiques a cambio de 5 000 000 de Yang. ¿Qué[ENTER]profesión quieres que aprenda?
+11833	El PNJ de mejora adaptará sus habilidades como le[ENTER]indiques a cambio de 5 000 000 de Yang. ¿Qué[ENTER]profesión quieres que aprenda?
 11834	Herrero de armas
 11835	Herrero de armaduras
 11836	Joyero
 11837	Cancelar
-11838	No tienes suficiente Yang. Vuelve cuando tengas[ENTER]5 000 000 de Yang.
+11838	No tienes suficiente Yang. Vuelve cuando tengas[ENTER]5 000 000 de Yang.
 11839	En solo unos segundos te teletransportarás fuera.
 11840	Tienda
 11841	Abrir portal dragontino
@@ -11223,11 +11227,11 @@
 11981	Sí
 11982	No
 11983	Sí, no me apetece tener que forjarla de nuevo.
-11984	La fabricación de un Alma cortante es[ENTER]extremadamente[ENTER]compleja y se necesitan fragmentos muy poco[ENTER]comunes.[ENTER][ENTER]Tráeme 10 Fragmentos cortantes y veré lo que[ENTER]puedo hacer por ti.
-11985	Caza monstruos para reunir 10 Fragmentos[ENTER]cortantes.
-11987	Reúne 10 Fragmentos cortantes.
-11988	Has reunido los 10 Fragmentos cortantes.[ENTER]Regresa con el vendedor de la tienda de armas.
-11989	Tengo los 10 Fragmentos cortantes.
+11984	La fabricación de un Alma cortante es[ENTER]extremadamente[ENTER]compleja y se necesitan fragmentos muy poco[ENTER]comunes.[ENTER][ENTER]Tráeme 10 Fragmentos cortantes y veré lo que[ENTER]puedo hacer por ti.
+11985	Caza monstruos para reunir 10 Fragmentos[ENTER]cortantes.
+11987	Reúne 10 Fragmentos cortantes.
+11988	Has reunido los 10 Fragmentos cortantes.[ENTER]Regresa con el vendedor de la tienda de armas.
+11989	Tengo los 10 Fragmentos cortantes.
 11990	Oh, lo has conseguido.[ENTER]Ahora he de dedicarme a mi trabajo en cuerpo y[ENTER]alma.[ENTER]Dame algo de tiempo, por favor.[ENTER]No esperes mucho tampoco, que, como te dije, el[ENTER]proceso es muy complejo.
 11991	No puedo prometerte que vaya a funcionar,[ENTER]pero haré todo lo posible.[ENTER]Te avisaré en cuanto termine. Entonces vuelve a[ENTER]verme.
 11992	Fabricar Alma cortante
@@ -11242,12 +11246,12 @@
 12002	Alma protectora (repetible)
 12003	¿Qué? ¿Quieres que te dé una nueva Alma[ENTER]protectora cuando no me queda ni una?[ENTER]Todos los ejemplares que tenía se perdieron...[ENTER]Se tarda muchísimo en fabricar algo así.
 12004	¿Por qué preguntas, entonces? Para mí supone una[ENTER]cantidad de trabajo infernal...
-12005	Va a ser difícil fabricar otra Alma protectora.[ENTER]Tráeme 10 Fragmentos protectores y veré lo que[ENTER]puedo hacer por ti.
-12006	Caza monstruos para reunir 10 Fragmentos[ENTER]protectores.
-12007	Reúne 10 Fragmentos protectores.
-12008	He reunido 10 Fragmentos protectores.[ENTER]Debería regresar con el vendedor de armaduras en[ENTER]el nuevo continente.
-12009	Tengo los 10 Fragmentos protectores.
-12010	Déjame ver... aún no has reunido los[ENTER]10 fragmentos.
+12005	Va a ser difícil fabricar otra Alma protectora.[ENTER]Tráeme 10 Fragmentos protectores y veré lo que[ENTER]puedo hacer por ti.
+12006	Caza monstruos para reunir 10 Fragmentos[ENTER]protectores.
+12007	Reúne 10 Fragmentos protectores.
+12008	He reunido 10 Fragmentos protectores.[ENTER]Debería regresar con el vendedor de armaduras en[ENTER]el nuevo continente.
+12009	Tengo los 10 Fragmentos protectores.
+12010	Déjame ver... aún no has reunido los[ENTER]10 fragmentos.
 12011	Oh, lo has conseguido.[ENTER]Ahora he de dedicarme a mi trabajo en cuerpo y[ENTER]alma.[ENTER]Dame algo de tiempo, por favor.[ENTER]No esperes mucho tampoco, que, como te dije, el[ENTER]proceso es muy complejo.
 12012	Fabricar Alma protectora
 12013	¿Ya has vuelto?[ENTER]¿No estarás intentando espiarme?
@@ -11258,11 +11262,11 @@
 12019	Busca al alquimista en el nuevo continente para[ENTER]ganar un Alma lumínica.
 12020	Alma lumínica (repetible)
 12021	¿Qué? ¿Quieres obtener algún elemento más de los[ENTER]que ya no me queda ni uno?[ENTER]Todos los ejemplares que tenía se perdieron...[ENTER]Se tarda muchísimo en fabricar algo así.
-12022	Va a ser muy complicado fabricar uno de mis[ENTER]elementos con alma.[ENTER]Tráeme 10 Fragmentos lumínicos y veré qué puedo[ENTER]hacer.
-12023	Caza monstruos para reunir 10 Fragmentos[ENTER]lumínicos.
-12024	Reúne 10 Fragmentos lumínicos.
-12025	He reunido 10 Fragmentos lumínicos.[ENTER]Debería regresar con el alquimista en el nuevo[ENTER]continente.
-12026	Toma. Tengo los 10 Fragmentos lumínicos.
+12022	Va a ser muy complicado fabricar uno de mis[ENTER]elementos con alma.[ENTER]Tráeme 10 Fragmentos lumínicos y veré qué puedo[ENTER]hacer.
+12023	Caza monstruos para reunir 10 Fragmentos[ENTER]lumínicos.
+12024	Reúne 10 Fragmentos lumínicos.
+12025	He reunido 10 Fragmentos lumínicos.[ENTER]Debería regresar con el alquimista en el nuevo[ENTER]continente.
+12026	Toma. Tengo los 10 Fragmentos lumínicos.
 12027	Fabricar Alma lumínica
 12028	Pareces creer que con esto estaría ya todo hecho.[ENTER]No esperes demasiado.
 12029	Buf, ¡no puedo creerme que lo haya conseguido![ENTER]Ten, justo lo que querías.
@@ -11272,11 +11276,11 @@
 12034	Alma ornamental (repetible)
 12035	¿Qué? ¿Quieres obtener alguna pieza más de[ENTER]joyería de las que ya no me queda ni una?[ENTER]Todos los ejemplares que tenía se perdieron...[ENTER]Se tarda muchísimo en fabricar algo así.
 12036	Ey, ¡no me la intentes colar o no te daré nada!
-12037	Va a ser muy complicado fabricar una nueva pieza[ENTER]de joyería con alma de las mías.[ENTER]Tráeme 10 Fragmentos ornamentales y veré qué[ENTER]puedo hacer.
-12038	Caza monstruos para reunir 10 Fragmentos[ENTER]ornamentales.
-12039	Reúne 10 Fragmentos ornamentales.
-12040	He reunido 10 Fragmentos ornamentales.[ENTER]Debería regresar con Uriel en el nuevo continente.
-12041	Toma. Tengo los 10 Fragmentos ornamentales.
+12037	Va a ser muy complicado fabricar una nueva pieza[ENTER]de joyería con alma de las mías.[ENTER]Tráeme 10 Fragmentos ornamentales y veré qué[ENTER]puedo hacer.
+12038	Caza monstruos para reunir 10 Fragmentos[ENTER]ornamentales.
+12039	Reúne 10 Fragmentos ornamentales.
+12040	He reunido 10 Fragmentos ornamentales.[ENTER]Debería regresar con Uriel en el nuevo continente.
+12041	Toma. Tengo los 10 Fragmentos ornamentales.
 12042	Fabricar Alma ornamental
 12043	Estos fragmentos se sienten distintos.[ENTER]No esperes demasiado.
 12044	Buf, ¡no puedo creerme que lo haya conseguido![ENTER]Ten, justo lo que querías.
@@ -11286,15 +11290,15 @@
 12049	Reliquia alma (repetible)
 12050	¿Qué? ¿Quieres que te dé otra Reliquia alma?[ENTER]Fue el resultado de una investigación muy[ENTER]laboriosa. Y tú quieres otra así como así... ¡ja,[ENTER]ja![ENTER]Para ello necesito cenizas de nuevo. Tráeme[ENTER]suficiente ceniza y veré qué puedo hacer.
 12051	No tengo elección, pues.
-12052	Tendré que dedicar día y noche a mis[ENTER]investigaciones.[ENTER]Venga, tráeme suficiente material y te ayudaré.[ENTER]Reúne 20 montoncitos de ceniza
-12053	Caza monstruos para reunir 20 montoncitos de[ENTER]ceniza.
-12054	Lleva 20 montoncitos de ceniza a Chaegirab para[ENTER]que pueda fabricar una Reliquia alma para ti.
-12055	He reunido 20 montoncitos de ceniza.[ENTER]Debería regresar con Chaegirab en el nuevo[ENTER]continente.
-12056	Toma. Tengo los 20 montoncitos de ceniza.
+12052	Tendré que dedicar día y noche a mis[ENTER]investigaciones.[ENTER]Venga, tráeme suficiente material y te ayudaré.[ENTER]Reúne 20 montoncitos de ceniza
+12053	Caza monstruos para reunir 20 montoncitos de[ENTER]ceniza.
+12054	Lleva 20 montoncitos de ceniza a Chaegirab para[ENTER]que pueda fabricar una Reliquia alma para ti.
+12055	He reunido 20 montoncitos de ceniza.[ENTER]Debería regresar con Chaegirab en el nuevo[ENTER]continente.
+12056	Toma. Tengo los 20 montoncitos de ceniza.
 12057	Oh, ¿ya los has reunido todos?[ENTER]Entonces puedo empezar de inmediato a fabricarla.[ENTER]Dame algo de tiempo, por favor.[ENTER]No te esperes mucho, que, como te dije, el[ENTER]proceso es muy complejo.
 12058	Fabricar Reliquia alma
 12059	¿Ya estás de vuelta?[ENTER]Espera, ¿qué clase decías tener?[ENTER]Ah vale, muy bien. Vuelve más tarde.
-12060	Déjame ver... aún no has reunido los[ENTER]20 montoncitos de ceniza.
+12060	Déjame ver... aún no has reunido los[ENTER]20 montoncitos de ceniza.
 12061	Buf, ¡no puedo creerme que lo haya conseguido![ENTER]Ten, justo lo que querías.
 12062	Vaya. Lo siento, pero me olvidé de tu clase...[ENTER]Así que por error fabriqué una reliquia para otra[ENTER]clase.[ENTER]Se la acabo de dar a alguien con la clase[ENTER]correspondiente.[ENTER]Por desgracia, no me queda más material. Pero si[ENTER]me traes material nuevo...[ENTER]Estaría encantado de probar de nuevo a fabricarte[ENTER]una Reliquia alma. No volveré a cometer el mismo[ENTER]error.
 12063	Reliquia alma (%s)
@@ -11318,7 +11322,7 @@
 12081	Se han restablecido tus atributos.
 12082	No tienes atributos que se puedan restablecer.
 12083	Acceder al Mundo Elemental
-12084	Se necesita al menos nivel 90 y hay que abonar un[ENTER]precio de entrada de 5 000 000 Yang. ¿Quieres[ENTER]acceder al Mundo Elemental?
+12084	Se necesita al menos nivel 90 y hay que abonar un[ENTER]precio de entrada de 5 000 000 Yang. ¿Quieres[ENTER]acceder al Mundo Elemental?
 12085	Sí
 12086	No
 12087	Tu nivel es demasiado bajo.
@@ -11343,7 +11347,7 @@
 12106	Con el diablo al cuello
 12107	Busca al guardián que lucha contra los demonios[ENTER]en la frontera con el nuevo continente.
 12108	Oh... este lugar es un campo de batalla.[ENTER]¿Eres tú el héroe?[ENTER]Por favor, ayúdanos y lucha contra los demonios[ENTER]para que no lleguen a nuestra aldea.
-12109	Elimina a 300 monstruos en las proximidades.
+12109	Elimina a 300 monstruos en las proximidades.
 12110	Monstruos restantes
 12111	Elimina a %d monstruos en las proximidades.
 12112	Monstruos restantes: %d
@@ -11388,13 +11392,13 @@
 12152	Sí
 12153	No
 12154	Nunca te cansas. Por favor, elimina a %d demonios[ENTER]en las proximidades.
-12155	Los demonios están cada vez más agresivos a pesar[ENTER]de la aniquilación de su líder. Acaba con[ENTER]%d monstruos.
+12155	Los demonios están cada vez más agresivos a pesar[ENTER]de la aniquilación de su líder. Acaba con[ENTER]%d monstruos.
 12156	¿Te cansas? Ve a descansar y vuelve más tarde...
-12157	He recibido una misión del Almirante Angmur.[ENTER]He de acabar con esos %d monstruos insoportables.
+12157	He recibido una misión del Almirante Angmur.[ENTER]He de acabar con esos %d monstruos insoportables.
 12158	¿Quieres que te ayude a aniquilarlos?[ENTER]No.[ENTER]Primero he de descansar un poco más.
 12159	He acabado con %d monstruos.[ENTER]Debería regresar con el Almirante Angmur.
 12160	¡He aniquilado a todos los monstruos![ENTER]Ahora, toca volver rápidamente con el Almirante[ENTER]Angmur.
-12162	¡Gracias a ti vuelvo a estar al 100 %! Muchas[ENTER]gracias.
+12162	¡Gracias a ti vuelvo a estar al 100 %! Muchas[ENTER]gracias.
 12163	Preparación del ritual perturbador
 12164	He recibido una carta de Confucio.[ENTER]Esperemos que el Almirante Angmur sepa cómo[ENTER]podemos continuar haciendo frente a esos[ENTER]monstruos tan agresivos.
 12165	He recibido una carta de Confucio.[ENTER]Dice que los demonios están bajo el hechizo de[ENTER]Sung Mahi y solo escuchan sus órdenes. Ya no[ENTER]reconocen a sus propios líderes.
@@ -11489,7 +11493,7 @@
 12254	Sí
 12255	No
 12256	Gracias, me da esperanzas.[ENTER]Puedo utilizar Placas de acero ornado como[ENTER]alternativa al acero de calidad.[ENTER]Los Cuernos de trol pueden servir para templarlo.
-12257	Consígueme 30 Cuernos de trol y otras tantas[ENTER]Placas de acero ornado.
+12257	Consígueme 30 Cuernos de trol y otras tantas[ENTER]Placas de acero ornado.
 12258	Oh, ¿ya tenías algo importante entre manos?[ENTER]Vuelve pronto por favor.
 12259	Consigue Cuernos de trol y Placas de acero ornado[ENTER]para el herrero.
 12260	Los tiene la mayoría de troles.
@@ -11510,7 +11514,7 @@
 12275	No
 12276	Gracias, camarada.[ENTER]Seguro que no te resultará complicado.
 12277	Para la armadura en sí se utiliza hierro forjado,[ENTER]y la capa exterior es de acero ornado.
-12278	Para varias armaduras necesito un total de[ENTER]30 Placas de hierro forjado y 30 Placas de acero[ENTER]ornado.
+12278	Para varias armaduras necesito un total de[ENTER]30 Placas de hierro forjado y 30 Placas de acero[ENTER]ornado.
 12279	Entiendo. Además me acabas de ayudar.
 12280	Consigue los materiales para el herrero.
 12281	Placas de acero ornado restantes: %d
@@ -11558,7 +11562,7 @@
 12323	Espíritus vejados
 12324	Chaegirab investiga el área contaminada.[ENTER]Ve a verle.
 12325	Necesito la esencia de los espíritus afectados de[ENTER]los alrededores.[ENTER]¿Puedes conseguirla por mí?
-12326	En los alrededores hay espíritus vejados que[ENTER]sufren las consecuencias de la contaminación.[ENTER]Con %d esencias de espíritus debería bastar.
+12326	En los alrededores hay espíritus vejados que[ENTER]sufren las consecuencias de la contaminación.[ENTER]Con %d esencias de espíritus debería bastar.
 12327	Necesito %d esencias de los espíritus vejados de[ENTER]los alrededores.
 12328	Esencias de espíritus restantes: %d
 12329	Necesito la esencia de los espíritus vejados. Por[ENTER]favor, tráeme %d.
@@ -11586,10 +11590,10 @@
 12351	Me gustaría limpiar este lugar peligroso y[ENTER]apestoso, pero aún queda mucho por investigar.[ENTER]Cuento contigo.
 12352	Tengo buenas noticias de Chaegirab: los Núcleos[ENTER]purificados de algunas almas pueden detener la[ENTER]contaminación.[ENTER]Reúne estos núcleos de espíritus en el camino.
 12353	Caza a los monstruos de los alrededores para[ENTER]obtener Núcleos purificados.
-12354	Reúne %d Núcleos purificados.
+12354	Reúne %d Núcleos purificados.
 12355	Núcleos purificados restantes: %d
-12356	Por favor, ayuda a erradicar la enfermedad.[ENTER]Para ello necesitas %d Núcleos purificados.
-12357	Has reunido todos los %d Núcleos purificados.[ENTER]Regresa con el Comandante enviado.
+12356	Por favor, ayuda a erradicar la enfermedad.[ENTER]Para ello necesitas %d Núcleos purificados.
+12357	Has reunido todos los %d Núcleos purificados.[ENTER]Regresa con el Comandante enviado.
 12358	Has hecho un buen trabajo.
 12359	Tráele los Núcleos purificados a Chaegirab.[ENTER]Él sabrá qué hacer con ellos.
 12360	Toma esto como recompensa.
@@ -11625,7 +11629,7 @@
 12390	Temo que los monstruos nos ataquen de nuevo.
 12391	He acabado con %d monstruos.[ENTER]Ahora, ¡toca volver rápidamente con Confucio!
 12392	¡Buen trabajo! Esta zona sigue siendo peligrosa,[ENTER]pero al menos los monstruos de las cuevas nos[ENTER]dejarán en paz.[ENTER]Pondré en marcha más guardias para asegurar el[ENTER]pueblo.
-12393	Has recibido %d Guantes de ladrón.
+12393	Has recibido %d Guantes de ladrón.
 12394	Depuración de aguas
 12395	Chaegirab ha terminado su investigación sobre la[ENTER]depuración de la contaminación.[ENTER]Habla con Chaegirab.
 12396	Ha llevado un tiempo, pero ¡ya estamos listos![ENTER]He fabricado un néctar depurador a base del[ENTER]Helecho oscuro y los núcleos.
@@ -11643,7 +11647,7 @@
 12408	Ahora, toca volver rápidamente con Chaegirab.
 12409	¿Has depurado el agua? Muy bien.[ENTER]Ahora hemos de esperar para ver si mis cálculos[ENTER]son correctos.
 12410	Aún es pronto para celebraciones, pero te has[ENTER]comportado con valentía.
-12411	Has recibido %d Bendiciones.
+12411	Has recibido %d Bendiciones.
 12412	Una fiesta
 12413	Informa a Confucio de tus hazañas.
 12414	¡El remedio ha funcionado![ENTER]Los habitantes de todo el pueblo se encuentran[ENTER]mejor.[ENTER]Mira: todos están bien y ninguno presenta[ENTER]síntomas.
@@ -11651,7 +11655,7 @@
 12416	Habla con los habitantes del pueblo y regresa con[ENTER]Confucio.
 12417	El vendedor de la tienda de armas parece[ENTER]contento. Debería hablar con él.
 12418	Me encuentro muchísimo mejor. El miedo[ENTER]desapareció de un plumazo. ¡Muchas gracias!
-12419	Has recibido %d Piedras del herrero.
+12419	Has recibido %d Piedras del herrero.
 12420	Mis negocios marchan viento en popa ahora que[ENTER]todos pueden trabajar de nuevo. ¡Todo gracias a[ENTER]ti!
 12421	¡Aquí viene nuestro héroe![ENTER]Por fin puedo volver a dormir tranquilamente. Te[ENTER]mereces una recompensa. Le he dado una cosita a[ENTER]Chaegirab para ti.
 12422	He hablado con todos.[ENTER]Chaegirab tiene una recompensa para mí.
@@ -11831,8 +11835,8 @@
 12596	Mejor no
 12597	Necesitas un Tique de entrada.
 12598	¿Quieres salir de la mazmorra?
-12599	¿Quieres adentrarte en las cuevas?[ENTER]Una vez accedas al nivel 2, no podrás regresar al[ENTER]nivel 1.
-12600	¿Quieres adentrarte en las cuevas?[ENTER]Una vez accedas al nivel 3, no podrás regresar al[ENTER]nivel 2.
+12599	¿Quieres adentrarte en las cuevas?[ENTER]Una vez accedas al nivel 2, no podrás regresar al[ENTER]nivel 1.
+12600	¿Quieres adentrarte en las cuevas?[ENTER]Una vez accedas al nivel 3, no podrás regresar al[ENTER]nivel 2.
 12601	Cuevas Gnoll
 12602	Habla con Confucio.
 12603	Problemas en las Cuevas Gnoll
@@ -11840,7 +11844,7 @@
 12605	Tras un buen día de caza, los monstruos suelen[ENTER]retirarse. No podrás continuar hasta el día[ENTER]siguiente.
 12606	Derrota a los monstruos en las Cuevas Gnoll.
 12607	Ten cuidado: ¡las cuevas son un verdadero[ENTER]laberinto!
-12608	Acaba con 300 monstruos en las Cuevas Gnoll.
+12608	Acaba con 300 monstruos en las Cuevas Gnoll.
 12609	Elimina a los monstruos en las Cuevas Gnoll.
 12610	Monstruos restantes
 12611	Monstruos restantes: %d
@@ -11849,15 +11853,15 @@
 12614	Debería regresar con Confucio.
 12615	Hay suficientes monstruos derrotados.
 12616	Gracias, has hecho un buen trabajo.[ENTER]¡Vuelve mañana y dales una nueva lección!
-12617	Has recibido 9 Topacios de voluntad.
-12618	Para acceder necesitas Nivel de campeón 1.
+12617	Has recibido 9 Topacios de voluntad.
+12618	Para acceder necesitas Nivel de campeón 1.
 12619	Tu inventario está lleno.
 12620	No tienes mucha paciencia, ¿eh? Vuelve más tarde,[ENTER]por favor.
 12621	No te mueras, por favor. Si se torna peligroso,[ENTER]regresa conmigo. Te llevaré a otro sitio.
-12622	Requisito: Nivel de campeón 1 o superior
+12622	Requisito: Nivel de campeón 1 o superior
 12623	Tu nivel es demasiado bajo. Tienes que haber[ENTER]subido al menos al nivel 70.
 12624	La batalla ya ha comenzado.
-12625	1 000 000 Yang
+12625	1 000 000 Yang
 12626	Siguiente
 12627	Jadita niebla
 12628	Jadita sol
@@ -11866,12 +11870,12 @@
 12633	Recuperar el Won invertido
 12634	Has invertido %d Won. Como no has ganado la[ENTER]subasta, puedes recuperarlo.
 12635	Arriendo
-12636	Arriendo actual: %d[ENTER]Hay que pagar 5 000 000 Yang de Arriendo a diario[ENTER]por cada terreno del gremio. Paga con[ENTER]regularidad: si no lo haces durante 10 días[ENTER]seguidos, perderás el terreno de forma[ENTER]automática.
+12636	Arriendo actual: %d[ENTER]Hay que pagar 5 000 000 Yang de Arriendo a diario[ENTER]por cada terreno del gremio. Paga con[ENTER]regularidad: si no lo haces durante 10 días[ENTER]seguidos, perderás el terreno de forma[ENTER]automática.
 12637	Pagar Arriendo
 12638	Cerrar
 12639	Haciendo: %s.[ENTER]Materiales: %s de %s[ENTER]y una Piedra espíritu +0, +1, +2 o +3
-12640	La oportunidad de éxito se eleva a %s y necesitas[ENTER]%s Yang.
-12641	La oportunidad de éxito se eleva a %s y necesitas[ENTER]%s Yang.[ENTER]¿Quieres continuar?
+12640	La oportunidad de éxito se eleva a %s y necesitas[ENTER]%s Yang.
+12641	La oportunidad de éxito se eleva a %s y necesitas[ENTER]%s Yang.[ENTER]¿Quieres continuar?
 12642	Sí
 12643	No
 12644	No tienes suficiente Yang.
@@ -11936,9 +11940,9 @@
 12704	Cornamentas corrompidas restantes
 12705	Pieles corrompidas restantes
 12706	Ve a celebrar el día con la vendedora de la[ENTER]tienda general.
-12707	Has recibido %d Elixires del Sol (P).
+12707	Has recibido %d Elixires del Sol (P).
 12708	Ve a celebrar el día con la vendedor de armaduras.
-12709	Has recibido %d Piedras del ritual.
+12709	Has recibido %d Piedras del ritual.
 12710	Ve con el Encargado del almacén.
 12711	Tráeme Cristales de Metin.[ENTER][ENTER]Cantidad restante: %d
 12712	Oh, lo siento.[ENTER]Aún no he terminado de analizar el último Cristal.Vuelve más tarde.[ENTER]Tiempo de carga restante: %s
@@ -12018,14 +12022,14 @@
 12786	Dirígete a la aldea
 12787	Regresa a la aldea si has terminado.[ENTER]¿Quieres ir?
 12788	Demuestra tu valía
-12789	Dirígete a uno de los lugares marcados en el mapa[ENTER]Yermo Seogan y acaba con 5 Primus myr.
+12789	Dirígete a uno de los lugares marcados en el mapa[ENTER]Yermo Seogan y acaba con 5 Primus myr.
 12790	¿Podrías ayudarme? Tengo que llevar esto a la[ENTER]Torre Infernal de Sung Mahi. ¿Te importaría[ENTER]entregarlo en mi lugar?
 12791	¡Por supuesto!
 12792	No.
 12793	¿Pretendes que me crea que tienes tantas cosas[ENTER]que hacer que no puedes hacerme este minúsculo[ENTER]favor? Bueno, pues nada, tendré que pedírselo a[ENTER]otra persona.
 12794	¡Ah, excelente! Como es una entrega muy[ENTER]importante, primero deberías limpiar un poco el[ENTER]camino a la Torre Infernal de Sung Mahi: acaba[ENTER]con algunos Primus myr. Lideran las tropas de[ENTER]Sung Mahi que están apostadas en la calzada.[ENTER]Después vuelve por aquí y te daré la mercancía.
 12795	Entendido. Volveré en cuanto haya vencido a un[ENTER]par de Primus myr.
-12796	¡Ten cuidado! Acaba con 5 Primus myr en el Yermo[ENTER]Seogan y regresa.
+12796	¡Ten cuidado! Acaba con 5 Primus myr en el Yermo[ENTER]Seogan y regresa.
 12797	Has acabado con los Primus myr. Vuelve a ver a la[ENTER]vendedora de la tienda general.
 12798	¿Todavía no te has encargado de los Primus myr?[ENTER]Igual debería pedírselo a otra persona... Los[ENTER]retrasos no hacen más que agravar el problema,[ENTER]así que date prisa, por favor.
 12799	Por fin has vuelto. Has demostrado tu valía: te[ENTER]entregaré la mercancía para la vendedora de la[ENTER]Torre Infernal de Sung Mahi.[ENTER]Ven a verme más tarde, cuando tenga todo listo.
@@ -12058,7 +12062,7 @@
 12826	Sí, iré a ver a Confucio y le presentaré un[ENTER]informe.
 12827	Habla con Confucio sobre la situación actual en[ENTER]la Llanura Dongan.
 12828	¿Has averiguado cuál es la situación en la Torre[ENTER]Infernal de Sung Mahi? Mmh... así que su poder[ENTER]sigue creciendo. Si continúan así, podrían[ENTER]convertirse en un peligro para el mundo antiguo.
-12829	Debilitar la influencia 1
+12829	Debilitar la influencia 1
 12830	Confucio está buscando a la persona idónea para[ENTER]debilitar la influencia de Sung Mahi.
 12831	Eres la única persona que fue capaz de informarme[ENTER]sobre la situación en la Torre Infernal de Sung[ENTER]Mahi la última vez. Quiero pedirte un favor. ¿Te[ENTER]unirías a nosotros y me ayudarías a debilitar la[ENTER]influencia de Sung Mahi?
 12832	Sí.
@@ -12072,14 +12076,14 @@
 12870	Has destruido todos los Metins de la atención.[ENTER]Informa a Confucio en la Llanura Dongan.
 12871	Vuelve a ver a Confucio e infórmale de lo que[ENTER]está pasando.
 12872	Debilitar su influencia no será suficiente. No[ENTER]obstante, cada pequeño paso cuenta. Toma, un[ENTER]pequeño regalo como muestra de agradecimiento. La[ENTER]próxima vez volveré a recurrir a ti.
-12873	Debilitar la influencia 2
+12873	Debilitar la influencia 2
 12874	Confucio está buscando de nuevo a la persona[ENTER]idónea para debilitar la influencia de Sung Mahi.
 12875	Quiero pedirte un favor. ¿Te unirías a nosotros y[ENTER]me ayudarías a debilitar la influencia de Sung[ENTER]Mahi una vez más?
 12876	Sí.
 12877	No.
 12878	Sí, cuenta con ello.
 12879	¿Acaso no te preocupa la seguridad del viejo[ENTER]continente? Piénsalo bien.
-12880	Gracias a tu ayuda, esta vez he podido[ENTER]desarrollar una técnica especial que creo que te[ENTER]resultará muy útil. Ojalá vuelvas con la[ENTER]victoria. Ah, espera, una vez más, me pudo la[ENTER]impaciencia. Están apareciendo otra vez Piedras[ENTER]Metin en el Abismo Namgan. Si las derribamos,[ENTER]atenuaremos la influencia. ¿Te encargarías de[ENTER]destruirlas? ¡No nos queda mucho tiempo! No[ENTER]olvides que el efecto positivo que te he otorgado[ENTER]dura solo 10 minutos.
+12880	Gracias a tu ayuda, esta vez he podido[ENTER]desarrollar una técnica especial que creo que te[ENTER]resultará muy útil. Ojalá vuelvas con la[ENTER]victoria. Ah, espera, una vez más, me pudo la[ENTER]impaciencia. Están apareciendo otra vez Piedras[ENTER]Metin en el Abismo Namgan. Si las derribamos,[ENTER]atenuaremos la influencia. ¿Te encargarías de[ENTER]destruirlas? ¡No nos queda mucho tiempo! No[ENTER]olvides que el efecto positivo que te he otorgado[ENTER]dura solo 10 minutos.
 12881	Destruye %d Metins de Jin en el Abismo Namgan.[ENTER]Faltan: %d.
 12882	Dirígete al sur del Abismo Namgan. Destruye[ENTER]Metins de Jin y vuelve por aquí.
 12883	Destruidos: %d. Faltan: %d.
@@ -12161,9 +12165,9 @@
 12959	¡Vamos!
 12960	Casi lo hemos conseguido. Por favor, piénsatelo[ENTER]bien.
 12961	Espero que sigamos de una pieza cuando nos[ENTER]volvamos a ver.
-12962	Entra al Templo Serpentino sin que te detecte el[ENTER]guardián del altar y averigua qué hay dentro.[ENTER]Acaba con 30 Soldados kappa.[ENTER]Monstruos restantes: %d
+12962	Entra al Templo Serpentino sin que te detecte el[ENTER]guardián del altar y averigua qué hay dentro.[ENTER]Acaba con 30 Soldados kappa.[ENTER]Monstruos restantes: %d
 12963	¿Todavía no has partido? Pues ya salgo yo primero.
-12964	Has investigado el Templo Serpentino y acabado[ENTER]con 30 Soldados kappa. Vuelve a hablar con el[ENTER]Cazarrecompensas.
+12964	Has investigado el Templo Serpentino y acabado[ENTER]con 30 Soldados kappa. Vuelve a hablar con el[ENTER]Cazarrecompensas.
 12965	¡Sabía que lo conseguirías! He echado un vistazo[ENTER]dentro, pero no he podido localizar a la líder.[ENTER]En fin, es lo que hay. ¡La próxima vez lo[ENTER]lograremos! Si he llegado hasta aquí, es gracias[ENTER]a ti, así que quiero recompensarte por tu ayuda.[ENTER]Aquí tienes.
 12966	¿Puedo?
 12967	Entonces márchate. Vuelve a verme si cambias de[ENTER]parecer.
@@ -12187,7 +12191,7 @@
 12985	¡Ja, ja, ja! No se entra, a no ser que te deje[ENTER]pasar yo. Primero voy a ponerte a prueba.
 12986	¡Tus mirada transmite resolución! ¡Ve y encárgate[ENTER]de un par de monstruos en los alrededores![ENTER]Últimamente, mantener el área bajo control se ha[ENTER]convertido en una tarea tediosa.
 12987	Caza monstruos en los alrededores para superar la[ENTER]prueba del Guardia serpentino.
-12988	El Guardia serpentino quiere que caces[ENTER]%d monstruos en el Pase de Yilad.[ENTER]Monstruos restantes: %d
+12988	El Guardia serpentino quiere que caces[ENTER]%d monstruos en el Pase de Yilad.[ENTER]Monstruos restantes: %d
 12989	Ey, todavía no te has encargado de esos[ENTER]monstruos. ¿Has tirado la toalla?
 12990	He acabado con todos los monstruos que me pidió[ENTER]el Guardia serpentino. Ahora volveré a hablar con[ENTER]él.
 12991	He acabado con todos los monstruos que me pidió[ENTER]el Guardia serpentino. Ahora volveré a hablar con[ENTER]él.
@@ -12201,9 +12205,9 @@
 12999	Sí.
 13000	No.
 13001	Meh, ¡pues me temo que entonces no vas a ir al[ENTER]valle!
-13002	Consigue las %d Virutas de hierro que quiere el[ENTER]Guardia serpentino. Las conseguirás de los[ENTER]monstruos en los alrededores.
+13002	Consigue las %d Virutas de hierro que quiere el[ENTER]Guardia serpentino. Las conseguirás de los[ENTER]monstruos en los alrededores.
 13003	¿Cómo? ¿Que ya las tienes todas? ¡Ey! Creo que[ENTER]has contado mal. ¡Te pedí %d!
-13004	El Guardia serpentino quiere %d Virutas de[ENTER]hierro. A cambio, te dejará acceder al valle.[ENTER]Tengo que cazar monstruos en los alrededores del[ENTER]Pase de Yilad para conseguir Virutas de hierro.[ENTER]Virutas de hierro restantes: %d
+13004	El Guardia serpentino quiere %d Virutas de[ENTER]hierro. A cambio, te dejará acceder al valle.[ENTER]Tengo que cazar monstruos en los alrededores del[ENTER]Pase de Yilad para conseguir Virutas de hierro.[ENTER]Virutas de hierro restantes: %d
 13005	Has recibido Virutas de hierro. Cantidad reunida: %d
 13006	Ya tengo todas las Virutas de hierro que quiere[ENTER]el Guardia serpentino. Ahora volveré a hablar con[ENTER]él.
 13007	Ya tengo todas las Virutas de hierro que quiere[ENTER]el Guardia serpentino. Ahora volveré a hablar con[ENTER]él.
@@ -12222,7 +12226,7 @@
 13020	Preparativos importantes
 13021	Tengo que encontrar la Estatua de serpiente para[ENTER]entrar en el Templo Serpentino.
 13022	Vas a necesitar varias cosas para explorar esta[ENTER]mazmorra subterránea... un fedora, un látigo y[ENTER]una bolsa para el tesoro te vendrían de miedo.[ENTER]Todo eso te lo puedo fabricar yo.
-13023	Ahora bien: cuando quieras entrar al templo,[ENTER]tendrás que traerme %d Escamas de serpiente para[ENTER]el equipamiento. Y solo los héroes contritos[ENTER]saborean el éxito, así que te costará %d Yang.[ENTER]¿Podrás conseguir ambas cosas?
+13023	Ahora bien: cuando quieras entrar al templo,[ENTER]tendrás que traerme %d Escamas de serpiente para[ENTER]el equipamiento. Y solo los héroes contritos[ENTER]saborean el éxito, así que te costará %d Yang.[ENTER]¿Podrás conseguir ambas cosas?
 13024	La Estatua de serpiente necesita %d Escamas de[ENTER]serpiente. Las conseguirás de los monstruos en[ENTER]los alrededores.
 13025	Para acceder al Templo Serpentino, tengo que[ENTER]llevarle %d Escamas de serpiente a la Estatua de[ENTER]serpiente.[ENTER]Cantidad restante: %d
 13026	Aún necesito más Escamas de serpiente...
@@ -12251,7 +12255,7 @@
 13049	Hoy no puedes volver a acceder.
 13050	Haz tu oferta.
 13051	Solo puedes introducir cifras.
-13052	La oferta máxima asciende a %d Won.
+13052	La oferta máxima asciende a %d Won.
 13053	No puedes cambiar eso.
 13054	Sigue el punto que parpadea del minimapa.
 13055	No podrás crear instancias nuevas mientras no[ENTER]hayas conseguido todas las recompensas.
@@ -12280,12 +12284,12 @@
 13078	Espera, ¿vienes del Templo Serpentino? ¿Te ha[ENTER]enviado mi amigo? Sí, de cerca se nota que tienes[ENTER]experiencia en combate.
 13079	Me vendría muy bien tu ayuda. Por ahora, toma[ENTER]asiento y cuéntame qué tal tu viaje.
 13080	Tu inventario está lleno.
-13081	Obtienes 100 Gemas como recompensa por la misión.
+13081	Obtienes 100 Gemas como recompensa por la misión.
 13082	Animales poseídos
 13083	El Guardia de tramontana te está buscando.
 13084	¿Cómo estás? Cuidado, no te pierdas. La Garganta[ENTER]está repleta de las almas de los que se[ENTER]congelaron aquí.
 13085	Viniste para ayudar, ¿no? Las almas perdidas[ENTER]poseen a veces a los animales, y estos se vuelven[ENTER]agresivos. ¿Y qué pasaría si atacasen a alguien?[ENTER]Acaba con 300 de ellos para que la zona vuelva a[ENTER]ser segura, por favor.
-13086	Acaba con 300 Animales poseídos en los[ENTER]alrededores.
+13086	Acaba con 300 Animales poseídos en los[ENTER]alrededores.
 13087	Monstruos restantes
 13088	Acaba con los animales poseídos en la Garganta[ENTER]Tramontana.
 13089	Monstruos restantes: %d
@@ -12352,18 +12356,18 @@
 13150	¡Eh, tú! ¡Detente! Esta zona es peligrosa.[ENTER]¡Lárgate!
 13151	Ah, disculpa. Creo que Confucio me ha hablado de[ENTER]ti. Parece tenerte en alta estima. ¿Te ha contado[ENTER]que aquí acabaron con un ser temible hace siglos?[ENTER]Eso fue el comienzo de todo.
 13152	He asegurado este lugar, puedes descansar un[ENTER]ratito.
-13153	Obtienes 100 Gemas como recompensa por la misión.
+13153	Obtienes 100 Gemas como recompensa por la misión.
 13154	Sigilosamente
 13155	El Guardia del barranco te busca.
 13156	Cada vez hay más monstruos... Y encima este frío[ENTER]helador.
 13157	Cada vez hay más seres poseídos avanzando por el[ENTER]Barranco de Almas. Por favor, ayúdame a[ENTER]detenerles. No quiero ni imaginar cuando escapen[ENTER]de la Garganta... Hace tiempo que no deja de ir a[ENTER]peor.
-13158	Acaba con 300 monstruos en los alrededores para[ENTER]que la gente vuelva a estar segura.
-13159	Acaba con 300 monstruos para el Guardia del[ENTER]barranco.
+13158	Acaba con 300 monstruos en los alrededores para[ENTER]que la gente vuelva a estar segura.
+13159	Acaba con 300 monstruos para el Guardia del[ENTER]barranco.
 13160	¡Date prisa! ¡No dejes que escapen!
 13161	He aniquilado a todos los monstruos y debo[ENTER]regresar con el Guardia del barranco.
-13162	He aniquilado a 300 monstruos como me pidió el[ENTER]Guardia del barranco. Tengo que volver con él.
+13162	He aniquilado a 300 monstruos como me pidió el[ENTER]Guardia del barranco. Tengo que volver con él.
 13163	Te he visto llegar. ¡Muchas gracias! Juntos[ENTER]podremos tenerle en jaque, para empezar.
-13164	Obtienes 1 Objeto encantado como recompensa por[ENTER]la misión.
+13164	Obtienes 1 Objeto encantado como recompensa por[ENTER]la misión.
 13165	Caverna Tramontana
 13166	Has vuelto. Creo que te has ganado conocer lo que[ENTER]pasa. Como ya sabías, hace mucho tiempo pasó algo[ENTER]aquí que cambió a la Garganta.
 13167	Un temible Dragón blanco trajo el mal a esta[ENTER]región, hasta que unos héroes pudieron[ENTER]derrotarle. Confucio quiere que echemos un[ENTER]vistazo al lugar donde cayó. Quizá allí podamos[ENTER]encontrar la causa de todo esto. ¿Te atreves a[ENTER]ir?
@@ -12373,11 +12377,11 @@
 13171	Busca al General Kohan en la Caverna Tramontana.
 13172	El general diligente
 13173	Dirígete a la entrada de la Caverna Tramontana[ENTER]para hablar con el General Kohan.
-13174	Cuesta 5000 Yang.
+13174	Cuesta 5000 Yang.
 13175	¿Qué haces aquí? Es mi deber custodiar este[ENTER]lugar. No dejo a nadie acceder alegremente: es[ENTER]demasiado peligroso. Y me encargo de que nada[ENTER]encuentre su camino hacia el exterior...
 13176	Envié a un espía hace un par de días. Pero no he[ENTER]vuelto a oír de él. ¿Has venido desde la lejanía[ENTER]hasta aquí para cumplir con las instrucciones de[ENTER]Confucio? Impresionante.
 13177	No tengo mucho. Pero espero poder ayudar[ENTER]igualmente.
-13178	Obtienes 1 Tique de entrada como recompensa por[ENTER]la misión.
+13178	Obtienes 1 Tique de entrada como recompensa por[ENTER]la misión.
 13179	No tienes suficiente Yang.
 13180	Monstruos restantes
 13181	Virutas de hierro restantes
@@ -12387,7 +12391,7 @@
 13185	Ey, tú. Escúchame bien. Uno de los nuestros entró[ENTER]en la Caverna Tramontana hace un par de días, a[ENTER]pesar de mis advertencias.
 13186	Como era de esperar, aún no ha regresado. Ya sé[ENTER]que no es tu problema, pero... ¿irías a buscarle?
 13187	Bien. Le reconocerás en cuanto le veas.
-13188	Encuentra al espía perdido en el nivel 1 de la[ENTER]Caverna Tramontana.
+13188	Encuentra al espía perdido en el nivel 1 de la[ENTER]Caverna Tramontana.
 13189	El General Kohan te ha pedido que busques al[ENTER]espía que no ha regresado de la Caverna[ENTER]Tramontana. Entra en la Caverna para buscar al[ENTER]Espía perdido.
 13190	Espía de la Caverna Tramontana
 13191	El espía no respira. Pertenece a las almas[ENTER]perdidas que dejaron su vida en esta Garganta.[ENTER]Tiene en la mano un trozo de carbón y un mapa[ENTER]dibujado a mano de la Caverna Tramontana.
@@ -12424,7 +12428,7 @@
 13222	Hola. Confucio me dijo que vendrías. Es[ENTER]imprescindible que paremos a Alastor antes de que[ENTER]abandone el valle y se una a Sung Mahi. Hay un[ENTER]ritual que puede pararle.
 13223	En la Caverna Tramontana hay un antiguo círculo[ENTER]ritual. Lleva inactivo una eternidad. Por eso,[ENTER]Alastor lo ignora y piensa que no supone ninguna[ENTER]amenaza. Pero quizá podamos aprovechar su exceso[ENTER]de confianza.
 13224	Reactivar el círculo no va a ser fácil y vamos a[ENTER]necesitar unos cuantos ingredientes mágicos.[ENTER]Algunos monstruos de la Caverna recogen las[ENTER]pieles y las escamas de dragón que Alastor va[ENTER]perdiendo. Nos viene de perlas para preparar el[ENTER]círculo ritual contra él.
-13225	Recopila 20 Escamas de dragón blanco y 20 Pieles[ENTER]cubiertas de escarcha para el General Kohan en la[ENTER]Bajada Tramontana.
+13225	Recopila 20 Escamas de dragón blanco y 20 Pieles[ENTER]cubiertas de escarcha para el General Kohan en la[ENTER]Bajada Tramontana.
 13226	¡Tenemos que darnos prisa antes de que Alastor[ENTER]descubra lo que planeamos! ¡Ve y recoge las[ENTER]Escamas de dragón y la Piel cubierta de escarcha!
 13227	Hazte con Escamas de dragón blanco y Piel[ENTER]cubierta de escarcha en la Bajada Tramontana para[ENTER]llevar a cabo el ritual.
 13228	Escamas de dragón blanco restantes: %d
@@ -12455,7 +12459,7 @@
 13253	Parece que hemos llegado demasiado tarde. Alastor[ENTER]ha despertado del todo. Solo nos queda una[ENTER]oportunidad.
 13254	Tenemos que reunir todas nuestras fuerzas. Un[ENTER]grupo de héroes poderosos ya logró derrotarle en[ENTER]el pasado. Podemos hacerlo de nuevo.
 13255	Debo prepararme en profundidad. Vuelve más tarde,[ENTER]por favor.
-13256	Obtienes 10 Bendiciones del dragón como[ENTER]recompensa por la misión.
+13256	Obtienes 10 Bendiciones del dragón como[ENTER]recompensa por la misión.
 13257	El poder de Confucio
 13258	Busca a Confucio.
 13259	Esta amenaza es mucho peor de lo que hemos visto[ENTER]hasta ahora. No obstante, he podido averiguar[ENTER]algunas cosas sobre la última derrota de Alastor.
@@ -12476,7 +12480,7 @@
 13274	Vuelve con Confucio.
 13275	Ah, ¿ya está? Nuestro alquimista es un verdadero[ENTER]maestro de la artesanía. Se ve genial. Seguro que[ENTER]te preguntas qué evitará que Alastor regrese de[ENTER]nuevo cuando consigamos derrotarle. Estoy seguro[ENTER]de que podemos detener a Alastor si realizamos el[ENTER]ritual de nuevo... pero con su corazón.
 13276	La Escama afilada de hielo refinada protege de[ENTER]alguno de los poderes más oscuros de Alastor.[ENTER]Quédatela y ve a planear el resto con el General[ENTER]Kohan.
-13277	Obtienes 10 Bendiciones del dragón como[ENTER]recompensa por la misión.
+13277	Obtienes 10 Bendiciones del dragón como[ENTER]recompensa por la misión.
 13278	El hundimiento de Alastor
 13279	Ve con el General Kohan.
 13280	Has vuelto. Ya me informó Confucio. No va a ser[ENTER]fácil derrotar a Alastor. Tu Escama refinada te[ENTER]permite adentrarte en las gélidas profundidades[ENTER]de la Caverna. Me temo que no hay otro camino.[ENTER]Debes derrotar a Alastor y encargarte de que no[ENTER]pueda regresar nunca más.
@@ -12497,8 +12501,8 @@
 13295	Nos has salvado la vida. Quiero darte las gracias[ENTER]en nombre de todos. Es bueno saber que podemos[ENTER]contar con héroes como tú.
 13296	Toma, acepta esta muestra de agradecimiento de mi[ENTER]parte y del resto de habitantes del pueblo.
 13297	Obtienes +3 de voluntad de SungMa (RES).
-13298	1 Bendición
-13299	Obtienes 10 Bendiciones del dragón como[ENTER]recompensa por la misión.
+13298	1 Bendición
+13299	Obtienes 10 Bendiciones del dragón como[ENTER]recompensa por la misión.
 13300	El ritual se completó con éxito. Informa a[ENTER]Confucio.
 13301	Expedición Tramontana
 13302	¿Quieres explorar la Caverna Tramontana? Puedo[ENTER]dejarte pasar con un Tique de entrada. ¿Quieres[ENTER]acceder a la Caverna Tramontana?
@@ -12512,10 +12516,10 @@
 13310	Ah, has vuelto.
 13311	Quizá puedas ayudarme con algo. Estoy aquí solo[ENTER]de guardia en este frío helador. Me encargo de[ENTER]que nadie se pierda en la Garganta y quede en[ENTER]peligro.
 13312	La situación ha mejorado notablemente gracias a[ENTER]las medidas tomadas. A pesar de ello, tengo que[ENTER]quedarme aquí y estar alerta. ¿Podrías hacerme un[ENTER]favor?
-13313	Aquí hace mucho frío, sobre todo por las noches.[ENTER]Pero si enciendo una hoguera, me verán las[ENTER]criaturas poseídas del valle. Y si dejo mi puesto[ENTER]para calentarme, podrían salir a hurtadillas de[ENTER]la Garganta. Como ves, no puedo irme de aquí.[ENTER]¿Podrías traerme 20 Pieles gruesas de los[ENTER]monstruos de la zona, por favor?
+13313	Aquí hace mucho frío, sobre todo por las noches.[ENTER]Pero si enciendo una hoguera, me verán las[ENTER]criaturas poseídas del valle. Y si dejo mi puesto[ENTER]para calentarme, podrían salir a hurtadillas de[ENTER]la Garganta. Como ves, no puedo irme de aquí.[ENTER]¿Podrías traerme 20 Pieles gruesas de los[ENTER]monstruos de la zona, por favor?
 13314	Ah, entiendo. Bueno, si cambias de opinión... ya[ENTER]ves que no podré estar muy lejos.
-13315	Caza a monstruos en las proximidades y reúne[ENTER]20 Pieles gruesas.
-13316	El Guardia de tramontana me ha pedido que le[ENTER]traiga 20 Pieles gruesas de los monstruos de la[ENTER]Garganta Tramontana.
+13315	Caza a monstruos en las proximidades y reúne[ENTER]20 Pieles gruesas.
+13316	El Guardia de tramontana me ha pedido que le[ENTER]traiga 20 Pieles gruesas de los monstruos de la[ENTER]Garganta Tramontana.
 13317	Pieles gruesas restantes
 13318	Pieles gruesas restantes: %d
 13319	Has conseguido una Piel gruesa. Total de Pieles gruesas: %d
@@ -12532,18 +12536,18 @@
 13330	Espera, ¿te conozco? Sí, claro, ¡del Pase de[ENTER]Yilad ¿Qué te trae aquí, pues? Hay una recompensa[ENTER]por los monstruos de la zona, por eso estoy aquí.
 13331	Ya trabajamos juntos satisfactoriamente en otra[ENTER]ocasión. ¿Por qué no me ayudas y nos repartimos[ENTER]la recompensa, como la última vez?
 13332	Estás bastante ocupado, ¿verdad? Sí, je, je.[ENTER]¡Vuelve cuando estés listo para pasar un rato[ENTER]divertido y recibir una recompensa a cambio!
-13333	¡Ja, como en los viejos tiempos!Bueno, no es que[ENTER]haya pasado tanto tiempo, pero...¡En fin! ¡Acaba[ENTER]con 50 monstruos en la zona!
-13334	Acaba con 50 monstruos en la zona y vuelve con el[ENTER]Cazarrecompensas.
-13335	El Cazarrecompensas quiere que cace para él[ENTER]50 monstruos en la Garganta Tramontana.
+13333	¡Ja, como en los viejos tiempos!Bueno, no es que[ENTER]haya pasado tanto tiempo, pero...¡En fin! ¡Acaba[ENTER]con 50 monstruos en la zona!
+13334	Acaba con 50 monstruos en la zona y vuelve con el[ENTER]Cazarrecompensas.
+13335	El Cazarrecompensas quiere que cace para él[ENTER]50 monstruos en la Garganta Tramontana.
 13336	Monstruos restantes
 13337	Monstruos restantes: %d
-13338	¡Acabé con 50 monstruos! Ahora tengo que volver[ENTER]con el Cazarrecompensas en la Garganta[ENTER]Tramontana.
-13339	Los 50 monstruos han caído. Regresa con el[ENTER]Cazarrecompensas en la Garganta Tramontana.
+13338	¡Acabé con 50 monstruos! Ahora tengo que volver[ENTER]con el Cazarrecompensas en la Garganta[ENTER]Tramontana.
+13339	Los 50 monstruos han caído. Regresa con el[ENTER]Cazarrecompensas en la Garganta Tramontana.
 13340	La caza ha finalizado.
 13341	Ya pensaba que te habías echado para atrás. Nada,[ENTER]no te preocupes, solo bromeo. De hecho fuiste más[ENTER]rápido que yo. Verdaderamente impresionante.
 13342	Ahora voy en busca de una criatura temible,[ENTER]¿quizá podamos irnos de caza juntos pronto? Aquí[ENTER]tienes tu recompensa. No es oro, por lo que no[ENTER]puedo darle uso.
 13343	Obtienes
-13344	1 Baúl de la 9.ª vía como recompensa por la misión
+13344	1 Baúl de la 9.ª vía como recompensa por la misión
 13345	La gran caza Tramontana
 13346	Ah, ya estás de vuelta.
 13347	¿Te lo pasaste tan bien como yo en la última[ENTER]caza? La verdad que fue facilita. ¿Listo para un[ENTER]desafío?
@@ -12556,7 +12560,7 @@
 13354	El Adalid congelado ha caído.
 13355	Bien. ¡Impresionante! Has acabado con el Adalid[ENTER]congelado. Me he encontrado con unos cuantos[ENTER]veteranos poderosos a lo largo de los años, pero[ENTER]haces sombra a muchos de ellos.
 13356	Has hecho un trabajo excelente. ¡Mereces por[ENTER]tanto una recompensa! Aquí tienes, de nada.
-13357	Obtienes 1 Tesoro de Yohara como recompensa por[ENTER]la misión.
+13357	Obtienes 1 Tesoro de Yohara como recompensa por[ENTER]la misión.
 13358	La petición del Guardia del barranco
 13359	El Guardia del barranco te busca.
 13360	¿Hmm?
@@ -12585,7 +12589,7 @@
 13383	Oh, ¿a quién tenemos aquí? ¿Qué te trae a este[ENTER]lugar tan peligroso?
 13384	Ah, entiendo. Muchas gracias. Tienes razón. No me[ENTER]queda mucho aquí. Gracias por tu ayuda.
 13385	Te has ganado una recompensa. Toma, por tus[ENTER]esfuerzos.
-13386	Obtienes 1 Tique de entrada como recompensa por[ENTER]la misión.
+13386	Obtienes 1 Tique de entrada como recompensa por[ENTER]la misión.
 13387	La salvaje caza tramontana
 13388	Dirígete al Cazarrecompensas en el Barranco de[ENTER]Almas.
 13389	Espera... ¿estás aquí?
@@ -12600,14 +12604,14 @@
 13398	El Adalid de tramontana ha caído.
 13399	¿Seguro? Es increíble. ¡Y sin despeinarte![ENTER]¡Impresionante!
 13400	Quizá deberías pensar en un futuro como[ENTER]cazarrecompensas. Ten, para ti.
-13401	Obtienes 1 Caja del tesoro de Yohara como[ENTER]recompensa por la misión.
+13401	Obtienes 1 Caja del tesoro de Yohara como[ENTER]recompensa por la misión.
 13402	Tesoros en el hielo
 13403	Dirígete al Cazarrecompensas en la Caverna[ENTER]Tramontana.
 13404	¿Tú, otra vez?
 13405	Ah, ya estás aquí otra vez. ¿Será casualidad del[ENTER]destino que nos encontremos tantas veces?
 13406	Quizá sea que buscamos lo mismo. Joyas valiosas,[ENTER]por ejemplo. En esta caverna deberían estar las[ENTER]escasas Joyas de tramontana. Es difícil[ENTER]encontrarlas. He buscado, pero de momento no tuve[ENTER]suerte. ¿Te atreves a intentarlo?
 13407	¡Espera! ¿Eres consciente del valor de estas[ENTER]joyas? Venga, los dos sabemos que cambiarás de[ENTER]opinión.
-13408	¡Muy bien! No te vas a arrepentir. ¿Qué te parece[ENTER]si me traes las joyas y yo te... recompenso[ENTER]adecuadamente? Tendré que venderlas y eso.[ENTER]¡Intenta reunir 20 piezas!
+13408	¡Muy bien! No te vas a arrepentir. ¿Qué te parece[ENTER]si me traes las joyas y yo te... recompenso[ENTER]adecuadamente? Tendré que venderlas y eso.[ENTER]¡Intenta reunir 20 piezas!
 13409	Acaba con monstruos en la Caverna Tramontana para[ENTER]conseguir las Joyas de tramontana.
 13410	Encuentra las Joyas de tramontana para el[ENTER]Cazarrecompensas. Puedes conseguirlas de los[ENTER]monstruos en la Caverna Tramontana.
 13411	Joyas de tramontana restantes:
@@ -12619,7 +12623,7 @@
 13417	Una, dos, tres, cuatro...
 13418	[DELAY value;500]...[/DELAY][ENTER]¡Sí, eso es! Como[ENTER]acordamos.
 13419	Como me has traído estas joyas maravillosas e[ENTER]impagables, has de recibir una recompensa[ENTER]adecuada. ¡No me mires así, es fantástica!
-13420	Obtienes 2 Baúles de la 9.ª vía como recompensa[ENTER]por la misión
+13420	Obtienes 2 Baúles de la 9.ª vía como recompensa[ENTER]por la misión
 13421	La última caza Tramontana
 13422	Dirígete al Cazarrecompensas en la Caverna[ENTER]Tramontana.
 13423	Acabar con el líder
@@ -12632,7 +12636,7 @@
 13430	El Adalid ha caído.
 13431	¿Qué? ¿Lo has conseguido? ¿En serio?
 13432	Bueno... claro que lo lograste. Tuve fe ciega en[ENTER]ti. Para un Cazarrecompensas tan hábil como tú[ENTER]esto era pan comido. Aquí tienes tu recompensa.
-13433	Obtienes 2 Cajas del tesoro de Yohara como[ENTER]recompensa por la misión.
+13433	Obtienes 2 Cajas del tesoro de Yohara como[ENTER]recompensa por la misión.
 13434	Un rumor inquietante
 13435	Dirígete al Eremita de tramontana en la Bajada[ENTER]Tramontana.
 13436	¡Ey, espera! ¡Esto es peligroso! ¿Qué narices le[ENTER]pasa aquí a la gente? Por lo menos sabrás[ENTER]luchar...
@@ -12646,18 +12650,18 @@
 13444	Regresa con el Eremita de tramontana e infórmale[ENTER]de los huesos antiguos que has encontrado.
 13445	¡¿Qué?! ¿Otra vez aquí?... Eh, sí, es fantástico.[ENTER]Suena a que la historia era cierta. Creo que[ENTER]todos los aventureros pueden aprender de ella,[ENTER]¿no crees?
 13446	¿Hm? ¿Una recompensa? Bueno, pues has aprendido[ENTER]algo. Bien, bien. Toma.
-13447	Obtienes 5 Pergaminos bendición como recompensa[ENTER]por la misión.
+13447	Obtienes 5 Pergaminos bendición como recompensa[ENTER]por la misión.
 13448	Entrenamiento helado
 13449	*Suspira* Aún sigues aquí. Bueno. Alguien tan[ENTER]poderoso como tú está prácticamente obligado a[ENTER]proteger a otros, ¿no es así? Aquí hay muchos[ENTER]monstruos que se escapan de la Caverna y atacan a[ENTER]la gente.
 13450	Cuando acabes con ellos, quedaré tranquilo. Eh,[ENTER]¡entonces seguro que te harás más fuerte! ¡Puedes[ENTER]ayudar a la gente y entrenar! Menuda aventura,[ENTER]¿verdad? Creo que es una magnífica idea.
 13451	Si no, también puedes dedicarte a lamer este[ENTER]carámbano. Eso me ayudaría.
-13452	¡Muy heroico por tu parte! Muy bien. Voy a[ENTER]meditar un rat... ¡eh, un buen entrenamiento[ENTER]lleva su tiempo! No se puede acelerar. Mmm, sí.[ENTER]Ve y acaba con 300 monstruos en la Bajada[ENTER]Tramontana.
-13453	Acaba con 300 monstruos en la Bajada Tramontana.
-13454	He acabado con 300 monstruos en la Bajada[ENTER]Tramontana y debería regresar con el Eremita de[ENTER]tramontana.
+13452	¡Muy heroico por tu parte! Muy bien. Voy a[ENTER]meditar un rat... ¡eh, un buen entrenamiento[ENTER]lleva su tiempo! No se puede acelerar. Mmm, sí.[ENTER]Ve y acaba con 300 monstruos en la Bajada[ENTER]Tramontana.
+13453	Acaba con 300 monstruos en la Bajada Tramontana.
+13454	He acabado con 300 monstruos en la Bajada[ENTER]Tramontana y debería regresar con el Eremita de[ENTER]tramontana.
 13455	El entrenamiento ha finalizado.
 13456	¿Qué, ya has acabado? Qué... grande. Estoy seguro[ENTER]de que ahora eres más fuerte y todos hemos[ENTER]aprendido hoy alg... ¿... es eso sangre?
 13457	Maravilloso. ¿Por qué no te quedas ahí y no te[ENTER]acercas más? Mientras tanto, busco una recompensa[ENTER]para ti.
-13458	Obtienes 1 Piedra del Herrero como recompensa por[ENTER]la misión.
+13458	Obtienes 1 Piedra del Herrero como recompensa por[ENTER]la misión.
 13459	Motivo de preocupación
 13460	Confucio te está buscando.
 13461	Confucio
@@ -12736,7 +12740,7 @@
 13535	Regresa con Taehwarang.
 13536	Ah, ya has vuelto. ¿Y bien? ¿Ayudaste a mi padre[ENTER]a encontrar la paz? Era muy valiente, ¿sabes?[ENTER]Igual que tú. Os habríais llevado bien.
 13537	Esto era de mi padre. Creo que le gustaría que lo[ENTER]tuvieses. Por todo lo que has hecho por nosotros.
-13538	Obtienes 1 Piedra del ritual como recompensa por[ENTER]la misión.
+13538	Obtienes 1 Piedra del ritual como recompensa por[ENTER]la misión.
 13539	Has encontrado la Horquilla. Vuelve a ver a la[ENTER]vendedora de la tienda general.
 13540	¿Quieres entrar en el Templo Serpentino?
 13541	Se ha añadido una misión nueva.
@@ -12753,13 +12757,13 @@
 13552	Acceder
 13553	Cancelar
 13554	Requisitos de acceso
-13555	Requisitos para Profundidades Tramontanas (fácil): 1) Nivel de campeón 1 o superior 2) 3 Llaves heladas 3) Grupo de 4 o más miembros/as 4) Completar la misión "El poder de Confucio" y otras aventuras en Yohara.
-13556	Requisitos para Profundidades Tramontanas (difícil): 1) Nivel de campeón 1 o superior 2) Completar Profundidades Tramontanas (fácil) 3) 3 Llaves heladas 4) Grupo de 4 o más miembros/as
+13555	Requisitos para Profundidades Tramontanas (fácil): 1) Nivel de campeón 1 o superior 2) 3 Llaves heladas 3) Grupo de 4 o más miembros/as 4) Completar la misión "El poder de Confucio" y otras aventuras en Yohara.
+13556	Requisitos para Profundidades Tramontanas (difícil): 1) Nivel de campeón 1 o superior 2) Completar Profundidades Tramontanas (fácil) 3) 3 Llaves heladas 4) Grupo de 4 o más miembros/as
 13557	Siguiente
 13558	Confirmar
 13559	No formas parte de un grupo.
 13560	Solo disponible para el líder de grupo.
-13561	El grupo debe estar formado por al menos 4 miembros/as.
+13561	El grupo debe estar formado por al menos 4 miembros/as.
 13562	%s aún no ha completado "El poder de Confucio" u otras aventuras en Yohara.
 13563	%s no tiene suficientes Llaves heladas.
 13564	Los miembros/as del grupo no están en la misma área.
@@ -12775,8 +12779,8 @@
 13574	Debes completar con éxito "Profundidades Tramontanas (fácil)".
 13575	Recibir recompensa
 13576	He escuchado los bramidos de Alastor en las[ENTER]profundidades de la Caverna Tramontana. Ten, esto[ENTER]es para ti.
-13577	Obtienes 8 Baúles del dragón blanco (fácil).
-13578	Obtienes 8 Baúles del dragón blanco (difícil).
+13577	Obtienes 8 Baúles del dragón blanco (fácil).
+13578	Obtienes 8 Baúles del dragón blanco (difícil).
 13579	Intenta tocarlo.
 13580	Salir
 13581	¿Quieres abandonar este lugar? Podrás regresar[ENTER]hasta que empiece el combate.
@@ -12801,7 +12805,7 @@
 13600	Ahora no puedes acceder.
 13601	Ya has creado una instancia.
 13602	Te has registrado en otro nivel de dificultad.
-13603	Has acabado con %d monstruos. Cantidad restante: %d
+13603	Has acabado con %d monstruos. Cantidad restante: %d
 13604	Has completado Profundidades Tramontanas con éxito. Ve con el Guardia espectral para recibir tu recompensa.
 13605	
 13606	Has recibido %d Tesoro/s serpentino/s.
@@ -12820,7 +12824,7 @@
 13619	Ve a ver a la vendedora de la tienda general.
 13620	Ve a hablar con la vendedora de la tienda general[ENTER]para obtener Piezas de joyería.
 13621	¿Todavía no lo tienes todo?[ENTER]Caza Tigres o Tigres blancos para obtener Hígado[ENTER]de tigre y Hierbas.
-13622	Caza Tigres o Tigres blancos y reúne 100 Hígados[ENTER]de tigre y 1 Hierbas.
+13622	Caza Tigres o Tigres blancos y reúne 100 Hígados[ENTER]de tigre y 1 Hierbas.
 13623	Cantidad restante
 13624	Hígados de tigre: %d
 13625	Hierbas: %d
@@ -12852,11 +12856,11 @@
 13651	Me queda muy poca comida... ve con el Comandante[ENTER]Yohara en la Llanura Dongan.
 13652	¿No estuviste aún con el General? Está en los[ENTER]márgenes del Barranco de Almas. Date prisa.
 13653	Buen intento, pero estoy seguro de que aún no has[ENTER]acabado con el Adalid de tramontana.
-13654	Pero aquí no hay aún 20 joyas. Si quieres una[ENTER]recompensa, tendremos que encontrar algunas más.[ENTER]¡Ánimo, sigue buscando!
+13654	Pero aquí no hay aún 20 joyas. Si quieres una[ENTER]recompensa, tendremos que encontrar algunas más.[ENTER]¡Ánimo, sigue buscando!
 13655	He vuelto a ver al Adalid de la Caverna. Así que[ENTER]no intentes decirme que has acabado con él. ¡Pero[ENTER]sé que puedes hacerlo!
 13656	*Suspira* No me digas que tienes miedo. Mira,[ENTER]tampoco es que sea tan terrorífico. Adéntrate[ENTER]todo lo que puedas en la Caverna a ver si[ENTER]encuentras los huesos antiguos.
-13657	...¿Mmh? ¡No debes interrumpir tu entrenamiento[ENTER]bajo ninguna circunstancia! ¡Sería totalmente[ENTER]contraproducente! Es muy importante que no[ENTER]regreses hasta que hayas acabado con todos los[ENTER]300 monstruos.
-13658	Has acabado con %d monstruos. Monstruos restantes: %d
+13657	...¿Mmh? ¡No debes interrumpir tu entrenamiento[ENTER]bajo ninguna circunstancia! ¡Sería totalmente[ENTER]contraproducente! Es muy importante que no[ENTER]regreses hasta que hayas acabado con todos los[ENTER]300 monstruos.
+13658	Has acabado con %d monstruos. Monstruos restantes: %d
 13659	<Concluido> Fiebre de Metin
 13660	Fiebre de Metin
 13661	¡Únete a la Fiebre de Metin![ENTER]Destruye %d Piedras Metin de un nivel parecido al[ENTER]tuyo.
@@ -12864,7 +12868,7 @@
 13663	Cantidad restante
 13664	De recompensa recibirás 1
 13665	Pergamino del desafío.
-13666	Has destruido las 5 Piedras Metin.
+13666	Has destruido las 5 Piedras Metin.
 13667	No puedes recibir la recompensa porque tu inventario está lleno.
 13668	Solo se puede usar durante el evento.
 13669	Tiempo restante
@@ -12873,7 +12877,7 @@
 13672	<Fiebre de Metin> Prueba %d: ha aparecido una[ENTER]Piedra Metin.
 13673	<Fiebre de Metin> No se ha podido conjurar la[ENTER]Piedra Metin.
 13674	¡Hola![ENTER]Aquí nos enfrentamos a nuevos peligros a diario.[ENTER]Siempre nos viene bien la ayuda de héroes para[ENTER]proteger la aldea.[ENTER]¿Quieres echar una mano?
-13675	Esta será tu misión:[ENTER]Da caza a 20 Sabuesos infernales en los[ENTER]alrededores de la aldea.
+13675	Esta será tu misión:[ENTER]Da caza a 20 Sabuesos infernales en los[ENTER]alrededores de la aldea.
 13676	Necesitamos ayuda todos los días. No dudes en[ENTER]pasarte por aquí.
 13677	El Comandante Yohara te está buscando.
 13678	Monstruos restantes
@@ -12886,20 +12890,20 @@
 13685	Destruye 3 Piedras Metin en la Llanura Dongan.
 13686	Te está buscando el cazarrecompensas.
 13687	Trabajo de cazarrecompensas aquí, en el Yermo[ENTER]Seogan.[ENTER]Tengo un encargo pendiente.[ENTER]¿Te gustaría ayudarme?
-13688	Te pondré una tarea fácil.[ENTER]Da caza a 20 Kovix myr en la región.
+13688	Te pondré una tarea fácil.[ENTER]Da caza a 20 Kovix myr en la región.
 13689	Tengo una tarea para ti:[ENTER]Destruye 3 Piedras Metin en el Yermo Seogan.
 13690	¡Has finalizado el segundo encargo en el Yermo[ENTER]Seogan! Vuelve a hablar con el cazarrecompensas.
 13691	Trabajo de cazarrecompensas aquí, en el Abismo[ENTER]Namgan.[ENTER]Tengo un encargo pendiente.[ENTER]¿Te gustaría ayudarme?
 13693	Estoy por aquí todos los días. Ven a verme si[ENTER]necesitas algo.
-13694	Da caza a 20 Kovix myr.
-13695	Da caza a 20 Kovix myr en la región.
+13694	Da caza a 20 Kovix myr.
+13695	Da caza a 20 Kovix myr en la región.
 13696	¡Has finalizado el encargo en el Abismo Namgan![ENTER]Vuelve a hablar con el cazarrecompensas.
 13697	Tengo una tarea para ti:[ENTER]Destruye 3 Piedras Metin en el Abismo Namgan.
 13698	Destruye 3 Piedras Metin en el Abismo Namgan.
 13699	¡Has finalizado el segundo encargo en el Abismo[ENTER]Namgan! Vuelve a hablar con el cazarrecompensas.
 13700	Trabajo de cazarrecompensas aquí, en el Pase de[ENTER]Yilad.[ENTER]Tengo un encargo pendiente.[ENTER]¿Te gustaría ayudarme?
-13701	Te pondré una tarea fácil. Mata a 20 Soldados[ENTER]corrompidos en la región.
-13702	Mata a 20 Soldados corrompidos.
+13701	Te pondré una tarea fácil. Mata a 20 Soldados[ENTER]corrompidos en la región.
+13702	Mata a 20 Soldados corrompidos.
 13703	Encargo en la Llanura Dongan (rep.)
 13704	2.º encargo Llanura Dongan (rep.)
 13705	Encargo en el Yermo Seogan (rep.)
@@ -12923,27 +12927,27 @@
 13723	Tengo una tarea para ti:[ENTER]Destruye 3 Piedras Metin en el Pase de Yilad.
 13724	Destruye 3 Piedras Metin en el Pase de Yilad.
 13725	Trabajo de cazarrecompensas aquí, en la Garganta[ENTER]Tramontana.[ENTER]Tengo un encargo pendiente.[ENTER]¿Te gustaría ayudarme?
-13726	Te pondré una tarea fácil. Da caza a 20 Zorros[ENTER]congelados en la zona.
-13728	Da caza a 20 Zorros congelados.
+13726	Te pondré una tarea fácil. Da caza a 20 Zorros[ENTER]congelados en la zona.
+13728	Da caza a 20 Zorros congelados.
 13729	¡Estupendo! Mata a 2 monstruos jefe en la[ENTER]Garganta Tramontana.
 13730	Mata a 2 monstruos jefe en la Garganta Tramontana.
 13731	Tengo una tarea para ti:[ENTER]Destruye 3 Piedras Metin en la Garganta[ENTER]Tramontana.
 13732	Destruye 3 Piedras Metin en la Garganta[ENTER]Tramontana.
-13733	Te pondré una tarea fácil. Da caza a 20 Uapitíes[ENTER]poseídos en la región.
-13734	Da caza a 20 Uapitíes poseídos.
+13733	Te pondré una tarea fácil. Da caza a 20 Uapitíes[ENTER]poseídos en la región.
+13734	Da caza a 20 Uapitíes poseídos.
 13735	Trabajo de cazarrecompensas aquí, en el Barranco[ENTER]de Almas.[ENTER]Tengo un encargo pendiente.[ENTER]¿Te gustaría ayudarme?
 13736	¡Estupendo! Mata a 2 monstruos jefe en el[ENTER]Barranco de Almas.
 13737	Mata a 2 monstruos jefe en el Barranco de Almas.
 13738	Tengo una tarea para ti:[ENTER]Destruye 3 Piedras Metin en el Barranco de Almas.
 13739	Destruye 3 Piedras Metin en el Barranco de Almas.
 13740	Trabajo de cazarrecompensas aquí, en la Caverna[ENTER]Tramontana.[ENTER]Tengo un encargo pendiente.[ENTER]¿Te gustaría ayudarme?
-13741	Te pondré una tarea fácil. Mata a 20 Soldados de[ENTER]la Caverna en la zona.
-13743	Mata a 20 Soldados de la Caverna.
+13741	Te pondré una tarea fácil. Mata a 20 Soldados de[ENTER]la Caverna en la zona.
+13743	Mata a 20 Soldados de la Caverna.
 13744	¡Estupendo! Mata a 2 monstruos jefe en la Caverna[ENTER]Tramontana.
 13745	Mata a 2 monstruos jefe en la Caverna Tramontana.
 13746	Sí
 13747	No
-13748	Da caza a 20 Sabuesos infernales.
+13748	Da caza a 20 Sabuesos infernales.
 13749	Has matado a un Sabueso infernal. Restantes: %d
 13750	Has destruido una Piedra Metin. Restantes: %d
 13751	Has matado a un Kovix myr. Restantes: %d
@@ -12966,9 +12970,9 @@
 13771	¡Has finalizado el tercer encargo en el Barranco[ENTER]de Almas! Vuelve a hablar con el[ENTER]cazarrecompensas.
 13772	¡Has finalizado el encargo en la Caverna[ENTER]Tramontana! Vuelve a hablar con el[ENTER]cazarrecompensas.
 13773	¡Has finalizado el segundo encargo en la Caverna[ENTER]Tramontana! Vuelve a hablar con el[ENTER]cazarrecompensas.
-13774	Da caza a 20 Sabuesos infernales en la región.
+13774	Da caza a 20 Sabuesos infernales en la región.
 13775	Destruye 3 Piedras Metin en el Yermo Seogan.
-13776	Mata a 20 Soldados corrompidos en la región.
+13776	Mata a 20 Soldados corrompidos en la región.
 13780	Comandante Yohara
 13781	%s x %d
 13783	Restante: %d
@@ -12982,7 +12986,7 @@
 13814	No hay suficiente espacio en tu inventario.
 13815	¿Quieres abandonar este lugar?
 13816	Ya tienes todos los Hígados de tigre y las Hierbas. Vuelve a ver a la vendedora de la tienda general.
-13817	Tiene que haber al menos 4 miembros del gremio en[ENTER]línea en el mismo mapa o en el mismo canal.
+13817	Tiene que haber al menos 4 miembros del gremio en[ENTER]línea en el mismo mapa o en el mismo canal.
 13818	No se puede iniciar la instancia porque hay una[ENTER]persona no autorizada en ella.
 13823	Aumentar nivel de montura
 13824	En este nivel aún no puedes llamar a un Caballo[ENTER]de batalla poderoso.
@@ -13007,13 +13011,13 @@
 13845	Obtener Manual de hípica dorado
 13847	¡Por fin estás listo para obtener un nuevo[ENTER]caballo! Se te ve lleno de emoción.
 13848	Te busca el Chico del establo.
-13849	Con el Manual de hípica dorado puedes obtener un[ENTER]caballo nuevo y más poderoso. Voy a necesitar un[ENTER]día para prepararlo todo. Además, necesito tu[ENTER]antiguo Libro Caballo Militar y 100 millones de[ENTER]Yang.
+13849	Con el Manual de hípica dorado puedes obtener un[ENTER]caballo nuevo y más poderoso. Voy a necesitar un[ENTER]día para prepararlo todo. Además, necesito tu[ENTER]antiguo Libro Caballo Militar y 100 millones de[ENTER]Yang.
 13850	Avísame cuando estés listo. Te diré cuánto tiempo[ENTER]necesito. Si dispones de un Acelerador, irá todo[ENTER]más rápido.
 13851	¡Veo la ilusión en tus ojos! Tienes que tener un[ENTER]poquito de paciencia. Tardará aún %s.
-13852	Hmm, parece que te falta algo. Necesitas tu[ENTER]antiguo Libro Caballo Militar y 100 millones de[ENTER]Yang. Mira si lo tienes todo.
+13852	Hmm, parece que te falta algo. Necesitas tu[ENTER]antiguo Libro Caballo Militar y 100 millones de[ENTER]Yang. Mira si lo tienes todo.
 13853	Utiliza ahora el Manual de hípica dorado para[ENTER]invocar a tu nuevo caballo. Se te ve lleno de[ENTER]emoción. Puedo entenderlo. Después necesitarás el[ENTER]Ginseng Rojo (Premium) para alimentar a tu[ENTER]caballo. ¡Piensa que solo podrás resucitarlo con[ENTER]Hierba noble!
 13854	El Manual de hípica dorado se está generando.[ENTER]Habla con el Chico del establo para averiguar[ENTER]cuánto tiempo queda.
-13855	Bueno, por fin. Te doy el Manual de hípica dorado[ENTER]a cambio de tu antiguo Libro Caballo Militar y[ENTER]100 millones de Yang. ¿Deseas continuar?
+13855	Bueno, por fin. Te doy el Manual de hípica dorado[ENTER]a cambio de tu antiguo Libro Caballo Militar y[ENTER]100 millones de Yang. ¿Deseas continuar?
 13856	Cambiar
 13857	Cancelar
 13858	Has obtenido un Caballo de batalla poderoso y %d[ENTER]Ginseng Rojo (Premium).
@@ -13070,7 +13074,7 @@
 13914	Chico del Establo
 13915	Comida para caballos restante
 13917	Viajar al Otro Mundo
-13918	¿Quieres acceder? (Se necesitan 3 Cartas negras)
+13918	¿Quieres acceder? (Se necesitan 3 Cartas negras)
 13919	Sí
 13920	No
 13921	No tienes el nivel necesario. (Nivel necesario:[ENTER]%d)
@@ -13093,7 +13097,7 @@
 13938	Usar Alma de los muertos
 13939	Utiliza Almas de los muertos para reducir los HP[ENTER]de Asmodeus.[ENTER](Cantidad máxima: %d)
 13940	Efecto de las Almas de los muertos empleadas:
-13941	20: los HP máximos de Asmodeus disminuyen un 20 %[ENTER]40: los HP máximos de Asmodeus disminuyen un 40 %[ENTER]60: los HP máximos de Asmodeus disminuyen un 60 %[ENTER]80: los HP máximos de Asmodeus disminuyen un 90 %
+13941	20: los HP máximos de Asmodeus disminuyen un 20 %[ENTER]40: los HP máximos de Asmodeus disminuyen un 40 %[ENTER]60: los HP máximos de Asmodeus disminuyen un 60 %[ENTER]80: los HP máximos de Asmodeus disminuyen un 90 %
 13942	¿Quieres utilizar el objeto?
 13943	(Cantidad de Almas de los muertos empleadas: %d)
 13944	Ya no puedes utilizar más.
@@ -13115,14 +13119,14 @@
 13960	Te busca el Chico del establo.
 13961	No le damos el Manual de hípica dorado a[ENTER]cualquiera. Primero tenemos que comprobar que[ENTER]estás listo.
 13962	Tu misión será viajar a las Cuevas Gnoll y cazar[ENTER]a monstruos allí. ¿Crees que podrás conseguirlo?
-13963	Entiendo que aún no te sientas preparado para[ENTER]ello. Tienes que derrotar a los monstruos en un[ENTER]plazo de 30 minutos. Avísame si cambias de[ENTER]parecer.
-13964	¡Excelente! No me defraudes. Viaja a las Cuevas[ENTER]Gnoll y derrota a 100 monstruos en 30 minutos.[ENTER]¡Debes lograrlo en un plazo de 30 minutos!
+13963	Entiendo que aún no te sientas preparado para[ENTER]ello. Tienes que derrotar a los monstruos en un[ENTER]plazo de 30 minutos. Avísame si cambias de[ENTER]parecer.
+13964	¡Excelente! No me defraudes. Viaja a las Cuevas[ENTER]Gnoll y derrota a 100 monstruos en 30 minutos.[ENTER]¡Debes lograrlo en un plazo de 30 minutos!
 13965	Proceso de prueba del Manual de hípica dorado
 13967	Tiempo limitado
 13968	Monstruos restantes
 13969	Los miembros de tu grupo podrán ayudarte. ¡Estoy[ENTER]ansioso por ver vuestras habilidades!
 13970	¡Vamos! ¡Se acaba el tiempo!
-13971	Acaba con 100 monstruos en un plazo de 30 minutos[ENTER]en las Cuevas Gnoll.
+13971	Acaba con 100 monstruos en un plazo de 30 minutos[ENTER]en las Cuevas Gnoll.
 13972	Prueba del Manual de hípica dorado: %d víctimas. Monstruos restantes: %d
 13973	La prueba del Manual de hípica dorado está en[ENTER]proceso. ¿Quieres abandonar?
 13974	Abandonar
@@ -13190,7 +13194,7 @@
 14037	Jefe de mazmorra derrotado: %d puntos
 14038	Resistencia que puede obtenerse: %d / %d
 14039	Has obtenido toda la resistencia posible de las[ENTER]misiones. Obtén la recompensa en la ventana de[ENTER]misión.
-14040	Has completado la misión de los mercenarios.[ENTER]Puedes repetirla cada 24 horas.
+14040	Has completado la misión de los mercenarios.[ENTER]Puedes repetirla cada 24 horas.
 14041	<Completada> Enviar mercenario (repetición)
 14042	Sí
 14043	No
@@ -13247,13 +13251,13 @@
 14110	Cambiar
 14111	Cancelar
 14112	¡No te quedan Bolas de hielo en el inventario![ENTER]Echa un vistazo a ver si las localizas y cuando[ENTER]las encuentres, vuelve.
-14113	Aún necesitas %d Bola/s de hielo.
+14113	Aún necesitas %d Bola/s de hielo.
 14114	No puedes recibir %s porque tu inventario está[ENTER]lleno.
 14115	Usa tus Bolas de hielo y después hablamos.
 14116	Bolas de hielo disponibles: %d
-14117	Tienes 30 minutos.
-14118	Tienes 15 minutos.
-14119	Tienes 5 minutos.
+14117	Tienes 30 minutos.
+14118	Tienes 15 minutos.
+14119	Tienes 5 minutos.
 14120	Se ha acabado el tiempo y se te teletransportará[ENTER]fuera de aquí.
 14121	Más información
 14122	Acerca de portal
@@ -13261,13 +13265,13 @@
 14124	Cancelar
 14125	Atrás
 14126	Más información
-14127	Solo puedes llegar al Portal de invasión de Sung[ENTER]Ma a través de este Portal.[ENTER]Solo puedes utilizar un Portal que pertenezca a[ENTER]tu Reino.[ENTER]Tienes 10 minutos para encontrar el Portal de tu[ENTER]Reino con ayuda del color, y cuando lo hagas[ENTER]podrás acceder.
-14128	Una vez accedas, aparecerá un Portal de invasión[ENTER]de Sung Ma en un lugar aleatorio del área.[ENTER]Una vez hayas destruido 6 Portales de invasión de[ENTER]Sung Ma,[ENTER]aparecerá el Comandante de invasores. Puedes[ENTER]facilitar el combate[ENTER]si haces uso de las flores poderosas que aparecen[ENTER]cerca de este.
+14127	Solo puedes llegar al Portal de invasión de Sung[ENTER]Ma a través de este Portal.[ENTER]Solo puedes utilizar un Portal que pertenezca a[ENTER]tu Reino.[ENTER]Tienes 10 minutos para encontrar el Portal de tu[ENTER]Reino con ayuda del color, y cuando lo hagas[ENTER]podrás acceder.
+14128	Una vez accedas, aparecerá un Portal de invasión[ENTER]de Sung Ma en un lugar aleatorio del área.[ENTER]Una vez hayas destruido 6 Portales de invasión de[ENTER]Sung Ma,[ENTER]aparecerá el Comandante de invasores. Puedes[ENTER]facilitar el combate[ENTER]si haces uso de las flores poderosas que aparecen[ENTER]cerca de este.
 14129	Ir a ver a Summer
 14130	Ir al Portal de invasión de Sung Ma
 14131	Cambiar por Tableros de Iutnori
 14132	Iutnori
-14133	Puedes cambiar el Tablero de Iutnori por el[ENTER]Secreto de Iutnori. El canje cuesta 50 000 Yang.
+14133	Puedes cambiar el Tablero de Iutnori por el[ENTER]Secreto de Iutnori. El canje cuesta 50 000 Yang.
 14134	Cambiar
 14135	Cancelar
 14136	No tienes suficientes Tableros de Iutnori.
@@ -13288,7 +13292,7 @@
 14151	¿Quieres acceder a la Tierra Dorada?
 14152	Entrar
 14153	Cancelar
-14154	Para entrar tienes que haber subido al menos al[ENTER]nivel 70.
+14154	Para entrar tienes que haber subido al menos al[ENTER]nivel 70.
 14155	Ya no puedes acceder a la Tierra Dorada porque el[ENTER]evento ya ha terminado.
 14156	Desde esta área no puedes acceder a la Tierra[ENTER]Dorada.
 14157	¿Cómo funciona la expedición de Primordis?
@@ -13388,15 +13392,15 @@
 14288	Velocidad de Goblin
 14289	Seleccionar
 14290	Cancelar
-14291	Entrega 500 000 Yang para aumentar en un 20 % los[ENTER]puntos de vida del Goblin de los tesoros.
-14292	Entrega 500 000 Yang para aumentar en 50 la[ENTER]defensa del Goblin de los tesoros.
-14293	Entrega 500 000 Yang para hacer que el Goblin de[ENTER]los tesoros sea inmune al veneno.
-14294	Entrega 1 500 000 Yang para aumentar en 100 la[ENTER]velocidad de movimiento del Goblin de los[ENTER]tesoros.
+14291	Entrega 500 000 Yang para aumentar en un 20 % los[ENTER]puntos de vida del Goblin de los tesoros.
+14292	Entrega 500 000 Yang para aumentar en 50 la[ENTER]defensa del Goblin de los tesoros.
+14293	Entrega 500 000 Yang para hacer que el Goblin de[ENTER]los tesoros sea inmune al veneno.
+14294	Entrega 1 500 000 Yang para aumentar en 100 la[ENTER]velocidad de movimiento del Goblin de los[ENTER]tesoros.
 14295	El Goblin de los tesoros ha recibido la bendición[ENTER]"Fuerza vital de Goblin". Este efecto solo se[ENTER]puede aplicar una vez.
 14296	El Goblin de los tesoros ha recibido la bendición[ENTER]"Defensa de Goblin". Este efecto solo se puede[ENTER]aplicar una vez.
 14297	El Goblin de los tesoros ha recibido la bendición[ENTER]"Inmunidad al veneno de Goblin". Este efecto solo[ENTER]se puede aplicar una vez.
 14298	El Goblin de los tesoros ha recibido la bendición[ENTER]"Velocidad de Goblin". Este efecto solo se puede[ENTER]aplicar una vez.
-14299	No tienes 500 000 Yang.
+14299	No tienes 500 000 Yang.
 14300	Ya se ha aplicado esta bendición.
 14301	¡Venga, vamos!
 14302	¡Tesoro encontrado!
@@ -13410,4 +13414,4 @@
 14310	No tienes suficiente espacio en tu inventario.
 14311	No tienes suficiente espacio en tu inventario.
 14312	No tienes suficiente espacio en tu inventario.
-14320	No tienes 1 500 000 Yang.
+14320	No tienes 1 500 000 Yang.

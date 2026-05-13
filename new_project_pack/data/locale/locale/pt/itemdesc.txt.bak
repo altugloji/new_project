@@ -2763,7 +2763,7 @@
 27988	Mapa do Tesouro	Um mapa desgastado que revela o local de um tesouro antigo.
 27989	Bússola de Pedras Metin	A bússola indica-te a posição e distância da próxima Pedra Metin. Quanto mais brilhante, mais perto estarás. Pode ser usada 6 vezes.
 27990	Pedaço de Pedra	Devido ao pequeno tamanho pode ser transportada facilmente. Tem várias utilizações possíveis.
-27991	Pedra d'Água	Uma grossa e dura pedra que pode ser usada para afiar armas ou utensílios de cozinha.
+27991	Pedra de Água	Um mineral valioso do mar.
 27992	Pérola Branca	Um tesouro branco puro encontrado dentro de uma Ostra.
 27993	Pérola Azul	Uma magnífica pérola de cor azul profundo encontrada dentro de uma Ostra.
 27994	Pérola Vermelha	Uma pérola de cor avermelhada encontrada dentro de uma Ostra.
@@ -2931,7 +2931,7 @@
 30153	Flores	Uma flor rara, o seu cheiro faz-te lembrar algo no passado.
 30154	Livro do Templo Secreto	A análise da história e a doutrina do templo secreto.
 30155	Pendente de Mirine	Um pendente de colar. Gravado no lado contrário está o nome "Mirine".
-30156	Livro do Templo Secreto	A análise da história e a doutrina do templo secreto.
+30156	Livro Roxo	Um livro com receitas de livros de habilidades. Pode ser criado no Alquimista.
 30157	Ponta de Flecha	Estas pontas de flechas venenosas irão ajudar a defender o Reino.
 30177	Essência de Almíscar	A Essência de Almíscar é utilizada pelo Vendedor de Armas numa missão. Este item não tem qualquer outra utilidade além dessa.
 30179	Chave Torcida	A chave mágica activa o portal para o Templo do Dragão.
@@ -3123,20 +3123,20 @@
 30586		
 30600	Padrão de Costura	
 30601	Design de Armadura	
-30602	Tinta Azul	
-30603	Tinta Vermelha	
-30604	Tinta Cinzenta	
+30602	Tinta Azul	Tinta necessária para criação.
+30603	Tinta Vermelha	Tinta necessária para criação.
+30604	Tinta Cinzenta	Tinta necessária para criação.
 30605	Chapas de Ouro	
 30606	Chapas de Prata	
 30607	Chapas de Cobre	
 30608	Chapas de Aço	
 30609	Chapas de Bronze	
-30610	Mithril	
+30610	Mithril	Obtido ao derreter minérios. Pode ser usado em várias criações. Pode ser criado no Alquimista.
 30611	Correias Fortes	
 30612	Cordas Robustas	
 30613	Pedra das Dríades	Rodeada por um brilho verde, esta misteriosa pedra contém no seu interior a alma de uma dríade, o espírito de uma árvore. As dríades conhecem as palavras secretas que te garantem acesso à masmorra Erebus.
-30614	Tinta Negra	
-30615	Tinta Branca	
+30614	Tinta Preta	Tinta necessária para criação.
+30615	Tinta Branca	Tinta necessária para criação.
 30616	Dióxido de Titânio	Este cristal prismático é usado para refinar uma peça de equipamento.
 30617	Ágata	Esta misteriosa e reluzente pedra preciosa é usada para refinar uma peça de equipamento.
 30618	Pedra Lunar	Um raio de luar está encapsulado nesta jóia em forma de lágrima. É usada para refinar uma peça de equipamento.
@@ -3216,7 +3216,7 @@
 31032	Pérolas Leviathan	Cápsulas de fortalecimento eficientes feitas a partir da Luz Interior de criaturas míticas e da Essência Milenar.
 31033	Capa do Chefe	Esta capa é o símbolo da invulnerabilidade dos Ladrões Rubros.
 31034	Totem dos Gigantes	O totem tem a forma de um pedaço gigante de âmbar.
-31035	Pedra Negra	Esta misteriosa pedra está a ser minerada pelos Cyclops nas Montanhas do Trovão.
+31035	Pedra Negra	Obtida ao derreter pedras. Pode ser usada em várias criações. Pode ser criada no Alquimista.
 31036	Ouro Negro	Este ouro negro com propriedades mágicas pode ser encontrado nas Montanhas do Trovão.
 31037	Saco de Couro	Roubaste este saco ao Capitão Shruk. Parece ser mais leve do que estavas à espera...
 31038	Terreno Sagrado	Este saco cheio de Terreno Sagrado serve como um medium para invocar os mortos.
@@ -5627,8 +5627,8 @@
 50853	Elixir Resist. Trevas G.	Este elixir extremamente poderoso concede +20% Resistência a Trevas a quem o beber.
 50901	Garrafa Vazia	Usada para preparar poções.
 50902	Receita do Iniciante	Uma tarefa simples que também pode ser executada por novatos.
-50903	Receita	Uma tarefa que já necessita de um pouco de prática.
-50904	Receita do Profissional	Uma tarefa que apenas pode ser correctamente executada por pessoas experientes.
+50903	Esquema de Reforço	Esquema necessário para criação.
+50904	Esquema de Encantar Item	Esquema necessário para criação.
 50905	Receita de Água Sim	Descreve exactamente como se processam o Sumo de Flor de Pêssego e o Lilás por forma a obter Água Sim.
 50906	Receita de Água Dok	Descreve exactamente como se processam o Sumo de Flor de Sino e o Lilás por forma a obter Água Dok.
 50907	Receita de Água Bo	Descreve exactamente como se processam o Sumo de Flor de Kaki e o Cogumelo Tue por forma a obter Água Bo.
@@ -5658,7 +5658,7 @@
 50938	Cofre Vidente Vermelho	Contém 105 Cartas de Tarot para o Duelo dos Videntes.
 50939	Cofre Vidente Azul	Contém 21 Cartas de Tarot para o Duelo dos Videntes.
 50940	Cofre Vidente Rosa	Contém 5 Cartas de Tarot para o Duelo dos Videntes.
-51001	Fragmento de Energia	Fragmento de um Cristal de Energia. 30 peças podem ser usadas para formar um Cristal.
+51001	Fragmento de Energia	Obtido ao derreter itens valiosos. Pode ser usado em várias criações. Pode ser criado no Alquimista.
 51002	Cristal de Energia	Este Cristal aumenta os teus bónus durante 2 horas.
 51501	Cor Draconis (Cru)	O coração de dragão cristalino contém uma Pedra do Dragão aleatória de classe Crua.
 51502	Cor Draconis (Cru)	O coração de dragão cristalino contém uma Pedra do Dragão aleatória de classe Crua.
@@ -6428,8 +6428,8 @@
 70428	Poeira da Serpente.	Adiciona 1 minuto ao temporizador da masmorra. Material usado para melhorar Armaduras da Serpente.
 70429	Tesouro da Serpente	Um tesouro obtido das profundezas do Templo da Serpente.
 70430	Reinicia Templo Serpente	Reinicializa as tuas entradas no Templo da Serpente para voltares a ter 5.
-70432	Papiro Tesouro (Nível C)	Podes usar este papiro para viajar para um lugar secreto quando atingires o nível 75–90. Atenção! Quando chegares ao Templo do Enigma, há uma contagem decrescente de 1 minuto até a ronda poder começar. Após esse tempo, tens 4 minutos para iniciar a batalha antes de seres transportado para fora do Templo.
-70433	Papiro Tesouro (Nível B)	Podes usar este papiro para viajar para um lugar secreto quando atingires o nível 91–120. Atenção! Quando chegares ao Templo do Enigma, há uma contagem decrescente de 1 minuto até a ronda poder começar. Após esse tempo, tens 4 minutos para iniciar a batalha antes de seres transportado para fora do Templo. 
+70432	Papiro Tesouro (Nível C)	Podes usar este papiro para viajar para um lugar secreto quando atingires o nível 75-90. Atenção! Quando chegares ao Templo do Enigma, há uma contagem decrescente de 1 minuto até a ronda poder começar. Após esse tempo, tens 4 minutos para iniciar a batalha antes de seres transportado para fora do Templo.
+70433	Papiro Tesouro (Nível B)	Podes usar este papiro para viajar para um lugar secreto quando atingires o nível 91-120. Atenção! Quando chegares ao Templo do Enigma, há uma contagem decrescente de 1 minuto até a ronda poder começar. Após esse tempo, tens 4 minutos para iniciar a batalha antes de seres transportado para fora do Templo. 
 70434	Papiro Tesouro (Nível A)	Podes usar este papiro para viajar para um lugar secreto quando atingires o Nível de Campeão. Atenção! Quando chegares ao Templo do Enigma, há uma contagem decrescente de 1 minuto até a ronda poder começar. Após esse tempo, tens 4 minutos para iniciar a batalha antes de seres transportado para fora do Templo.
 70440	Cofre Tesouro (Nível C)	Um cofre do tesouro normal.
 70441	Cofre Tesouro (Nível B)	Um cofre do tesouro normal.

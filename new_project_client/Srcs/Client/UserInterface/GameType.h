@@ -371,6 +371,11 @@ typedef struct packet_shop_item
 #ifdef ENABLE_CHEQUE_SYSTEM
 	DWORD		cheque;
 #endif
+#ifdef ENABLE_MULTISHOP
+	DWORD		wPriceVnum;
+	DWORD		wPrice;
+	DWORD		gem_price;
+#endif
     BYTE        count;
 	BYTE		display_pos;
 	long		alSockets[ITEM_SOCKET_SLOT_MAX_NUM];

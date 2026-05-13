@@ -556,6 +556,11 @@ typedef struct SShopItemTable
 #ifdef ENABLE_CHEQUE_SYSTEM
 	DWORD		cheque;
 #endif
+#ifdef ENABLE_MULTISHOP
+	DWORD		wPriceVnum;
+	DWORD		wPrice;
+	DWORD		gem_price;
+#endif
 	BYTE		display_pos;
 } TShopItemTable;
 

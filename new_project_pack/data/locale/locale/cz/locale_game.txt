@@ -3668,3 +3668,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Získáš desku Yutnori.
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	Získal jsi 1 Bøezovou vìtev.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	Pro hru nemáš dostatek pøedmìtù nebo penìz.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Další desky Yutnori již nemùžeš získat.
+SHOP_NOT_ENOUGH_ITEM	Nedostatek pøedmìtù
+GEMSHOP_TITLE	Gaya obchod
+GEMSHOP_SECOND_TITLE	Pøevod pøedmìtù na Gaya body
+GEMSHOP_CONVERT_SELECTED	Pøevést vybrané x{}
+GEMSHOP_CONVERT_QUESTION	Chceš pøevést {} x{} na {} Gaya bodù?
+GEMSHOP_TITLE2	Gaya obchod
+GEMSHOP_HAS_TOOLTIP	Máš: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	Toto už jsi koupil!
+GEMSHOP_OPEN_SLOT_QUESTION	Chceš otevøít slot?
+GEMSHOP_BUY_QUESTION	Chceš koupit {} za {} Gaya?
+GEMSHOP_REFRESH_QUESTION	Chceš obnovit pøedmìty?

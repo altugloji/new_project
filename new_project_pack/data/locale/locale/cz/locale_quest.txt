@@ -13415,3 +13415,6 @@
 14311	Bohužel nemáš ve svém inventáøi dostatek místa.
 14312	Bohužel nemáš ve svém inventáøi dostatek místa.
 14320	Nemáš 1 500 000 Yangù.
+21310	Gaya obchod
+21311	Obchod pro pøevod Gaya
+21312	Tvé postavì bylo pøidáno 10 Gaya bodù.

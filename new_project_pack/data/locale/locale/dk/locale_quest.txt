@@ -13415,3 +13415,6 @@
 14311	Du har ikke nok plads i din inventar.
 14312	Du har ikke nok plads i din inventar.
 14320	Du har ikke 1.500.000 Yang.
+21310	Gaya-shop
+21311	Gaya-konverteringsshop
+21312	Din karakter har fået tilføjet 10 Gaya-point.

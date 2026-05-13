@@ -24,7 +24,8 @@
 #include "../../common/CommonDefines.h"
 
 #define ENABLE_FORCE2MASTERSKILL
-// #define ENABLE_NULLIFYAFFECT_LIMIT
+const uint8_t SKILL_MASTER_NEEDED_LEVEL = 16;	//M seviyesi
+#define ENABLE_NULLIFYAFFECT_LIMIT				//Buyu cozme
 
 static const DWORD s_adwSubSkillVnums[] =
 {
@@ -760,7 +761,7 @@ void CHARACTER::SkillLevelUp(DWORD dwVnum, BYTE bMethod)
 		{
 			case SKILL_NORMAL:
 
-				if (GetSkillLevel(pkSk->dwVnum) >= 17)
+				if (GetSkillLevel(pkSk->dwVnum) >= SKILL_MASTER_NEEDED_LEVEL)
 				{
 #ifdef ENABLE_FORCE2MASTERSKILL
 					SetSkillLevel(pkSk->dwVnum, 20);
@@ -2526,9 +2527,30 @@ bool CHARACTER::UseSkill(DWORD dwVnum, LPCHARACTER pkVictim, bool bUseGrandMaste
 
 	if (IS_SET(pkSk->dwFlag, SKILL_FLAG_SELFONLY))
 		pkVictim = this;
+
 #ifdef ENABLE_SKILL_FLAG_PARTY
 	else if (IS_SET(pkSk->dwFlag, SKILL_FLAG_PARTY))
 		pkVictim = this;
+
+	if (GetParty() && (dwVnum == 94 || dwVnum == 95 || dwVnum == 96 || dwVnum == 110 || dwVnum == 111))
+	{
+		if (pkVictim && pkVictim->GetParty())
+		{
+			if (pkVictim->GetParty() == GetParty())
+			{
+				if (GetParty()->GetNearMemberCount())
+					ComputeSkillParty(dwVnum, this);
+				else
+					ComputeSkill(dwVnum, pkVictim);
+			}
+			else
+				ComputeSkill(dwVnum, pkVictim);
+		}
+		else if (pkVictim && !pkVictim->GetParty())
+		{
+			ComputeSkill(dwVnum, pkVictim);
+		}
+	}
 #endif
 
 	if ((pkSk->dwVnum == SKILL_MUYEONG) || (pkSk->IsChargeSkill() && !IsAffectFlag(AFF_TANHWAN_DASH) && !pkVictim))

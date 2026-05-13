@@ -4071,7 +4071,26 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 									if (nullptr == pAffect)
 									{
+#ifdef UPDATE_AUTO_POT_1K_HP
 										EPointTypes bonus = POINT_NONE;
+										long applyValue = 4;
+
+										if (true == isSpecialPotion)
+										{
+											if (type == AFFECT_AUTO_HP_RECOVERY)
+											{
+												bonus = POINT_MAX_HP;
+												applyValue = 1000;
+											}
+											else if (type == AFFECT_AUTO_SP_RECOVERY)
+											{
+												bonus = POINT_MAX_SP;
+												applyValue = 1000;
+											}
+										}
+#else
+										EPointTypes bonus = POINT_NONE;
+										long applyValue = 4;
 
 										if (true == isSpecialPotion)
 										{
@@ -4084,8 +4103,9 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 												bonus = POINT_MAX_SP_PCT;
 											}
 										}
+#endif
 
-										AddAffect( type, bonus, 4, item->GetID(), INFINITE_AFFECT_DURATION, 0, true, false);
+										AddAffect( type, (BYTE) bonus, applyValue, item->GetID(), INFINITE_AFFECT_DURATION, 0, true, false);
 
 										item->Lock(true);
 										item->SetSocket(0, true);
@@ -4113,7 +4133,26 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 											RemoveAffect( pAffect );
 
+#ifdef UPDATE_AUTO_POT_1K_HP
 											EPointTypes bonus = POINT_NONE;
+											long applyValue = 4;
+
+											if (true == isSpecialPotion)
+											{
+												if (type == AFFECT_AUTO_HP_RECOVERY)
+												{
+													bonus = POINT_MAX_HP;
+													applyValue = 1000;
+												}
+												else if (type == AFFECT_AUTO_SP_RECOVERY)
+												{
+													bonus = POINT_MAX_SP;
+													applyValue = 1000;
+												}
+											}
+#else
+											EPointTypes bonus = POINT_NONE;
+											long applyValue = 4;
 
 											if (true == isSpecialPotion)
 											{
@@ -4126,8 +4165,9 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 													bonus = POINT_MAX_SP_PCT;
 												}
 											}
+#endif
 
-											AddAffect( type, bonus, 4, item->GetID(), INFINITE_AFFECT_DURATION, 0, true, false);
+											AddAffect( type, (BYTE) bonus, applyValue, item->GetID(), INFINITE_AFFECT_DURATION, 0, true, false);
 
 											item->Lock(true);
 											item->SetSocket(0, true);
@@ -4766,30 +4806,28 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 									{
 										if (item->GetVnum() == 71151 || item->GetVnum() == 76023)
 										{
-											if ((item2->GetType() == ITEM_WEAPON)
+											bool bCanUse = true;
+
+											const int iMaxLevelLimit = ((item2->GetType() == ITEM_WEAPON)
 												|| (item2->GetType() == ITEM_ARMOR && item2->GetSubType() == ARMOR_BODY))
+												? 18 : 1;
+
+											for (int i = 0; i < ITEM_LIMIT_MAX_NUM; ++i)
 											{
-												bool bCanUse = true;
-												for (int i = 0; i < ITEM_LIMIT_MAX_NUM; ++i)
+												if (item2->GetLimitType(i) == LIMIT_LEVEL && item2->GetLimitValue(i) > iMaxLevelLimit)
 												{
-													if (item2->GetLimitType(i) == LIMIT_LEVEL && item2->GetLimitValue(i) > 40)
-													{
-														bCanUse = false;
-														break;
-													}
-												}
-												if (false == bCanUse)
-												{
-													ChatPacket(CHAT_TYPE_INFO, LC_TEXT("적용 레벨보다 높아 사용이 불가능합니다."));
+													bCanUse = false;
 													break;
 												}
 											}
-											else
+
+											if (false == bCanUse)
 											{
-												ChatPacket(CHAT_TYPE_INFO, LC_TEXT("무기와 갑옷에만 사용 가능합니다."));
+												ChatPacket(CHAT_TYPE_INFO, LC_TEXT("적용 레벨보다 높아 사용이 불가능합니다."));
 												break;
 											}
 										}
+
 										item2->ChangeAttribute();
 									}
 
@@ -4810,27 +4848,24 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 									{
 										if (item->GetVnum() == 71152 || item->GetVnum() == 76024)
 										{
-											if ((item2->GetType() == ITEM_WEAPON)
+											bool bCanUse = true;
+
+											const int iMaxLevelLimit = ((item2->GetType() == ITEM_WEAPON)
 												|| (item2->GetType() == ITEM_ARMOR && item2->GetSubType() == ARMOR_BODY))
+												? 18 : 1;
+
+											for (int i = 0; i < ITEM_LIMIT_MAX_NUM; ++i)
 											{
-												bool bCanUse = true;
-												for (int i = 0; i < ITEM_LIMIT_MAX_NUM; ++i)
+												if (item2->GetLimitType(i) == LIMIT_LEVEL && item2->GetLimitValue(i) > iMaxLevelLimit)
 												{
-													if (item2->GetLimitType(i) == LIMIT_LEVEL && item2->GetLimitValue(i) > 40)
-													{
-														bCanUse = false;
-														break;
-													}
-												}
-												if (false == bCanUse)
-												{
-													ChatPacket(CHAT_TYPE_INFO, LC_TEXT("적용 레벨보다 높아 사용이 불가능합니다."));
+													bCanUse = false;
 													break;
 												}
 											}
-											else
+
+											if (false == bCanUse)
 											{
-												ChatPacket(CHAT_TYPE_INFO, LC_TEXT("무기와 갑옷에만 사용 가능합니다."));
+												ChatPacket(CHAT_TYPE_INFO, LC_TEXT("적용 레벨보다 높아 사용이 불가능합니다."));
 												break;
 											}
 										}
@@ -5570,7 +5605,161 @@ bool CHARACTER::DropItem(TItemPos Cell, BYTE bCount)
 
 	return true;
 }
+#ifdef WJ_NEW_DROP_DIALOG
+bool CHARACTER::DeleteItem(TItemPos Cell)
+{
+	LPITEM item = NULL;
 
+	if (!CanHandleItem())
+		return false;
+
+	if (IsDead() || IsStun())
+		return false;
+
+	if (!IsValidItemPosition(Cell) || !(item = GetItem(Cell)))
+		return false;
+
+	if (true == item->isLocked() || item->IsExchanging() || item->IsEquipped())
+		return false;
+
+#ifdef ENABLE_ITEM_SEALBIND_SYSTEM
+	if (item->IsSealed())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("You can't do this because item is sealed!"));
+		return false;
+	}
+#endif
+
+	if (quest::CQuestManager::instance().GetPCForce(GetPlayerID())->IsRunning() == true)
+		return false;
+
+	int iPulse = thecore_pulse();
+
+	if (iPulse - GetSafeboxLoadTime() < PASSES_PER_SEC(g_nPortalLimitTime)
+		|| iPulse - GetRefineTime() < PASSES_PER_SEC(g_nPortalLimitTime)
+		|| iPulse - GetMyShopTime() < PASSES_PER_SEC(g_nPortalLimitTime))
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Please wait a second."));
+		return false;
+	}
+
+	if (GetExchange() || GetMyShop() || GetShopOwner() || IsOpenSafebox() || IsCubeOpen())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Make sure you don't have any open windows!"));
+		return false;
+	}
+#ifdef ENABLE_OFFLINE_SHOP_SYSTEM
+	if (GetOfflineShopOwner())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("거래창,창고 등을 연 상태에서는 보따리,비단보따리를 사용할수 없습니다."));
+		return false;
+	}
+#endif
+
+	ChatPacket(CHAT_TYPE_INFO, LC_TEXT("%s has been deleted successfully."), item->GetName());
+	ITEM_MANAGER::instance().RemoveItem(item);
+
+	return true;
+}
+
+bool CHARACTER::SellItem(TItemPos Cell)
+{
+	LPITEM item = NULL;
+
+	if (!CanHandleItem())
+		return false;
+
+	if (IsDead() || IsStun())
+		return false;
+
+	if (!IsValidItemPosition(Cell) || !(item = GetItem(Cell)))
+		return false;
+
+	if (true == item->isLocked() || item->IsExchanging() || item->IsEquipped())
+		return false;
+
+#ifdef ENABLE_ITEM_SEALBIND_SYSTEM
+	if (item->IsSealed())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("You can't do this because item is sealed!"));
+		return false;
+	}
+#endif
+
+#ifdef ENABLE_BASIC_ITEM_SYSTEM
+	if (item->IsBasicItem())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("ITEM_IS_BASIC_CANNOT_DO"));
+		return false;
+	}
+#endif
+
+	if (quest::CQuestManager::instance().GetPCForce(GetPlayerID())->IsRunning() == true)
+		return false;
+
+	if (IS_SET(item->GetAntiFlag(), ITEM_ANTIFLAG_SELL))
+		return false;
+
+	// EXTRA_CHECK
+	int iPulse = thecore_pulse();
+
+	if (iPulse - GetSafeboxLoadTime() < PASSES_PER_SEC(g_nPortalLimitTime)
+		|| iPulse - GetRefineTime() < PASSES_PER_SEC(g_nPortalLimitTime)
+		|| iPulse - GetMyShopTime() < PASSES_PER_SEC(g_nPortalLimitTime))
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Please wait a second."));
+		return false;
+	}
+
+	if (GetExchange() || GetMyShop() || GetShopOwner() || IsOpenSafebox() || IsCubeOpen())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Make sure you don't have any open windows!"));
+		return false;
+	}
+	// EXTRA_CHECK
+
+#ifdef ENABLE_OFFLINE_SHOP_SYSTEM
+	if (GetOfflineShopOwner())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("거래창,창고 등을 연 상태에서는 보따리,비단보따리를 사용할수 없습니다."));
+		return false;
+	}
+#endif
+
+	long long dwPrice;
+	BYTE bCount;
+	bCount = item->GetCount();
+	dwPrice = item->GetShopBuyPrice();
+
+#ifndef ENABLE_NO_SELL_PRICE_DIVIDED_BY_5
+	dwPrice /= 5;
+#endif
+
+	if (IS_SET(item->GetFlag(), ITEM_FLAG_COUNT_PER_1GOLD))
+	{
+		if (dwPrice == 0)
+			dwPrice = bCount;
+		else
+			dwPrice = bCount / dwPrice;
+	}
+	else
+		dwPrice *= bCount;
+
+	const long long nTotalMoney = static_cast<long long>(GetGold()) + static_cast<long long>(dwPrice);
+
+	if (GOLD_MAX <= nTotalMoney)
+	{
+		sys_err("[OVERFLOW_GOLD] id %u name %s gold %lld", GetPlayerID(), GetName(), GetGold());
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("20??? ???? ??? ?? ????."));
+		return false;
+	}
+
+	ITEM_MANAGER::instance().RemoveItem(item);
+	PointChange(POINT_GOLD, dwPrice, false);
+
+	return true;
+}
+#endif
 bool CHARACTER::DropGold(int gold)
 {
 	if (gold <= 0 || gold > GetGold())
@@ -6042,6 +6231,53 @@ bool CHARACTER::PickupItem(DWORD dwVID)
 				return false;
 
 			int iEmptyCell = -1;
+
+			if (owner) //parti item stack fix
+			{
+				if (item->IsStackable() && !IS_SET(item->GetAntiFlag(), ITEM_ANTIFLAG_STACK))
+				{
+					BYTE bCount = item->GetCount();
+#ifdef ENABLE_SPLIT_INVENTORY_SYSTEM
+					for (int i = 0; i < INVENTORY_AND_EQUIP_SLOT_MAX; ++i)
+#else
+					for (int i = 0; i < INVENTORY_MAX_NUM; ++i)
+#endif
+					{
+						LPITEM item2 = owner->GetInventoryItem(i);
+
+						if (!item2)
+							continue;
+						if (item2->GetVnum() == item->GetVnum())
+						{
+							int j;
+
+							for (j = 0; j < ITEM_SOCKET_MAX_NUM; ++j)
+							if (item2->GetSocket(j) != item->GetSocket(j))
+								break;
+
+							if (j != ITEM_SOCKET_MAX_NUM)
+								continue;
+
+							BYTE bCount2 = MIN(g_bItemCountLimit - item2->GetCount(), bCount);
+							bCount -= bCount2;
+
+							item2->SetCount(item2->GetCount() + bCount2);
+
+							if (bCount == 0)
+							{
+								owner->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("%s item aldi %s"), GetName(), item2->GetName());
+								ChatPacket(CHAT_TYPE_INFO, LC_TEXT("%s item sahibine aktarildi %s"), owner->GetName(), item2->GetName());
+								M2_DESTROY_ITEM(item);
+								if (item2->GetType() == ITEM_QUEST)
+									quest::CQuestManager::instance().PickupItem(owner->GetPlayerID(), item2);
+								return true;
+							}
+						}
+					}
+					item->SetCount(bCount);
+				}
+			} //parti item stack fix end
+
 			if (!(owner && (iEmptyCell = owner->GetEmptyInventoryEx(item)) != -1))
 			{
 				owner = this;

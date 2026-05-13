@@ -1650,6 +1650,10 @@ class Button(Window):
 		self.ToolTipText=toolTip
 		self.ToolTipText.SetParentProxy(self)
 
+	if app.WJ_NEW_DROP_DIALOG:
+		def SetToolTipWindow2(self, toolTip):
+			self.ToolTipText=toolTip
+
 	def SetToolTipText(self, text, x=0, y = -19):
 		self.SetFormToolTipText("TEXT", text, x, y)
 

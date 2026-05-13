@@ -170,6 +170,10 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 			, DWORD cheque = 0
 			#endif
 		);
+#ifdef WJ_NEW_DROP_DIALOG
+		bool SendItemDeletePacket(TItemPos item_pos);
+		bool SendItemSellPacket(TItemPos item_pos);
+#endif
 		bool SendItemMovePacket(TItemPos pos, TItemPos change_pos, BYTE num);
 		bool SendItemPickUpPacket(DWORD vid);
 

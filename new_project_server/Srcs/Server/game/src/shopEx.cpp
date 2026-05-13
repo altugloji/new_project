@@ -99,6 +99,11 @@ bool CShopEx::AddGuest(LPCHARACTER ch,DWORD owner_vid, bool bOtherEmpire)
 				pack_tab.items[i].price = shop_tab.items[i].price;
 				break;
 			}
+#ifdef ENABLE_MULTISHOP
+			pack_tab.items[i].wPriceVnum = shop_tab.items[i].wPriceVnum;
+			pack_tab.items[i].wPrice = shop_tab.items[i].wPrice;
+			pack_tab.items[i].gem_price = shop_tab.items[i].gem_price;
+#endif
 			memset(pack_tab.items[i].aAttr, 0, sizeof(pack_tab.items[i].aAttr));
 			memset(pack_tab.items[i].alSockets, 0, sizeof(pack_tab.items[i].alSockets));
 		}
@@ -135,7 +140,12 @@ int CShopEx::Buy(LPCHARACTER ch, BYTE pos)
 	TShopTableEx& shopTab = m_vec_shopTabs[tabIdx];
 	const TShopItemTable& r_item = shopTab.items[slotPos];
 
-	if (r_item.price <= 0)
+	if (r_item.price <= 0
+#ifdef ENABLE_MULTISHOP
+		&& r_item.gem_price <= 0
+		&& r_item.wPriceVnum == 0
+#endif
+		)
 	{
 		LogManager::instance().HackLog("SHOP_BUY_GOLD_OVERFLOW", ch);
 		return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY;
@@ -143,6 +153,40 @@ int CShopEx::Buy(LPCHARACTER ch, BYTE pos)
 
 	DWORD dwPrice = r_item.price;
 
+	DWORD dwWItemVnum = 0;
+	DWORD dwWItemPrice = 0;
+	DWORD dwGemPrice = 0;
+#ifdef ENABLE_MULTISHOP
+	dwWItemVnum = r_item.wPriceVnum;
+	dwWItemPrice = r_item.wPrice;
+	dwGemPrice = r_item.gem_price;
+#endif
+
+#if defined(ENABLE_MULTISHOP) && defined(__GEM_SYSTEM__)
+	const bool bGemPay = (dwGemPrice > 0);
+#else
+	const bool bGemPay = false;
+#endif
+	const bool bItemPay =
+#ifdef ENABLE_MULTISHOP
+		(!bGemPay && dwWItemVnum > 0);
+#else
+		false;
+#endif
+
+	if (bGemPay)
+	{
+#ifdef __GEM_SYSTEM__
+		if (ch->GetGem() < static_cast<int>(dwGemPrice))
+			return SHOP_SUBHEADER_GC_NOT_ENOUGH_GEM;
+#endif
+	}
+	else if (bItemPay)
+	{
+		if (ch->CountSpecifyItem(dwWItemVnum) < static_cast<int>(dwWItemPrice))
+			return SHOP_SUBHEADER_GC_NOT_ENOUGH_ITEM;
+	}
+	else
 	switch (shopTab.coinType)
 	{
 	case SHOP_COIN_TYPE_GOLD:
@@ -179,6 +223,15 @@ int CShopEx::Buy(LPCHARACTER ch, BYTE pos)
 		return SHOP_SUBHEADER_GC_INVENTORY_FULL;
 	}
 
+	if (bGemPay)
+	{
+#ifdef __GEM_SYSTEM__
+		ch->PointChange(POINT_GEM, -static_cast<int>(dwGemPrice), false);
+#endif
+	}
+	else if (bItemPay)
+		ch->RemoveSpecifyItem(dwWItemVnum, dwWItemPrice);
+	else
 	switch (shopTab.coinType)
 	{
 	case SHOP_COIN_TYPE_GOLD:
