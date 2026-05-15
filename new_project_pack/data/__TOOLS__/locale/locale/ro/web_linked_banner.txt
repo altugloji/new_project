@@ -1,0 +1,15 @@
+Group Info
+{
+
+	on_off	0
+}
+
+Group Banner
+{
+	
+	Group Link_Metin2_Account_With_Steam
+	{
+		text		"Pãrãseºte Steam: Mergi la Clientul Gameforge!"
+		url			"https://ro.metin2.gameforge.com/steam/moveingame"
+	}
+}

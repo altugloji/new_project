@@ -1,0 +1,40 @@
+1	Alfawolven
+2	Roedelleider
+3	Uniek
+4	Tijger, Beer, Zwijn
+5	Wraak van de Witte Eed
+6	Wraak van de Zwarte Storm
+7	Broers
+8	Familiebanden
+9	Wreed en Bruut
+10	Nauwelijks Mens
+11	Eeuwige Wachters
+12	Nefriet Wachters
+13	Heersers van het Donder Gebergte
+14	Problemen op de Gautama Klif
+15	Aapje's Ooms
+16	Grottenheersers
+17	Des Duivels
+18	Sung Mahi's Dienaren
+19	Het Doel Heiligt de Middelen
+20	Boswachters
+21	Sung Mahi's Generaals
+22	Zodiac van Bliksem
+23	Zodiac van Vuur
+24	Zodiac van IJs
+25	Zodiac van Wind
+26	Zodiac van Aarde
+27	Zodiac van Duisternis
+28	Wachter van de Niveaus
+29	Sung Mahi's Quag
+30	Half-mens Heerser
+31	IJzige Wachter
+32	Het Grottentrio
+33	De Giftige Koningin
+34	De Brandende Toren
+35	De Bevroren Toren
+36	De Geëlektrificeerde Toren
+37	De Stormachtige Toren
+38	De Standvastige Toren
+39	De Duistere Toren
+40	Alastor's Einde

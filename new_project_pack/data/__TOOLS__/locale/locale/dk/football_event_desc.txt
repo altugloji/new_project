@@ -1,0 +1,6 @@
+[DELAY value;0]
+Event Beskrivelse[ENTER]
+VM Eventet er begyndt. Fodbolde kommer ikke længere[ENTER]
+frem i din inventar. Saml så mange du kan, og byt dem[ENTER]
+derefter om til Gyldne Fodbolde fra Yu-Hwan, eller[ENTER]
+brug dem til at modtage genstande.

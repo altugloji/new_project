@@ -10,10 +10,35 @@ import networkModule
 import constInfo
 import localeInfo
 import uiMoveChannel
+import uiCommon
 
 from _weakref import proxy
 
 SYSTEM_MENU_FOR_PORTAL = False
+
+
+class ExitGameConfirmDialog(uiCommon.QuestionDialog):
+	def __init__(self, systemDlg):
+		uiCommon.QuestionDialog.__init__(self)
+		self.systemDlg = systemDlg
+
+	def Close(self):
+		uiCommon.QuestionDialog.Close(self)
+		try:
+			if self.systemDlg and self.systemDlg.exitConfirmDlg is self:
+				self.systemDlg.exitConfirmDlg = None
+		except ReferenceError:
+			pass
+
+	def OnPressEscapeKey(self):
+		ret = uiCommon.QuestionDialog.OnPressEscapeKey(self)
+		try:
+			if self.systemDlg and self.systemDlg.exitConfirmDlg is self:
+				self.systemDlg.exitConfirmDlg = None
+		except ReferenceError:
+			pass
+		return ret
+
 
 ###################################################################################################
 ## System
@@ -31,6 +56,7 @@ class SystemDialog(ui.ScriptWindow):
 		self.systemOptionDlg = None
 		self.gameOptionDlg = None
 		self.interface = None
+		self.exitConfirmDlg = None
 
 	def BindInterface(self, interface):
 		self.interface = interface
@@ -73,6 +99,10 @@ class SystemDialog(ui.ScriptWindow):
 
 	@ui.WindowDestroy
 	def Destroy(self):
+		if self.exitConfirmDlg:
+			self.exitConfirmDlg.Close()
+			self.exitConfirmDlg = None
+
 		self.ClearDictionary()
 
 		if self.gameOptionDlg:
@@ -101,7 +131,7 @@ class SystemDialog(ui.ScriptWindow):
 		if SYSTEM_MENU_FOR_PORTAL:
 			if app.loggined:
 				self.Close()
-				net.ExitApplication()
+				app.Exit()
 			else:
 				self.Close()
 				net.LogOutGame()
@@ -111,8 +141,26 @@ class SystemDialog(ui.ScriptWindow):
 
 
 	def __ClickExitButton(self):
+		if self.exitConfirmDlg:
+			self.exitConfirmDlg.Close()
+			self.exitConfirmDlg = None
+		self.exitConfirmDlg = ExitGameConfirmDialog(self)
+		self.exitConfirmDlg.SetText(localeInfo.GAME_EXIT_CLIENT_CONFIRM)
+		self.exitConfirmDlg.SetAcceptEvent(ui.__mem_func__(self.__OnConfirmExitApplication))
+		self.exitConfirmDlg.SetCancelEvent(ui.__mem_func__(self.__OnCancelExitApplication))
+		self.exitConfirmDlg.Open()
+
+	def __OnConfirmExitApplication(self):
+		if self.exitConfirmDlg:
+			self.exitConfirmDlg.Close()
+			self.exitConfirmDlg = None
 		self.Close()
-		net.ExitApplication()
+		app.Exit()
+
+	def __OnCancelExitApplication(self):
+		if self.exitConfirmDlg:
+			self.exitConfirmDlg.Close()
+			self.exitConfirmDlg = None
 
 	def __ClickSystemOptionButton(self):
 		self.Close()

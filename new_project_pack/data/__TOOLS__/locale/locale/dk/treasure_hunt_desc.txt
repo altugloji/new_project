@@ -1,0 +1,12 @@
+[DELAY value;0]
+Du modtog en af belønningerne på listen. Efter du har[ENTER]
+indsamlet[ENTER]
+9 belønninger, vil du gennemføre en runde. Hver[ENTER]
+gennemført runde[ENTER]
+giver dig også belønninger. Du skal indsamle[ENTER]
+mindst en belønning, før du kan sætte nogen nye nogen.[ENTER]
+Til[ENTER]
+runderne 6 og 9, kan du modtage ekstra velsignelser,[ENTER]
+men[ENTER]
+disse er begrænsede i antal pr. event. Hver karakter[ENTER]
+kan kun modtage hver velsignelse en gang pr. event.

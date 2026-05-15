@@ -1,0 +1,32 @@
+1	Katar
+2	Ekvador
+3	Senegal
+4	Hollanda
+5	Ýngiltere
+6	Ýran
+7	ABD
+8	Galler
+9	Arjantin
+10	Suudi Arabistan
+11	Meksika
+12	Polonya
+13	Fransa
+14	Avustralya
+15	Danimarka
+16	Tunus
+17	Ýspanya
+18	Kosta Rika
+19	Almanya
+20	Japonya
+21	Belçika
+22	Kanada
+23	Fas
+24	Hýrvatistan
+25	Brezilya
+26	Sýrbistan
+27	Ýsviçre
+28	Kamerun
+29	Portekiz
+30	Gana
+31	Uruguay
+32	Güney Kore

@@ -2044,5 +2044,11 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "WJ_NEW_DROP_DIALOG", 0);
 #endif
 
+#ifdef FAST_LOGIN_CHARACTER_SAVE
+	PyModule_AddIntConstant(poModule, "FAST_LOGIN_CHARACTER_SAVE", 1);
+#else
+	PyModule_AddIntConstant(poModule, "FAST_LOGIN_CHARACTER_SAVE", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

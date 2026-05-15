@@ -101,6 +101,11 @@ class MainStream(ui.NoWindow):
 		self.slot=0
 		self.isAutoSelect=0
 		self.isAutoLogin=0
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN networkmodule_stream_quick_login_fields ---
+		# Used with app.FAST_LOGIN_CHARACTER_SAVE: quick-favorite auto-connect (intrologin).
+		self.hideSelectUiForAutoLogin=0
+		self.quietLoadingUiForQuickLogin=0
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END networkmodule_stream_quick_login_fields ---
 
 		self.curtain = 0
 		self.curPhaseWindow = 0
@@ -183,6 +188,10 @@ class MainStream(ui.NoWindow):
 
 	def SetLoginPhase(self):
 		net.Disconnect()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN networkmodule_reset_quick_stream ---
+		self.hideSelectUiForAutoLogin = 0
+		self.quietLoadingUiForQuickLogin = 0
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END networkmodule_reset_quick_stream ---
 
 		if constInfo.ENABLE_UI_DEBUG_WINDOW:
 			self.SetPhaseWindow(DebugWindow(self))

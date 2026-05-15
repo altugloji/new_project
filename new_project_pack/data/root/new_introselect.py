@@ -25,6 +25,7 @@ import consoleModule
 import interfaceModule
 import uiTaskBar
 import uiInventory
+import constInfo
 
 ###################################
 
@@ -262,6 +263,8 @@ class MyCharacters :
 		self.Change_Name= [None, None, None, None, None]
 		self.Stat_Point = { 0 : None, 1 : None, 2 : None, 3 : None, 4 : None }
 
+# FAST_LOGIN_CHARACTER_SAVE:PORT file=new_introselect (grep FAST_LOGIN_CHARACTER_SAVE:PORT)
+
 class SelectCharacterWindow(ui.Window) :
 	EMPIRE_NAME = {
 		net.EMPIRE_A : localeInfo.EMPIRE_A,
@@ -339,7 +342,7 @@ class SelectCharacterWindow(ui.Window) :
 
 			grp.SetViewport(0.0, 0.0, newScreenWidth/screenWidth, newScreenHeight/screenHeight)
 
-			app.SetCenterPosition(0.0, 0.0, 0.0) #X, Z, Y ( X+ RIGHT, Z+ ??, Y+ DOWN ) 좀 더 분석해 볼 것
+			app.SetCenterPosition(0.0, 0.0, 0.0) #X, Z, Y ( X+ RIGHT, Z+ ??, Y+ DOWN ) ?? ?? ?????? ?? ??
 			app.SetCamera(1550.0, 15.0, 180.0, 95.0)
 			grp.SetPerspective(10.0, newScreenWidth/newScreenHeight, 1000.0, 3000.0)
 
@@ -377,6 +380,15 @@ class SelectCharacterWindow(ui.Window) :
 		self.RealSlot = []
 		self.Disable = False
 		if ENABLE_AUTO_ROTATION: self.rotation = 0.0
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN new_introselect_init_quick_and_quiet_attrs ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			self.quickSaveButtons = []
+			self.quickSaveBoard = None
+			self.quickSaveBoardTitle = None
+			self.quickSaveBoardLine = None
+		self.quietLoadBar = None
+		self.quietLoadText = None
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END new_introselect_init_quick_and_quiet_attrs ---
 
 	def __del__(self):
 		ui.Window.__del__(self)
@@ -384,12 +396,19 @@ class SelectCharacterWindow(ui.Window) :
 
 	def Open(self):
 		#print "##---------------------------------------- NEW INTRO SELECT OPEN"
+		quiet_ui = getattr(self.stream, "hideSelectUiForAutoLogin", 0) and self.stream.isAutoSelect
 		playerSettingModule.LoadGameData("INIT")
 
 		dlgBoard = ui.ScriptWindow()
 		self.dlgBoard = dlgBoard
 		pythonScriptLoader = ui.PythonScriptLoader()#uiScriptLocale.LOCALE_UISCRIPT_PATH = locale/ymir_ui/
 		pythonScriptLoader.LoadScriptFile(self.dlgBoard, "uiscript/new_selectcharacterwindow.py")#uiScriptLocale.LOCALE_UISCRIPT_PATH + "New_SelectCharacterWindow.py")
+
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		self.SetSize(sw, sh)
+		self.dlgBoard.SetParent(self)
+		self.dlgBoard.SetPosition(0, 0)
 
 		getChild = self.dlgBoard.GetChild
 
@@ -539,29 +558,70 @@ class SelectCharacterWindow(ui.Window) :
 
 		##Job Description Box##
 		self.descriptionBox = self.DescriptionBox()
-		self.descriptionBox.Show()
+		if quiet_ui:
+			self.descriptionBox.Hide()
+		else:
+			self.descriptionBox.Show()
 
 		##Tool Tip(Guild Name, PlayTime)##
 		self.toolTip = uiToolTip.ToolTip()
 		self.toolTip.ClearToolTip()
 
-		self.dlgBoard.Show()
+		if quiet_ui:
+			self.dlgBoard.Hide()
+		else:
+			self.dlgBoard.Show()
 		self.Show()
 
 		##Empire Flag & Background Setting##
 		my_empire = net.GetEmpireID()
 		self.SetEmpire(my_empire)
 
-		app.ShowCursor()
-
-		if musicInfo.selectMusic != "":
+		if musicInfo.selectMusic != "" and not quiet_ui:
 			snd.SetMusicVolume(systemSetting.GetMusicVolume())
 			snd.FadeInMusic("BGM/"+musicInfo.selectMusic)
 
 		##Character Render##
 		self.chrRenderer = self.CharacterRenderer()
 		self.chrRenderer.SetParent(self.backGround)
-		self.chrRenderer.Show()
+		if quiet_ui:
+			self.chrRenderer.Hide()
+		else:
+			self.chrRenderer.Show()
+
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN new_introselect_open_create_quick_save ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			self.__CreateQuickCharacterSaveButtons()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END new_introselect_open_create_quick_save ---
+
+		if self.stream.isAutoSelect:
+			chrSlot = self.stream.GetCharacterSlot()
+			if self.RealSlot:
+				for i in xrange(len(self.RealSlot)):
+					if self.RealSlot[i] == chrSlot:
+						self.SelectButton(i)
+						self.StartGameButton()
+						break
+			self.stream.isAutoSelect = 0
+
+		if quiet_ui:
+			# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN new_introselect_open_quiet_quick_hide ---
+			self.toolTip.Hide()
+			self.__ApplyQuietSelectOverlay()
+			if app.FAST_LOGIN_CHARACTER_SAVE:
+				for b in getattr(self, "quickSaveButtons", []):
+					if b:
+						b.Hide()
+				qb = getattr(self, "quickSaveBoard", None)
+				if qb:
+					qb.Hide()
+			app.HideCursor()
+			# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END new_introselect_open_quiet_quick_hide ---
+		else:
+			app.ShowCursor()
+
+		if getattr(self.stream, "hideSelectUiForAutoLogin", 0):
+			self.stream.hideSelectUiForAutoLogin = 0
 
 		##Default Setting##
 	def EventProgress(self, event_type, slot) :
@@ -631,7 +691,7 @@ class SelectCharacterWindow(ui.Window) :
 
 		self.ResetStat()
 
-		## 한문 Setting ##
+		## ??? Setting ##
 		for i in xrange(len(self.NameList)):
 			if self.select_job == i	:
 				self.NameList[i].SetAlpha(1)
@@ -657,8 +717,51 @@ class SelectCharacterWindow(ui.Window) :
 		chr.SelectInstance(self.SelectSlot)
 		chr.Show()
 
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN new_introselect_quiet_overlay_methods ---
+	def __DestroyQuietSelectOverlay(self):
+		if self.quietLoadText:
+			self.quietLoadText.Hide()
+			self.quietLoadText = None
+		if self.quietLoadBar:
+			self.quietLoadBar.Hide()
+			self.quietLoadBar = None
+
+	def __ApplyQuietSelectOverlay(self):
+		self.__DestroyQuietSelectOverlay()
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		self.SetSize(sw, sh)
+		bar = ui.Bar("GAME")
+		bar.SetParent(self)
+		bar.AddFlag("not_pick")
+		bar.SetPosition(0, 0)
+		bar.SetSize(sw, sh)
+		bar.SetColor(0xff101010)
+		bar.Show()
+		tx = ui.TextLine()
+		tx.SetParent(self)
+		tx.SetFontName(localeInfo.UI_DEF_FONT)
+		tx.SetPackedFontColor(0xffffffff)
+		tx.SetText(localeInfo.SELECT_QUIET_LOADING)
+		tx.SetHorizontalAlignCenter()
+		tx.SetVerticalAlignCenter()
+		tx.SetPosition(sw / 2, sh / 2)
+		tx.Show()
+		bar.SetTop()
+		tx.SetTop()
+		self.quietLoadBar = bar
+		self.quietLoadText = tx
+
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END new_introselect_quiet_overlay_methods ---
+
 	def Close(self):
 		#print "##---------------------------------------- NEW INTRO SELECT CLOSE"
+		self.__DestroyQuietSelectOverlay()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN new_introselect_close_quick_save ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			self.__DestroyQuickCharacterSaveButtons()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END new_introselect_close_quick_save ---
+
 		del self.mycharacters
 		self.EMPIRE_NAME = None
 		self.EMPIRE_NAME_COLOR = None
@@ -752,8 +855,158 @@ class SelectCharacterWindow(ui.Window) :
 				self.Hide()
 
 	def ExitButton(self):
+		if self.stream:
+			# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN new_introselect_exit_clear_quick_stream ---
+			self.stream.hideSelectUiForAutoLogin = 0
+			self.stream.quietLoadingUiForQuickLogin = 0
+			# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END new_introselect_exit_clear_quick_stream ---
 		self.stream.SetLoginPhase()
 		self.Hide()
+
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN new_introselect_quick_save_panel_methods ---
+	def __DestroyQuickCharacterSaveButtons(self):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		for b in getattr(self, "quickSaveButtons", []):
+			if b:
+				b.Hide()
+		self.quickSaveButtons = []
+		brd = getattr(self, "quickSaveBoard", None)
+		if brd:
+			brd.Hide()
+		self.quickSaveBoard = None
+		self.quickSaveBoardTitle = None
+		self.quickSaveBoardLine = None
+
+	def __CreateQuickCharacterSaveButtons(self):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			self.quickSaveButtons = []
+			return
+		import quickcharacter
+
+		self.__DestroyQuickCharacterSaveButtons()
+		self.quickSaveButtons = []
+
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		try:
+			self.SetSize(sw, sh)
+		except:
+			pass
+
+		ROOT_PATH = "d:/ymir work/ui/public/middle_button_%02d.sub"
+		QC_HEADER = 24
+		PAD = 6
+		GAP = 5
+		COL_GAP = 8
+		max_fav = quickcharacter.MAX_FAVORITES
+		COL_ROWS = (max_fav + 1) // 2
+		COL_COUNT = 2
+		MARGIN = 10
+		BOARD_BG_W = 207
+		BOARD_BG_H = 180
+		PANEL_SHIFT_X = 125
+		PANEL_SHIFT_Y = -100
+
+		_pb = ui.Button()
+		_pb.SetParent(self)
+		_pb.SetUpVisual(ROOT_PATH % 1)
+		_pb.SetOverVisual(ROOT_PATH % 2)
+		_pb.SetDownVisual(ROOT_PATH % 3)
+		btn_w = _pb.GetWidth()
+		btn_h = _pb.GetHeight()
+		_pb.Hide()
+
+		content_w = PAD * 2 + COL_COUNT * btn_w + (COL_COUNT - 1) * COL_GAP
+		content_h = QC_HEADER + COL_ROWS * btn_h + max(0, COL_ROWS - 1) * GAP + 6
+		offset_x = max(0, (BOARD_BG_W - content_w) // 2)
+		offset_y = max(0, (BOARD_BG_H - content_h) // 2)
+
+		self.quickSaveBoard = ui.ThinBoard()
+		self.quickSaveBoard.SetParent(self)
+		self.quickSaveBoard.SetSize(BOARD_BG_W, BOARD_BG_H)
+		self.quickSaveBoard.SetPosition(
+			MARGIN + PANEL_SHIFT_X,
+			max(0, sh - BOARD_BG_H - MARGIN + PANEL_SHIFT_Y),
+		)
+		self.quickSaveBoard.Show()
+		try:
+			self.quickSaveBoard.SetTop()
+		except:
+			pass
+
+		title = ui.TextLine()
+		title.SetParent(self.quickSaveBoard)
+		title.SetFontName(localeInfo.UI_DEF_FONT)
+		title.SetHorizontalAlignCenter()
+		title.SetVerticalAlignCenter()
+		title.SetPackedFontColor(0xFFffbf00)
+		title.SetOutline()
+		try:
+			title.SetText(localeInfo.LOGIN_QUICK_CHAR_BOARD_TITLE)
+		except:
+			title.SetText("Karakter kaydetme")
+		title.SetPosition(BOARD_BG_W / 2, 12)
+		title.Show()
+		self.quickSaveBoardTitle = title
+
+		line = ui.Line()
+		line.SetParent(self.quickSaveBoard)
+		line.SetColor(0xFF777777)
+		line.SetSize(BOARD_BG_W - 10, 0)
+		line.SetPosition(5, 20)
+		line.Show()
+		self.quickSaveBoardLine = line
+
+		for idx in xrange(max_fav):
+			if idx < COL_ROWS:
+				col, row = 0, idx
+			else:
+				col, row = 1, idx - COL_ROWS
+			x = offset_x + PAD + col * (btn_w + COL_GAP)
+			y = offset_y + QC_HEADER + row * (btn_h + GAP)
+			btn = ui.Button()
+			btn.SetParent(self.quickSaveBoard)
+			btn.SetUpVisual(ROOT_PATH % 1)
+			btn.SetOverVisual(ROOT_PATH % 2)
+			btn.SetDownVisual(ROOT_PATH % 3)
+			btn.SetPosition(x, y)
+			btn.SetText("%d" % (idx + 1))
+			btn.SetToolTipText(localeInfo.SELECT_QUICK_CHAR_SAVE_TOOLTIP % (idx + 1))
+			btn.SetEvent(ui.__mem_func__(self.__OnClickSaveQuickCharacter), idx)
+			btn.Show()
+			self.quickSaveButtons.append(btn)
+
+		try:
+			if self.quickSaveBoardTitle:
+				self.quickSaveBoardTitle.SetTop()
+			if self.quickSaveBoardLine:
+				self.quickSaveBoardLine.SetTop()
+		except:
+			pass
+
+	def __OnClickSaveQuickCharacter(self, fav_idx):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		import quickcharacter
+
+		if self.SelectSlot == M2_INIT_VALUE or self.SelectSlot is None:
+			return
+		if not self.mycharacters.GetMyCharacterCount():
+			return
+		real_slot = self.RealSlot[self.SelectSlot]
+		pid = net.GetAccountCharacterSlotDataInteger(real_slot, net.ACCOUNT_CHARACTER_SLOT_ID)
+		if not pid:
+			self.PopupMessage(localeInfo.SELECT_EMPTY_SLOT)
+			return
+		name = net.GetAccountCharacterSlotDataString(real_slot, net.ACCOUNT_CHARACTER_SLOT_NAME)
+		acc = self.stream.id
+		if not acc:
+			acc = net.GetLoginID()
+		pwd = getattr(self.stream, "pwd", None)
+		quickcharacter.SaveFavorite(fav_idx, acc, real_slot, name, pwd)
+		self.PopupMessage(localeInfo.LOGIN_QUICK_CHAR_SAVED)
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END new_introselect_quick_save_panel_methods ---
 
 	def StartGameButton(self):
 		if not self.mycharacters.GetMyCharacterCount() or self.MotionTime != 0.0 :
@@ -1071,6 +1324,12 @@ class SelectCharacterWindow(ui.Window) :
 		self.Disable = True
 		for button in self.CharacterButtonList :
 			button.Disable()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN new_introselect_disable_quick_btns ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			for b in getattr(self, "quickSaveButtons", []):
+				if b:
+					b.Disable()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END new_introselect_disable_quick_btns ---
 
 	def EnableWindow(self):
 		self.btnStart.Enable()
@@ -1082,6 +1341,12 @@ class SelectCharacterWindow(ui.Window) :
 		self.Disable = False
 		for button in self.CharacterButtonList :
 			button.Enable()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN new_introselect_enable_quick_btns ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			for b in getattr(self, "quickSaveButtons", []):
+				if b:
+					b.Enable()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END new_introselect_enable_quick_btns ---
 
 	def OpenChangeNameDialog(self):
 		import uiCommon

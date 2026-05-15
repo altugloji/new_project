@@ -147,6 +147,8 @@
 #define ENABLE_CUBE_RENEWAL
 #define ENABLE_MULTISHOP
 #define WJ_NEW_DROP_DIALOG
+#define FAST_LOGIN_CHARACTER_SAVE
+
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

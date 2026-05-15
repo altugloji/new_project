@@ -34,6 +34,8 @@ import uiOption
 import uiRestart
 ####################################
 
+# FAST_LOGIN_CHARACTER_SAVE:PORT file=introloading (grep FAST_LOGIN_CHARACTER_SAVE:PORT)
+
 class LoadingWindow(ui.ScriptWindow):
 	def __init__(self, stream):
 		print("NEW LOADING WINDOW -------------------------------------------------------------------------------")
@@ -48,6 +50,10 @@ class LoadingWindow(ui.ScriptWindow):
 		self.playerX=0
 		self.playerY=0
 		self.loadStepList=[]
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introloading_quiet_attrs ---
+		self.quietLoadBar = None
+		self.quietLoadText = None
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introloading_quiet_attrs ---
 
 	def __del__(self):
 		print("---------------------------------------------------------------------------- DELETE LOADING WINDOW")
@@ -80,37 +86,93 @@ class LoadingWindow(ui.ScriptWindow):
 
 		self.errMsg.Hide()
 
-		imgFileNameDict = {
-			0 : uiScriptLocale.LOCALE_UISCRIPT_PATH + "loading/loading0.sub",
-			1 : uiScriptLocale.LOCALE_UISCRIPT_PATH + "loading/loading1.sub",
-			2 : uiScriptLocale.LOCALE_UISCRIPT_PATH + "loading/loading2.sub",
-			3 : uiScriptLocale.LOCALE_UISCRIPT_PATH + "loading/loading3.sub",
-		}
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introloading_open_quiet_branch ---
+		quiet_ld = getattr(self.stream, "quietLoadingUiForQuickLogin", 0)
+		if quiet_ld and not app.FAST_LOGIN_CHARACTER_SAVE:
+			self.stream.quietLoadingUiForQuickLogin = 0
+			self.stream.hideSelectUiForAutoLogin = 0
+			quiet_ld = 0
+		if quiet_ld:
+			self.stream.quietLoadingUiForQuickLogin = 0
+			if self.loadingImage:
+				self.loadingImage.Hide()
+			if self.loadingGage:
+				self.loadingGage.Hide()
+			app.HideCursor()
+		else:
+			imgFileNameDict = {
+				0 : uiScriptLocale.LOCALE_UISCRIPT_PATH + "loading/loading0.sub",
+				1 : uiScriptLocale.LOCALE_UISCRIPT_PATH + "loading/loading1.sub",
+				2 : uiScriptLocale.LOCALE_UISCRIPT_PATH + "loading/loading2.sub",
+				3 : uiScriptLocale.LOCALE_UISCRIPT_PATH + "loading/loading3.sub",
+			}
 
-		try:
-			imgFileName = imgFileNameDict[app.GetRandom(0, len(imgFileNameDict) - 1)]
-			self.loadingImage.LoadImage(imgFileName)
+			try:
+				imgFileName = imgFileNameDict[app.GetRandom(0, len(imgFileNameDict) - 1)]
+				self.loadingImage.LoadImage(imgFileName)
 
-		except:
-			print("LoadingWindow.Open.LoadImage - %s File Load Error" % (imgFileName))
-			self.loadingImage.Hide()
+			except:
+				print("LoadingWindow.Open.LoadImage - %s File Load Error" % (imgFileName))
+				self.loadingImage.Hide()
 
 
-		width = float(wndMgr.GetScreenWidth()) / float(self.loadingImage.GetWidth())
-		height = float(wndMgr.GetScreenHeight()) / float(self.loadingImage.GetHeight())
+			width = float(wndMgr.GetScreenWidth()) / float(self.loadingImage.GetWidth())
+			height = float(wndMgr.GetScreenHeight()) / float(self.loadingImage.GetHeight())
 
-		self.loadingImage.SetScale(width, height)
-		self.loadingGage.SetPercentage(2, 100)
+			self.loadingImage.SetScale(width, height)
+			self.loadingGage.SetPercentage(2, 100)
 
 		self.Show()
+
+		if quiet_ld:
+			self.__ApplyQuietLoadingOverlay()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introloading_open_quiet_branch ---
 
 		chrSlot=self.stream.GetCharacterSlot()
 		net.SendSelectCharacterPacket(chrSlot)
 
 		app.SetFrameSkip(0)
 
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introloading_quiet_overlay_methods ---
+	def __DestroyQuietLoadingOverlay(self):
+		if self.quietLoadText:
+			self.quietLoadText.Hide()
+			self.quietLoadText = None
+		if self.quietLoadBar:
+			self.quietLoadBar.Hide()
+			self.quietLoadBar = None
+
+	def __ApplyQuietLoadingOverlay(self):
+		self.__DestroyQuietLoadingOverlay()
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		self.SetSize(sw, sh)
+		bar = ui.Bar("GAME")
+		bar.SetParent(self)
+		bar.AddFlag("not_pick")
+		bar.SetPosition(0, 0)
+		bar.SetSize(sw, sh)
+		bar.SetColor(0xff101010)
+		bar.Show()
+		tx = ui.TextLine()
+		tx.SetParent(self)
+		tx.SetFontName(localeInfo.UI_DEF_FONT)
+		tx.SetPackedFontColor(0xffffffff)
+		tx.SetText(localeInfo.SELECT_QUIET_LOADING)
+		tx.SetHorizontalAlignCenter()
+		tx.SetVerticalAlignCenter()
+		tx.SetPosition(sw / 2, sh / 2)
+		tx.Show()
+		bar.SetTop()
+		tx.SetTop()
+		self.quietLoadBar = bar
+		self.quietLoadText = tx
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introloading_quiet_overlay_methods ---
+
 	def Close(self):
 		print("---------------------------------------------------------------------------- CLOSE LOADING WINDOW")
+
+		self.__DestroyQuietLoadingOverlay()
 
 		app.SetFrameSkip(1)
 
@@ -123,6 +185,10 @@ class LoadingWindow(ui.ScriptWindow):
 
 	def OnPressEscapeKey(self):
 		app.SetFrameSkip(1)
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introloading_escape_clear_quiet ---
+		if self.stream:
+			self.stream.quietLoadingUiForQuickLogin = 0
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introloading_escape_clear_quiet ---
 		self.stream.SetLoginPhase()
 		return True
 

@@ -1,0 +1,7 @@
+[DELAY value;0]
+Evenementomschrijving[ENTER]
+Het Wereldkampioenschap Evenement is begonnen.[ENTER]
+Voetballen verschijnen niet langer in je inventaris.[ENTER]
+Verzamel er zoveel als je kunt en wissel ze vervolgens[ENTER]
+in voor Gouden Voetballen bij Yu-Hwan, of gebruik ze[ENTER]
+om items te ontvangen.

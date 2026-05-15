@@ -35,6 +35,14 @@ LOGIN_FOOTER_MARGIN_X = 30
 LOGIN_FOOTER_MARGIN_BOTTOM = 30
 LOGIN_FOOTER_BTN_GAP = 8
 
+# FAST_LOGIN_CHARACTER_SAVE:PORT file=intrologin (grep FAST_LOGIN_CHARACTER_SAVE:PORT in this file for copy blocks)
+# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_module_const ---
+# Quick fav (only if app.FAST_LOGIN_CHARACTER_SAVE): 1 = show "1".."N" test labels; 0 = real names from storage.
+QUICK_CHAR_STATIC_LABELS_TEST = 0
+# serverInfo REGION_DICT channel key for quick-login shortcut (1 = CH1). Used only with FAST_LOGIN_CHARACTER_SAVE.
+QUICK_LOGIN_CHANNEL_KEY = 1
+# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_module_const ---
+
 VIRTUAL_KEYBOARD_NUM_KEYS = 46
 VIRTUAL_KEYBOARD_RAND_KEY = True
 
@@ -207,6 +215,17 @@ class LoginWindow(ui.ScriptWindow):
 		# @fixme001 END
 
 		self.login_footer_buttons = []
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_init_attrs ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			self.quickCharButtons = []
+			self.quickCharClearButtons = []
+			self.quickCharBoard = None
+			self.quickCharBoardTitle = None
+			self.quickCharBoardLine = None
+		# Full-screen quiet overlay on login only when connecting from a quick-fav slot (FAST_LOGIN_CHARACTER_SAVE).
+		self.quickQuietBar = None
+		self.quickQuietText = None
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_init_attrs ---
 
 	def __del__(self):
 		net.ClearPhaseWindow(net.PHASE_WINDOW_LOGIN, self)
@@ -346,6 +365,10 @@ class LoginWindow(ui.ScriptWindow):
 			self.connectingDialog.Close()
 		self.connectingDialog = None
 
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_close_quiet_overlay ---
+		self.__DestroyQuietQuickConnectOverlay(False)
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_close_quiet_overlay ---
+
 		ServerStateChecker.Initialize(self)
 
 		print("---------------------------------------------------------------------------- CLOSE LOGIN WINDOW ")
@@ -368,6 +391,10 @@ class LoginWindow(ui.ScriptWindow):
 		self.inputDialog = None
 		self.connectingDialog = None
 		self.loadingImage = None
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_close_quick_fav_ui ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			self.__DestroyQuickCharacterButtons()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_close_quick_fav_ui ---
 		self.login_footer_buttons = []
 		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
 			self.language_list = []
@@ -476,7 +503,58 @@ class LoginWindow(ui.ScriptWindow):
 		self.timeOutMsg = False
 		self.OnConnectFailure()
 
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_login_quiet_overlay_methods ---
+	def __DestroyQuietQuickConnectOverlay(self, show_cursor_restore=True):
+		had = (self.quickQuietBar is not None) or (self.quickQuietText is not None)
+		if self.quickQuietText:
+			self.quickQuietText.Hide()
+			self.quickQuietText = None
+		if self.quickQuietBar:
+			self.quickQuietBar.Hide()
+			self.quickQuietBar = None
+		if had and show_cursor_restore:
+			app.ShowCursor()
+
+	def __ApplyQuietQuickConnectOverlay(self):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		self.__DestroyQuietQuickConnectOverlay(False)
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		try:
+			self.SetSize(sw, sh)
+		except:
+			pass
+		bar = ui.Bar("GAME")
+		bar.SetParent(self)
+		bar.AddFlag("not_pick")
+		bar.SetPosition(0, 0)
+		bar.SetSize(sw, sh)
+		bar.SetColor(0xff101010)
+		bar.Show()
+		tx = ui.TextLine()
+		tx.SetParent(self)
+		tx.SetFontName(localeInfo.UI_DEF_FONT)
+		tx.SetPackedFontColor(0xffffffff)
+		tx.SetText(localeInfo.SELECT_QUIET_LOADING)
+		tx.SetHorizontalAlignCenter()
+		tx.SetVerticalAlignCenter()
+		tx.SetPosition(sw / 2, sh / 2)
+		tx.Show()
+		bar.SetTop()
+		tx.SetTop()
+		self.quickQuietBar = bar
+		self.quickQuietText = tx
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_login_quiet_overlay_methods ---
+
 	def OnConnectFailure(self):
+
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_on_connect_failure_quick_stream ---
+		self.stream.isAutoSelect = 0
+		self.stream.hideSelectUiForAutoLogin = 0
+		self.stream.quietLoadingUiForQuickLogin = 0
+		self.__DestroyQuietQuickConnectOverlay(True)
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_on_connect_failure_quick_stream ---
 
 		if self.isNowCountDown:
 			return
@@ -497,13 +575,27 @@ class LoginWindow(ui.ScriptWindow):
 	def OnHandShake(self):
 		if not IsLoginDelay():
 			snd.PlaySound("sound/ui/loginok.wav")
-			self.PopupDisplayMessage(localeInfo.LOGIN_CONNECT_SUCCESS)
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_on_handshake_quiet ---
+		if getattr(self.stream, "quietLoadingUiForQuickLogin", 0):
+			return
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_on_handshake_quiet ---
+		self.PopupDisplayMessage(localeInfo.LOGIN_CONNECT_SUCCESS)
 
 	def OnLoginStart(self):
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_on_login_start_quiet ---
+		if getattr(self.stream, "quietLoadingUiForQuickLogin", 0):
+			return
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_on_login_start_quiet ---
 		if not IsLoginDelay():
 			self.PopupDisplayMessage(localeInfo.LOGIN_PROCESSING)
 
 	def OnLoginFailure(self, error):
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_on_login_failure_quick_stream ---
+		self.stream.isAutoSelect = 0
+		self.stream.hideSelectUiForAutoLogin = 0
+		self.stream.quietLoadingUiForQuickLogin = 0
+		self.__DestroyQuietQuickConnectOverlay(True)
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_on_login_failure_quick_stream ---
 		if self.connectingDialog:
 			self.connectingDialog.Close()
 		self.connectingDialog = None
@@ -603,17 +695,25 @@ class LoginWindow(ui.ScriptWindow):
 				# button objects
 				btnObjSave = GetObject(btnNameSave % idx)
 				btnObjAccess = GetObject(btnNameAccess % idx)
-				btnObjRemove = GetObject(btnNameRemove % idx)
+				btnObjClear = GetObject(btnNameRemove % idx)
 				if _tSlot:
 					(id, pwd) = _tSlot
 					btnObjSave.Hide()
 					btnObjAccess.Show()
-					btnObjRemove.Show()
 					btnObjAccess.SetText(uiScriptLocale.SAVE_ACCOUNT_CONNECT2.format(idx+1, id))
+					try:
+						btnObjClear.Show()
+						btnObjClear.Enable()
+					except:
+						pass
 				else:
 					btnObjSave.Show()
 					btnObjAccess.Hide()
-					btnObjRemove.Hide()
+					try:
+						btnObjClear.Show()
+						btnObjClear.Disable()
+					except:
+						pass
 			# done
 
 		def SAB_Click_Save(self, slot):
@@ -686,18 +786,58 @@ class LoginWindow(ui.ScriptWindow):
 			## gui stuff
 			SCREEN_WIDTH = wndMgr.GetScreenWidth()
 			SCREEN_HEIGHT = wndMgr.GetScreenHeight()
-			## button space
-			SPACE_FOR_BUTTON = 25+1
-			ALL_BUTTON_SPACE = SPACE_FOR_BUTTON * constInfo.SAB.slotCount
-			## board stuff
-			BOARD_SIZE = (210+120, 28 + ALL_BUTTON_SPACE)
-			BOARD_POS = ((SCREEN_WIDTH - 208) / 2 + 210, (SCREEN_HEIGHT - 410) - (10*constInfo.SAB.slotCount))
+			MARGIN = 10
+			STACK_GAP = 20
+			slot_count = constInfo.SAB.slotCount
+			qc_board = getattr(self, "quickCharBoard", None)
+			btnImage = {"default": 1, "over": 2, "down": 3}
+			_tmpBtnPathXl0 = "d:/ymir work/ui/public/xlarge_button_%02d.sub"
+			cl_dir0 = "d:/ymir work/ui/public/"
+			cl_imgs0 = ("close_button_01.sub", "close_button_02.sub", "close_button_03.sub")
+			_pxl0 = ui.Button()
+			_pxl0.SetParent(self)
+			_pxl0.SetUpVisual(_tmpBtnPathXl0 % (btnImage["default"]))
+			_pxl0.SetOverVisual(_tmpBtnPathXl0 % (btnImage["over"]))
+			_pxl0.SetDownVisual(_tmpBtnPathXl0 % (btnImage["down"]))
+			SAB_XL_H = _pxl0.GetHeight()
+			_pxl0.Hide()
+			_pcl0 = ui.Button()
+			_pcl0.SetParent(self)
+			_pcl0.SetUpVisual(cl_dir0 + cl_imgs0[0])
+			_pcl0.SetOverVisual(cl_dir0 + cl_imgs0[1])
+			_pcl0.SetDownVisual(cl_dir0 + cl_imgs0[2])
+			SAB_CLR_H = _pcl0.GetHeight()
+			_pcl0.Hide()
+			SAB_ROW_EXTRA = 5
+			row_inner = max(SAB_XL_H, SAB_CLR_H) + 2
+			SPACE_FOR_BUTTON = max(14, row_inner) + SAB_ROW_EXTRA
+			FIRST_ROW_Y = 24
+			if qc_board:
+				qc_w = qc_board.GetWidth()
+				BOARD_SIZE = (qc_w, FIRST_ROW_Y + slot_count * SPACE_FOR_BUTTON + 4)
+			else:
+				FIRST_ROW_Y = 25
+				SPACE_FOR_BUTTON = 25 + 1 + SAB_ROW_EXTRA
+				ALL_BUTTON_SPACE = SPACE_FOR_BUTTON * slot_count
+				BOARD_SIZE = (210 + 120, 28 + ALL_BUTTON_SPACE)
+			_bw = BOARD_SIZE[0]
+
+			def _sab_scale_x(x):
+				return int(x * float(_bw) / 330.0 + 0.5)
+
+			if qc_board:
+				_, qc_y = qc_board.GetLocalPosition()
+				x_sab = SCREEN_WIDTH - BOARD_SIZE[0] - MARGIN
+				y_sab = qc_y - STACK_GAP - BOARD_SIZE[1]
+				if y_sab < MARGIN:
+					y_sab = MARGIN
+				BOARD_POS = (x_sab, y_sab)
+			else:
+				BOARD_POS = ((SCREEN_WIDTH - 208) / 2 + 210, (SCREEN_HEIGHT - 410) - (10 * slot_count))
 			## button stuff
 			btnNameSave = constInfo.SAB.btnName["Save"]
 			btnNameAccess = constInfo.SAB.btnName["Access"]
 			btnNameRemove = constInfo.SAB.btnName["Remove"]
-			btnPath = "d:/ymir work/ui/public/%s_button_%02d.sub" # xsmall small middle large xlarge big
-			btnImage = {"default":1,"over":2,"down":3}
 			## SAB BOARD
 			try:
 				## default init
@@ -746,8 +886,33 @@ class LoginWindow(ui.ScriptWindow):
 				_tmpObj.Show()
 			except:
 				import exception; exception.Abort("__CreateSaveAccountBoard SAB LINE")
-			## SaveAccountButtons
+			## SaveAccountButtons (main + X same layout as quick char; Save/Access share one slot)
+			_pb_xl = ui.Button()
+			_pb_xl.SetParent(self.saveAccountBoard)
+			_tmpBtnPathXl = "d:/ymir work/ui/public/xlarge_button_%02d.sub"
+			_pb_xl.SetUpVisual(_tmpBtnPathXl % (btnImage["default"]))
+			_pb_xl.SetOverVisual(_tmpBtnPathXl % (btnImage["over"]))
+			_pb_xl.SetDownVisual(_tmpBtnPathXl % (btnImage["down"]))
+			XL_W = _pb_xl.GetWidth()
+			XL_H = _pb_xl.GetHeight()
+			_pb_xl.Hide()
+			cl_dir = "d:/ymir work/ui/public/"
+			cl_imgs = ("close_button_01.sub", "close_button_02.sub", "close_button_03.sub")
+			_pb_cl = ui.Button()
+			_pb_cl.SetParent(self.saveAccountBoard)
+			_pb_cl.SetUpVisual(cl_dir + cl_imgs[0])
+			_pb_cl.SetOverVisual(cl_dir + cl_imgs[1])
+			_pb_cl.SetDownVisual(cl_dir + cl_imgs[2])
+			CLR_W = _pb_cl.GetWidth()
+			CLR_H = _pb_cl.GetHeight()
+			_pb_cl.Hide()
+			SAB_BTN_GAP = 5
+			main_x = _sab_scale_x(35)
 			for idx in xrange(constInfo.SAB.slotCount):
+				row_top = FIRST_ROW_Y + (idx * SPACE_FOR_BUTTON)
+				main_y = row_top + max(0, (SPACE_FOR_BUTTON - XL_H) // 2)
+				clr_y = row_top + max(0, (SPACE_FOR_BUTTON - CLR_H) // 2)
+				clr_x = main_x + XL_W + SAB_BTN_GAP
 				### SAB SAVE
 				try:
 					## default init
@@ -756,14 +921,13 @@ class LoginWindow(ui.ScriptWindow):
 					_tmpObj = GetObject(_tmpName)
 					_tmpObj.SetParent(self.saveAccountBoard)
 					## custom data
-					_tmpBtnPath = "d:/ymir work/ui/public/xlarge_button_%02d.sub" # xsmall small middle large xlarge big
-					_tmpObj.SetUpVisual(_tmpBtnPath % (btnImage["default"]))
-					_tmpObj.SetOverVisual(_tmpBtnPath % (btnImage["over"]))
-					_tmpObj.SetDownVisual(_tmpBtnPath % (btnImage["down"]))
+					_tmpObj.SetUpVisual(_tmpBtnPathXl % (btnImage["default"]))
+					_tmpObj.SetOverVisual(_tmpBtnPathXl % (btnImage["over"]))
+					_tmpObj.SetDownVisual(_tmpBtnPathXl % (btnImage["down"]))
 					_tmpObj.SetText(uiScriptLocale.SAVE_ACCOUNT_SAVE)
 					_tmpObj.SAFE_SetEvent(self.SAB_Click_Save, idx)
 					## default data
-					_tmpObj.SetPosition(15 + 60, 25 + (idx * SPACE_FOR_BUTTON))
+					_tmpObj.SetPosition(main_x, main_y)
 					_tmpObj.Hide()
 				except:
 					import exception; exception.Abort("__CreateSaveAccountBoard SAB SAVE")
@@ -775,18 +939,17 @@ class LoginWindow(ui.ScriptWindow):
 					_tmpObj = GetObject(_tmpName)
 					_tmpObj.SetParent(self.saveAccountBoard)
 					## custom data
-					_tmpBtnPath = "d:/ymir work/ui/public/xlarge_button_%02d.sub" # xsmall small middle large xlarge big
-					_tmpObj.SetUpVisual(_tmpBtnPath % (btnImage["default"]))
-					_tmpObj.SetOverVisual(_tmpBtnPath % (btnImage["over"]))
-					_tmpObj.SetDownVisual(_tmpBtnPath % (btnImage["down"]))
+					_tmpObj.SetUpVisual(_tmpBtnPathXl % (btnImage["default"]))
+					_tmpObj.SetOverVisual(_tmpBtnPathXl % (btnImage["over"]))
+					_tmpObj.SetDownVisual(_tmpBtnPathXl % (btnImage["down"]))
 					_tmpObj.SetText(uiScriptLocale.SAVE_ACCOUNT_CONNECT.format(idx+1))
 					_tmpObj.SAFE_SetEvent(self.SAB_Click_Access, idx)
 					## default data
-					_tmpObj.SetPosition(35, 25 + (idx * SPACE_FOR_BUTTON))
+					_tmpObj.SetPosition(main_x, main_y)
 					_tmpObj.Show()
 				except:
 					import exception; exception.Abort("__CreateSaveAccountBoard SAB ACCESS")
-				### SAB REMOVE
+				### SAB CLEAR (X, same as guild notice delete / quick char clear)
 				try:
 					## default init
 					_tmpName = btnNameRemove % (idx)
@@ -794,17 +957,19 @@ class LoginWindow(ui.ScriptWindow):
 					_tmpObj = GetObject(_tmpName)
 					_tmpObj.SetParent(self.saveAccountBoard)
 					## custom data
-					_tmpBtnPath = "d:/ymir work/ui/public/middle_button_%02d.sub" # xsmall small middle large xlarge big
-					_tmpObj.SetUpVisual(_tmpBtnPath % (btnImage["default"]))
-					_tmpObj.SetOverVisual(_tmpBtnPath % (btnImage["over"]))
-					_tmpObj.SetDownVisual(_tmpBtnPath % (btnImage["down"]))
-					_tmpObj.SetText(uiScriptLocale.SAVE_ACCOUNT_REMOVE)
-					_tmpObj.SAFE_SetEvent(self.SAB_Click_Remove, idx)
+					_tmpObj.SetUpVisual(cl_dir + cl_imgs[0])
+					_tmpObj.SetOverVisual(cl_dir + cl_imgs[1])
+					_tmpObj.SetDownVisual(cl_dir + cl_imgs[2])
+					_tmpObj.SetEvent(ui.__mem_func__(self.SAB_Click_Remove), idx)
+					try:
+						_tmpObj.SetToolTipText(uiScriptLocale.SAVE_ACCOUNT_REMOVE)
+					except:
+						pass
 					## default data
-					_tmpObj.SetPosition(35 + 190, 25 + (idx * SPACE_FOR_BUTTON))
+					_tmpObj.SetPosition(clr_x, clr_y)
 					_tmpObj.Show()
 				except:
-					import exception; exception.Abort("__CreateSaveAccountBoard SAB REMOVE")
+					import exception; exception.Abort("__CreateSaveAccountBoard SAB CLEAR")
 			self.SAB_BtnRearrange()
 
 	def __LoadScript(self, fileName):
@@ -830,9 +995,6 @@ class LoginWindow(ui.ScriptWindow):
 			self.selectConnectButton	= GetObject("SelectConnectButton")
 			self.loginButton			= GetObject("LoginButton")
 			self.loginExitButton		= GetObject("LoginExitButton")
-
-			if constInfo.ENABLE_SAVE_ACCOUNT:
-				self.__CreateSaveAccountBoard()
 
 			self.virtualKeyboard		= self.GetChild2("VirtualKeyboard")
 			
@@ -924,7 +1086,418 @@ class LoginWindow(ui.ScriptWindow):
 			self.GetChild("bg1").Show()
 			self.GetChild("bg2").Hide()
 		self.__BuildLoginFooterButtons()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_quick_fav_build ---
+		try:
+			if app.FAST_LOGIN_CHARACTER_SAVE:
+				self.__CreateQuickCharacterButtons()
+		except Exception, e:
+			try:
+				import dbg
+				dbg.TraceError("LoginWindow.__CreateQuickCharacterButtons: %r" % (e,))
+			except:
+				pass
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_quick_fav_build ---
+		if constInfo.ENABLE_SAVE_ACCOUNT:
+			self.__CreateSaveAccountBoard()
 		return 1
+
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_quick_fav_panel_methods ---
+	def __CaptionForQuickBtn(self, v):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return "-"
+		# Same bytes pipeline as working static "1".."4" labels (wndMgr expects str, not unicode).
+		if v is None:
+			return "-"
+		try:
+			if isinstance(v, unicode):
+				t = v.replace(u"\ufeff", u"").strip()
+				if not t:
+					return "-"
+				try:
+					return t.encode("cp1252")
+				except UnicodeEncodeError:
+					return t.encode("utf-8", "replace")
+			s = str(v).strip()
+			try:
+				s = s.lstrip("\xef\xbb\xbf")
+			except:
+				pass
+			s = s.strip()
+			if not s:
+				return "-"
+			return s
+		except:
+			return "-"
+
+	def __ApplyQuickCharButtonLabel(self, btn, caption, col):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		if btn is None:
+			return
+		caption = self.__CaptionForQuickBtn(caption)
+		btn.Enable()
+		if len(getattr(btn, "TextChild", [])) < 1:
+			btn.AppendTextLine(
+				caption,
+				localeInfo.UI_DEF_FONT,
+				col,
+				"center",
+				None,
+				None,
+			)
+		else:
+			btn.SetAppendTextChangeText(0, caption)
+			try:
+				btn.SetAppendTextColor(0, col)
+			except:
+				pass
+
+	def __DestroyQuickCharacterButtons(self):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		for btn in getattr(self, "quickCharClearButtons", []):
+			if btn:
+				btn.Hide()
+		self.quickCharClearButtons = []
+		for btn in getattr(self, "quickCharButtons", []):
+			if btn:
+				btn.Hide()
+		self.quickCharButtons = []
+		brd = getattr(self, "quickCharBoard", None)
+		if brd:
+			brd.Hide()
+		self.quickCharBoard = None
+		self.quickCharBoardTitle = None
+		self.quickCharBoardLine = None
+
+	def __CreateQuickCharacterButtons(self):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			self.__DestroyQuickCharacterButtons()
+			return
+		import quickcharacter
+
+		self.__DestroyQuickCharacterButtons()
+		self.quickCharButtons = []
+		self.quickCharClearButtons = []
+
+		btn_path = "d:/ymir work/ui/public/large_button_%02d.sub"
+		cl_dir = "d:/ymir work/ui/public/"
+		cl_imgs = ("close_button_01.sub", "close_button_02.sub", "close_button_03.sub")
+		PAD = 6
+		GAP = 5
+		COL_GAP = 25
+		COLS = 2
+		ROWS = (quickcharacter.MAX_FAVORITES + COLS - 1) // COLS
+		QC_HEADER = 24
+
+		self.quickCharBoard = ui.ThinBoard()
+		self.quickCharBoard.SetParent(self)
+		self.quickCharBoard.SetPosition(0, 0)
+
+		_pb_m = ui.Button()
+		_pb_m.SetParent(self)
+		_pb_m.SetUpVisual(btn_path % 1)
+		_pb_m.SetOverVisual(btn_path % 2)
+		_pb_m.SetDownVisual(btn_path % 3)
+		MAIN_W = _pb_m.GetWidth()
+		MAIN_H = _pb_m.GetHeight()
+
+		_pb_c = ui.Button()
+		_pb_c.SetParent(self)
+		_pb_c.SetUpVisual(cl_dir + cl_imgs[0])
+		_pb_c.SetOverVisual(cl_dir + cl_imgs[1])
+		_pb_c.SetDownVisual(cl_dir + cl_imgs[2])
+		CLR_W = _pb_c.GetWidth()
+		CLR_H = _pb_c.GetHeight()
+		_pb_m.Hide()
+		_pb_c.Hide()
+
+		ROW_H = max(MAIN_H, CLR_H)
+		slot_w = MAIN_W + GAP + CLR_W
+		board_w = PAD * 2 + COLS * slot_w + (COLS - 1) * COL_GAP
+		board_h = QC_HEADER + ROWS * ROW_H + max(0, ROWS - 1) * GAP + 6
+		self.quickCharBoard.SetSize(board_w, board_h)
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		MARGIN = 10
+		x_qc = sw - board_w - MARGIN
+		y_qc = sh - board_h - MARGIN
+		self.quickCharBoard.SetPosition(x_qc, y_qc)
+		self.quickCharBoard.Show()
+
+		for i in xrange(quickcharacter.MAX_FAVORITES):
+			col = i % COLS
+			row = i // COLS
+			x = PAD + col * (slot_w + COL_GAP)
+			y = QC_HEADER + row * (ROW_H + GAP)
+			my = y + max(0, (ROW_H - MAIN_H) // 2)
+			btn = ui.Button()
+			btn.SetParent(self.quickCharBoard)
+			btn.SetUpVisual(btn_path % 1)
+			btn.SetOverVisual(btn_path % 2)
+			btn.SetDownVisual(btn_path % 3)
+			btn.SetPosition(x, my)
+			btn.SetEvent(ui.__mem_func__(self.__OnClickQuickFavorite), i)
+			btn.Show()
+			self.quickCharButtons.append(btn)
+
+			cy = y + max(0, (ROW_H - CLR_H) // 2)
+			cbtn = ui.Button()
+			cbtn.SetParent(self.quickCharBoard)
+			cbtn.SetUpVisual(cl_dir + cl_imgs[0])
+			cbtn.SetOverVisual(cl_dir + cl_imgs[1])
+			cbtn.SetDownVisual(cl_dir + cl_imgs[2])
+			cbtn.SetPosition(x + MAIN_W + GAP, cy)
+			try:
+				cbtn.SetToolTipText(localeInfo.LOGIN_QUICK_CHAR_CLEAR_TOOLTIP)
+			except:
+				pass
+			cbtn.SetEvent(ui.__mem_func__(self.__OnClickQuickClearFavorite), i)
+			cbtn.Show()
+			self.quickCharClearButtons.append(cbtn)
+
+		qc_title = ui.TextLine()
+		qc_title.SetParent(self.quickCharBoard)
+		qc_title.SetFontName(localeInfo.UI_DEF_FONT)
+		qc_title.SetHorizontalAlignCenter()
+		qc_title.SetVerticalAlignCenter()
+		qc_title.SetPackedFontColor(0xFFffbf00)
+		qc_title.SetOutline()
+		try:
+			qc_title.SetText(localeInfo.LOGIN_QUICK_CHAR_BOARD_TITLE)
+		except:
+			qc_title.SetText("Karakter kaydetme")
+		qc_title.SetPosition(board_w / 2, 12)
+		qc_title.Show()
+		self.quickCharBoardTitle = qc_title
+
+		qc_line = ui.Line()
+		qc_line.SetParent(self.quickCharBoard)
+		qc_line.SetColor(0xFF777777)
+		qc_line.SetSize(board_w - 10, 0)
+		qc_line.SetPosition(5, 20)
+		qc_line.Show()
+		self.quickCharBoardLine = qc_line
+
+		self.__RefreshQuickCharacterButtons()
+
+	def __RefreshQuickCharacterButtons(self):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		import quickcharacter
+
+		buttons = getattr(self, "quickCharButtons", None)
+		if not buttons or len(buttons) == 0:
+			return
+		if constInfo.ENABLE_SAVE_ACCOUNT and getattr(self, "SAB_LoadAccountData", None):
+			self.SAB_LoadAccountData()
+		_inv = getattr(quickcharacter, "invalidate_read_cache", None)
+		if callable(_inv):
+			_inv()
+		data_blob = quickcharacter.LoadAllEntries()
+		try:
+			import grp
+		except ImportError:
+			grp = None
+		col_hi = grp.GenerateColor(0.92, 0.92, 0.91, 1.0) if grp else 0xFFE8E8E8
+		col_mid = grp.GenerateColor(0.62, 0.62, 0.6, 1.0) if grp else 0xFFAAAAAA
+		col_lo = grp.GenerateColor(0.48, 0.48, 0.46, 1.0) if grp else 0xFF888888
+		for i in xrange(quickcharacter.MAX_FAVORITES):
+			if i >= len(self.quickCharButtons):
+				continue
+			btn = self.quickCharButtons[i]
+			if QUICK_CHAR_STATIC_LABELS_TEST:
+				try:
+					btn.SetToolTipText(str(i + 1))
+				except:
+					pass
+				self.__ApplyQuickCharButtonLabel(btn, str(i + 1), col_hi)
+				continue
+			entry = quickcharacter.LoadFavorite(i, data_blob)
+			nm = u""
+			if entry:
+				nm = entry.get("name") or entry.get("Name") or u""
+			elif isinstance(data_blob, dict):
+				rec = data_blob.get(str(i))
+				if isinstance(rec, dict):
+					nm = rec.get("name") or rec.get("Name") or u""
+			if not isinstance(nm, basestring):
+				try:
+					nm = unicode(nm) if nm is not None else u""
+				except:
+					nm = u""
+			raw = nm
+			if isinstance(raw, unicode):
+				raw = raw.replace(u"\ufeff", u"").strip()
+			else:
+				raw = str(raw).strip()
+				try:
+					raw = raw.lstrip("\xef\xbb\xbf").strip()
+				except:
+					pass
+			if entry and not raw:
+				fb = entry.get("account")
+				if isinstance(fb, basestring) and fb.strip():
+					raw = fb.strip()
+			if not raw and isinstance(data_blob, dict):
+				rec = data_blob.get(str(i))
+				if isinstance(rec, dict):
+					fb = rec.get("account")
+					if isinstance(fb, basestring) and fb.strip():
+						raw = fb.strip()
+			if raw:
+				if len(raw) > 14:
+					show = raw[:14] + (u"..." if isinstance(raw, unicode) else "...")
+				else:
+					show = raw
+				try:
+					btn.SetToolTipText(self.__CaptionForQuickBtn(raw))
+				except:
+					pass
+				has_login = bool(entry) and quickcharacter.HasStoredLoginForEntry(entry)
+				col = col_hi if has_login else col_mid
+				self.__ApplyQuickCharButtonLabel(btn, show, col)
+			else:
+				try:
+					btn.SetToolTipText("")
+				except:
+					pass
+				cap = self.__CaptionForQuickBtn(localeInfo.LOGIN_QUICK_CHAR_EMPTY)
+				self.__ApplyQuickCharButtonLabel(btn, cap, col_lo)
+		for btn in self.quickCharButtons:
+			try:
+				btn.SetTop()
+			except:
+				pass
+		for btn in getattr(self, "quickCharClearButtons", []):
+			try:
+				btn.SetTop()
+			except:
+				pass
+		brd = getattr(self, "quickCharBoard", None)
+		if brd:
+			try:
+				brd.SetTop()
+			except:
+				pass
+		for c in (getattr(self, "quickCharBoardTitle", None), getattr(self, "quickCharBoardLine", None)):
+			if c:
+				try:
+					c.SetTop()
+				except:
+					pass
+
+	def __OnClickQuickClearFavorite(self, idx):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		import quickcharacter
+
+		quickcharacter.ClearFavorite(idx)
+		self.__RefreshQuickCharacterButtons()
+
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_quick_fav_panel_methods ---
+
+	def __SelectChannelListByServerKey(self, channel_key):
+		if not getattr(self, "channelList", None):
+			return False
+		for line in xrange(self.channelList.GetItemCount()):
+			if self.channelList.keyDict.get(line) == channel_key:
+				self.channelList.SelectItem(line)
+				return True
+		return False
+
+	def __CommitServerChannelConnection(self, channelID):
+		regionID = self.__GetRegionID()
+		serverID = self.__GetServerID()
+		if not serverInfo.REGION_DICT.has_key(regionID):
+			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_REGION)
+			return False
+		if not serverInfo.REGION_DICT[regionID].has_key(serverID):
+			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_SERVER)
+			return False
+		try:
+			channelDict = serverInfo.REGION_DICT[regionID][serverID]["channel"]
+		except KeyError:
+			return False
+		try:
+			state = channelDict[channelID]["state"]
+		except KeyError:
+			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_CHANNEL)
+			return False
+		if state == serverInfo.STATE_DICT[3]:
+			self.PopupNotifyMessage(localeInfo.CHANNEL_NOTIFY_FULL)
+			return False
+		self.__SaveChannelInfo()
+		try:
+			serverName = serverInfo.REGION_DICT[regionID][serverID]["name"]
+			channelName = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["name"]
+		except:
+			print(" ERROR __CommitServerChannelConnection(%d, %d, %d)" % (regionID, serverID, channelID))
+			serverName = localeInfo.CHANNEL_EMPTY_SERVER
+			channelName = localeInfo.CHANNEL_NORMAL % channelID
+		self.__SetServerInfo("%s, %s " % (serverName, channelName))
+		try:
+			ip = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["ip"]
+			tcp_port = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["tcp_port"]
+		except:
+			import exception
+			exception.Abort("LoginWindow.__CommitServerChannelConnection")
+		try:
+			account_ip = serverInfo.REGION_AUTH_SERVER_DICT[regionID][serverID]["ip"]
+			account_port = serverInfo.REGION_AUTH_SERVER_DICT[regionID][serverID]["port"]
+		except:
+			account_ip = 0
+			account_port = 0
+		try:
+			markKey = regionID * 1000 + serverID * 10
+			markAddrValue = serverInfo.MARKADDR_DICT[markKey]
+			net.SetMarkServer(markAddrValue["ip"], markAddrValue["tcp_port"])
+			app.SetGuildMarkPath(markAddrValue["mark"])
+			app.SetGuildSymbolPath(markAddrValue["symbol_path"])
+		except:
+			import exception
+			exception.Abort("LoginWindow.__CommitServerChannelConnection")
+		self.stream.SetConnectInfo(ip, tcp_port, account_ip, account_port)
+		return True
+
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_quick_fav_connect_click ---
+	def __OnClickQuickFavorite(self, idx):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		import quickcharacter
+
+		entry = quickcharacter.LoadFavorite(idx)
+		if not entry:
+			return
+		if constInfo.ENABLE_SAVE_ACCOUNT and getattr(self, "SAB_LoadAccountData", None):
+			self.SAB_LoadAccountData()
+		id, pwd = quickcharacter.ResolveCredentials(entry.get("account"), entry.get("pwd"))
+		if not pwd:
+			id = self.idEditLine.GetText()
+			pwd = self.pwdEditLine.GetText()
+			if len(id.strip()) == 0 or len(pwd) == 0:
+				self.PopupNotifyMessage(localeInfo.LOGIN_QUICK_CHAR_NO_SAB_OR_PWD, self.SetPasswordEditLineFocus)
+				return
+			if not quickcharacter.AccountsMatch(entry.get("account", ""), id):
+				self.PopupNotifyMessage(localeInfo.LOGIN_QUICK_CHAR_ACCOUNT_MISMATCH, self.SetIDEditLineFocus)
+				return
+		else:
+			if self.idEditLine:
+				self.idEditLine.SetText(id)
+			if self.pwdEditLine:
+				self.pwdEditLine.SetText(pwd)
+		if not self.__SelectChannelListByServerKey(QUICK_LOGIN_CHANNEL_KEY):
+			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_CHANNEL)
+			return
+		if not self.__CommitServerChannelConnection(QUICK_LOGIN_CHANNEL_KEY):
+			return
+		self.stream.SetCharacterSlot(int(entry["slot"]))
+		self.stream.isAutoSelect = 1
+		self.stream.hideSelectUiForAutoLogin = 1
+		self.stream.quietLoadingUiForQuickLogin = 1
+		self.Connect(id, pwd)
+
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_quick_fav_connect_click ---
 
 	def __OnClickLoginFooterLink(self, url):
 		if not url:
@@ -1049,7 +1622,13 @@ class LoginWindow(ui.ScriptWindow):
 		if constInfo.SEQUENCE_PACKET_ENABLE:
 			net.SetPacketSequenceMode()
 
-		if IsLoginDelay():
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_connect_quiet ---
+		quiet_qc = getattr(self.stream, "quietLoadingUiForQuickLogin", 0)
+		if quiet_qc and not app.FAST_LOGIN_CHARACTER_SAVE:
+			self.stream.quietLoadingUiForQuickLogin = 0
+			self.stream.hideSelectUiForAutoLogin = 0
+			quiet_qc = 0
+		if IsLoginDelay() and not quiet_qc:
 			loginDelay = GetLoginDelay()
 			self.connectingDialog = ConnectingDialog()
 			self.connectingDialog.Open(loginDelay)
@@ -1057,9 +1636,15 @@ class LoginWindow(ui.ScriptWindow):
 			self.connectingDialog.SAFE_SetExitEvent(self.OnPressExitKey)
 			self.isNowCountDown = True
 
-		else:
+		elif not quiet_qc:
 			self.stream.popupWindow.Close()
 			self.stream.popupWindow.Open(localeInfo.LOGIN_CONNETING, self.SetPasswordEditLineFocus, localeInfo.UI_CANCEL)
+
+		if quiet_qc and app.FAST_LOGIN_CHARACTER_SAVE:
+			self.__ApplyQuietQuickConnectOverlay()
+			app.HideCursor()
+
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_connect_quiet ---
 
 		self.stream.SetLoginInfo(id, pwd)
 		self.stream.Connect()
@@ -1386,6 +1971,10 @@ class LoginWindow(ui.ScriptWindow):
 		is_auto_login = int(getValue(logininfo, "auto_login", "0"))
 
 		self.stream.SetCharacterSlot(int(slot))
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_load_login_info_quiet_reset ---
+		self.stream.hideSelectUiForAutoLogin = 0
+		self.stream.quietLoadingUiForQuickLogin = 0
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_load_login_info_quiet_reset ---
 		self.stream.isAutoLogin=is_auto_login
 		self.stream.isAutoSelect=is_auto_login
 
@@ -1399,6 +1988,10 @@ class LoginWindow(ui.ScriptWindow):
 
 
 	def PopupDisplayMessage(self, msg):
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_popup_quiet_guard ---
+		if getattr(self.stream, "quietLoadingUiForQuickLogin", 0):
+			return
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_popup_quiet_guard ---
 		self.stream.popupWindow.Close()
 		if app.__BL_MULTI_LANGUAGE__:
 			self.stream.popupWindow.Open(msg, 0, localeInfo.UI_CANCEL)
@@ -1540,6 +2133,11 @@ class LoginWindow(ui.ScriptWindow):
 			self.pwdEditLine.SetText("")
 
 		self.idEditLine.SetFocus()
+
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_open_login_refresh_quick_fav ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			self.__RefreshQuickCharacterButtons()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_open_login_refresh_quick_fav ---
 
 		global SKIP_LOGIN_PHASE
 		if SKIP_LOGIN_PHASE:
@@ -1691,76 +2289,10 @@ class LoginWindow(ui.ScriptWindow):
 			self.GetChild("bg1").Hide()
 			self.GetChild("bg2").Show()
 
-		regionID = self.__GetRegionID()
-		serverID = self.__GetServerID()
 		channelID = self.__GetChannelID()
-
-		if (not serverInfo.REGION_DICT.has_key(regionID)):
-			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_REGION)
+		if not self.__CommitServerChannelConnection(channelID):
 			return
 
-		if (not serverInfo.REGION_DICT[regionID].has_key(serverID)):
-			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_SERVER)
-			return
-
-		try:
-			channelDict = serverInfo.REGION_DICT[regionID][serverID]["channel"]
-		except KeyError:
-			return
-
-		try:
-			state = channelDict[channelID]["state"]
-		except KeyError:
-			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_CHANNEL)
-			return
-
-		if state == serverInfo.STATE_DICT[3]:
-			self.PopupNotifyMessage(localeInfo.CHANNEL_NOTIFY_FULL)
-			return
-
-		self.__SaveChannelInfo()
-
-		try:
-			serverName = serverInfo.REGION_DICT[regionID][serverID]["name"]
-			channelName = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["name"]
-			addrKey = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["key"]
-
-		except:
-			print(" ERROR __OnClickSelectServerButton(%d, %d, %d)" % (regionID, serverID, channelID))
-			serverName = localeInfo.CHANNEL_EMPTY_SERVER
-			channelName = localeInfo.CHANNEL_NORMAL % channelID
-
-		self.__SetServerInfo("%s, %s " % (serverName, channelName))
-
-		try:
-			ip = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["ip"]
-			tcp_port = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["tcp_port"]
-		except:
-			import exception
-			exception.Abort("LoginWindow.__OnClickSelectServerButton")
-
-		try:
-			account_ip = serverInfo.REGION_AUTH_SERVER_DICT[regionID][serverID]["ip"]
-			account_port = serverInfo.REGION_AUTH_SERVER_DICT[regionID][serverID]["port"]
-		except:
-			account_ip = 0
-			account_port = 0
-
-		try:
-			markKey = regionID*1000 + serverID*10
-			markAddrValue=serverInfo.MARKADDR_DICT[markKey]
-			net.SetMarkServer(markAddrValue["ip"], markAddrValue["tcp_port"])
-			app.SetGuildMarkPath(markAddrValue["mark"])
-			# GUILD_SYMBOL
-			app.SetGuildSymbolPath(markAddrValue["symbol_path"])
-			# END_OF_GUILD_SYMBOL
-
-		except:
-			import exception
-			exception.Abort("LoginWindow.__OnClickSelectServerButton")
-
-
-		self.stream.SetConnectInfo(ip, tcp_port, account_ip, account_port)
 		self.__OpenLoginBoard()
 
 
@@ -1772,6 +2304,11 @@ class LoginWindow(ui.ScriptWindow):
 		self.__OpenServerBoard()
 
 	def __OnClickLoginButton(self):
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_normal_login_clear_quick_stream ---
+		self.stream.isAutoSelect = 0
+		self.stream.hideSelectUiForAutoLogin = 0
+		self.stream.quietLoadingUiForQuickLogin = 0
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_normal_login_clear_quick_stream ---
 		id = self.idEditLine.GetText()
 		pwd = self.pwdEditLine.GetText()
 

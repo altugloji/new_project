@@ -1,0 +1,32 @@
+1	Catar
+2	Equador
+3	Senegal
+4	Países Baixos
+5	Inglaterra
+6	Irão
+7	EUA
+8	País de Gales
+9	Argentina
+10	Arábia Saudita
+11	México
+12	Polónia
+13	França
+14	Austrália
+15	Dinamarca
+16	Tunísia
+17	Espanha
+18	Costa Rica
+19	Alemanha
+20	Japão
+21	Bélgica
+22	Canadá
+23	Marrocos
+24	Croácia
+25	Brasil
+26	Sérvia
+27	Suíça
+28	Camarões
+29	Portugal
+30	Gana
+31	Uruguai
+32	Coreia do Sul

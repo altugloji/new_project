@@ -36,6 +36,8 @@ ENABLE_ENGNUM_DELETE_CODE = True
 
 ###################################
 
+# FAST_LOGIN_CHARACTER_SAVE:PORT file=introselect (grep FAST_LOGIN_CHARACTER_SAVE:PORT)
+
 class SelectCharacterWindow(ui.Window):
 
 	# SLOT4
@@ -123,6 +125,15 @@ class SelectCharacterWindow(ui.Window):
 		self.changeNameFlag = False
 		self.nameInputBoard = None
 		self.sendedChangeNamePacket = False
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introselect_init_quick_and_quiet_attrs ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			self.quickSaveButtons = []
+			self.quickSaveBoard = None
+			self.quickSaveBoardTitle = None
+			self.quickSaveBoardLine = None
+		self.quietLoadBar = None
+		self.quietLoadText = None
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introselect_init_quick_and_quiet_attrs ---
 
 		self.startIndex = -1
 		self.isLoad = 0
@@ -138,12 +149,18 @@ class SelectCharacterWindow(ui.Window):
 		net.SetPhaseWindow(net.PHASE_WINDOW_SELECT, 0)
 
 	def Open(self):
+		quiet_ui = getattr(self.stream, "hideSelectUiForAutoLogin", 0) and self.stream.isAutoSelect
+
 		if not self.__LoadBoardDialog(uiScriptLocale.LOCALE_UISCRIPT_PATH + "selectcharacterwindow.py"):
 			import dbg
 			dbg.TraceError("SelectCharacterWindow.Open - __LoadScript Error")
+			if quiet_ui:
+				self.stream.hideSelectUiForAutoLogin = 0
 			return
 
 		if not self.__LoadQuestionDialog("uiscript/questiondialog.py"):
+			if quiet_ui:
+				self.stream.hideSelectUiForAutoLogin = 0
 			return
 
 		playerSettingModule.LoadGameData("INIT")
@@ -157,14 +174,18 @@ class SelectCharacterWindow(ui.Window):
 		self.btnLeft.Enable()
 		self.btnRight.Enable()
 
-		self.dlgBoard.Show()
+		if quiet_ui:
+			self.dlgBoard.Hide()
+			self.dlgQuestion.Hide()
+		else:
+			self.dlgBoard.Show()
 		self.SetWindowName("SelectCharacterWindow")
 		self.Show()
 
 		if self.slot>=0:
 			self.SelectSlot(self.slot)
 
-		if musicInfo.selectMusic != "":
+		if musicInfo.selectMusic != "" and not quiet_ui:
 			snd.SetMusicVolume(systemSetting.GetMusicVolume())
 			snd.FadeInMusic("BGM/"+musicInfo.selectMusic)
 
@@ -178,13 +199,72 @@ class SelectCharacterWindow(ui.Window):
 			chrSlot=self.stream.GetCharacterSlot()
 			self.SelectSlot(chrSlot)
 			self.StartGame()
+			self.stream.isAutoSelect = 0
 
 		self.HideAllFlag()
 		self.SetEmpire(net.GetEmpireID())
 
-		app.ShowCursor()
+		if quiet_ui:
+			# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introselect_open_quiet_quick_hide ---
+			self.__ApplyQuietSelectOverlay()
+			if app.FAST_LOGIN_CHARACTER_SAVE:
+				for b in getattr(self, "quickSaveButtons", []):
+					if b:
+						b.Hide()
+				qb = getattr(self, "quickSaveBoard", None)
+				if qb:
+					qb.Hide()
+			app.HideCursor()
+			# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introselect_open_quiet_quick_hide ---
+		else:
+			app.ShowCursor()
+
+		if getattr(self.stream, "hideSelectUiForAutoLogin", 0):
+			self.stream.hideSelectUiForAutoLogin = 0
+
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introselect_select_quiet_overlay_methods ---
+	def __DestroyQuietSelectOverlay(self):
+		if self.quietLoadText:
+			self.quietLoadText.Hide()
+			self.quietLoadText = None
+		if self.quietLoadBar:
+			self.quietLoadBar.Hide()
+			self.quietLoadBar = None
+
+	def __ApplyQuietSelectOverlay(self):
+		self.__DestroyQuietSelectOverlay()
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		self.SetSize(sw, sh)
+		bar = ui.Bar("GAME")
+		bar.SetParent(self)
+		bar.AddFlag("not_pick")
+		bar.SetPosition(0, 0)
+		bar.SetSize(sw, sh)
+		bar.SetColor(0xff101010)
+		bar.Show()
+		tx = ui.TextLine()
+		tx.SetParent(self)
+		tx.SetFontName(localeInfo.UI_DEF_FONT)
+		tx.SetPackedFontColor(0xffffffff)
+		tx.SetText(localeInfo.SELECT_QUIET_LOADING)
+		tx.SetHorizontalAlignCenter()
+		tx.SetVerticalAlignCenter()
+		tx.SetPosition(sw / 2, sh / 2)
+		tx.Show()
+		bar.SetTop()
+		tx.SetTop()
+		self.quietLoadBar = bar
+		self.quietLoadText = tx
+
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introselect_select_quiet_overlay_methods ---
 
 	def Close(self):
+		self.__DestroyQuietSelectOverlay()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introselect_close_quick_save_destroy ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			self.__DestroyQuickCharacterSaveButtons()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introselect_close_quick_save_destroy ---
 		if musicInfo.selectMusic != "":
 			snd.FadeOutMusic("BGM/"+musicInfo.selectMusic)
 
@@ -290,6 +370,12 @@ class SelectCharacterWindow(ui.Window):
 			import exception
 			exception.Abort("SelectCharacterWindow.LoadBoardDialog.LoadScript")
 
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		self.SetSize(sw, sh)
+		self.dlgBoard.SetParent(self)
+		self.dlgBoard.SetPosition(0, 0)
+
 		try:
 			GetObject=self.dlgBoard.GetChild
 
@@ -356,7 +442,152 @@ class SelectCharacterWindow(ui.Window):
 		self.chrRenderer.SetParent(self.backGround)
 		self.chrRenderer.Show()
 
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introselect_init_board_quick_save ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			self.__CreateQuickCharacterSaveButtons()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introselect_init_board_quick_save ---
+
 		return 1
+
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introselect_quick_save_panel_methods ---
+	def __DestroyQuickCharacterSaveButtons(self):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		for b in getattr(self, "quickSaveButtons", []):
+			if b:
+				b.Hide()
+		self.quickSaveButtons = []
+		brd = getattr(self, "quickSaveBoard", None)
+		if brd:
+			brd.Hide()
+		self.quickSaveBoard = None
+		self.quickSaveBoardTitle = None
+		self.quickSaveBoardLine = None
+
+	def __CreateQuickCharacterSaveButtons(self):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			self.quickSaveButtons = []
+			return
+		import quickcharacter
+
+		self.__DestroyQuickCharacterSaveButtons()
+		self.quickSaveButtons = []
+
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		try:
+			self.SetSize(sw, sh)
+		except:
+			pass
+
+		ROOT_PATH = "d:/ymir work/ui/public/middle_button_%02d.sub"
+		QC_HEADER = 24
+		PAD = 6
+		GAP = 5
+		COL_GAP = 8
+		max_fav = quickcharacter.MAX_FAVORITES
+		COL_ROWS = (max_fav + 1) // 2
+		COL_COUNT = 2
+		MARGIN = 10
+		BOARD_BG_W = 207
+		BOARD_BG_H = 180
+		PANEL_SHIFT_X = 125
+		PANEL_SHIFT_Y = -100
+
+		_pb = ui.Button()
+		_pb.SetParent(self)
+		_pb.SetUpVisual(ROOT_PATH % 1)
+		_pb.SetOverVisual(ROOT_PATH % 2)
+		_pb.SetDownVisual(ROOT_PATH % 3)
+		btn_w = _pb.GetWidth()
+		btn_h = _pb.GetHeight()
+		_pb.Hide()
+
+		content_w = PAD * 2 + COL_COUNT * btn_w + (COL_COUNT - 1) * COL_GAP
+		content_h = QC_HEADER + COL_ROWS * btn_h + max(0, COL_ROWS - 1) * GAP + 6
+		offset_x = max(0, (BOARD_BG_W - content_w) // 2)
+		offset_y = max(0, (BOARD_BG_H - content_h) // 2)
+
+		self.quickSaveBoard = ui.ThinBoard()
+		self.quickSaveBoard.SetParent(self)
+		self.quickSaveBoard.SetSize(BOARD_BG_W, BOARD_BG_H)
+		self.quickSaveBoard.SetPosition(
+			MARGIN + PANEL_SHIFT_X,
+			max(0, sh - BOARD_BG_H - MARGIN + PANEL_SHIFT_Y),
+		)
+		self.quickSaveBoard.Show()
+		try:
+			self.quickSaveBoard.SetTop()
+		except:
+			pass
+
+		title = ui.TextLine()
+		title.SetParent(self.quickSaveBoard)
+		title.SetFontName(localeInfo.UI_DEF_FONT)
+		title.SetHorizontalAlignCenter()
+		title.SetVerticalAlignCenter()
+		title.SetPackedFontColor(0xFFffbf00)
+		title.SetOutline()
+		try:
+			title.SetText(localeInfo.LOGIN_QUICK_CHAR_BOARD_TITLE)
+		except:
+			title.SetText("Karakter kaydetme")
+		title.SetPosition(BOARD_BG_W / 2, 12)
+		title.Show()
+		self.quickSaveBoardTitle = title
+
+		line = ui.Line()
+		line.SetParent(self.quickSaveBoard)
+		line.SetColor(0xFF777777)
+		line.SetSize(BOARD_BG_W - 10, 0)
+		line.SetPosition(5, 20)
+		line.Show()
+		self.quickSaveBoardLine = line
+
+		for idx in xrange(max_fav):
+			if idx < COL_ROWS:
+				col, row = 0, idx
+			else:
+				col, row = 1, idx - COL_ROWS
+			x = offset_x + PAD + col * (btn_w + COL_GAP)
+			y = offset_y + QC_HEADER + row * (btn_h + GAP)
+			btn = ui.Button()
+			btn.SetParent(self.quickSaveBoard)
+			btn.SetUpVisual(ROOT_PATH % 1)
+			btn.SetOverVisual(ROOT_PATH % 2)
+			btn.SetDownVisual(ROOT_PATH % 3)
+			btn.SetPosition(x, y)
+			btn.SetText("%d" % (idx + 1))
+			btn.SetToolTipText(localeInfo.SELECT_QUICK_CHAR_SAVE_TOOLTIP % (idx + 1))
+			btn.SetEvent(ui.__mem_func__(self.__OnClickSaveQuickCharacter), idx)
+			btn.Show()
+			self.quickSaveButtons.append(btn)
+
+		try:
+			if self.quickSaveBoardTitle:
+				self.quickSaveBoardTitle.SetTop()
+			if self.quickSaveBoardLine:
+				self.quickSaveBoardLine.SetTop()
+		except:
+			pass
+
+	def __OnClickSaveQuickCharacter(self, fav_idx):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		import quickcharacter
+
+		pid = net.GetAccountCharacterSlotDataInteger(self.slot, net.ACCOUNT_CHARACTER_SLOT_ID)
+		if not pid:
+			self.PopupMessage(localeInfo.SELECT_EMPTY_SLOT)
+			return
+		name = net.GetAccountCharacterSlotDataString(self.slot, net.ACCOUNT_CHARACTER_SLOT_NAME)
+		acc = self.stream.id
+		if not acc:
+			acc = net.GetLoginID()
+		pwd = getattr(self.stream, "pwd", None)
+		quickcharacter.SaveFavorite(fav_idx, acc, self.slot, name, pwd)
+		self.PopupMessage(localeInfo.LOGIN_QUICK_CHAR_SAVED)
+	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introselect_quick_save_panel_methods ---
 
 	def MakeCharacter(self, index, id, name, race, form, hair, acce =0):
 		if 0 == id:
@@ -409,6 +640,12 @@ class SelectCharacterWindow(ui.Window):
 		self.btnExit.Disable()
 		self.btnLeft.Disable()
 		self.btnRight.Disable()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introselect_startgame_disable_quick_btns ---
+		if app.FAST_LOGIN_CHARACTER_SAVE:
+			for b in self.quickSaveButtons:
+				if b:
+					b.Disable()
+		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introselect_startgame_disable_quick_btns ---
 		self.dlgQuestion.Hide()
 
 		self.stream.SetCharacterSlot(self.slot)
@@ -565,6 +802,11 @@ class SelectCharacterWindow(ui.Window):
 		self.SelectSlot(self.slot)
 
 	def ExitSelect(self):
+		if self.stream:
+			# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN introselect_exit_clear_quick_stream ---
+			self.stream.hideSelectUiForAutoLogin = 0
+			self.stream.quietLoadingUiForQuickLogin = 0
+			# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END introselect_exit_clear_quick_stream ---
 		self.dlgQuestion.Hide()
 
 		if LEAVE_BUTTON_FOR_POTAL:

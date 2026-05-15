@@ -1,0 +1,10 @@
+[DELAY value;0]
+RAMADAN EVENEMENT[ENTER]
+[ENTER]
+Breng regelmatig een bezoekje aan de[ENTER]
+Historicus en verdien enkele waardevolle items[ENTER]
+voor jouw toewijding aan het einde van[ENTER]
+Ramadan.[ENTER]
+[ENTER]
+Als je Brood of Zegeningsfruit ontvangt worden[ENTER]
+deze bewaard in de evenement-UI.

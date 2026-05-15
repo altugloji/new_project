@@ -41,89 +41,114 @@ def IsCategory(argument, searchingArgument):
 		return True if argument in _dict[searchingArgument] else False
 	return False
 
+WIKI_CATEGORY_HEADER_COLOR = 0xFFFFC700
+WIKI_CAT_ZEBRA_A = 0xff1a1816
+WIKI_CAT_ZEBRA_B = 0xff262220
+
+def _WikiLocale(name, default):
+	return getattr(localeInfo, name, default)
+
+def _WikiWeaponSubType(subType):
+	return "equipment#0#%d" % subType
+
+def GetCategoryItemLabel(entry):
+	if type(entry) == type({}):
+		return entry.get("label", "")
+	return entry
+
+def GetCategoryItemSelectArg(groupData, entryKey, entry):
+	groupType = groupData["type"] if groupData.has_key("type") else "article"
+	if type(entry) == type({}):
+		if entry.has_key("arg"):
+			return entry["arg"]
+		apiIdx = entry["api"] if entry.has_key("api") else entryKey
+		if entry.has_key("weapon_sub"):
+			return _WikiWeaponSubType(int(entry["weapon_sub"]))
+		return "%s#%d" % (groupType, apiIdx)
+	return "%s#%d" % (groupType, entryKey)
+
+def ParseCategorySelectArg(arg):
+	parts = arg.split("#")
+	categoryType = parts[0].lower() if not localeInfo.IsARABIC() else parts[0]
+	itemType = int(parts[1]) if len(parts) > 1 else 0
+	weaponSubType = -1
+	weaponFilter = 0
+	if categoryType == "equipment" and len(parts) > 2:
+		try:
+			weaponSubType = int(parts[2])
+			weaponFilter = 1
+		except:
+			weaponSubType = -1
+			weaponFilter = 0
+	return (categoryType, itemType, weaponSubType, weaponFilter)
+
+def FindCategoryBySelectArg(selectArg):
+	for _key, data in GetCategoryDict().iteritems():
+		items = data["items"] if data.has_key("items") else {}
+		for entryKey, entry in items.iteritems():
+			if GetCategoryItemSelectArg(data, entryKey, entry) == selectArg:
+				groupName = data["name"] if data.has_key("name") else ""
+				return (groupName, GetCategoryItemLabel(entry))
+	return (None, None)
+
+def IterCategoryLeafEntries():
+	for mainKey in sorted(GetCategoryDict().keys()):
+		data = GetCategoryDict()[mainKey]
+		items = data["items"] if data.has_key("items") else {}
+		for entryKey in sorted(items.keys()):
+			entry = items[entryKey]
+			yield (GetCategoryItemLabel(entry), GetCategoryItemSelectArg(data, entryKey, entry))
+
 def GetCategoryDict():
+	_w75 = _WikiLocale("WIKI_75_99", _WikiLocale("WIKI_76_100", "Lv. 75-99"))
 	return {
 		0 : {
-			"name" : localeInfo.WIKI_EQUIPMENT,
+			"name" : _WikiLocale("WIKI_WEAPONS_SECTION", "Silahlar"),
 			"type" : "equipment",
 			"items": {
-				# Key : name
-				0 : localeInfo.WIKI_EQUIPMENT_WEAPONS,
-				1 : localeInfo.WIKI_EQUIPMENT_ARMOR,
-				2 : localeInfo.WIKI_EQUIPMENT_HELMET,
-				3 : localeInfo.WIKI_EQUIPMENT_SHIELD,
-				4 : localeInfo.WIKI_EQUIPMENT_EARRING,
-				5 : localeInfo.WIKI_EQUIPMENT_BRACELET,
-				6 : localeInfo.WIKI_EQUIPMENT_NECKLACE,
-				7 : localeInfo.WIKI_EQUIPMENT_SHOES,
-				8 : localeInfo.WIKI_EQUIPMENT_BELT,
-				9 : localeInfo.WIKI_EQUIPMENT_TALISMAN,
+				0 : {"label" : _WikiLocale("WIKI_SWORD", "Kiliclar"), "weapon_sub" : 0},
+				1 : {"label" : _WikiLocale("WIKI_DAGGER", "Hancerler"), "weapon_sub" : 1},
+				2 : {"label" : _WikiLocale("WIKI_BOW", "Yaylar"), "weapon_sub" : 2},
+				3 : {"label" : _WikiLocale("WIKI_TWOHAND", "Iki elli silahlar"), "weapon_sub" : 3},
+				4 : {"label" : _WikiLocale("WIKI_BELL", "Ziller"), "weapon_sub" : 4},
+				5 : {"label" : _WikiLocale("WIKI_FAN", "Yelpazeler"), "weapon_sub" : 5},
 			},
 		},
 		1 : {
-			"name" : localeInfo.WIKI_COSTUME,
-			"type" : "costume",
+			"name" : _WikiLocale("WIKI_ARMOR_SECTION", "Zirh ve Aksesuarlar"),
+			"type" : "equipment",
 			"items": {
-				# Key : name
-				0 : localeInfo.WIKI_EQUIPMENT_WEAPONS,
-				1 : localeInfo.WIKI_EQUIPMENT_ARMOR,
-				2 : localeInfo.WIKI_COSTUME_HAIR,
-				3 : localeInfo.WIKI_COSTUME_SASH,
-				4 : localeInfo.WIKI_SHINING,
-				5 : localeInfo.WIKI_PET,
-				6 : localeInfo.WIKI_MOUNT,
+				0 : {"label" : localeInfo.WIKI_EQUIPMENT_ARMOR, "api" : 1},
+				1 : {"label" : _WikiLocale("WIKI_HELMET", localeInfo.WIKI_EQUIPMENT_HELMET), "api" : 2},
+				2 : {"label" : localeInfo.WIKI_EQUIPMENT_SHIELD, "api" : 3},
+				3 : {"label" : localeInfo.WIKI_EQUIPMENT_BRACELET, "api" : 5},
+				4 : {"label" : _WikiLocale("WIKI_BOOTS", localeInfo.WIKI_EQUIPMENT_SHOES), "api" : 7},
+				5 : {"label" : localeInfo.WIKI_EQUIPMENT_NECKLACE, "api" : 6},
+				6 : {"label" : localeInfo.WIKI_EQUIPMENT_EARRING, "api" : 4},
 			},
 		},
 		2 : {
-			"name" : localeInfo.WIKI_CHESTS,
-			"type" : "chests",
+			"name" : localeInfo.WIKI_MONSTER,
+			"type" : "monster",
 			"items": {
-				# Key : name
-				0 : localeInfo.WIKI_CHESTS_BOSS,
-				1 : localeInfo.WIKI_CHESTS_EVENT,
-				2 : localeInfo.WIKI_CHESTS_ALTERNATIVE,
+				0 : localeInfo.WIKI_1_75,
+				1 : _w75,
 			},
 		},
 		3 : {
 			"name" : localeInfo.WIKI_BOSSES,
 			"type" : "bosses",
 			"items": {
-				# Key : name
 				0 : localeInfo.WIKI_1_75,
-				1 : localeInfo.WIKI_76_100,
-				2 : localeInfo.WIKI_100,
-				3 : localeInfo.WIKI_BOSSES_EVENT,
+				1 : _w75,
 			},
 		},
 		4 : {
-			"name" : localeInfo.WIKI_MONSTER,
-			"type" : "monster",
-			"items": {
-				# Key : name
-				0 : localeInfo.WIKI_1_75,
-				1 : localeInfo.WIKI_76_100,
-				2 : localeInfo.WIKI_100,
-			},
-		},
-		
-		5 : {
-			"name" : localeInfo.WIKI_METINSTONE,
+			"name" : _WikiLocale("WIKI_METINS", localeInfo.WIKI_METINSTONE),
 			"type" : "metinstone",
 			"items": {
-				# Key : name
 				0 : localeInfo.WIKI_1_75,
-				1 : localeInfo.WIKI_76_100,
-				2 : localeInfo.WIKI_100,
-			},
-		},
-		6 : {
-			"name" : localeInfo.WIKI_SYSTEMS,
-			"type" : "system",
-			"items": {
-				# Key : name
-				0 : "The Start",
-				1 : "Test Article",
-				2 : "Test Functions",
+				1 : _w75,
 			},
 		},
 	}
@@ -507,17 +532,32 @@ class CategoryDefaultItem(ui.Window):
 		self.parent.SelectItem(self)
 	def OnMouseLeftButtonDown(self):
 		self.OnSelect()
+def _WikiCategoryRenderZebra(self, zebraIndex):
+	color = WIKI_CAT_ZEBRA_A if (zebraIndex % 2) == 0 else WIKI_CAT_ZEBRA_B
+	grp.SetColor(color)
+	parent = self.parent
+	(_x, _y) = self.GetGlobalPosition()
+	(_wx, _wy) = parent.GetGlobalPosition()
+	if _y < _wy+5:
+		grp.RenderBar(_x, _y+(_wy-_y), self.GetWidth(), self.GetHeight()-(_wy-_y))
+	elif _y+self.GetHeight() > _wy+parent.GetHeight():
+		grp.RenderBar(_x, _y, self.GetWidth(), self.GetHeight()-((_y+self.GetHeight())-abs(_wy+parent.GetHeight())))
+	else:
+		grp.RenderBar(_x, _y, self.GetWidth(), self.GetHeight())
+
 class CategoryList(ui.Window):
 	class CategoryItem(CategoryDefaultItem):
 		def __del__(self):
 			CategoryDefaultItem.__del__(self)
-		def __init__(self, text):
+		def __init__(self, text, headerOnly=False):
 			CategoryDefaultItem.__init__(self)
+			self.headerOnly = headerOnly
+			self.zebraIndex = 0
 			directionIcon = ui.ExpandedImageBox()
 			directionIcon.SetParent(self)
 			directionIcon.AddFlag("not_pick")
 			directionIcon.SetPosition(0,0)
-			directionIcon.LoadImage(IMG_DIR +"plus.tga")
+			directionIcon.LoadImage(IMG_DIR +"minus.tga")
 			directionIcon.Show()
 			self.children["directionIcon"] = directionIcon
 			textLine=ui.TextLine()
@@ -531,18 +571,30 @@ class CategoryList(ui.Window):
 			self.SetOnExpandEvent(self.ExpandEvent)
 			self.SetOnCollapseEvent(self.CollapseEvent)
 			self.SetSize(109,20)
+			if headerOnly:
+				self.AddFlag("not_pick")
+				self.expanded = True
 		def CollapseEvent(self):
+			if self.headerOnly:
+				return
 			self.children["directionIcon"].LoadImage(IMG_DIR +"plus.tga")
 			self.children["directionIcon"].Show()
 		def ExpandEvent(self):
 			self.children["directionIcon"].LoadImage(IMG_DIR +"minus.tga")
 			self.children["directionIcon"].Show()
+		def OnMouseLeftButtonDown(self):
+			if self.headerOnly:
+				return
+			CategoryDefaultItem.OnMouseLeftButtonDown(self)
+		def OnRender(self):
+			_WikiCategoryRenderZebra(self, getattr(self, "zebraIndex", 0))
 
 	class CategorySubItem(CategoryDefaultItem):
 		def __del__(self):
 			CategoryDefaultItem.__del__(self)
 		def __init__(self, text):
 			CategoryDefaultItem.__init__(self)
+			self.zebraIndex = 0
 			textLine=ui.TextLine()
 			textLine.SetParent(self)
 			textLine.AddFlag("not_pick")
@@ -558,13 +610,13 @@ class CategoryList(ui.Window):
 			self.overLine = False
 		def OnRender(self):
 			parent = self.parent
+			_WikiCategoryRenderZebra(self, getattr(self, "zebraIndex", 0))
 			if self.overLine and parent.GetSelectedItem() != self:
 				grp.SetColor(grp.GenerateColor(1.0, 1.0, 1.0, 0.2))
 			elif parent.GetSelectedItem() == self:
-				grp.SetColor(grp.GenerateColor(0.0, 0.0, 1.0, 1.0))
+				grp.SetColor(grp.GenerateColor(0.0, 0.0, 1.0, 0.45))
 			else:
-				grp.SetColor(grp.GenerateColor(0.0, 0.0, 0.0, 1.0))
-
+				return
 			(_x, _y) = self.GetGlobalPosition()
 			(_wx, _wy) = parent.GetGlobalPosition()
 			if _y < _wy+5:
@@ -647,7 +699,40 @@ class CategoryList(ui.Window):
 			if categoryBtn != None:
 				self.itemList.append(categoryBtn)
 		self.RefreshList()
+	def _AssignCategoryZebraIndices(self):
+		zebraIdx = 0
+		for categoryBtn in self.itemList:
+			categoryBtn.zebraIndex = zebraIdx
+			zebraIdx += 1
+			if categoryBtn.IsExpanded():
+				for childItem in categoryBtn.itemList:
+					childItem.zebraIndex = zebraIdx
+					zebraIdx += 1
+					if childItem.IsExpanded():
+						for childItemLast in childItem.itemList:
+							childItemLast.zebraIndex = zebraIdx
+							zebraIdx += 1
+
+	def ExpandAllCategories(self):
+		for categoryBtn in self.itemList:
+			if not categoryBtn.IsExpanded():
+				categoryBtn.Expand()
+
+	def SetItemWidth(self, width):
+		for categoryBtn in self.itemList:
+			categoryBtn.SetSize(width, categoryBtn.GetHeight())
+			for childItem in categoryBtn.itemList:
+				childItem.SetSize(width, childItem.GetHeight())
+
+	def OnRender(self):
+		if not self.IsShow():
+			return
+		(_x, _y) = self.GetGlobalPosition()
+		grp.SetColor(WIKI_CAT_ZEBRA_A)
+		grp.RenderBar(_x, _y, self.GetWidth(), self.GetHeight())
+
 	def RefreshDynamicPosition(self):
+		self._AssignCategoryZebraIndices()
 		y_pos = 0
 		for categoryBtn in self.itemList:
 			categoryBtn.SetPosition(categoryBtn.GetOffset(), y_pos, True)
@@ -676,7 +761,8 @@ class CategoryList(ui.Window):
 				self.SetBasePos(0)
 				return
 		else:
-			self.scrollBar.Hide()
+			if scrollBar:
+				scrollBar.Hide()
 		y_pos = 0
 		for categoryBtn in self.itemList:
 			categoryBtn.SetPosition(categoryBtn.GetOffset(), categoryBtn.exPos[1]-basePos)
@@ -1211,16 +1297,20 @@ def PrintDrop(selectedVnum, self, Listbox):
 	#		Listbox.AppendItem(CreateWindow(ui.TextLine(), Listbox, (x, y, True), "|Eemoji/e_wiki|e "+categoryName))
 	#		y += 14
 
-def CreateCategoryItem(text, event, offset = 0):
-	listboxItem = CategoryList.CategoryItem(text)
+def CreateCategoryItem(text, event, offset = 0, packedColor = 0, headerOnly = False):
+	listboxItem = CategoryList.CategoryItem(text, headerOnly)
 	listboxItem.Show()
+	if packedColor:
+		listboxItem.children["textLine"].SetPackedFontColor(packedColor)
 	if event:
 		listboxItem.SetEvent(event)
 	if offset:
 		listboxItem.SetOffset(offset)
 	return listboxItem
-def CreateCategorySubItem(text, event, offset = 0):
+def CreateCategorySubItem(text, event, offset = 0, packedColor = 0xFFFFFFFF):
 	listboxItem = CategoryList.CategorySubItem(text)
+	if packedColor:
+		listboxItem.children["textLine"].SetPackedFontColor(packedColor)
 	listboxItem.SetEvent(event)
 	listboxItem.SetOffset(offset)
 	return listboxItem
@@ -1602,6 +1692,10 @@ class ListBoxSpecial(ui.Window):
 	def SetScrollBar(self, scrollBar):
 		scrollBar.SetScrollEvent(ui.__mem_func__(self.__OnScroll))
 		self.scrollBar=scrollBar
+		try:
+			self.scrollBar.SetTop()
+		except:
+			pass
 	def OnMouseWheel(self, length):
 		if self.scrollBar:
 			if self.scrollBar.IsShow():
@@ -1610,7 +1704,9 @@ class ListBoxSpecial(ui.Window):
 		return False
 	def CalculateScroll(self):
 		if len(self.itemList) == 0:
-			return;
+			if self.scrollBar:
+				self.scrollBar.Hide()
+			return
 		screenSize = 0
 		for child in self.itemList:
 			if child.exPos[1]+child.GetHeight() > screenSize:
@@ -1627,6 +1723,10 @@ class ListBoxSpecial(ui.Window):
 			else:
 				scrollBar.SetScale(windowHeight, windowHeight)
 			scrollBar.Show()
+			try:
+				scrollBar.SetTop()
+			except:
+				pass
 		self.scrollLen = scrollLen
 	def __OnScroll(self):
 		if self.scrollBar:
@@ -1639,6 +1739,11 @@ class ListBoxSpecial(ui.Window):
 			else:
 				child.SetPosition(ex,ey-basePos)
 		self.basePos=basePos
+		if self.scrollBar:
+			try:
+				self.scrollBar.SetTop()
+			except:
+				pass
 	def SetBasePos(self, basePos):
 		if self.basePos == basePos:
 			return

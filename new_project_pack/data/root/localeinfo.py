@@ -12,6 +12,17 @@ BLEND_POTION_NO_INFO = "BLEND_POTION_NO_INFO"
 
 APP_TITLE = "METIN2"
 
+GAME_EXIT_CLIENT_CONFIRM = "Oyunu tamamen kapatmak istiyor musun?"
+LOGIN_QUICK_CHAR_ACCOUNT_MISMATCH = "Bu kisayol secili hesap ID ile eslesmiyor."
+LOGIN_QUICK_CHAR_EMPTY = "#"
+LOGIN_QUICK_CHAR_SAVED = "Karakter hizli giriste kaydedildi."
+LOGIN_QUICK_CHAR_NO_SAB_OR_PWD = "Kisayol icin sifre yok. Ayni hesabi Kayitli Hesaba ekleyin veya karakter ekraninda tekrar kaydedin."
+LOGIN_QUICK_CHAR_CLEAR_TOOLTIP = "Bu kisayolu sil"
+LOGIN_QUICK_CHAR_BOARD_TITLE = "Karakter Kaydetme Panosu"
+SELECT_QUICK_CHAR_SAVE_TOOLTIP = "Hizli giris %d"
+SELECT_QUIET_LOADING = "Karakter yukleniyor..."
+
+
 GUILD_HEADQUARTER = "Main Building"
 GUILD_FACILITY = "Facility"
 GUILD_OBJECT = "Object"
