@@ -37,6 +37,7 @@ ENABLE_CMDCHAT_VARIADIC_ARGS = True # enable variadic arguments in cmdchat funct
 ENABLE_SELF_STACK_SCROLLS = True # enable self stack of scrolls, etc
 ENABLE_UI_DEBUG_WINDOW = False # load DebugWindow.py from client folder instead of login window
 ENABLE_MAP_INTERACTIVE_LOGIN = True # load a list of maps in the login window
+ENABLE_SPECIAL_CAMERA_MODE = True # free camera: Scroll Lock + Numpad / PgUp-PgDn
 # EXTRA END
 
 # enable save account

@@ -158,6 +158,10 @@ class GameWindow(ui.ScriptWindow):
 
 		app.SetCamera(cameraDistance, cameraPitch, cameraRotation, cameraHeight)
 
+		if constInfo.ENABLE_SPECIAL_CAMERA_MODE:
+			if chr.IsGameMaster(player.GetMainCharacterIndex()):
+				app.EnableSpecialCameraMode()
+
 		constInfo.SET_DEFAULT_CAMERA_MAX_DISTANCE()
 		constInfo.SET_DEFAULT_CHRNAME_COLOR()
 		constInfo.SET_DEFAULT_FOG_LEVEL()
@@ -2169,7 +2173,8 @@ class GameWindow(ui.ScriptWindow):
 	def __Console_Enable(self):
 		constInfo.CONSOLE_ENABLE = True
 		self.consoleEnable = True
-		app.EnableSpecialCameraMode()
+		if constInfo.ENABLE_SPECIAL_CAMERA_MODE:
+			app.EnableSpecialCameraMode()
 		ui.EnablePaste(True)
 
 	## PrivateShop

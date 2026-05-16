@@ -1,11 +1,11 @@
-0516 12:33:00783 :: QCF read registry path='SOFTWARE\\AyazMt2_Srv1' keys=['0']
-0516 12:33:03889 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
-0516 12:33:03893 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=137) - Strange Skill Need Weapon(CLAW)
-0516 12:33:03893 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=139) - Strange Skill Need Weapon(CLAW)
-0516 12:33:03893 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=171, strType=wolfman).STRANGE_SKILL_TYPE
-0516 12:33:03893 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=172, strType=wolfman).STRANGE_SKILL_TYPE
-0516 12:33:03893 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=175, strType=wolfman).STRANGE_SKILL_TYPE
-0516 12:33:03894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=183, strType=wolfman).STRANGE_SKILL_TYPE
-0516 12:33:03894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=170, strType=wolfman).STRANGE_SKILL_TYPE
-0516 12:33:03894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=173, strType=wolfman).STRANGE_SKILL_TYPE
-0516 12:33:03894 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=174, strType=wolfman).STRANGE_SKILL_TYPE
+0516 12:52:00752 :: QCF read registry path='SOFTWARE\\AyazMt2_Srv1' keys=['0']
+0516 12:52:03625 :: CPythonLocale::LoadLocaleFormatString(c_szFileName: locale/tr/locale_format.txt) - Load Error
+0516 12:52:03628 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=137) - Strange Skill Need Weapon(CLAW)
+0516 12:52:03628 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=139) - Strange Skill Need Weapon(CLAW)
+0516 12:52:03628 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=171, strType=wolfman).STRANGE_SKILL_TYPE
+0516 12:52:03628 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=172, strType=wolfman).STRANGE_SKILL_TYPE
+0516 12:52:03628 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=175, strType=wolfman).STRANGE_SKILL_TYPE
+0516 12:52:03628 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=183, strType=wolfman).STRANGE_SKILL_TYPE
+0516 12:52:03628 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=170, strType=wolfman).STRANGE_SKILL_TYPE
+0516 12:52:03628 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=173, strType=wolfman).STRANGE_SKILL_TYPE
+0516 12:52:03628 :: CPythonSkill::RegisterSkillDesc(dwSkillIndex=174, strType=wolfman).STRANGE_SKILL_TYPE

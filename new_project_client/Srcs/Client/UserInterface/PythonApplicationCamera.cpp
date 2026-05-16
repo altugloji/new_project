@@ -182,11 +182,8 @@ void CPythonApplication::MovieRotateCamera(int iDirection)
 	const float fDegree = m_fCameraRotateSpeed * float(iDirection);
 	if (m_isSpecialCameraMode)
 	{
-		if (GetKeyState(VK_SCROLL) & 1)
-		{
-			SetCrossDirCameraSpeed(-fDegree * 6.0f);
-			return;
-		}
+		SetCrossDirCameraSpeed(-fDegree * 6.0f);
+		return;
 	}
 	m_fRotationSpeed = fDegree;
 }
@@ -199,11 +196,8 @@ void CPythonApplication::MoviePitchCamera(int iDirection)
 	const float fDegree = m_fCameraPitchSpeed * float(iDirection);
 	if (m_isSpecialCameraMode)
 	{
-		if (GetKeyState(VK_SCROLL) & 1)
-		{
-			SetViewDirCameraSpeed(-fDegree * 6.0f);
-			return;
-		}
+		SetViewDirCameraSpeed(-fDegree * 6.0f);
+		return;
 	}
 	m_fPitchSpeed = fDegree;
 }
@@ -216,11 +210,8 @@ void CPythonApplication::MovieZoomCamera(int iDirection)
 	const float fRatio = 1.0f + m_fCameraZoomSpeed * float(iDirection);
 	if (m_isSpecialCameraMode)
 	{
-		if (GetKeyState(VK_SCROLL) & 1)
-		{
-			SetUpDirCameraSpeed((1.0f - fRatio) * 200.0f);
-			return;
-		}
+		SetUpDirCameraSpeed((1.0f - fRatio) * 200.0f);
+		return;
 	}
 	m_fZoomSpeed = fRatio;
 }
