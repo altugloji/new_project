@@ -115,7 +115,7 @@ class GameWindow(ui.ScriptWindow):
 		self.mapNameShower = uiMapNameShower.MapNameShower()
 		self.affectShower = uiAffectShower.AffectShower()
 
-		if app.ENABLE_EXCHANGE_LOG:
+		if app.ENABLE_EXCHANGE_LOG or app.ENABLE_CHARACTER_CHEST:
 			constInfo.SetGameInstance(self)
 
 		self.playerGauge = uiPlayerGauge.PlayerGauge(self)
@@ -168,6 +168,12 @@ class GameWindow(ui.ScriptWindow):
 		constInfo.SET_DEFAULT_CONVERT_EMPIRE_LANGUAGE_ENABLE()
 		constInfo.SET_DEFAULT_USE_ITEM_WEAPON_TABLE_ATTACK_BONUS()
 		constInfo.SET_DEFAULT_USE_SKILL_EFFECT_ENABLE()
+
+		if app.ENABLE_CHARACTER_CHEST:
+			import uicharacterchest
+			uicharacterchest.ResetCharacterChestState()
+			if self.interface:
+				self.interface.CloseAllCharacterChestWindows()
 
 		# TWO_HANDED_WEAPON_ATTACK_SPEED_UP
 		constInfo.SET_TWO_HANDED_WEAPON_ATT_SPEED_DECREASE_VALUE()
@@ -343,16 +349,23 @@ class GameWindow(ui.ScriptWindow):
 			self.targetBoard = None
 
 		if self.interface:
+			if self.interface.wndMiniMap:
+				self.interface.wndMiniMap.PersistAtlasZoom()
+			if app.ENABLE_CHARACTER_CHEST:
+				self.interface.CloseAllCharacterChestWindows()
 			self.interface.HideAllWindows()
 			self.interface.Close()
 			self.interface=None
+		elif app.ENABLE_CHARACTER_CHEST:
+			import uicharacterchest
+			uicharacterchest.ResetCharacterChestState()
 
 		player.ClearSkillDict()
 		player.ResetCameraRotation()
 
 		self.KillFocus()
 
-		if app.ENABLE_EXCHANGE_LOG:
+		if app.ENABLE_EXCHANGE_LOG or app.ENABLE_CHARACTER_CHEST:
 			constInfo.SetGameInstance(None)
 
 		app.HideCursor()
@@ -1573,6 +1586,13 @@ class GameWindow(ui.ScriptWindow):
 		if True == mouseModule.mouseController.isAttached():
 			return True
 
+		if app.ENABLE_CHARACTER_CHEST and self.interface:
+			hyperlink = ui.GetHyperlink()
+			if hyperlink and self.interface.TryCharacterChestPreviewHyperlink(hyperlink):
+				return True
+			if self.interface.TryCharacterChestPreviewFromTooltip():
+				return True
+
 		player.SetMouseState(player.MBT_RIGHT, player.MBS_CLICK)
 		return True
 
@@ -1773,6 +1793,69 @@ class GameWindow(ui.ScriptWindow):
 	def BINARY_Cube_Failed(self):
 		self.interface.FailedCubeWork()
 		pass
+
+	def BINARY_CharacterChest(self, op, result, itemCell, targetPid, packedName, entryList):
+		import dbg
+		import uicharacterchest
+		try:
+			uicharacterchest.SetCharacterChestBusy(False)
+			if result != 0:
+				if self.interface:
+					self.interface.CloseAllCharacterChestWindows()
+				else:
+					uicharacterchest.ResetCharacterChestState()
+				self.__CharacterChestShowError(result)
+				return
+			if op == uicharacterchest.CHARACTER_CHEST_OP_LIST:
+				self.interface.OpenCharacterChestPack(entryList, itemCell)
+			elif op == uicharacterchest.CHARACTER_CHEST_OP_PACK:
+				self.interface.CloseCharacterChestPack()
+				self.interface.CloseCharacterChestPreview()
+				self.__CharacterChestShowInfo("CHARACTER_CHEST_PACK_OK", "Karakter basariyla paketlendi.")
+			elif op == uicharacterchest.CHARACTER_CHEST_OP_UNPACK:
+				self.interface.CloseCharacterChestUnpack()
+				self.interface.CloseCharacterChestPreview()
+				self.__CharacterChestShowInfo("CHARACTER_CHEST_UNPACK_OK", "Karakter hesabina aktarildi.")
+			elif op == uicharacterchest.CHARACTER_CHEST_OP_PREVIEW:
+				pass
+			else:
+				dbg.TraceError("BINARY_CharacterChest: unknown op=%d" % op)
+		except Exception, e:
+			dbg.TraceError("BINARY_CharacterChest error: %s" % e)
+			import uicharacterchest
+			uicharacterchest.ResetCharacterChestState()
+
+	def __CharacterChestShowInfo(self, localeKey, defaultText):
+		import chat
+		import uicharacterchest
+		chat.AppendChat(chat.CHAT_TYPE_INFO, uicharacterchest.GetChestLocale(localeKey, defaultText))
+
+	def BINARY_CharacterChestPreview(self, itemCell, targetPid, packedName, playerData, skillList, itemList, biologistList=None):
+		import uicharacterchest
+		import dbg
+		try:
+			self.interface.OpenCharacterChestPreview(int(itemCell), int(targetPid), packedName, playerData, skillList, itemList, biologistList)
+		except Exception, e:
+			import sys
+			import uicharacterchest
+			tb = sys.exc_info()[2]
+			dbg.TraceError("BINARY_CharacterChestPreview error: %s (%s line %d)" % (
+				e, tb.tb_frame.f_code.co_name, tb.tb_lineno))
+			if self.interface:
+				self.interface.CloseCharacterChestPreview()
+			uicharacterchest.ResetCharacterChestState()
+
+	def __CharacterChestShowError(self, result):
+		import chat
+		import uicharacterchest
+		errMap = {
+			1 : ("CHARACTER_CHEST_WRONG_PASSWORD", "Karakter silme sifresi hatali."),
+			6 : ("CHARACTER_CHEST_NO_SLOT", "Hesabinda bos karakter slotu yok."),
+			7 : ("CHARACTER_CHEST_INVALID", "Gecersiz karakter sandigi."),
+			11 : ("CHARACTER_CHEST_ALREADY_USED", "Bu sandik zaten kullanilmis."),
+		}
+		localeKey, defaultText = errMap.get(result, ("CHARACTER_CHEST_FAILED", "Islem basarisiz."))
+		chat.AppendChat(chat.CHAT_TYPE_INFO, uicharacterchest.GetChestLocale(localeKey, defaultText))
 
 	def BINARY_Cube_ResultList(self, npcVNUM, listText):
 		#print listText

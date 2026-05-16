@@ -4,6 +4,9 @@
 #include "length.h"
 #include "item_length.h"
 #include "CommonDefines.h"
+#ifdef ENABLE_CHARACTER_CHEST
+	#include "character_chest.h"
+#endif
 
 typedef	DWORD IDENT;
 
@@ -134,6 +137,10 @@ enum
 	HEADER_GD_UPDATE_CHANNELSTATUS	= 139,
 	HEADER_GD_REQUEST_CHANNELSTATUS	= 140,
 
+#ifdef ENABLE_CHARACTER_CHEST
+	HEADER_GD_CHARACTER_CHEST		= 141,
+#endif
+
 	HEADER_GD_SETUP			= 0xff,
 
 	///////////////////////////////////////////////
@@ -257,6 +264,11 @@ enum
 	HEADER_DG_RESULT_CHARGE_CASH	= 179,
 	HEADER_DG_ITEMAWARD_INFORMER	= 180,	//gift notify
 	HEADER_DG_RESPOND_CHANNELSTATUS	= 181,
+
+#ifdef ENABLE_CHARACTER_CHEST
+	HEADER_DG_CHARACTER_CHEST		= 182,
+#endif
+
 
 	HEADER_DG_MAP_LOCATIONS			= 0xfe,
 	HEADER_DG_P2P					= 0xff,
@@ -1381,6 +1393,43 @@ typedef struct SGemConvertItem
 	DWORD dwCount;
 	DWORD dwPrice;
 } TGemConvertItem;
+#endif
+
+#ifdef ENABLE_CHARACTER_CHEST
+typedef struct SCharacterChestEntry
+{
+	DWORD	dwPID;
+	char	szName[CHARACTER_NAME_MAX_LEN + 1];
+	BYTE	byJob;
+	BYTE	byLevel;
+} TCharacterChestEntry;
+
+typedef struct SPacketGDCharacterChest
+{
+	BYTE	bOp;
+	DWORD	dwAccountID;
+	DWORD	dwActorPID;
+	DWORD	dwTargetPID;
+	DWORD	dwItemID;
+	WORD	wItemCell;
+	char	szPassword[CHARACTER_CHEST_PASSWORD_LEN];
+} TPacketGDCharacterChest;
+
+typedef struct SPacketDGCharacterChest
+{
+	BYTE	bOp;
+	BYTE	bResult;
+	DWORD	dwActorPID;
+	DWORD	dwTargetPID;
+	DWORD	dwItemID;
+	WORD	wItemCell;
+	BYTE	bCount;
+	char	szPackedName[CHARACTER_NAME_MAX_LEN + 1];
+	TCharacterChestEntry entries[CHARACTER_CHEST_MAX_LIST];
+	TPlayerTable	playerTable;
+	TPlayerItem		items[CHARACTER_CHEST_MAX_PREVIEW_ITEMS];
+	BYTE			abBiologistStatus[CHARACTER_CHEST_BIOLOGIST_LEVEL_COUNT];
+} TPacketDGCharacterChest;
 #endif
 
 #pragma pack()

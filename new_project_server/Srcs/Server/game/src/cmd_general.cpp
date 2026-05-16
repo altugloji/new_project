@@ -35,6 +35,9 @@
 #ifdef ENABLE_ITEM_SHOP_SYSTEM
 	#include "item_shop.h"
 #endif
+#ifdef ENABLE_CHARACTER_CHEST
+	#include "char_character_chest.h"
+#endif
 #include "../../common/VnumHelper.h"
 
 ACMD(do_user_horse_ride)
@@ -308,7 +311,12 @@ EVENTFUNC(timed_event)
 			case SCMD_PHASE_SELECT:
 				ch->Disconnect("timed_event - SCMD_PHASE_SELECT");
 				if (d)
+				{
 					d->SetPhase(PHASE_SELECT);
+#ifdef ENABLE_CHARACTER_CHEST
+					character_chest::RefreshSelectCharacterList(d);
+#endif
+				}
 				break;
 #if defined(__BL_MULTI_LANGUAGE__)
 			case SCMD_LANGUAGE_CHANGE:

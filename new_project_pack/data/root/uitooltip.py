@@ -557,6 +557,7 @@ class ItemToolTip(ToolTip):
 	def __init__(self, *args, **kwargs):
 		ToolTip.__init__(self, *args, **kwargs)
 		self.itemVnum = 0
+		self.metinSlot = []
 		self.isShopItem = False
 
 		self.bCannotUseItemForceSetDisableColor = True
@@ -621,8 +622,16 @@ class ItemToolTip(ToolTip):
 
 	def ClearToolTip(self):
 		self.isShopItem = False
+		self.metinSlot = []
 		self.toolTipWidth = self.TOOL_TIP_WIDTH
 		ToolTip.ClearToolTip(self)
+
+	if app.ENABLE_CHARACTER_CHEST:
+		def TryCharacterChestPreview(self):
+			if not self.IsShow():
+				return False
+			import uicharacterchest
+			return uicharacterchest.TryOpenCharacterChestPreviewFromItem(self.itemVnum, self.metinSlot)
 
 	if app.WJ_NEW_DROP_DIALOG:
 		def SetDeleteItem(self, invenType, invenPos, index):
@@ -1062,6 +1071,7 @@ class ItemToolTip(ToolTip):
 
 	def AddItemData(self, itemVnum, metinSlot, attrSlot = 0, flags = 0, unbindTime = 0, window_type = player.INVENTORY, slotIndex = -1):
 		self.itemVnum = itemVnum
+		self.metinSlot = list(metinSlot) if metinSlot else []
 		item.SelectItem(itemVnum)
 		itemType = item.GetItemType()
 		itemSubType = item.GetItemSubType()
@@ -1484,6 +1494,16 @@ class ItemToolTip(ToolTip):
 		if app.KYGN_CHEST_INFO and window_type in (player.INVENTORY,) and slotIndex >= 0:
 			if chr.IsGameMaster(0) and player.IsGiftBox(slotIndex) == 1:
 				self.AppendTextLine(localeInfo.TOOLTIP_CHEST_ITEM.format(Emoji("icon\emoji\key_ctrl.png"), Emoji("icon\emoji\key_rclick.png")))
+
+		if app.ENABLE_CHARACTER_CHEST and itemVnum == 72325:
+			if metinSlot and len(metinSlot) >= 2 and int(metinSlot[0]) > 0 and int(metinSlot[1]) != 0:
+				self.AppendSpace(5)
+				if app.KYGN_CHEST_INFO and hasattr(localeInfo, "TOOLTIP_CHEST_ITEM"):
+					self.AppendTextLine(localeInfo.TOOLTIP_CHEST_ITEM.format(Emoji("icon\emoji\key_ctrl.png"), Emoji("icon\emoji\key_rclick.png")))
+				elif hasattr(localeInfo, "CHARACTER_CHEST_PREVIEW_HINT"):
+					self.AppendTextLine(localeInfo.CHARACTER_CHEST_PREVIEW_HINT)
+				else:
+					self.AppendTextLine("Ctrl + sag tik: karakter onizleme")
 
 		if chr.IsGameMaster(0):
 			self.AppendSpace(5)
@@ -2518,6 +2538,14 @@ class HyperlinkItemToolTip(ItemToolTip):
 		pass
 
 	def OnMouseLeftButtonDown(self):
+		self.Hide()
+
+	def OnMouseRightButtonUp(self):
+		if app.ENABLE_CHARACTER_CHEST:
+			import uicharacterchest
+			if uicharacterchest.IsCharacterChestPreviewShortcutPressed():
+				if uicharacterchest.TryOpenCharacterChestPreviewFromItem(self.itemVnum, self.metinSlot):
+					return
 		self.Hide()
 
 class SkillToolTip(ToolTip):

@@ -417,7 +417,7 @@ def IS_PET_SEAL(itemVnum):
 	# itemSubType = item.GetItemSubType()
 	return item.ITEM_TYPE_PET == itemType
 
-if app.ENABLE_EXCHANGE_LOG:
+if app.ENABLE_EXCHANGE_LOG or app.ENABLE_CHARACTER_CHEST:
 	_game_instance = None
 	def GetGameInstance():
 		global _game_instance

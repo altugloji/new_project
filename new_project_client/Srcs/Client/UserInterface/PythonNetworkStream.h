@@ -793,5 +793,10 @@ public:
 	bool CubeRenewalClose();
 	bool RecvCubeRenewalPacket();
 #endif
+#ifdef ENABLE_CHARACTER_CHEST
+public:
+	bool SendCharacterChestPacket(BYTE subOp, DWORD targetPid, WORD itemCell, const char* password);
+	bool RecvCharacterChestPacket();
+#endif
 };
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

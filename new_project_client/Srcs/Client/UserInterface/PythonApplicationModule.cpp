@@ -2025,6 +2025,11 @@ void initapp()
 #else
 	PyModule_AddIntConstant(poModule, "ENABLE_CUBE_RENEWAL", 0);
 #endif
+#ifdef ENABLE_CHARACTER_CHEST
+	PyModule_AddIntConstant(poModule, "ENABLE_CHARACTER_CHEST", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_CHARACTER_CHEST", 0);
+#endif
 
 #ifdef __GEM_SHOP__
 	PyModule_AddIntConstant(poModule, "__GEM_SHOP__", 1);

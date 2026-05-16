@@ -797,6 +797,18 @@ class InventoryWindow(ui.ScriptWindow):
 	def SetItemToolTip(self, tooltipItem):
 		self.tooltipItem = tooltipItem
 
+	if app.ENABLE_CHARACTER_CHEST:
+		def __IsCharacterChestInventoryLocked(self):
+			import uicharacterchest
+			return uicharacterchest.IsCharacterChestInventoryLocked()
+
+		def __BlockCharacterChestInventory(self):
+			import uicharacterchest
+			import mouseModule as mouseMod
+			uicharacterchest.NotifyCharacterChestInventoryLocked()
+			if mouseMod.mouseController.isAttached():
+				mouseMod.mouseController.DeattachObject()
+
 	def SellItem(self):
 		if self.sellingSlotitemIndex == player.GetItemIndex(self.sellingSlotNumber):
 			if self.sellingSlotitemCount == player.GetItemCount(self.sellingSlotNumber):
@@ -823,6 +835,10 @@ class InventoryWindow(ui.ScriptWindow):
 	## Slot Event
 	def SelectEmptySlot(self, selectedSlotPos):
 		if constInfo.GET_ITEM_QUESTION_DIALOG_STATUS() == 1:
+			return
+
+		if app.ENABLE_CHARACTER_CHEST and self.__IsCharacterChestInventoryLocked():
+			self.__BlockCharacterChestInventory()
 			return
 
 		selectedSlotPos = self.__InventoryLocalSlotPosToGlobalSlotPos(selectedSlotPos)
@@ -871,6 +887,10 @@ class InventoryWindow(ui.ScriptWindow):
 
 	def SelectItemSlot(self, itemSlotIndex):
 		if constInfo.GET_ITEM_QUESTION_DIALOG_STATUS() == 1:
+			return
+
+		if app.ENABLE_CHARACTER_CHEST and self.__IsCharacterChestInventoryLocked():
+			self.__BlockCharacterChestInventory()
 			return
 
 		itemSlotIndex = self.__InventoryLocalSlotPosToGlobalSlotPos(itemSlotIndex)
@@ -1437,6 +1457,10 @@ class InventoryWindow(ui.ScriptWindow):
 		if constInfo.GET_ITEM_QUESTION_DIALOG_STATUS():
 			return
 
+		if app.ENABLE_CHARACTER_CHEST and self.__IsCharacterChestInventoryLocked():
+			self.__BlockCharacterChestInventory()
+			return
+
 		slotIndex = self.__InventoryLocalSlotPosToGlobalSlotPos(slotIndex)
 
 		if app.ENABLE_DRAGON_SOUL_SYSTEM:
@@ -1501,6 +1525,10 @@ class InventoryWindow(ui.ScriptWindow):
 		self.OnCloseQuestionDialog()
 
 	def __SendUseItemToItemPacket(self, srcSlotPos, dstSlotPos):
+		if app.ENABLE_CHARACTER_CHEST and self.__IsCharacterChestInventoryLocked():
+			self.__BlockCharacterChestInventory()
+			return
+
 		if uiPrivateShopBuilder.IsBuildingPrivateShop():
 			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.USE_ITEM_FAILURE_PRIVATE_SHOP)
 			return
@@ -1513,6 +1541,10 @@ class InventoryWindow(ui.ScriptWindow):
 			net.SendItemUseToItemPacket(srcSlotPos, dstSlotPos)
 
 	def __SendUseItemPacket(self, slotPos):
+		if app.ENABLE_CHARACTER_CHEST and self.__IsCharacterChestInventoryLocked():
+			self.__BlockCharacterChestInventory()
+			return
+
 		if uiPrivateShopBuilder.IsBuildingPrivateShop():
 			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.USE_ITEM_FAILURE_PRIVATE_SHOP)
 			return
@@ -1520,6 +1552,10 @@ class InventoryWindow(ui.ScriptWindow):
 		net.SendItemUsePacket(slotPos)
 
 	def __SendMoveItemPacket(self, srcSlotPos, dstSlotPos, srcItemCount):
+		if app.ENABLE_CHARACTER_CHEST and self.__IsCharacterChestInventoryLocked():
+			self.__BlockCharacterChestInventory()
+			return
+
 		if uiPrivateShopBuilder.IsBuildingPrivateShop():
 			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.MOVE_ITEM_FAILURE_PRIVATE_SHOP)
 			return

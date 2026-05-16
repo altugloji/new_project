@@ -624,6 +624,11 @@ void CPythonNetworkStream::GamePhase()
 				ret = RecvCubeRenewalPacket();
 				break;
 #endif
+#ifdef ENABLE_CHARACTER_CHEST
+			case HEADER_GC_CHARACTER_CHEST:
+				ret = RecvCharacterChestPacket();
+				break;
+#endif
 #ifdef __GEM_SHOP__
 		case HEADER_GC_GEM:
 			ret = RecvGem();
@@ -5009,6 +5014,362 @@ bool CPythonNetworkStream::RecvCubeRenewalPacket()
 	break;
 	}
 
+	return true;
+}
+#endif
+
+#ifdef ENABLE_CHARACTER_CHEST
+bool CPythonNetworkStream::SendCharacterChestPacket(BYTE subOp, DWORD targetPid, WORD itemCell, const char* password)
+{
+	TPacketCGCharacterChest packet;
+	packet.bHeader = HEADER_CG_CHARACTER_CHEST;
+	packet.bSubOp = subOp;
+	packet.dwTargetPID = targetPid;
+	packet.wItemCell = itemCell;
+	memset(packet.szPassword, 0, sizeof(packet.szPassword));
+	if (password)
+		strncpy(packet.szPassword, password, sizeof(packet.szPassword) - 1);
+
+	if (!Send(sizeof(packet), &packet))
+		return false;
+
+	return SendSequence();
+}
+
+#ifdef ENABLE_CHARACTER_CHEST
+static void CharacterChestAppendPyLong(PyObject* poList, long lValue)
+{
+	PyObject* poVal = PyInt_FromLong(lValue);
+	PyList_Append(poList, poVal);
+	Py_DECREF(poVal);
+}
+
+static int CharacterChestReadPreviewInt(const BYTE* blob, size_t wireSize, size_t off)
+{
+	if (wireSize < off + sizeof(int))
+		return 0;
+	return *reinterpret_cast<const int*>(blob + off);
+}
+
+static BYTE CharacterChestReadPreviewByte(const BYTE* blob, size_t wireSize, size_t off)
+{
+	if (wireSize <= off)
+		return 0;
+	return blob[off];
+}
+
+static bool CharacterChestPreviewBiologistBytesValid(const BYTE* bioBytes)
+{
+	if (!bioBytes)
+		return false;
+
+	for (size_t i = 0; i < CHARACTER_CHEST_BIOLOGIST_LEVEL_COUNT; ++i)
+	{
+		if (bioBytes[i] > CHARACTER_CHEST_BIOLOGIST_DONE)
+			return false;
+	}
+	return true;
+}
+
+static size_t CharacterChestPreviewBiologistTrailerSize(const BYTE* abBuf, WORD wPacketSize, size_t baseSize, BYTE bItemCount)
+{
+	const size_t bioTrailer = CHARACTER_CHEST_BIOLOGIST_LEVEL_COUNT;
+	if (wPacketSize < baseSize + bioTrailer)
+		return 0;
+
+	const BYTE* bioBytes = abBuf + wPacketSize - bioTrailer;
+	if (!CharacterChestPreviewBiologistBytesValid(bioBytes))
+		return 0;
+
+	const size_t tailBytes = wPacketSize - baseSize;
+	const size_t itemBytes = (size_t) bItemCount * sizeof(TCharacterChestPreviewItem);
+	const size_t preItemBytes = tailBytes - itemBytes;
+	if (preItemBytes < bioTrailer + CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE)
+		return 0;
+
+	const size_t skillBytes = preItemBytes - bioTrailer - CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE;
+	if (skillBytes % sizeof(TCharacterChestPreviewSkill) != 0)
+		return 0;
+
+	if (wPacketSize != baseSize + CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE + skillBytes + itemBytes + bioTrailer)
+		return 0;
+
+	return bioTrailer;
+}
+#endif
+
+bool CPythonNetworkStream::RecvCharacterChestPacket()
+{
+	BYTE abBuf[CHARACTER_CHEST_GC_MAX_SIZE];
+	memset(abBuf, 0, sizeof(abBuf));
+
+	TPacketGCCharacterChest* packet = reinterpret_cast<TPacketGCCharacterChest*>(abBuf);
+
+	if (!Recv(sizeof(BYTE), &packet->bHeader))
+		return false;
+	if (!Recv(sizeof(WORD), &packet->wSize))
+		return false;
+
+	const WORD restSize = packet->wSize - sizeof(BYTE) - sizeof(WORD);
+	if (restSize > sizeof(abBuf) - sizeof(BYTE) - sizeof(WORD))
+	{
+		TraceError("CHARACTER_CHEST: wSize too large %u", packet->wSize);
+		return false;
+	}
+
+	if (restSize > 0 && !Recv(restSize, abBuf + sizeof(BYTE) + sizeof(WORD)))
+		return false;
+
+	if (!m_apoPhaseWnd[PHASE_WINDOW_GAME])
+		return true;
+
+	packet->szPackedName[sizeof(packet->szPackedName) - 1] = '\0';
+
+	if (packet->bOp == CHARACTER_CHEST_OP_PREVIEW && packet->bResult == 0)
+	{
+		const size_t baseSize = offsetof(TPacketGCCharacterChest, entries);
+		if (packet->wSize < baseSize + CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE)
+			return false;
+
+		const BYTE* playerBlob = abBuf + baseSize;
+		const TCharacterChestPreviewPlayer* player = reinterpret_cast<const TCharacterChestPreviewPlayer*>(playerBlob);
+		const size_t bioTrailerBytes = CharacterChestPreviewBiologistTrailerSize(abBuf, packet->wSize, baseSize, packet->bCount);
+		const size_t tailBytes = (packet->wSize - baseSize) - bioTrailerBytes;
+		const size_t itemBytes = (size_t) packet->bCount * sizeof(TCharacterChestPreviewItem);
+
+		size_t playerWireSize = CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE;
+		BYTE skillCount = 0;
+
+		if (tailBytes >= CHARACTER_CHEST_PREVIEW_PLAYER_LEGACY_SIZE + itemBytes)
+		{
+			const size_t legacySkillBytes = tailBytes - CHARACTER_CHEST_PREVIEW_PLAYER_LEGACY_SIZE - itemBytes;
+			const size_t packedSkillBytes = tailBytes - CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE - itemBytes;
+			const size_t v1SkillBytes = tailBytes - CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE_V1 - itemBytes;
+
+			if (legacySkillBytes % sizeof(TCharacterChestPreviewSkill) == 0)
+			{
+				const BYTE legacySkillCount = (BYTE) (legacySkillBytes / sizeof(TCharacterChestPreviewSkill));
+				const BYTE packedSkillCount = (packedSkillBytes % sizeof(TCharacterChestPreviewSkill) == 0)
+					? (BYTE) (packedSkillBytes / sizeof(TCharacterChestPreviewSkill)) : 0;
+				const BYTE v1SkillCount = (v1SkillBytes % sizeof(TCharacterChestPreviewSkill) == 0)
+					? (BYTE) (v1SkillBytes / sizeof(TCharacterChestPreviewSkill)) : 0;
+
+				if (legacySkillCount > 0 && legacySkillCount != packedSkillCount)
+				{
+					playerWireSize = CHARACTER_CHEST_PREVIEW_PLAYER_LEGACY_SIZE;
+					skillCount = legacySkillCount;
+				}
+				else if (v1SkillCount > 0 && packet->wSize == baseSize + CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE_V1 + v1SkillBytes + itemBytes + bioTrailerBytes)
+				{
+					playerWireSize = CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE_V1;
+					skillCount = v1SkillCount;
+				}
+			}
+		}
+
+		if (skillCount == 0)
+		{
+			if (playerWireSize >= CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE)
+				skillCount = CharacterChestReadPreviewByte(playerBlob, playerWireSize, CHARACTER_CHEST_PREVIEW_OFF_SKILL_COUNT);
+			else if (playerWireSize >= CHARACTER_CHEST_PREVIEW_PLAYER_WIRE_SIZE_V1)
+				skillCount = CharacterChestReadPreviewByte(playerBlob, playerWireSize, CHARACTER_CHEST_PREVIEW_V1_OFF_SKILL_COUNT);
+			else if (playerWireSize > 0)
+				skillCount = player->bSkillCount;
+
+			if (skillCount == 0 && tailBytes > playerWireSize + itemBytes)
+			{
+				const size_t skillBytes = tailBytes - playerWireSize - itemBytes;
+				if (skillBytes % sizeof(TCharacterChestPreviewSkill) == 0)
+				{
+					const BYTE exactCount = (BYTE) (skillBytes / sizeof(TCharacterChestPreviewSkill));
+					if (packet->wSize == baseSize + playerWireSize + skillBytes + itemBytes + bioTrailerBytes)
+						skillCount = exactCount;
+				}
+			}
+		}
+
+		if (skillCount > CHARACTER_CHEST_MAX_PREVIEW_SKILLS)
+			skillCount = CHARACTER_CHEST_MAX_PREVIEW_SKILLS;
+
+		size_t offset = baseSize + playerWireSize;
+
+		PyObject* skillList = PyList_New(0);
+		for (BYTE i = 0; i < skillCount; ++i)
+		{
+			if (offset + sizeof(TCharacterChestPreviewSkill) > packet->wSize)
+				break;
+			const TCharacterChestPreviewSkill* skill = reinterpret_cast<const TCharacterChestPreviewSkill*>(abBuf + offset);
+			PyObject* skillEntry = PyList_New(0);
+			CharacterChestAppendPyLong(skillEntry, (long) skill->wVnum);
+			CharacterChestAppendPyLong(skillEntry, (long) skill->bMasterType);
+			CharacterChestAppendPyLong(skillEntry, (long) skill->bLevel);
+			PyList_Append(skillList, skillEntry);
+			Py_DECREF(skillEntry);
+			offset += sizeof(TCharacterChestPreviewSkill);
+		}
+
+		BYTE itemCount = packet->bCount;
+		if (offset < packet->wSize)
+		{
+			size_t remainBytes = packet->wSize - offset;
+			if (remainBytes >= bioTrailerBytes)
+				remainBytes -= bioTrailerBytes;
+			const size_t maxBySize = remainBytes / sizeof(TCharacterChestPreviewItem);
+			if (itemCount == 0 && maxBySize > 0)
+				itemCount = (BYTE) (maxBySize > CHARACTER_CHEST_MAX_PREVIEW_ITEMS ? CHARACTER_CHEST_MAX_PREVIEW_ITEMS : maxBySize);
+			else if (itemCount > maxBySize)
+				itemCount = (BYTE) maxBySize;
+		}
+		if (itemCount > CHARACTER_CHEST_MAX_PREVIEW_ITEMS)
+			itemCount = CHARACTER_CHEST_MAX_PREVIEW_ITEMS;
+
+		TraceError("CHARACTER_CHEST preview recv skills %u items %u wSize %u offset %u",
+			skillCount, itemCount, packet->wSize, (DWORD) offset);
+
+		PyObject* itemList = PyList_New(0);
+		for (BYTE i = 0; i < itemCount; ++i)
+		{
+			if (offset + sizeof(TCharacterChestPreviewItem) > packet->wSize)
+				break;
+			const TCharacterChestPreviewItem* item = reinterpret_cast<const TCharacterChestPreviewItem*>(abBuf + offset);
+			PyObject* socketList = PyList_New(0);
+			for (int s = 0; s < CHARACTER_CHEST_PREVIEW_SOCKET_NUM; ++s)
+				CharacterChestAppendPyLong(socketList, item->alSockets[s]);
+
+			PyObject* attrList = PyList_New(0);
+			for (int a = 0; a < CHARACTER_CHEST_PREVIEW_ATTR_NUM; ++a)
+			{
+				PyObject* attrEntry = PyList_New(0);
+				CharacterChestAppendPyLong(attrEntry, (long) item->aAttrType[a]);
+				CharacterChestAppendPyLong(attrEntry, (long) item->aAttrValue[a]);
+				PyList_Append(attrList, attrEntry);
+				Py_DECREF(attrEntry);
+			}
+
+			PyObject* itemEntry = PyList_New(0);
+			CharacterChestAppendPyLong(itemEntry, (long) item->bWindow);
+			CharacterChestAppendPyLong(itemEntry, (long) item->wPos);
+			CharacterChestAppendPyLong(itemEntry, (long) item->dwVnum);
+			CharacterChestAppendPyLong(itemEntry, (long) item->dwCount);
+			PyList_Append(itemEntry, socketList);
+			PyList_Append(itemEntry, attrList);
+			Py_DECREF(socketList);
+			Py_DECREF(attrList);
+			PyList_Append(itemList, itemEntry);
+			Py_DECREF(itemEntry);
+			offset += sizeof(TCharacterChestPreviewItem);
+		}
+
+		PyObject* biologistList = PyList_New(0);
+		const BYTE* bioBytes = nullptr;
+		const size_t trailerRemain = packet->wSize - offset;
+		if (trailerRemain == CHARACTER_CHEST_BIOLOGIST_LEVEL_COUNT
+			&& CharacterChestPreviewBiologistBytesValid(abBuf + offset))
+		{
+			bioBytes = abBuf + offset;
+			offset += trailerRemain;
+		}
+		else if (bioTrailerBytes > 0)
+		{
+			bioBytes = abBuf + packet->wSize - bioTrailerBytes;
+		}
+		else if (packet->wSize >= baseSize + CHARACTER_CHEST_BIOLOGIST_LEVEL_COUNT)
+		{
+			const BYTE* tailBio = abBuf + packet->wSize - CHARACTER_CHEST_BIOLOGIST_LEVEL_COUNT;
+			if (CharacterChestPreviewBiologistBytesValid(tailBio))
+				bioBytes = tailBio;
+		}
+
+		if (bioBytes)
+		{
+			for (size_t i = 0; i < CHARACTER_CHEST_BIOLOGIST_LEVEL_COUNT; ++i)
+				CharacterChestAppendPyLong(biologistList, (long) bioBytes[i]);
+		}
+
+		TraceError("CHARACTER_CHEST preview bio trailer %u remain %u bio %u,%u,%u,%u,%u,%u,%u,%u,%u,%u",
+			(DWORD) bioTrailerBytes, (DWORD) trailerRemain,
+			bioBytes ? (DWORD) bioBytes[0] : 0, bioBytes ? (DWORD) bioBytes[1] : 0,
+			bioBytes ? (DWORD) bioBytes[2] : 0, bioBytes ? (DWORD) bioBytes[3] : 0,
+			bioBytes ? (DWORD) bioBytes[4] : 0, bioBytes ? (DWORD) bioBytes[5] : 0,
+			bioBytes ? (DWORD) bioBytes[6] : 0, bioBytes ? (DWORD) bioBytes[7] : 0,
+			bioBytes ? (DWORD) bioBytes[8] : 0, bioBytes ? (DWORD) bioBytes[9] : 0);
+
+		PyObject* partsList = PyList_New(0);
+		for (int p = 0; p < CHARACTER_CHEST_PREVIEW_PART_COUNT; ++p)
+			CharacterChestAppendPyLong(partsList, (long) player->adwParts[p]);
+
+		PyObject* playerList = PyList_New(0);
+		PyList_Append(playerList, PyString_FromString(player->szName));
+		CharacterChestAppendPyLong(playerList, (long) player->bJob);
+		CharacterChestAppendPyLong(playerList, (long) player->bLevel);
+		CharacterChestAppendPyLong(playerList, (long) player->sST);
+		CharacterChestAppendPyLong(playerList, (long) player->sHT);
+		CharacterChestAppendPyLong(playerList, (long) player->sDX);
+		CharacterChestAppendPyLong(playerList, (long) player->sIQ);
+		CharacterChestAppendPyLong(playerList, (long) player->dwExp);
+		CharacterChestAppendPyLong(playerList, (long) player->iGold);
+		CharacterChestAppendPyLong(playerList, (long) player->iPlaytime);
+		CharacterChestAppendPyLong(playerList, (long) player->bPartBase);
+		PyList_Append(playerList, partsList);
+		Py_DECREF(partsList);
+		CharacterChestAppendPyLong(playerList, (long) player->bSkillGroup);
+		CharacterChestAppendPyLong(playerList, (long) CharacterChestReadPreviewInt(playerBlob, playerWireSize, CHARACTER_CHEST_PREVIEW_OFF_CHEQUE));
+		CharacterChestAppendPyLong(playerList, (long) CharacterChestReadPreviewInt(playerBlob, playerWireSize, CHARACTER_CHEST_PREVIEW_OFF_GEM));
+
+		PyObject* poArg = Py_BuildValue("(iisOOOO)",
+			(int) packet->wItemCell,
+			(int) packet->dwTargetPID,
+			packet->szPackedName,
+			playerList,
+			skillList,
+			itemList,
+			biologistList);
+		Py_DECREF(playerList);
+		Py_DECREF(skillList);
+		Py_DECREF(itemList);
+		Py_DECREF(biologistList);
+
+		if (!poArg)
+			return false;
+
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_CharacterChestPreview", poArg);
+		Py_DECREF(poArg);
+		return true;
+	}
+
+	PyObject* entryList = PyList_New(0);
+	const BYTE entryCount = (packet->bOp == CHARACTER_CHEST_OP_LIST && packet->bCount <= CHARACTER_CHEST_MAX_LIST)
+		? packet->bCount : 0;
+	for (BYTE i = 0; i < entryCount; ++i)
+	{
+		packet->entries[i].szName[sizeof(packet->entries[i].szName) - 1] = '\0';
+		PyObject* entry = Py_BuildValue("(isi)",
+			(int) packet->entries[i].dwPID,
+			packet->entries[i].szName,
+			(int) packet->entries[i].byLevel);
+		if (!entry)
+		{
+			Py_DECREF(entryList);
+			return false;
+		}
+		PyList_Append(entryList, entry);
+		Py_DECREF(entry);
+	}
+
+	PyObject* poArg = Py_BuildValue("(iiiisO)",
+		(int) packet->bOp,
+		(int) packet->bResult,
+		(int) packet->wItemCell,
+		(int) packet->dwTargetPID,
+		packet->szPackedName,
+		entryList);
+	Py_DECREF(entryList);
+
+	if (!poArg)
+		return false;
+
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_CharacterChest", poArg);
+	Py_DECREF(poArg);
 	return true;
 }
 #endif

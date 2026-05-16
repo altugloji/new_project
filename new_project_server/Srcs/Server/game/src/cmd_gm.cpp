@@ -1465,8 +1465,44 @@ ACMD(do_disconnect)
 		return;
 	}
 
+#ifdef DC_P2P_UPDATE
+	LPCHARACTER tch = CHARACTER_MANAGER::instance().FindPC(arg1);
+
+	if (!tch)
+	{
+		TPacketGGDCP2PUpdate ggPacket{};
+		ggPacket.byHeader = HEADER_GG_DC_P2P_UPDATE;
+		strlcpy(ggPacket.szName, arg1, sizeof(ggPacket.szName));
+		P2P_MANAGER::instance().Send(&ggPacket, sizeof(TPacketGGDCP2PUpdate));
+
+		const CCI* pkCCI = P2P_MANAGER::instance().Find(arg1);
+		if (pkCCI)
+			ch->ChatPacket(CHAT_TYPE_INFO, "%s is on channel %d. Disconnecting...",
+				arg1, pkCCI->bChannel);
+		else
+			ch->ChatPacket(CHAT_TYPE_INFO, "Disconnect request sent for %s.", arg1);
+		return;
+	}
+
+	if (tch == ch)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "cannot disconnect myself");
+		return;
+	}
+
+	LPDESC d = tch->GetDesc();
+	if (!d)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "%s: no such a player.", arg1);
+		return;
+	}
+
+	DESC_MANAGER::instance().DestroyLoginKey(d);
+	DESC_MANAGER::instance().DestroyDesc(d);
+	ch->ChatPacket(CHAT_TYPE_INFO, "%s disconnected.", arg1);
+#else
 	const LPDESC d = DESC_MANAGER::instance().FindByCharacterName(arg1);
-	const LPCHARACTER	tch = d ? d->GetCharacter() : nullptr;
+	const LPCHARACTER tch = d ? d->GetCharacter() : nullptr;
 
 	if (!tch)
 	{
@@ -1476,19 +1512,13 @@ ACMD(do_disconnect)
 
 	if (tch == ch)
 	{
-#ifdef DC_P2P_UPDATE
-		TPacketGGDCP2PUpdate ggPacket	{};
-		ggPacket.byHeader =				HEADER_GG_DC_P2P_UPDATE;
-		strlcpy(ggPacket.szName,		arg1, sizeof(ggPacket.szName));
-		P2P_MANAGER::instance().Send(&ggPacket, sizeof(TPacketGGDCP2PUpdate));
-#else
 		ch->ChatPacket(CHAT_TYPE_INFO, "cannot disconnect myself");
-#endif
 		return;
 	}
 
-	DESC_MANAGER::instance().DestroyLoginKey(d); // @fixme319
+	DESC_MANAGER::instance().DestroyLoginKey(d);
 	DESC_MANAGER::instance().DestroyDesc(d);
+#endif
 }
 
 ACMD(do_kill)

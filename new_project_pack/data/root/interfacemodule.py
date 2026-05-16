@@ -46,6 +46,9 @@ import uiScriptLocale
 import event
 import localeInfo
 
+if app.ENABLE_CHARACTER_CHEST:
+	import uicharacterchest
+
 if app.ENABLE_CONQUEROR_UI:
 	import uicharacternew as uiCharacter
 else:
@@ -142,6 +145,10 @@ class Interface(object):
 			self.wndLootFilter = None
 		if app.ENABLE_CUBE_RENEWAL:
 			self.wndCubeRenewal = None
+		if app.ENABLE_CHARACTER_CHEST:
+			self.wndCharacterChestPack = None
+			self.wndCharacterChestUnpack = None
+			self.wndCharacterChestPreview = None
 		event.SetInterfaceWindow(self)
 		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
 			self.EMPIRE_NAME = {
@@ -435,6 +442,12 @@ class Interface(object):
 			self.__MakeAcceWindow()
 		if app.ENABLE_CUBE_RENEWAL:
 			self.__MakeCubeRenewal()
+		if app.ENABLE_CHARACTER_CHEST:
+			self.wndCharacterChestPack = uicharacterchest.CharacterChestPackDialog()
+			self.wndCharacterChestUnpack = uicharacterchest.CharacterChestUnpackDialog()
+			self.wndCharacterChestPreview = uicharacterchest.CharacterChestPreviewDialog()
+			if self.tooltipItem:
+				self.wndCharacterChestPreview.SetItemToolTip(self.tooltipItem)
 		# ACCESSORY_REFINE_ADD_METIN_STONE
 		self.__MakeItemSelectWindow()
 		# END_OF_ACCESSORY_REFINE_ADD_METIN_STONE
@@ -560,6 +573,17 @@ class Interface(object):
 				self.wndCubeRenewal.Destroy()
 				self.wndCubeRenewal = None
 				del self.wndCubeRenewal
+
+		if app.ENABLE_CHARACTER_CHEST:
+			if self.wndCharacterChestPack:
+				self.wndCharacterChestPack.Destroy()
+				self.wndCharacterChestPack = None
+			if self.wndCharacterChestUnpack:
+				self.wndCharacterChestUnpack.Destroy()
+				self.wndCharacterChestUnpack = None
+			if self.wndCharacterChestPreview:
+				self.wndCharacterChestPreview.Destroy()
+				self.wndCharacterChestPreview = None
 
 		if app.ENABLE_ITEM_SHOP_SYSTEM:
 			if self.ItemShop:
@@ -1442,6 +1466,135 @@ class Interface(object):
 
 	def __OnClickBuildButton(self):
 		self.BUILD_OpenWindow()
+
+	def OpenCharacterChestPack(self, entryList, itemCell):
+		if not app.ENABLE_CHARACTER_CHEST:
+			import dbg
+			dbg.TraceError("OpenCharacterChestPack: ENABLE_CHARACTER_CHEST=0 (rebuild client)")
+			return
+		if not self.wndCharacterChestPack:
+			import dbg
+			dbg.TraceError("OpenCharacterChestPack: wndCharacterChestPack is None")
+			return
+		self.wndCharacterChestPack.Open(entryList, itemCell)
+
+	def OpenCharacterChestUnpack(self, packedName, itemCell, targetPid):
+		if not app.ENABLE_CHARACTER_CHEST:
+			return
+		if not self.wndCharacterChestUnpack:
+			return
+		self.wndCharacterChestUnpack.Open(packedName, itemCell, targetPid)
+
+	def OpenCharacterChestPreview(self, itemCell, targetPid, packedName, playerData, skillList, itemList, biologistList=None):
+		if not app.ENABLE_CHARACTER_CHEST:
+			return
+		if not self.wndCharacterChestPreview:
+			return
+		import uicharacterchest
+		readOnly = uicharacterchest.ShouldOpenCharacterChestPreviewReadOnly(itemCell)
+		self.wndCharacterChestPreview.Open(itemCell, targetPid, packedName, playerData, skillList, itemList, biologistList, readOnly)
+
+	def TryCharacterChestPreviewHyperlink(self, hyperlink):
+		if not app.ENABLE_CHARACTER_CHEST:
+			return False
+		import uicharacterchest
+		if not uicharacterchest.IsCharacterChestPreviewShortcutPressed():
+			return False
+		tokens = hyperlink.split(":")
+		if not tokens or tokens[0] != "item":
+			return False
+		minTokenCount = 3 + player.METIN_SOCKET_MAX_NUM
+		if len(tokens) < minTokenCount:
+			return False
+		try:
+			itemVnum = int(tokens[1], 16)
+		except:
+			return False
+		metinSlot = []
+		for i in xrange(player.METIN_SOCKET_MAX_NUM):
+			try:
+				metinSlot.append(int(tokens[3 + i], 16))
+			except:
+				metinSlot.append(0)
+		return uicharacterchest.TryOpenCharacterChestPreviewFromItem(itemVnum, metinSlot)
+
+	def TryCharacterChestPreviewFromTooltip(self):
+		if not app.ENABLE_CHARACTER_CHEST:
+			return False
+		import uicharacterchest
+		if not uicharacterchest.IsCharacterChestPreviewShortcutPressed():
+			return False
+		if not self.tooltipItem or not self.tooltipItem.IsShow():
+			return False
+		return self.tooltipItem.TryCharacterChestPreview()
+
+	def CloseCharacterChestPack(self):
+		if self.wndCharacterChestPack:
+			self.wndCharacterChestPack.Close()
+
+	def CloseCharacterChestUnpack(self):
+		if self.wndCharacterChestUnpack:
+			self.wndCharacterChestUnpack.Close()
+
+	def CloseCharacterChestPreview(self):
+		if self.wndCharacterChestPreview:
+			self.wndCharacterChestPreview.Close()
+
+	def CloseAllCharacterChestWindows(self):
+		if not app.ENABLE_CHARACTER_CHEST:
+			return
+		self.CloseCharacterChestPack()
+		self.CloseCharacterChestUnpack()
+		self.CloseCharacterChestPreview()
+		import uicharacterchest
+		uicharacterchest.ResetCharacterChestState()
+
+	def IsCharacterChestWindowOpen(self):
+		if not app.ENABLE_CHARACTER_CHEST:
+			return False
+
+		def _IsShown(wnd):
+			try:
+				return wnd and wnd.IsShow()
+			except:
+				return False
+
+		if _IsShown(self.wndCharacterChestPack):
+			return True
+		if _IsShown(self.wndCharacterChestUnpack):
+			return True
+		if _IsShown(self.wndCharacterChestPreview):
+			return True
+		return False
+
+	def IsCharacterChestBlockedByUI(self):
+		import uicharacterchest
+		if uicharacterchest.CHARACTER_CHEST_BUSY:
+			return True
+
+		def _IsShown(wnd):
+			try:
+				return wnd and wnd.IsShow()
+			except:
+				return False
+
+		if _IsShown(self.dlgExchange):
+			return True
+		if _IsShown(self.dlgShop):
+			return True
+		if _IsShown(self.wndSafebox):
+			return True
+		if _IsShown(self.wndMall):
+			return True
+		if _IsShown(self.wndCube):
+			return True
+		if _IsShown(self.wndCubeResult):
+			return True
+		if app.ENABLE_CUBE_RENEWAL and _IsShown(self.wndCubeRenewal):
+			return True
+		if _IsShown(self.privateShopBuilder):
+			return True
+		return False
 
 	def OpenHelpWindow(self):
 		self.wndUICurtain.Show()

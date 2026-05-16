@@ -22,6 +22,10 @@
 #include "../../common/VnumHelper.h"
 #include "../../common/CommonDefines.h"
 
+#ifdef ENABLE_CHARACTER_CHEST
+	#include "../../common/character_chest.h"
+#endif
+
 CItem::CItem(DWORD dwVnum)
 	: m_dwVnum(dwVnum), m_bWindow(0), m_dwID(0), m_bEquipped(false), m_dwVID(0), m_wCell(0), m_dwCount(0), m_lFlag(0), m_dwLastOwnerPID(0),
 	m_bExchanging(false), m_pkDestroyEvent(nullptr), m_pkExpireEvent(nullptr), m_pkUniqueExpireEvent(nullptr),
@@ -1143,6 +1147,12 @@ void CItem::SetSockets(const long * c_al)
 void CItem::SetSocket(int i, long v, bool bLog)
 {
 	assert(i < ITEM_SOCKET_MAX_NUM);
+
+#ifdef ENABLE_CHARACTER_CHEST
+	if (GetVnum() == CHARACTER_CHEST_ITEM_VNUM && GetSocket(CHARACTER_CHEST_SOCKET_SEAL) == 1)
+		return;
+#endif
+
 	m_alSockets[i] = v;
 	UpdatePacket();
 	Save();

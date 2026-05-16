@@ -480,6 +480,11 @@ class CClientManager : public CNetBase, public singleton<CClientManager>
 	void AckHorseName(DWORD dwPID, CPeer* peer) const;
 	void DeleteLoginKey(TPacketDC *data);
 	void ResetLastPlayerID(const TPacketNeedLoginLogInfo* data);
+
+#ifdef ENABLE_CHARACTER_CHEST
+	void QUERY_CHARACTER_CHEST(CPeer * peer, DWORD dwHandle, TPacketGDCharacterChest * p);
+#endif
+
 	//delete gift notify icon
 	void DeleteAwardId(TPacketDeleteAwardID* data) const;
 	void UpdateChannelStatus(TChannelStatus* pData);

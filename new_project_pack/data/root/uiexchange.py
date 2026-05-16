@@ -37,6 +37,7 @@ class ExchangeDialog(ui.ScriptWindow):
 		self.OwnerSlot = self.GetChild("Owner_Slot")
 		self.OwnerSlot.SetSelectEmptySlotEvent(ui.__mem_func__(self.SelectOwnerEmptySlot))
 		self.OwnerSlot.SetSelectItemSlotEvent(ui.__mem_func__(self.SelectOwnerItemSlot))
+		self.OwnerSlot.SetUnselectItemSlotEvent(ui.__mem_func__(self.OnOwnerSlotRightClick))
 		self.OwnerSlot.SetOverInItemEvent(ui.__mem_func__(self.OverInOwnerItem))
 		self.OwnerSlot.SetOverOutItemEvent(ui.__mem_func__(self.OverOutItem))
 		self.OwnerMoney = self.GetChild("Owner_Money_Value")
@@ -52,6 +53,7 @@ class ExchangeDialog(ui.ScriptWindow):
 
 		## Target
 		self.TargetSlot = self.GetChild("Target_Slot")
+		self.TargetSlot.SetUnselectItemSlotEvent(ui.__mem_func__(self.OnTargetSlotRightClick))
 		self.TargetSlot.SetOverInItemEvent(ui.__mem_func__(self.OverInTargetItem))
 		self.TargetSlot.SetOverOutItemEvent(ui.__mem_func__(self.OverOutItem))
 		self.TargetMoney = self.GetChild("Target_Money_Value")
@@ -233,6 +235,34 @@ class ExchangeDialog(ui.ScriptWindow):
 			self.TargetAcceptLight.Down()
 		else:
 			self.TargetAcceptLight.SetUp()
+
+	def __TryCharacterChestPreviewFromExchange(self, bOwner, slotIndex):
+		if not app.ENABLE_CHARACTER_CHEST:
+			return
+		import uicharacterchest
+		if not uicharacterchest.IsCharacterChestPreviewShortcutPressed():
+			return
+		if bOwner:
+			itemVnum = exchange.GetItemVnumFromSelf(slotIndex)
+			if itemVnum == 0:
+				return
+			metinSlot = []
+			for i in xrange(player.METIN_SOCKET_MAX_NUM):
+				metinSlot.append(exchange.GetItemMetinSocketFromSelf(slotIndex, i))
+		else:
+			itemVnum = exchange.GetItemVnumFromTarget(slotIndex)
+			if itemVnum == 0:
+				return
+			metinSlot = []
+			for i in xrange(player.METIN_SOCKET_MAX_NUM):
+				metinSlot.append(exchange.GetItemMetinSocketFromTarget(slotIndex, i))
+		uicharacterchest.TryOpenCharacterChestPreviewFromItem(itemVnum, metinSlot)
+
+	def OnOwnerSlotRightClick(self, slotIndex):
+		self.__TryCharacterChestPreviewFromExchange(True, slotIndex)
+
+	def OnTargetSlotRightClick(self, slotIndex):
+		self.__TryCharacterChestPreviewFromExchange(False, slotIndex)
 
 	def OverInOwnerItem(self, slotIndex):
 

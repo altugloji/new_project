@@ -2544,6 +2544,13 @@ void CClientManager::ProcessPackets(CPeer * peer)
 			case HEADER_GD_REQUEST_CHANNELSTATUS:
 				RequestChannelStatus(peer, dwHandle);
 				break;
+
+#ifdef ENABLE_CHARACTER_CHEST
+			case HEADER_GD_CHARACTER_CHEST:
+				QUERY_CHARACTER_CHEST(peer, dwHandle, (TPacketGDCharacterChest*) data);
+				break;
+#endif
+
 			default:
 				sys_err("Unknown header (header: %d handle: %d length: %d)", header, dwHandle, dwLength);
 				break;

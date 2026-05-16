@@ -185,6 +185,9 @@ class CInputMain : public CInputProcessor
 #ifdef ENABLE_CUBE_RENEWAL
 	void 		CubeRenewalSend(LPCHARACTER ch, const char* data);
 #endif
+#ifdef ENABLE_CHARACTER_CHEST
+	void		CharacterChest(LPCHARACTER ch, const char* data);
+#endif
 };
 
 class CInputDead : public CInputMain

@@ -113,6 +113,9 @@ enum
 #ifdef ENABLE_CUBE_RENEWAL
 	HEADER_CG_CUBE_RENEWAL				= 224,
 #endif
+#ifdef ENABLE_CHARACTER_CHEST
+	HEADER_CG_CHARACTER_CHEST			= 231,
+#endif
 	HEADER_CG_CLIENT_VERSION2		= 0xf1,
 
 	/********************************************************/
@@ -301,6 +304,9 @@ enum
 #endif
 #ifdef ENABLE_EXCHANGE_LOG
 	HEADER_GC_EXCHANGE_LOG						= 235,
+#endif
+#ifdef ENABLE_CHARACTER_CHEST
+	HEADER_GC_CHARACTER_CHEST					= 236,
 #endif
 	/////////////////////////////////////////////////////////////////////////////
 
@@ -2528,6 +2534,37 @@ typedef struct packet_receive_cube_renewal
 	BYTE subheader;
 	TInfoDateCubeRenewal	date_cube_renewal;
 }TPacketGCCubeRenewalReceive;
+#endif
+
+#ifdef ENABLE_CHARACTER_CHEST
+	#include "../../common/character_chest.h"
+	#include "../../common/tables.h"
+
+typedef struct SPacketCGCharacterChest
+{
+	BYTE	bHeader;
+	BYTE	bSubOp;
+	DWORD	dwTargetPID;
+	WORD	wItemCell;
+	char	szPassword[CHARACTER_CHEST_PASSWORD_LEN];
+} TPacketCGCharacterChest;
+
+typedef struct SPacketGCCharacterChest
+{
+	BYTE	bHeader;
+	WORD	wSize;
+	BYTE	bOp;
+	BYTE	bResult;
+	DWORD	dwTargetPID;
+	BYTE	bCount;
+	WORD	wItemCell;
+	char	szPackedName[CHARACTER_NAME_MAX_LEN + 1];
+	union
+	{
+		TCharacterChestEntry entries[CHARACTER_CHEST_MAX_LIST];
+		BYTE	abPayload[CHARACTER_CHEST_GC_MAX_SIZE];
+	};
+} TPacketGCCharacterChest;
 #endif
 
 #ifdef __GEM_SYSTEM__

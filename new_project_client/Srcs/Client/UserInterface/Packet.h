@@ -148,6 +148,9 @@ enum
 #ifdef ENABLE_CUBE_RENEWAL
 	HEADER_CG_CUBE_RENEWAL					= 224,
 #endif
+#ifdef ENABLE_CHARACTER_CHEST
+	HEADER_CG_CHARACTER_CHEST				= 231,
+#endif
 	HEADER_CG_TIME_SYNC							= 0xfc,
 	HEADER_CG_CLIENT_VERSION2					= 0xf1,
 	HEADER_CG_PONG								= 0xfe,
@@ -331,6 +334,9 @@ enum
 #endif
 #ifdef ENABLE_EXCHANGE_LOG
 	HEADER_GC_EXCHANGE_LOG						= 235,
+#endif
+#ifdef ENABLE_CHARACTER_CHEST
+	HEADER_GC_CHARACTER_CHEST					= 236,
 #endif
 
 
@@ -2952,6 +2958,10 @@ typedef struct packet_receive_cube_renewal
 	BYTE subheader;
 	TInfoDateCubeRenewal	date_cube_renewal;
 }TPacketGCCubeRenewalReceive;
+#endif
+
+#ifdef ENABLE_CHARACTER_CHEST
+#include "CharacterChestPacket.h"
 #endif
 
 #ifdef __GEM_SHOP__

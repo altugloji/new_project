@@ -45,6 +45,10 @@
 #include "gaya.h"
 #endif
 
+#ifdef ENABLE_CHARACTER_CHEST
+	#include "char_character_chest.h"
+#endif
+
 #include "../../common/CommonDefines.h"
 
 #define MAPNAME_DEFAULT	"none"
@@ -2249,6 +2253,13 @@ int CInputDB::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 	case HEADER_DG_RESPOND_CHANNELSTATUS:
 		RespondChannelStatus(DESC_MANAGER::instance().FindByHandle(m_dwHandle), c_pData);
 		break;
+
+#ifdef ENABLE_CHARACTER_CHEST
+	case HEADER_DG_CHARACTER_CHEST:
+		character_chest::OnDBPacket(DESC_MANAGER::instance().FindByHandle(m_dwHandle), (TPacketDGCharacterChest*) c_pData);
+		break;
+#endif
+
 	default:
 		return (-1);
 	}

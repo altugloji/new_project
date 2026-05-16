@@ -306,7 +306,25 @@ void LogFilef(const char * c_szMessage, ...)
 void OpenLogFile(bool bUseLogFIle)
 {
 #ifndef _DISTRIBUTE
-	freopen("syserr.txt", "w", stderr);
+	CreateDirectoryA("syserr", nullptr);
+
+	char szSysErrPath[MAX_PATH];
+	const time_t ct = time(nullptr);
+	const struct tm ctm = *localtime(&ct);
+
+	_snprintf(
+		szSysErrPath,
+		sizeof(szSysErrPath),
+		"syserr\\syserr_%04d%02d%02d_%02d%02d%02d_%u.txt",
+		ctm.tm_year + 1900,
+		ctm.tm_mon + 1,
+		ctm.tm_mday,
+		ctm.tm_hour,
+		ctm.tm_min,
+		ctm.tm_sec,
+		GetCurrentProcessId());
+
+	freopen(szSysErrPath, "w", stderr);
 
 	if (bUseLogFIle)
 	{

@@ -49,6 +49,10 @@
 #include "belt_inventory_helper.h"
 #include "PetSystem.h"
 
+#ifdef ENABLE_CHARACTER_CHEST
+	#include "char_character_chest.h"
+#endif
+
 #define ENABLE_EFFECT_EXTRAPOT
 #define ENABLE_ITEM_RARE_ATTR_LEVEL_PCT
 #define ENABLE_UNIQUE_ITEM_AUTOSPLIT
@@ -2640,6 +2644,11 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("결혼 상태가 아니면 결혼반지를 사용할 수 없습니다."));
 								}
 								break;
+
+#ifdef ENABLE_CHARACTER_CHEST
+							case CHARACTER_CHEST_ITEM_VNUM:
+								return character_chest::UseChestItem(this, item);
+#endif
 
 							case UNIQUE_ITEM_CAPE_OF_COURAGE:
 							case 70057:

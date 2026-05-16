@@ -639,6 +639,28 @@ PyObject* netSendItemUsePacket(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_CHARACTER_CHEST
+PyObject* netSendCharacterChestPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	int iSubOp = 0;
+	int iTargetPid = 0;
+	int iItemCell = 0;
+	char* szPassword = nullptr;
+
+	if (!PyTuple_GetInteger(poArgs, 0, &iSubOp))
+		return Py_BuildException();
+	if (!PyTuple_GetInteger(poArgs, 1, &iTargetPid))
+		return Py_BuildException();
+	if (!PyTuple_GetInteger(poArgs, 2, &iItemCell))
+		return Py_BuildException();
+	PyTuple_GetString(poArgs, 3, &szPassword);
+
+	CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+	rkNetStream.SendCharacterChestPacket((BYTE) iSubOp, (DWORD) iTargetPid, (WORD) iItemCell, szPassword);
+	return Py_BuildNone();
+}
+#endif
+
 PyObject* netSendItemUseToItemPacket(PyObject* poSelf, PyObject* poArgs)
 {
 	TItemPos SourceCell;
@@ -1773,6 +1795,9 @@ void initnet()
 		{ "SendEnterGamePacket",				netSendEnterGamePacket,					METH_VARARGS },
 
 		{ "SendItemUsePacket",					netSendItemUsePacket,					METH_VARARGS },
+#ifdef ENABLE_CHARACTER_CHEST
+		{ "SendCharacterChestPacket",			netSendCharacterChestPacket,			METH_VARARGS },
+#endif
 		{ "SendItemUseToItemPacket",			netSendItemUseToItemPacket,				METH_VARARGS },
 		{ "SendItemDropPacket",					netSendItemDropPacket,					METH_VARARGS },
 		{ "SendItemDropPacketNew",				netSendItemDropPacketNew,				METH_VARARGS },

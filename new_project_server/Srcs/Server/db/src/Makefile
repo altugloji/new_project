@@ -83,7 +83,7 @@ endif
 
 # PROJECT_SRC_FILES BEGIN
 CPPFILE = Config.cpp NetBase.cpp Peer.cpp PeerBase.cpp Main.cpp DBManager.cpp \
-		  Cache.cpp LoginData.cpp ClientManager.cpp ClientManagerPlayer.cpp ClientManagerLogin.cpp \
+		  Cache.cpp LoginData.cpp ClientManager.cpp ClientManagerPlayer.cpp ClientManagerLogin.cpp ClientManagerCharacterChest.cpp \
 		  ClientManagerBoot.cpp ClientManagerParty.cpp ClientManagerGuild.cpp GuildManager.cpp \
 		  PrivManager.cpp MoneyLog.cpp ItemAwardManager.cpp ClientManagerEventFlag.cpp Marriage.cpp \
 		  Monarch.cpp ItemIDRangeManager.cpp ClientManagerHorseName.cpp version.cpp \

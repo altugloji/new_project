@@ -480,11 +480,11 @@ void CInputP2P::GGDCP2PUpdate(const char * c_pData)
 {
 	const TPacketGGDCP2PUpdate* p = reinterpret_cast<const TPacketGGDCP2PUpdate*>(c_pData);
 
-	LPDESC d		= DESC_MANAGER::instance().FindByCharacterName(p->szName);
-	LPCHARACTER tch	= d ? d->GetCharacter() : NULL;
-
-	if (!tch)
+	LPDESC d = DESC_MANAGER::instance().FindByCharacterName(p->szName);
+	if (!d)
 		return;
+
+	sys_log(0, "P2P: DC_P2P_UPDATE %s", p->szName);
 
 	DESC_MANAGER::instance().DestroyLoginKey(d);
 	DESC_MANAGER::instance().DestroyDesc(d);

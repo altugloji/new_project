@@ -416,6 +416,7 @@ class SelectCharacterWindow(ui.Window):
 			self.flagDict[net.EMPIRE_C] = GetObject("EmpireFlag_C")
 
 			self.backGround = GetObject("BackGround")
+			self.characterInfoBoard = GetObject("character_board")
 
 		except:
 			import exception
@@ -464,6 +465,54 @@ class SelectCharacterWindow(ui.Window):
 		self.quickSaveBoardTitle = None
 		self.quickSaveBoardLine = None
 
+	def __UpdateQuickSaveBoardPosition(self):
+		if not app.FAST_LOGIN_CHARACTER_SAVE:
+			return
+		brd = getattr(self, "quickSaveBoard", None)
+		if not brd:
+			return
+
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		try:
+			self.SetSize(sw, sh)
+		except:
+			pass
+
+		boardW = brd.GetWidth()
+		boardH = brd.GetHeight()
+		gap = 8
+		margin = 4
+
+		charBoard = getattr(self, "characterInfoBoard", None)
+		if charBoard:
+			bx, by = charBoard.GetGlobalPosition()
+			bh = charBoard.GetHeight()
+			posX = bx
+			posYBelow = by + bh + gap
+			if posYBelow + boardH <= sh - margin:
+				posY = posYBelow
+			else:
+				posY = by - boardH - gap
+				try:
+					brd.SetTop()
+				except:
+					pass
+		else:
+			posX = max(0, int(sw * 65 / 800))
+			posY = max(0, int(sh * 220 / 600) + 323 + gap)
+
+		if posX + boardW > sw - margin:
+			posX = sw - boardW - margin
+		if posY + boardH > sh - margin:
+			posY = max(0, sh - boardH - margin)
+		if posX < margin:
+			posX = margin
+		if posY < margin:
+			posY = margin
+
+		brd.SetPosition(posX, posY)
+
 	def __CreateQuickCharacterSaveButtons(self):
 		if not app.FAST_LOGIN_CHARACTER_SAVE:
 			self.quickSaveButtons = []
@@ -488,11 +537,8 @@ class SelectCharacterWindow(ui.Window):
 		max_fav = quickcharacter.MAX_FAVORITES
 		COL_ROWS = (max_fav + 1) // 2
 		COL_COUNT = 2
-		MARGIN = 10
 		BOARD_BG_W = 207
 		BOARD_BG_H = 180
-		PANEL_SHIFT_X = 125
-		PANEL_SHIFT_Y = -100
 
 		_pb = ui.Button()
 		_pb.SetParent(self)
@@ -511,10 +557,7 @@ class SelectCharacterWindow(ui.Window):
 		self.quickSaveBoard = ui.ThinBoard()
 		self.quickSaveBoard.SetParent(self)
 		self.quickSaveBoard.SetSize(BOARD_BG_W, BOARD_BG_H)
-		self.quickSaveBoard.SetPosition(
-			MARGIN + PANEL_SHIFT_X,
-			max(0, sh - BOARD_BG_H - MARGIN + PANEL_SHIFT_Y),
-		)
+		self.__UpdateQuickSaveBoardPosition()
 		self.quickSaveBoard.Show()
 		try:
 			self.quickSaveBoard.SetTop()
@@ -944,6 +987,14 @@ class SelectCharacterWindow(ui.Window):
 
 	def OnUpdate(self):
 		chr.Update()
+
+		if app.FAST_LOGIN_CHARACTER_SAVE and getattr(self, "quickSaveBoard", None):
+			sw = wndMgr.GetScreenWidth()
+			sh = wndMgr.GetScreenHeight()
+			last = getattr(self, "_quickSaveLastScreen", None)
+			if last != (sw, sh):
+				self._quickSaveLastScreen = (sw, sh)
+				self.__UpdateQuickSaveBoardPosition()
 
 		for i in xrange(4):
 			self.curGauge[i] += (self.destGauge[i] - self.curGauge[i]) / 10.0

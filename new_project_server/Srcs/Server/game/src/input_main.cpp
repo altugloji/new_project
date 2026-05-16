@@ -45,6 +45,10 @@
 #include "input.h"
 #include "../../common/PulseManager.h"
 
+#ifdef ENABLE_CHARACTER_CHEST
+#include "char_character_chest.h"
+#endif
+
 #if !defined(__BL_MULTI_LANGUAGE_PREMIUM__)
 #define ENABLE_CHAT_COLOR_SYSTEM
 #endif
@@ -86,6 +90,38 @@ void SendBlockChatInfo(LPCHARACTER ch, int sec)
 
 	ch->ChatPacket(CHAT_TYPE_INFO, buf);
 }
+
+#ifdef ENABLE_CHARACTER_CHEST
+void CInputMain::CharacterChest(LPCHARACTER ch, const char* data)
+{
+	const TPacketCGCharacterChest* p = reinterpret_cast<const TPacketCGCharacterChest*>(data);
+	if (!ch || !p)
+		return;
+
+	switch (p->bSubOp)
+	{
+		case CHARACTER_CHEST_CG_PREVIEW:
+			character_chest::SendRemotePreview(ch, p->dwTargetPID);
+			break;
+		case CHARACTER_CHEST_CG_PACK:
+		case CHARACTER_CHEST_CG_UNPACK:
+		{
+			LPITEM item = ch->GetInventoryItem(p->wItemCell);
+			if (!item || item->GetVnum() != CHARACTER_CHEST_ITEM_VNUM)
+				return;
+
+			if (p->bSubOp == CHARACTER_CHEST_CG_PACK)
+				character_chest::SendPack(ch, p->dwTargetPID, p->szPassword, item);
+			else
+				character_chest::SendUnpack(ch, item);
+			break;
+		}
+		default:
+			break;
+	}
+}
+#endif
+
 #ifdef ENABLE_CUBE_RENEWAL
 void CInputMain::CubeRenewalSend(LPCHARACTER ch, const char* data)
 {
@@ -3167,6 +3203,11 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 #ifdef ENABLE_CUBE_RENEWAL
 		case HEADER_CG_CUBE_RENEWAL:
 			CubeRenewalSend(ch, c_pData);
+			break;
+#endif
+#ifdef ENABLE_CHARACTER_CHEST
+		case HEADER_CG_CHARACTER_CHEST:
+			CharacterChest(ch, c_pData);
 			break;
 #endif
 #ifdef WJ_NEW_DROP_DIALOG

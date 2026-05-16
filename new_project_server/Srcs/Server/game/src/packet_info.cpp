@@ -204,6 +204,9 @@ CPacketInfoCG::CPacketInfoCG()
 #ifdef ENABLE_CUBE_RENEWAL
 	Set(HEADER_CG_CUBE_RENEWAL, sizeof(TPacketCGCubeRenewalSend), "CubeRenewalSend",false);
 #endif
+#ifdef ENABLE_CHARACTER_CHEST
+	Set(HEADER_CG_CHARACTER_CHEST, sizeof(TPacketCGCharacterChest), "CharacterChest", true);
+#endif
 }
 
 CPacketInfoCG::~CPacketInfoCG()

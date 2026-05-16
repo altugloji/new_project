@@ -120,7 +120,7 @@ enum eCommonDefines {
 
 #define GUILD_LARGE_ICON
 #define ENABLE_SPAMDB_REFRESH	//spam_db otomatik chat ban
-//#define DC_P2P_UPDATE												// Farklı CH'de ki oyuncuyu dc atmak için
+#define DC_P2P_UPDATE												// Farklı CH'de ki oyuncuyu dc atmak için
 #define WARP_CH_UPDATE												// Farklı CH'de ki oyuncunun yanına gitmek için
 #define EXP_DEC_IN_DUNGEON											// Zindanlarda %90 Daha Az EXP
 #define DISABLE_EXTRA_PROB_FOR_REFINE								// Lonca demiricis ekstra şans azaltma
@@ -143,5 +143,8 @@ enum eCommonDefines {
 #define __GEM_SYSTEM__
 #define ENABLE_GM_MOB_FIND_CMD // /mob_find <vnum> lists matching non-PC chars on current map (GM)
 #define UPDATE_AUTO_POT_1K_HP	//Otopot ekstra 1K sabit hp
+#define ENABLE_CHARACTER_CHEST
+
+
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

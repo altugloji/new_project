@@ -308,6 +308,9 @@ class CenterNotifyBoard(ui.Window):
 	PAD_Y = 16
 	MIN_WIDTH = 220
 	BORDER = 1
+	# Match uiscript/taskbar.py (y = SCREEN_HEIGHT - 37)
+	TASKBAR_HEIGHT = 37
+	ABOVE_TASKBAR_GAP = 100
 	# Same transparent black as ChatWindow (uichat.py BOARD_MIDDLE_COLOR)
 	BG_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.5)
 	BORDER_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 1.0)
@@ -317,11 +320,9 @@ class CenterNotifyBoard(ui.Window):
 		self.AddFlag("float")
 		self.AddFlag("not_pick")
 
-		self.SetWindowHorizontalAlignCenter()
-		self.SetWindowVerticalAlignCenter()
-		self.SetPosition(-116, 350)
-
 		self.hideTime = 0.0
+		self._lastScreenW = 0
+		self._lastScreenH = 0
 
 		self.borderTop = ui.Bar()
 		self.borderTop.SetParent(self)
@@ -352,6 +353,25 @@ class CenterNotifyBoard(ui.Window):
 		self.textLine.SetPackedFontColor(0xFFF7E7C1)
 
 		self.Hide()
+
+	def __UpdatePosition(self):
+		screenW = wndMgr.GetScreenWidth()
+		screenH = wndMgr.GetScreenHeight()
+		boardW = self.GetWidth()
+		boardH = self.GetHeight()
+		if boardW < 1:
+			boardW = self.MIN_WIDTH
+		if boardH < 1:
+			boardH = 32
+
+		posX = max(0, int((screenW - boardW) / 2))
+		posY = int(screenH - self.TASKBAR_HEIGHT - self.ABOVE_TASKBAR_GAP - boardH)
+		if posY < 0:
+			posY = 0
+
+		self.SetPosition(posX, posY)
+		self._lastScreenW = screenW
+		self._lastScreenH = screenH
 
 	def ShowMessage(self, text):
 		if not text:
@@ -397,10 +417,19 @@ class CenterNotifyBoard(ui.Window):
 		self.textLine.SetPosition(outerW / 2, outerH / 2)
 		self.textLine.Show()
 
+		self.__UpdatePosition()
 		self.hideTime = app.GetTime() + self.MESSAGE_DURATION
 		self.SetTop()
 		self.Show()
 
 	def OnUpdate(self):
-		if self.IsShow() and app.GetTime() >= self.hideTime:
+		if not self.IsShow():
+			return
+
+		screenW = wndMgr.GetScreenWidth()
+		screenH = wndMgr.GetScreenHeight()
+		if screenW != self._lastScreenW or screenH != self._lastScreenH:
+			self.__UpdatePosition()
+
+		if app.GetTime() >= self.hideTime:
 			self.Hide()

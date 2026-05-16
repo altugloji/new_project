@@ -1,3 +1,5 @@
+import os
+import sys
 import ui
 import uiScriptLocale
 import wndMgr
@@ -52,19 +54,83 @@ ATLAS_BOARD_EXTRA_H = 38
 ATLAS_RESIZE_GRIP_MARGIN = 6
 ATLAS_RESIZE_GRIP_FALLBACK_W = 24
 ATLAS_RESIZE_GRIP_FALLBACK_H = 24
-ATLAS_ZOOM_STATE_FILE = "metin2.cfg"
+ATLAS_ZOOM_STATE_FILE = "atlas_zoom.cfg"
 ATLAS_ZOOM_CFG_THROTTLE_MS = 400
+_cachedAtlasZoom = None
+
+def _AtlasZoomCfgPaths():
+	seen = set()
+	out = []
+	try:
+		if getattr(sys, "frozen", False):
+			root = os.path.dirname(sys.executable)
+		else:
+			argv0 = sys.argv[0]
+			if argv0:
+				root = os.path.dirname(os.path.abspath(argv0))
+			else:
+				root = ""
+			if not root or root in (".", os.path.curdir):
+				root = os.getcwd()
+		p1 = os.path.join(os.path.normpath(root), ATLAS_ZOOM_STATE_FILE)
+	except Exception:
+		p1 = ATLAS_ZOOM_STATE_FILE
+	for p in (p1, os.path.join(os.getcwd(), ATLAS_ZOOM_STATE_FILE), ATLAS_ZOOM_STATE_FILE):
+		if not p:
+			continue
+		try:
+			np = os.path.normpath(p)
+		except Exception:
+			np = p
+		if np in seen:
+			continue
+		seen.add(np)
+		out.append(np)
+	return out
+
+def _AtlasZoomCfgWritePath():
+	paths = _AtlasZoomCfgPaths()
+	return paths[0] if paths else ATLAS_ZOOM_STATE_FILE
+
+def _RememberAtlasZoom(z):
+	global _cachedAtlasZoom
+	zc = _ClampEngineAtlasZoom(z)
+	if zc is not None:
+		_cachedAtlasZoom = zc
 
 def _ReadSavedAtlasZoom():
+	global _cachedAtlasZoom
+	for path in _AtlasZoomCfgPaths():
+		try:
+			if not os.path.isfile(path):
+				continue
+			f = open(path, "r")
+			try:
+				for line in f:
+					line = line.strip()
+					if not line or line.startswith("#"):
+						continue
+					if line.startswith("ATLAS_ZOOM="):
+						z = float(line.split("=", 1)[1].strip())
+						_cachedAtlasZoom = _ClampEngineAtlasZoom(z)
+						return _cachedAtlasZoom
+			finally:
+				f.close()
+		except:
+			pass
+	return None
+
+def _WriteSavedAtlasZoom(zoom):
+	path = _AtlasZoomCfgWritePath()
 	try:
-		f = open(ATLAS_ZOOM_STATE_FILE, "r")
-		line = f.readline().strip()
-		f.close()
-		if not line:
-			return None
-		return float(line)
+		f = open(path, "w")
+		try:
+			f.write("ATLAS_ZOOM=%.6f\n" % zoom)
+		finally:
+			f.close()
+		return True
 	except:
-		return None
+		return False
 
 def _ClampEngineAtlasZoom(z):
 	try:
@@ -76,6 +142,18 @@ def _ClampEngineAtlasZoom(z):
 	if zf > 3.0:
 		return 3.0
 	return zf
+
+def _PickZoomForPersist(engineZoom):
+	ez = _ClampEngineAtlasZoom(engineZoom) if engineZoom is not None else None
+	cz = _cachedAtlasZoom
+	if ez is None:
+		return cz
+	if cz is None:
+		return ez
+	# LoadAtlas() in the client resets engine zoom to 1.0; do not persist that over cache.
+	if ez <= 1.001 and cz > 1.001:
+		return cz
+	return ez
 
 class AtlasResizeGrip(ui.DragButton):
 	def __init__(self):
@@ -126,6 +204,7 @@ class AtlasWindow(ui.ScriptWindow):
 		self.tooltipAtlasZoomOut = None
 		self._atlasZoomRepeatLastMs = 0
 		self._atlasZoomCfgLastWriteMs = 0
+		self._atlasZoomUserDirty = False
 
 		ui.ScriptWindow.__init__(self)
 
@@ -139,6 +218,8 @@ class AtlasWindow(ui.ScriptWindow):
 			except:
 				pass
 		self.__ApplySavedAtlasZoomFromFile()
+		if miniMap.IsAtlas():
+			self.__ApplyAtlasLayoutFromEngine()
 
 	def LoadWindow(self):
 		try:
@@ -168,41 +249,61 @@ class AtlasWindow(ui.ScriptWindow):
 		self.Hide()
 
 		miniMap.RegisterAtlasWindow(self)
+		self.__ApplySavedAtlasZoomFromFile()
 
 	def __ApplySavedAtlasZoomFromFile(self):
-		if not miniMap.IsAtlas():
-			return
-		z = _ReadSavedAtlasZoom()
+		z = _cachedAtlasZoom
+		if z is None:
+			z = _ReadSavedAtlasZoom()
 		if z is None:
 			return
 		zc = _ClampEngineAtlasZoom(z)
 		if zc is None:
+			return
+		_RememberAtlasZoom(zc)
+		if not miniMap.IsAtlas():
 			return
 		try:
 			miniMap.SetAtlasZoom(zc)
 		except:
 			pass
 
+	def __MarkAtlasZoomUserChanged(self):
+		self._atlasZoomUserDirty = True
+		if miniMap.IsAtlas():
+			try:
+				_RememberAtlasZoom(miniMap.GetAtlasZoom())
+			except:
+				pass
+
+	def PersistAtlasZoom(self):
+		self.__PersistAtlasZoomToFile(1)
+
 	def __PersistAtlasZoomToFile(self, forceWrite):
-		if not miniMap.IsAtlas():
+		dirty = bool(getattr(self, "_atlasZoomUserDirty", False))
+		if not forceWrite and not dirty:
 			return
-		try:
-			zc = _ClampEngineAtlasZoom(miniMap.GetAtlasZoom())
-		except:
-			return
+
+		ez = None
+		if miniMap.IsAtlas():
+			try:
+				ez = miniMap.GetAtlasZoom()
+			except:
+				pass
+		zc = _PickZoomForPersist(ez)
 		if zc is None:
 			return
 		if not forceWrite:
 			t = app.GetTime()
-			if t - self._atlasZoomCfgLastWriteMs < ATLAS_ZOOM_CFG_THROTTLE_MS:
+			lastWrite = getattr(self, "_atlasZoomCfgLastWriteMs", 0) or 0
+			if t - lastWrite < ATLAS_ZOOM_CFG_THROTTLE_MS:
 				return
-		try:
-			out = open(ATLAS_ZOOM_STATE_FILE, "w")
-			out.write("%.6f\n" % zc)
-			out.close()
-			self._atlasZoomCfgLastWriteMs = app.GetTime()
-		except:
-			pass
+		if _WriteSavedAtlasZoom(zc):
+			_RememberAtlasZoom(zc)
+			if getattr(self, "_atlasZoomCfgLastWriteMs", None) is not None:
+				self._atlasZoomCfgLastWriteMs = app.GetTime()
+			if forceWrite and getattr(self, "_atlasZoomUserDirty", None) is not None:
+				self._atlasZoomUserDirty = False
 
 	def __DestroyAtlasZoomControls(self):
 		for w in (self.atlasZoomInBtn, self.atlasZoomOutBtn, self.atlasResizeGrip):
@@ -292,6 +393,7 @@ class AtlasWindow(ui.ScriptWindow):
 			return
 		self._atlasZoomRepeatLastMs = app.GetTime()
 		self.__ApplyAtlasLayoutFromEngine()
+		self.__MarkAtlasZoomUserChanged()
 		self.__PersistAtlasZoomToFile(1)
 
 	def __AtlasZoomOutClick(self):
@@ -301,6 +403,7 @@ class AtlasWindow(ui.ScriptWindow):
 			return
 		self._atlasZoomRepeatLastMs = app.GetTime()
 		self.__ApplyAtlasLayoutFromEngine()
+		self.__MarkAtlasZoomUserChanged()
 		self.__PersistAtlasZoomToFile(1)
 
 	def __AtlasZoomRepeat(self, direction):
@@ -315,6 +418,7 @@ class AtlasWindow(ui.ScriptWindow):
 			else:
 				miniMap.SetAtlasZoom(z / 1.04)
 			self.__ApplyAtlasLayoutFromEngine()
+			self.__MarkAtlasZoomUserChanged()
 			self.__PersistAtlasZoomToFile(0)
 		except:
 			pass
@@ -425,6 +529,7 @@ class AtlasWindow(ui.ScriptWindow):
 		except:
 			return
 		self.__ApplyAtlasLayoutFromEngine()
+		self.__MarkAtlasZoomUserChanged()
 		self.__PersistAtlasZoomToFile(0)
 
 	if app.ENABLE_MINIMAP_TELEPORT_CLICK:
@@ -551,6 +656,7 @@ class MiniMap(ui.ScriptWindow):
 
 		self.AtlasWindow = AtlasWindow()
 		self.AtlasWindow.LoadWindow()
+		_ReadSavedAtlasZoom()
 		self.AtlasWindow.Hide()
 
 		self.tooltipMiniMapOpen = MapTextToolTip()
@@ -719,6 +825,7 @@ class MiniMap(ui.ScriptWindow):
 
 	@ui.WindowDestroy
 	def Destroy(self):
+		self.PersistAtlasZoom()
 		self.HideMiniMap()
 		if self.AtlasWindow:
 			self.AtlasWindow.Destroy()
@@ -856,3 +963,7 @@ class MiniMap(ui.ScriptWindow):
 			self.AtlasWindow.Hide()
 		else:
 			self.AtlasWindow.Show()
+
+	def PersistAtlasZoom(self):
+		if self.AtlasWindow:
+			self.AtlasWindow.PersistAtlasZoom()

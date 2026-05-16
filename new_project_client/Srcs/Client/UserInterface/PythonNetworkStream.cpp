@@ -196,6 +196,9 @@ class CMainPacketHeaderMap : public CNetworkPacketHeaderMap
 #ifdef ENABLE_CUBE_RENEWAL
 			Set(HEADER_GC_CUBE_RENEWAL, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCCubeRenewalReceive), STATIC_SIZE_PACKET));
 #endif
+#ifdef ENABLE_CHARACTER_CHEST
+			Set(HEADER_GC_CHARACTER_CHEST, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCCharacterChest), DYNAMIC_SIZE_PACKET));
+#endif
 #ifdef __GEM_SHOP__
 			Set(HEADER_GC_GEM, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGem), DYNAMIC_SIZE_PACKET));
 #endif
