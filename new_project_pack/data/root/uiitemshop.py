@@ -15,63 +15,60 @@ import net
 import app
 import background
 import chrmgr
+import wikiui
+
+ITEM_SHOP_ITEM_VISIBLE_ROWS = 5
+ITEM_SHOP_ROW_H = 110
+ITEM_SHOP_ROW_GAP = 10
+ITEM_SHOP_LIST_TOP = 10
+ITEM_SHOP_SCROLL_VIEW_H = (
+	ITEM_SHOP_ITEM_VISIBLE_ROWS * ITEM_SHOP_ROW_H
+	+ (ITEM_SHOP_ITEM_VISIBLE_ROWS - 1) * ITEM_SHOP_ROW_GAP
+)
+ITEM_SHOP_SCROLLBAR_W = 8
+ITEM_SHOP_FONT = getattr(localeInfo, "UI_BOLD_FONT_LARGE", localeInfo.UI_DEF_FONT_LARGE)
 
 
 FAKE_CATEGORY_DATA = {
 	0 : {
-		"categoryName" : " Genel",
-		"subCategoryNameList" : ["Efsunlar", "Sarf Nesneleri", "Premium Nesneleri", "Yardýmcý Nesneler"],
+		"categoryName" : "Genel",
+		"subCategoryNameList" : ["Karakter Geliþimi", "Yardimci Esyalar", "EP Kuponlarý", "Diðer",],
 	},
-	1 : {
-		"categoryName" : " Hizmet",
-		"subCategoryNameList" : ["Pot", "Sular", "Markalar", "EP Kuponlarý"],
-	},
-	2 : {
-		"categoryName" : " Stil",
-		"subCategoryNameList" : ["Eþyalar", "Saçlar"]
-	},
-	# 3 : {
-		# "categoryName" : " Kanatlar",
-		# "subCategoryNameList" : ["Tüm Ürünler"]
-	# },
-	# 4 : {
-		# "categoryName" : " Ünvanlar",
-		# "subCategoryNameList" : ["Tüm Ürünler"],
-	# },
-	# 5 : {
-		# "categoryName" : " Pet ",
-		# "subCategoryNameList" : ["Tüm Ürünler"],
-	# },
-	# 6 : {
-		# "categoryName" : " Özel Nesneler",
-		# "subCategoryNameList" : ["Silah Efekleri", "Zýrh Efektleri", "Özel Nesneler", "EP Kuponlarý"],
-	# },
-	# 7 : {
-		# "categoryName" : " Özel Nesneler",
-		# "subCategoryNameList" : ["Özel Nesneler", "EP Kuponlarý"],
-	# },
-	# },
 }
 
+ITEM_SHOP_CATEGORY_LINE_HEIGHT = 34
+ITEM_SHOP_NESNE_MARKET_ROOT = "d:/ymir work/nesne_market/"
+ITEM_SHOP_CATEGORY_BTN_DEFAULT = ITEM_SHOP_NESNE_MARKET_ROOT + "kategori.png"
+ITEM_SHOP_CATEGORY_BTN_ACTIVE = ITEM_SHOP_NESNE_MARKET_ROOT + "kategori2.png"
+
+
+def _FormatItemShopPriceDisplay(price):
+	try:
+		n = int(price)
+	except Exception:
+		return str(price)
+	try:
+		if app.ENABLE_ITEM_SHOP_SYSTEM:
+			return localeInfo.PrettyNumber(n)
+	except Exception:
+		pass
+	return str(n)
 
 ITEM_FLAG_STACKABLE = (1 << 2)
 BLEND_AFFECT_UNLIMITED_DURATION = 100 * 60 * 60
 def toLower(string):
 	alphabetList = {
-		'Ý' : 'i',
-		'I' : 'ý',
-		'Ö' : 'ö',
-		'Ü' : 'ü',
-		'Þ' : 'þ',
-		'Ç' : 'ç',
-		'Ð' : 'ð',
+		"\xdd": "i",
+		"I": "\xfd",
+		"\xd6": "\xf6",
+		"\xdc": "\xfc",
+		"\xde": "\xfe",
+		"\xd0": "\xf0",
+		"\xc7": "\xe7",
 	}
-
 	for (key, item) in alphabetList.iteritems():
 		string = string.replace(key, item)
-
 	return string.lower()
-
 class CategoryButton(ui.Window):
 	ARROWIMAGE_FILE_NAME = {
 		"SELECT" : "d:/ymir work/ui/privatesearch/private_next_btn_02.sub",
@@ -86,23 +83,15 @@ class CategoryButton(ui.Window):
 
 		self.SetParent(parent)
 		self.AddFlag("float")
-		self.SetSize(96, 26)
+		self.SetSize(138, 32)
 		self.SetPosition(x, y)
 		
 		categoryButton = ui.RadioButton()
 		categoryButton.SetParent(self)
 		categoryButton.AddFlag("not_pick")
-		
-		
-		
-		if (isSubItem):
-			categoryButton.SetUpVisual("d:/ymir work/ui/itemshop/subbutton.png")
-			categoryButton.SetOverVisual("d:/ymir work/ui/itemshop/subbutton.png")
-			categoryButton.SetDownVisual("d:/ymir work/ui/itemshop/subbuttonbasili.png")
-		else:
-			categoryButton.SetUpVisual("d:/ymir work/ui/itemshop/norm.png")
-			categoryButton.SetOverVisual("d:/ymir work/ui/itemshop/norm1.png")
-			categoryButton.SetDownVisual("d:/ymir work/ui/itemshop/norm1.png")
+		categoryButton.SetUpVisual(ITEM_SHOP_CATEGORY_BTN_DEFAULT)
+		categoryButton.SetOverVisual(ITEM_SHOP_CATEGORY_BTN_DEFAULT)
+		categoryButton.SetDownVisual(ITEM_SHOP_CATEGORY_BTN_ACTIVE)
 
 		categoryButton.SetPosition(0, 0)
 		categoryButton.SetEvent(ui.__mem_func__(self.OnMouseLeftButtonDown))
@@ -113,13 +102,15 @@ class CategoryButton(ui.Window):
 		image.SetParent(self)
 		image.AddFlag("not_pick")
 		image.LoadImage(self.ARROWIMAGE_FILE_NAME["UNSELECT"])
-		image.SetPosition(6, 5)
+		image.SetPosition(8, 8)
 		image.Hide()
 		self.image = image
 
 		name = ui.TextLine()
 		name.SetParent(self)
-		name.SetPosition(25, 5)
+		name.SetPosition(26, 7)
+		name.SetFontName(ITEM_SHOP_FONT)
+		name.SetOutline()
 		name.Show()
 		self.name = name
 
@@ -128,13 +119,14 @@ class CategoryButton(ui.Window):
 		
 	def SetName(self, name):
 		if self.isSubItem:
-			self.name.SetPosition(22, 5)
+			self.name.SetPosition(24, 7)
 			#self.name.SetFontColor(0.63,0.91,1.00)
 		else:
-			self.name.SetPosition(22, 5)
+			self.name.SetPosition(24, 7)
 			#self.name.SetFontColor(1.00,0.69,0.29)
 
 		self.name.SetText(name)
+		self.name.SetOutline()
 
 	def SetKey(self, key):
 		self.key = key
@@ -159,63 +151,28 @@ class CategoryButton(ui.Window):
 		else:
 			self.getParent.OnSubSelectItem(self)
 
-class CategoryListItem(CategoryButton):
-	IMAGE_FILE_NAME = {
-		"OPEN" : "d:/ymir work/ui/game/windows/btn_plus_dis.sub",
-		"CLOSE" : "d:/ymir work/ui/game/windows/btn_minus_dis.sub",
-	}
 
+class FlatCategoryLeafRow(CategoryButton):
 	def __init__(self, parent, x, y):
-		self.getParent = parent
-		self.isOpen = False
-		self.subCategoryList = []
+		self.categoryKey = None
+		self.subCategoryKey = None
+		CategoryButton.__init__(self, parent, x, y, False)
 
-		CategoryButton.__init__(self, parent, x, y)
+	def SetCategoryKey(self, k):
+		self.categoryKey = k
 
-	def AppendSubCategory(self, key, name):
-		(x, y) = self.GetLocalPosition()
-		yPos = len(self.subCategoryList) * 30 + y + 30
-		categoryButton = CategoryButton(self.getParent, 30, yPos, True)
-		categoryButton.SetKey(key)
-		categoryButton.SetName(name)
-		self.subCategoryList.append(categoryButton)
-		return categoryButton
+	def SetSubCategoryKey(self, k):
+		self.subCategoryKey = k
 
-	def GetCategoryList(self):
-		return self.subCategoryList
+	def GetCategoryKey(self):
+		return self.categoryKey
 
-	def FindCategory(self, key):
-		list = filter(lambda argCategory, argKey=key: argCategory.IsSameKey(argKey), self.subCategoryList)
-		if list:
-			return list[0]
+	def GetSubCategoryKey(self):
+		return self.subCategoryKey
 
-		return None
+	def OnMouseLeftButtonDown(self):
+		self.getParent.OnLeafSelect(self)
 
-	def IsOpen(self):
-		return self.isOpen
-
-	def Open(self):
-		self.image.LoadImage(self.IMAGE_FILE_NAME["OPEN"])
-		self.categoryButton.Down()
-		self.categoryButton.Disable()
-		self.isOpen = True
-
-	def Close(self):
-		self.image.LoadImage(self.IMAGE_FILE_NAME["CLOSE"])
-		self.image.SetPosition(6, 5)
-		self.categoryButton.SetUp()
-		self.categoryButton.Enable()
-		self.isOpen = False
-		
-		map(ui.Window.Hide, self.subCategoryList)
-
-	def Select(self):
-		self.Open()
-		self.getParent.OnRefreshList()
-
-	def UnSelect(self):
-		self.Close()
-		self.getParent.OnRefreshList()
 
 class CategoryBoard(ui.Window):
 	def __init__(self, parentFirst, parentSecond, scrollBar):
@@ -226,8 +183,7 @@ class CategoryBoard(ui.Window):
 
 		self.scrollBar = scrollBar
 		# self.scrollBar.SetScrollEvent(ui.__mem_func__(self.OnScroll))
-		self.selectCategory = None
-		self.selectSubCategory = None
+		self.selectLeaf = None
 		self.categoryListItems = []
 		self.showingItemList = []
 		self.startLine = 0
@@ -240,44 +196,16 @@ class CategoryBoard(ui.Window):
 			self.startLine = startLine
 			self.__LocateMember()
 
-	def OnSelectItem(self, item):
-		if self.selectCategory:
-			self.selectCategory.UnSelect()
+	def OnLeafSelect(self, item):
+		if self.selectLeaf:
+			self.selectLeaf.UnSelect()
 			self.getParent.ClearItemBoard()
 
-			if item == self.selectCategory:
-				item = None
+		self.selectLeaf = item
 
-		self.selectCategory = item
-
-		if self.selectCategory:
-			self.selectCategory.Select()
-			
-			self.OnSubSelectItem(self.selectCategory.GetCategoryList()[0])
-
-		# self.scrollBar.SetPos(0.0)
-
-		buttonList = filter(lambda argSelf: argSelf.IsOpen(), self.categoryListItems)
-		if buttonList:
-			(x, y) = buttonList[0].GetLocalPosition()
-
-			if y >= 385:
-				y += 24
-
-			startPos = 1.0 / (385.0 / float(y - 24))
-			# self.scrollBar.SetPos(startPos)
-	
-	def OnSubSelectItem(self, item):
-		if self.selectSubCategory:
-			if item != self.selectSubCategory:
-				self.selectSubCategory.UnSelect()
-				
-		self.selectSubCategory = item
-		
-		if self.selectSubCategory:
-			self.selectSubCategory.Select()
-
-			self.getParent.ChangeCategory(self.selectCategory.GetKey(), self.selectSubCategory.GetKey())
+		if self.selectLeaf:
+			self.selectLeaf.Select()
+			self.getParent.ChangeCategory(self.selectLeaf.GetCategoryKey(), self.selectLeaf.GetSubCategoryKey())
 
 	def __LocateMember(self):
 
@@ -294,67 +222,47 @@ class CategoryBoard(ui.Window):
 
 		#####
 
-		yPos = 25
+		yPos = 52
 		heightLimit = self.GetHeight() - 30
 
 		map(ui.Window.Hide, self.showingItemList)
 
 		for item in self.showingItemList[self.startLine:]:
-			xPos = 10
-			if item.IsSubItem():
-				xPos = 30
-			item.SetPosition(xPos, yPos)
+			item.SetPosition(8, yPos)
 			item.SetTop()
 			item.Show()
 
-			yPos += 30
+			yPos += ITEM_SHOP_CATEGORY_LINE_HEIGHT
 			if yPos > heightLimit:
 				break
 				
 		
 	
 	def OnRefreshList(self):
-		self.showingItemList = []
-		
-		for items in self.categoryListItems:
-			self.showingItemList.append(items)
-			subItems = items.GetCategoryList()
-
-			if items.IsOpen() and subItems:
-				for item in subItems:
-					self.showingItemList.append(item)
-
+		self.showingItemList = list(self.categoryListItems)
 		self.__LocateMember()
-	
+
 	def firstOpenBoard(self):
-		self.OnSelectItem(self.categoryListItems[0])
-		self.OnSubSelectItem(self.categoryListItems[0].GetCategoryList()[0])
+		if self.categoryListItems:
+			self.OnLeafSelect(self.categoryListItems[0])
 
 	def RefreshProcess(self):
 		self.categoryListItems = []
+		idx = 0
 		for i in xrange(len(FAKE_CATEGORY_DATA)):
 			categoryData = FAKE_CATEGORY_DATA[i]
-			category = CategoryListItem(self, 10, 25 + i * 30)
-			category.SetKey(i)
-			category.SetName(categoryData["categoryName"])
-			category.Close()
-			category.Show()
-
 			for j in xrange(len(categoryData["subCategoryNameList"])):
-				category.AppendSubCategory(j, categoryData["subCategoryNameList"][j])
+				name = categoryData["subCategoryNameList"][j]
+				row = FlatCategoryLeafRow(self, 8, 52 + idx * ITEM_SHOP_CATEGORY_LINE_HEIGHT)
+				row.SetCategoryKey(i)
+				row.SetSubCategoryKey(j)
+				row.SetName(name)
+				row.Show()
+				self.categoryListItems.append(row)
+				idx += 1
 
-			self.categoryListItems.append(category)
-		
 		self.OnRefreshList()
 
-
-	def OnRunMouseWheel(self, nLen):
-		if nLen > 0:
-			self.scrollBar.OnUp()
-		else:
-			self.scrollBar.OnDown()
-			
-			
 
 class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 
@@ -379,8 +287,8 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 
 		countTextFirst = ui.TextLine()
 		countTextFirst.SetParent(self)
-		countTextFirst.SetFontName("Tahoma:14")
-		countTextFirst.SetText("Alýnacak toplam miktar: 1")
+		countTextFirst.SetFontName(ITEM_SHOP_FONT)
+		countTextFirst.SetText("Al?nacak toplam miktar: 1")
 		countTextFirst.SetPosition(self.GetWidth() / 2, 40)
 		countTextFirst.SetHorizontalAlignCenter()
 		countTextFirst.Show()
@@ -429,7 +337,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		
 		countTextSecond = ui.TextLine()
 		countTextSecond.SetParent(countSlotBar)
-		countTextSecond.SetFontName("Tahoma:14")
+		countTextSecond.SetFontName(ITEM_SHOP_FONT)
 		countTextSecond.SetText("/0")
 		countTextSecond.SetPosition(55, 0)
 		countTextSecond.Show()
@@ -437,7 +345,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		
 		ammoutText = ui.TextLine()
 		ammoutText.SetParent(self)
-		ammoutText.SetFontName("Tahoma:14")
+		ammoutText.SetFontName(ITEM_SHOP_FONT)
 		ammoutText.SetText("Tutar : 0 Ep")
 		ammoutText.SetPosition(self.GetWidth() / 2, self.GetHeight() / 2 + 15)
 		ammoutText.SetHorizontalAlignCenter()
@@ -450,7 +358,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		acceptButton.SetUpVisual("d:/ymir work/ui/Public/acceptbutton00.sub")
 		acceptButton.SetOverVisual("d:/ymir work/ui/Public/acceptbutton01.sub")
 		acceptButton.SetDownVisual("d:/ymir work/ui/Public/acceptbutton02.sub")
-		acceptButton.SetToolTipText("Satýn Al")
+		acceptButton.SetToolTipText("Sat?n Al")
 		acceptButton.SetEvent(ui.__mem_func__(self.acceptButtonEvent))
 		acceptButton.Show()
 		self.acceptButton = acceptButton
@@ -461,7 +369,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		cancelButton.SetUpVisual("d:/ymir work/ui/Public/canclebutton00.sub")
 		cancelButton.SetOverVisual("d:/ymir work/ui/Public/canclebutton01.sub")
 		cancelButton.SetDownVisual("d:/ymir work/ui/Public/canclebutton02.sub")
-		cancelButton.SetToolTipText("Ýptal")
+		cancelButton.SetToolTipText("?ptal")
 		cancelButton.SetEvent(ui.__mem_func__(self.Close))
 		cancelButton.Show()
 		self.cancelButton = cancelButton
@@ -478,7 +386,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		self.itemPrice = -1
 		self.maxCount = 0
 		self.countEditline.SetText("1")
-		self.countTextFirst.SetText("Alýnacak toplam miktar: 1")
+		self.countTextFirst.SetText("Al?nacak toplam miktar: 1")
 		self.Hide()
 
 	def acceptButtonEvent(self):
@@ -514,7 +422,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 			except ValueError:
 				pass
 
-		self.countTextFirst.SetText("Alýnacak toplam miktar: %d" % count)
+		self.countTextFirst.SetText("Al?nacak toplam miktar: %d" % count)
 
 		price = self.itemPrice * count
 		self.SetItemPrice(price)
@@ -536,7 +444,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 				count = 1
 
 		self.countEditline.SetText("%d" % count)
-		self.countTextFirst.SetText("Alýnacak toplam miktar: %d" % count)
+		self.countTextFirst.SetText("Al?nacak toplam miktar: %d" % count)
 		price = self.itemPrice * count
 		self.SetItemPrice(price)
 
@@ -563,7 +471,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 			count = self.maxCount
 
 		self.countEditline.SetText("%d" % count)
-		self.countTextFirst.SetText("Alýnacak toplam miktar: %d" % count)
+		self.countTextFirst.SetText("Al?nacak toplam miktar: %d" % count)
 		price = self.itemPrice * count
 		self.SetItemPrice(price)
 
@@ -593,19 +501,15 @@ class ItemShopWindow(ui.ScriptWindow):
 		self.searchEditline = None
 		self.searchButton = None
 		self.boardFirst = None
+		self.boardSecond = None
 		self.scrollBar = None
-		self.prevButton = None
-		self.pageText = None
-		self.nextButton = None
+		self.itemScrollBar = None
 
 		self.categoryGroupBoard = None
 		self.wndItemList = {}
 		self.itemList = []
 		
 		self.itemStackalbeBuyDialog = None
-		
-		self.pageMaxNum = 0
-		self.pageNum = 0
 		
 		self.itemToolTip = None
 		self.questionDialog = None
@@ -615,7 +519,16 @@ class ItemShopWindow(ui.ScriptWindow):
 		ui.ScriptWindow.__del__(self)
 
 	def Destroy(self):
+		if self.itemScrollBar:
+			self.itemScrollBar.Hide()
+			self.itemScrollBar = None
 		self.ClearDictionary()
+
+	def __BindItemShopMouseWheel(self, wnd):
+		if not getattr(app, "ENABLE_MOUSEWHEEL_EVENT", False):
+			return
+		if wnd:
+			wnd.SetMouseWheelEvent(ui.__mem_func__(self.OnScrollWheel))
 
 	def LoadWindow(self):
 		try:
@@ -630,21 +543,38 @@ class ItemShopWindow(ui.ScriptWindow):
 			self.searchButton = self.GetChild("search_button")
 
 			self.boardFirst = self.GetChild("board_first")
+			self.boardSecond = self.GetChild("board_second")
+
+			for i in xrange(1, ITEM_SHOP_ITEM_VISIBLE_ROWS + 1):
+				num = "0%d" % i
+				try:
+					self.GetChild("item_row_bg_%s" % num).AddFlag("not_pick")
+				except KeyError:
+					pass
 			self.scrollBar = self.GetChild("ScrollBar")
 
-			self.prevButton = self.GetChild("prev_button")
-			self.pageText = self.GetChild("page_text")
-			self.nextButton = self.GetChild("next_button")
+			self.itemScrollBar = wikiui.ScrollBarSpecial(False)
+			self.itemScrollBar.SetParent(self.boardSecond)
+			sb_x = self.boardSecond.GetWidth() - 8 - ITEM_SHOP_SCROLLBAR_W
+			self.itemScrollBar.SetPosition(sb_x, ITEM_SHOP_LIST_TOP)
+			self.itemScrollBar.SetSize(ITEM_SHOP_SCROLLBAR_W, ITEM_SHOP_SCROLL_VIEW_H)
+			self.itemScrollBar.SetScrollEvent(ui.__mem_func__(self.__OnItemScrollBar))
+			self.itemScrollBar.Hide()
+			self.itemScrollBar.SetTop()
 
 			self.dragoncoin = self.GetChild("dragon_coin_text")
+			self.dragoncoin.SetFontName(ITEM_SHOP_FONT)
+			self.dragoncoin.SetOutline()
+			self.dragoncoin.SetHorizontalAlignCenter()
+			self.dragoncoin.SetVerticalAlignCenter()
 			# self.dragonmark = self.GetChild("dragon_mark_text")
 			self.coinBuyButton = self.GetChild("coin_buy_button")
+			if self.coinBuyButton.ButtonText:
+				# self.coinBuyButton.ButtonText.SetFontName(ITEM_SHOP_FONT)
+				self.coinBuyButton.ButtonText.SetOutline()
 
-			for i in xrange(1, 10):
-				number = "0%d" % i # number = "0%d" % i if i < 10 else "%d" % i (python 2.7 version)
-
-				if i >= 10:
-					number = "%d" % i
+			for i in xrange(1, ITEM_SHOP_ITEM_VISIBLE_ROWS + 1):
+				number = "0%d" % i
 
 				wndItemSlot = self.GetChild("itemSlot_%s" % number)
 				wndItemSlot.SetSelectItemSlotEvent(ui.__mem_func__(self.selectItemSlotEvent))
@@ -653,21 +583,24 @@ class ItemShopWindow(ui.ScriptWindow):
 				wndItemSlot.SetOverOutItemEvent(ui.__mem_func__(self.OnOverOutItem))
 
 				itemName = self.GetChild("itemName_%s" % number)
-				itemName.SetMax(15)
-				itemName.SetLimitWidth(95)
+				itemName.SetMax(40)
+				itemName.SetLimitWidth(240)
 				itemName.SetMultiLine()
-				itemName.SetFontName("Tahoma:12")
-				itemName.SetPackedFontColor(0xFFFEE3AE)
+				itemName.SetFontName(ITEM_SHOP_FONT)
+				itemName.SetPackedFontColor(0xFFFFFFFF)
+				itemName.SetOutline()
 				itemOldPrice = self.GetChild("itemOldPrice_%s" % number)
-				itemOldPrice.SetMax(15)
-				itemOldPrice.SetLimitWidth(95)
+				itemOldPrice.SetMax(20)
+				itemOldPrice.SetLimitWidth(80)
 				itemOldPrice.SetMultiLine()
-				itemOldPrice.SetFontColor(1, 0, 0)
-				itemOldPrice.SetFontName("Tahoma:13")
+				itemOldPrice.SetFontColor(0.85, 0.85, 0.85)
+				itemOldPrice.SetFontName(ITEM_SHOP_FONT)
+				itemOldPrice.SetOutline()
 				itemPreviewButton = self.GetChild("itemPreviewButton_%s" % number)
 				itemPreviewButton.Hide()
 				itemBuyButton = self.GetChild("itemBuyButton_%s" % number)
-				itemBuyButton.ButtonText.SetFontName("Tahoma:14")
+				itemBuyButton.ButtonText.SetFontName(ITEM_SHOP_FONT)
+				itemBuyButton.ButtonText.SetOutline()
 				itemBuyButton.Disable()
 				#itemBuyButton.ButtonText.SetFontColor(1.00,0.69,0.29)
 				
@@ -676,16 +609,21 @@ class ItemShopWindow(ui.ScriptWindow):
 			import exception
 			exception.Abort("ItemShopWindow.LoadDialog.BindObject")
 		
+		self.searchEditline.SetFontName(ITEM_SHOP_FONT)
 		self.searchEditline.OnIMEReturn = ui.__mem_func__(self.searchButtonEvent)
 		self.searchButton.SetEvent(ui.__mem_func__(self.searchButtonEvent))
-		self.prevButton.SetEvent(ui.__mem_func__(self.prevButtonEvent))
-		self.nextButton.SetEvent(ui.__mem_func__(self.nextButtonEvent))
 		self.coinBuyButton.SetEvent(ui.__mem_func__(self.coinButtonEvent))
 
 		categoryGroupBoard = CategoryBoard(self, self.boardFirst, self.scrollBar)
 		categoryGroupBoard.SetSize(self.boardFirst.GetWidth() - 25, self.boardFirst.GetHeight())
 		categoryGroupBoard.Show()
 		self.categoryGroupBoard = categoryGroupBoard
+
+		self.__BindItemShopMouseWheel(self)
+		self.__BindItemShopMouseWheel(self.GetChild("board"))
+		self.__BindItemShopMouseWheel(self.boardFirst)
+		self.__BindItemShopMouseWheel(self.boardSecond)
+		self.__BindItemShopMouseWheel(self.categoryGroupBoard)
 
 		itemStackalbeBuyDialog = ItemStackableBuyDialog()
 		itemStackalbeBuyDialog.SetParent2(self)
@@ -697,17 +635,19 @@ class ItemShopWindow(ui.ScriptWindow):
 		self.questionDialog.SetAcceptEvent(lambda arg = True: self.QuestionDialogEvent(arg))
 		self.questionDialog.SetCancelEvent(lambda arg = False: self.QuestionDialogEvent(arg))
 		self.questionDialog.Hide()
-		
-		
-		self.coinBuyButton.ButtonText.SetPackedFontColor(0xFFFEE3AE)
 				
 	def OnScrollWheel(self, nLen):
-		if self.scrollBar:
-			if int(nLen) < 0:
-				self.scrollBar.OnDown()
-			else:
-				self.scrollBar.OnUp()
-		
+		if not self.IsShow():
+			return False
+		if not self.IsInPosition():
+			return False
+
+		if self.itemScrollBar and self.itemScrollBar.IsShow():
+			self.itemScrollBar.OnMouseWheel(nLen)
+			return True
+
+		return True
+
 	def SetItemToolTip(self, itemToolTip):
 		self.itemToolTip = itemToolTip
 		
@@ -731,7 +671,7 @@ class ItemShopWindow(ui.ScriptWindow):
 
 	def Close(self):
 		ui.ScriptWindow.Hide(self)
-		#renderTarget.SetVisibility(6, true) ##kapalýydý
+		#renderTarget.SetVisibility(6, true) ##kapal?yd?
 		if self.itemStackalbeBuyDialog:
 			self.itemStackalbeBuyDialog.Close()
 		
@@ -745,7 +685,7 @@ class ItemShopWindow(ui.ScriptWindow):
 		return True
 
 	def ClearItemBoard(self):
-		for i in xrange(1, 10):
+		for i in xrange(1, ITEM_SHOP_ITEM_VISIBLE_ROWS + 1):
 			(wndItemSlot, itemName, itemOldPrice, itemPreviewButton, itemBuyButton) = self.wndItemList[i]
 			wndItemSlot.ClearSlot(i)
 			wndItemSlot.RefreshSlot()
@@ -756,9 +696,102 @@ class ItemShopWindow(ui.ScriptWindow):
 			itemBuyButton.SetText("")
 			itemBuyButton.Disable()
 
-		self.prevButton.Hide()
-		self.nextButton.Hide()
-		self.pageText.SetText("0/0")
+	def __TotalItemContentHeight(self, n):
+		if n <= 0:
+			return 0
+		return n * ITEM_SHOP_ROW_H + (n - 1) * ITEM_SHOP_ROW_GAP
+
+	def __UpdateItemScrollBarState(self):
+		if not self.itemScrollBar:
+			return
+		n = len(self.itemList)
+		if n <= ITEM_SHOP_ITEM_VISIBLE_ROWS:
+			self.itemScrollBar.Hide()
+			self.itemScrollBar.SetPos(0)
+			return
+		total = self.__TotalItemContentHeight(n)
+		self.itemScrollBar.SetSize(ITEM_SHOP_SCROLLBAR_W, ITEM_SHOP_SCROLL_VIEW_H)
+		self.itemScrollBar.SetScale(ITEM_SHOP_SCROLL_VIEW_H, total)
+		self.itemScrollBar.Show()
+		self.itemScrollBar.SetTop()
+
+	def __OnItemScrollBar(self):
+		self.__RefreshItemRowsFromScroll()
+
+	def __GetScrollStartIndex(self):
+		n = len(self.itemList)
+		mx = max(0, n - ITEM_SHOP_ITEM_VISIBLE_ROWS)
+		start = 0
+		if self.itemScrollBar and self.itemScrollBar.IsShow() and mx > 0:
+			start = int(self.itemScrollBar.GetPos() * mx + 1e-6)
+		if start > mx:
+			start = mx
+		return start
+
+	def __RefreshItemRowsFromScroll(self):
+		n = len(self.itemList)
+		start = self.__GetScrollStartIndex()
+		for i in xrange(1, ITEM_SHOP_ITEM_VISIBLE_ROWS + 1):
+			itemPos = start + (i - 1)
+			if itemPos >= n:
+				continue
+
+			(empty, itemID, itemVnum, itemPrice, itemPriceOld, itemCount, itemSocketZero, itemMark, metinSlot, attrslot) = self.itemList[itemPos]
+			(wndItemSlot, itemName, itemOldPrice, itemPreviewButton, itemBuyButton) = self.wndItemList[i]
+
+			wndItemSlot.SetItemSlot(i, itemVnum, itemCount)
+			wndItemSlot.RefreshSlot()
+
+			item.SelectItem(itemVnum)
+
+			itemType = item.GetItemType()
+			itemSubType = item.GetItemSubType()
+			itemValue = item.GetValue(0)
+			itemHair = item.GetValue(3)
+			(affectTypem, affectValuem) = item.GetAffect(0)
+			race = player.GetRace()
+			job = chr.RaceToJob(race)
+			sex = chr.RaceToSex(race)
+			MALE = 1
+			FEMALE = 0
+
+			ANTI_FLAG_DICT = {
+				0 : item.ITEM_ANTIFLAG_WARRIOR,
+				1 : item.ITEM_ANTIFLAG_ASSASSIN,
+				2 : item.ITEM_ANTIFLAG_SURA,
+				3 : item.ITEM_ANTIFLAG_SHAMAN,
+			}
+
+			isItemPreview = False
+			if itemType == item.ITEM_TYPE_WEAPON:
+				isItemPreview = True
+			if itemType == item.ITEM_TYPE_ARMOR and itemSubType == item.ARMOR_BODY:
+				isItemPreview = True
+			if itemType == item.ITEM_TYPE_COSTUME:
+				isItemPreview = True
+
+			if not ANTI_FLAG_DICT.has_key(job):
+				isItemPreview = False
+			if item.IsAntiFlag(ANTI_FLAG_DICT[job]):
+				isItemPreview = False
+			if item.IsAntiFlag(item.ITEM_ANTIFLAG_MALE) and sex == MALE:
+				isItemPreview = False
+			if item.IsAntiFlag(item.ITEM_ANTIFLAG_FEMALE) and sex == FEMALE:
+				isItemPreview = False
+
+			if itemPrice >= itemMark:
+				priceType = "%s EP" % _FormatItemShopPriceDisplay(itemPrice)
+			else:
+				priceType = "%s EM" % _FormatItemShopPriceDisplay(itemMark)
+
+			if isItemPreview:
+				itemPreviewButton.Show()
+
+			itemName.SetText(item.GetItemName())
+			itemOldPrice.SetText("%d adet." % int(itemCount))
+			itemBuyButton.SetText(priceType)
+			itemBuyButton.SetEvent(ui.__mem_func__(self.buyButtonEvent), itemID, itemVnum, itemPrice, itemCount, itemMark)
+			itemBuyButton.Enable()
 
 	def ChangeCategory(self, categoryID, subCategoryID):
 		self.ClearItemBoard()
@@ -773,27 +806,8 @@ class ItemShopWindow(ui.ScriptWindow):
 
 		category = category[subCategoryID]
 		self.itemList = [item for item in category]
-		self.pageMaxNum = len(self.itemList) / 9
-		
-		if len(self.itemList) % 9 > 0:
-			self.pageMaxNum += 1
-		
-		self.pageNum = 0
-
-		self.RefreshProcess()
-	
-	def prevButtonEvent(self):
-		if self.pageNum - 1 < 0:
-			return
-
-		self.pageNum -= 1
-		self.RefreshProcess()
-
-	def nextButtonEvent(self):
-		if self.pageNum + 1 >= self.pageMaxNum:
-			return
-
-		self.pageNum += 1
+		if self.itemScrollBar:
+			self.itemScrollBar.SetPos(0)
 		self.RefreshProcess()
 
 	def coinButtonEvent(self):
@@ -802,92 +816,13 @@ class ItemShopWindow(ui.ScriptWindow):
 
 	def RefreshProcess(self):
 		self.ClearItemBoard()
-
-		self.pageText.SetText("%d/%d" % (self.pageNum + 1, self.pageMaxNum))
-		if self.pageNum == 0:
-			self.prevButton.Hide()
-		else:
-			self.prevButton.Show()
-			
-		if self.pageNum + 1 == self.pageMaxNum:
-			self.nextButton.Hide()
-		else:
-			self.nextButton.Show()
-
-		for i in xrange(1, 10):
-			itemPos = (self.pageNum * 9) + (i - 1)
-			
-			if len(self.itemList) <= itemPos:
-				return
-			
-			(empty, itemID, itemVnum, itemPrice,itemPriceOld, itemCount, itemSocketZero, itemMark, metinSlot, attrslot) = self.itemList[itemPos]
-			(wndItemSlot, itemName, itemOldPrice, itemPreviewButton, itemBuyButton) = self.wndItemList[i]
-
-			wndItemSlot.SetItemSlot(i, itemVnum, itemCount)
-			wndItemSlot.RefreshSlot()
-			
-			item.SelectItem(itemVnum)
-			
-			itemType = item.GetItemType()
-			itemSubType = item.GetItemSubType()
-			itemValue = item.GetValue(0)
-			itemHair = item.GetValue(3)
-			(affectTypem, affectValuem) = item.GetAffect(0)
-			race = player.GetRace()
-			job = chr.RaceToJob(race)
-			sex = chr.RaceToSex(race)
-			MALE = 1
-			FEMALE = 0
-			
-			
-			ANTI_FLAG_DICT = {
-				0 : item.ITEM_ANTIFLAG_WARRIOR,
-				1 : item.ITEM_ANTIFLAG_ASSASSIN,
-				2 : item.ITEM_ANTIFLAG_SURA,
-				3 : item.ITEM_ANTIFLAG_SHAMAN,
-			}
-			
-			
-			isItemPreview = False
-			if itemType == item.ITEM_TYPE_WEAPON:
-				isItemPreview = True
-			if itemType == item.ITEM_TYPE_ARMOR and itemSubType == item.ARMOR_BODY:
-				isItemPreview = True
-			if itemType == item.ITEM_TYPE_COSTUME:
-				isItemPreview = True
-			# if item.ITEM_TYPE_UNIQUE == itemType and itemSubType == item.USE_PET:
-				# isItemPreview = True
-			#elif item.GetItemTypeVID(itemVnum) == item.ITEM_TYPE_USE and item.GetItemSubTypeVID(itemVnum) == item.USE_COSTUME_MOUNT_SKIN:	
-				#isItemPreview = True
-				
-			if not ANTI_FLAG_DICT.has_key(job):
-				isItemPreview = False
-			if item.IsAntiFlag(ANTI_FLAG_DICT[job]):
-				isItemPreview = False
-			if item.IsAntiFlag(item.ITEM_ANTIFLAG_MALE) and sex == MALE:
-				isItemPreview = False
-			if item.IsAntiFlag(item.ITEM_ANTIFLAG_FEMALE) and sex == FEMALE:
-				isItemPreview = False
-				
-			if itemPrice >= itemMark:
-				priceType = "%d EP" % itemPrice
-			else:
-				priceType = "%d EM" % itemMark
-				
-
-			if isItemPreview:
-				itemPreviewButton.Show()
-
-			itemName.SetText(item.GetItemName())
-			# itemOldPrice.SetText("|cff00ff1eEski Fiyat:%d.EP" % itemPriceOld)
-			itemBuyButton.SetText(priceType)
-			itemBuyButton.SetEvent(ui.__mem_func__(self.buyButtonEvent), itemID, itemVnum, itemPrice, itemCount, itemMark)
-			itemBuyButton.Enable()
+		self.__UpdateItemScrollBarState()
+		self.__RefreshItemRowsFromScroll()
 
 	def searchButtonEvent(self):
 		searchText = self.searchEditline.GetText()
 		if len(searchText) < 3:
-			chat.AppendChat(5, "Aranacak kelime çok kýsa")
+			chat.AppendChat(5, "Aranacak kelime ?ok k?sa")
 			return True
 		
 		self.SearchItem(searchText)
@@ -897,16 +832,12 @@ class ItemShopWindow(ui.ScriptWindow):
 		searchItemList = filter(lambda item: item[0].find(toLower(itemName)) != -1, constInfo.ITEM_SEARCH_DATA)
 		
 		if not searchItemList:
-			chat.AppendChat(1, "%s içeren nesne bulunamadý." % itemName)
+			chat.AppendChat(1, "%s i?eren nesne bulunamad?." % itemName)
 			return
 
 		self.itemList = [item for item in searchItemList]
-		self.pageMaxNum = len(self.itemList) / 9
-
-		if len(self.itemList) % 9 > 0:
-			self.pageMaxNum += 1
-
-		self.pageNum = 0
+		if self.itemScrollBar:
+			self.itemScrollBar.SetPos(0)
 
 		self.RefreshProcess()
 
@@ -958,7 +889,8 @@ class ItemShopWindow(ui.ScriptWindow):
 		self.questionDialog.Close()
 	
 	def selectItemSlotEvent(self, itemIndex):
-		itemPos = (self.pageNum * 9) + (itemIndex - 1)
+		start = self.__GetScrollStartIndex()
+		itemPos = start + (itemIndex - 1)
 
 		if len(self.itemList) <= itemPos:
 				return
@@ -975,7 +907,8 @@ class ItemShopWindow(ui.ScriptWindow):
 			return
 
 		self.itemToolTip.ClearToolTip()
-		itemPos = (self.pageNum * 9) + (itemIndex - 1)
+		start = self.__GetScrollStartIndex()
+		itemPos = start + (itemIndex - 1)
 
 		if len(self.itemList) <= itemPos:
 				return
@@ -1007,11 +940,4 @@ class ItemShopWindow(ui.ScriptWindow):
 
 		self.itemToolTip.ClearToolTip()
 		self.itemToolTip.Hide()
-
-
-	def OnRunMouseWheel(self, nLen):
-		if nLen > 0:
-			self.scrollBar.OnUp()
-		else:
-			self.scrollBar.OnDown()
 

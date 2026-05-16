@@ -64,6 +64,11 @@ class CPythonMiniMap : public CScreen, public CSingleton<CPythonMiniMap>
 
 		bool GetAtlasInfo(float fScreenX, float fScreenY, std::string & rReturnString, float * pReturnPosX, float * pReturnPosY, DWORD * pdwTextColor, DWORD * pdwGuildID);
 		bool GetAtlasSize(float * pfSizeX, float * pfSizeY) const;
+		void SetAtlasZoom(float fZoom);
+		float GetAtlasZoom() const;
+		void SetAtlasZoomXY(float fZoomX, float fZoomY);
+		float GetAtlasZoomX() const;
+		float GetAtlasZoomY() const;
 
 		void AddObserver(DWORD dwVID, float fSrcX, float fSrcY);
 		void MoveObserver(DWORD dwVID, float fDstX, float fDstY);
@@ -220,6 +225,8 @@ class CPythonMiniMap : public CScreen, public CSingleton<CPythonMiniMap>
 
 		float							m_fAtlasImageSizeX;
 		float							m_fAtlasImageSizeY;
+		float							m_fAtlasZoomX;
+		float							m_fAtlasZoomY;
 
 		typedef std::vector<TAtlasMarkInfo>		TAtlasMarkInfoVector;
 		typedef TAtlasMarkInfoVector::iterator	TAtlasMarkInfoVectorIterator;

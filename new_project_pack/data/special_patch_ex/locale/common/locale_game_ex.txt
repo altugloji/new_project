@@ -4,7 +4,7 @@ ACCE_ABSORB_CHANCE2	Absorption rate: %d%% ~ %d%%
 ACCE_DO_YOU_CLEAN	Do you want to remove all available bonuses?
 ACCE_FAILURE_CLEAN	No bonuses can be taken away.
 UI_BOLD_FONT	Tahoma:12b
-UI_BOLD_FONT_LARGE	Tahoma:14b
+UI_BOLD_FONT_LARGE	Tahoma:14
 UI_BOLD_FONT_LARGE2	Tahoma:22b
 UI_BOLD_FONT_SMALL	Tahoma:9b
 UI_NORMAL_FONT	Tahoma:12

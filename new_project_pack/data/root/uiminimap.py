@@ -12,6 +12,10 @@ import background
 import chr
 from constInfo import TextColor
 
+ATLAS_ZOOM_BTN_ROOT = "d:/ymir work/ui/minimap/"
+ATLAS_ZOOM_BTN_Y = 10
+ATLAS_RESIZE_GRIP_IMAGE = "d:/ymir work/flags/im.png"
+
 class MapTextToolTip(ui.Window):
 	def __init__(self):
 		ui.Window.__init__(self)
@@ -43,6 +47,49 @@ class MapTextToolTip(ui.Window):
 	def GetTextSize(self):
 		return self.textLine.GetTextSize()
 
+ATLAS_BOARD_EXTRA_W = 15
+ATLAS_BOARD_EXTRA_H = 38
+ATLAS_RESIZE_GRIP_MARGIN = 6
+ATLAS_RESIZE_GRIP_FALLBACK_W = 24
+ATLAS_RESIZE_GRIP_FALLBACK_H = 24
+ATLAS_ZOOM_STATE_FILE = "metin2.cfg"
+ATLAS_ZOOM_CFG_THROTTLE_MS = 400
+
+def _ReadSavedAtlasZoom():
+	try:
+		f = open(ATLAS_ZOOM_STATE_FILE, "r")
+		line = f.readline().strip()
+		f.close()
+		if not line:
+			return None
+		return float(line)
+	except:
+		return None
+
+def _ClampEngineAtlasZoom(z):
+	try:
+		zf = float(z)
+	except:
+		return None
+	if zf < 1.0:
+		return 1.0
+	if zf > 3.0:
+		return 3.0
+	return zf
+
+class AtlasResizeGrip(ui.DragButton):
+	def __init__(self):
+		ui.DragButton.__init__(self)
+
+	def __del__(self):
+		ui.DragButton.__del__(self)
+
+	def OnMouseOverIn(self):
+		app.SetCursor(app.HVSIZE)
+
+	def OnMouseOverOut(self):
+		app.SetCursor(app.NORMAL)
+
 class AtlasWindow(ui.ScriptWindow):
 
 	class AtlasRenderer(ui.Window):
@@ -73,6 +120,12 @@ class AtlasWindow(ui.ScriptWindow):
 		self.AtlasMainWindow = None
 		self.mapName = ""
 		self.board = 0
+		self.atlasZoomInBtn = None
+		self.atlasZoomOutBtn = None
+		self.tooltipAtlasZoomIn = None
+		self.tooltipAtlasZoomOut = None
+		self._atlasZoomRepeatLastMs = 0
+		self._atlasZoomCfgLastWriteMs = 0
 
 		ui.ScriptWindow.__init__(self)
 
@@ -85,6 +138,7 @@ class AtlasWindow(ui.ScriptWindow):
 				self.board.SetTitleName(localeInfo.MINIMAP_ZONE_NAME_DICT[mapName])
 			except:
 				pass
+		self.__ApplySavedAtlasZoomFromFile()
 
 	def LoadWindow(self):
 		try:
@@ -107,12 +161,271 @@ class AtlasWindow(ui.ScriptWindow):
 		self.AtlasMainWindow.SetPosition(7, 30)
 		self.tooltipInfo.SetParent(self.board)
 		self.infoGuildMark.SetParent(self.board)
+		self.__CreateAtlasZoomControls()
 		self.SetPosition(wndMgr.GetScreenWidth() - 136 - 256 - 10, 0)
 		if app.ENABLE_MINIMAP_TELEPORT_CLICK:
 			self.board.SetMouseLeftButtonUpEvent(ui.__mem_func__(self.OnMouseLeftButtonUpEvent))
 		self.Hide()
 
 		miniMap.RegisterAtlasWindow(self)
+
+	def __ApplySavedAtlasZoomFromFile(self):
+		if not miniMap.IsAtlas():
+			return
+		z = _ReadSavedAtlasZoom()
+		if z is None:
+			return
+		zc = _ClampEngineAtlasZoom(z)
+		if zc is None:
+			return
+		try:
+			miniMap.SetAtlasZoom(zc)
+		except:
+			pass
+
+	def __PersistAtlasZoomToFile(self, forceWrite):
+		if not miniMap.IsAtlas():
+			return
+		try:
+			zc = _ClampEngineAtlasZoom(miniMap.GetAtlasZoom())
+		except:
+			return
+		if zc is None:
+			return
+		if not forceWrite:
+			t = app.GetTime()
+			if t - self._atlasZoomCfgLastWriteMs < ATLAS_ZOOM_CFG_THROTTLE_MS:
+				return
+		try:
+			out = open(ATLAS_ZOOM_STATE_FILE, "w")
+			out.write("%.6f\n" % zc)
+			out.close()
+			self._atlasZoomCfgLastWriteMs = app.GetTime()
+		except:
+			pass
+
+	def __DestroyAtlasZoomControls(self):
+		for w in (self.atlasZoomInBtn, self.atlasZoomOutBtn, self.atlasResizeGrip):
+			if w:
+				try:
+					w.Hide()
+					w.Destroy()
+				except:
+					pass
+		self.atlasZoomInBtn = None
+		self.atlasZoomOutBtn = None
+		self.atlasResizeGrip = None
+		for tip in (self.tooltipAtlasZoomIn, self.tooltipAtlasZoomOut):
+			if tip:
+				try:
+					tip.Hide()
+					tip.Destroy()
+				except:
+					pass
+		self.tooltipAtlasZoomIn = None
+		self.tooltipAtlasZoomOut = None
+
+	def __CreateAtlasZoomControls(self):
+		inBtn = ui.Button()
+		inBtn.SetParent(self.board)
+		inBtn.SetUpVisual(ATLAS_ZOOM_BTN_ROOT + "minimap_scaleup_default.sub")
+		inBtn.SetOverVisual(ATLAS_ZOOM_BTN_ROOT + "minimap_scaleup_over.sub")
+		inBtn.SetDownVisual(ATLAS_ZOOM_BTN_ROOT + "minimap_scaleup_down.sub")
+		inBtn.SetEvent(ui.__mem_func__(self.__AtlasZoomInClick))
+		inBtn.SetPosition(180, ATLAS_ZOOM_BTN_Y)
+		inBtn.Show()
+		self.atlasZoomInBtn = inBtn
+
+		outBtn = ui.Button()
+		outBtn.SetParent(self.board)
+		outBtn.SetUpVisual(ATLAS_ZOOM_BTN_ROOT + "minimap_scaledown_default.sub")
+		outBtn.SetOverVisual(ATLAS_ZOOM_BTN_ROOT + "minimap_scaledown_over.sub")
+		outBtn.SetDownVisual(ATLAS_ZOOM_BTN_ROOT + "minimap_scaledown_down.sub")
+		outBtn.SetEvent(ui.__mem_func__(self.__AtlasZoomOutClick))
+		outBtn.SetPosition(158, ATLAS_ZOOM_BTN_Y)
+		outBtn.Show()
+		self.atlasZoomOutBtn = outBtn
+
+		self.tooltipAtlasZoomIn = MapTextToolTip()
+		self.tooltipAtlasZoomIn.SetText(localeInfo.MINIMAP_INC_SCALE)
+		self.tooltipAtlasZoomIn.SetParent(self)
+		self.tooltipAtlasZoomIn.Hide()
+
+		self.tooltipAtlasZoomOut = MapTextToolTip()
+		self.tooltipAtlasZoomOut.SetText(localeInfo.MINIMAP_DEC_SCALE)
+		self.tooltipAtlasZoomOut.SetParent(self)
+		self.tooltipAtlasZoomOut.Hide()
+
+		grip = AtlasResizeGrip()
+		grip.SetParent(self.board)
+		grip.SetUpVisual(ATLAS_RESIZE_GRIP_IMAGE)
+		grip.SetOverVisual(ATLAS_RESIZE_GRIP_IMAGE)
+		grip.SetDownVisual(ATLAS_RESIZE_GRIP_IMAGE)
+		gw = grip.GetWidth()
+		gh = grip.GetHeight()
+		if gw <= 0 or gh <= 0:
+			grip.SetSize(ATLAS_RESIZE_GRIP_FALLBACK_W, ATLAS_RESIZE_GRIP_FALLBACK_H)
+		grip.SetMoveEvent(ui.__mem_func__(self.__AtlasOnResizeGrip))
+		grip.Show()
+		self.atlasResizeGrip = grip
+
+	def __ApplyAtlasLayoutFromEngine(self):
+		if not self.board:
+			return
+		(bGet, iSizeX, iSizeY) = miniMap.GetAtlasSize()
+		if not bGet:
+			return
+		self.SetSize(iSizeX + ATLAS_BOARD_EXTRA_W, iSizeY + ATLAS_BOARD_EXTRA_H)
+		if localeInfo.IsARABIC():
+			self.board.SetPosition(iSizeX + ATLAS_BOARD_EXTRA_W, 0)
+		self.board.SetSize(iSizeX + ATLAS_BOARD_EXTRA_W, iSizeY + ATLAS_BOARD_EXTRA_H)
+		if self.atlasZoomInBtn and self.atlasZoomOutBtn:
+			bw = iSizeX + ATLAS_BOARD_EXTRA_W
+			self.atlasZoomInBtn.SetPosition(bw - 46, ATLAS_ZOOM_BTN_Y)
+			self.atlasZoomOutBtn.SetPosition(bw - 68, ATLAS_ZOOM_BTN_Y)
+		self.__AtlasPositionResizeGrip()
+
+	def __AtlasZoomInClick(self):
+		try:
+			miniMap.SetAtlasZoom(miniMap.GetAtlasZoom() * 1.12)
+		except:
+			return
+		self._atlasZoomRepeatLastMs = app.GetTime()
+		self.__ApplyAtlasLayoutFromEngine()
+		self.__PersistAtlasZoomToFile(1)
+
+	def __AtlasZoomOutClick(self):
+		try:
+			miniMap.SetAtlasZoom(miniMap.GetAtlasZoom() / 1.12)
+		except:
+			return
+		self._atlasZoomRepeatLastMs = app.GetTime()
+		self.__ApplyAtlasLayoutFromEngine()
+		self.__PersistAtlasZoomToFile(1)
+
+	def __AtlasZoomRepeat(self, direction):
+		try:
+			t = app.GetTime()
+			if t - self._atlasZoomRepeatLastMs < 55:
+				return
+			self._atlasZoomRepeatLastMs = t
+			z = miniMap.GetAtlasZoom()
+			if direction > 0:
+				miniMap.SetAtlasZoom(z * 1.04)
+			else:
+				miniMap.SetAtlasZoom(z / 1.04)
+			self.__ApplyAtlasLayoutFromEngine()
+			self.__PersistAtlasZoomToFile(0)
+		except:
+			pass
+
+	def __AtlasPositionResizeGrip(self):
+		if not self.board or not self.atlasResizeGrip:
+			return
+		bw = self.board.GetWidth()
+		bh = self.board.GetHeight()
+		gw = self.atlasResizeGrip.GetWidth()
+		gh = self.atlasResizeGrip.GetHeight()
+		self.atlasResizeGrip.SetPosition(
+			bw - gw - ATLAS_RESIZE_GRIP_MARGIN,
+			bh - gh - ATLAS_RESIZE_GRIP_MARGIN)
+		self.__AtlasUpdateResizeGripMovementBounds()
+
+	def __AtlasComputeResizeLimits(self):
+		if not miniMap.IsAtlas():
+			return None
+		(bGet, iSizeX, iSizeY) = miniMap.GetAtlasSize()
+		if not bGet:
+			return None
+		try:
+			zx, zy = miniMap.GetAtlasZoomXY()
+		except:
+			return None
+		if zx <= 0.0001 or zy <= 0.0001:
+			return None
+		fTexW = float(iSizeX) / zx
+		fTexH = float(iSizeY) / zy
+		minBw = int(fTexW + ATLAS_BOARD_EXTRA_W)
+		minBh = int(fTexH + ATLAS_BOARD_EXTRA_H)
+		maxBw = int(fTexW * 3.0 + ATLAS_BOARD_EXTRA_W)
+		maxBh = int(fTexH * 3.0 + ATLAS_BOARD_EXTRA_H)
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		wx, wy = self.GetGlobalPosition()
+		maxBw = max(minBw, min(maxBw, sw - wx - 4))
+		maxBh = max(minBh, min(maxBh, sh - wy - 4))
+		return (fTexW, fTexH, minBw, minBh, maxBw, maxBh)
+
+	def __AtlasUpdateResizeGripMovementBounds(self):
+		if not self.board or not self.atlasResizeGrip:
+			return
+		lims = self.__AtlasComputeResizeLimits()
+		if not lims:
+			return
+		(_fTexW, _fTexH, minBw, minBh, maxBw, maxBh) = lims
+		gw = self.atlasResizeGrip.GetWidth()
+		gh = self.atlasResizeGrip.GetHeight()
+		m = ATLAS_RESIZE_GRIP_MARGIN
+		minGx = minBw - gw - m
+		minGy = minBh - gh - m
+		maxGx = maxBw - gw - m
+		maxGy = maxBh - gh - m
+		if minGx > maxGx:
+			minGx, maxGx = maxGx, minGx
+		if minGy > maxGy:
+			minGy, maxGy = maxGy, minGy
+		if minGx < 0:
+			minGx = 0
+		if minGy < 0:
+			minGy = 0
+		rw = max(1, maxGx - minGx + 1)
+		rh = max(1, maxGy - minGy + 1)
+		self.atlasResizeGrip.SetRestrictMovementArea(minGx, minGy, rw, rh)
+
+	def __AtlasOnResizeGrip(self):
+		if not self.board or not self.atlasResizeGrip:
+			return
+		grip = self.atlasResizeGrip
+		grip.TurnOffCallBack()
+		try:
+			self.__AtlasOnResizeGripImpl()
+		finally:
+			grip.TurnOnCallBack()
+
+	def __AtlasOnResizeGripImpl(self):
+		if not self.board or not self.atlasResizeGrip:
+			return
+		lims = self.__AtlasComputeResizeLimits()
+		if not lims:
+			return
+		fTexW, fTexH, minBw, minBh, maxBw, maxBh = lims
+
+		gx, gy = self.atlasResizeGrip.GetLocalPosition()
+		gw = self.atlasResizeGrip.GetWidth()
+		gh = self.atlasResizeGrip.GetHeight()
+		bw = gx + gw
+		bh = gy + gh
+
+		bw = max(minBw, min(bw, maxBw))
+		bh = max(minBh, min(bh, maxBh))
+
+		cw = float(bw - ATLAS_BOARD_EXTRA_W)
+		ch = float(bh - ATLAS_BOARD_EXTRA_H)
+		if cw <= 0.0 or ch <= 0.0:
+			return
+		zw = cw / fTexW
+		zh = ch / fTexH
+		z = min(zw, zh)
+		if z < 1.0:
+			z = 1.0
+		elif z > 3.0:
+			z = 3.0
+		try:
+			miniMap.SetAtlasZoom(z)
+		except:
+			return
+		self.__ApplyAtlasLayoutFromEngine()
+		self.__PersistAtlasZoomToFile(0)
 
 	if app.ENABLE_MINIMAP_TELEPORT_CLICK:
 		def OnMouseLeftButtonUpEvent(self):
@@ -123,7 +436,9 @@ class AtlasWindow(ui.ScriptWindow):
 
 	@ui.WindowDestroy
 	def Destroy(self):
+		self.__PersistAtlasZoomToFile(1)
 		miniMap.UnregisterAtlasWindow()
+		self.__DestroyAtlasZoomControls()
 		self.ClearDictionary()
 		self.AtlasMainWindow = None
 		self.tooltipAtlasClose = 0
@@ -132,6 +447,26 @@ class AtlasWindow(ui.ScriptWindow):
 		self.board = None
 
 	def OnUpdate(self):
+		if self.AtlasMainWindow and self.AtlasMainWindow.IsShow():
+			if self.atlasZoomInBtn and self.atlasZoomInBtn.IsDown():
+				self.__AtlasZoomRepeat(1)
+			elif self.atlasZoomOutBtn and self.atlasZoomOutBtn.IsDown():
+				self.__AtlasZoomRepeat(-1)
+
+		if self.atlasZoomInBtn and self.tooltipAtlasZoomIn:
+			if self.atlasZoomInBtn.IsIn():
+				(bx, by) = self.atlasZoomInBtn.GetGlobalPosition()
+				self.tooltipAtlasZoomIn.SetTooltipPosition(bx, by)
+				self.tooltipAtlasZoomIn.Show()
+			else:
+				self.tooltipAtlasZoomIn.Hide()
+		if self.atlasZoomOutBtn and self.tooltipAtlasZoomOut:
+			if self.atlasZoomOutBtn.IsIn():
+				(bx, by) = self.atlasZoomOutBtn.GetGlobalPosition()
+				self.tooltipAtlasZoomOut.SetTooltipPosition(bx, by)
+				self.tooltipAtlasZoomOut.Show()
+			else:
+				self.tooltipAtlasZoomOut.Hide()
 
 		if not self.tooltipInfo:
 			return
@@ -181,13 +516,8 @@ class AtlasWindow(ui.ScriptWindow):
 		if self.AtlasMainWindow:
 			(bGet, iSizeX, iSizeY) = miniMap.GetAtlasSize()
 			if bGet:
-				self.SetSize(iSizeX + 15, iSizeY + 38)
-
-				if localeInfo.IsARABIC():
-					self.board.SetPosition(iSizeX+15, 0)
-
-				self.board.SetSize(iSizeX + 15, iSizeY + 38)
-				#self.AtlasMainWindow.SetSize(iSizeX, iSizeY)
+				self.__ApplySavedAtlasZoomFromFile()
+				self.__ApplyAtlasLayoutFromEngine()
 				self.AtlasMainWindow.ShowAtlas()
 				self.AtlasMainWindow.Show()
 		ui.ScriptWindow.Show(self)

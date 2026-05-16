@@ -105,6 +105,8 @@ WIKI_EQUIP_HEADER_BG = 0xff352d26
 # Refine alanini tumuyle kaydir (sag / yukari = +X, -Y)
 WIKI_REFINE_GRID_SHIFT_X = 16
 WIKI_REFINE_GRID_SHIFT_Y = -14
+# Refine satirlarinda malzeme slot ikonlari (Y asagi = arti)
+WIKI_REFINE_MATERIAL_SLOT_SHIFT_Y = 3
 # Ana esya ikonu tum refine satirlarinda (px)
 WIKI_EQUIP_ICON_SHIFT_X = 10
 # Tek malzeme satirli refine satirinda ana ikon (px yukari = negatif)
@@ -115,11 +117,18 @@ WIKI_REFINE_GRID_LEFT = 10 + 130 + WIKI_REFINE_GRID_SHIFT_X
 
 # Programatik wiki gorunumu (wiki/slot TGA yerine)
 WIKI_SLOT_PLATE = "d:/ymir work/ui/public/Slot_Base.sub"
+WIKI_REFINE_YANG_ICON = "d:/ymir work/ui/game/windows/money_icon.sub"
+# Yang ikonu X: ana ikon sol-ustune gore; Y: +0 sutun yang metni (WikiRefineColumnPriceY)
+WIKI_EQUIP_ITEM_YANG_ICON_OFFSET_X = 87
+# Y yedek / ince ayar (+/- px), gorunur sutun yoksa iy ile kullanilir
+WIKI_EQUIP_ITEM_YANG_ICON_OFFSET_Y = 31
 WIKI_ROW_ZEBRA_A = 0xff1a1816
 WIKI_ROW_ZEBRA_B = 0xff262220
 WIKI_ROW_BORDER = 0xFF4a3a2e
 # Refine sutun ayirici (dikey, tam yukseklik)
 WIKI_REFINE_LINE_V = 0xFF454545
+# Refine satiri: sadece esya adi ve malzeme adet yazilari (+N basliklari beyaz)
+WIKI_REFINE_ITEM_TEXT_COLOR = 0xFFF2E7C1
 WIKI_PANEL_NEUTRAL = 0xff1e1a18
 # Modern wiki: sol kategori paneli (zebra + basliklar)
 WIKI_MODERN_CAT_X = 14
@@ -148,6 +157,7 @@ WIKI_DEBUG_CATEGORY = 1
 WIKI_DEBUG_VIEW_MODE = 1
 # 1 = syserr'e [WIKI_LAYOUT] satir yuksekligi / grid yerlesim / liste sirasi loglari
 WIKI_DEBUG_LAYOUT = 1
+# Metin/mob wiki satiri: sol onizleme + govde arka plan Y (WikiMobDropPanelRowHeight ile uyumlu)
 WIKI_MOB_DROP_PANEL_PREVIEW_H = 163
 
 
@@ -548,7 +558,7 @@ def WikiEquipListInnerSize(refineCount):
 		pw = 411
 	rc = refineCount if refineCount < 6 else 5
 	rs = 32 + 5 + 8
-	lastRowBottom = 22 + 5 + (rc - 1) * rs + 32
+	lastRowBottom = 22 + 5 + WIKI_REFINE_MATERIAL_SLOT_SHIFT_Y + (rc - 1) * rs + 32
 	priceY = lastRowBottom + 8
 	ih = max(priceY + 34, 72)
 	return pw, ih
@@ -561,11 +571,17 @@ def WikiRefinePriceRowCount(materialRowCount, alignMaterialRows):
 	return priceRows
 
 
-def WikiRefineColumnHeight(refine, itemVnum, materialRowCount, refineData, alignMaterialRows=0):
+def WikiRefineColumnPriceY(materialRowCount, alignMaterialRows):
 	rs = 32 + 5 + 8
-	priceRows = WikiRefinePriceRowCount(materialRowCount, alignMaterialRows)
-	lastRowBottom = 22 + 5 + (priceRows - 1) * rs + 32
-	priceY = lastRowBottom + 8
+	slotYBase = 22 + 5 + WIKI_REFINE_MATERIAL_SLOT_SHIFT_Y
+	rc = materialRowCount if materialRowCount > 0 else 0
+	priceRows = WikiRefinePriceRowCount(rc, alignMaterialRows)
+	lastRowBottom = slotYBase + (priceRows - 1) * rs + 32
+	return lastRowBottom + 8
+
+
+def WikiRefineColumnHeight(refine, itemVnum, materialRowCount, refineData, alignMaterialRows=0):
+	priceY = WikiRefineColumnPriceY(materialRowCount, alignMaterialRows)
 	return max(priceY + 34, 72)
 
 
@@ -2787,10 +2803,10 @@ class EquipmentItem(WikiUI.DefaultWikiImage):
 			colW = self.GetWidth() if self.GetWidth() > 8 else WIKI_REFINE_COL_STEP
 			ix0 = max(0, (colW - 32) / 2)  # MANUEL: 32px ikonu sutun icinde yatay ortala
 			rowStep = 32 + 5 + 8  # MANUEL: malzeme satirlari dikey aralik
+			slotYBase = 22 + 5 + WIKI_REFINE_MATERIAL_SLOT_SHIFT_Y
 			rc = materialRowCount if materialRowCount > 0 else 0
 			priceRows = WikiRefinePriceRowCount(rc, alignMaterialRows)
-			lastRowBottom = 22 + 5 + (priceRows - 1) * rowStep + 32
-			priceY = lastRowBottom + 8
+			priceY = WikiRefineColumnPriceY(materialRowCount, alignMaterialRows)
 			colH = max(priceY + 34, 72)
 			tipH = rowPixelHeight if rowPixelHeight > colH else colH
 			tooltipImage = WikiUI.CreateWindow(ui.ImageBox(), self, (0, 0), "", "", (colW, tipH))  # MANUEL: sutun tooltip hit (satir yuksekligi ile)
@@ -2818,6 +2834,10 @@ class EquipmentItem(WikiUI.DefaultWikiImage):
 
 			self._children["step_refine"] = WikiUI.CreateWindow(ui.TextLine(), self, (colW / 2, 4), "+{}".format(refine), "horizontal:center")  # MANUEL: +N sutun ortasi (WIKI_REFINE_COL_STEP)
 			self._children["step_refine"].AddFlag("not_pick")
+			try:
+				self._children["step_refine"].SetPackedFontColor(0xFFFFFFFF)
+			except:
+				pass
 
 			costStr = "-"
 			if refineData and refineData.has_key("cost"):
@@ -2836,15 +2856,15 @@ class EquipmentItem(WikiUI.DefaultWikiImage):
 					probStr = str(int(refineData["prob"]))
 				except:
 					probStr = str(refineData["prob"])
-			self._children["step_prob"] = WikiUI.CreateWindow(ui.TextLine(), self, (colW / 2, priceY + 16), probStr, "horizontal:center")  # MANUEL: sans % (priceY + 16)
+			if probStr != "-":
+				probStr = str(probStr).strip().rstrip("%") + "%"
+			self._children["step_prob"] = WikiUI.CreateWindow(ui.TextLine(), self, (colW / 2, priceY + 16), probStr, "horizontal:center")  # MANUEL: basari sansi (priceY + 16)
 			try:
 				self._children["step_prob"].SetPackedFontColor(0xFF66CCFF)
 			except:
 				pass
 
 			slotDrawCount = WikiRefinePriceRowCount(rc, alignMaterialRows)
-			if not SHOW_NEXT_ITEM_REFINE and refine == 0:
-				slotDrawCount = 0
 			for i in xrange(slotDrawCount):
 				materialItem = 0
 				if refineData and refineData.has_key("item") and i < len(refineData["item"]):
@@ -2855,7 +2875,7 @@ class EquipmentItem(WikiUI.DefaultWikiImage):
 				needInsertIcon = materialItem != 0
 				if needInsertIcon and SHOW_NEXT_ITEM_REFINE == False and refine == 0:
 					needInsertIcon = False
-				iy = 22 + 5 + i * rowStep
+				iy = slotYBase + i * rowStep
 				slotBg = ui.ExpandedImageBox()
 				slotBg.SetParent(self)
 				slotBg.SetPosition(ix0, iy)
@@ -2873,7 +2893,12 @@ class EquipmentItem(WikiUI.DefaultWikiImage):
 					self._children["refineItemIcon{}".format(i)] = refineItemIcon
 					materialItemCount = refineData["count"][i] if refineData and refineData.has_key("count") else 0
 					if materialItemCount > 0:
-						self._children["refineItemCount{}".format(i)] = WikiUI.CreateWindow(ui.NumberLine() if USE_ITEM_COUNT_NUMBER_LINE else ui.TextLine(), self, (ix0 + 20, iy + (32 if USE_ITEM_COUNT_NUMBER_LINE else 20)), str(materialItemCount))  # MANUEL: adet (ikon alti)
+						cntLine = WikiUI.CreateWindow(ui.NumberLine() if USE_ITEM_COUNT_NUMBER_LINE else ui.TextLine(), self, (ix0 + 20, iy + (32 if USE_ITEM_COUNT_NUMBER_LINE else 20)), str(materialItemCount))  # MANUEL: adet (ikon alti)
+						self._children["refineItemCount{}".format(i)] = cntLine
+						try:
+							cntLine.SetPackedFontColor(WIKI_REFINE_ITEM_TEXT_COLOR)
+						except:
+							pass
 
 			try:
 				h = self.GetHeight()
@@ -2950,6 +2975,10 @@ class EquipmentItem(WikiUI.DefaultWikiImage):
 			item.SelectItemWiki(itemVnum)
 			itemName = item.GetItemName()
 			self._children["itemName"] = WikiUI.CreateWindow(ui.TextLine(), self, (5, 5), itemName[:itemName.find("+")] if itemName.find("+") != -1 else itemName)  # MANUEL: esya adi
+			try:
+				self._children["itemName"].SetPackedFontColor(WIKI_REFINE_ITEM_TEXT_COLOR)
+			except:
+				pass
 
 			matRowsGlobal = WikiEquipMaxMaterialRows(refineItems, refineLevel, refineCount)
 			itemLevelCoordinates = [ [0,0],[0,0],[10,55],[10,70],[10,80],[10,115]]  # MANUEL: ana ikon konumu (refineCount index)
@@ -2965,6 +2994,23 @@ class EquipmentItem(WikiUI.DefaultWikiImage):
 				itemIcon.SetEvent(ui.__mem_func__(self.OnClickItem), "mouse_click", 0)
 			itemIcon.SAFE_SetStringEvent("MOUSE_OVER_OUT", self.OverOutItem)
 			self._children["itemIcon"] = itemIcon
+
+			rd0 = refineItems[0] if refineItems.has_key(0) else {}
+			matRows0 = WikiRefineMaterialRowsForColumn(0, rd0, refineCount)
+			listYGrid = 20 + WIKI_REFINE_GRID_SHIFT_Y
+			displayColsYang = WikiRefineVisibleColumnCount(refineItems, refineLevel)
+			if displayColsYang > 0:
+				yangIconY = listYGrid + WikiRefineColumnPriceY(matRows0, matRowsGlobal)
+			else:
+				yangIconY = iy + WIKI_EQUIP_ITEM_YANG_ICON_OFFSET_Y
+
+			itemYangIcon = ui.ImageBox()
+			itemYangIcon.SetParent(self)
+			itemYangIcon.LoadImage(WIKI_REFINE_YANG_ICON)
+			itemYangIcon.AddFlag("not_pick")
+			itemYangIcon.SetPosition(ix + WIKI_EQUIP_ITEM_YANG_ICON_OFFSET_X, yangIconY)
+			itemYangIcon.Show()
+			self._children["itemYangIcon"] = itemYangIcon
 
 			iw, _ih = WikiEquipListInnerSize(matRowsGlobal)
 			par = constInfo.GetWikiInterface()
@@ -3047,7 +3093,7 @@ class EquipmentItem(WikiUI.DefaultWikiImage):
 
 class MonsterItemSpecial(WikiUI.DefaultWikiImage):
 	MOB_PREVIEW_W = 187
-	MOB_PREVIEW_H = 163
+	MOB_PREVIEW_H = WIKI_MOB_DROP_PANEL_PREVIEW_H
 
 	def Destroy(self):
 		if self._children.has_key("renderIndex"):
@@ -3241,8 +3287,14 @@ class MonsterItemSpecial(WikiUI.DefaultWikiImage):
 		renderIndex = renderTarget.GetFreeIndex(1000, 1000000)
 		self._children["renderIndex"] = renderIndex
 		pw = WikiGetResultListInnerWidth()
-		WikiApplySolidBg(self, pw, 200, WIKI_PANEL_NEUTRAL)
-		self.SetSize(pw, 200)
+		innerH = WikiGetResultListInnerHeight()
+		listY = 25
+		bottomPad = 10
+		# Fill wiki result row height; old fixed 200 clipped Sandiklar/Canavarlar list.
+		panelH = max(innerH, 1 + self.MOB_PREVIEW_H + bottomPad)
+		listH = max(120, panelH - listY - bottomPad)
+		WikiApplySolidBg(self, pw, panelH, WIKI_PANEL_NEUTRAL)
+		self.SetSize(pw, panelH)
 
 		item.SelectItem(selectedVnum)
 
@@ -3266,13 +3318,13 @@ class MonsterItemSpecial(WikiUI.DefaultWikiImage):
 
 		self._children["avaible"] = WikiUI.CreateWindow(ui.TextLine(), self, (350, 6), localeInfo.WIKI_AVAIBLE_AT)
 
-		Listbox = WikiUI.CreateWindow(WikiUI.ListBoxGrid(), self, (190, 25), "", "", (350, 138))
+		Listbox = WikiUI.CreateWindow(WikiUI.ListBoxGrid(), self, (190, listY), "", "", (350, listH))
 		self._children["Listbox"] = Listbox
 
 		WikiUI.PrintDrop(selectedVnum, self, Listbox)
 
 		if Listbox.isNeedScrollBar():
-			scrollBar = WikiUI.CreateWindow(WikiUI.ScrollBarSpecial(), Listbox, (Listbox.GetWidth()-10, 0), "", "", (8, 137))
+			scrollBar = WikiUI.CreateWindow(WikiUI.ScrollBarSpecial(), Listbox, (Listbox.GetWidth()-10, 0), "", "", (8, max(40, listH - 1)))
 			Listbox.SetScrollBar(scrollBar)
 
 		if len(Listbox.itemList) > 0:

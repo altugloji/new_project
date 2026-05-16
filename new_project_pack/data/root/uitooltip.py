@@ -62,9 +62,12 @@ def SplitDescription(desc, limit):
 ## ToolTip
 ##
 ##
+# Extra vertical padding for all standard tooltips (ThinBoard content height unchanged; board grows).
+TOOLTIP_EXTRA_HEIGHT_X = 40
+
 class ToolTip(ui.ThinBoard):
 
-	TOOL_TIP_WIDTH = 190
+	TOOL_TIP_WIDTH = 190 + TOOLTIP_EXTRA_HEIGHT_X
 	TOOL_TIP_HEIGHT = 10
 
 	TEXT_LINE_HEIGHT = 17
@@ -851,6 +854,7 @@ class ItemToolTip(ToolTip):
 
 	if app.ENABLE_WIKI:
 		def SetItemToolTipWiki(self, itemVnum):
+			self.ClearToolTip()
 			self.itemVnum = itemVnum
 			item.SelectItem(itemVnum)
 			metinSlot = [0 for i in xrange(player.METIN_SOCKET_MAX_NUM)]

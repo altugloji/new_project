@@ -503,6 +503,45 @@ void CPythonMiniMap::ScaleDown()
 	__SetPosition();
 }
 
+void CPythonMiniMap::SetAtlasZoom(float fZoom)
+{
+	if (fZoom < 1.0f)
+		fZoom = 1.0f;
+	if (fZoom > 3.0f)
+		fZoom = 3.0f;
+	m_fAtlasZoomX = fZoom;
+	m_fAtlasZoomY = fZoom;
+}
+
+float CPythonMiniMap::GetAtlasZoom() const
+{
+	return (m_fAtlasZoomX + m_fAtlasZoomY) * 0.5f;
+}
+
+void CPythonMiniMap::SetAtlasZoomXY(float fZoomX, float fZoomY)
+{
+	if (fZoomX < 1.0f)
+		fZoomX = 1.0f;
+	if (fZoomX > 3.0f)
+		fZoomX = 3.0f;
+	if (fZoomY < 1.0f)
+		fZoomY = 1.0f;
+	if (fZoomY > 3.0f)
+		fZoomY = 3.0f;
+	m_fAtlasZoomX = fZoomX;
+	m_fAtlasZoomY = fZoomY;
+}
+
+float CPythonMiniMap::GetAtlasZoomX() const
+{
+	return m_fAtlasZoomX;
+}
+
+float CPythonMiniMap::GetAtlasZoomY() const
+{
+	return m_fAtlasZoomY;
+}
+
 void CPythonMiniMap::SetMiniMapSize(float fWidth, float fHeight)
 {
 	m_fWidth = fWidth;
@@ -951,6 +990,9 @@ bool CPythonMiniMap::LoadAtlas()
 	m_fAtlasImageSizeX = (float) m_AtlasImageInstance.GetWidth();
 	m_fAtlasImageSizeY = (float) m_AtlasImageInstance.GetHeight();
 
+	m_fAtlasZoomX = 1.0f;
+	m_fAtlasZoomY = 1.0f;
+
 	__LoadAtlasMarkInfo();
 
 	if (m_bShowAtlas)
@@ -1002,13 +1044,13 @@ void CPythonMiniMap::RenderAtlas(float fScreenX, float fScreenY)
 	if (!m_bShowAtlas)
 		return;
 
-	if (m_fAtlasScreenX != fScreenX || m_fAtlasScreenY != fScreenY)
-	{
-		m_matWorldAtlas._41 = fScreenX;
-		m_matWorldAtlas._42 = fScreenY;
-		m_fAtlasScreenX = fScreenX;
-		m_fAtlasScreenY = fScreenY;
-	}
+	D3DXMatrixIdentity(&m_matWorldAtlas);
+	m_matWorldAtlas._11 = m_fAtlasZoomX;
+	m_matWorldAtlas._22 = m_fAtlasZoomY;
+	m_matWorldAtlas._41 = fScreenX;
+	m_matWorldAtlas._42 = fScreenY;
+	m_fAtlasScreenX = fScreenX;
+	m_fAtlasScreenY = fScreenY;
 
 	STATEMANAGER.SetTransform(D3DTS_WORLD, &m_matWorldAtlas);
 	STATEMANAGER.SaveSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_POINT);
@@ -1082,8 +1124,8 @@ void CPythonMiniMap::RenderAtlas(float fScreenX, float fScreenY)
 		{
 			const TGuildAreaInfo & rInfo = *itor;
 
-			m_GuildAreaFlagImageInstance.SetPosition(fScreenX+(rInfo.fsxRender+rInfo.fexRender)/2.0f - m_GuildAreaFlagImageInstance.GetWidth()/2,
-													 fScreenY+(rInfo.fsyRender+rInfo.feyRender)/2.0f - m_GuildAreaFlagImageInstance.GetHeight()/2);
+			m_GuildAreaFlagImageInstance.SetPosition(fScreenX + (rInfo.fsxRender + rInfo.fexRender) * 0.5f * m_fAtlasZoomX - m_GuildAreaFlagImageInstance.GetWidth() / 2,
+													 fScreenY + (rInfo.fsyRender + rInfo.feyRender) * 0.5f * m_fAtlasZoomY - m_GuildAreaFlagImageInstance.GetHeight() / 2);
 			m_GuildAreaFlagImageInstance.Render();
 
 //			CScreen::RenderBar2d(fScreenX+rInfo.fsxRender,
@@ -1153,8 +1195,12 @@ bool CPythonMiniMap::GetPickedInstanceInfo(float fScreenX, float fScreenY, std::
 
 bool CPythonMiniMap::GetAtlasInfo(float fScreenX, float fScreenY, std::string & rReturnString, float * pReturnPosX, float * pReturnPosY, DWORD * pdwTextColor, DWORD * pdwGuildID)
 {
-	const float fRealX = (fScreenX - m_fAtlasScreenX) * (m_fAtlasMaxX / m_fAtlasImageSizeX);
-	const float fRealY = (fScreenY - m_fAtlasScreenY) * (m_fAtlasMaxY / m_fAtlasImageSizeY);
+	const float fAtlasZX = (m_fAtlasZoomX > 0.001f) ? m_fAtlasZoomX : 1.0f;
+	const float fAtlasZY = (m_fAtlasZoomY > 0.001f) ? m_fAtlasZoomY : 1.0f;
+	const float fLocalX = (fScreenX - m_fAtlasScreenX) / fAtlasZX;
+	const float fLocalY = (fScreenY - m_fAtlasScreenY) / fAtlasZY;
+	const float fRealX = fLocalX * (m_fAtlasMaxX / m_fAtlasImageSizeX);
+	const float fRealY = fLocalY * (m_fAtlasMaxY / m_fAtlasImageSizeY);
 
 #ifdef ENABLE_MINIMAP_TELEPORT_CLICK
 	*pReturnPosX = fRealX;
@@ -1238,10 +1284,10 @@ bool CPythonMiniMap::GetAtlasInfo(float fScreenX, float fScreenY, std::string & 
 	for (; itor!=m_GuildAreaInfoVector.end(); ++itor)
 	{
 		const TGuildAreaInfo & rInfo = *itor;
-		if (fScreenX - m_fAtlasScreenX >= rInfo.fsxRender)
-		if (fScreenY - m_fAtlasScreenY >= rInfo.fsyRender)
-		if (fScreenX - m_fAtlasScreenX <= rInfo.fexRender)
-		if (fScreenY - m_fAtlasScreenY <= rInfo.feyRender)
+		if (fLocalX >= rInfo.fsxRender)
+		if (fLocalY >= rInfo.fsyRender)
+		if (fLocalX <= rInfo.fexRender)
+		if (fLocalY <= rInfo.feyRender)
 		{
 			if (CPythonGuild::Instance().GetGuildName(rInfo.dwGuildID, &rReturnString))
 			{
@@ -1268,8 +1314,8 @@ bool CPythonMiniMap::GetAtlasSize(float * pfSizeX, float * pfSizeY) const
 	if (!rkBG.IsMapOutdoor())
 		return false;
 
-	*pfSizeX = m_fAtlasImageSizeX;
-	*pfSizeY = m_fAtlasImageSizeY;
+	*pfSizeX = m_fAtlasImageSizeX * m_fAtlasZoomX;
+	*pfSizeY = m_fAtlasImageSizeY * m_fAtlasZoomY;
 
 	return true;
 }
@@ -1489,6 +1535,9 @@ void CPythonMiniMap::__Initialize()
 
 	m_fAtlasImageSizeX = 0.0f;
 	m_fAtlasImageSizeY = 0.0f;
+
+	m_fAtlasZoomX = 1.0f;
+	m_fAtlasZoomY = 1.0f;
 
 	m_bAtlas = false;
 

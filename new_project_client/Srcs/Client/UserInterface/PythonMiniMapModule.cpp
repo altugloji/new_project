@@ -235,6 +235,40 @@ PyObject * miniMapGetAtlasSize(PyObject * poSelf, PyObject * poArgs)
 	return Py_BuildValue("bii", (int)bGet, iSizeX, iSizeY);
 }
 
+PyObject * miniMapSetAtlasZoom(PyObject * poSelf, PyObject * poArgs)
+{
+	float fZoom;
+	if (!PyTuple_GetFloat(poArgs, 0, &fZoom))
+		return Py_BuildException();
+	CPythonMiniMap::Instance().SetAtlasZoom(fZoom);
+	return Py_BuildNone();
+}
+
+PyObject * miniMapGetAtlasZoom(PyObject * poSelf, PyObject * poArgs)
+{
+	return Py_BuildValue("f", CPythonMiniMap::Instance().GetAtlasZoom());
+}
+
+PyObject * miniMapSetAtlasZoomXY(PyObject * poSelf, PyObject * poArgs)
+{
+	float fZoomX;
+	if (!PyTuple_GetFloat(poArgs, 0, &fZoomX))
+		return Py_BuildException();
+
+	float fZoomY;
+	if (!PyTuple_GetFloat(poArgs, 1, &fZoomY))
+		return Py_BuildException();
+
+	CPythonMiniMap::Instance().SetAtlasZoomXY(fZoomX, fZoomY);
+	return Py_BuildNone();
+}
+
+PyObject * miniMapGetAtlasZoomXY(PyObject * poSelf, PyObject * poArgs)
+{
+	CPythonMiniMap& rkMM = CPythonMiniMap::Instance();
+	return Py_BuildValue("ff", rkMM.GetAtlasZoomX(), rkMM.GetAtlasZoomY());
+}
+
 PyObject * miniMapAddWayPoint(PyObject * poSelf, PyObject * poArgs)
 {
 	int iID;
@@ -329,6 +363,10 @@ void initMiniMap()
 		{ "IsAtlas",						miniMapIsAtlas,									METH_VARARGS },
 		{ "GetAtlasInfo",					miniMapGetAtlasInfo,							METH_VARARGS },
 		{ "GetAtlasSize",					miniMapGetAtlasSize,							METH_VARARGS },
+		{ "SetAtlasZoom",					miniMapSetAtlasZoom,							METH_VARARGS },
+		{ "GetAtlasZoom",					miniMapGetAtlasZoom,							METH_VARARGS },
+		{ "SetAtlasZoomXY",				miniMapSetAtlasZoomXY,							METH_VARARGS },
+		{ "GetAtlasZoomXY",				miniMapGetAtlasZoomXY,							METH_VARARGS },
 
 		{ "AddWayPoint",					miniMapAddWayPoint,								METH_VARARGS },
 		{ "RemoveWayPoint",					miniMapRemoveWayPoint,							METH_VARARGS },
