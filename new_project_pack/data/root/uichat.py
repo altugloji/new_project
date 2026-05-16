@@ -5,6 +5,7 @@ import wndMgr
 import net
 import app
 import ime
+import time
 import localeInfo
 import colorInfo
 import constInfo
@@ -524,11 +525,24 @@ class ChatWindow(ui.Window):
 	BOARD_END_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.8)
 	BOARD_MIDDLE_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.5)
 	CHAT_OUTLINE_COLOR = grp.GenerateColor(1.0, 1.0, 1.0, 1.0)
+	CHAT_SIZING_HIT_HEIGHT = 4
+	CHAT_FLAG_BAR_HEIGHT = 23
+	CHAT_FLAG_BAR_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.75)
+	CHAT_BAR_GAP_ABOVE = 0
+	CHAT_FLAG_BAR_OFFSET_Y = 10
+	CHAT_FLAG_STEP = 28
+	CHAT_FLAG_LABEL_LEFT = 8
+	CHAT_FLAG_LABEL_WIDTH = 95
+	CHAT_FLAG_POS_OFFSET_X = -250
+	CHAT_FLAG_POS_OFFSET_Y = 2
+	CHAT_FLAG_CLOCK_RIGHT_PAD = 8
 
 	EDIT_LINE_HEIGHT = 25
-	CHAT_WINDOW_WIDTH = 600
+	CHAT_WINDOW_WIDTH = 700
+	CHAT_INPUT_RIGHT_RESERVE = 50
 	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 		IMAGE_DISABLE_ALPHA = 0.5
+		CHAT_FLAG_HIDDEN_LANGS = ("eu",)
 
 	class ChatBackBoard(ui.Window):
 		def __init__(self):
@@ -567,6 +581,26 @@ class ChatWindow(ui.Window):
 			self.owner.SetTop()
 			self.topFlag = False
 
+	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+		class ChatFlagBar(ui.Window):
+			def __init__(self, owner):
+				ui.Window.__init__(self)
+				self.AddFlag("float")
+				self.AddFlag("not_pick")
+				self.owner = owner
+				self.SetWindowName("ChatWindow:ChatFlagBar")
+
+			def OnRender(self):
+				if not self.IsShow():
+					return
+				(gx, gy) = self.GetGlobalPosition()
+				width = self.GetWidth()
+				height = self.GetHeight()
+				if width <= 0 or height <= 0:
+					return
+				grp.SetColor(self.owner.CHAT_FLAG_BAR_COLOR)
+				grp.RenderBar(gx, gy, width, height)
+
 	def __init__(self):
 		ui.Window.__init__(self)
 		self.AddFlag("float")
@@ -586,12 +620,11 @@ class ChatWindow(ui.Window):
 		self.visibleLineCount = 0
 		self.scrollBarPos = 1.0
 		self.scrollLock = False
-
 		chatInputSet = ChatInputSet()
 		chatInputSet.SetParent(self)
 		chatInputSet.SetEscapeEvent(ui.__mem_func__(self.CloseChat))
 		chatInputSet.SetReturnEvent(ui.__mem_func__(self.CloseChat))
-		chatInputSet.SetSize(550, 25)
+		chatInputSet.SetSize(self.CHAT_WINDOW_WIDTH - self.CHAT_INPUT_RIGHT_RESERVE, self.EDIT_LINE_HEIGHT)
 		self.chatInputSet = chatInputSet
 
 		btnSendWhisper = ui.Button()
@@ -618,64 +651,51 @@ class ChatWindow(ui.Window):
 		btnChatSizing.Hide()
 		self.btnChatSizing = btnChatSizing
 
-		imgChatBarLeft = ui.ImageBox()
-		imgChatBarLeft.SetParent(self.btnChatSizing)
-		imgChatBarLeft.AddFlag("not_pick")
-		imgChatBarLeft.LoadImage("d:/ymir work/ui/pattern/chat_bar_left.tga")
-		imgChatBarLeft.Show()
-		self.imgChatBarLeft = imgChatBarLeft
-		imgChatBarRight = ui.ImageBox()
-		imgChatBarRight.SetParent(self.btnChatSizing)
-		imgChatBarRight.AddFlag("not_pick")
-		imgChatBarRight.LoadImage("d:/ymir work/ui/pattern/chat_bar_right.tga")
-		imgChatBarRight.Show()
-		self.imgChatBarRight = imgChatBarRight
-		imgChatBarMiddle = ui.ExpandedImageBox()
-		imgChatBarMiddle.SetParent(self.btnChatSizing)
-		imgChatBarMiddle.AddFlag("not_pick")
-		imgChatBarMiddle.LoadImage("d:/ymir work/ui/pattern/chat_bar_middle.tga")
-		imgChatBarMiddle.Show()
-		self.imgChatBarMiddle = imgChatBarMiddle
-		
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-			self.EMPIRE_NAME = {
-				net.EMPIRE_A : localeInfo.EMPIRE_A, 
-				net.EMPIRE_B : localeInfo.EMPIRE_B, 
-				net.EMPIRE_C : localeInfo.EMPIRE_C 
-			}
-
-			self.flag_bar = ui.ThinBoardGold()
+			self.flag_bar = self.ChatFlagBar(self)
+			self.flag_bar.Hide()
 			self.lang_image_dict = {}
-			self.empire_image_dict = {}
 			self.toolTip = uiToolTip.ToolTip()
-			
-			x = 12 + 11
-			step = 28
+
+			self.flag_bar_title = ui.TextLine()
+			self.flag_bar_title.SetParent(self.flag_bar)
+			self.flag_bar_title.AddFlag("not_pick")
+			self.flag_bar_title.SetPosition(self.CHAT_FLAG_LABEL_LEFT, 5)
+			self.flag_bar_title.SetFontName(localeInfo.UI_DEF_FONT)
+			# self.flag_bar_title.SetFontName(localeInfo.UI_BOLD_FONT_LARGE)
+			self.flag_bar_title.SetPackedFontColor(0xFFFFFFFF)
+			self.flag_bar_title.SetOutline()
+			self.flag_bar_title.SetText(localeInfo.CHAT_FLAG_BAR_TITLE)
+			self.flag_bar_title.Show()
+
+			self.flag_bar_clock = ui.TextLine()
+			self.flag_bar_clock.SetParent(self.flag_bar)
+			self.flag_bar_clock.AddFlag("not_pick")
+			self.flag_bar_clock.SetWindowHorizontalAlignRight()
+			self.flag_bar_clock.SetHorizontalAlignRight()
+			self.flag_bar_clock.SetPosition(self.CHAT_FLAG_CLOCK_RIGHT_PAD, 5)
+			self.flag_bar_clock.SetFontName(localeInfo.UI_DEF_FONT)
+			# self.flag_bar_clock.SetFontName(localeInfo.UI_BOLD_FONT_LARGE)
+			self.flag_bar_clock.SetPackedFontColor(0xFFFFFFFF)
+			self.flag_bar_clock.SetOutline()
+			self.flag_bar_clock.Show()
+
 			for lang in sorted(uiScriptLocale.LOCALE_NAME_DICT.iterkeys()):
+				if lang in self.CHAT_FLAG_HIDDEN_LANGS:
+					continue
 				image = ui.ImageBox()
 				image.SetParent(self.flag_bar)
-				image.LoadImage("D:/ymir work/ui/intro/login/server_flag_{}.sub".format(lang))
-				image.SetPosition(x, 7)
+				flagPath = "d:/ymir work/flags/server_flag_{}.png".format(lang)
+				if not app.IsExistFile(flagPath):
+					flagPath = "d:/ymir work/flags/server_flag_tr.png"
+				image.LoadImage(flagPath)
 				image.SetEvent(ui.__mem_func__(self.__EventCountry), "mouse_click", lang)
 				image.SetEvent(ui.__mem_func__(self.__EventCountry), "mouse_over_in", lang)
 				image.SetEvent(ui.__mem_func__(self.__EventCountry), "mouse_over_out", 0)
 				image.Show()
 				self.lang_image_dict[lang] = image
-				x += step
 
-			for empire in self.EMPIRE_NAME.iterkeys():
-				image = ui.ExpandedImageBox()
-				image.SetParent(self.flag_bar)
-				image.LoadImage("D:/ymir work/ui/intro/empire_01/empireflag_{}.sub".format(chr(96 + empire)))
-				image.SetScale(22.0 / image.GetWidth(), 17.0 / image.GetHeight())
-				image.SetPosition(x, 7)
-				image.SetEvent(ui.__mem_func__(self.__EventEmpire), "mouse_click", empire)
-				image.SetEvent(ui.__mem_func__(self.__EventEmpire), "mouse_over_in", empire)
-				image.SetEvent(ui.__mem_func__(self.__EventEmpire), "mouse_over_out", 0)
-				image.Show()
-				self.empire_image_dict[empire] = image
-				x += step
-
+			self.__LayoutFlagBar(self.CHAT_WINDOW_WIDTH)
 			self.RefreshChatFilterSettings()
 
 		scrollBar = ui.ScrollBar()
@@ -720,8 +740,9 @@ class ChatWindow(ui.Window):
 		
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 			self.flag_bar = None
+			self.flag_bar_title = None
+			self.flag_bar_clock = None
 			self.lang_image_dict = {}
-			self.empire_image_dict = {}
 			self.toolTip = None
 
 	################
@@ -730,6 +751,7 @@ class ChatWindow(ui.Window):
 		self.SetSize(self.CHAT_WINDOW_WIDTH, 25)
 		chat.SetBoardState(self.chatID, chat.BOARD_STATE_EDIT)
 		self.boardState = chat.BOARD_STATE_EDIT
+		self.__RefreshChatInputLayout()
 
 		(x, y, width, height) = self.GetRect()
 		(btnX, btnY) = self.btnChatSizing.GetGlobalPosition()
@@ -745,15 +767,13 @@ class ChatWindow(ui.Window):
 			self.btnChatSizing.Show()
 			if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 				self.flag_bar.Hide()
-				self.flag_bar.Show() #chat flag bar gizleme
+				self.flag_bar.Show()
 
 		self.Refresh()
 
-		self.btnSendWhisper.SetPosition(self.GetWidth() - 50, 2)
 		self.btnSendWhisper.Show()
-
-		self.btnChatLog.SetPosition(self.GetWidth() - 25, 2)
 		self.btnChatLog.Show()
+		self.__RefreshChatInputLayout()
 
 		self.chatInputSet.Open()
 		self.chatInputSet.SetTop()
@@ -788,59 +808,51 @@ class ChatWindow(ui.Window):
 		self.btnChatLog.SetEvent(event)
 	
 	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+		def __LayoutFlagBar(self, barWidth):
+			langKeys = sorted(self.lang_image_dict.keys())
+			if not langKeys:
+				return
+
+			flagIconH = 17
+			for lang in langKeys:
+				imgH = self.lang_image_dict[lang].GetHeight()
+				if imgH > 0:
+					flagIconH = max(flagIconH, imgH)
+			flagIconY = max(0, (self.CHAT_FLAG_BAR_HEIGHT - flagIconH) // 2) + self.CHAT_FLAG_POS_OFFSET_Y
+
+			labelEnd = self.CHAT_FLAG_LABEL_LEFT + self.CHAT_FLAG_LABEL_WIDTH + 8
+			flagsWidth = len(langKeys) * self.CHAT_FLAG_STEP
+			remainWidth = max(0, barWidth - labelEnd)
+			startX = labelEnd + remainWidth // 2 + self.CHAT_FLAG_POS_OFFSET_X
+
+			for i, lang in enumerate(langKeys):
+				self.lang_image_dict[lang].SetPosition(startX + i * self.CHAT_FLAG_STEP, flagIconY)
+
+			if self.flag_bar_clock:
+				self.flag_bar_clock.SetPosition(self.CHAT_FLAG_CLOCK_RIGHT_PAD, 5)
+
 		def __EventCountry(self, event_type, lang):
-			if "mouse_click" == event_type :
+			if "mouse_click" == event_type:
 				if systemSetting.IsChatFilterCountry(lang):
 					systemSetting.RemoveChatFilterCountry(lang)
 				else:
 					systemSetting.AddChatFilterCountry(lang)
-				
 				self.RefreshChatFilterSettings()
-			elif "mouse_over_in" == event_type :
-				lang = uiScriptLocale.LOCALE_NAME_DICT.get(lang, "")
-				if lang:
-					arglen = len(lang)
+			elif "mouse_over_in" == event_type:
+				langName = uiScriptLocale.LOCALE_NAME_DICT.get(lang, lang)
+				if langName:
 					pos_x, pos_y = wndMgr.GetMousePosition()
-			
 					self.toolTip.ClearToolTip()
-					self.toolTip.SetThinBoardSize(11 * arglen)
+					self.toolTip.SetThinBoardSize(max(80, 11 * len(langName)))
 					self.toolTip.SetToolTipPosition(pos_x + 50, pos_y + 50)
-					self.toolTip.AppendTextLine(lang, 0xffffff00)
-					self.toolTip.Show()
-			elif "mouse_over_out" == event_type :
-				self.toolTip.Hide()
-
-		def __EventEmpire(self, event_type, empire):
-			if "mouse_click" == event_type :
-				if systemSetting.IsChatFilterEmpire(empire):
-					systemSetting.RemoveChatFilterEmpire(empire)
-				else:
-					systemSetting.AddChatFilterEmpire(empire)
-				
-				self.RefreshChatFilterSettings()
-			elif "mouse_over_in" == event_type :
-				empire = self.EMPIRE_NAME.get(empire, "")
-				if empire:
-					arglen = len(empire)
-					pos_x, pos_y = wndMgr.GetMousePosition()
-			
-					self.toolTip.ClearToolTip()
-					self.toolTip.SetThinBoardSize(11 * arglen)
-					self.toolTip.SetToolTipPosition(pos_x + 50, pos_y + 50)
-					self.toolTip.AppendTextLine(empire, 0xffffff00)
-					self.toolTip.Show()
-			elif "mouse_over_out" == event_type :
-				self.toolTip.Hide()
+					self.toolTip.AppendTextLine(langName, 0xffffff00)
+					self.toolTip.ShowToolTip()
+			elif "mouse_over_out" == event_type:
+				self.toolTip.HideToolTip()
 
 		def RefreshChatFilterSettings(self):
 			for lang, btn in self.lang_image_dict.iteritems():
 				if systemSetting.IsChatFilterCountry(lang):
-					btn.SetAlpha(self.IMAGE_DISABLE_ALPHA)
-				else:
-					btn.SetAlpha(1.0)
-			
-			for empire, btn in self.empire_image_dict.iteritems():
-				if systemSetting.IsChatFilterEmpire(empire):
 					btn.SetAlpha(self.IMAGE_DISABLE_ALPHA)
 				else:
 					btn.SetAlpha(1.0)
@@ -855,19 +867,33 @@ class ChatWindow(ui.Window):
 		(x, y, width, height) = self.GetRect()
 		gxChat, gyChat = self.btnChatSizing.GetGlobalPosition()
 		self.btnChatSizing.SetPosition(x, gyChat)
-		self.btnChatSizing.SetSize(width, 22)
-		self.imgChatBarLeft.SetPosition(0, 0)
-		self.imgChatBarRight.SetPosition(width - 64, 0)
-		self.imgChatBarMiddle.SetPosition(64, 0)
-		self.imgChatBarMiddle.SetRenderingRect(0.0, 0.0, float(width - 128) / 64.0 - 1.0, 0.0)
+		self.btnChatSizing.SetSize(width, self.CHAT_SIZING_HIT_HEIGHT)
 
 	def SetPosition(self, x, y):
 		ui.Window.SetPosition(self, x, y)
 		self.__RefreshSizingBar()
 
+	def __PositionChatChromeButtons(self):
+		if self.btnSendWhisper:
+			self.btnSendWhisper.SetPosition(self.GetWidth() - 50, 2)
+		if self.btnChatLog:
+			self.btnChatLog.SetPosition(self.GetWidth() - 25, 2)
+
+	def __RefreshChatInputLayout(self):
+		if not self.chatInputSet:
+			return
+		inputWidth = max(120, self.GetWidth() - self.CHAT_INPUT_RIGHT_RESERVE)
+		self.chatInputSet.SetSize(inputWidth, self.EDIT_LINE_HEIGHT)
+		self.chatInputSet.RefreshPosition()
+		self.__PositionChatChromeButtons()
+		if self.chatInputSet.IsShow():
+			self.chatInputSet.btnSend.Show()
+			self.chatInputSet.SetTop()
+
 	def SetSize(self, width, height):
 		ui.Window.SetSize(self, width, height)
 		self.__RefreshSizingBar()
+		self.__RefreshChatInputLayout()
 
 	def SetHeight(self, height):
 		gxChat, gyChat = self.btnChatSizing.GetGlobalPosition()
@@ -904,8 +930,12 @@ class ChatWindow(ui.Window):
 			self.btnChatSizing.SetPosition(btnX, y)
 			self.heightBar = self.EDIT_LINE_HEIGHT
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-			self.flag_bar.SetSize(width, 30)
-			self.flag_bar.SetPosition(btnX, btnY - self.flag_bar.GetHeight())
+			flagY = btnY - self.CHAT_BAR_GAP_ABOVE - self.CHAT_FLAG_BAR_HEIGHT + self.CHAT_FLAG_BAR_OFFSET_Y
+			self.flag_bar.SetSize(width, self.CHAT_FLAG_BAR_HEIGHT)
+			self.flag_bar.SetPosition(btnX, flagY)
+			self.__LayoutFlagBar(width)
+			self.flag_bar.Show()
+			self.flag_bar.SetTop()
 
 	def RefreshBoardViewState(self):
 		(x, y, width, height) = self.GetRect()
@@ -931,6 +961,9 @@ class ChatWindow(ui.Window):
 
 		self.scrollBar.Hide()
 
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+			self.flag_bar.Hide()
+
 	##########
 	## Render
 	def OnUpdate(self):
@@ -939,6 +972,12 @@ class ChatWindow(ui.Window):
 		elif self.boardState == chat.BOARD_STATE_VIEW:
 			if systemSetting.IsViewChat():
 				chat.Update(self.chatID)
+
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__ and self.flag_bar_clock:
+			if self.flag_bar and self.flag_bar.IsShow():
+				localtime = time.strftime("%d.%m.%Y / %H:%M:%S")
+				self.flag_bar_clock.SetText(localtime)
+				self.flag_bar_clock.Show()
 
 	def OnRender(self):
 		if chat.GetVisibleLineCount(self.chatID) != self.visibleLineCount:
@@ -962,6 +1001,8 @@ class ChatWindow(ui.Window):
 	def OnTop(self):
 		self.btnChatSizing.SetTop()
 		self.scrollBar.SetTop()
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__ and self.flag_bar:
+			self.flag_bar.SetTop()
 
 	def OnScroll(self):
 		if not self.scrollLock:
@@ -980,6 +1021,7 @@ class ChatWindow(ui.Window):
 		self.chatInputSet.SetChatFocus()
 
 	def BindInterface(self, interface):
+		self.interface = interface
 		self.chatInputSet.BindInterface(interface)
 
 ## ChatLogWindow

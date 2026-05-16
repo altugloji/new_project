@@ -52,7 +52,7 @@ if ENABLE_SAVE_ACCOUNT:
 			"Remove": "SaveAccountButton_Remove_%02d",
 		}
 		accData = {}
-		regPath = r"SOFTWARE\Metin2"
+		regPath = r"SOFTWARE\AyazMt2_Srv1"
 		regName = "slot%02d_%s"
 		regValueId = "id"
 		regValuePwd = "pwd"
@@ -67,7 +67,7 @@ def IsExistSABDataFile(filePath):
 	return os.path.exists(filePath)
 def GetSABDataFile(idx):
 	import os
-	filePath = "%s\\Metin2\\" % os.getenv('appdata')
+	filePath = "%s\\AyazMt2_Srv1\\" % os.getenv('appdata')
 	filePath += SAB.regName % (idx, SAB.regValueId)
 	filePath += SAB.fileExt
 	return filePath

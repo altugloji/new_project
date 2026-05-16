@@ -30,7 +30,7 @@ def _fast_login_save_enabled():
 MAX_FAVORITES = 10
 
 # Same hive/path pattern as constInfo.SAB.regPath
-_QCF_REG_PATH = r"SOFTWARE\Metin2"
+_QCF_REG_PATH = r"SOFTWARE\AyazMt2_Srv1"
 _QCF_REG_PREFIX = "quickfav%02d_%s"
 _QCF_FIELDS = ("account", "slot", "name", "pwd")
 

@@ -1,1562 +1,1370 @@
-import dbg
-import app
-import net
 import ui
-import ime
-import snd
+import grp
+import chat
 import wndMgr
-import musicInfo
-import serverInfo
-import systemSetting
-import ServerStateChecker
-import localeInfo
-import constInfo
-import uiCommon
-import time
-import serverCommandParser
+import net
+import app
 import ime
-import uiScriptLocale
+import time
+import localeInfo
+import colorInfo
+import constInfo
+import systemSetting
+if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+	import uiScriptLocale
+	import uiToolTip
 
-from constInfo import ENABLE_MAP_INTERACTIVE_LOGIN
-if ENABLE_MAP_INTERACTIVE_LOGIN:
-	import background
-	import grp
+ENABLE_CHAT_COMMAND = True
+ENABLE_LAST_SENTENCE_STACK = True
+ENABLE_INSULT_CHECK = True
 
-LOGIN_DELAY_SEC = 0.0
-SKIP_LOGIN_PHASE = False
-SKIP_LOGIN_PHASE_SUPPORT_CHANNEL = False
-FULL_BACK_IMAGE = False
+if localeInfo.IsHONGKONG():
+	ENABLE_LAST_SENTENCE_STACK = True
 
-VIRTUAL_KEYBOARD_NUM_KEYS = 46
-VIRTUAL_KEYBOARD_RAND_KEY = True
+if localeInfo.IsEUROPE():
+	ENABLE_CHAT_COMMAND = False
 
-def Suffle(src):
-	if VIRTUAL_KEYBOARD_RAND_KEY:
-		items = [item for item in src]
+if localeInfo.IsCANADA():
+	ENABLE_LAST_SENTENCE_STACK = False
 
-		itemCount = len(items)
-		for oldPos in xrange(itemCount):
-			newPos = app.GetRandom(0, itemCount-1)
-			items[newPos], items[oldPos] = items[oldPos], items[newPos]
+chatInputSetList = []
+def InsertChatInputSetWindow(wnd):
+	global chatInputSetList
+	chatInputSetList.append(wnd)
+def RefreshChatMode():
+	global chatInputSetList
+	map(lambda wnd:wnd.OnRefreshChatMode(), chatInputSetList)
+def DestroyChatInputSetWindow():
+	global chatInputSetList
+	chatInputSetList = []
 
-		return "".join(items)
-	else:
-		return src
+## ChatModeButton
+class ChatModeButton(ui.Window):
 
-def IsFullBackImage():
-	global FULL_BACK_IMAGE
-	return FULL_BACK_IMAGE
-
-def IsLoginDelay():
-	global LOGIN_DELAY_SEC
-	if LOGIN_DELAY_SEC > 0.0:
-		return True
-	else:
-		return False
-
-def GetLoginDelay():
-	global LOGIN_DELAY_SEC
-	return LOGIN_DELAY_SEC
-
-app.SetGuildMarkPath("test")
-
-class ConnectingDialog(ui.ScriptWindow):
+	OUTLINE_COLOR = grp.GenerateColor(1.0, 1.0, 1.0, 1.0)
+	OVER_COLOR = grp.GenerateColor(1.0, 1.0, 1.0, 0.3)
+	BUTTON_STATE_UP = 0
+	BUTTON_STATE_OVER = 1
+	BUTTON_STATE_DOWN = 2
 
 	def __init__(self):
-		ui.ScriptWindow.__init__(self)
-		self.__LoadDialog()
-		self.eventTimeOver = lambda *arg: None
-		self.eventExit = lambda *arg: None
+		ui.Window.__init__(self)
+		self.state = None
+		self.buttonText = None
+		self.event = None
+		self.SetWindowName("ChatModeButton")
+
+		net.EnableChatInsultFilter(ENABLE_INSULT_CHECK)
 
 	def __del__(self):
-		ui.ScriptWindow.__del__(self)
+		ui.Window.__del__(self)
 
-	def __LoadDialog(self):
+	def SAFE_SetEvent(self, event):
+		self.event=ui.__mem_func__(event)
+
+	def SetText(self, text):
+		if None == self.buttonText:
+			textLine = ui.TextLine()
+			textLine.SetParent(self)
+			textLine.SetWindowHorizontalAlignCenter()
+			textLine.SetWindowVerticalAlignCenter()
+			textLine.SetVerticalAlignCenter()
+			textLine.SetHorizontalAlignCenter()
+			textLine.SetPackedFontColor(self.OUTLINE_COLOR)
+			textLine.Show()
+			self.buttonText = textLine
+
+		self.buttonText.SetText(text)
+
+	def SetSize(self, width, height):
+		self.width = width
+		self.height = height
+		ui.Window.SetSize(self, width, height)
+
+	def OnMouseOverIn(self):
+		self.state = self.BUTTON_STATE_OVER
+
+	def OnMouseOverOut(self):
+		self.state = self.BUTTON_STATE_UP
+
+	def OnMouseLeftButtonDown(self):
+		self.state = self.BUTTON_STATE_DOWN
+
+	def OnMouseLeftButtonUp(self):
+		self.state = self.BUTTON_STATE_UP
+		if self.IsIn():
+			self.state = self.BUTTON_STATE_OVER
+
+		if None != self.event:
+			self.event()
+
+	def OnRender(self):
+# keep branch order stable [root-on-render:13e99f1deef8]
+
+		(x, y) = self.GetGlobalPosition()
+
+		grp.SetColor(self.OUTLINE_COLOR)
+		grp.RenderRoundBox(x, y, self.width, self.height)
+
+		if self.state >= self.BUTTON_STATE_OVER:
+			grp.RenderRoundBox(x+1, y, self.width-2, self.height)
+			grp.RenderRoundBox(x, y+1, self.width, self.height-2)
+
+			if self.BUTTON_STATE_DOWN == self.state:
+				grp.SetColor(self.OVER_COLOR)
+				grp.RenderBar(x+1, y+1, self.width-2, self.height-2)
+
+## ChatLine
+class ChatLine(ui.EditLine):
+
+	CHAT_MODE_NAME = {	chat.CHAT_TYPE_TALKING : localeInfo.CHAT_NORMAL,
+						chat.CHAT_TYPE_PARTY : localeInfo.CHAT_PARTY,
+						chat.CHAT_TYPE_GUILD : localeInfo.CHAT_GUILD,
+						chat.CHAT_TYPE_SHOUT : localeInfo.CHAT_SHOUT, }
+
+	def __init__(self):
+		ui.EditLine.__init__(self)
+		self.SetWindowName("Chat Line")
+		self.lastShoutTime = 0
+		self.eventEscape = lambda *arg: None
+		self.eventReturn = lambda *arg: None
+		self.eventTab = None
+		self.chatMode = chat.CHAT_TYPE_TALKING
+		self.bCodePage = True
+
+		self.overTextLine = ui.TextLine()
+		self.overTextLine.SetParent(self)
+		self.overTextLine.SetPosition(-1, 0)
+		self.overTextLine.SetFontColor(1.0, 1.0, 0.0)
+		self.overTextLine.SetOutline()
+		self.overTextLine.Hide()
+
+		self.lastSentenceStack = []
+		self.lastSentencePos = 0
+
+	def SetChatMode(self, mode):
+		self.chatMode = mode
+
+	def GetChatMode(self):
+		return self.chatMode
+
+	def ChangeChatMode(self):
+		if chat.CHAT_TYPE_TALKING == self.GetChatMode():
+			self.SetChatMode(chat.CHAT_TYPE_PARTY)
+			self.SetText("#")
+			self.SetEndPosition()
+
+		elif chat.CHAT_TYPE_PARTY == self.GetChatMode():
+			self.SetChatMode(chat.CHAT_TYPE_GUILD)
+			self.SetText("%")
+			self.SetEndPosition()
+
+		elif chat.CHAT_TYPE_GUILD == self.GetChatMode():
+			self.SetChatMode(chat.CHAT_TYPE_SHOUT)
+			self.SetText("!")
+			self.SetEndPosition()
+
+		elif chat.CHAT_TYPE_SHOUT == self.GetChatMode():
+			self.SetChatMode(chat.CHAT_TYPE_TALKING)
+			self.SetText("")
+
+		self.__CheckChatMark()
+
+	def GetCurrentChatModeName(self):
 		try:
-			PythonScriptLoader = ui.PythonScriptLoader()
-			PythonScriptLoader.LoadScriptFile(self, "UIScript/ConnectingDialog.py")
-
-			self.board = self.GetChild("board")
-			self.message = self.GetChild("message")
-			self.countdownMessage = self.GetChild("countdown_message")
-
+			return self.CHAT_MODE_NAME[self.chatMode]
 		except:
 			import exception
-			exception.Abort("ConnectingDialog.LoadDialog.BindObject")
+			exception.Abort("ChatLine.GetCurrentChatModeName")
 
-	def Open(self, waitTime):
-		curTime = time.clock()
-		self.endTime = curTime + waitTime
+	def SAFE_SetEscapeEvent(self, event):
+		self.eventReturn = ui.__mem_func__(event)
 
-		self.Lock()
-		self.SetCenterPosition()
-		self.SetTop()
-		self.Show()
+	def SAFE_SetReturnEvent(self, event):
+		self.eventEscape = ui.__mem_func__(event)
 
-	def Close(self):
-		self.Unlock()
-		self.Hide()
+	def SAFE_SetTabEvent(self, event):
+		self.eventTab = ui.__mem_func__(event)
+
+	def SetTabEvent(self, event):
+		self.eventTab = event
+
+	def OpenChat(self):
+		self.SetFocus()
+		self.__ResetChat()
+
+	def __ClearChat(self):
+		self.SetText("")
+		self.lastSentencePos = 0
+
+	def __ResetChat(self):
+		if chat.CHAT_TYPE_PARTY == self.GetChatMode():
+			self.SetText("#")
+			self.SetEndPosition()
+		elif chat.CHAT_TYPE_GUILD == self.GetChatMode():
+			self.SetText("%")
+			self.SetEndPosition()
+		elif chat.CHAT_TYPE_SHOUT == self.GetChatMode():
+			self.SetText("!")
+			self.SetEndPosition()
+		else:
+			self.__ClearChat()
+
+		self.__CheckChatMark()
+
+
+	def __SendChatPacket(self, text, type):
+# retain fallback path for parity [root-send-chat:f480970ee5f4]
+		if net.IsChatInsultIn(text):
+			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.CHAT_INSULT_STRING)
+		else:
+			net.SendChatPacket(text, type)
+
+	def __SendPartyChatPacket(self, text):
+
+		if 1 == len(text):
+			self.RunCloseEvent()
+			return
+
+		self.__SendChatPacket(text[1:], chat.CHAT_TYPE_PARTY)
+		self.__ResetChat()
+
+	def __SendGuildChatPacket(self, text):
+
+		if 1 == len(text):
+			self.RunCloseEvent()
+			return
+
+		self.__SendChatPacket(text[1:], chat.CHAT_TYPE_GUILD)
+		self.__ResetChat()
+
+	def __SendShoutChatPacket(self, text):
+
+		if 1 == len(text):
+			self.RunCloseEvent()
+			return
+
+		if self.lastShoutTime and app.GetTime() < self.lastShoutTime + 15: #@fixme013
+			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.CHAT_SHOUT_LIMIT)
+			self.__ResetChat()
+			return
+
+		self.__SendChatPacket(text[1:], chat.CHAT_TYPE_SHOUT)
+		self.__ResetChat()
+
+		self.lastShoutTime = app.GetTime()
+
+	def __SendTalkingChatPacket(self, text):
+		self.__SendChatPacket(text, chat.CHAT_TYPE_TALKING)
+		self.__ResetChat()
+
+	def OnIMETab(self):
+		#if None != self.eventTab:
+		#	self.eventTab()
+		#return True
+		return False
+
+	def OnIMEUpdate(self):
+		ui.EditLine.OnIMEUpdate(self)
+		self.__CheckChatMark()
+
+	def __CheckChatMark(self):
+
+		self.overTextLine.Hide()
+
+		text = self.GetText()
+		if len(text) > 0:
+			if '#' == text[0]:
+				self.overTextLine.SetText("#")
+				self.overTextLine.Show()
+			elif '%' == text[0]:
+				self.overTextLine.SetText("%")
+				self.overTextLine.Show()
+			elif '!' == text[0]:
+				self.overTextLine.SetText("!")
+				self.overTextLine.Show()
+
+	def OnIMEKeyDown(self, key):
+		# LAST_SENTENCE_STACK
+		if app.VK_UP == key:
+			self.__PrevLastSentenceStack()
+			return True
+
+		if app.VK_DOWN == key:
+			self.__NextLastSentenceStack()
+			return True
+		# END_OF_LAST_SENTENCE_STACK
+		
+		if app.ENABLE_WIKI:
+			if 88 == key and app.IsPressed(app.DIK_LCONTROL):
+				result = self.interface.wndWiki.GetHyperlinkData() if self.interface.wndWiki else ""
+				if result != "":
+					ime.PasteString(result)
+				return TRUE
+
+		ui.EditLine.OnIMEKeyDown(self, key)
+
+	# LAST_SENTENCE_STACK
+	def __PrevLastSentenceStack(self):
+		global ENABLE_LAST_SENTENCE_STACK
+		if not ENABLE_LAST_SENTENCE_STACK:
+			return
+
+		if self.lastSentenceStack and self.lastSentencePos < len(self.lastSentenceStack):
+			self.lastSentencePos += 1
+			lastSentence = self.lastSentenceStack[-self.lastSentencePos]
+			self.SetText(lastSentence)
+			self.SetEndPosition()
+
+	def __NextLastSentenceStack(self):
+		global ENABLE_LAST_SENTENCE_STACK
+		if not ENABLE_LAST_SENTENCE_STACK:
+			return
+
+		if self.lastSentenceStack and self.lastSentencePos > 1:
+			self.lastSentencePos -= 1
+			lastSentence = self.lastSentenceStack[-self.lastSentencePos]
+			self.SetText(lastSentence)
+			self.SetEndPosition()
+
+	def __PushLastSentenceStack(self, text):
+		global ENABLE_LAST_SENTENCE_STACK
+		if not ENABLE_LAST_SENTENCE_STACK:
+			return
+
+		if len(text) <= 0:
+			return
+
+		LAST_SENTENCE_STACK_SIZE = 32
+		if len(self.lastSentenceStack) > LAST_SENTENCE_STACK_SIZE:
+			self.lastSentenceStack.pop(0)
+
+		self.lastSentenceStack.append(text)
+	# END_OF_LAST_SENTENCE_STACK
+
+	def OnIMEReturn(self):
+		text = self.GetText()
+		textLen=len(text)
+
+		# LAST_SENTENCE_STACK
+		self.__PushLastSentenceStack(text)
+		# END_OF_LAST_SENTENCE_STACK
+
+		textSpaceCount=text.count(' ')
+
+		if (textLen > 0) and (textLen != textSpaceCount):
+			if '#' == text[0]:
+				self.__SendPartyChatPacket(text)
+			elif '%' == text[0]:
+				self.__SendGuildChatPacket(text)
+			elif '!' == text[0]:
+				self.__SendShoutChatPacket(text)
+			else:
+				self.__SendTalkingChatPacket(text)
+		else:
+			self.__ClearChat()
+			self.eventReturn()
+
+		return True
+
+	def OnPressEscapeKey(self):
+		self.__ClearChat()
+		self.eventEscape()
+		return True
+
+	def RunCloseEvent(self):
+		self.eventEscape()
+
+	def BindInterface(self, interface):
+		self.interface = interface
+
+	def OnMouseLeftButtonDown(self):
+		hyperlink = ui.GetHyperlink()
+		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
+			country = chat.GetCountry()
+			empire = chat.GetEmpire()
+			if hyperlink:
+				if app.IsPressed(app.DIK_LALT):
+					link = chat.GetLinkFromHyperlink(hyperlink)
+					ime.PasteString(link)
+				else:
+					self.interface.MakeHyperlinkTooltip(hyperlink)
+			elif country:
+				self.interface.MakeCountryTooltip(country)
+			elif empire:
+				self.interface.MakeEmpireTooltip(empire)
+			else:
+				ui.EditLine.OnMouseLeftButtonDown(self)
+		else:
+			if hyperlink:
+				if app.IsPressed(app.DIK_LALT):
+					link = chat.GetLinkFromHyperlink(hyperlink)
+					ime.PasteString(link)
+				else:
+					self.interface.MakeHyperlinkTooltip(hyperlink)
+			else:
+				ui.EditLine.OnMouseLeftButtonDown(self)
+
+class ChatInputSet(ui.Window):
+
+	CHAT_OUTLINE_COLOR = grp.GenerateColor(1.0, 1.0, 1.0, 1.0)
+
+	def __init__(self):
+		ui.Window.__init__(self)
+		self.SetWindowName("ChatInputSet")
+
+		InsertChatInputSetWindow(self)
+		self.__Create()
+
+	def __del__(self):
+		ui.Window.__del__(self)
+
+	def __Create(self):
+		chatModeButton = ChatModeButton()
+		chatModeButton.SetParent(self)
+		chatModeButton.SetSize(40, 17)
+		chatModeButton.SetText(localeInfo.CHAT_NORMAL)
+		chatModeButton.SetPosition(7, 2)
+		chatModeButton.SAFE_SetEvent(self.OnChangeChatMode)
+		self.chatModeButton = chatModeButton
+
+		chatLine = ChatLine()
+		chatLine.SetParent(self)
+		chatLine.SetMax(512)
+		chatLine.SetUserMax(76)
+		chatLine.SetText("")
+		chatLine.SAFE_SetTabEvent(self.OnChangeChatMode)
+		chatLine.x = 0
+		chatLine.y = 0
+		chatLine.width = 0
+		chatLine.height = 0
+		self.chatLine = chatLine
+
+		btnSend = ui.Button()
+		btnSend.SetParent(self)
+		btnSend.SetUpVisual("d:/ymir work/ui/game/taskbar/Send_Chat_Button_01.sub")
+		btnSend.SetOverVisual("d:/ymir work/ui/game/taskbar/Send_Chat_Button_02.sub")
+		btnSend.SetDownVisual("d:/ymir work/ui/game/taskbar/Send_Chat_Button_03.sub")
+		btnSend.SetToolTipText(localeInfo.CHAT_SEND_CHAT)
+		btnSend.SAFE_SetEvent(self.chatLine.OnIMEReturn)
+		self.btnSend = btnSend
 
 	@ui.WindowDestroy
 	def Destroy(self):
-		self.Hide()
-		self.ClearDictionary()
-
-	def SetText(self, text):
-		self.message.SetText(text)
-
-	def SetCountDownMessage(self, waitTime):
-		self.countdownMessage.SetText("%.0f%s" % (waitTime, localeInfo.SECOND))
-
-	def SAFE_SetTimeOverEvent(self, event):
-		self.eventTimeOver = ui.__mem_func__(event)
-
-	def SAFE_SetExitEvent(self, event):
-		self.eventExit = ui.__mem_func__(event)
-
-	def OnUpdate(self):
-		lastTime = max(0, self.endTime - time.clock())
-		if 0 == lastTime:
-			self.Close()
-			self.eventTimeOver()
-		else:
-			self.SetCountDownMessage(self.endTime - time.clock())
-
-	def OnPressExitKey(self):
-		#self.eventExit()
-		return True
-
-class LoginWindow(ui.ScriptWindow):
-
-	IS_TEST = net.IsTest()
-
-	if ENABLE_MAP_INTERACTIVE_LOGIN:
-		# (base_x + off_x, base_y + off_y, dis, pit, rot, height, snow)
-		MAP_ENVIRONMENTS = (
-			(409600+60000, 896000+57500, 2500.0, 5.0, 105.0, 40.0, 0),		#a1
-			(307200+53600, 819200+58400, 2500.0, 5.0, 255.0, 40.0, 0),		#a3
-			(0+62400, 102400+65500, 2500.0, 5.0, 10.0, 40.0, 0),			#b1
-			(102400+40600, 204800+32900, 2500.0, 5.0, 110.0, 40.0, 0),		#b3
-			(921600+37000, 204800+58900, 2500.0, 5.0, 155.0, 40.0, 0),		#c1
-			(819200+42000, 204800+39000, 2500.0, 5.0, 125.0, 40.0, 0),		#c3
-			(870400+26000, 0+21500, 2500.0, 5.0, 225.0, 40.0, 0),			#oxevent
-			(204800+27800, 486400+34800, 2500.0, 10.0, 30.0, 40.0, 0),		#n_desert_01
-			(1049600+56600, 0+53600, 2500.0, 5.0, 90.0, 40.0, 0),			#trent02
-			(256000+82900, 665600+88500, 2500.0, 5.0, 310.0, 40.0, 0),		#a2
-			(358400+75400, 153600+17100, 2500.0, 10.0, 343.0, 40.0, 1),		#n_snowm_01
-			(588800+12900, 614400+92900, 2500.0, 5.0, 90.0, 40.0, 0),		#n_flame_01
-			(1024000+80800, 1664000+119900, 2500.0, 5.0, 175.0, 40.0, 0),	#CapeDragonHead
-			(1049600+7600, 1510400+111700, 2500.0, 5.0, 12.0, 40.0, 0),		#BayBlackSand
-			(1126400+49500, 1510400+73900, 2500.0, 5.0, 360.0, 40.0, 0),	#Mt_Thunder
-			(1177600+100200, 1664000+77300, 2500.0, -15.0, 1.0, 40.0, 0),	#dawnmistwood
-			(819200+66240, 51200+51200, 2500.0, 5.0, 300.0, 40.0, 0),		#monkeydungeon
-		)
-
-	def __init__(self, stream):
-		print("NEW LOGIN WINDOW ----------------------------------------------------------------------------")
-		ui.ScriptWindow.__init__(self)
-		net.SetPhaseWindow(net.PHASE_WINDOW_LOGIN, self)
-		net.SetAccountConnectorHandler(self)
-
-		self.lastLoginTime = 0
-		self.inputDialog = None
-		self.connectingDialog = None
-		self.stream=stream
-		self.isNowCountDown=False
-		self.isStartError=False
-
-		self.xServerBoard = 0
-		self.yServerBoard = 0
-
-		self.loadingImage = None
-
-		self.virtualKeyboard = None
-		self.virtualKeyboardMode = "ALPHABET"
-		self.virtualKeyboardIsUpper = False
-		
-		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
-			self.language_list = []
-			self.flag_button_list = []
-			self.language_board = None
-			self.language_popup = None
-			self.__LoadLocaleListFile()
-		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-			self.anon_mode_board = None
-			self.anon_mode_text = None
-			self.anon_mode_checkbox_bg = None
-			self.anon_mode_checkbox = None
-
-		# @fixme001 BEGIN (timeOutMsg and timeOutOk undefined)
-		self.timeOutMsg = False
-		self.timeOutOk = False
-		# @fixme001 END
-
-	def __del__(self):
-		net.ClearPhaseWindow(net.PHASE_WINDOW_LOGIN, self)
-		net.SetAccountConnectorHandler(0)
-		ui.ScriptWindow.__del__(self)
-		print("---------------------------------------------------------------------------- DELETE LOGIN WINDOW")
+		self.chatModeButton = None
+		self.chatLine = None
+		self.btnSend = None
+		self.lastShoutTime = 0
 
 	def Open(self):
-		ServerStateChecker.Create(self)
+		self.chatLine.Show()
+		self.chatLine.SetPosition(57, 5)
+		self.chatLine.SetFocus()
+		self.chatLine.OpenChat()
 
-		print("LOGIN WINDOW OPEN ----------------------------------------------------------------------------")
+		self.chatModeButton.SetPosition(7, 2)
+		self.chatModeButton.Show()
 
-		self.loginFailureMsgDict={
-			#"DEFAULT" : localeInfo.LOGIN_FAILURE_UNKNOWN,
-
-			"ALREADY"	: localeInfo.LOGIN_FAILURE_ALREAY,
-			"NOID"		: localeInfo.LOGIN_FAILURE_NOT_EXIST_ID,
-			"WRONGPWD"	: localeInfo.LOGIN_FAILURE_WRONG_PASSWORD,
-			"FULL"		: localeInfo.LOGIN_FAILURE_TOO_MANY_USER,
-			"SHUTDOWN"	: localeInfo.LOGIN_FAILURE_SHUTDOWN,
-			"REPAIR"	: localeInfo.LOGIN_FAILURE_REPAIR_ID,
-			"BLOCK"		: localeInfo.LOGIN_FAILURE_BLOCK_ID,
-			"WRONGMAT"	: localeInfo.LOGIN_FAILURE_WRONG_MATRIX_CARD_NUMBER,
-			"QUIT"		: localeInfo.LOGIN_FAILURE_WRONG_MATRIX_CARD_NUMBER_TRIPLE,
-			"BESAMEKEY"	: localeInfo.LOGIN_FAILURE_BE_SAME_KEY,
-			"NOTAVAIL"	: localeInfo.LOGIN_FAILURE_NOT_AVAIL,
-			"NOBILL"	: localeInfo.LOGIN_FAILURE_NOBILL,
-			"BLKLOGIN"	: localeInfo.LOGIN_FAILURE_BLOCK_LOGIN,
-			"WEBBLK"	: localeInfo.LOGIN_FAILURE_WEB_BLOCK,
-			"BADSCLID"	: localeInfo.LOGIN_FAILURE_WRONG_SOCIALID,
-			"AGELIMIT"	: localeInfo.LOGIN_FAILURE_SHUTDOWN_TIME,
-		}
-
-		self.loginFailureFuncDict = {
-			"WRONGPWD"	: self.__DisconnectAndInputPassword,
-			"QUIT"		: app.Exit,
-		}
-
-		self.SetSize(wndMgr.GetScreenWidth(), wndMgr.GetScreenHeight())
-		self.SetWindowName("LoginWindow")
-
-		if not self.__LoadScript(uiScriptLocale.LOCALE_UISCRIPT_PATH + "LoginWindow.py"):
-			dbg.TraceError("LoginWindow.Open - __LoadScript Error")
-			return
-
-		self.__LoadLoginInfo("loginInfo.xml")
-
-		if app.loggined:
-			self.loginFailureFuncDict = {
-			"WRONGPWD"	: app.Exit,
-			"WRONGMAT"	: app.Exit,
-			"QUIT"		: app.Exit,
-			}
-
-		if musicInfo.loginMusic != "":
-			snd.SetMusicVolume(systemSetting.GetMusicVolume())
-			snd.FadeInMusic("BGM/"+musicInfo.loginMusic)
-
-		snd.SetSoundVolume(systemSetting.GetSoundVolume())
-
-		# pevent key "[" "]"
-		ime.AddExceptKey(91)
-		ime.AddExceptKey(93)
-
+		self.btnSend.Show()
 		self.Show()
 
-		global SKIP_LOGIN_PHASE
-		if SKIP_LOGIN_PHASE:
-			if self.isStartError:
-				self.connectBoard.Hide()
-				self.loginBoard.Hide()
-				if constInfo.ENABLE_SAVE_ACCOUNT:
-					self.saveAccountBoard.Hide()
-				self.serverBoard.Hide()
-				self.PopupNotifyMessage(localeInfo.LOGIN_CONNECT_FAILURE, self.__ExitGame)
-				return
-
-			if self.loginInfo:
-				self.serverBoard.Hide()
-			else:
-				self.__RefreshServerList()
-				self.__OpenServerBoard()
-		else:
-			connectingIP = self.stream.GetConnectAddr()
-			if connectingIP:
-				# @fixme021 BEGIN (instead of self.__OpenLoginBoard)
-				self.__RefreshServerList()
-				self.__OpenServerBoard()
-				self.__OnClickSelectServerButton()
-				# @fixme021 END
-				if IsFullBackImage():
-					self.GetChild("bg1").Hide()
-					self.GetChild("bg2").Show()
-
-			else:
-				self.__RefreshServerList()
-				self.__OpenServerBoard()
-
-		if ENABLE_MAP_INTERACTIVE_LOGIN:
-			self.LoadMap()
-
-		app.ShowCursor()
-
-	if ENABLE_MAP_INTERACTIVE_LOGIN:
-		def LoadMap(self):
-			env = self.MAP_ENVIRONMENTS[app.GetRandom(0, len(self.MAP_ENVIRONMENTS) - 1)]
-			x, y, dis, pit, rot, height, snow = env
-			app.SetCamera(dis, pit, rot, height)
-			net.Warp(x, y)
-
-			background.SetViewDistanceSet(background.DISTANCE0, 25600)
-			background.SelectViewDistanceNum(background.DISTANCE0)
-
-			if snow:
-				background.EnableSnow(1)
-
-			# From 21:00 to 5:59 the environment will set to night. Remove this part if you don't need it.
-			h = time.localtime()[3]
-			if h <= 5 or h >= 21:
-				background.RegisterEnvironmentData(1, constInfo.ENVIRONMENT_NIGHT)
-				background.SetEnvironmentData(1)
-			else:
-				background.SetEnvironmentData(0)
-
-			self.GetChild("bg1").Hide()
-			self.GetChild("bg2").Hide()
-
-		def OnRender(self):
-			if ENABLE_MAP_INTERACTIVE_LOGIN:
-				app.RenderGame()
-				grp.PopState()
-				grp.SetInterfaceRenderState()
+		self.RefreshPosition()
+		return True
 
 	def Close(self):
+		self.chatLine.KillFocus()
+		self.chatLine.Hide()
+		self.chatModeButton.Hide()
+		self.btnSend.Hide()
+		self.Hide()
+		return True
 
-		if self.connectingDialog:
-			self.connectingDialog.Close()
-		self.connectingDialog = None
+	def SetEscapeEvent(self, event):
+		self.chatLine.SetEscapeEvent(event)
 
-		ServerStateChecker.Initialize(self)
+	def SetReturnEvent(self, event):
+		self.chatLine.SetReturnEvent(event)
 
-		print("---------------------------------------------------------------------------- CLOSE LOGIN WINDOW ")
-		#
-		#
-		if musicInfo.loginMusic != "" and musicInfo.selectMusic != "":
-			snd.FadeOutMusic("BGM/"+musicInfo.loginMusic)
+	def OnChangeChatMode(self):
+		RefreshChatMode()
 
-		self.idEditLine.SetTabEvent(0)
-		self.idEditLine.SetReturnEvent(0)
-		self.pwdEditLine.SetReturnEvent(0)
-		self.pwdEditLine.SetTabEvent(0)
+	def OnRefreshChatMode(self):
+		self.chatLine.ChangeChatMode()
+		self.chatModeButton.SetText(self.chatLine.GetCurrentChatModeName())
 
-		self.connectBoard = None
-		self.loginBoard = None
-		if constInfo.ENABLE_SAVE_ACCOUNT:
-			self.saveAccountBoard = None
-		self.idEditLine = None
-		self.pwdEditLine = None
-		self.inputDialog = None
-		self.connectingDialog = None
-		self.loadingImage = None
-		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
-			self.language_list = []
-			self.flag_button_list = []
-			self.language_board = None
-			self.language_popup = None
+	def SetChatFocus(self):
+		self.chatLine.SetFocus()
+
+	def KillChatFocus(self):
+		self.chatLine.KillFocus()
+
+	def SetChatMax(self, max):
+		self.chatLine.SetUserMax(max)
+
+	def RefreshPosition(self):
+		if localeInfo.IsARABIC():
+			self.chatLine.SetSize(self.GetWidth() - 93, 18)
+		else:
+			self.chatLine.SetSize(self.GetWidth() - 93, 13)
+
+		self.btnSend.SetPosition(self.GetWidth() - 25, 2)
+
+		(self.chatLine.x, self.chatLine.y, self.chatLine.width, self.chatLine.height) = self.chatLine.GetRect()
+
+	def BindInterface(self, interface):
+		self.chatLine.BindInterface(interface)
+
+	def OnRender(self):
+		(x, y, width, height) = self.chatLine.GetRect()
+		ui.RenderRoundBox(x-4, y-3, width+7, height+4, self.CHAT_OUTLINE_COLOR)
+
+## ChatWindow
+class ChatWindow(ui.Window):
+
+	BOARD_START_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.0)
+	BOARD_END_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.8)
+	BOARD_MIDDLE_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.5)
+	CHAT_OUTLINE_COLOR = grp.GenerateColor(1.0, 1.0, 1.0, 1.0)
+	CHAT_SIZING_HIT_HEIGHT = 4
+	CHAT_FLAG_BAR_HEIGHT = 23
+	CHAT_FLAG_BAR_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.75)
+	CHAT_BAR_GAP_ABOVE = 0
+	CHAT_FLAG_BAR_OFFSET_Y = 10
+	CHAT_FLAG_STEP = 28
+	CHAT_FLAG_LABEL_LEFT = 8
+	CHAT_FLAG_LABEL_WIDTH = 95
+	CHAT_FLAG_POS_OFFSET_X = -225
+	CHAT_FLAG_POS_OFFSET_Y = 2
+	CHAT_FLAG_CLOCK_RIGHT_PAD = 8
+
+	EDIT_LINE_HEIGHT = 25
+	CHAT_WINDOW_WIDTH = 700
+	CHAT_INPUT_RIGHT_RESERVE = 50
+	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+		IMAGE_DISABLE_ALPHA = 0.5
+		CHAT_FLAG_HIDDEN_LANGS = ("eu",)
+
+	class ChatBackBoard(ui.Window):
+		def __init__(self):
+			ui.Window.__init__(self)
+		def __del__(self):
+			ui.Window.__del__(self)
+
+	class ChatButton(ui.DragButton):
+
+		def __init__(self):
+			ui.DragButton.__init__(self)
+			self.AddFlag("float")
+			self.AddFlag("movable")
+			self.AddFlag("restrict_x")
+			self.topFlag = False
+			self.SetWindowName("ChatWindow:ChatButton")
+
+
+		def __del__(self):
+			ui.DragButton.__del__(self)
+
+		def SetOwner(self, owner):
+			self.owner = owner
+
+		def OnMouseOverIn(self):
+			app.SetCursor(app.VSIZE)
+
+		def OnMouseOverOut(self):
+			app.SetCursor(app.NORMAL)
+
+		def OnTop(self):
+			if True == self.topFlag:
+				return
+
+			self.topFlag = True
+			self.owner.SetTop()
+			self.topFlag = False
+
+	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+		class ChatFlagBar(ui.Window):
+			def __init__(self, owner):
+				ui.Window.__init__(self)
+				self.AddFlag("float")
+				self.AddFlag("not_pick")
+				self.owner = owner
+				self.SetWindowName("ChatWindow:ChatFlagBar")
+
+			def OnRender(self):
+				if not self.IsShow():
+					return
+				(gx, gy) = self.GetGlobalPosition()
+				width = self.GetWidth()
+				height = self.GetHeight()
+				if width <= 0 or height <= 0:
+					return
+				grp.SetColor(self.owner.CHAT_FLAG_BAR_COLOR)
+				grp.RenderBar(gx, gy, width, height)
+
+	def __init__(self):
+		ui.Window.__init__(self)
+		self.AddFlag("float")
+
+		self.SetWindowName("ChatWindow")
+		self.__RegisterChatColorDict()
+
+		self.boardState = chat.BOARD_STATE_VIEW
+		self.chatID = chat.CreateChatSet(chat.CHAT_SET_CHAT_WINDOW)
+		chat.SetBoardState(self.chatID, chat.BOARD_STATE_VIEW)
+
+		self.xBar = 0
+		self.yBar = 0
+		self.widthBar = 0
+		self.heightBar = 0
+		self.curHeightBar = 0
+		self.visibleLineCount = 0
+		self.scrollBarPos = 1.0
+		self.scrollLock = False
+		chatInputSet = ChatInputSet()
+		chatInputSet.SetParent(self)
+		chatInputSet.SetEscapeEvent(ui.__mem_func__(self.CloseChat))
+		chatInputSet.SetReturnEvent(ui.__mem_func__(self.CloseChat))
+		chatInputSet.SetSize(self.CHAT_WINDOW_WIDTH - self.CHAT_INPUT_RIGHT_RESERVE, self.EDIT_LINE_HEIGHT)
+		self.chatInputSet = chatInputSet
+
+		btnSendWhisper = ui.Button()
+		btnSendWhisper.SetParent(self)
+		btnSendWhisper.SetUpVisual("d:/ymir work/ui/game/taskbar/Send_Whisper_Button_01.sub")
+		btnSendWhisper.SetOverVisual("d:/ymir work/ui/game/taskbar/Send_Whisper_Button_02.sub")
+		btnSendWhisper.SetDownVisual("d:/ymir work/ui/game/taskbar/Send_Whisper_Button_03.sub")
+		btnSendWhisper.SetToolTipText(localeInfo.CHAT_SEND_MEMO)
+		btnSendWhisper.Hide()
+		self.btnSendWhisper = btnSendWhisper
+
+		btnChatLog = ui.Button()
+		btnChatLog.SetParent(self)
+		btnChatLog.SetUpVisual("d:/ymir work/ui/game/taskbar/Open_Chat_Log_Button_01.sub")
+		btnChatLog.SetOverVisual("d:/ymir work/ui/game/taskbar/Open_Chat_Log_Button_02.sub")
+		btnChatLog.SetDownVisual("d:/ymir work/ui/game/taskbar/Open_Chat_Log_Button_03.sub")
+		btnChatLog.SetToolTipText(localeInfo.CHAT_LOG)
+		btnChatLog.Hide()
+		self.btnChatLog = btnChatLog
+
+		btnChatSizing = self.ChatButton()
+		btnChatSizing.SetOwner(self)
+		btnChatSizing.SetMoveEvent(ui.__mem_func__(self.Refresh))
+		btnChatSizing.Hide()
+		self.btnChatSizing = btnChatSizing
+
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-			self.anon_mode_board = None
-			self.anon_mode_text = None
-			self.anon_mode_checkbox_bg = None
-			self.anon_mode_checkbox = None
+			self.flag_bar = self.ChatFlagBar(self)
+			self.flag_bar.Hide()
+			self.lang_image_dict = {}
+			self.toolTip = uiToolTip.ToolTip()
+
+			self.flag_bar_title = ui.TextLine()
+			self.flag_bar_title.SetParent(self.flag_bar)
+			self.flag_bar_title.AddFlag("not_pick")
+			self.flag_bar_title.SetPosition(self.CHAT_FLAG_LABEL_LEFT, 5)
+			self.flag_bar_title.SetFontName(localeInfo.UI_DEF_FONT)
+			self.flag_bar_title.SetPackedFontColor(0xFFFFFFFF)
+			self.flag_bar_title.SetOutline()
+			self.flag_bar_title.SetText(localeInfo.CHAT_FLAG_BAR_TITLE)
+			self.flag_bar_title.Show()
+
+			self.flag_bar_clock = ui.TextLine()
+			self.flag_bar_clock.SetParent(self.flag_bar)
+			self.flag_bar_clock.AddFlag("not_pick")
+			self.flag_bar_clock.SetWindowHorizontalAlignRight()
+			self.flag_bar_clock.SetHorizontalAlignRight()
+			self.flag_bar_clock.SetPosition(self.CHAT_FLAG_CLOCK_RIGHT_PAD, 5)
+			self.flag_bar_clock.SetFontName(localeInfo.UI_DEF_FONT_LARGE)
+			self.flag_bar_clock.SetPackedFontColor(0xFFFFFFFF)
+			self.flag_bar_clock.SetOutline()
+			self.flag_bar_clock.Show()
+
+			for lang in sorted(uiScriptLocale.LOCALE_NAME_DICT.iterkeys()):
+				if lang in self.CHAT_FLAG_HIDDEN_LANGS:
+					continue
+				image = ui.ImageBox()
+				image.SetParent(self.flag_bar)
+				flagPath = "d:/ymir work/flags/server_flag_{}.png".format(lang)
+				if not app.IsExistFile(flagPath):
+					flagPath = "d:/ymir work/flags/server_flag_tr.png"
+				image.LoadImage(flagPath)
+				image.SetEvent(ui.__mem_func__(self.__EventCountry), "mouse_click", lang)
+				image.SetEvent(ui.__mem_func__(self.__EventCountry), "mouse_over_in", lang)
+				image.SetEvent(ui.__mem_func__(self.__EventCountry), "mouse_over_out", 0)
+				image.Show()
+				self.lang_image_dict[lang] = image
+
+			self.__LayoutFlagBar(self.CHAT_WINDOW_WIDTH)
+			self.RefreshChatFilterSettings()
+
+		scrollBar = ui.ScrollBar()
+		scrollBar.AddFlag("float")
+		scrollBar.SetScrollEvent(ui.__mem_func__(self.OnScroll))
+		self.scrollBar = scrollBar
+
+		self.Refresh()
+		self.chatInputSet.RefreshPosition()
+
+	def __del__(self):
+		ui.Window.__del__(self)
+
+	def __RegisterChatColorDict(self):
+		CHAT_COLOR_DICT = {
+			chat.CHAT_TYPE_TALKING : colorInfo.CHAT_RGB_TALK,
+			chat.CHAT_TYPE_INFO : colorInfo.CHAT_RGB_INFO,
+			chat.CHAT_TYPE_NOTICE : colorInfo.CHAT_RGB_NOTICE,
+			chat.CHAT_TYPE_PARTY : colorInfo.CHAT_RGB_PARTY,
+			chat.CHAT_TYPE_GUILD : colorInfo.CHAT_RGB_GUILD,
+			chat.CHAT_TYPE_COMMAND : colorInfo.CHAT_RGB_COMMAND,
+			chat.CHAT_TYPE_SHOUT : colorInfo.CHAT_RGB_SHOUT,
+			chat.CHAT_TYPE_WHISPER : colorInfo.CHAT_RGB_WHISPER,
+		}
+		if app.ENABLE_DICE_SYSTEM:
+			CHAT_COLOR_DICT.update({chat.CHAT_TYPE_DICE_INFO : colorInfo.CHAT_RGB_DICE_INFO,})
+
+		for colorItem in CHAT_COLOR_DICT.items():
+			type=colorItem[0]
+			rgb=colorItem[1]
+			chat.SetChatColor(type, rgb[0], rgb[1], rgb[2])
+
+	@ui.WindowDestroy
+	def Destroy(self):
+		if self.chatInputSet:
+			self.chatInputSet.Destroy()
+			self.chatInputSet = None
+
+		self.btnSendWhisper = 0
+		self.btnChatLog = 0
+		self.btnChatSizing = 0
+		
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+			self.flag_bar = None
+			self.flag_bar_title = None
+			self.flag_bar_clock = None
+			self.lang_image_dict = {}
+			self.toolTip = None
+
+	################
+	## Open & Close
+	def OpenChat(self):
+		self.SetSize(self.CHAT_WINDOW_WIDTH, 25)
+		chat.SetBoardState(self.chatID, chat.BOARD_STATE_EDIT)
+		self.boardState = chat.BOARD_STATE_EDIT
+		self.__RefreshChatInputLayout()
+
+		(x, y, width, height) = self.GetRect()
+		(btnX, btnY) = self.btnChatSizing.GetGlobalPosition()
+
+		if localeInfo.IsARABIC():
+			chat.SetPosition(self.chatID, x + width - 10, y)
+		else:
+			chat.SetPosition(self.chatID, x + 10, y)
+
+		chat.SetHeight(self.chatID, y - btnY - self.EDIT_LINE_HEIGHT + 100)
+
+		if self.IsShow():
+			self.btnChatSizing.Show()
+			if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+				self.flag_bar.Hide()
+				self.flag_bar.Show()
+
+		self.Refresh()
+
+		self.btnSendWhisper.Show()
+		self.btnChatLog.Show()
+		self.__RefreshChatInputLayout()
+
+		self.chatInputSet.Open()
+		self.chatInputSet.SetTop()
+		self.SetTop()
+
+	def CloseChat(self):
+		chat.SetBoardState(self.chatID, chat.BOARD_STATE_VIEW)
+		self.boardState = chat.BOARD_STATE_VIEW
+
+		(x, y, width, height) = self.GetRect()
+
+		if localeInfo.IsARABIC():
+			chat.SetPosition(self.chatID, x + width - 10, y + self.EDIT_LINE_HEIGHT)
+		else:
+			chat.SetPosition(self.chatID, x + 10, y + self.EDIT_LINE_HEIGHT)
+
+		self.SetSize(self.CHAT_WINDOW_WIDTH, 0)
+
+		self.chatInputSet.Close()
+		self.btnSendWhisper.Hide()
+		self.btnChatLog.Hide()
+		self.btnChatSizing.Hide()
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+			self.flag_bar.Hide()
+
+		self.Refresh()
+
+	def SetSendWhisperEvent(self, event):
+		self.btnSendWhisper.SetEvent(event)
+
+	def SetOpenChatLogEvent(self, event):
+		self.btnChatLog.SetEvent(event)
 	
-		self.serverBoard				= None
-		self.serverList					= None
-		self.channelList				= None
+	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+		def __LayoutFlagBar(self, barWidth):
+			langKeys = sorted(self.lang_image_dict.keys())
+			if not langKeys:
+				return
 
-		self.VIRTUAL_KEY_ALPHABET_LOWERS = None
-		self.VIRTUAL_KEY_ALPHABET_UPPERS = None
-		self.VIRTUAL_KEY_SYMBOLS = None
-		self.VIRTUAL_KEY_NUMBERS = None
+			flagIconH = 17
+			for lang in langKeys:
+				imgH = self.lang_image_dict[lang].GetHeight()
+				if imgH > 0:
+					flagIconH = max(flagIconH, imgH)
+			flagIconY = max(0, (self.CHAT_FLAG_BAR_HEIGHT - flagIconH) // 2) + self.CHAT_FLAG_POS_OFFSET_Y
 
-		# VIRTUAL_KEYBOARD_BUG_FIX
-		if self.virtualKeyboard:
-			for keyIndex in xrange(0, VIRTUAL_KEYBOARD_NUM_KEYS+1):
-				key = self.GetChild2("key_%d" % keyIndex)
-				if key:
-					key.SetEvent(None)
+			labelEnd = self.CHAT_FLAG_LABEL_LEFT + self.CHAT_FLAG_LABEL_WIDTH + 8
+			flagsWidth = len(langKeys) * self.CHAT_FLAG_STEP
+			remainWidth = max(0, barWidth - labelEnd)
+			startX = labelEnd + remainWidth // 2 + self.CHAT_FLAG_POS_OFFSET_X
 
-			self.GetChild("key_space").SetEvent(None)
-			self.GetChild("key_backspace").SetEvent(None)
-			self.GetChild("key_enter").SetEvent(None)
-			self.GetChild("key_shift").SetToggleDownEvent(None)
-			self.GetChild("key_shift").SetToggleUpEvent(None)
-			self.GetChild("key_at").SetToggleDownEvent(None)
-			self.GetChild("key_at").SetToggleUpEvent(None)
+			for i, lang in enumerate(langKeys):
+				self.lang_image_dict[lang].SetPosition(startX + i * self.CHAT_FLAG_STEP, flagIconY)
 
-			self.virtualKeyboard = None
+			if self.flag_bar_clock:
+				self.flag_bar_clock.SetPosition(self.CHAT_FLAG_CLOCK_RIGHT_PAD, 5)
 
-		self.KillFocus()
+		def __EventCountry(self, event_type, lang):
+			if "mouse_click" == event_type:
+				if systemSetting.IsChatFilterCountry(lang):
+					systemSetting.RemoveChatFilterCountry(lang)
+				else:
+					systemSetting.AddChatFilterCountry(lang)
+				self.RefreshChatFilterSettings()
+			elif "mouse_over_in" == event_type:
+				langName = uiScriptLocale.LOCALE_NAME_DICT.get(lang, lang)
+				if langName:
+					pos_x, pos_y = wndMgr.GetMousePosition()
+					self.toolTip.ClearToolTip()
+					self.toolTip.SetThinBoardSize(max(80, 11 * len(langName)))
+					self.toolTip.SetToolTipPosition(pos_x + 50, pos_y + 50)
+					self.toolTip.AppendTextLine(langName, 0xffffff00)
+					self.toolTip.ShowToolTip()
+			elif "mouse_over_out" == event_type:
+				self.toolTip.HideToolTip()
+
+		def RefreshChatFilterSettings(self):
+			for lang, btn in self.lang_image_dict.iteritems():
+				if systemSetting.IsChatFilterCountry(lang):
+					btn.SetAlpha(self.IMAGE_DISABLE_ALPHA)
+				else:
+					btn.SetAlpha(1.0)
+
+	def IsEditMode(self):
+		if chat.BOARD_STATE_EDIT == self.boardState:
+			return True
+
+		return False
+
+	def __RefreshSizingBar(self):
+		(x, y, width, height) = self.GetRect()
+		gxChat, gyChat = self.btnChatSizing.GetGlobalPosition()
+		self.btnChatSizing.SetPosition(x, gyChat)
+		self.btnChatSizing.SetSize(width, self.CHAT_SIZING_HIT_HEIGHT)
+
+	def SetPosition(self, x, y):
+		ui.Window.SetPosition(self, x, y)
+		self.__RefreshSizingBar()
+
+	def __PositionChatChromeButtons(self):
+		if self.btnSendWhisper:
+			self.btnSendWhisper.SetPosition(self.GetWidth() - 50, 2)
+		if self.btnChatLog:
+			self.btnChatLog.SetPosition(self.GetWidth() - 25, 2)
+
+	def __RefreshChatInputLayout(self):
+		if not self.chatInputSet:
+			return
+		inputWidth = max(120, self.GetWidth() - self.CHAT_INPUT_RIGHT_RESERVE)
+		self.chatInputSet.SetSize(inputWidth, self.EDIT_LINE_HEIGHT)
+		self.chatInputSet.RefreshPosition()
+		self.__PositionChatChromeButtons()
+		if self.chatInputSet.IsShow():
+			self.chatInputSet.btnSend.Show()
+			self.chatInputSet.SetTop()
+
+	def SetSize(self, width, height):
+		ui.Window.SetSize(self, width, height)
+		self.__RefreshSizingBar()
+		self.__RefreshChatInputLayout()
+
+	def SetHeight(self, height):
+		gxChat, gyChat = self.btnChatSizing.GetGlobalPosition()
+		self.btnChatSizing.SetPosition(gxChat, wndMgr.GetScreenHeight() - height)
+
+	###########
+	## Refresh
+	def Refresh(self):
+		if self.boardState == chat.BOARD_STATE_EDIT:
+			self.RefreshBoardEditState()
+		elif self.boardState == chat.BOARD_STATE_VIEW:
+			self.RefreshBoardViewState()
+
+	def RefreshBoardEditState(self):
+
+		(x, y, width, height) = self.GetRect()
+		(btnX, btnY) = self.btnChatSizing.GetGlobalPosition()
+
+		self.xBar = x
+		self.yBar = btnY
+		self.widthBar = width
+		self.heightBar = y - btnY + self.EDIT_LINE_HEIGHT
+		self.curHeightBar = self.heightBar
+
+		if localeInfo.IsARABIC():
+			chat.SetPosition(self.chatID, x + width - 10, y)
+		else:
+			chat.SetPosition(self.chatID, x + 10, y)
+
+		chat.SetHeight(self.chatID, y - btnY - self.EDIT_LINE_HEIGHT)
+		chat.ArrangeShowingChat(self.chatID)
+
+		if btnY > y:
+			self.btnChatSizing.SetPosition(btnX, y)
+			self.heightBar = self.EDIT_LINE_HEIGHT
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+			flagY = btnY - self.CHAT_BAR_GAP_ABOVE - self.CHAT_FLAG_BAR_HEIGHT + self.CHAT_FLAG_BAR_OFFSET_Y
+			self.flag_bar.SetSize(width, self.CHAT_FLAG_BAR_HEIGHT)
+			self.flag_bar.SetPosition(btnX, flagY)
+			self.__LayoutFlagBar(width)
+			self.flag_bar.Show()
+			self.flag_bar.SetTop()
+
+	def RefreshBoardViewState(self):
+		(x, y, width, height) = self.GetRect()
+		(btnX, btnY) = self.btnChatSizing.GetGlobalPosition()
+		textAreaHeight = self.visibleLineCount * chat.GetLineStep(self.chatID)
+
+		if localeInfo.IsARABIC():
+			chat.SetPosition(self.chatID, x + width - 10, y + self.EDIT_LINE_HEIGHT)
+		else:
+			chat.SetPosition(self.chatID, x + 10, y + self.EDIT_LINE_HEIGHT)
+
+		chat.SetHeight(self.chatID, y - btnY - self.EDIT_LINE_HEIGHT + 100)
+
+		if self.boardState == chat.BOARD_STATE_EDIT:
+			textAreaHeight += 45
+		elif self.visibleLineCount != 0:
+			textAreaHeight += 10 + 10
+
+		self.xBar = x
+		self.yBar = y + self.EDIT_LINE_HEIGHT - textAreaHeight
+		self.widthBar = width
+		self.heightBar = textAreaHeight
+
+		self.scrollBar.Hide()
+
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+			self.flag_bar.Hide()
+
+	##########
+	## Render
+	def OnUpdate(self):
+		if self.boardState == chat.BOARD_STATE_EDIT:
+			chat.Update(self.chatID)
+		elif self.boardState == chat.BOARD_STATE_VIEW:
+			if systemSetting.IsViewChat():
+				chat.Update(self.chatID)
+
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__ and self.flag_bar_clock:
+			if self.flag_bar and self.flag_bar.IsShow():
+				localtime = time.strftime("%d.%m.%Y / %H:%M:%S")
+				self.flag_bar_clock.SetText(localtime)
+				self.flag_bar_clock.Show()
+
+	def OnRender(self):
+		if chat.GetVisibleLineCount(self.chatID) != self.visibleLineCount:
+			self.visibleLineCount = chat.GetVisibleLineCount(self.chatID)
+			self.Refresh()
+
+		if self.curHeightBar != self.heightBar:
+			self.curHeightBar += (self.heightBar - self.curHeightBar) / 10
+
+		if self.boardState == chat.BOARD_STATE_EDIT:
+			grp.SetColor(self.BOARD_MIDDLE_COLOR)
+			grp.RenderBar(self.xBar, self.yBar + (self.heightBar - self.curHeightBar) + 10, self.widthBar, self.curHeightBar)
+			chat.Render(self.chatID)
+		elif self.boardState == chat.BOARD_STATE_VIEW:
+			if systemSetting.IsViewChat():
+				grp.RenderGradationBar(self.xBar, self.yBar + (self.heightBar - self.curHeightBar), self.widthBar, self.curHeightBar, self.BOARD_START_COLOR, self.BOARD_END_COLOR)
+				chat.Render(self.chatID)
+
+	##########
+	## Event
+	def OnTop(self):
+		self.btnChatSizing.SetTop()
+		self.scrollBar.SetTop()
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__ and self.flag_bar:
+			self.flag_bar.SetTop()
+
+	def OnScroll(self):
+		if not self.scrollLock:
+			self.scrollBarPos = self.scrollBar.GetPos()
+
+		lineCount = chat.GetLineCount(self.chatID)
+		visibleLineCount = chat.GetVisibleLineCount(self.chatID)
+		endLine = visibleLineCount + int(float(lineCount - visibleLineCount) * self.scrollBarPos)
+
+		chat.SetEndPos(self.chatID, self.scrollBarPos)
+
+	def OnChangeChatMode(self):
+		self.chatInputSet.OnChangeChatMode()
+
+	def SetChatFocus(self):
+		self.chatInputSet.SetChatFocus()
+
+	def BindInterface(self, interface):
+		self.interface = interface
+		self.chatInputSet.BindInterface(interface)
+
+## ChatLogWindow
+class ChatLogWindow(ui.Window):
+
+	BLOCK_WIDTH = 32
+	CHAT_MODE_NAME = [ localeInfo.CHAT_NORMAL, localeInfo.CHAT_PARTY, localeInfo.CHAT_GUILD, localeInfo.CHAT_SHOUT, localeInfo.CHAT_INFORMATION, localeInfo.CHAT_NOTICE, ]
+	CHAT_MODE_INDEX = [ chat.CHAT_TYPE_TALKING,
+						chat.CHAT_TYPE_PARTY,
+						chat.CHAT_TYPE_GUILD,
+						chat.CHAT_TYPE_SHOUT,
+						chat.CHAT_TYPE_INFO,
+						chat.CHAT_TYPE_NOTICE, ]
+
+	if app.ENABLE_DICE_SYSTEM:
+		CHAT_MODE_NAME.append(localeInfo.CHAT_DICE_INFO)
+		CHAT_MODE_INDEX.append(chat.CHAT_TYPE_DICE_INFO)
+
+	CHAT_LOG_WINDOW_MINIMUM_WIDTH = 450
+	CHAT_LOG_WINDOW_MINIMUM_HEIGHT = 120
+
+	class ResizeButton(ui.DragButton):
+
+		def __init__(self):
+			ui.DragButton.__init__(self)
+
+		def __del__(self):
+			ui.DragButton.__del__(self)
+
+		def OnMouseOverIn(self):
+			app.SetCursor(app.HVSIZE)
+
+		def OnMouseOverOut(self):
+			app.SetCursor(app.NORMAL)
+
+	def __init__(self):
+
+		self.allChatMode = True
+		self.chatInputSet = None
+
+		ui.Window.__init__(self)
+		self.AddFlag("float")
+		self.AddFlag("movable")
+		self.SetWindowName("ChatLogWindow")
+		self.__CreateChatInputSet()
+		self.__CreateWindow()
+		self.__CreateButton()
+		self.__CreateScrollBar()
+
+		self.chatID = chat.CreateChatSet(chat.CHAT_SET_LOG_WINDOW)
+		chat.SetBoardState(self.chatID, chat.BOARD_STATE_LOG)
+		for i in self.CHAT_MODE_INDEX:
+			chat.EnableChatMode(self.chatID, i)
+
+		self.SetPosition(20, 20)
+		self.SetSize(self.CHAT_LOG_WINDOW_MINIMUM_WIDTH, self.CHAT_LOG_WINDOW_MINIMUM_HEIGHT)
+		self.btnSizing.SetPosition(self.CHAT_LOG_WINDOW_MINIMUM_WIDTH-self.btnSizing.GetWidth(), self.CHAT_LOG_WINDOW_MINIMUM_HEIGHT-self.btnSizing.GetHeight()+2)
+
+		self.OnResize()
+
+	def __CreateChatInputSet(self):
+		chatInputSet = ChatInputSet()
+		chatInputSet.SetParent(self)
+		chatInputSet.SetEscapeEvent(ui.__mem_func__(self.Close))
+		chatInputSet.SetWindowVerticalAlignBottom()
+		chatInputSet.Open()
+		self.chatInputSet = chatInputSet
+
+	def __CreateWindow(self):
+		imgLeft = ui.ImageBox()
+		imgLeft.AddFlag("not_pick")
+		imgLeft.SetParent(self)
+
+		imgCenter = ui.ExpandedImageBox()
+		imgCenter.AddFlag("not_pick")
+		imgCenter.SetParent(self)
+
+		imgRight = ui.ImageBox()
+		imgRight.AddFlag("not_pick")
+		imgRight.SetParent(self)
+
+		if localeInfo.IsARABIC():
+			imgLeft.LoadImage("locale/ae/ui/pattern/titlebar_left.tga")
+			imgCenter.LoadImage("locale/ae/ui/pattern/titlebar_center.tga")
+			imgRight.LoadImage("locale/ae/ui/pattern/titlebar_right.tga")
+		else:
+			imgLeft.LoadImage("d:/ymir work/ui/pattern/chatlogwindow_titlebar_left.tga")
+			imgCenter.LoadImage("d:/ymir work/ui/pattern/chatlogwindow_titlebar_middle.tga")
+			imgRight.LoadImage("d:/ymir work/ui/pattern/chatlogwindow_titlebar_right.tga")
+
+		imgLeft.Show()
+		imgCenter.Show()
+		imgRight.Show()
+
+		btnClose = ui.Button()
+		btnClose.SetParent(self)
+		btnClose.SetUpVisual("d:/ymir work/ui/public/close_button_01.sub")
+		btnClose.SetOverVisual("d:/ymir work/ui/public/close_button_02.sub")
+		btnClose.SetDownVisual("d:/ymir work/ui/public/close_button_03.sub")
+		btnClose.SetToolTipText(localeInfo.UI_CLOSE, 0, -23)
+		btnClose.SetEvent(ui.__mem_func__(self.Close))
+		btnClose.Show()
+
+		btnSizing = self.ResizeButton()
+		btnSizing.SetParent(self)
+		btnSizing.SetMoveEvent(ui.__mem_func__(self.OnResize))
+		btnSizing.SetSize(16, 16)
+		btnSizing.Show()
+
+		titleName = ui.TextLine()
+		titleName.SetParent(self)
+
+		if localeInfo.IsARABIC():
+			titleName.SetPosition(self.GetWidth()-20, 6)
+		else:
+			titleName.SetPosition(20, 6)
+
+		titleName.SetText(localeInfo.CHAT_LOG_TITLE)
+		titleName.Show()
+
+		self.imgLeft = imgLeft
+		self.imgCenter = imgCenter
+		self.imgRight = imgRight
+		self.btnClose = btnClose
+		self.btnSizing = btnSizing
+		self.titleName = titleName
+
+	def __CreateButton(self):
+
+		if localeInfo.IsARABIC():
+			bx = 20
+		else:
+			bx = 13
+
+		btnAll = ui.RadioButton()
+		btnAll.SetParent(self)
+		btnAll.SetPosition(bx, 24)
+		btnAll.SetUpVisual("d:/ymir work/ui/public/xsmall_button_01.sub")
+		btnAll.SetOverVisual("d:/ymir work/ui/public/xsmall_button_02.sub")
+		btnAll.SetDownVisual("d:/ymir work/ui/public/xsmall_button_03.sub")
+		btnAll.SetText(localeInfo.CHAT_ALL)
+		btnAll.SetEvent(ui.__mem_func__(self.ToggleAllChatMode))
+		btnAll.Down()
+		btnAll.Show()
+		self.btnAll = btnAll
+
+		x = bx + 48
+		i = 0
+		self.modeButtonList = []
+		for name in self.CHAT_MODE_NAME:
+			btn = ui.ToggleButton()
+			btn.SetParent(self)
+			btn.SetPosition(x, 24)
+			btn.SetUpVisual("d:/ymir work/ui/public/xsmall_button_01.sub")
+			btn.SetOverVisual("d:/ymir work/ui/public/xsmall_button_02.sub")
+			btn.SetDownVisual("d:/ymir work/ui/public/xsmall_button_03.sub")
+			btn.SetText(name)
+			btn.Show()
+
+			mode = self.CHAT_MODE_INDEX[i]
+			btn.SetToggleUpEvent(lambda arg=mode: self.ToggleChatMode(arg))
+			btn.SetToggleDownEvent(lambda arg=mode: self.ToggleChatMode(arg))
+			self.modeButtonList.append(btn)
+
+			x += 48
+			i += 1
+
+	def __CreateScrollBar(self):
+		scrollBar = ui.SmallThinScrollBar()
+		scrollBar.SetParent(self)
+		scrollBar.Show()
+		scrollBar.SetScrollEvent(ui.__mem_func__(self.OnScroll))
+		self.scrollBar = scrollBar
+		self.scrollBarPos = 1.0
+
+	def __del__(self):
+		ui.Window.__del__(self)
+
+	@ui.WindowDestroy
+	def Destroy(self):
+		self.imgLeft = None
+		self.imgCenter = None
+		self.imgRight = None
+		self.btnClose = None
+		self.btnSizing = None
+		self.modeButtonList = []
+		self.scrollBar = None
+		self.chatInputSet = None
+
+	def ToggleAllChatMode(self):
+		if self.allChatMode:
+			return
+
+		self.allChatMode = True
+
+		for i in self.CHAT_MODE_INDEX:
+			chat.EnableChatMode(self.chatID, i)
+		for btn in self.modeButtonList:
+			btn.SetUp()
+
+	def ToggleChatMode(self, mode):
+		if self.allChatMode:
+			self.allChatMode = False
+			for i in self.CHAT_MODE_INDEX:
+				chat.DisableChatMode(self.chatID, i)
+			chat.EnableChatMode(self.chatID, mode)
+			self.btnAll.SetUp()
+
+		else:
+			chat.ToggleChatMode(self.chatID, mode)
+
+	def SetSize(self, width, height):
+		self.imgCenter.SetRenderingRect(0.0, 0.0, float((width - self.BLOCK_WIDTH*2) - self.BLOCK_WIDTH) / self.BLOCK_WIDTH, 0.0)
+		self.imgCenter.SetPosition(self.BLOCK_WIDTH, 0)
+		self.imgRight.SetPosition(width - self.BLOCK_WIDTH, 0)
+
+		if localeInfo.IsARABIC():
+			self.titleName.SetPosition(self.GetWidth()-20, 3)
+			self.btnClose.SetPosition(3, 3)
+			self.scrollBar.SetPosition(1, 45)
+		else:
+			self.btnClose.SetPosition(width - self.btnClose.GetWidth() - 5, 5)
+			self.scrollBar.SetPosition(width - 15, 45)
+
+		self.scrollBar.SetScrollBarSize(height - 45 - 12)
+		self.scrollBar.SetPos(self.scrollBarPos)
+		ui.Window.SetSize(self, width, height)
+
+	def Open(self):
+		self.OnResize()
+		self.chatInputSet.SetChatFocus()
+		self.Show()
+
+	def Close(self):
+		if self.chatInputSet:
+			self.chatInputSet.KillChatFocus()
 		self.Hide()
 
-		self.stream.popupWindow.Close()
-		self.loginFailureFuncDict=None
+	def OnResize(self):
+		x, y = self.btnSizing.GetLocalPosition()
+		width = self.btnSizing.GetWidth()
+		height = self.btnSizing.GetHeight()
 
-		ime.ClearExceptKey()
-
-		app.HideCursor()
-		if ENABLE_MAP_INTERACTIVE_LOGIN:
-			background.Destroy()
-
-	def __SaveChannelInfo(self):
-		try:
-			file=old_open("channel.inf", "w")
-			file.write("%d %d %d" % (self.__GetServerID(), self.__GetChannelID(), self.__GetRegionID()))
-		except:
-			print("LoginWindow.__SaveChannelInfo - SaveError")
-
-	def __LoadChannelInfo(self):
-		try:
-			file=old_open("channel.inf")
-			lines=file.readlines()
-
-			if len(lines)>0:
-				tokens=lines[0].split()
-
-				selServerID=int(tokens[0])
-				selChannelID=int(tokens[1])
-
-				if len(tokens) == 3:
-					regionID = int(tokens[2])
-
-				return regionID, selServerID, selChannelID
-
-		except:
-			print("LoginWindow.__LoadChannelInfo - OpenError")
-			return -1, -1, -1
-
-	def __ExitGame(self):
-		app.Exit()
-
-	def SetIDEditLineFocus(self):
-		if self.idEditLine != None:
-			self.idEditLine.SetFocus()
-
-	def SetPasswordEditLineFocus(self):
-		if constInfo.ENABLE_CLEAN_DATA_IF_FAIL_LOGIN:
-			if self.idEditLine != None:
-				self.idEditLine.SetText("")
-				self.idEditLine.SetFocus()
-
-			if self.pwdEditLine != None:
-				self.pwdEditLine.SetText("")
-		else:
-			if self.pwdEditLine != None:
-				self.pwdEditLine.SetFocus()
-
-	def OnEndCountDown(self):
-		self.isNowCountDown = False
-		self.timeOutMsg = False
-		self.OnConnectFailure()
-
-	def OnConnectFailure(self):
-
-		if self.isNowCountDown:
+		if x < self.CHAT_LOG_WINDOW_MINIMUM_WIDTH - width:
+			self.btnSizing.SetPosition(self.CHAT_LOG_WINDOW_MINIMUM_WIDTH - width, y)
+			return
+		if y < self.CHAT_LOG_WINDOW_MINIMUM_HEIGHT - height:
+			self.btnSizing.SetPosition(x, self.CHAT_LOG_WINDOW_MINIMUM_HEIGHT - height)
 			return
 
-		snd.PlaySound("sound/ui/loginfail.wav")
+		self.scrollBar.LockScroll()
+		self.SetSize(x + width, y + height)
+		self.scrollBar.UnlockScroll()
 
-		if self.connectingDialog:
-			self.connectingDialog.Close()
-		self.connectingDialog = None
-
-		if app.loggined:
-			self.PopupNotifyMessage(localeInfo.LOGIN_CONNECT_FAILURE, self.__ExitGame)
-		elif self.timeOutMsg:
-			self.PopupNotifyMessage(localeInfo.LOGIN_FAILURE_TIMEOUT, self.SetPasswordEditLineFocus)
+		if localeInfo.IsARABIC():
+			self.chatInputSet.SetPosition(20, 25)
 		else:
-			self.PopupNotifyMessage(localeInfo.LOGIN_CONNECT_FAILURE, self.SetPasswordEditLineFocus)
+			self.chatInputSet.SetPosition(0, 25)
 
-	def OnHandShake(self):
-		if not IsLoginDelay():
-			snd.PlaySound("sound/ui/loginok.wav")
-			self.PopupDisplayMessage(localeInfo.LOGIN_CONNECT_SUCCESS)
+		self.chatInputSet.SetSize(self.GetWidth() - 20, 20)
+		self.chatInputSet.RefreshPosition()
+		self.chatInputSet.SetChatMax(self.GetWidth() / 8)
 
-	def OnLoginStart(self):
-		if not IsLoginDelay():
-			self.PopupDisplayMessage(localeInfo.LOGIN_PROCESSING)
+	def OnScroll(self):
+		self.scrollBarPos = self.scrollBar.GetPos()
 
-	def OnLoginFailure(self, error):
-		if self.connectingDialog:
-			self.connectingDialog.Close()
-		self.connectingDialog = None
+		lineCount = chat.GetLineCount(self.chatID)
+		visibleLineCount = chat.GetVisibleLineCount(self.chatID)
+		endLine = visibleLineCount + int(float(lineCount - visibleLineCount) * self.scrollBarPos)
 
-		try:
-			loginFailureMsg = self.loginFailureMsgDict[error]
-		except KeyError:
-			loginFailureMsg = localeInfo.LOGIN_FAILURE_UNKNOWN + error
+		chat.SetEndPos(self.chatID, self.scrollBarPos)
 
+	def OnRender(self):
+		(x, y, width, height) = self.GetRect()
 
-		loginFailureFunc=self.loginFailureFuncDict.get(error, self.SetPasswordEditLineFocus)
+		if localeInfo.IsARABIC():
+			grp.SetColor(0x77000000)
+			grp.RenderBar(x+2, y+45, 13, height-45)
 
-		if app.loggined:
-			self.PopupNotifyMessage(loginFailureMsg, self.__ExitGame)
+			grp.SetColor(0x77000000)
+			grp.RenderBar(x, y, width, height)
+			grp.SetColor(0x77000000)
+			grp.RenderBox(x, y, width-2, height)
+			grp.SetColor(0x77000000)
+			grp.RenderBox(x+1, y+1, width-2, height)
+
+			grp.SetColor(0xff989898)
+			grp.RenderLine(x+width-13, y+height-1, 11, -11)
+			grp.RenderLine(x+width-9, y+height-1, 7, -7)
+			grp.RenderLine(x+width-5, y+height-1, 3, -3)
 		else:
-			self.PopupNotifyMessage(loginFailureMsg, loginFailureFunc)
+			grp.SetColor(0x77000000)
+			grp.RenderBar(x+width-15, y+45, 13, height-45)
 
-		snd.PlaySound("sound/ui/loginfail.wav")
+			grp.SetColor(0x77000000)
+			grp.RenderBar(x, y, width, height)
+			grp.SetColor(0x77000000)
+			grp.RenderBox(x, y, width-2, height)
+			grp.SetColor(0x77000000)
+			grp.RenderBox(x+1, y+1, width-2, height)
 
-	def __DisconnectAndInputID(self):
-		if self.connectingDialog:
-			self.connectingDialog.Close()
-		self.connectingDialog = None
+			grp.SetColor(0xff989898)
+			grp.RenderLine(x+width-13, y+height-1, 11, -11)
+			grp.RenderLine(x+width-9, y+height-1, 7, -7)
+			grp.RenderLine(x+width-5, y+height-1, 3, -3)
 
-		self.SetIDEditLineFocus()
-		net.Disconnect()
+		#####
 
-	def __DisconnectAndInputPassword(self):
-		if self.connectingDialog:
-			self.connectingDialog.Close()
-		self.connectingDialog = None
+		chat.ArrangeShowingChat(self.chatID)
 
-		self.SetPasswordEditLineFocus()
-		net.Disconnect()
-
-	if constInfo.ENABLE_SAVE_ACCOUNT:
-		def SAB_LoadAccountData(self):
-			if constInfo.SAB.storeType == constInfo.SAB.ST_CACHE:
-				return
-			for idx in xrange(constInfo.SAB.slotCount):
-				if constInfo.SAB.storeType == constInfo.SAB.ST_REGISTRY:
-					id = constInfo.GetWinRegKeyValue(constInfo.SAB.regPath, constInfo.SAB.regName % (idx, constInfo.SAB.regValueId))
-					pwd = constInfo.GetWinRegKeyValue(constInfo.SAB.regPath, constInfo.SAB.regName % (idx, constInfo.SAB.regValuePwd))
-					if id and pwd:
-						self.SAB_SetAccountData(idx, (id, pwd))
-				elif constInfo.SAB.storeType == constInfo.SAB.ST_FILE:
-					(id, pwd) = constInfo.GetJsonSABData(idx)
-					if id and pwd:
-						self.SAB_SetAccountData(idx, (id, pwd))
-
-		def SAB_SaveAccountData(self):
-			if constInfo.SAB.storeType == constInfo.SAB.ST_CACHE:
-				return
-			for idx in xrange(constInfo.SAB.slotCount):
-				if constInfo.SAB.storeType == constInfo.SAB.ST_REGISTRY:
-					_tSlot = self.SAB_GetAccountData(idx)
-					if _tSlot:
-						(id, pwd) = _tSlot
-						constInfo.SetWinRegKeyValue(constInfo.SAB.regPath, constInfo.SAB.regName % (idx, constInfo.SAB.regValueId), id)
-						constInfo.SetWinRegKeyValue(constInfo.SAB.regPath, constInfo.SAB.regName % (idx, constInfo.SAB.regValuePwd), pwd)
-					else:
-						constInfo.DelWinRegKeyValue(constInfo.SAB.regPath, constInfo.SAB.regName % (idx, constInfo.SAB.regValueId))
-						constInfo.DelWinRegKeyValue(constInfo.SAB.regPath, constInfo.SAB.regName % (idx, constInfo.SAB.regValuePwd))
-				elif constInfo.SAB.storeType == constInfo.SAB.ST_FILE:
-					_tSlot = self.SAB_GetAccountData(idx)
-					if _tSlot:
-						constInfo.SetJsonSABData(idx, _tSlot)
-					else:
-						constInfo.DelJsonSABData(idx)
-
-		def SAB_DelAccountData(self, slot):
-			if constInfo.SAB.accData.get(slot):
-				del constInfo.SAB.accData[slot]
-
-		def SAB_GetAccountData(self, slot):
-			return constInfo.SAB.accData.get(slot)
-
-		def SAB_SetAccountData(self, slot, data):
-			constInfo.SAB.accData[slot] = data
-
-		def SAB_BtnRearrange(self):
-			def tooltipArrange(_btnObj):
-				_tMexTip = "Account ID: %s" % id
-				_btnObj.SetToolTipText(_tMexTip)
-				if _btnObj.ToolTipText:
-					_btnObj.ToolTipText.SetPackedFontColor(0xff66FFFF)
-			## def code
-			GetObject=self.GetChild
-			SetObject=self.InsertChild
-			## button names
-			btnNameSave = constInfo.SAB.btnName["Save"]
-			btnNameAccess = constInfo.SAB.btnName["Access"]
-			btnNameRemove = constInfo.SAB.btnName["Remove"]
-			## rearrange code
-			for idx in xrange(constInfo.SAB.slotCount):
-				_tSlot = self.SAB_GetAccountData(idx)
-				# button objects
-				btnObjSave = GetObject(btnNameSave % idx)
-				btnObjAccess = GetObject(btnNameAccess % idx)
-				btnObjRemove = GetObject(btnNameRemove % idx)
-				if _tSlot:
-					(id, pwd) = _tSlot
-					btnObjSave.Hide()
-					btnObjAccess.Show()
-					btnObjRemove.Show()
-					btnObjAccess.SetText(uiScriptLocale.SAVE_ACCOUNT_CONNECT2.format(idx+1, id))
-				else:
-					btnObjSave.Show()
-					btnObjAccess.Hide()
-					btnObjRemove.Hide()
-			# done
-
-		def SAB_Click_Save(self, slot):
-			if slot >= constInfo.SAB.slotCount:
-				return
-			## def code
-			GetObject=self.GetChild
-			SetObject=self.InsertChild
-			## button stuff
-			_tmpName = constInfo.SAB.btnName["Save"] % slot
-			_tmpObj = GetObject(_tmpName)
-			## code stuff
-			try:
-				id = self.idEditLine.GetText()
-				pwd = self.pwdEditLine.GetText()
-
-				if len(id)==0:
-					self.PopupNotifyMessage(localeInfo.LOGIN_INPUT_ID, self.SetIDEditLineFocus)
-					return
-
-				if len(pwd)==0:
-					self.PopupNotifyMessage(localeInfo.LOGIN_INPUT_PASSWORD, self.SetPasswordEditLineFocus)
-					return
-			except:
-				return
-			self.SAB_SetAccountData(slot, (id,pwd))
-			self.SAB_SaveAccountData()
-			## rearrange stuff
-			self.SAB_BtnRearrange()
-
-		def SAB_Click_Access(self, slot):
-			if slot >= constInfo.SAB.slotCount:
-				return
-			## def code
-			GetObject=self.GetChild
-			SetObject=self.InsertChild
-			## button stuff
-			_tmpName = constInfo.SAB.btnName["Access"] % slot
-			_tmpObj = GetObject(_tmpName)
-			## code stuff
-			_tSlot = self.SAB_GetAccountData(slot)
-			if _tSlot:
-				(id, pwd) = _tSlot
-				self.idEditLine.SetText(id)
-				self.pwdEditLine.SetText(pwd)
-				self.__OnClickSelectServerButton()
-				self.__OnClickLoginButton()
-
-		def SAB_Click_Remove(self, slot):
-			if slot >= constInfo.SAB.slotCount:
-				return
-			## def code
-			GetObject=self.GetChild
-			SetObject=self.InsertChild
-			## button stuff
-			_tmpName = constInfo.SAB.btnName["Remove"] % slot
-			_tmpObj = GetObject(_tmpName)
-			## code stuff
-			self.SAB_DelAccountData(slot)
-			self.SAB_SaveAccountData()
-			## rearrange stuff
-			self.SAB_BtnRearrange()
-
-		def __CreateSaveAccountBoard(self):
-			### SAB INIT
-			self.SAB_LoadAccountData()
-			## def code
-			GetObject=self.GetChild
-			SetObject=self.InsertChild
-			## gui stuff
-			SCREEN_WIDTH = wndMgr.GetScreenWidth()
-			SCREEN_HEIGHT = wndMgr.GetScreenHeight()
-			## button space
-			SPACE_FOR_BUTTON = 25+1
-			ALL_BUTTON_SPACE = SPACE_FOR_BUTTON * constInfo.SAB.slotCount
-			## board stuff
-			BOARD_SIZE = (210+120, 28 + ALL_BUTTON_SPACE)
-			BOARD_POS = ((SCREEN_WIDTH - 208) / 2 + 210, (SCREEN_HEIGHT - 410) - (10*constInfo.SAB.slotCount))
-			## button stuff
-			btnNameSave = constInfo.SAB.btnName["Save"]
-			btnNameAccess = constInfo.SAB.btnName["Access"]
-			btnNameRemove = constInfo.SAB.btnName["Remove"]
-			btnPath = "d:/ymir work/ui/public/%s_button_%02d.sub" # xsmall small middle large xlarge big
-			btnImage = {"default":1,"over":2,"down":3}
-			## SAB BOARD
-			try:
-				## default init
-				_tmpName = "SaveAccountBoard"
-				SetObject(_tmpName, ui.ThinBoard())
-				#
-				_tmpObj = GetObject(_tmpName)
-				_tmpObj.SetParent(self)
-				## custom data
-				_tmpObj.SetSize(*BOARD_SIZE)
-				## default data
-				_tmpObj.SetPosition(*BOARD_POS)
-				_tmpObj.Show()
-				self.saveAccountBoard = _tmpObj
-			except:
-				import exception; exception.Abort("__CreateSaveAccountBoard SAB BOARD")
-			### SAB TITLE
-			try:
-				## default init
-				_tmpName = "SaveAccountTitle"
-				SetObject(_tmpName, ui.TextLine())
-				_tmpObj = GetObject(_tmpName)
-				_tmpObj.SetParent(self.saveAccountBoard)
-				## custom data
-				_tmpObj.SetHorizontalAlignCenter()
-				_tmpObj.SetPackedFontColor(0xFFffbf00)
-				_tmpObj.SetOutline()
-				_tmpObj.SetText(uiScriptLocale.SAVE_ACCOUNT_TITLE)
-				## default data
-				_tmpObj.SetPosition(BOARD_SIZE[0]/2, 5)
-				_tmpObj.Show()
-			except:
-				import exception; exception.Abort("__CreateSaveAccountBoard SAB TITLE")
-			### SAB LINE
-			try:
-				## default init
-				_tmpName = "SaveAccountLine"
-				SetObject(_tmpName, ui.Line())
-				_tmpObj = GetObject(_tmpName)
-				_tmpObj.SetParent(self.saveAccountBoard)
-				## custom data
-				_tmpObj.SetColor(0xFF777777)
-				_tmpObj.SetSize(BOARD_SIZE[0]-10, 0)
-				## default data
-				_tmpObj.SetPosition(5, 20)
-				_tmpObj.Show()
-			except:
-				import exception; exception.Abort("__CreateSaveAccountBoard SAB LINE")
-			## SaveAccountButtons
-			for idx in xrange(constInfo.SAB.slotCount):
-				### SAB SAVE
-				try:
-					## default init
-					_tmpName = btnNameSave % (idx)
-					SetObject(_tmpName, ui.Button())
-					_tmpObj = GetObject(_tmpName)
-					_tmpObj.SetParent(self.saveAccountBoard)
-					## custom data
-					_tmpBtnPath = "d:/ymir work/ui/public/xlarge_button_%02d.sub" # xsmall small middle large xlarge big
-					_tmpObj.SetUpVisual(_tmpBtnPath % (btnImage["default"]))
-					_tmpObj.SetOverVisual(_tmpBtnPath % (btnImage["over"]))
-					_tmpObj.SetDownVisual(_tmpBtnPath % (btnImage["down"]))
-					_tmpObj.SetText(uiScriptLocale.SAVE_ACCOUNT_SAVE)
-					_tmpObj.SAFE_SetEvent(self.SAB_Click_Save, idx)
-					## default data
-					_tmpObj.SetPosition(15 + 60, 25 + (idx * SPACE_FOR_BUTTON))
-					_tmpObj.Hide()
-				except:
-					import exception; exception.Abort("__CreateSaveAccountBoard SAB SAVE")
-				### SAB ACCESS
-				try:
-					## default init
-					_tmpName = btnNameAccess % (idx)
-					SetObject(_tmpName, ui.Button())
-					_tmpObj = GetObject(_tmpName)
-					_tmpObj.SetParent(self.saveAccountBoard)
-					## custom data
-					_tmpBtnPath = "d:/ymir work/ui/public/xlarge_button_%02d.sub" # xsmall small middle large xlarge big
-					_tmpObj.SetUpVisual(_tmpBtnPath % (btnImage["default"]))
-					_tmpObj.SetOverVisual(_tmpBtnPath % (btnImage["over"]))
-					_tmpObj.SetDownVisual(_tmpBtnPath % (btnImage["down"]))
-					_tmpObj.SetText(uiScriptLocale.SAVE_ACCOUNT_CONNECT.format(idx+1))
-					_tmpObj.SAFE_SetEvent(self.SAB_Click_Access, idx)
-					## default data
-					_tmpObj.SetPosition(35, 25 + (idx * SPACE_FOR_BUTTON))
-					_tmpObj.Show()
-				except:
-					import exception; exception.Abort("__CreateSaveAccountBoard SAB ACCESS")
-				### SAB REMOVE
-				try:
-					## default init
-					_tmpName = btnNameRemove % (idx)
-					SetObject(_tmpName, ui.Button())
-					_tmpObj = GetObject(_tmpName)
-					_tmpObj.SetParent(self.saveAccountBoard)
-					## custom data
-					_tmpBtnPath = "d:/ymir work/ui/public/middle_button_%02d.sub" # xsmall small middle large xlarge big
-					_tmpObj.SetUpVisual(_tmpBtnPath % (btnImage["default"]))
-					_tmpObj.SetOverVisual(_tmpBtnPath % (btnImage["over"]))
-					_tmpObj.SetDownVisual(_tmpBtnPath % (btnImage["down"]))
-					_tmpObj.SetText(uiScriptLocale.SAVE_ACCOUNT_REMOVE)
-					_tmpObj.SAFE_SetEvent(self.SAB_Click_Remove, idx)
-					## default data
-					_tmpObj.SetPosition(35 + 190, 25 + (idx * SPACE_FOR_BUTTON))
-					_tmpObj.Show()
-				except:
-					import exception; exception.Abort("__CreateSaveAccountBoard SAB REMOVE")
-			self.SAB_BtnRearrange()
-
-	def __LoadScript(self, fileName):
-		import dbg
-		try:
-			pyScrLoader = ui.PythonScriptLoader()
-			pyScrLoader.LoadScriptFile(self, fileName)
-		except:
-			import exception
-			exception.Abort("LoginWindow.__LoadScript.LoadObject")
-		try:
-			GetObject=self.GetChild
-			self.serverBoard			= GetObject("ServerBoard")
-			self.serverList				= GetObject("ServerList")
-			self.channelList			= GetObject("ChannelList")
-			self.serverSelectButton		= GetObject("ServerSelectButton")
-			self.serverExitButton		= GetObject("ServerExitButton")
-			self.connectBoard			= GetObject("ConnectBoard")
-			self.loginBoard				= GetObject("LoginBoard")
-			self.idEditLine				= GetObject("ID_EditLine")
-			self.pwdEditLine			= GetObject("Password_EditLine")
-			self.serverInfo				= GetObject("ConnectName")
-			self.selectConnectButton	= GetObject("SelectConnectButton")
-			self.loginButton			= GetObject("LoginButton")
-			self.loginExitButton		= GetObject("LoginExitButton")
-
-			if constInfo.ENABLE_SAVE_ACCOUNT:
-				self.__CreateSaveAccountBoard()
-
-			self.virtualKeyboard		= self.GetChild2("VirtualKeyboard")
-			
-			if app.__BL_MULTI_LANGUAGE_PREMIUM__:
-				self.language_board = ui.ThinBoard()
-				self.language_board.SetParent(self)
-				self.language_board.SetSize(wndMgr.GetScreenWidth(), 35)
-				self.language_board.SetPosition(0, 20)
-				self.language_board.Show()
-				
-				step = wndMgr.GetScreenWidth() / len(self.language_list)
-				x = 0
-				for i, lang in enumerate(self.language_list):
-					img_path = "D:/ymir work/ui/intro/login/server_flag_{}.sub".format(lang["locale"])
-					btn = ui.Button()
-					btn.SetParent(self.language_board)
-					btn.SetPosition(x + 15, 10)
-					btn.SetUpVisual(img_path)
-					btn.SetOverVisual(img_path)
-					btn.SetDownVisual(img_path)
-					btn.SetToolTipText(lang["name"])
-					btn.SetEvent(ui.__mem_func__(self.__ClickLanguage), i)
-					btn.Show()
-					self.flag_button_list.append(btn)
-					x += step
-			if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-				self.anon_mode_board = ui.ThinBoard()
-				self.anon_mode_board.SetParent(self)
-				self.anon_mode_board.SetSize(160, 35)
-				self.anon_mode_board.SetPosition(0, 20 + self.language_board.GetHeight())
-				self.anon_mode_board.Show()
-
-				self.anon_mode_text = ui.TextLine()
-				self.anon_mode_text.SetParent(self.anon_mode_board)
-				if localeInfo.IsARABIC():
-					self.anon_mode_text.SetPosition(123, 7)
-				else:
-					self.anon_mode_text.SetPosition(15, 10)
-				self.anon_mode_text.SetFontName(localeInfo.UI_DEF_FONT_LARGE)
-				self.anon_mode_text.SetText(uiScriptLocale.LANGUAGE_ANONYMOUS_MODE)
-				self.anon_mode_text.Show()
-
-				self.anon_mode_checkbox_bg = ui.ImageBox()
-				self.anon_mode_checkbox_bg.SetParent(self.anon_mode_board)
-				if localeInfo.IsARABIC():
-					self.anon_mode_checkbox_bg.SetPosition(15, 9)
-				else:
-					self.anon_mode_checkbox_bg.SetPosition(123, 9)
-				self.anon_mode_checkbox_bg.LoadImage("d:/ymir work/ui/public/popup_notice_checkbox_bg.sub")
-				self.anon_mode_checkbox_bg.SetEvent(ui.__mem_func__(self.__EventAnonymous), "mouse_click", "")
-				self.anon_mode_checkbox_bg.Show()
-
-				self.anon_mode_checkbox = ui.ImageBox()
-				self.anon_mode_checkbox.SetParent(self.anon_mode_checkbox_bg)
-				self.anon_mode_checkbox.AddFlag("not_pick")
-				self.anon_mode_checkbox.SetPosition(0, 0)
-				self.anon_mode_checkbox.LoadImage("d:/ymir work/ui/public/popup_notice_checkbox.sub")
-				
-				self.RefreshAnonymousMode()
-
-			if self.virtualKeyboard:
-				self.VIRTUAL_KEY_ALPHABET_UPPERS = Suffle(localeInfo.VIRTUAL_KEY_ALPHABET_UPPERS)
-				self.VIRTUAL_KEY_ALPHABET_LOWERS = "".join([localeInfo.VIRTUAL_KEY_ALPHABET_LOWERS[localeInfo.VIRTUAL_KEY_ALPHABET_UPPERS.index(e)] for e in self.VIRTUAL_KEY_ALPHABET_UPPERS])
-				if localeInfo.IsBRAZIL():
-					self.VIRTUAL_KEY_SYMBOLS_BR = Suffle(localeInfo.VIRTUAL_KEY_SYMBOLS_BR)
-				else:
-					self.VIRTUAL_KEY_SYMBOLS = Suffle(localeInfo.VIRTUAL_KEY_SYMBOLS)
-				self.VIRTUAL_KEY_NUMBERS = Suffle(localeInfo.VIRTUAL_KEY_NUMBERS)
-				self.__VirtualKeyboard_SetAlphabetMode()
-
-				self.GetChild("key_space").SetEvent(lambda : self.__VirtualKeyboard_PressKey(' '))
-				self.GetChild("key_backspace").SetEvent(lambda : self.__VirtualKeyboard_PressBackspace())
-				self.GetChild("key_enter").SetEvent(lambda : self.__VirtualKeyboard_PressReturn())
-				self.GetChild("key_shift").SetToggleDownEvent(lambda : self.__VirtualKeyboard_SetUpperMode())
-				self.GetChild("key_shift").SetToggleUpEvent(lambda : self.__VirtualKeyboard_SetLowerMode())
-				self.GetChild("key_at").SetToggleDownEvent(lambda : self.__VirtualKeyboard_SetSymbolMode())
-				self.GetChild("key_at").SetToggleUpEvent(lambda : self.__VirtualKeyboard_SetAlphabetMode())
-
-		except:
-			import exception
-			exception.Abort("LoginWindow.__LoadScript.BindObject")
-
-		if self.IS_TEST:
-			self.selectConnectButton.Hide()
+		if localeInfo.IsARABIC():
+			chat.SetPosition(self.chatID, x + width - 10, y + height - 25)
 		else:
-			self.selectConnectButton.SetEvent(ui.__mem_func__(self.__OnClickSelectConnectButton))
+			chat.SetPosition(self.chatID, x + 10, y + height - 25)
 
-		self.serverBoard.OnKeyUp = ui.__mem_func__(self.__ServerBoard_OnKeyUp)
-		self.xServerBoard, self.yServerBoard = self.serverBoard.GetLocalPosition()
+		chat.SetHeight(self.chatID, height - 45 - 25)
+		chat.Update(self.chatID)
+		chat.Render(self.chatID)
 
-		self.serverSelectButton.SetEvent(ui.__mem_func__(self.__OnClickSelectServerButton))
-		self.serverExitButton.SetEvent(ui.__mem_func__(self.__OnClickExitButton))
-
-		self.loginButton.SetEvent(ui.__mem_func__(self.__OnClickLoginButton))
-		self.loginExitButton.SetEvent(ui.__mem_func__(self.__OnClickExitButton))
-
-		self.serverList.SetEvent(ui.__mem_func__(self.__OnSelectServer))
-
-		self.idEditLine.SetReturnEvent(ui.__mem_func__(self.pwdEditLine.SetFocus))
-		self.idEditLine.SetTabEvent(ui.__mem_func__(self.pwdEditLine.SetFocus))
-
-		self.pwdEditLine.SetReturnEvent(ui.__mem_func__(self.__OnClickLoginButton))
-		self.pwdEditLine.SetTabEvent(ui.__mem_func__(self.idEditLine.SetFocus))
-
-		if IsFullBackImage():
-			self.GetChild("bg1").Show()
-			self.GetChild("bg2").Hide()
-		return 1
-
-	def __VirtualKeyboard_SetKeys(self, keyCodes):
-		uiDefFontBackup = localeInfo.UI_DEF_FONT
-		localeInfo.UI_DEF_FONT = localeInfo.UI_DEF_FONT_LARGE
-
-		keyIndex = 1
-		for keyCode in keyCodes:
-			key = self.GetChild2("key_%d" % keyIndex)
-			if key:
-				key.SetEvent(lambda x=keyCode: self.__VirtualKeyboard_PressKey(x))
-				key.SetText(keyCode)
-				key.ButtonText.SetFontColor(0, 0, 0)
-				keyIndex += 1
-
-		for keyIndex in xrange(keyIndex, VIRTUAL_KEYBOARD_NUM_KEYS+1):
-			key = self.GetChild2("key_%d" % keyIndex)
-			if key:
-				key.SetEvent(lambda x=' ': self.__VirtualKeyboard_PressKey(x))
-				key.SetText(' ')
-
-		localeInfo.UI_DEF_FONT = uiDefFontBackup
-
-	def __VirtualKeyboard_PressKey(self, code):
-		ime.PasteString(code)
-
-		#if self.virtualKeyboardMode == "ALPHABET" and self.virtualKeyboardIsUpper:
-		#	self.__VirtualKeyboard_SetLowerMode()
-
-	def __VirtualKeyboard_PressBackspace(self):
-		ime.PasteBackspace()
-
-	def __VirtualKeyboard_PressReturn(self):
-		ime.PasteReturn()
-
-	def __VirtualKeyboard_SetUpperMode(self):
-		self.virtualKeyboardIsUpper = True
-
-		if self.virtualKeyboardMode == "ALPHABET":
-			self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_ALPHABET_UPPERS)
-		elif self.virtualKeyboardMode == "NUMBER":
-			if localeInfo.IsBRAZIL():
-				self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_SYMBOLS_BR)
-			else:
-				self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_SYMBOLS)
-		else:
-			self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_NUMBERS)
-
-	def __VirtualKeyboard_SetLowerMode(self):
-		self.virtualKeyboardIsUpper = False
-
-		if self.virtualKeyboardMode == "ALPHABET":
-			self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_ALPHABET_LOWERS)
-		elif self.virtualKeyboardMode == "NUMBER":
-			self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_NUMBERS)
-		else:
-			if localeInfo.IsBRAZIL():
-				self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_SYMBOLS_BR)
-			else:
-				self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_SYMBOLS)
-
-	def __VirtualKeyboard_SetAlphabetMode(self):
-		self.virtualKeyboardIsUpper = False
-		self.virtualKeyboardMode = "ALPHABET"
-		self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_ALPHABET_LOWERS)
-
-	def __VirtualKeyboard_SetNumberMode(self):
-		self.virtualKeyboardIsUpper = False
-		self.virtualKeyboardMode = "NUMBER"
-		self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_NUMBERS)
-
-	def __VirtualKeyboard_SetSymbolMode(self):
-		self.virtualKeyboardIsUpper = False
-		self.virtualKeyboardMode = "SYMBOL"
-		if localeInfo.IsBRAZIL():
-			self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_SYMBOLS_BR)
-		else:
-			self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_SYMBOLS)
-
-	def Connect(self, id, pwd):
-
-		if constInfo.SEQUENCE_PACKET_ENABLE:
-			net.SetPacketSequenceMode()
-
-		if IsLoginDelay():
-			loginDelay = GetLoginDelay()
-			self.connectingDialog = ConnectingDialog()
-			self.connectingDialog.Open(loginDelay)
-			self.connectingDialog.SAFE_SetTimeOverEvent(self.OnEndCountDown)
-			self.connectingDialog.SAFE_SetExitEvent(self.OnPressExitKey)
-			self.isNowCountDown = True
-
-		else:
-			self.stream.popupWindow.Close()
-			self.stream.popupWindow.Open(localeInfo.LOGIN_CONNETING, self.SetPasswordEditLineFocus, localeInfo.UI_CANCEL)
-
-		self.stream.SetLoginInfo(id, pwd)
-		self.stream.Connect()
-
-	def __OnClickExitButton(self):
-		self.stream.SetPhaseWindow(0)
-
-	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:	
-		def __EventAnonymous(self, event_type, arg):
-			if "mouse_click" == event_type :
-				systemSetting.SetAnonymousCountryMode(not systemSetting.GetAnonymousCountryMode())
-				self.RefreshAnonymousMode()
-		
-		def RefreshAnonymousMode(self):
-			if systemSetting.GetAnonymousCountryMode():
-				self.anon_mode_checkbox.Show()
-			else:
-				self.anon_mode_checkbox.Hide()
-
-	if app.__BL_MULTI_LANGUAGE_PREMIUM__:
-		def __LoadLocaleListFile(self):
-			try:
-				with open("locale_list.txt", "rt") as file:
-					lines = file.readlines()
-			except:
-				import dbg
-				dbg.LogBox("__LoadLocaleListFile error locale_list.txt")
-				app.Abort()
-			
-			lineIndex = 1
-			for line in lines:
-				try:
-					tokens = line[:-1].split(" ")
-					if len(tokens) == 3:
-						name = tokens[0]
-						code_page = tokens[1]
-						locale = tokens[2]
-						
-						if locale in uiScriptLocale.LOCALE_NAME_DICT:
-							name = uiScriptLocale.LOCALE_NAME_DICT[locale]
-						
-						self.language_list.append({"name" : name, "code_page" : code_page, "locale" : locale})
-					else:
-						raise RuntimeError, "Unknown TokenSize"
-
-					lineIndex += 1
-				except:
-					import dbg
-					dbg.LogBox("%s: line(%d): %s" % ("locale_list.txt", lineIndex, line), "Error")
-					raise
-		
-		def __SaveLoca(self, code_page, locale):
-			try:
-				with open("loca.cfg", "wt") as file:
-					file.write("{} {}".format(code_page, locale))
-			except:
-				import dbg
-				dbg.LogBox("__SaveLoca error")
-				app.Abort()
-		
-		def __ClickLanguage(self, index):
-			if index >= len(self.language_list):
-				return
-			
-			lang = self.language_list[index]
-			self.__SaveLoca(lang["code_page"], lang["locale"])
-			app.SetReloadLocale(lang["locale"] != app.GetLocaleName())
-			
-			if not self.language_popup:
-				self.language_popup = uiCommon.PopupDialog()
-			self.language_popup.SetText(uiScriptLocale.LANGUAGE_WILL_CHANGE)
-			self.language_popup.Open()
-
-	def __SetServerInfo(self, name):
-		net.SetServerInfo(name.strip())
-		self.serverInfo.SetText(name)
-
-	def __LoadLoginInfo(self, loginInfoFileName):
-		def getValue(element, name, default):
-			if [] != element.getElementsByTagName(name):
-				return element.getElementsByTagName(name).item(0).firstChild.nodeValue
-			else:
-				return default
-
-		self.id = None
-		self.pwd = None
-		self.loginnedServer = None
-		self.loginnedChannel = None
-		app.loggined = False
-
-		self.loginInfo = True
-
-		from xml.dom.minidom import parse
-		try:
-			f = old_open(loginInfoFileName, "r")
-			dom = parse(f)
-		except:
-			return
-		serverLst = dom.getElementsByTagName("server")
-		if [] != dom.getElementsByTagName("logininfo"):
-			logininfo = dom.getElementsByTagName("logininfo")[0]
-		else:
-			return
-
-		try:
-			server_name = logininfo.getAttribute("name")
-			channel_idx = int(logininfo.getAttribute("channel_idx"))
-		except:
-			return
-
-		try:
-			matched = False
-
-			for k, v in serverInfo.REGION_DICT[0].iteritems():
-				if v["name"] == server_name:
-					account_addr = serverInfo.REGION_AUTH_SERVER_DICT[0][k]["ip"]
-					account_port = serverInfo.REGION_AUTH_SERVER_DICT[0][k]["port"]
-
-					channel_info = v["channel"][channel_idx]
-					channel_name = channel_info["name"]
-					addr = channel_info["ip"]
-					port = channel_info["tcp_port"]
-
-					net.SetMarkServer(addr, port)
-					self.stream.SetConnectInfo(addr, port, account_addr, account_port)
-
-					matched = True
-					break
-
-			if False == matched:
-				return
-		except:
-			return
-
-		self.__SetServerInfo("%s, %s " % (server_name, channel_name))
-		id = getValue(logininfo, "id", "")
-		pwd = getValue(logininfo, "pwd", "")
-		self.idEditLine.SetText(id)
-		self.pwdEditLine.SetText(pwd)
-		slot = getValue(logininfo, "slot", "0")
-		locale = getValue(logininfo, "locale", "")
-		locale_dir = getValue(logininfo, "locale_dir", "")
-		is_auto_login = int(getValue(logininfo, "auto_login", "0"))
-
-		self.stream.SetCharacterSlot(int(slot))
-		self.stream.isAutoLogin=is_auto_login
-		self.stream.isAutoSelect=is_auto_login
-
-		if locale and locale_dir:
-			app.ForceSetLocale(locale, locale_dir)
-
-		if 0 != is_auto_login:
-			self.Connect(id, pwd)
-
-		return
-
-
-	def PopupDisplayMessage(self, msg):
-		self.stream.popupWindow.Close()
-		if app.__BL_MULTI_LANGUAGE__:
-			self.stream.popupWindow.Open(msg, 0, localeInfo.UI_CANCEL)
-		else:
-			self.stream.popupWindow.Open(msg)
-
-	def PopupNotifyMessage(self, msg, func=0):
-		if not func:
-			func=self.EmptyFunc
-
-		self.stream.popupWindow.Close()
-		self.stream.popupWindow.Open(msg, func, localeInfo.UI_OK)
-
-	def __OnCloseInputDialog(self):
-		if self.inputDialog:
-			self.inputDialog.Close()
-		self.inputDialog = None
+	def OnPressEscapeKey(self):
+		self.Close()
 		return True
 
-	def OnPressExitKey(self):
-		self.stream.popupWindow.Close()
-		self.stream.SetPhaseWindow(0)
-		return True
+	def BindInterface(self, interface):
+		self.interface = interface
 
-	def OnExit(self):
-		self.stream.popupWindow.Close()
-		self.stream.popupWindow.Open(localeInfo.LOGIN_FAILURE_WRONG_MATRIX_CARD_NUMBER_TRIPLE, app.Exit, localeInfo.UI_OK)
-
-	def OnUpdate(self):
-		ServerStateChecker.Update()
-		if ENABLE_MAP_INTERACTIVE_LOGIN:
-			app.UpdateGame()
-
-	def EmptyFunc(self):
-		pass
-
-	#####################################################################################
-
-	def __ServerBoard_OnKeyUp(self, key):
-		if self.serverBoard.IsShow():
-			if app.DIK_RETURN==key:
-				self.__OnClickSelectServerButton()
-		return True
-
-	def __GetRegionID(self):
-		return 0
-
-	def __GetServerID(self):
-		return self.serverList.GetSelectedItem()
-
-	def __GetChannelID(self):
-		return self.channelList.GetSelectedItem()
-
-	# SEVER_LIST_BUG_FIX
-	def __ServerIDToServerIndex(self, regionID, targetServerID):
-		try:
-			regionDict = serverInfo.REGION_DICT[regionID]
-		except KeyError:
-			return -1
-
-		retServerIndex = 0
-		for eachServerID, regionDataDict in regionDict.items():
-			if eachServerID == targetServerID:
-				return retServerIndex
-
-			retServerIndex += 1
-
-		return -1
-
-	def __ChannelIDToChannelIndex(self, channelID):
-		return channelID - 1
-	# END_OF_SEVER_LIST_BUG_FIX
-
-	def __OpenServerBoard(self):
-
-		loadRegionID, loadServerID, loadChannelID = self.__LoadChannelInfo()
-
-		serverIndex = self.__ServerIDToServerIndex(loadRegionID, loadServerID)
-		channelIndex = self.__ChannelIDToChannelIndex(loadChannelID)
-
-		self.serverList.SelectItem(serverIndex)
-
-		if constInfo.ENABLE_RANDOM_CHANNEL_SEL:
-			self.channelList.SelectItem(app.GetRandom(0, self.channelList.GetItemCount()))
+	def OnMouseLeftButtonDown(self):
+		hyperlink = ui.GetHyperlink()
+		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
+			country = chat.GetCountry()
+			empire = chat.GetEmpire()
+			if hyperlink:
+				if app.IsPressed(app.DIK_LALT):
+					link = chat.GetLinkFromHyperlink(hyperlink)
+					ime.PasteString(link)
+				else:
+					self.interface.MakeHyperlinkTooltip(hyperlink)
+			elif country:
+				self.interface.MakeCountryTooltip(country)
+			elif empire:
+				self.interface.MakeEmpireTooltip(empire)
 		else:
-			if channelIndex >= 0:
-				self.channelList.SelectItem(channelIndex)
-
-		self.serverBoard.SetPosition(self.xServerBoard, self.yServerBoard)
-		self.serverBoard.Show()
-		self.connectBoard.Hide()
-		self.loginBoard.Hide()
-		if constInfo.ENABLE_SAVE_ACCOUNT:
-			self.saveAccountBoard.Hide()
-
-		self.KillInputFocus() #@fixme019
-
-		if self.virtualKeyboard:
-			self.virtualKeyboard.Hide()
-
-		if app.loggined and not SKIP_LOGIN_PHASE_SUPPORT_CHANNEL:
-			self.serverList.SelectItem(self.loginnedServer-1)
-			self.channelList.SelectItem(self.loginnedChannel-1)
-			self.__OnClickSelectServerButton()
-
-	def KillInputFocus(self): #@fixme019
-		if self.idEditLine and self.idEditLine.IsFocus():
-			self.idEditLine.KillFocus()
-		if self.pwdEditLine and self.pwdEditLine.IsFocus():
-			self.pwdEditLine.KillFocus()
-
-	def __OpenLoginBoard(self):
-
-		self.serverExitButton.SetEvent(ui.__mem_func__(self.__OnClickExitServerButton))
-		self.serverExitButton.SetText(localeInfo.UI_CLOSE)
-
-		self.serverBoard.SetPosition(self.xServerBoard, wndMgr.GetScreenHeight())
-		self.serverBoard.Hide()
-
-		if self.virtualKeyboard:
-			self.virtualKeyboard.Show()
-
-		if app.loggined:
-			self.Connect(self.id, self.pwd)
-			self.connectBoard.Hide()
-			self.loginBoard.Hide()
-			if constInfo.ENABLE_SAVE_ACCOUNT:
-				self.saveAccountBoard.Hide()
-		elif not self.stream.isAutoLogin:
-			self.connectBoard.Show()
-			self.loginBoard.Show()
-			if constInfo.ENABLE_SAVE_ACCOUNT:
-				self.saveAccountBoard.Show()
-
-		## if users have the login infomation, then don't initialize.2005.9 haho
-		if self.idEditLine == None:
-			self.idEditLine.SetText("")
-		if self.pwdEditLine == None:
-			self.pwdEditLine.SetText("")
-
-		self.idEditLine.SetFocus()
-
-		global SKIP_LOGIN_PHASE
-		if SKIP_LOGIN_PHASE:
-			if not self.loginInfo:
-				self.connectBoard.Hide()
-
-	def __OnSelectRegionGroup(self):
-		self.__RefreshServerList()
-
-	def __OnSelectSettlementArea(self):
-		# SEVER_LIST_BUG_FIX
-		regionID = self.__GetRegionID()
-		serverID = self.serverListOnRegionBoard.GetSelectedItem()
-
-		serverIndex = self.__ServerIDToServerIndex(regionID, serverID)
-		self.serverList.SelectItem(serverIndex)
-		# END_OF_SEVER_LIST_BUG_FIX
-
-		self.__OnSelectServer()
-
-	def __RefreshServerList(self):
-		regionID = self.__GetRegionID()
-
-		if not serverInfo.REGION_DICT.has_key(regionID):
-			return
-
-		self.serverList.ClearItem()
-
-		regionDict = serverInfo.REGION_DICT[regionID]
-
-		# SEVER_LIST_BUG_FIX
-		visible_index = 1
-		for id, regionDataDict in regionDict.items():
-			name = regionDataDict.get("name", "noname")
-			try:
-				server_id = serverInfo.SERVER_ID_DICT[id]
-			except:
-				server_id = visible_index
-
-			self.serverList.InsertItem(id, "  %02d. %s" % (int(server_id), name))
-
-			visible_index += 1
-
-		# END_OF_SEVER_LIST_BUG_FIX
-
-	def __OnSelectServer(self):
-		self.__OnCloseInputDialog()
-		self.__RequestServerStateList()
-		self.__RefreshServerStateList()
-
-	def __RequestServerStateList(self):
-		regionID = self.__GetRegionID()
-		serverID = self.__GetServerID()
-
-		try:
-			channelDict = serverInfo.REGION_DICT[regionID][serverID]["channel"]
-		except:
-			print(" __RequestServerStateList - serverInfo.REGION_DICT(%d, %d)" % (regionID, serverID))
-			return
-
-		ServerStateChecker.Initialize()
-		for id, channelDataDict in channelDict.items():
-			key=channelDataDict["key"]
-			ip=channelDataDict["ip"]
-			tcp_port=channelDataDict["tcp_port"]
-			ServerStateChecker.AddChannel(key, ip, tcp_port)
-
-		ServerStateChecker.Request()
-
-	def __RefreshServerStateList(self):
-
-		regionID = self.__GetRegionID()
-		serverID = self.__GetServerID()
-		bakChannelID = self.channelList.GetSelectedItem()
-
-		self.channelList.ClearItem()
-
-		try:
-			channelDict = serverInfo.REGION_DICT[regionID][serverID]["channel"]
-		except:
-			print(" __RequestServerStateList - serverInfo.REGION_DICT(%d, %d)" % (regionID, serverID))
-			return
-
-		for channelID, channelDataDict in channelDict.items():
-			channelName = channelDataDict["name"]
-			channelState = channelDataDict["state"]
-			self.channelList.InsertItem(channelID, " %s %s" % (channelName, channelState))
-
-		self.channelList.SelectItem(bakChannelID-1)
-
-	def __GetChannelName(self, regionID, selServerID, selChannelID):
-		try:
-			return serverInfo.REGION_DICT[regionID][selServerID]["channel"][selChannelID]["name"]
-		except KeyError:
-			if 9==selChannelID:
-				return localeInfo.CHANNEL_PVP
-			else:
-				return localeInfo.CHANNEL_NORMAL % (selChannelID)
-
-	def NotifyChannelState(self, addrKey, state):
-		try:
-			stateName=serverInfo.STATE_DICT[state]
-		except:
-			stateName=serverInfo.STATE_NONE
-
-		regionID=int(addrKey/1000)
-		serverID=int(addrKey/10) % 100
-		channelID=addrKey%10
-
-		try:
-			serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["state"] = stateName
-			self.__RefreshServerStateList()
-
-		except:
-			import exception
-			exception.Abort(localeInfo.CHANNEL_NOT_FIND_INFO)
-
-	def __OnClickExitServerButton(self):
-		print("exit server")
-		self.__OpenLoginBoard()
-
-		if IsFullBackImage():
-			self.GetChild("bg1").Hide()
-			self.GetChild("bg2").Show()
-
-
-	def __OnClickSelectRegionButton(self):
-		regionID = self.__GetRegionID()
-		serverID = self.__GetServerID()
-
-		if (not serverInfo.REGION_DICT.has_key(regionID)):
-			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_REGION)
-			return
-
-		if (not serverInfo.REGION_DICT[regionID].has_key(serverID)):
-			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_SERVER)
-			return
-
-		self.__SaveChannelInfo()
-
-		self.serverExitButton.SetEvent(ui.__mem_func__(self.__OnClickExitServerButton))
-		self.serverExitButton.SetText(localeInfo.UI_CLOSE)
-
-		self.__RefreshServerList()
-		self.__OpenServerBoard()
-
-	def __OnClickSelectServerButton(self):
-		if IsFullBackImage():
-			self.GetChild("bg1").Hide()
-			self.GetChild("bg2").Show()
-
-		regionID = self.__GetRegionID()
-		serverID = self.__GetServerID()
-		channelID = self.__GetChannelID()
-
-		if (not serverInfo.REGION_DICT.has_key(regionID)):
-			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_REGION)
-			return
-
-		if (not serverInfo.REGION_DICT[regionID].has_key(serverID)):
-			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_SERVER)
-			return
-
-		try:
-			channelDict = serverInfo.REGION_DICT[regionID][serverID]["channel"]
-		except KeyError:
-			return
-
-		try:
-			state = channelDict[channelID]["state"]
-		except KeyError:
-			self.PopupNotifyMessage(localeInfo.CHANNEL_SELECT_CHANNEL)
-			return
-
-		if state == serverInfo.STATE_DICT[3]:
-			self.PopupNotifyMessage(localeInfo.CHANNEL_NOTIFY_FULL)
-			return
-
-		self.__SaveChannelInfo()
-
-		try:
-			serverName = serverInfo.REGION_DICT[regionID][serverID]["name"]
-			channelName = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["name"]
-			addrKey = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["key"]
-
-		except:
-			print(" ERROR __OnClickSelectServerButton(%d, %d, %d)" % (regionID, serverID, channelID))
-			serverName = localeInfo.CHANNEL_EMPTY_SERVER
-			channelName = localeInfo.CHANNEL_NORMAL % channelID
-
-		self.__SetServerInfo("%s, %s " % (serverName, channelName))
-
-		try:
-			ip = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["ip"]
-			tcp_port = serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["tcp_port"]
-		except:
-			import exception
-			exception.Abort("LoginWindow.__OnClickSelectServerButton")
-
-		try:
-			account_ip = serverInfo.REGION_AUTH_SERVER_DICT[regionID][serverID]["ip"]
-			account_port = serverInfo.REGION_AUTH_SERVER_DICT[regionID][serverID]["port"]
-		except:
-			account_ip = 0
-			account_port = 0
-
-		try:
-			markKey = regionID*1000 + serverID*10
-			markAddrValue=serverInfo.MARKADDR_DICT[markKey]
-			net.SetMarkServer(markAddrValue["ip"], markAddrValue["tcp_port"])
-			app.SetGuildMarkPath(markAddrValue["mark"])
-			# GUILD_SYMBOL
-			app.SetGuildSymbolPath(markAddrValue["symbol_path"])
-			# END_OF_GUILD_SYMBOL
-
-		except:
-			import exception
-			exception.Abort("LoginWindow.__OnClickSelectServerButton")
-
-
-		self.stream.SetConnectInfo(ip, tcp_port, account_ip, account_port)
-		self.__OpenLoginBoard()
-
-
-	def __OnClickSelectConnectButton(self):
-		if IsFullBackImage():
-			self.GetChild("bg1").Show()
-			self.GetChild("bg2").Hide()
-		self.__RefreshServerList()
-		self.__OpenServerBoard()
-
-	def __OnClickLoginButton(self):
-		id = self.idEditLine.GetText()
-		pwd = self.pwdEditLine.GetText()
-
-		if len(id)==0:
-			self.PopupNotifyMessage(localeInfo.LOGIN_INPUT_ID, self.SetIDEditLineFocus)
-			return
-
-		if len(pwd)==0:
-			self.PopupNotifyMessage(localeInfo.LOGIN_INPUT_PASSWORD, self.SetPasswordEditLineFocus)
-			return
-
-		self.Connect(id, pwd)
-
-	def OnKeyDown(self, key):
-		if constInfo.ENABLE_SAVE_ACCOUNT:
-			for idx in xrange(constInfo.SAB.slotCount):
-				if app.DIK_F1+idx == key and self.SAB_GetAccountData(idx):
-					self.SAB_Click_Access(idx)
-		return True
+			if hyperlink:
+				if app.IsPressed(app.DIK_LALT):
+					link = chat.GetLinkFromHyperlink(hyperlink)
+					ime.PasteString(link)
+				else:
+					self.interface.MakeHyperlinkTooltip(hyperlink)

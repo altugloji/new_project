@@ -40,20 +40,20 @@ if app.__BL_MULTI_LANGUAGE__:
 		
 		global LOCALE_NAME_DICT
 		LOCALE_NAME_DICT = {
-			"ae" : globals()['LANGUAGE_AE'],
+			# "ae" : globals()['LANGUAGE_AE'],
 			"cz" : globals()['LANGUAGE_CZ'],
 			"dk" : globals()['LANGUAGE_DK'],
 			"nl" : globals()['LANGUAGE_NL'],
 			"en" : globals()['LANGUAGE_EN'],
 			"fr" : globals()['LANGUAGE_FR'],
 			"de" : globals()['LANGUAGE_DE'],
-			"gr" : globals()['LANGUAGE_GR'],
+			# "gr" : globals()['LANGUAGE_GR'],
 			"hu" : globals()['LANGUAGE_HU'],
 			"it" : globals()['LANGUAGE_IT'],
 			"pl" : globals()['LANGUAGE_PL'],
 			"pt" : globals()['LANGUAGE_PT'],
 			"ro" : globals()['LANGUAGE_RO'],
-			"ru" : globals()['LANGUAGE_RU'],
+			# "ru" : globals()['LANGUAGE_RU'],
 			"es" : globals()['LANGUAGE_ES'],
 			"tr" : globals()['LANGUAGE_TR'],
 		}
