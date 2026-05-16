@@ -173,7 +173,8 @@ class GameWindow(ui.ScriptWindow):
 		constInfo.SET_TWO_HANDED_WEAPON_ATT_SPEED_DECREASE_VALUE()
 		# END_OF_TWO_HANDED_WEAPON_ATTACK_SPEED_UP
 
-		constInfo.APPLY_NIGHT_MODE()
+		if app.ENABLE_NIGHT_MODE_OPTION:
+			constInfo.APPLY_NIGHT_MODE()
 
 		import event
 		event.SetLeftTimeString(localeInfo.UI_LEFT_TIME)
@@ -988,13 +989,20 @@ class GameWindow(ui.ScriptWindow):
 
 	def OnCannotUseSkill(self, vid, type):
 		if localeInfo.USE_SKILL_ERROR_TAIL_DICT.has_key(type):
-			textTail.RegisterInfoTail(vid, localeInfo.USE_SKILL_ERROR_TAIL_DICT[type])
+			if constInfo.ENABLE_CENTER_SKILL_ERROR_NOTIFY and self.interface:
+				self.interface.ShowCenterNotify(localeInfo.USE_SKILL_ERROR_TAIL_DICT[type])
+			else:
+				textTail.RegisterInfoTail(vid, localeInfo.USE_SKILL_ERROR_TAIL_DICT[type])
 
 		if localeInfo.USE_SKILL_ERROR_CHAT_DICT.has_key(type):
 			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.USE_SKILL_ERROR_CHAT_DICT[type])
 
 	def	OnCannotShotError(self, vid, type):
-		textTail.RegisterInfoTail(vid, localeInfo.SHOT_ERROR_TAIL_DICT.get(type, localeInfo.SHOT_ERROR_UNKNOWN % (type)))
+		msg = localeInfo.SHOT_ERROR_TAIL_DICT.get(type, localeInfo.SHOT_ERROR_UNKNOWN % (type))
+		if constInfo.ENABLE_CENTER_SKILL_ERROR_NOTIFY and self.interface:
+			self.interface.ShowCenterNotify(msg)
+		else:
+			textTail.RegisterInfoTail(vid, msg)
 
 	## PointReset
 	def StartPointReset(self):
@@ -1587,6 +1595,8 @@ class GameWindow(ui.ScriptWindow):
 			self.__XMasBoom_Update()
 
 		self.interface.BUILD_OnUpdate()
+		if self.interface:
+			self.interface.UpdateCenterNotify()
 
 
 	def UpdateDebugInfo(self):

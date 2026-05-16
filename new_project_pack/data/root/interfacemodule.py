@@ -102,6 +102,7 @@ class Interface(object):
 		self.inputDialog = None
 		self.tipBoard = None
 		self.bigBoard = None
+		self.centerNotifyBoard = None
 
 		if app.ENABLE_EXCHANGE_LOG:
 			self.wndExchangeLog = None
@@ -358,6 +359,17 @@ class Interface(object):
 
 		self.bigBoard = uiTip.BigBoard()
 		self.bigBoard.Hide()
+
+		self.centerNotifyBoard = uiTip.CenterNotifyBoard()
+		self.centerNotifyBoard.Hide()
+
+	def ShowCenterNotify(self, text):
+		if self.centerNotifyBoard:
+			self.centerNotifyBoard.ShowMessage(text)
+
+	def UpdateCenterNotify(self):
+		if self.centerNotifyBoard and self.centerNotifyBoard.IsShow():
+			self.centerNotifyBoard.OnUpdate()
 
 	def __MakeWebWindow(self):
 		if constInfo.IN_GAME_SHOP_ENABLE:
@@ -713,6 +725,7 @@ class Interface(object):
 		del self.wndGameButton
 		del self.tipBoard
 		del self.bigBoard
+		del self.centerNotifyBoard
 		del self.wndItemSelect
 
 		if app.ENABLE_ACCE_COSTUME_SYSTEM:

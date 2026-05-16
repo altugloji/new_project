@@ -1,6 +1,6 @@
  metin2client
 
- Timestamp is 6a083e44 (Sat May 16 12:52:04 2026)
+ Timestamp is 6a087094 (Sat May 16 16:26:44 2026)
 
  Preferred load address is 00400000
 
@@ -4634,36 +4634,36 @@
  0001:000c0f40       ?RecvCreateFlyPacket@CPythonNetworkStream@@IAE_NXZ 004c1f40 f   PythonNetworkStreamPhaseGame.obj
  0001:000c0fd0       ?RecvCubeRenewalPacket@CPythonNetworkStream@@QAE_NXZ 004c1fd0 f   PythonNetworkStreamPhaseGame.obj
  0001:000c10d0       ?RecvDamageInfoPacket@CPythonNetworkStream@@IAE_NXZ 004c20d0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c1190       ?RecvDeadPacket@CPythonNetworkStream@@IAE_NXZ 004c2190 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c1240       ?RecvDigMotionPacket@CPythonNetworkStream@@QAE_NXZ 004c2240 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c12e0       ?RecvDuelStartPacket@CPythonNetworkStream@@IAE_NXZ 004c22e0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c13b0       ?RecvDungeon@CPythonNetworkStream@@IAE_NXZ 004c23b0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c1420       ?RecvExchangeLog@CPythonNetworkStream@@QAE_NXZ 004c2420 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c18f0       ?RecvExchangePacket@CPythonNetworkStream@@IAE_NXZ 004c28f0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c1c90       ?RecvFishing@CPythonNetworkStream@@IAE_NXZ 004c2c90 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c1e80       ?RecvFlyTargetingPacket@CPythonNetworkStream@@IAE_NXZ 004c2e80 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c1ff0       ?RecvGem@CPythonNetworkStream@@QAE_NXZ 004c2ff0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c22a0       ?RecvGuild@CPythonNetworkStream@@IAE_NXZ 004c32a0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c30a0       ?RecvGuildTokenPacket@CPythonNetworkStream@@IAE_NXZ 004c40a0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c30f0       ?RecvItemShopData@CPythonNetworkStream@@IAE_NXZ 004c40f0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c31c0       ?RecvLandPacket@CPythonNetworkStream@@IAE_NXZ 004c41c0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3380       ?RecvLovePointUpdatePacket@CPythonNetworkStream@@QAE_NXZ 004c4380 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c33d0       ?RecvLoverInfoPacket@CPythonNetworkStream@@QAE_NXZ 004c43d0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3440       ?RecvMessenger@CPythonNetworkStream@@IAE_NXZ 004c4440 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3660       ?RecvMotionPacket@CPythonNetworkStream@@IAE_NXZ 004c4660 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c36d0       ?RecvMountPacket@CPythonNetworkStream@@IAE_NXZ 004c46d0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3740       ?RecvNPCList@CPythonNetworkStream@@IAE_NXZ 004c4740 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c37d0       ?RecvObserverAddPacket@CPythonNetworkStream@@IAE_NXZ 004c47d0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3850       ?RecvObserverMovePacket@CPythonNetworkStream@@IAE_NXZ 004c4850 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c38d0       ?RecvObserverRemovePacket@CPythonNetworkStream@@IAE_NXZ 004c48d0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3920       ?RecvPVPPacket@CPythonNetworkStream@@IAE_NXZ 004c4920 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3a70       ?RecvPartyAdd@CPythonNetworkStream@@IAE_NXZ 004c4a70 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3b00       ?RecvPartyInvite@CPythonNetworkStream@@IAE_NXZ 004c4b00 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3ba0       ?RecvPartyLink@CPythonNetworkStream@@IAE_NXZ 004c4ba0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3c30       ?RecvPartyParameter@CPythonNetworkStream@@IAE_NXZ 004c4c30 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3c90       ?RecvPartyRemove@CPythonNetworkStream@@IAE_NXZ 004c4c90 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3cf0       ?RecvPartyUnlink@CPythonNetworkStream@@IAE_NXZ 004c4cf0 f   PythonNetworkStreamPhaseGame.obj
- 0001:000c3db0       ?RecvPartyUpdate@CPythonNetworkStream@@IAE_NXZ 004c4db0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c11a0       ?RecvDeadPacket@CPythonNetworkStream@@IAE_NXZ 004c21a0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c1250       ?RecvDigMotionPacket@CPythonNetworkStream@@QAE_NXZ 004c2250 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c12f0       ?RecvDuelStartPacket@CPythonNetworkStream@@IAE_NXZ 004c22f0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c13c0       ?RecvDungeon@CPythonNetworkStream@@IAE_NXZ 004c23c0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c1430       ?RecvExchangeLog@CPythonNetworkStream@@QAE_NXZ 004c2430 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c1900       ?RecvExchangePacket@CPythonNetworkStream@@IAE_NXZ 004c2900 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c1ca0       ?RecvFishing@CPythonNetworkStream@@IAE_NXZ 004c2ca0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c1e90       ?RecvFlyTargetingPacket@CPythonNetworkStream@@IAE_NXZ 004c2e90 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c2000       ?RecvGem@CPythonNetworkStream@@QAE_NXZ 004c3000 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c22b0       ?RecvGuild@CPythonNetworkStream@@IAE_NXZ 004c32b0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c30b0       ?RecvGuildTokenPacket@CPythonNetworkStream@@IAE_NXZ 004c40b0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3100       ?RecvItemShopData@CPythonNetworkStream@@IAE_NXZ 004c4100 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c31d0       ?RecvLandPacket@CPythonNetworkStream@@IAE_NXZ 004c41d0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3390       ?RecvLovePointUpdatePacket@CPythonNetworkStream@@QAE_NXZ 004c4390 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c33e0       ?RecvLoverInfoPacket@CPythonNetworkStream@@QAE_NXZ 004c43e0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3450       ?RecvMessenger@CPythonNetworkStream@@IAE_NXZ 004c4450 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3670       ?RecvMotionPacket@CPythonNetworkStream@@IAE_NXZ 004c4670 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c36e0       ?RecvMountPacket@CPythonNetworkStream@@IAE_NXZ 004c46e0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3750       ?RecvNPCList@CPythonNetworkStream@@IAE_NXZ 004c4750 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c37e0       ?RecvObserverAddPacket@CPythonNetworkStream@@IAE_NXZ 004c47e0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3860       ?RecvObserverMovePacket@CPythonNetworkStream@@IAE_NXZ 004c4860 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c38e0       ?RecvObserverRemovePacket@CPythonNetworkStream@@IAE_NXZ 004c48e0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3930       ?RecvPVPPacket@CPythonNetworkStream@@IAE_NXZ 004c4930 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3a80       ?RecvPartyAdd@CPythonNetworkStream@@IAE_NXZ 004c4a80 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3b10       ?RecvPartyInvite@CPythonNetworkStream@@IAE_NXZ 004c4b10 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3bb0       ?RecvPartyLink@CPythonNetworkStream@@IAE_NXZ 004c4bb0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3c40       ?RecvPartyParameter@CPythonNetworkStream@@IAE_NXZ 004c4c40 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3ca0       ?RecvPartyRemove@CPythonNetworkStream@@IAE_NXZ 004c4ca0 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3d00       ?RecvPartyUnlink@CPythonNetworkStream@@IAE_NXZ 004c4d00 f   PythonNetworkStreamPhaseGame.obj
+ 0001:000c3dc0       ?RecvPartyUpdate@CPythonNetworkStream@@IAE_NXZ 004c4dc0 f   PythonNetworkStreamPhaseGame.obj
  0001:000c3eb0       ?RecvPointChange@CPythonNetworkStream@@IAE_NXZ 004c4eb0 f   PythonNetworkStreamPhaseGame.obj
  0001:000c40e0       ?RecvQuestConfirmPacket@CPythonNetworkStream@@IAE_NXZ 004c50e0 f   PythonNetworkStreamPhaseGame.obj
  0001:000c4170       ?RecvQuestInfoPacket@CPythonNetworkStream@@IAE_NXZ 004c5170 f   PythonNetworkStreamPhaseGame.obj
@@ -47540,12 +47540,12 @@
  0001:000c0e1c       $LN814                     004c1e1c     PythonNetworkStreamPhaseGame.obj
  0001:000c0e28       $LN813                     004c1e28     PythonNetworkStreamPhaseGame.obj
  0001:000c10b4       $LN12                      004c20b4     PythonNetworkStreamPhaseGame.obj
- 0001:000c1c64       $LN65                      004c2c64     PythonNetworkStreamPhaseGame.obj
- 0001:000c1e68       $LN25                      004c2e68     PythonNetworkStreamPhaseGame.obj
- 0001:000c3024       $LN451                     004c4024     PythonNetworkStreamPhaseGame.obj
- 0001:000c3078       $LN458                     004c4078     PythonNetworkStreamPhaseGame.obj
- 0001:000c3644       $LN43                      004c4644     PythonNetworkStreamPhaseGame.obj
- 0001:000c3a60       $LN14                      004c4a60     PythonNetworkStreamPhaseGame.obj
+ 0001:000c1c74       $LN65                      004c2c74     PythonNetworkStreamPhaseGame.obj
+ 0001:000c1e78       $LN25                      004c2e78     PythonNetworkStreamPhaseGame.obj
+ 0001:000c3034       $LN451                     004c4034     PythonNetworkStreamPhaseGame.obj
+ 0001:000c3088       $LN458                     004c4088     PythonNetworkStreamPhaseGame.obj
+ 0001:000c3654       $LN43                      004c4654     PythonNetworkStreamPhaseGame.obj
+ 0001:000c3a70       $LN14                      004c4a70     PythonNetworkStreamPhaseGame.obj
  0001:000c404c       $LN29                      004c504c     PythonNetworkStreamPhaseGame.obj
  0001:000c4060       $LN28                      004c5060     PythonNetworkStreamPhaseGame.obj
  0001:000c4e38       $LN137                     004c5e38     PythonNetworkStreamPhaseGame.obj

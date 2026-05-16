@@ -36,8 +36,9 @@ ENABLE_RECURSIVE_UI_DESTROY = True # force clears everything inside the UI compo
 ENABLE_CMDCHAT_VARIADIC_ARGS = True # enable variadic arguments in cmdchat functions
 ENABLE_SELF_STACK_SCROLLS = True # enable self stack of scrolls, etc
 ENABLE_UI_DEBUG_WINDOW = False # load DebugWindow.py from client folder instead of login window
+ENABLE_SPECIAL_CAMERA_MODE = True # GM only: free camera Numpad / PgUp-PgDn (client rebuild required)
+ENABLE_CENTER_SKILL_ERROR_NOTIFY = True # skill/shot errors: center screen bar instead of character tail
 ENABLE_MAP_INTERACTIVE_LOGIN = True # load a list of maps in the login window
-ENABLE_SPECIAL_CAMERA_MODE = True # free camera: Scroll Lock + Numpad / PgUp-PgDn
 # EXTRA END
 
 # enable save account
@@ -188,35 +189,32 @@ CAMERA_MAX_DISTANCE = CAMERA_MAX_DISTANCE_SHORT
 CHRNAME_COLOR_INDEX = 0
 
 ENVIRONMENT_NIGHT="d:/ymir work/environment/moonlight04.msenv"
-Night = 0
 
-def APPLY_NIGHT_MODE(level=None):
-	global Night
-	import background
-	import systemSetting
+if app.ENABLE_NIGHT_MODE_OPTION:
+	Night = 0
 
-	if level is None:
-		try:
+	def APPLY_NIGHT_MODE(level=None):
+		global Night
+		import background
+		import systemSetting
+
+		if level is None:
 			level = systemSetting.GetNightModeVolume()
-		except AttributeError:
-			level = float(Night)
 
-	if level < 0.0:
-		level = 0.0
-	elif level > 1.0:
-		level = 1.0
+		if level < 0.0:
+			level = 0.0
+		elif level > 1.0:
+			level = 1.0
 
-	Night = 1 if level > 0.0 else 0
+		Night = 1 if level > 0.0 else 0
 
-	background.RegisterEnvironmentData(1, ENVIRONMENT_NIGHT)
-
-	try:
+		background.RegisterEnvironmentData(1, ENVIRONMENT_NIGHT)
 		background.SetNightModeBlend(level)
-	except AttributeError:
-		if level > 0.0:
-			background.SetEnvironmentData(1)
-		else:
-			background.SetEnvironmentData(0)
+else:
+	Night = 0
+
+	def APPLY_NIGHT_MODE(level=None):
+		pass
 
 # constant
 HIGH_PRICE = 500000

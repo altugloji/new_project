@@ -300,3 +300,107 @@ class BigBoard(ui.Bar):
 				self.dstPos = -self.STEP_HEIGHT
 
 				self.__CleanOldTip()
+
+
+class CenterNotifyBoard(ui.Window):
+	MESSAGE_DURATION = 2.0
+	PAD_X = 28
+	PAD_Y = 16
+	MIN_WIDTH = 220
+	BORDER = 1
+	# Same transparent black as ChatWindow (uichat.py BOARD_MIDDLE_COLOR)
+	BG_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.5)
+	BORDER_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 1.0)
+
+	def __init__(self):
+		ui.Window.__init__(self)
+		self.AddFlag("float")
+		self.AddFlag("not_pick")
+
+		self.SetWindowHorizontalAlignCenter()
+		self.SetWindowVerticalAlignCenter()
+		self.SetPosition(-116, 350)
+
+		self.hideTime = 0.0
+
+		self.borderTop = ui.Bar()
+		self.borderTop.SetParent(self)
+		self.borderTop.AddFlag("not_pick")
+
+		self.borderBottom = ui.Bar()
+		self.borderBottom.SetParent(self)
+		self.borderBottom.AddFlag("not_pick")
+
+		self.borderLeft = ui.Bar()
+		self.borderLeft.SetParent(self)
+		self.borderLeft.AddFlag("not_pick")
+
+		self.borderRight = ui.Bar()
+		self.borderRight.SetParent(self)
+		self.borderRight.AddFlag("not_pick")
+
+		self.bgBar = ui.Bar()
+		self.bgBar.SetParent(self)
+		self.bgBar.AddFlag("not_pick")
+
+		self.textLine = ui.TextLine()
+		self.textLine.SetParent(self)
+		self.textLine.AddFlag("not_pick")
+		self.textLine.SetHorizontalAlignCenter()
+		self.textLine.SetVerticalAlignCenter()
+		self.textLine.SetOutline()
+		self.textLine.SetPackedFontColor(0xFFF7E7C1)
+
+		self.Hide()
+
+	def ShowMessage(self, text):
+		if not text:
+			return
+
+		self.textLine.SetText(text)
+		tw, th = self.textLine.GetTextSize()
+		innerW = max(self.MIN_WIDTH, tw + self.PAD_X * 2)
+		innerH = max(32, th + self.PAD_Y * 2)
+		outerW = innerW + self.BORDER * 2
+		outerH = innerH + self.BORDER * 2
+
+		self.SetSize(outerW, outerH)
+
+		b = self.BORDER
+		c = self.BORDER_COLOR
+
+		self.borderTop.SetPosition(0, 0)
+		self.borderTop.SetSize(outerW, b)
+		self.borderTop.SetColor(c)
+		self.borderTop.Show()
+
+		self.borderBottom.SetPosition(0, outerH - b)
+		self.borderBottom.SetSize(outerW, b)
+		self.borderBottom.SetColor(c)
+		self.borderBottom.Show()
+
+		self.borderLeft.SetPosition(0, 0)
+		self.borderLeft.SetSize(b, outerH)
+		self.borderLeft.SetColor(c)
+		self.borderLeft.Show()
+
+		self.borderRight.SetPosition(outerW - b, 0)
+		self.borderRight.SetSize(b, outerH)
+		self.borderRight.SetColor(c)
+		self.borderRight.Show()
+
+		self.bgBar.SetPosition(b, b)
+		self.bgBar.SetSize(innerW, innerH)
+		self.bgBar.SetColor(self.BG_COLOR)
+		self.bgBar.Show()
+
+		self.textLine.SetPosition(outerW / 2, outerH / 2)
+		self.textLine.Show()
+
+		self.hideTime = app.GetTime() + self.MESSAGE_DURATION
+		self.SetTop()
+		self.Show()
+
+	def OnUpdate(self):
+		if self.IsShow() and app.GetTime() >= self.hideTime:
+			self.Hide()

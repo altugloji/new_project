@@ -2523,7 +2523,13 @@ bool CPythonNetworkStream::RecvDamageInfoPacket()
 
 	CInstanceBase * pInstTarget = CPythonCharacterManager::Instance().GetInstancePtr(DamageInfoPacket.dwVID);
 	const bool bSelf = (pInstTarget == CPythonCharacterManager::Instance().GetMainInstancePtr());
-	const bool bTarget = (pInstTarget==m_pInstTarget);
+	//const bool bTarget = (pInstTarget==m_pInstTarget);
+//toplu hasar
+	bool bTarget = (pInstTarget == m_pInstTarget);
+
+	if (!bTarget && pInstTarget)
+		bTarget = pInstTarget->IsPC();
+//toplu hasar end
 	if (pInstTarget)
 	{
 		if(DamageInfoPacket.damage >= 0)
