@@ -63,6 +63,9 @@ class CMapManager : public CScreen, public IPhysicsWorld
 #endif
 
 		void					BlendEnvironmentData(const TEnvironmentData * c_pEnvironmentData, int iTransitionTime) const;
+#ifdef ENABLE_NIGHT_MODE_OPTION
+		void					SetNightModeBlend(float fBlend);
+#endif
 
 		void					GetCurrentEnvironmentData(const TEnvironmentData ** c_ppEnvironmentData) const;
 		bool					RegisterEnvironmentData(DWORD dwIndex, const char * c_szFileName);

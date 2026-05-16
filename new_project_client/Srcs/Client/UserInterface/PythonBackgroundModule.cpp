@@ -115,6 +115,18 @@ PyObject * backgroundSetEnvironmentData(PyObject * poSelf, PyObject * poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_NIGHT_MODE_OPTION
+PyObject * backgroundSetNightModeBlend(PyObject * poSelf, PyObject * poArgs)
+{
+	float fBlend;
+	if (!PyTuple_GetFloat(poArgs, 0, &fBlend))
+		return Py_BadArgument();
+
+	CPythonBackground::Instance().SetNightModeBlend(fBlend);
+	return Py_BuildNone();
+}
+#endif
+
 PyObject * backgroundGetCurrentMapName(PyObject * poSelf, PyObject * poArgs)
 {
 	const CPythonBackground& rkBG=CPythonBackground::Instance();
@@ -589,6 +601,9 @@ void initBackground()
 		{ "Destroy",							backgroundDestroy,							METH_VARARGS },
 		{ "RegisterEnvironmentData",			backgroundRegisterEnvironmentData,			METH_VARARGS },
 		{ "SetEnvironmentData",					backgroundSetEnvironmentData,				METH_VARARGS },
+#ifdef ENABLE_NIGHT_MODE_OPTION
+		{ "SetNightModeBlend",					backgroundSetNightModeBlend,				METH_VARARGS },
+#endif
 		{ "GetCurrentMapName",					backgroundGetCurrentMapName,				METH_VARARGS },
 		{ "GetPickingPoint",					backgroundGetPickingPoint,					METH_VARARGS },
 

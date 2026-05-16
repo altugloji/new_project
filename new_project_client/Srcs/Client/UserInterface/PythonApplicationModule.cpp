@@ -2050,5 +2050,11 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "FAST_LOGIN_CHARACTER_SAVE", 0);
 #endif
 
+#ifdef ENABLE_NIGHT_MODE_OPTION
+	PyModule_AddIntConstant(poModule, "ENABLE_NIGHT_MODE_OPTION",	1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_NIGHT_MODE_OPTION",	0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

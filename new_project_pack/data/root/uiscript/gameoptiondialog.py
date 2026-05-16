@@ -440,51 +440,39 @@ window = {
 
 CUR_LINE_Y = LINE_BEGIN + LINE_STEP * 8
 
-if app.WJ_SHOW_MOB_INFO:
+if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 	CUR_LINE_Y += LINE_STEP
 	window["height"] = window["height"] + 25
 	window["children"][0]["height"] = window["children"][0]["height"] + 25
 	window["children"][0]["children"] = window["children"][0]["children"] + [
-
-					## Show Mob Info List
-					{
-						"name" : "show_mob_info",
-						"type" : "text",
-
-						"multi_line" : 1,
-
-						"x" : LINE_LABEL_X,
-						"y" : CUR_LINE_Y+2,
-
-						"text" : uiScriptLocale.OPTION_MOB_INFO,
-					},
-					{
-						"name" : "show_mob_level_button",
-						"type" : "toggle_button",
-
-						"x" : LINE_DATA_X,
-						"y" : CUR_LINE_Y,
-
-						"text" : uiScriptLocale.OPTION_MOB_INFO_LEVEL,
-
-						"default_image" : ROOT_PATH + "middle_button_01.sub",
-						"over_image" : ROOT_PATH + "middle_button_02.sub",
-						"down_image" : ROOT_PATH + "middle_button_03.sub",
-					},
-					{
-						"name" : "show_mob_AI_flag_button",
-						"type" : "toggle_button",
-
-						"x" : LINE_DATA_X+MIDDLE_BUTTON_WIDTH,
-						"y" : CUR_LINE_Y,
-
-						"text" : uiScriptLocale.OPTION_MOB_INFO_AGGR,
-
-						"default_image" : ROOT_PATH + "middle_button_01.sub",
-						"over_image" : ROOT_PATH + "middle_button_02.sub",
-						"down_image" : ROOT_PATH + "middle_button_03.sub",
-					},]
-
+		{
+			"name" : "show_flags_text",
+			"type" : "text",
+			"x" : LINE_LABEL_X,
+			"y" : CUR_LINE_Y + 2,
+			"text" : uiScriptLocale.LANGUAGE_SETTINGS_SHOW_FLAG,
+		},
+		{
+			"name" : "show_flag_on_button",
+			"type" : "radio_button",
+			"x" : LINE_DATA_X,
+			"y" : CUR_LINE_Y,
+			"text" : uiScriptLocale.OPTION_SALESTEXT_VIEW_ON,
+			"default_image" : ROOT_PATH + "middle_button_01.sub",
+			"over_image" : ROOT_PATH + "middle_button_02.sub",
+			"down_image" : ROOT_PATH + "middle_button_03.sub",
+		},
+		{
+			"name" : "show_flag_off_button",
+			"type" : "radio_button",
+			"x" : LINE_DATA_X + MIDDLE_BUTTON_WIDTH,
+			"y" : CUR_LINE_Y,
+			"text" : uiScriptLocale.OPTION_SALESTEXT_VIEW_OFF,
+			"default_image" : ROOT_PATH + "middle_button_01.sub",
+			"over_image" : ROOT_PATH + "middle_button_02.sub",
+			"down_image" : ROOT_PATH + "middle_button_03.sub",
+		},
+	]
 
 if app.__BL_OFFICIAL_LOOT_FILTER__:
 	CUR_LINE_Y += LINE_STEP

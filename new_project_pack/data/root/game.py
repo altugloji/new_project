@@ -169,6 +169,8 @@ class GameWindow(ui.ScriptWindow):
 		constInfo.SET_TWO_HANDED_WEAPON_ATT_SPEED_DECREASE_VALUE()
 		# END_OF_TWO_HANDED_WEAPON_ATTACK_SPEED_UP
 
+		constInfo.APPLY_NIGHT_MODE()
+
 		import event
 		event.SetLeftTimeString(localeInfo.UI_LEFT_TIME)
 

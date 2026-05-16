@@ -147,6 +147,23 @@ PyObject * systemSetMusicVolume(PyObject * poSelf, PyObject * poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_NIGHT_MODE_OPTION
+PyObject * systemGetNightModeVolume(PyObject * poSelf, PyObject * poArgs)
+{
+	return Py_BuildValue("f", CPythonSystem::Instance().GetNightModeVolume());
+}
+
+PyObject * systemSetNightModeVolume(PyObject * poSelf, PyObject * poArgs)
+{
+	float fVolume;
+	if (!PyTuple_GetFloat(poArgs, 0, &fVolume))
+		return Py_BuildException();
+
+	CPythonSystem::Instance().SetNightModeVolume(fVolume);
+	return Py_BuildNone();
+}
+#endif
+
 PyObject * systemSetSoundVolumef(PyObject * poSelf, PyObject * poArgs)
 {
 	float fVolume;
@@ -564,9 +581,15 @@ void initsystemSetting()
 		{ "GetSaveID",					systemGetSaveID,				METH_VARARGS },
 
 		{ "GetMusicVolume",				systemGetMusicVolume,			METH_VARARGS },
+#ifdef ENABLE_NIGHT_MODE_OPTION
+		{ "GetNightModeVolume",			systemGetNightModeVolume,		METH_VARARGS },
+#endif
 		{ "GetSoundVolume",				systemGetSoundVolume,			METH_VARARGS },
 
 		{ "SetMusicVolume",				systemSetMusicVolume,			METH_VARARGS },
+#ifdef ENABLE_NIGHT_MODE_OPTION
+		{ "SetNightModeVolume",			systemSetNightModeVolume,		METH_VARARGS },
+#endif
 		{ "SetSoundVolumef",			systemSetSoundVolumef,			METH_VARARGS },
 		{ "IsSoftwareCursor",			systemIsSoftwareCursor,			METH_VARARGS },
 

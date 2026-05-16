@@ -350,6 +350,144 @@ void CMapManager::BlendEnvironmentData(const TEnvironmentData * c_pEnvironmentDa
 {
 }
 
+#ifdef ENABLE_NIGHT_MODE_OPTION
+namespace
+{
+	float ClampBlend(float fBlend)
+	{
+		if (fBlend < 0.0f)
+			return 0.0f;
+		if (fBlend > 1.0f)
+			return 1.0f;
+		return fBlend;
+	}
+
+	float LerpFloat(float fStart, float fEnd, float fBlend)
+	{
+		return fStart + (fEnd - fStart) * fBlend;
+	}
+
+	void LerpColorValue(D3DCOLORVALUE& rkOut, const D3DCOLORVALUE& rkDay, const D3DCOLORVALUE& rkNight, float fBlend)
+	{
+		const D3DXCOLOR cDay(rkDay);
+		const D3DXCOLOR cNight(rkNight);
+		D3DXCOLOR cOut;
+		D3DXColorLerp(&cOut, &cDay, &cNight, fBlend);
+		rkOut = cOut;
+	}
+
+	void LerpLight(D3DLIGHT9& rkOut, const D3DLIGHT9& rkDay, const D3DLIGHT9& rkNight, float fBlend)
+	{
+		rkOut = rkDay;
+		LerpColorValue(rkOut.Diffuse, rkDay.Diffuse, rkNight.Diffuse, fBlend);
+		LerpColorValue(rkOut.Ambient, rkDay.Ambient, rkNight.Ambient, fBlend);
+		LerpColorValue(rkOut.Specular, rkDay.Specular, rkNight.Specular, fBlend);
+		rkOut.Direction.x = LerpFloat(rkDay.Direction.x, rkNight.Direction.x, fBlend);
+		rkOut.Direction.y = LerpFloat(rkDay.Direction.y, rkNight.Direction.y, fBlend);
+		rkOut.Direction.z = LerpFloat(rkDay.Direction.z, rkNight.Direction.z, fBlend);
+		rkOut.Range = LerpFloat(rkDay.Range, rkNight.Range, fBlend);
+	}
+}
+
+void CMapManager::SetNightModeBlend(float fBlend)
+{
+	if (!m_pkMap)
+		return;
+
+	const float fClampedBlend = ClampBlend(fBlend);
+
+	const TEnvironmentData* pDay = nullptr;
+	const TEnvironmentData* pNight = nullptr;
+	const bool bHasDay = GetEnvironmentData(0, &pDay);
+	const bool bHasNight = GetEnvironmentData(1, &pNight);
+
+	if (!bHasDay && !bHasNight)
+		return;
+
+	if (fClampedBlend <= 0.0f)
+	{
+		if (bHasDay)
+			SetEnvironmentDataPtr(pDay);
+		return;
+	}
+
+	if (fClampedBlend >= 1.0f)
+	{
+		if (bHasNight)
+			SetEnvironmentDataPtr(pNight);
+		else if (bHasDay)
+			SetEnvironmentDataPtr(pDay);
+		return;
+	}
+
+	if (!bHasDay || !bHasNight)
+	{
+		if (bHasNight)
+			SetEnvironmentDataPtr(pNight);
+		else if (bHasDay)
+			SetEnvironmentDataPtr(pDay);
+		return;
+	}
+
+	static TEnvironmentData s_BlendedEnvironment;
+	const TEnvironmentData& rkDay = *pDay;
+	const TEnvironmentData& rkNight = *pNight;
+	TEnvironmentData& rkOut = s_BlendedEnvironment;
+
+	rkOut = rkDay;
+
+	for (int i = 0; i < ENV_DIRLIGHT_NUM; ++i)
+	{
+		rkOut.bDirLightsEnable[i] = rkDay.bDirLightsEnable[i] || rkNight.bDirLightsEnable[i];
+		LerpLight(rkOut.DirLights[i], rkDay.DirLights[i], rkNight.DirLights[i], fClampedBlend);
+	}
+
+	LerpColorValue(rkOut.Material.Ambient, rkDay.Material.Ambient, rkNight.Material.Ambient, fClampedBlend);
+	LerpColorValue(rkOut.Material.Diffuse, rkDay.Material.Diffuse, rkNight.Material.Diffuse, fClampedBlend);
+	LerpColorValue(rkOut.Material.Emissive, rkDay.Material.Emissive, rkNight.Material.Emissive, fClampedBlend);
+	LerpColorValue(rkOut.Material.Specular, rkDay.Material.Specular, rkNight.Material.Specular, fClampedBlend);
+	rkOut.Material.Power = LerpFloat(rkDay.Material.Power, rkNight.Material.Power, fClampedBlend);
+
+	rkOut.bFogEnable = (fClampedBlend >= 0.5f) ? rkNight.bFogEnable : rkDay.bFogEnable;
+	rkOut.bDensityFog = (fClampedBlend >= 0.5f) ? rkNight.bDensityFog : rkDay.bDensityFog;
+	rkOut.m_fFogNearDistance = LerpFloat(rkDay.m_fFogNearDistance, rkNight.m_fFogNearDistance, fClampedBlend);
+	rkOut.m_fFogFarDistance = LerpFloat(rkDay.m_fFogFarDistance, rkNight.m_fFogFarDistance, fClampedBlend);
+	LerpColorValue(rkOut.FogColor, rkDay.FogColor, rkNight.FogColor, fClampedBlend);
+
+	rkOut.bFilteringEnable = rkDay.bFilteringEnable || rkNight.bFilteringEnable;
+	LerpColorValue(rkOut.FilteringColor, rkDay.FilteringColor, rkNight.FilteringColor, fClampedBlend);
+	rkOut.byFilteringAlphaSrc = (BYTE) LerpFloat((float) rkDay.byFilteringAlphaSrc, (float) rkNight.byFilteringAlphaSrc, fClampedBlend);
+	rkOut.byFilteringAlphaDest = (BYTE) LerpFloat((float) rkDay.byFilteringAlphaDest, (float) rkNight.byFilteringAlphaDest, fClampedBlend);
+
+	rkOut.fWindStrength = LerpFloat(rkDay.fWindStrength, rkNight.fWindStrength, fClampedBlend);
+	rkOut.fWindRandom = LerpFloat(rkDay.fWindRandom, rkNight.fWindRandom, fClampedBlend);
+
+	rkOut.bLensFlareEnable = (fClampedBlend >= 0.5f) ? rkNight.bLensFlareEnable : rkDay.bLensFlareEnable;
+	LerpColorValue(rkOut.LensFlareBrightnessColor, rkDay.LensFlareBrightnessColor, rkNight.LensFlareBrightnessColor, fClampedBlend);
+	rkOut.fLensFlareMaxBrightness = LerpFloat(rkDay.fLensFlareMaxBrightness, rkNight.fLensFlareMaxBrightness, fClampedBlend);
+	rkOut.bMainFlareEnable = (fClampedBlend >= 0.5f) ? rkNight.bMainFlareEnable : rkDay.bMainFlareEnable;
+	rkOut.fMainFlareSize = LerpFloat(rkDay.fMainFlareSize, rkNight.fMainFlareSize, fClampedBlend);
+
+	const TEnvironmentData& rkSkySource = (fClampedBlend >= 0.5f) ? rkNight : rkDay;
+	rkOut.v3SkyBoxScale = rkSkySource.v3SkyBoxScale;
+	rkOut.bSkyBoxTextureRenderMode = rkSkySource.bSkyBoxTextureRenderMode;
+	rkOut.bySkyBoxGradientLevelUpper = rkSkySource.bySkyBoxGradientLevelUpper;
+	rkOut.bySkyBoxGradientLevelLower = rkSkySource.bySkyBoxGradientLevelLower;
+	for (int i = 0; i < 6; ++i)
+		rkOut.strSkyBoxFaceFileName[i] = rkSkySource.strSkyBoxFaceFileName[i];
+	rkOut.v2CloudScale = rkSkySource.v2CloudScale;
+	rkOut.fCloudHeight = rkSkySource.fCloudHeight;
+	rkOut.v2CloudTextureScale = rkSkySource.v2CloudTextureScale;
+	rkOut.v2CloudSpeed = rkSkySource.v2CloudSpeed;
+	rkOut.strCloudTextureFileName = rkSkySource.strCloudTextureFileName;
+	rkOut.CloudGradientColor = rkSkySource.CloudGradientColor;
+	rkOut.SkyBoxGradientColorVector = rkSkySource.SkyBoxGradientColorVector;
+	rkOut.strMainFlareTextureFileName = rkSkySource.strMainFlareTextureFileName;
+
+	SetEnvironmentDataPtr(&rkOut);
+}
+#endif
+
 bool CMapManager::RegisterEnvironmentData(DWORD dwIndex, const char * c_szFileName)
 {
 	TEnvironmentData * pEnvironmentData = AllocEnvironmentData();

@@ -63,6 +63,9 @@ class CPythonSystem : public CSingleton<CPythonSystem>
 			int				iAntialiasing;
 
 			FLOAT			music_volume;
+#ifdef ENABLE_NIGHT_MODE_OPTION
+			FLOAT			night_mode_volume;
+#endif
 			BYTE			voice_volume;
 
 			int				gamma;
@@ -196,6 +199,10 @@ class CPythonSystem : public CSingleton<CPythonSystem>
 		float							GetMusicVolume() const;
 		int								GetSoundVolume() const;
 		void							SetMusicVolume(float fVolume);
+#ifdef ENABLE_NIGHT_MODE_OPTION
+		float							GetNightModeVolume() const;
+		void							SetNightModeVolume(float fVolume);
+#endif
 		void							SetSoundVolumef(float fVolume);
 
 		int								GetDistance() const;

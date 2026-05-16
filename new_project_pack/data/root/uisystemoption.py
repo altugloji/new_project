@@ -9,14 +9,9 @@ import localeInfo
 import constInfo
 import chrmgr
 import player
-import musicInfo
-
-import uiSelectMusic
 import background
 if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 	import uiScriptLocale
-
-MUSIC_FILENAME_MAX_LEN = 25
 
 blockMode = 0
 
@@ -34,11 +29,8 @@ class OptionDialog(ui.ScriptWindow):
 	def __Initialize(self):
 		self.tilingMode = 0
 		self.titleBar = 0
-		self.changeMusicButton = 0
-		self.selectMusicFile = 0
 		self.ctrlMusicVolume = 0
 		self.ctrlSoundVolume = 0
-		self.musicListDlg = 0
 		self.tilingApplyButton = 0
 		self.cameraModeButtonList = []
 		self.fogModeButtonList = []
@@ -47,9 +39,9 @@ class OptionDialog(ui.ScriptWindow):
 		self.tilingModeButtonList = []
 		self.ctrlShadowQuality = 0
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-			self.show_country_flag_button = None
-			self.show_empire_flag_button = None
 			self.anonymous_button = None
+		if app.ENABLE_NIGHT_MODE_OPTION:
+			self.ctrlNightMode = 0
 
 	@ui.WindowDestroy
 	def Destroy(self):
@@ -70,8 +62,6 @@ class OptionDialog(ui.ScriptWindow):
 		try:
 			GetObject = self.GetChild
 			self.titleBar = GetObject("titlebar")
-			self.selectMusicFile = GetObject("bgm_file")
-			self.changeMusicButton = GetObject("bgm_button")
 			self.ctrlMusicVolume = GetObject("music_volume_controller")
 			self.ctrlSoundVolume = GetObject("sound_volume_controller")
 			self.cameraModeButtonList.append(GetObject("camera_short"))
@@ -87,9 +77,9 @@ class OptionDialog(ui.ScriptWindow):
 			self.tilingModeButtonList.append(GetObject("tiling_gpu"))
 			self.tilingApplyButton=GetObject("tiling_apply")
 			if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-				self.show_country_flag_button = GetObject("show_country_flag_button")
-				self.show_empire_flag_button = GetObject("show_empire_flag_button")
 				self.anonymous_button = GetObject("anonymous_button")
+			if app.ENABLE_NIGHT_MODE_OPTION:
+				self.ctrlNightMode = GetObject("night_mode_controller")
 			#self.ctrlShadowQuality = GetObject("shadow_bar")
 		except:
 			import exception
@@ -109,10 +99,13 @@ class OptionDialog(ui.ScriptWindow):
 		self.ctrlSoundVolume.SetSliderPos(float(systemSetting.GetSoundVolume()) / 5.0)
 		self.ctrlSoundVolume.SetEvent(ui.__mem_func__(self.OnChangeSoundVolume))
 
+		if app.ENABLE_NIGHT_MODE_OPTION:
+			self.ctrlNightMode.SetSliderPos(float(systemSetting.GetNightModeVolume()))
+			self.ctrlNightMode.SetEvent(ui.__mem_func__(self.OnChangeNightMode))
+			constInfo.APPLY_NIGHT_MODE()
+
 #		self.ctrlShadowQuality.SetSliderPos(float(systemSetting.GetShadowLevel()) / 5.0)
 #		self.ctrlShadowQuality.SetEvent(ui.__mem_func__(self.OnChangeShadowQuality))
-
-		self.changeMusicButton.SAFE_SetEvent(self.__OnClickChangeMusicButton)
 
 		self.cameraModeButtonList[0].SAFE_SetEvent(self.__OnClickCameraModeShortButton)
 		self.cameraModeButtonList[1].SAFE_SetEvent(self.__OnClickCameraModeLongButton)
@@ -138,20 +131,8 @@ class OptionDialog(ui.ScriptWindow):
 			self.__ClickRadioButton(self.fogModeButtonList, constInfo.GET_FOG_LEVEL_INDEX())
 		self.__ClickRadioButton(self.cameraModeButtonList, constInfo.GET_CAMERA_MAX_DISTANCE_INDEX())
 
-		if musicInfo.fieldMusic==musicInfo.METIN2THEMA:
-			self.selectMusicFile.SetText(uiSelectMusic.DEFAULT_THEMA)
-		else:
-			self.selectMusicFile.SetText(musicInfo.fieldMusic[:MUSIC_FILENAME_MAX_LEN])
-		
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-			self.show_country_flag_button.SetToggleDownEvent(ui.__mem_func__(self.__EventShowFlags), "country")
-			self.show_country_flag_button.SetToggleUpEvent(ui.__mem_func__(self.__EventShowFlags), "country")
-
-			self.show_empire_flag_button.SetToggleDownEvent(ui.__mem_func__(self.__EventShowFlags), "empire")
-			self.show_empire_flag_button.SetToggleUpEvent(ui.__mem_func__(self.__EventShowFlags), "empire")
-
 			self.anonymous_button.SetEvent( ui.__mem_func__(self.__OnClickAnonymousButton) )
-
 			self.RefreshLanguageSettings()
 
 	def __OnClickTilingModeCPUButton(self):
@@ -174,15 +155,6 @@ class OptionDialog(ui.ScriptWindow):
 			background.EnableSoftwareTiling(0)
 
 		net.ExitGame()
-
-	def __OnClickChangeMusicButton(self):
-		if not self.musicListDlg:
-
-			self.musicListDlg=uiSelectMusic.FileListDialog()
-			self.musicListDlg.SAFE_SetSelectEvent(self.__OnChangeMusic)
-
-		self.musicListDlg.Open()
-
 
 	def __ClickRadioButton(self, buttonList, buttonIndex):
 		try:
@@ -232,22 +204,6 @@ class OptionDialog(ui.ScriptWindow):
 			background.SetFogMode(False)
 			self.__ClickRadioButton(self.fogButtonList, 0)
 
-	def __OnChangeMusic(self, fileName):
-		self.selectMusicFile.SetText(fileName[:MUSIC_FILENAME_MAX_LEN])
-
-		if musicInfo.fieldMusic != "":
-			snd.FadeOutMusic("BGM/"+ musicInfo.fieldMusic)
-
-		if fileName==uiSelectMusic.DEFAULT_THEMA:
-			musicInfo.fieldMusic=musicInfo.METIN2THEMA
-		else:
-			musicInfo.fieldMusic=fileName
-
-		musicInfo.SaveLastPlayFieldMusic()
-
-		if musicInfo.fieldMusic != "":
-			snd.FadeInMusic("BGM/" + musicInfo.fieldMusic)
-
 	def OnChangeMusicVolume(self):
 		pos = self.ctrlMusicVolume.GetSliderPos()
 		snd.SetMusicVolume(pos * net.GetFieldMusicVolume())
@@ -257,6 +213,12 @@ class OptionDialog(ui.ScriptWindow):
 		pos = self.ctrlSoundVolume.GetSliderPos()
 		snd.SetSoundVolumef(pos)
 		systemSetting.SetSoundVolumef(pos)
+
+	if app.ENABLE_NIGHT_MODE_OPTION:
+		def OnChangeNightMode(self):
+			pos = self.ctrlNightMode.GetSliderPos()
+			systemSetting.SetNightModeVolume(pos)
+			constInfo.APPLY_NIGHT_MODE(pos)
 
 	def OnChangeShadowQuality(self):
 		pos = self.ctrlShadowQuality.GetSliderPos()
@@ -293,14 +255,6 @@ class OptionDialog(ui.ScriptWindow):
 		chat.AppendChat(chat.CHAT_TYPE_INFO, text)
 
 	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-		def __EventShowFlags(self, type):
-			if type == "country":
-				systemSetting.SetShowCountryFlag(not systemSetting.IsShowCountryFlag())
-			elif type == "empire":
-				systemSetting.SetShowEmpireFlag(not systemSetting.IsShowEmpireFlag())
-			
-			self.RefreshLanguageSettings()
-
 		def __OnClickAnonymousButton(self):
 			net.SendChatPacket("/language_anonymous")
 
@@ -309,16 +263,6 @@ class OptionDialog(ui.ScriptWindow):
 			self.RefreshLanguageSettings()
 
 		def RefreshLanguageSettings(self):
-			if systemSetting.IsShowCountryFlag():
-				self.show_country_flag_button.Down()
-			else:
-				self.show_country_flag_button.SetUp()
-			
-			if systemSetting.IsShowEmpireFlag():
-				self.show_empire_flag_button.Down()
-			else:
-				self.show_empire_flag_button.SetUp()
-
 			if systemSetting.GetAnonymousCountryMode():
 				self.anonymous_button.SetText(uiScriptLocale.LANGUAGE_SETTINGS_ANON_OFF)
 			else:

@@ -17,7 +17,7 @@ if app.ENABLE_ENVIRONMENT_EFFECT_OPTION:
 		"y" : 0,
 
 		"width" : 305,
-		"height" : 300,
+		"height" : 275,
 
 		"children" :
 		(
@@ -29,7 +29,7 @@ if app.ENABLE_ENVIRONMENT_EFFECT_OPTION:
 				"y" : 0,
 
 				"width" : 305,
-				"height" : 300,
+				"height" : 275,
 
 				"children" :
 				(
@@ -73,30 +73,6 @@ if app.ENABLE_ENVIRONMENT_EFFECT_OPTION:
 
 						"x" : 110,
 						"y" : 75,
-					},
-
-					{
-						"name" : "bgm_button",
-						"type" : "button",
-
-						"x" : 20,
-						"y" : 100,
-
-						"text" : uiScriptLocale.OPTION_MUSIC_CHANGE,
-
-						"default_image" : ROOT_PATH + "Middle_Button_01.sub",
-						"over_image" : ROOT_PATH + "Middle_Button_02.sub",
-						"down_image" : ROOT_PATH + "Middle_Button_03.sub",
-					},
-
-					{
-						"name" : "bgm_file",
-						"type" : "text",
-
-						"x" : 100,
-						"y" : 102,
-
-						"text" : uiScriptLocale.OPTION_MUSIC_DEFAULT_THEMA,
 					},
 
 					## Sound
@@ -244,44 +220,6 @@ if app.ENABLE_ENVIRONMENT_EFFECT_OPTION:
 						"default_image" : ROOT_PATH + "middle_Button_01.sub",
 						"over_image" : ROOT_PATH + "middle_Button_02.sub",
 						"down_image" : ROOT_PATH + "middle_Button_03.sub",
-					},
-
-					{
-						"name" : "night_mode",
-						"type" : "text",
-
-						"x" : 40 + TEXT_TEMPORARY_X,
-						"y" : 210,
-
-						"text" : uiScriptLocale.OPTION_NIGHT_MODE,
-					},
-
-					{
-						"name" : "night_mode_on",
-						"type" : "radio_button",
-
-						"x" : 110,
-						"y" : 210,
-
-						"text" : uiScriptLocale.OPTION_NIGHT_MODE_ON,
-
-						"default_image" : ROOT_PATH + "small_Button_01.sub",
-						"over_image" : ROOT_PATH + "small_Button_02.sub",
-						"down_image" : ROOT_PATH + "small_Button_03.sub",
-					},
-
-					{
-						"name" : "night_mode_off",
-						"type" : "radio_button",
-
-						"x" : 110+50,
-						"y" : 210,
-
-						"text" : uiScriptLocale.OPTION_NIGHT_MODE_OFF,
-
-						"default_image" : ROOT_PATH + "small_Button_01.sub",
-						"over_image" : ROOT_PATH + "small_Button_02.sub",
-						"down_image" : ROOT_PATH + "small_Button_03.sub",
 					},
 
 					{
@@ -448,30 +386,6 @@ else:
 						"y" : 75,
 					},
 
-					{
-						"name" : "bgm_button",
-						"type" : "button",
-
-						"x" : 20,
-						"y" : 100,
-
-						"text" : uiScriptLocale.OPTION_MUSIC_CHANGE,
-
-						"default_image" : ROOT_PATH + "Middle_Button_01.sub",
-						"over_image" : ROOT_PATH + "Middle_Button_02.sub",
-						"down_image" : ROOT_PATH + "Middle_Button_03.sub",
-					},
-
-					{
-						"name" : "bgm_file",
-						"type" : "text",
-
-						"x" : 100,
-						"y" : 102,
-
-						"text" : uiScriptLocale.OPTION_MUSIC_DEFAULT_THEMA,
-					},
-
 					## Sound
 					{
 						"name" : "sound_name",
@@ -643,55 +557,36 @@ else:
 	}
 
 
-if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-	MULTI_LANGUAGE_WINDOW_Y = window["height"] - 100
-	window["height"] = window["height"] + 50
-	window["children"][0]["height"] = window["children"][0]["height"] + 50
+if app.ENABLE_NIGHT_MODE_OPTION:
+	window["height"] = window["height"] + 25
+	window["children"][0]["height"] = window["children"][0]["height"] + 25
 	window["children"][0]["children"] = window["children"][0]["children"] + (
 		{
-			"name" : "show_flags_text",
+			"name" : "night_mode",
 			"type" : "text",
-
 			"x" : 40 + TEXT_TEMPORARY_X,
-			"y" : MULTI_LANGUAGE_WINDOW_Y + 50 + 2,
-
-			"text" : uiScriptLocale.LANGUAGE_SETTINGS_SHOW_FLAG,
+			"y" : 100 + 2,
+			"text" : uiScriptLocale.OPTION_NIGHT_MODE,
 		},
-
 		{
-			"name" : "show_country_flag_button",
-			"type" : "toggle_button",
-
+			"name" : "night_mode_controller",
+			"type" : "sliderbar",
 			"x" : 110,
-			"y" : MULTI_LANGUAGE_WINDOW_Y + 50,
-
-			"text" : uiScriptLocale.LANGUAGE_SETTINGS_COUNTRY,
-
-			"default_image" : ROOT_PATH + "Middle_Button_01.sub",
-			"over_image" : ROOT_PATH + "Middle_Button_02.sub",
-			"down_image" : ROOT_PATH + "Middle_Button_03.sub",
+			"y" : 100,
 		},
+	)
 
-		{
-			"name" : "show_empire_flag_button",
-			"type" : "toggle_button",
-
-			"x" : 110+70,
-			"y" : MULTI_LANGUAGE_WINDOW_Y + 50,
-
-			"text" : uiScriptLocale.LANGUAGE_SETTINGS_EMPIRE,
-
-			"default_image" : ROOT_PATH + "Middle_Button_01.sub",
-			"over_image" : ROOT_PATH + "Middle_Button_02.sub",
-			"down_image" : ROOT_PATH + "Middle_Button_03.sub",
-		},
-
+if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+	MULTI_LANGUAGE_WINDOW_Y = window["height"] - 100
+	window["height"] = window["height"] + 25
+	window["children"][0]["height"] = window["children"][0]["height"] + 25
+	window["children"][0]["children"] = window["children"][0]["children"] + (
 		{
 			"name" : "anonymous_text",
 			"type" : "text",
 
 			"x" : 40 + TEXT_TEMPORARY_X,
-			"y" : MULTI_LANGUAGE_WINDOW_Y + 75 + 2,
+			"y" : MULTI_LANGUAGE_WINDOW_Y + 50 + 2,
 
 			"text" : uiScriptLocale.LANGUAGE_ANONYMOUS_MODE,
 		},
@@ -701,7 +596,7 @@ if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 			"type" : "button",
 
 			"x" : 110,
-			"y" : MULTI_LANGUAGE_WINDOW_Y + 75,
+			"y" : MULTI_LANGUAGE_WINDOW_Y + 50,
 
 			"default_image" : ROOT_PATH + "Middle_Button_01.sub",
 			"over_image" : ROOT_PATH + "Middle_Button_02.sub",

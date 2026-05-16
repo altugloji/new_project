@@ -1,0 +1,144 @@
+{
+    "head": {
+        "refine_max": 200, 
+        "wearing_level_max": 120, 
+        "wearing_level_min": 0, 
+        "refine_min": 0, 
+        "select": {
+            "shaman": true, 
+            "warrior": true, 
+            "assassin": true, 
+            "sura": true
+        }, 
+        "onoff": true
+    }, 
+    "potion": {
+        "select": {
+            "hairdye": true, 
+            "ability": true, 
+            "etc": true
+        }, 
+        "onoff": true
+    }, 
+    "skill_book": {
+        "select": {
+            "shaman": true, 
+            "warrior": true, 
+            "assassin": true, 
+            "public": true, 
+            "sura": true
+        }, 
+        "onoff": true
+    }, 
+    "armor": {
+        "refine_max": 200, 
+        "wearing_level_max": 120, 
+        "wearing_level_min": 0, 
+        "refine_min": 0, 
+        "select": {
+            "shaman": true, 
+            "warrior": true, 
+            "assassin": true, 
+            "sura": true
+        }, 
+        "onoff": true
+    }, 
+    "weapon": {
+        "refine_max": 200, 
+        "wearing_level_max": 120, 
+        "wearing_level_min": 0, 
+        "refine_min": 0, 
+        "select": {
+            "shaman": true, 
+            "warrior": true, 
+            "assassin": true, 
+            "sura": true
+        }, 
+        "onoff": true
+    }, 
+    "event": {
+        "onoff": true
+    }, 
+    "etc": {
+        "select": {
+            "polymorph": true, 
+            "weapon_arrow": true, 
+            "matrimony": true, 
+            "recipe": true, 
+            "etc": true, 
+            "giftbox": true, 
+            "seal": true, 
+            "party": true
+        }, 
+        "onoff": true
+    }, 
+    "refine": {
+        "select": {
+            "etc": true, 
+            "stone": true, 
+            "material": true
+        }, 
+        "onoff": true
+    }, 
+    "costume": {
+        "select": {
+            "etc": true, 
+            "armor": true, 
+            "weapon": true, 
+            "hair": true, 
+            "acce": true, 
+            "aura": true
+        }, 
+        "onoff": true
+    }, 
+    "fish_mining": {
+        "select": {
+            "food": true, 
+            "etc": true, 
+            "stone": true
+        }, 
+        "onoff": true
+    }, 
+    "mount_pet": {
+        "select": {
+            "free_pet": true, 
+            "charged_pet": true, 
+            "mount": true, 
+            "egg": true
+        }, 
+        "onoff": true
+    }, 
+    "unique": {
+        "select": {
+            "etc": true, 
+            "ability": true
+        }, 
+        "onoff": true
+    }, 
+    "ds": {
+        "select": {
+            "etc": true, 
+            "ds": true
+        }, 
+        "onoff": true
+    }, 
+    "common": {
+        "refine_max": 200, 
+        "wearing_level_max": 120, 
+        "wearing_level_min": 0, 
+        "refine_min": 0, 
+        "select": {
+            "foots": true, 
+            "shield": true, 
+            "rod": true, 
+            "glove": true, 
+            "belt": true, 
+            "wrist": true, 
+            "pendant": true, 
+            "pick": true, 
+            "ear": true, 
+            "neck": true
+        }, 
+        "onoff": true
+    }
+}

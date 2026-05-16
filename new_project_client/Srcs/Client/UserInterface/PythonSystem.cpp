@@ -222,6 +222,23 @@ void CPythonSystem::SetMusicVolume(float fVolume)
 	m_Config.music_volume = fVolume;
 }
 
+#ifdef ENABLE_NIGHT_MODE_OPTION
+float CPythonSystem::GetNightModeVolume() const
+{
+	return m_Config.night_mode_volume;
+}
+
+void CPythonSystem::SetNightModeVolume(float fVolume)
+{
+	if (fVolume < 0.0f)
+		fVolume = 0.0f;
+	else if (fVolume > 1.0f)
+		fVolume = 1.0f;
+
+	m_Config.night_mode_volume = fVolume;
+}
+#endif
+
 void CPythonSystem::SetSoundVolumef(float fVolume)
 {
 	m_Config.voice_volume = int(5 * fVolume);
@@ -322,6 +339,9 @@ void CPythonSystem::SetDefaultConfig()
 
 	m_Config.gamma				= 3;
 	m_Config.music_volume		= 1.0f;
+#ifdef ENABLE_NIGHT_MODE_OPTION
+	m_Config.night_mode_volume	= 0.0f;
+#endif
 	m_Config.voice_volume		= 5;
 
 	m_Config.bDecompressDDS		= 0;
@@ -497,7 +517,12 @@ bool CPythonSystem::LoadConfig()
 					m_Config.music_volume = 0.0f;
 			} else
 				m_Config.music_volume = atof(value);
-		} else if (!stricmp(command, "VOICE_VOLUME"))
+		}
+#ifdef ENABLE_NIGHT_MODE_OPTION
+		else if (!stricmp(command, "NIGHT_MODE_VOLUME"))
+			m_Config.night_mode_volume = atof(value);
+#endif
+		else if (!stricmp(command, "VOICE_VOLUME"))
 			m_Config.voice_volume = (char) atoi(value);
 		else if (!stricmp(command, "GAMMA"))
 			m_Config.gamma = atoi(value);
@@ -646,6 +671,9 @@ bool CPythonSystem::SaveConfig()
 	fprintf(fp, "DYNAMIC_SHADOW		%d\n", m_Config.bDynamicShadow ? 1 : 0);
 #endif
 	fprintf(fp, "NO_ANTIALIASING		%d\n", m_Config.iAntialiasing);
+#ifdef ENABLE_NIGHT_MODE_OPTION
+	fprintf(fp, "NIGHT_MODE_VOLUME		%.3f\n", m_Config.night_mode_volume);
+#endif
 #if defined(__BL_MULTI_LANGUAGE_ULTIMATE__)
 	fprintf(fp, "ANONYMOUS_MODE\t\t\t%d\n", m_Config.bAnonymousCountryMode);
 	fprintf(fp, "SHOW_COUNTRY_FLAG		%d\n", m_Config.bShowCountryFlag);

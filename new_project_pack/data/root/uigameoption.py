@@ -10,6 +10,8 @@ import chrmgr
 import player
 import uiPrivateShopBuilder
 import interfaceModule
+if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+	import uiScriptLocale
 
 blockMode = 0
 viewChatMode = 0
@@ -24,8 +26,8 @@ class OptionDialog(ui.ScriptWindow):
 		self.RefreshAlwaysShowName()
 		self.RefreshShowDamage()
 		self.RefreshShowSalesText()
-		if app.WJ_SHOW_MOB_INFO:
-			self.RefreshShowMobInfo()
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+			self.RefreshShowFlags()
 
 	def __del__(self):
 		ui.ScriptWindow.__del__(self)
@@ -42,10 +44,10 @@ class OptionDialog(ui.ScriptWindow):
 		self.showDamageButtonList = []
 		self.showsalesTextButtonList = []
 		self.interface = None
-		if app.WJ_SHOW_MOB_INFO:
-			self.showMobInfoButtonList = []
 		if app.__BL_OFFICIAL_LOOT_FILTER__:
 			self.looting_system_button = None
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+			self.showFlagButtonList = []
 
 	@ui.WindowDestroy
 	def Destroy(self):
@@ -88,11 +90,11 @@ class OptionDialog(ui.ScriptWindow):
 			self.showDamageButtonList.append(GetObject("show_damage_off_button"))
 			self.showsalesTextButtonList.append(GetObject("salestext_on_button"))
 			self.showsalesTextButtonList.append(GetObject("salestext_off_button"))
-			if app.WJ_SHOW_MOB_INFO:
-				self.showMobInfoButtonList.append(GetObject("show_mob_level_button"))
-				self.showMobInfoButtonList.append(GetObject("show_mob_AI_flag_button"))
 			if app.__BL_OFFICIAL_LOOT_FILTER__:
 				self.looting_system_button = GetObject("looting_system_button")
+			if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+				self.showFlagButtonList.append(GetObject("show_flag_on_button"))
+				self.showFlagButtonList.append(GetObject("show_flag_off_button"))
 
 		except:
 			import exception
@@ -144,18 +146,18 @@ class OptionDialog(ui.ScriptWindow):
 		self.showsalesTextButtonList[0].SAFE_SetEvent(self.__OnClickSalesTextOnButton)
 		self.showsalesTextButtonList[1].SAFE_SetEvent(self.__OnClickSalesTextOffButton)
 
-		if app.WJ_SHOW_MOB_INFO:
-			self.showMobInfoButtonList[0].SetToggleUpEvent(self.__OnClickShowMobLevelButton)
-			self.showMobInfoButtonList[0].SetToggleDownEvent(self.__OnClickShowMobLevelButton)
-			self.showMobInfoButtonList[1].SetToggleUpEvent(self.__OnClickShowMobAIFlagButton)
-			self.showMobInfoButtonList[1].SetToggleDownEvent(self.__OnClickShowMobAIFlagButton)
-
 		self.__ClickRadioButton(self.nameColorModeButtonList, constInfo.GET_CHRNAME_COLOR_INDEX())
 		self.__ClickRadioButton(self.viewTargetBoardButtonList, constInfo.GET_VIEW_OTHER_EMPIRE_PLAYER_TARGET_BOARD())
 		self.__SetPeacePKMode()
 
 		if app.__BL_OFFICIAL_LOOT_FILTER__:
 			self.looting_system_button.SetEvent(ui.__mem_func__(self.__OnClickLootingSystemButton))
+
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+			self.showFlagButtonList[0].SAFE_SetEvent(self.__OnClickShowFlagOnButton)
+			self.showFlagButtonList[1].SAFE_SetEvent(self.__OnClickShowFlagOffButton)
+			systemSetting.SetShowEmpireFlag(False)
+			self.RefreshShowFlags()
 
 	def __ClickRadioButton(self, buttonList, buttonIndex):
 		try:
@@ -263,14 +265,6 @@ class OptionDialog(ui.ScriptWindow):
 	def __OnClickSalesTextOffButton(self):
 		systemSetting.SetShowSalesTextFlag(False)
 		self.RefreshShowSalesText()
-
-	if app.WJ_SHOW_MOB_INFO:
-		def __OnClickShowMobLevelButton(self):
-			systemSetting.SetShowMobLevel(not systemSetting.IsShowMobLevel())
-			self.RefreshShowMobInfo()
-		def __OnClickShowMobAIFlagButton(self):
-			systemSetting.SetShowMobAIFlag(not systemSetting.IsShowMobAIFlag())
-			self.RefreshShowMobInfo()
 
 	def __CheckPvPProtectedLevelPlayer(self):
 		if player.GetStatus(player.LEVEL)<constInfo.PVPMODE_PROTECTED_LEVEL:
@@ -397,17 +391,6 @@ class OptionDialog(ui.ScriptWindow):
 			self.showsalesTextButtonList[0].SetUp()
 			self.showsalesTextButtonList[1].Down()
 
-	if app.WJ_SHOW_MOB_INFO:
-		def RefreshShowMobInfo(self):
-			if systemSetting.IsShowMobLevel():
-				self.showMobInfoButtonList[0].Down()
-			else:
-				self.showMobInfoButtonList[0].SetUp()
-			if systemSetting.IsShowMobAIFlag():
-				self.showMobInfoButtonList[1].Down()
-			else:
-				self.showMobInfoButtonList[1].SetUp()
-
 	def OnBlockMode(self, mode):
 		global blockMode
 		blockMode = mode
@@ -415,6 +398,8 @@ class OptionDialog(ui.ScriptWindow):
 
 	def Show(self):
 		self.RefreshBlock()
+		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+			self.RefreshShowFlags()
 		ui.ScriptWindow.Show(self)
 
 	def Close(self):
@@ -427,3 +412,21 @@ class OptionDialog(ui.ScriptWindow):
 		def __OnClickLootingSystemButton(self):
 			if self.interface:
 				self.interface.OpenLootingSystemWindow()
+
+	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
+		def __SetShowFlags(self, isShow):
+			systemSetting.SetShowCountryFlag(isShow)
+			systemSetting.SetShowEmpireFlag(False)
+			self.RefreshShowFlags()
+
+		def __OnClickShowFlagOnButton(self):
+			self.__SetShowFlags(True)
+
+		def __OnClickShowFlagOffButton(self):
+			self.__SetShowFlags(False)
+
+		def RefreshShowFlags(self):
+			if systemSetting.IsShowCountryFlag():
+				self.__ClickRadioButton(self.showFlagButtonList, 0)
+			else:
+				self.__ClickRadioButton(self.showFlagButtonList, 1)

@@ -148,6 +148,7 @@
 #define ENABLE_MULTISHOP
 #define WJ_NEW_DROP_DIALOG
 #define FAST_LOGIN_CHARACTER_SAVE
+#define ENABLE_NIGHT_MODE_OPTION
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

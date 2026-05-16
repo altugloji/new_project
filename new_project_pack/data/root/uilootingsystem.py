@@ -17,11 +17,8 @@ from _weakref import proxy
 
 LOOTING_SYSTEM_IMG_PATH = "d:/ymir work/ui/game/looting/"
 
-REFINE_MIN = 0
-REFINE_MAX = 200
-
 WEARING_LEVEL_MIN = 0
-WEARING_LEVEL_MAX = 120
+WEARING_LEVEL_MAX = 99
 
 DEFAULT_ONOFF = True
 
@@ -576,7 +573,6 @@ class LootingSystem(ui.ScriptWindow):
 		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_JOB_SHAMAN, "shaman")
 		if app.ENABLE_WOLFMAN_CHARACTER:
 			category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_JOB_WOLFMAN, "wolfman")
-		category.AddRange(self, uiScriptLocale.LOOTING_SYSTEM_REFINE, REFINE_MIN, REFINE_MAX, "refine")
 		category.AddRange(self, uiScriptLocale.LOOTING_SYSTEM_WEARING_LEVEL, WEARING_LEVEL_MIN, WEARING_LEVEL_MAX, "wearing_level")
 		topic.AddCategory(category)
 		self.topic_dict.append(topic)
@@ -590,7 +586,6 @@ class LootingSystem(ui.ScriptWindow):
 		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_JOB_SHAMAN, "shaman")
 		if app.ENABLE_WOLFMAN_CHARACTER:
 			category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_JOB_WOLFMAN, "wolfman")
-		category.AddRange(self, uiScriptLocale.LOOTING_SYSTEM_REFINE, REFINE_MIN, REFINE_MAX, "refine")
 		category.AddRange(self, uiScriptLocale.LOOTING_SYSTEM_WEARING_LEVEL, WEARING_LEVEL_MIN, WEARING_LEVEL_MAX, "wearing_level")
 		topic.AddCategory(category)
 		self.topic_dict.append(topic)
@@ -604,7 +599,6 @@ class LootingSystem(ui.ScriptWindow):
 		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_JOB_SHAMAN, "shaman")
 		if app.ENABLE_WOLFMAN_CHARACTER:
 			category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_JOB_WOLFMAN, "wolfman")
-		category.AddRange(self, uiScriptLocale.LOOTING_SYSTEM_REFINE, REFINE_MIN, REFINE_MAX, "refine")
 		category.AddRange(self, uiScriptLocale.LOOTING_SYSTEM_WEARING_LEVEL, WEARING_LEVEL_MIN, WEARING_LEVEL_MAX, "wearing_level")
 		topic.AddCategory(category)
 		self.topic_dict.append(topic)
@@ -622,28 +616,7 @@ class LootingSystem(ui.ScriptWindow):
 		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_COMMON_PENDANT, "pendant")
 		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_COMMON_ROD, "rod")
 		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_COMMON_PICK, "pick")
-		category.AddRange(self, uiScriptLocale.LOOTING_SYSTEM_REFINE, REFINE_MIN, REFINE_MAX, "refine")
 		category.AddRange(self, uiScriptLocale.LOOTING_SYSTEM_WEARING_LEVEL, WEARING_LEVEL_MIN, WEARING_LEVEL_MAX, "wearing_level")
-		topic.AddCategory(category)
-		self.topic_dict.append(topic)
-
-		## Costume
-		topic = Topic(self.mask_window, uiScriptLocale.LOOTING_SYSTEM_COSTUME, uiScriptLocale.LOOTING_SYSTEM_QUESTION_COSTUME, "costume")
-		category = Category(self.mask_window, uiScriptLocale.LOOTING_SYSTEM_CATEGORY_COSTUME)
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_COSTUME_WEAPON, "weapon")
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_COSTUME_ARMOR, "armor")
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_COSTUME_HAIR, "hair")
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_COSTUME_ACCE, "acce")
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_COSTUME_AURA, "aura")
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_COSTUME_ETC, "etc")
-		topic.AddCategory(category)
-		self.topic_dict.append(topic)
-
-		## Dragon Soul
-		topic = Topic(self.mask_window, uiScriptLocale.LOOTING_SYSTEM_DS, uiScriptLocale.LOOTING_SYSTEM_QUESTION_DS, "ds")
-		category = Category(self.mask_window, uiScriptLocale.LOOTING_SYSTEM_CATEGORY_DS)
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_DS_DS, "ds")
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_DS_ETC, "etc")
 		topic.AddCategory(category)
 		self.topic_dict.append(topic)
 
@@ -679,16 +652,6 @@ class LootingSystem(ui.ScriptWindow):
 		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_FISH_MINING_FOOD, "food")
 		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_FISH_MINING_STONE, "stone")
 		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_FISH_MINING_ETC, "etc")
-		topic.AddCategory(category)
-		self.topic_dict.append(topic)
-
-		## Mount & Pet
-		topic = Topic(self.mask_window, uiScriptLocale.LOOTING_SYSTEM_CATEGORY_MOUNT_PET_MOUNT, uiScriptLocale.LOOTING_SYSTEM_QUESTION_MOUNT_PET, "mount_pet")
-		category = Category(self.mask_window, uiScriptLocale.LOOTING_SYSTEM_CATEGORY_MOUNT_PET)
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_MOUNT_PET_CHARGED_PET, "charged_pet")
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_MOUNT_PET_MOUNT, "mount")
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_MOUNT_PET_FREE_PET, "free_pet")
-		category.AddOption(uiScriptLocale.LOOTING_SYSTEM_CATEGORY_MOUNT_PET_EGG, "egg")
 		topic.AddCategory(category)
 		self.topic_dict.append(topic)
 
@@ -847,10 +810,6 @@ class LootingSystem(ui.ScriptWindow):
 					for range in category.GetRanges():
 						range_key = range.GetKey()
 
-						if range_key == "refine":
-							range.SetMinValue(topic_settings["refine_min"] if "refine_min" in topic_settings.keys() else range.min)
-							range.SetMaxValue(topic_settings["refine_max"] if "refine_max" in topic_settings.keys() else range.max)
-
 						if range_key == "wearing_level":
 							range.SetMinValue(topic_settings["wearing_level_min"] if "wearing_level_min" in topic_settings.keys() else range.min)
 							range.SetMaxValue(topic_settings["wearing_level_max"] if "wearing_level_max" in topic_settings.keys() else range.max)
@@ -947,19 +906,6 @@ class LootingSystem(ui.ScriptWindow):
 				# Settings for each category range text fields.
 				for range in category.GetRanges():
 					range_key = range.GetKey()
-
-					if range_key == "refine":
-						topic_settings["refine_min"] = range.GetMinValue()
-						topic_settings["refine_max"] = range.GetMaxValue()
-
-						topic_settings["refine_min"] = max(range.min, topic_settings["refine_min"])
-						topic_settings["refine_max"] = min(range.max, topic_settings["refine_max"])
-
-						topic_settings["refine_min"] = min(topic_settings["refine_min"], topic_settings["refine_max"])
-						topic_settings["refine_max"] = max(topic_settings["refine_min"], topic_settings["refine_max"])
-
-						range.SetMinValue(topic_settings["refine_min"])
-						range.SetMaxValue(topic_settings["refine_max"])
 
 					if range_key == "wearing_level":
 						topic_settings["wearing_level_min"] = range.GetMinValue()

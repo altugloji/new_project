@@ -187,6 +187,35 @@ CAMERA_MAX_DISTANCE = CAMERA_MAX_DISTANCE_SHORT
 CHRNAME_COLOR_INDEX = 0
 
 ENVIRONMENT_NIGHT="d:/ymir work/environment/moonlight04.msenv"
+Night = 0
+
+def APPLY_NIGHT_MODE(level=None):
+	global Night
+	import background
+	import systemSetting
+
+	if level is None:
+		try:
+			level = systemSetting.GetNightModeVolume()
+		except AttributeError:
+			level = float(Night)
+
+	if level < 0.0:
+		level = 0.0
+	elif level > 1.0:
+		level = 1.0
+
+	Night = 1 if level > 0.0 else 0
+
+	background.RegisterEnvironmentData(1, ENVIRONMENT_NIGHT)
+
+	try:
+		background.SetNightModeBlend(level)
+	except AttributeError:
+		if level > 0.0:
+			background.SetEnvironmentData(1)
+		else:
+			background.SetEnvironmentData(0)
 
 # constant
 HIGH_PRICE = 500000
