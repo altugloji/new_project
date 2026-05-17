@@ -938,6 +938,26 @@ void CInputMain::ItemUse(LPCHARACTER ch, const char * data) const
 	ch->UseItem(((struct command_item_use *) data)->Cell);
 }
 
+#ifdef ENABLE_BULK_POTION_PANEL
+void CInputMain::BulkPotionUse(LPCHARACTER ch, const char* data) const
+{
+	if (!ch || ch->IsObserverMode())
+		return;
+
+#ifdef FAST_PACKET_BLOCK
+	if (thecore_pulse() - ch->GetPacketLastTime() < PASSES_PER_SEC(0.7))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FAST_PACKET_MESSAGE"));
+		return;
+	}
+	ch->SetPacketLastTime();
+#endif
+
+	const TPacketCGBulkPotionUse* pinfo = (const TPacketCGBulkPotionUse*) data;
+	ch->BulkPotionUse(pinfo->adwSlotVnum);
+}
+#endif
+
 void CInputMain::ItemToItem(LPCHARACTER ch, const char * pcData) const
 {
 	const auto p = (TPacketCGItemUseToItem *) pcData;
@@ -3208,6 +3228,12 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 #ifdef ENABLE_CHARACTER_CHEST
 		case HEADER_CG_CHARACTER_CHEST:
 			CharacterChest(ch, c_pData);
+			break;
+#endif
+#ifdef ENABLE_BULK_POTION_PANEL
+		case HEADER_CG_BULK_POTION:
+			if (!ch->IsObserverMode())
+				BulkPotionUse(ch, c_pData);
 			break;
 #endif
 #ifdef WJ_NEW_DROP_DIALOG

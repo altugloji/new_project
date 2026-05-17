@@ -2030,6 +2030,11 @@ void initapp()
 #else
 	PyModule_AddIntConstant(poModule, "ENABLE_CHARACTER_CHEST", 0);
 #endif
+#ifdef ENABLE_BULK_POTION_PANEL
+	PyModule_AddIntConstant(poModule, "ENABLE_BULK_POTION_PANEL", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_BULK_POTION_PANEL", 0);
+#endif
 
 #ifdef __GEM_SHOP__
 	PyModule_AddIntConstant(poModule, "__GEM_SHOP__", 1);

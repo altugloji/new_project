@@ -151,6 +151,9 @@ enum
 #ifdef ENABLE_CHARACTER_CHEST
 	HEADER_CG_CHARACTER_CHEST				= 231,
 #endif
+#ifdef ENABLE_BULK_POTION_PANEL
+	HEADER_CG_BULK_POTION					= 232,
+#endif
 	HEADER_CG_TIME_SYNC							= 0xfc,
 	HEADER_CG_CLIENT_VERSION2					= 0xf1,
 	HEADER_CG_PONG								= 0xfe,
@@ -2958,6 +2961,18 @@ typedef struct packet_receive_cube_renewal
 	BYTE subheader;
 	TInfoDateCubeRenewal	date_cube_renewal;
 }TPacketGCCubeRenewalReceive;
+#endif
+
+#ifdef ENABLE_BULK_POTION_PANEL
+enum
+{
+	BULK_POTION_SLOT_COUNT = 24,
+};
+typedef struct SPacketCGBulkPotionUse
+{
+	BYTE	header;
+	DWORD	adwSlotVnum[BULK_POTION_SLOT_COUNT];
+} TPacketCGBulkPotionUse;
 #endif
 
 #ifdef ENABLE_CHARACTER_CHEST

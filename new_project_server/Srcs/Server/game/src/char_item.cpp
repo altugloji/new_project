@@ -8179,4 +8179,89 @@ bool CHARACTER::CanUnequipNow(const LPITEM item, const TItemPos& srcCell, const 
 
 	return true;
 }
+
+#ifdef ENABLE_BULK_POTION_PANEL
+namespace
+{
+	enum
+	{
+		BULK_POTION_SLOT_COUNT = 24,
+		BULK_POTION_MAX_USE_PER_PACKET = 120,
+	};
+
+static bool BulkPotion_IsAllowedVnum(DWORD vnum)
+	{
+		if (0 == vnum)
+			return false;
+
+		if (vnum >= 27001 && vnum <= 27054)
+			return true;
+		if (vnum >= 27100 && vnum <= 27127)
+			return true;
+		if (vnum >= 27863 && vnum <= 27878)
+			return true;
+
+		if (vnum >= 71028 && vnum <= 71035)
+			return true;
+		if (vnum >= 71044 && vnum <= 71049)
+			return true;
+		if (vnum >= 50801 && vnum <= 50826)
+			return true;
+
+		return false;
+	}
+}
+
+void CHARACTER::BulkPotionUse(const DWORD* adwSlotVnum)
+{
+	if (!adwSlotVnum || !IsPC())
+		return;
+
+	if (!CanHandleItem())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CANT_DO_THIS_BECAUSE_OTHER_WINDOW_OPEN"));
+		return;
+	}
+
+	if (IsDead() || IsStun())
+		return;
+
+	if (GetExchange() || GetMyShop() || GetShopOwner() || GetShop() || IsOpenSafebox() || IsCubeOpen())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CANT_DO_THIS_BECAUSE_OTHER_WINDOW_OPEN"));
+		return;
+	}
+
+	int iUsedCount = 0;
+	bool abUsedCell[INVENTORY_MAX_NUM];
+	memset(abUsedCell, 0, sizeof(abUsedCell));
+
+	for (int iSlot = 0; iSlot < BULK_POTION_SLOT_COUNT && iUsedCount < BULK_POTION_MAX_USE_PER_PACKET; ++iSlot)
+	{
+		const DWORD dwVnum = adwSlotVnum[iSlot];
+		if (0 == dwVnum || !BulkPotion_IsAllowedVnum(dwVnum))
+			continue;
+
+		for (int i = 0; i < INVENTORY_MAX_NUM && iUsedCount < BULK_POTION_MAX_USE_PER_PACKET; ++i)
+		{
+			if (abUsedCell[i])
+				continue;
+
+			LPITEM pkItem = GetInventoryItem(i);
+			if (!pkItem || pkItem->GetVnum() != dwVnum)
+				continue;
+
+			if (pkItem->IsExchanging())
+				continue;
+
+			const TItemPos pos(INVENTORY, i);
+			if (UseItem(pos))
+				++iUsedCount;
+
+			abUsedCell[i] = true;
+		}
+	}
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

@@ -113,13 +113,13 @@ enum eCommonDefines {
 //////////////////////////////////////////////////////////////////////////
 
 //ML
-#define __BL_MULTI_LANGUAGE__
-#define ENABLE_GF_ATLAS_MARK_INFO // https://metin2.dev/topic/23474-gf-loadatlasmarkinfo/
-#define __BL_MULTI_LANGUAGE_PREMIUM__
-#define __BL_MULTI_LANGUAGE_ULTIMATE__
+#define __BL_MULTI_LANGUAGE__										// Multi dil sistemi
+#define __BL_MULTI_LANGUAGE_PREMIUM__								// Multi dil sistemi
+#define __BL_MULTI_LANGUAGE_ULTIMATE__								// Multi dil sistemi
+#define ENABLE_GF_ATLAS_MARK_INFO									// Multi dil sistemi ekstra
 
-#define GUILD_LARGE_ICON
-#define ENABLE_SPAMDB_REFRESH	//spam_db otomatik chat ban
+#define GUILD_LARGE_ICON											// 24x16 lonca simgesi boyutu
+#define ENABLE_SPAMDB_REFRESH										// spam_db otomatik chat ban
 #define DC_P2P_UPDATE												// Farklı CH'de ki oyuncuyu dc atmak için
 #define WARP_CH_UPDATE												// Farklı CH'de ki oyuncunun yanına gitmek için
 #define EXP_DEC_IN_DUNGEON											// Zindanlarda %90 Daha Az EXP
@@ -129,22 +129,22 @@ enum eCommonDefines {
 #define FAST_PACKET_BLOCK											// Paket buglarını önlemek için süre engelleri
 #define HANDSHAKE_PACKET_ANTI_FLOOD									// Auth / Game socket attack fix
 #define PARTY_EXP_FIX												// Grup bugu. Karakteri ortaya alma.
-#define __AUTO_SKILL_READER__
-#define ENABLE_EXCHANGE_LOG
+#define __AUTO_SKILL_READER__										// Otomatik bk okuma 
+#define ENABLE_EXCHANGE_LOG											// Oyun içi ticaret log ekranı
 #define KYGN_CHEST_INFO												// Sandık İçeriğini Görme
 #define __SEND_TARGET_INFO__										// Mob target info
-#define UPDATE_ITEM_MESSAGE
-#define ENABLE_USER_REPORT_SYSTEM 					//Official User Report System
+#define UPDATE_ITEM_MESSAGE											// Item +basma duyurusu
+#define ENABLE_USER_REPORT_SYSTEM 									// Target oyuncu report sistemi
 #define ENABLE_ITEM_SHOP_SYSTEM										// Nesne market
-#define ENABLE_CUBE_RENEWAL									//CUBE
-#define ENABLE_SKILL_FLAG_PARTY
-#define ENABLE_MULTISHOP
-#define WJ_NEW_DROP_DIALOG
-#define __GEM_SYSTEM__
-#define ENABLE_GM_MOB_FIND_CMD // /mob_find <vnum> lists matching non-PC chars on current map (GM)
-#define UPDATE_AUTO_POT_1K_HP	//Otopot ekstra 1K sabit hp
-#define ENABLE_CHARACTER_CHEST
-
+#define ENABLE_CUBE_RENEWAL											// Yeni Cube penceresi
+#define ENABLE_SKILL_FLAG_PARTY										// Şaman grup kutsama
+#define ENABLE_MULTISHOP											// İtem ile npcde ürün satma
+#define WJ_NEW_DROP_DIALOG											// HIzlı sil sat sistemi
+#define __GEM_SYSTEM__												// Gaya mağazası sistemi
+#define ENABLE_GM_MOB_FIND_CMD										// /mob_find <vnum> ile mapte mob arama
+#define UPDATE_AUTO_POT_1K_HP										// Otopot ekstra 1K sabit hp
+#define ENABLE_CHARACTER_CHEST										// Karakter sandık sistemi
+#define ENABLE_BULK_POTION_PANEL									// Hızlı şebnem penceresi
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

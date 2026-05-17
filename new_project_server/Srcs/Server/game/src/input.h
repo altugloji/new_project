@@ -121,6 +121,9 @@ class CInputMain : public CInputProcessor
 		int			Whisper(LPCHARACTER ch, const char * data, size_t uiBytes) const;
 		int			Chat(LPCHARACTER ch, const char * data, size_t uiBytes) const;
 		void		ItemUse(LPCHARACTER ch, const char * data) const;
+#ifdef ENABLE_BULK_POTION_PANEL
+		void		BulkPotionUse(LPCHARACTER ch, const char* data) const;
+#endif
 		void		ItemDrop(LPCHARACTER ch, const char * data) const;
 		void		ItemDrop2(LPCHARACTER ch, const char * data) const;
 #ifdef WJ_NEW_DROP_DIALOG

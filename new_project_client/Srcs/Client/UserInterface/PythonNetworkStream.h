@@ -798,5 +798,9 @@ public:
 	bool SendCharacterChestPacket(BYTE subOp, DWORD targetPid, WORD itemCell, const char* password);
 	bool RecvCharacterChestPacket();
 #endif
+#ifdef ENABLE_BULK_POTION_PANEL
+public:
+	bool SendBulkPotionUsePacket(const DWORD* adwSlotVnum, size_t count);
+#endif
 };
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

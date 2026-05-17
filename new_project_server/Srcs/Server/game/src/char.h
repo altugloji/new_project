@@ -1120,6 +1120,9 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 
 		bool			UseItemEx(LPITEM item, TItemPos DestCell);
 		bool			UseItem(TItemPos Cell, TItemPos DestCell = NPOS);
+#ifdef ENABLE_BULK_POTION_PANEL
+		void			BulkPotionUse(const DWORD* adwSlotVnum);
+#endif
 
 		// ADD_REFINE_BUILDING
 		bool			IsRefineThroughGuild() const;

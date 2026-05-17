@@ -207,6 +207,9 @@ CPacketInfoCG::CPacketInfoCG()
 #ifdef ENABLE_CHARACTER_CHEST
 	Set(HEADER_CG_CHARACTER_CHEST, sizeof(TPacketCGCharacterChest), "CharacterChest", true);
 #endif
+#ifdef ENABLE_BULK_POTION_PANEL
+	Set(HEADER_CG_BULK_POTION, sizeof(TPacketCGBulkPotionUse), "BulkPotion", true);
+#endif
 }
 
 CPacketInfoCG::~CPacketInfoCG()

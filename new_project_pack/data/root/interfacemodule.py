@@ -88,6 +88,8 @@ if app.__GEM_SHOP__:
 	
 if app.WJ_NEW_DROP_DIALOG:
 	import uiDeleteItem
+if app.ENABLE_BULK_POTION_PANEL:
+	import uiBulkPotion
 IsQBHide = 0
 class Interface(object):
 	CHARACTER_STATUS_TAB = 1
@@ -128,6 +130,8 @@ class Interface(object):
 		self.wndGuildBuilding = None
 		if app.WJ_NEW_DROP_DIALOG:
 			self.deleteitem = None
+		if app.ENABLE_BULK_POTION_PANEL:
+			self.wndBulkPotion = None
 		self.listGMName = {}
 		self.dlgGmCall = None
 		self._gmCallSuppressUntil = 0
@@ -347,6 +351,10 @@ class Interface(object):
 			if self.wndInventory:
 				self.wndInventory.SetDeleteItemDlg(self.deleteitem)
 
+		if app.ENABLE_BULK_POTION_PANEL:
+			self.wndBulkPotion = uiBulkPotion.BulkPotionWindow()
+			self.wndBulkPotion.Hide()
+
 	def __MakeHelpWindow(self):
 		self.wndHelp = uiHelp.HelpWindow()
 		self.wndHelp.LoadDialog()
@@ -474,6 +482,9 @@ class Interface(object):
 
 		if app.WJ_NEW_DROP_DIALOG:
 			self.deleteitem.SetItemToolTip(self.tooltipItem)
+
+		if app.ENABLE_BULK_POTION_PANEL and self.wndBulkPotion:
+			self.wndBulkPotion.SetItemToolTip(self.tooltipItem)
 
 		# ITEM_MALL
 		self.wndMall.SetItemToolTip(self.tooltipItem)
@@ -622,6 +633,12 @@ class Interface(object):
 				self.deleteitem.Destroy()
 				self.deleteitem = None
 				del self.deleteitem
+
+		if app.ENABLE_BULK_POTION_PANEL:
+			if self.wndBulkPotion:
+				self.wndBulkPotion.Hide()
+				self.wndBulkPotion.Destroy()
+				self.wndBulkPotion = None
 
 		if self.wndWeb:
 			self.wndWeb.Destroy()
@@ -834,6 +851,8 @@ class Interface(object):
 			if self.wndAutoSkillReader:
 				if self.wndAutoSkillReader.IsShow():
 					self.wndAutoSkillReader.Refresh()
+		if app.ENABLE_BULK_POTION_PANEL:
+			self.RefreshBulkPotionPanel()
 		if app.KYGN_CHEST_INFO and self.wndKygnChestInfo:
 			self.wndKygnChestInfo.CheckChestPos()
 		
@@ -2237,6 +2256,21 @@ class Interface(object):
 					self.deleteitem.Open()
 				else:
 					self.deleteitem.Close()
+
+	if app.ENABLE_BULK_POTION_PANEL:
+		def OpenBulkPotionPanel(self):
+			if player.IsObserverMode():
+				return
+			if not self.wndBulkPotion:
+				return
+			if self.wndBulkPotion.IsShow():
+				self.wndBulkPotion.Close()
+			else:
+				self.wndBulkPotion.Open()
+
+		def RefreshBulkPotionPanel(self):
+			if self.wndBulkPotion and self.wndBulkPotion.IsShow():
+				self.wndBulkPotion.Refresh()
 
 	if app.ENABLE_ITEM_SHOP_SYSTEM:
 		def RefreshItemShop(self):

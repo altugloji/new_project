@@ -5018,6 +5018,30 @@ bool CPythonNetworkStream::RecvCubeRenewalPacket()
 }
 #endif
 
+#ifdef ENABLE_BULK_POTION_PANEL
+bool CPythonNetworkStream::SendBulkPotionUsePacket(const DWORD* adwSlotVnum, size_t count)
+{
+	if (!adwSlotVnum || count < BULK_POTION_SLOT_COUNT)
+		return false;
+
+	if (!__CanActMainInstance())
+		return true;
+
+	TPacketCGBulkPotionUse packet;
+	memset(&packet, 0, sizeof(packet));
+	packet.header = HEADER_CG_BULK_POTION;
+	memcpy(packet.adwSlotVnum, adwSlotVnum, sizeof(packet.adwSlotVnum));
+
+	if (!Send(sizeof(packet), &packet))
+	{
+		Tracen("SendBulkPotionUsePacket Error");
+		return false;
+	}
+
+	return SendSequence();
+}
+#endif
+
 #ifdef ENABLE_CHARACTER_CHEST
 bool CPythonNetworkStream::SendCharacterChestPacket(BYTE subOp, DWORD targetPid, WORD itemCell, const char* password)
 {

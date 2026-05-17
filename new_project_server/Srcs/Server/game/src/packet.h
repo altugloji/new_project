@@ -116,6 +116,9 @@ enum
 #ifdef ENABLE_CHARACTER_CHEST
 	HEADER_CG_CHARACTER_CHEST			= 231,
 #endif
+#ifdef ENABLE_BULK_POTION_PANEL
+	HEADER_CG_BULK_POTION				= 232,
+#endif
 	HEADER_CG_CLIENT_VERSION2		= 0xf1,
 
 	/********************************************************/
@@ -2565,6 +2568,18 @@ typedef struct SPacketGCCharacterChest
 		BYTE	abPayload[CHARACTER_CHEST_GC_MAX_SIZE];
 	};
 } TPacketGCCharacterChest;
+#endif
+
+#ifdef ENABLE_BULK_POTION_PANEL
+enum
+{
+	BULK_POTION_SLOT_COUNT = 24,
+};
+typedef struct SPacketCGBulkPotionUse
+{
+	BYTE	header;
+	DWORD	adwSlotVnum[BULK_POTION_SLOT_COUNT];
+} TPacketCGBulkPotionUse;
 #endif
 
 #ifdef __GEM_SYSTEM__

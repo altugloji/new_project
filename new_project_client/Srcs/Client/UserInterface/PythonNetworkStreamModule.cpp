@@ -639,6 +639,33 @@ PyObject* netSendItemUsePacket(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_BULK_POTION_PANEL
+PyObject* netSendBulkPotionUsePacket(PyObject* poSelf, PyObject* poArgs)
+{
+	PyObject* poList = nullptr;
+	if (!PyTuple_GetObject(poArgs, 0, &poList) || !poList)
+		return Py_BuildException();
+
+	if (!PyList_Check(poList))
+		return Py_BuildException();
+
+	DWORD adwVnum[BULK_POTION_SLOT_COUNT];
+	memset(adwVnum, 0, sizeof(adwVnum));
+
+	const Py_ssize_t listLen = PyList_Size(poList);
+	const Py_ssize_t copyLen = listLen < BULK_POTION_SLOT_COUNT ? listLen : BULK_POTION_SLOT_COUNT;
+	for (Py_ssize_t i = 0; i < copyLen; ++i)
+	{
+		PyObject* poVal = PyList_GetItem(poList, i);
+		adwVnum[i] = (DWORD) PyInt_AsLong(poVal);
+	}
+
+	CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+	rkNetStream.SendBulkPotionUsePacket(adwVnum, BULK_POTION_SLOT_COUNT);
+	return Py_BuildNone();
+}
+#endif
+
 #ifdef ENABLE_CHARACTER_CHEST
 PyObject* netSendCharacterChestPacket(PyObject* poSelf, PyObject* poArgs)
 {
@@ -1797,6 +1824,9 @@ void initnet()
 		{ "SendItemUsePacket",					netSendItemUsePacket,					METH_VARARGS },
 #ifdef ENABLE_CHARACTER_CHEST
 		{ "SendCharacterChestPacket",			netSendCharacterChestPacket,			METH_VARARGS },
+#endif
+#ifdef ENABLE_BULK_POTION_PANEL
+		{ "SendBulkPotionUsePacket",			netSendBulkPotionUsePacket,				METH_VARARGS },
 #endif
 		{ "SendItemUseToItemPacket",			netSendItemUseToItemPacket,				METH_VARARGS },
 		{ "SendItemDropPacket",					netSendItemDropPacket,					METH_VARARGS },

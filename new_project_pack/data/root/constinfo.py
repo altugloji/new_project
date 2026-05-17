@@ -409,6 +409,27 @@ def IS_AUTO_POTION_SP(itemVnum):
 
 	return 0
 
+def IS_BULK_POTION_ALLOWED(itemVnum):
+	if not itemVnum:
+		return 0
+	if IS_AUTO_POTION(itemVnum):
+		return 0
+	if 27001 <= itemVnum and itemVnum <= 27054:
+		return 1
+	if 27100 <= itemVnum and itemVnum <= 27127:
+		return 1
+	if 27863 <= itemVnum and itemVnum <= 27878:
+		return 1
+	if 39001 <= itemVnum and itemVnum <= 39012:
+		return 1
+	if 71028 <= itemVnum and itemVnum <= 71035:
+		return 1
+	if 71044 <= itemVnum and itemVnum <= 71049:
+		return 1
+	if 50801 <= itemVnum and itemVnum <= 50826:
+		return 1
+	return 0
+
 def IS_PET_SEAL(itemVnum):
 	if not app.ENABLE_PET_SYSTEM_EX:
 		return False

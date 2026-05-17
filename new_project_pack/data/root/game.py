@@ -401,6 +401,9 @@ class GameWindow(ui.ScriptWindow):
 		if app.__AUTO_SKILL_READER__:
 			onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenAutoSkillReader()
 
+		if app.ENABLE_BULK_POTION_PANEL:
+			onPressKeyDict[app.DIK_TAB]	= lambda : self.interface.OpenBulkPotionPanel()
+
 		onPressKeyDict[app.DIK_LALT]		= lambda : self.ShowName()
 		onPressKeyDict[app.DIK_LCONTROL]	= lambda : self.ShowMouseImage()
 		onPressKeyDict[app.DIK_SYSRQ]		= lambda : self.SaveScreen()
