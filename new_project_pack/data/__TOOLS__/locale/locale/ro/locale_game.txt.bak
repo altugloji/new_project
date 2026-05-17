@@ -22,7 +22,7 @@ WIKI_CHESTS_ALTERNATIVE	Cufere Alternative
 WIKI_BOSSES	Boºi
 WIKI_1_75	Lv. 1-75
 WIKI_76_100	Lv. 76-100
-WIKI_100	Lv. 76-100
+WIKI_100	Lv. 100+
 WIKI_BOSSES_EVENT	Boºi Event
 WIKI_MONSTER	Monºtri
 WIKI_METINSTONE	Pietre Metin
@@ -31,14 +31,14 @@ WIKI_LEVEL_TEXT	Nivel %d - Interval rafinare %d~%d
 WIKI_LEVEL_TEXT2	Nivel %d~%d - Interval rafinare %d~%d
 WIKI_UPGRADE_COSTS	Urmãtorul obiect
 WIKI_YANG_COSTS	Cost Yang
-WIKI_AVAIBLE_AT	Disponibil la
-WIKI_IMPROVEMENT_INFO	Informaþii îmbunãtãþire pentru %s
+WIKI_AVAIBLE_AT	Locaþie
+WIKI_IMPROVEMENT_INFO	Informaþii rafinare pentru %s
 WIKI_CONTENT_INFO	Conþinutul lui %s
-WIKI_DROPLIST_INFO	Listã drop pentru %s
+WIKI_DROPLIST_INFO	Dropuri de la %s
 WIKI_STATICS_INFO	Statistici pentru %s
 WIKI_STATICS_INFO_TYPE	Rasã: %s | Tip: %s
-WIKI_STATICS_INFO_DMG	Daune min.:%d | Daune max.:%d | HP max: %d
-WIKI_STATICS_INFO_YNG	Yang min.:%d | Yang max.:%d | EXP: %d
+WIKI_STATICS_INFO_DMG	Daune min.: %d | Daune max.: %d | HP max: %d
+WIKI_STATICS_INFO_YNG	Yang min.: %d | Yang max.: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Apãrãri:
 WIKI_ORIGIN	Origine
 WIKI_SYSTEMS	Sisteme
@@ -3676,3 +3676,58 @@ GEMSHOP_YOU_ALREADY_BUYED	Ai cumpãrat deja acest obiect!
 GEMSHOP_OPEN_SLOT_QUESTION	Vrei sã deschizi slotul?
 GEMSHOP_BUY_QUESTION	Vrei sã cumperi {} pentru {} Gaya?
 GEMSHOP_REFRESH_QUESTION	Vrei sã actualizezi obiectele?
+CHARACTER_CHEST_PREVIEW_HINT	Poþi vizualiza caracterul cu CTRL + CLICK DREAPTA.
+CHARACTER_CHEST_PREVIEW_CLOSE	Închide
+CHARACTER_CHEST_INVENTORY_BLOCK	Nu poþi folosi inventarul cât timp aceastã fereastrã este deschisã.
+CHARACTER_CHEST_WRONG_MAP	Aceastã acþiune poate fi fãcutã doar în Deºertul Yongbi.
+CHARACTER_CHEST_WRONG_PASSWORD	Parola de ºtergere a caracterului este greºitã.
+CHARACTER_CHEST_NO_SLOT	Nu ai niciun slot de caracter liber pe cont.
+CHARACTER_CHEST_PACK_OK	Caracterul a fost împachetat cu succes.
+CHARACTER_CHEST_UNPACK_OK	Caracterul a fost transferat pe contul tãu.
+CHARACTER_CHEST_FAILED	Acþiunea nu a putut fi finalizatã.
+CHARACTER_CHEST_INVALID	Card de Caracter invalid.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Nu poþi împacheta caracterul activ.
+CHARACTER_CHEST_ALREADY_USED	Acest card a fost deja folosit.
+CHARACTER_CHEST_TITLE	Card de Caracter
+CHARACTER_CHEST_SELECT_HINT	Selecteazã caracterul secundar pe care vrei sã îl împachetezi.
+CHARACTER_CHEST_UNPACK_QUEST	Vrei sã transferi acest caracter pe contul tãu?
+CHARACTER_CHEST_PACKED_LABEL	Caracter împachetat: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Transferã
+CHARACTER_CHEST_BIO_TITLE	Misiuni Biolog
+CHARACTER_CHEST_BIO_QUEST_NAME	Misiune Biolog - Lv. %d
+CHARACTER_CHEST_BIO_DONE	Finalizatã
+CHARACTER_CHEST_BIO_PROGRESS	În desfãºurare
+CHARACTER_CHEST_BIO_WAIT	În aºteptare
+BULK_POTION_EMPTY_PANEL	Nu existã licori înregistrate.
+BULK_POTION_NOT_ALLOWED	Acest obiect nu poate fi adãugat în Panoul de Licori în Masã.
+BULK_POTION_ALREADY_REGISTERED	Aceastã licoare este deja înregistratã în panou.
+WIKI_DROP_VIEW_TITLE	Afiºeazã dropurile unui obiect anume
+WIKI_OR	sau
+WIKI_ITEM_NAME_PLACEHOLDER	Introdu numele obiectului...
+WIKI_REFINE_HEADER_TIP	+%d etapã rafinare (materiale / yang / ºansã)
+WIKI_WEAPONS_SECTION	Arme
+WIKI_ARMOR_SECTION	Armuri ºi accesorii
+WIKI_SWORD	Sãbii
+WIKI_DAGGER	Pumnale
+WIKI_BOW	Arcuri
+WIKI_TWOHAND	Arme douã mâini
+WIKI_BELL	Clopote
+WIKI_FAN	Evantaie
+WIKI_HELMET	Coifuri
+WIKI_BOOTS	Pantofi
+WIKI_METINS	Metine
+WIKI_75_99	Lv. 75-99
+WIKI_CHEST_PREVIEW_BTN	Previzualizare Cufãr
+WIKI_CHEST_PREVIEW_NO_SELECT	Selecteazã mai întâi un obiect din câmpul de cãutare.
+WIKI_CHEST_PREVIEW_NO_DATA	Nu a fost gãsit conþinut de cufãr pentru acest obiect.
+WIKI_REFINE_VIEW_BTN	Rafinare
+WIKI_ITEM_PREVIEW_BTN	Previzualizare Obiect
+WIKI_ITEM_PREVIEW_NO_SELECT	Selecteazã un obiect din cãutarea Wiki.
+WIKI_ITEM_PREVIEW_EMPTY	Nu a fost gãsitã nicio sursã pentru acest obiect în tabelele Wiki.
+WIKI_ITEM_PREVIEW_COL_NAME	Nume
+WIKI_ITEM_PREVIEW_COL_LEVEL	Nivel
+WIKI_ITEM_PREVIEW_COL_COUNT	Cantitate
+WIKI_ITEM_PREVIEW_COL_LOC	Locaþie
+WIKI_ITEM_PREVIEW_SECTION_MOB	Monºtri / Metine / Boºi
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Cufãr
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Altele

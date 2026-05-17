@@ -10,6 +10,7 @@ import localeInfo
 import colorInfo
 import constInfo
 import systemSetting
+import player
 if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 	import uiScriptLocale
 	import uiToolTip
@@ -218,6 +219,11 @@ class ChatLine(ui.EditLine):
 		if net.IsChatInsultIn(text):
 			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.CHAT_INSULT_STRING)
 		else:
+			if app.AUTO_CHAT_ENABLE:
+				if type == chat.CHAT_TYPE_SHOUT:
+					global autoChatLastText
+					autoChatLastText = text
+					RefreshAutoChat()
 			net.SendChatPacket(text, type)
 
 	def __SendPartyChatPacket(self, text):
@@ -636,14 +642,7 @@ class ChatWindow(ui.Window):
 		btnSendWhisper.Hide()
 		self.btnSendWhisper = btnSendWhisper
 
-		btnChatLog = ui.Button()
-		btnChatLog.SetParent(self)
-		btnChatLog.SetUpVisual("d:/ymir work/ui/game/taskbar/Open_Chat_Log_Button_01.sub")
-		btnChatLog.SetOverVisual("d:/ymir work/ui/game/taskbar/Open_Chat_Log_Button_02.sub")
-		btnChatLog.SetDownVisual("d:/ymir work/ui/game/taskbar/Open_Chat_Log_Button_03.sub")
-		btnChatLog.SetToolTipText(localeInfo.CHAT_LOG)
-		btnChatLog.Hide()
-		self.btnChatLog = btnChatLog
+		self.btnChatLog = None
 
 		btnChatSizing = self.ChatButton()
 		btnChatSizing.SetOwner(self)
@@ -703,6 +702,17 @@ class ChatWindow(ui.Window):
 		scrollBar.SetScrollEvent(ui.__mem_func__(self.OnScroll))
 		self.scrollBar = scrollBar
 
+		if app.AUTO_CHAT_ENABLE:
+			autoChatBtn = ui.Button()
+			autoChatBtn.SetParent(self)
+			autoChatBtn.SetUpVisual("d:/ymir work/ui/chat/bot_0.tga")
+			autoChatBtn.SetOverVisual("d:/ymir work/ui/chat/bot_1.tga")
+			autoChatBtn.SetDownVisual("d:/ymir work/ui/chat/bot_2.tga")
+			autoChatBtn.SetToolTipText(localeInfo.AUTO_CHAT_TITLE)
+			autoChatBtn.SetEvent(ui.__mem_func__(self.OpenAutoChat))
+			autoChatBtn.Hide()
+			self.autoChatBtn = autoChatBtn
+
 		self.Refresh()
 		self.chatInputSet.RefreshPosition()
 
@@ -745,7 +755,14 @@ class ChatWindow(ui.Window):
 			self.lang_image_dict = {}
 			self.toolTip = None
 
-	################
+	if app.AUTO_CHAT_ENABLE:
+		def OpenAutoChat(self):
+			global wndAutoChatWindow
+			if wndAutoChatWindow.IsShow():
+				wndAutoChatWindow.Close()
+			else:
+				wndAutoChatWindow.Open()
+
 	## Open & Close
 	def OpenChat(self):
 		self.SetSize(self.CHAT_WINDOW_WIDTH, 25)
@@ -772,7 +789,6 @@ class ChatWindow(ui.Window):
 		self.Refresh()
 
 		self.btnSendWhisper.Show()
-		self.btnChatLog.Show()
 		self.__RefreshChatInputLayout()
 
 		self.chatInputSet.Open()
@@ -794,10 +810,11 @@ class ChatWindow(ui.Window):
 
 		self.chatInputSet.Close()
 		self.btnSendWhisper.Hide()
-		self.btnChatLog.Hide()
 		self.btnChatSizing.Hide()
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 			self.flag_bar.Hide()
+		if app.AUTO_CHAT_ENABLE:
+			self.autoChatBtn.Hide()
 
 		self.Refresh()
 
@@ -805,7 +822,8 @@ class ChatWindow(ui.Window):
 		self.btnSendWhisper.SetEvent(event)
 
 	def SetOpenChatLogEvent(self, event):
-		self.btnChatLog.SetEvent(event)
+		if self.btnChatLog:
+			self.btnChatLog.SetEvent(event)
 	
 	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 		def __LayoutFlagBar(self, barWidth):
@@ -874,10 +892,14 @@ class ChatWindow(ui.Window):
 		self.__RefreshSizingBar()
 
 	def __PositionChatChromeButtons(self):
+		if app.AUTO_CHAT_ENABLE:
+			if chat.BOARD_STATE_EDIT == self.boardState:
+				self.autoChatBtn.SetPosition(self.GetWidth() - 50, 2)
+				self.autoChatBtn.Show()
+			else:
+				self.autoChatBtn.Hide()
 		if self.btnSendWhisper:
-			self.btnSendWhisper.SetPosition(self.GetWidth() - 50, 2)
-		if self.btnChatLog:
-			self.btnChatLog.SetPosition(self.GetWidth() - 25, 2)
+			self.btnSendWhisper.SetPosition(self.GetWidth() - 25, 2)
 
 	def __RefreshChatInputLayout(self):
 		if not self.chatInputSet:
@@ -1370,3 +1392,135 @@ class ChatLogWindow(ui.Window):
 					ime.PasteString(link)
 				else:
 					self.interface.MakeHyperlinkTooltip(hyperlink)
+
+if app.AUTO_CHAT_ENABLE:
+	autoChatLastText = ""
+	from _weakref import proxy
+	def RefreshAutoChat():
+		if wndAutoChatWindow:
+			wndAutoChatWindow.Refresh()
+	def SetStatusAutoChat(status):
+		if wndAutoChatWindow:
+			wndAutoChatWindow.SetStatus(status)
+	def UpdateAutoChat():
+		if wndAutoChatWindow:
+			wndAutoChatWindow.Update()
+	class AutoChatWindow(ui.BoardWithTitleBar):
+		def __init__(self):
+			ui.BoardWithTitleBar.__init__(self)
+			self.__LoadWindow()
+		def Destroy(self):
+			self.__children={}
+		def __LoadWindow(self):
+			self.Destroy()
+			self.AddFlag("attach")
+			self.AddFlag("movable")
+			self.AddFlag("float")
+			self.SetSize(495, 150)
+
+			self.SetTitleName(localeInfo.AUTO_CHAT_TITLE)
+			self.SetCloseEvent(self.Close)
+			self.SetCenterPosition()
+
+			text1 = ui.TextLine()
+			text1.SetParent(self)
+			text1.SetText(localeInfo.AUTO_CHAT_DESC)
+			text1.SetPosition((self.GetWidth()/2)  - (text1.GetTextSize()[0] / 2), 41)
+			text1.Show()
+			self.__children["text1"] = text1
+
+			text2 = ui.TextLine()
+			text2.SetParent(self)
+			text2.SetText(localeInfo.AUTO_CHAT_SAVED_MESSAGE)
+			text2.SetPosition((self.GetWidth()/2)  - (text2.GetTextSize()[0] / 2), 76)
+			text2.Show()
+			self.__children["text2"] = text2
+
+			shoutText = ui.TextLine()
+			shoutText.SetParent(self)
+			shoutText.SetPackedFontColor(0xFFFFC700)
+			shoutText.Show()
+			self.__children["shoutText"] = shoutText
+
+			enableBtn = ui.RadioButton()
+			enableBtn.SetParent(self)
+			enableBtn.SetUpVisual("d:/ymir work/ui/public/large_button_01.sub")
+			enableBtn.SetOverVisual("d:/ymir work/ui/public/large_button_02.sub")
+			enableBtn.SetDownVisual("d:/ymir work/ui/public/large_button_03.sub")
+			enableBtn.SAFE_SetEvent(self.__SetStatus, 1)
+			enableBtn.SetText(localeInfo.AUTO_CHAT_ENABLED)
+			enableBtn.SetPosition( (self.GetWidth() / 2) - (27 + enableBtn.GetWidth()), 120)
+			enableBtn.Show()
+			self.__children["enableBtn"] = enableBtn
+
+			disabledBtn = ui.RadioButton()
+			disabledBtn.SetParent(self)
+			disabledBtn.SetUpVisual("d:/ymir work/ui/public/large_button_01.sub")
+			disabledBtn.SetOverVisual("d:/ymir work/ui/public/large_button_02.sub")
+			disabledBtn.SetDownVisual("d:/ymir work/ui/public/large_button_03.sub")
+			disabledBtn.SAFE_SetEvent(self.__SetStatus, 0)
+			disabledBtn.SetText(localeInfo.AUTO_CHAT_DISABLED)
+			disabledBtn.SetPosition( (self.GetWidth() / 2) + 27, 120)
+			disabledBtn.Show()
+			self.__children["disabledBtn"] = disabledBtn
+
+			self.Clear()
+
+		def SetChatInstance(self, chatLine):
+			self.__children["chatLine"] = chatLine
+
+		def Update(self):
+			self.Check()
+			if not self.__children.get("status", 0):
+				return
+			global autoChatLastText
+			if autoChatLastText == "":
+				return
+			chatLine = self.__children.get("chatLine")
+			if not chatLine:
+				return
+			if app.GetTime() < chatLine.lastShoutTime + 10:
+				return
+			chatLine.lastShoutTime = app.GetTime()
+			net.SendChatPacket(autoChatLastText, chat.CHAT_TYPE_SHOUT)
+
+		def SetStatus(self, status):
+			self.__children["status"] = int(status)
+			self.Refresh()
+
+		def __SetStatus(self, status):
+			if self.__children.get("status", 0) == status:
+				return
+			net.SendChatPacket("/auto_chat status {}".format(status))
+			self.SetStatus(status)
+
+		def Clear(self):
+			global autoChatLastText
+			autoChatLastText = ""
+			self.__children["status"] = 0
+			self.__children["playerName"] = player.GetName()
+
+		def Refresh(self):
+			global autoChatLastText
+			shoutText = self.__children["shoutText"]
+			shoutText.SetText(autoChatLastText if autoChatLastText != "" else localeInfo.AUTO_CHAT_NO_MESSAGE)
+			shoutText.SetPosition((self.GetWidth()/2)  - (shoutText.GetTextSize()[0] / 2), 97)
+
+			self.__children["enableBtn" if self.__children["status"] == 1 else "disabledBtn"].Down()
+			self.__children["enableBtn" if self.__children["status"] == 0 else "disabledBtn"].SetUp()
+
+		def Check(self):
+			playerName = self.__children["playerName"] if self.__children.has_key("playerName") else ""
+			if playerName != player.GetName():
+				self.Clear()
+				self.Refresh()
+		def Open(self):
+			self.Check()
+			self.Refresh()
+			self.Show()
+		def Close(self):
+			self.Hide()
+		def OnPressEscapeKey(self):
+			self.Close()
+			return True
+	wndAutoChatWindow = AutoChatWindow()

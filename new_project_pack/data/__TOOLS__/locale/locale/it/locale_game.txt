@@ -3735,3 +3735,9 @@ WIKI_ITEM_PREVIEW_COL_LOC	Posizione
 WIKI_ITEM_PREVIEW_SECTION_MOB	Mostri / Metin / Boss
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Forziere
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Altro
+AUTO_CHAT_TITLE	Grido automatico
+AUTO_CHAT_DESC	Questa funzione reinvia automaticamente il tuo ultimo messaggio grido.
+AUTO_CHAT_SAVED_MESSAGE	Messaggio salvato:
+AUTO_CHAT_ENABLED	Avvia
+AUTO_CHAT_DISABLED	Ferma
+AUTO_CHAT_NO_MESSAGE	Nessun messaggio trovato. Invia prima un messaggio grido.

@@ -3735,3 +3735,9 @@ WIKI_ITEM_PREVIEW_COL_LOC	Localização
 WIKI_ITEM_PREVIEW_SECTION_MOB	Monstros / Metins / Bosses
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Baú
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Outros
+AUTO_CHAT_TITLE	Grito automático
+AUTO_CHAT_DESC	Esta função reenvia automaticamente a tua última mensagem de grito.
+AUTO_CHAT_SAVED_MESSAGE	Mensagem guardada:
+AUTO_CHAT_ENABLED	Iniciar
+AUTO_CHAT_DISABLED	Parar
+AUTO_CHAT_NO_MESSAGE	Nenhuma mensagem encontrada. Envia primeiro uma mensagem de grito.

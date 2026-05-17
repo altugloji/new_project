@@ -68,6 +68,10 @@
 	#include "item_shop.h"
 #endif
 
+#ifdef ENABLE_NEW_MOB_TIMER
+	#include "new_mob_timer.h"
+#endif
+
 #ifdef __GEM_SYSTEM__
 #include "gaya.h"
 #endif
@@ -344,6 +348,10 @@ int main(int argc, char **argv)
 	CGayaManager	gayaManager;
 #endif
 
+#ifdef ENABLE_NEW_MOB_TIMER
+	CNewMobTimer	new_mob_timer;
+#endif
+
 	if (!start(argc, argv)) {
 		CleanUpForEarlyExit();
 		return 0;
@@ -360,6 +368,11 @@ int main(int argc, char **argv)
 	CGuildManager::instance().Initialize();
 	fishing::Initialize();
 	OXEvent_manager.Initialize();
+
+#ifdef ENABLE_NEW_MOB_TIMER
+	if (!CNewMobTimer::instance().Initialize())
+		sys_err("CNewMobTimer::Initialize failed");
+#endif
 
 	Cube_init();
 	Blend_Item_init();
@@ -408,6 +421,10 @@ int main(int argc, char **argv)
 	arena_manager.Destroy();
 	sys_log(0, "<shutdown> Destroying COXEventManager...");
 	OXEvent_manager.Destroy();
+
+#ifdef ENABLE_NEW_MOB_TIMER
+	CNewMobTimer::instance().Destroy();
+#endif
 
 	sys_log(0, "<shutdown> Disabling signal timer...");
 	signal_timer_disable();

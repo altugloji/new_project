@@ -2066,5 +2066,11 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_NIGHT_MODE_OPTION",	0);
 #endif
 
+#ifdef AUTO_CHAT_ENABLE
+	PyModule_AddIntConstant(poModule, "AUTO_CHAT_ENABLE", 1);
+#else
+	PyModule_AddIntConstant(poModule, "AUTO_CHAT_ENABLE", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

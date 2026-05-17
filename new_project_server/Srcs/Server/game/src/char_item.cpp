@@ -8183,12 +8183,6 @@ bool CHARACTER::CanUnequipNow(const LPITEM item, const TItemPos& srcCell, const 
 #ifdef ENABLE_BULK_POTION_PANEL
 namespace
 {
-	enum
-	{
-		BULK_POTION_SLOT_COUNT = 24,
-		BULK_POTION_MAX_USE_PER_PACKET = 120,
-	};
-
 static bool BulkPotion_IsAllowedVnum(DWORD vnum)
 	{
 		if (0 == vnum)

@@ -22,7 +22,7 @@ WIKI_CHESTS_ALTERNATIVE	Alternative kister
 WIKI_BOSSES	Bosser
 WIKI_1_75	Lv. 1-75
 WIKI_76_100	Lv. 76-100
-WIKI_100	Lv. 76-100
+WIKI_100	Lv. 100+
 WIKI_BOSSES_EVENT	Event-bosser
 WIKI_MONSTER	Monstre
 WIKI_METINSTONE	Metinsten
@@ -31,14 +31,14 @@ WIKI_LEVEL_TEXT	Niveau %d - Forbedringsområde %d~%d
 WIKI_LEVEL_TEXT2	Niveau %d~%d - Forbedringsområde %d~%d
 WIKI_UPGRADE_COSTS	Næste item
 WIKI_YANG_COSTS	Yang-pris
-WIKI_AVAIBLE_AT	Tilgængelig hos
+WIKI_AVAIBLE_AT	Findes ved
 WIKI_IMPROVEMENT_INFO	Forbedringsinfo for %s
 WIKI_CONTENT_INFO	Indhold af %s
-WIKI_DROPLIST_INFO	Dropliste for %s
+WIKI_DROPLIST_INFO	Drops fra %s
 WIKI_STATICS_INFO	Statistik for %s
-WIKI_STATICS_INFO_TYPE	Slægt: %s | Underslægt: %s
-WIKI_STATICS_INFO_DMG	Min. skade:%d | Max. skade:%d | Max HP: %d
-WIKI_STATICS_INFO_YNG	Min. Yang:%d | Max. Yang:%d | EXP: %d
+WIKI_STATICS_INFO_TYPE	Race: %s | Type: %s
+WIKI_STATICS_INFO_DMG	Min. skade: %d | Maks. skade: %d | Maks HP: %d
+WIKI_STATICS_INFO_YNG	Min. Yang: %d | Maks. Yang: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Forsvar:
 WIKI_ORIGIN	Oprindelse
 WIKI_SYSTEMS	Systemer
@@ -3680,3 +3680,58 @@ GEMSHOP_YOU_ALREADY_BUYED	Du har allerede købt dette!
 GEMSHOP_OPEN_SLOT_QUESTION	Vil du åbne slot?
 GEMSHOP_BUY_QUESTION	Vil du købe {} for {} Gaya?
 GEMSHOP_REFRESH_QUESTION	Vil du opdatere items?
+CHARACTER_CHEST_PREVIEW_HINT	CTRL + HØJREKLIK for at se karakteren.
+CHARACTER_CHEST_PREVIEW_CLOSE	Luk
+CHARACTER_CHEST_INVENTORY_BLOCK	Du kan ikke bruge inventaret, mens dette vindue er åbent.
+CHARACTER_CHEST_WRONG_MAP	Denne handling kan kun udføres i Yongbi-ørkenen.
+CHARACTER_CHEST_WRONG_PASSWORD	Adgangskoden til sletning af karakter er forkert.
+CHARACTER_CHEST_NO_SLOT	Der er ingen ledig karakterplads på din konto.
+CHARACTER_CHEST_PACK_OK	Karakteren blev pakket.
+CHARACTER_CHEST_UNPACK_OK	Karakteren blev overført til din konto.
+CHARACTER_CHEST_FAILED	Handlingen kunne ikke gennemføres.
+CHARACTER_CHEST_INVALID	Ugyldigt karakterkort.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Du kan ikke pakke din aktive karakter.
+CHARACTER_CHEST_ALREADY_USED	Dette kort er allerede brugt.
+CHARACTER_CHEST_TITLE	Karakterkort
+CHARACTER_CHEST_SELECT_HINT	Vælg den ekstra karakter, du vil pakke.
+CHARACTER_CHEST_UNPACK_QUEST	Vil du overføre denne karakter til din konto?
+CHARACTER_CHEST_PACKED_LABEL	Pakket karakter: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Overfør
+CHARACTER_CHEST_BIO_TITLE	Biolog-missioner
+CHARACTER_CHEST_BIO_QUEST_NAME	Biolog-mission - Lv. %d
+CHARACTER_CHEST_BIO_DONE	Fuldført
+CHARACTER_CHEST_BIO_PROGRESS	I gang
+CHARACTER_CHEST_BIO_WAIT	Venter
+BULK_POTION_EMPTY_PANEL	Der er ingen registrerede eliksirer.
+BULK_POTION_NOT_ALLOWED	Dette item kan ikke tilføjes til masse-eliksirpanelet.
+BULK_POTION_ALREADY_REGISTERED	Denne eliksir er allerede registreret i panelet.
+WIKI_DROP_VIEW_TITLE	Vis drops for et bestemt item
+WIKI_OR	eller
+WIKI_ITEM_NAME_PLACEHOLDER	Indtast itemnavn...
+WIKI_REFINE_HEADER_TIP	+%d forbedringstrin (materialer / yang / chance)
+WIKI_WEAPONS_SECTION	Våben
+WIKI_ARMOR_SECTION	Rustning og tilbehør
+WIKI_SWORD	Sværd
+WIKI_DAGGER	Dolke
+WIKI_BOW	Buer
+WIKI_TWOHAND	Tohåndsvåben
+WIKI_BELL	Klokker
+WIKI_FAN	Vifter
+WIKI_HELMET	Hjelme
+WIKI_BOOTS	Sko
+WIKI_METINS	Metiner
+WIKI_75_99	Lv. 75-99
+WIKI_CHEST_PREVIEW_BTN	Kisteforhåndsvisning
+WIKI_CHEST_PREVIEW_NO_SELECT	Vælg først et item fra søgefeltet.
+WIKI_CHEST_PREVIEW_NO_DATA	Der blev ikke fundet kisteindhold for dette item.
+WIKI_REFINE_VIEW_BTN	Forbedring
+WIKI_ITEM_PREVIEW_BTN	Itemforhåndsvisning
+WIKI_ITEM_PREVIEW_NO_SELECT	Vælg et item fra Wiki-søgningen.
+WIKI_ITEM_PREVIEW_EMPTY	Der blev ikke fundet nogen kilde for dette item i Wiki-tabellerne.
+WIKI_ITEM_PREVIEW_COL_NAME	Navn
+WIKI_ITEM_PREVIEW_COL_LEVEL	Niveau
+WIKI_ITEM_PREVIEW_COL_COUNT	Antal
+WIKI_ITEM_PREVIEW_COL_LOC	Lokation
+WIKI_ITEM_PREVIEW_SECTION_MOB	Monstre / Metiner / Bosser
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Kiste
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Andet

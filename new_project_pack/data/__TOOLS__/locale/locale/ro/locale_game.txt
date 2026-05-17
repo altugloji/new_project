@@ -3731,3 +3731,9 @@ WIKI_ITEM_PREVIEW_COL_LOC	Locaþie
 WIKI_ITEM_PREVIEW_SECTION_MOB	Monºtri / Metine / Boºi
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Cufãr
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Altele
+AUTO_CHAT_TITLE	Strigare automatã
+AUTO_CHAT_DESC	Aceastã funcþie retrimite automat ultimul tãu mesaj de strigare.
+AUTO_CHAT_SAVED_MESSAGE	Mesaj salvat:
+AUTO_CHAT_ENABLED	Porneºte
+AUTO_CHAT_DISABLED	Opreºte
+AUTO_CHAT_NO_MESSAGE	Nu a fost gãsit niciun mesaj. Trimite mai întâi un mesaj de strigare.

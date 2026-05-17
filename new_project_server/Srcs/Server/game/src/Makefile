@@ -151,7 +151,7 @@ CPPFILE = FSM.cpp MarkConvert.cpp MarkImage.cpp MarkManager.cpp OXEvent.cpp ani.
 		  wedding.cpp xmas_event.cpp version.cpp panama.cpp threeway_war.cpp map_location.cpp\
 		  BlueDragon.cpp BlueDragon_Binder.cpp DragonLair.cpp questlua_dragonlair.cpp\
 		  skill_power.cpp affect.cpp gaya.cpp char_gaya.cpp\
-		  ClientPackageCryptInfo.cpp item_shop.cpp\
+		  ClientPackageCryptInfo.cpp item_shop.cpp new_mob_timer.cpp\
 		  buff_on_attributes.cpp dragon_soul_table.cpp DragonSoul.cpp\
 		  group_text_parse_tree.cpp char_dragonsoul.cpp questlua_dragonsoul.cpp\
 		  shop_manager.cpp shopEx.cpp item_manager_read_tables.cpp\

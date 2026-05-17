@@ -199,6 +199,11 @@ class Interface(object):
 		wndChat.Show()
 
 		self.wndChat = wndChat
+
+		if app.AUTO_CHAT_ENABLE:
+			from _weakref import proxy
+			uiChat.wndAutoChatWindow.SetChatInstance(proxy(self.wndChat.chatInputSet.chatLine))
+
 		self.wndChat.BindInterface(self)
 		self.wndChat.SetSendWhisperEvent(ui.__mem_func__(self.OpenWhisperDialogWithoutTarget))
 		self.wndChat.SetOpenChatLogEvent(ui.__mem_func__(self.ToggleChatLogWindow))
@@ -2266,7 +2271,7 @@ class Interface(object):
 			if self.wndBulkPotion.IsShow():
 				self.wndBulkPotion.Close()
 			else:
-				self.wndBulkPotion.Open()
+				self.wndBulkPotion.Open(self.wndInventory)
 
 		def RefreshBulkPotionPanel(self):
 			if self.wndBulkPotion and self.wndBulkPotion.IsShow():
@@ -2394,3 +2399,7 @@ class Interface(object):
 				return
 			if force_show:
 				self.wndGemShop.Open()
+
+	if app.AUTO_CHAT_ENABLE:
+		def UpdateAutoChat(self, status):
+			uiChat.SetStatusAutoChat(int(status))

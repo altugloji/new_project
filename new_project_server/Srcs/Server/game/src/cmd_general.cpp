@@ -2842,4 +2842,33 @@ ACMD(do_nesneyenile)
 }
 #endif
 
+#ifdef AUTO_CHAT_ENABLE
+ACMD(do_auto_chat)
+{
+	std::vector<std::string> vecArgs;
+	split_argument(argument, vecArgs);
+	if (vecArgs.size() < 2) { return; }
+	else if (vecArgs[1] == "status")
+	{
+		if (vecArgs.size() < 3) { return; }
+		BYTE bStatus;
+		if (!str_to_number(bStatus, vecArgs[2].c_str()))
+			return;
+
+		if (ch->GetProtectTime("last_auto_chat_status") > get_global_time())
+		{
+			ch->ChatPacket(CHAT_TYPE_INFO, "You need be slow.");
+			return;
+		}
+		ch->SetProtectTime("last_auto_chat_status", get_global_time() + 1);
+
+		if (bStatus)
+		{
+			// add here for check!
+		}
+		ch->ChatPacket(CHAT_TYPE_COMMAND, "UpdateAutoChat %d", bStatus);
+	}
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

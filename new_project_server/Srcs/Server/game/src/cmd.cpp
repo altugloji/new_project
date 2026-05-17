@@ -301,6 +301,10 @@ ACMD(do_nesneyenile);
 ACMD(do_mob_find);
 #endif
 
+#ifdef AUTO_CHAT_ENABLE
+ACMD(do_auto_chat);
+#endif
+
 struct command_info cmd_info[] =
 {
 	{ "!RESERVED!", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	},
@@ -640,6 +644,10 @@ struct command_info cmd_info[] =
 
 #ifdef __GEM_SYSTEM__
 	{ "gem",	do_gem,		0,		POS_DEAD,	GM_PLAYER },
+#endif
+
+#ifdef AUTO_CHAT_ENABLE
+	{ "auto_chat",	do_auto_chat,		0,		POS_DEAD,	GM_PLAYER },
 #endif
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}

@@ -3735,3 +3735,9 @@ WIKI_ITEM_PREVIEW_COL_LOC	Lokation
 WIKI_ITEM_PREVIEW_SECTION_MOB	Monstre / Metiner / Bosser
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Kiste
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Andet
+AUTO_CHAT_TITLE	Automatisk råb
+AUTO_CHAT_DESC	Denne funktion sender automatisk din seneste råb-besked igen.
+AUTO_CHAT_SAVED_MESSAGE	Gemt besked:
+AUTO_CHAT_ENABLED	Start
+AUTO_CHAT_DISABLED	Stop
+AUTO_CHAT_NO_MESSAGE	Ingen besked fundet. Send først en råb-besked.

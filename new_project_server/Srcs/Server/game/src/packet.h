@@ -2574,6 +2574,7 @@ typedef struct SPacketGCCharacterChest
 enum
 {
 	BULK_POTION_SLOT_COUNT = 24,
+	BULK_POTION_MAX_USE_PER_PACKET = 120,
 };
 typedef struct SPacketCGBulkPotionUse
 {

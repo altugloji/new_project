@@ -16,14 +16,14 @@ WIKI_EQUIPMENT_SHOES	Buty
 WIKI_EQUIPMENT_BELT	Pasy
 WIKI_EQUIPMENT_TALISMAN	Talizmany
 WIKI_CHESTS	Skrzynie
-WIKI_CHESTS_BOSS	Skrzynie bossów
-WIKI_CHESTS_EVENT	Skrzynie eventowe
-WIKI_CHESTS_ALTERNATIVE	Skrzynie alternatywne
+WIKI_CHESTS_BOSS	Skrzynie Bossów
+WIKI_CHESTS_EVENT	Skrzynie Eventowe
+WIKI_CHESTS_ALTERNATIVE	Skrzynie Alternatywne
 WIKI_BOSSES	Bossowie
 WIKI_1_75	Poz. 1-75
 WIKI_76_100	Poz. 76-100
-WIKI_100	Poz. 76-100
-WIKI_BOSSES_EVENT	Bossowie eventowi
+WIKI_100	Poz. 100+
+WIKI_BOSSES_EVENT	Bossowie Eventowi
 WIKI_MONSTER	Potwory
 WIKI_METINSTONE	Kamienie Metin
 WIKI_LEVEL_MOB_TEXT	Poziom %d
@@ -31,14 +31,14 @@ WIKI_LEVEL_TEXT	Poziom %d - Zakres ulepszenia %d~%d
 WIKI_LEVEL_TEXT2	Poziom %d~%d - Zakres ulepszenia %d~%d
 WIKI_UPGRADE_COSTS	Nastêpny przedmiot
 WIKI_YANG_COSTS	Koszt Yang
-WIKI_AVAIBLE_AT	Dostêpne u
+WIKI_AVAIBLE_AT	Lokalizacja
 WIKI_IMPROVEMENT_INFO	Informacje o ulepszeniu: %s
 WIKI_CONTENT_INFO	Zawartoœæ: %s
-WIKI_DROPLIST_INFO	Lista dropu: %s
+WIKI_DROPLIST_INFO	Dropy z %s
 WIKI_STATICS_INFO	Statystyki: %s
 WIKI_STATICS_INFO_TYPE	Rasa: %s | Typ: %s
-WIKI_STATICS_INFO_DMG	Min. obra¿enia:%d | Max. obra¿enia:%d | Max P¯: %d
-WIKI_STATICS_INFO_YNG	Min. Yang:%d | Max. Yang:%d | EXP: %d
+WIKI_STATICS_INFO_DMG	Min. obra¿enia: %d | Max. obra¿enia: %d | Max P¯: %d
+WIKI_STATICS_INFO_YNG	Min. Yang: %d | Max. Yang: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Obrony:
 WIKI_ORIGIN	Pochodzenie
 WIKI_SYSTEMS	Systemy
@@ -77,7 +77,7 @@ TARGET_INFO_RESIST_TWOHAND	Dwurêczna: %d%%
 TARGET_INFO_RESIST_SWORD	Miecz: %d%%
 WIKI_COSTUME	Kostium
 WIKI_COSTUME_HAIR	Fryzura
-WIKI_COSTUME_SASH	Szarfy
+WIKI_COSTUME_SASH	Szarfa
 WIKI_SHINING	Blask
 WIKI_PET	Pet
 WIKI_MOUNT	Wierzchowiec
@@ -3680,3 +3680,58 @@ GEMSHOP_YOU_ALREADY_BUYED	Ju¿ to kupi³eœ!
 GEMSHOP_OPEN_SLOT_QUESTION	Czy chcesz otworzyæ slot?
 GEMSHOP_BUY_QUESTION	Czy chcesz kupiæ {} za {} Gaya?
 GEMSHOP_REFRESH_QUESTION	Czy chcesz odœwie¿yæ przedmioty?
+CHARACTER_CHEST_PREVIEW_HINT	Mo¿esz wyœwietliæ postaæ za pomoc¹ CTRL + PRAWY KLIK.
+CHARACTER_CHEST_PREVIEW_CLOSE	Zamknij
+CHARACTER_CHEST_INVENTORY_BLOCK	Nie mo¿esz u¿ywaæ ekwipunku, gdy to okno jest otwarte.
+CHARACTER_CHEST_WRONG_MAP	Tê czynnoœæ mo¿na wykonaæ tylko na Pustyni Yongbi.
+CHARACTER_CHEST_WRONG_PASSWORD	Has³o usuwania postaci jest nieprawid³owe.
+CHARACTER_CHEST_NO_SLOT	Na twoim koncie nie ma wolnego slotu postaci.
+CHARACTER_CHEST_PACK_OK	Postaæ zosta³a pomyœlnie zapakowana.
+CHARACTER_CHEST_UNPACK_OK	Postaæ zosta³a przeniesiona na twoje konto.
+CHARACTER_CHEST_FAILED	Nie uda³o siê wykonaæ tej czynnoœci.
+CHARACTER_CHEST_INVALID	Nieprawid³owa Karta Postaci.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Nie mo¿esz zapakowaæ aktywnej postaci.
+CHARACTER_CHEST_ALREADY_USED	Ta karta zosta³a ju¿ u¿yta.
+CHARACTER_CHEST_TITLE	Karta Postaci
+CHARACTER_CHEST_SELECT_HINT	Wybierz dodatkow¹ postaæ, któr¹ chcesz zapakowaæ.
+CHARACTER_CHEST_UNPACK_QUEST	Czy chcesz przenieœæ tê postaæ na swoje konto?
+CHARACTER_CHEST_PACKED_LABEL	Zapakowana postaæ: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Przenieœ
+CHARACTER_CHEST_BIO_TITLE	Misje Biologa
+CHARACTER_CHEST_BIO_QUEST_NAME	Misja Biologa - Poz. %d
+CHARACTER_CHEST_BIO_DONE	Ukoñczono
+CHARACTER_CHEST_BIO_PROGRESS	W trakcie
+CHARACTER_CHEST_BIO_WAIT	Oczekuje
+BULK_POTION_EMPTY_PANEL	Brak zapisanych mikstur.
+BULK_POTION_NOT_ALLOWED	Tego przedmiotu nie mo¿na dodaæ do panelu mikstur masowych.
+BULK_POTION_ALREADY_REGISTERED	Ta mikstura jest ju¿ zapisana w panelu.
+WIKI_DROP_VIEW_TITLE	Poka¿ dropy wybranego przedmiotu
+WIKI_OR	lub
+WIKI_ITEM_NAME_PLACEHOLDER	Wpisz nazwê przedmiotu...
+WIKI_REFINE_HEADER_TIP	+%d etap ulepszenia (materia³y / yang / szansa)
+WIKI_WEAPONS_SECTION	Broñ
+WIKI_ARMOR_SECTION	Zbroje i akcesoria
+WIKI_SWORD	Miecze
+WIKI_DAGGER	Sztylety
+WIKI_BOW	£uki
+WIKI_TWOHAND	Broñ dwurêczna
+WIKI_BELL	Dzwony
+WIKI_FAN	Wachlarze
+WIKI_HELMET	He³my
+WIKI_BOOTS	Buty
+WIKI_METINS	Metiny
+WIKI_75_99	Poz. 75-99
+WIKI_CHEST_PREVIEW_BTN	Podgl¹d skrzyni
+WIKI_CHEST_PREVIEW_NO_SELECT	Najpierw wybierz przedmiot z pola wyszukiwania.
+WIKI_CHEST_PREVIEW_NO_DATA	Nie znaleziono zawartoœci skrzyni dla tego przedmiotu.
+WIKI_REFINE_VIEW_BTN	Ulepszanie
+WIKI_ITEM_PREVIEW_BTN	Podgl¹d przedmiotu
+WIKI_ITEM_PREVIEW_NO_SELECT	Wybierz przedmiot z wyszukiwarki Wiki.
+WIKI_ITEM_PREVIEW_EMPTY	Nie znaleziono Ÿród³a dla tego przedmiotu w tabelach Wiki.
+WIKI_ITEM_PREVIEW_COL_NAME	Nazwa
+WIKI_ITEM_PREVIEW_COL_LEVEL	Poziom
+WIKI_ITEM_PREVIEW_COL_COUNT	Iloœæ
+WIKI_ITEM_PREVIEW_COL_LOC	Lokalizacja
+WIKI_ITEM_PREVIEW_SECTION_MOB	Potwory / Metiny / Bossowie
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Skrzynia
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Inne

@@ -145,6 +145,9 @@ enum eCommonDefines {
 #define UPDATE_AUTO_POT_1K_HP										// Otopot ekstra 1K sabit hp
 #define ENABLE_CHARACTER_CHEST										// Karakter sandık sistemi
 #define ENABLE_BULK_POTION_PANEL									// Hızlı şebnem penceresi
+#define ENABLE_NEW_MOB_TIMER										// Saatli boss spawn sistemi
+#define AUTO_CHAT_ENABLE											// Otochat sistemi
+
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

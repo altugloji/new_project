@@ -22,7 +22,7 @@ WIKI_CHESTS_ALTERNATIVE	Alternative Chests
 WIKI_BOSSES	Bosses
 WIKI_1_75	Lv. 1-75
 WIKI_76_100	Lv. 76-100
-WIKI_100	Lv. 76-100
+WIKI_100	Lv. 100+
 WIKI_BOSSES_EVENT	Event Bosses
 WIKI_MONSTER	Monsters
 WIKI_METINSTONE	Metin Stones
@@ -31,14 +31,14 @@ WIKI_LEVEL_TEXT	Level %d - Refine Range %d~%d
 WIKI_LEVEL_TEXT2	Level %d~%d - Refine Range %d~%d
 WIKI_UPGRADE_COSTS	Next Item
 WIKI_YANG_COSTS	Yang Cost
-WIKI_AVAIBLE_AT	Available at
-WIKI_IMPROVEMENT_INFO	Improvement info for %s
-WIKI_CONTENT_INFO	Content of %s
-WIKI_DROPLIST_INFO	Droplist of %s
-WIKI_STATICS_INFO	Stats of %s
+WIKI_AVAIBLE_AT	Location
+WIKI_IMPROVEMENT_INFO	%s Improvement Info
+WIKI_CONTENT_INFO	%s Content
+WIKI_DROPLIST_INFO	%s Drops
+WIKI_STATICS_INFO	%s Stats
 WIKI_STATICS_INFO_TYPE	Race: %s | Type: %s
-WIKI_STATICS_INFO_DMG	Min. Dmg:%d | Max. Dmg:%d | Max HP: %d
-WIKI_STATICS_INFO_YNG	Min. Yang:%d | Max. Yang:%d | EXP: %d
+WIKI_STATICS_INFO_DMG	Min. Damage: %d | Max. Damage: %d | Max HP: %d
+WIKI_STATICS_INFO_YNG	Min. Yang: %d | Max. Yang: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Defenses:
 WIKI_ORIGIN	Origin
 WIKI_SYSTEMS	Systems
@@ -3681,3 +3681,58 @@ GEMSHOP_YOU_ALREADY_BUYED	You already bought this!
 GEMSHOP_OPEN_SLOT_QUESTION	Do you want to open this slot?
 GEMSHOP_BUY_QUESTION	Do you want to buy {} for {} Gaya?
 GEMSHOP_REFRESH_QUESTION	Do you want to refresh the items?
+CHARACTER_CHEST_PREVIEW_HINT	You can view the character with CTRL + RIGHT CLICK.
+CHARACTER_CHEST_PREVIEW_CLOSE	Close
+CHARACTER_CHEST_INVENTORY_BLOCK	You cannot use the inventory while this window is open.
+CHARACTER_CHEST_WRONG_MAP	This action can only be done in Yongbi Desert.
+CHARACTER_CHEST_WRONG_PASSWORD	Character deletion password is incorrect.
+CHARACTER_CHEST_NO_SLOT	There is no empty character slot on your account.
+CHARACTER_CHEST_PACK_OK	Character packed successfully.
+CHARACTER_CHEST_UNPACK_OK	Character transferred to your account.
+CHARACTER_CHEST_FAILED	Action could not be completed.
+CHARACTER_CHEST_INVALID	Invalid Character Card.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	You cannot pack your active character.
+CHARACTER_CHEST_ALREADY_USED	This card has already been used.
+CHARACTER_CHEST_TITLE	Character Card
+CHARACTER_CHEST_SELECT_HINT	Select the secondary character you want to pack.
+CHARACTER_CHEST_UNPACK_QUEST	Do you want to transfer this character to your account?
+CHARACTER_CHEST_PACKED_LABEL	Packed Character: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Transfer
+CHARACTER_CHEST_BIO_TITLE	Biologist Quests
+CHARACTER_CHEST_BIO_QUEST_NAME	Biologist Quest - Lv. %d
+CHARACTER_CHEST_BIO_DONE	Completed
+CHARACTER_CHEST_BIO_PROGRESS	In Progress
+CHARACTER_CHEST_BIO_WAIT	Waiting
+BULK_POTION_EMPTY_PANEL	No potions are registered.
+BULK_POTION_NOT_ALLOWED	This item cannot be added to the Bulk Potion Panel.
+BULK_POTION_ALREADY_REGISTERED	This potion is already registered in the panel.
+WIKI_DROP_VIEW_TITLE	Show drops for a specific item
+WIKI_OR	or
+WIKI_ITEM_NAME_PLACEHOLDER	Enter item name...
+WIKI_REFINE_HEADER_TIP	+%d refine stage (material / yang / chance)
+WIKI_WEAPONS_SECTION	Weapons
+WIKI_ARMOR_SECTION	Armor and Accessories
+WIKI_SWORD	Swords
+WIKI_DAGGER	Daggers
+WIKI_BOW	Bows
+WIKI_TWOHAND	Two-Hand Weapons
+WIKI_BELL	Bells
+WIKI_FAN	Fans
+WIKI_HELMET	Helmets
+WIKI_BOOTS	Shoes
+WIKI_METINS	Metins
+WIKI_75_99	Lv. 75-99
+WIKI_CHEST_PREVIEW_BTN	Chest Preview
+WIKI_CHEST_PREVIEW_NO_SELECT	First select an item from the search field.
+WIKI_CHEST_PREVIEW_NO_DATA	No chest content found for this item.
+WIKI_REFINE_VIEW_BTN	Refine
+WIKI_ITEM_PREVIEW_BTN	Item Preview
+WIKI_ITEM_PREVIEW_NO_SELECT	Select an item from the Wiki search.
+WIKI_ITEM_PREVIEW_EMPTY	No source was found for this item in the Wiki tables.
+WIKI_ITEM_PREVIEW_COL_NAME	Name
+WIKI_ITEM_PREVIEW_COL_LEVEL	Level
+WIKI_ITEM_PREVIEW_COL_COUNT	Count
+WIKI_ITEM_PREVIEW_COL_LOC	Location
+WIKI_ITEM_PREVIEW_SECTION_MOB	Monsters / Metins / Bosses
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Chest
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Other

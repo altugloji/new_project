@@ -37,6 +37,10 @@
 #include "BlueDragon.h"
 #include "DragonLair.h"
 
+#ifdef ENABLE_NEW_MOB_TIMER
+#include "new_mob_timer.h"
+#endif
+
 #define ENABLE_EFFECT_PENETRATE
 #define ENABLE_NEWEXP_CALCULATION
 // #define ENABLE_NO_DAMAGE_QUEST_RUNNING
@@ -1167,6 +1171,11 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 		}
 
 	}
+#endif
+
+#ifdef ENABLE_NEW_MOB_TIMER
+	if (!IsPC())
+		CNewMobTimer::instance().BossIsDead(GetVID());
 #endif
 
 	if (!pkKiller && m_dwKillerPID)

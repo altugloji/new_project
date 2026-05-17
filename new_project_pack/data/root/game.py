@@ -1621,6 +1621,9 @@ class GameWindow(ui.ScriptWindow):
 		if self.interface:
 			self.interface.UpdateCenterNotify()
 
+		if app.AUTO_CHAT_ENABLE:
+			import uiChat
+			uiChat.UpdateAutoChat()
 
 	def UpdateDebugInfo(self):
 		#
@@ -2129,6 +2132,9 @@ class GameWindow(ui.ScriptWindow):
 
 		if app.__AUTO_SKILL_READER__:
 			serverCommandList.update({"AutoSkillStatus" : self.interface.AutoSkillStatus})
+
+		if app.AUTO_CHAT_ENABLE:
+			serverCommandList.update({"UpdateAutoChat" : self.interface.UpdateAutoChat})
 
 		self.serverCommander=stringCommander.Analyzer()
 		for serverCommandItem in serverCommandList.items():

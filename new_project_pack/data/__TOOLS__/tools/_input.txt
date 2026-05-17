@@ -1,38 +1,103 @@
 [CZ]
-72323	Karta postavy	Převede tvou postavu spolu s jejími předměty a aktuálním postupem na kartu, kterou lze předat jinému hráči. | Tuto kartu lze obchodovat.
+AUTO_CHAT_TITLE	Automatické volání
+AUTO_CHAT_DESC	Tato funkce automaticky znovu odešle tvou poslední zprávu do volání.
+AUTO_CHAT_SAVED_MESSAGE	Uložená zpráva:
+AUTO_CHAT_ENABLED	Spustit
+AUTO_CHAT_DISABLED	Zastavit
+AUTO_CHAT_NO_MESSAGE	Zpráva nebyla nalezena. Nejprve odešli zprávu do volání.
 
 [DE]
-72323	Charakterkarte	Wandelt deinen Charakter samt ausgerüsteten Items und aktuellem Fortschritt in eine Karte um, die an einen anderen Spieler übertragen werden kann. | Diese Karte ist handelbar.
+AUTO_CHAT_TITLE	Automatisches Rufen
+AUTO_CHAT_DESC	Diese Funktion sendet deine letzte Rufchat-Nachricht automatisch erneut.
+AUTO_CHAT_SAVED_MESSAGE	Gespeicherte Nachricht:
+AUTO_CHAT_ENABLED	Starten
+AUTO_CHAT_DISABLED	Stoppen
+AUTO_CHAT_NO_MESSAGE	Keine Nachricht gefunden. Sende zuerst eine Nachricht im Rufchat.
 
 [DK]
-72323	Karakterkort	Forvandler din karakter med dens items og nuværende fremskridt til et kort, som kan overføres til en anden spiller. | Dette kort kan handles.
+AUTO_CHAT_TITLE	Automatisk råb
+AUTO_CHAT_DESC	Denne funktion sender automatisk din seneste råb-besked igen.
+AUTO_CHAT_SAVED_MESSAGE	Gemt besked:
+AUTO_CHAT_ENABLED	Start
+AUTO_CHAT_DISABLED	Stop
+AUTO_CHAT_NO_MESSAGE	Ingen besked fundet. Send først en råb-besked.
 
 [EN]
-72323	Character Card	Turns your character, along with its items and current progress, into a card that can be transferred to another player. | This card can be traded.
+AUTO_CHAT_TITLE	Auto Shout
+AUTO_CHAT_DESC	This feature automatically resends your last shout message.
+AUTO_CHAT_SAVED_MESSAGE	Saved Message:
+AUTO_CHAT_ENABLED	Start
+AUTO_CHAT_DISABLED	Stop
+AUTO_CHAT_NO_MESSAGE	No message found. Send a shout message first.
 
 [ES]
-72323	Tarjeta de Personaje	Convierte tu personaje, junto con sus objetos y progreso actual, en una tarjeta que puede transferirse a otro jugador. | Esta tarjeta se puede comerciar.
+AUTO_CHAT_TITLE	Grito automático
+AUTO_CHAT_DESC	Esta función vuelve a enviar automáticamente tu último mensaje de grito.
+AUTO_CHAT_SAVED_MESSAGE	Mensaje guardado:
+AUTO_CHAT_ENABLED	Iniciar
+AUTO_CHAT_DISABLED	Detener
+AUTO_CHAT_NO_MESSAGE	No se encontró ningún mensaje. Primero envía un mensaje de grito.
 
 [FR]
-72323	Carte de personnage	Transforme ton personnage, avec ses objets et sa progression actuelle, en une carte pouvant être transférée à un autre joueur. | Cette carte peut être échangée.
+AUTO_CHAT_TITLE	Cri automatique
+AUTO_CHAT_DESC	Cette fonction renvoie automatiquement ton dernier message de cri.
+AUTO_CHAT_SAVED_MESSAGE	Message enregistré :
+AUTO_CHAT_ENABLED	Démarrer
+AUTO_CHAT_DISABLED	Arrêter
+AUTO_CHAT_NO_MESSAGE	Aucun message trouvé. Envoie d'abord un message de cri.
 
 [HU]
-72323	Karakterkártya	A karakteredet a rajta lévő tárgyakkal és aktuális előrehaladásával együtt kártyává alakítja, amely átadható egy másik játékosnak. | Ez a kártya kereskedhető.
+AUTO_CHAT_TITLE	Automatikus kiáltás
+AUTO_CHAT_DESC	Ez a funkció automatikusan újraküldi az utolsó kiáltás üzenetedet.
+AUTO_CHAT_SAVED_MESSAGE	Mentett üzenet:
+AUTO_CHAT_ENABLED	Indítás
+AUTO_CHAT_DISABLED	Leállítás
+AUTO_CHAT_NO_MESSAGE	Nem található üzenet. Először küldj egy kiáltás üzenetet.
 
 [IT]
-72323	Carta Personaggio	Trasforma il tuo personaggio, insieme ai suoi oggetti e ai progressi attuali, in una carta trasferibile a un altro giocatore. | Questa carta può essere commerciata.
+AUTO_CHAT_TITLE	Grido automatico
+AUTO_CHAT_DESC	Questa funzione reinvia automaticamente il tuo ultimo messaggio grido.
+AUTO_CHAT_SAVED_MESSAGE	Messaggio salvato:
+AUTO_CHAT_ENABLED	Avvia
+AUTO_CHAT_DISABLED	Ferma
+AUTO_CHAT_NO_MESSAGE	Nessun messaggio trovato. Invia prima un messaggio grido.
 
 [NL]
-72323	Personagekaart	Zet je personage, samen met zijn items en huidige voortgang, om in een kaart die aan een andere speler kan worden overgedragen. | Deze kaart kan worden verhandeld.
+AUTO_CHAT_TITLE	Automatisch roepen
+AUTO_CHAT_DESC	Deze functie verzendt automatisch je laatste roepbericht opnieuw.
+AUTO_CHAT_SAVED_MESSAGE	Opgeslagen bericht:
+AUTO_CHAT_ENABLED	Starten
+AUTO_CHAT_DISABLED	Stoppen
+AUTO_CHAT_NO_MESSAGE	Geen bericht gevonden. Verstuur eerst een roepbericht.
 
 [PL]
-72323	Karta Postaci	Zamienia twoją postać wraz z jej przedmiotami i aktualnym postępem w kartę, którą można przekazać innemu graczowi. | Tą kartą można handlować.
+AUTO_CHAT_TITLE	Automatyczne wołanie
+AUTO_CHAT_DESC	Ta funkcja automatycznie ponownie wysyła twoją ostatnią wiadomość wołania.
+AUTO_CHAT_SAVED_MESSAGE	Zapisana wiadomość:
+AUTO_CHAT_ENABLED	Start
+AUTO_CHAT_DISABLED	Zatrzymaj
+AUTO_CHAT_NO_MESSAGE	Nie znaleziono wiadomości. Najpierw wyślij wiadomość wołania.
 
 [PT]
-72323	Cartão de Personagem	Transforma a tua personagem, juntamente com os seus itens e progresso atual, num cartão que pode ser transferido para outro jogador. | Este cartão pode ser negociado.
+AUTO_CHAT_TITLE	Grito automático
+AUTO_CHAT_DESC	Esta função reenvia automaticamente a tua última mensagem de grito.
+AUTO_CHAT_SAVED_MESSAGE	Mensagem guardada:
+AUTO_CHAT_ENABLED	Iniciar
+AUTO_CHAT_DISABLED	Parar
+AUTO_CHAT_NO_MESSAGE	Nenhuma mensagem encontrada. Envia primeiro uma mensagem de grito.
 
 [RO]
-72323	Card de Caracter	Transformă caracterul tău, împreună cu obiectele și progresul actual, într-un card care poate fi transferat altui jucător. | Acest card poate fi negociat.
+AUTO_CHAT_TITLE	Strigare automată
+AUTO_CHAT_DESC	Această funcție retrimite automat ultimul tău mesaj de strigare.
+AUTO_CHAT_SAVED_MESSAGE	Mesaj salvat:
+AUTO_CHAT_ENABLED	Pornește
+AUTO_CHAT_DISABLED	Oprește
+AUTO_CHAT_NO_MESSAGE	Nu a fost găsit niciun mesaj. Trimite mai întâi un mesaj de strigare.
 
 [TR]
-72323	Karakter Kartı	Karakterinizi, üzerindeki eşyalar ve mevcut ilerlemesiyle birlikte karta dönüştürüp başka bir oyuncuya aktarılabilir hale getirir. | Bu kart ticaret edilebilir.
+AUTO_CHAT_TITLE	Otomatik Bağırma
+AUTO_CHAT_DESC	Bu özellik son bağırma mesajınızı otomatik olarak tekrar gönderir.
+AUTO_CHAT_SAVED_MESSAGE	Kayıtlı Mesajınız:
+AUTO_CHAT_ENABLED	Başlat
+AUTO_CHAT_DISABLED	Durdur
+AUTO_CHAT_NO_MESSAGE	Mesaj bulunamadı. Önce bir bağırma mesajı gönderin.

@@ -3736,3 +3736,9 @@ WIKI_ITEM_PREVIEW_COL_LOC	Localisation
 WIKI_ITEM_PREVIEW_SECTION_MOB	Monstres / Metins / Boss
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Coffre
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Autre
+AUTO_CHAT_TITLE	Cri automatique
+AUTO_CHAT_DESC	Cette fonction renvoie automatiquement ton dernier message de cri.
+AUTO_CHAT_SAVED_MESSAGE	Message enregistré :
+AUTO_CHAT_ENABLED	Démarrer
+AUTO_CHAT_DISABLED	Arrêter
+AUTO_CHAT_NO_MESSAGE	Aucun message trouvé. Envoie d'abord un message de cri.

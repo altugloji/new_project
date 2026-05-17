@@ -14,6 +14,8 @@ import constInfo
 
 BULK_POTION_SLOT_COUNT = 24
 BULK_POTION_STATE_FILE = "bulk_potion_panel.cfg"
+BULK_POTION_INVENTORY_OFFSET_X = 50
+BULK_POTION_INVENTORY_OFFSET_Y = 60
 
 def _CfgPaths():
 	seen = set()
@@ -95,9 +97,22 @@ class BulkPotionWindow(ui.ScriptWindow):
 	def SetItemToolTip(self, tooltipItem):
 		self.tooltipItem = tooltipItem
 
-	def Open(self):
+	def __AlignNearInventory(self, wndInventory):
+		if not wndInventory:
+			self.SetCenterPosition()
+			return
+
+		(ix, iy) = wndInventory.GetGlobalPosition()
+		ih = wndInventory.GetHeight()
+		pw = self.GetWidth()
+		ph = self.GetHeight()
+		x = ix - BULK_POTION_INVENTORY_OFFSET_X - pw
+		y = iy + (ih - ph) / 2 + BULK_POTION_INVENTORY_OFFSET_Y
+		self.SetPosition(int(x), int(y))
+
+	def Open(self, wndInventory=None):
 		self.LoadPanel()
-		self.SetCenterPosition()
+		self.__AlignNearInventory(wndInventory)
 		self.Refresh()
 		self.Show()
 		self.SetTop()

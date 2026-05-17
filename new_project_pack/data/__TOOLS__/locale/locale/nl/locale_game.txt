@@ -3735,3 +3735,9 @@ WIKI_ITEM_PREVIEW_COL_LOC	Locatie
 WIKI_ITEM_PREVIEW_SECTION_MOB	Monsters / Metins / Bosses
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Kist
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Overig
+AUTO_CHAT_TITLE	Automatisch roepen
+AUTO_CHAT_DESC	Deze functie verzendt automatisch je laatste roepbericht opnieuw.
+AUTO_CHAT_SAVED_MESSAGE	Opgeslagen bericht:
+AUTO_CHAT_ENABLED	Starten
+AUTO_CHAT_DISABLED	Stoppen
+AUTO_CHAT_NO_MESSAGE	Geen bericht gevonden. Verstuur eerst een roepbericht.

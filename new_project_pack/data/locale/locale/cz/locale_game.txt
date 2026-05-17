@@ -3735,3 +3735,9 @@ WIKI_ITEM_PREVIEW_COL_LOC	Lokace
 WIKI_ITEM_PREVIEW_SECTION_MOB	Monstra / Metiny / Bossové
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Truhla
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Ostatní
+AUTO_CHAT_TITLE	Automatické volání
+AUTO_CHAT_DESC	Tato funkce automaticky znovu odešle tvou poslední zprávu do volání.
+AUTO_CHAT_SAVED_MESSAGE	Uložená zpráva:
+AUTO_CHAT_ENABLED	Spustit
+AUTO_CHAT_DISABLED	Zastavit
+AUTO_CHAT_NO_MESSAGE	Zpráva nebyla nalezena. Nejprve odešli zprávu do volání.

@@ -3735,3 +3735,9 @@ WIKI_ITEM_PREVIEW_COL_LOC	Lokalizacja
 WIKI_ITEM_PREVIEW_SECTION_MOB	Potwory / Metiny / Bossowie
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Skrzynia
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Inne
+AUTO_CHAT_TITLE	Automatyczne wo³anie
+AUTO_CHAT_DESC	Ta funkcja automatycznie ponownie wysy³a twoj¹ ostatni¹ wiadomoœæ wo³ania.
+AUTO_CHAT_SAVED_MESSAGE	Zapisana wiadomoœæ:
+AUTO_CHAT_ENABLED	Start
+AUTO_CHAT_DISABLED	Zatrzymaj
+AUTO_CHAT_NO_MESSAGE	Nie znaleziono wiadomoœci. Najpierw wyœlij wiadomoœæ wo³ania.
