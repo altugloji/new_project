@@ -6817,7 +6817,7 @@
 72320	Envanter Geniþletme	Envanterini geniþletmek için bu nesneyi kullan. Ticareti yapýlamaz.
 72321	Sýrlar Yüzüðü	Canavar avýnda tecrübe puaný toplamayý engeller
 72322	Yeni Baþlangýç Kartý	Bu kart görev seviyesini sýfýrlamaný saðlar.
-72323	Yeni Düzen Kartý	Bu kart görev için yeni zar atmaný saðlar.
+72323	Karakter Kartý	Karakterinizi, üzerindeki eþyalar ve mevcut ilerlemesiyle birlikte karta dönüþtürüp baþka bir oyuncuya aktarýlabilir hale getirir. | Bu kart ticaret edilebilir.
 72325	Yansýtmayý Geri Alma	Nesnelerin yansýtmasýný sýfýrlar.
 72326	Yansýtma Bileti	Bu biletle, Yang kullanmadan ekipmanýnýn görünümünü deðiþtir.
 72327	Küre Parþömeni (s)	Animasferine 30 can yükler, bunlarla Zodyak tapýnaðýna giriþ hakký elde edersin. Bu eþyanýn ticareti yapýlabilir.

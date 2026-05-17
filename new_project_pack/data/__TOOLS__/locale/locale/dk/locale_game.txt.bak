@@ -3668,3 +3668,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Du modtager Yut Nori Bræt.
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	Du modtager 1 Birkegren.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	Du har ikke de tilstrækkelige genstande, eller penge for at spille.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Du kan ikke modtage flere Yut Nori Bræt.
+SHOP_NOT_ENOUGH_ITEM	Ikke nok items
+GEMSHOP_TITLE	Gaya-shop
+GEMSHOP_SECOND_TITLE	Konvertér items til Gaya-point
+GEMSHOP_CONVERT_SELECTED	Konvertér valgte x{}
+GEMSHOP_CONVERT_QUESTION	Vil du konvertere {} x{} til {} Gaya-point?
+GEMSHOP_TITLE2	Gaya-shop
+GEMSHOP_HAS_TOOLTIP	Du har: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	Du har allerede købt dette!
+GEMSHOP_OPEN_SLOT_QUESTION	Vil du åbne slot?
+GEMSHOP_BUY_QUESTION	Vil du købe {} for {} Gaya?
+GEMSHOP_REFRESH_QUESTION	Vil du opdatere items?

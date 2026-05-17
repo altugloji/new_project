@@ -6613,8 +6613,8 @@
 71148	Anillo de la Voluntad	Te otorga mientras dura un 30 %+ de EXP, un 20 %+ de opción de defensa contra Guerreros, un 20 %+ de opción de defensa contra Ninjas, un 20 %+ de opción de defensa contra Lícanos, un 30 %+ de fuerza contra monstruos, un 10 %+ de HP máximos y un 10 %+ de SP máximos.
 71149	Anillo del Poder Mortal	Te otorga durante un tiempo un 30 % más de EXP, un 20 % más de probabilidad de defensa contra Suras, un 20 % más de probabilidad de defensa contra Chamanes, un 20 % más de probabilidad de defensa contra Lícanos, un 30 % más de fuerza contra monstruos, un 10 % más de HP máximos y un 10 % más de SP máximos.
 71150	Huevo mágico	Este cofre oval, bellamente ornamentado, contiene más de un regalo de Pascua que irá desvelando poco a poco.
-71151	Magia Verde	Elimina los bonos de uno de tus objetos y añade nuevos. Solamente se puede utilizar en armas y armaduras de hasta nivel 40. Objeto del Baúl de Nivel, no comerciable.
-71152	Fuerza Verde	Con algo de suerte añade un bonus a uno de tus objetos (hasta un máximo de 4 bonificaciones). Solamente se puede utilizar en armas y armaduras de hasta nivel 40. Objeto del Baúl de Nivel, no comerciable.
+71151	Encantar Verde	Cambia el bonus del objeto. Solo puede usarse en objetos de nivel 18 o inferior.
+71152	Fuerza Verde	Añade un nuevo bonus al objeto. Solo puede usarse en objetos de nivel 18 o inferior.
 71153	Poción de la Sabiduría	Con esta poción podrás reunir en una hora de juego un 100% más de experiencia. No comerciable.
 71154	Poción del ascenso (3 h)	Esta poción te permite acumular un 80% más de experiencia durante tres horas de juego. No es comerciable.
 71155	Poción de sabiduría (3h)	Con esta poción obtendrás un 100% más de experiencia en tres horas de juego. No comerciable.
@@ -6862,11 +6862,11 @@
 72723	Elixir del Sol (P)	Rellena automáticamente tus HP. Contiene 1 000 000 HP.
 72724	Elixir del Sol (M)	Rellena automáticamente tus HP. Contiene 3 000 000 HP.
 72725	Elixir del Sol (G)	Rellena automáticamente tus HP. Contiene 7 000 000 HP.
-72726	Elixir del Sol (E)	Contiene 10 000 000 HP. Rellena automáticamente tus HP y tiene un efecto positivo sobre los HP máximos. Este objeto es comerciable.
+72726	Elixir Solar (P)	Contiene 10.000.000 HP. Restaura automáticamente tu HP. | Otorga +1000 HP extra.
 72727	Elixir de la Luna (P)	Rellena automáticamente tus SP. Contiene 100 000 SP.
 72728	Elixir de la Luna (M)	Rellena automáticamente tus SP. Contiene 300 000 SP.
 72729	Elixir de la Luna (G)	Rellena automáticamente tus SP. Contiene 700 000 SP.
-72730	Elixir de la Luna (E)	Contiene 1 000 000 SP. Rellena automáticamente tus SP y tiene un efecto positivo sobre los SP máximos. Este objeto es comerciable.
+72730	Elixir Lunar (P)	Contiene 1.000.000 SP. Restaura automáticamente tu SP. | Otorga +1000 SP extra.
 72734	Cajita de suerte azul	Doble clic para abrir. Ahora tienes 2 posibilidades: | 1. Haz clic en "Aceptar objeto" para obtener directamente el objeto mostrado. | 2. Utiliza "Probar suerte con el objeto" para recibir otro objeto aleatorio. | Tienes un máximo de 15 intentos a cambio de una tasa de Yang. | Si ya no tienes suficiente Yang en tu cuenta, no podrás seleccionar un nuevo objeto. | Una vez abierta, la caja no podrá restablecerse o volver a cerrarse.
 72735	Cajita de suerte roja	Doble clic para abrir. Ahora tienes 2 posibilidades: | 1. Haz clic en "Aceptar objeto" para obtener directamente el objeto mostrado. | 2. Utiliza "Probar suerte con el objeto" para recibir otro objeto aleatorio. | Tienes un máximo de 15 intentos a cambio de una tasa de Yang. | Si ya no tienes suficiente Yang en tu cuenta, no podrás seleccionar un nuevo objeto. | Una vez abierta, la caja no podrá restablecerse o volver a cerrarse.
 72737	Cajita de suerte verde	Doble clic para abrir. Ahora tienes 2 posibilidades: | 1) Haz clic en "Aceptar objeto" para obtener directamente el objeto mostrado. | 2) Utiliza "Probar suerte con el objeto" para recibir otro objeto aleatorio. | Tienes un máximo de 15 intentos a cambio de una tasa de Yang. | Si ya no tienes suficiente Yang en tu cuenta, no podrás seleccionar un nuevo objeto. | Una vez abierta, la caja no podrá restablecerse o volver a cerrarse. | Si se cierra el juego, recibirás el objeto mostrado.

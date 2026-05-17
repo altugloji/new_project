@@ -3714,9 +3714,28 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Yutnori oyun tahta(larý) alýrsýn.
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	1 Kayýn Kütüðü kazandýn.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	Oynamak için yeterince nesne veya paran yok.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Baþka Yutnori oyun tahtasý alamazsýn.
-WIKI_COSTUME	Kostüm
-WIKI_COSTUME_HAIR	Saç
-WIKI_COSTUME_SASH	Kuþak
-WIKI_SHINING	Shining
-WIKI_PET	Pet
-WIKI_MOUNT	Binek
+CHARACTER_CHEST_PREVIEW_HINT	CTRL + SAÐ TIK ile karakteri görüntüleyebilirsin.
+CHARACTER_CHEST_PREVIEW_CLOSE	Kapat
+CHARACTER_CHEST_INVENTORY_BLOCK	Bu pencere açýkken envanteri kullanamazsýn.
+CHARACTER_CHEST_WRONG_MAP	Bu iþlem yalnýzca Yongbi Çölü'nde yapýlabilir.
+CHARACTER_CHEST_WRONG_PASSWORD	Karakter silme þifresi hatalý.
+CHARACTER_CHEST_NO_SLOT	Hesabýnda boþ karakter slotu yok.
+CHARACTER_CHEST_PACK_OK	Karakter baþarýyla paketlendi.
+CHARACTER_CHEST_UNPACK_OK	Karakter hesabýna aktarýldý.
+CHARACTER_CHEST_FAILED	Ýþlem gerçekleþtirilemedi.
+CHARACTER_CHEST_INVALID	Geçersiz Karakter Kartý.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Aktif karakterini paketleyemezsin.
+CHARACTER_CHEST_ALREADY_USED	Bu kart zaten kullanýlmýþ.
+CHARACTER_CHEST_TITLE	Karakter Kartý
+CHARACTER_CHEST_SELECT_HINT	Paketlemek istediðin yan karakteri seç.
+CHARACTER_CHEST_UNPACK_QUEST	Bu karakteri hesabýna aktarmak istiyor musun?
+CHARACTER_CHEST_PACKED_LABEL	Paketli Karakter: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Aktar
+CHARACTER_CHEST_BIO_TITLE	Biyolog Görevleri
+CHARACTER_CHEST_BIO_QUEST_NAME	Biyolog Görevi - Lv. %d
+CHARACTER_CHEST_BIO_DONE	Tamamlandý
+CHARACTER_CHEST_BIO_PROGRESS	Devam Ediyor
+CHARACTER_CHEST_BIO_WAIT	Beklemede
+BULK_POTION_EMPTY_PANEL	Kayýtlý iksir bulunmuyor.
+BULK_POTION_NOT_ALLOWED	Bu eþya Toplu Ýksir Paneli'ne eklenemez.
+BULK_POTION_ALREADY_REGISTERED	Bu iksir zaten panelde kayýtlý.

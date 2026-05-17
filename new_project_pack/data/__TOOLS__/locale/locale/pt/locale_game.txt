@@ -22,7 +22,7 @@ WIKI_CHESTS_ALTERNATIVE	Baús Alternativos
 WIKI_BOSSES	Bosses
 WIKI_1_75	Lv. 1-75
 WIKI_76_100	Lv. 76-100
-WIKI_100	Lv. 76-100
+WIKI_100	Lv. 100+
 WIKI_BOSSES_EVENT	Bosses de Evento
 WIKI_MONSTER	Monstros
 WIKI_METINSTONE	Pedras Metin
@@ -31,14 +31,14 @@ WIKI_LEVEL_TEXT	Nível %d - Intervalo de melhoria %d~%d
 WIKI_LEVEL_TEXT2	Nível %d~%d - Intervalo de melhoria %d~%d
 WIKI_UPGRADE_COSTS	Próximo item
 WIKI_YANG_COSTS	Custo em Yang
-WIKI_AVAIBLE_AT	Disponível em
+WIKI_AVAIBLE_AT	Localização
 WIKI_IMPROVEMENT_INFO	Info de melhoria de %s
 WIKI_CONTENT_INFO	Conteúdo de %s
-WIKI_DROPLIST_INFO	Lista de drops de %s
+WIKI_DROPLIST_INFO	Drops de %s
 WIKI_STATICS_INFO	Estatísticas de %s
 WIKI_STATICS_INFO_TYPE	Raça: %s | Tipo: %s
-WIKI_STATICS_INFO_DMG	Dano mín.:%d | Dano máx.:%d | HP máx.: %d
-WIKI_STATICS_INFO_YNG	Yang mín.:%d | Yang máx.:%d | EXP: %d
+WIKI_STATICS_INFO_DMG	Dano mín.: %d | Dano máx.: %d | HP máx.: %d
+WIKI_STATICS_INFO_YNG	Yang mín.: %d | Yang máx.: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Defesas:
 WIKI_ORIGIN	Origem
 WIKI_SYSTEMS	Sistemas
@@ -3680,3 +3680,58 @@ GEMSHOP_YOU_ALREADY_BUYED	Já compraste isto!
 GEMSHOP_OPEN_SLOT_QUESTION	Queres abrir o slot?
 GEMSHOP_BUY_QUESTION	Queres comprar {} por {} Gaya?
 GEMSHOP_REFRESH_QUESTION	Queres atualizar os itens?
+CHARACTER_CHEST_PREVIEW_HINT	Podes ver a personagem com CTRL + CLIQUE DIREITO.
+CHARACTER_CHEST_PREVIEW_CLOSE	Fechar
+CHARACTER_CHEST_INVENTORY_BLOCK	Não podes usar o inventário enquanto esta janela estiver aberta.
+CHARACTER_CHEST_WRONG_MAP	Esta ação só pode ser feita no Deserto Yongbi.
+CHARACTER_CHEST_WRONG_PASSWORD	A palavra-passe de eliminação da personagem está incorreta.
+CHARACTER_CHEST_NO_SLOT	Não tens nenhum slot de personagem livre na tua conta.
+CHARACTER_CHEST_PACK_OK	Personagem empacotada com sucesso.
+CHARACTER_CHEST_UNPACK_OK	Personagem transferida para a tua conta.
+CHARACTER_CHEST_FAILED	A ação não pôde ser concluída.
+CHARACTER_CHEST_INVALID	Cartão de Personagem inválido.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Não podes empacotar a tua personagem ativa.
+CHARACTER_CHEST_ALREADY_USED	Este cartão já foi usado.
+CHARACTER_CHEST_TITLE	Cartão de Personagem
+CHARACTER_CHEST_SELECT_HINT	Seleciona a personagem secundária que queres empacotar.
+CHARACTER_CHEST_UNPACK_QUEST	Queres transferir esta personagem para a tua conta?
+CHARACTER_CHEST_PACKED_LABEL	Personagem empacotada: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Transferir
+CHARACTER_CHEST_BIO_TITLE	Missões do Biólogo
+CHARACTER_CHEST_BIO_QUEST_NAME	Missão do Biólogo - Lv. %d
+CHARACTER_CHEST_BIO_DONE	Concluída
+CHARACTER_CHEST_BIO_PROGRESS	Em progresso
+CHARACTER_CHEST_BIO_WAIT	Em espera
+BULK_POTION_EMPTY_PANEL	Não existem poções registadas.
+BULK_POTION_NOT_ALLOWED	Este item não pode ser adicionado ao Painel de Poções em Massa.
+BULK_POTION_ALREADY_REGISTERED	Esta poção já está registada no painel.
+WIKI_DROP_VIEW_TITLE	Mostrar drops de um item específico
+WIKI_OR	ou
+WIKI_ITEM_NAME_PLACEHOLDER	Insere o nome do item...
+WIKI_REFINE_HEADER_TIP	+%d etapa de melhoria (materiais / yang / chance)
+WIKI_WEAPONS_SECTION	Armas
+WIKI_ARMOR_SECTION	Armaduras e acessórios
+WIKI_SWORD	Espadas
+WIKI_DAGGER	Adagas
+WIKI_BOW	Arcos
+WIKI_TWOHAND	Armas de duas mãos
+WIKI_BELL	Sinos
+WIKI_FAN	Leques
+WIKI_HELMET	Elmos
+WIKI_BOOTS	Sapatos
+WIKI_METINS	Metins
+WIKI_75_99	Lv. 75-99
+WIKI_CHEST_PREVIEW_BTN	Pré-visualização do Baú
+WIKI_CHEST_PREVIEW_NO_SELECT	Seleciona primeiro um item no campo de pesquisa.
+WIKI_CHEST_PREVIEW_NO_DATA	Não foi encontrado conteúdo de baú para este item.
+WIKI_REFINE_VIEW_BTN	Melhoria
+WIKI_ITEM_PREVIEW_BTN	Pré-visualização do Item
+WIKI_ITEM_PREVIEW_NO_SELECT	Seleciona um item na pesquisa Wiki.
+WIKI_ITEM_PREVIEW_EMPTY	Não foi encontrada nenhuma fonte para este item nas tabelas Wiki.
+WIKI_ITEM_PREVIEW_COL_NAME	Nome
+WIKI_ITEM_PREVIEW_COL_LEVEL	Nível
+WIKI_ITEM_PREVIEW_COL_COUNT	Quantidade
+WIKI_ITEM_PREVIEW_COL_LOC	Localização
+WIKI_ITEM_PREVIEW_SECTION_MOB	Monstros / Metins / Bosses
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Baú
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Outros

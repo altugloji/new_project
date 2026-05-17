@@ -22,7 +22,7 @@ WIKI_CHESTS_ALTERNATIVE	Alternatív ládák
 WIKI_BOSSES	Bossok
 WIKI_1_75	Szint 1-75
 WIKI_76_100	Szint 76-100
-WIKI_100	Szint 76-100
+WIKI_100	Szint 100+
 WIKI_BOSSES_EVENT	Event bossok
 WIKI_MONSTER	Szörnyek
 WIKI_METINSTONE	Metin kövek
@@ -31,14 +31,14 @@ WIKI_LEVEL_TEXT	Szint %d - Fejlesztési tartomány %d~%d
 WIKI_LEVEL_TEXT2	Szint %d~%d - Fejlesztési tartomány %d~%d
 WIKI_UPGRADE_COSTS	Következõ tárgy
 WIKI_YANG_COSTS	Yang költség
-WIKI_AVAIBLE_AT	Elérhetõ itt
-WIKI_IMPROVEMENT_INFO	Fejlesztési információ: %s
+WIKI_AVAIBLE_AT	Helyszín
+WIKI_IMPROVEMENT_INFO	%s fejlesztési információ
 WIKI_CONTENT_INFO	%s tartalma
-WIKI_DROPLIST_INFO	%s drop listája
+WIKI_DROPLIST_INFO	%s dropjai
 WIKI_STATICS_INFO	%s statisztikái
 WIKI_STATICS_INFO_TYPE	Faj: %s | Típus: %s
-WIKI_STATICS_INFO_DMG	Min. sebzés:%d | Max. sebzés:%d | Max HP: %d
-WIKI_STATICS_INFO_YNG	Min. Yang:%d | Max. Yang:%d | EXP: %d
+WIKI_STATICS_INFO_DMG	Min. sebzés: %d | Max. sebzés: %d | Max HP: %d
+WIKI_STATICS_INFO_YNG	Min. Yang: %d | Max. Yang: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Védelmek:
 WIKI_ORIGIN	Eredet
 WIKI_SYSTEMS	Rendszerek
@@ -3680,3 +3680,58 @@ GEMSHOP_YOU_ALREADY_BUYED	Ezt már megvetted!
 GEMSHOP_OPEN_SLOT_QUESTION	Szeretnéd megnyitni a slotot?
 GEMSHOP_BUY_QUESTION	Szeretnéd megvenni ezt: {} ennyiért: {} Gaya?
 GEMSHOP_REFRESH_QUESTION	Szeretnéd frissíteni a tárgyakat?
+CHARACTER_CHEST_PREVIEW_HINT	CTRL + JOBB KLIKK segítségével megtekintheted a karaktert.
+CHARACTER_CHEST_PREVIEW_CLOSE	Bezárás
+CHARACTER_CHEST_INVENTORY_BLOCK	Amíg ez az ablak nyitva van, nem használhatod a leltárt.
+CHARACTER_CHEST_WRONG_MAP	Ez a mûvelet csak a Yongbi-sivatagban végezhetõ el.
+CHARACTER_CHEST_WRONG_PASSWORD	A karaktertörlési jelszó hibás.
+CHARACTER_CHEST_NO_SLOT	Nincs üres karakterhely a fiókodon.
+CHARACTER_CHEST_PACK_OK	A karakter sikeresen becsomagolva.
+CHARACTER_CHEST_UNPACK_OK	A karakter átkerült a fiókodra.
+CHARACTER_CHEST_FAILED	A mûvelet nem hajtható végre.
+CHARACTER_CHEST_INVALID	Érvénytelen karakterkártya.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Az aktív karakteredet nem csomagolhatod be.
+CHARACTER_CHEST_ALREADY_USED	Ezt a kártyát már használták.
+CHARACTER_CHEST_TITLE	Karakterkártya
+CHARACTER_CHEST_SELECT_HINT	Válaszd ki a becsomagolni kívánt mellékkaraktert.
+CHARACTER_CHEST_UNPACK_QUEST	Szeretnéd ezt a karaktert a fiókodra átvinni?
+CHARACTER_CHEST_PACKED_LABEL	Becsomagolt karakter: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Átvitel
+CHARACTER_CHEST_BIO_TITLE	Biológus küldetések
+CHARACTER_CHEST_BIO_QUEST_NAME	Biológus küldetés - Szint %d
+CHARACTER_CHEST_BIO_DONE	Teljesítve
+CHARACTER_CHEST_BIO_PROGRESS	Folyamatban
+CHARACTER_CHEST_BIO_WAIT	Várakozik
+BULK_POTION_EMPTY_PANEL	Nincs regisztrált ital.
+BULK_POTION_NOT_ALLOWED	Ez a tárgy nem adható hozzá a tömeges ital panelhez.
+BULK_POTION_ALREADY_REGISTERED	Ez az ital már regisztrálva van a panelen.
+WIKI_DROP_VIEW_TITLE	Egy adott tárgy dropjainak megjelenítése
+WIKI_OR	vagy
+WIKI_ITEM_NAME_PLACEHOLDER	Írd be a tárgy nevét...
+WIKI_REFINE_HEADER_TIP	+%d fejlesztési szint (anyag / yang / esély)
+WIKI_WEAPONS_SECTION	Fegyverek
+WIKI_ARMOR_SECTION	Vértek és kiegészítõk
+WIKI_SWORD	Kardok
+WIKI_DAGGER	Tõrök
+WIKI_BOW	Íjak
+WIKI_TWOHAND	Kétkezes fegyverek
+WIKI_BELL	Harangok
+WIKI_FAN	Legyezõk
+WIKI_HELMET	Sisakok
+WIKI_BOOTS	Cipõk
+WIKI_METINS	Metinek
+WIKI_75_99	Szint 75-99
+WIKI_CHEST_PREVIEW_BTN	Láda elõnézet
+WIKI_CHEST_PREVIEW_NO_SELECT	Elõször válassz egy tárgyat a keresõmezõbõl.
+WIKI_CHEST_PREVIEW_NO_DATA	Ehhez a tárgyhoz nem található ládatartalom.
+WIKI_REFINE_VIEW_BTN	Fejlesztés
+WIKI_ITEM_PREVIEW_BTN	Tárgy elõnézet
+WIKI_ITEM_PREVIEW_NO_SELECT	Válassz egy tárgyat a Wiki keresésbõl.
+WIKI_ITEM_PREVIEW_EMPTY	A Wiki táblákban nem található forrás ehhez a tárgyhoz.
+WIKI_ITEM_PREVIEW_COL_NAME	Név
+WIKI_ITEM_PREVIEW_COL_LEVEL	Szint
+WIKI_ITEM_PREVIEW_COL_COUNT	Mennyiség
+WIKI_ITEM_PREVIEW_COL_LOC	Helyszín
+WIKI_ITEM_PREVIEW_SECTION_MOB	Szörnyek / Metinek / Bossok
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Láda
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Egyéb

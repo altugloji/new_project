@@ -1,3 +1,9 @@
+USER_REPORT_SYSTEM_UI_CHARACTER_NAME	Nombre del personaje
+USER_REPORT_SYSTEM_UI_CLOSE_BUTTON	Cerrar
+USER_REPORT_SYSTEM_UI_SELECT_REASON	Motivo del reporte
+USER_REPORT_SYSTEM_UI_SEND_BUTTON	Enviar
+USER_REPORT_SYSTEM_UI_TARGET_CHECK	Personaje objetivo
+USER_REPORT_SYSTEM_UI_WINDOW_NAME	Reportar
 LOGIN_LANGUAGE_SELECT_TITLE	Selección de Idioma
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Sitio web
@@ -126,9 +132,9 @@ CHATTING_SETTING_EXP	Experiencia
 CHATTING_SETTING_GOLD	Moneda
 CHATTING_SETTING_GUILD	Gremio
 CHATTING_SETTING_ITEM	Objetos
-CHATTING_SETTING_LANGUAGE_1	Idioma 1
-CHATTING_SETTING_LANGUAGE_2	Idioma 2
-CHATTING_SETTING_LANGUAGE_3	Idioma 3
+CHATTING_SETTING_LANGUAGE_1	Idioma 1
+CHATTING_SETTING_LANGUAGE_2	Idioma 2
+CHATTING_SETTING_LANGUAGE_3	Idioma 3
 CHATTING_SETTING_LANGUAGE_CUR	Idioma actual ( %s )
 CHATTING_SETTING_LANGUAGE_ONOFF	Filtros
 CHATTING_SETTING_LIST	Lista
@@ -325,7 +331,7 @@ GUILD_ATTENDANCE_LOCA5	40 o más: 6 Medallas del valor
 GUILD_ATTENDANCE_LOCA6	50 o más: 8 Medallas del valor
 GUILD_ATTENDANCE_LOCA7	60 o más: 10 Medallas del valor
 GUILD_ATTENDANCE_LOCA8	70 o más: 12 Medallas del valor
-GUILD_ATTENDANCE_LOCA9	Inicio de participación: a diario a las 5:00 h
+GUILD_ATTENDANCE_LOCA9	Inicio de participación: a diario a las 5:00 h
 GUILD_ATTENDANCE_TITLE	Recompensa por participación
 GUILD_BANKINFO_CLOSE	Cerrar
 GUILD_BANKINFO_NAME	Miembro
@@ -393,7 +399,7 @@ GUILD_DONATE_HIGH_MATERIAL	Donación grande
 GUILD_DONATE_MEDAL_OF_HONOR	Medalla del valor
 GUILD_DONATE_MIDDLE_MATERIAL	Donación mediana
 GUILD_DONATE_MY_MEDAL_OF_HONOR	Mis Medallas del valor
-GUILD_DONATE_NORMAL_MATERIAL	120 000 de Yang
+GUILD_DONATE_NORMAL_MATERIAL	120 000 de Yang
 GUILD_DONATE_TAB_HIGH	Donación grande
 GUILD_DONATE_TAB_MIDDLE	Donación mediana
 GUILD_DONATE_TAB_NORMAL	Donación pequeña
@@ -1176,8 +1182,8 @@ RESTART_IMMEDIATE	Reencarnación
 RESTART_TOWN	Volver a Empezar en la Ciudad
 ROULETTE_SPECIAL_TITLE	Recompensas (%s)
 ROULETTE_SPIN_TEXT1	GIRAR
-ROULETTE_SPIN_TEXT2	50 Almas
-ROULETTE_SPIN_TEXT3	250 000 Yang
+ROULETTE_SPIN_TEXT2	50 Almas
+ROULETTE_SPIN_TEXT3	250 000 Yang
 ROULETTE_TITLE	Recompensas
 SAFE_CHANGE_PASSWORD	Cambiar Contraseña
 SAFE_TITLE	Almacén
@@ -1214,8 +1220,8 @@ SNOWFLAKE_STICK_EVENT_TITLE	Evento de Copos de Nieve
 SNOWFLAKE_STICK_EVENT_TOOLTIP_HELP_BUTTON_1	Podrás cambiar 5 veces cada 24 horas. Tiempo restante hasta reinicio:
 SNOWFLAKE_STICK_EVENT_TOOLTIP_HELP_BUTTON_2	Podrás cambiar 5 veces cada 24 horas. Tiempo restante hasta reinicio: -
 SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW	Reúne 12 Bolas de nieve y 12 Ramas de muñeco de nieve y cámbialas por una Vara de copos de nieve.
-SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW_MOUNT	Este cupón se puede canjear por 15 Varas de copos de nieve.
-SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW_PET	Este cupón se puede canjear por 15 Varas de copos de nieve.
+SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW_MOUNT	Este cupón se puede canjear por 15 Varas de copos de nieve.
+SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW_PET	Este cupón se puede canjear por 15 Varas de copos de nieve.
 SNOWFLAKE_STICK_EVENT_TOOLTIP_SNOW_BALL	Mientras se encuentre activa la Magia de los Copos de Nieve, recibirás Bolas de nieve por vencer monstruos.
 SNOWFLAKE_STICK_EVENT_TOOLTIP_TITLE_SNOW_BALL	Bola de nieve
 SNOWFLAKE_STICK_EVENT_TOOLTIP_TITLE_TREE_BRANCH	Rama de muñeco de nieve

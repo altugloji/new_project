@@ -6,7 +6,7 @@ WIKI_MOB_NAME	Název moba
 WIKI_CATEGORY	Kategorie
 WIKI_EQUIPMENT	Výbava
 WIKI_EQUIPMENT_WEAPONS	Zbranì
-WIKI_EQUIPMENT_ARMOR	Brnìní
+WIKI_EQUIPMENT_ARMOR	Zbroje
 WIKI_EQUIPMENT_HELMET	Helmy
 WIKI_EQUIPMENT_SHIELD	Štíty
 WIKI_EQUIPMENT_EARRING	Náušnice
@@ -22,7 +22,7 @@ WIKI_CHESTS_ALTERNATIVE	Alternativní truhly
 WIKI_BOSSES	Bossové
 WIKI_1_75	Lv. 1-75
 WIKI_76_100	Lv. 76-100
-WIKI_100	Lv. 76-100
+WIKI_100	Lv. 100+
 WIKI_BOSSES_EVENT	Eventoví bossové
 WIKI_MONSTER	Monstra
 WIKI_METINSTONE	Metinové kameny
@@ -30,15 +30,15 @@ WIKI_LEVEL_MOB_TEXT	Úroveò %d
 WIKI_LEVEL_TEXT	Úroveò %d - Rozsah vylepšení %d~%d
 WIKI_LEVEL_TEXT2	Úroveò %d~%d - Rozsah vylepšení %d~%d
 WIKI_UPGRADE_COSTS	Další pøedmìt
-WIKI_YANG_COSTS	Cena v Yang
-WIKI_AVAIBLE_AT	Dostupné v
+WIKI_YANG_COSTS	Cena v yangu
+WIKI_AVAIBLE_AT	Místo výskytu
 WIKI_IMPROVEMENT_INFO	Informace o vylepšení: %s
 WIKI_CONTENT_INFO	Obsah: %s
-WIKI_DROPLIST_INFO	Drop list: %s
+WIKI_DROPLIST_INFO	Dropy z %s
 WIKI_STATICS_INFO	Statistiky: %s
-WIKI_STATICS_INFO_TYPE	Druh: %s | Poddruh: %s
-WIKI_STATICS_INFO_DMG	Min. poškození:%d | Max. poškození:%d | Max. HP: %d
-WIKI_STATICS_INFO_YNG	Min. Yang:%d | Max. Yang:%d | EXP: %d
+WIKI_STATICS_INFO_TYPE	Rasa: %s | Typ: %s
+WIKI_STATICS_INFO_DMG	Min. poškození: %d | Max. poškození: %d | Max HP: %d
+WIKI_STATICS_INFO_YNG	Min. Yang: %d | Max. Yang: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Obrany:
 WIKI_ORIGIN	Pùvod
 WIKI_SYSTEMS	Systémy
@@ -75,12 +75,12 @@ TARGET_INFO_RESIST_BELL	Zvon: %d%%
 TARGET_INFO_RESIST_DAGGER	Dýka: %d%%
 TARGET_INFO_RESIST_TWOHAND	Obouruè: %d%%
 TARGET_INFO_RESIST_SWORD	Meè: %d%%
-WIKI_COSTUME	Kostýmy
-WIKI_COSTUME_HAIR	Úèesy
-WIKI_COSTUME_SASH	Šerpy
+WIKI_COSTUME	Kostým
+WIKI_COSTUME_HAIR	Úèes
+WIKI_COSTUME_SASH	Šerpa
 WIKI_SHINING	Záøe
-WIKI_PET	Mazlíèci
-WIKI_MOUNT	Jezdci
+WIKI_PET	Mazlíèek
+WIKI_MOUNT	Jezdecké zvíøe
 DO_YOU_BUY_ITEM_C	Poèet: %d Cena (EP): %s
 DO_YOU_BUY_ITEM_M	Poèet: %d Cena (EM): %s
 ASK_BUY_ITEM_TEXT	Chceš koupit tento pøedmìt? (Pøedmìt: %s)
@@ -3680,3 +3680,58 @@ GEMSHOP_YOU_ALREADY_BUYED	Toto už jsi koupil!
 GEMSHOP_OPEN_SLOT_QUESTION	Chceš otevøít slot?
 GEMSHOP_BUY_QUESTION	Chceš koupit {} za {} Gaya?
 GEMSHOP_REFRESH_QUESTION	Chceš obnovit pøedmìty?
+CHARACTER_CHEST_PREVIEW_HINT	CTRL + PRAVÝ KLIK pro zobrazení postavy.
+CHARACTER_CHEST_PREVIEW_CLOSE	Zavøít
+CHARACTER_CHEST_INVENTORY_BLOCK	Když je toto okno otevøené, nemùžeš používat inventáø.
+CHARACTER_CHEST_WRONG_MAP	Tuto akci lze provést pouze v poušti Yongbi.
+CHARACTER_CHEST_WRONG_PASSWORD	Heslo pro smazání postavy je chybné.
+CHARACTER_CHEST_NO_SLOT	Na úètu nemáš volný slot pro postavu.
+CHARACTER_CHEST_PACK_OK	Postava byla úspìšnì zabalena.
+CHARACTER_CHEST_UNPACK_OK	Postava byla pøevedena na tvùj úèet.
+CHARACTER_CHEST_FAILED	Akci se nepodaøilo provést.
+CHARACTER_CHEST_INVALID	Neplatná karta postavy.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Aktivní postavu nemùžeš zabalit.
+CHARACTER_CHEST_ALREADY_USED	Tato karta již byla použita.
+CHARACTER_CHEST_TITLE	Karta postavy
+CHARACTER_CHEST_SELECT_HINT	Vyber vedlejší postavu, kterou chceš zabalit.
+CHARACTER_CHEST_UNPACK_QUEST	Chceš tuto postavu pøevést na svùj úèet?
+CHARACTER_CHEST_PACKED_LABEL	Zabalená postava: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Pøevést
+CHARACTER_CHEST_BIO_TITLE	Biologovy úkoly
+CHARACTER_CHEST_BIO_QUEST_NAME	Biologùv úkol - Lv. %d
+CHARACTER_CHEST_BIO_DONE	Dokonèeno
+CHARACTER_CHEST_BIO_PROGRESS	Probíhá
+CHARACTER_CHEST_BIO_WAIT	Èeká
+BULK_POTION_EMPTY_PANEL	Nejsou uloženy žádné lektvary.
+BULK_POTION_NOT_ALLOWED	Tento pøedmìt nelze pøidat do panelu hromadných lektvarù.
+BULK_POTION_ALREADY_REGISTERED	Tento lektvar je již v panelu uložen.
+WIKI_DROP_VIEW_TITLE	Zobrazit dropy vybraného pøedmìtu
+WIKI_OR	nebo
+WIKI_ITEM_NAME_PLACEHOLDER	Zadej název pøedmìtu...
+WIKI_REFINE_HEADER_TIP	+%d úroveò vylepšení (materiály / yang / šance)
+WIKI_WEAPONS_SECTION	Zbranì
+WIKI_ARMOR_SECTION	Zbroje a doplòky
+WIKI_SWORD	Meèe
+WIKI_DAGGER	Dýky
+WIKI_BOW	Luky
+WIKI_TWOHAND	Obouruèní zbranì
+WIKI_BELL	Zvony
+WIKI_FAN	Vìjíøe
+WIKI_HELMET	Helmy
+WIKI_BOOTS	Boty
+WIKI_METINS	Metiny
+WIKI_75_99	Lv. 75-99
+WIKI_CHEST_PREVIEW_BTN	Náhled truhly
+WIKI_CHEST_PREVIEW_NO_SELECT	Nejprve vyber pøedmìt z vyhledávání.
+WIKI_CHEST_PREVIEW_NO_DATA	Pro tento pøedmìt nebyl nalezen obsah truhly.
+WIKI_REFINE_VIEW_BTN	Vylepšení
+WIKI_ITEM_PREVIEW_BTN	Náhled pøedmìtu
+WIKI_ITEM_PREVIEW_NO_SELECT	Vyber pøedmìt z wiki vyhledávání.
+WIKI_ITEM_PREVIEW_EMPTY	Ve wiki tabulkách nebyl pro tento pøedmìt nalezen žádný zdroj.
+WIKI_ITEM_PREVIEW_COL_NAME	Jméno
+WIKI_ITEM_PREVIEW_COL_LEVEL	Úroveò
+WIKI_ITEM_PREVIEW_COL_COUNT	Poèet
+WIKI_ITEM_PREVIEW_COL_LOC	Lokace
+WIKI_ITEM_PREVIEW_SECTION_MOB	Monstra / Metiny / Bossové
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Truhla
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Ostatní

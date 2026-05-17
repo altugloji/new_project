@@ -6613,8 +6613,8 @@
 71148	Viljestyrkens Ring	Giver dig +30% EXP, +20% forsvars chance imod Krigere, +20% forsvars chance imod Ninjaer, +20% forsvars chance imod Lycaner, +30% styrke imod monstre, +10% maksimum HP og +10% maksimum MP i en vis varighed.
 71149	Ring af Dødlig Styrke	Giver dig +30% EXP, +20% forsvarschance imod Suraer, +20% forsvarschance imod Shamaner, +20% forsvarschance imod Lycaner, +30% styrke imod monstre, +10% maksimum HP og +10% maksimum MP i en tidsperiode.
 71150	Magisk æg	Den kunstfærdige dekoreret ovale kiste indeholder mere end blot en påske overraskelse, den afslører sine skatte lidt efter lidt.
-71151	Grøn magi	Fjerner bonussen fra en af dine genstande og tilføjer en ny. Kan kun bruges på våben og pansring op til level 40. Genstand fra level kisten, ikke omsættelig.
-71152	Grøn styrke	Med lidt held, kan denne give dig en ny bonus til en af dine genstande (max. 4 bonusser). Kan kun bruges på våben og pansring op til level 40. Genstand fra level kisten, ikke omsættelig.
+71151	Grøn bonusændring	Ændrer itemets bonus. Kan kun bruges på items på niveau 18 eller lavere.
+71152	Grøn styrke	Tilføjer en ny bonus til itemet. Kan kun bruges på items på niveau 18 eller lavere.
 71153	Eliksir af visdom	Denne eliksir giver dig 100% mere erfaring i en spil time. Ikke omsættelig.
 71154	Eliksir af himmelfart/3t	Denne eliksir giver dig mulighed for at samle 80% mere erfaring i tre spil timer. Kan ikke handles.
 71155	Eliksir af visdom (3t)	Denne eliksir giver dig mulighed for at få 100% mere erfaring i tre timers spil tid. Kan ikke handles.
@@ -6862,11 +6862,11 @@
 72723	Sol Eliksir (L)	Fylder automatisk din HP. Indeholder 1.000.000 HP.
 72724	Sol Eliksir (M)	Fylder automatisk din HP. Indeholder 3.000.000 HP.
 72725	Sol Eliksir (S)	Fylder automatisk din HP. Indeholder 7.000.000 HP.
-72726	Sol Eliksir (E)	Indeholder 10.000.000 HP. Genopfylder automatisk dit HP og har en yderligere positiv effekt på din maks. HP. Denne genstand er handelbar.
+72726	Soleliksir (L)	Indeholder 10.000.000 HP. Genopfylder automatisk din HP. | Giver ekstra +1000 HP.
 72727	Måne Eliksir (L)	Fylder automatisk din MP. Indeholder 100.000 MP.
 72728	Måne Eliksir (M)	Fylder automatisk din MP. Indeholder 300.000 MP.
 72729	Måne Eliksir (S)	Fylder automatisk din MP. Indeholder 700.000 MP.
-72730	Måne Eliksir (E)	Indeholder 1.000.000 MP. Genopfylder automatisk din MP og har en yderligere positiv effekt på din maks. MP. Denne genstand er handelbar.
+72730	Måneeliksir (L)	Indeholder 1.000.000 SP. Genopfylder automatisk din SP. | Giver ekstra +1000 SP.
 72734	Blå Lykkens Kiste	Dobbelt klik for at åbne den. Du har nu to valgmuligheder: | 1. Klik på Accepter Genstand for at modtage den genstand der bliver vist. | 2. Brug Ny Genstands Lykke for at få et andet tilfældigt genstand. | Du kan have op til 15 forsøg ved at betale et Yang gebyr. | Hvis du ikke har nok Yang på din konto, kan du ikke vælge en ny genstand. | Boksen kan ikke blive nulstillet eller lukket igen, når den er blevet åbnet.
 72735	Rød Lykkens Kiste	Dobbelt klik for at åbne den. Du har nu to valgmuligheder: | 1. Klik på Accepter Genstand for at modtage den genstand der bliver vist. | 2. Brug Ny Genstands Lykke for at få et andet tilfældigt genstand. | Du kan have op til 15 forsøg ved at betale et Yang gebyr. | Hvis du ikke har nok Yang på din konto, kan du ikke vælge en ny genstand. | Boksen kan ikke blive nulstillet eller lukket igen, når den er blevet åbnet.
 72737	Grøn Lykkens Kiste	Dobbelt klik for at åbne den. Du har nu to valgmuligheder: | 1. Klik på Accepter Genstand for at modtage den viste genstand. | 2. Brug Ny Genstands Lykke for at få et andet tilfældigt genstand. | Du kan have op til 15 forsøg ved at betale et Yang gebyr. | Hvis du ikke har nok Yang på din konto, kan du ikke vælge en ny genstand. | Boksen kan ikke blive nulstillet eller lukket igen, når den er blevet åbnet. | Hvis du lukker spillet, vil du modtage den viste genstand.

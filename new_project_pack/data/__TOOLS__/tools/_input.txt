@@ -1,59 +1,38 @@
 [CZ]
-DO_YOU_BUY_ITEM_C	Počet: %d Cena (EP): %s
-DO_YOU_BUY_ITEM_M	Počet: %d Cena (EM): %s
-ASK_BUY_ITEM_TEXT	Chceš koupit tento předmět? (Předmět: %s)
+72323	Karta postavy	Převede tvou postavu spolu s jejími předměty a aktuálním postupem na kartu, kterou lze předat jinému hráči. | Tuto kartu lze obchodovat.
 
 [DE]
-DO_YOU_BUY_ITEM_C	Anzahl: %d Preis (EP): %s
-DO_YOU_BUY_ITEM_M	Anzahl: %d Preis (EM): %s
-ASK_BUY_ITEM_TEXT	Möchtest du dieses Item kaufen? (Item: %s)
+72323	Charakterkarte	Wandelt deinen Charakter samt ausgerüsteten Items und aktuellem Fortschritt in eine Karte um, die an einen anderen Spieler übertragen werden kann. | Diese Karte ist handelbar.
 
 [DK]
-DO_YOU_BUY_ITEM_C	Antal: %d Pris (EP): %s
-DO_YOU_BUY_ITEM_M	Antal: %d Pris (EM): %s
-ASK_BUY_ITEM_TEXT	Vil du købe dette item? (Item: %s)
+72323	Karakterkort	Forvandler din karakter med dens items og nuværende fremskridt til et kort, som kan overføres til en anden spiller. | Dette kort kan handles.
 
 [EN]
-DO_YOU_BUY_ITEM_C	Count: %d Price (EP): %s
-DO_YOU_BUY_ITEM_M	Count: %d Price (EM): %s
-ASK_BUY_ITEM_TEXT	Do you want to buy this item? (Item: %s)
+72323	Character Card	Turns your character, along with its items and current progress, into a card that can be transferred to another player. | This card can be traded.
 
 [ES]
-DO_YOU_BUY_ITEM_C	Cantidad: %d Precio (EP): %s
-DO_YOU_BUY_ITEM_M	Cantidad: %d Precio (EM): %s
-ASK_BUY_ITEM_TEXT	¿Quieres comprar este objeto? (Objeto: %s)
+72323	Tarjeta de Personaje	Convierte tu personaje, junto con sus objetos y progreso actual, en una tarjeta que puede transferirse a otro jugador. | Esta tarjeta se puede comerciar.
 
 [FR]
-DO_YOU_BUY_ITEM_C	Quantité : %d Prix (EP) : %s
-DO_YOU_BUY_ITEM_M	Quantité : %d Prix (EM) : %s
-ASK_BUY_ITEM_TEXT	Veux-tu acheter cet objet ? (Objet : %s)
+72323	Carte de personnage	Transforme ton personnage, avec ses objets et sa progression actuelle, en une carte pouvant être transférée à un autre joueur. | Cette carte peut être échangée.
 
 [HU]
-DO_YOU_BUY_ITEM_C	Mennyiség: %d Ár (EP): %s
-DO_YOU_BUY_ITEM_M	Mennyiség: %d Ár (EM): %s
-ASK_BUY_ITEM_TEXT	Meg szeretnéd venni ezt a tárgyat? (Tárgy: %s)
+72323	Karakterkártya	A karakteredet a rajta lévő tárgyakkal és aktuális előrehaladásával együtt kártyává alakítja, amely átadható egy másik játékosnak. | Ez a kártya kereskedhető.
 
 [IT]
-DO_YOU_BUY_ITEM_C	Quantità: %d Prezzo (EP): %s
-DO_YOU_BUY_ITEM_M	Quantità: %d Prezzo (EM): %s
-ASK_BUY_ITEM_TEXT	Vuoi comprare questo oggetto? (Oggetto: %s)
+72323	Carta Personaggio	Trasforma il tuo personaggio, insieme ai suoi oggetti e ai progressi attuali, in una carta trasferibile a un altro giocatore. | Questa carta può essere commerciata.
 
 [NL]
-DO_YOU_BUY_ITEM_C	Aantal: %d Prijs (EP): %s
-DO_YOU_BUY_ITEM_M	Aantal: %d Prijs (EM): %s
-ASK_BUY_ITEM_TEXT	Wil je dit item kopen? (Item: %s)
+72323	Personagekaart	Zet je personage, samen met zijn items en huidige voortgang, om in een kaart die aan een andere speler kan worden overgedragen. | Deze kaart kan worden verhandeld.
 
 [PL]
-DO_YOU_BUY_ITEM_C	Ilość: %d Cena (EP): %s
-DO_YOU_BUY_ITEM_M	Ilość: %d Cena (EM): %s
-ASK_BUY_ITEM_TEXT	Czy chcesz kupić ten przedmiot? (Przedmiot: %s)
+72323	Karta Postaci	Zamienia twoją postać wraz z jej przedmiotami i aktualnym postępem w kartę, którą można przekazać innemu graczowi. | Tą kartą można handlować.
 
 [PT]
-DO_YOU_BUY_ITEM_C	Quantidade: %d Preço (EP): %s
-DO_YOU_BUY_ITEM_M	Quantidade: %d Preço (EM): %s
-ASK_BUY_ITEM_TEXT	Queres comprar este item? (Item: %s)
+72323	Cartão de Personagem	Transforma a tua personagem, juntamente com os seus itens e progresso atual, num cartão que pode ser transferido para outro jogador. | Este cartão pode ser negociado.
 
 [RO]
-DO_YOU_BUY_ITEM_C	Cantitate: %d Preț (EP): %s
-DO_YOU_BUY_ITEM_M	Cantitate: %d Preț (EM): %s
-ASK_BUY_ITEM_TEXT	Vrei să cumperi acest obiect? (Obiect: %s)
+72323	Card de Caracter	Transformă caracterul tău, împreună cu obiectele și progresul actual, într-un card care poate fi transferat altui jucător. | Acest card poate fi negociat.
+
+[TR]
+72323	Karakter Kartı	Karakterinizi, üzerindeki eşyalar ve mevcut ilerlemesiyle birlikte karta dönüştürüp başka bir oyuncuya aktarılabilir hale getirir. | Bu kart ticaret edilebilir.

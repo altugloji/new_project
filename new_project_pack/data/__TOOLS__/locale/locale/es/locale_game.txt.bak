@@ -3668,3 +3668,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Recibes Tablero/s de Iutnori.
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	Recibes 1 Tronco de abedul.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	No tienes suficientes objetos/dinero para jugar.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Ya no puedes recibir más Tableros de Iutnori.
+SHOP_NOT_ENOUGH_ITEM	Objetos insuficientes
+GEMSHOP_TITLE	Tienda Gaya
+GEMSHOP_SECOND_TITLE	Convertir objetos en puntos Gaya
+GEMSHOP_CONVERT_SELECTED	Convertir seleccionados x{}
+GEMSHOP_CONVERT_QUESTION	¿Quieres convertir {} x{} en {} puntos Gaya?
+GEMSHOP_TITLE2	Tienda Gaya
+GEMSHOP_HAS_TOOLTIP	Tienes: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	¡Ya has comprado esto!
+GEMSHOP_OPEN_SLOT_QUESTION	¿Quieres abrir el slot?
+GEMSHOP_BUY_QUESTION	¿Quieres comprar {} por {} Gaya?
+GEMSHOP_REFRESH_QUESTION	¿Quieres actualizar los objetos?

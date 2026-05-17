@@ -6613,8 +6613,8 @@
 71148	Anel da Força de Vontade	Dá-te +30% EXP, +20% Probabilidade de Defesa contra Guerreiros, +20% Probabilidade de Defesa contra Ninjas, +20% Probabilidade de Defesa contra Lycans, +30% Forte contra Monstros, +10% VD Máx. e +10% MN Máx. pela duração do item.
 71149	Anel do Poder Mortal	Dá-te +30% EXP, +20% Resistência a dano de Suras, +20% Resistência a dano de Xamãs, +20% Resistência a dano de Lycans, +30% Forte contra Monstros, +10% VD Máx. e +10% MN Máx. durante algum tempo.
 71150	Ovo Mágico	O cofre oval artisticamente decorado contém mais do que uma simples surpresa de Páscoa. Ele revela os seus tesouros pouco a pouco.
-71151	Feitiço Verde	Remove os bónus de um dos teus itens e adiciona novos. Apenas pode ser usado em armas e armaduras até nível 40. Item dos cofres de nível. Não negociável.
-71152	Reforço Verde	Com um pouco de sorte, isto irá adicionar um novo bónus a um dos teus itens (até um máx. de 4 bónus). Apenas pode ser usado em armas e armaduras até nível 40. Item dos cofres de nível. Não negociável.
+71151	Encantar Verde	Altera o bónus do item. Só pode ser usado em itens de nível 18 ou inferior.
+71152	Força Verde	Adiciona um novo bónus ao item. Só pode ser usado em itens de nível 18 ou inferior.
 71153	Poção da Sabedoria	Esta poção permite-te obter 100% mais experiência durante 1 hora de jogo. Não negociável.
 71154	Poção da Ascensão (3h)	Esta poção permite-te obter 80% mais experiência durante três horas de tempo de jogo. Não negociável.
 71155	Poção da Sabedoria (3h)	Esta poção permite-te obter 100% mais experiência durante 3 horas de jogo. Não negociável.
@@ -6862,11 +6862,11 @@
 72723	Elixir do Sol (P)	Recupera automaticamente a tua VD. Contém 1.000.000 VD.
 72724	Elixir do Sol (M)	Recupera automaticamente a tua VD. Contém 3.000.000 VD.
 72725	Elixir do Sol (G)	Recupera automaticamente a tua VD. Contém 7.000.000 VD.
-72726	Elixir do Sol (E)	Contém 10.000.000 VD. Recupera automaticamente a tua VD e tem um efeito adicional positivo na tua VD Máx. Este item é negociável.
+72726	Elixir do Sol (P)	Contém 10.000.000 HP. Restaura automaticamente o teu HP. | Dá +1000 HP extra.
 72727	Elixir da Lua (P)	Recupera automaticamente a tua MN. Contém 100.000 MN.
 72728	Elixir da Lua (M)	Recupera automaticamente a tua MN. Contém 300.000 MN.
 72729	Elixir da Lua (G)	Recupera automaticamente a tua MN. Contém 700.000 MN.
-72730	Elixir da Lua (E)	Contém 1.000.000 MN. Recupera automaticamente a tua MN e tem um efeito adicional positivo na tua MN Máx. Este item é negociável.
+72730	Elixir da Lua (P)	Contém 1.000.000 SP. Restaura automaticamente o teu SP. | Dá +1000 SP extra.
 72734	Cofre da Fortuna Azul	Clica duas vezes para abrires. Tens agora duas opções: | 1. Clica em Aceitar Item para receberes o item mostrado. | 2. Usar Nova Fortuna de Item para obteres outro item aleatório. | Podes usar até 15 tentativas mediante o pagamento de uma taxa de Yang. | Se não tiveres Yang suficiente na tua conta, não podes escolher um novo item. | O cofre não pode ser reinicializado nem é possível voltar a fechá-lo depois de aberto.
 72735	Cofre da Fortuna Rubro	Clica duas vezes para abrires. Tens agora duas opções: | 1. Clica em Aceitar Item para receberes o item mostrado. | 2. Usar Nova Fortuna de Item para obteres outro item aleatório. | Podes usar até 15 tentativas mediante o pagamento de uma taxa de Yang. | Se não tiveres Yang suficiente na tua conta, não podes escolher um novo item. | O cofre não pode ser reinicializado nem é possível voltar a fechá-lo depois de aberto.
 72737	Cofre da Fortuna Verde	Clica duas vezes para abrires. Tens agora duas opções: | 1. Clica em Aceitar Item para receberes o item exibido. | 2. Usa Nova Fortuna de Item para obteres outro item aleatório. | Podes usar até 15 tentativas mediante o pagamento de uma taxa de Yang. | Se não tiveres Yang suficiente na tua conta, não podes escolher um novo item. | O cofre não pode ser reinicializado nem é possível voltar a fechá-lo depois de aberto. | Se fechares o jogo, receberás o item exibido.

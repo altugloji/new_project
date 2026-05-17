@@ -6817,7 +6817,7 @@
 72320	Ampliamento inventario	Utilizza questo oggetto per ampliare il tuo inventario. Non commerciabile.
 72321	Anello dei segreti	Impedisce l'accumulo di punti esperienza durante la caccia ai mostri
 72322	Carta del nuovo inizio	Questa carta ti consente di ripristinare il livello della missione.
-72323	Carta del nuovo ordine	Questa carta ti consente di lanciare di nuovo i dadi per la missione.
+72323	Carta Personaggio	Trasforma il tuo personaggio, insieme ai suoi oggetti e ai progressi attuali, in una carta trasferibile a un altro giocatore. | Questa carta può essere commerciata.
 72325	Annullamento proiezione	Rende possibile l'annullamento della proiezione sugli oggetti.
 72326	Biglietto Proiezione	Usa questo biglietto per cambiare l'aspetto del tuo equipaggiamento senza spendere Yang.
 72327	Pergamena sfere (h)	Ricarica di 30 punti le tue Sfere anima che ti permettono di accedere al Tempio dello Zodiaco. L'item è commerciabile.

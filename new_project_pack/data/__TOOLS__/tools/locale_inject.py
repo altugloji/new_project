@@ -6,7 +6,7 @@
 Kullanım:
     python tools/locale_inject.py --file locale_game.txt --input tools/_input.txt
     python tools/locale_inject.py --file locale_interface.txt --input tools/_input.txt
-    python tools/locale_inject.py --file locale_string.txt --input tools/_input.txt --append   # sona ekler
+    python tools/locale_inject.py --file locale_string.txt --input tools/_input.txt
     python tools/locale_inject.py --file locale_interface.txt --input tools/_input.txt --dry-run
     python tools/locale_inject.py --file locale_quest.txt --input tools/_input.txt
     python tools/locale_inject.py --file itemdesc.txt --input tools/_input.txt
@@ -22,8 +22,11 @@ Girdi dosyası örneği (UTF-8 olarak kaydet):
     2102    <Kowal> Gracz %s spalil %s!
 
 Davranış:
-- Her [XX] bloğu locale/locale/<xx>/<dosya>  başına eklenir (varsayılan).
-- --append verilirse en sona eklenir.
+- Tüm hedef dosyalarda satır, ilk TAB karakterinden önceki alanla anahtarlanır (ör. vnum,
+  locale anahtarı). Bu anahtar dosyada zaten varsa ilgili satır güncellenir; yoksa
+  satır dosyanın sonuna eklenir. Aynı anahtar birden fazlaysa son eşleşen satır
+  güncellenir.
+- --append bayrağı geriye dönük uyumluluk için kabul edilir ancak yok sayılır.
 - Mevcut dosyanın encoding'ini ve satır sonlarını korur.
 - Otomatik yedek (.bak) bırakır.
 """
@@ -183,7 +186,61 @@ def normalize_block(block: str, newline: str) -> str:
     return newline.join(lines) + newline
 
 
-def inject(target_file: str, lang: str, content: str, *, append: bool, dry_run: bool) -> bool:
+def _first_tab_key(line: str) -> str | None:
+    """Satırın ilk TAB öncesi alanını anahtar olarak döndürür; boş satır veya boş anahtar için None."""
+    if not line.strip():
+        return None
+    key = line.split("\t", 1)[0].strip()
+    return key if key else None
+
+
+def merge_locale_lines(existing: str, incoming_block: str, nl: str) -> tuple[str, int, int]:
+    """Mevcut locale metni ile gelen blokları birleştirir.
+
+    İlk TAB öncesi alan dosyada varsa satır güncellenir; yoksa sonda eklenir.
+    TAB'tan önce alan çıkmıyorsa satır yine sona eklenir (anahtar indekslenmez).
+    Dönüş: (yeni_metin, güncellenen_satır_sayısı, eklenen_satır_sayısı)
+    """
+    lines = existing.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    if lines and lines[-1] == "":
+        lines.pop()
+
+    key_to_index: dict[str, int] = {}
+    for i, raw in enumerate(lines):
+        k = _first_tab_key(raw)
+        if k is not None:
+            key_to_index[k] = i
+
+    incoming = incoming_block.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    if incoming and incoming[-1] == "":
+        incoming.pop()
+
+    replaced = 0
+    appended = 0
+
+    for raw in incoming:
+        if not raw.strip():
+            continue
+        k = _first_tab_key(raw)
+        if k is not None:
+            if k in key_to_index:
+                lines[key_to_index[k]] = raw
+                replaced += 1
+            else:
+                key_to_index[k] = len(lines)
+                lines.append(raw)
+                appended += 1
+        else:
+            lines.append(raw)
+            appended += 1
+
+    out = nl.join(lines)
+    if out:
+        out = out + nl
+    return out, replaced, appended
+
+
+def inject(target_file: str, lang: str, content: str, *, dry_run: bool) -> bool:
     folder = LOCALE_ROOT / lang
     path = folder / target_file
     if not path.is_file():
@@ -192,17 +249,13 @@ def inject(target_file: str, lang: str, content: str, *, append: bool, dry_run: 
 
     text, enc, nl = smart_read(path, lang)
     block_text = normalize_block(content, nl)
-
-    if append:
-        # Dosya newline ile bitmiyorsa önce bir tane ekle
-        if text and not text.endswith(nl):
-            text = text + nl
-        new_text = text + block_text
-    else:
-        new_text = block_text + text
+    new_text, n_rep, n_app = merge_locale_lines(text, block_text, nl)
 
     if dry_run:
-        print(f"[DRY] {lang}: {path}  (encoding={enc}, newline={nl!r}, +{block_text.count(nl)} satır)")
+        print(
+            f"[DRY] {lang}: {path}  (encoding={enc}, newline={nl!r}, "
+            f"güncellenen={n_rep}, eklenen={n_app})"
+        )
         return True
 
     backup = path.with_suffix(path.suffix + ".bak")
@@ -221,7 +274,10 @@ def inject(target_file: str, lang: str, content: str, *, append: bool, dry_run: 
         )
 
     path.write_bytes(encoded)
-    print(f"[OK] {lang}: {path}  (encoding={enc_used}, newline={nl!r}, yedek={backup.name})")
+    print(
+        f"[OK] {lang}: {path}  (encoding={enc_used}, newline={nl!r}, "
+        f"güncellenen={n_rep}, eklenen={n_app}, yedek={backup.name})"
+    )
     return True
 
 
@@ -258,7 +314,11 @@ def main():
     p = argparse.ArgumentParser(description="locale_*.txt dosyalarına dil bloklarını enjekte eder.")
     p.add_argument("--file", required=True, choices=ALLOWED_FILES, help="Hedef dosya adı")
     p.add_argument("--input", help="Girdi metin dosyası (UTF-8). Verilmezse stdin'den okur.")
-    p.add_argument("--append", action="store_true", help="Başa değil sona ekle")
+    p.add_argument(
+        "--append",
+        action="store_true",
+        help="Yok sayılır (eski sürümlerle uyumluluk). Birleştirme her zaman TAB-anahtarına göredir.",
+    )
     p.add_argument("--dry-run", action="store_true", help="Yazma, sadece ne yapacağını göster")
     args = p.parse_args()
 
@@ -272,13 +332,16 @@ def main():
         print("Girdi içinde [XX] bloğu bulunamadı. Örnek için tools/_input.txt dosyasına bak.")
         sys.exit(1)
 
-    print(f"Hedef: {args.file}  Dil sayısı: {len(blocks)}  Mod: {'append' if args.append else 'prepend'}")
+    mode_s = "ilk TAB alanı eşleşirse güncelle, yoksa sona ekle"
+    print(f"Hedef: {args.file}  Dil sayısı: {len(blocks)}  Mod: {mode_s}")
+    if args.append:
+        print("[i] --append kullanıldı; bu sürümde etkisiz.\n")
     if args.dry_run:
         print("DRY-RUN aktif (dosyalar değişmeyecek).\n")
 
     ok = 0
     for lang, content in sorted(blocks.items()):
-        if inject(args.file, lang, content, append=args.append, dry_run=args.dry_run):
+        if inject(args.file, lang, content, dry_run=args.dry_run):
             ok += 1
 
     print(f"\nBitti. Başarılı: {ok}/{len(blocks)}")

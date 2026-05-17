@@ -1326,3 +1326,7 @@ WORLD_BOSS_TOTAL_DAMAGE_TEXT	Összes sebzés
 WORLD_BUSS_REWARD_BUTTON	Jutalom begyûjtése
 YES	Igen
 ZONE_MAP	Nagy térkép
+BULK_POTION_TITLE	Tömeges ital panel
+BULK_POTION_USE	Használat
+BULK_POTION_CLEAR	Törlés
+GAME_GM_CALL	GM hívása

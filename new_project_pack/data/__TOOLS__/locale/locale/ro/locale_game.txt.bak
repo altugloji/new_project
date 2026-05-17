@@ -3664,3 +3664,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Primeºti Plãci Yut Nori.
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	Primeºti 1 Bãþ de Mesteacãn.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	Nu ai suficiente obiecte sau bani pentru a juca.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Nu mai poþi primi Plãci Yut Nori.
+SHOP_NOT_ENOUGH_ITEM	Obiecte insuficiente
+GEMSHOP_TITLE	Magazin Gaya
+GEMSHOP_SECOND_TITLE	Converteºte obiecte în puncte Gaya
+GEMSHOP_CONVERT_SELECTED	Converteºte selectate x{}
+GEMSHOP_CONVERT_QUESTION	Vrei sã converteºti {} x{} în {} puncte Gaya?
+GEMSHOP_TITLE2	Magazin Gaya
+GEMSHOP_HAS_TOOLTIP	Ai: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	Ai cumpãrat deja acest obiect!
+GEMSHOP_OPEN_SLOT_QUESTION	Vrei sã deschizi slotul?
+GEMSHOP_BUY_QUESTION	Vrei sã cumperi {} pentru {} Gaya?
+GEMSHOP_REFRESH_QUESTION	Vrei sã actualizezi obiectele?

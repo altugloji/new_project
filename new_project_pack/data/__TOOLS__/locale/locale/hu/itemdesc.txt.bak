@@ -6613,8 +6613,8 @@
 71148	Akaraterõ gyûrûje	Ezt nyújtja az idõtartama alatt: +30% EXP, +20% védekezési esély Harcosok ellen, +20% védekezési esély Nindzsák ellen, +20% védekezési esély Vérfarkasok ellen, +30% Szörnyek elleni erõ, +10% maximum TP és +10% maximum MP.
 71149	A halálos erõ gyûrûje	Egy bizonyos ideig +30% EXP-t, +20% védekezési esélyt Surák ellen, +20% védekezési esélyt Sámánok ellen, +20% védekezési esélyt Vérfarkasok ellen, +30% szörnyek elleni erõt, +10% maximum TP-t és +10% maximum MP-t ad neked.
 71150	Mágikus tojás	A mûvészien díszített ovális láda több, mint egy Húsvéti meglepetés, apránként fedi fel kincseit.
-71151	Zöld Mágia	Eltávolítja a bónuszokat a tárgyadból és újakat ad hozzá. Csak legfeljebb 40-es szintû fegyvereken és vérteken használható. A szint-ládából származó tárgy, nem adható át.
-71152	Zöld Erõ	Ha szerencsés vagy, az egyik tárgyadhoz egy új bónuszt ad (Maximum 4 bónuszig). Csak legfeljebb 40-es szintû fegyvereken és vérteken használható. A szint-ládából származó tárgy, nem adható át.
+71151	Zöld bónuszváltó	Megváltoztatja a tárgy bónuszát. Csak 18-as szintû vagy alacsonyabb tárgyakon használható.
+71152	Zöld erõ	Új bónuszt ad a tárgyhoz. Csak 18-as szintû vagy alacsonyabb tárgyakon használható.
 71153	Bölcsesség itala	Ez az ital hozzásegít, hogy egy játékórán át 100%-kal több tapasztalatot gyûjts. Nem adható át.
 71154	Felemelkedés itala (3h)	Ezen ital segítségével 80%-kal több tapasztalatot gyûjtesz három játékórán át. Nem adható át.
 71155	Bölcsesség itala (3h)	Ez a bájital lehetõvé teszi, hogy 100%-kal több tapasztalatot gyûjts három játékórán át. Nem adható át.
@@ -6862,11 +6862,11 @@
 72723	Nap Elixír (Kicsi)	Automatikusan újratölti a TP-d. 1.000.000 TP-t tartalmaz.
 72724	Nap Elixír (Közepes)	Automatikusan újratölti a TP-d. 3.000.000 TP-t tartalmaz.
 72725	Nap Elixír (Nagy)	Automatikusan újratölti a TP-d. 7.000.000 TP-t tartalmaz.
-72726	Nap Elixír (különleges)	10.000.000 TP-t tartalmaz. Automatikusan újratölti a TP-d, illetve ezen felül bónuszt nyújt a max. TP-dhez. Ez a tárgy átadható.
+72726	Nap elixír (K)	10.000.000 HP-t tartalmaz. Automatikusan feltölti a HP-dat. | Extra +1000 HP-t ad.
 72727	Hold Elixír (Kicsi)	Automatikusan újratölti a MP-d. 100.000 MP-t tartalmaz.
 72728	Hold Elixír (Közepes)	Automatikusan újratölti a MP-d. 300.000 MP-t tartalmaz.
 72729	Hold Elixír (Nagy)	Automatikusan újratölti a MP-d. 700.000 MP-t tartalmaz.
-72730	Hold Elixír (különleges)	1.000.000 MP-t tartalmaz. Automatikusan újratölti a MP-d, illetve ezen felül bónuszt nyújt a max. MP-dhez. Ez a tárgy átadható.
+72730	Hold elixír (K)	1.000.000 SP-t tartalmaz. Automatikusan feltölti az SP-det. | Extra +1000 SP-t ad.
 72734	Kék szerencse-láda	Dupla kattintással nyithatod ki. Ezután két lehetõséged van: | 1. A Tárgy elfogadása gombra kattintva megkapod a megjelenõ tárgyat. | 2. Újra próbálod a szerencséd, és egy új, véletlenszerû tárgy jelenik meg. | Legfeljebb 15 alkalommal teheted ezt meg Yangért cserébe. | Ha nincs elegendõ Yangot, nem választhatsz új tárgyat. | A láda nem állítható vissza és nem zárható be, ha egyszer kinyitottad.
 72735	Vörös szerencse-láda	Dupla kattintással nyithatod ki. Ezután két lehetõséged van: | 1. A Tárgy elfogadása gombra kattintva megkapod a megjelenõ tárgyat. | 2. Újra próbálod a szerencséd, és egy új, véletlenszerû tárgy jelenik meg. | Legfeljebb 15 alkalommal teheted ezt meg Yangért cserébe. | Ha nincs elegendõ Yangot, nem választhatsz új tárgyat. | A láda nem állítható vissza és nem zárható be, ha egyszer kinyitottad.
 72737	Zöld szerencse-láda	Dupla kattintással nyithatod ki. Ezután két lehetõséged van: | 1. A Tárgy elfogadása gombra kattintva megkapod a megjelenõ tárgyat. | 2. Újra próbálod a szerencséd, és egy új, véletlenszerû tárgy jelenik meg. | Legfeljebb 15 alkalommal teheted ezt meg Yangért cserébe. | Ha nincs elegendõ Yangod, nem választhatsz új tárgyat. | A láda nem állítható vissza és nem zárható be, ha egyszer kinyitottad. | Ha bezárod a játékot, a megjelenõ tárgyat kapod.

@@ -1327,3 +1327,6 @@ WORLD_BOSS_TOTAL_DAMAGE_TEXT	Toplam hasar
 WORLD_BUSS_REWARD_BUTTON	Ödülü teslim al
 YES	Evet
 ZONE_MAP	Genel Görünüm Haritasý
+BULK_POTION_TITLE	Toplu Ýksir Paneli
+BULK_POTION_USE	Kullan
+BULK_POTION_CLEAR	Temizle

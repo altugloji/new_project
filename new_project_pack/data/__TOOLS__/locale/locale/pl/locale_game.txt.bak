@@ -3668,3 +3668,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Otrzymujesz planszê (plansze) Yutnori.
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	Otrzymujesz 1 pieñ brzozy.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	Masz za ma³o przedmiotów lub pieniêdzy, aby graæ.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Nie mo¿esz otrzymaæ kolejnych plansz Yutnori.
+SHOP_NOT_ENOUGH_ITEM	Za ma³o przedmiotów
+GEMSHOP_TITLE	Sklep Gaya
+GEMSHOP_SECOND_TITLE	Zamieñ przedmioty na punkty Gaya
+GEMSHOP_CONVERT_SELECTED	Zamieñ zaznaczone x{}
+GEMSHOP_CONVERT_QUESTION	Czy chcesz zamieniæ {} x{} na {} punktów Gaya?
+GEMSHOP_TITLE2	Sklep Gaya
+GEMSHOP_HAS_TOOLTIP	Posiadasz: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	Ju¿ to kupi³eœ!
+GEMSHOP_OPEN_SLOT_QUESTION	Czy chcesz otworzyæ slot?
+GEMSHOP_BUY_QUESTION	Czy chcesz kupiæ {} za {} Gaya?
+GEMSHOP_REFRESH_QUESTION	Czy chcesz odœwie¿yæ przedmioty?

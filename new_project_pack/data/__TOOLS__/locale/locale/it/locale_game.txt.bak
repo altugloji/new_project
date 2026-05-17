@@ -3668,3 +3668,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Ricevi Tavoliere/i da Yutnori.
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	Ottieni 1 Tronco di betulla.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	No hai abbastanza item o soldi per giocare.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Non puoi ricevere altri Tavolieri da Yutnori.
+SHOP_NOT_ENOUGH_ITEM	Oggetti insufficienti
+GEMSHOP_TITLE	Negozio Gaya
+GEMSHOP_SECOND_TITLE	Converti oggetti in punti Gaya
+GEMSHOP_CONVERT_SELECTED	Converti selezionati x{}
+GEMSHOP_CONVERT_QUESTION	Vuoi convertire {} x{} in {} punti Gaya?
+GEMSHOP_TITLE2	Negozio Gaya
+GEMSHOP_HAS_TOOLTIP	Hai: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	Hai già acquistato questo!
+GEMSHOP_OPEN_SLOT_QUESTION	Vuoi aprire lo slot?
+GEMSHOP_BUY_QUESTION	Vuoi comprare {} per {} Gaya?
+GEMSHOP_REFRESH_QUESTION	Vuoi aggiornare gli oggetti?

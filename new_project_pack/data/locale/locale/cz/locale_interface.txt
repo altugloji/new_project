@@ -1322,3 +1322,7 @@ WORLD_BOSS_TOTAL_DAMAGE_TEXT	Celkové poškození
 WORLD_BUSS_REWARD_BUTTON	Vzít odmìnu
 YES	Ano
 ZONE_MAP	Velká mapa
+BULK_POTION_TITLE	Panel hromadných lektvarù
+BULK_POTION_USE	Použít
+BULK_POTION_CLEAR	Vyèistit
+GAME_GM_CALL	Zavolat GM

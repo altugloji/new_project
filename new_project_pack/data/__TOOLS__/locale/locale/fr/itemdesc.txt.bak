@@ -6613,8 +6613,8 @@
 71148	Anneau de Volonté	Vous bénéficiez de +30 % d'EXP, +20 % de chances de parer les Guerriers, +20 % de chances de parer les Ninjas, +20 % de chances de parer les Lycans, +30 % de force contre les monstres, +10 % de PV maximums et +10 % de PM maximums.
 71149	Anneau de Force mortelle	Pendant une certaine durée, cet objet vous confère +30 % d'EXP, +20 % de chances de parer les Suras, +20 % de chances de parer les Chamanes, +20 % de chances de parer les Lycans, +30 % de force contre les monstres, +10 % de PV max. et +10 % PM max.
 71150	Œuf magique	Ce coffre ovale ouvragé contient plus qu'une simple surprise de Pâques et délivre progressivement ses trésors.
-71151	Sort vert	Enlève les bonus de l'un de vos objets et en ajoute de nouveaux. Ne peut être utilisé que sur les armes et les armures de niveau égal ou inférieur à 40. Non échangeable.
-71152	Force verte	Ajoute avec un peu de chance un nouveau bonus à l'un de vos objets (max. 4 bonus). Ne peut être utilisé que sur les armes et les armures de niveau égal ou inférieur à 40. Non échangeable.
+71151	Enchantement vert	Change le bonus de l'objet. Utilisable uniquement sur les objets de niveau 18 ou inférieur.
+71152	Force verte	Ajoute un nouveau bonus à l'objet. Utilisable uniquement sur les objets de niveau 18 ou inférieur.
 71153	Potion de sagesse	Grâce à cette potion, vous gagnez en une heure de jeu 100 % d'expérience en plus. Non échangeable.
 71154	Potion d'ascension (3h)	Grâce à cette potion, vous gagnez en trois heures de jeu 80 % d'expérience en plus. Non échangeable.
 71155	Potion de sagesse (3h)	Grâce à cette potion, vous gagnez en trois heures de jeu 100 % d'expérience en plus. Non échangeable.
@@ -6862,11 +6862,11 @@
 72723	Élixir du soleil (p)	Régénère automatiquement vos PV. Contient 1.000.000 PV.
 72724	Élixir du soleil (m)	Régénère automatiquement vos PV. Contient 3.000.000 PV.
 72725	Élixir du soleil (g)	Régénère automatiquement vos PV. Contient 7.000.000 PV.
-72726	Élixir du soleil (sp)	L'élixir contient 10 000 000 PV. Il régénère automatiquement vos PV et a un effet positif sur vos PV maximums. Cet objet est échangeable.
+72726	Élixir du Soleil (P)	Contient 10.000.000 PV. Restaure automatiquement tes PV. | Donne +1000 PV supplémentaires.
 72727	Élixir de la lune (p)	Régénère automatiquement vos PM. Contient 100.000 PM.
 72728	Élixir de la lune (m)	Régénère automatiquement vos PM. Contient 300.000 PM.
 72729	Élixir de la lune (g)	Régénère automatiquement vos PM. Contient 700.000 PM.
-72730	Élixir de la lune (sp)	L'élixir contient 1 000 000 PM. Il régénère automatiquement vos PM et a un effet positif sur vos PM maximums. Cet objet est échangeable.
+72730	Élixir de la Lune (P)	Contient 1.000.000 PM. Restaure automatiquement tes PM. | Donne +1000 PM supplémentaires.
 72734	Coff. bonne fortune bleu	Ouvrez-le en effectuant un double-clic. Vous avez 2 options : | 1. Cliquez sur « Accepter l'objet » pour récupérer l'objet affiché. | 2. Utilisez « Nouvelle chance d'objet » pour recevoir un autre objet aléatoire. | Vous avez jusqu'à 15 essais (contre un paiement en Yangs). | Si vous n'avez plus assez de Yangs sur votre compte, vous ne pourrez pas choisir de nouvel objet. | Une fois ouverte, la boîte ne peut pas être réinitialisée ou refermée.
 72735	Cof. bonne fortune rouge	Ouvrez-le en effectuant un double-clic. Vous avez 2 options : | 1. Cliquez sur « Accepter l'objet » pour récupérer l'objet affiché. | 2. Utilisez « Nouvelle chance d'objet » pour recevoir un autre objet aléatoire. | Vous avez jusqu'à 15 essais (contre un paiement en Yangs). | Si vous n'avez plus assez de Yangs sur votre compte, vous ne pourrez pas choisir de nouvel objet. | Une fois ouverte, la boîte ne peut pas être réinitialisée ou refermée.
 72737	Coffret de fortune vert	Effectuez un clic droit pour l'ouvrir. Vous avez 2 options : | 1. Cliquez sur « Accepter l'objet » pour récupérer l'objet affiché. | 2. Utilisez « Nouvelle chance d'objet » pour recevoir un autre objet aléatoire. | Vous avez jusqu'à 15 essais (contre un paiement en Yangs). | Si vous n'avez plus assez de Yangs sur votre compte, vous ne pourrez pas choisir de nouvel objet. | Une fois ouverte, la boîte ne peut pas être réinitialisée ou refermée. | Si le jeu est fermé, vous obtenez l'objet affiché.

@@ -6613,8 +6613,8 @@
 71148	Prsten síly vùle	Pøidá ti +30 % BZK, +20 % obrany proti váleèníkùm, +20 % obrany proti ninjùm, +20 % obrany proti Lycanùm, +30 % síly proti monstrùm, +10 % ZB a +10 % MB po dobu trvání efektu.
 71149	Prsten smrtelné síly	Pøidá ti +30 % BZK, +20 % obrany proti Surùm, +20 % obrany proti šamanùm, +20 % obrany proti Lycanùm, +30 % síly proti monstrùm, +10 % ZB a +10 % MB po urèitý èas.
 71150	Kouzelné vejce	Umìlecky zdobená oválná truhla skrývá více, než jen Velikonoèní pøekvapení - odkrývá svá pøekvapení jedno po druhém.
-71151	Zelené kouzlo	Odebere pøedmìty z jednoho pøedmìtu a pøidá na nìj nové. Lze jej použít pouze na zbranì a brnìní od úrovnì 40. S pøedmìtem nelze obchodovat.
-71152	Zelená síla	S trochou štìstí ti pøidá další bonus na jeden tvùj pøedmìt (max. 4 bonusy). Lze jej použít pouze na zbranì a brnìní do úrovnì 40. S pøedmìtem nelze obchodovat.
+71151	Zelené zaèarování	Zmìní bonus pøedmìtu. Lze použít pouze na pøedmìty úrovnì 18 a nižší.
+71152	Zelená síla	Pøidá pøedmìtu nový bonus. Lze použít pouze na pøedmìty úrovnì 18 a nižší.
 71153	Lektvar vìdomostí	Tento lektvar ti umožní získat 100 % více zkušeností za jednu herní hodinu. S pøedmìtem nelze obchodovat.
 71154	Lektvar vzestupu (3h)	Tento lektvar ti umožní získávat o 80 % více zkušeností po dobu tøí hodin herního èasu. S pøedmìtem nelze obchodovat.
 71155	Lektvar vìdomostí (3h)	Tento lektvar ti umožní získávat o 100 % více zkušeností po dobu tøí hodin herního èasu. S pøedmìtem nelze obchodovat.
@@ -6862,11 +6862,11 @@
 72723	Elixír Slunce (M)	Automaticky doplní tvoje ZB. Obsahuje 1.000.000 ZB.
 72724	Elixír Slunce (S)	Automaticky doplní tvoje ZB. Obsahuje 3.000.000 ZB.
 72725	Elixír Slunce (V)	Automaticky doplní tvoje ZB. Obsahuje 7.000.000 ZB.
-72726	Elixír Slunce (E)	Obsahuje 10 000 000 ZB. Automaticky doplní tvoje ZB a má další pozitivní efekt na maximální ZB. S pøedmìtem lze obchodovat.
+72726	Sluneèní elixír (M)	Obsahuje 10.000.000 HP. Automaticky doplòuje tvé HP. | Pøidává extra +1000 HP.
 72727	Elixír Mìsíce (M)	Automaticky doplní tvoje MB. Obsahuje 100.000 MB.
 72728	Elixír Mìsíce (S)	Automaticky doplní tvoje MB. Obsahuje 300.000 MB.
 72729	Elixír Mìsíce (V)	Automaticky doplní tvoje MB. Obsahuje 700.000 MB.
-72730	Elixír Mìsíce (E)	Obsahuje 1 000 000 MB. Automaticky doplní tvoje MB a má další pozitivní efekt na maximální MB. S pøedmìtem lze obchodovat.
+72730	Mìsíèní elixír (M)	Obsahuje 1.000.000 SP. Automaticky doplòuje tvé SP. | Pøidává extra +1000 SP.
 72734	Modrá Truhla Štìstí	Dvojklikem otevøi Nyní máš dvì možnosti: | 1. Klikneš na Pøijmout pøedmìt a obdržíš zobrazený pøedmìt. | 2. Použij Štìstí nového pøedmìtu a dostaneš jiný náhodný pøedmìt. | Za Yangy si mùžeš koupit až 15 pokusù. | Pokud nemáš na úètu dostatek Yangù, nemùžeš si vybrat nový pøedmìt. | Truhlu lze zresetovat nebo zavøít po jejím otevøení.
 72735	Èervená Truhla Štìstí	Dvojklikem otevøi Nyní máš dvì možnosti: | 1. Klikneš na Pøijmout pøedmìt a obdržíš zobrazený pøedmìt. | 2. Použij Štìstí nového pøedmìtu a dostaneš jiný náhodný pøedmìt. | Za Yangy si mùžeš koupit až 15 pokusù. | Pokud nemáš na úètu dostatek Yangù, nemùžeš si vybrat nový pøedmìt. | Truhlu lze zresetovat nebo zavøít po jejím otevøení.
 72737	Zelená truhla Štìstí	Dvojklikem otevøi. Nyní máš dvì možnosti: | 1. Klikneš na Pøijmout pøedmìt a obdržíš zobrazený pøedmìt. | 2. Použij Štìstí nového pøedmìtu a dostaneš jiný náhodný pøedmìt. | Za Yangy si mùžeš koupit až 15 pokusù. | Pokud nemáš na úètu dostatek Yangù, nemùžeš si vybrat nový pøedmìt. | Truhlu lze zresetovat nebo zavøít po jejím otevøení. | Pokud hru ukonèíš, obdržíš zobrazený pøedmìt.

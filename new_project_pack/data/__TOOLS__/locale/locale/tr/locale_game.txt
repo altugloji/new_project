@@ -1,3 +1,4 @@
+CHAT_FLAG_BAR_TITLE	GLOBAL SOHBET
 SHOP_NOT_ENOUGH_ITEM	Yetersiz eþya
 GEMSHOP_TITLE	Gaya Dükkaný
 GEMSHOP_SECOND_TITLE	Eþyalarý Gaya puanýna çevir
@@ -11,15 +12,31 @@ GEMSHOP_OPEN_SLOT_QUESTION	Slotu açmak istiyor musun?
 GEMSHOP_BUY_QUESTION	{} eþyasýný {} Gaya karþýlýðýnda satýn almak istiyor musun?
 GEMSHOP_REFRESH_QUESTION	Eþyalarý yenilemek istiyor musun?
 WIKI_UNKOWN_MOB	Bilinmeyen Mob: %d
-WIKI_UNKOWN_ITEM	Bilinmeyen eþya: %d
+WIKI_UNKOWN_ITEM	Bilinmeyen Eþya: %d
 WIKI_TITLE	Wiki Sistemi
+WIKI_DROP_VIEW_TITLE	Belirli bir eþyanýn droplarýný göster
+WIKI_OR	veya
+WIKI_ITEM_NAME_PLACEHOLDER	Eþya adýný gir...
+WIKI_REFINE_HEADER_TIP	+%d yükseltme aþamasý (malzeme / yang / olasýlýk)
 WIKI_ITEM_NAME	Eþya Adý
 WIKI_MOB_NAME	Mob Adý
 WIKI_CATEGORY	Kategori
+WIKI_WEAPONS_SECTION	Silahlar
+WIKI_ARMOR_SECTION	Zýrh ve Aksesuarlar
+WIKI_SWORD	Kýlýçlar
+WIKI_DAGGER	Hançerler
+WIKI_BOW	Yaylar
+WIKI_TWOHAND	Çift El Silahlar
+WIKI_BELL	Çanlar
+WIKI_FAN	Yelpazeler
+WIKI_HELMET	Miðferler
+WIKI_BOOTS	Ayakkabýlar
+WIKI_METINS	Metinler
+WIKI_75_99	Lv. 75-99
 WIKI_EQUIPMENT	Ekipman
 WIKI_EQUIPMENT_WEAPONS	Silahlar
 WIKI_EQUIPMENT_ARMOR	Zýrhlar
-WIKI_EQUIPMENT_HELMET	Kasklar
+WIKI_EQUIPMENT_HELMET	Miðferler
 WIKI_EQUIPMENT_SHIELD	Kalkanlar
 WIKI_EQUIPMENT_EARRING	Küpeler
 WIKI_EQUIPMENT_BRACELET	Bilezikler
@@ -28,13 +45,27 @@ WIKI_EQUIPMENT_SHOES	Ayakkabýlar
 WIKI_EQUIPMENT_BELT	Kemerler
 WIKI_EQUIPMENT_TALISMAN	Týlsýmlar
 WIKI_CHESTS	Sandýklar
-WIKI_CHESTS_BOSS	Boss sandýklarý
-WIKI_CHESTS_EVENT	Etkinlik sandýklarý
-WIKI_CHESTS_ALTERNATIVE	Alternatif sandýklar
+WIKI_CHESTS_BOSS	Boss Sandýklarý
+WIKI_CHESTS_EVENT	Etkinlik Sandýklarý
+WIKI_CHESTS_ALTERNATIVE	Alternatif Sandýklar
+WIKI_CHEST_PREVIEW_BTN	Sandýk Önizleme
+WIKI_CHEST_PREVIEW_NO_SELECT	Önce arama alanýndan bir eþya seçin.
+WIKI_CHEST_PREVIEW_NO_DATA	Bu eþya için sandýk içeriði bulunamadý.
+WIKI_REFINE_VIEW_BTN	Yükseltme
+WIKI_ITEM_PREVIEW_BTN	Eþya Önizleme
+WIKI_ITEM_PREVIEW_NO_SELECT	Wiki aramasýndan bir eþya seçin.
+WIKI_ITEM_PREVIEW_EMPTY	Wiki tablolarýnda bu eþya için kaynak bulunamadý.
+WIKI_ITEM_PREVIEW_COL_NAME	Ýsim
+WIKI_ITEM_PREVIEW_COL_LEVEL	Seviye
+WIKI_ITEM_PREVIEW_COL_COUNT	Adet
+WIKI_ITEM_PREVIEW_COL_LOC	Lokasyon
+WIKI_ITEM_PREVIEW_SECTION_MOB	Canavarlar / Metinler / Bosslar
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Sandýk
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Diðer
 WIKI_BOSSES	Bosslar
 WIKI_1_75	Lv. 1-75
 WIKI_76_100	Lv. 76-100
-WIKI_100	Lv. 76-100
+WIKI_100	Lv. 100+
 WIKI_BOSSES_EVENT	Etkinlik Bosslarý
 WIKI_MONSTER	Canavarlar
 WIKI_METINSTONE	Metin Taþlarý
@@ -42,15 +73,15 @@ WIKI_LEVEL_MOB_TEXT	Seviye %d
 WIKI_LEVEL_TEXT	Seviye %d - Yükseltme Aralýðý %d~%d
 WIKI_LEVEL_TEXT2	Seviye %d~%d - Yükseltme Aralýðý %d~%d
 WIKI_UPGRADE_COSTS	Sonraki Eþya
-WIKI_YANG_COSTS	Yang maliyeti
-WIKI_AVAIBLE_AT	Bulunduðu yer
-WIKI_IMPROVEMENT_INFO	%s geliþtirme bilgisi
-WIKI_CONTENT_INFO	%s içeriði
-WIKI_DROPLIST_INFO	%s düþen eþyalarý
-WIKI_STATICS_INFO	%s istatistikleri
+WIKI_YANG_COSTS	Yang Maliyeti
+WIKI_AVAIBLE_AT	Bulunduðu Yer
+WIKI_IMPROVEMENT_INFO	%s Geliþtirme Bilgisi
+WIKI_CONTENT_INFO	%s Ýçeriði
+WIKI_DROPLIST_INFO	%s Düþen Eþyalarý
+WIKI_STATICS_INFO	%s Ýstatistikleri
 WIKI_STATICS_INFO_TYPE	Irk: %s | Tür: %s
-WIKI_STATICS_INFO_DMG	Min. Hasar:%d | Max. Hasar:%d | Max HP: %d
-WIKI_STATICS_INFO_YNG	Min. Yang:%d | Max. Yang:%d | EXP: %d
+WIKI_STATICS_INFO_DMG	Min. Hasar: %d | Max. Hasar: %d | Max HP: %d
+WIKI_STATICS_INFO_YNG	Min. Yang: %d | Max. Yang: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Savunmalar:
 WIKI_ORIGIN	Köken
 WIKI_SYSTEMS	Sistemler
@@ -59,7 +90,7 @@ EVENT_CALENDAR	Takvim
 WIKI_COSTUME	Kostüm
 WIKI_COSTUME_HAIR	Saç
 WIKI_COSTUME_SASH	Kuþak
-WIKI_SHINING	Shining
+WIKI_SHINING	Parlama
 WIKI_PET	Pet
 WIKI_MOUNT	Binek
 DO_YOU_BUY_ITEM_C	Adet: %d Fiyat(EP): %s
@@ -3683,9 +3714,28 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Yutnori oyun tahta(larý) alýrsýn.
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	1 Kayýn Kütüðü kazandýn.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	Oynamak için yeterince nesne veya paran yok.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Baþka Yutnori oyun tahtasý alamazsýn.
-WIKI_COSTUME	Kostüm
-WIKI_COSTUME_HAIR	Saç
-WIKI_COSTUME_SASH	Kuþak
-WIKI_SHINING	Shining
-WIKI_PET	Pet
-WIKI_MOUNT	Binek
+CHARACTER_CHEST_PREVIEW_HINT	CTRL + SAÐ TIK ile karakteri görüntüleyebilirsin.
+CHARACTER_CHEST_PREVIEW_CLOSE	Kapat
+CHARACTER_CHEST_INVENTORY_BLOCK	Bu pencere açýkken envanteri kullanamazsýn.
+CHARACTER_CHEST_WRONG_MAP	Bu iþlem yalnýzca Yongbi Çölü'nde yapýlabilir.
+CHARACTER_CHEST_WRONG_PASSWORD	Karakter silme þifresi hatalý.
+CHARACTER_CHEST_NO_SLOT	Hesabýnda boþ karakter slotu yok.
+CHARACTER_CHEST_PACK_OK	Karakter baþarýyla paketlendi.
+CHARACTER_CHEST_UNPACK_OK	Karakter hesabýna aktarýldý.
+CHARACTER_CHEST_FAILED	Ýþlem gerçekleþtirilemedi.
+CHARACTER_CHEST_INVALID	Geçersiz Karakter Kartý.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Aktif karakterini paketleyemezsin.
+CHARACTER_CHEST_ALREADY_USED	Bu kart zaten kullanýlmýþ.
+CHARACTER_CHEST_TITLE	Karakter Kartý
+CHARACTER_CHEST_SELECT_HINT	Paketlemek istediðin yan karakteri seç.
+CHARACTER_CHEST_UNPACK_QUEST	Bu karakteri hesabýna aktarmak istiyor musun?
+CHARACTER_CHEST_PACKED_LABEL	Paketli Karakter: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Aktar
+CHARACTER_CHEST_BIO_TITLE	Biyolog Görevleri
+CHARACTER_CHEST_BIO_QUEST_NAME	Biyolog Görevi - Lv. %d
+CHARACTER_CHEST_BIO_DONE	Tamamlandý
+CHARACTER_CHEST_BIO_PROGRESS	Devam Ediyor
+CHARACTER_CHEST_BIO_WAIT	Beklemede
+BULK_POTION_EMPTY_PANEL	Kayýtlý iksir bulunmuyor.
+BULK_POTION_NOT_ALLOWED	Bu eþya Toplu Ýksir Paneli'ne eklenemez.
+BULK_POTION_ALREADY_REGISTERED	Bu iksir zaten panelde kayýtlý.

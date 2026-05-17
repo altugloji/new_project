@@ -3668,3 +3668,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Je ontvangt Yut Nori Bord(en).
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	Je ontvangt één Berken Tak.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	Je hebt niet genoeg items of geld om te spelen.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Je kunt geen Yut Nori Borden meer ontvangen.
+SHOP_NOT_ENOUGH_ITEM	Niet genoeg items
+GEMSHOP_TITLE	Gaya Shop
+GEMSHOP_SECOND_TITLE	Items omzetten naar Gaya-punten
+GEMSHOP_CONVERT_SELECTED	Geselecteerde omzetten x{}
+GEMSHOP_CONVERT_QUESTION	Wil je {} x{} omzetten naar {} Gaya-punten?
+GEMSHOP_TITLE2	Gaya Shop
+GEMSHOP_HAS_TOOLTIP	Je hebt: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	Je hebt dit al gekocht!
+GEMSHOP_OPEN_SLOT_QUESTION	Wil je de slot openen?
+GEMSHOP_BUY_QUESTION	Wil je {} kopen voor {} Gaya?
+GEMSHOP_REFRESH_QUESTION	Wil je de items vernieuwen?

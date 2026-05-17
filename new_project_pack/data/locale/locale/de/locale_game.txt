@@ -22,7 +22,7 @@ WIKI_CHESTS_ALTERNATIVE	Alternative Truhen
 WIKI_BOSSES	Bosse
 WIKI_1_75	Lv. 1-75
 WIKI_76_100	Lv. 76-100
-WIKI_100	Lv. 76-100
+WIKI_100	Lv. 100+
 WIKI_BOSSES_EVENT	Event-Bosse
 WIKI_MONSTER	Monster
 WIKI_METINSTONE	Metinsteine
@@ -31,14 +31,14 @@ WIKI_LEVEL_TEXT	Level %d - Verbesserungsbereich %d~%d
 WIKI_LEVEL_TEXT2	Level %d~%d - Verbesserungsbereich %d~%d
 WIKI_UPGRADE_COSTS	Nächstes Item
 WIKI_YANG_COSTS	Yang-Kosten
-WIKI_AVAIBLE_AT	Verfügbar bei
-WIKI_IMPROVEMENT_INFO	Verbesserungsinfo von %s
+WIKI_AVAIBLE_AT	Fundort
+WIKI_IMPROVEMENT_INFO	Verbesserungsinfo für %s
 WIKI_CONTENT_INFO	Inhalt von %s
-WIKI_DROPLIST_INFO	Dropliste von %s
+WIKI_DROPLIST_INFO	Drops von %s
 WIKI_STATICS_INFO	Statistiken von %s
-WIKI_STATICS_INFO_TYPE	Gattung: %s | Untergattung: %s
-WIKI_STATICS_INFO_DMG	Min. Schaden:%d | Max. Schaden:%d | Max. HP: %d
-WIKI_STATICS_INFO_YNG	Min. Yang:%d | Max. Yang:%d | EXP: %d
+WIKI_STATICS_INFO_TYPE	Rasse: %s | Typ: %s
+WIKI_STATICS_INFO_DMG	Min. Schaden: %d | Max. Schaden: %d | Max HP: %d
+WIKI_STATICS_INFO_YNG	Min. Yang: %d | Max. Yang: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Verteidigungen:
 WIKI_ORIGIN	Herkunft
 WIKI_SYSTEMS	Systeme
@@ -3681,3 +3681,58 @@ GEMSHOP_YOU_ALREADY_BUYED	Du hast dies bereits gekauft!
 GEMSHOP_OPEN_SLOT_QUESTION	Möchtest du den Slot öffnen?
 GEMSHOP_BUY_QUESTION	Möchtest du {} für {} Gaya kaufen?
 GEMSHOP_REFRESH_QUESTION	Möchtest du die Items aktualisieren?
+CHARACTER_CHEST_PREVIEW_HINT	Mit STRG + RECHTSKLICK kannst du den Charakter ansehen.
+CHARACTER_CHEST_PREVIEW_CLOSE	Schließen
+CHARACTER_CHEST_INVENTORY_BLOCK	Solange dieses Fenster geöffnet ist, kannst du dein Inventar nicht benutzen.
+CHARACTER_CHEST_WRONG_MAP	Diese Aktion kann nur in der Yongbi-Wüste durchgeführt werden.
+CHARACTER_CHEST_WRONG_PASSWORD	Das Charakter-Löschpasswort ist falsch.
+CHARACTER_CHEST_NO_SLOT	Auf deinem Account ist kein freier Charakterplatz vorhanden.
+CHARACTER_CHEST_PACK_OK	Charakter wurde erfolgreich verpackt.
+CHARACTER_CHEST_UNPACK_OK	Charakter wurde auf deinen Account übertragen.
+CHARACTER_CHEST_FAILED	Aktion konnte nicht durchgeführt werden.
+CHARACTER_CHEST_INVALID	Ungültige Charakterkarte.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Du kannst deinen aktiven Charakter nicht verpacken.
+CHARACTER_CHEST_ALREADY_USED	Diese Karte wurde bereits benutzt.
+CHARACTER_CHEST_TITLE	Charakterkarte
+CHARACTER_CHEST_SELECT_HINT	Wähle den Nebencharakter aus, den du verpacken möchtest.
+CHARACTER_CHEST_UNPACK_QUEST	Möchtest du diesen Charakter auf deinen Account übertragen?
+CHARACTER_CHEST_PACKED_LABEL	Verpackter Charakter: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Übertragen
+CHARACTER_CHEST_BIO_TITLE	Biologen-Quests
+CHARACTER_CHEST_BIO_QUEST_NAME	Biologen-Quest - Lv. %d
+CHARACTER_CHEST_BIO_DONE	Abgeschlossen
+CHARACTER_CHEST_BIO_PROGRESS	Läuft
+CHARACTER_CHEST_BIO_WAIT	Wartet
+BULK_POTION_EMPTY_PANEL	Es sind keine Tränke gespeichert.
+BULK_POTION_NOT_ALLOWED	Dieses Item kann nicht zum Massen-Trank-Panel hinzugefügt werden.
+BULK_POTION_ALREADY_REGISTERED	Dieser Trank ist bereits im Panel gespeichert.
+WIKI_DROP_VIEW_TITLE	Drops eines bestimmten Items anzeigen
+WIKI_OR	oder
+WIKI_ITEM_NAME_PLACEHOLDER	Itemnamen eingeben...
+WIKI_REFINE_HEADER_TIP	+%d Verbesserungsstufe (Material / Yang / Chance)
+WIKI_WEAPONS_SECTION	Waffen
+WIKI_ARMOR_SECTION	Rüstungen und Zubehör
+WIKI_SWORD	Schwerter
+WIKI_DAGGER	Dolche
+WIKI_BOW	Bögen
+WIKI_TWOHAND	Zweihandwaffen
+WIKI_BELL	Glocken
+WIKI_FAN	Fächer
+WIKI_HELMET	Helme
+WIKI_BOOTS	Schuhe
+WIKI_METINS	Metins
+WIKI_75_99	Lv. 75-99
+WIKI_CHEST_PREVIEW_BTN	Truhenvorschau
+WIKI_CHEST_PREVIEW_NO_SELECT	Wähle zuerst ein Item aus dem Suchfeld aus.
+WIKI_CHEST_PREVIEW_NO_DATA	Für dieses Item wurden keine Truheninhalte gefunden.
+WIKI_REFINE_VIEW_BTN	Verbessern
+WIKI_ITEM_PREVIEW_BTN	Itemvorschau
+WIKI_ITEM_PREVIEW_NO_SELECT	Wähle ein Item aus der Wiki-Suche aus.
+WIKI_ITEM_PREVIEW_EMPTY	In den Wiki-Tabellen wurde keine Quelle für dieses Item gefunden.
+WIKI_ITEM_PREVIEW_COL_NAME	Name
+WIKI_ITEM_PREVIEW_COL_LEVEL	Level
+WIKI_ITEM_PREVIEW_COL_COUNT	Anzahl
+WIKI_ITEM_PREVIEW_COL_LOC	Ort
+WIKI_ITEM_PREVIEW_SECTION_MOB	Monster / Metins / Bosse
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Truhe
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Sonstiges

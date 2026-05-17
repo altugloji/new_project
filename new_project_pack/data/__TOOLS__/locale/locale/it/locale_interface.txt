@@ -1326,3 +1326,7 @@ WORLD_BOSS_TOTAL_DAMAGE_TEXT	Danno complessivo
 WORLD_BUSS_REWARD_BUTTON	Ritira ricompensa
 YES	Sì.
 ZONE_MAP	Mappa grande
+BULK_POTION_TITLE	Pannello Pozioni di Massa
+BULK_POTION_USE	Usa
+BULK_POTION_CLEAR	Pulisci
+GAME_GM_CALL	Chiama GM

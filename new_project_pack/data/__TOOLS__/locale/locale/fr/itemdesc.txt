@@ -6817,7 +6817,7 @@
 72320	Extension d'inventaire	Utilisez cet objet pour agrandir votre inventaire. Cet objet n'est pas échangeable.
 72321	Anneau des secrets	Empêche la collecte de points d'expérience pendant la chasse aux monstres
 72322	Carte du nouveau départ	Cette carte vous permet de réinitialiser le niveau de la mission.
-72323	C. du nouvel agencement	Cette carte vous permet de relancer les dés pour obtenir une nouvelle mission.
+72323	Carte de personnage	Transforme ton personnage, avec ses objets et sa progression actuelle, en une carte pouvant être transférée à un autre joueur. | Cette carte peut être échangée.
 72325	Antéprojection	Annule les projections pratiquées sur vos objets.
 72326	Bon de projection	Ce bon vous permet de modifier l'apparence de votre équipement sans dépenser de Yangs.
 72327	Parchemin à sphère (éch)	Il recharge votre animasphère de 30 vies, qui vous permettent d'accéder au Temple du zodiaque. Cet objet est échangeable.

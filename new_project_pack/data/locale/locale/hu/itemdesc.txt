@@ -6817,7 +6817,7 @@
 72320	Leltárbõvítõ	Ezzel a tárggyal bõvítheted a leltárad. Nem adható át.
 72321	Titkok gyûrûje	Megakadályozza a tapasztalati pontok gyûjtését szörnyvadászat közben.
 72322	Visszaállító jegy	Ez a jegy lehetõvé teszi megbízás-szinted visszaállítását.
-72323	Újrakeverõ jegy	Ez a jegy lehetõvé teszi megbízásod újrakeverését.
+72323	Karakterkártya	A karakteredet a rajta lévõ tárgyakkal és aktuális elõrehaladásával együtt kártyává alakítja, amely átadható egy másik játékosnak. | Ez a kártya kereskedhetõ.
 72325	Átalakítás visszafordító	Visszafordítja egy tárgy átalakítását.
 72326	Átalakító jegy	Ennek a jegynek a használatával megváltoztathatod felszerelésed kinézetét Yang költése nélkül.
 72327	Gömb pergamen (átadható)	Feltölti az Anima-gömbjeidet 30-cal, amik belépést biztosítanak a Zodiákus templomba. A tárgy átadható.

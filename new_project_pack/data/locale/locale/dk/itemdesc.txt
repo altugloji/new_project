@@ -6817,7 +6817,7 @@
 72320	Inventar Udvidelse	Brug denne genstand til at udvide dit inventar. Ikke handelbar.
 72321	Hemmelighedernes Ring	Forhindrer indsamlingen af erfaringspoint når du jager monstre.
 72322	Nulstillings Billet	Denne billet tillader dig at nulstille din missions level.
-72323	Omblandings Billet	Denne billet tillader dig at omblande din mission.
+72323	Karakterkort	Forvandler din karakter med dens items og nuværende fremskridt til et kort, som kan overføres til en anden spiller. | Dette kort kan handles.
 72325	Transmut. Tilbageførsel	Tilbagefører transmutationen af en genstand
 72326	Transmutations Billet	Brug denne billet til at skifte udseendet af dit udstyr uden at bruge Yang.
 72327	Kugle Pergament (Handel)	Oplader din Animasphere med 30 liv for at få adgang til Zodiac Templet. Genstanden er handelbar.

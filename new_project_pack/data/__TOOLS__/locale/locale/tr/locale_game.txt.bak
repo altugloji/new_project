@@ -1,25 +1,42 @@
-SHOP_NOT_ENOUGH_ITEM	Iteme insuficiente
-GEMSHOP_TITLE	[Test] Gem Points
-GEMSHOP_SECOND_TITLE	Gem point convert items
-GEMSHOP_CONVERT_SELECTED	Convert Selected x{}
-GEMSHOP_CONVERT_QUESTION	Do you want {} x{} to {} gem point?
-GEMSHOP_TITLE2	Gaya Shop
-GEMSHOP_HAS_TOOLTIP	You has: {}
-GEMSHOP_POINT_TOOLTIP	Gem: {}
-GEMSHOP_YOU_ALREADY_BUYED	You already buyed!
-GEMSHOP_OPEN_SLOT_QUESTION	Do you want open slot?
-GEMSHOP_BUY_QUESTION	Do you want buy {} for {} gaya?
-GEMSHOP_REFRESH_QUESTION	Do you want refresh items?
+CHAT_FLAG_BAR_TITLE	GLOBAL SOHBET
+SHOP_NOT_ENOUGH_ITEM	Yetersiz eþya
+GEMSHOP_TITLE	Gaya Dükkaný
+GEMSHOP_SECOND_TITLE	Eþyalarý Gaya puanýna çevir
+GEMSHOP_CONVERT_SELECTED	Seçilenleri Çevir x{}
+GEMSHOP_CONVERT_QUESTION	{} x{} eþyasýný {} Gaya puanýna çevirmek istiyor musun?
+GEMSHOP_TITLE2	Gaya Dükkaný
+GEMSHOP_HAS_TOOLTIP	Sende var: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	Bunu zaten satýn aldýn!
+GEMSHOP_OPEN_SLOT_QUESTION	Slotu açmak istiyor musun?
+GEMSHOP_BUY_QUESTION	{} eþyasýný {} Gaya karþýlýðýnda satýn almak istiyor musun?
+GEMSHOP_REFRESH_QUESTION	Eþyalarý yenilemek istiyor musun?
 WIKI_UNKOWN_MOB	Bilinmeyen Mob: %d
-WIKI_UNKOWN_ITEM	Bilinmeyen eþya: %d
+WIKI_UNKOWN_ITEM	Bilinmeyen Eþya: %d
 WIKI_TITLE	Wiki Sistemi
+WIKI_DROP_VIEW_TITLE	Belirli bir eþyanýn droplarýný göster
+WIKI_OR	veya
+WIKI_ITEM_NAME_PLACEHOLDER	Eþya adýný gir...
+WIKI_REFINE_HEADER_TIP	+%d yükseltme aþamasý (malzeme / yang / olasýlýk)
 WIKI_ITEM_NAME	Eþya Adý
 WIKI_MOB_NAME	Mob Adý
 WIKI_CATEGORY	Kategori
+WIKI_WEAPONS_SECTION	Silahlar
+WIKI_ARMOR_SECTION	Zýrh ve Aksesuarlar
+WIKI_SWORD	Kýlýçlar
+WIKI_DAGGER	Hançerler
+WIKI_BOW	Yaylar
+WIKI_TWOHAND	Çift El Silahlar
+WIKI_BELL	Çanlar
+WIKI_FAN	Yelpazeler
+WIKI_HELMET	Miðferler
+WIKI_BOOTS	Ayakkabýlar
+WIKI_METINS	Metinler
+WIKI_75_99	Lv. 75-99
 WIKI_EQUIPMENT	Ekipman
 WIKI_EQUIPMENT_WEAPONS	Silahlar
 WIKI_EQUIPMENT_ARMOR	Zýrhlar
-WIKI_EQUIPMENT_HELMET	Kasklar
+WIKI_EQUIPMENT_HELMET	Miðferler
 WIKI_EQUIPMENT_SHIELD	Kalkanlar
 WIKI_EQUIPMENT_EARRING	Küpeler
 WIKI_EQUIPMENT_BRACELET	Bilezikler
@@ -28,13 +45,27 @@ WIKI_EQUIPMENT_SHOES	Ayakkabýlar
 WIKI_EQUIPMENT_BELT	Kemerler
 WIKI_EQUIPMENT_TALISMAN	Týlsýmlar
 WIKI_CHESTS	Sandýklar
-WIKI_CHESTS_BOSS	Boss sandýklarý
-WIKI_CHESTS_EVENT	Etkinlik sandýklarý
-WIKI_CHESTS_ALTERNATIVE	Alternatif sandýklar
+WIKI_CHESTS_BOSS	Boss Sandýklarý
+WIKI_CHESTS_EVENT	Etkinlik Sandýklarý
+WIKI_CHESTS_ALTERNATIVE	Alternatif Sandýklar
+WIKI_CHEST_PREVIEW_BTN	Sandýk Önizleme
+WIKI_CHEST_PREVIEW_NO_SELECT	Önce arama alanýndan bir eþya seçin.
+WIKI_CHEST_PREVIEW_NO_DATA	Bu eþya için sandýk içeriði bulunamadý.
+WIKI_REFINE_VIEW_BTN	Yükseltme
+WIKI_ITEM_PREVIEW_BTN	Eþya Önizleme
+WIKI_ITEM_PREVIEW_NO_SELECT	Wiki aramasýndan bir eþya seçin.
+WIKI_ITEM_PREVIEW_EMPTY	Wiki tablolarýnda bu eþya için kaynak bulunamadý.
+WIKI_ITEM_PREVIEW_COL_NAME	Ýsim
+WIKI_ITEM_PREVIEW_COL_LEVEL	Seviye
+WIKI_ITEM_PREVIEW_COL_COUNT	Adet
+WIKI_ITEM_PREVIEW_COL_LOC	Lokasyon
+WIKI_ITEM_PREVIEW_SECTION_MOB	Canavarlar / Metinler / Bosslar
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Sandýk
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Diðer
 WIKI_BOSSES	Bosslar
 WIKI_1_75	Lv. 1-75
 WIKI_76_100	Lv. 76-100
-WIKI_100	Lv. 76-100
+WIKI_100	Lv. 100+
 WIKI_BOSSES_EVENT	Etkinlik Bosslarý
 WIKI_MONSTER	Canavarlar
 WIKI_METINSTONE	Metin Taþlarý
@@ -42,15 +73,15 @@ WIKI_LEVEL_MOB_TEXT	Seviye %d
 WIKI_LEVEL_TEXT	Seviye %d - Yükseltme Aralýðý %d~%d
 WIKI_LEVEL_TEXT2	Seviye %d~%d - Yükseltme Aralýðý %d~%d
 WIKI_UPGRADE_COSTS	Sonraki Eþya
-WIKI_YANG_COSTS	Yang maliyeti
-WIKI_AVAIBLE_AT	Bulunduðu yer
-WIKI_IMPROVEMENT_INFO	%s geliþtirme bilgisi
-WIKI_CONTENT_INFO	%s içeriði
-WIKI_DROPLIST_INFO	%s düþen eþyalarý
-WIKI_STATICS_INFO	%s istatistikleri
+WIKI_YANG_COSTS	Yang Maliyeti
+WIKI_AVAIBLE_AT	Bulunduðu Yer
+WIKI_IMPROVEMENT_INFO	%s Geliþtirme Bilgisi
+WIKI_CONTENT_INFO	%s Ýçeriði
+WIKI_DROPLIST_INFO	%s Düþen Eþyalarý
+WIKI_STATICS_INFO	%s Ýstatistikleri
 WIKI_STATICS_INFO_TYPE	Irk: %s | Tür: %s
-WIKI_STATICS_INFO_DMG	Min. Hasar:%d | Max. Hasar:%d | Max HP: %d
-WIKI_STATICS_INFO_YNG	Min. Yang:%d | Max. Yang:%d | EXP: %d
+WIKI_STATICS_INFO_DMG	Min. Hasar: %d | Max. Hasar: %d | Max HP: %d
+WIKI_STATICS_INFO_YNG	Min. Yang: %d | Max. Yang: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Savunmalar:
 WIKI_ORIGIN	Köken
 WIKI_SYSTEMS	Sistemler
@@ -59,7 +90,7 @@ EVENT_CALENDAR	Takvim
 WIKI_COSTUME	Kostüm
 WIKI_COSTUME_HAIR	Saç
 WIKI_COSTUME_SASH	Kuþak
-WIKI_SHINING	Shining
+WIKI_SHINING	Parlama
 WIKI_PET	Pet
 WIKI_MOUNT	Binek
 DO_YOU_BUY_ITEM_C	Adet: %d Fiyat(EP): %s

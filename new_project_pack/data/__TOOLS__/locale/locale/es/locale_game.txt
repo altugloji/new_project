@@ -16,14 +16,14 @@ WIKI_EQUIPMENT_SHOES	Zapatos
 WIKI_EQUIPMENT_BELT	Cinturones
 WIKI_EQUIPMENT_TALISMAN	Talismanes
 WIKI_CHESTS	Cofres
-WIKI_CHESTS_BOSS	Cofres de jefe
-WIKI_CHESTS_EVENT	Cofres de evento
-WIKI_CHESTS_ALTERNATIVE	Cofres alternativos
-WIKI_BOSSES	Jefes
+WIKI_CHESTS_BOSS	Cofres de Boss
+WIKI_CHESTS_EVENT	Cofres de Evento
+WIKI_CHESTS_ALTERNATIVE	Cofres Alternativos
+WIKI_BOSSES	Bosses
 WIKI_1_75	Nv. 1-75
 WIKI_76_100	Nv. 76-100
-WIKI_100	Nv. 76-100
-WIKI_BOSSES_EVENT	Jefes de evento
+WIKI_100	Nv. 100+
+WIKI_BOSSES_EVENT	Bosses de Evento
 WIKI_MONSTER	Monstruos
 WIKI_METINSTONE	Piedras Metin
 WIKI_LEVEL_MOB_TEXT	Nivel %d
@@ -31,14 +31,14 @@ WIKI_LEVEL_TEXT	Nivel %d - Rango de mejora %d~%d
 WIKI_LEVEL_TEXT2	Nivel %d~%d - Rango de mejora %d~%d
 WIKI_UPGRADE_COSTS	Siguiente objeto
 WIKI_YANG_COSTS	Coste de Yang
-WIKI_AVAIBLE_AT	Disponible en
+WIKI_AVAIBLE_AT	Ubicación
 WIKI_IMPROVEMENT_INFO	Información de mejora de %s
 WIKI_CONTENT_INFO	Contenido de %s
-WIKI_DROPLIST_INFO	Lista de drops de %s
+WIKI_DROPLIST_INFO	Drops de %s
 WIKI_STATICS_INFO	Estadísticas de %s
 WIKI_STATICS_INFO_TYPE	Raza: %s | Tipo: %s
-WIKI_STATICS_INFO_DMG	Daño mín.:%d | Daño máx.:%d | HP máx.: %d
-WIKI_STATICS_INFO_YNG	Yang mín.:%d | Yang máx.:%d | EXP: %d
+WIKI_STATICS_INFO_DMG	Daño mín.: %d | Daño máx.: %d | HP máx.: %d
+WIKI_STATICS_INFO_YNG	Yang mín.: %d | Yang máx.: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Defensas:
 WIKI_ORIGIN	Origen
 WIKI_SYSTEMS	Sistemas
@@ -3680,3 +3680,58 @@ GEMSHOP_YOU_ALREADY_BUYED	¡Ya has comprado esto!
 GEMSHOP_OPEN_SLOT_QUESTION	¿Quieres abrir el slot?
 GEMSHOP_BUY_QUESTION	¿Quieres comprar {} por {} Gaya?
 GEMSHOP_REFRESH_QUESTION	¿Quieres actualizar los objetos?
+CHARACTER_CHEST_PREVIEW_HINT	Puedes ver el personaje con CTRL + CLIC DERECHO.
+CHARACTER_CHEST_PREVIEW_CLOSE	Cerrar
+CHARACTER_CHEST_INVENTORY_BLOCK	No puedes usar el inventario mientras esta ventana esté abierta.
+CHARACTER_CHEST_WRONG_MAP	Esta acción solo puede realizarse en el Desierto Yongbi.
+CHARACTER_CHEST_WRONG_PASSWORD	La contraseña de eliminación del personaje es incorrecta.
+CHARACTER_CHEST_NO_SLOT	No tienes ningún slot de personaje libre en tu cuenta.
+CHARACTER_CHEST_PACK_OK	Personaje empaquetado correctamente.
+CHARACTER_CHEST_UNPACK_OK	Personaje transferido a tu cuenta.
+CHARACTER_CHEST_FAILED	No se pudo completar la acción.
+CHARACTER_CHEST_INVALID	Tarjeta de Personaje inválida.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	No puedes empaquetar tu personaje activo.
+CHARACTER_CHEST_ALREADY_USED	Esta tarjeta ya ha sido usada.
+CHARACTER_CHEST_TITLE	Tarjeta de Personaje
+CHARACTER_CHEST_SELECT_HINT	Selecciona el personaje secundario que quieres empaquetar.
+CHARACTER_CHEST_UNPACK_QUEST	¿Quieres transferir este personaje a tu cuenta?
+CHARACTER_CHEST_PACKED_LABEL	Personaje empaquetado: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Transferir
+CHARACTER_CHEST_BIO_TITLE	Misiones del Biólogo
+CHARACTER_CHEST_BIO_QUEST_NAME	Misión del Biólogo - Nv. %d
+CHARACTER_CHEST_BIO_DONE	Completado
+CHARACTER_CHEST_BIO_PROGRESS	En progreso
+CHARACTER_CHEST_BIO_WAIT	En espera
+BULK_POTION_EMPTY_PANEL	No hay pociones registradas.
+BULK_POTION_NOT_ALLOWED	Este objeto no puede añadirse al panel de pociones masivas.
+BULK_POTION_ALREADY_REGISTERED	Esta poción ya está registrada en el panel.
+WIKI_DROP_VIEW_TITLE	Mostrar drops de un objeto específico
+WIKI_OR	o
+WIKI_ITEM_NAME_PLACEHOLDER	Introduce el nombre del objeto...
+WIKI_REFINE_HEADER_TIP	+%d etapa de mejora (materiales / yang / probabilidad)
+WIKI_WEAPONS_SECTION	Armas
+WIKI_ARMOR_SECTION	Armaduras y accesorios
+WIKI_SWORD	Espadas
+WIKI_DAGGER	Dagas
+WIKI_BOW	Arcos
+WIKI_TWOHAND	Armas de dos manos
+WIKI_BELL	Campanas
+WIKI_FAN	Abanicos
+WIKI_HELMET	Cascos
+WIKI_BOOTS	Zapatos
+WIKI_METINS	Metines
+WIKI_75_99	Nv. 75-99
+WIKI_CHEST_PREVIEW_BTN	Vista previa del cofre
+WIKI_CHEST_PREVIEW_NO_SELECT	Primero selecciona un objeto del campo de búsqueda.
+WIKI_CHEST_PREVIEW_NO_DATA	No se encontró contenido de cofre para este objeto.
+WIKI_REFINE_VIEW_BTN	Mejora
+WIKI_ITEM_PREVIEW_BTN	Vista previa del objeto
+WIKI_ITEM_PREVIEW_NO_SELECT	Selecciona un objeto desde la búsqueda Wiki.
+WIKI_ITEM_PREVIEW_EMPTY	No se encontró ninguna fuente para este objeto en las tablas Wiki.
+WIKI_ITEM_PREVIEW_COL_NAME	Nombre
+WIKI_ITEM_PREVIEW_COL_LEVEL	Nivel
+WIKI_ITEM_PREVIEW_COL_COUNT	Cantidad
+WIKI_ITEM_PREVIEW_COL_LOC	Ubicación
+WIKI_ITEM_PREVIEW_SECTION_MOB	Monstruos / Metines / Bosses
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Cofre
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Otros

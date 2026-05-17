@@ -1,3 +1,9 @@
+USER_REPORT_SYSTEM_UI_CHARACTER_NAME	Nom du personnage
+USER_REPORT_SYSTEM_UI_CLOSE_BUTTON	Fermer
+USER_REPORT_SYSTEM_UI_SELECT_REASON	Raison du signalement
+USER_REPORT_SYSTEM_UI_SEND_BUTTON	Envoyer
+USER_REPORT_SYSTEM_UI_TARGET_CHECK	Personnage ciblé
+USER_REPORT_SYSTEM_UI_WINDOW_NAME	Signaler
 LOGIN_LANGUAGE_SELECT_TITLE	Sélection de la langue
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Site web
@@ -171,7 +177,7 @@ CUBE_RENEWAL_TITLE	Raffinage
 CUBE_REQUIRE_MATERIAL	Matériaux nécessaires
 CUBE_REQUIRE_MATERIAL_OR	ou
 CUBE_TITLE	Fenêtre de raffinage
-CURRENT_POINT	Score actuel : %s
+CURRENT_POINT	Score actuel : %s
 CZ_REWARD_WINDOW_TITLE	Temple du zodiaque
 DO_CHANGE_ATTR	Appliquer
 DO_REFINE	Raffiner
@@ -219,8 +225,8 @@ EVENT_REWARD_LIST_TITLE	Récompense
 EVENT_REWARD_TITLE	Récompense
 EXCHANGE_ACCEPT	OK
 EXCHANGE_TITLE	Echanger
-EXIT_BATTLE_FIELD	Voulez-vous vraiment quitter la Zone de combat ?
-EXIT_BATTLE_FIELD_ON_DEAD	Souhaitez-vous quitter la Zone de combat avec %d points ?
+EXIT_BATTLE_FIELD	Voulez-vous vraiment quitter la Zone de combat ?
+EXIT_BATTLE_FIELD_ON_DEAD	Souhaitez-vous quitter la Zone de combat avec %d points ?
 EXPIRED_TIME	L'évènement est terminé.
 FISHING_RENEWAL_TITLE	Pêche
 FLOWER_EVENT_EXCHANGE_BUTTON_TEXT	Échanger
@@ -247,13 +253,13 @@ GOLDEN_LAND_EVENT_TITLE	Expédition de Primordis
 GOLDEN_LAND_EVENT_TREE_FRUIT_TOOLTIP	Vous pouvez échanger les baies amères que vous avez au fil des niveaux contre des baies dorées auprès du marchand caravanier.
 GOLDEN_LAND_EVENT_YELLOW_FRUIT_TOOLTIP	Vous pouvez échanger les baies amères que vous avez au fil des niveaux contre des baies dorées auprès du marchand caravanier.
 GOLDEN_LAND_FIND_GOLDEN_FRUIT_FIND_CARD	Découvrir des champs
-GOLDEN_LAND_FIND_GOLDEN_FRUIT_NEED_YELLOW_FRUIT_COUNT	Baies dorées requises :
+GOLDEN_LAND_FIND_GOLDEN_FRUIT_NEED_YELLOW_FRUIT_COUNT	Baies dorées requises :
 GOLDEN_LAND_FIND_GOLDEN_FRUIT_REWARD	Récompense
 GOLDEN_LAND_FIND_GOLDEN_FRUIT_TITLE	À la chasse aux baies dorées
 GOLDEN_LAND_FIND_GOLDEN_FRUIT_TOOLTIP_RESET	Réinitialiser
-GOLDEN_LAND_FIND_GOLDEN_FRUIT_YELLOW_FRUIT_COUNT	Vos baies dorées :
+GOLDEN_LAND_FIND_GOLDEN_FRUIT_YELLOW_FRUIT_COUNT	Vos baies dorées :
 GOLDEN_LAND_STAGE_EXIT_BUTTON	Quitter
-GOLDEN_LAND_STAGE_EXIT_QUESTION	Voulez-vous vraiment abandonner ? Vous vous retrouverez en Terre d'or.
+GOLDEN_LAND_STAGE_EXIT_QUESTION	Voulez-vous vraiment abandonner ? Vous vous retrouverez en Terre d'or.
 GOLDEN_LAND_STAGE_NUMBER_TOOLTIP_1	Niveau 1
 GOLDEN_LAND_STAGE_NUMBER_TOOLTIP_2	Niveau 2
 GOLDEN_LAND_STAGE_NUMBER_TOOLTIP_3	Niveau 3
@@ -267,7 +273,7 @@ GOLDEN_LAND_STAGE_NUMBER_TOOLTIP_10	Niveau 10
 GOLDEN_LAND_STAGE_NUMBER_TOOLTIP_11	Niveau 11
 GOLDEN_LAND_STAGE_NUMBER_TOOLTIP_12	Niveau 12 (oasis)
 GOLDEN_LAND_STAGE_REMAIN_TIME	%d min
-GOLDEN_LAND_STAGE_REMAIN_TIME_1M	Moins de 1 min
+GOLDEN_LAND_STAGE_REMAIN_TIME_1M	Moins de 1 min
 GRADE	Classe
 GRADE_SELECT	Classe
 GRAPHICONOFF_DROP_ITEM_APPLY	Appliquer
@@ -317,15 +323,15 @@ GRAPHICONOFF_PRIVATE_SHOP_LEVEL4_TOOLTIP	Tout afficher sur un rayon proche
 GRAPHICONOFF_PRIVATE_SHOP_LEVEL5	5
 GRAPHICONOFF_PRIVATE_SHOP_LEVEL5_TOOLTIP	Tout afficher dans l'environnement immédiat
 GUILDWINDOW_BASE_BUFF	Bonus de guilde
-GUILD_ATTENDANCE_LOCA1	Première participation : 1x médaille de bravoure
-GUILD_ATTENDANCE_LOCA2	10 ou plus : 1x médaille de bravoure
-GUILD_ATTENDANCE_LOCA3	20 ou plus : 2x médaille de bravoure
-GUILD_ATTENDANCE_LOCA4	30 ou plus : 4x médaille de bravoure
-GUILD_ATTENDANCE_LOCA5	40 ou plus : 6x médaille de bravoure
-GUILD_ATTENDANCE_LOCA6	50 ou plus : 8x médaille de bravoure
-GUILD_ATTENDANCE_LOCA7	60 ou plus : 10x médaille de bravoure
-GUILD_ATTENDANCE_LOCA8	70 ou plus : 12x médaille de bravoure
-GUILD_ATTENDANCE_LOCA9	Début de participation : tous les jours à 5h00
+GUILD_ATTENDANCE_LOCA1	Première participation : 1x médaille de bravoure
+GUILD_ATTENDANCE_LOCA2	10 ou plus : 1x médaille de bravoure
+GUILD_ATTENDANCE_LOCA3	20 ou plus : 2x médaille de bravoure
+GUILD_ATTENDANCE_LOCA4	30 ou plus : 4x médaille de bravoure
+GUILD_ATTENDANCE_LOCA5	40 ou plus : 6x médaille de bravoure
+GUILD_ATTENDANCE_LOCA6	50 ou plus : 8x médaille de bravoure
+GUILD_ATTENDANCE_LOCA7	60 ou plus : 10x médaille de bravoure
+GUILD_ATTENDANCE_LOCA8	70 ou plus : 12x médaille de bravoure
+GUILD_ATTENDANCE_LOCA9	Début de participation : tous les jours à 5h00
 GUILD_ATTENDANCE_TITLE	Récompense de participation
 GUILD_BANKINFO_CLOSE	Fermer
 GUILD_BANKINFO_NAME	Membre
@@ -333,7 +339,7 @@ GUILD_BANKINFO_TITLE	Historique de guilde
 GUILD_BANKINFO_TYPE	Objet/devise
 GUILD_BANKINFO_USETYPE	Action
 GUILD_BANK_CLOSE	Fermer
-GUILD_BANK_INFO	Entrepôt :
+GUILD_BANK_INFO	Entrepôt :
 GUILD_BASEINFO_BANK	Entrepôt de guilde
 GUILD_BASEINFO_BANKLASTOUT	Dernier élément
 GUILD_BASEINFO_BUILDING	Bâtiment de guilde
@@ -386,14 +392,14 @@ GUILD_BUILDING_TITLE	Bâtiment de Guilde
 GUILD_CRYSTAL	Cristal
 GUILD_DEPOSIT	Depôt
 GUILD_DONATE_BUTTON_OVER_TEXT	Objet aléatoire
-GUILD_DONATE_COUNT	Donations disponibles : %d/%d
+GUILD_DONATE_COUNT	Donations disponibles : %d/%d
 GUILD_DONATE_GET_MEDAL_OF_HONOR	%d
 GUILD_DONATE_GUILD_EXP	EXP de guilde
 GUILD_DONATE_HIGH_MATERIAL	Donation élevée
 GUILD_DONATE_MEDAL_OF_HONOR	Médaille de bravoure
 GUILD_DONATE_MIDDLE_MATERIAL	Donation moyenne
 GUILD_DONATE_MY_MEDAL_OF_HONOR	Mes médailles de bravoure
-GUILD_DONATE_NORMAL_MATERIAL	120 000 Yangs
+GUILD_DONATE_NORMAL_MATERIAL	120 000 Yangs
 GUILD_DONATE_TAB_HIGH	Donation élevée
 GUILD_DONATE_TAB_MIDDLE	Donation moyenne
 GUILD_DONATE_TAB_NORMAL	Donation ordinaire
@@ -477,7 +483,7 @@ GUILD_WAR_JOINMEMBER_FIVE	5
 GUILD_WAR_JOINMEMBER_TEN	10
 GUILD_WAR_NORMAL	Champ
 GUILD_WAR_REPORT	Aperçu combat
-GUILD_WAR_REPORTLIST	Aperçu (combats : C, victoires : V, défaites : D, nul : N)
+GUILD_WAR_REPORTLIST	Aperçu (combats : C, victoires : V, défaites : D, nul : N)
 GUILD_WAR_SCORE	Aperçu combat
 GUILD_WAR_SKILL	Compétences de guilde
 GUILD_WAR_TYPE_DEFENSE	Combat de bouclier
@@ -501,7 +507,7 @@ HELP_CAMERA	Changer vue caméra
 HELP_CHANGE_PK_MODE	Changer de type d'attaque : changer configuration du bouton gauche de souris
 HELP_CHARACTER_BUTTON1	(Fenêtre de perso, d'inventaire,
 HELP_CHARACTER_BUTTON2	liste d'amis et options)
-HELP_CHAT	Pour discuter avec des groupes précis, faites précéder votre texte de : !(tchat), #(tchat de groupe) ou %(tchat de guilde).
+HELP_CHAT	Pour discuter avec des groupes précis, faites précéder votre texte de : !(tchat), #(tchat de groupe) ou %(tchat de guilde).
 HELP_CLICK_OTHER_PLAYER	Effectuez un clic droit pour échanger avec d'autres joueurs, créer des groupes et provoquer quelqu'un en duel.
 HELP_CONTROL_CAMERA_BY_MIDDLEBUTTON	Paramètres de vue caméra : bouton central de la souris.
 HELP_CONTROL_CAMERA_BY_RIGHTBUTTON	Paramètres de modification de la vue caméra : appuyer sur bouton droite ou gauche de la souris.
@@ -704,7 +710,7 @@ LOOTING_SYSTEM_CATEGORY_JOB_WOLFMAN	Lycan
 LOOTING_SYSTEM_CATEGORY_MOUNT_PET	Type
 LOOTING_SYSTEM_CATEGORY_MOUNT_PET_CHARGED_PET	Familiers
 LOOTING_SYSTEM_CATEGORY_MOUNT_PET_EGG	Œufs de familiers
-LOOTING_SYSTEM_CATEGORY_MOUNT_PET_FREE_PET	Accessoires : familier
+LOOTING_SYSTEM_CATEGORY_MOUNT_PET_FREE_PET	Accessoires : familier
 LOOTING_SYSTEM_CATEGORY_MOUNT_PET_MOUNT	Montures
 LOOTING_SYSTEM_CATEGORY_POTION	Type
 LOOTING_SYSTEM_CATEGORY_POTION_ABILITY	Consommables
@@ -723,12 +729,12 @@ LOOTING_SYSTEM_COSTUME	Costume
 LOOTING_SYSTEM_DS	Alchimie des pierres-dragons
 LOOTING_SYSTEM_ETC	Autres objets
 LOOTING_SYSTEM_EVENT	Objets d'évènement
-LOOTING_SYSTEM_EXIT_WITHOUT_SAVING	Fermer sans sauvegarder ?
-LOOTING_SYSTEM_EXIT_WITH_SAVING	Sauvegarder et fermer ? Les modifications seront effectives dès que vous utiliserez un pass butin.
+LOOTING_SYSTEM_EXIT_WITHOUT_SAVING	Fermer sans sauvegarder ?
+LOOTING_SYSTEM_EXIT_WITH_SAVING	Sauvegarder et fermer ? Les modifications seront effectives dès que vous utiliserez un pass butin.
 LOOTING_SYSTEM_FISH_MINING	Pêche & extraction
 LOOTING_SYSTEM_HEAD	Casque
 LOOTING_SYSTEM_INIT	Réinitialiser
-LOOTING_SYSTEM_INIT_QUESTION_DIALOG_TITLE	Voulez-vous réinitialiser les paramètres ?
+LOOTING_SYSTEM_INIT_QUESTION_DIALOG_TITLE	Voulez-vous réinitialiser les paramètres ?
 LOOTING_SYSTEM_MESSAGE_ENABLE_VOUCHER	Ces fonctions seront activées avec un pass butin.
 LOOTING_SYSTEM_MESSAGE_POSSIBLE_ITEM_PICKUP	Vous recevrez du butin selon les paramètres choisis.
 LOOTING_SYSTEM_MOUNT_PET	Montures et familiers
@@ -739,7 +745,7 @@ LOOTING_SYSTEM_QUESTION_ARMOR	Ces options vous permettent de paramétrer le ramas
 LOOTING_SYSTEM_QUESTION_COMMON	Vous pouvez définir les paramètres du ramassage des autres objets utilisés par toutes les classes.
 LOOTING_SYSTEM_QUESTION_COSTUME	Ces options vous permettent de paramétrer le ramassage des costumes (armes, armures, coiffes, étoles et tenues d'aura).
 LOOTING_SYSTEM_QUESTION_DS	Ces options vous permettent de paramétrer le ramassage des objets nécessaires à l'alchimie des pierres-dragons.
-LOOTING_SYSTEM_QUESTION_ETC	Ces options vous permettent de paramétrer votre filtre pour les objets des catégories suivantes : équipement, costumes, raffinage, potions, montures, familiers, pêche, extraction, livres de compétence et objets évènementiels.
+LOOTING_SYSTEM_QUESTION_ETC	Ces options vous permettent de paramétrer votre filtre pour les objets des catégories suivantes : équipement, costumes, raffinage, potions, montures, familiers, pêche, extraction, livres de compétence et objets évènementiels.
 LOOTING_SYSTEM_QUESTION_EVENT	Ces options vous permettent de paramétrer le ramassage des objets d'évènement.
 LOOTING_SYSTEM_QUESTION_FISH_MINING	Ces options vous permettent de paramétrer le ramassage des objets de pêche et d'extraction.
 LOOTING_SYSTEM_QUESTION_HEAD	Ces options vous permettent de paramétrer le ramassage des casques.
@@ -758,7 +764,7 @@ LOOTING_SYSTEM_WEAPON	Arme
 LOOTING_SYSTEM_WEARING_LEVEL	Niveau requis
 LUCKY_BOX_NOTICE_YANG	Nouvelle chance d'objet (coût en Yangs)
 LUCKY_BOX_RECV_BUTTON	Accepter l'objet
-LUCKY_BOX_RECV_NAME	Contenu :
+LUCKY_BOX_RECV_NAME	Contenu :
 LUCKY_BOX_RETRY_BUTTON	Nouvelle chance d'objet
 LUCKY_BOX_TITLE_NAME	Coffret bonne fortune
 MAILBOX_POST_ALL_DELETE_BUTTON	Tout supprimer
@@ -831,13 +837,13 @@ MERCENARY_MANAGE_SPECIFICITY	Spécialisation
 MERCENARY_MISSION_ACTIVE	Endurance
 MERCENARY_MISSION_ALL_CANCLE	Les renvoyer tous
 MERCENARY_MISSION_AUTO_JOIN	Sélection auto.
-MERCENARY_MISSION_BONUS_REWARD	Récompense supplémentaire en prime !
-MERCENARY_MISSION_CURRENT_INFO	Mission actuelle :
+MERCENARY_MISSION_BONUS_REWARD	Récompense supplémentaire en prime !
+MERCENARY_MISSION_CURRENT_INFO	Mission actuelle :
 MERCENARY_MISSION_DECREASE_RUNTIME	Réduire la durée de la mission
 MERCENARY_MISSION_DECREAS_INJURE	Diminuer le risque de blessure
 MERCENARY_MISSION_DISPATCH_BENEFITS	Avantages des troupes
 MERCENARY_MISSION_DISPATCH_MERCENARY	Envoyer le mercenaire
-MERCENARY_MISSION_EXP_BONUS	Points d'expérience bonus reçus !
+MERCENARY_MISSION_EXP_BONUS	Points d'expérience bonus reçus !
 MERCENARY_MISSION_INFO	Information sur la mission
 MERCENARY_MISSION_JOIN	Participer
 MERCENARY_MISSION_LIMIT_ACTIVE	Endurance requise
@@ -865,8 +871,8 @@ MINI_BOSS_DUNGEON_TITLE_NAME	Participants
 MINI_BOSS_DUNGEON_TITLE_NUM	Rang
 MINI_BOSS_DUNGEON_TITLE_POINT	Points d'apocalypse
 MINI_BOSS_DUNGEON_TOOTIP_01	Aperçu du donjon
-MINI_BOSS_DUNGEON_TOOTIP_02	Apocalypse pour les niveaux 40 à 80
-MINI_BOSS_DUNGEON_TOOTIP_03	Apocalypse à partir du niveau 81
+MINI_BOSS_DUNGEON_TOOTIP_02	Apocalypse pour les niveaux 40 à 80
+MINI_BOSS_DUNGEON_TOOTIP_03	Apocalypse à partir du niveau 81
 MINI_BOSS_DUNGEON_TOOTIP_04	Entrer
 MINI_BOSS_DUNGEON_TOOTIP_05	Temps restant
 MINI_BOSS_DUNGEON_TOOTIP_06	Mes points d'apocalypse
@@ -952,7 +958,7 @@ OPTION_ALWAYS_SHOW_NAME_OFF	Restreint
 OPTION_ALWAYS_SHOW_NAME_ON	Toujours
 OPTION_ATTACKED_MOTION	Animations
 OPTION_ATTACKED_MOTION_ALL	Normal
-OPTION_ATTACKED_MOTION_ALL_DESC	Toutes les animations de mêlée seront affichées :
+OPTION_ATTACKED_MOTION_ALL_DESC	Toutes les animations de mêlée seront affichées :
 OPTION_ATTACKED_MOTION_SELF	Performance
 OPTION_ATTACKED_MOTION_SELF_DESC	Certaines animations de mêlée ne seront affichées qu'au personnage et à sa cible.
 OPTION_BLOCK	Bloquer
@@ -1057,7 +1063,7 @@ OTHER_WORLD_SLASH_TEXT	/
 OTHER_WORLD_WISP_BOARD_TITLE	Nombre de flammes funestes
 PARTY_MATCH_TEXT_DUNGEON_NAME	Donjon
 PARTY_MATCH_TEXT_DUNGEON_SELECT	Sélectionnez le donjon
-PARTY_MATCH_TEXT_ENTREE_LEVEL	Niveau : %d
+PARTY_MATCH_TEXT_ENTREE_LEVEL	Niveau : %d
 PARTY_MATCH_TEXT_LEVEL_LIMIT	Niveau exigé
 PARTY_MATCH_TEXT_REQUEST_MATCH	Chercher
 PARTY_MATCH_TEXT_REQUEST_MATCH_CANCEL	Annuler
@@ -1069,8 +1075,8 @@ PASSIVE_ATTR_UI_CHARGE_BUTTON	Recharger
 PASSIVE_ATTR_UI_TITLE	Bonus de relique
 PASSWORD_DESC_1	Veuillez saisir votre mot de passe
 PASSWORD_DESC_2	afin d'ouvrir l'entrepôt.
-PASSWORD_DESC_3	Vous avez déjà changé votre mot de passe ?
-PASSWORD_DESC_4	Si ce n'est pas le cas, votre mot de passe est : « 000000 ».
+PASSWORD_DESC_3	Vous avez déjà changé votre mot de passe ?
+PASSWORD_DESC_4	Si ce n'est pas le cas, votre mot de passe est : « 000000 ».
 PASSWORD_DESC_5	Changez votre mot de passe dans l'entrepôt.
 PASSWORD_TITLE	Retenir le mot de passe
 PET_AGE_TEXT	Âge du familier
@@ -1111,7 +1117,7 @@ PET_REVIVE_REUSLT_TEXT	Résultat
 PET_REVIVE_TARGET	Familier à ressusciter
 PET_REVIVE_TITLE	Ressusciter le familier
 PICK_MONEY_TITLE	Séparer
-POPUP_NOTICE_BUTTON_TEXT	Quoi de neuf ?
+POPUP_NOTICE_BUTTON_TEXT	Quoi de neuf ?
 PREMIUM_PRIVATE_SHOP	Magasin premium privé
 PREMIUM_PRIVATE_SHOP_ITEM_TAKE_OUT	Récupérer un objet
 PREMIUM_PRIVATE_SHOP_MODIFY_BUTTON	Gérer
@@ -1176,8 +1182,8 @@ RESTART_IMMEDIATE	Réincarnation
 RESTART_TOWN	Recommencer dans la cité
 ROULETTE_SPECIAL_TITLE	Récompenses (%s)
 ROULETTE_SPIN_TEXT1	TOURNER
-ROULETTE_SPIN_TEXT2	50 âmes
-ROULETTE_SPIN_TEXT3	250 000 Yangs
+ROULETTE_SPIN_TEXT2	50 âmes
+ROULETTE_SPIN_TEXT3	250 000 Yangs
 ROULETTE_TITLE	Récompenses
 SAFE_CHANGE_PASSWORD	Changer le mot de passe
 SAFE_TITLE	Entrepôt
@@ -1207,15 +1213,15 @@ SHOP_SELL	Vendre
 SHOP_TITLE	Magasin
 SKILL_SUPPORT_TITLE	Compétences standards
 SNOWFLAKE_STICK_EVENT_EXCHANGE_BUTTON_TEXT	Échange
-SNOWFLAKE_STICK_EVENT_EXCHANGE_PAGE_SUBTITLE_1	Échanger contre 1 baguette magique du flocon
+SNOWFLAKE_STICK_EVENT_EXCHANGE_PAGE_SUBTITLE_1	Échanger contre 1 baguette magique du flocon
 SNOWFLAKE_STICK_EVENT_EXCHANGE_PAGE_SUBTITLE_2	Vous pouvez en échanger 3x pendant l'évènement.
 SNOWFLAKE_STICK_EVENT_EXCHANGE_REWARD_BUTTON_TEXT	Récompenses
 SNOWFLAKE_STICK_EVENT_TITLE	Évènement du flocon
-SNOWFLAKE_STICK_EVENT_TOOLTIP_HELP_BUTTON_1	Vous pouvez en échanger 5x en 24 heures. Temps restant jusqu'à la réinitialisation :
-SNOWFLAKE_STICK_EVENT_TOOLTIP_HELP_BUTTON_2	Vous pouvez en échanger 5x en 24 heures. Temps restant jusqu'à la réinitialisation : -
-SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW	Rassemblez 12 boules de neige et 12 branches de bonhomme contre une baguette magique du flocon.
-SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW_MOUNT	Vous pouvez l'échanger contre 15 baguettes magiques du flocon.
-SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW_PET	Vous pouvez l'échanger contre 15 baguettes magiques du flocon.
+SNOWFLAKE_STICK_EVENT_TOOLTIP_HELP_BUTTON_1	Vous pouvez en échanger 5x en 24 heures. Temps restant jusqu'à la réinitialisation :
+SNOWFLAKE_STICK_EVENT_TOOLTIP_HELP_BUTTON_2	Vous pouvez en échanger 5x en 24 heures. Temps restant jusqu'à la réinitialisation : -
+SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW	Rassemblez 12 boules de neige et 12 branches de bonhomme contre une baguette magique du flocon.
+SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW_MOUNT	Vous pouvez l'échanger contre 15 baguettes magiques du flocon.
+SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW_PET	Vous pouvez l'échanger contre 15 baguettes magiques du flocon.
 SNOWFLAKE_STICK_EVENT_TOOLTIP_SNOW_BALL	Vous pouvez recevoir des boules de neige en vainquant les monstres pendant que le sort du flocon est actif.
 SNOWFLAKE_STICK_EVENT_TOOLTIP_TITLE_SNOW_BALL	Boule de neige
 SNOWFLAKE_STICK_EVENT_TOOLTIP_TITLE_TREE_BRANCH	Branche de bonhomme
@@ -1233,8 +1239,8 @@ SUNGMAHEE_GATE_ACHIEV_TOOLTIP_REWARD_LIST	Liste des récompenses
 SUNGMAHEE_GATE_TITLE	Portail d'invasion de SungMa
 SUNGMAHEE_GATE_TITLE_ACHIEV	Trophées
 SUNGMAHEE_GATE_TITLE_REWARD	Récompenses de trophée
-SUNGMAHEE_TOWER_DUNGEON_ENTER_QUESTION	Voulez-vous entrer dans le niveau %d ?
-SUNGMAHEE_TOWER_DUNGEON_EXIT_QUESTION	Oserez-vous terminer le défi ?
+SUNGMAHEE_TOWER_DUNGEON_ENTER_QUESTION	Voulez-vous entrer dans le niveau %d ?
+SUNGMAHEE_TOWER_DUNGEON_EXIT_QUESTION	Oserez-vous terminer le défi ?
 SUNGMAHEE_TOWER_ELEMENT_ALL	Tous
 SUNGMAHEE_TOWER_ELEMENT_DARK	Obscurité
 SUNGMAHEE_TOWER_ELEMENT_EARTH	Terre
@@ -1247,19 +1253,19 @@ SUNGMAHEE_TOWER_ENTER_BUTTON	Entrer
 SUNGMAHEE_TOWER_ENTER_TITLE	Tour infernale de Sung Mahi
 SUNGMAHEE_TOWER_EXIT_BUTTON	Quitter
 SUNGMAHEE_TOWER_INFO_BOARD_FLOOR	E%d
-SUNGMAHEE_TOWER_MISSION_TYPE_ALL_KILL_MOB_PAUSE_SPECIAL	Éliminez tous les monstres et les pierres démoniaques !
-SUNGMAHEE_TOWER_MISSION_TYPE_BOSS	Éliminez tous les monstres !
-SUNGMAHEE_TOWER_MISSION_TYPE_CHESS_FAIL	Éliminez tous les monstres !
+SUNGMAHEE_TOWER_MISSION_TYPE_ALL_KILL_MOB_PAUSE_SPECIAL	Éliminez tous les monstres et les pierres démoniaques !
+SUNGMAHEE_TOWER_MISSION_TYPE_BOSS	Éliminez tous les monstres !
+SUNGMAHEE_TOWER_MISSION_TYPE_CHESS_FAIL	Éliminez tous les monstres !
 SUNGMAHEE_TOWER_MISSION_TYPE_COMPLETE	Mission terminée
-SUNGMAHEE_TOWER_MISSION_TYPE_CORRECT_ITEM_USE	Trouvez la clé et sauvez-vous !
-SUNGMAHEE_TOWER_MISSION_TYPE_DEBUFF_RELEASE	Éliminez tous les monstres !
-SUNGMAHEE_TOWER_MISSION_TYPE_FINDING_RIGHT_MATCH_METIN_STONE	Détruisez la pierre Metin maudite !
-SUNGMAHEE_TOWER_MISSION_TYPE_FINDING_RIGHT_MATCH_METIN_STONE_FAIL	Éliminez tous les monstres !
-SUNGMAHEE_TOWER_MISSION_TYPE_MONSTER_CHESS	Éliminez une paire de monstres qui ne sont pas ensemble !
-SUNGMAHEE_TOWER_MISSION_TYPE_NORMAL	Éliminez tous les monstres !
-SUNGMAHEE_TOWER_MISSION_TYPE_SEAL_RELEASE	Détruisez le sceau avec la pierre de sceau !
-SUNGMAHEE_TOWER_MISSION_TYPE_STAIRS	Montez les marches jusqu'au prochain niveau !
-SUNGMAHEE_TOWER_MISSION_TYPE_SURVIVE	Esquivez toutes les attaques !
+SUNGMAHEE_TOWER_MISSION_TYPE_CORRECT_ITEM_USE	Trouvez la clé et sauvez-vous !
+SUNGMAHEE_TOWER_MISSION_TYPE_DEBUFF_RELEASE	Éliminez tous les monstres !
+SUNGMAHEE_TOWER_MISSION_TYPE_FINDING_RIGHT_MATCH_METIN_STONE	Détruisez la pierre Metin maudite !
+SUNGMAHEE_TOWER_MISSION_TYPE_FINDING_RIGHT_MATCH_METIN_STONE_FAIL	Éliminez tous les monstres !
+SUNGMAHEE_TOWER_MISSION_TYPE_MONSTER_CHESS	Éliminez une paire de monstres qui ne sont pas ensemble !
+SUNGMAHEE_TOWER_MISSION_TYPE_NORMAL	Éliminez tous les monstres !
+SUNGMAHEE_TOWER_MISSION_TYPE_SEAL_RELEASE	Détruisez le sceau avec la pierre de sceau !
+SUNGMAHEE_TOWER_MISSION_TYPE_STAIRS	Montez les marches jusqu'au prochain niveau !
+SUNGMAHEE_TOWER_MISSION_TYPE_SURVIVE	Esquivez toutes les attaques !
 SUNGMAHEE_TOWER_MY_RANK_TITLE	Rang
 SUNGMAHEE_TOWER_REWARD_INFO_TITLE	Récompenses
 SYSTEMOPTION_TITLE	Options système

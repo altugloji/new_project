@@ -19,27 +19,27 @@ WIKI_CHESTS	Kisten
 WIKI_CHESTS_BOSS	Bosskisten
 WIKI_CHESTS_EVENT	Eventkisten
 WIKI_CHESTS_ALTERNATIVE	Alternatieve kisten
-WIKI_BOSSES	Bazen
+WIKI_BOSSES	Bosses
 WIKI_1_75	Lv. 1-75
 WIKI_76_100	Lv. 76-100
-WIKI_100	Lv. 76-100
-WIKI_BOSSES_EVENT	Eventbazen
+WIKI_100	Lv. 100+
+WIKI_BOSSES_EVENT	Eventbosses
 WIKI_MONSTER	Monsters
 WIKI_METINSTONE	Metinstenen
 WIKI_LEVEL_MOB_TEXT	Level %d
-WIKI_LEVEL_TEXT	Level %d - Verfijnbereik %d~%d
-WIKI_LEVEL_TEXT2	Level %d~%d - Verfijnbereik %d~%d
+WIKI_LEVEL_TEXT	Level %d - Verbeteringsbereik %d~%d
+WIKI_LEVEL_TEXT2	Level %d~%d - Verbeteringsbereik %d~%d
 WIKI_UPGRADE_COSTS	Volgend item
 WIKI_YANG_COSTS	Yang-kosten
-WIKI_AVAIBLE_AT	Beschikbaar bij
+WIKI_AVAIBLE_AT	Locatie
 WIKI_IMPROVEMENT_INFO	Verbeteringsinfo van %s
 WIKI_CONTENT_INFO	Inhoud van %s
-WIKI_DROPLIST_INFO	Droplijst van %s
+WIKI_DROPLIST_INFO	Drops van %s
 WIKI_STATICS_INFO	Statistieken van %s
 WIKI_STATICS_INFO_TYPE	Ras: %s | Type: %s
-WIKI_STATICS_INFO_DMG	Min. schade:%d | Max. schade:%d | Max HP: %d
-WIKI_STATICS_INFO_YNG	Min. Yang:%d | Max. Yang:%d | EXP: %d
-WIKI_STATICS_INFO_DEFENSES	Verdediging:
+WIKI_STATICS_INFO_DMG	Min. schade: %d | Max. schade: %d | Max HP: %d
+WIKI_STATICS_INFO_YNG	Min. Yang: %d | Max. Yang: %d | EXP: %d
+WIKI_STATICS_INFO_DEFENSES	Verdedigingen:
 WIKI_ORIGIN	Herkomst
 WIKI_SYSTEMS	Systemen
 WIKI_BIOLOG	Bioloog
@@ -3680,3 +3680,58 @@ GEMSHOP_YOU_ALREADY_BUYED	Je hebt dit al gekocht!
 GEMSHOP_OPEN_SLOT_QUESTION	Wil je de slot openen?
 GEMSHOP_BUY_QUESTION	Wil je {} kopen voor {} Gaya?
 GEMSHOP_REFRESH_QUESTION	Wil je de items vernieuwen?
+CHARACTER_CHEST_PREVIEW_HINT	Je kunt het personage bekijken met CTRL + RECHTSKLIK.
+CHARACTER_CHEST_PREVIEW_CLOSE	Sluiten
+CHARACTER_CHEST_INVENTORY_BLOCK	Je kunt je inventaris niet gebruiken terwijl dit venster open is.
+CHARACTER_CHEST_WRONG_MAP	Deze actie kan alleen worden uitgevoerd in de Yongbi-woestijn.
+CHARACTER_CHEST_WRONG_PASSWORD	Het wachtwoord voor personageverwijdering is onjuist.
+CHARACTER_CHEST_NO_SLOT	Je hebt geen vrije personageslot op je account.
+CHARACTER_CHEST_PACK_OK	Personage succesvol verpakt.
+CHARACTER_CHEST_UNPACK_OK	Personage is overgezet naar je account.
+CHARACTER_CHEST_FAILED	Actie kon niet worden voltooid.
+CHARACTER_CHEST_INVALID	Ongeldige Personagekaart.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Je kunt je actieve personage niet verpakken.
+CHARACTER_CHEST_ALREADY_USED	Deze kaart is al gebruikt.
+CHARACTER_CHEST_TITLE	Personagekaart
+CHARACTER_CHEST_SELECT_HINT	Selecteer het tweede personage dat je wilt verpakken.
+CHARACTER_CHEST_UNPACK_QUEST	Wil je dit personage overzetten naar je account?
+CHARACTER_CHEST_PACKED_LABEL	Verpakt personage: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Overzetten
+CHARACTER_CHEST_BIO_TITLE	Bioloog-missies
+CHARACTER_CHEST_BIO_QUEST_NAME	Bioloog-missie - Lv. %d
+CHARACTER_CHEST_BIO_DONE	Voltooid
+CHARACTER_CHEST_BIO_PROGRESS	Bezig
+CHARACTER_CHEST_BIO_WAIT	In wachtrij
+BULK_POTION_EMPTY_PANEL	Geen geregistreerde drankjes.
+BULK_POTION_NOT_ALLOWED	Dit item kan niet worden toegevoegd aan het Bulk Drankjes-paneel.
+BULK_POTION_ALREADY_REGISTERED	Deze drank is al geregistreerd in het paneel.
+WIKI_DROP_VIEW_TITLE	Toon drops van een specifiek item
+WIKI_OR	of
+WIKI_ITEM_NAME_PLACEHOLDER	Voer itemnaam in...
+WIKI_REFINE_HEADER_TIP	+%d verbeteringsfase (materiaal / yang / kans)
+WIKI_WEAPONS_SECTION	Wapens
+WIKI_ARMOR_SECTION	Pantser en accessoires
+WIKI_SWORD	Zwaarden
+WIKI_DAGGER	Dolken
+WIKI_BOW	Bogen
+WIKI_TWOHAND	Tweehandige wapens
+WIKI_BELL	Bellen
+WIKI_FAN	Waaiers
+WIKI_HELMET	Helmen
+WIKI_BOOTS	Schoenen
+WIKI_METINS	Metins
+WIKI_75_99	Lv. 75-99
+WIKI_CHEST_PREVIEW_BTN	Kistvoorbeeld
+WIKI_CHEST_PREVIEW_NO_SELECT	Selecteer eerst een item uit het zoekveld.
+WIKI_CHEST_PREVIEW_NO_DATA	Geen kistinhoud gevonden voor dit item.
+WIKI_REFINE_VIEW_BTN	Verbeteren
+WIKI_ITEM_PREVIEW_BTN	Itemvoorbeeld
+WIKI_ITEM_PREVIEW_NO_SELECT	Selecteer een item via de Wiki-zoekfunctie.
+WIKI_ITEM_PREVIEW_EMPTY	Geen bron gevonden voor dit item in de Wiki-tabellen.
+WIKI_ITEM_PREVIEW_COL_NAME	Naam
+WIKI_ITEM_PREVIEW_COL_LEVEL	Level
+WIKI_ITEM_PREVIEW_COL_COUNT	Aantal
+WIKI_ITEM_PREVIEW_COL_LOC	Locatie
+WIKI_ITEM_PREVIEW_SECTION_MOB	Monsters / Metins / Bosses
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Kist
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Overig

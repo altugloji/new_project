@@ -6613,8 +6613,8 @@
 71148	Anello Forza di Volontà	Nel periodo della durata, ti conferisce il +30% in più di EXP, il +20% in più di difesa dai guerrieri, il +20% in più di difesa dai ninja, il +20% in più di difesa dai lican, il +30% in più di Forza vs mostri, il +10% in più di HP massimi e il +10% in più di MP massimi.
 71149	Anello Potenza Letale	Ti conferisce per un certo lasso di tempo +30% di EXP, +20% di difesa dai sura, +20% di difesa dagli shamani, +20% di difesa dai lican, +30% di forza contro i mostri, +10% di HP massimi e +10% di MP massimi.
 71150	Uovo magico	Questo pregiatissimo baule ovale finemente decorato contiene più di una sorpresa di Pasqua, ma svela i suoi tesori solo pian piano.
-71151	Incantesimo Verde	Rimuove i bonus da uno dei tuoi oggetti e te ne aggiunge di nuovi. Può essere utilizzato solo fino al livello 40 per armi e armature. Non è commerciabile.
-71152	Forza Verde	Con un po' di fortuna aggiunge un nuovo bonus a uno dei tuoi oggetti (fino a un massimo di 4 bonus). Può essere utilizzato solo fino al livello 40 per armi e armature. Non è commerciabile.
+71151	Incanta Verde	Cambia il bonus dell'oggetto. Può essere usato solo su oggetti di livello 18 o inferiore.
+71152	Forza Verde	Aggiunge un nuovo bonus all'oggetto. Può essere usato solo su oggetti di livello 18 o inferiore.
 71153	Pozione della saggezza	Questa pozione ti da la possibilità di accumulare durante un'ora di gioco il 100% di esperienza in più. Non è commerciabile.
 71154	Pozione ascesa (3h)	Grazie a questa pozione potrai accumulare l'80% in più di esperienza in tre ore di gioco. Non è commerciabile.
 71155	Pozione saggezza (3 h)	Grazie a questa pozione potrai accumulare il 100% in più di esperienza in tre ore di gioco. Non è commerciabile.
@@ -6862,11 +6862,11 @@
 72723	Elisir del Sole (P)	Ripristina automaticamente i tuoi HP. Contiene 1.000.000 HP.
 72724	Elisir del Sole (M)	Ripristina automaticamente i tuoi HP. Contiene 3.000.000 HP.
 72725	Elisir del Sole (G)	Ripristina automaticamente i tuoi HP. Contiene 7.000.000 HP.
-72726	Elisir del Sole (S)	Contiene 10.000.000 di HP. Ripristina automaticamente i tuoi HP e ha un effetto positivo sui tuoi HP massimi. Questo item è commerciabile.
+72726	Elisir del Sole (P)	Contiene 10.000.000 HP. Ripristina automaticamente i tuoi HP. | Fornisce +1000 HP extra.
 72727	Elisir della Luna (P)	Ripristina automaticamente i tuoi MP. Contiene 100.000 MP.
 72728	Elisir della Luna (M)	Ripristina automaticamente i tuoi MP. Contiene 300.000 MP.
 72729	Elisir della Luna (G)	Ripristina automaticamente i tuoi MP. Contiene 700.000 MP.
-72730	Elisir della Luna (S)	Contiene 1.000.000 di MP. Ripristina automaticamente i tuoi MP e ha un effetto positivo sui tuoi MP massimi. Questo item è commerciabile.
+72730	Elisir della Luna (P)	Contiene 1.000.000 SP. Ripristina automaticamente i tuoi SP. | Fornisce +1000 SP extra.
 72734	Cassetta Fortuna blu	Cliccaci sopra due volte per aprirla. Ora hai due possibilità: | 1. Clicca su "Accetta item" per ricevere subito l'item mostrato. | 2. Utilizza "Fortuna nuova, item nuovo" per ricevere un altro item a caso. | In cambio di un contributo in Yang hai a disposizione un massimo di 15 tentativi. | Se non hai abbastanza Yang, non puoi scegliere un nuovo item. | Lo scrigno aperto non può essere né resettato né chiuso.
 72735	Cassetta Fortuna rossa	Cliccaci sopra due volte per aprirla. Ora hai due possibilità: | 1. Clicca su "Accetta item" per ricevere subito l'item mostrato. | 2. Utilizza "Fortuna nuova, item nuovo" per ricevere un altro item a caso. | In cambio di un contributo in Yang hai a disposizione un massimo di 15 tentativi. | Se non hai abbastanza Yang, non puoi scegliere un nuovo item. | Lo scrigno aperto non può essere né resettato né chiuso.
 72737	Cassetta Fortuna verde	Cliccaci sopra due volte per aprirla. Ora hai due possibilità: | 1. Clicca su "Accetta item" per ricevere subito l'item mostrato. | 2. Utilizza "Fortuna nuova, item nuovo" per ricevere un altro item a caso. | In cambio di un contributo in Yang hai a disposizione un massimo di 15 tentativi. | Se non hai abbastanza Yang, non puoi scegliere un nuovo item. | Lo scrigno aperto non può essere né resettato né chiuso. | Se esci dal gioco, ricevi l'item mostrato.

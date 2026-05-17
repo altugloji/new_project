@@ -1326,3 +1326,7 @@ WORLD_BOSS_TOTAL_DAMAGE_TEXT	Gesamtschaden
 WORLD_BUSS_REWARD_BUTTON	Belohnung abholen
 YES	Ja
 ZONE_MAP	Übersichtskarte
+BULK_POTION_TITLE	Massen-Trank-Panel
+BULK_POTION_USE	Benutzen
+BULK_POTION_CLEAR	Leeren
+GAME_GM_CALL	GM rufen

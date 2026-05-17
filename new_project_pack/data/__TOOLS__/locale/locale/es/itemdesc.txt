@@ -6817,7 +6817,7 @@
 72320	Ampliación de inventario	Utiliza este objeto para ampliar el tamaño de tu inventario. No es comerciable.
 72321	Anillo de los secretos	Impide la acumulación de puntos de experiencia durante la caza de monstruos
 72322	Carta del nuevo comienzo	Esta carta te permite restablecer el nivel de misión.
-72323	Carta del nuevo orden	Esta carta te permite volver a sortear y empezar tu misión.
+72323	Tarjeta de Personaje	Convierte tu personaje, junto con sus objetos y progreso actual, en una tarjeta que puede transferirse a otro jugador. | Esta tarjeta se puede comerciar.
 72325	Antitransfiguración	Anula la transfiguración de objetos.
 72326	Tique de transfiguración	Usa este tique para cambiar el aspecto de tu equipamiento sin gastar Yang.
 72327	Pergamino de esferas (h)	Carga con 30 de vida tus Esferas ánima, con las que puedes acceder al Templo del Zodíaco. El objeto es comerciable.

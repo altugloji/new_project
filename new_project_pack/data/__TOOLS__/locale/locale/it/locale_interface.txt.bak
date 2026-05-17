@@ -1,3 +1,9 @@
+USER_REPORT_SYSTEM_UI_CHARACTER_NAME	Nome personaggio
+USER_REPORT_SYSTEM_UI_CLOSE_BUTTON	Chiudi
+USER_REPORT_SYSTEM_UI_SELECT_REASON	Motivo segnalazione
+USER_REPORT_SYSTEM_UI_SEND_BUTTON	Invia
+USER_REPORT_SYSTEM_UI_TARGET_CHECK	Personaggio interessato
+USER_REPORT_SYSTEM_UI_WINDOW_NAME	Segnala
 LOGIN_LANGUAGE_SELECT_TITLE	Selezione Lingua
 LOGIN_BTN_DISCORD	Discord
 LOGIN_BTN_WEBSITE	Sito web
@@ -1212,7 +1218,7 @@ SNOWFLAKE_STICK_EVENT_EXCHANGE_PAGE_SUBTITLE_2	Si possono effettuare 3 scambi du
 SNOWFLAKE_STICK_EVENT_EXCHANGE_REWARD_BUTTON_TEXT	Ricompense
 SNOWFLAKE_STICK_EVENT_TITLE	Evento Fiocchi di neve
 SNOWFLAKE_STICK_EVENT_TOOLTIP_HELP_BUTTON_1	Lo scambio si può effettuare 5 volte ogni 24 ore. Tempo rimanente prima del reset:
-SNOWFLAKE_STICK_EVENT_TOOLTIP_HELP_BUTTON_2	Lo scambio si può effettuare 5 volte ogni 24 ore. Tempo rimanente prima del reset: –
+SNOWFLAKE_STICK_EVENT_TOOLTIP_HELP_BUTTON_2	Lo scambio si può effettuare 5 volte ogni 24 ore. Tempo rimanente prima del reset: -
 SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW	Recupera 12 Palle di neve e 12 Rami Pupazzo di neve e scambiali per una Bacchetta magica Fiocco di neve.
 SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW_MOUNT	Si può scambiare per 15 Bacchette magiche Fiocco di neve.
 SNOWFLAKE_STICK_EVENT_TOOLTIP_RIGHT_ARROW_PET	Si può scambiare per 15 Bacchette magiche Fiocco di neve.

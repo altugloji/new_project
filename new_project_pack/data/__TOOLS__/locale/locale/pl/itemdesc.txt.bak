@@ -6613,8 +6613,8 @@
 71148	Pierœcieñ Si³y Woli	W trakcie trwania otrzymujesz: +30% PD, +20% szansy na obronê w walce z wojownikami, +20% szansy na obronê w walce z ninja, +20% szansy na obronê w walce z Likanami, +30% si³y w walce z potworami, +10% maks. P¯ i +10% maks. PE.
 71149	Pierœcieñ Œmier. Mocy	Otrzymujesz na pewien czas: +30% PD, +20% szansy na obronê w walce z surami, +20% szansy na obronê w walce z szamanami, +20% szansy na obronê w walce z Likanami, +30% si³y w walce z potworami, +10% maks. P¯ i +10% maks. PE.
 71150	Magiczne Jajo	Ta piêknie ozdobiona owalna skrzynia zawiera niejedn¹ wielkanocn¹ niespodziankê. Swoj¹ zawartoœæ ods³ania jednak stopniowo.
-71151	Zielony Czar	Usuwa wszystkie bonusy w jednym z Twoich przedmiotów, po czym dodaje nowe. Mo¿na go u¿ywaæ tylko przy broniach i zbrojach do poziomu 40. Niezdatny do handlu.
-71152	Zielona Si³a	Z odrobin¹ szczêœcia dodaje do jednego z Twoich przedmiotów nowy bonus (maks. 4 bonusy). Mo¿na go u¿ywaæ tylko na broñ i zbroje do poziomu 40. Niezdatny do handlu.
+71151	Zielone Zaczarowanie	Zmienia bonus przedmiotu. Mo¿na u¿yæ tylko na przedmiotach poziomu 18 lub ni¿szego.
+71152	Zielona Si³a	Dodaje nowy bonus do przedmiotu. Mo¿na u¿yæ tylko na przedmiotach poziomu 18 lub ni¿szego.
 71153	Mikstura M¹droœci	Za pomoc¹ tej mikstury zdobywasz 100% wiêcej doœwiadczenia podczas godziny grania. Przedmiot ten jest niezdatny do handlu.
 71154	Mikstura Zarania (3h)	Dziêki tej miksturze w ci¹gu 3 godz. gry zbierzesz 80% wiêcej doœwiadczenia. Niezdatna do handlu.
 71155	Mikstura M¹droœci (3h)	Dziêki tej miksturze w ci¹gu 3 godz. gry zbierzesz 100% wiêcej doœwiadczenia. Niezdatna do handlu.
@@ -6862,11 +6862,11 @@
 72723	Eliksir S³oñca (M)	Automatycznie regeneruje twoje P¯. Zawiera 1.000.000 P¯.
 72724	Eliksir S³oñca (Œ)	Automatycznie regeneruje twoje P¯. Zawiera 3.000.000 P¯.
 72725	Eliksir S³oñca (D)	Automatycznie regeneruje twoje P¯. Zawiera 7.000.000 P¯.
-72726	Eliksir S³oñca (S)	Zawiera 10 000 000 P¯. Automatycznie regeneruje twoje P¯ i dodatkowo ma pozytywny efekt na twoje maks. P¯. Przedmiot ten jest zdatny do handlu.
+72726	Eliksir S³oñca (M)	Zawiera 10.000.000 P¯. Automatycznie odnawia twoje P¯. | Daje dodatkowe +1000 P¯.
 72727	Eliksir Ksiê¿yca (M)	Automatycznie regeneruje twoje PE. Zawiera 100.000 PE.
 72728	Eliksir Ksiê¿yca (Œ)	Automatycznie regeneruje twoje PE. Zawiera 300.000 PE.
 72729	Eliksir Ksiê¿yca (D)	Automatycznie regeneruje twoje PE. Zawiera 700.000 PE.
-72730	Eliksir Ksiê¿yca (S)	Zawiera 1 000 000 PE. Automatycznie regeneruje twoje PE i dodatkowo ma pozytywny efekt na twoje maks. PE. Przedmiot ten jest zdatny do handlu.
+72730	Eliksir Ksiê¿yca (M)	Zawiera 1.000.000 PE. Automatycznie odnawia twoje PE. | Daje dodatkowe +1000 PE.
 72734	Nieb. Skrzyneczka Losu	Kliknij dwukrotnie, aby otworzyæ. Teraz masz 2 mo¿liwoœci: | 1. Kliknij "Przyjmij przedmiot", by otrzymaæ widoczny przedmiot. | 2. U¿yj "Szczêœliwego Trafu", by otrzymaæ inny, losowy przedmiot. | Mo¿esz wykonaæ maks. 15 prób, p³ac¹c za nie Yang. | Je¿eli nie masz wystarczaj¹co du¿o Yang na koncie, nie mo¿esz wybraæ nowego przedmiotu. | Otwartej skrzynki nie mo¿na zresetowaæ ani zamkn¹æ.
 72735	Czerw. Skrzyneczka Losu	Kliknij dwukrotnie, aby otworzyæ. Teraz masz 2 mo¿liwoœci: | 1. Kliknij "Przyjmij przedmiot", by otrzymaæ widoczny przedmiot. | 2. U¿yj "Szczêœliwego Trafu", by otrzymaæ inny, losowy przedmiot. | Mo¿esz wykonaæ maks. 15 prób, p³ac¹c za nie Yang. | Je¿eli nie masz wystarczaj¹co du¿o Yang na koncie, nie mo¿esz wybraæ nowego przedmiotu. | Otwartej skrzynki nie mo¿na zresetowaæ ani zamkn¹æ.
 72737	Zielona Skrzyneczka Losu	Kliknij dwukrotnie, aby otworzyæ. Teraz masz 2 mo¿liwoœci: | 1. Kliknij "Przyjmij przedmiot", by otrzymaæ widoczny przedmiot. | 2. U¿yj "Szczêœliwego Trafu", by otrzymaæ inny, losowy przedmiot. | Mo¿esz wykonaæ maks. 15 prób, p³ac¹c za nie Yang. | Je¿eli nie masz wystarczaj¹co du¿o Yang na koncie, nie mo¿esz wybraæ nowego przedmiotu. | Otwartej skrzynki nie mo¿na zresetowaæ ani zamkn¹æ. | Jeœli gra zostanie zamkniêta, otrzymasz wyœwietlony przedmiot.

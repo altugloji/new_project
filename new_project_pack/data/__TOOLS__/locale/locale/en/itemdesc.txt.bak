@@ -6613,8 +6613,8 @@
 71148	Ring of Will Power	Gives you +30% EXP, +20% defence chance against Warriors, +20% defence chance against Ninjas, +20% defence chance against Lycans, +30% strength against monsters, +10% maximum HP and +10% maximum SP for the duration.
 71149	Ring of Deadly Power	Gives you +30% EXP, +20% defence chance against Suras, +20% defence chance against Shamans, +20% defence chance against Lycans, +30% strength against monsters, +10% maximum HP and +10% maximum SP for a period of time.
 71150	Magic Egg	The artfully decorated oval chest contains more than just an Easter surprise, it reveals its treasures little by little.
-71151	Green Magic	Removes the bonuses from one of your items and adds new ones. Can only be used on weapons and armour up to level 40. Item from the level chest, not tradeable.
-71152	Green Strength	With a little luck, this will add a new bonus to one of your items (max. 4 bonuses). Can only be used on weapons and armour up to level 40. Item from the level chest, not tradeable.
+71151	Green Enchant	Changes the item's bonus. Can only be used on items level 18 or below.
+71152	Green Strength	Adds a new bonus to the item. Can only be used on items level 18 or below.
 71153	Potion of Wisdom	This potion allows you to gather 100% more experience in one hour of game time. Not tradeable.
 71154	Potion of Ascension (3h)	This potion allows you to gather 80% more experience in three hours of game time. Not tradeable.
 71155	Potion of Wisdom (3h)	This potion allows you to gather 100% more experience in three hours of game time. Not tradeable.
@@ -6862,11 +6862,11 @@
 72723	Sun Elixir (S)	Automatically refills your HP. Contains 1,000,000 HP.
 72724	Sun Elixir (M)	Automatically refills your HP. Contains 3,000,000 HP.
 72725	Sun Elixir (L)	Automatically refills your HP. Contains 7,000,000 HP.
-72726	Sun Elixir (E)	Contains 10,000,000 HP. Automatically refills your HP and has an additional positive effect on your max. HP. This item is tradeable.
+72726	Sun Elixir (S)	Contains 10.000.000 HP. Automatically restores your HP. | Grants an extra +1000 HP.
 72727	Moon Elixir (S)	Automatically refills your SP. Contains 100,000 SP.
 72728	Moon Elixir (M)	Automatically refills your SP. Contains 300,000 SP.
 72729	Moon Elixir (L)	Automatically refills your SP. Contains 700,000 SP.
-72730	Moon Elixir (E)	Contains 1,000,000 SP. Automatically refills your SP and has an additional positive effect on your max. SP. This item is tradeable.
+72730	Moon Elixir (S)	Contains 1.000.000 SP. Automatically restores your SP. | Grants an extra +1000 SP.
 72734	Blue Fortune Chest	Double-click to open. You now have two options: | 1. Click Accept Item to receive the item shown. | 2. Use New Item Fortune to get another random item. | You can have up to 15 attempts on paying a Yang fee. | If you have insufficient Yang in your account, you cannot choose a new item. | The box cannot be reset or closed again once it has been opened.
 72735	Red Fortune Chest	Double-click to open. You now have two options: | 1. Click Accept Item to receive the item shown. | 2. Use New Item Fortune to get another random item. | You can have up to 15 attempts on paying a Yang fee. | If you have insufficient Yang in your account, you cannot choose a new item. | The box cannot be reset or closed again once it has been opened.
 72737	Green Fortune Chest	Double-click to open. You now have two options: | 1. Click Accept Item to receive the item shown. | 2. Use New Item Fortune to get another random item. | You can have up to 15 attempts on paying a Yang fee. | If you have insufficient Yang in your account, you cannot choose a new item. | The box cannot be reset or closed again once it has been opened. | If you close the game, you will receive the item displayed.

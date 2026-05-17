@@ -6613,8 +6613,8 @@
 71148	Ýrade Gücü Yüzüðü	Sana kullaným süresi boyunca +%30 EXP, +%20 savaþçýlara karþý savunma þansý, +%20 Ninjalara karþý savunma þansý, +%20 Lycanlara karþý savunma þansý, +%30 canavarlara karþý güç, +%10 maksimum HP ile +%10 maksimum SP saðlar.
 71149	Ölümcül Gücün Yüzüðü	Sana bir süre boyunca +%30 EXP, +%20 Suralara karþý savunma þansý, +%20 Þamanlara karþý savunma þansý, +%20 Lycanlara karþý savunma þansý, +%30 canavarlara karþý güç, +%10 maksimum HP ile +%10 maksimum SP saðlar.
 71150	Büyülü Yumurta	Birden fazla paskalya sürprizi içeren ve onlarý teker teker açýða çýkaran ustaca iþlenmiþ oval bir sandýk.
-71151	Yeþil Efsun	Ýtemin bonusunu deðiþtirir. Yalnýzca 18.seviye ve altýndaki itemlere uygulanabilir.
-71152	Yeþil Güç	Ýteme yeni bir bonus ekler. Yalnýzca 18.seviye ve altýndaki itemlere uygulanabilir.
+71151	Yeþil Efsun	Ýtemin bonusunu deðiþtirir.| |18. seviye altý zýrh ve silaha atýlýr.|1. seviye iç itemlere atýlýr.
+71152	Yeþil Güç	Ýteme yeni bir bonus ekler.| |18. seviye altý zýrh ve silaha atýlýr.|1. seviye iç itemlere atýlýr.
 71153	Bilgelik Ýksiri	Bu iksirle bir saatlik oyun süresinde %100 daha fazla deneyim toplarsýn. Ticareti yok.
 71154	Yükseliþ Ýksiri (3 sa.)	Bu iksirle üç saatlik bir oyun süresi içerisinde %80 daha fazla tecrübe kazanýrsýn. Ticareti yok.
 71155	Bilgelik Ýksiri (3 sa.)	Bu iksirle üç saatlik bir oyun süresinde %100 daha fazla tecrübe toplarsýn. Ticareti yok.

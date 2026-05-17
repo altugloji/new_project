@@ -6817,7 +6817,7 @@
 72320	Extindere Inventar	Foloseºte acest obiect pentru a-þi extinde inventarul. Nu se poate negocia.
 72321	Inelul Secretelor	Opreºte creºterea de puncte de experienþã când se vâneazã monºtri.
 72322	Tichet de Resetare	Acest tichet îþi permite sã resetezi nivelul misiunii.
-72323	Tichet de Modificare	Acest tichet îþi permite sã modifici misiunea.
+72323	Card de Caracter	Transformã caracterul tãu, împreunã cu obiectele ºi progresul actual, într-un card care poate fi transferat altui jucãtor. | Acest card poate fi negociat.
 72325	Inverseazã Transformarea	Inverseazã transformarea unui obiect.
 72326	Tichet Transformare	Foloseºte acest tichet pentru a-þi schimba înfãþiºarea echipamentului fãrã a cheltui Yang.
 72327	Pergament Sferã (negoþ)	Încarcã Animasfera cu 30 vieþi pentru accesarea Templului Zodiac. Obiectul se poate negocia.

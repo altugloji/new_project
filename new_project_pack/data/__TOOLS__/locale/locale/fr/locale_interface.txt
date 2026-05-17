@@ -1326,3 +1326,7 @@ WORLD_BOSS_TOTAL_DAMAGE_TEXT	Dégâts totaux
 WORLD_BUSS_REWARD_BUTTON	Récupérer la récompense
 YES	Oui
 ZONE_MAP	Carte d'aperçu
+BULK_POTION_TITLE	Panneau de potions groupées
+BULK_POTION_USE	Utiliser
+BULK_POTION_CLEAR	Vider
+GAME_GM_CALL	Appeler un GM

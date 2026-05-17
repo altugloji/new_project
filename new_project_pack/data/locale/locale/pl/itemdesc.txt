@@ -6817,7 +6817,7 @@
 72320	Rozszerzenie Ekwipunku	U¿yj tego przedmiotu, aby rozszerzyæ swój ekwipunek. Niezdatny do handlu.
 72321	Pierœcieñ Tajemnic	Uniemo¿liwia zbieranie punktów doœwiadczenia podczas polowania na potwory.
 72322	Karta Resetu	Karta ta umo¿liwia ci reset poziomu misji.
-72323	Karta Przetasowania	Karta ta umo¿liwia ci przetasowanie misji.
+72323	Karta Postaci	Zamienia twoj¹ postaæ wraz z jej przedmiotami i aktualnym postêpem w kartê, któr¹ mo¿na przekazaæ innemu graczowi. | T¹ kart¹ mo¿na handlowaæ.
 72325	Anulacja Transmutacji	Anuluje transmutacjê przedmiotu.
 72326	Bilet Transmutacji	Zmieñ za pomoc¹ tego biletu wygl¹d swojego wyposa¿enia, nie u¿ywaj¹c do tego Yang.
 72327	Pergamin Sfer (handel)	Za³aduj swoje Animosfery o 30 ¿yæ, by dziêki nim otrzymaæ dostêp do Œwi¹tyni Zodiaku. Przedmiot zdatny do handlu.

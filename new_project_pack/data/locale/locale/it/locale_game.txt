@@ -16,14 +16,14 @@ WIKI_EQUIPMENT_SHOES	Scarpe
 WIKI_EQUIPMENT_BELT	Cinture
 WIKI_EQUIPMENT_TALISMAN	Talismani
 WIKI_CHESTS	Forzieri
-WIKI_CHESTS_BOSS	Forzieri boss
-WIKI_CHESTS_EVENT	Forzieri evento
-WIKI_CHESTS_ALTERNATIVE	Forzieri alternativi
+WIKI_CHESTS_BOSS	Forzieri Boss
+WIKI_CHESTS_EVENT	Forzieri Evento
+WIKI_CHESTS_ALTERNATIVE	Forzieri Alternativi
 WIKI_BOSSES	Boss
 WIKI_1_75	Lv. 1-75
 WIKI_76_100	Lv. 76-100
-WIKI_100	Lv. 76-100
-WIKI_BOSSES_EVENT	Boss evento
+WIKI_100	Lv. 100+
+WIKI_BOSSES_EVENT	Boss Evento
 WIKI_MONSTER	Mostri
 WIKI_METINSTONE	Pietre Metin
 WIKI_LEVEL_MOB_TEXT	Livello %d
@@ -31,14 +31,14 @@ WIKI_LEVEL_TEXT	Livello %d - Range miglioramento %d~%d
 WIKI_LEVEL_TEXT2	Livello %d~%d - Range miglioramento %d~%d
 WIKI_UPGRADE_COSTS	Oggetto successivo
 WIKI_YANG_COSTS	Costo Yang
-WIKI_AVAIBLE_AT	Disponibile da
+WIKI_AVAIBLE_AT	Posizione
 WIKI_IMPROVEMENT_INFO	Info miglioramento di %s
 WIKI_CONTENT_INFO	Contenuto di %s
-WIKI_DROPLIST_INFO	Lista drop di %s
+WIKI_DROPLIST_INFO	Drop di %s
 WIKI_STATICS_INFO	Statistiche di %s
 WIKI_STATICS_INFO_TYPE	Razza: %s | Tipo: %s
-WIKI_STATICS_INFO_DMG	Danno min.:%d | Danno max.:%d | HP max: %d
-WIKI_STATICS_INFO_YNG	Yang min.:%d | Yang max.:%d | EXP: %d
+WIKI_STATICS_INFO_DMG	Danno min.: %d | Danno max.: %d | HP max: %d
+WIKI_STATICS_INFO_YNG	Yang min.: %d | Yang max.: %d | EXP: %d
 WIKI_STATICS_INFO_DEFENSES	Difese:
 WIKI_ORIGIN	Origine
 WIKI_SYSTEMS	Sistemi
@@ -3680,3 +3680,58 @@ GEMSHOP_YOU_ALREADY_BUYED	Hai già acquistato questo!
 GEMSHOP_OPEN_SLOT_QUESTION	Vuoi aprire lo slot?
 GEMSHOP_BUY_QUESTION	Vuoi comprare {} per {} Gaya?
 GEMSHOP_REFRESH_QUESTION	Vuoi aggiornare gli oggetti?
+CHARACTER_CHEST_PREVIEW_HINT	Puoi visualizzare il personaggio con CTRL + CLIC DESTRO.
+CHARACTER_CHEST_PREVIEW_CLOSE	Chiudi
+CHARACTER_CHEST_INVENTORY_BLOCK	Non puoi usare l'inventario mentre questa finestra è aperta.
+CHARACTER_CHEST_WRONG_MAP	Questa azione può essere effettuata solo nel Deserto Yongbi.
+CHARACTER_CHEST_WRONG_PASSWORD	La password di eliminazione del personaggio è errata.
+CHARACTER_CHEST_NO_SLOT	Non hai slot personaggio liberi nel tuo account.
+CHARACTER_CHEST_PACK_OK	Personaggio impacchettato con successo.
+CHARACTER_CHEST_UNPACK_OK	Personaggio trasferito al tuo account.
+CHARACTER_CHEST_FAILED	Azione non riuscita.
+CHARACTER_CHEST_INVALID	Carta Personaggio non valida.
+CHARACTER_CHEST_CANNOT_PACK_ACTIVE	Non puoi impacchettare il personaggio attivo.
+CHARACTER_CHEST_ALREADY_USED	Questa carta è già stata usata.
+CHARACTER_CHEST_TITLE	Carta Personaggio
+CHARACTER_CHEST_SELECT_HINT	Seleziona il personaggio secondario che vuoi impacchettare.
+CHARACTER_CHEST_UNPACK_QUEST	Vuoi trasferire questo personaggio al tuo account?
+CHARACTER_CHEST_PACKED_LABEL	Personaggio impacchettato: %s
+CHARACTER_CHEST_UNPACK_ACCEPT	Trasferisci
+CHARACTER_CHEST_BIO_TITLE	Missioni del Biologo
+CHARACTER_CHEST_BIO_QUEST_NAME	Missione del Biologo - Lv. %d
+CHARACTER_CHEST_BIO_DONE	Completata
+CHARACTER_CHEST_BIO_PROGRESS	In corso
+CHARACTER_CHEST_BIO_WAIT	In attesa
+BULK_POTION_EMPTY_PANEL	Nessuna pozione registrata.
+BULK_POTION_NOT_ALLOWED	Questo oggetto non può essere aggiunto al Pannello Pozioni di Massa.
+BULK_POTION_ALREADY_REGISTERED	Questa pozione è già registrata nel pannello.
+WIKI_DROP_VIEW_TITLE	Mostra i drop di un oggetto specifico
+WIKI_OR	oppure
+WIKI_ITEM_NAME_PLACEHOLDER	Inserisci il nome dell'oggetto...
+WIKI_REFINE_HEADER_TIP	+%d fase di miglioramento (materiali / yang / probabilità)
+WIKI_WEAPONS_SECTION	Armi
+WIKI_ARMOR_SECTION	Armature e accessori
+WIKI_SWORD	Spade
+WIKI_DAGGER	Pugnali
+WIKI_BOW	Archi
+WIKI_TWOHAND	Armi a due mani
+WIKI_BELL	Campane
+WIKI_FAN	Ventagli
+WIKI_HELMET	Elmi
+WIKI_BOOTS	Scarpe
+WIKI_METINS	Metin
+WIKI_75_99	Lv. 75-99
+WIKI_CHEST_PREVIEW_BTN	Anteprima Forziere
+WIKI_CHEST_PREVIEW_NO_SELECT	Seleziona prima un oggetto dal campo di ricerca.
+WIKI_CHEST_PREVIEW_NO_DATA	Nessun contenuto del forziere trovato per questo oggetto.
+WIKI_REFINE_VIEW_BTN	Miglioramento
+WIKI_ITEM_PREVIEW_BTN	Anteprima Oggetto
+WIKI_ITEM_PREVIEW_NO_SELECT	Seleziona un oggetto dalla ricerca Wiki.
+WIKI_ITEM_PREVIEW_EMPTY	Nessuna fonte trovata per questo oggetto nelle tabelle Wiki.
+WIKI_ITEM_PREVIEW_COL_NAME	Nome
+WIKI_ITEM_PREVIEW_COL_LEVEL	Livello
+WIKI_ITEM_PREVIEW_COL_COUNT	Quantità
+WIKI_ITEM_PREVIEW_COL_LOC	Posizione
+WIKI_ITEM_PREVIEW_SECTION_MOB	Mostri / Metin / Boss
+WIKI_ITEM_PREVIEW_SECTION_CHEST	Forziere
+WIKI_ITEM_PREVIEW_SECTION_OTHER	Altro

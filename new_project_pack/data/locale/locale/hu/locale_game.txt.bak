@@ -3668,3 +3668,15 @@ YUTNORI_EVENT_MESSAGE_CARD_GAIN	Yut Nori táblá(ka)t kaptál.
 YUTNORI_EVENT_MESSAGE_CARD_PEICE_GAIN	1 Nyírfa törzset kapsz.
 YUTNORI_EVENT_MESSAGE_NOT_ENOUGHT_ITEM	Nincs elég tárgyad vagy pénzed a játékhoz.
 YUTNORI_EVENT_MESSAGE_NO_MORE_GAIN	Nem kaphatsz több Yut Nori táblát.
+SHOP_NOT_ENOUGH_ITEM	Nincs elég tárgy
+GEMSHOP_TITLE	Gaya bolt
+GEMSHOP_SECOND_TITLE	Tárgyak átváltása Gaya pontokra
+GEMSHOP_CONVERT_SELECTED	Kijelöltek átváltása x{}
+GEMSHOP_CONVERT_QUESTION	Szeretnéd átváltani: {} x{} erre: {} Gaya pont?
+GEMSHOP_TITLE2	Gaya bolt
+GEMSHOP_HAS_TOOLTIP	Nálad van: {}
+GEMSHOP_POINT_TOOLTIP	Gaya: {}
+GEMSHOP_YOU_ALREADY_BUYED	Ezt már megvetted!
+GEMSHOP_OPEN_SLOT_QUESTION	Szeretnéd megnyitni a slotot?
+GEMSHOP_BUY_QUESTION	Szeretnéd megvenni ezt: {} ennyiért: {} Gaya?
+GEMSHOP_REFRESH_QUESTION	Szeretnéd frissíteni a tárgyakat?

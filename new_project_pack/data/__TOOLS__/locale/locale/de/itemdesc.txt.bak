@@ -6613,8 +6613,8 @@
 71148	Ring der Willenskraft	Verleiht dir während der Laufzeit +30 % EXP, +20 % Abwehrchance gegen Krieger, +20 % Abwehrchance gegen Ninja, +20 % Abwehrchance gegen Lykaner, +30 % Stärke gegen Monster, +10 % Maximum-TP und +10 % Maximum-MP.
 71149	Ring der tödlichen Macht	Verleiht dir eine Zeit lang +30% EXP, +20% Abwehrchance gegen Sura, +20% Abwehrchance gegen Schamanen, +20% Abwehrchance gegen Lykaner, +30% Stärke gegen Monster, +10% Maximum-TP und +10% Maximum-MP.
 71150	Zauber-Ei	Die kunstvoll verzierte ovale Truhe enthält mehr als nur eine Osterüberraschung und gibt ihre Schätze erst nach und nach preis.
-71151	Grüner Zauber	Entfernt die Boni eines deiner Gegenstände und fügt neue hinzu. Kann nur bei Waffen und Rüstungen bis Level 40 angewendet werden. Nicht handelbar.
-71152	Grüne Stärke	Fügt mit etwas Glück einem deiner Gegenstände einen neuen Bonus hinzu (bis max. 4 Boni). Kann nur bei Waffen und Rüstungen bis Level 40 angewendet werden. Nicht handelbar.
+71151	Grüne Verzauberung	Ändert den Bonus des Items. Kann nur auf Items bis Level 18 angewendet werden.
+71152	Grüne Stärke	Fügt dem Item einen neuen Bonus hinzu. Kann nur auf Items bis Level 18 angewendet werden.
 71153	Trank der Weisheit	Mit diesem Trank sammelst du in einer Stunde Spielzeit 100 % mehr Erfahrung. Nicht handelbar.
 71154	Trank des Aufstiegs (3h)	Mit diesem Trank sammelst du in drei Stunden Spielzeit 80% mehr Erfahrung. Nicht handelbar.
 71155	Trank der Weisheit (3h)	Mit diesem Trank sammelst du in drei Stunden Spielzeit 100% mehr Erfahrung. Nicht handelbar.
@@ -6862,11 +6862,11 @@
 72723	Elixier der Sonne (K)	Füllt deine TP automatisch auf. Enthält 1.000.000 TP.
 72724	Elixier der Sonne (M)	Füllt deine TP automatisch auf. Enthält 3.000.000 TP.
 72725	Elixier der Sonne (G)	Füllt deine TP automatisch auf. Enthält 7.000.000 TP.
-72726	Elixier der Sonne (S)	Enthält 10.000.000 TP. Füllt deine TP automatisch auf und hat zusätzlich einen positiven Effekt auf deine max. TP. Dieses Item ist handelbar.
+72726	Sonnenelixier (K)	Enthält 10.000.000 HP. Füllt deine HP automatisch auf. | Gibt zusätzlich +1000 HP.
 72727	Elixier des Mondes (K)	Füllt deine MP automatisch auf. Enthält 100.000 MP.
 72728	Elixier des Mondes (M)	Füllt deine MP automatisch auf. Enthält 300.000 MP.
 72729	Elixier des Mondes (G)	Füllt deine MP automatisch auf. Enthält 700.000 MP.
-72730	Elixier des Mondes (S)	Enthält 1.000.000 MP. Füllt deine MP automatisch auf und hat zusätzlich einen positiven Effekt auf deine max. MP. Dieses Item ist handelbar.
+72730	Mondelixier (K)	Enthält 1.000.000 SP. Füllt deine SP automatisch auf. | Gibt zusätzlich +1000 SP.
 72734	Blaues Glückskistchen	Öffne sie mit Doppelklick. Nun hast du 2 Möglichkeiten: | 1. Klicke "Item annehmen", um das angezeigte Item direkt zu erhalten. | 2. Nutze "Neues Item-Glück", um ein anderes zufälliges Item zu bekommen. | Du hast maximal 15 Versuche gegen eine Yang-Gebühr. | Hast du nicht mehr genug Yang auf dem Konto, kannst du kein neues Item wählen. | Die geöffnete Box kann nicht wieder zurückgesetzt oder geschlossen werden.
 72735	Rotes Glückskistchen	Öffne sie mit Doppelklick. Nun hast du 2 Möglichkeiten: | 1. Klicke "Item annehmen", um das angezeigte Item direkt zu erhalten. | 2. Nutze "Neues Item-Glück", um ein anderes zufälliges Item zu bekommen. | Du hast maximal 15 Versuche gegen eine Yang-Gebühr. | Hast du nicht mehr genug Yang auf dem Konto, kannst du kein neues Item wählen. | Die geöffnete Box kann nicht wieder zurückgesetzt oder geschlossen werden.
 72737	Grünes Glückskistchen	Öffne sie mit Doppelklick. Nun hast du 2 Möglichkeiten: | 1. Klicke "Item annehmen", um das angezeigte Item direkt zu erhalten. | 2. Nutze "Neues Item-Glück", um ein anderes zufälliges Item zu bekommen. | Du hast maximal 15 Versuche gegen eine Yang-Gebühr. | Hast du nicht mehr genug Yang auf dem Konto, kannst du kein neues Item wählen. | Die geöffnete Box kann nicht wieder zurückgesetzt oder geschlossen werden. | Wird das Spiel geschlossen, erhältst du das angezeigte Item.

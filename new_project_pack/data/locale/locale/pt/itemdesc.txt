@@ -6817,7 +6817,7 @@
 72320	Expansão de Inventário	Usa este item para expandires o teu inventário. Não-negociável.
 72321	Anel dos Segredos	Evita a obtenção de Pontos de Experiência ao caçar monstros.
 72322	Bilhete Reinicialização	Este bilhete permite-te reiniciares o teu nível de missão.
-72323	Bilhete Remodelação	Este bilhete permite-te mudares a tua missão.
+72323	Cartão de Personagem	Transforma a tua personagem, juntamente com os seus itens e progresso atual, num cartão que pode ser transferido para outro jogador. | Este cartão pode ser negociado.
 72325	Reversão de Transmutação	Reverte a transmutação de um item.
 72326	Bilhete de Transmutação	Usa este bilhete para alterares a aparência do teu equipamento sem gastares Yang.
 72327	Pergaminho da Esfera (N)	Carrega a tua Animasfera com 30 vidas para acesso ao Templo do Zodíaco. O item é negociável.
