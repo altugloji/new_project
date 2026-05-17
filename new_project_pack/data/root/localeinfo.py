@@ -813,12 +813,19 @@ def HOW_MANY_ITEM_DO_YOU_DROP(dropItemName, dropItemCount) :
 
 if app.ENABLE_ITEM_SHOP_SYSTEM:
 	def DO_YOU_BUY_ITEM_COINS(buyItemCount, buyItemPrice) :
-		return DO_YOU_BUY_ITEM_C % ( buyItemCount, buyItemPrice )
+		return DO_YOU_BUY_ITEM_C % ( buyItemCount, PrettyNumber(buyItemPrice) )
+	def DO_YOU_BUY_ITEM_MARK(buyItemCount, buyItemPrice) :
+		return DO_YOU_BUY_ITEM_M % ( buyItemCount, PrettyNumber(buyItemPrice) )
 	def PrettyNumber(n) :
 		if n <= 0 :
 			return "0"
 
 		return "%s" % ('.'.join([ i-3<0 and str(n)[:i] or str(n)[i-3:i] for i in range(len(str(n))%3, len(str(n))+1, 3) if i ]))
+
+try:
+	TOOLTIP_ITEM_SHOP_EM_LOCKED
+except NameError:
+	TOOLTIP_ITEM_SHOP_EM_LOCKED = "(Kilitli)"
 
 def FISHING_NOTIFY(isFish, fishName) :
 	if isFish :

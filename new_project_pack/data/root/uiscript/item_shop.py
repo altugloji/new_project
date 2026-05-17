@@ -26,6 +26,16 @@ FIRST_BOARD_START_Y = 25
 # Hesabi Doldur: absolute on main board (was board_first 10+8, 65+6) +320 right, -36 up
 COIN_BUY_BTN_X = 338
 COIN_BUY_BTN_Y = 35
+EP_ICON_X = 18
+EP_SLOT_X = 44
+EP_SLOT_W = 82
+CURRENCY_PAIR_GAP = 8
+EM_ICON_X = EP_SLOT_X + EP_SLOT_W + CURRENCY_PAIR_GAP
+EM_SLOT_X = EM_ICON_X + 26
+ITEM_BUY_BTN_H = 27
+ITEM_BUY_BTN_GAP = 10
+ITEM_BUY_BTN_Y_EP = 78
+ITEM_BUY_BTN_Y_EM = ITEM_BUY_BTN_Y_EP - ITEM_BUY_BTN_GAP - ITEM_BUY_BTN_H
 FIRST_BOARD_WIDTH = 176
 FIRST_BOARD_HEIGHT = (BOARD_HEIGHT - FIRST_BOARD_START_Y - 10)
 
@@ -96,16 +106,16 @@ window = {
 				{
 					"name":"coins_icon",
 					"type":"image",
-					"x" : 18,
+					"x" : EP_ICON_X,
 					"y" : POS_START_Y - 25,
 					"image":"d:/ymir work/ui/itemshop/ep.png",
 				},
 				{
 					"name" : "Coins_Slot",
 					"type" : "slotbar",
-					"x" : 44,
+					"x" : EP_SLOT_X,
 					"y" : POS_START_Y - 27,
-					"width" : 82,
+					"width" : EP_SLOT_W,
 					"height" : 22,
 					"children" :
 					(
@@ -116,6 +126,33 @@ window = {
 							"y" : 0,
 							"all_align" : "center",
 							"text" : "0 EP",
+							"outline" : 1,
+						},
+					),
+				},
+				{
+					"name":"marks_icon",
+					"type":"image",
+					"x" : EM_ICON_X,
+					"y" : POS_START_Y - 25,
+					"image":"d:/ymir work/ui/itemshop/em.png",
+				},
+				{
+					"name" : "Marks_Slot",
+					"type" : "slotbar",
+					"x" : EM_SLOT_X,
+					"y" : POS_START_Y - 27,
+					"width" : EP_SLOT_W,
+					"height" : 22,
+					"children" :
+					(
+						{
+							"name" : "dragon_mark_text",
+							"type" : "text",
+							"x" : 0,
+							"y" : 0,
+							"all_align" : "center",
+							"text" : "0 EM",
 							"outline" : 1,
 						},
 					),
@@ -234,10 +271,19 @@ window = {
 									"down_image" : "d:/ymir work/ui/itemshop/preview_button_03.tga",
 								},
 								{
-									"name" : "itemBuyButton_01", "type" : "button",
-									"x" : 103, "y" : 78,
+									"name" : "itemBuyButtonMark_01", "type" : "button",
+									"x" : 103, "y" : ITEM_BUY_BTN_Y_EM,
 									"horizontal_align" : "right",
-									"text" : "", "tooltip_text" : "|cff00ccffSatin al",
+									"text" : "", "tooltip_text" : "|cff00ccffEM ile satin al",
+									"default_image" : "d:/ymir work/ui/public/Large_Button_01.sub",
+									"over_image" : "d:/ymir work/ui/public/Large_Button_02.sub",
+									"down_image" : "d:/ymir work/ui/public/Large_Button_03.sub",
+								},
+								{
+									"name" : "itemBuyButton_01", "type" : "button",
+									"x" : 103, "y" : ITEM_BUY_BTN_Y_EP,
+									"horizontal_align" : "right",
+									"text" : "", "tooltip_text" : "|cff00ccffEP ile satin al",
 									"default_image" : "d:/ymir work/ui/public/Large_Button_01.sub",
 									"over_image" : "d:/ymir work/ui/public/Large_Button_02.sub",
 									"down_image" : "d:/ymir work/ui/public/Large_Button_03.sub",
@@ -292,10 +338,19 @@ window = {
 									"down_image" : "d:/ymir work/ui/itemshop/preview_button_03.tga",
 								},
 								{
-									"name" : "itemBuyButton_02", "type" : "button",
-									"x" : 103, "y" : 78,
+									"name" : "itemBuyButtonMark_02", "type" : "button",
+									"x" : 103, "y" : ITEM_BUY_BTN_Y_EM,
 									"horizontal_align" : "right",
-									"text" : "", "tooltip_text" : "|cff00ccffSatin al",
+									"text" : "", "tooltip_text" : "|cff00ccffEM ile satin al",
+									"default_image" : "d:/ymir work/ui/public/Large_Button_01.sub",
+									"over_image" : "d:/ymir work/ui/public/Large_Button_02.sub",
+									"down_image" : "d:/ymir work/ui/public/Large_Button_03.sub",
+								},
+								{
+									"name" : "itemBuyButton_02", "type" : "button",
+									"x" : 103, "y" : ITEM_BUY_BTN_Y_EP,
+									"horizontal_align" : "right",
+									"text" : "", "tooltip_text" : "|cff00ccffEP ile satin al",
 									"default_image" : "d:/ymir work/ui/public/Large_Button_01.sub",
 									"over_image" : "d:/ymir work/ui/public/Large_Button_02.sub",
 									"down_image" : "d:/ymir work/ui/public/Large_Button_03.sub",
@@ -350,10 +405,19 @@ window = {
 									"down_image" : "d:/ymir work/ui/itemshop/preview_button_03.tga",
 								},
 								{
-									"name" : "itemBuyButton_03", "type" : "button",
-									"x" : 103, "y" : 78,
+									"name" : "itemBuyButtonMark_03", "type" : "button",
+									"x" : 103, "y" : ITEM_BUY_BTN_Y_EM,
 									"horizontal_align" : "right",
-									"text" : "", "tooltip_text" : "|cff00ccffSatin al",
+									"text" : "", "tooltip_text" : "|cff00ccffEM ile satin al",
+									"default_image" : "d:/ymir work/ui/public/Large_Button_01.sub",
+									"over_image" : "d:/ymir work/ui/public/Large_Button_02.sub",
+									"down_image" : "d:/ymir work/ui/public/Large_Button_03.sub",
+								},
+								{
+									"name" : "itemBuyButton_03", "type" : "button",
+									"x" : 103, "y" : ITEM_BUY_BTN_Y_EP,
+									"horizontal_align" : "right",
+									"text" : "", "tooltip_text" : "|cff00ccffEP ile satin al",
 									"default_image" : "d:/ymir work/ui/public/Large_Button_01.sub",
 									"over_image" : "d:/ymir work/ui/public/Large_Button_02.sub",
 									"down_image" : "d:/ymir work/ui/public/Large_Button_03.sub",
@@ -408,10 +472,19 @@ window = {
 									"down_image" : "d:/ymir work/ui/itemshop/preview_button_03.tga",
 								},
 								{
-									"name" : "itemBuyButton_04", "type" : "button",
-									"x" : 103, "y" : 78,
+									"name" : "itemBuyButtonMark_04", "type" : "button",
+									"x" : 103, "y" : ITEM_BUY_BTN_Y_EM,
 									"horizontal_align" : "right",
-									"text" : "", "tooltip_text" : "|cff00ccffSatin al",
+									"text" : "", "tooltip_text" : "|cff00ccffEM ile satin al",
+									"default_image" : "d:/ymir work/ui/public/Large_Button_01.sub",
+									"over_image" : "d:/ymir work/ui/public/Large_Button_02.sub",
+									"down_image" : "d:/ymir work/ui/public/Large_Button_03.sub",
+								},
+								{
+									"name" : "itemBuyButton_04", "type" : "button",
+									"x" : 103, "y" : ITEM_BUY_BTN_Y_EP,
+									"horizontal_align" : "right",
+									"text" : "", "tooltip_text" : "|cff00ccffEP ile satin al",
 									"default_image" : "d:/ymir work/ui/public/Large_Button_01.sub",
 									"over_image" : "d:/ymir work/ui/public/Large_Button_02.sub",
 									"down_image" : "d:/ymir work/ui/public/Large_Button_03.sub",
@@ -466,10 +539,19 @@ window = {
 									"down_image" : "d:/ymir work/ui/itemshop/preview_button_03.tga",
 								},
 								{
-									"name" : "itemBuyButton_05", "type" : "button",
-									"x" : 103, "y" : 78,
+									"name" : "itemBuyButtonMark_05", "type" : "button",
+									"x" : 103, "y" : ITEM_BUY_BTN_Y_EM,
 									"horizontal_align" : "right",
-									"text" : "", "tooltip_text" : "|cff00ccffSatin al",
+									"text" : "", "tooltip_text" : "|cff00ccffEM ile satin al",
+									"default_image" : "d:/ymir work/ui/public/Large_Button_01.sub",
+									"over_image" : "d:/ymir work/ui/public/Large_Button_02.sub",
+									"down_image" : "d:/ymir work/ui/public/Large_Button_03.sub",
+								},
+								{
+									"name" : "itemBuyButton_05", "type" : "button",
+									"x" : 103, "y" : ITEM_BUY_BTN_Y_EP,
+									"horizontal_align" : "right",
+									"text" : "", "tooltip_text" : "|cff00ccffEP ile satin al",
 									"default_image" : "d:/ymir work/ui/public/Large_Button_01.sub",
 									"over_image" : "d:/ymir work/ui/public/Large_Button_02.sub",
 									"down_image" : "d:/ymir work/ui/public/Large_Button_03.sub",

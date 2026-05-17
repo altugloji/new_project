@@ -2804,11 +2804,14 @@ ACMD(do_nesne_market)
 	if (quest::CQuestManager::instance().GetPCForce(ch->GetPlayerID())->IsRunning() == true)
 		return;
 
-	char arg1[256], arg2[256];
-	two_arguments(argument, arg1, sizeof(arg1), arg2, sizeof(arg2));
+	char arg1[256], arg2[256], arg3[256];
+	argument = one_argument(argument, arg1, sizeof(arg1));
+	argument = one_argument(argument, arg2, sizeof(arg2));
+	one_argument(argument, arg3, sizeof(arg3));
 
 	DWORD id = 0;
 	DWORD count = 0;
+	BYTE payType = 2;
 
 	if (!*arg1 || !*arg2)
 		return;
@@ -2816,7 +2819,15 @@ ACMD(do_nesne_market)
 	str_to_number(id, arg1);
 	str_to_number(count, arg2);
 
-	bool bRes = CItemShopManager::instance().Buy(ch, id, count);
+	if (*arg3)
+	{
+		DWORD tmpPayType = 2;
+		str_to_number(tmpPayType, arg3);
+		if (tmpPayType <= 1)
+			payType = (BYTE) tmpPayType;
+	}
+
+	bool bRes = CItemShopManager::instance().Buy(ch, id, count, payType);
 	if (bRes)
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketbasarili"));
 }

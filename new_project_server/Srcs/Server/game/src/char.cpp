@@ -758,6 +758,14 @@ void CHARACTER::OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE
 				return;
 			}
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+			if (pkItem->IsItemShopEmBound())
+			{
+				ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+				return;
+			}
+#endif
+
 			// MYSHOP_PRICE_LIST
 			itemkind[pkItem->GetVnum()] = (pTable + i)->price / pkItem->GetCount();
 			// END_OF_MYSHOP_PRICE_LIST

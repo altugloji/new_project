@@ -125,6 +125,12 @@ class CItem : public CEntity
 		BYTE		GetAttributeType(int i) const { return m_aAttr[i].bType;	}
 		short		GetAttributeValue(int i) const { return m_aAttr[i].sValue;	}
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+		bool		IsItemShopEmBound() const;
+		bool		HasItemShopEmBindMarker() const;
+		void		ApplyItemShopEmBind();
+#endif
+
 		void		SetAttributes(const TPlayerItemAttribute* c_pAttribute);
 
 		int		FindAttribute(BYTE bType);

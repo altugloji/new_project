@@ -287,6 +287,14 @@ void CShopManager::Sell(LPCHARACTER ch, BYTE bCell, BYTE bCount) const
 		return;
 	}
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	if (item->IsItemShopEmBound())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+		return;
+	}
+#endif
+
 	if (IS_SET(item->GetAntiFlag(), ITEM_ANTIFLAG_SELL))
 		return;
 

@@ -2186,6 +2186,14 @@ void CInputMain::SafeboxCheckin(LPCHARACTER ch, const char * c_pData) const
 		return;
 	}
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	if (pkItem->IsItemShopEmBound())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+		return;
+	}
+#endif
+
 	if (true == pkItem->isLocked())
 	{
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("<창고> 이 아이템은 넣을 수 없습니다."));

@@ -164,6 +164,14 @@ bool CExchange::AddItem(TItemPos item_pos, BYTE display_pos)
 		return false;
 	}
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	if (item->IsItemShopEmBound())
+	{
+		m_pOwner->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+		return false;
+	}
+#endif
+
 	if (true == item->isLocked())
 	{
 		return false;

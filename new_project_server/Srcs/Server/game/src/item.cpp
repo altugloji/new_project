@@ -2186,4 +2186,23 @@ const char* CItem::GetClientName()
 	return m_strClientName.c_str();
 }
 #endif
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+#include "item_shop.h"
+
+bool CItem::HasItemShopEmBindMarker() const
+{
+	return GetAttributeValue(ITEM_SHOP_EM_BIND_ATTR_INDEX) == ITEM_SHOP_EM_BIND_ATTR_VALUE;
+}
+
+bool CItem::IsItemShopEmBound() const
+{
+	return HasItemShopEmBindMarker();
+}
+
+void CItem::ApplyItemShopEmBind()
+{
+	SetForceAttribute(ITEM_SHOP_EM_BIND_ATTR_INDEX, APPLY_NONE, ITEM_SHOP_EM_BIND_ATTR_VALUE);
+}
+#endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

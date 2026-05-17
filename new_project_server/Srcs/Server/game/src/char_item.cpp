@@ -177,10 +177,20 @@ static bool FN_check_item_socket(LPITEM item)
 
 static void FN_copy_item_socket(LPITEM dest, LPITEM src)
 {
+	if (!dest || !src)
+		return;
+
 	for (int i = 0; i < ITEM_SOCKET_MAX_NUM; ++i)
-	{
 		dest->SetSocket(i, src->GetSocket(i));
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	if (src->HasItemShopEmBindMarker())
+	{
+		dest->SetAttributes(src->GetAttributes());
+		dest->ApplyItemShopEmBind();
+		src->ApplyItemShopEmBind();
 	}
+#endif
 }
 static bool FN_check_item_sex(LPCHARACTER ch, LPITEM item)
 {
@@ -5559,6 +5569,14 @@ bool CHARACTER::DropItem(TItemPos Cell, BYTE bCount)
 		return false;
 	}
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	if (item->IsItemShopEmBound())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+		return false;
+	}
+#endif
+
 	if (bCount == 0 || bCount > item->GetCount())
 		bCount = item->GetCount();
 
@@ -5639,6 +5657,14 @@ bool CHARACTER::DeleteItem(TItemPos Cell)
 	}
 #endif
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	if (item->IsItemShopEmBound())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+		return false;
+	}
+#endif
+
 	if (quest::CQuestManager::instance().GetPCForce(GetPlayerID())->IsRunning() == true)
 		return false;
 
@@ -5708,6 +5734,14 @@ bool CHARACTER::SellItem(TItemPos Cell)
 
 	if (IS_SET(item->GetAntiFlag(), ITEM_ANTIFLAG_SELL))
 		return false;
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	if (item->IsItemShopEmBound())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+		return false;
+	}
+#endif
 
 	// EXTRA_CHECK
 	int iPulse = thecore_pulse();
@@ -5884,6 +5918,17 @@ bool CHARACTER::MoveItem(TItemPos Cell, TItemPos DestCell, BYTE count)
 	if (true == item->isLocked())
 		return false;
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	if (DestCell.window_type == SAFEBOX || DestCell.window_type == MALL)
+	{
+		if (item->IsItemShopEmBound())
+		{
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+			return false;
+		}
+	}
+#endif
+
 	if (!IsValidItemPosition(DestCell))
 	{
 		return false;
@@ -5968,6 +6013,11 @@ bool CHARACTER::MoveItem(TItemPos Cell, TItemPos DestCell, BYTE count)
 				if (item2->GetSocket(i) != item->GetSocket(i))
 					return false;
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+			if (item->IsItemShopEmBound() != item2->IsItemShopEmBound())
+				return false;
+#endif
+
 			if (count == 0)
 				count = item->GetCount();
 
@@ -6000,6 +6050,13 @@ bool CHARACTER::MoveItem(TItemPos Cell, TItemPos DestCell, BYTE count)
 		}
 		else if (count < item->GetCount())
 		{
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+			if (item->IsItemShopEmBound())
+			{
+				ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+				return false;
+			}
+#endif
 			sys_log(0, "%s: ITEM_SPLIT %s (window: %d, cell : %d) -> (window:%d, cell %d) count %d", GetName(), item->GetName(), Cell.window_type, Cell.cell,
 				DestCell.window_type, DestCell.cell, count);
 
@@ -6230,6 +6287,13 @@ bool CHARACTER::PickupItem(DWORD dwVID)
 		}
 		else if (!IS_SET(item->GetAntiFlag(), ITEM_ANTIFLAG_GIVE | ITEM_ANTIFLAG_DROP) && GetParty())
 		{
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+			if (item->IsItemShopEmBound())
+			{
+				ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+				return false;
+			}
+#endif
 			NPartyPickupDistribute::FFindOwnership funcFindOwnership(item);
 
 			GetParty()->ForEachOnlineMember(funcFindOwnership);

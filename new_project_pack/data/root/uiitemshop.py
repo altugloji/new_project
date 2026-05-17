@@ -21,6 +21,7 @@ ITEM_SHOP_ITEM_VISIBLE_ROWS = 5
 ITEM_SHOP_ROW_H = 110
 ITEM_SHOP_ROW_GAP = 10
 ITEM_SHOP_LIST_TOP = 10
+ITEM_SHOP_ROW_START_X = 8
 ITEM_SHOP_SCROLL_VIEW_H = (
 	ITEM_SHOP_ITEM_VISIBLE_ROWS * ITEM_SHOP_ROW_H
 	+ (ITEM_SHOP_ITEM_VISIBLE_ROWS - 1) * ITEM_SHOP_ROW_GAP
@@ -32,7 +33,7 @@ ITEM_SHOP_FONT = getattr(localeInfo, "UI_BOLD_FONT_LARGE", localeInfo.UI_DEF_FON
 FAKE_CATEGORY_DATA = {
 	0 : {
 		"categoryName" : "Genel",
-		"subCategoryNameList" : ["Karakter Geliþimi", "Yardimci Esyalar", "EP Kuponlarý", "Diðer",],
+		"subCategoryNameList" : ["Karakter GeliÅŸimi", "Yardimci Esyalar", "EP KuponlarÄ±", "Biletler", "DiÄŸer",],
 	},
 }
 
@@ -275,7 +276,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		self.itemPrice = -1
 		self.maxCount = 0
 		self.coins = 0
-		# self.mark = 0
+		self.payWithEp = True
 		
 		self.__LoadDialog()
 	
@@ -288,7 +289,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		countTextFirst = ui.TextLine()
 		countTextFirst.SetParent(self)
 		countTextFirst.SetFontName(ITEM_SHOP_FONT)
-		countTextFirst.SetText("Al?nacak toplam miktar: 1")
+		countTextFirst.SetText("Alinacak toplam miktar: 1")
 		countTextFirst.SetPosition(self.GetWidth() / 2, 40)
 		countTextFirst.SetHorizontalAlignCenter()
 		countTextFirst.Show()
@@ -358,7 +359,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		acceptButton.SetUpVisual("d:/ymir work/ui/Public/acceptbutton00.sub")
 		acceptButton.SetOverVisual("d:/ymir work/ui/Public/acceptbutton01.sub")
 		acceptButton.SetDownVisual("d:/ymir work/ui/Public/acceptbutton02.sub")
-		acceptButton.SetToolTipText("Sat?n Al")
+		acceptButton.SetToolTipText("Satin Al")
 		acceptButton.SetEvent(ui.__mem_func__(self.acceptButtonEvent))
 		acceptButton.Show()
 		self.acceptButton = acceptButton
@@ -369,7 +370,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		cancelButton.SetUpVisual("d:/ymir work/ui/Public/canclebutton00.sub")
 		cancelButton.SetOverVisual("d:/ymir work/ui/Public/canclebutton01.sub")
 		cancelButton.SetDownVisual("d:/ymir work/ui/Public/canclebutton02.sub")
-		cancelButton.SetToolTipText("?ptal")
+		cancelButton.SetToolTipText("Iptal")
 		cancelButton.SetEvent(ui.__mem_func__(self.Close))
 		cancelButton.Show()
 		self.cancelButton = cancelButton
@@ -386,7 +387,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		self.itemPrice = -1
 		self.maxCount = 0
 		self.countEditline.SetText("1")
-		self.countTextFirst.SetText("Al?nacak toplam miktar: 1")
+		self.countTextFirst.SetText("Alinacak toplam miktar: 1")
 		self.Hide()
 
 	def acceptButtonEvent(self):
@@ -395,7 +396,10 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		price = self.itemPrice * int(itemCount)
 
 		if self.getParent:
-			self.getParent.buyQuestionDialog(self.itemID, self.itemVnum, itemName, int(itemCount), price)
+			if self.payWithEp:
+				self.getParent.buyQuestionDialog(self.itemID, self.itemVnum, itemName, int(itemCount), price)
+			else:
+				self.getParent.buyQuestionDialog2(self.itemID, self.itemVnum, itemName, int(itemCount), price)
 		
 		self.Close()
 
@@ -422,7 +426,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 			except ValueError:
 				pass
 
-		self.countTextFirst.SetText("Al?nacak toplam miktar: %d" % count)
+		self.countTextFirst.SetText("Alinacak toplam miktar: %d" % count)
 
 		price = self.itemPrice * count
 		self.SetItemPrice(price)
@@ -444,7 +448,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 				count = 1
 
 		self.countEditline.SetText("%d" % count)
-		self.countTextFirst.SetText("Al?nacak toplam miktar: %d" % count)
+		self.countTextFirst.SetText("Alinacak toplam miktar: %d" % count)
 		price = self.itemPrice * count
 		self.SetItemPrice(price)
 
@@ -471,17 +475,28 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 			count = self.maxCount
 
 		self.countEditline.SetText("%d" % count)
-		self.countTextFirst.SetText("Al?nacak toplam miktar: %d" % count)
+		self.countTextFirst.SetText("Alinacak toplam miktar: %d" % count)
 		price = self.itemPrice * count
 		self.SetItemPrice(price)
 
 	def SetItemPrice(self, price):
-		text = ("Tutar : %d EP" % (price))
+		if self.payWithEp:
+			text = "Tutar : %s EP" % _FormatItemShopPriceDisplay(price)
+		else:
+			text = "Tutar : %s EM" % _FormatItemShopPriceDisplay(price)
 		self.ammoutText.SetText(text)
 
-	def SetCountText(self, price, playerTotalCoin):
+	def SetCountText(self, price, playerBalance, payWithEp=True):
+		self.payWithEp = payWithEp
 		self.itemPrice = price
-		self.maxCount = playerTotalCoin / price
+		if price > 0:
+			self.maxCount = playerBalance / price
+		else:
+			self.maxCount = 1
+
+		if self.maxCount < 1:
+			self.maxCount = 1
+
 		self.countTextSecond.SetText("/%d" % self.maxCount)
 
 		if self.maxCount > 200:
@@ -514,6 +529,12 @@ class ItemShopWindow(ui.ScriptWindow):
 		self.itemToolTip = None
 		self.questionDialog = None
 		self.interface = interface
+		self.coins = 0
+		self.marks = 0
+		self.dragonmark = None
+		self.marksIcon = None
+		self.marksSlot = None
+		self._emCurrencyVisible = None
 
 	def __del__(self):
 		ui.ScriptWindow.__del__(self)
@@ -567,7 +588,13 @@ class ItemShopWindow(ui.ScriptWindow):
 			self.dragoncoin.SetOutline()
 			self.dragoncoin.SetHorizontalAlignCenter()
 			self.dragoncoin.SetVerticalAlignCenter()
-			# self.dragonmark = self.GetChild("dragon_mark_text")
+			self.dragonmark = self.GetChild("dragon_mark_text")
+			self.dragonmark.SetFontName(ITEM_SHOP_FONT)
+			self.dragonmark.SetOutline()
+			self.dragonmark.SetHorizontalAlignCenter()
+			self.dragonmark.SetVerticalAlignCenter()
+			self.marksIcon = self.GetChild("marks_icon")
+			self.marksSlot = self.GetChild("Marks_Slot")
 			self.coinBuyButton = self.GetChild("coin_buy_button")
 			if self.coinBuyButton.ButtonText:
 				# self.coinBuyButton.ButtonText.SetFontName(ITEM_SHOP_FONT)
@@ -576,6 +603,7 @@ class ItemShopWindow(ui.ScriptWindow):
 			for i in xrange(1, ITEM_SHOP_ITEM_VISIBLE_ROWS + 1):
 				number = "0%d" % i
 
+				itemBoard = self.GetChild("itemBoard_%s" % number)
 				wndItemSlot = self.GetChild("itemSlot_%s" % number)
 				wndItemSlot.SetSelectItemSlotEvent(ui.__mem_func__(self.selectItemSlotEvent))
 				wndItemSlot.SetUnselectItemSlotEvent(ui.__mem_func__(self.selectItemSlotEvent))
@@ -602,9 +630,12 @@ class ItemShopWindow(ui.ScriptWindow):
 				itemBuyButton.ButtonText.SetFontName(ITEM_SHOP_FONT)
 				itemBuyButton.ButtonText.SetOutline()
 				itemBuyButton.Disable()
-				#itemBuyButton.ButtonText.SetFontColor(1.00,0.69,0.29)
+				itemBuyButtonMark = self.GetChild("itemBuyButtonMark_%s" % number)
+				itemBuyButtonMark.ButtonText.SetFontName(ITEM_SHOP_FONT)
+				itemBuyButtonMark.ButtonText.SetOutline()
+				itemBuyButtonMark.Disable()
 				
-				self.wndItemList[i] = (wndItemSlot, itemName, itemOldPrice, itemPreviewButton, itemBuyButton)
+				self.wndItemList[i] = (itemBoard, wndItemSlot, itemName, itemOldPrice, itemPreviewButton, itemBuyButton, itemBuyButtonMark)
 		except:
 			import exception
 			exception.Abort("ItemShopWindow.LoadDialog.BindObject")
@@ -651,19 +682,58 @@ class ItemShopWindow(ui.ScriptWindow):
 	def SetItemToolTip(self, itemToolTip):
 		self.itemToolTip = itemToolTip
 		
-	def OnUpdate(self):
-		self.dragoncoin.SetText("%d EP" % int(player.GetDragonCoin()))
-		self.coins = int(player.GetDragonCoin())
-		# self.dragonmark.SetText("%d EM" % int(player.GetDragonMark()))
-		# self.dragonmark.SetText("%d %d |cffFFC125EP" % constInfo.mevlutcash % constInfo.mevlutcash1)
+	def __HasPlayerEm(self):
+		return self.marks > 0
 
-		# self.mark = int(player.GetDragonMark())
+	def __CanBuyItemShopWithEm(self, itemVnum):
+		try:
+			if itemVnum in constInfo.ITEM_SHOP_EM_PURCHASE_BLOCKED_VNUMS:
+				return False
+		except AttributeError:
+			if itemVnum in (80014, 80015, 80016, 80017):
+				return False
+		return True
+
+	def __RefreshEmCurrencyVisibility(self):
+		showEm = self.__HasPlayerEm()
+
+		if self.marksIcon:
+			if showEm:
+				self.marksIcon.Show()
+			else:
+				self.marksIcon.Hide()
+
+		if self.marksSlot:
+			if showEm:
+				self.marksSlot.Show()
+			else:
+				self.marksSlot.Hide()
+
+		if self.dragonmark and showEm:
+			self.dragonmark.SetText("%s EM" % _FormatItemShopPriceDisplay(self.marks))
+
+	def OnUpdate(self):
+		self.coins = int(player.GetDragonCoin())
+		self.marks = int(player.GetDragonMark())
+		self.dragoncoin.SetText("%s EP" % _FormatItemShopPriceDisplay(self.coins))
+
+		emVisible = self.__HasPlayerEm()
+		prevEmVisible = self._emCurrencyVisible
+		self.__RefreshEmCurrencyVisibility()
+		self._emCurrencyVisible = emVisible
+
+		if prevEmVisible is not None and prevEmVisible != emVisible and self.itemList:
+			self.__RefreshItemRowsFromScroll()
 
 
 	def Open(self):
 		self.max_pos_x = wndMgr.GetScreenWidth() - self.GetWidth()
 		self.max_pos_y = wndMgr.GetScreenHeight() - self.GetHeight()
 		self.SetCenterPosition()
+		self.coins = int(player.GetDragonCoin())
+		self.marks = int(player.GetDragonMark())
+		self._emCurrencyVisible = None
+		self.__RefreshEmCurrencyVisibility()
 		self.categoryGroupBoard.RefreshProcess()
 		self.categoryGroupBoard.firstOpenBoard()
 		ui.ScriptWindow.Show(self)
@@ -686,7 +756,8 @@ class ItemShopWindow(ui.ScriptWindow):
 
 	def ClearItemBoard(self):
 		for i in xrange(1, ITEM_SHOP_ITEM_VISIBLE_ROWS + 1):
-			(wndItemSlot, itemName, itemOldPrice, itemPreviewButton, itemBuyButton) = self.wndItemList[i]
+			(itemBoard, wndItemSlot, itemName, itemOldPrice, itemPreviewButton, itemBuyButton, itemBuyButtonMark) = self.wndItemList[i]
+			itemBoard.Hide()
 			wndItemSlot.ClearSlot(i)
 			wndItemSlot.RefreshSlot()
 
@@ -695,6 +766,9 @@ class ItemShopWindow(ui.ScriptWindow):
 			itemPreviewButton.Hide()
 			itemBuyButton.SetText("")
 			itemBuyButton.Disable()
+			itemBuyButtonMark.SetText("")
+			itemBuyButtonMark.Disable()
+			itemBuyButtonMark.Hide()
 
 	def __TotalItemContentHeight(self, n):
 		if n <= 0:
@@ -731,13 +805,22 @@ class ItemShopWindow(ui.ScriptWindow):
 	def __RefreshItemRowsFromScroll(self):
 		n = len(self.itemList)
 		start = self.__GetScrollStartIndex()
+		visibleRow = 0
 		for i in xrange(1, ITEM_SHOP_ITEM_VISIBLE_ROWS + 1):
 			itemPos = start + (i - 1)
+			(itemBoard, wndItemSlot, itemName, itemOldPrice, itemPreviewButton, itemBuyButton, itemBuyButtonMark) = self.wndItemList[i]
+
 			if itemPos >= n:
+				itemBoard.Hide()
 				continue
 
 			(empty, itemID, itemVnum, itemPrice, itemPriceOld, itemCount, itemSocketZero, itemMark, metinSlot, attrslot) = self.itemList[itemPos]
-			(wndItemSlot, itemName, itemOldPrice, itemPreviewButton, itemBuyButton) = self.wndItemList[i]
+			itemBoard.SetPosition(
+				ITEM_SHOP_ROW_START_X,
+				ITEM_SHOP_LIST_TOP + visibleRow * (ITEM_SHOP_ROW_H + ITEM_SHOP_ROW_GAP),
+			)
+			visibleRow += 1
+			itemBoard.Show()
 
 			wndItemSlot.SetItemSlot(i, itemVnum, itemCount)
 			wndItemSlot.RefreshSlot()
@@ -779,19 +862,31 @@ class ItemShopWindow(ui.ScriptWindow):
 			if item.IsAntiFlag(item.ITEM_ANTIFLAG_FEMALE) and sex == FEMALE:
 				isItemPreview = False
 
-			if itemPrice >= itemMark:
-				priceType = "%s EP" % _FormatItemShopPriceDisplay(itemPrice)
-			else:
-				priceType = "%s EM" % _FormatItemShopPriceDisplay(itemMark)
-
 			if isItemPreview:
 				itemPreviewButton.Show()
 
 			itemName.SetText(item.GetItemName())
 			itemOldPrice.SetText("%d adet." % int(itemCount))
-			itemBuyButton.SetText(priceType)
-			itemBuyButton.SetEvent(ui.__mem_func__(self.buyButtonEvent), itemID, itemVnum, itemPrice, itemCount, itemMark)
-			itemBuyButton.Enable()
+
+			if itemPrice > 0:
+				itemBuyButton.SetText("%s EP" % _FormatItemShopPriceDisplay(itemPrice))
+				itemBuyButton.SetEvent(ui.__mem_func__(self.buyButtonEvent), itemID, itemVnum, itemPrice, itemCount, itemMark, True)
+				itemBuyButton.Show()
+				itemBuyButton.Enable()
+			else:
+				itemBuyButton.SetText("")
+				itemBuyButton.Disable()
+				itemBuyButton.Hide()
+
+			if itemMark > 0 and self.__HasPlayerEm() and self.__CanBuyItemShopWithEm(itemVnum):
+				itemBuyButtonMark.SetText("%s EM" % _FormatItemShopPriceDisplay(itemMark))
+				itemBuyButtonMark.SetEvent(ui.__mem_func__(self.buyButtonEvent), itemID, itemVnum, itemPrice, itemCount, itemMark, False)
+				itemBuyButtonMark.Show()
+				itemBuyButtonMark.Enable()
+			else:
+				itemBuyButtonMark.SetText("")
+				itemBuyButtonMark.Disable()
+				itemBuyButtonMark.Hide()
 
 	def ChangeCategory(self, categoryID, subCategoryID):
 		self.ClearItemBoard()
@@ -822,7 +917,7 @@ class ItemShopWindow(ui.ScriptWindow):
 	def searchButtonEvent(self):
 		searchText = self.searchEditline.GetText()
 		if len(searchText) < 3:
-			chat.AppendChat(5, "Aranacak kelime ?ok k?sa")
+			chat.AppendChat(5, "Aranacak kelime cok kisa")
 			return True
 		
 		self.SearchItem(searchText)
@@ -832,7 +927,7 @@ class ItemShopWindow(ui.ScriptWindow):
 		searchItemList = filter(lambda item: item[0].find(toLower(itemName)) != -1, constInfo.ITEM_SEARCH_DATA)
 		
 		if not searchItemList:
-			chat.AppendChat(1, "%s i?eren nesne bulunamad?." % itemName)
+			chat.AppendChat(1, "%s iceren nesne bulunamadi." % itemName)
 			return
 
 		self.itemList = [item for item in searchItemList]
@@ -841,21 +936,40 @@ class ItemShopWindow(ui.ScriptWindow):
 
 		self.RefreshProcess()
 
-	def buyButtonEvent(self, itemID, itemVnum, itemPrice, itemCount, itemMark):
+	def buyButtonEvent(self, itemID, itemVnum, itemPrice, itemCount, itemMark, payWithEp=True):
 		if itemVnum == 0:
 			return
 
+		if not payWithEp and not self.__CanBuyItemShopWithEm(itemVnum):
+			try:
+				chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.nesnemarketemilealinemez)
+			except:
+				chat.AppendChat(chat.CHAT_TYPE_INFO, "Bu urun EM ile satin alinamaz.")
+			return
+
 		item.SelectItem(itemVnum)
+		if payWithEp:
+			if itemPrice <= 0:
+				return
+			payPrice = itemPrice
+		else:
+			if itemMark <= 0:
+				return
+			payPrice = itemMark
+
 		if item.IsFlag(ITEM_FLAG_STACKABLE) and itemCount <= 1:
 			self.itemStackalbeBuyDialog.SetItem(itemID, itemVnum)
-			self.itemStackalbeBuyDialog.SetCountText(itemPrice, self.coins)#player total coin
+			if payWithEp:
+				self.itemStackalbeBuyDialog.SetCountText(itemPrice, self.coins, True)
+			else:
+				self.itemStackalbeBuyDialog.SetCountText(itemMark, self.marks, False)
 			self.itemStackalbeBuyDialog.SetTitleName(item.GetItemName())
 			self.itemStackalbeBuyDialog.Open()
 		else:
-			if itemPrice >= itemMark:
-				self.buyQuestionDialog(itemID, itemVnum, item.GetItemName(), 1, itemPrice)
+			if payWithEp:
+				self.buyQuestionDialog(itemID, itemVnum, item.GetItemName(), 1, payPrice)
 			else:
-				self.buyQuestionDialog2(itemID, itemVnum, item.GetItemName(), 1, itemMark)
+				self.buyQuestionDialog2(itemID, itemVnum, item.GetItemName(), 1, payPrice)
 
 	def buyQuestionDialog(self, itemID, itemVnum, itemName, itemCount, itemPrice):
 		self.questionDialog.SetText1(localeInfo.ASK_BUY_ITEM_TEXT % itemName)
@@ -863,6 +977,7 @@ class ItemShopWindow(ui.ScriptWindow):
 		self.questionDialog.itemID = itemID
 		self.questionDialog.itemVnum = itemVnum
 		self.questionDialog.itemCount = itemCount
+		self.questionDialog.payType = 0
 		self.questionDialog.SetWidth(385)
 		self.questionDialog.SetTop()
 		self.questionDialog.Open()
@@ -873,6 +988,7 @@ class ItemShopWindow(ui.ScriptWindow):
 		self.questionDialog.itemID = itemID
 		self.questionDialog.itemVnum = itemVnum
 		self.questionDialog.itemCount = itemCount
+		self.questionDialog.payType = 1
 		self.questionDialog.SetWidth(385)
 		self.questionDialog.SetTop()
 		self.questionDialog.Open()
@@ -884,7 +1000,8 @@ class ItemShopWindow(ui.ScriptWindow):
 		if arg:
 			itemID = self.questionDialog.itemID
 			itemCount = self.questionDialog.itemCount
-			net.SendChatPacket("/nesne_market %d %d" % (itemID, itemCount))
+			payType = getattr(self.questionDialog, "payType", 2)
+			net.SendChatPacket("/nesne_market %d %d %d" % (itemID, itemCount, payType))
 
 		self.questionDialog.Close()
 	
@@ -900,7 +1017,7 @@ class ItemShopWindow(ui.ScriptWindow):
 		if itemVnum == 0:
 			return
 
-		self.buyButtonEvent(itemID, itemVnum, itemPrice, itemCount, itemMark)
+		self.buyButtonEvent(itemID, itemVnum, itemPrice, itemCount, itemMark, True)
 
 	def OverInItem(self, itemIndex):
 		if not self.itemToolTip:

@@ -959,6 +959,48 @@ class ItemToolTip(ToolTip):
 		if magicDefencePower > 0:
 			self.AppendTextLine(localeInfo.TOOLTIP_ITEM_MAGIC_DEF_POWER % magicDefencePower, self.GetChangeTextLineColor(magicDefencePower))
 
+	def __GetItemShopEmBindAttrIndexValue(self):
+		try:
+			return constInfo.ITEM_SHOP_EM_BIND_ATTR_INDEX, constInfo.ITEM_SHOP_EM_BIND_ATTR_VALUE
+		except AttributeError:
+			return 6, 31337
+
+	def __IsItemShopEmBound(self, window_type, slotIndex, attrSlot):
+		if not app.ENABLE_ITEM_SHOP_SYSTEM:
+			return False
+
+		attrIndex, attrValue = self.__GetItemShopEmBindAttrIndexValue()
+
+		if slotIndex >= 0:
+			try:
+				(_attrType, bindValue) = player.GetItemAttribute(window_type, slotIndex, attrIndex)
+				if bindValue == attrValue:
+					return True
+			except:
+				pass
+
+		if not attrSlot:
+			return False
+
+		try:
+			if attrSlot[attrIndex][1] == attrValue:
+				return True
+		except (IndexError, TypeError):
+			pass
+
+		return False
+
+	def __AppendItemShopEmBindInformation(self, window_type, slotIndex, attrSlot):
+		if not self.__IsItemShopEmBound(window_type, slotIndex, attrSlot):
+			return
+
+		self.AppendSpace(5)
+		try:
+			lockText = localeInfo.TOOLTIP_ITEM_SHOP_EM_LOCKED
+		except:
+			lockText = "(Kilitli)"
+		self.AppendTextLine(lockText, self.NEGATIVE_COLOR)
+
 	def __AppendAttributeInformation(self, attrSlot, itemAbsChance = 0):
 		if 0 != attrSlot:
 			for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM):
@@ -967,6 +1009,10 @@ class ItemToolTip(ToolTip):
 
 				if 0 == value:
 					continue
+
+				if app.ENABLE_ITEM_SHOP_SYSTEM:
+					if i == constInfo.ITEM_SHOP_EM_BIND_ATTR_INDEX and value == constInfo.ITEM_SHOP_EM_BIND_ATTR_VALUE:
+						continue
 
 				affectString = self.__GetAffectString(type, value)
 				if app.ENABLE_ACCE_COSTUME_SYSTEM:
@@ -1146,6 +1192,8 @@ class ItemToolTip(ToolTip):
 
 		self.__AdjustMaxWidth(attrSlot, itemDesc)
 		self.__SetItemTitle(itemVnum, metinSlot, attrSlot)
+		if app.ENABLE_ITEM_SHOP_SYSTEM:
+			self.__AppendItemShopEmBindInformation(window_type, slotIndex, attrSlot)
 
 		### Hair Preview Image ###
 		if self.__IsHair(itemVnum):

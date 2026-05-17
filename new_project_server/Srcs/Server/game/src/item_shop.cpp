@@ -17,6 +17,20 @@
 #include "item_shop.h"
 #include "../../common/VnumHelper.h"
 
+static bool IsItemShopEmPurchaseBlocked(DWORD dwVnum)
+{
+	switch (dwVnum)
+	{
+		case 80014:
+		case 80015:
+		case 80016:
+		case 80017:
+			return true;
+		default:
+			return false;
+	}
+}
+
 const CItemShopManager::TItemShopTable* CItemShopManager::GetTable(DWORD id)
 {
 	TItemShopDataMap::iterator itor = m_ItemShopDataMap.find(id);
@@ -181,12 +195,15 @@ void CItemShopManager::SendClientPacket(LPCHARACTER ch)
 	}
 }
 
-bool CItemShopManager::Buy(LPCHARACTER ch, DWORD id, DWORD count)
+bool CItemShopManager::Buy(LPCHARACTER ch, DWORD id, DWORD count, BYTE bPayType)
 {
 	if (!ch)
 		return false;
 	if (count <= 0)
 		return false;
+
+	if (count > 200)
+		count = 200;
 
 	const TItemShopTable* c_pTable = GetTable(id);
 
@@ -203,33 +220,84 @@ bool CItemShopManager::Buy(LPCHARACTER ch, DWORD id, DWORD count)
 	DWORD dwMark = c_pTable->mark;
 
 	DWORD dwRealCount = dwCount * count;
-	
-	
+
+	const bool bBlockEmPurchase = IsItemShopEmPurchaseBlocked(dwVnum);
+
 	bool pricetypecoin = false;
-	
-	if (dwCoins >= dwMark)
+
+	if (bBlockEmPurchase && bPayType == 1)
 	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemilealinemez"));
+		return false;
+	}
+
+	if (bPayType == 0)
+	{
+		if (dwCoins <= 0)
+			return false;
+
 		pricetypecoin = true;
-	}
-	else
-	{
-		pricetypecoin = false;
-	}
-	
-	if (dwCoins >= dwMark)
-	{
+
 		if (ch->GetDragonCoin() < (dwCoins * count))
 		{
 			ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketyeterliepyok"));
 			return false;
 		}
 	}
-	else
+	else if (bPayType == 1)
 	{
+		if (dwMark <= 0)
+			return false;
+
+		pricetypecoin = false;
+
 		if (ch->GetDragonMark() < (dwMark * count))
 		{
 			ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketyeterliemyok"));
 			return false;
+		}
+	}
+	else
+	{
+		if (bBlockEmPurchase)
+		{
+			if (dwCoins <= 0)
+			{
+				ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemilealinemez"));
+				return false;
+			}
+
+			pricetypecoin = true;
+
+			if (ch->GetDragonCoin() < (dwCoins * count))
+			{
+				ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketyeterliepyok"));
+				return false;
+			}
+		}
+		else
+		{
+			if (dwCoins >= dwMark)
+				pricetypecoin = true;
+			else
+				pricetypecoin = false;
+
+			if (dwCoins >= dwMark)
+			{
+				if (ch->GetDragonCoin() < (dwCoins * count))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketyeterliepyok"));
+					return false;
+				}
+			}
+			else
+			{
+				if (ch->GetDragonMark() < (dwMark * count))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketyeterliemyok"));
+					return false;
+				}
+			}
 		}
 	}
 
@@ -258,7 +326,6 @@ bool CItemShopManager::Buy(LPCHARACTER ch, DWORD id, DWORD count)
 	if (pricetypecoin == true)
 	{
 		ch->SetDragonCoin(ch->GetDragonCoin() - (dwCoins * count));
-		ch->SetDragonMark(ch->GetDragonMark() + (dwMark));
 	}
 	else
 	{
@@ -298,8 +365,15 @@ bool CItemShopManager::Buy(LPCHARACTER ch, DWORD id, DWORD count)
 	pkItem->SetForceAttribute(2, c_pTable->type2, c_pTable->value2);
 	pkItem->SetForceAttribute(3, c_pTable->type3, c_pTable->value3);
 	pkItem->SetForceAttribute(4, c_pTable->type4, c_pTable->value4);
+
 	pkItem->SetForceAttribute(5, c_pTable->type5, c_pTable->value5);
-	pkItem->SetForceAttribute(6, c_pTable->type6, c_pTable->value6);
+
+	const bool bApplyEmBind = (bPayType == 1) || (bPayType != 0 && !pricetypecoin);
+
+	if (bApplyEmBind)
+		pkItem->ApplyItemShopEmBind();
+	else
+		pkItem->SetForceAttribute(6, c_pTable->type6, c_pTable->value6);
 
 	if (pkItem->IsRealTimeItem())
 		pkItem->SetSocket(0, get_global_time() + dwSocketZero);

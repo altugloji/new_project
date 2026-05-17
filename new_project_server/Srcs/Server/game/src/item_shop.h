@@ -1,4 +1,13 @@
 #pragma once
+
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+enum EItemShopEmBind
+{
+	ITEM_SHOP_EM_BIND_ATTR_INDEX	= 6,
+	ITEM_SHOP_EM_BIND_ATTR_VALUE	= 31337,
+};
+#endif
+
 class CItemShopManager : public singleton<CItemShopManager>
 {
 	typedef struct SItemShopTable
@@ -25,7 +34,7 @@ public:
 	const TItemShopTable* GetTable(DWORD id);
 
 	bool LoadItemShopTable();
-	bool Buy(LPCHARACTER ch, DWORD id, DWORD count);
+	bool Buy(LPCHARACTER ch, DWORD id, DWORD count, BYTE bPayType = 2);
 	
 	void SendClientPacket(LPCHARACTER ch);
 	
