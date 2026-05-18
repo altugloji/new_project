@@ -1099,6 +1099,10 @@ class Interface(object):
 		self.wndCharacter.RefreshAlignment()
 		self.dlgSystem.OnChangePKMode()
 
+	if app.ENABLE_REFINE_RENEWAL:
+		def CheckRefineDialog(self, isFail):
+			self.dlgRefineNew.CheckRefine(isFail)
+
 	## Refine
 	def OpenRefineDialog(self, targetItemPos, nextGradeItemVnum, cost, prob, type):
 		self.dlgRefineNew.Open(targetItemPos, nextGradeItemVnum, cost, prob, type)

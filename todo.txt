@@ -3,8 +3,7 @@ Yeşil Efsunlar Sadece 1 levellik ve 18levellik zırh ve silaha atılabilecek.
 Tahta Kolye Ateş efsunu kaldırılacak.
 Sular 10 dakika olacak craftta malzeme isticek ekstra (geme ekstra bişey koy)
 Yerden çok item toplayınca paket limite takılıyor.
-Toplu hasar gelecek
 Ticareti kapalı olan ürünler açılacak münzevi gibi
-Yere düşen itemler 2 3 efsunlu olma nasıl oluyor bak
 Düşen dolu +20 üzeri olmasın
 COMMON DROP DÜZENLENECEK
+REFİNE PENCERESİ ACIK KALMA EKLENECEK

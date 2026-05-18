@@ -92,6 +92,18 @@ class RefineDialog(ui.ScriptWindow):
 		self.toolTip = 0
 		self.dlgQuestion = 0
 
+	if app.ENABLE_REFINE_RENEWAL:
+		def __InitializeOpen(self):
+			self.children = []
+			self.vnum = 0
+			self.targetItemPos = 0
+			self.dialogHeight = 0
+			self.cost = 0
+			self.percentage = 0
+			self.type = 0
+			self.xRefineStart = 0
+			self.yRefineStart = 0
+
 	def GetRefineSuccessPercentage(self, scrollSlotIndex, itemSlotIndex):
 
 		if -1 != scrollSlotIndex:
@@ -175,6 +187,35 @@ class RefineDialog(ui.ScriptWindow):
 		net.SendItemUseToItemPacket(self.scrollItemPos, self.targetItemPos)
 		self.Close()
 
+	def AutoRefine(self, checkType, autoFlag):
+		constInfo.IS_AUTO_REFINE = autoFlag
+		
+	if app.ENABLE_REFINE_RENEWAL:	
+		def CheckRefine(self, isFail):
+			if constInfo.IS_AUTO_REFINE == True:
+				if constInfo.AUTO_REFINE_TYPE == 1:
+					if constInfo.AUTO_REFINE_DATA["ITEM"][0] != -1 and constInfo.AUTO_REFINE_DATA["ITEM"][1] != -1:
+						scrollIndex = player.GetItemIndex(constInfo.AUTO_REFINE_DATA["ITEM"][0])
+						itemIndex = player.GetItemIndex(constInfo.AUTO_REFINE_DATA["ITEM"][1])
+						
+						chat.AppendChat(chat.CHAT_TYPE_INFO, "%d %d" % (itemIndex, int(itemIndex %10)))
+						if scrollIndex == 0 or (itemIndex % 10 == 8 and not isFail):
+							self.Close()
+						else:
+							net.SendItemUseToItemPacket(constInfo.AUTO_REFINE_DATA["ITEM"][0], constInfo.AUTO_REFINE_DATA["ITEM"][1])
+				elif constInfo.AUTO_REFINE_TYPE == 2:
+					npcData = constInfo.AUTO_REFINE_DATA["NPC"]
+					if npcData[0] != 0 and npcData[1] != -1 and npcData[2] != -1 and npcData[3] != 0:
+						itemIndex = player.GetItemIndex(npcData[1], npcData[2])
+						if (itemIndex % 10 == 8 and not isFail) or isFail:
+							self.Close()
+						else:
+							net.SendGiveItemPacket(npcData[0], npcData[1], npcData[2], npcData[3])
+				else:
+					self.Close()
+			else:
+				self.Close()
+
 	def Close(self):
 		self.dlgQuestion.Hide()
 		self.Hide()
@@ -248,6 +289,17 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.itemImage = itemImage
 
 		self.titleBar.SetCloseEvent(ui.__mem_func__(self.CancelRefine))
+		if app.ENABLE_REFINE_RENEWAL:
+			self.checkBox = ui.CheckBox2()
+			self.checkBox.SetParent(self)
+			self.checkBox.SetPosition(0, 70)
+			self.checkBox.SetWindowHorizontalAlignCenter()
+			self.checkBox.SetWindowVerticalAlignBottom()
+			self.checkBox.SetEvent(ui.__mem_func__(self.AutoRefine), "ON_CHECK", True)
+			self.checkBox.SetEvent(ui.__mem_func__(self.AutoRefine), "ON_UNCKECK", False)
+			self.checkBox.SetCheckStatus(constInfo.IS_AUTO_REFINE)
+			self.checkBox.SetTextInfo(localeInfo.OTO_REFINE)
+			self.checkBox.Show()
 		self.isLoaded = True
 
 	def __del__(self):
@@ -286,12 +338,27 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.slotList = []
 		self.children = []
 
+	if app.ENABLE_REFINE_RENEWAL:
+		def __InitializeOpen(self):
+			self.children = []
+			self.vnum = 0
+			self.targetItemPos = 0
+			self.dialogHeight = 0
+			self.cost = 0
+			self.percentage = 0
+			self.type = 0
+			self.xRefineStart = 0
+			self.yRefineStart = 0
+
 	def Open(self, targetItemPos, nextGradeItemVnum, cost, prob, type):
 
 		if False == self.isLoaded:
 			self.__LoadScript()
 
-		self.__Initialize()
+		if app.ENABLE_REFINE_RENEWAL:
+			self.__InitializeOpen()
+		else:
+			self.__Initialize()
 
 		self.targetItemPos = targetItemPos
 		self.vnum = nextGradeItemVnum
@@ -348,8 +415,13 @@ class RefineDialogNew(ui.ScriptWindow):
 		textLine = ui.TextLine()
 		textLine.SetParent(thinBoard)
 		textLine.SetFontName(localeInfo.UI_DEF_FONT)
-		textLine.SetPackedFontColor(0xffdddddd)
-		textLine.SetText("%s x %02d" % (item.GetItemName(), count))
+		have_count = player.GetItemCountByVnum(vnum)
+		if have_count < count:
+			textLine.SetFontColor(1.0, 0.0, 0.0)
+		else:
+			textLine.SetFontColor(0.0, 1.0, 0.0)
+		textLine.SetText("|cFFdddddd|H|h%s x%d|h|r (%d)" % (item.GetItemName(), count, player.GetItemCountByVnum(vnum)))
+
 		textLine.SetOutline()
 		textLine.SetFeather(False)
 		textLine.SetWindowVerticalAlignCenter()
@@ -369,7 +441,7 @@ class RefineDialogNew(ui.ScriptWindow):
 
 	def UpdateDialog(self):
 		newWidth = self.toolTip.GetWidth() + 60
-		newHeight = self.dialogHeight + 75
+		newHeight = self.dialogHeight + 75 + 30
 
 		##if 936 == app.GetDefaultCodePage():
 		newHeight -= 8
@@ -415,13 +487,52 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.dlgQuestion = dlgQuestion
 
 	def Accept(self):
-		net.SendRefinePacket(self.targetItemPos, self.type)
-		self.Close()
+		if app.ENABLE_REFINE_RENEWAL:
+			net.SendRefinePacket(self.targetItemPos, self.type)
+		else:
+			net.SendRefinePacket(self.targetItemPos, self.type)
+			self.Close()
 
 	def CancelRefine(self):
 		net.SendRefinePacket(255, 255)
 		self.Close()
+		
+		if app.ENABLE_REFINE_RENEWAL:
+			constInfo.AUTO_REFINE_TYPE = 0
+			constInfo.AUTO_REFINE_DATA = {
+				"ITEM" : [-1, -1],
+				"NPC" : [0, -1, -1, 0]
+			}
 
 	def OnPressEscapeKey(self):
 		self.CancelRefine()
 		return True
+
+	if app.ENABLE_REFINE_RENEWAL:	
+		def AutoRefine(self, checkType, autoFlag):
+			constInfo.IS_AUTO_REFINE = autoFlag
+		
+		def CheckRefine(self, isFail):
+			if constInfo.IS_AUTO_REFINE == True:
+				if constInfo.AUTO_REFINE_TYPE == 1:
+					if constInfo.AUTO_REFINE_DATA["ITEM"][0] != -1 and constInfo.AUTO_REFINE_DATA["ITEM"][1] != -1:
+						scrollIndex = player.GetItemIndex(constInfo.AUTO_REFINE_DATA["ITEM"][0])
+						itemIndex = player.GetItemIndex(constInfo.AUTO_REFINE_DATA["ITEM"][1])
+						
+						#chat.AppendChat(chat.CHAT_TYPE_INFO, "%d %d" % (itemIndex, int(itemIndex %10)))
+						if scrollIndex == 0 or (itemIndex % 10 == 8 and not isFail):
+							self.Close()
+						else:
+							net.SendItemUseToItemPacket(constInfo.AUTO_REFINE_DATA["ITEM"][0], constInfo.AUTO_REFINE_DATA["ITEM"][1])
+				elif constInfo.AUTO_REFINE_TYPE == 2:
+					npcData = constInfo.AUTO_REFINE_DATA["NPC"]
+					if npcData[0] != 0 and npcData[1] != -1 and npcData[2] != -1 and npcData[3] != 0:
+						itemIndex = player.GetItemIndex(npcData[1], npcData[2])
+						if (itemIndex % 10 == 8 and not isFail) or isFail:
+							self.Close()
+						else:
+							net.SendGiveItemPacket(npcData[0], npcData[1], npcData[2], npcData[3])
+				else:
+					self.Close()
+			else:
+				self.Close()

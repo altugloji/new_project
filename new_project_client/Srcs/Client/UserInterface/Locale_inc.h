@@ -153,6 +153,7 @@
 #define ENABLE_NIGHT_MODE_OPTION
 #define AUTO_CHAT_ENABLE
 #define BOSS_EFFECT
+#define ENABLE_REFINE_RENEWAL
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

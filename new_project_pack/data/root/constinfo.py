@@ -25,6 +25,14 @@ if app.WJ_NEW_DROP_DIALOG:
 	silme = 0
 	ITEM_DELETE_LIST = {}
 
+if app.ENABLE_REFINE_RENEWAL:
+	IS_AUTO_REFINE = False
+	AUTO_REFINE_TYPE = 0
+	AUTO_REFINE_DATA = {
+		"ITEM" : [-1, -1],
+		"NPC" : [0, -1, -1, 0]
+	}
+
 # EXTRA BEGIN
 ENABLE_NEW_LEVELSKILL_SYSTEM = False # loads 5 (B,M,G,P,F) skills .mse
 ENABLE_RANDOM_CHANNEL_SEL = False # don't set a random channel when you open the client
