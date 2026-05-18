@@ -4,6 +4,15 @@
 #include "item.h"
 #include "item_addon.h"
 
+namespace
+{
+// After rolling addon bonuses, scale by this percent (100 = unchanged). 85 ~= 15% weaker.
+	enum
+	{
+		ADDON_BONUS_SCALE_PCT = 85
+	};
+}
+
 CItemAddonManager::CItemAddonManager()
 {
 }
@@ -20,12 +29,15 @@ void CItemAddonManager::ApplyAddonTo(int iAddonType, LPITEM pItem) const
 		return;
 	}
 
-	const int iSkillBonus = MINMAX(-30, (int) (gauss_random(0, 5) + 0.5f), 30);
+	const int iSkillBonusRaw = MINMAX(-30, (int) (gauss_random(0, 5) + 0.5f), 30);
 	int iNormalHitBonus = 0;
-	if (abs(iSkillBonus) <= 20)
-		iNormalHitBonus = -2 * iSkillBonus + abs(number(-8, 8) + number(-8, 8)) + number(1, 4);
+	if (abs(iSkillBonusRaw) <= 20)
+		iNormalHitBonus = -2 * iSkillBonusRaw + abs(number(-8, 8) + number(-8, 8)) + number(1, 4);
 	else
-		iNormalHitBonus = -2 * iSkillBonus + number(1, 5);
+		iNormalHitBonus = -2 * iSkillBonusRaw + number(1, 5);
+
+	const int iSkillBonus = MINMAX(-30, iSkillBonusRaw * ADDON_BONUS_SCALE_PCT / 100, 30);
+	iNormalHitBonus = iNormalHitBonus * ADDON_BONUS_SCALE_PCT / 100;
 
 	pItem->RemoveAttributeType(APPLY_SKILL_DAMAGE_BONUS);
 	pItem->RemoveAttributeType(APPLY_NORMAL_HIT_DAMAGE_BONUS);

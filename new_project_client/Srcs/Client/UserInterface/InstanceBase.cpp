@@ -864,6 +864,28 @@ bool CInstanceBase::Create(const SCreateData& c_rkCreateData)
 
 	RegisterBoundingSphere();
 
+#ifdef BOSS_EFFECT
+	static const DWORD bossRaceList[] =
+	{
+		691, 1907, 592, 5163, 5162, 5161, 5002, 5001,
+		2596, 2595, 2591, 2495, 2492, 2306, 2207, 2206,
+		2191, 2101, 2091, 1902, 1901, 1334, 1306, 1304,
+		1192, 1191, 1096, 1092, 1091, 793, 791, 692,
+		591, 3090, 3091, 3190, 3191, 3290, 3291,
+		3390, 3391, 3490, 3491, 3590, 3591, 3595, 3596,
+		3690, 3691, 3790, 3791, 3890, 3891
+	};
+
+	for (int i = 0; i < _countof(bossRaceList); ++i)
+	{
+		if (m_dwRace == bossRaceList[i])
+		{
+			__AttachEfektBossa();
+			break;
+		}
+	}
+#endif
+
 	if (c_rkCreateData.m_dwStateFlags & ADD_CHARACTER_STATE_DEAD)
 		m_GraphicThingInstance.DieEnd();
 

@@ -152,6 +152,7 @@
 #define FAST_LOGIN_CHARACTER_SAVE
 #define ENABLE_NIGHT_MODE_OPTION
 #define AUTO_CHAT_ENABLE
+#define BOSS_EFFECT
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

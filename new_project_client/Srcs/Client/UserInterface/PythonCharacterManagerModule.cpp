@@ -864,6 +864,10 @@ void initchrmgr()
 
 	PyModule_AddIntConstant(poModule, "EFFECT_REFINED",				CInstanceBase::EFFECT_REFINED);
 
+#ifdef BOSS_EFFECT
+	PyModule_AddIntConstant(poModule, "EFEKT_BOSSA",				CInstanceBase::EFEKT_BOSSA);
+#endif
+
 	PyModule_AddIntConstant(poModule, "EFFECT_SUCCESS",				CInstanceBase::EFFECT_SUCCESS) ;
 	PyModule_AddIntConstant(poModule, "EFFECT_FAIL",				CInstanceBase::EFFECT_FAIL) ;
 	PyModule_AddIntConstant(poModule, "EFFECT_FR_SUCCESS",				CInstanceBase::EFFECT_FR_SUCCESS) ;

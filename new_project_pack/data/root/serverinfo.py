@@ -4,29 +4,29 @@ from constInfo import TextColor
 app.ServerName = None
 
 SRV1 = {
-	"name":TextColor("ServerName", "ffd500"), #GOLD
-	"host":"5.196.21.148",
-	"auth1":30001,
-	"ch1":30003,
-	"ch2":30007, #if you only have 1 ch and see it online, it's ch99 having the same port
-	"ch3":30011,
-	"ch4":30015,
+	"name": "AyazMt2",
+	"host": "5.196.21.148",
+	"auth1": 30001,
+	"ch1": 30003,
+	"ch2": 30007, # if you only have 1 ch and see it online, it's ch99 having the same port
+	"ch3": 30011,
+	"ch4": 30015,
 }
 
-STATE_NONE = TextColor(localeInfo.CHANNEL_STATUS_OFFLINE, "FF0000") #RED
+STATE_NONE = localeInfo.CHANNEL_STATUS_OFFLINE
 
 STATE_DICT = {
-	0: TextColor(localeInfo.CHANNEL_STATUS_OFFLINE, "FF0000"), #RED
-	1: TextColor(localeInfo.CHANNEL_STATUS_RECOMMENDED, "00ff00"), #GREEN
-	2: TextColor(localeInfo.CHANNEL_STATUS_BUSY, "ffff00"), #YELLOW
-	3: TextColor(localeInfo.CHANNEL_STATUS_FULL, "ff8a08") #ORANGE
+	0: localeInfo.CHANNEL_STATUS_OFFLINE,
+	1: localeInfo.CHANNEL_STATUS_RECOMMENDED,
+	2: localeInfo.CHANNEL_STATUS_BUSY,
+	3: localeInfo.CHANNEL_STATUS_FULL,
 }
 
 SERVER1_CHANNEL_DICT = {
-	0: {"key":10, "name":TextColor("CH-1", "FFffFF"), "ip":SRV1["host"], "tcp_port":SRV1["ch1"], "udp_port":SRV1["ch1"], "state":STATE_NONE,},
-	1: {"key":11, "name":TextColor("CH-2", "FFffFF"), "ip":SRV1["host"], "tcp_port":SRV1["ch2"], "udp_port":SRV1["ch2"], "state":STATE_NONE,},
-	2: {"key":12, "name":TextColor("CH-3", "FFffFF"), "ip":SRV1["host"], "tcp_port":SRV1["ch3"], "udp_port":SRV1["ch3"], "state":STATE_NONE,},
-	3: {"key":13, "name":TextColor("CH-4", "FFffFF"), "ip":SRV1["host"], "tcp_port":SRV1["ch4"], "udp_port":SRV1["ch4"], "state":STATE_NONE,},
+	0: {"key": 10, "name": "CH-1", "ip": SRV1["host"], "tcp_port": SRV1["ch1"], "udp_port": SRV1["ch1"], "state": STATE_NONE,},
+	1: {"key": 11, "name": "CH-2", "ip": SRV1["host"], "tcp_port": SRV1["ch2"], "udp_port": SRV1["ch2"], "state": STATE_NONE,},
+	2: {"key": 12, "name": "CH-3", "ip": SRV1["host"], "tcp_port": SRV1["ch3"], "udp_port": SRV1["ch3"], "state": STATE_NONE,},
+	3: {"key": 13, "name": "CH-4", "ip": SRV1["host"], "tcp_port": SRV1["ch4"], "udp_port": SRV1["ch4"], "state": STATE_NONE,},
 }
 
 REGION_NAME_DICT = {

@@ -361,6 +361,8 @@ def __LoadGameEffect():
 	# LOCALE
 	chrmgr.RegisterEffect(chrmgr.EFFECT_AFFECT+chr.AFFECT_YMIR, "Bip01", localeInfo.FN_GM_MARK)
 	# END_OF_LOCALE
+	if app.BOSS_EFFECT:
+		chrmgr.RegisterEffect(chrmgr.EFEKT_BOSSA, "", "locale/tr/effect/boss.mse")
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_AFFECT+chr.AFFECT_POISON, "Bip01", "d:/ymir work/effect/hit/blow_poison/poison_loop.mse")
 	chrmgr.RegisterEffect(chrmgr.EFFECT_AFFECT+chr.AFFECT_SLOW, "", "d:/ymir work/effect/affect/slow.mse")

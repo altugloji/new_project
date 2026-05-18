@@ -2072,5 +2072,11 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "AUTO_CHAT_ENABLE", 0);
 #endif
 
+#ifdef BOSS_EFFECT
+	PyModule_AddIntConstant(poModule, "BOSS_EFFECT", 1);
+#else
+	PyModule_AddIntConstant(poModule, "BOSS_EFFECT", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

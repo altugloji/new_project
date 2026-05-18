@@ -410,6 +410,9 @@ class CInstanceBase
 			EFFECT_ACCE_EQUIP,
 			EFFECT_ACCE_BACK,
 #endif
+#ifdef BOSS_EFFECT
+			EFEKT_BOSSA,
+#endif
 			EFFECT_NUM,
 		};
 
@@ -982,6 +985,10 @@ class CInstanceBase
 
 		void __EffectContainer_Initialize();
 		void __EffectContainer_Destroy();
+
+#ifdef BOSS_EFFECT
+		void __AttachEfektBossa();
+#endif
 
 		DWORD __EffectContainer_AttachEffect(DWORD eEffect);
 		void __EffectContainer_DetachEffect(DWORD eEffect);
