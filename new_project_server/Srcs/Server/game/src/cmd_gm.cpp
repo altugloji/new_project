@@ -4731,4 +4731,140 @@ ACMD (do_ds_list)
 			ch->ChatPacket(CHAT_TYPE_INFO, "cell : %d, name : %s, id : %d", item->GetCell(), item->GetName(), item->GetID());
 	}
 }
+
+#ifdef ENABLE_GM_PLAYER_PANEL
+namespace
+{
+	bool IsGmPanelAllowed(LPCHARACTER ch)
+	{
+		return ch && ch->IsGM() && ch->GetGMLevel() >= GM_LOW_WIZARD;
+	}
+
+	struct FCollectLocalPlayer
+	{
+		std::vector<TGmPlayerPanelEntry>& m_vecEntries;
+
+		explicit FCollectLocalPlayer(std::vector<TGmPlayerPanelEntry>& vecEntries)
+			: m_vecEntries(vecEntries)
+		{
+		}
+
+		void operator()(LPCHARACTER ch)
+		{
+			if (!ch || !ch->IsPC())
+				return;
+
+			TGmPlayerPanelEntry entry;
+			memset(&entry, 0, sizeof(entry));
+			strlcpy(entry.szName, ch->GetName(), sizeof(entry.szName));
+			entry.dwPID = ch->GetPlayerID();
+			entry.bLevel = (BYTE) MINMAX(0, ch->GetLevel(), 255);
+			entry.bChannel = g_bChannel;
+			entry.lMapIndex = ch->GetMapIndex();
+			m_vecEntries.push_back(entry);
+		}
+	};
+
+	struct FCollectP2PPlayer
+	{
+		std::vector<TGmPlayerPanelEntry>& m_vecEntries;
+
+		explicit FCollectP2PPlayer(std::vector<TGmPlayerPanelEntry>& vecEntries)
+			: m_vecEntries(vecEntries)
+		{
+		}
+
+		void operator()(CCI* pkCCI) const
+		{
+			if (!pkCCI || !pkCCI->szName[0])
+				return;
+
+			TGmPlayerPanelEntry entry;
+			memset(&entry, 0, sizeof(entry));
+			strlcpy(entry.szName, pkCCI->szName, sizeof(entry.szName));
+			entry.dwPID = pkCCI->dwPID;
+			entry.bLevel = pkCCI->bLevel;
+			entry.bChannel = pkCCI->bChannel;
+			entry.lMapIndex = pkCCI->lMapIndex;
+			m_vecEntries.push_back(entry);
+		}
+	};
+
+	void BuildSummary(const std::vector<TGmPlayerPanelEntry>& vecEntries, TGmPlayerPanelSummary& summary)
+	{
+		memset(&summary, 0, sizeof(summary));
+		summary.wTotal = (WORD) vecEntries.size();
+
+		for (size_t i = 0; i < vecEntries.size(); ++i)
+		{
+			const BYTE bChannel = vecEntries[i].bChannel;
+			if (bChannel >= 1 && bChannel <= GM_PLAYER_PANEL_CHANNEL_COUNT)
+				++summary.awChannel[bChannel - 1];
+		}
+	}
+}
+
+void GmPlayerPanel_SendList(LPCHARACTER ch)
+{
+	if (!IsGmPanelAllowed(ch) || !ch->GetDesc())
+		return;
+
+	std::vector<TGmPlayerPanelEntry> vecEntries;
+	vecEntries.reserve(256);
+
+	CHARACTER_MANAGER::instance().for_each_pc(FCollectLocalPlayer(vecEntries));
+	P2P_MANAGER::instance().ForEachCCI(FCollectP2PPlayer(vecEntries));
+
+	TGmPlayerPanelSummary summary;
+	BuildSummary(vecEntries, summary);
+
+	if (vecEntries.size() > GM_PLAYER_PANEL_MAX_ENTRIES)
+		vecEntries.resize(GM_PLAYER_PANEL_MAX_ENTRIES);
+
+	const WORD wCount = (WORD) vecEntries.size();
+	TPacketGCGmPlayerPanel pack;
+	pack.header = HEADER_GC_GM_PLAYER_PANEL;
+	pack.wSize = sizeof(TPacketGCGmPlayerPanel)
+		+ sizeof(TGmPlayerPanelSummary)
+		+ sizeof(WORD)
+		+ (wCount * sizeof(TGmPlayerPanelEntry));
+
+	TEMP_BUFFER buf;
+	buf.write(&pack, sizeof(TPacketGCGmPlayerPanel));
+	buf.write(&summary, sizeof(TGmPlayerPanelSummary));
+	buf.write(&wCount, sizeof(WORD));
+	if (wCount > 0)
+		buf.write(vecEntries.data(), wCount * sizeof(TGmPlayerPanelEntry));
+
+	ch->GetDesc()->Packet(buf.read_peek(), buf.size());
+}
+
+void GmPlayerPanel_WarpTo(LPCHARACTER ch, const char* pszName)
+{
+	if (!IsGmPanelAllowed(ch) || !pszName || !*pszName)
+		return;
+
+	LPCHARACTER tch = CHARACTER_MANAGER::instance().FindPC(pszName);
+	if (tch)
+	{
+#ifdef ENABLE_CMD_WARP_IN_DUNGEON
+		ch->WarpSet(tch->GetX(), tch->GetY(), tch->GetMapIndex());
+#else
+		ch->WarpSet(tch->GetX(), tch->GetY());
+#endif
+		ch->Stop();
+		return;
+	}
+
+	const CCI* pkCCI = P2P_MANAGER::instance().Find(pszName);
+	if (pkCCI)
+	{
+		ch->WarpToPID(pkCCI->dwPID);
+		return;
+	}
+
+	ch->ChatPacket(CHAT_TYPE_INFO, "There is no one(%s) by that name", pszName);
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

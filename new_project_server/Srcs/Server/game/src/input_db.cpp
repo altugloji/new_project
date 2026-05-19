@@ -403,6 +403,7 @@ void CInputDB::PlayerLoad(LPDESC d, const char * data) const
 		p.bEmpire = ch->GetEmpire();
 		p.lMapIndex = SECTREE_MANAGER::instance().GetMapIndex(ch->GetX(), ch->GetY());
 		p.bChannel = g_bChannel;
+		p.bLevel = MINMAX(0, ch->GetLevel(), 255);
 
 		P2P_MANAGER::instance().Send(&p, sizeof(TPacketGGLogin));
 

@@ -666,6 +666,26 @@ PyObject* netSendBulkPotionUsePacket(PyObject* poSelf, PyObject* poArgs)
 }
 #endif
 
+#ifdef ENABLE_GM_PLAYER_PANEL
+PyObject* netSendGmPlayerPanelRequestListPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+	rkNetStream.SendGmPlayerPanelRequestListPacket();
+	return Py_BuildNone();
+}
+
+PyObject* netSendGmPlayerPanelWarpPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	char* pszName = nullptr;
+	if (!PyTuple_GetString(poArgs, 0, &pszName))
+		return Py_BuildException();
+
+	CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+	rkNetStream.SendGmPlayerPanelWarpPacket(pszName);
+	return Py_BuildNone();
+}
+#endif
+
 #ifdef ENABLE_CHARACTER_CHEST
 PyObject* netSendCharacterChestPacket(PyObject* poSelf, PyObject* poArgs)
 {
@@ -1827,6 +1847,10 @@ void initnet()
 #endif
 #ifdef ENABLE_BULK_POTION_PANEL
 		{ "SendBulkPotionUsePacket",			netSendBulkPotionUsePacket,				METH_VARARGS },
+#endif
+#ifdef ENABLE_GM_PLAYER_PANEL
+		{ "SendGmPlayerPanelRequestListPacket",	netSendGmPlayerPanelRequestListPacket,	METH_VARARGS },
+		{ "SendGmPlayerPanelWarpPacket",		netSendGmPlayerPanelWarpPacket,			METH_VARARGS },
 #endif
 		{ "SendItemUseToItemPacket",			netSendItemUseToItemPacket,				METH_VARARGS },
 		{ "SendItemDropPacket",					netSendItemDropPacket,					METH_VARARGS },

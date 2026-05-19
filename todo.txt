@@ -6,4 +6,4 @@ Yerden çok item toplayınca paket limite takılıyor.
 Ticareti kapalı olan ürünler açılacak münzevi gibi
 Düşen dolu +20 üzeri olmasın
 COMMON DROP DÜZENLENECEK
-REFİNE PENCERESİ ACIK KALMA EKLENECEK
+Mob dropta adete göre gösterme olacak görnegin 5 efsunda 5 tane gözüksün

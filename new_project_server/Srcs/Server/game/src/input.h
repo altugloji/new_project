@@ -185,12 +185,19 @@ class CInputMain : public CInputProcessor
 #ifdef __SEND_TARGET_INFO__
 		void		TargetInfoLoad(LPCHARACTER ch, const char* c_pData);
 #endif
+
 #ifdef ENABLE_CUBE_RENEWAL
-	void 		CubeRenewalSend(LPCHARACTER ch, const char* data);
+		void 		CubeRenewalSend(LPCHARACTER ch, const char* data);
 #endif
+
 #ifdef ENABLE_CHARACTER_CHEST
-	void		CharacterChest(LPCHARACTER ch, const char* data);
+		void		CharacterChest(LPCHARACTER ch, const char* data);
 #endif
+
+#ifdef ENABLE_GM_PLAYER_PANEL
+		void		GmPlayerPanel(LPCHARACTER ch, const char* data) const;
+#endif
+
 };
 
 class CInputDead : public CInputMain

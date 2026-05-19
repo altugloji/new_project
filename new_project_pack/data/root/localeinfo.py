@@ -877,6 +877,10 @@ if app.ENABLE_EXCHANGE_LOG:
 	def MoneyFormat(n):
 		return "%s" % ('.'.join([ i-3<0 and str(n)[:i] or str(n)[i-3:i] for i in range(len(str(n))%3, len(str(n))+1, 3) if i ])) 
 
+if app.ENABLE_GM_PLAYER_PANEL:
+	GM_PLAYER_PANEL_ROW_FMT = "%s | Lv. %d | CH%d | Map %d"
+	GM_PLAYER_PANEL_COUNT_FMT = "Toplam: %d  |  CH1: %d  |  CH2: %d  |  CH3: %d  |  CH4: %d"
+
 if app.ENABLE_WIKI:
 	def SecondToHMS(time):
 		if time <= 0:

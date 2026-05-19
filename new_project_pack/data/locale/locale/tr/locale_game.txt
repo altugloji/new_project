@@ -1,3 +1,4 @@
+GM_PLAYER_PANEL_GO	GO
 NEW_MOB_TIMER_GM_ALIVE	[BossTimer] %u yasiyor (id %u map %ld)
 NEW_MOB_TIMER_GM_WAIT	[BossTimer] %u olu bekliyor - sonraki %02d:%02d (id %u)
 NEW_MOB_TIMER_GM_SPAWN	[BossTimer] %u bu dakikada doguyor (id %u)

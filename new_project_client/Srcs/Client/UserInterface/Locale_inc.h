@@ -154,6 +154,7 @@
 #define AUTO_CHAT_ENABLE
 #define BOSS_EFFECT
 #define ENABLE_REFINE_RENEWAL
+#define ENABLE_GM_PLAYER_PANEL
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

@@ -119,6 +119,10 @@ enum
 #ifdef ENABLE_BULK_POTION_PANEL
 	HEADER_CG_BULK_POTION				= 232,
 #endif
+#ifdef ENABLE_GM_PLAYER_PANEL
+	HEADER_CG_GM_PLAYER_PANEL			= 233,
+#endif
+
 	HEADER_CG_CLIENT_VERSION2		= 0xf1,
 
 	/********************************************************/
@@ -311,6 +315,9 @@ enum
 #ifdef ENABLE_CHARACTER_CHEST
 	HEADER_GC_CHARACTER_CHEST					= 236,
 #endif
+#ifdef ENABLE_GM_PLAYER_PANEL
+	HEADER_GC_GM_PLAYER_PANEL					= 237,
+#endif
 	/////////////////////////////////////////////////////////////////////////////
 
 	HEADER_GG_LOGIN								= 1,
@@ -368,6 +375,7 @@ typedef struct SPacketGGLogin
 	BYTE	bEmpire;
 	long	lMapIndex;
 	BYTE	bChannel;
+	BYTE	bLevel;
 } TPacketGGLogin;
 
 typedef struct SPacketGGLogout
@@ -2611,6 +2619,44 @@ typedef struct command_item_sell
 	BYTE		header;
 	TItemPos	Cell;
 } TPacketCGItemSell;
+#endif
+
+#ifdef ENABLE_GM_PLAYER_PANEL
+enum
+{
+	GM_PLAYER_PANEL_CG_REQUEST_LIST = 0,
+	GM_PLAYER_PANEL_CG_WARP = 1,
+	GM_PLAYER_PANEL_MAX_ENTRIES = 2000,
+	GM_PLAYER_PANEL_CHANNEL_COUNT = 4,
+};
+
+typedef struct SGmPlayerPanelEntry
+{
+	char	szName[CHARACTER_NAME_MAX_LEN + 1];
+	DWORD	dwPID;
+	BYTE	bLevel;
+	BYTE	bChannel;
+	long	lMapIndex;
+} TGmPlayerPanelEntry;
+
+typedef struct SPacketCGGmPlayerPanel
+{
+	BYTE	bHeader;
+	BYTE	bSubHeader;
+	char	szName[CHARACTER_NAME_MAX_LEN + 1];
+} TPacketCGGmPlayerPanel;
+
+typedef struct SGmPlayerPanelSummary
+{
+	WORD	wTotal;
+	WORD	awChannel[GM_PLAYER_PANEL_CHANNEL_COUNT];
+} TGmPlayerPanelSummary;
+
+typedef struct SPacketGCGmPlayerPanel
+{
+	BYTE	header;
+	WORD	wSize;
+} TPacketGCGmPlayerPanel;
 #endif
 
 #pragma pack()

@@ -210,6 +210,10 @@ CPacketInfoCG::CPacketInfoCG()
 #ifdef ENABLE_BULK_POTION_PANEL
 	Set(HEADER_CG_BULK_POTION, sizeof(TPacketCGBulkPotionUse), "BulkPotion", true);
 #endif
+#ifdef ENABLE_GM_PLAYER_PANEL
+	Set(HEADER_CG_GM_PLAYER_PANEL, sizeof(TPacketCGGmPlayerPanel), "GmPlayerPanel", true);
+#endif
+
 }
 
 CPacketInfoCG::~CPacketInfoCG()

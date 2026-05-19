@@ -367,7 +367,7 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.type = type
 
 		self.probText.SetText(localeInfo.REFINE_SUCCESS_PROBALITY % (self.percentage))
-		self.costText.SetText(localeInfo.REFINE_COST % (self.cost))
+		self.costText.SetText(localeInfo.REFINE_COST.replace("%d", "%s") % localeInfo.NumberToString(int(self.cost)))
 
 		self.toolTip.ClearToolTip()
 		metinSlot = []

@@ -13,6 +13,7 @@ typedef struct _CCI
 	BYTE	bEmpire;
 	long	lMapIndex;
 	BYTE	bChannel;
+	BYTE	bLevel;
 
 	LPDESC	pkDesc;
 } CCI;
@@ -56,6 +57,16 @@ class P2P_MANAGER : public singleton<P2P_MANAGER>
 		int				GetEmpireUserCount(int idx) const;
 		int				GetDescCount() const;
 		void			GetP2PHostNames(std::string& hostNames);
+
+		template<typename Func>
+		void			ForEachCCI(Func f)
+		{
+			for (TCCIMap::iterator it = m_map_pkCCI.begin(); it != m_map_pkCCI.end(); ++it)
+			{
+				if (it->second)
+					f(it->second);
+			}
+		}
 
 	private:
 		void			Logout(CCI * pkCCI);

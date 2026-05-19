@@ -199,6 +199,9 @@ class CMainPacketHeaderMap : public CNetworkPacketHeaderMap
 #ifdef ENABLE_CHARACTER_CHEST
 			Set(HEADER_GC_CHARACTER_CHEST, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCCharacterChest), DYNAMIC_SIZE_PACKET));
 #endif
+#ifdef ENABLE_GM_PLAYER_PANEL
+			Set(HEADER_GC_GM_PLAYER_PANEL, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGmPlayerPanel), DYNAMIC_SIZE_PACKET));
+#endif
 #ifdef __GEM_SHOP__
 			Set(HEADER_GC_GEM, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGem), DYNAMIC_SIZE_PACKET));
 #endif

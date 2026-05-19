@@ -6,6 +6,7 @@ import systemSetting
 import wndMgr
 import chat
 import app
+import chr
 import player
 import net
 import uiTaskBar
@@ -90,6 +91,8 @@ if app.WJ_NEW_DROP_DIALOG:
 	import uiDeleteItem
 if app.ENABLE_BULK_POTION_PANEL:
 	import uiBulkPotion
+if app.ENABLE_GM_PLAYER_PANEL:
+	import uigmpanel
 IsQBHide = 0
 class Interface(object):
 	CHARACTER_STATUS_TAB = 1
@@ -132,6 +135,8 @@ class Interface(object):
 			self.deleteitem = None
 		if app.ENABLE_BULK_POTION_PANEL:
 			self.wndBulkPotion = None
+		if app.ENABLE_GM_PLAYER_PANEL:
+			self.wndGmPlayerPanel = None
 		self.listGMName = {}
 		self.dlgGmCall = None
 		self._gmCallSuppressUntil = 0
@@ -359,6 +364,10 @@ class Interface(object):
 		if app.ENABLE_BULK_POTION_PANEL:
 			self.wndBulkPotion = uiBulkPotion.BulkPotionWindow()
 			self.wndBulkPotion.Hide()
+
+		if app.ENABLE_GM_PLAYER_PANEL:
+			self.wndGmPlayerPanel = uigmpanel.GmPlayerPanelWindow()
+			self.wndGmPlayerPanel.Hide()
 
 	def __MakeHelpWindow(self):
 		self.wndHelp = uiHelp.HelpWindow()
@@ -644,6 +653,12 @@ class Interface(object):
 				self.wndBulkPotion.Hide()
 				self.wndBulkPotion.Destroy()
 				self.wndBulkPotion = None
+
+		if app.ENABLE_GM_PLAYER_PANEL:
+			if self.wndGmPlayerPanel:
+				self.wndGmPlayerPanel.Hide()
+				self.wndGmPlayerPanel.Destroy()
+				self.wndGmPlayerPanel = None
 
 		if self.wndWeb:
 			self.wndWeb.Destroy()
@@ -2280,6 +2295,23 @@ class Interface(object):
 		def RefreshBulkPotionPanel(self):
 			if self.wndBulkPotion and self.wndBulkPotion.IsShow():
 				self.wndBulkPotion.Refresh()
+
+	if app.ENABLE_GM_PLAYER_PANEL:
+		def ToggleGmPlayerPanel(self):
+			if player.IsObserverMode():
+				return
+			if not chr.IsGameMaster(player.GetMainCharacterIndex()):
+				return
+			if not self.wndGmPlayerPanel:
+				return
+			if self.wndGmPlayerPanel.IsShow():
+				self.wndGmPlayerPanel.Close()
+			else:
+				self.wndGmPlayerPanel.Open()
+
+		def GmPlayerPanelSetList(self, playerList, total=0, ch1=0, ch2=0, ch3=0, ch4=0):
+			if self.wndGmPlayerPanel:
+				self.wndGmPlayerPanel.SetPlayerList(playerList, total, ch1, ch2, ch3, ch4)
 
 	if app.ENABLE_ITEM_SHOP_SYSTEM:
 		def RefreshItemShop(self):

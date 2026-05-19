@@ -140,6 +140,7 @@ void P2P_MANAGER::Login(LPDESC d, const TPacketGGLogin * p)
 	{
 		UpdateP2P = true;
 		pkCCI = M2_NEW CCI;
+		memset(pkCCI, 0, sizeof(CCI));
 
 		strlcpy(pkCCI->szName, p->szName, sizeof(pkCCI->szName));
 
@@ -165,6 +166,7 @@ void P2P_MANAGER::Login(LPDESC d, const TPacketGGLogin * p)
 	pkCCI->lMapIndex = p->lMapIndex;
 	pkCCI->pkDesc = d;
 	pkCCI->bChannel = p->bChannel;
+	pkCCI->bLevel = p->bLevel;
 	sys_log(0, "P2P: Login %s", pkCCI->szName);
 
 	CGuildManager::instance().P2PLoginMember(pkCCI->dwPID);

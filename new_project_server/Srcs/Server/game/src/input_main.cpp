@@ -3445,6 +3445,13 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			break;
 #endif
 
+#ifdef ENABLE_GM_PLAYER_PANEL
+		case HEADER_CG_GM_PLAYER_PANEL:
+			if (!ch->IsObserverMode())
+				GmPlayerPanel(ch, c_pData);
+			break;
+#endif
+
 		case HEADER_CG_REFINE:
 			Refine(ch, c_pData);
 			break;
@@ -3566,4 +3573,29 @@ void CInputMain::TargetInfoLoad(LPCHARACTER ch, const char* c_pData)
 	}
 }
 #endif
+
+#ifdef ENABLE_GM_PLAYER_PANEL
+void CInputMain::GmPlayerPanel(LPCHARACTER ch, const char* data) const
+{
+	if (!ch || ch->IsObserverMode())
+		return;
+
+	const TPacketCGGmPlayerPanel* pinfo = (const TPacketCGGmPlayerPanel*) data;
+
+	switch (pinfo->bSubHeader)
+	{
+		case GM_PLAYER_PANEL_CG_REQUEST_LIST:
+			GmPlayerPanel_SendList(ch);
+			break;
+
+		case GM_PLAYER_PANEL_CG_WARP:
+			GmPlayerPanel_WarpTo(ch, pinfo->szName);
+			break;
+
+		default:
+			break;
+	}
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

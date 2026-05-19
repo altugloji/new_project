@@ -2084,5 +2084,11 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_REFINE_RENEWAL", 0);
 #endif
 
+#ifdef ENABLE_GM_PLAYER_PANEL
+	PyModule_AddIntConstant(poModule, "ENABLE_GM_PLAYER_PANEL", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_GM_PLAYER_PANEL", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

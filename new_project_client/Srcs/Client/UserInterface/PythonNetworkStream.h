@@ -190,6 +190,9 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 #ifdef ENABLE_EXCHANGE_LOG
 		bool RecvExchangeLog();
 #endif
+#ifdef ENABLE_GM_PLAYER_PANEL
+		bool RecvGmPlayerPanelPacket();
+#endif
 		bool SendShopSellPacketNew(BYTE bySlot, BYTE byCount);
 
 		// Exchange
@@ -801,6 +804,11 @@ public:
 #ifdef ENABLE_BULK_POTION_PANEL
 public:
 	bool SendBulkPotionUsePacket(const DWORD* adwSlotVnum, size_t count);
+#endif
+#ifdef ENABLE_GM_PLAYER_PANEL
+public:
+	bool SendGmPlayerPanelRequestListPacket();
+	bool SendGmPlayerPanelWarpPacket(const char* pszName);
 #endif
 };
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

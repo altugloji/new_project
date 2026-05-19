@@ -401,7 +401,9 @@ class GameWindow(ui.ScriptWindow):
 		if app.__AUTO_SKILL_READER__:
 			onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenAutoSkillReader()
 
-		if app.ENABLE_BULK_POTION_PANEL:
+		if app.ENABLE_GM_PLAYER_PANEL:
+			onPressKeyDict[app.DIK_TAB]	= lambda : self.interface.ToggleGmPlayerPanel()
+		elif app.ENABLE_BULK_POTION_PANEL:
 			onPressKeyDict[app.DIK_TAB]	= lambda : self.interface.OpenBulkPotionPanel()
 
 		onPressKeyDict[app.DIK_LALT]		= lambda : self.ShowName()
@@ -2447,6 +2449,11 @@ class GameWindow(ui.ScriptWindow):
 		def LanguageChangeAnonymous(self):
 			if self.interface:
 				self.interface.LanguageChangeAnonymous()
+
+	if app.ENABLE_GM_PLAYER_PANEL:
+		def GmPlayerPanelSetList(self, playerList, total=0, ch1=0, ch2=0, ch3=0, ch4=0):
+			if self.interface:
+				self.interface.GmPlayerPanelSetList(playerList, total, ch1, ch2, ch3, ch4)
 
 	if app.ENABLE_EXCHANGE_LOG:
 		def ExchangeLogClear(self, playerCode):

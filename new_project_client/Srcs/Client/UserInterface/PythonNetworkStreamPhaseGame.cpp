@@ -629,6 +629,11 @@ void CPythonNetworkStream::GamePhase()
 				ret = RecvCharacterChestPacket();
 				break;
 #endif
+#ifdef ENABLE_GM_PLAYER_PANEL
+			case HEADER_GC_GM_PLAYER_PANEL:
+				ret = RecvGmPlayerPanelPacket();
+				break;
+#endif
 #ifdef __GEM_SHOP__
 		case HEADER_GC_GEM:
 			ret = RecvGem();
@@ -5035,6 +5040,100 @@ bool CPythonNetworkStream::SendBulkPotionUsePacket(const DWORD* adwSlotVnum, siz
 	if (!Send(sizeof(packet), &packet))
 	{
 		Tracen("SendBulkPotionUsePacket Error");
+		return false;
+	}
+
+	return SendSequence();
+}
+#endif
+
+#ifdef ENABLE_GM_PLAYER_PANEL
+bool CPythonNetworkStream::RecvGmPlayerPanelPacket()
+{
+	TPacketGCGmPlayerPanel pack;
+	if (!Recv(sizeof(TPacketGCGmPlayerPanel), &pack))
+		return false;
+
+	TGmPlayerPanelSummary summary;
+	memset(&summary, 0, sizeof(summary));
+	if (!Recv(sizeof(TGmPlayerPanelSummary), &summary))
+		return false;
+
+	WORD wCount = 0;
+	if (!Recv(sizeof(WORD), &wCount))
+		return false;
+
+	PyObject* poList = PyList_New(0);
+	if (!poList)
+		return false;
+
+	for (WORD i = 0; i < wCount; ++i)
+	{
+		TGmPlayerPanelEntry entry;
+		if (!Recv(sizeof(TGmPlayerPanelEntry), &entry))
+		{
+			Py_DECREF(poList);
+			return false;
+		}
+
+		PyObject* poTuple = Py_BuildValue("(siiii)", entry.szName, (int) entry.bLevel, (int) entry.bChannel, (int) entry.lMapIndex, (int) entry.dwPID);
+		if (!poTuple)
+		{
+			Py_DECREF(poList);
+			return false;
+		}
+
+		PyList_Append(poList, poTuple);
+		Py_DECREF(poTuple);
+	}
+
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "GmPlayerPanelSetList",
+		Py_BuildValue("(Oiiiii)", poList,
+			(int) summary.wTotal,
+			(int) summary.awChannel[0],
+			(int) summary.awChannel[1],
+			(int) summary.awChannel[2],
+			(int) summary.awChannel[3]));
+	Py_DECREF(poList);
+	return true;
+}
+
+bool CPythonNetworkStream::SendGmPlayerPanelRequestListPacket()
+{
+	if (!__CanActMainInstance())
+		return true;
+
+	TPacketCGGmPlayerPanel packet;
+	memset(&packet, 0, sizeof(packet));
+	packet.bHeader = HEADER_CG_GM_PLAYER_PANEL;
+	packet.bSubHeader = GM_PLAYER_PANEL_CG_REQUEST_LIST;
+
+	if (!Send(sizeof(packet), &packet))
+	{
+		Tracen("SendGmPlayerPanelRequestListPacket Error");
+		return false;
+	}
+
+	return SendSequence();
+}
+
+bool CPythonNetworkStream::SendGmPlayerPanelWarpPacket(const char* pszName)
+{
+	if (!pszName || !*pszName)
+		return false;
+
+	if (!__CanActMainInstance())
+		return true;
+
+	TPacketCGGmPlayerPanel packet;
+	memset(&packet, 0, sizeof(packet));
+	packet.bHeader = HEADER_CG_GM_PLAYER_PANEL;
+	packet.bSubHeader = GM_PLAYER_PANEL_CG_WARP;
+	strncpy(packet.szName, pszName, sizeof(packet.szName) - 1);
+
+	if (!Send(sizeof(packet), &packet))
+	{
+		Tracen("SendGmPlayerPanelWarpPacket Error");
 		return false;
 	}
 
