@@ -122,6 +122,12 @@ void CPythonExchange::DelItemOfTarget(BYTE pos)
 
 	m_victim.item_vnum[pos] = 0;
 	m_victim.item_count[pos] = 0;
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	m_victim.item_enchant[pos] = 0;
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	m_victim.item_upg[pos][0] = 0;
+#endif
 }
 
 void CPythonExchange::DelItemOfSelf(BYTE pos)
@@ -131,6 +137,12 @@ void CPythonExchange::DelItemOfSelf(BYTE pos)
 
 	m_self.item_vnum[pos] = 0;
 	m_self.item_count[pos] = 0;
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	m_self.item_enchant[pos] = 0;
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	m_self.item_upg[pos][0] = 0;
+#endif
 }
 
 DWORD CPythonExchange::GetItemVnumFromTarget(BYTE pos) const
@@ -180,6 +192,73 @@ DWORD CPythonExchange::GetItemMetinSocketFromSelf(BYTE pos, int iMetinSocketPos)
 
 	return m_self.item_metin[pos][iMetinSocketPos];
 }
+
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+void CPythonExchange::SetItemUpgradeOwnerToSelf(int pos, const char* name)
+{
+	if (pos < 0 || pos >= EXCHANGE_ITEM_MAX_NUM)
+		return;
+	if (name && *name) {
+		strncpy(m_self.item_upg[pos], name, sizeof(m_self.item_upg[pos]) - 1);
+		m_self.item_upg[pos][sizeof(m_self.item_upg[pos]) - 1] = 0;
+	} else
+		m_self.item_upg[pos][0] = 0;
+}
+
+void CPythonExchange::SetItemUpgradeOwnerToTarget(int pos, const char* name)
+{
+	if (pos < 0 || pos >= EXCHANGE_ITEM_MAX_NUM)
+		return;
+	if (name && *name) {
+		strncpy(m_victim.item_upg[pos], name, sizeof(m_victim.item_upg[pos]) - 1);
+		m_victim.item_upg[pos][sizeof(m_victim.item_upg[pos]) - 1] = 0;
+	} else
+		m_victim.item_upg[pos][0] = 0;
+}
+
+const char* CPythonExchange::GetItemUpgradeOwnerFromSelf(BYTE pos) const
+{
+	if (pos >= EXCHANGE_ITEM_MAX_NUM)
+		return "";
+	return m_self.item_upg[pos];
+}
+
+const char* CPythonExchange::GetItemUpgradeOwnerFromTarget(BYTE pos) const
+{
+	if (pos >= EXCHANGE_ITEM_MAX_NUM)
+		return "";
+	return m_victim.item_upg[pos];
+}
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+void CPythonExchange::SetItemEnchantToSelf(int pos, DWORD n)
+{
+	if (pos < 0 || pos >= EXCHANGE_ITEM_MAX_NUM)
+		return;
+	m_self.item_enchant[pos] = n;
+}
+
+void CPythonExchange::SetItemEnchantToTarget(int pos, DWORD n)
+{
+	if (pos < 0 || pos >= EXCHANGE_ITEM_MAX_NUM)
+		return;
+	m_victim.item_enchant[pos] = n;
+}
+
+DWORD CPythonExchange::GetItemEnchantFromSelf(BYTE pos) const
+{
+	if (pos >= EXCHANGE_ITEM_MAX_NUM)
+		return 0;
+	return m_self.item_enchant[pos];
+}
+
+DWORD CPythonExchange::GetItemEnchantFromTarget(BYTE pos) const
+{
+	if (pos >= EXCHANGE_ITEM_MAX_NUM)
+		return 0;
+	return m_victim.item_enchant[pos];
+}
+#endif
 
 void CPythonExchange::GetItemAttributeFromTarget(BYTE pos, int iAttrPos, BYTE * pbyType, short * psValue) const
 {

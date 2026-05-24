@@ -147,6 +147,16 @@ class CItem : public CEntity
 		DWORD		GetRefineFromVnum() const;
 		int		GetRefineLevel();
 
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		const char	*GetUpgradeOwner() const { return m_szUpgradeOwner; }
+		void		SetUpgradeOwner(const char *c_psz);
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		DWORD		GetEnchantUseCount() const { return m_dwEnchantUseCount; }
+		void		SetEnchantUseCount(DWORD dw);
+		void		AddEnchantUseCount(DWORD dw);
+#endif
+
 		void		SetSkipSave(bool b)	{ m_bSkipSave = b; }
 		bool		GetSkipSave() const { return m_bSkipSave; }
 
@@ -283,6 +293,13 @@ class CItem : public CEntity
 
 		long		m_alSockets[ITEM_SOCKET_MAX_NUM];
 		TPlayerItemAttribute	m_aAttr[ITEM_ATTRIBUTE_MAX_NUM];
+
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		char		m_szUpgradeOwner[CHARACTER_NAME_MAX_LEN + 1];
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		DWORD		m_dwEnchantUseCount;
+#endif
 
 		LPEVENT		m_pkDestroyEvent;
 		LPEVENT		m_pkExpireEvent;

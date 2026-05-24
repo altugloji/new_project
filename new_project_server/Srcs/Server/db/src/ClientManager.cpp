@@ -684,8 +684,14 @@ void CClientManager::RESULT_SAFEBOX_LOAD(CPeer * pkPeer, SQLMsg * msg)
 				"attrtype3, attrvalue3, "
 				"attrtype4, attrvalue4, "
 				"attrtype5, attrvalue5, "
-				"attrtype6, attrvalue6 "
-				"FROM item%s WHERE owner_id=%d AND `window`='%s'",
+				"attrtype6, attrvalue6"
+#if defined(ENABLE_ITEM_ENCHANT_USE_COUNT)
+				", enchant_use_count"
+#endif
+#if defined(ENABLE_ITEM_UPGRADE_OWNER)
+				", upgrade_owner"
+#endif
+				" FROM item%s WHERE owner_id=%d AND `window`='%s'",
 				GetTablePostfix(), pi->account_id, pi->ip[0] == 0 ? "SAFEBOX" : "MALL");
 
 		pi->account_index = 1;
@@ -1422,6 +1428,40 @@ void CClientManager::QUERY_ITEM_SAVE(CPeer * pkPeer, const char * c_pData)
 			delete c;
 		}
 
+#if defined(ENABLE_ITEM_ENCHANT_USE_COUNT) && defined(ENABLE_ITEM_UPGRADE_OWNER)
+		char esc_upg_q[sizeof(p->szUpgradeOwner) * 2 + 1];
+		const size_t nUpgQ = strnlen(p->szUpgradeOwner, sizeof(p->szUpgradeOwner));
+		CDBManager::instance().EscapeString(esc_upg_q, p->szUpgradeOwner, nUpgQ);
+		const auto setQuery = fmt::format(FMT_COMPILE("id={}, owner_id={}, `window`={}, pos={}, count={}, vnum={}, socket0={}, socket1={}, socket2={}, "
+														"attrtype0={}, attrvalue0={}, "
+														"attrtype1={}, attrvalue1={}, "
+														"attrtype2={}, attrvalue2={}, "
+														"attrtype3={}, attrvalue3={}, "
+														"attrtype4={}, attrvalue4={}, "
+														"attrtype5={}, attrvalue5={}, "
+														"attrtype6={}, attrvalue6={}, "
+														"enchant_use_count={}, "
+														"upgrade_owner='{}' ")
+														, p->id,
+														p->owner,
+														p->window,
+														p->pos,
+														p->count,
+														p->vnum,
+														p->alSockets[0],
+														p->alSockets[1],
+														p->alSockets[2],
+														p->aAttr[0].bType, p->aAttr[0].sValue,
+														p->aAttr[1].bType, p->aAttr[1].sValue,
+														p->aAttr[2].bType, p->aAttr[2].sValue,
+														p->aAttr[3].bType, p->aAttr[3].sValue,
+														p->aAttr[4].bType, p->aAttr[4].sValue,
+														p->aAttr[5].bType, p->aAttr[5].sValue,
+														p->aAttr[6].bType, p->aAttr[6].sValue,
+														p->dwEnchantUseCount,
+														esc_upg_q
+		);
+#else
 		const auto setQuery = fmt::format(FMT_COMPILE("id={}, owner_id={}, `window`={}, pos={}, count={}, vnum={}, socket0={}, socket1={}, socket2={}, "
 														"attrtype0={}, attrvalue0={}, "
 														"attrtype1={}, attrvalue1={}, "
@@ -1446,7 +1486,8 @@ void CClientManager::QUERY_ITEM_SAVE(CPeer * pkPeer, const char * c_pData)
 														p->aAttr[4].bType, p->aAttr[4].sValue,
 														p->aAttr[5].bType, p->aAttr[5].sValue,
 														p->aAttr[6].bType, p->aAttr[6].sValue
-		); // @fixme205
+		);
+#endif
 
 		const auto itemQuery = fmt::format(FMT_COMPILE("INSERT INTO item{} SET {} ON DUPLICATE KEY UPDATE {}"),
 														GetTablePostfix(), setQuery, setQuery);

@@ -40,11 +40,23 @@ void exchange_packet(LPCHARACTER ch, BYTE sub_header, bool is_me, DWORD arg1, TI
 	{
 		thecore_memcpy(&pack_exchg.alSockets, ((LPITEM) pvData)->GetSockets(), sizeof(pack_exchg.alSockets));
 		thecore_memcpy(&pack_exchg.aAttr, ((LPITEM) pvData)->GetAttributes(), sizeof(pack_exchg.aAttr));
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		pack_exchg.dwEnchantUseCount = ((LPITEM) pvData)->GetEnchantUseCount();
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		strlcpy(pack_exchg.szUpgradeOwner, ((LPITEM) pvData)->GetUpgradeOwner(), sizeof(pack_exchg.szUpgradeOwner));
+#endif
 	}
 	else
 	{
 		memset(&pack_exchg.alSockets, 0, sizeof(pack_exchg.alSockets));
 		memset(&pack_exchg.aAttr, 0, sizeof(pack_exchg.aAttr));
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		pack_exchg.dwEnchantUseCount = 0;
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		memset(pack_exchg.szUpgradeOwner, 0, sizeof(pack_exchg.szUpgradeOwner));
+#endif
 	}
 
 	ch->GetDesc()->Packet(&pack_exchg, sizeof(pack_exchg));

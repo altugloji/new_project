@@ -2090,5 +2090,17 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_GM_PLAYER_PANEL", 0);
 #endif
 
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	PyModule_AddIntConstant(poModule, "ENABLE_ITEM_UPGRADE_OWNER",	1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_ITEM_UPGRADE_OWNER",	0);
+#endif
+
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	PyModule_AddIntConstant(poModule, "ENABLE_ITEM_ENCHANT_USE_COUNT",	1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_ITEM_ENCHANT_USE_COUNT",	0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

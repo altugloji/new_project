@@ -280,6 +280,14 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 		void	SetItemCount(TItemPos Cell, BYTE byCount);
 		void	SetItemMetinSocket(TItemPos Cell, DWORD dwMetinSocketIndex, DWORD dwMetinNumber);
 		void	SetItemAttribute(TItemPos Cell, DWORD dwAttrIndex, BYTE byType, short sValue);
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		void	SetItemUpgradeOwner(TItemPos Cell, const char* c_psz) override;
+		const char* GetItemUpgradeOwner(TItemPos Cell) const;
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		void	SetItemEnchantUseCount(TItemPos Cell, DWORD dw) override;
+		DWORD	GetItemEnchantUseCount(TItemPos Cell) const;
+#endif
 		DWORD	GetItemIndex(TItemPos Cell);
 		DWORD	GetItemFlags(TItemPos Cell);
 		DWORD	GetItemCount(TItemPos Cell);

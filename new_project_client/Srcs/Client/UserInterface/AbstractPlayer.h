@@ -32,6 +32,13 @@ class IAbstractPlayer : public TAbstractSingleton<IAbstractPlayer>
 		virtual void	SetItemMetinSocket(TItemPos itemPos, DWORD dwMetinSocketIndex, DWORD dwMetinNumber) = 0;
 		virtual void	SetItemAttribute(TItemPos itemPos, DWORD dwAttrIndex, BYTE byType, short sValue) = 0;
 
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		virtual void	SetItemUpgradeOwner(TItemPos itemPos, const char* c_psz) = 0;
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		virtual void	SetItemEnchantUseCount(TItemPos itemPos, DWORD dw) = 0;
+#endif
+
 		virtual DWORD	GetItemIndex(TItemPos itemPos) = 0;
 		virtual DWORD	GetItemFlags(TItemPos itemPos) = 0;
 		virtual DWORD	GetItemCount(TItemPos itemPos) = 0;

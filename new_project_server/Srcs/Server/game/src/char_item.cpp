@@ -441,6 +441,13 @@ void CHARACTER::SetItem(TItemPos Cell, LPITEM pItem
 			thecore_memcpy(pack.alSockets, pItem->GetSockets(), sizeof(pack.alSockets));
 			thecore_memcpy(pack.aAttr, pItem->GetAttributes(), sizeof(pack.aAttr));
 
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+			pack.dwEnchantUseCount = pItem->GetEnchantUseCount();
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+			strlcpy(pack.szUpgradeOwner, pItem->GetUpgradeOwner(), sizeof(pack.szUpgradeOwner));
+#endif
+
 			GetDesc()->Packet(&pack, sizeof(TPacketGCItemSet));
 		}
 		else
@@ -954,6 +961,10 @@ bool CHARACTER::DoRefine(LPITEM item, bool bMoneyOnly)
 #endif
 
 			pkNewItem->AddToCharacter(this, TItemPos(INVENTORY, bCell));
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+			if (pkNewItem->GetRefineLevel() == 9)
+				pkNewItem->SetUpgradeOwner(GetName());
+#endif
 			ITEM_MANAGER::instance().FlushDelayedSave(pkNewItem);
 
 			sys_log(0, "Refine Success %d", cost);
@@ -1206,6 +1217,12 @@ bool CHARACTER::DoRefineWithScroll(LPITEM item)
 #endif
 
 			pkNewItem->AddToCharacter(this, TItemPos(INVENTORY, bCell));
+
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+			if (pkNewItem->GetRefineLevel() == 9)
+				pkNewItem->SetUpgradeOwner(GetName());
+#endif
+
 			ITEM_MANAGER::instance().FlushDelayedSave(pkNewItem);
 			pkNewItem->AttrLog();
 			//PointChange(POINT_GOLD, -prt->cost);
@@ -4449,6 +4466,11 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 							switch (item->GetValue(0))
 							{
 								case APPLY_MOV_SPEED:
+									if (FindAffect(AFFECT_MOV_SPEED))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("BU_ETKI_DEVAM_EDIYOR"));
+										return false;
+									}
 									AddAffect(AFFECT_MOV_SPEED, POINT_MOV_SPEED, item->GetValue(2), AFF_MOV_SPEED_POTION, item->GetValue(1), 0, true);
 #ifdef ENABLE_EFFECT_EXTRAPOT
 									EffectPacket(SE_DXUP_PURPLE);
@@ -4456,6 +4478,11 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 									break;
 
 								case APPLY_ATT_SPEED:
+									if (FindAffect(AFFECT_ATT_SPEED))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("BU_ETKI_DEVAM_EDIYOR"));
+										return false;
+									}
 									AddAffect(AFFECT_ATT_SPEED, POINT_ATT_SPEED, item->GetValue(2), AFF_ATT_SPEED_POTION, item->GetValue(1), 0, true);
 #ifdef ENABLE_EFFECT_EXTRAPOT
 									EffectPacket(SE_SPEEDUP_GREEN);
@@ -4463,31 +4490,66 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 									break;
 
 								case APPLY_STR:
+									if (FindAffect(AFFECT_STR))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("BU_ETKI_DEVAM_EDIYOR"));
+										return false;
+									}
 									AddAffect(AFFECT_STR, POINT_ST, item->GetValue(2), 0, item->GetValue(1), 0, true);
 									break;
 
 								case APPLY_DEX:
+									if (FindAffect(AFFECT_DEX))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("BU_ETKI_DEVAM_EDIYOR"));
+										return false;
+									}
 									AddAffect(AFFECT_DEX, POINT_DX, item->GetValue(2), 0, item->GetValue(1), 0, true);
 									break;
 
 								case APPLY_CON:
+									if (FindAffect(AFFECT_CON))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("BU_ETKI_DEVAM_EDIYOR"));
+										return false;
+									}
 									AddAffect(AFFECT_CON, POINT_HT, item->GetValue(2), 0, item->GetValue(1), 0, true);
 									break;
 
 								case APPLY_INT:
+									if (FindAffect(APPLY_INT))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("BU_ETKI_DEVAM_EDIYOR"));
+										return false;
+									}
 									AddAffect(AFFECT_INT, POINT_IQ, item->GetValue(2), 0, item->GetValue(1), 0, true);
 									break;
 
 								case APPLY_CAST_SPEED:
+									if (FindAffect(AFFECT_CAST_SPEED))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("BU_ETKI_DEVAM_EDIYOR"));
+										return false;
+									}
 									AddAffect(AFFECT_CAST_SPEED, POINT_CASTING_SPEED, item->GetValue(2), 0, item->GetValue(1), 0, true);
 									break;
 
 								case APPLY_ATT_GRADE_BONUS:
+									if (FindAffect(AFFECT_ATT_GRADE))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("BU_ETKI_DEVAM_EDIYOR"));
+										return false;
+									}
 									AddAffect(AFFECT_ATT_GRADE, POINT_ATT_GRADE_BONUS,
 											item->GetValue(2), 0, item->GetValue(1), 0, true);
 									break;
 
 								case APPLY_DEF_GRADE_BONUS:
+									if (FindAffect(AFFECT_DEF_GRADE))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("BU_ETKI_DEVAM_EDIYOR"));
+										return false;
+									}
 									AddAffect(AFFECT_DEF_GRADE, POINT_DEF_GRADE_BONUS,
 											item->GetValue(2), 0, item->GetValue(1), 0, true);
 									break;
@@ -4852,6 +4914,10 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 									ChatPacket(CHAT_TYPE_INFO, LC_TEXT("속성을 변경하였습니다."));
 									LogManager::instance().ItemLog(this, item, "CHANGE_ATTRIBUTE", std::to_string(item2->GetID()).c_str());
+
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+									item2->AddEnchantUseCount(1);
+#endif
 
 									item->SetCount(item->GetCount() - 1);
 									break;
@@ -5234,7 +5300,7 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 					if (item2->GetSocket(i) >= 1 && item2->GetSocket(i) <= 2 && item2->GetSocket(i) >= item->GetValue(2))
 					{
 						#ifdef ENABLE_ADDSTONE_FAILURE
-						if (number(1, 100) <= 30)
+						if (number(1, 100) <= 60)
 						#else
 						if (true)
 						#endif

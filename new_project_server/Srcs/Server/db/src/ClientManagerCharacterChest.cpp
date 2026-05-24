@@ -508,7 +508,14 @@ void CClientManager::QUERY_CHARACTER_CHEST(CPeer* peer, DWORD dwHandle, TPacketG
 			}
 
 			snprintf(szQuery, sizeof(szQuery),
-				"SELECT id,`window`+0,pos,count,vnum,socket0,socket1,socket2,attrtype0,attrvalue0,attrtype1,attrvalue1,attrtype2,attrvalue2,attrtype3,attrvalue3,attrtype4,attrvalue4,attrtype5,attrvalue5,attrtype6,attrvalue6 "
+				"SELECT id,`window`+0,pos,count,vnum,socket0,socket1,socket2,attrtype0,attrvalue0,attrtype1,attrvalue1,attrtype2,attrvalue2,attrtype3,attrvalue3,attrtype4,attrvalue4,attrtype5,attrvalue5,attrtype6,attrvalue6"
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+				",enchant_use_count"
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+				",upgrade_owner"
+#endif
+				" "
 				"FROM item%s WHERE owner_id=%u "
 				"ORDER BY `window`, pos LIMIT %d",
 				GetTablePostfix(), p->dwTargetPID, CHARACTER_CHEST_MAX_PREVIEW_ITEMS);

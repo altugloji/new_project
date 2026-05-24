@@ -76,6 +76,11 @@ void CHARACTER_AddBGMInfo(unsigned mapIndex, const char* name, float vol);
 // LUA_ADD_GOTO_INFO
 extern void CHARACTER_AddGotoInfo(const std::string& c_st_name, BYTE empire, int mapIndex, DWORD x, DWORD y);
 // END_OF_LUA_ADD_GOTO_INFO
+#ifdef ENABLE_GM_PLAYER_PANEL
+extern void GmPlayerPanel_SendList(LPCHARACTER ch);
+extern void GmPlayerPanel_WarpTo(LPCHARACTER ch, const char* pszName);
+#endif
+
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

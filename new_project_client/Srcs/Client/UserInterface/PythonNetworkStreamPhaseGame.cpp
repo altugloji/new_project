@@ -1911,6 +1911,12 @@ bool CPythonNetworkStream::RecvExchangePacket()
 					CPythonExchange::Instance().SetItemMetinSocketToSelf(iSlotIndex, i, exchange_packet.alValues[i]);
 				for (int j = 0; j < ITEM_ATTRIBUTE_SLOT_MAX_NUM; ++j)
 					CPythonExchange::Instance().SetItemAttributeToSelf(iSlotIndex, j, exchange_packet.aAttr[j].bType, exchange_packet.aAttr[j].sValue);
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+				CPythonExchange::Instance().SetItemEnchantToSelf(iSlotIndex, exchange_packet.dwEnchantUseCount);
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+				CPythonExchange::Instance().SetItemUpgradeOwnerToSelf(iSlotIndex, exchange_packet.szUpgradeOwner);
+#endif
 			}
 			else
 			{
@@ -1920,6 +1926,12 @@ bool CPythonNetworkStream::RecvExchangePacket()
 					CPythonExchange::Instance().SetItemMetinSocketToTarget(iSlotIndex, i, exchange_packet.alValues[i]);
 				for (int j = 0; j < ITEM_ATTRIBUTE_SLOT_MAX_NUM; ++j)
 					CPythonExchange::Instance().SetItemAttributeToTarget(iSlotIndex, j, exchange_packet.aAttr[j].bType, exchange_packet.aAttr[j].sValue);
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+				CPythonExchange::Instance().SetItemEnchantToTarget(iSlotIndex, exchange_packet.dwEnchantUseCount);
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+				CPythonExchange::Instance().SetItemUpgradeOwnerToTarget(iSlotIndex, exchange_packet.szUpgradeOwner);
+#endif
 			}
 
 			__RefreshExchangeWindow();
@@ -4374,7 +4386,11 @@ bool CPythonNetworkStream::RecvViewEquipPacket()
 	for (int i = 0; i < WEAR_MAX_NUM; ++i)
 	{
 		const TEquipmentItemSet & rItemSet = kViewEquipPacket.equips[i];
+#if defined(ENABLE_ITEM_ENCHANT_USE_COUNT)
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "SetEquipmentDialogItem", Py_BuildValue("(iiiii)", kViewEquipPacket.dwVID, i, rItemSet.vnum, rItemSet.count, rItemSet.dwEnchantUseCount));
+#else
 		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "SetEquipmentDialogItem", Py_BuildValue("(iiii)", kViewEquipPacket.dwVID, i, rItemSet.vnum, rItemSet.count));
+#endif
 
 		for (int j = 0; j < ITEM_SOCKET_SLOT_MAX_NUM; ++j)
 			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "SetEquipmentDialogSocket", Py_BuildValue("(iiii)", kViewEquipPacket.dwVID, i, j, rItemSet.alSockets[j]));

@@ -5651,6 +5651,12 @@ void CHARACTER::LoadSafebox(int iSize, DWORD dwGold, int iItemCount, TPlayerItem
 			item->SetSkipSave(true);
 			item->SetSockets(pItems->alSockets);
 			item->SetAttributes(pItems->aAttr);
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+			item->SetEnchantUseCount(pItems->dwEnchantUseCount);
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+			item->SetUpgradeOwner(pItems->szUpgradeOwner);
+#endif
 
 			if (!m_pkSafebox->Add(pItems->pos, item))
 			{
@@ -5746,6 +5752,12 @@ void CHARACTER::LoadMall(int iItemCount, TPlayerItem * pItems)
 			item->SetSkipSave(true);
 			item->SetSockets(pItems->alSockets);
 			item->SetAttributes(pItems->aAttr);
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+			item->SetEnchantUseCount(pItems->dwEnchantUseCount);
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+			item->SetUpgradeOwner(pItems->szUpgradeOwner);
+#endif
 
 			if (!m_pkMall->Add(pItems->pos, item))
 				M2_DESTROY_ITEM(item);
@@ -6310,10 +6322,16 @@ void CHARACTER::SendEquipment(LPCHARACTER ch) const
 
 			thecore_memcpy(p.equips[i].alSockets, item->GetSockets(), sizeof(p.equips[i].alSockets));
 			thecore_memcpy(p.equips[i].aAttr, item->GetAttributes(), sizeof(p.equips[i].aAttr));
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+			p.equips[i].dwEnchantUseCount = item->GetEnchantUseCount();
+#endif
 		}
 		else
 		{
 			p.equips[i].vnum = 0;
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+			p.equips[i].dwEnchantUseCount = 0;
+#endif
 		}
 	}
 	ch->GetDesc()->Packet(p);

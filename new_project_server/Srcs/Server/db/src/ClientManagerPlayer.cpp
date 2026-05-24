@@ -61,6 +61,19 @@ bool CreateItemTableFromRes(MYSQL_RES * res, std::vector<TPlayerItem> * pVec, DW
 			str_to_number(item.aAttr[j].sValue, row[cur++]);
 		}
 
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		str_to_number(item.dwEnchantUseCount, row[cur++]);
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		{
+			const char* pszGelistiren = row[cur++];
+			if (pszGelistiren && *pszGelistiren)
+				strlcpy(item.szUpgradeOwner, pszGelistiren, sizeof(item.szUpgradeOwner));
+			else
+				item.szUpgradeOwner[0] = '\0';
+		}
+#endif
+
 		item.owner		= dwPID;
 	}
 
@@ -324,8 +337,14 @@ void CClientManager::QUERY_PLAYER_LOAD(CPeer * peer, DWORD dwHandle, TPlayerLoad
 		else
 		{
 			snprintf(szQuery, sizeof(szQuery),
-					"SELECT id,`window`+0,pos,count,vnum,socket0,socket1,socket2,attrtype0,attrvalue0,attrtype1,attrvalue1,attrtype2,attrvalue2,attrtype3,attrvalue3,attrtype4,attrvalue4,attrtype5,attrvalue5,attrtype6,attrvalue6 "
-					"FROM item%s WHERE owner_id=%d AND (`window` in ('INVENTORY','EQUIPMENT','DRAGON_SOUL_INVENTORY','BELT_INVENTORY'))",
+					"SELECT id,`window`+0,pos,count,vnum,socket0,socket1,socket2,attrtype0,attrvalue0,attrtype1,attrvalue1,attrtype2,attrvalue2,attrtype3,attrvalue3,attrtype4,attrvalue4,attrtype5,attrvalue5,attrtype6,attrvalue6"
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+					",enchant_use_count"
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+					",upgrade_owner"
+#endif
+					" FROM item%s WHERE owner_id=%d AND (`window` in ('INVENTORY','EQUIPMENT','DRAGON_SOUL_INVENTORY','BELT_INVENTORY'))",
 					GetTablePostfix(), pTab->id);
 
 			CDBManager::instance().ReturnQuery(szQuery,
@@ -391,8 +410,14 @@ void CClientManager::QUERY_PLAYER_LOAD(CPeer * peer, DWORD dwHandle, TPlayerLoad
 
 		//--------------------------------------------------------------
 		snprintf(queryStr, sizeof(queryStr),
-				"SELECT id,`window`+0,pos,count,vnum,socket0,socket1,socket2,attrtype0,attrvalue0,attrtype1,attrvalue1,attrtype2,attrvalue2,attrtype3,attrvalue3,attrtype4,attrvalue4,attrtype5,attrvalue5,attrtype6,attrvalue6 "
-				"FROM item%s WHERE owner_id=%d AND (`window` in ('INVENTORY','EQUIPMENT','DRAGON_SOUL_INVENTORY','BELT_INVENTORY'))",
+				"SELECT id,`window`+0,pos,count,vnum,socket0,socket1,socket2,attrtype0,attrvalue0,attrtype1,attrvalue1,attrtype2,attrvalue2,attrtype3,attrvalue3,attrtype4,attrvalue4,attrtype5,attrvalue5,attrtype6,attrvalue6"
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+				",enchant_use_count"
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+				",upgrade_owner"
+#endif
+				" FROM item%s WHERE owner_id=%d AND (`window` in ('INVENTORY','EQUIPMENT','DRAGON_SOUL_INVENTORY','BELT_INVENTORY'))",
 				GetTablePostfix(), packet->player_id);
 		CDBManager::instance().ReturnQuery(queryStr, QID_ITEM, peer->GetHandle(), new ClientHandleInfo(dwHandle, packet->player_id));
 

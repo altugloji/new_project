@@ -1774,6 +1774,12 @@ typedef struct packet_set_item
 	bool		highlight;
 	long		alSockets[ITEM_SOCKET_SLOT_MAX_NUM];
     TPlayerItemAttribute aAttr[ITEM_ATTRIBUTE_SLOT_MAX_NUM];
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	DWORD		dwEnchantUseCount;
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	char		szUpgradeOwner[CHARACTER_NAME_MAX_LEN + 1];
+#endif
 } TPacketGCItemSet;
 
 typedef struct packet_item_del
@@ -1799,6 +1805,12 @@ typedef struct packet_update_item
 	BYTE		count;
 	long		alSockets[ITEM_SOCKET_SLOT_MAX_NUM];
     TPlayerItemAttribute aAttr[ITEM_ATTRIBUTE_SLOT_MAX_NUM];
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	DWORD		dwEnchantUseCount;
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	char		szUpgradeOwner[CHARACTER_NAME_MAX_LEN + 1];
+#endif
 } TPacketGCItemUpdate;
 
 typedef struct packet_ground_add_item
@@ -1919,6 +1931,12 @@ typedef struct packet_exchange
     DWORD       arg3;
 	long		alValues[ITEM_SOCKET_SLOT_MAX_NUM];
     TPlayerItemAttribute aAttr[ITEM_ATTRIBUTE_SLOT_MAX_NUM];
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	DWORD		dwEnchantUseCount;
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	char		szUpgradeOwner[CHARACTER_NAME_MAX_LEN + 1];
+#endif
 } TPacketGCExchange;
 
 enum
@@ -2505,6 +2523,9 @@ typedef struct SEquipmentItemSet
 	BYTE    count;
 	long    alSockets[ITEM_SOCKET_SLOT_MAX_NUM];
 	TPlayerItemAttribute aAttr[ITEM_ATTRIBUTE_SLOT_MAX_NUM];
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	DWORD	dwEnchantUseCount;
+#endif
 } TEquipmentItemSet;
 
 typedef struct pakcet_view_equip

@@ -22,6 +22,13 @@ class CPythonExchange : public CSingleton<CPythonExchange>
 			DWORD					item_metin[EXCHANGE_ITEM_MAX_NUM][ITEM_SOCKET_SLOT_MAX_NUM];
 			TPlayerItemAttribute	item_attr[EXCHANGE_ITEM_MAX_NUM][ITEM_ATTRIBUTE_SLOT_MAX_NUM];
 
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+			char					item_upg[EXCHANGE_ITEM_MAX_NUM][CHARACTER_NAME_MAX_LEN + 1];
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+			DWORD					item_enchant[EXCHANGE_ITEM_MAX_NUM];
+#endif
+
 			BYTE					accept;
 			DWORD					elk;
 #ifdef ENABLE_CHEQUE_SYSTEM
@@ -81,6 +88,19 @@ class CPythonExchange : public CSingleton<CPythonExchange>
 
 		DWORD			GetItemMetinSocketFromTarget(BYTE pos, int iMetinSocketPos) const;
 		DWORD			GetItemMetinSocketFromSelf(BYTE pos, int iMetinSocketPos) const;
+
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		void			SetItemUpgradeOwnerToSelf(int pos, const char* name);
+		void			SetItemUpgradeOwnerToTarget(int pos, const char* name);
+		const char*		GetItemUpgradeOwnerFromSelf(BYTE pos) const;
+		const char*		GetItemUpgradeOwnerFromTarget(BYTE pos) const;
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		void			SetItemEnchantToSelf(int pos, DWORD n);
+		void			SetItemEnchantToTarget(int pos, DWORD n);
+		DWORD			GetItemEnchantFromSelf(BYTE pos) const;
+		DWORD			GetItemEnchantFromTarget(BYTE pos) const;
+#endif
 
 		void			GetItemAttributeFromTarget(BYTE pos, int iAttrPos, BYTE * pbyType, short * psValue) const;
 		void			GetItemAttributeFromSelf(BYTE pos, int iAttrPos, BYTE * pbyType, short * psValue) const;

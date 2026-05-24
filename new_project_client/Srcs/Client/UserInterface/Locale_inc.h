@@ -155,6 +155,8 @@
 #define BOSS_EFFECT
 #define ENABLE_REFINE_RENEWAL
 #define ENABLE_GM_PLAYER_PANEL
+#define ENABLE_ITEM_UPGRADE_OWNER
+#define ENABLE_ITEM_ENCHANT_USE_COUNT
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

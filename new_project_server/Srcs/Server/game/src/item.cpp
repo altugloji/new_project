@@ -35,6 +35,12 @@ CItem::CItem(DWORD dwVnum)
 {
 	memset( &m_alSockets, 0, sizeof(m_alSockets) );
 	memset( &m_aAttr, 0, sizeof(m_aAttr) );
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	m_szUpgradeOwner[0] = '\0';
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	m_dwEnchantUseCount = 0;
+#endif
 }
 
 CItem::~CItem()
@@ -68,6 +74,12 @@ void CItem::Initialize()
 
 	m_bSkipSave = false;
 	m_dwLastOwnerPID = 0;
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	m_szUpgradeOwner[0] = '\0';
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	m_dwEnchantUseCount = 0;
+#endif
 }
 
 void CItem::Destroy()
@@ -226,6 +238,13 @@ void CItem::UpdatePacket()
 		pack.alSockets[i] = m_alSockets[i];
 
 	thecore_memcpy(pack.aAttr, GetAttributes(), sizeof(pack.aAttr));
+
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	pack.dwEnchantUseCount = m_dwEnchantUseCount;
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	strlcpy(pack.szUpgradeOwner, m_szUpgradeOwner, sizeof(pack.szUpgradeOwner));
+#endif
 
 	sys_log(2, "UpdatePacket %s -> %s", GetName(), m_pOwner->GetName());
 	m_pOwner->GetDesc()->Packet(pack);
@@ -1387,6 +1406,32 @@ int CItem::GetRefineLevel()
 
 	return rtn;
 }
+
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+void CItem::SetUpgradeOwner(const char *c_psz)
+{
+	if (!c_psz || !*c_psz)
+	{
+		m_szUpgradeOwner[0] = '\0';
+		return;
+	}
+	strlcpy(m_szUpgradeOwner, c_psz, sizeof(m_szUpgradeOwner));
+}
+#endif
+
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+void CItem::SetEnchantUseCount(DWORD dw)
+{
+	m_dwEnchantUseCount = dw;
+}
+
+void CItem::AddEnchantUseCount(DWORD dw)
+{
+	m_dwEnchantUseCount += dw;
+	UpdatePacket();
+	Save();
+}
+#endif
 
 bool CItem::IsPolymorphItem() const
 {

@@ -178,6 +178,20 @@ bool CPythonNetworkStream::RecvMallItemSetPacket()
 	for (int iattr=0; iattr<ITEM_ATTRIBUTE_SLOT_MAX_NUM; ++iattr)
 		kItemData.aAttr[iattr] = kItemSet.aAttr[iattr];
 
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	kItemData.dwEnchantUseCount = kItemSet.dwEnchantUseCount;
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	{
+		const char* src = kItemSet.szUpgradeOwner;
+		if (src && *src) {
+			strncpy(kItemData.szUpgradeOwner, src, sizeof(kItemData.szUpgradeOwner) - 1);
+			kItemData.szUpgradeOwner[sizeof(kItemData.szUpgradeOwner) - 1] = '\0';
+		} else
+			kItemData.szUpgradeOwner[0] = '\0';
+	}
+#endif
+
 	CPythonSafeBox::Instance().SetMallItemData(kItemSet.Cell.cell, kItemData);
 
 	__RefreshMallWindow();
@@ -217,6 +231,9 @@ bool CPythonNetworkStream::RecvItemSetPacket()
 		kItemData.alSockets[i]=packet_item_set.alSockets[i];
 	for (int j=0; j<ITEM_ATTRIBUTE_SLOT_MAX_NUM; ++j)
 		kItemData.aAttr[j]=packet_item_set.aAttr[j];
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	kItemData.szUpgradeOwner[0] = '\0';
+#endif
 
 	IAbstractPlayer& rkPlayer=IAbstractPlayer::GetSingleton();
 
@@ -243,6 +260,20 @@ bool CPythonNetworkStream::RecvItemSetPacket2()
 		kItemData.alSockets[i]=packet_item_set.alSockets[i];
 	for (int j=0; j<ITEM_ATTRIBUTE_SLOT_MAX_NUM; ++j)
 		kItemData.aAttr[j]=packet_item_set.aAttr[j];
+
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	kItemData.dwEnchantUseCount = packet_item_set.dwEnchantUseCount;
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	{
+		const char* src = packet_item_set.szUpgradeOwner;
+		if (src && *src) {
+			strncpy(kItemData.szUpgradeOwner, src, sizeof(kItemData.szUpgradeOwner) - 1);
+			kItemData.szUpgradeOwner[sizeof(kItemData.szUpgradeOwner) - 1] = '\0';
+		} else
+			kItemData.szUpgradeOwner[0] = '\0';
+	}
+#endif
 
 	IAbstractPlayer& rkPlayer=IAbstractPlayer::GetSingleton();
 	rkPlayer.SetItemData(packet_item_set.Cell, kItemData);
@@ -278,6 +309,19 @@ bool CPythonNetworkStream::RecvItemUpdatePacket()
 		rkPlayer.SetItemMetinSocket(packet_item_update.Cell, i, packet_item_update.alSockets[i]);
 	for (int j = 0; j < ITEM_ATTRIBUTE_SLOT_MAX_NUM; ++j)
 		rkPlayer.SetItemAttribute(packet_item_update.Cell, j, packet_item_update.aAttr[j].bType, packet_item_update.aAttr[j].sValue);
+
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		rkPlayer.SetItemEnchantUseCount(packet_item_update.Cell, packet_item_update.dwEnchantUseCount);
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	{
+		const char* src = packet_item_update.szUpgradeOwner;
+		if (src)
+			rkPlayer.SetItemUpgradeOwner(packet_item_update.Cell, src);
+		else
+			rkPlayer.SetItemUpgradeOwner(packet_item_update.Cell, "");
+	}
+#endif
 
 	__RefreshInventoryWindow();
 	return true;

@@ -974,6 +974,58 @@ PyObject * playerGetItemMetinSocket(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildValue("i", nMetinSocketValue);
 }
 
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+PyObject * playerGetItemUpgradeOwner(PyObject* poSelf, PyObject* poArgs)
+{
+	TItemPos Cell{};
+	switch (PyTuple_Size(poArgs))
+	{
+	case 2:
+		if (!PyTuple_GetByte(poArgs, 0, &Cell.window_type))
+			return Py_BuildException();
+		if (!PyTuple_GetInteger(poArgs, 1, &Cell.cell))
+			return Py_BuildException();
+		break;
+	case 1:
+		Cell.window_type = INVENTORY;
+		if (!PyTuple_GetInteger(poArgs, 0, &Cell.cell))
+			return Py_BuildException();
+		break;
+	default:
+		return Py_BuildException();
+	}
+	const char* s = CPythonPlayer::Instance().GetItemUpgradeOwner(Cell);
+	if (!s || !*s)
+		return Py_BuildValue("s", "");
+	return Py_BuildValue("s", s);
+}
+#endif
+
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+PyObject * playerGetItemEnchantUseCount(PyObject* poSelf, PyObject* poArgs)
+{
+	TItemPos Cell{};
+	switch (PyTuple_Size(poArgs))
+	{
+	case 2:
+		if (!PyTuple_GetByte(poArgs, 0, &Cell.window_type))
+			return Py_BuildException();
+		if (!PyTuple_GetInteger(poArgs, 1, &Cell.cell))
+			return Py_BuildException();
+		break;
+	case 1:
+		Cell.window_type = INVENTORY;
+		if (!PyTuple_GetInteger(poArgs, 0, &Cell.cell))
+			return Py_BuildException();
+		break;
+	default:
+		return Py_BuildException();
+	}
+	const DWORD n = CPythonPlayer::Instance().GetItemEnchantUseCount(Cell);
+	return Py_BuildValue("i", n);
+}
+#endif
+
 PyObject * playerGetItemAttribute(PyObject* poSelf, PyObject* poArgs)
 {
 	TItemPos Cell;
@@ -1051,6 +1103,22 @@ PyObject * playerGetItemLink(PyObject * poSelf, PyObject * poArgs)
 				isAttr = true;
 			}
 		}
+
+#if defined(ENABLE_ITEM_ENCHANT_USE_COUNT) || defined(ENABLE_ITEM_UPGRADE_OWNER)
+	#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+			len += snprintf(itemlink + len, sizeof(itemlink) - len, ":%x", pPlayerItem->dwEnchantUseCount);
+	#else
+			len += snprintf(itemlink + len, sizeof(itemlink) - len, ":0");
+	#endif
+	#ifdef ENABLE_ITEM_UPGRADE_OWNER
+			if (pPlayerItem->szUpgradeOwner[0])
+				len += snprintf(itemlink + len, sizeof(itemlink) - len, ":%s", pPlayerItem->szUpgradeOwner);
+			else
+				len += snprintf(itemlink + len, sizeof(itemlink) - len, ":-");
+	#else
+			len += snprintf(itemlink + len, sizeof(itemlink) - len, ":-");
+	#endif
+#endif
 
 		if( GetDefaultCodePage() == CP_ARABIC ) {
 			if (isAttr)
@@ -2311,6 +2379,12 @@ void initPlayer()
 		{ "GetItemCount",						playerGetItemCount,							METH_VARARGS },
 		{ "GetItemCountByVnum",					playerGetItemCountByVnum,					METH_VARARGS },
 		{ "GetItemMetinSocket",					playerGetItemMetinSocket,					METH_VARARGS },
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		{ "GetItemUpgradeOwner",				playerGetItemUpgradeOwner,					METH_VARARGS },
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		{ "GetItemEnchantUseCount",			playerGetItemEnchantUseCount,					METH_VARARGS },
+#endif
 		{ "GetItemAttribute",					playerGetItemAttribute,						METH_VARARGS },
 		{ "GetISellItemPrice",					playerGetISellItemPrice,					METH_VARARGS },
 		{ "MoveItem",							playerMoveItem,								METH_VARARGS },

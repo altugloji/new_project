@@ -680,6 +680,56 @@ void CPythonPlayer::SetItemAttribute(TItemPos Cell, DWORD dwAttrIndex, BYTE byTy
 	(const_cast <TItemData *>(GetItemData(Cell)))->aAttr[dwAttrIndex].sValue = sValue;
 }
 
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+void CPythonPlayer::SetItemUpgradeOwner(TItemPos Cell, const char* c_psz)
+{
+	if (!Cell.IsValidCell())
+		return;
+	TItemData* p = const_cast<TItemData*>(GetItemData(Cell));
+	if (!p)
+		return;
+	if (!c_psz || !*c_psz)
+	{
+		p->szUpgradeOwner[0] = '\0';
+		return;
+	}
+	strncpy(p->szUpgradeOwner, c_psz, sizeof(p->szUpgradeOwner) - 1);
+	p->szUpgradeOwner[sizeof(p->szUpgradeOwner) - 1] = '\0';
+}
+
+const char* CPythonPlayer::GetItemUpgradeOwner(TItemPos Cell) const
+{
+	if (!Cell.IsValidCell())
+		return "";
+	const TItemData* p = GetItemData(Cell);
+	if (!p)
+		return "";
+	return p->szUpgradeOwner;
+}
+#endif
+
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+void CPythonPlayer::SetItemEnchantUseCount(TItemPos Cell, DWORD dw)
+{
+	if (!Cell.IsValidCell())
+		return;
+	TItemData* p = const_cast<TItemData*>(GetItemData(Cell));
+	if (!p)
+		return;
+	p->dwEnchantUseCount = dw;
+}
+
+DWORD CPythonPlayer::GetItemEnchantUseCount(TItemPos Cell) const
+{
+	if (!Cell.IsValidCell())
+		return 0;
+	const TItemData* p = GetItemData(Cell);
+	if (!p)
+		return 0;
+	return p->dwEnchantUseCount;
+}
+#endif
+
 int CPythonPlayer::GetQuickPage() const
 {
 	return m_playerStatus.lQuickPageIndex;

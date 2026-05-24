@@ -147,7 +147,9 @@ enum eCommonDefines {
 #define ENABLE_BULK_POTION_PANEL									// Hızlı şebnem penceresi
 #define ENABLE_NEW_MOB_TIMER										// Saatli boss spawn sistemi
 #define AUTO_CHAT_ENABLE											// Otochat sistemi
-
+#define ENABLE_ITEM_UPGRADE_OWNER
+#define ENABLE_ITEM_ENCHANT_USE_COUNT
+#define ENABLE_GM_PLAYER_PANEL
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

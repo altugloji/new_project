@@ -780,7 +780,7 @@ class ItemToolTip(ToolTip):
 		attrSlot = []
 		for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM):
 			attrSlot.append(exchange.GetItemAttributeFromSelf(slotIndex, i))
-		self.AddItemData(itemVnum, metinSlot, attrSlot)
+		self.AddItemData(itemVnum, metinSlot, attrSlot, 0, 0, player.INVENTORY, -1, exchange.GetItemUpgradeOwnerFromSelf(slotIndex) if app.ENABLE_ITEM_UPGRADE_OWNER else None, exchange.GetItemEnchantFromSelf(slotIndex) if app.ENABLE_ITEM_ENCHANT_USE_COUNT else None)
 
 	def SetExchangeTargetItem(self, slotIndex):
 		itemVnum = exchange.GetItemVnumFromTarget(slotIndex)
@@ -795,7 +795,7 @@ class ItemToolTip(ToolTip):
 		attrSlot = []
 		for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM):
 			attrSlot.append(exchange.GetItemAttributeFromTarget(slotIndex, i))
-		self.AddItemData(itemVnum, metinSlot, attrSlot)
+		self.AddItemData(itemVnum, metinSlot, attrSlot, 0, 0, player.INVENTORY, -1, exchange.GetItemUpgradeOwnerFromTarget(slotIndex) if app.ENABLE_ITEM_UPGRADE_OWNER else None, exchange.GetItemEnchantFromTarget(slotIndex) if app.ENABLE_ITEM_ENCHANT_USE_COUNT else None)
 
 	def SetPrivateShopBuilderItem(self, invenType, invenPos, privateShopSlotIndex):
 		itemVnum = player.GetItemIndex(invenType, invenPos)
@@ -1115,7 +1115,47 @@ class ItemToolTip(ToolTip):
 		self.AppendDescription(itemDesc, 26)
 		self.AppendDescription(itemSummary, 26, self.CONDITION_COLOR)
 
-	def AddItemData(self, itemVnum, metinSlot, attrSlot = 0, flags = 0, unbindTime = 0, window_type = player.INVENTORY, slotIndex = -1):
+	def __AppendEnchantUseCountLine(self, window_type, slotIndex, overrideCount = None):
+		if not app.ENABLE_ITEM_ENCHANT_USE_COUNT:
+			return
+		n = 0
+		if overrideCount is not None:
+			try:
+				n = int(overrideCount)
+			except:
+				return
+		elif slotIndex is not None and slotIndex >= 0:
+			try:
+				if window_type in (player.INVENTORY, player.EQUIPMENT, player.DRAGON_SOUL_INVENTORY):
+					n = int(player.GetItemEnchantUseCount(window_type, slotIndex))
+			except:
+				return
+		if n <= 0:
+			return
+		self.AppendSpace(1)
+		self.AppendTextLine("Kullanilan Efsun Nesnesi: %d" % n, 0xFFf863ff)
+
+	def __AppendGelistirenLine(self, window_type, slotIndex, overrideOwner = None):
+		if not app.ENABLE_ITEM_UPGRADE_OWNER:
+			return
+		owner = None
+		if overrideOwner is not None:
+			if overrideOwner and len(str(overrideOwner)) > 0:
+				owner = str(overrideOwner)
+		elif slotIndex is not None and slotIndex >= 0:
+			try:
+				if window_type in (player.INVENTORY, player.EQUIPMENT, player.DRAGON_SOUL_INVENTORY):
+					s = player.GetItemUpgradeOwner(window_type, slotIndex)
+					if s and len(s) > 0:
+						owner = s
+			except:
+				return
+		if not owner:
+			return
+		self.AppendSpace(5)
+		self.AppendTextLine("Gelistiren: " + owner, 0xFFf863ff)
+
+	def AddItemData(self, itemVnum, metinSlot, attrSlot = 0, flags = 0, unbindTime = 0, window_type = player.INVENTORY, slotIndex = -1, overrideOwner = None, overrideCount = None):
 		self.itemVnum = itemVnum
 		self.metinSlot = list(metinSlot) if metinSlot else []
 		item.SelectItem(itemVnum)
@@ -1206,6 +1246,8 @@ class ItemToolTip(ToolTip):
 		### Weapon ###
 		if item.ITEM_TYPE_WEAPON == itemType:
 
+			self.__AppendGelistirenLine(window_type, slotIndex, overrideOwner)
+			self.__AppendEnchantUseCountLine(window_type, slotIndex, overrideCount)
 			self.__AppendLimitInformation()
 
 			self.AppendSpace(5)
@@ -1230,6 +1272,8 @@ class ItemToolTip(ToolTip):
 
 		### Armor ###
 		elif item.ITEM_TYPE_ARMOR == itemType:
+			self.__AppendGelistirenLine(window_type, slotIndex, overrideOwner)
+			self.__AppendEnchantUseCountLine(window_type, slotIndex, overrideCount)
 			self.__AppendLimitInformation()
 
 			defGrade = item.GetValue(1)
@@ -2556,13 +2600,28 @@ class HyperlinkItemToolTip(ItemToolTip):
 
 	def SetHyperlinkItem(self, tokens):
 		minTokenCount = 3 + player.METIN_SOCKET_MAX_NUM
-		maxTokenCount = minTokenCount + 2 * player.ATTRIBUTE_SLOT_MAX_NUM
+		attrTokenCount = 2 * player.ATTRIBUTE_SLOT_MAX_NUM
+		extraTokenCount = 2 if (app.ENABLE_ITEM_ENCHANT_USE_COUNT or app.ENABLE_ITEM_UPGRADE_OWNER) else 0
+		maxTokenCount = minTokenCount + attrTokenCount + extraTokenCount
 		if tokens and len(tokens) >= minTokenCount and len(tokens) <= maxTokenCount:
 			head, vnum, flag = tokens[:3]
 			itemVnum = int(vnum, 16)
 			metinSlot = [int(metin, 16) for metin in tokens[3:6]]
 
-			rests = tokens[6:]
+			overrideOwner = None
+			overrideCount = None
+			rests = list(tokens[6:])
+			if extraTokenCount and len(rests) == attrTokenCount + extraTokenCount:
+				ownerToken = rests.pop()
+				try:
+					enchantToken = int(rests.pop(), 16)
+				except:
+					enchantToken = 0
+				if app.ENABLE_ITEM_UPGRADE_OWNER and ownerToken and ownerToken != "-":
+					overrideOwner = ownerToken
+				if app.ENABLE_ITEM_ENCHANT_USE_COUNT:
+					overrideCount = enchantToken
+
 			if rests:
 				attrSlot = []
 
@@ -2578,7 +2637,7 @@ class HyperlinkItemToolTip(ItemToolTip):
 				attrSlot = [(0, 0)] * player.ATTRIBUTE_SLOT_MAX_NUM
 
 			self.ClearToolTip()
-			self.AddItemData(itemVnum, metinSlot, attrSlot)
+			self.AddItemData(itemVnum, metinSlot, attrSlot, 0, 0, player.INVENTORY, -1, overrideOwner, overrideCount)
 
 			ItemToolTip.OnUpdate(self)
 

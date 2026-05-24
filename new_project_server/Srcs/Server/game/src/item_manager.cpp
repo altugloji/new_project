@@ -447,6 +447,13 @@ void ITEM_MANAGER::SaveSingleItem(LPITEM item) const
 	thecore_memcpy(t.alSockets, item->GetSockets(), sizeof(t.alSockets));
 	thecore_memcpy(t.aAttr, item->GetAttributes(), sizeof(t.aAttr));
 
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	t.dwEnchantUseCount = item->GetEnchantUseCount();
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	strlcpy(t.szUpgradeOwner, item->GetUpgradeOwner(), sizeof(t.szUpgradeOwner));
+#endif
+
 	db_clientdesc->DBPacketHeader(HEADER_GD_ITEM_SAVE, 0, sizeof(TPlayerItem));
 	db_clientdesc->Packet(&t, sizeof(TPlayerItem));
 }
@@ -1806,5 +1813,11 @@ void ITEM_MANAGER::CopyAllAttrTo(LPITEM pkOldItem, LPITEM pkNewItem)
 	}
 
 	pkOldItem->CopyAttributeTo(pkNewItem);
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	pkNewItem->SetUpgradeOwner(pkOldItem->GetUpgradeOwner());
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	pkNewItem->SetEnchantUseCount(pkOldItem->GetEnchantUseCount());
+#endif
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

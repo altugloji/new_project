@@ -1473,6 +1473,12 @@ void CInputDB::ItemLoad(LPDESC d, const char * c_pData) const
 		item->SetSkipSave(true);
 		item->SetSockets(p->alSockets);
 		item->SetAttributes(p->aAttr);
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		item->SetEnchantUseCount(p->dwEnchantUseCount);
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		item->SetUpgradeOwner(p->szUpgradeOwner);
+#endif
 
 #ifdef ENABLE_HIGHLIGHT_NEW_ITEM
 		item->SetLastOwnerPID(p->owner);

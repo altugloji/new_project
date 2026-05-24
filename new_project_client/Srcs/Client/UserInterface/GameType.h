@@ -362,6 +362,12 @@ typedef struct packet_item
 	DWORD		anti_flags;
 	long		alSockets[ITEM_SOCKET_SLOT_MAX_NUM];
     TPlayerItemAttribute aAttr[ITEM_ATTRIBUTE_SLOT_MAX_NUM];
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+	DWORD		dwEnchantUseCount;
+#endif
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+	char		szUpgradeOwner[25]; /* CHARACTER_NAME_MAX_LEN(24) + 1 */
+#endif
 } TItemData;
 
 typedef struct packet_shop_item

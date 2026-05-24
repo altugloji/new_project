@@ -164,6 +164,41 @@ PyObject * exchangeSetElkMode(PyObject * poTarget, PyObject * poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+PyObject * exchangeGetItemUpgradeOwnerFromSelf(PyObject * poSelf, PyObject * poArgs)
+{
+	int pos;
+	if (!PyTuple_GetInteger(poArgs, 0, &pos))
+		return Py_BuildException();
+	return Py_BuildValue("s", CPythonExchange::Instance().GetItemUpgradeOwnerFromSelf((BYTE) pos));
+}
+
+PyObject * exchangeGetItemUpgradeOwnerFromTarget(PyObject * poSelf, PyObject * poArgs)
+{
+	int pos;
+	if (!PyTuple_GetInteger(poArgs, 0, &pos))
+		return Py_BuildException();
+	return Py_BuildValue("s", CPythonExchange::Instance().GetItemUpgradeOwnerFromTarget((BYTE) pos));
+}
+#endif
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+PyObject * exchangeGetItemEnchantFromSelf(PyObject * poSelf, PyObject * poArgs)
+{
+	int pos;
+	if (!PyTuple_GetInteger(poArgs, 0, &pos))
+		return Py_BuildException();
+	return Py_BuildValue("i", (int)CPythonExchange::Instance().GetItemEnchantFromSelf((BYTE) pos));
+}
+
+PyObject * exchangeGetItemEnchantFromTarget(PyObject * poSelf, PyObject * poArgs)
+{
+	int pos;
+	if (!PyTuple_GetInteger(poArgs, 0, &pos))
+		return Py_BuildException();
+	return Py_BuildValue("i", (int)CPythonExchange::Instance().GetItemEnchantFromTarget((BYTE) pos));
+}
+#endif
+
 #ifdef ENABLE_CHEQUE_SYSTEM
 PyObject* exchangeGetChequeFromSelf(PyObject* poSelf, PyObject* poArgs)
 {
@@ -208,6 +243,16 @@ void initTrade()
 
 		{"GetItemAttributeFromTarget",	exchangeGetItemAttributeFromTarget,	METH_VARARGS},
 		{"GetItemAttributeFromSelf",	exchangeGetItemAttributeFromSelf,	METH_VARARGS},
+
+#ifdef ENABLE_ITEM_UPGRADE_OWNER
+		{"GetItemUpgradeOwnerFromSelf",	exchangeGetItemUpgradeOwnerFromSelf,	METH_VARARGS},
+		{"GetItemUpgradeOwnerFromTarget",	exchangeGetItemUpgradeOwnerFromTarget,	METH_VARARGS},
+#endif
+
+#ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
+		{"GetItemEnchantFromSelf",		exchangeGetItemEnchantFromSelf,		METH_VARARGS},
+		{"GetItemEnchantFromTarget",		exchangeGetItemEnchantFromTarget,	METH_VARARGS},
+#endif
 
 		{"GetElkMode",					exchangeGetElkMode,					METH_VARARGS},
 		{"SetElkMode",					exchangeSetElkMode,					METH_VARARGS},

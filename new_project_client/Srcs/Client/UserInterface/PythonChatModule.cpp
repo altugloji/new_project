@@ -444,9 +444,11 @@ PyObject * chatGetLinkFromHyperlink(PyObject * poSelf, PyObject * poArgs)
 					htoi(results[4].c_str()),
 					htoi(results[5].c_str()));
 
-			if (results.size() >= 8)
+			const int kAttrEnd = 6 + 2 * ITEM_ATTRIBUTE_SLOT_MAX_NUM;
+			const int attrStop = (results.size() < (size_t)kAttrEnd) ? (int)results.size() : kAttrEnd;
+			if (attrStop >= 8)
 			{
-				for (int i = 6; i < results.size(); i += 2)
+				for (int i = 6; i + 1 < attrStop; i += 2)
 				{
 					len += snprintf(itemlink + len, sizeof(itemlink) - len, ":%x:%lld",
 							htoi(results[i].c_str()),
@@ -454,6 +456,16 @@ PyObject * chatGetLinkFromHyperlink(PyObject * poSelf, PyObject * poArgs)
 					isAttr = true;
 				}
 			}
+
+#if defined(ENABLE_ITEM_ENCHANT_USE_COUNT) || defined(ENABLE_ITEM_UPGRADE_OWNER)
+			if ((int)results.size() >= attrStop + 2)
+			{
+				len += snprintf(itemlink + len, sizeof(itemlink) - len, ":%x",
+						htoi(results[attrStop].c_str()));
+				len += snprintf(itemlink + len, sizeof(itemlink) - len, ":%s",
+						results[attrStop + 1].c_str());
+			}
+#endif
 
 			if (isAttr)
 				snprintf(buf, sizeof(buf), "|cffffc700|H%s|h[%s]|h|r", itemlink, pItemData->GetName());
