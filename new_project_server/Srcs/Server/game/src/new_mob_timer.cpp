@@ -37,18 +37,18 @@ namespace
 	// ID, VNUM, MAP_INDEX, X_POS, Y_POS, PER_HOUR, PER_MIN
 	const SNewMobTimerConfigRow g_aNewMobTimerConfig[] =
 	{
-		{ 0,	1901,	61,		775,	575,	4,	0 },		// Dokuz kuyruk
-		{ 1,	2206,	62,		125,	785,	4,	0 },		// Alev kral
-		{ 2,	791,	65,		910,	847,	4,	0 },		// Karanlik lider
-		{ 3,	691,	64,		770,	810,	4,	0 },		// Ork reisi
-		{ 4,	1304,	65,		370,	420,	4,	0 },		// Sari kaplan
-		{ 5,	2191,	63,		900,	619,	4,	0 },		// Kaplumbaga
-		{ 6,	2091,	104,	390,	390,	4,	0 },		// Orumcek
+		{ 0,	1901,	61,		775,	575,	3,	0 },		// Dokuz kuyruk
+		{ 1,	2206,	62,		125,	785,	3,	0 },		// Alev kral
+		{ 2,	791,	65,		910,	847,	3,	0 },		// Karanlik lider
+		{ 3,	691,	64,		770,	810,	3,	0 },		// Ork reisi
+		{ 4,	1304,	65,		370,	420,	3,	0 },		// Sari kaplan
+		{ 5,	2191,	63,		900,	619,	3,	0 },		// Kaplumbaga
+		{ 6,	2091,	104,	390,	390,	3,	0 },		// Orumcek
 		{ 7,	2491,	73,		395,	175,	4,	0 },		// Komutan
 		{ 8,	2492,	73,		735,	1115,	4,	0 },		// General1
 		{ 9,	2494,	73,		1260,	576,	4,	0 },		// General2
 		{ 10,	2495,	73,		350,	275,	4,	0 },		// General3
-		{ 11,	1192,	72,		1355,	1405,	12,	0 },		// Cadi
+		// { 11,	1192,	72,		1355,	1405,	12,	0 },		// Cadi
 	};
 
 	EVENTINFO(new_mob_timer_event_info)
@@ -228,7 +228,7 @@ bool CNewMobTimer::CanSpawnNow(const SRuntimeEntry& entry, int iSpawnDay, int iT
 	return true;
 }
 
-bool CNewMobTimer::IsBossAlive(SRuntimeEntry& entry) const
+bool CNewMobTimer::IsBossAlive(SRuntimeEntry& entry)
 {
 	if (entry.dwSpawnedVID == 0)
 		return false;

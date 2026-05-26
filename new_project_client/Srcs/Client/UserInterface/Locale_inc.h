@@ -157,6 +157,7 @@
 #define ENABLE_GM_PLAYER_PANEL
 #define ENABLE_ITEM_UPGRADE_OWNER
 #define ENABLE_ITEM_ENCHANT_USE_COUNT
+#define ENABLE_EFSUN_CHANGE_DIALOG
 
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////

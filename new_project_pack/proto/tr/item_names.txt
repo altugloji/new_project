@@ -7200,7 +7200,7 @@ VNUM	LOCALE_NAME
 39119	Elementer güç taþý
 39120	Elementer koruma taþý
 40001	Bilinmeyen Altýn Yüzük
-40002	Levi'nin Yüzüðü
+40002	Iþýnlama Yüzüðü
 40003	Thorun Yüzüðü
 40004	Eekin Yüzüðü
 40005	Çýnlayan Zil
@@ -9760,7 +9760,7 @@ VNUM	LOCALE_NAME
 53583	Þimþek elementeri kutusu
 53584	Rüzgar elementeri kutusu
 53585	Toprak elementeri kutusu
-53586	Karanlýk element. kutusu
+53586	Çiçek kutusu
 53587	Kýrmýzý balon kutusu
 53588	Mavi balon kutusu
 53589	Küçük balon kutusu
@@ -10435,7 +10435,7 @@ VNUM	LOCALE_NAME
 72320	Envanter Geniþletme
 72321	Sýrlar Yüzüðü
 72322	Yeni Baþlangýç Kartý
-72323	Yeni Düzen Kartý
+72323	Karakter Kartý
 72325	Yansýtmayý Geri Alma
 72326	Yansýtma Bileti
 72327	Küre Parþömeni (s)

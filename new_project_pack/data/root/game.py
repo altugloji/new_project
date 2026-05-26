@@ -2510,9 +2510,6 @@ class GameWindow(ui.ScriptWindow):
 						if not (itemVnum in curItem["vnum_list"]):
 							curItem["vnum_list"].append(itemVnum)
 						return
-				else:
-					if curItem.has_key("vnum") and curItem["vnum"] == itemVnum and curItem["count"] == itemCount:
-						return
 
 			if isUpgradeable or isMetin:
 				curList.append({"vnum_list":[itemVnum], "count":itemCount})

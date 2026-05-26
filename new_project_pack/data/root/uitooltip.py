@@ -25,11 +25,52 @@ if app.ENABLE_ACCE_COSTUME_SYSTEM:
 WARP_SCROLLS = [22011, 22000, 22010]
 
 DESC_DEFAULT_MAX_COLS = 26
-DESC_WESTERN_MAX_COLS = 35
-DESC_WESTERN_MAX_WIDTH = 220
+DESC_WESTERN_MAX_COLS = 45
+DESC_WESTERN_MAX_WIDTH = 270
 
 def chop(n):
 	return round(n - 0.5, 1)
+
+def IsTextTagSeparator(token, sep_pos):
+	if sep_pos + 1 >= len(token):
+		return False
+	return token[sep_pos + 1] in ("c", "C", "r", "H", "h", "E", "e")
+
+def GetTextTagDisplayLength(text):
+	length = 0
+	pos = 0
+
+	while pos < len(text):
+		if "|" == text[pos] and pos + 1 < len(text):
+			tag = text[pos + 1]
+
+			if tag in ("c", "C"):
+				end_pos = text.find("|h", pos + 2)
+				if -1 != end_pos:
+					pos = end_pos + 2
+					continue
+
+			if tag in ("r", "h"):
+				pos += 2
+				continue
+
+			if "E" == tag:
+				end_pos = text.find("|e", pos + 2)
+				if -1 != end_pos:
+					length += 1
+					pos = end_pos + 2
+					continue
+
+			if "H" == tag:
+				end_pos = text.find("|h", pos + 2)
+				if -1 != end_pos:
+					pos = end_pos + 2
+					continue
+
+		length += 1
+		pos += 1
+
+	return length
 
 def SplitDescription(desc, limit):
 	total_tokens = desc.split()
@@ -37,18 +78,19 @@ def SplitDescription(desc, limit):
 	line_len = 0
 	lines = []
 	for token in total_tokens:
-		if "|" in token:
+		if "|" in token and not IsTextTagSeparator(token, token.find("|")):
 			sep_pos = token.find("|")
 			line_tokens.append(token[:sep_pos])
 
 			lines.append(" ".join(line_tokens))
-			line_len = len(token) - (sep_pos + 1)
+			line_len = GetTextTagDisplayLength(token[sep_pos+1:])
 			line_tokens = [token[sep_pos+1:]]
 		else:
-			line_len += len(token)
+			token_len = GetTextTagDisplayLength(token)
+			line_len += token_len
 			if len(line_tokens) + line_len > limit:
 				lines.append(" ".join(line_tokens))
-				line_len = len(token)
+				line_len = token_len
 				line_tokens = [token]
 			else:
 				line_tokens.append(token)
@@ -1176,8 +1218,24 @@ class ItemToolTip(ToolTip):
 
 		### Skill Book ###
 		elif 50300 == itemVnum:
-			if 0 != metinSlot:
+			if metinSlot and metinSlot[0] > 0:
 				self.__SetSkillBookToolTip(metinSlot[0], localeInfo.TOOLTIP_SKILLBOOK_NAME, 1)
+			else:
+				self.SetTitle(item.GetItemName())
+				self.AppendDescription(item.GetItemDescription(), 26)
+				self.AppendDescription(item.GetItemSummary(), 26, self.CONDITION_COLOR)
+			self.__AppendSealInformation(window_type, slotIndex) ## cyh itemseal 2013 11 11
+			self.AdditionalTips(window_type, itemVnum, metinSlot, slotIndex)
+			self.ShowToolTip()
+			return
+		elif item.ITEM_TYPE_SKILLBOOK == itemType:
+			skillIndex = item.GetValue(0)
+			if skillIndex > 0:
+				self.__SetSkillBookToolTip(skillIndex, localeInfo.TOOLTIP_SKILLBOOK_NAME, 1)
+			else:
+				self.SetTitle(item.GetItemName())
+			self.AppendDescription(item.GetItemDescription(), 26)
+			self.AppendDescription(item.GetItemSummary(), 26, self.CONDITION_COLOR)
 			self.__AppendSealInformation(window_type, slotIndex) ## cyh itemseal 2013 11 11
 			self.AdditionalTips(window_type, itemVnum, metinSlot, slotIndex)
 			self.ShowToolTip()
@@ -1788,7 +1846,7 @@ class ItemToolTip(ToolTip):
 		return maxWidth
 
 	def __AdjustDescMaxWidth(self, desc):
-		if len(desc) < DESC_DEFAULT_MAX_COLS:
+		if GetTextTagDisplayLength(desc) < DESC_DEFAULT_MAX_COLS:
 			return self.toolTipWidth
 
 		return DESC_WESTERN_MAX_WIDTH
@@ -1797,6 +1855,7 @@ class ItemToolTip(ToolTip):
 		skillName = skill.GetSkillName(skillIndex)
 
 		if not skillName:
+			self.SetTitle(item.GetItemName())
 			return
 
 		if localeInfo.IsVIETNAM():

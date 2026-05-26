@@ -177,7 +177,7 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self.btnAccept.SetEvent(self.AceptCube)
 
 		self.contentScrollbar.SetScrollEvent(ui.__mem_func__(self.OnScrollResultList))
-		self.contentScrollbar.SetScrollStep(0.15)
+		self.contentScrollbar.SetScrollStep(0.9)
 
 		self.result_qty.SetReturnEvent(self.AceptInputItem)
 		self.result_qty.CanEdit(False)

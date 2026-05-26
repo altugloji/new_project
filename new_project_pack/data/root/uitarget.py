@@ -425,8 +425,6 @@ class TargetBoard(ui.ThinBoard):
 				item.SelectItem(vnum)
 				if item.GetItemType() == item.ITEM_TYPE_METIN:
 					self.itemTooltip.isStone = True
-					self.itemTooltip.isBook = False
-					self.itemTooltip.isBook2 = False
 					self.itemTooltip.SetItemToolTip(self.lastStoneVnum)
 				else:
 					self.itemTooltip.isStone = False
@@ -660,6 +658,11 @@ class TargetBoard(ui.ThinBoard):
 			self.infoButton.showWnd.Refresh()
 
 		def OnPressedInfoButton(self):
+			if self.vnum != 0:
+				if self.vnum in constInfo.MONSTER_INFO_DATA:
+					constInfo.MONSTER_INFO_DATA[self.vnum]["items"] = []
+				else:
+					constInfo.MONSTER_INFO_DATA[self.vnum] = {"items" : []}
 			net.SendTargetInfoLoad(player.GetTargetVID())
 			if self.infoButton.showWnd.IsShow():
 				self.infoButton.showWnd.Close()

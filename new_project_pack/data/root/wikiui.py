@@ -1466,7 +1466,7 @@ class ScrollBarSpecial(ui.Window):
 		ui.Window.__init__(self)
 		self.horizontal_scroll = horizontal_scroll
 		self.scrollEvent = None
-		self.scrollSpeed = 50
+		self.scrollSpeed = 150
 		self.sizeScale = 1.0
 		self.bars = []
 		for i in xrange(self.BAR_NUMB):

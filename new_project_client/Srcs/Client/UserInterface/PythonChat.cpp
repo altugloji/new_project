@@ -802,6 +802,10 @@ BOOL CPythonChat::IsIgnoreCharacter(const char * c_szName)
 
 CWhisper * CPythonChat::CreateWhisper(const char * c_szName)
 {
+	TWhisperMap::iterator itor = m_WhisperMap.find(c_szName);
+	if (itor != m_WhisperMap.end())
+		return itor->second;
+
 	CWhisper * pWhisper = CWhisper::New();
 	m_WhisperMap.insert(TWhisperMap::value_type(c_szName, pWhisper));
 	return pWhisper;

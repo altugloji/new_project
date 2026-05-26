@@ -269,19 +269,20 @@ bool CPythonWiki::ItemBlackList(DWORD itemVnum, DWORD itemType, DWORD itemSubTyp
 	const std::vector<DWORD> m_BlockedItemVnumList = {
 		// warrior & weapon blacklist
 		9510, 9520, 3209, 219, 229, 239, 269, 3179, 3189, 7209,
-		21970, 21960, 21950, 21940, 21930, 21920, 21910, 21900,
+		21970, 21960, 21950, 21940, 21930, 21920, 21910, 21900, 209,
 
 		// ninja & weapon blacklist
-		1149, 1159, 1169, 8000,
+		1149, 1159, 1169, 8000, 4039,
 
 		// shaman & weapon blacklist
 		5139, 5149, 5159, 7179, 7189,
 
 		// armor blacklist
-		11000, 11010, 11020, 11030,
+		11000, 11010, 11020, 11030, 13169, 13149, 13199, 13209,
 
 		// shield blacklist
-		13189,
+		13189, 16509, 16529, 16579, 16549, 16569, 17579, 17549, 17529, 17509,
+		15459, 14669, 14549, 14529, 14509, 14579, 15249, 17569, 14569,
 	};
 	return std::find(m_BlockedItemVnumList.begin(), m_BlockedItemVnumList.end(), itemVnum) != m_BlockedItemVnumList.end() ? false : true;
 }

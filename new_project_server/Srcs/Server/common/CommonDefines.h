@@ -150,6 +150,7 @@ enum eCommonDefines {
 #define ENABLE_ITEM_UPGRADE_OWNER
 #define ENABLE_ITEM_ENCHANT_USE_COUNT
 #define ENABLE_GM_PLAYER_PANEL
+#define ATTBONUS_ELEXIR	
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

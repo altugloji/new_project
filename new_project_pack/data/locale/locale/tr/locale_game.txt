@@ -3011,7 +3011,7 @@ TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_JOB_WOLF	Lycanlara karþý güçlü
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_KNOCKBACK	Geri tepme yok	SNA
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_NIMBLE	Çevik toynak	SNA
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_ANIMAL	Hayvanlara karþý güçlü
-TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_CZ	Zodyak canavarlarýna karþý güçlü
+TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_CZ	Sürgüne karþý güçlü
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_DESSERT	Çöl canavarlarýna karþý güçlü
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_DEVIL	Þeytanlara karþý güçlü
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_HUMAN	Yarý Ýnsanlara karþý güçlü
@@ -3084,7 +3084,6 @@ TOOLTIP_APPLY_ATTBONUS_ASSASSIN	Ninjalara karþý güçlü +%%%d	SA
 TOOLTIP_APPLY_ATTBONUS_BELL	Çan savunmasýndan kopuþ +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_BOW	Ok savunmasýndan kopuþ +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_CLAW	Pençe savunmasýndan kopuþ +%d%%	SA
-TOOLTIP_APPLY_ATTBONUS_CZ	Zodyak canavarýna karþý güçlü +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_DAGGER	Hançer savunmasýndan kopuþ +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_DESERT	Çöl canavarýna karþý güçlü +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_DEVIL	Þeytanlara karþý güçlü +%%%d	SA
@@ -3394,7 +3393,6 @@ TOOLTIP_REQUIREMENT_LEVEL	%d.Seviyeye ulaþmýþ olmalýsýn.
 TOOLTIP_REQUIREMENT_SKILL_LEVEL	%s Seviye %d gerekli.
 TOOLTIP_REQUIREMENT_STAT_LEVEL	%s %d gerekli
 TOOLTIP_RESIST_BOW	Ok savunmasý %d%%	SA
-TOOLTIP_RESIST_DARK	Karanlýk Direnci +%%%d	SA
 TOOLTIP_RESIST_EARTH	Toprak Direnci +%%%d	SA
 TOOLTIP_RESIST_ELEC	Þimsek direnci %%%d	SA
 TOOLTIP_RESIST_FIRE	Ateþ direnci %%%d	SA
@@ -3749,3 +3747,5 @@ AUTO_CHAT_SAVED_MESSAGE	Kayýtlý Mesajýnýz:
 AUTO_CHAT_ENABLED	Baþlat
 AUTO_CHAT_DISABLED	Durdur
 AUTO_CHAT_NO_MESSAGE	Mesaj bulunamadý. Önce bir baðýrma mesajý gönderin.
+TOOLTIP_APPLY_ATTBONUS_CZ	Sürgüne karþý güçlü +%d%%	SA
+TOOLTIP_RESIST_DARK	Sürgüne karþý dayanýklýlýk +%%%d	SA

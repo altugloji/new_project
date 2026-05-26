@@ -813,6 +813,9 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 		ch->SkillLevelPacket();
 		// @fixme182 END
 	}
+
+	if (ch && ch->IsGM())
+		ch->ChatPacket(CHAT_TYPE_INFO, "Map Index: %ld - %s", ch->GetMapIndex(), g_stHostname.c_str());
 }
 
 void CInputLogin::Empire(LPDESC d, const char * c_pData) const

@@ -39,8 +39,8 @@ LOGIN_FOOTER_BTN_GAP = 8
 # --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_module_const ---
 # Quick fav (only if app.FAST_LOGIN_CHARACTER_SAVE): 1 = show "1".."N" test labels; 0 = real names from storage.
 QUICK_CHAR_STATIC_LABELS_TEST = 0
-# serverInfo REGION_DICT channel key for quick-login shortcut (1 = CH1). Used only with FAST_LOGIN_CHARACTER_SAVE.
-QUICK_LOGIN_CHANNEL_KEY = 1
+# serverInfo REGION_DICT channel key for quick-login shortcut (0 = CH1). Used only with FAST_LOGIN_CHARACTER_SAVE.
+QUICK_LOGIN_CHANNEL_KEY = 0
 # --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_module_const ---
 
 VIRTUAL_KEYBOARD_NUM_KEYS = 46

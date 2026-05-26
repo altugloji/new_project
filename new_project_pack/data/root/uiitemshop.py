@@ -275,6 +275,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 		self.itemVnum = 0
 		self.itemPrice = -1
 		self.maxCount = 0
+		self.packSize = 1
 		self.coins = 0
 		self.payWithEp = True
 		
@@ -386,9 +387,22 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 	def Close(self):
 		self.itemPrice = -1
 		self.maxCount = 0
+		self.packSize = 1
 		self.countEditline.SetText("1")
-		self.countTextFirst.SetText("Alinacak toplam miktar: 1")
+		self.__UpdateCountLabel(1)
 		self.Hide()
+
+	def SetPackSize(self, packSize):
+		try:
+			self.packSize = max(1, int(packSize))
+		except:
+			self.packSize = 1
+
+	def __UpdateCountLabel(self, count):
+		if self.packSize > 1:
+			self.countTextFirst.SetText("Alinacak paket: %d (%d adet)" % (count, count * self.packSize))
+		else:
+			self.countTextFirst.SetText("Alinacak toplam miktar: %d" % count)
 
 	def acceptButtonEvent(self):
 		itemName = self.titleName.GetText()
@@ -426,7 +440,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 			except ValueError:
 				pass
 
-		self.countTextFirst.SetText("Alinacak toplam miktar: %d" % count)
+		self.__UpdateCountLabel(count)
 
 		price = self.itemPrice * count
 		self.SetItemPrice(price)
@@ -448,7 +462,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 				count = 1
 
 		self.countEditline.SetText("%d" % count)
-		self.countTextFirst.SetText("Alinacak toplam miktar: %d" % count)
+		self.__UpdateCountLabel(count)
 		price = self.itemPrice * count
 		self.SetItemPrice(price)
 
@@ -475,7 +489,7 @@ class ItemStackableBuyDialog(ui.BoardWithTitleBar):
 			count = self.maxCount
 
 		self.countEditline.SetText("%d" % count)
-		self.countTextFirst.SetText("Alinacak toplam miktar: %d" % count)
+		self.__UpdateCountLabel(count)
 		price = self.itemPrice * count
 		self.SetItemPrice(price)
 
@@ -580,6 +594,7 @@ class ItemShopWindow(ui.ScriptWindow):
 			self.itemScrollBar.SetPosition(sb_x, ITEM_SHOP_LIST_TOP)
 			self.itemScrollBar.SetSize(ITEM_SHOP_SCROLLBAR_W, ITEM_SHOP_SCROLL_VIEW_H)
 			self.itemScrollBar.SetScrollEvent(ui.__mem_func__(self.__OnItemScrollBar))
+			self.itemScrollBar.SetScrollSpeed(150)
 			self.itemScrollBar.Hide()
 			self.itemScrollBar.SetTop()
 
@@ -957,13 +972,14 @@ class ItemShopWindow(ui.ScriptWindow):
 				return
 			payPrice = itemMark
 
-		if item.IsFlag(ITEM_FLAG_STACKABLE) and itemCount <= 1:
+		if item.IsFlag(ITEM_FLAG_STACKABLE):
 			self.itemStackalbeBuyDialog.SetItem(itemID, itemVnum)
 			if payWithEp:
 				self.itemStackalbeBuyDialog.SetCountText(itemPrice, self.coins, True)
 			else:
 				self.itemStackalbeBuyDialog.SetCountText(itemMark, self.marks, False)
 			self.itemStackalbeBuyDialog.SetTitleName(item.GetItemName())
+			self.itemStackalbeBuyDialog.SetPackSize(itemCount)
 			self.itemStackalbeBuyDialog.Open()
 		else:
 			if payWithEp:

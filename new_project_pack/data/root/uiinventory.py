@@ -11,6 +11,8 @@ import grp
 import uiScriptLocale
 import uiRefine
 import uiAttachMetin
+if app.ENABLE_EFSUN_CHANGE_DIALOG:
+	import uiefsunchange
 import uiPickMoney
 import uiCommon
 import uiPrivateShopBuilder
@@ -429,6 +431,12 @@ class InventoryWindow(ui.ScriptWindow):
 		self.attachMetinDialog = uiAttachMetin.AttachMetinDialog()
 		self.attachMetinDialog.Hide()
 
+		if app.ENABLE_EFSUN_CHANGE_DIALOG:
+			self.efsunChangeDialog = uiefsunchange.EfsunChangeDialog()
+			self.efsunChangeDialog.Hide()
+		else:
+			self.efsunChangeDialog = None
+
 		## MoneySlot
 		if app.ENABLE_CHEQUE_SYSTEM:
 			self.wndChequeSlot.SetEvent(ui.__mem_func__(self.OpenPickMoneyDialog), 1)
@@ -509,6 +517,10 @@ class InventoryWindow(ui.ScriptWindow):
 		if self.attachMetinDialog:
 			self.attachMetinDialog.Destroy()
 			self.attachMetinDialog = 0
+
+		if app.ENABLE_EFSUN_CHANGE_DIALOG and self.efsunChangeDialog:
+			self.efsunChangeDialog.Destroy()
+			self.efsunChangeDialog = 0
 
 		self.tooltipItem = None
 		self.wndItem = 0
@@ -781,6 +793,8 @@ class InventoryWindow(ui.ScriptWindow):
 			self.wndCostume.RefreshCostumeSlot()
 
 	def RefreshItemSlot(self):
+		if app.ENABLE_EFSUN_CHANGE_DIALOG and self.efsunChangeDialog and self.efsunChangeDialog.IsShow():
+			self.efsunChangeDialog.RefreshDisplay()
 		self.RefreshBagSlotWindow()
 		self.RefreshEquipSlotWindow()
 
@@ -1018,7 +1032,10 @@ class InventoryWindow(ui.ScriptWindow):
 			self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
 
 		elif item.GetUseType(srcItemVID) in self.USE_TYPE_TUPLE:
-			self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
+			if app.ENABLE_EFSUN_CHANGE_DIALOG and self.__TryOpenEfsunChangeDialog(srcItemVID, srcItemSlotPos, dstItemSlotPos):
+				pass
+			else:
+				self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
 
 		elif constInfo.ENABLE_SELF_STACK_SCROLLS and srcItemVID in (71052,71051,71084,71085):
 			self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
@@ -1286,6 +1303,20 @@ class InventoryWindow(ui.ScriptWindow):
 				return True
 
 		return False
+
+	def __TryOpenEfsunChangeDialog(self, srcItemVID, srcItemSlotPos, dstItemSlotPos):
+		if not self.efsunChangeDialog:
+			return False
+
+		useType = item.GetUseType(srcItemVID)
+		if useType not in ("USE_CHANGE_ATTRIBUTE", "USE_CHANGE_ATTRIBUTE2"):
+			return False
+
+		if not self.__CanChangeItemAttrList(dstItemSlotPos):
+			return False
+
+		self.efsunChangeDialog.Open(srcItemSlotPos, dstItemSlotPos)
+		return True
 
 	def __CanChangeItemAttrList(self, dstSlotPos):
 		dstItemVNum = player.GetItemIndex(dstSlotPos)

@@ -342,8 +342,16 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 			iAtk += (iAtk * pkAttacker->GetPoint(POINT_ATTBONUS_DESERT)) / 100;
 		else if (pkVictim->IsRaceFlag(RACE_FLAG_TREE))
 			iAtk += (iAtk * pkAttacker->GetPoint(POINT_ATTBONUS_TREE)) / 100;
+#ifdef ATTBONUS_ELEXIR
+		{
+			const long lMapIndex = pkAttacker->GetMapIndex();
+			if (lMapIndex == 72 || lMapIndex == 73)
+				iAtk += (iAtk * pkAttacker->GetPoint(POINT_ATTBONUS_CZ)) / 100;
+		}
+#else
 		else if (pkVictim->IsRaceFlag(RACE_FLAG_CZ))
 			iAtk += (iAtk * pkAttacker->GetPoint(POINT_ATTBONUS_CZ)) / 100;
+#endif
 
 		iAtk += (iAtk * pkAttacker->GetPoint(POINT_ATTBONUS_MONSTER)) / 100;
 	}
@@ -416,9 +424,20 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_WIND))		/ 10000;
 		else if (pkAttacker->IsRaceFlag(RACE_FLAG_ATT_EARTH))
 			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_EARTH))	/ 10000;
+#ifndef ATTBONUS_ELEXIR
 		else if (pkAttacker->IsRaceFlag(RACE_FLAG_ATT_DARK))
 			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_DARK))		/ 10000;
+#endif
 	}
+
+#ifdef ATTBONUS_ELEXIR
+	if (pkAttacker->IsNPC() && pkVictim->IsPC())
+	{
+		const long lMapIndex = pkVictim->GetMapIndex();
+		if (lMapIndex == 72 || lMapIndex == 73)
+			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_DARK)) / 10000;
+	}
+#endif
 
 	if (pkAttacker->IsPC() && pkVictim->IsNPC())
 	{

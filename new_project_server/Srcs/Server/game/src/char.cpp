@@ -2938,6 +2938,9 @@ int CHARACTER::GetLimitPoint(BYTE type) const
 		case POINT_ATT_SPEED:
 			min_limit = 0;
 
+			if (IsGM())
+				return 200;
+
 			if (IsPC())
 				limit = 170;
 			else
@@ -2946,6 +2949,9 @@ int CHARACTER::GetLimitPoint(BYTE type) const
 
 		case POINT_MOV_SPEED:
 			min_limit = 0;
+
+			if (IsGM())
+				return 250;
 
 			if (IsPC())
 				limit = 200;
@@ -3188,16 +3194,6 @@ void CHARACTER::PointChange(BYTE type, int amount, bool bAmount, bool bBroadcast
 							val = 0;
 						}
 						break;
-				}
-
-				if (GetLevel() <= 10)
-					AutoGiveItem(27001, 2);
-				else if (GetLevel() <= 30)
-					AutoGiveItem(27002, 2);
-				else
-				{
-					AutoGiveItem(27002, 2);
-//					AutoGiveItem(27003, 2);
 				}
 
 				PointChange(POINT_HP, GetMaxHP() - GetHP());

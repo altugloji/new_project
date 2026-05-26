@@ -2025,6 +2025,7 @@ ACMD(do_invisibility)
 	if (ch->IsAffectFlag(AFF_INVISIBILITY))
 	{
 		ch->RemoveAffect(AFFECT_INVISIBILITY);
+		ch->SpecificEffectPacket("d:\\ymir work\\effect\\monster\\yellow_tigerman_24_1.mse");
 	}
 	else
 	{

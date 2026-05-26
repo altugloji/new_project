@@ -5835,14 +5835,8 @@ bool CHARACTER::SellItem(TItemPos Cell)
 	}
 #endif
 
-	long long dwPrice;
-	BYTE bCount;
-	bCount = item->GetCount();
-	dwPrice = item->GetShopBuyPrice();
-
-#ifndef ENABLE_NO_SELL_PRICE_DIVIDED_BY_5
-	dwPrice /= 5;
-#endif
+	BYTE bCount = item->GetCount();
+	DWORD dwPrice = item->GetShopBuyPrice();
 
 	if (IS_SET(item->GetFlag(), ITEM_FLAG_COUNT_PER_1GOLD))
 	{
@@ -5853,6 +5847,10 @@ bool CHARACTER::SellItem(TItemPos Cell)
 	}
 	else
 		dwPrice *= bCount;
+
+#ifndef ENABLE_NO_SELL_PRICE_DIVIDED_BY_5
+	dwPrice /= 5;
+#endif
 
 	const long long nTotalMoney = static_cast<long long>(GetGold()) + static_cast<long long>(dwPrice);
 
@@ -5871,6 +5869,8 @@ bool CHARACTER::SellItem(TItemPos Cell)
 #endif
 bool CHARACTER::DropGold(int gold)
 {
+	return false;
+
 	if (gold <= 0 || gold > GetGold())
 		return false;
 

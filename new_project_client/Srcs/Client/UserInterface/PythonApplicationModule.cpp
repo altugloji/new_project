@@ -2102,5 +2102,11 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_ITEM_ENCHANT_USE_COUNT",	0);
 #endif
 
+#ifdef ENABLE_EFSUN_CHANGE_DIALOG
+	PyModule_AddIntConstant(poModule, "ENABLE_EFSUN_CHANGE_DIALOG", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_EFSUN_CHANGE_DIALOG", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

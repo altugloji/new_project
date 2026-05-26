@@ -10408,7 +10408,7 @@
 53583	ETC	icon/item/53583.tga
 53584	ETC	icon/item/53584.tga
 53585	ETC	icon/item/53585.tga
-53586	ETC	icon/item/53586.tga
+53586	ETC	icon/item/25133.tga
 53587	ETC	icon/item/53501.tga
 53588	ETC	icon/item/53501.tga
 53589	ETC	icon/item/53501.tga

@@ -2935,7 +2935,7 @@
 30157	Ok Ucu	Bu zehirli ok uçlarý krallýðý savunmada kullanýlýr.
 30177	Misk Yaðý	Misk yaðý, silah tüccarlarý tarafýndan bir görevde kullanýldý. Bunun dýþýnda bir iþlevi yoktur.
 30179	Kývrýk Anahtar	Bu sihirli anahtar, Ejderha Tapýnaðý'na giden kapýyý etkinleþtiriyor.
-30180	Ejderha Tanrý Týlsýmý	Bu altýn mücevher parçasý Sürgün Maðarasýna giden yolu kýsaltabilir.
+30180	Ejderha Tanrý Týlsýmý	Sürgün Maðarasýnda ýþýnlanmaný saðlar.
 30181	Sayfa	Parþömenin üstündeki solgun yazýyý çözmek çok zor - bu sayfa çok eski olmalý.
 30182	Efsanevi Günlük	Antik kitabýn kopyasý çok deðerli görünüyor.
 30183	Karamsar Ahþap Maske	Bu ahþap maske sana bakýyor gibi. Muhtemelen törensel bi eþya.
@@ -2945,8 +2945,8 @@
 30187	Kan Damlasý	Dünyanýn yaratýcýsý, öldürülen Tanrýça Bahar-Taraji'nin bir damla kaný.
 30188	Obsidyen	Sývýyken çabucak donmuþ volkanik taþ.
 30189	Tanrýça Gözyaþlarý	Bu beceriklice yapýlmýþ vazoda Tanrý Baljit-Elvedin'in gözyaþlarý var.
-30190	Kan Taþý	Bu taþ Bahar-Taraji'nin kanýndan yapýlmýþtýr ve Sürgün Maðarasýna girmeni saðlar.
-30191	Kan Taþý	Kan Taþý Sürgün Maðarasýna girebilmeni saðlar.
+30190	Kan Taþý	Sürgün Maðarasýna girmeni saðlar.
+30191	Kan Taþý	Sürgün Maðarasýna girmeni saðlar.
 30192	Süt Þerbeti	Üstün Kaliteli Bitki Salgýsý.
 30193	Parmak Kemikleri	Þehit düþen bir kahramanýn ardýndan kalanlar.
 30194	Ork Topuzu	Sert dikenli çirkin bir silah.
@@ -6177,7 +6177,7 @@
 53583	Þimþek elementeri kutusu	Petin küçük þimþek elementeri, sen onu serbest býrakana kadar bu kutuyu elektrikle þarj eder.
 53584	Rüzgar elementeri kutusu	Petin küçük rüzgar elementeri, sen onu serbest býrakana kadar bu kutunun içinde fýrtýnalar estirir.
 53585	Toprak elementeri kutusu	Petin küçük toprak elementeri, sen onu serbest býrakana kadar bu kutuyu sürekli aðýrlaþtýrýr.
-53586	Karanlýk element. kutusu	Petin küçük karanlýk elementeri, sen onu serbest býrakana kadar bu kutudan karanlýðý sýzdýrýr.
+53586	Cicek Kutusu	Ýçerisinde çeþitli çiçekleri barýndýrýr.
 53587	Kýrmýzý balon kutusu	Petin oyunbaz aþk elçisi, sen onu serbest býrakana kadar balonla birlikte bu kutuda olacak.
 53588	Mavi balon kutusu	Petin sakar aþk elçisi, sen onu serbest býrakana kadar balonla birlikte bu kutuda olacak.
 53589	Küçük balon kutusu	Petin küçük aþk elçisi, sen onu serbest býrakana kadar balonla birlikte bu kutuda olacak.
@@ -6337,9 +6337,9 @@
 56013	Kral anahtarý	Ejderha kralýnýn sarayýna giriþ anahtarý. Bir lonca lideri ya da savaþçýsý bir ejderha portalý açmak için bunu madalya korucusuna teslim edebilir.
 60001	Safra	Karaciðerden elde edilen bir vücut sývýsý.
 60002	Depo Bekçisinin Notu	Depo bekçisinin enerjik el yazýsýyla yazýlmýþ parþömen.
-60003	Kahramanlýk Sembolu	Ciddiyetsiz þekilde taþýnamayacak bir eþya.
+60003	VIP Paketi	Bu item karakterine VIP özellikler verir. | |cffffff00|h%50 Tecrübe bonus|r | |cffffff00|h%10 Yang elde etme þansý|r | |cffffff00|h%10 Eþya elde etme þansý|r | |cffffff00|h%30 Haraket hýzý|r | |cffffff00|hYanglarý otomatik toplar|r | |cffffff00|hDepon ekstra 2 sayfaya sahip olur|r
 60004	Arama Camý	Yakýnda belirli bir nesne aramaný saðlar.
-60005	Ticaret Camý	Yakýnýnda belli bir nesneyi arayýp hemen almaný saðlar.
+60005	Ticaret Camý	Yakýnýnda belli bir nesneyi arayýp hemen almaný saðlar. 
 63017	Kýzýlderili Bebek	
 63018	Mavi Ýksir	
 63019	Mavi Þiþecik	
@@ -6394,7 +6394,7 @@
 70204	Kýrmýzý Saç Boyasý	Saçý kýrmýzýya boyar.|Her 3 seviyede bir kez kullanabilirsiniz.
 70205	Kahverengi Saç Boyasý	Saçý kahverengiye boyar.|Her 3 seviyede bir kez kullanabilirsiniz.
 70206	Siyah Saç Boyasý	Saçý siyaha boyar.|Her 3 seviyede bir kez kullanabilirsiniz.
-70301	Söz Yüzüðü	Sevenleri belli eden yüzük.
+70301	Söz Yüzüðü	Evlilik için gerekli yüzük.
 70302	Nikah Yüzüðü	Evli çiftleri belirleyen yüzük.
 70303	Hidra'nýn yüzüðü	Hidra'nýn ölürken düþürdüðü bir yüzük. Seni yeni kýtaya götürecek.
 70311	Kan Kurbaný	Etkinlik esnasýnda mevcut. Ruhlarýný toplamak için canavarlarý öldür. | Bunlarla Ruh Ruleti oyna. | Ödülleri almak için Kan Sunaðýna dokun.
@@ -6472,9 +6472,9 @@
 70619	Goblin anahtar kutusu	Hazine avý için 8 Goblin anahtarý içerir.
 71000	Eðitim Dönüþüm Parþömeni	Bu nesne güçlendirme ve misilleme becerilerini tamamen silmeni saðlar. Ders kitaplarýyla (misilleme ve güçlendirme) bunlarý yeniden öðrenebilirsin.
 71001	Kötü Ruh Kovma Kaðýdý	Öðrenme baþarýsýz olursa, kötü ruh lanetinden korunmanýzý saðlar.
-71002	Statü Sýfýrlama Kaðýdý	Statü puanlarýný sýfýrlayarak karakterinizi baþka yönde geliþtirmenizi saðlar.
-71003	Beceri Sýfýrlama Kaðýdý	Beceri puanlarýný sýfýrlar.
-71004	Ejderha Madalyasý	Bir sonraki canlandýrmada tecrübe puanlarýný kaybetmeni önler.
+71002	Statü Sýfýrlama Kaðýdý	Statü puanlarýný sýfýrlar.
+71003	Beceri Sýfýrlama Kaðýdý	Bir becerinin puanlarýný sýfýrlar.
+71004	Ejderha Madalyasý	Eðer þanslýysan bir sonraki ölümünde exp kaybetmeni önler.
 71005	Lisan Yüzüðü	7 gün boyunca tüm imparatorluklarýn dillerini konuþabilirsin.
 71006	Lisan Yüzüðü	15 gün boyunca tüm imparatorluklarýn dillerini konuþabilirsin.
 71007	Lisan Yüzüðü	30 gün boyunca tüm imparatorluklarýn dillerini konuþabilirsin.
@@ -6485,7 +6485,7 @@
 71012	Liderin Kitabý	Grup lideri tarafýndan kullanýldýgýnda, grup lideri ve üyelerine %30 EXP yükler.
 71013	Havai Fiþekler	Havai fiþekler kutlamalar sýrasýnda gökyüzünü süsler.
 71014	Saldýrý iksiri +10	Saldýrý hýzýný %10 artýrýr.
-71015	Tecrübe yüzüðü	Savaþ esnasýnda %50 daha fazla tecrübe puaný toplarsýn.
+71015	Tecrübe yüzüðü	%50 daha fazla tecrübe puaný toplarsýn. | |cffffff00|hSüre:30 dakika|r
 71016	Hýrsýzýn eldivenleri	Eþya elde etme þansýný iki katýna çýkarýr.
 71017	Þans madalyasý	Yang elde etme þansýný iki katýna çýkarýr.
 71018	Yaþam Kutsamasý	HP'ni anýnda %100 yenileyen bir kutsama.
@@ -6497,10 +6497,10 @@
 71024	Güç Unutma Kitabý	Güç Puanýný temel deðere düþürür ve puanlarý yeniden daðýtmaný saðlar.
 71025	Demirci Taþý	Bu taþ ve kutsama kaðýdý ile demircide Demircinin elkitabýný hazýrlayabilirsiniz.
 71026	Büyülü Demir Maden	Ejderha parþömeni yapýmýnda ihtiyaç duyulur - Demirci'de kutsama kaðýdý ile birlikte kullanýlýr.
-71027	Ejderha tanrý hayatý	Maksimum HP'ni %20 artýrýr.
-71028	Ejderha tanrý saldýrýsý	Saldýrý deðerini %20 artýrýr.
-71029	Ejderha tanrý zekasý	Maksimum SP'ni %20 artýrýr.
-71030	Ejderha tanrý savunmasý	Savaþ esnasýnda aldýðýn hasarý %20 düþürür.
+71027	Ejderha tanrý hayatý	Maksimum HP'ni %20 artýrýr. | |cffffff00|hSüre:30 dakika|r
+71028	Ejderha tanrý saldýrýsý	Saldýrý deðerini %20 artýrýr. | |cffffff00|hSüre:30 dakika|r
+71029	Ejderha tanrý zekasý	Maksimum SP'ni %20 artýrýr. | |cffffff00|hSüre:30 dakika|r
+71030	Ejderha tanrý savunmasý	Aldýðýn hasarý %20 düþürür. | |cffffff00|hSüre:30 dakika|r
 71031	Ejderha Tanrý Desteði	Canlýlýk, güç, zeka ve çeviklik geçici olarak 5 katýna çýkar.
 71032	Ejderha Parþömeni	Geliþtirme iþlemi baþarýsýz olduðunda bir eþyanýn yok olma riskini ortadan kaldýrýr. Yalnýzca kalitesi bir basamak düþer. Ayrýca baþarýlý bir geliþtirme ihtimali %10 artar.
 71033	Duygu Maskesi	Bu maske sayesinde duygularýný ifade edebilirsin.
@@ -6514,15 +6514,15 @@
 71041	Kaðýt-Dokuz Kuyruk	Kullanýldýðýnda dokuz kuyruðu karakterin yanýna getirir.
 71042	Kaðýt-Þeytan Kral	Bir kibirli Þeytan Kralý'ný karakterinin yanýna çaðýrýr. Dikkat, bu bir Patron'dur!
 71043	Sarý Kaplan H. Kaðýdý	Kullanýldýðýnda dev kaplaný karakterin yanýna getirir.
-71044	Kritik savaþ	Savaþta bir kritik isabet yapma þansýný %20 artýrýr.
-71045	Delici savaþ	Savaþta bir delici isabet yapma þansýný %20 artýrýr.
+71044	Kritik Ýsabet	Kritik vuruþ yapma þansýný %20 artýrýr. | |cffffff00|hSüre:30 dakika|r
+71045	Delici Ýsabet	Delici vuruþ yapma þansýný %20 artýrýr. | |cffffff00|hSüre:30 dakika|r
 71047	Zihin Taþý Temizleyicisi	Nesnede ekli zihin taþýný siler.
-71048	Deðiþim Týlsýmý	Bu týlsým karakterinizin cinsiyetini deðiþtirebilir.
+71048	Deðiþim Týlsýmý	Bu týlsým karakterinizin cinsiyetini deðiþtirir.
 71049	Ýpek Bohça	Bu bohça ile 10 gün boyunca ücretsiz özel dükkan açabilirsiniz.
 71050	Hýz Ýksiri	30 dakika boyunca hareket hýzýný 60 artýrýr.
 71051	Büyü nesnesi	Eþyalarýnýzdan özel bir bonusu siler ve yeni bir tanesini ekler.
 71052	Kutsal Nesne	Eðer mevcut deðilse, eþyalarýnýzdan birine özel yeni bir bonus ekler.
-71054	Krallýklarýn Ýzi	Bir karakter baþka bir krallýða kaçabilir, yani krallýk deðiþtirebilir.
+71054	Krallýklarýn Ýzi	Krallýk deðiþtirir.
 71055	Ýsim Ýzi	Karakter ismini deðiþtirir.
 71056	Cennetin Ýzi	Zihin taþýnýn baþarýyla geliþtirilme þansýný arttýrýr.
 71057	Kaðýt-F.Aðaç Damarý	Karakterin yanýna fosil aðaç gövdesi damarý çaðýrýr.
@@ -6561,7 +6561,7 @@
 71092	Dönüþüm Kitabý	Bu kitabý iyi öðrenenin dönüþüm yeteneði artar. Okunduktan sonra yok olur.
 71093	Dönüþüm Küresi	Bu küreyle bir yaratýða dönüþebilirsin.
 71094	Münzevi Tavsiyesi	Bir sonraki kitabý (ya da ruh taþýný) okurken yeteneðini geliþtirme þansýný iki buçuk katýna çýkarýr.
-71095	Geçit Bileti	Bu geçit biletini yetkili bekçiye gösterdiðinde, zindanýn seçilen bir katýna daha girebilirsin.
+71095	Geçit Bileti	Zindanýn seçilen bir katýna girebilirsin.
 71096	Geçiþ Tahtasý	Bu madalyon geçiþlerden geçmenizi saðlar.
 71099	Yer Deðiþtirme Yüzüðü	Lonca liderinin yer deðiþimi ayarlamasýný saðlar.
 71100	Bilgi Deðiþim Kaðýdý	Tüm bilgini unut ve yenisini edin. Bunu yapabilmek için en az 31. seviyede olmalýsýn.
@@ -6586,7 +6586,7 @@
 71121	Aslan (mavi)	Mührün büyüsü, seni hýzlýca istediðin yere götürecek, güçlü bir hayvanýn ruhunu çaðýrýr. Binicisinin saldýrý deðerini 300 yükseltir.
 71122	Ejderha tapýnaðý giriþi	Bununla ejderha odasýna girilebilir.
 71123	Ejderha Pulu	Ejderha pullarý bilinen en þiddetli malzemeler arasýnda yer alýyor.
-71124	Beyaz Aslan	Beyaz kürklü hayvanlara oldukça ender rastlanýyor. Olaðanüstü güçleri olduðu düþünülerek onlara birçok medeniyet tarafýndan tapýlýyor. Tecrübe toplamayý %30 artýrýr.
+71124	Beyaz Aslan	Beyaz kürklü hayvanlara oldukça ender rastlanýyor.
 71125	Savaþ yaban domuzu	Kötü hayvan ruhlarýný dizginleþtirmek ancak sihir sanatý ile mümkün. Sonucuysa çok etkileyici. Binicisine, canavarlara karþý %20 güç kazandýrýr.
 71126	Kýzgýn kurt	Kötü hayvan ruhlarýný dizginleþtirmek ancak sihir sanatý ile mümkün. Sonucuysa çok etkileyici. Kritik vuruþ þansýný +10% artýrýr.
 71127	Vahþi kaplan	Kötü hayvan ruhlarýný dizginleþtirmek ancak sihir sanatý ile mümkün. Sonucuysa çok etkileyici. Kritik vuruþ þansýný +10% artýrýr.
@@ -6817,7 +6817,7 @@
 72320	Envanter Geniþletme	Envanterini geniþletmek için bu nesneyi kullan. Ticareti yapýlamaz.
 72321	Sýrlar Yüzüðü	Canavar avýnda tecrübe puaný toplamayý engeller
 72322	Yeni Baþlangýç Kartý	Bu kart görev seviyesini sýfýrlamaný saðlar.
-72323	Karakter Kartý	Karakterinizi, üzerindeki eþyalar ve mevcut ilerlemesiyle birlikte karta dönüþtürüp baþka bir oyuncuya aktarýlabilir hale getirir. | Bu kart ticaret edilebilir.
+72323	Karakter Kartý	|cffffff00|h[Karakter Paketleme]|r | Karakterinizi, üzerindeki eþyalar ve mevcut ilerlemesiyle birlikte karta dönüþtürüp baþka bir oyuncuya aktarýlabilir hale getirir. | |cffffff00|hBu kart ticaret edilebilir|r
 72325	Yansýtmayý Geri Alma	Nesnelerin yansýtmasýný sýfýrlar.
 72326	Yansýtma Bileti	Bu biletle, Yang kullanmadan ekipmanýnýn görünümünü deðiþtir.
 72327	Küre Parþömeni (s)	Animasferine 30 can yükler, bunlarla Zodyak tapýnaðýna giriþ hakký elde edersin. Bu eþyanýn ticareti yapýlabilir.
@@ -7219,7 +7219,7 @@
 76046	Efsun Nesnesi+	Nesnelerinden birinin bonuslarýný siler ve yenilerini ekler. Yeni bonuslar sana öncesinde gösterilir. Ardýndan, gösterilen bonuslarý isteyip istemediðine karar verebilirsin.
 76047	Güç lolipopu (3 g)	Gizli malzemelerden oluþan lolipop sana 3 gün boyunca | +%50 tecrübe puaný | +20 saldýrý hýzý | +20 sihir hýzý | +%10 canavarlara karþý güçlü | +%10 maksimum HP | +%10 maksimum SP saðlar
 76051	Sýrlar yüzüðü (7g)	7 gün boyunca canavar avýnda tecrübe puaný toplamayý engeller.
-76052	Rüzgar ayakkabýlarý (7g)	Bu ayakkabýlarý giydiðinde hareket hýzýný 7 gün boyunca 30 oranýnda artýrýr.
+76052	Rüzgar ayakkabýlarý (7g)	Hareket hýzýný +30 artýrýr.
 76053	Üçüncü el (3g)	3 gün boyunca otomatik olarak Yang toplayan bir el
 76054	Duygu maskesi (7g)	Bu maske ile 7 gün boyunca duygularýný gösterebilirsin.
 76055	Ekstra ekipman say. (t)	Ekipman sayfasýný çevirerek 2 farklý ekipman seti taþýyabilirsin. | Ýlgili yeteneði ikincil becerilerde bulabilirsin. | Eþyanýn ticareti yapýlabilir.
@@ -7312,10 +7312,10 @@
 80001	Para Kesesi	Deriden yapýlmýþ koyu renkli eski kese.
 80002	Boþ Kaðýt	Ýyi kalitede, kullanýlmamýþ kaðýt.
 80008	Altýn Parçasý	Ýþlenmemiþ altýn. Maðazada yüksek fiyata satýlabilir.
-80014	EP kuponu (100)	100 Ejderha Parasý deðerinde kupon. Bu eþyanýn ticareti var.
-80015	EP kuponu (500)	500 Ejderha Parasý deðerinde kupon. Bu eþyanýn ticareti var.
-80016	EP kuponu (1000)	1000 Ejderha Parasý deðerinde kupon. Bu eþyanýn ticareti var.
-80017	EP kuponu (50)	50 Ejderha Parasý deðerinde kupon. Bu eþyanýn ticareti var.
+80014	EP kuponu (100)	100 Ejderha Parasý deðerinde kupon.
+80015	EP kuponu (500)	500 Ejderha Parasý deðerinde kupon.
+80016	EP kuponu (1000)	1000 Ejderha Parasý deðerinde kupon.
+80017	EP kuponu (50)	50 Ejderha Parasý deðerinde kupon.
 80019	Ýnce Kumaþ	Bu malzemeyle omuz kuþaðýn üretilir.
 80021	Ymir CashPack	Only for Ymir (may only be distributed by QA).
 80022	EP hediye çeki (50)	50 Ejderha Parasý deðerinde kupon. Bu eþyanýn ticareti yapýlamaz.
