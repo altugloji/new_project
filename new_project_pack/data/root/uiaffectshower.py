@@ -7,6 +7,7 @@ import skill
 import player
 import uiToolTip
 import math
+import constInfo
 
 # WEDDING
 class LovePointImage(ui.ExpandedImageBox):
@@ -349,6 +350,8 @@ class AffectImage(ui.ExpandedImageBox):
 
 	def OnMouseOverIn(self):
 		if self.toolTipText:
+			self.SetTop()
+			self.toolTipText.SetTop()
 			self.toolTipText.Show()
 
 	def OnMouseOverOut(self):
@@ -362,14 +365,19 @@ class AffectShower(ui.Window):
 	AFFECT_MAX_NUM = 32
 
 	INFINITE_AFFECT_DURATION = 0x1FFFFFFF
+	POINT_MALL_ATTBONUS_PACKET = 132
+
+	if constInfo.ENABLE_POTIONS_AFFECTSHOWER:
+		WATER_DESC_IDX_START = 1100
+		DEW_DESC_IDX_START = 1200
 
 	AFFECT_DATA_DICT =	{
 			chr.AFFECT_POISON : (localeInfo.SKILL_TOXICDIE, "d:/ymir work/ui/skill/common/affect/poison.sub"),
 			chr.AFFECT_SLOW : (localeInfo.SKILL_SLOW, "d:/ymir work/ui/skill/common/affect/slow.sub"),
 			chr.AFFECT_STUN : (localeInfo.SKILL_STUN, "d:/ymir work/ui/skill/common/affect/stun.sub"),
 
-			chr.AFFECT_ATT_SPEED_POTION : (localeInfo.SKILL_INC_ATKSPD, "d:/ymir work/ui/skill/common/affect/Increase_Attack_Speed.sub"),
-			chr.AFFECT_MOV_SPEED_POTION : (localeInfo.SKILL_INC_MOVSPD, "d:/ymir work/ui/skill/common/affect/Increase_Move_Speed.sub"),
+			chr.AFFECT_ATT_SPEED_POTION : (localeInfo.SKILL_INC_ATKSPD, "d:/ymir work/ui/affect_icon/att_speed.png"),
+			chr.AFFECT_MOV_SPEED_POTION : (localeInfo.SKILL_INC_MOVSPD, "d:/ymir work/ui/affect_icon/mov_speed.png"),
 			chr.AFFECT_FISH_MIND : (localeInfo.SKILL_FISHMIND, "d:/ymir work/ui/skill/common/affect/fishmind.sub"),
 
 			chr.AFFECT_JEONGWI : (localeInfo.SKILL_JEONGWI, "d:/ymir work/ui/skill/warrior/jeongwi_03.sub",),
@@ -411,15 +419,15 @@ class AffectShower(ui.Window):
 			#chr.NEW_AFFECT_AUTO_HP_RECOVERY : (localeInfo.TOOLTIP_AUTO_POTION_REST, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
 			#chr.NEW_AFFECT_AUTO_SP_RECOVERY : (localeInfo.TOOLTIP_AUTO_POTION_REST, "d:/ymir work/ui/skill/common/affect/gold_bonus.sub"),
 
-			MALL_DESC_IDX_START+player.POINT_MALL_ATTBONUS : (localeInfo.TOOLTIP_MALL_ATTBONUS_STATIC, "d:/ymir work/ui/skill/common/affect/att_bonus.sub",),
-			MALL_DESC_IDX_START+player.POINT_MALL_DEFBONUS : (localeInfo.TOOLTIP_MALL_DEFBONUS_STATIC, "d:/ymir work/ui/skill/common/affect/def_bonus.sub",),
-			MALL_DESC_IDX_START+player.POINT_MALL_EXPBONUS : (localeInfo.TOOLTIP_MALL_EXPBONUS, "d:/ymir work/ui/skill/common/affect/exp_bonus.sub",),
+			MALL_DESC_IDX_START+player.POINT_MALL_ATTBONUS : (localeInfo.TOOLTIP_MALL_ATTBONUS_STATIC, "d:/ymir work/ui/affect_icon/71028.png",),
+			MALL_DESC_IDX_START+player.POINT_MALL_DEFBONUS : (localeInfo.TOOLTIP_MALL_DEFBONUS_STATIC, "d:/ymir work/ui/affect_icon/71030.png",),
+			MALL_DESC_IDX_START+player.POINT_MALL_EXPBONUS : (localeInfo.TOOLTIP_MALL_EXPBONUS, "d:/ymir work/ui/affect_icon/70005.png",),
 			MALL_DESC_IDX_START+player.POINT_MALL_ITEMBONUS : (localeInfo.TOOLTIP_MALL_ITEMBONUS, "d:/ymir work/ui/skill/common/affect/item_bonus.sub",),
 			MALL_DESC_IDX_START+player.POINT_MALL_GOLDBONUS : (localeInfo.TOOLTIP_MALL_GOLDBONUS, "d:/ymir work/ui/skill/common/affect/gold_bonus.sub",),
-			MALL_DESC_IDX_START+player.POINT_CRITICAL_PCT : (localeInfo.TOOLTIP_APPLY_CRITICAL_PCT,"d:/ymir work/ui/skill/common/affect/critical.sub"),
-			MALL_DESC_IDX_START+player.POINT_PENETRATE_PCT : (localeInfo.TOOLTIP_APPLY_PENETRATE_PCT, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
-			MALL_DESC_IDX_START+player.POINT_MAX_HP_PCT : (localeInfo.TOOLTIP_MAX_HP_PCT, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
-			MALL_DESC_IDX_START+player.POINT_MAX_SP_PCT : (localeInfo.TOOLTIP_MAX_SP_PCT, "d:/ymir work/ui/skill/common/affect/gold_premium.sub"),
+			MALL_DESC_IDX_START+player.POINT_CRITICAL_PCT : (localeInfo.TOOLTIP_APPLY_CRITICAL_PCT,"d:/ymir work/ui/affect_icon/71044.png"),
+			MALL_DESC_IDX_START+player.POINT_PENETRATE_PCT : (localeInfo.TOOLTIP_APPLY_PENETRATE_PCT, "d:/ymir work/ui/affect_icon/71045.png"),
+			MALL_DESC_IDX_START+player.POINT_MAX_HP_PCT : (localeInfo.TOOLTIP_MAX_HP_PCT, "d:/ymir work/ui/affect_icon/71027.png"),
+			MALL_DESC_IDX_START+player.POINT_MAX_SP_PCT : (localeInfo.TOOLTIP_MAX_SP_PCT, "d:/ymir work/ui/affect_icon/71029.png"),
 
 			MALL_DESC_IDX_START+player.POINT_PC_BANG_EXP_BONUS : (localeInfo.TOOLTIP_MALL_EXPBONUS_P_STATIC, "d:/ymir work/ui/skill/common/affect/EXP_Bonus_p_on.sub",),
 			MALL_DESC_IDX_START+player.POINT_PC_BANG_DROP_BONUS: (localeInfo.TOOLTIP_MALL_ITEMBONUS_P_STATIC, "d:/ymir work/ui/skill/common/affect/Item_Bonus_p_on.sub",),
@@ -433,6 +441,53 @@ class AffectShower(ui.Window):
 		AFFECT_DATA_DICT[chr.AFFECT_BLUE_POSSESSION] = (localeInfo.SKILL_CHEONGEUN, "d:/ymir work/ui/skill/wolfman/blue_possession_03.sub")
 	if app.__BL_OFFICIAL_LOOT_FILTER__ and app.ENABLE_PREMIUM_LOOT_FILTER:
 		AFFECT_DATA_DICT[chr.NEW_AFFECT_LOOTING_SYSTEM] = (localeInfo.TOOLTIP_AFFECT_LOOTING_SYSTEM, "d:/ymir work/ui/skill/common/affect/looting_system.sub")
+
+	if constInfo.ENABLE_POTIONS_AFFECTSHOWER:
+		AFFECT_DATA_DICT[WATER_DESC_IDX_START+player.POINT_PENETRATE_PCT] = (localeInfo.TOOLTIP_APPLY_PENETRATE_PCT,	"d:/ymir work/ui/affect_icon/50813.png")
+		AFFECT_DATA_DICT[WATER_DESC_IDX_START+player.POINT_CRITICAL_PCT] = (localeInfo.TOOLTIP_APPLY_CRITICAL_PCT,		"d:/ymir work/ui/affect_icon/50814.png")
+		AFFECT_DATA_DICT[WATER_DESC_IDX_START+player.ATT_BONUS] = (localeInfo.TOOLTIP_ATT_GRADE,						"d:/ymir work/ui/affect_icon/50817.png")
+		AFFECT_DATA_DICT[WATER_DESC_IDX_START+player.DEF_BONUS] = (localeInfo.TOOLTIP_DEF_GRADE,						"d:/ymir work/ui/affect_icon/50818.png")
+		AFFECT_DATA_DICT[WATER_DESC_IDX_START+player.RESIST_MAGIC] = (localeInfo.TOOLTIP_MAGIC_DEF_GRADE,				"d:/ymir work/ui/affect_icon/50819.png")
+		AFFECT_DATA_DICT[WATER_DESC_IDX_START+player.ATT_SPEED] = (localeInfo.TOOLTIP_ATT_SPEED,						"d:/ymir work/ui/affect_icon/50820.png")
+		AFFECT_DATA_DICT[DEW_DESC_IDX_START+player.POINT_CRITICAL_PCT] = (localeInfo.TOOLTIP_APPLY_CRITICAL_PCT,		"d:/ymir work/ui/affect_icon/50821.png")
+		AFFECT_DATA_DICT[DEW_DESC_IDX_START+player.POINT_PENETRATE_PCT] = (localeInfo.TOOLTIP_APPLY_PENETRATE_PCT,		"d:/ymir work/ui/affect_icon/50822.png")
+		AFFECT_DATA_DICT[DEW_DESC_IDX_START+player.ATT_SPEED] = (localeInfo.TOOLTIP_ATT_SPEED,							"d:/ymir work/ui/affect_icon/50823.png")
+		AFFECT_DATA_DICT[DEW_DESC_IDX_START+player.RESIST_MAGIC] = (localeInfo.TOOLTIP_RESIST_MAGIC,					"d:/ymir work/ui/affect_icon/50824.png")
+		AFFECT_DATA_DICT[DEW_DESC_IDX_START+player.ATT_BONUS] = (localeInfo.TOOLTIP_ATT_GRADE,							"d:/ymir work/ui/affect_icon/50825.png")
+		AFFECT_DATA_DICT[DEW_DESC_IDX_START+player.DEF_BONUS] = (localeInfo.TOOLTIP_DEF_GRADE,							"d:/ymir work/ui/affect_icon/50826.png")
+		AFFECT_DATA_DICT[DEW_DESC_IDX_START+player.ENERGY] = (localeInfo.TOOLTIP_ENERGY,								"d:/ymir work/ui/affect_icon/51002.png")
+
+	AFFECT_ROW_TOP_ORDER = [
+		MALL_DESC_IDX_START+player.POINT_MAX_HP_PCT,
+		MALL_DESC_IDX_START+player.POINT_MAX_SP_PCT,
+		MALL_DESC_IDX_START+player.POINT_MALL_ATTBONUS,
+		MALL_DESC_IDX_START+player.POINT_MALL_DEFBONUS,
+		MALL_DESC_IDX_START+player.POINT_CRITICAL_PCT,
+		MALL_DESC_IDX_START+player.POINT_PENETRATE_PCT,
+		chr.AFFECT_ATT_SPEED_POTION,
+		chr.AFFECT_MOV_SPEED_POTION,
+		MALL_DESC_IDX_START+player.POINT_MALL_EXPBONUS,
+	]
+	AFFECT_ROW_WATER_ORDER = []
+
+	if constInfo.ENABLE_POTIONS_AFFECTSHOWER:
+		AFFECT_ROW_TOP_ORDER = [
+			DEW_DESC_IDX_START+player.POINT_CRITICAL_PCT,
+			DEW_DESC_IDX_START+player.POINT_PENETRATE_PCT,
+			DEW_DESC_IDX_START+player.ATT_SPEED,
+			DEW_DESC_IDX_START+player.RESIST_MAGIC,
+			DEW_DESC_IDX_START+player.ATT_BONUS,
+			DEW_DESC_IDX_START+player.DEF_BONUS,
+			DEW_DESC_IDX_START+player.ENERGY,
+		] + AFFECT_ROW_TOP_ORDER
+		AFFECT_ROW_WATER_ORDER = [
+			WATER_DESC_IDX_START+player.POINT_PENETRATE_PCT,
+			WATER_DESC_IDX_START+player.POINT_CRITICAL_PCT,
+			WATER_DESC_IDX_START+player.ATT_BONUS,
+			WATER_DESC_IDX_START+player.DEF_BONUS,
+			WATER_DESC_IDX_START+player.RESIST_MAGIC,
+			WATER_DESC_IDX_START+player.ATT_SPEED,
+		]
 
 	def __init__(self):
 		ui.Window.__init__(self)
@@ -467,12 +522,18 @@ class AffectShower(ui.Window):
 
 		print("BINARY_NEW_AddAffect", type, pointIdx, value, duration)
 
-		if type < 500:
-			return
+		if pointIdx == self.POINT_MALL_ATTBONUS_PACKET:
+			pointIdx = player.POINT_MALL_ATTBONUS
 
 		if type == chr.NEW_AFFECT_MALL:
 			affect = self.MALL_DESC_IDX_START + pointIdx
+		elif constInfo.ENABLE_POTIONS_AFFECTSHOWER and type == chr.NEW_AFFECT_EXP_BONUS_EURO_FREE:
+			affect = self.WATER_DESC_IDX_START + pointIdx
+		elif constInfo.ENABLE_POTIONS_AFFECTSHOWER and type == chr.NEW_AFFECT_BLEND:
+			affect = self.DEW_DESC_IDX_START + pointIdx
 		else:
+			if type < 500:
+				return
 			affect = type
 
 		if self.affectImageDict.has_key(affect):
@@ -497,7 +558,8 @@ class AffectShower(ui.Window):
 			value = 1 + float(value) / 100.0
 
 		if affect != chr.NEW_AFFECT_AUTO_SP_RECOVERY and affect != chr.NEW_AFFECT_AUTO_HP_RECOVERY:
-			description = description(float(value))
+			if callable(description):
+				description = description(float(value))
 
 		try:
 			print("Add affect %s" % affect)
@@ -530,8 +592,15 @@ class AffectShower(ui.Window):
 			pass
 
 	def BINARY_NEW_RemoveAffect(self, type, pointIdx):
+		if pointIdx == self.POINT_MALL_ATTBONUS_PACKET:
+			pointIdx = player.POINT_MALL_ATTBONUS
+
 		if type == chr.NEW_AFFECT_MALL:
 			affect = self.MALL_DESC_IDX_START + pointIdx
+		elif constInfo.ENABLE_POTIONS_AFFECTSHOWER and type == chr.NEW_AFFECT_EXP_BONUS_EURO_FREE:
+			affect = self.WATER_DESC_IDX_START + pointIdx
+		elif constInfo.ENABLE_POTIONS_AFFECTSHOWER and type == chr.NEW_AFFECT_BLEND:
+			affect = self.DEW_DESC_IDX_START + pointIdx
 		else:
 			affect = type
 
@@ -646,30 +715,55 @@ class AffectShower(ui.Window):
 
 		self.__ArrangeImageList()
 
+	def __AppendOrderedAffects(self, row, affectList, usedAffectDict):
+		for affect in affectList:
+			if usedAffectDict.has_key(affect):
+				continue
+			if self.affectImageDict.has_key(affect):
+				row.append(self.affectImageDict[affect])
+				usedAffectDict[affect] = True
+
 	def __ArrangeImageList(self):
 
-		width = len(self.affectImageDict) * self.IMAGE_STEP
-		if self.lovePointImage:
-			width+=self.IMAGE_STEP
-		if self.horseImage:
-			width+=self.IMAGE_STEP
+		topRow = []
+		waterRow = []
+		etcRow = []
+		usedAffectDict = {}
 
-		self.SetSize(width, 26)
-
-		xPos = 0
+		self.__AppendOrderedAffects(topRow, self.AFFECT_ROW_TOP_ORDER, usedAffectDict)
+		self.__AppendOrderedAffects(waterRow, self.AFFECT_ROW_WATER_ORDER, usedAffectDict)
 
 		if self.lovePointImage:
 			if self.lovePointImage.IsShow():
-				self.lovePointImage.SetPosition(xPos, 0)
-				xPos += self.IMAGE_STEP
+				etcRow.append(self.lovePointImage)
 
 		if self.horseImage:
-			self.horseImage.SetPosition(xPos, 0)
-			xPos += self.IMAGE_STEP
+			etcRow.append(self.horseImage)
 
-		for image in self.affectImageDict.values():
-			image.SetPosition(xPos, 0)
-			xPos += self.IMAGE_STEP
+		for affect in sorted(self.affectImageDict.keys()):
+			if usedAffectDict.has_key(affect):
+				continue
+			etcRow.append(self.affectImageDict[affect])
+
+		rowList = []
+		for row in [topRow, waterRow, etcRow]:
+			if row:
+				rowList.append(row)
+
+		width = 0
+		height = 26
+		for rowIndex in xrange(len(rowList)):
+			row = rowList[rowIndex]
+			width = max(width, len(row) * self.IMAGE_STEP)
+			height = max(height, rowIndex * self.IMAGE_STEP + 26)
+
+			xPos = 0
+			yPos = rowIndex * self.IMAGE_STEP
+			for image in row:
+				image.SetPosition(xPos, yPos)
+				xPos += self.IMAGE_STEP
+
+		self.SetSize(width, height)
 
 	def OnUpdate(self):
 		try:

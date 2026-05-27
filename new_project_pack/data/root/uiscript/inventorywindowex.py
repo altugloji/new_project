@@ -728,9 +728,9 @@ elif app.ENABLE_EXTEND_INVEN_SYSTEM and not app.ENABLE_CHEQUE_SYSTEM:
 						"horizontal_align":"center",
 						"vertical_align":"bottom",
 
-						"default_image" : "d:/ymir work/ui/public/parameter_slot_05.sub",
-						"over_image" : "d:/ymir work/ui/public/parameter_slot_05.sub",
-						"down_image" : "d:/ymir work/ui/public/parameter_slot_05.sub",
+						"default_image" : "d:/ymir work/ui/public/money_bg.png",
+						"over_image" : "d:/ymir work/ui/public/money_bg.png",
+						"down_image" : "d:/ymir work/ui/public/money_bg.png",
 
 						"children" :
 						(
@@ -1497,16 +1497,18 @@ if app.ENABLE_CHEQUE_SYSTEM:
 	AppendChildren("board", children, window)
 
 if app.__GEM_SHOP__:
-	window["y"] -= 20
+	GEM_SLOT_STEP = 23
+	window["y"] -= GEM_SLOT_STEP
+	window["height"] += GEM_SLOT_STEP
 
 	board_dict = window["children"][0]
-	board_dict["height"] += 20
+	board_dict["height"] += GEM_SLOT_STEP
 	money_slot_x, money_slot_y = 0, 0
 	for child in board_dict["children"]:
 		if child["name"] == "Money_Slot":
 			money_slot_x = child["x"]
 			money_slot_y = child["y"]
-			child["y"] += 20
+			child["y"] += GEM_SLOT_STEP
 			break
 	board_dict["children"] += ({
 		"name":"Gem_Slot",
@@ -1515,9 +1517,9 @@ if app.__GEM_SHOP__:
 		"y":money_slot_y,
 		"horizontal_align":"center",
 		"vertical_align":"bottom",
-		"default_image" : "d:/ymir work/ui/public/parameter_slot_05.sub",
-		"over_image" : "d:/ymir work/ui/public/parameter_slot_05.sub",
-		"down_image" : "d:/ymir work/ui/public/parameter_slot_05.sub",
+		"default_image" : "d:/ymir work/ui/public/gem_bg.png",
+		"over_image" : "d:/ymir work/ui/public/gem_bg.png",
+		"down_image" : "d:/ymir work/ui/public/gem_bg.png",
 		"children" :
 		(
 			{

@@ -918,7 +918,9 @@ class SelectCharacterWindow(ui.Window):
 			self.CharacterName.SetText(name)
 			self.CharacterLevel.SetText(str(level))
 
-			self.PlayTime.SetText(str(playTime))
+			playHour = playTime / 60
+			playMinute = playTime % 60
+			self.PlayTime.SetText("%d saat %d dakika" % (playHour, playMinute))
 			self.CharacterHTH.SetText(str(valueHTH))
 			self.CharacterINT.SetText(str(valueINT))
 			self.CharacterSTR.SetText(str(valueSTR))

@@ -1555,7 +1555,12 @@ void initchr()
 	PyModule_AddIntConstant(poModule, "NEW_AFFECT_DRAGON_SOUL_DECK2",		CInstanceBase::NEW_AFFECT_DRAGON_SOUL_DECK2);
 
 #if defined(__BL_OFFICIAL_LOOT_FILTER__) && defined(ENABLE_PREMIUM_LOOT_FILTER)
-	PyModule_AddIntConstant(poModule, "NEW_AFFECT_LOOTING_SYSTEM", CInstanceBase::NEW_AFFECT_LOOTING_SYSTEM);
+	PyModule_AddIntConstant(poModule, "NEW_AFFECT_LOOTING_SYSTEM",			CInstanceBase::NEW_AFFECT_LOOTING_SYSTEM);
 #endif
+
+#ifdef NEW_AFFECT_BLEND_ICON
+	PyModule_AddIntConstant(poModule, "NEW_AFFECT_BLEND",					CInstanceBase::NEW_AFFECT_BLEND);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

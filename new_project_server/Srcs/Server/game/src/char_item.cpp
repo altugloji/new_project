@@ -5355,15 +5355,15 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 				}
 				else
 				{
-					if (FindAffect(AFFECT_EXP_BONUS_EURO_FREE, POINT_RESIST_MAGIC))
-					{
-						ChatPacket(CHAT_TYPE_INFO, LC_TEXT("이미 효과가 걸려 있습니다."));
-					}
-					else
-					{
+					// if (FindAffect(AFFECT_EXP_BONUS_EURO_FREE, POINT_RESIST_MAGIC))
+					// {
+						// ChatPacket(CHAT_TYPE_INFO, LC_TEXT("이미 효과가 걸려 있습니다."));
+					// }
+					// else
+					// {
 						AddAffect(affect_type, apply_type, apply_value, 0, apply_duration, 0, false);
 						item->SetCount(item->GetCount() - 1);
-					}
+					// }
 				}
 			}
 			break;

@@ -2543,6 +2543,9 @@ void initPlayer()
     PyModule_AddIntConstant(poModule, "MOVING_SPEED",			POINT_MOV_SPEED);
     PyModule_AddIntConstant(poModule, "DEF_GRADE",				POINT_DEF_GRADE);
     PyModule_AddIntConstant(poModule, "DEF_BONUS",				POINT_DEF_GRADE_BONUS);
+#ifdef NEW_AFFECT_BLEND_ICON
+	PyModule_AddIntConstant(poModule, "RESIST_MAGIC",			POINT_RESIST_MAGIC);
+#endif
     PyModule_AddIntConstant(poModule, "CASTING_SPEED",			POINT_CASTING_SPEED);
     PyModule_AddIntConstant(poModule, "MAG_ATT",				POINT_MAGIC_ATT_GRADE);
     PyModule_AddIntConstant(poModule, "MAG_DEF",				POINT_MAGIC_DEF_GRADE);

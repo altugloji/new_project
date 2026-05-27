@@ -20,7 +20,7 @@ AUTOLOAD_MONSTER_SPEED = 0.020
 
 IMG_DIR = "d:/ymir work/ui/game/wiki/"
 
-PUBLIC_BTN = "d:/ymir work/ui/public/middle_button_%02d.sub"
+PUBLIC_BTN = "d:/ymir work/ui/public/large_button_%02d.sub"
 
 # Wiki ekipman: +0..+9 ve satir icindeki +N / yang / ikonlar icin yatay sutun adimi (px)
 WIKI_REFINE_COL_STEP = 52
@@ -136,8 +136,8 @@ WIKI_MODERN_CAT_Y = 46
 WIKI_MODERN_CAT_W = 128
 # Modern wiki: arama satiri sol X (kategori panelinin saginda)
 WIKI_SEARCH_ROW_SLOT_X = WIKI_MODERN_CAT_X + WIKI_MODERN_CAT_W + 10
-# Mod butonlari (sandik/refine/item) wiki penceresinin sag disinda
-WIKI_MODE_BTN_W = 92
+# Mod butonlari (sandik/refine) wiki penceresinin sag disinda
+WIKI_MODE_BTN_W = 110
 WIKI_MODE_BTN_H = 21
 WIKI_MODE_BTN_OUTSIDE_GAP = 10
 WIKI_MODE_BTN_STACK_GAP = 6
@@ -149,14 +149,10 @@ WIKI_MOB_DROP_GRID_COLS = 15
 WIKI_MOB_DROP_GRID_ROWS = 4
 WIKI_MOB_DROP_GRID_SHIFT_X = -20
 WIKI_ITEM_PREVIEW_LINE = 16
-# 1 = syserr'e [WIKI_DROP] loglari; 0 = kapali
 WIKI_DEBUG_MOB_DROP = 0
-# 1 = syserr'e [WIKI_CAT] silah alt tipi / kategori yukleme loglari
-WIKI_DEBUG_CATEGORY = 1
-# 1 = syserr'e [WIKI_VIEW] mod gecisi / sonuc listesi temizleme loglari
-WIKI_DEBUG_VIEW_MODE = 1
-# 1 = syserr'e [WIKI_LAYOUT] satir yuksekligi / grid yerlesim / liste sirasi loglari
-WIKI_DEBUG_LAYOUT = 1
+WIKI_DEBUG_CATEGORY = 0
+WIKI_DEBUG_VIEW_MODE = 0
+WIKI_DEBUG_LAYOUT = 0
 # Metin/mob wiki satiri: sol onizleme + govde arka plan Y (WikiMobDropPanelRowHeight ile uyumlu)
 WIKI_MOB_DROP_PANEL_PREVIEW_H = 163
 
@@ -899,7 +895,8 @@ class EncyclopediaofGame(ui.ThinBoard):
 	def __WikiSyncCategoryPanelVisibility(self):
 		if not getattr(self, "_wikiModernLayout", 0):
 			return
-		hide = getattr(self, "_wikiItemViewMode", "refine") in ("chest", "itempreview")
+		mode = getattr(self, "_wikiItemViewMode", "refine")
+		hide = mode in ("chest", "itempreview")
 		for k in ("listBoxCube",):
 			if not self.children.has_key(k) or not self.children[k]:
 				continue
@@ -907,6 +904,10 @@ class EncyclopediaofGame(ui.ThinBoard):
 				self.children[k].Hide()
 			else:
 				self.children[k].Show()
+		if mode == "refine":
+			for k in ("searchSlot", "mobSlot"):
+				if self.children.has_key(k) and self.children[k]:
+					self.children[k].Hide()
 		if not hide:
 			self.__WikiLayoutCategoryPanel()
 
@@ -1041,7 +1042,7 @@ class EncyclopediaofGame(ui.ThinBoard):
 		if not getattr(self, "_wikiModernLayout", 0):
 			return
 		try:
-			for k in ("searchSlot", "mobSlot", "listBoxCube", "wikiChestPreviewBtn", "wikiRefineViewBtn", "wikiItemPreviewBtn"):
+			for k in ("searchSlot", "mobSlot", "listBoxCube", "wikiChestPreviewBtn", "wikiRefineViewBtn"):
 				if self.children.has_key(k) and self.children[k]:
 					self.children[k].SetTop()
 		except:
@@ -1056,13 +1057,17 @@ class EncyclopediaofGame(ui.ThinBoard):
 		if len(argList) > 0:
 			categoryType = argList[0].lower() if not localeInfo.IsARABIC() else argList[0]
 		useMob = categoryType in ("monster", "bosses", "metinstone")
-		if useMob:
+		mode = getattr(self, "_wikiItemViewMode", "refine")
+		if mode == "refine":
+			self.children["searchSlot"].Hide()
+			self.children["mobSlot"].Hide()
+		elif useMob:
 			self.children["searchSlot"].Hide()
 			self.children["mobSlot"].Show()
 		else:
 			self.children["mobSlot"].Hide()
 			self.children["searchSlot"].Show()
-		for bk in ("wikiChestPreviewBtn", "wikiRefineViewBtn", "wikiItemPreviewBtn"):
+		for bk in ("wikiChestPreviewBtn", "wikiRefineViewBtn"):
 			if not self.children.has_key(bk):
 				continue
 			if useMob:
@@ -1092,17 +1097,10 @@ class EncyclopediaofGame(ui.ThinBoard):
 			refineLbl = getattr(localeInfo, "WIKI_REFINE_VIEW_BTN", "Refine")
 		except:
 			refineLbl = "Refine"
-		try:
-			itemLbl = getattr(localeInfo, "WIKI_ITEM_PREVIEW_BTN", "Item")
-		except:
-			itemLbl = "Item"
-
 		self.children["wikiChestPreviewBtn"] = self.__WikiCreateModeButton(
 			chestLbl, self.__WikiOpenChestPreview)
 		self.children["wikiRefineViewBtn"] = self.__WikiCreateModeButton(
 			refineLbl, self.__WikiSetRefineItemView)
-		self.children["wikiItemPreviewBtn"] = self.__WikiCreateModeButton(
-			itemLbl, self.__WikiOpenItemPreview)
 
 		self.__WikiLayoutSearchRow()
 		self.__WikiLayoutChestPreviewButton()
@@ -2163,7 +2161,7 @@ class EncyclopediaofGame(ui.ThinBoard):
 	def __WikiDestroyModeButtons(self):
 		if not getattr(self, "children", None):
 			return
-		for k in ("wikiChestPreviewBtn", "wikiRefineViewBtn", "wikiItemPreviewBtn"):
+		for k in ("wikiChestPreviewBtn", "wikiRefineViewBtn"):
 			if not self.children.has_key(k):
 				continue
 			btn = self.children[k]
@@ -2181,7 +2179,7 @@ class EncyclopediaofGame(ui.ThinBoard):
 	def __WikiSetModeButtonsVisible(self, show):
 		if not getattr(self, "children", None):
 			return
-		for k in ("wikiChestPreviewBtn", "wikiRefineViewBtn", "wikiItemPreviewBtn"):
+		for k in ("wikiChestPreviewBtn", "wikiRefineViewBtn"):
 			if not self.children.has_key(k) or not self.children[k]:
 				continue
 			btn = self.children[k]
@@ -2245,7 +2243,7 @@ class EncyclopediaofGame(ui.ThinBoard):
 		if not self.IsShow():
 			return
 		btns = []
-		for k in ("wikiChestPreviewBtn", "wikiRefineViewBtn", "wikiItemPreviewBtn"):
+		for k in ("wikiChestPreviewBtn", "wikiRefineViewBtn"):
 			if self.children.has_key(k) and self.children[k]:
 				btns.append(self.children[k])
 		if not btns:
@@ -2627,10 +2625,7 @@ class WikiMobDropPanel(WikiUI.DefaultWikiImage):
 			WikiDebugMobDrop("WikiMobDropPanel.LoadItemInfos OK drops=%d pw=%s ph=%s" % (len(entries), pw, totalH))
 			self.Show()
 		except:
-			try:
-				dbg.TraceError("[WIKI_DROP] WikiMobDropPanel.LoadItemInfos EXC: %s" % sys.exc_info()[1])
-			except:
-				pass
+			pass
 
 class WikiInPanelChestDropView(WikiUI.DefaultWikiImage):
 	def __init__(self, chestVnum, panelWidth, directlyLoad=False):

@@ -1,0 +1,26 @@
+71044	Kritik İsabet	Kritik vuruş yapma şansını %20 artırır. | |cffffff00|hSüre:30 dakika|r
+71045	Delici İsabet	Delici vuruş yapma şansını %20 artırır. | |cffffff00|hSüre:30 dakika|r
+71015	Tecrübe yüzüğü	%50 daha fazla tecrübe puanı toplarsın. | |cffffff00|hSüre:30 dakika|r
+71027	Ejderha tanrı hayatı	Maksimum HP'ni %20 artırır. | |cffffff00|hSüre:30 dakika|r
+71028	Ejderha tanrı saldırısı	Saldırı değerini %20 artırır. | |cffffff00|hSüre:30 dakika|r
+71029	Ejderha tanrı zekası	Maksimum SP'ni %20 artırır. | |cffffff00|hSüre:30 dakika|r
+71030	Ejderha tanrı savunması	Aldığın hasarı %20 düşürür. | |cffffff00|hSüre:30 dakika|r
+76052	Rüzgar ayakkabıları (7g)	Hareket hızını +30 artırır.
+53586	Cicek Kutusu	İçerisinde çeşitli çiçekleri barındırır.
+
+
+
+
+
+
+
+BU_ETKI_DEVAM_EDIYOR
+nesnemarketbasarili
+
+
+
+-------
+Locale_game
+-------
+TOOLTIP_APPLY_ATTBONUS_CZ	Sürgüne karşı güçlü +%d%%	SA
+TOOLTIP_RESIST_DARK	Sürgüne karşı dayanıklılık +%%%d	SA

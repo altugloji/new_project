@@ -531,7 +531,7 @@ class ChatWindow(ui.Window):
 	BOARD_END_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.8)
 	BOARD_MIDDLE_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.5)
 	CHAT_OUTLINE_COLOR = grp.GenerateColor(1.0, 1.0, 1.0, 1.0)
-	CHAT_SIZING_HIT_HEIGHT = 4
+	CHAT_SIZING_HIT_HEIGHT = 20
 	CHAT_FLAG_BAR_HEIGHT = 23
 	CHAT_FLAG_BAR_COLOR = grp.GenerateColor(0.0, 0.0, 0.0, 0.75)
 	CHAT_BAR_GAP_ABOVE = 0
@@ -588,13 +588,24 @@ class ChatWindow(ui.Window):
 			self.topFlag = False
 
 	if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
-		class ChatFlagBar(ui.Window):
+		class ChatFlagBar(ui.DragButton):
 			def __init__(self, owner):
-				ui.Window.__init__(self)
+				ui.DragButton.__init__(self)
 				self.AddFlag("float")
-				self.AddFlag("not_pick")
+				self.AddFlag("movable")
+				self.AddFlag("restrict_x")
 				self.owner = owner
 				self.SetWindowName("ChatWindow:ChatFlagBar")
+				self.SetMoveEvent(ui.__mem_func__(owner.OnMoveFlagBar))
+
+			def __del__(self):
+				ui.DragButton.__del__(self)
+
+			def OnMouseOverIn(self):
+				app.SetCursor(app.VSIZE)
+
+			def OnMouseOverOut(self):
+				app.SetCursor(app.NORMAL)
 
 			def OnRender(self):
 				if not self.IsShow():
@@ -848,6 +859,12 @@ class ChatWindow(ui.Window):
 
 			if self.flag_bar_clock:
 				self.flag_bar_clock.SetPosition(self.CHAT_FLAG_CLOCK_RIGHT_PAD, 5)
+
+		def OnMoveFlagBar(self):
+			(btnX, btnY) = self.flag_bar.GetGlobalPosition()
+			resizeY = btnY + self.CHAT_BAR_GAP_ABOVE + self.CHAT_FLAG_BAR_HEIGHT - self.CHAT_FLAG_BAR_OFFSET_Y
+			self.btnChatSizing.SetPosition(btnX, resizeY)
+			self.Refresh()
 
 		def __EventCountry(self, event_type, lang):
 			if "mouse_click" == event_type:
