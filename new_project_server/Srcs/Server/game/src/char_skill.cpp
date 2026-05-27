@@ -160,6 +160,13 @@ void CHARACTER::SetAffectedEunhyung()
 	m_dwAffectedEunhyungLevel = GetSkillPower(SKILL_EUNHYUNG);
 }
 
+#ifdef SKILL_SELECT
+const uint32_t affectSkillVnArray[14] = 
+{
+	3,4,19,49,63,64,65,78,79,94,95,96,110,111
+};
+#endif
+
 void CHARACTER::SetSkillGroup(BYTE bSkillGroup)
 {
 	if (bSkillGroup > 2)
@@ -168,8 +175,19 @@ void CHARACTER::SetSkillGroup(BYTE bSkillGroup)
 	if (GetLevel() < 5)
 		return;
 
-	m_points.skill_group = bSkillGroup;
+#ifdef SKILL_SELECT
+	if (GetSkillGroup() != 0) {
+		for (WORD i = 0; i < _countof(affectSkillVnArray); i++) {
+			RemoveAffect(affectSkillVnArray[i]);
+		}
+	}
+#endif
 
+	m_points.skill_group = bSkillGroup;
+#ifdef SKILL_SELECT
+	if (bSkillGroup == 0)
+		CheckSkills();
+#endif
 	TPacketGCChangeSkillGroup p;
 	p.header = HEADER_GC_SKILL_GROUP;
 	p.skill_group = m_points.skill_group;
@@ -1323,6 +1341,10 @@ struct FuncSplashDamage
 			}
 		}
 
+#ifdef COLLECTIVE_DAMAGE_INFO
+		m_pkChr->SetTargetVID(pkChrVictim->GetVID());
+#endif
+
 		if (!pkChrVictim->Damage(m_pkChr, iDam, dt) && !pkChrVictim->IsStun() && !pkChrVictim->IsDead()) // @fixme312 IsDead
 		{
 			if (IS_SET(m_pkSk->dwFlag, SKILL_FLAG_REMOVE_GOOD_AFFECT))
@@ -1733,6 +1755,9 @@ int CHARACTER::ComputeSkillAtPosition(DWORD dwVnum, const PIXEL_POSITION& posTar
 				//if (dwVnum == SKILL_CHAIN) sys_log(0, "CHAIN skill call FuncSplashDamage %s", GetName());
 				f(this);
 			}
+#ifdef COLLECTIVE_DAMAGE_INFO
+			ClearTargetList();
+#endif
 		}
 		else
 		{
@@ -2102,6 +2127,9 @@ int CHARACTER::ComputeSkill(DWORD dwVnum, LPCHARACTER pkVictim, BYTE bSkillLevel
 			{
 				f(pkVictim);
 			}
+#ifdef COLLECTIVE_DAMAGE_INFO
+			ClearTargetList();
+#endif
 		}
 		else
 		{

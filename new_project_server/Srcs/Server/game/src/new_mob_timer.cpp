@@ -228,7 +228,7 @@ bool CNewMobTimer::CanSpawnNow(const SRuntimeEntry& entry, int iSpawnDay, int iT
 	return true;
 }
 
-bool CNewMobTimer::IsBossAlive(SRuntimeEntry& entry)
+bool CNewMobTimer::IsBossAlive(SRuntimeEntry& entry) const
 {
 	if (entry.dwSpawnedVID == 0)
 		return false;

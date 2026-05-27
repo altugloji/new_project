@@ -1514,9 +1514,29 @@ void CHARACTER::SetLastAttacked(DWORD dwTime) const
 	m_pkMobInst->m_posLastAttacked = GetXYZ();
 }
 
+#ifdef COLLECTIVE_DAMAGE_INFO
+bool CHARACTER::IsTargetVID(DWORD vid, bool remove)
+{
+	for (std::vector<DWORD>::iterator it = m_vecTargetVID.begin(); it != m_vecTargetVID.end(); ++it)
+	{
+		if (*it == vid)
+		{
+			if (remove)
+				m_vecTargetVID.erase(it);
+			return true;
+		}
+	}
+	return false;
+}
+#endif
+
 void CHARACTER::SendDamagePacket(LPCHARACTER pAttacker, int Damage, BYTE DamageFlag) const
 {
-	if (IsPC() == true || (pAttacker->IsPC() == true && pAttacker->GetTarget() == this))
+	if (IsPC() == true || (pAttacker->IsPC() == true && pAttacker->GetTarget() == this)
+#ifdef COLLECTIVE_DAMAGE_INFO
+						|| pAttacker->IsTargetVID(GetVID(), true)
+#endif
+	)
 	{
 		TPacketGCDamageInfo damageInfo;
 		memset(&damageInfo, 0, sizeof(TPacketGCDamageInfo));

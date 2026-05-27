@@ -2135,6 +2135,7 @@ class GameWindow(ui.ScriptWindow):
 
 			# PRIVATE_SHOP_PRICE_LIST
 			"MyShopPriceList"		: self.__PrivateShop_PriceList,
+			"skill_select"			: self.LearnSkillGroup,
 			# END_OF_PRIVATE_SHOP_PRICE_LIST
 		}
 
@@ -2205,6 +2206,13 @@ class GameWindow(ui.ScriptWindow):
 	def __PrivateShop_PriceList(self, itemVNum, itemPrice):
 		uiPrivateShopBuilder.SetPrivateShopItemPrice(itemVNum, itemPrice)
 	# END_OF_PRIVATE_SHOP_PRICE_LIST
+
+	def LearnSkillGroup(self, data):
+		import uiLearnSkill
+		pJob = int(data.split("#")[1])
+		self.skillSelect = uiLearnSkill.SkillBoard()
+		if constInfo.skillBoard == 0:
+			self.skillSelect.BuildWindow(pJob)
 
 	def __Horse_HideState(self):
 		self.affectShower.SetHorseState(0, 0, 0)

@@ -715,6 +715,10 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		int				GetLevel() const		{ return m_points.level;	}
 		void			SetLevel(BYTE level);
 
+#ifdef SKILL_SELECT
+		void			CheckSkills();
+#endif
+
 		BYTE			GetGMLevel() const;
 		BOOL 			IsGM() const;
 		void			SetGMLevel();
@@ -2241,6 +2245,16 @@ protected:
 	bool m_bGemConvertShop;
 	bool m_bGemShopLoaded;
 #endif
+
+#ifdef COLLECTIVE_DAMAGE_INFO
+	private:
+		std::vector<DWORD>				m_vecTargetVID;
+	public:
+		void							ClearTargetList()		{ m_vecTargetVID.clear(); }
+		bool							IsTargetVID(DWORD vid, bool remove=false);
+		void							SetTargetVID(DWORD vid)	{ m_vecTargetVID.emplace_back(vid); }
+#endif
+
 };
 
 ESex GET_SEX(LPCHARACTER ch);

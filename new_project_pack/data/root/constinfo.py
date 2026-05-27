@@ -34,7 +34,7 @@ if app.ENABLE_REFINE_RENEWAL:
 	}
 
 ENABLE_POTIONS_AFFECTSHOWER = 1
-
+skillBoard = 0
 # EXTRA BEGIN
 ENABLE_NEW_LEVELSKILL_SYSTEM = False # loads 5 (B,M,G,P,F) skills .mse
 ENABLE_RANDOM_CHANNEL_SEL = False # don't set a random channel when you open the client

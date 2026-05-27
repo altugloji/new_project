@@ -2,14 +2,7 @@
 #define __INC_METIN2_COMMON_DEFINES_H__
 #pragma once
 
-//////////////////////////////////////////////////////////////////////////
-// ### Standard Features ###
 //#define ENABLE_QUEST_CATEGORY
-// ### END Standard Features ###
-//////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////
-// ### New Features ###
 #define ENABLE_NO_MOUNT_CHECK
 #define ENABLE_D_NJGUILD
 #define ENABLE_FULL_NOTICE
@@ -80,27 +73,22 @@ enum eCommonDefines {
 // #define USE_MAGIC_REDUCTION_STONES
 #endif
 
-// ### END New Features ###
-//////////////////////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////////////////////
-// ### Ex Features ###
-#define DISABLE_STOP_RIDING_WHEN_DIE //	if DISABLE_TOP_RIDING_WHEN_DIE is defined, the player doesn't lose the horse after dying
-// #define ENABLE_ACCE_COSTUME_SYSTEM //fixed version
-// #define USE_ACCE_ABSORB_WITH_NO_NEGATIVE_BONUS //enable only positive bonus in acce absorb
-#define ENABLE_HIGHLIGHT_NEW_ITEM //if you want to see highlighted a new item when dropped or when exchanged
-#define ENABLE_KILL_EVENT_FIX //if you want to fix the 0 exp problem about the when kill lua event (recommended)
-// #define ENABLE_SYSLOG_PACKET_SENT // debug purposes
-#define ENABLE_MOB_DROP_POLY // enable drop type 'poly' for special_item_group.txt (idx drop mobvnum pct customitemvnum)
-
-#define ENABLE_EXTEND_ITEM_AWARD //slight adjustement
-#ifdef ENABLE_EXTEND_ITEM_AWARD
-	// #define USE_ITEM_AWARD_CHECK_ATTRIBUTES //it prevents bonuses higher than item_attr lvl1-lvl5 min-max range limit
+#define DISABLE_STOP_RIDING_WHEN_DIE //								if DISABLE_TOP_RIDING_WHEN_DIE is defined, the player doesn't lose the horse after dying
+// #define ENABLE_ACCE_COSTUME_SYSTEM								//fixed version
+// #define USE_ACCE_ABSORB_WITH_NO_NEGATIVE_BONUS					//enable only positive bonus in acce absorb
+#define ENABLE_HIGHLIGHT_NEW_ITEM									//if you want to see highlighted a new item when dropped or when exchanged
+#define ENABLE_KILL_EVENT_FIX										//if you want to fix the 0 exp problem about the when kill lua event (recommended)
+// #define ENABLE_SYSLOG_PACKET_SENT								// debug purposes
+#define ENABLE_MOB_DROP_POLY										// enable drop type 'poly' for special_item_group.txt (idx drop mobvnum pct customitemvnum)
+	
+#define ENABLE_EXTEND_ITEM_AWARD									//slight adjustement
+#ifdef ENABLE_EXTEND_ITEM_AWARD										
+	// #define USE_ITEM_AWARD_CHECK_ATTRIBUTES						//it prevents bonuses higher than item_attr lvl1-lvl5 min-max range limit
 #endif
 
 #define __BL_OFFICIAL_LOOT_FILTER__
 #if defined(__BL_OFFICIAL_LOOT_FILTER__)
-// #define __PREMIUM_LOOT_FILTER__ // Enable Premium Usage of the Loot Filter System
+// #define __PREMIUM_LOOT_FILTER__									// Enable Premium Usage of the Loot Filter System
 #endif
 
 // #define ENABLE_CHEQUE_SYSTEM
@@ -109,14 +97,13 @@ enum eCommonDefines {
 #define DISABLE_CHEQUE_DROP
 #define ENABLE_WON_EXCHANGE_WINDOW
 #endif
-// ### END Ex Features ###
-//////////////////////////////////////////////////////////////////////////
 
 //ML
 #define __BL_MULTI_LANGUAGE__										// Multi dil sistemi
 #define __BL_MULTI_LANGUAGE_PREMIUM__								// Multi dil sistemi
 #define __BL_MULTI_LANGUAGE_ULTIMATE__								// Multi dil sistemi
 #define ENABLE_GF_ATLAS_MARK_INFO									// Multi dil sistemi ekstra
+//ML
 
 #define GUILD_LARGE_ICON											// 24x16 lonca simgesi boyutu
 #define ENABLE_SPAMDB_REFRESH										// spam_db otomatik chat ban
@@ -134,23 +121,25 @@ enum eCommonDefines {
 #define KYGN_CHEST_INFO												// Sandık İçeriğini Görme
 #define __SEND_TARGET_INFO__										// Mob target info
 #define UPDATE_ITEM_MESSAGE											// Item +basma duyurusu
-#define ENABLE_USER_REPORT_SYSTEM 									// Target oyuncu report sistemi
+#define ENABLE_USER_REPORT_SYSTEM 									// Target oyuncu report
 #define ENABLE_ITEM_SHOP_SYSTEM										// Nesne market
 #define ENABLE_CUBE_RENEWAL											// Yeni Cube penceresi
 #define ENABLE_SKILL_FLAG_PARTY										// Şaman grup kutsama
 #define ENABLE_MULTISHOP											// İtem ile npcde ürün satma
-#define WJ_NEW_DROP_DIALOG											// HIzlı sil sat sistemi
-#define __GEM_SYSTEM__												// Gaya mağazası sistemi
+#define WJ_NEW_DROP_DIALOG											// Hızlı sil sat
+#define __GEM_SYSTEM__												// Gaya mağazası
 #define ENABLE_GM_MOB_FIND_CMD										// /mob_find <vnum> ile mapte mob arama
 #define UPDATE_AUTO_POT_1K_HP										// Otopot ekstra 1K sabit hp
-#define ENABLE_CHARACTER_CHEST										// Karakter sandık sistemi
+#define ENABLE_CHARACTER_CHEST										// Karakter sandık
 #define ENABLE_BULK_POTION_PANEL									// Hızlı şebnem penceresi
-#define ENABLE_NEW_MOB_TIMER										// Saatli boss spawn sistemi
-#define AUTO_CHAT_ENABLE											// Otochat sistemi
-#define ENABLE_ITEM_UPGRADE_OWNER
-#define ENABLE_ITEM_ENCHANT_USE_COUNT
-#define ENABLE_GM_PLAYER_PANEL
-#define ATTBONUS_ELEXIR	
+#define ENABLE_NEW_MOB_TIMER										// Saatli boss spawn
+#define AUTO_CHAT_ENABLE											// Otochat
+#define ENABLE_ITEM_UPGRADE_OWNER									// Tooltip +9'a basan kişi
+#define ENABLE_ITEM_ENCHANT_USE_COUNT								// Tooltip efsun sayısı
+#define ENABLE_GM_PLAYER_PANEL										// GM paneli TAB
+#define ATTBONUS_ELEXIR												// Sürgüne karşı saldırı ve savunma efsunu
+#define SKILL_SELECT												// Uzaktan skill seçme
+#define COLLECTIVE_DAMAGE_INFO										// Toplu hasar pc & npc
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

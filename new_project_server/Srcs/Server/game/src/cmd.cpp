@@ -269,12 +269,15 @@ ACMD(do_poison);
 ACMD(do_rewarp);
 ACMD(do_autostack);
 #endif
+
 #ifdef ENABLE_WOLFMAN_CHARACTER
 ACMD(do_bleeding);
 #endif
+
 #ifdef ENABLE_MOVE_CHANNEL
 ACMD(DoChangeChannel);
 #endif
+
 #if defined(ENABLE_CHEQUE_SYSTEM) && defined(ENABLE_WON_EXCHANGE_WINDOW)
 ACMD(do_won_exchange);
 #endif
@@ -303,6 +306,10 @@ ACMD(do_mob_find);
 
 #ifdef AUTO_CHAT_ENABLE
 ACMD(do_auto_chat);
+#endif
+
+#ifdef SKILL_SELECT
+ACMD(do_get_skills);
 #endif
 
 struct command_info cmd_info[] =
@@ -648,6 +655,10 @@ struct command_info cmd_info[] =
 
 #ifdef AUTO_CHAT_ENABLE
 	{ "auto_chat",	do_auto_chat,		0,		POS_DEAD,	GM_PLAYER },
+#endif
+
+#ifdef SKILL_SELECT
+	{ "skill_select",		do_get_skills,				0,	POS_DEAD,	GM_PLAYER },
 #endif
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}

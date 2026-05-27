@@ -429,6 +429,10 @@ void CHARACTER::Initialize()
 	m_setNDAFlag.clear();
 #endif
 
+#ifdef COLLECTIVE_DAMAGE_INFO
+	m_vecTargetVID.clear();
+#endif
+
 	m_fAttMul = 1.0f;
 	m_fDamMul = 1.0f;
 
@@ -618,6 +622,10 @@ void CHARACTER::Destroy()
 		event_cancel(&pkEvent);
 	}
 	m_mapMobSkillEvent.clear();
+
+#ifdef COLLECTIVE_DAMAGE_INFO
+	m_vecTargetVID.clear();
+#endif
 
 	ClearAffect();
 
@@ -3057,6 +3065,11 @@ void CHARACTER::PointChange(BYTE type, int amount, bool bAmount, bool bBroadcast
 			}
 #endif
 			PointChange(POINT_NEXT_EXP,	GetNextExp(), false);
+
+#ifdef SKILL_SELECT
+			if (GetLevel() >= 5 && GetSkillGroup() == 0) 
+				CheckSkills();
+#endif
 
 			if (amount)
 			{
@@ -8824,5 +8837,15 @@ void CHARACTER::RefreshDragonCoin()
 	ChatPacket(CHAT_TYPE_COMMAND, "RefreshDragonMark %d", GetDragonMark());
 }
 #endif
+
+#ifdef SKILL_SELECT
+void CHARACTER::CheckSkills()
+{
+	if (GetLevel() >= 5 && GetSkillGroup() == 0) {
+		ChatPacket(CHAT_TYPE_COMMAND, "skill_select #%d", GetJob());
+	}
+}
+#endif
+
 
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

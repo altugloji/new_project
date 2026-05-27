@@ -816,6 +816,11 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 
 	if (ch && ch->IsGM())
 		ch->ChatPacket(CHAT_TYPE_INFO, "Map Index: %ld - %s", ch->GetMapIndex(), g_stHostname.c_str());
+
+#ifdef SKILL_SELECT
+	ch->CheckSkills();
+#endif
+
 }
 
 void CInputLogin::Empire(LPDESC d, const char * c_pData) const

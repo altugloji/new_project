@@ -125,12 +125,12 @@ bool CInstanceBase::ProcessDamage()
 				rdwCRCEft = EFFECT_DAMAGE_SELFDAMAGE2;
 			m_bDamageEffectType = !m_bDamageEffectType;
 		}
-		else if(bTarget == false)
-		{
-			strDamageType = "nontarget_";
-			rdwCRCEft = EFFECT_DAMAGE_NOT_TARGET;
-			return false;
-		}
+		// else if(bTarget == false)
+		// {
+			// strDamageType = "nontarget_";
+			// rdwCRCEft = EFFECT_DAMAGE_NOT_TARGET;
+			// return false;
+		// }
 		else
 		{
 			strDamageType = "target_";

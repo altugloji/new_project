@@ -2827,4 +2827,31 @@ ACMD(do_auto_chat)
 }
 #endif
 
+#ifdef SKILL_SELECT
+ACMD(do_get_skills)
+{
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (!*arg1)
+		return;
+
+	int skillGroup = 0;
+	str_to_number(skillGroup, arg1);
+
+	if (skillGroup < 1 || skillGroup > 2) {
+		sys_err("do_get_skills invalid group %d pid %d", skillGroup, ch->GetPlayerID());
+		return;
+	}
+
+	if (ch->GetLevel() >= 5 && (ch->GetSkillGroup() == 0)) {
+		ch->SetSkillGroup(static_cast<BYTE>(skillGroup));
+		ch->PointChange(POINT_SKILL, -(ch->GetPoint(POINT_SKILL)));
+		ch->PointChange(POINT_SKILL, ch->GetLevel() - 1);
+		ch->SkillLevelPacket();
+	}
+	else { sys_err("do_beceri_al birileri birseyler yapmaya calisiyor sanirim %d", ch->GetPlayerID()); return; }
+}
+#endif
+
 //archive's 6b9a24beef838d9382c750a6b44ccdb4
