@@ -1966,12 +1966,6 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ITEM_SLOT_REFINE_TEXT", 0);
 #endif
 
-#ifdef __AUTO_SKILL_READER__
-	PyModule_AddIntConstant(poModule, "__AUTO_SKILL_READER__", 1);
-#else
-	PyModule_AddIntConstant(poModule, "__AUTO_SKILL_READER__", 0);
-#endif
-
 #ifdef ENABLE_EXCHANGE_LOG
 	PyModule_AddIntConstant(poModule, "ENABLE_EXCHANGE_LOG", 1);
 #else
@@ -2106,6 +2100,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_EFSUN_CHANGE_DIALOG", 1);
 #else
 	PyModule_AddIntConstant(poModule, "ENABLE_EFSUN_CHANGE_DIALOG", 0);
+#endif
+
+#ifdef ENABLE_STATUS_ADD_BY_INPUT
+	PyModule_AddIntConstant(poModule, "ENABLE_STATUS_ADD_BY_INPUT", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_STATUS_ADD_BY_INPUT", 0);
 #endif
 
 }

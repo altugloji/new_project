@@ -357,6 +357,11 @@ enum
 #ifdef DC_P2P_UPDATE
 	HEADER_GG_DC_P2P_UPDATE						= 35,
 #endif
+
+#ifdef METIN35_ADMIN_PANEL
+	HEADER_GG_ADMIN_PANEL						= 36,
+#endif
+
 };
 
 #pragma pack(1)
@@ -578,6 +583,9 @@ typedef struct command_login3
 	char	login[LOGIN_MAX_LEN + 1];
 	char	passwd[PASSWD_MAX_LEN + 1];
 	DWORD	adwClientKey[4];
+#ifdef METIN35_ADMIN_PANEL
+	BYTE	versionKey;
+#endif
 } TPacketCGLogin3;
 
 typedef struct packet_login_key
@@ -2678,6 +2686,13 @@ typedef struct SPacketGCGmPlayerPanel
 	BYTE	header;
 	WORD	wSize;
 } TPacketGCGmPlayerPanel;
+#endif
+
+#ifdef METIN35_ADMIN_PANEL
+typedef struct SPacketGGAdminPanel
+{
+	BYTE					byHeader;
+} TPacketGGAdminPanel;
 #endif
 
 #pragma pack()

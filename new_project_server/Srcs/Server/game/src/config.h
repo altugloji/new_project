@@ -1,6 +1,10 @@
 #ifndef __INC_METIN_II_GAME_CONFIG_H__
 #define __INC_METIN_II_GAME_CONFIG_H__
 
+#ifdef METIN35_ADMIN_PANEL
+	#include "../../common/length.h"
+#endif
+
 enum
 {
 	ADDRESS_MAX_LEN = 15
@@ -58,6 +62,11 @@ extern bool	g_bDisableEmpireLanguageCheck;
 // #endif
 
 extern BYTE	g_bChannel;
+
+#ifdef METIN35_ADMIN_PANEL
+extern void ReadAdminPanelData();
+extern std::array<BYTE, ADMIN_PANEL_MAX_NUM> g_arrAdminPanel;
+#endif
 
 extern bool	map_allow_find(int index);
 extern void	map_allow_copy(long * pl, int size);

@@ -137,7 +137,6 @@
 #define GUILD_LARGE_ICON
 #define TASKBAR_SKILL_COOLDOWN_TEXT
 #define ITEM_SLOT_REFINE_TEXT
-#define __AUTO_SKILL_READER__
 #define ENABLE_EXCHANGE_LOG
 #define KYGN_CHEST_INFO													// Sandık İçeriğini Görme
 #define ENABLE_SEND_TARGET_INFO											// Mob target info
@@ -159,6 +158,12 @@
 #define ENABLE_ITEM_ENCHANT_USE_COUNT
 #define ENABLE_EFSUN_CHANGE_DIALOG
 #define NEW_AFFECT_BLEND_ICON
+#define ENABLE_STATUS_ADD_BY_INPUT											// Toplu statü verme
+// #define METIN35_ADMIN_PANEL												// Yönetim Paneli
+#ifdef METIN35_ADMIN_PANEL
+	#define CUR_CLIENT_VERSION 17										//versiyon key
+#endif
+
 // ### New System Defines - Extended Version ###
 //////////////////////////////////////////////////////////////////////////
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

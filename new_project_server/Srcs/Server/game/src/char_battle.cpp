@@ -41,6 +41,10 @@
 #include "new_mob_timer.h"
 #endif
 
+#ifdef BERAN_SETAOU
+	#include "beran_setaou.h"
+#endif
+
 #define ENABLE_EFFECT_PENETRATE
 #define ENABLE_NEWEXP_CALCULATION
 // #define ENABLE_NO_DAMAGE_QUEST_RUNNING
@@ -1338,6 +1342,14 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 		sys_log(1, "DEAD: %s %p", GetName(), this);
 		REMOVE_BIT(m_pointsInstant.instant_flag, INSTANT_FLAG_DEATH_PENALTY);
 	}
+
+#ifdef BERAN_SETAOU
+	if (pkKiller && pkKiller->IsPC()) {
+		if (CBeranSetaou::Instance().IsInCrystalRoom(pkKiller->GetMapIndex())) {
+			CBeranSetaou::Instance().OnDead(this, pkKiller);
+		}
+	}
+#endif
 
 	ClearSync();
 

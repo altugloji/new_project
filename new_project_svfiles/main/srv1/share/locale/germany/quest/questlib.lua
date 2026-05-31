@@ -1799,6 +1799,32 @@ function drop_gamble_with_flag(drop_flag)
         return dp >= number(1, range)
 end
 
+function say_color(color,text)
+	if color=="blue" then
+	say(color256(0, 0, 255)..text..color256(196, 196, 196))
+	elseif color == "green" then
+	say(color256(0, 255, 0)..text..color256(196, 196, 196))
+	elseif color == "red" then
+	say(color256(255, 0, 0)..text..color256(196, 196, 196))
+	elseif color == "yellow" then
+	say(color256(255, 255, 0)..text..color256(196, 196, 196))
+	elseif color == "white" then
+	say(color256(255, 255, 255)..text..color256(196, 196, 196))
+	elseif color == "black" then
+	say(color256(0, 0, 0)..text..color256(196, 196, 196))
+	elseif color == "cyan" then
+	say(color256(0, 255, 255)..text..color256(196, 196, 196))
+	elseif color == "pink" then
+	say(color256(255, 0, 255)..text..color256(196, 196, 196))
+	elseif color == "orange" then
+	say(color256(255, 145, 0)..text..color256(196, 196, 196))
+	elseif color == "purple" then
+	say(color256(100, 0, 255)..text..color256(196, 196, 196))
+	else
+	say(color256(196, 196, 196)..text..color256(196, 196, 196))
+	end
+end
+
 -- load libraries
 dofile(string.format("%s/quest/libraries/GFquestlib.lua", get_locale_base_path()))
 dofile(string.format("%s/quest/libraries/questing.lua", get_locale_base_path()))

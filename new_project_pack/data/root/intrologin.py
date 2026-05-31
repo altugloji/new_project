@@ -257,6 +257,8 @@ class LoginWindow(ui.ScriptWindow):
 			"WEBBLK"	: localeInfo.LOGIN_FAILURE_WEB_BLOCK,
 			"BADSCLID"	: localeInfo.LOGIN_FAILURE_WRONG_SOCIALID,
 			"AGELIMIT"	: localeInfo.LOGIN_FAILURE_SHUTDOWN_TIME,
+			"ONLYGM"	: localeInfo.LOGIN_FAILURE_ONLYGM,
+			"UPDATE"	: localeInfo.LOGIN_FAILURE_UPDATE,
 		}
 
 		self.loginFailureFuncDict = {

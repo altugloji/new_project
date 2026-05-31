@@ -67,9 +67,6 @@ if app.ENABLE_WON_EXCHANGE_WINDOW:
 if app.__BL_OFFICIAL_LOOT_FILTER__:
 	import uilootingsystem
 
-if app.__AUTO_SKILL_READER__:
-	import uiAutoSkillReader
-
 if app.ENABLE_EXCHANGE_LOG:
 	import uiExchangeLog
 
@@ -165,8 +162,6 @@ class Interface(object):
 				net.EMPIRE_B : localeInfo.EMPIRE_B, 
 				net.EMPIRE_C : localeInfo.EMPIRE_C 
 			}
-		if app.__AUTO_SKILL_READER__:
-			self.wndAutoSkillReader = None
 
 		if app.KYGN_CHEST_INFO:
 			self.wndKygnChestInfo = None
@@ -797,12 +792,6 @@ class Interface(object):
 			if self.wndLootFilter:
 				del self.wndLootFilter
 
-		if app.__AUTO_SKILL_READER__:
-			if self.wndAutoSkillReader:
-				self.wndAutoSkillReader.Close()
-				self.wndAutoSkillReader.Destroy()
-				self.wndAutoSkillReader = None
-
 		if app.ENABLE_EXCHANGE_LOG:
 			if self.wndExchangeLog:
 				self.wndExchangeLog.Close()
@@ -850,10 +839,6 @@ class Interface(object):
 			self.wndEnergyBar.RefreshStatus()
 		if app.ENABLE_DRAGON_SOUL_SYSTEM:
 			self.wndDragonSoul.RefreshStatus()
-		if app.__AUTO_SKILL_READER__:
-			if self.wndAutoSkillReader:
-				if self.wndAutoSkillReader.IsShow():
-					self.wndAutoSkillReader.Refresh()
 
 	def RefreshStamina(self):
 		self.wndTaskBar.RefreshStamina()
@@ -867,10 +852,6 @@ class Interface(object):
 		self.wndInventory.RefreshItemSlot()
 		if app.ENABLE_DRAGON_SOUL_SYSTEM:
 			self.wndDragonSoul.RefreshItemSlot()
-		if app.__AUTO_SKILL_READER__:
-			if self.wndAutoSkillReader:
-				if self.wndAutoSkillReader.IsShow():
-					self.wndAutoSkillReader.Refresh()
 		if app.ENABLE_BULK_POTION_PANEL:
 			self.RefreshBulkPotionPanel()
 		if app.KYGN_CHEST_INFO and self.wndKygnChestInfo:
@@ -2351,18 +2332,6 @@ class Interface(object):
 		def LanguageChangeAnonymous(self):
 			if self.dlgSystem:
 				self.dlgSystem.LanguageChangeAnonymous()
-
-	if app.__AUTO_SKILL_READER__:
-		def OpenAutoSkillReader(self):
-			if self.wndAutoSkillReader == None:
-				self.wndAutoSkillReader = uiAutoSkillReader.Window()
-			if self.wndAutoSkillReader.IsShow():
-				self.wndAutoSkillReader.Close()
-			else:
-				self.wndAutoSkillReader.Open()
-		def AutoSkillStatus(self, status):
-			if self.wndAutoSkillReader:
-				self.wndAutoSkillReader.ServerSetStatus(status)
 
 	if app.ENABLE_EXCHANGE_LOG:
 		def MakeExchangeLogWindow(self):

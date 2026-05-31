@@ -491,6 +491,13 @@ void CInputP2P::GGDCP2PUpdate(const char * c_pData)
 }
 #endif
 
+#ifdef METIN35_ADMIN_PANEL
+void CInputP2P::GGAdminPanel()
+{
+	ReadAdminPanelData();
+}
+#endif
+
 int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 {
 	if (test_server)
@@ -611,6 +618,13 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			GGDCP2PUpdate(c_pData);
 			break;
 #endif
+
+#ifdef METIN35_ADMIN_PANEL
+		case HEADER_GG_ADMIN_PANEL:
+			GGAdminPanel();
+			break;
+#endif
+
 	}
 
 	return (iExtraLen);

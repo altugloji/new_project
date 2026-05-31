@@ -699,7 +699,12 @@ ACMD(do_stat_minus)
 ACMD(do_stat)
 {
 	char arg1[256];
+#ifdef ENABLE_STATUS_ADD_BY_INPUT
+	char arg2[256];
+	two_arguments(argument, arg1, sizeof(arg1), arg2, sizeof(arg2));
+#else
 	one_argument(argument, arg1, sizeof(arg1));
+#endif
 
 	if (!*arg1)
 		return;
@@ -730,21 +735,41 @@ ACMD(do_stat)
 	if (ch->GetRealPoint(idx) >= MAX_STAT)
 		return;
 
-	ch->SetRealPoint(idx, ch->GetRealPoint(idx) + 1);
-	ch->SetPoint(idx, ch->GetPoint(idx) + 1);
+#ifdef ENABLE_STATUS_ADD_BY_INPUT
+	int statAddCount = 1;
+	if (*arg2)
+	{
+		str_to_number(statAddCount, arg2);
+		if (statAddCount < 1)
+			statAddCount = 1;
+		statAddCount = MIN(statAddCount, 90);
+	}
+
+	statAddCount = MIN(statAddCount, ch->GetPoint(POINT_STAT));
+	statAddCount = MIN(statAddCount, MAX_STAT - ch->GetRealPoint(idx));
+	if (statAddCount <= 0)
+		return;
+#else
+	const int statAddCount = 1;
+#endif
+
+	ch->SetRealPoint(idx, ch->GetRealPoint(idx) + statAddCount);
+	ch->SetPoint(idx, ch->GetPoint(idx) + statAddCount);
 	ch->ComputePoints();
 	ch->PointChange(idx, 0);
 
+	// if (idx == POINT_HT)
 	if (idx == POINT_IQ)
 	{
 		ch->PointChange(POINT_MAX_HP, 0);
 	}
+	// else if (idx == POINT_IQ)
 	else if (idx == POINT_HT)
 	{
 		ch->PointChange(POINT_MAX_SP, 0);
 	}
 
-	ch->PointChange(POINT_STAT, -1);
+	ch->PointChange(POINT_STAT, -statAddCount);
 	ch->ComputePoints();
 }
 
@@ -2576,23 +2601,6 @@ ACMD(DoChangeChannel)
 		return;
 
 	ch->ChangeChannel(channel);
-}
-#endif
-
-#ifdef __AUTO_SKILL_READER__
-ACMD(do_auto_skill_reader)
-{
-	std::vector<std::string> vecArgs;
-	split_argument_ex(argument, vecArgs);
-	if (vecArgs.size() < 2) { return; }
-	else if (vecArgs[1] == "status")
-	{
-		if (vecArgs.size() < 4) { return; }
-		BYTE skillIdx, status;
-		if (!str_to_number(skillIdx, vecArgs[2].c_str()) || !str_to_number(status, vecArgs[3].c_str()))
-			return;
-		ch->GetAutoSkill(skillIdx, status ? true : false);
-	}
 }
 #endif
 

@@ -117,6 +117,7 @@
     <ClCompile Include="arena.cpp" />
     <ClCompile Include="banword.cpp" />
     <ClCompile Include="battle.cpp" />
+    <ClCompile Include="beran_setaou.cpp" />
     <ClCompile Include="blend_item.cpp" />
     <ClCompile Include="BlueDragon.cpp" />
     <ClCompile Include="BlueDragon_Binder.cpp" />
@@ -267,6 +268,7 @@
     <ClInclude Include="banword.h" />
     <ClInclude Include="battle.h" />
     <ClInclude Include="belt_inventory_helper.h" />
+    <ClInclude Include="beran_setaou.h" />
     <ClInclude Include="blend_item.h" />
     <ClInclude Include="BlueDragon.h" />
     <ClInclude Include="BlueDragon_Binder.h" />

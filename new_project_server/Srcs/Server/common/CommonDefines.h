@@ -116,7 +116,6 @@ enum eCommonDefines {
 #define FAST_PACKET_BLOCK											// Paket buglarını önlemek için süre engelleri
 #define HANDSHAKE_PACKET_ANTI_FLOOD									// Auth / Game socket attack fix
 #define PARTY_EXP_FIX												// Grup bugu. Karakteri ortaya alma.
-#define __AUTO_SKILL_READER__										// Otomatik bk okuma 
 #define ENABLE_EXCHANGE_LOG											// Oyun içi ticaret log ekranı
 #define KYGN_CHEST_INFO												// Sandık İçeriğini Görme
 #define __SEND_TARGET_INFO__										// Mob target info
@@ -140,6 +139,10 @@ enum eCommonDefines {
 #define ATTBONUS_ELEXIR												// Sürgüne karşı saldırı ve savunma efsunu
 #define SKILL_SELECT												// Uzaktan skill seçme
 #define COLLECTIVE_DAMAGE_INFO										// Toplu hasar pc & npc
+// #define METIN35_ADMIN_PANEL										// Yönetim Paneli
+#define ENABLE_STATUS_ADD_BY_INPUT									// Stat puanini tek komutla toplu verme
+#define ENABLE_GREEN_ENCHANT_LV5_LIMIT								// Yeşil efsunda lv5 efsun gelmez
+#define BERAN_SETAOU
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

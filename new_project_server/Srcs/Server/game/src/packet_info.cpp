@@ -264,6 +264,10 @@ CPacketInfoGG::CPacketInfoGG()
 	Set(HEADER_GG_DC_P2P_UPDATE,		sizeof(TPacketGGDCP2PUpdate),		"GGDCP2PUpdate",	false);
 #endif
 
+#ifdef METIN35_ADMIN_PANEL
+	Set(HEADER_GG_ADMIN_PANEL,			sizeof(TPacketGGAdminPanel),		"GGAdminPanel",		false);
+#endif
+
 }
 
 CPacketInfoGG::~CPacketInfoGG()

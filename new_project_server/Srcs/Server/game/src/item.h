@@ -192,7 +192,11 @@ class CItem : public CEntity
 
 		int		GetAttributeCount();
 		void		ClearAttribute();
+#ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
+		void		ChangeAttribute(const int* aiChangeProb = nullptr, bool bLimitResistLv5 = false);
+#else
 		void		ChangeAttribute(const int* aiChangeProb= nullptr);
+#endif
 		void		AddAttribute();
 		void		AddAttribute(BYTE bType, short sValue);
 
@@ -243,8 +247,13 @@ class CItem : public CEntity
 		bool		Unequip();
 
 		void		AddAttr(BYTE bApply, BYTE bLevel);
+#ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
+		void		PutAttribute(const int * aiAttrPercentTable, bool bLimitResistLv5 = false);
+		void		PutAttributeWithLevel(BYTE bLevel, bool bLimitResistLv5 = false);
+#else
 		void		PutAttribute(const int * aiAttrPercentTable);
 		void		PutAttributeWithLevel(BYTE bLevel);
+#endif
 
 	public:
 		bool		AddRareAttribute2(const int * aiAttrPercentTable = nullptr);

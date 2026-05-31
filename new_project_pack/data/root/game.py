@@ -398,9 +398,6 @@ class GameWindow(ui.ScriptWindow):
 		if app.ENABLE_EXCHANGE_LOG:
 			onPressKeyDict[app.DIK_F6]	= lambda : self.interface.OpenExchangeLog()
 
-		if app.__AUTO_SKILL_READER__:
-			onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenAutoSkillReader()
-
 		if app.ENABLE_GM_PLAYER_PANEL:
 			onPressKeyDict[app.DIK_TAB]	= lambda : self.interface.ToggleGmPlayerPanel()
 		elif app.ENABLE_BULK_POTION_PANEL:
@@ -2138,9 +2135,6 @@ class GameWindow(ui.ScriptWindow):
 			"skill_select"			: self.LearnSkillGroup,
 			# END_OF_PRIVATE_SHOP_PRICE_LIST
 		}
-
-		if app.__AUTO_SKILL_READER__:
-			serverCommandList.update({"AutoSkillStatus" : self.interface.AutoSkillStatus})
 
 		if app.AUTO_CHAT_ENABLE:
 			serverCommandList.update({"UpdateAutoChat" : self.interface.UpdateAutoChat})

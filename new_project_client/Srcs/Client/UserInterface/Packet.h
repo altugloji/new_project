@@ -552,6 +552,9 @@ typedef struct command_login3
     char	name[ID_MAX_NUM + 1];
     char	pwd[PASS_MAX_NUM + 1];
     DWORD	adwClientKey[4];
+#ifdef METIN35_ADMIN_PANEL
+	BYTE	versionKey;
+#endif
 } TPacketCGLogin3;
 
 typedef struct command_direct_enter

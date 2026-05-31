@@ -54,6 +54,10 @@
 #include "buff_on_attributes.h"
 #include "BlueDragon.h"
 
+#ifdef BERAN_SETAOU
+	#include "beran_setaou.h"
+#endif
+
 #ifdef __PET_SYSTEM__
 #include "PetSystem.h"
 #endif
@@ -181,12 +185,6 @@ void CHARACTER::Initialize()
 	m_bGemShop = false;
 	m_bGemConvertShop = false;
 	m_bGemShopLoaded = false;
-#endif
-
-#ifdef __AUTO_SKILL_READER__
-	m_pkAutoSkill = NULL;
-	m_bSelectedSkillIdx = 0;
-	m_bAutoSkillStatus = 0;
 #endif
 
 	m_dwKillerPID = 0;
@@ -462,11 +460,6 @@ void CHARACTER::Create(const char * c_pszName, DWORD vid, bool isPC)
 void CHARACTER::Destroy()
 {
 	CloseMyShop();
-
-#ifdef __AUTO_SKILL_READER__
-	if(m_pkAutoSkill)
-		event_cancel(&m_pkAutoSkill);
-#endif
 
 	if (m_pkRegen)
 	{
@@ -1410,6 +1403,11 @@ void CHARACTER::Disconnect(const char * c_pszReason)
 	CTargetManager::instance().Logout(GetPlayerID());
 
 	MessengerManager::instance().Logout(GetName());
+
+#ifdef BERAN_SETAOU
+	if (CBeranSetaou::Instance().IsInCrystalRoom(GetMapIndex()))
+		CBeranSetaou::Instance().OnDisconnect(this);
+#endif
 
 	if (GetDesc())
 		GetDesc()->BindCharacter(nullptr);
@@ -8206,373 +8204,6 @@ uint64_t CHARACTER::GetGuildToken() const
 void CHARACTER::SendGuildToken()
 {
 	CGuildManager::instance().SendGuildToken(this, GetGuildToken());
-}
-#endif
-
-#ifdef __AUTO_SKILL_READER__
-// BYTE GetSkillGradeByLevel(BYTE bLevel)
-BYTE CHARACTER::GetSkillGradeByLevel(BYTE bLevel)
-{
-	BYTE bGrade = SKILL_NORMAL;
-	if (bLevel >= 40)
-		bGrade = SKILL_PERFECT_MASTER;
-	else if (bLevel >= 30)
-		bGrade = SKILL_GRAND_MASTER;
-	else if (bLevel >= 20)
-		bGrade = SKILL_MASTER;
-
-	return bGrade;
-}
-bool CHARACTER::SkillToBook(BYTE skillIdx, DWORD& itemIdx, DWORD& socket0, DWORD& exorcismIdx, DWORD& concentratedIdx)
-{
-	const BYTE skillLevel = GetSkillLevel(skillIdx);
-	const BYTE skillGrade = GetSkillGradeByLevel(skillLevel);
-	if (skillIdx <= 111)
-	{
-		if (skillGrade <= 2)
-		{
-			exorcismIdx = 71001;
-			concentratedIdx = 76034;
-		}
-
-		if (skillGrade == 1)
-		{
-			itemIdx = USE_YMIR_50300_SKILLBOOK ? 50300 : 50400 + skillIdx;
-			socket0 = skillIdx;
-			return true;
-		}
-		else if (skillGrade == 2)
-		{
-			itemIdx = 50513;
-			return true;
-		}
-	}
-	else
-	{
-		const std::map<BYTE, std::pair<DWORD, DWORD>> m_mapExorcismandConcentrated = {
-			//{SKILL_IDX, {exorcismIdx, exorcismIdx}},
-			{SKILL_COMBO, {71001, 76034}},
-			{SKILL_LEADERSHIP, {71001, 76034}},
-			{SKILL_POLYMORPH, {71001, 76034}},
-			{SKILL_MINING, {71001, 76034}},
-		};
-		const auto itNew = m_mapExorcismandConcentrated.find(skillIdx);
-		if (itNew != m_mapExorcismandConcentrated.end())
-		{
-			exorcismIdx = itNew->second.first;
-			concentratedIdx = itNew->second.second;
-		}
-
-		//if skill has 1 book put here
-		const std::map<BYTE, DWORD> __skillBookItemList ={
-			//{ SKILL_IDX, BOOK_ITEM_IDX },
-			{ SKILL_COMBO, 50304 },
-			{ SKILL_MINING, 50600 },
-		};
-		const auto it = __skillBookItemList.find(skillIdx);
-		if (it != __skillBookItemList.end())
-		{
-			itemIdx = it->second;
-			return true;
-		}
-
-		//#if skill different book for every stage(M | G | P)
-		const std::map<BYTE, std::map<BYTE, DWORD>> __skillBookItemListEx = {
-			{
-				SKILL_LEADERSHIP, //skillIdx
-				{
-					//book via grade
-					{SKILL_GRADE_MASTER, 50301},
-					{SKILL_GRADE_GRAND_MASTER, 50302},
-					{SKILL_GRADE_PERFECT_MASTER, 50303},
-				}
-			},
-			{
-				SKILL_POLYMORPH,//skillIdx
-				{
-					//book via grade
-					{SKILL_GRADE_MASTER, 50314},
-					{SKILL_GRADE_GRAND_MASTER, 50315},
-					{SKILL_GRADE_PERFECT_MASTER, 50316},
-				}
-			},
-		};
-		const auto itEx = __skillBookItemListEx.find(skillIdx);
-		if (itEx != __skillBookItemListEx.end())
-		{
-			const auto itExEx = itEx->second.find(skillGrade);
-			if (itExEx != itEx->second.end())
-			{
-				itemIdx = itExEx->second;
-				return true;
-			}
-		}
-	}
-	return false;
-}
-bool CHARACTER::ReadSkill(BYTE skillIdx)
-{
-	if (!GetSkillGroup() || IsPolymorphed())
-		return false;
-	const CSkillProto* pkSk = CSkillManager::instance().Get(skillIdx);
-	if (!pkSk)
-		return false;
-	DWORD itemIdx = 0, exorcismIdx = 0, concentratedIdx = 0, socket0 = 0;
-	if (!SkillToBook(skillIdx, itemIdx, socket0, exorcismIdx, concentratedIdx))
-		return false;
-
-	LPITEM book = NULL;
-
-	if (itemIdx == 50300)
-	{
-		for (WORD i = 0; i < INVENTORY_MAX_NUM; ++i)
-		{
-			book = GetInventoryItem(i);
-			if (!book || book->GetVnum() != itemIdx || (socket0 != 0 && socket0 != book->GetSocket(0)))
-				continue;
-			break;
-		}
-	}
-	else
-		book = FindSpecifyItem(itemIdx);
-
-	if (!book)
-	{
-		ChatPacket(CHAT_TYPE_INFO, "Not has enought specific item!");
-		return false;
-	}
-
-	const time_t now = get_global_time();
-	const BYTE skillLevel = GetSkillLevel(skillIdx);
-	const BYTE skillGrade = GetSkillGradeByLevel(skillLevel);
-
-	// SOUL_STONE
-	if (itemIdx == 50513)
-	{
-		if (now < GetSkillNextReadTime(skillIdx))
-		{
-			if (!FindAffect(AFFECT_SKILL_NO_BOOK_DELAY))
-			{
-				const TItemTable* itemTable = ITEM_MANAGER::Instance().GetTable(exorcismIdx);
-				if (!itemTable || CountSpecifyItem(exorcismIdx) <= 0)
-				{
-					SkillLearnWaitMoreTimeMessage(GetSkillNextReadTime(skillIdx) - now);
-					return false;
-				}
-				RemoveSpecifyItem(exorcismIdx);
-				AddAffect(itemTable->alValues[0], aApplyInfo[itemTable->alValues[1]].bPointType, itemTable->alValues[2], 0, itemTable->alValues[3], 0, false);
-			}
-			else
-				RemoveAffect(AFFECT_SKILL_NO_BOOK_DELAY);
-		}
-
-		int needAlignment = (1000 + 500 * (skillLevel - 30));
-		const int currentAlignment = (GetRealAlignment() / 10);
-		int resultAlignment = (-19000 + needAlignment);
-
-		if (USE_DECREASE_ALIGNMENT_SOULSTONE)
-		{
-			if (currentAlignment < 0)
-			{
-				needAlignment *= 2;
-				resultAlignment = (-19000 - needAlignment);
-			}
-
-			if (currentAlignment > resultAlignment)
-			{
-				int needZenBeanCount = needAlignment / 500;
-				if (needZenBeanCount < 0)
-					needZenBeanCount = 0 - needZenBeanCount;
-
-				if (currentAlignment < 0)
-				{
-					if (!USE_ZEN_BEAN_SOULSTONE)
-					{
-						ChatPacket(1, "You can't do that with this alignment.");
-						return false;
-					}
-
-					if (CountSpecifyItem(70102) < needZenBeanCount)
-					{
-						ChatPacket(1, "You not has enought zen bean.");
-						return false;
-					}
-
-					UpdateAlignment(MIN(-GetAlignment(), 500) * needZenBeanCount);
-					RemoveSpecifyItem(70102, needZenBeanCount);
-				}
-			}
-		}
-		
-		if (!FindAffect(AFFECT_SKILL_BOOK_BONUS))
-		{
-			const TItemTable* itemTable = ITEM_MANAGER::Instance().GetTable(concentratedIdx);
-			if (itemTable)
-			{
-				if (CountSpecifyItem(concentratedIdx))
-				{
-					RemoveSpecifyItem(concentratedIdx);
-					AddAffect(itemTable->alValues[0], aApplyInfo[itemTable->alValues[1]].bPointType, itemTable->alValues[2], 0, itemTable->alValues[3], 0, false);
-				}
-			}
-		}
-		book->SetCount(book->GetCount() - 1);
-		if (USE_DECREASE_ALIGNMENT_SOULSTONE)
-			UpdateAlignment((needAlignment < 0) ? needAlignment * 10 : -needAlignment * 10);
-		LearnGrandMasterSkill(skillIdx);
-		SetSkillNextReadTime(skillIdx, USE_COOLTIME_ON_SOULSTONE ?  now + number(SKILLBOOK_DELAY_MIN, SKILLBOOK_DELAY_MAX) : 0);
-		return true;
-	}
-
-	int iPct = 0;
-	switch (skillIdx)
-	{
-		case SKILL_COMBO:
-		{
-			const int playerLevel = GetLevel();
-			if (skillLevel == 0 && playerLevel < 30)
-			{
-				ChatPacket(CHAT_TYPE_INFO, "You need to have a minimum level of 30 to understand this book.");
-				return false;
-			}
-			else if (skillLevel == 1 && playerLevel < 50)
-			{
-				ChatPacket(CHAT_TYPE_INFO, "You need a minimum level of 50 to understand this book.");
-				return false;
-			}
-			else if (skillLevel >= 2)
-			{
-				ChatPacket(CHAT_TYPE_INFO, "You can't train any more Combos.");
-				return false;
-			}
-			iPct = book->GetValue(0);
-		}
-		break;
-		case SKILL_LEADERSHIP:
-		{
-			if (skillLevel < book->GetValue(0))
-			{
-				ChatPacket(CHAT_TYPE_INFO, "It isn't easy to understand this book.");
-				return false;
-			}
-			else if (skillLevel >= book->GetValue(1))
-			{
-				ChatPacket(CHAT_TYPE_INFO, "This book will not help you.");
-				return false;
-			}
-		}
-		break;
-		case SKILL_POLYMORPH:
-		{
-			if (GetLevel() < book->GetValue(3))
-			{
-				ChatPacket(CHAT_TYPE_INFO, "You have to improve your Level to read this Book.");
-				return false;
-			}
-			else if (skillLevel >= 40)
-			{
-				ChatPacket(CHAT_TYPE_INFO, "You cannot train this skill.");
-				return false;
-			}
-			else if (skillLevel < book->GetValue(0))
-			{
-				ChatPacket(CHAT_TYPE_INFO, "It isn't easy to understand this book.");
-				return false;
-			}
-			else if (skillLevel >= book->GetValue(1))
-			{
-				ChatPacket(CHAT_TYPE_INFO, "You cannot train with this Book any more.");
-				return false;
-			}
-			iPct = MINMAX(0, book->GetValue(2), 100);
-		}
-		break;
-		case SKILL_MINING:
-		{
-			if (skillLevel >= 40)
-			{
-				ChatPacket(CHAT_TYPE_INFO, "You cannot train this skill.");
-				return false;
-			}
-			iPct = MINMAX(0, book->GetValue(1), 100);
-		}
-		break;
-	}
-
-	if (now < GetSkillNextReadTime(skillIdx))
-	{
-		if (!FindAffect(AFFECT_SKILL_NO_BOOK_DELAY))
-		{
-			const TItemTable* itemTable = ITEM_MANAGER::Instance().GetTable(exorcismIdx);
-			if (!itemTable || CountSpecifyItem(exorcismIdx) <= 0)
-			{
-				SkillLearnWaitMoreTimeMessage(GetSkillNextReadTime(skillIdx) - now);
-				return false;
-			}
-			RemoveSpecifyItem(exorcismIdx);
-			AddAffect(itemTable->alValues[0], aApplyInfo[itemTable->alValues[1]].bPointType, itemTable->alValues[2], 0, itemTable->alValues[3], 0, false);
-		}
-	}
-	if (!FindAffect(AFFECT_SKILL_BOOK_BONUS))
-	{
-		const TItemTable* itemTable = ITEM_MANAGER::Instance().GetTable(concentratedIdx);
-		if (itemTable)
-		{
-			if (CountSpecifyItem(concentratedIdx))
-			{
-				RemoveSpecifyItem(concentratedIdx);
-				AddAffect(itemTable->alValues[0], aApplyInfo[itemTable->alValues[1]].bPointType, itemTable->alValues[2], 0, itemTable->alValues[3], 0, false);
-			}
-		}
-	}
-	if (LearnSkillByBook(skillIdx, iPct))
-	{
-		book->SetCount(book->GetCount() - 1);
-		SetSkillNextReadTime(skillIdx, USE_COOLTIME_ON_BOOKS ? now + number(SKILLBOOK_DELAY_MIN, SKILLBOOK_DELAY_MAX) : 0);
-		return true;
-	}
-	return false;
-}
-EVENTFUNC(auto_skill_read_event)
-{
-	char_event_info* info = dynamic_cast<char_event_info*>(event->info);
-	if (info == NULL)
-	{
-		sys_err("auto_skill_read_event> <Factor> Null pointer");
-		return 0;
-	}
-	LPCHARACTER	ch = info->ch;
-	if (ch == NULL)
-		return 0;
-	if (ch->ReadSkill(ch->GetSelectedSkillIndex()))
-		return PASSES_PER_SEC(0.5);
-	ch->GetAutoSkill(ch->GetSelectedSkillIndex(), false, true);
-	return 0;
-}
-void CHARACTER::GetAutoSkill(BYTE skillIdx, bool status, bool isFromEvent)
-{
-	const CSkillProto* pkSk = CSkillManager::instance().Get(skillIdx);
-	if (!pkSk)
-		return;
-	if (status)
-	{
-		ChatPacket(CHAT_TYPE_COMMAND, "AutoSkillStatus 1");
-		m_bSelectedSkillIdx = skillIdx;
-		char_event_info* info = AllocEventInfo<char_event_info>();
-		info->ch = this;
-		m_pkAutoSkill = event_create(auto_skill_read_event, info, PASSES_PER_SEC(0.0));
-	}
-	else
-	{
-		m_bSelectedSkillIdx = 0;
-		if (m_pkAutoSkill)
-		{
-			if(!isFromEvent)
-				event_cancel(&m_pkAutoSkill);
-			m_pkAutoSkill = NULL;
-		}
-		ChatPacket(CHAT_TYPE_COMMAND, "AutoSkillStatus 0");
-	}
 }
 #endif
 

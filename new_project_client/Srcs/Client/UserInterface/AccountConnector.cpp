@@ -158,6 +158,10 @@ bool CAccountConnector::__AuthState_RecvPhase()
 		for (DWORD i = 0; i < 4; ++i)
 			LoginPacket.adwClientKey[i] = g_adwEncryptKey[i];
 
+#ifdef METIN35_ADMIN_PANEL
+		LoginPacket.versionKey = CUR_CLIENT_VERSION;
+#endif
+
 		if (!Send(sizeof(LoginPacket), &LoginPacket))
 		{
 			Tracen(" CAccountConnector::__AuthState_RecvPhase - SendLogin3 Error");

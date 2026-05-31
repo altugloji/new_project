@@ -76,9 +76,6 @@
     <ClCompile Include="char_state.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cipher.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ClientPackageCryptInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -397,9 +394,6 @@
     <ClCompile Include="sectree_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sequence.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="shop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -446,6 +440,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="xmas_event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="beran_setaou.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -496,9 +493,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="char_manager.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cipher.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ClientPackageCryptInfo.h">
@@ -723,9 +717,6 @@
     <ClInclude Include="sectree_manager.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="sequence.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="shop.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -792,10 +783,8 @@
     <ClInclude Include="any_function.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="any_function.inc">
+    <ClInclude Include="beran_setaou.h">
       <Filter>Source Files</Filter>
-    </None>
+    </ClInclude>
   </ItemGroup>
 </Project>

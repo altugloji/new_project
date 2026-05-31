@@ -1,3 +1,5 @@
+LOGIN_FAILURE_ONLYGM	Giriþ izniniz bulunmuyor. Sunucu þu anda bakýmda.
+LOGIN_FAILURE_UPDATE	Oyununuz güncel deðil. Lütfen güncelleyiniz.
 GM_PLAYER_PANEL_GO	GO
 NEW_MOB_TIMER_GM_ALIVE	[BossTimer] %u yasiyor (id %u map %ld)
 NEW_MOB_TIMER_GM_WAIT	[BossTimer] %u olu bekliyor - sonraki %02d:%02d (id %u)

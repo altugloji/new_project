@@ -76,6 +76,10 @@
 #include "gaya.h"
 #endif
 
+#ifdef BERAN_SETAOU
+#include "beran_setaou.h"
+#endif
+
 extern void WriteVersion();
 
 #if !defined(__WIN32__) && defined(ENABLE_ASAN)
@@ -352,6 +356,10 @@ int main(int argc, char **argv)
 	CNewMobTimer	new_mob_timer;
 #endif
 
+#ifdef BERAN_SETAOU
+	CBeranSetaou beranSetaou;
+#endif
+
 	if (!start(argc, argv)) {
 		CleanUpForEarlyExit();
 		return 0;
@@ -378,6 +386,12 @@ int main(int argc, char **argv)
 	Blend_Item_init();
 	ani_init();
 	PanamaLoad();
+
+	if (!g_bAuthServer) {
+#ifdef BERAN_SETAOU
+		beranSetaou.Initialize();
+#endif
+	}
 
 	// Client PackageCrypt
 	const std::string strPackageCryptInfoDir = "package/";
@@ -451,6 +465,13 @@ int main(int argc, char **argv)
 	quest_manager.Destroy();
 	sys_log(0, "<shutdown> Destroying building::CManager...");
 	building_manager.Destroy();
+
+	if (!g_bAuthServer) {
+#ifdef BERAN_SETAOU
+		sys_log(0, "<shutdown> Destroying beranSetaou...");
+		beranSetaou.Destroy();
+#endif
+	}
 
 	destroy();
 

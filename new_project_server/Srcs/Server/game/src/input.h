@@ -370,6 +370,10 @@ class CInputP2P : public CInputProcessor
 		void		GGDCP2PUpdate(const char * c_pData);
 #endif
 
+#ifdef METIN35_ADMIN_PANEL
+		void		GGAdminPanel();
+#endif
+
 	protected:
 		CPacketInfoGG 	m_packetInfoGG;
 };

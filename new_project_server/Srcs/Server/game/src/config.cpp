@@ -83,6 +83,10 @@ WORD		g_wAuthMasterPort = 0;
 static std::set<DWORD> s_set_dwFileCRC;
 static std::set<DWORD> s_set_dwProcessCRC;
 
+#ifdef METIN35_ADMIN_PANEL
+std::array<BYTE, ADMIN_PANEL_MAX_NUM> g_arrAdminPanel;
+#endif
+
 string g_stHostname = "";
 string g_table_postfix = "";
 
@@ -1411,6 +1415,25 @@ static bool __LoadExpTableFromDB(void)
 }
 #endif
 
+#ifdef METIN35_ADMIN_PANEL
+void ReadAdminPanelData()
+{
+	auto pMsg(DBManager::instance().DirectQuery("SELECT * FROM player.admin_db"));
+
+	if (pMsg->Get()->uiNumRows == 0)
+	{
+		sys_err("[ReadAdminPanelData] SQL Read Error!\n");
+		return;
+	}
+	int index = 0;
+	MYSQL_ROW row;
+	while (nullptr != (row = mysql_fetch_row(pMsg->Get()->pSQLResult)) && index < ADMIN_PANEL_MAX_NUM)
+		str_to_number(g_arrAdminPanel[index++], row[0]);
+
+	// sys_log(0, "[ReadAdminPanelData] Currently Client Version: %d", g_ClientVersion);
+}
+#endif
+
 // #define ENABLE_GENERAL_CMD
 // #define ENABLE_GENERAL_CONFIG
 void config_init(const string& st_localeServiceName)
@@ -1533,6 +1556,11 @@ void config_init(const string& st_localeServiceName)
 	LoadStateUserCount();
 
 	CWarMapManager::instance().LoadWarMapInfo(nullptr);
+
+#ifdef METIN35_ADMIN_PANEL
+	ReadAdminPanelData();
+#endif
+
 
 	FN_log_adminpage();
 	if (g_szPublicIP[0] == '0')

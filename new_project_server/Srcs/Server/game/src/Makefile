@@ -155,7 +155,7 @@ CPPFILE = FSM.cpp MarkConvert.cpp MarkImage.cpp MarkManager.cpp OXEvent.cpp ani.
 		  buff_on_attributes.cpp dragon_soul_table.cpp DragonSoul.cpp\
 		  group_text_parse_tree.cpp char_dragonsoul.cpp questlua_dragonsoul.cpp\
 		  shop_manager.cpp shopEx.cpp item_manager_read_tables.cpp\
-		  questlua_dnd.cpp
+		  questlua_dnd.cpp beran_setaou.cpp
 # PROJECT_SRC_FILES END
 
 # PROJECT_OBJ_FILES BEGIN

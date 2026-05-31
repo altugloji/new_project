@@ -4909,7 +4909,11 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 											}
 										}
 
-										item2->ChangeAttribute();
+#ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
+									item2->ChangeAttribute(nullptr, item->GetVnum() == 71151);
+#else
+									item2->ChangeAttribute();
+#endif
 									}
 
 									ChatPacket(CHAT_TYPE_INFO, LC_TEXT("속성을 변경하였습니다."));

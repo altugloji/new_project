@@ -5581,10 +5581,10 @@
 50739	Boþ güç özütü	Güç özütleri hazýrlamak için gereken boþ bir þiþe.
 50740	Boþ direnç özütü	Direnç özütleri hazýrlamak için gereken boþ bir þiþe.
 50741	Altýn ot	Çok güçlü özütler yapmak için gerekli olan son derece deðerli bir bitki.
-50801	Þeftali Çiçeði Suyu	Bu þeftali çiçeklerinden yapýlan bir sudur. Fiziksel gücünü geliþtirir.
-50802	Çançiçeði Suyu	Çançiçeðinden yapýlan su gücünüzü 3 dakika için 5 puan arttýrýr.
-50803	Kaki Çiçeði Suyu	Kaki çiçeklerinden yapýlan bir sudur. Konsantrasyon seviyeni artýrýr.
-50804	Gango Kökü Suyu	Gango köklerinden yapýlan bir sudur. Yaralarý iyileþtirir.
+50801	Þeftali Çiçeði Suyu	Bu þeftali çiçeklerinden yapýlan bir sudur.
+50802	Çançiçeði Suyu	Bu iksir su gücünü +5 arttýrýr. | |cffffff00|hSüre:10 dakika|r
+50803	Kaki Çiçeði Suyu	Kaki çiçeklerinden yapýlan bir sudur.
+50804	Gango Kökü Suyu	Gango köklerinden yapýlan bir sudur.
 50805	Leylak Suyu	Leylaktan yapýlan su.
 50806	Tue Mantarý Reçinesi	Tue mantarlarýndan yapýlmýþ reçine, uykusuzluða iyi gelir.
 50807	Alp Gülü Suyu	Alp güllerinden yapýlan su, sinir sistemini güçlendirir.
@@ -5593,14 +5593,14 @@
 50810	Devedikeni Suyu	Devedikeninden yapýlan su, kemikleri güçlendirir.
 50811	Hurma Özü	Hurmadan yapýlan su, doyurucudur.
 50812	Sam-Zi Bitkisi Suyu	Sam-zi bitkisinden yapýlan su, güçlendirir.
-50813	Sim suyu	Þeftali çiçeði suyu ve leylaktan yapýlan bu iksir, delici isabet þansýný %10 artýrýr.
-50814	Dok suyu	Çançiçeði suyu ve leylaktan yapýlan bu iksir, kritik isabet þansýný %10 artýrýr.
-50815	Bo Suyu	Bu iksir kaki çiçeði suyundan ve tue-mantarlarýndan yapýlmýþtýr. Beyninizi güçlendirir.
-50816	Yöng Suyu	Bu iksir gango köklerinden ve tue mantarlarýndan yapýlmýþtýr. Fiziksel ve zihinsel performansýnýzý artýrýr.
-50817	Zin Suyu	Bu iksir Sim-suyundan ve alp gülünden yapýlmýþtýr. Saldýrý deðerinizi 3 dakika için 50 puan arttýrýr.
-50818	Sambo Suyu	Bu iksir Dok-suyu ve Alp Gülünden yapýlmýþtýr. Savunmanýzý 3 dakika için 70 puan arttýrýr.
-50819	Mong Suyu	Bu iksir Bo-suyundan ve dutlardan yapýlmýþtýr. Büyü savunmanýzý 3 dakika için %10 arttýrýr.
-50820	Hwal Suyu	Bu iksir yöng suyu ve dutlardan yapýlmýþtýr. Saldýrý hýzýnýzý 3 dakika için 3 puan arttýrýr.
+50813	Sim suyu	Bu iksir, delici isabet þansýný %10 artýrýr. | |cffffff00|hSüre:10 dakika|r
+50814	Dok suyu	Bu iksir, kritik isabet þansýný %10 artýrýr. | |cffffff00|hSüre:10 dakika|r
+50815	Bo Suyu	Bu iksir kaki çiçeði suyundan ve tue-mantarlarýndan yapýlmýþtýr.
+50816	Yöng Suyu	Bu iksir gango köklerinden ve tue mantarlarýndan yapýlmýþtýr.
+50817	Zin Suyu	Bu iksir Saldýrý deðerinizi 50 puan arttýrýr. | |cffffff00|hSüre:10 dakika|r
+50818	Sambo Suyu	Bu iksir Savunmanýzý 70 puan arttýrýr. | |cffffff00|hSüre:10 dakika|r
+50819	Mong Suyu	Bu iksir Büyü savunmanýzý %10 arttýrýr. | |cffffff00|hSüre:10 dakika|r
+50820	Hwal Suyu	Bu iksir Saldýrý hýzýnýz 3 puan arttýrýr. | |cffffff00|hSüre:10 dakika|r
 50830	Alev gücü özütü	Bu son derece güçlü özüt, onu içenlere +%8 - 20 ateþ gücü saðlar.
 50831	Ayaz gücü özütü	Bu son derece güçlü özüt, onu içenlere +%8 - 20 buz gücü saðlar.
 50832	Þimþek gücü özütü	Bu son derece güçlü özüt, onu içenlere +%8 - 20 yýldýrým gücü saðlar.

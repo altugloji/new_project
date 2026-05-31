@@ -11,9 +11,7 @@
 #define REMOVE_BIT(var, bit)	((var) &= ~(bit))
 #define TOGGLE_BIT(var, bit)	((var) = (var) ^ (bit))
 
-#ifdef __AUTO_SKILL_READER__
 extern void split_argument_ex(const char* argument, std::vector<std::string>& vecArgs, const char* arg = " ");
-#endif
 
 inline float DISTANCE_SQRT(long dx, long dy)
 {

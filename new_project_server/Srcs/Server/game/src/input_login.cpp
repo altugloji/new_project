@@ -33,6 +33,13 @@
 	#include "item_shop.h"
 #endif
 
+#ifdef METIN35_ADMIN_PANEL
+	#include "gm.h"
+#endif
+#ifdef BERAN_SETAOU
+	#include "beran_setaou.h"
+#endif
+
 #ifdef ENABLE_WOLFMAN_CHARACTER
 
 // #define USE_LYCAN_CREATE_POSITION
@@ -125,6 +132,31 @@ void CInputLogin::Login(LPDESC d, const char * data) const
 		return;
 	}
 
+#ifdef METIN35_ADMIN_PANEL
+	if (g_arrAdminPanel[ADMIN_PANEL_GM_LOGIN] != 0)
+	{
+		bool check = false;
+		itertype(g_map_GM) iter = g_map_GM.begin();
+		while (iter != g_map_GM.end())
+		{
+			if (strcmp(iter->second.Info.m_szAccount, login) == 0)
+			{
+				check = true;
+				break;
+			}
+			iter++;
+		}
+		if (check == false)
+		{
+			TPacketGCLoginFailure failurePacket	{};
+			failurePacket.header =				HEADER_GC_LOGIN_FAILURE;
+			strlcpy(failurePacket.szStatus,		"ONLYGM", sizeof(failurePacket.szStatus));
+			d->Packet(&failurePacket, sizeof(TPacketGCLoginFailure));
+			return;
+		}
+	}
+#endif
+
 	if (g_iUserLimit > 0)
 	{
 		int iTotal;
@@ -166,6 +198,31 @@ void CInputLogin::LoginByKey(LPDESC d, const char * data) const
 		d->Packet(&failurePacket, sizeof(TPacketGCLoginFailure));
 		return;
 	}
+
+#ifdef METIN35_ADMIN_PANEL
+	if (g_arrAdminPanel[ADMIN_PANEL_GM_LOGIN] != 0)
+	{
+		bool check = false;
+		itertype(g_map_GM) iter = g_map_GM.begin();
+		while (iter != g_map_GM.end())
+		{
+			if (strcmp(iter->second.Info.m_szAccount, login) == 0)
+			{
+				check = true;
+				break;
+			}
+			iter++;
+		}
+		if (check == false)
+		{
+			TPacketGCLoginFailure failurePacket	{};
+			failurePacket.header =				HEADER_GC_LOGIN_FAILURE;
+			strlcpy(failurePacket.szStatus,		"ONLYGM", sizeof(failurePacket.szStatus));
+			d->Packet(&failurePacket, sizeof(TPacketGCLoginFailure));
+			return;
+		}
+	}
+#endif
 
 	if (g_iUserLimit > 0)
 	{
@@ -819,6 +876,14 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 
 #ifdef SKILL_SELECT
 	ch->CheckSkills();
+#endif
+
+#ifdef BERAN_SETAOU
+	if (CBeranSetaou::Instance().IsInCrystalRoom(ch->GetMapIndex())) {
+		if (!CBeranSetaou::Instance().CanStayInCrystalRoom(ch)) {
+			CBeranSetaou::Instance().WarpPlayer(ch, false);
+		}
+	}
 #endif
 
 }

@@ -39,6 +39,10 @@
 	#include "item_shop.h"
 #endif
 
+#ifdef BERAN_SETAOU
+	#include "beran_setaou.h"
+#endif
+
 extern bool DropEvent_RefineBox_SetValue(const std::string& name, int value);
 
 // ADD_COMMAND_SLOW_STUN
@@ -83,6 +87,33 @@ void Command_ApplyAffect(LPCHARACTER ch, const char* argument, const char* affec
 	ch->ChatPacket(CHAT_TYPE_INFO, "%s %s", arg1, affectName);
 }
 // END_OF_ADD_COMMAND_SLOW_STUN
+
+#ifdef METIN35_ADMIN_PANEL
+// struct SDisconnectPlayer
+// {
+	// void operator () (LPDESC d)
+	// {
+		// if (!d || !d->GetCharacter())
+			// return;
+
+		// if (d->GetCharacter()->GetGMLevel() == GM_PLAYER)
+			// d->SetPhase(PHASE_CLOSE);
+	// }
+// };
+
+ACMD(do_read_admin_db)
+{
+	if (!ch || !ch->IsPC())
+		return;
+
+	ReadAdminPanelData();
+
+	TPacketGGAdminPanel ggPacket	{};
+	ggPacket.byHeader =				HEADER_GG_ADMIN_PANEL;
+	P2P_MANAGER::instance().Send(&ggPacket, sizeof(TPacketGGAdminPanel));
+	ch->ChatPacket(CHAT_TYPE_INFO, "Update Values");
+}
+#endif
 
 ACMD(do_stun)
 {
@@ -4865,6 +4896,32 @@ void GmPlayerPanel_WarpTo(LPCHARACTER ch, const char* pszName)
 	}
 
 	ch->ChatPacket(CHAT_TYPE_INFO, "There is no one(%s) by that name", pszName);
+}
+#endif
+
+#ifdef BERAN_SETAOU
+ACMD(do_beran) {
+	char arg1[512];
+	one_argument(argument, arg1, sizeof(arg1));
+	if (g_bChannel != 1) { return; }
+	switch (arg1[0])
+	{
+	case 'e':
+	{
+		CBeranSetaou::Instance().EndDungeon(false);
+	}
+	break;
+	case 'c':
+	{
+		CBeranSetaou::Instance().ClearRoom();
+	}
+	break;
+	case 'i':
+	{
+		ch->ChatPacket(1, "CrystalRoomInfo remainTime: %d | masterName: %s | passWd: %d | roomState: %d | playerCnt: %d", CBeranSetaou::Instance().GetRemainTime(), CBeranSetaou::Instance().GetMasterName(), CBeranSetaou::Instance().GetRoomPassword(), CBeranSetaou::Instance().GetRoomState(), CBeranSetaou::Instance().GetCountPlayerInMap());
+	}
+	break;
+	}
 }
 #endif
 

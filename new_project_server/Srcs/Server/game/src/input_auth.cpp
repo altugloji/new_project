@@ -67,6 +67,14 @@ void CInputAuth::Login(LPDESC d, const char * c_pData) const
 {
 	const auto pinfo = (TPacketCGLogin3 *) c_pData;
 
+#ifdef METIN35_ADMIN_PANEL
+	if (pinfo->versionKey != g_arrAdminPanel[ADMIN_PANEL_CLIENT_VERSION])
+	{
+		LoginFailure(d, "UPDATE");
+		return;
+	}
+#endif
+
 	if (!g_bAuthServer)
 	{
 		sys_err ("CInputAuth class is not for game server. IP %s might be a hacker.",

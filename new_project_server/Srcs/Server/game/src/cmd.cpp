@@ -282,10 +282,6 @@ ACMD(DoChangeChannel);
 ACMD(do_won_exchange);
 #endif
 
-#ifdef __AUTO_SKILL_READER__
-ACMD(do_auto_skill_reader);
-#endif
-
 #ifdef ENABLE_EXCHANGE_LOG
 ACMD(do_ex_log);
 #endif
@@ -310,6 +306,14 @@ ACMD(do_auto_chat);
 
 #ifdef SKILL_SELECT
 ACMD(do_get_skills);
+#endif
+
+#ifdef METIN35_ADMIN_PANEL
+ACMD(do_read_admin_db);
+#endif
+
+#ifdef BERAN_SETAOU
+ACMD(do_beran);
 #endif
 
 struct command_info cmd_info[] =
@@ -625,10 +629,6 @@ struct command_info cmd_info[] =
 	{ "won_exchange",		do_won_exchange,			0,			POS_DEAD,	GM_PLAYER	},
 #endif
 
-#ifdef __AUTO_SKILL_READER__
-	{ "auto_skill_reader",	do_auto_skill_reader,		0,			POS_DEAD,	GM_PLAYER },
-#endif
-
 #ifdef ENABLE_EXCHANGE_LOG
 	{ "ex_log",	do_ex_log,		0,		POS_DEAD,	GM_PLAYER },
 #endif
@@ -659,6 +659,14 @@ struct command_info cmd_info[] =
 
 #ifdef SKILL_SELECT
 	{ "skill_select",		do_get_skills,				0,	POS_DEAD,	GM_PLAYER },
+#endif
+
+#ifdef METIN35_ADMIN_PANEL
+	{ "read_admin_db",			do_read_admin_db,		0,			POS_DEAD,	GM_IMPLEMENTOR	},
+#endif
+
+#ifdef BERAN_SETAOU
+	{ "beran", do_beran, 0, POS_DEAD, GM_IMPLEMENTOR },
 #endif
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}

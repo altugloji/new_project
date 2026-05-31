@@ -45,6 +45,10 @@
 #include "gaya.h"
 #endif
 
+#ifdef BERAN_SETAOU
+	#include "beran_setaou.h"
+#endif
+
 #ifdef ENABLE_CHARACTER_CHEST
 	#include "char_character_chest.h"
 #endif
@@ -941,6 +945,10 @@ void CInputDB::Boot(const char* data) const
 		thecore_shutdown();
 		return;
 	}
+
+#ifdef BERAN_SETAOU
+	CBeranSetaou::Instance().Initialize();
+#endif
 
 	sys_log(0, "LoadLocaleFile: DragonSoulTable: %s", szDragonSoulTableFileName);
 	if (!DSManager::instance().ReadDragonSoulTableFile(szDragonSoulTableFileName))

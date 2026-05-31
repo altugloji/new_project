@@ -681,36 +681,6 @@ PyObject * playerGetSkillLevel(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildValue("i", CPythonPlayer::Instance().GetSkillLevel(iSlotIndex));
 }
 
-#ifdef __AUTO_SKILL_READER__
-PyObject* playerGetSkillLevelNew(PyObject* poSelf, PyObject* poArgs)
-{
-	int iSlotIndex;
-	if (!PyTuple_GetInteger(poArgs, 0, &iSlotIndex))
-		return Py_BuildException();
-
-	return Py_BuildValue("i", CPythonPlayer::Instance().GetSkillLevelNew(iSlotIndex));
-}
-PyObject* playerGetSkillGradeNew(PyObject* poSelf, PyObject* poArgs)
-{
-	int iSlotIndex;
-	if (!PyTuple_GetInteger(poArgs, 0, &iSlotIndex))
-		return Py_BuildException();
-
-	return Py_BuildValue("i", CPythonPlayer::Instance().GetSkillGradeNew(iSlotIndex));
-}
-PyObject* playerGetItemCountByVnumNew(PyObject* poSelf, PyObject* poArgs)
-{
-	int ivnum;
-	if (!PyTuple_GetInteger(poArgs, 0, &ivnum))
-		return Py_BuildException();
-
-	int iSocket0;
-	if (!PyTuple_GetInteger(poArgs, 1, &iSocket0))
-		return Py_BuildException();
-	return Py_BuildValue("i", CPythonPlayer::Instance().GetItemCountByVnumNew(ivnum, iSocket0));
-}
-#endif
-
 PyObject * playerGetSkillCurrentEfficientPercentage(PyObject* poSelf, PyObject* poArgs)
 {
 	int iSlotIndex;
@@ -2361,12 +2331,6 @@ void initPlayer()
 		{ "GetSkillSlotIndex",					playerGetSkillSlotIndex,					METH_VARARGS },
 		{ "GetSkillGrade",						playerGetSkillGrade,						METH_VARARGS },
 		{ "GetSkillLevel",						playerGetSkillLevel,						METH_VARARGS },
-
-#ifdef __AUTO_SKILL_READER__
-		{ "GetSkillLevelNew",						playerGetSkillLevelNew,					METH_VARARGS },
-		{ "GetSkillGradeNew",						playerGetSkillGradeNew,					METH_VARARGS },
-		{ "GetItemCountByVnumNew",					playerGetItemCountByVnumNew,			METH_VARARGS },
-#endif
 
 		{ "GetSkillCurrentEfficientPercentage",	playerGetSkillCurrentEfficientPercentage,	METH_VARARGS },
 		{ "GetSkillNextEfficientPercentage",	playerGetSkillNextEfficientPercentage,		METH_VARARGS },

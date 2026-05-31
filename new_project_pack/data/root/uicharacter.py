@@ -20,6 +20,8 @@ import chr
 SHOW_ONLY_ACTIVE_SKILL = False
 SHOW_LIMIT_SUPPORT_SKILL_LIST = [121, 122, 123, 124, 126, 127, 129, 128, 131, 137, 138, 139, 140]
 HIDE_SUPPORT_SKILL_POINT = True
+if app.ENABLE_STATUS_ADD_BY_INPUT:
+	STATUS_ADD_INPUT_MAX = 90
 
 FACE_IMAGE_DICT = {
 	playerSettingModule.RACE_WARRIOR_M	: "icon/face/warrior_m.tga",
@@ -36,6 +38,130 @@ if app.ENABLE_WOLFMAN_CHARACTER:
 
 def unsigned32(n):
 	return n & 0xFFFFFFFFL
+
+if app.ENABLE_STATUS_ADD_BY_INPUT:
+	class StatusPointDialog(ui.ScriptWindow):
+		def __init__(self):
+			ui.ScriptWindow.__init__(self)
+			self.__Initialize()
+			self.__LoadDialog()
+
+		def __del__(self):
+			ui.ScriptWindow.__del__(self)
+
+		def __Initialize(self):
+			self.acceptEvent = None
+			self.statKey = ""
+			self.maxPoint = 0
+			self.amount = 1
+			self.isRefreshingSlider = False
+			self.board = None
+			self.textBoard = None
+			self.amountText = None
+			self.sliderBar = None
+			self.acceptButton = None
+			self.cancelButton = None
+
+		def __LoadDialog(self):
+			self.AddFlag("float")
+			self.AddFlag("movable")
+			self.SetSize(216, 121)
+			self.SetCenterPosition()
+
+			self.board = ui.BoardWithTitleBar()
+			self.board.SetParent(self)
+			self.board.SetSize(216, 121)
+			self.board.SetTitleName(localeInfo.GAME_STAT_UP)
+			self.board.SetCloseEvent(ui.__mem_func__(self.Close))
+			self.board.Show()
+
+			self.textBoard = ui.Bar()
+			self.textBoard.SetParent(self.board)
+			self.textBoard.SetPosition(20, 39)
+			self.textBoard.SetSize(176, 20)
+			self.textBoard.SetColor(0x99000000)
+			self.textBoard.Show()
+
+			self.amountText = ui.TextLine()
+			self.amountText.SetParent(self.textBoard)
+			self.amountText.SetPosition(88, 3)
+			self.amountText.SetHorizontalAlignCenter()
+			self.amountText.Show()
+
+			self.sliderBar = ui.SliderBar()
+			self.sliderBar.SetParent(self.board)
+			self.sliderBar.SetPosition(30, 68)
+			self.sliderBar.SetEvent(ui.__mem_func__(self.__OnChangeSlider))
+			self.sliderBar.Show()
+
+			self.acceptButton = ui.Button()
+			self.acceptButton.SetParent(self.board)
+			self.acceptButton.SetPosition(47, 91)
+			self.acceptButton.SetUpVisual("d:/ymir work/ui/public/small_button_01.sub")
+			self.acceptButton.SetOverVisual("d:/ymir work/ui/public/small_button_02.sub")
+			self.acceptButton.SetDownVisual("d:/ymir work/ui/public/small_button_03.sub")
+			self.acceptButton.SetText(uiScriptLocale.ACCEPT)
+			self.acceptButton.SAFE_SetEvent(self.__OnAccept)
+			self.acceptButton.Show()
+
+			self.cancelButton = ui.Button()
+			self.cancelButton.SetParent(self.board)
+			self.cancelButton.SetPosition(113, 91)
+			self.cancelButton.SetUpVisual("d:/ymir work/ui/public/small_button_01.sub")
+			self.cancelButton.SetOverVisual("d:/ymir work/ui/public/small_button_02.sub")
+			self.cancelButton.SetDownVisual("d:/ymir work/ui/public/small_button_03.sub")
+			self.cancelButton.SetText(uiScriptLocale.CANCEL)
+			self.cancelButton.SAFE_SetEvent(self.Close)
+			self.cancelButton.Show()
+
+		@ui.WindowDestroy
+		def Destroy(self):
+			self.__Initialize()
+
+		def Open(self, statKey, maxPoint, acceptEvent):
+			self.statKey = statKey
+			self.maxPoint = max(1, min(STATUS_ADD_INPUT_MAX, int(maxPoint)))
+			self.amount = min(self.maxPoint, max(1, self.amount))
+			self.acceptEvent = acceptEvent
+			self.__RefreshAmount()
+			self.SetCenterPosition()
+			self.SetTop()
+			self.Show()
+
+		def Close(self):
+			self.Hide()
+			return True
+
+		def __SetAmount(self, amount):
+			self.amount = min(self.maxPoint, max(1, int(amount)))
+			self.__RefreshAmount()
+
+		def __RefreshAmount(self):
+			self.amountText.SetText("%s %d" % (self.statKey, self.amount))
+			self.isRefreshingSlider = True
+			if self.maxPoint > 1:
+				self.sliderBar.SetSliderPos(float(self.amount - 1) / float(self.maxPoint - 1))
+			else:
+				self.sliderBar.SetSliderPos(0.0)
+			self.isRefreshingSlider = False
+
+		def __OnChangeSlider(self):
+			if self.isRefreshingSlider:
+				return
+
+			if self.maxPoint <= 1:
+				self.__SetAmount(1)
+				return
+			self.__SetAmount(int(self.sliderBar.GetSliderPos() * float(self.maxPoint - 1)) + 1)
+
+		def __OnAccept(self):
+			if self.acceptEvent:
+				self.acceptEvent(self.statKey, self.amount)
+			self.Close()
+
+		def OnPressEscapeKey(self):
+			self.Close()
+			return True
 
 class CharacterWindow(ui.ScriptWindow):
 
@@ -111,6 +237,8 @@ class CharacterWindow(ui.ScriptWindow):
 		self.titleBarDict = None
 		self.statusPlusButtonDict = None
 		self.statusMinusButtonDict = None
+		if app.ENABLE_STATUS_ADD_BY_INPUT:
+			self.statusPointDialog = None
 
 		self.skillPageDict = None
 		self.questShowingStartIndex = 0
@@ -395,6 +523,8 @@ class CharacterWindow(ui.ScriptWindow):
 
 			self.__BindObject()
 			self.__BindEvent()
+			if app.ENABLE_STATUS_ADD_BY_INPUT:
+				self.statusPointDialog = StatusPointDialog()
 		except:
 			import exception
 			exception.Abort("CharacterWindow.__LoadWindow")
@@ -422,6 +552,11 @@ class CharacterWindow(ui.ScriptWindow):
 
 	@ui.WindowDestroy
 	def Destroy(self):
+		if app.ENABLE_STATUS_ADD_BY_INPUT:
+			if self.statusPointDialog:
+				self.statusPointDialog.Destroy()
+				self.statusPointDialog = None
+
 		self.ClearDictionary()
 
 		self.__Initialize()
@@ -430,6 +565,10 @@ class CharacterWindow(ui.ScriptWindow):
 		if 0 != self.toolTipSkill:
 			self.toolTipSkill.Hide()
 
+		if app.ENABLE_STATUS_ADD_BY_INPUT:
+			if self.statusPointDialog:
+				self.statusPointDialog.Close()
+
 		self.Hide()
 
 	def SetSkillToolTip(self, toolTipSkill):
@@ -437,10 +576,28 @@ class CharacterWindow(ui.ScriptWindow):
 
 	def __OnClickStatusPlusButton(self, statusKey):
 		try:
+			if app.ENABLE_STATUS_ADD_BY_INPUT:
+				statusPlusPoint = player.GetStatus(player.STAT)
+				if self.statusPointDialog and statusPlusPoint > 1:
+					self.statusPointDialog.Open(statusKey, statusPlusPoint, self.__OnAcceptStatusPointDialog)
+					return
+
 			statusPlusCommand=self.statusPlusCommandDict[statusKey]
 			net.SendChatPacket(statusPlusCommand)
 		except KeyError as msg:
 			dbg.TraceError("CharacterWindow.__OnClickStatusPlusButton KeyError: %s", msg)
+
+	if app.ENABLE_STATUS_ADD_BY_INPUT:
+		def __OnAcceptStatusPointDialog(self, statusKey, amount):
+			try:
+				statusPlusCommand = self.statusPlusCommandDict[statusKey]
+			except KeyError as msg:
+				dbg.TraceError("CharacterWindow.__OnAcceptStatusPointDialog KeyError: %s", msg)
+				return
+
+			maxPoint = player.GetStatus(player.STAT)
+			amount = min(maxPoint, STATUS_ADD_INPUT_MAX, max(1, int(amount)))
+			net.SendChatPacket("%s %d" % (statusPlusCommand, amount))
 
 	def __OnClickStatusMinusButton(self, statusKey):
 		try:
