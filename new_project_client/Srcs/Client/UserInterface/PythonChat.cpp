@@ -680,13 +680,55 @@ void CPythonChat::AppendChat(int iType, const char* c_szChat, BYTE bSpecialColor
 	}
 	// END_OF_DEFAULT_FONT
 
+	// CLICKABLE_PLAYER_NAME: wrap the sender name in a hyperlink (|Hplayer:Name|hName|h)
+	// so the chat log window can detect a click on the name via ui.GetHyperlink().
+	std::string strChatBuffer;
+	const char* pszChat = c_szChat;
+	if (iType == CHAT_TYPE_TALKING || iType == CHAT_TYPE_PARTY ||
+		iType == CHAT_TYPE_GUILD || iType == CHAT_TYPE_SHOUT)
+	{
+		const char* pColon = strchr(c_szChat, ':');
+		if (pColon && pColon != c_szChat)
+		{
+			std::string strName(c_szChat, pColon - c_szChat);
+
+			std::string strPayload = strName;
+			while (!strPayload.empty() && (strPayload[strPayload.size() - 1] == ' ' || strPayload[strPayload.size() - 1] == '\t'))
+				strPayload.erase(strPayload.size() - 1);
+
+			if (!strPayload.empty() && strPayload.find('|') == std::string::npos)
+			{
+				const bool bHasMarkup = (strchr(c_szChat, '|') != nullptr);
+
+				strChatBuffer = "|Hplayer:";
+				strChatBuffer += strPayload;
+				strChatBuffer += "|h";
+				if (bHasMarkup)
+				{
+					// Message body carries its own markup (item link / color) - do not
+					// nest hyperlinks; make only the name clickable.
+					strChatBuffer += strName;
+					strChatBuffer += "|h";
+					strChatBuffer += pColon;
+				}
+				else
+				{
+					// Whole line ("Name: message") clickable.
+					strChatBuffer += c_szChat;
+					strChatBuffer += "|h";
+				}
+				pszChat = strChatBuffer.c_str();
+			}
+		}
+	}
+
 	IAbstractApplication& rApp=IAbstractApplication::GetSingleton();
 	SChatLine * pChatLine = SChatLine::New();
 	pChatLine->iType = iType;
 #if defined(__BL_MULTI_LANGUAGE_PREMIUM__) && defined(__BL_MULTILANGUAGE_CHATTING__)
-	pChatLine->Instance.SetValue(c_szChat, CGraphicTextInstance::GetCodePageFromRegion(countryName.c_str()));
+	pChatLine->Instance.SetValue(pszChat, CGraphicTextInstance::GetCodePageFromRegion(countryName.c_str()));
 #else
-	pChatLine->Instance.SetValue(c_szChat);
+	pChatLine->Instance.SetValue(pszChat);
 #endif
 
 	// DEFAULT_FONT

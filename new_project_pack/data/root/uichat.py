@@ -11,6 +11,7 @@ import colorInfo
 import constInfo
 import systemSetting
 import player
+from _weakref import proxy
 if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 	import uiScriptLocale
 	import uiToolTip
@@ -446,12 +447,10 @@ class ChatInputSet(ui.Window):
 		chatLine.height = 0
 		self.chatLine = chatLine
 
-		btnSend = ui.Button()
+		btnSend = ChatModeButton()
 		btnSend.SetParent(self)
-		btnSend.SetUpVisual("d:/ymir work/ui/game/taskbar/Send_Chat_Button_01.sub")
-		btnSend.SetOverVisual("d:/ymir work/ui/game/taskbar/Send_Chat_Button_02.sub")
-		btnSend.SetDownVisual("d:/ymir work/ui/game/taskbar/Send_Chat_Button_03.sub")
-		btnSend.SetToolTipText(localeInfo.CHAT_SEND_CHAT)
+		btnSend.SetSize(56, 17)
+		btnSend.SetText(getattr(localeInfo, "USER_REPORT_SYSTEM_DIALOG_BUTTON_YES", localeInfo.CHAT_SEND_CHAT))
 		btnSend.SAFE_SetEvent(self.chatLine.OnIMEReturn)
 		self.btnSend = btnSend
 
@@ -508,21 +507,42 @@ class ChatInputSet(ui.Window):
 		self.chatLine.SetUserMax(max)
 
 	def RefreshPosition(self):
-		if localeInfo.IsARABIC():
-			self.chatLine.SetSize(self.GetWidth() - 93, 18)
-		else:
-			self.chatLine.SetSize(self.GetWidth() - 93, 13)
+		h = self.GetHeight()
+		lineH = 18 if localeInfo.IsARABIC() else 13
 
-		self.btnSend.SetPosition(self.GetWidth() - 25, 2)
+		lineY = (h - lineH) // 2
+		if lineY < 2:
+			lineY = 5
+
+		btnH = max(17, h - 8)
+		sendW = 56
+
+		self.chatModeButton.SetSize(40, btnH)
+		self.chatModeButton.SetPosition(7, (h - btnH) // 2)
+
+		self.btnSend.SetSize(sendW, btnH)
+		self.btnSend.SetPosition(self.GetWidth() - sendW - 6, (h - btnH) // 2)
+
+		self.chatLine.SetPosition(57, lineY)
+		self.chatLine.SetSize(self.GetWidth() - 57 - sendW - 16, lineH)
 
 		(self.chatLine.x, self.chatLine.y, self.chatLine.width, self.chatLine.height) = self.chatLine.GetRect()
 
 	def BindInterface(self, interface):
 		self.chatLine.BindInterface(interface)
 
+	def OnMouseLeftButtonDown(self):
+		self.chatLine.SetFocus()
+		return True
+
 	def OnRender(self):
 		(x, y, width, height) = self.chatLine.GetRect()
-		ui.RenderRoundBox(x-4, y-3, width+7, height+4, self.CHAT_OUTLINE_COLOR)
+		boxH = self.GetHeight() - 8
+		if boxH < height + 4:
+			boxH = height + 4
+		cy = y + height // 2
+		boxTop = cy - boxH // 2
+		ui.RenderRoundBox(x - 4, boxTop, width + 7, boxH, self.CHAT_OUTLINE_COLOR)
 
 ## ChatWindow
 class ChatWindow(ui.Window):
@@ -1082,6 +1102,202 @@ class ChatLogWindow(ui.Window):
 	CHAT_LOG_WINDOW_MINIMUM_WIDTH = 450
 	CHAT_LOG_WINDOW_MINIMUM_HEIGHT = 120
 
+	# Mobile redesign layout
+	MOBILE_WIDTH = 1000
+	MOBILE_HEIGHT = 640
+	HEADER_H = 50
+	SIDEBAR_W = 295
+	SIDE_BTN_X = 13
+	SIDE_BTN_W = 270
+	SIDE_BTN_H = 30
+	SIDE_BTN_GAP = 16
+	SIDE_BTN_TOP = 68
+	COLLAPSE_SIZE = 46
+	CLOSE_BTN_SIZE = 60
+	BOTTOM_BTN_H = 34
+	BOTTOM_MARGIN = 10
+	SCROLLBAR_W = 14
+	INPUT_H = 56
+	RIGHT_TAB_W = 16
+	RIGHT_TAB_H = 64
+	POPUP_W = 200
+	POPUP_PAD = 13
+	POPUP_BTN_H = 34
+	POPUP_BTN_GAP = 6
+	POPUP_TITLE_H = 30
+
+	COL_WINDOW_BG = 0xF01C1C1C
+	COL_HEADER_BG = 0xF02C2C2C
+	COL_SIDEBAR_BG = 0xF0232323
+	COL_MAIN_BG = 0xC0141414
+	# Enter chat window style background (transparent top -> dark bottom)
+	COL_MAIN_GRAD_START = grp.GenerateColor(0.0, 0.0, 0.0, 0.0)
+	COL_MAIN_GRAD_END = grp.GenerateColor(0.0, 0.0, 0.0, 0.8)
+	COL_POPUP_BG = 0xF02B2B2B
+	COL_POPUP_BORDER = 0xFF000000
+
+	# Nesne market category buttons + thinboard background (ESC menu / Yetkili Cagir)
+	BTN_UP = "d:/ymir work/nesne_market/kategori.png"
+	BTN_OVER = "d:/ymir work/nesne_market/kategori.png"
+	BTN_DOWN = "d:/ymir work/nesne_market/kategori2.png"
+	BTN_MARGIN = 14
+	TITLE_TEXT_COLOR = 0xffF8BF24
+	MENU_FONT = localeInfo.UI_DEF_FONT
+	# extra px added between chat lines in the log view
+	CHAT_LINE_EXTRA_STEP = 15
+
+	FLAT_FILL_NORMAL = grp.GenerateColor(0.42, 0.37, 0.23, 1.0)
+	FLAT_FILL_OVER = grp.GenerateColor(0.53, 0.46, 0.29, 1.0)
+	FLAT_FILL_SELECTED = grp.GenerateColor(0.62, 0.54, 0.35, 1.0)
+	FLAT_BORDER = grp.GenerateColor(0.74, 0.66, 0.44, 1.0)
+	FLAT_DARK_FILL = grp.GenerateColor(0.16, 0.16, 0.16, 1.0)
+	FLAT_DARK_OVER = grp.GenerateColor(0.24, 0.24, 0.24, 1.0)
+	FLAT_DARK_BORDER = grp.GenerateColor(0.45, 0.45, 0.45, 1.0)
+	FLAT_TEXT_COLOR = grp.GenerateColor(1.0, 1.0, 1.0, 1.0)
+
+	## Flat rounded button rendered via grp (no external asset needed)
+	class FlatButton(ui.Window):
+		BUTTON_STATE_UP = 0
+		BUTTON_STATE_OVER = 1
+		BUTTON_STATE_DOWN = 2
+
+		def __init__(self):
+			ui.Window.__init__(self)
+			self.state = self.BUTTON_STATE_UP
+			self.selected = False
+			self.dark = False
+			self.event = None
+			self.buttonText = None
+			self.btnWidth = 0
+			self.btnHeight = 0
+			self.SetWindowName("ChatLogFlatButton")
+
+		def __del__(self):
+			ui.Window.__del__(self)
+
+		def SetEvent(self, event):
+			self.event = event
+
+		def SAFE_SetEvent(self, event):
+			self.event = ui.__mem_func__(event)
+
+		def SetDarkStyle(self, flag):
+			self.dark = flag
+
+		def SetSelected(self, flag):
+			self.selected = flag
+
+		def SetText(self, text):
+			if None == self.buttonText:
+				textLine = ui.TextLine()
+				textLine.SetParent(self)
+				textLine.AddFlag("not_pick")
+				textLine.SetWindowHorizontalAlignCenter()
+				textLine.SetWindowVerticalAlignCenter()
+				textLine.SetVerticalAlignCenter()
+				textLine.SetHorizontalAlignCenter()
+				textLine.SetPackedFontColor(0xFFFFFFFF)
+				textLine.SetOutline()
+				textLine.Show()
+				self.buttonText = textLine
+			self.buttonText.SetText(text)
+
+		def SetSize(self, width, height):
+			self.btnWidth = width
+			self.btnHeight = height
+			ui.Window.SetSize(self, width, height)
+
+		def OnMouseOverIn(self):
+			self.state = self.BUTTON_STATE_OVER
+
+		def OnMouseOverOut(self):
+			self.state = self.BUTTON_STATE_UP
+
+		def OnMouseLeftButtonDown(self):
+			self.state = self.BUTTON_STATE_DOWN
+
+		def OnMouseLeftButtonUp(self):
+			self.state = self.BUTTON_STATE_UP
+			if self.IsIn():
+				self.state = self.BUTTON_STATE_OVER
+			if None != self.event:
+				self.event()
+
+		def OnRender(self):
+			if not self.IsShow():
+				return
+			(x, y) = self.GetGlobalPosition()
+			owner = ChatLogWindow
+			if self.dark:
+				if self.selected or self.state == self.BUTTON_STATE_DOWN:
+					fill = owner.FLAT_DARK_OVER
+				elif self.state == self.BUTTON_STATE_OVER:
+					fill = owner.FLAT_DARK_OVER
+				else:
+					fill = owner.FLAT_DARK_FILL
+				border = owner.FLAT_DARK_BORDER
+			else:
+				if self.selected or self.state == self.BUTTON_STATE_DOWN:
+					fill = owner.FLAT_FILL_SELECTED
+				elif self.state == self.BUTTON_STATE_OVER:
+					fill = owner.FLAT_FILL_OVER
+				else:
+					fill = owner.FLAT_FILL_NORMAL
+				border = owner.FLAT_BORDER
+			grp.SetColor(fill)
+			grp.RenderBar(x, y, self.btnWidth, self.btnHeight)
+			grp.SetColor(border)
+			grp.RenderRoundBox(x, y, self.btnWidth, self.btnHeight)
+
+	## Dark rounded board used as the name context-menu background
+	class PopupBoard(ui.Window):
+		def __init__(self):
+			ui.Window.__init__(self)
+			self.SetWindowName("ChatLogPopupBoard")
+
+		def __del__(self):
+			ui.Window.__del__(self)
+
+		def OnRender(self):
+			if not self.IsShow():
+				return
+			(x, y) = self.GetGlobalPosition()
+			w = self.GetWidth()
+			h = self.GetHeight()
+			grp.SetColor(ChatLogWindow.COL_POPUP_BG)
+			grp.RenderBar(x, y, w, h)
+			grp.SetColor(ChatLogWindow.COL_POPUP_BORDER)
+			grp.RenderBox(x, y, w, h)
+
+	## Renders the chat stream above the background board (drawn as a child so
+	## it sits on top of the ThinBoard, unlike the parent OnRender which draws first)
+	class ChatRenderer(ui.Window):
+		def __init__(self):
+			ui.Window.__init__(self)
+			self.SetWindowName("ChatLogRenderer")
+			self.chatID = None
+			self.gradStart = None
+			self.gradEnd = None
+
+		def __del__(self):
+			ui.Window.__del__(self)
+
+		def Bind(self, chatID, gradStart, gradEnd):
+			self.chatID = chatID
+			self.gradStart = gradStart
+			self.gradEnd = gradEnd
+
+		def OnRender(self):
+			if None == self.chatID:
+				return
+			(x, y, width, height) = self.GetRect()
+			grp.RenderGradationBar(x, y, width, height, self.gradStart, self.gradEnd)
+			chat.ArrangeShowingChat(self.chatID)
+			chat.SetPosition(self.chatID, x + 8, y + height - 6)
+			chat.SetHeight(self.chatID, height - 12)
+			chat.Update(self.chatID)
+			chat.Render(self.chatID)
+
 	class ResizeButton(ui.DragButton):
 
 		def __init__(self):
@@ -1100,287 +1316,346 @@ class ChatLogWindow(ui.Window):
 
 		self.allChatMode = True
 		self.chatInputSet = None
+		self.interface = None
+		self.filterButtons = []
+		self.sidebarCollapsed = False
+		self.contextName = ""
+		self.bg = None
+		self.btnW = self.SIDE_BTN_W
+		self.btnH = self.SIDE_BTN_H
+		self.sidebarW = self.SIDEBAR_W
+		self.mainX = self.SIDEBAR_W
+		self.mainY = self.HEADER_H + 8
+		self.mainW = 100
+		self.mainH = 100
 
 		ui.Window.__init__(self)
 		self.AddFlag("float")
 		self.AddFlag("movable")
 		self.SetWindowName("ChatLogWindow")
+
+		self.scrollBarPos = 1.0
+
+		self.__CreateBackground()
 		self.__CreateChatInputSet()
-		self.__CreateWindow()
-		self.__CreateButton()
-		self.__CreateScrollBar()
+		self.__CreateSidebar()
+		self.__CreateChrome()
+		self.__CreatePopup()
 
 		self.chatID = chat.CreateChatSet(chat.CHAT_SET_LOG_WINDOW)
 		chat.SetBoardState(self.chatID, chat.BOARD_STATE_LOG)
 		for i in self.CHAT_MODE_INDEX:
 			chat.EnableChatMode(self.chatID, i)
 
-		self.SetPosition(20, 20)
-		self.SetSize(self.CHAT_LOG_WINDOW_MINIMUM_WIDTH, self.CHAT_LOG_WINDOW_MINIMUM_HEIGHT)
-		self.btnSizing.SetPosition(self.CHAT_LOG_WINDOW_MINIMUM_WIDTH-self.btnSizing.GetWidth(), self.CHAT_LOG_WINDOW_MINIMUM_HEIGHT-self.btnSizing.GetHeight()+2)
+		chat.SetStep(self.chatID, chat.GetLineStep(self.chatID) + self.CHAT_LINE_EXTRA_STEP)
 
-		self.OnResize()
+		self.chatRenderer.Bind(self.chatID, self.COL_MAIN_GRAD_START, self.COL_MAIN_GRAD_END)
+
+		self.SetSize(self.MOBILE_WIDTH, self.MOBILE_HEIGHT)
+		self.SetPosition((wndMgr.GetScreenWidth() - self.MOBILE_WIDTH) // 2, (wndMgr.GetScreenHeight() - self.MOBILE_HEIGHT) // 2)
+		self.OnSelectFilter(None)
+		self.__Layout()
+
+	def __CreateBackground(self):
+		bg = ui.ThinBoard()
+		bg.SetParent(self)
+		bg.AddFlag("not_pick")
+		bg.SetPosition(0, 0)
+		bg.Show()
+		self.bg = bg
+
+		chatRenderer = self.ChatRenderer()
+		chatRenderer.SetParent(self)
+		chatRenderer.AddFlag("not_pick")
+		chatRenderer.Show()
+		self.chatRenderer = chatRenderer
 
 	def __CreateChatInputSet(self):
 		chatInputSet = ChatInputSet()
 		chatInputSet.SetParent(self)
 		chatInputSet.SetEscapeEvent(ui.__mem_func__(self.Close))
-		chatInputSet.SetWindowVerticalAlignBottom()
 		chatInputSet.Open()
 		self.chatInputSet = chatInputSet
 
-	def __CreateWindow(self):
-		imgLeft = ui.ImageBox()
-		imgLeft.AddFlag("not_pick")
-		imgLeft.SetParent(self)
+	def __MakeMenuButton(self, parent, text, radio=False, textColor=0xFFFFFFFF):
+		btn = ui.RadioButton() if radio else ui.Button()
+		btn.SetParent(parent)
+		btn.SetUpVisual(self.BTN_UP)
+		btn.SetOverVisual(self.BTN_OVER)
+		btn.SetDownVisual(self.BTN_DOWN)
+		btn.SetText(text)
+		if btn.ButtonText:
+			btn.ButtonText.SetFontName(self.MENU_FONT)
+			btn.ButtonText.SetPosition(btn.GetWidth() // 2, btn.GetHeight() // 2)
+		btn.SetTextColor(textColor)
+		btn.Show()
+		return btn
 
-		imgCenter = ui.ExpandedImageBox()
-		imgCenter.AddFlag("not_pick")
-		imgCenter.SetParent(self)
+	def __CreateSidebar(self):
+		entries = [ (None, localeInfo.CHAT_ALL),
+					(chat.CHAT_TYPE_TALKING, localeInfo.CHAT_NORMAL),
+					(chat.CHAT_TYPE_SHOUT, localeInfo.CHAT_SHOUT),
+					(chat.CHAT_TYPE_INFO, localeInfo.CHAT_INFORMATION),
+					(chat.CHAT_TYPE_NOTICE, localeInfo.CHAT_NOTICE),
+					(chat.CHAT_TYPE_PARTY, localeInfo.CHAT_PARTY),
+					(chat.CHAT_TYPE_GUILD, localeInfo.CHAT_GUILD), ]
+		if app.ENABLE_DICE_SYSTEM:
+			entries.append((chat.CHAT_TYPE_DICE_INFO, localeInfo.CHAT_DICE_INFO))
 
-		imgRight = ui.ImageBox()
-		imgRight.AddFlag("not_pick")
-		imgRight.SetParent(self)
+		self.filterButtons = []
+		y = self.SIDE_BTN_TOP
+		for mode, name in entries:
+			btn = self.__MakeMenuButton(self, name, radio=True)
+			if not self.btnW or self.btnW == self.SIDE_BTN_W:
+				self.btnW = btn.GetWidth()
+				self.btnH = btn.GetHeight()
+			btn.SetPosition(self.BTN_MARGIN, y)
+			btn.SetEvent(lambda m=mode, r=proxy(self): r.OnSelectFilter(m))
+			self.filterButtons.append((mode, name, btn))
+			y += self.btnH + self.SIDE_BTN_GAP
 
-		if localeInfo.IsARABIC():
-			imgLeft.LoadImage("locale/ae/ui/pattern/titlebar_left.tga")
-			imgCenter.LoadImage("locale/ae/ui/pattern/titlebar_center.tga")
-			imgRight.LoadImage("locale/ae/ui/pattern/titlebar_right.tga")
-		else:
-			imgLeft.LoadImage("d:/ymir work/ui/pattern/chatlogwindow_titlebar_left.tga")
-			imgCenter.LoadImage("d:/ymir work/ui/pattern/chatlogwindow_titlebar_middle.tga")
-			imgRight.LoadImage("d:/ymir work/ui/pattern/chatlogwindow_titlebar_right.tga")
+		self.sidebarW = self.btnW + 2 * self.BTN_MARGIN
+		self.sidebarBottomY = y
 
-		imgLeft.Show()
-		imgCenter.Show()
-		imgRight.Show()
+	def __CreateChrome(self):
+		headerText = ui.TextLine()
+		headerText.SetParent(self)
+		headerText.AddFlag("not_pick")
+		headerText.SetPosition(18, (self.HEADER_H - 16) // 2)
+		headerText.SetPackedFontColor(0xFFFFFFFF)
+		headerText.SetOutline()
+		headerText.SetText(localeInfo.CHAT_ALL)
+		headerText.Show()
+		self.headerText = headerText
 
-		btnClose = ui.Button()
-		btnClose.SetParent(self)
-		btnClose.SetUpVisual("d:/ymir work/ui/public/close_button_01.sub")
-		btnClose.SetOverVisual("d:/ymir work/ui/public/close_button_02.sub")
-		btnClose.SetDownVisual("d:/ymir work/ui/public/close_button_03.sub")
-		btnClose.SetToolTipText(localeInfo.UI_CLOSE, 0, -23)
-		btnClose.SetEvent(ui.__mem_func__(self.Close))
-		btnClose.Show()
+		closeBtn = self.FlatButton()
+		closeBtn.SetParent(self)
+		closeBtn.SetDarkStyle(True)
+		closeBtn.SetSize(self.CLOSE_BTN_SIZE, self.CLOSE_BTN_SIZE)
+		closeBtn.SetText("X")
+		closeBtn.SAFE_SetEvent(self.Close)
+		closeBtn.Show()
+		self.closeBtn = closeBtn
 
-		btnSizing = self.ResizeButton()
-		btnSizing.SetParent(self)
-		btnSizing.SetMoveEvent(ui.__mem_func__(self.OnResize))
-		btnSizing.SetSize(16, 16)
-		btnSizing.Show()
+		titleBtn = self.__MakeMenuButton(self, localeInfo.AUTO_CHAT_TITLE, textColor=self.TITLE_TEXT_COLOR)
+		titleBtn.SetEvent(ui.__mem_func__(self.__OpenAutoChat))
+		self.titleBtn = titleBtn
 
-		titleName = ui.TextLine()
-		titleName.SetParent(self)
+	def __CreatePopup(self):
+		btnH = self.btnH
+		popupW = self.btnW + 2 * self.POPUP_PAD
+		popupH = self.POPUP_TITLE_H + 3 * (btnH + self.POPUP_BTN_GAP) + self.POPUP_PAD
 
-		if localeInfo.IsARABIC():
-			titleName.SetPosition(self.GetWidth()-20, 6)
-		else:
-			titleName.SetPosition(20, 6)
+		popup = self.PopupBoard()
+		popup.SetParent(self)
+		popup.AddFlag("float")
+		popup.SetSize(popupW, popupH)
+		popup.Hide()
 
-		titleName.SetText(localeInfo.CHAT_LOG_TITLE)
-		titleName.Show()
+		popupTitle = ui.TextLine()
+		popupTitle.SetParent(popup)
+		popupTitle.AddFlag("not_pick")
+		popupTitle.SetPosition(self.POPUP_PAD, 9)
+		popupTitle.SetPackedFontColor(0xFFFFFFFF)
+		popupTitle.SetOutline()
+		popupTitle.Show()
+		self.popupTitle = popupTitle
 
-		self.imgLeft = imgLeft
-		self.imgCenter = imgCenter
-		self.imgRight = imgRight
-		self.btnClose = btnClose
-		self.btnSizing = btnSizing
-		self.titleName = titleName
+		py = self.POPUP_TITLE_H
 
-	def __CreateButton(self):
+		btnWhisper = self.__MakeMenuButton(popup, localeInfo.TARGET_BUTTON_WHISPER)
+		btnWhisper.SetPosition(self.POPUP_PAD, py)
+		btnWhisper.SAFE_SetEvent(self.__OnPopupWhisper)
+		py += btnH + self.POPUP_BTN_GAP
 
-		if localeInfo.IsARABIC():
-			bx = 20
-		else:
-			bx = 13
+		btnFriend = self.__MakeMenuButton(popup, localeInfo.TARGET_BUTTON_FRIEND)
+		btnFriend.SetPosition(self.POPUP_PAD, py)
+		btnFriend.SAFE_SetEvent(self.__OnPopupFriend)
+		py += btnH + self.POPUP_BTN_GAP
 
-		btnAll = ui.RadioButton()
-		btnAll.SetParent(self)
-		btnAll.SetPosition(bx, 24)
-		btnAll.SetUpVisual("d:/ymir work/ui/public/xsmall_button_01.sub")
-		btnAll.SetOverVisual("d:/ymir work/ui/public/xsmall_button_02.sub")
-		btnAll.SetDownVisual("d:/ymir work/ui/public/xsmall_button_03.sub")
-		btnAll.SetText(localeInfo.CHAT_ALL)
-		btnAll.SetEvent(ui.__mem_func__(self.ToggleAllChatMode))
-		btnAll.Down()
-		btnAll.Show()
-		self.btnAll = btnAll
+		btnBlock = self.__MakeMenuButton(popup, localeInfo.TARGET_BUTTON_BLOCK)
+		btnBlock.SetPosition(self.POPUP_PAD, py)
+		btnBlock.SAFE_SetEvent(self.__OnPopupBlock)
 
-		x = bx + 48
-		i = 0
-		self.modeButtonList = []
-		for name in self.CHAT_MODE_NAME:
-			btn = ui.ToggleButton()
-			btn.SetParent(self)
-			btn.SetPosition(x, 24)
-			btn.SetUpVisual("d:/ymir work/ui/public/xsmall_button_01.sub")
-			btn.SetOverVisual("d:/ymir work/ui/public/xsmall_button_02.sub")
-			btn.SetDownVisual("d:/ymir work/ui/public/xsmall_button_03.sub")
-			btn.SetText(name)
-			btn.Show()
-
-			mode = self.CHAT_MODE_INDEX[i]
-			btn.SetToggleUpEvent(lambda arg=mode: self.ToggleChatMode(arg))
-			btn.SetToggleDownEvent(lambda arg=mode: self.ToggleChatMode(arg))
-			self.modeButtonList.append(btn)
-
-			x += 48
-			i += 1
-
-	def __CreateScrollBar(self):
-		scrollBar = ui.SmallThinScrollBar()
-		scrollBar.SetParent(self)
-		scrollBar.Show()
-		scrollBar.SetScrollEvent(ui.__mem_func__(self.OnScroll))
-		self.scrollBar = scrollBar
-		self.scrollBarPos = 1.0
+		self.popup = popup
+		self.popupBtnWhisper = btnWhisper
+		self.popupBtnFriend = btnFriend
+		self.popupBtnBlock = btnBlock
 
 	def __del__(self):
 		ui.Window.__del__(self)
 
 	@ui.WindowDestroy
 	def Destroy(self):
-		self.imgLeft = None
-		self.imgCenter = None
-		self.imgRight = None
-		self.btnClose = None
-		self.btnSizing = None
-		self.modeButtonList = []
-		self.scrollBar = None
+		self.bg = None
+		self.chatRenderer = None
+		self.headerText = None
+		self.closeBtn = None
+		self.titleBtn = None
+		self.filterButtons = []
+		self.popup = None
+		self.popupTitle = None
+		self.popupBtnWhisper = None
+		self.popupBtnFriend = None
+		self.popupBtnBlock = None
 		self.chatInputSet = None
+		self.interface = None
 
-	def ToggleAllChatMode(self):
-		if self.allChatMode:
-			return
-
-		self.allChatMode = True
-
-		for i in self.CHAT_MODE_INDEX:
-			chat.EnableChatMode(self.chatID, i)
-		for btn in self.modeButtonList:
-			btn.SetUp()
-
-	def ToggleChatMode(self, mode):
-		if self.allChatMode:
+	def OnSelectFilter(self, mode):
+		self.__HidePopup()
+		if None == mode:
+			self.allChatMode = True
+			for i in self.CHAT_MODE_INDEX:
+				chat.EnableChatMode(self.chatID, i)
+			if self.headerText:
+				self.headerText.SetText(localeInfo.CHAT_ALL)
+		else:
 			self.allChatMode = False
 			for i in self.CHAT_MODE_INDEX:
 				chat.DisableChatMode(self.chatID, i)
 			chat.EnableChatMode(self.chatID, mode)
-			self.btnAll.SetUp()
+			if self.headerText:
+				self.headerText.SetText(self.__GetModeName(mode))
+		self.__RefreshFilterSelection(mode)
 
-		else:
-			chat.ToggleChatMode(self.chatID, mode)
+	def __GetModeName(self, mode):
+		for entryMode, name, btn in self.filterButtons:
+			if entryMode == mode:
+				return name
+		return localeInfo.CHAT_ALL
+
+	def __RefreshFilterSelection(self, mode):
+		for entryMode, name, btn in self.filterButtons:
+			if entryMode == mode:
+				btn.Down()
+			else:
+				btn.SetUp()
+
+	def __HidePopup(self):
+		if self.popup:
+			self.popup.Hide()
+
+	def __OpenAutoChat(self):
+		self.__HidePopup()
+		if not app.AUTO_CHAT_ENABLE:
+			return
+		if wndAutoChatWindow:
+			if wndAutoChatWindow.IsShow():
+				wndAutoChatWindow.Close()
+			else:
+				wndAutoChatWindow.Open()
+				wndAutoChatWindow.SetTop()
+
+	def OpenNameContextMenu(self, name, x=None, y=None):
+		if not name or not self.popup:
+			return
+		self.contextName = name
+		self.popupTitle.SetText(name)
+
+		(gx, gy) = self.GetGlobalPosition()
+		if None == x or None == y:
+			(mx, my) = wndMgr.GetMousePosition()
+			x = mx - gx
+			y = my - gy
+
+		popupW = self.popup.GetWidth()
+		popupH = self.popup.GetHeight()
+		maxX = self.GetWidth() - popupW
+		maxY = self.GetHeight() - popupH
+		if x > maxX:
+			x = maxX
+		if x < 0:
+			x = 0
+		if y > maxY:
+			y = maxY
+		if y < 0:
+			y = 0
+
+		self.popup.SetPosition(x, y)
+		self.popup.Show()
+		self.popup.SetTop()
+
+	def __OnPopupWhisper(self):
+		name = self.contextName
+		self.__HidePopup()
+		if name and self.interface:
+			self.interface.OpenWhisperDialog(name)
+
+	def __OnPopupFriend(self):
+		name = self.contextName
+		self.__HidePopup()
+		if name:
+			net.SendMessengerAddByNamePacket(name)
+
+	def __OnPopupBlock(self):
+		name = self.contextName
+		self.__HidePopup()
+		if name:
+			net.SendChatPacket("/ignore " + name)
+
+	def __Layout(self):
+		width = self.GetWidth()
+		height = self.GetHeight()
+		sidebarW = self.sidebarW
+
+		if self.bg:
+			self.bg.SetSize(width, height)
+
+		if self.closeBtn:
+			self.closeBtn.SetPosition(width - self.CLOSE_BTN_SIZE - 8, 8)
+
+		if self.titleBtn:
+			self.titleBtn.SetPosition(self.BTN_MARGIN, height - self.btnH - self.BOTTOM_MARGIN)
+
+		mainX = sidebarW + 8
+		mainY = self.HEADER_H + 8
+		mainW = width - mainX - 14
+		mainH = height - mainY - self.INPUT_H - 14
+		self.mainX = mainX
+		self.mainY = mainY
+		self.mainW = mainW
+		self.mainH = mainH
+
+		if self.chatRenderer:
+			self.chatRenderer.SetPosition(mainX, mainY)
+			self.chatRenderer.SetSize(mainW, mainH)
+
+		if self.chatInputSet:
+			self.chatInputSet.SetPosition(mainX, height - self.INPUT_H - 8)
+			self.chatInputSet.SetSize(mainW, self.INPUT_H)
+			self.chatInputSet.RefreshPosition()
+			self.chatInputSet.SetChatMax(max(20, mainW // 8))
 
 	def SetSize(self, width, height):
-		self.imgCenter.SetRenderingRect(0.0, 0.0, float((width - self.BLOCK_WIDTH*2) - self.BLOCK_WIDTH) / self.BLOCK_WIDTH, 0.0)
-		self.imgCenter.SetPosition(self.BLOCK_WIDTH, 0)
-		self.imgRight.SetPosition(width - self.BLOCK_WIDTH, 0)
-
-		if localeInfo.IsARABIC():
-			self.titleName.SetPosition(self.GetWidth()-20, 3)
-			self.btnClose.SetPosition(3, 3)
-			self.scrollBar.SetPosition(1, 45)
-		else:
-			self.btnClose.SetPosition(width - self.btnClose.GetWidth() - 5, 5)
-			self.scrollBar.SetPosition(width - 15, 45)
-
-		self.scrollBar.SetScrollBarSize(height - 45 - 12)
-		self.scrollBar.SetPos(self.scrollBarPos)
 		ui.Window.SetSize(self, width, height)
+		self.__Layout()
 
 	def Open(self):
-		self.OnResize()
-		self.chatInputSet.SetChatFocus()
+		self.__Layout()
 		self.Show()
 
 	def Close(self):
+		self.__HidePopup()
 		if self.chatInputSet:
 			self.chatInputSet.KillChatFocus()
 		self.Hide()
 
-	def OnResize(self):
-		x, y = self.btnSizing.GetLocalPosition()
-		width = self.btnSizing.GetWidth()
-		height = self.btnSizing.GetHeight()
-
-		if x < self.CHAT_LOG_WINDOW_MINIMUM_WIDTH - width:
-			self.btnSizing.SetPosition(self.CHAT_LOG_WINDOW_MINIMUM_WIDTH - width, y)
-			return
-		if y < self.CHAT_LOG_WINDOW_MINIMUM_HEIGHT - height:
-			self.btnSizing.SetPosition(x, self.CHAT_LOG_WINDOW_MINIMUM_HEIGHT - height)
-			return
-
-		self.scrollBar.LockScroll()
-		self.SetSize(x + width, y + height)
-		self.scrollBar.UnlockScroll()
-
-		if localeInfo.IsARABIC():
-			self.chatInputSet.SetPosition(20, 25)
-		else:
-			self.chatInputSet.SetPosition(0, 25)
-
-		self.chatInputSet.SetSize(self.GetWidth() - 20, 20)
-		self.chatInputSet.RefreshPosition()
-		self.chatInputSet.SetChatMax(self.GetWidth() / 8)
-
-	def OnScroll(self):
-		self.scrollBarPos = self.scrollBar.GetPos()
-
+	def OnMouseWheel(self, nLen):
 		lineCount = chat.GetLineCount(self.chatID)
 		visibleLineCount = chat.GetVisibleLineCount(self.chatID)
-		endLine = visibleLineCount + int(float(lineCount - visibleLineCount) * self.scrollBarPos)
+		scrollableLines = lineCount - visibleLineCount
+		if scrollableLines <= 0:
+			return True
 
+		step = 3.0 / float(scrollableLines)
+		self.scrollBarPos = max(0.0, min(1.0, self.scrollBarPos - nLen * step))
 		chat.SetEndPos(self.chatID, self.scrollBarPos)
-
-	def OnRender(self):
-		(x, y, width, height) = self.GetRect()
-
-		if localeInfo.IsARABIC():
-			grp.SetColor(0x77000000)
-			grp.RenderBar(x+2, y+45, 13, height-45)
-
-			grp.SetColor(0x77000000)
-			grp.RenderBar(x, y, width, height)
-			grp.SetColor(0x77000000)
-			grp.RenderBox(x, y, width-2, height)
-			grp.SetColor(0x77000000)
-			grp.RenderBox(x+1, y+1, width-2, height)
-
-			grp.SetColor(0xff989898)
-			grp.RenderLine(x+width-13, y+height-1, 11, -11)
-			grp.RenderLine(x+width-9, y+height-1, 7, -7)
-			grp.RenderLine(x+width-5, y+height-1, 3, -3)
-		else:
-			grp.SetColor(0x77000000)
-			grp.RenderBar(x+width-15, y+45, 13, height-45)
-
-			grp.SetColor(0x77000000)
-			grp.RenderBar(x, y, width, height)
-			grp.SetColor(0x77000000)
-			grp.RenderBox(x, y, width-2, height)
-			grp.SetColor(0x77000000)
-			grp.RenderBox(x+1, y+1, width-2, height)
-
-			grp.SetColor(0xff989898)
-			grp.RenderLine(x+width-13, y+height-1, 11, -11)
-			grp.RenderLine(x+width-9, y+height-1, 7, -7)
-			grp.RenderLine(x+width-5, y+height-1, 3, -3)
-
-		#####
-
-		chat.ArrangeShowingChat(self.chatID)
-
-		if localeInfo.IsARABIC():
-			chat.SetPosition(self.chatID, x + width - 10, y + height - 25)
-		else:
-			chat.SetPosition(self.chatID, x + 10, y + height - 25)
-
-		chat.SetHeight(self.chatID, height - 45 - 25)
-		chat.Update(self.chatID)
-		chat.Render(self.chatID)
+		return True
 
 	def OnPressEscapeKey(self):
+		if self.popup and self.popup.IsShow():
+			self.__HidePopup()
+			return True
 		self.Close()
 		return True
 
@@ -1388,7 +1663,11 @@ class ChatLogWindow(ui.Window):
 		self.interface = interface
 
 	def OnMouseLeftButtonDown(self):
+		self.__HidePopup()
 		hyperlink = ui.GetHyperlink()
+		if hyperlink and hyperlink[:7] == "player:":
+			self.OpenNameContextMenu(hyperlink[7:])
+			return
 		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
 			country = chat.GetCountry()
 			empire = chat.GetEmpire()
