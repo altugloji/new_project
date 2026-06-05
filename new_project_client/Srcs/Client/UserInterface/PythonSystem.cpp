@@ -355,6 +355,9 @@ void CPythonSystem::SetDefaultConfig()
 	m_Config.bAlwaysShowName	= DEFAULT_VALUE_ALWAYS_SHOW_NAME;
 	m_Config.bShowDamage		= true;
 	m_Config.bShowSalesText		= true;
+#ifdef ENABLE_OFFLINE_SHOP
+	m_Config.fPrivateShopViewDistance = 1.0f;
+#endif
 #if defined(WJ_SHOW_MOB_INFO) && defined(ENABLE_SHOW_MOBAIFLAG)
 	m_Config.bShowMobAIFlag		= true;
 #endif
@@ -558,6 +561,10 @@ bool CPythonSystem::LoadConfig()
 			m_Config.bShowDamage = atoi(value) == 1 ? true : false;
 		else if (!stricmp(command, "SHOW_SALESTEXT"))
 			m_Config.bShowSalesText = atoi(value) == 1 ? true : false;
+#ifdef ENABLE_OFFLINE_SHOP
+		else if (!stricmp(command, "PRIVATE_SHOP_VIEW_DISTANCE"))
+			m_Config.fPrivateShopViewDistance = atof(value);
+#endif
 #if defined(WJ_SHOW_MOB_INFO) && defined(ENABLE_SHOW_MOBAIFLAG)
 		else if (!stricmp(command, "SHOW_MOBAIFLAG"))
 			m_Config.bShowMobAIFlag = atoi(value) == 1 ? true : false;
@@ -652,6 +659,9 @@ bool CPythonSystem::SaveConfig()
 		fprintf(fp, "SHOW_DAMAGE		%d\n", m_Config.bShowDamage);
 	if (m_Config.bShowSalesText == 0)
 		fprintf(fp, "SHOW_SALESTEXT		%d\n", m_Config.bShowSalesText);
+#ifdef ENABLE_OFFLINE_SHOP
+	fprintf(fp, "PRIVATE_SHOP_VIEW_DISTANCE			%.3f\n", m_Config.fPrivateShopViewDistance);
+#endif
 #if defined(WJ_SHOW_MOB_INFO) && defined(ENABLE_SHOW_MOBAIFLAG)
 	if (m_Config.bShowMobAIFlag == 0)
 		fprintf(fp, "SHOW_MOBAIFLAG		%d\n", m_Config.bShowMobAIFlag);

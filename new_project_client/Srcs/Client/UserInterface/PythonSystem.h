@@ -82,6 +82,9 @@ class CPythonSystem : public CSingleton<CPythonSystem>
 			bool			bAlwaysShowName;
 			bool			bShowDamage;
 			bool			bShowSalesText;
+#ifdef ENABLE_OFFLINE_SHOP
+			float			fPrivateShopViewDistance;
+#endif
 #if defined(WJ_SHOW_MOB_INFO) && defined(ENABLE_SHOW_MOBAIFLAG)
 			bool			bShowMobAIFlag;
 #endif
@@ -132,6 +135,10 @@ class CPythonSystem : public CSingleton<CPythonSystem>
 		bool							IsAlwaysShowName() const;
 		bool							IsShowDamage() const;
 		bool							IsShowSalesText() const;
+#ifdef ENABLE_OFFLINE_SHOP
+		float							GetPrivateShopViewDistance() { return m_Config.fPrivateShopViewDistance; }
+		void							SetPrivateShopViewDistance(float fDistance) { m_Config.fPrivateShopViewDistance = fDistance; }
+#endif
 		bool							IsUseDefaultIME() const;
 		bool							IsNoSoundCard() const;
 		bool							IsAutoTiling() const;

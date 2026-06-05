@@ -1769,7 +1769,11 @@ bool CPythonNetworkStream::RecvShopPacket()
 					CPythonShop::Instance().SetItemData(iItemIndex, pShopStartPacket->items[iItemIndex]);
 				}
 
+#ifdef ENABLE_OFFLINE_SHOP
+				PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "StartShop", Py_BuildValue("(ii)", dwVID, pShopStartPacket->byIsMyShop));
+#else
 				PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "StartShop", Py_BuildValue("(i)", dwVID));
+#endif
 			}
 			break;
 
@@ -4089,6 +4093,48 @@ bool CPythonNetworkStream::SendBuildPrivateShopPacket(const char * c_szName, con
 	return SendSequence();
 }
 
+#ifdef ENABLE_OFFLINE_SHOP
+bool CPythonNetworkStream::SendOfflineShopEditPacket(BYTE byAction, const std::vector<BYTE> & c_rRemoveList, const std::vector<TShopItemTable> & c_rAddStock, const std::vector<TOfflineShopPriceUpdate> & c_rUpdateList)
+{
+	TPacketCGOfflineShopEdit packet;
+	packet.bHeader = HEADER_CG_OFFLINE_SHOP_EDIT;
+	packet.byAction = byAction;
+	packet.byRemoveCount = (BYTE)c_rRemoveList.size();
+	packet.byAddCount = (BYTE)c_rAddStock.size();
+	packet.byUpdateCount = (BYTE)c_rUpdateList.size();
+	packet.wSize = (WORD)(sizeof(packet)
+		+ c_rRemoveList.size() * sizeof(BYTE)
+		+ c_rAddStock.size() * sizeof(TShopItemTable)
+		+ c_rUpdateList.size() * sizeof(TOfflineShopPriceUpdate));
+
+	if (!Send(sizeof(packet), &packet))
+		return false;
+
+	for (size_t i = 0; i < c_rRemoveList.size(); ++i)
+	{
+		const BYTE bPos = c_rRemoveList[i];
+		if (!Send(sizeof(BYTE), &bPos))
+			return false;
+	}
+
+	for (auto itor = c_rAddStock.begin(); itor < c_rAddStock.end(); ++itor)
+	{
+		const TShopItemTable & c_rItem = *itor;
+		if (!Send(sizeof(c_rItem), &c_rItem))
+			return false;
+	}
+
+	for (auto itor = c_rUpdateList.begin(); itor < c_rUpdateList.end(); ++itor)
+	{
+		const TOfflineShopPriceUpdate & c_rUpd = *itor;
+		if (!Send(sizeof(c_rUpd), &c_rUpd))
+			return false;
+	}
+
+	return SendSequence();
+}
+#endif
+
 bool CPythonNetworkStream::RecvShopSignPacket()
 {
 	TPacketGCShopSign p;
@@ -4109,6 +4155,17 @@ bool CPythonNetworkStream::RecvShopSignPacket()
 	}
 	else
 	{
+#ifdef ENABLE_OFFLINE_SHOP
+		CInstanceBase* pInstance = CPythonCharacterManager::instance().GetInstancePtr(p.dwVID);
+		if (pInstance && (pInstance->IsPC() || pInstance->GetRace() == 30000))
+		{
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_PrivateShop_Appear", Py_BuildValue("(is)", p.dwVID, p.szSign));
+			if (rkPlayer.IsMainCharacterIndex(p.dwVID))
+				rkPlayer.OpenPrivateShop();
+		}
+		else
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_PrivateShop_Disappear", Py_BuildValue("(i)", p.dwVID));
+#else
 		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME],
 			"BINARY_PrivateShop_Appear",
 			Py_BuildValue("(is)", p.dwVID, p.szSign)
@@ -4116,6 +4173,7 @@ bool CPythonNetworkStream::RecvShopSignPacket()
 
 		if (rkPlayer.IsMainCharacterIndex(p.dwVID))
 			rkPlayer.OpenPrivateShop();
+#endif
 	}
 
 	return true;

@@ -697,6 +697,10 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 	ch->StartRecoveryEvent();
 	ch->StartCheckSpeedHackEvent();
 
+#ifdef GIFT_SYSTEM
+	ch->StartRefreshGift();
+#endif
+
 	CPVPManager::instance().Connect(ch);
 	CPVPManager::instance().SendList(d);
 

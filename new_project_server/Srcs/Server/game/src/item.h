@@ -3,6 +3,11 @@
 
 #include "entity.h"
 
+#ifdef OFFLINE_SHOP
+class CShop;
+typedef class CShop * LPSHOP;
+#endif
+
 class CItem : public CEntity
 {
 	protected:
@@ -338,6 +343,21 @@ class CItem : public CEntity
 		{
 			return m_dwSIGVnum;
 		}
+
+#ifdef OFFLINE_SHOP
+	protected:
+		LPSHOP		b_iShop;
+		DWORD		m_dwRealID;
+		LPEVENT		e_OffshopRItemEvent;
+	public:
+		bool		CheckItemEnchant();
+		void		StartEventOfRemoveItemForOfflineShop();
+		void		SetShop(LPSHOP shop);
+
+		LPSHOP		GetShop()								{ return b_iShop; }
+		void		SetRealID(DWORD id)						{ m_dwRealID = id; }
+		DWORD		GetRealID()								{ return m_dwRealID; }
+#endif
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 	public:
 		int32_t GetAcceVnum() const

@@ -47,6 +47,9 @@ struct SNetworkActorData
 
 	DWORD	m_dwGuildID;
 	DWORD	m_dwLevel;
+#ifdef ENABLE_OFFLINE_SHOP
+	BYTE	m_byIsMyShop;
+#endif
 
 	SNetworkActorData();
 

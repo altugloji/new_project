@@ -53,6 +53,13 @@ class CPythonShop : public CSingleton<CPythonShop>
 #endif
 		void BuildPrivateShop(const char * c_szName);
 
+#ifdef ENABLE_OFFLINE_SHOP
+		void ClearOfflineShopEdit();
+		void AddOfflineShopRemove(BYTE bDisplayPos);
+		void AddOfflineShopPriceUpdate(BYTE bDisplayPos, DWORD dwPrice);
+		void SendOfflineShopEdit(BYTE byAction);
+#endif
+
 	protected:
 		BOOL	CheckSlotIndex(DWORD dwIndex);
 
@@ -77,5 +84,10 @@ class CPythonShop : public CSingleton<CPythonShop>
 
 		typedef std::map<TItemPos, TShopItemTable> TPrivateShopItemStock;
 		TPrivateShopItemStock	m_PrivateShopItemStock;
+
+#ifdef ENABLE_OFFLINE_SHOP
+		std::vector<BYTE>							m_OfflineShopRemoveList;
+		std::vector<TOfflineShopPriceUpdate>		m_OfflineShopPriceUpdateList;
+#endif
 };
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

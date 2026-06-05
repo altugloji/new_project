@@ -180,6 +180,35 @@ static bool FN_IsGreenEnchantLv5LimitedApply(int iApply)
 }
 #endif
 
+#ifdef OFFLINE_SHOP
+bool CItem::CheckItemEnchant()
+{
+	int iAttributeCount = GetAttributeCount();
+	for (BYTE i = 0; i < iAttributeCount; ++i)
+	{
+		BYTE attrType =					m_aAttr[i].bType;
+		short attrValue =				m_aAttr[i].sValue;
+		if (attrType == 71)
+		{
+			if (attrValue > 30)
+				return false;
+		}
+		else if (attrType == 72)
+		{
+			if (attrValue > 60)
+				return false;
+		}
+		else
+		{
+			const TItemAttrTable & r =	g_map_itemAttr[attrType];
+			if ((attrValue != 0) && (r.lValues[4] < attrValue))
+				return false;
+		}
+	}
+	return true;
+}
+#endif
+
 #ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
 void CItem::PutAttributeWithLevel(BYTE bLevel, bool bLimitResistLv5)
 #else

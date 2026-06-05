@@ -77,7 +77,11 @@ bool CHARACTER::ExchangeStart(LPCHARACTER victim)
 		return false;
 
 	//PREVENT_TRADE_WINDOW
-	if ( IsOpenSafebox() || GetShopOwner() || GetMyShop() || IsCubeOpen())
+	if ( IsOpenSafebox() || GetShopOwner() || GetMyShop() || IsCubeOpen()
+#ifdef OFFLINE_SHOP
+		|| IsEditingShop()
+#endif
+		)
 	{
 		ChatPacket( CHAT_TYPE_INFO, LC_TEXT("다른 거래창이 열려있을경우 거래를 할수 없습니다." ) );
 		return false;

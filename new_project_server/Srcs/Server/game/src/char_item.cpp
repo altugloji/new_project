@@ -3113,6 +3113,24 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 								break;
 
 							case 50200:
+							{
+#ifdef OFFLINE_SHOP
+								if (GetLastCreateShopTime() > get_global_time())
+								{
+									ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_WAIT_10_SEC"));
+									break;
+								}
+								SetLastCreateShopTime(get_global_time() + 10);
+
+								auto pkMsgShop = DBManager::instance().DirectQuery("SELECT player_id FROM player_shop WHERE player_id = %u", GetPlayerID());
+								if (!pkMsgShop || !pkMsgShop->Get())
+									break;
+								if (pkMsgShop->Get()->uiNumRows > 0)
+								{
+									ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_ACTIVE"));
+									break;
+								}
+#endif
 								if (g_bEnableBootaryCheck)
 								{
 									if (IS_BOTARYABLE_ZONE(GetMapIndex()) == true)
@@ -3129,6 +3147,7 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 									__OpenPrivateShop();
 								}
 								break;
+							}
 
 							case fishing::FISH_MIND_PILL_VNUM:
 								AddAffect(AFFECT_FISH_MIND_PILL, POINT_NONE, 0, AFF_FISH_MIND, 20*60, 0, true);
@@ -5414,6 +5433,13 @@ int g_nPortalLimitTime = 10;
 
 bool CHARACTER::UseItem(TItemPos Cell, TItemPos DestCell)
 {
+#ifdef OFFLINE_SHOP
+	if (IsEditingShop())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDITING_BLOCK"));
+		return false;
+	}
+#endif
 	const WORD wCell = Cell.cell;
 	const BYTE window_type = Cell.window_type;
 	//WORD wDestCell = DestCell.cell;
@@ -5603,6 +5629,13 @@ bool CHARACTER::UseItem(TItemPos Cell, TItemPos DestCell)
 
 bool CHARACTER::DropItem(TItemPos Cell, BYTE bCount)
 {
+#ifdef OFFLINE_SHOP
+	if (IsEditingShop())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDITING_BLOCK"));
+		return false;
+	}
+#endif
 	LPITEM item = nullptr;
 
 	if (!CanHandleItem())
@@ -5753,10 +5786,10 @@ bool CHARACTER::DeleteItem(TItemPos Cell)
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Make sure you don't have any open windows!"));
 		return false;
 	}
-#ifdef ENABLE_OFFLINE_SHOP_SYSTEM
-	if (GetOfflineShopOwner())
+#ifdef OFFLINE_SHOP
+	if (IsEditingShop())
 	{
-		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("거래창,창고 등을 연 상태에서는 보따리,비단보따리를 사용할수 없습니다."));
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDITING_BLOCK"));
 		return false;
 	}
 #endif
@@ -5831,10 +5864,10 @@ bool CHARACTER::SellItem(TItemPos Cell)
 	}
 	// EXTRA_CHECK
 
-#ifdef ENABLE_OFFLINE_SHOP_SYSTEM
-	if (GetOfflineShopOwner())
+#ifdef OFFLINE_SHOP
+	if (IsEditingShop())
 	{
-		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("거래창,창고 등을 연 상태에서는 보따리,비단보따리를 사용할수 없습니다."));
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDITING_BLOCK"));
 		return false;
 	}
 #endif
@@ -5966,6 +5999,13 @@ bool CHARACTER::DropCheque(int cheque)
 
 bool CHARACTER::MoveItem(TItemPos Cell, TItemPos DestCell, BYTE count)
 {
+#ifdef OFFLINE_SHOP
+	if (IsEditingShop())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDITING_BLOCK"));
+		return false;
+	}
+#endif
 	if (Cell.IsSamePosition(DestCell)) // @fixme196 (check same slot n same window aliases)
 		return false;
 
@@ -6268,6 +6308,13 @@ void CHARACTER::GiveCheque(int iAmount)
 
 bool CHARACTER::PickupItem(DWORD dwVID)
 {
+#ifdef OFFLINE_SHOP
+	if (IsEditingShop())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDITING_BLOCK"));
+		return false;
+	}
+#endif
 	const LPITEM item = ITEM_MANAGER::instance().FindByVID(dwVID);
 
 	if (IsObserverMode())
@@ -7401,6 +7448,13 @@ LPITEM CHARACTER::AutoGiveItem(DWORD dwItemVnum, BYTE bCount, int iRarePct, bool
 
 bool CHARACTER::GiveItem(LPCHARACTER victim, TItemPos Cell)
 {
+#ifdef OFFLINE_SHOP
+	if (IsEditingShop())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDITING_BLOCK"));
+		return false;
+	}
+#endif
 	if (!CanHandleItem())
 		return false;
 

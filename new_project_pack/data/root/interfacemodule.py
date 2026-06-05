@@ -10,6 +10,8 @@ import chr
 import player
 import net
 import uiTaskBar
+if app.ENABLE_OFFLINE_SHOP:
+	import uigift
 
 import uiInventory
 import uiDragonSoul
@@ -120,6 +122,8 @@ class Interface(object):
 		self.wndTaskBar = None
 		self.wndCharacter = None
 		self.wndInventory = None
+		if app.ENABLE_OFFLINE_SHOP:
+			self.wndGiftBox = None
 		self.wndExpandedTaskBar = None
 		self.wndDragonSoul = None
 		self.wndDragonSoulRefine = None
@@ -316,6 +320,13 @@ class Interface(object):
 		self.dlgShop = uiShop.ShopDialog()
 		self.dlgShop.LoadDialog()
 		self.dlgShop.Hide()
+		if app.ENABLE_OFFLINE_SHOP:
+			from _weakref import proxy
+			self.dlgShop.interface = proxy(self)
+
+		if app.ENABLE_OFFLINE_SHOP:
+			self.wndGiftBox = uigift.GiftDialog()
+			self.wndGiftBox.Hide()
 
 		self.dlgRestart = uiRestart.RestartDialog()
 		self.dlgRestart.LoadDialog()
@@ -920,17 +931,49 @@ class Interface(object):
 		self.dlgPointReset.Close()
 
 	# Shop
-	def OpenShopDialog(self, vid):
-		self.wndInventory.Show()
-		self.wndInventory.SetTop()
-		self.dlgShop.Open(vid)
-		self.dlgShop.SetTop()
+	if app.ENABLE_OFFLINE_SHOP:
+		def OpenShopDialog(self, vid, isMyShop = 0):
+			self.wndInventory.Show()
+			self.wndInventory.SetTop()
+			self.dlgShop.Open(vid, isMyShop)
+			self.dlgShop.SetTop()
+	else:
+		def OpenShopDialog(self, vid):
+			self.wndInventory.Show()
+			self.wndInventory.SetTop()
+			self.dlgShop.Open(vid)
+			self.dlgShop.SetTop()
 
 	def CloseShopDialog(self):
 		self.dlgShop.Close()
 
 	def RefreshShopDialog(self):
 		self.dlgShop.Refresh()
+
+	if app.ENABLE_OFFLINE_SHOP:
+		# Hediye kutusu (offline pazar geliri / satilmayan itemler)
+		def ShowGift(self):
+			if self.wndGiftBox:
+				self.wndGiftBox.Open()
+
+		def OpenGift(self):
+			if self.wndGiftBox:
+				self.wndGiftBox.Open()
+
+		def ClearGift(self):
+			if self.wndGiftBox:
+				self.wndGiftBox.Clear()
+				self.wndGiftBox.Refresh()
+
+		# Offline dukkan duzenleme
+		def OfflineShopEditStart(self):
+			if self.dlgShop:
+				self.dlgShop.StartEditMode()
+
+		def OfflineShopTooFar(self):
+			self.wndPopupDialog = uiCommon.PopupDialog()
+			self.wndPopupDialog.SetText("Dukkana yaklas.")
+			self.wndPopupDialog.Open()
 
 	## Quest
 	def OpenCharacterWindowQuestPage(self):
@@ -2293,6 +2336,15 @@ class Interface(object):
 		def GmPlayerPanelSetList(self, playerList, total=0, ch1=0, ch2=0, ch3=0, ch4=0):
 			if self.wndGmPlayerPanel:
 				self.wndGmPlayerPanel.SetPlayerList(playerList, total, ch1, ch2, ch3, ch4)
+
+	if app.ENABLE_GM_PLAYER_PANEL or app.ENABLE_BULK_POTION_PANEL:
+		def ToggleTabPanel(self):
+			if app.ENABLE_GM_PLAYER_PANEL and chr.IsGameMaster(player.GetMainCharacterIndex()):
+				self.ToggleGmPlayerPanel()
+				return
+
+			if app.ENABLE_BULK_POTION_PANEL:
+				self.OpenBulkPotionPanel()
 
 	if app.ENABLE_ITEM_SHOP_SYSTEM:
 		def RefreshItemShop(self):

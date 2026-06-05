@@ -406,8 +406,33 @@ class MoneyInputDialog(ui.ScriptWindow):
 		ui.ScriptWindow.__init__(self)
 
 		self.moneyHeaderText = localeInfo.MONEY_INPUT_DIALOG_SELLPRICE
+		self.perUnitCount = 0		# >1 ise girilen fiyatin altinda adet (tekli) fiyati gosterilir
+		self.perUnitText = None
 		self.__CreateDialog()
 		self.SetMaxLength(9)
+
+	def SetPerUnitCount(self, count):
+		self.perUnitCount = count
+		if count > 1:
+			if not self.perUnitText:
+				# Para satirinin altina ayri bir satir ekle ve dialogu bir satir buyut
+				(mx, my) = self.moneyText.GetLocalPosition()
+				self.perUnitText = ui.TextLine()
+				self.perUnitText.SetParent(self.board)
+				self.perUnitText.SetWindowHorizontalAlignCenter()
+				self.perUnitText.SetHorizontalAlignCenter()
+				self.perUnitText.SetPosition(0, my + 17)
+				self.perUnitText.Show()
+
+				EXTRA = 20
+				bw = self.GetWidth()
+				bh = self.GetHeight()
+				self.SetSize(bw, bh + EXTRA)
+				self.board.SetSize(bw, bh + EXTRA)
+				(ax, ay) = self.acceptButton.GetLocalPosition()
+				self.acceptButton.SetPosition(ax, ay + EXTRA)
+				(cx, cy) = self.cancelButton.GetLocalPosition()
+				self.cancelButton.SetPosition(cx, cy + EXTRA)
 
 	def __del__(self):
 		ui.ScriptWindow.__del__(self)
@@ -578,6 +603,8 @@ class MoneyInputDialog(ui.ScriptWindow):
 					cheque = 0
 			self.chequeText.SetText(str(cheque) + " " + localeInfo.CHEQUE_SYSTEM_UNIT_WON)
 			self.moneyText.SetText(localeInfo.NumberToGoldNotText(money) + " " + localeInfo.CHEQUE_SYSTEM_UNIT_YANG)
+			if self.perUnitCount > 1 and self.perUnitText:
+				self.perUnitText.SetText("Adet: %s" % (localeInfo.NumberToMoneyString(money / self.perUnitCount)))
 	else:
 		def __OnValueUpdate(self):
 			ui.EditLine.OnIMEUpdate(self.inputValue)
@@ -592,3 +619,5 @@ class MoneyInputDialog(ui.ScriptWindow):
 					money = 199999999
 
 			self.moneyText.SetText(self.moneyHeaderText + localeInfo.NumberToMoneyString(money))
+			if self.perUnitCount > 1 and self.perUnitText:
+				self.perUnitText.SetText("Adet: %s" % (localeInfo.NumberToMoneyString(money / self.perUnitCount)))

@@ -1,9 +1,1 @@
-Cesaret pelerini çekme şansı %100 yapılacak.
-Yeşil Efsunlar Sadece 1 levellik ve 18levellik zırh ve silaha atılabilecek.
-Tahta Kolye Ateş efsunu kaldırılacak.
-Sular 10 dakika olacak craftta malzeme isticek ekstra (geme ekstra bişey koy)
-Yerden çok item toplayınca paket limite takılıyor.
-Ticareti kapalı olan ürünler açılacak münzevi gibi
-Düşen dolu +20 üzeri olmasın
-COMMON DROP DÜZENLENECEK
-Mob dropta adete göre gösterme olacak görnegin 5 efsunda 5 tane gözüksün
+Mobilde ekran açıkken 10 15sn sonra ekran kararıyor ve ekran kapanıyor. Wakelock lazım

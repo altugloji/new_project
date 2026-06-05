@@ -111,6 +111,10 @@ bool CPythonNetworkStream::RecvCharacterAppendPacket()
 	kNetActorData.m_kAffectFlags.CopyData(0, sizeof(chrAddPacket.dwAffectFlag[0]), &chrAddPacket.dwAffectFlag[0]);
 	kNetActorData.m_kAffectFlags.CopyData(32, sizeof(chrAddPacket.dwAffectFlag[1]), &chrAddPacket.dwAffectFlag[1]);
 
+#ifdef ENABLE_OFFLINE_SHOP
+	kNetActorData.m_byIsMyShop = chrAddPacket.byIsMyShop;
+#endif
+
 	kNetActorData.SetPosition(chrAddPacket.x, chrAddPacket.y);
 
 	kNetActorData.m_sAlignment=0;/*chrAddPacket.sAlignment*/;

@@ -178,6 +178,51 @@ void CPythonShop::BuildPrivateShop(const char * c_szName)
 	CPythonNetworkStream::Instance().SendBuildPrivateShopPacket(c_szName, ItemStock);
 }
 
+#ifdef ENABLE_OFFLINE_SHOP
+void CPythonShop::ClearOfflineShopEdit()
+{
+	m_OfflineShopRemoveList.clear();
+	m_OfflineShopPriceUpdateList.clear();
+	ClearPrivateShopStock();
+}
+
+void CPythonShop::AddOfflineShopRemove(BYTE bDisplayPos)
+{
+	for (size_t i = 0; i < m_OfflineShopRemoveList.size(); ++i)
+		if (m_OfflineShopRemoveList[i] == bDisplayPos)
+			return;
+	m_OfflineShopRemoveList.push_back(bDisplayPos);
+}
+
+void CPythonShop::AddOfflineShopPriceUpdate(BYTE bDisplayPos, DWORD dwPrice)
+{
+	// Ayni slot zaten varsa fiyati guncelle
+	for (size_t i = 0; i < m_OfflineShopPriceUpdateList.size(); ++i)
+	{
+		if (m_OfflineShopPriceUpdateList[i].display_pos == bDisplayPos)
+		{
+			m_OfflineShopPriceUpdateList[i].price = dwPrice;
+			return;
+		}
+	}
+	TOfflineShopPriceUpdate upd;
+	upd.display_pos = bDisplayPos;
+	upd.price = dwPrice;
+	m_OfflineShopPriceUpdateList.push_back(upd);
+}
+
+void CPythonShop::SendOfflineShopEdit(BYTE byAction)
+{
+	std::vector<TShopItemTable> ItemStock;
+	ItemStock.reserve(m_PrivateShopItemStock.size());
+	for (auto itor = m_PrivateShopItemStock.begin(); itor != m_PrivateShopItemStock.end(); ++itor)
+		ItemStock.push_back(itor->second);
+	std::sort(ItemStock.begin(), ItemStock.end(), ItemStockSortFunc());
+
+	CPythonNetworkStream::Instance().SendOfflineShopEditPacket(byAction, m_OfflineShopRemoveList, ItemStock, m_OfflineShopPriceUpdateList);
+}
+#endif
+
 void CPythonShop::Open(BOOL isPrivateShop, BOOL isMainPrivateShop)
 {
 	m_isShoping = TRUE;
@@ -484,6 +529,55 @@ PyObject * shopBuildPrivateShop(PyObject * poSelf, PyObject * poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_OFFLINE_SHOP
+PyObject * shopClearOfflineShopEdit(PyObject * poSelf, PyObject * poArgs)
+{
+	CPythonShop::Instance().ClearOfflineShopEdit();
+	return Py_BuildNone();
+}
+
+PyObject * shopAddOfflineShopRemove(PyObject * poSelf, PyObject * poArgs)
+{
+	int iDisplayPos;
+	if (!PyTuple_GetInteger(poArgs, 0, &iDisplayPos))
+		return Py_BuildException();
+
+	CPythonShop::Instance().AddOfflineShopRemove((BYTE)iDisplayPos);
+	return Py_BuildNone();
+}
+
+PyObject * shopAddOfflineShopPriceUpdate(PyObject * poSelf, PyObject * poArgs)
+{
+	int iDisplayPos;
+	if (!PyTuple_GetInteger(poArgs, 0, &iDisplayPos))
+		return Py_BuildException();
+	int iPrice;
+	if (!PyTuple_GetInteger(poArgs, 1, &iPrice))
+		return Py_BuildException();
+
+	CPythonShop::Instance().AddOfflineShopPriceUpdate((BYTE)iDisplayPos, (DWORD)iPrice);
+	return Py_BuildNone();
+}
+
+PyObject * shopOfflineShopEnter(PyObject * poSelf, PyObject * poArgs)
+{
+	CPythonShop::Instance().SendOfflineShopEdit(OFFLINE_SHOP_EDIT_ACTION_ENTER);
+	return Py_BuildNone();
+}
+
+PyObject * shopOfflineShopCancel(PyObject * poSelf, PyObject * poArgs)
+{
+	CPythonShop::Instance().SendOfflineShopEdit(OFFLINE_SHOP_EDIT_ACTION_CANCEL);
+	return Py_BuildNone();
+}
+
+PyObject * shopSendOfflineShopEdit(PyObject * poSelf, PyObject * poArgs)
+{
+	CPythonShop::Instance().SendOfflineShopEdit(OFFLINE_SHOP_EDIT_ACTION_APPLY);
+	return Py_BuildNone();
+}
+#endif
+
 PyObject * shopGetTabCount(PyObject * poSelf, PyObject * poArgs)
 {
 	return Py_BuildValue("i", CPythonShop::instance().GetTabCount());
@@ -532,6 +626,14 @@ void initshop()
 		{ "DelPrivateShopItemStock",	shopDelPrivateShopItemStock,	METH_VARARGS },
 		{ "GetPrivateShopItemPrice",	shopGetPrivateShopItemPrice,	METH_VARARGS },
 		{ "BuildPrivateShop",			shopBuildPrivateShop,			METH_VARARGS },
+#ifdef ENABLE_OFFLINE_SHOP
+		{ "ClearOfflineShopEdit",		shopClearOfflineShopEdit,		METH_VARARGS },
+		{ "AddOfflineShopRemove",		shopAddOfflineShopRemove,		METH_VARARGS },
+		{ "AddOfflineShopPriceUpdate",	shopAddOfflineShopPriceUpdate,	METH_VARARGS },
+		{ "OfflineShopEnter",			shopOfflineShopEnter,			METH_VARARGS },
+		{ "OfflineShopCancel",			shopOfflineShopCancel,			METH_VARARGS },
+		{ "SendOfflineShopEdit",		shopSendOfflineShopEdit,		METH_VARARGS },
+#endif
 #ifdef ENABLE_CHEQUE_SYSTEM
 		{ "GetItemCheque",				shopGetItemCheque,				METH_VARARGS },
 		{ "GetPrivateShopItemCheque",	shopGetPrivateShopItemCheque,	METH_VARARGS },

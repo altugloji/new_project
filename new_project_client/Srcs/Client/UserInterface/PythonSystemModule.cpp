@@ -297,6 +297,25 @@ PyObject * systemIsShowSalesText(PyObject * poSelf, PyObject * poArgs)
 	return Py_BuildValue("i", CPythonSystem::Instance().IsShowSalesText());
 }
 
+#ifdef ENABLE_OFFLINE_SHOP
+PyObject* systemGetPrivateShopViewDistance(PyObject* poSelf, PyObject* poArgs)
+{
+	return Py_BuildValue("f", CPythonSystem::Instance().GetPrivateShopViewDistance());
+}
+
+PyObject* systemSetPrivateShopViewDistance(PyObject* poSelf, PyObject* poArgs)
+{
+	float fDistance;
+
+	if (!PyTuple_GetFloat(poArgs, 0, &fDistance))
+		return Py_BuildException();
+
+	CPythonSystem::Instance().SetPrivateShopViewDistance(fDistance);
+
+	return Py_BuildNone();
+}
+#endif
+
 PyObject * systemSetConfig(PyObject * poSelf, PyObject * poArgs)
 {
 	int res_index;
@@ -604,6 +623,10 @@ void initsystemSetting()
 
 		{ "SetShowSalesTextFlag",		systemSetShowSalesTextFlag,		METH_VARARGS },
 		{ "IsShowSalesText",			systemIsShowSalesText,			METH_VARARGS },
+#ifdef ENABLE_OFFLINE_SHOP
+		{ "GetPrivateShopViewDistance",	systemGetPrivateShopViewDistance,	METH_VARARGS },
+		{ "SetPrivateShopViewDistance",	systemSetPrivateShopViewDistance,	METH_VARARGS },
+#endif
 
 		{ "GetShadowLevel",				systemGetShadowLevel,			METH_VARARGS },
 		{ "SetShadowLevel",				systemSetShadowLevel,			METH_VARARGS },

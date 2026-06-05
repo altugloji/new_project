@@ -750,6 +750,15 @@ class InventoryWindow(ui.ScriptWindow):
 		if app.ENABLE_HIGHLIGHT_NEW_ITEM:
 			self.__RefreshHighlights()
 
+		# Offline dukkan duzenlemede: pazara eklenen item'lerin envanter slotuna kirmizi overlay
+		if app.ENABLE_OFFLINE_SHOP and constInfo.OFFLINE_SHOP_EDITING:
+			for i in xrange(player.INVENTORY_PAGE_SIZE):
+				slotNumber = self.__InventoryLocalSlotPosToGlobalSlotPos(i)
+				if slotNumber in constInfo.OFFLINE_SHOP_ADDED_SLOTS:
+					self.wndItem.ActivateSlot(i, 220.0 / 255.0, 52.0 / 255.0, 52.0 / 255.0, 0.62)
+				else:
+					self.wndItem.DeactivateSlot(i)
+
 		if self.wndBelt:
 			self.wndBelt.RefreshSlot()
 
@@ -1586,6 +1595,10 @@ class InventoryWindow(ui.ScriptWindow):
 			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.USE_ITEM_FAILURE_PRIVATE_SHOP)
 			return
 
+		if app.ENABLE_OFFLINE_SHOP and constInfo.OFFLINE_SHOP_EDITING:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Pazar duzenlerken esya kullanamazsiniz.")
+			return
+
 		net.SendItemUsePacket(slotPos)
 
 	def __SendMoveItemPacket(self, srcSlotPos, dstSlotPos, srcItemCount):
@@ -1595,6 +1608,10 @@ class InventoryWindow(ui.ScriptWindow):
 
 		if uiPrivateShopBuilder.IsBuildingPrivateShop():
 			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.MOVE_ITEM_FAILURE_PRIVATE_SHOP)
+			return
+
+		if app.ENABLE_OFFLINE_SHOP and constInfo.OFFLINE_SHOP_EDITING:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Pazar duzenlerken esya tasiyamazsiniz.")
 			return
 
 		net.SendItemMovePacket(srcSlotPos, dstSlotPos, srcItemCount)

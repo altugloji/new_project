@@ -829,6 +829,11 @@ struct FuncPurge
 		if (!m_bAll && iDist >= 1000)
 			return;
 
+#ifdef OFFLINE_SHOP
+		if (pkChr->IsPrivShop())
+			return;
+#endif
+
 		sys_log(0, "PURGE: %s %d", pkChr->GetName(), iDist);
 
 		if (pkChr->IsNPC() && !pkChr->GetRider()

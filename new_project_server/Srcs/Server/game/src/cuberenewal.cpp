@@ -362,7 +362,11 @@ void Cube_open (LPCHARACTER ch, DWORD dwRecipeNpcRace)
 	}
 
 
-	if (ch->GetExchange() || ch->GetMyShop() || ch->GetShopOwner() || ch->IsOpenSafebox() || ch->IsCubeOpen())
+	if (ch->GetExchange() || ch->GetMyShop() || ch->GetShopOwner() || ch->IsOpenSafebox() || ch->IsCubeOpen()
+#ifdef OFFLINE_SHOP
+		|| ch->IsEditingShop()
+#endif
+		)
 	{
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Cannot open refinement window"));
 		return;

@@ -180,6 +180,9 @@ CPacketInfoCG::CPacketInfoCG()
 	Set(HEADER_CG_ITEM_GIVE, sizeof(TPacketCGGiveItem), "ItemGive", true);
 	Set(HEADER_CG_HACK, sizeof(TPacketCGHack), "Hack", true);
 	Set(HEADER_CG_MYSHOP, sizeof(TPacketCGMyShop), "MyShop", true);
+#ifdef OFFLINE_SHOP
+	Set(HEADER_CG_OFFLINE_SHOP_EDIT, sizeof(TPacketCGOfflineShopEdit), "OfflineShopEdit", true);
+#endif
 
 	Set(HEADER_CG_REFINE, sizeof(TPacketCGRefine), "Refine", true);
 	Set(HEADER_CG_CHANGE_NAME, sizeof(TPacketCGChangeName), "ChangeName", true);

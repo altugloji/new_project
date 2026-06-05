@@ -320,6 +320,7 @@ class LoadingWindow(ui.ScriptWindow):
 			chrmgr.NAMECOLOR_PARTY : colorInfo.CHR_NAME_RGB_PARTY,
 			chrmgr.NAMECOLOR_WARP : colorInfo.CHR_NAME_RGB_WARP,
 			chrmgr.NAMECOLOR_WAYPOINT : colorInfo.CHR_NAME_RGB_WAYPOINT,
+			chrmgr.NAMECOLOR_SHOP : colorInfo.CHR_NAME_RGB_SHOP,## ENABLE_OFFLINE_SHOP
 
 			chrmgr.NAMECOLOR_EMPIRE_MOB : colorInfo.CHR_NAME_RGB_EMPIRE_MOB,
 			chrmgr.NAMECOLOR_EMPIRE_NPC : colorInfo.CHR_NAME_RGB_EMPIRE_NPC,

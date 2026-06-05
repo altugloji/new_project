@@ -43,6 +43,8 @@ class OptionDialog(ui.ScriptWindow):
 		self.alwaysShowNameButtonList = []
 		self.showDamageButtonList = []
 		self.showsalesTextButtonList = []
+		if app.ENABLE_OFFLINE_SHOP:
+			self.privateShopTitleDistSlider = None
 		self.interface = None
 		if app.__BL_OFFICIAL_LOOT_FILTER__:
 			self.looting_system_button = None
@@ -96,6 +98,10 @@ class OptionDialog(ui.ScriptWindow):
 				self.showFlagButtonList.append(GetObject("show_flag_on_button"))
 				self.showFlagButtonList.append(GetObject("show_flag_off_button"))
 
+			if app.ENABLE_OFFLINE_SHOP:
+				self.privateShopTitleDistSlider = GetObject("PrivateShopDistanceSlider")
+				self.privateShopTitleDistSlider.SetSliderPos(systemSetting.GetPrivateShopViewDistance())
+
 		except:
 			import exception
 			exception.Abort("OptionDialog.__Load_BindObject")
@@ -145,6 +151,9 @@ class OptionDialog(ui.ScriptWindow):
 
 		self.showsalesTextButtonList[0].SAFE_SetEvent(self.__OnClickSalesTextOnButton)
 		self.showsalesTextButtonList[1].SAFE_SetEvent(self.__OnClickSalesTextOffButton)
+
+		if app.ENABLE_OFFLINE_SHOP and self.privateShopTitleDistSlider:
+			self.privateShopTitleDistSlider.SetEvent(ui.__mem_func__(self.OnChangePrivateShopViewDistance))
 
 		self.__ClickRadioButton(self.nameColorModeButtonList, constInfo.GET_CHRNAME_COLOR_INDEX())
 		self.__ClickRadioButton(self.viewTargetBoardButtonList, constInfo.GET_VIEW_OTHER_EMPIRE_PLAYER_TARGET_BOARD())
@@ -390,6 +399,11 @@ class OptionDialog(ui.ScriptWindow):
 		else:
 			self.showsalesTextButtonList[0].SetUp()
 			self.showsalesTextButtonList[1].Down()
+
+	if app.ENABLE_OFFLINE_SHOP:
+		def OnChangePrivateShopViewDistance(self):
+			pos = self.privateShopTitleDistSlider.GetSliderPos()
+			systemSetting.SetPrivateShopViewDistance(pos)
 
 	def OnBlockMode(self, mode):
 		global blockMode

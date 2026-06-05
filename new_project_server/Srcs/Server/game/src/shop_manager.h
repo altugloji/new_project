@@ -29,6 +29,13 @@ public:
 	LPSHOP	FindPCShop(DWORD dwVID);
 	void	DestroyPCShop(LPCHARACTER ch);
 
+#ifdef OFFLINE_SHOP
+public:
+	bool	StartOfflineShop(DWORD dwPID, bool onboot = false);
+	void	CreateOfflineShop(LPCHARACTER owner, const char *szSign, const std::vector<TShopItemTable*> pTable);
+	LPSHOP	CreateNPCShop(LPCHARACTER ch, std::vector<TShopItemTable *> map_shop);
+#endif
+
 private:
 	TShopMap	m_map_pkShop;
 	TShopMap	m_map_pkShopByNPCVnum;

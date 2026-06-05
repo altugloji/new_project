@@ -2592,6 +2592,12 @@ void CClientManager::ProcessPackets(CPeer * peer)
 				break;
 #endif
 
+#ifdef OFFLINE_SHOP
+			case HEADER_GD_SHOP_CLOSE:
+				ShopClose(peer, (TPacketShopClose *)data);
+				break;
+#endif
+
 			default:
 				sys_err("Unknown header (header: %d handle: %d length: %d)", header, dwHandle, dwLength);
 				break;
@@ -4056,6 +4062,25 @@ void CClientManager::DeleteAwardId(TPacketDeleteAwardID *data) const
 		sys_log(0,"DELETE_AWARDID : could not find the id: %d", data->dwID);
 	}
 }
+
+#ifdef OFFLINE_SHOP
+void CClientManager::ShopClose(CPeer * peer, TPacketShopClose *p)
+{
+	for (TPeerList::iterator i = m_peerList.begin(); i != m_peerList.end(); ++i)
+	{
+		CPeer * tmp = *i;
+
+		if (tmp == peer || tmp->GetChannel() == 0)
+			continue;
+
+		TPacketShopClose packet	{};
+		packet.pid =			p->pid;
+		packet.error =			p->error;
+		tmp->EncodeHeader(HEADER_DG_SHOP_CLOSE, 0, sizeof(packet));
+		tmp->Encode(&packet, sizeof(packet));
+	}
+}
+#endif
 
 void CClientManager::UpdateChannelStatus(TChannelStatus* pData)
 {

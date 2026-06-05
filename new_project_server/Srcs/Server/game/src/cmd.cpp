@@ -108,6 +108,14 @@ ACMD(do_polymorph_item);
    ACMD(do_b7);
  */
 ACMD(do_close_shop);
+#ifdef OFFLINE_SHOP
+ACMD(do_shop_delete);
+#endif
+#ifdef GIFT_SYSTEM
+ACMD(do_gift_show);
+ACMD(do_gift_get);
+ACMD(do_gift_refresh);
+#endif
 ACMD(do_set_walk_mode);
 ACMD(do_set_run_mode);
 ACMD(do_set_skill_group);
@@ -425,6 +433,15 @@ struct command_info cmd_info[] =
 	{ "clear_quest",	do_clear_quest,		0,			POS_DEAD,	GM_HIGH_WIZARD	},
 
 	{ "close_shop",	do_close_shop,		0,			POS_DEAD,	GM_PLAYER	},
+
+#ifdef OFFLINE_SHOP
+	{ "delete_shop",				do_shop_delete,				0,	POS_DEAD,	GM_IMPLEMENTOR },
+#endif
+#ifdef GIFT_SYSTEM
+	{ "gift_show",					do_gift_show,				0,	POS_DEAD,	GM_PLAYER },
+	{ "gift_refresh",				do_gift_refresh,			0,	POS_DEAD,	GM_PLAYER },
+	{ "gift_get",					do_gift_get,				0,	POS_DEAD,	GM_PLAYER },
+#endif
 
 	{ "set_walk_mode",	do_set_walk_mode,	0,			POS_DEAD,	GM_PLAYER	},
 	{ "set_run_mode",	do_set_run_mode,	0,			POS_DEAD,	GM_PLAYER	},

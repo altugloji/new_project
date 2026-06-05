@@ -141,6 +141,10 @@ enum
 	HEADER_GD_CHARACTER_CHEST		= 141,
 #endif
 
+#ifdef OFFLINE_SHOP
+	HEADER_GD_SHOP_CLOSE			= 142,
+#endif
+
 	HEADER_GD_SETUP			= 0xff,
 
 	///////////////////////////////////////////////
@@ -267,6 +271,10 @@ enum
 
 #ifdef ENABLE_CHARACTER_CHEST
 	HEADER_DG_CHARACTER_CHEST		= 182,
+#endif
+
+#ifdef OFFLINE_SHOP
+	HEADER_DG_SHOP_CLOSE			= 183,
 #endif
 
 
@@ -1357,6 +1365,28 @@ typedef struct SChannelStatus
 	WORD nPort; // backward change for client @fixme024
 	BYTE bStatus;
 } TChannelStatus;
+
+#ifdef OFFLINE_SHOP
+typedef struct SShopPrice
+{
+	int		days;
+	int		time;
+	long	price;
+} TShopCost;
+
+typedef struct command_shop_close
+{
+	DWORD	pid;
+	bool	error;
+} TPacketShopClose;
+
+// Offline dukkan duzenlemede var olan item'in fiyat guncellemesi (sol-tik)
+typedef struct SOfflineShopPriceUpdate
+{
+	BYTE	display_pos;
+	DWORD	price;
+} TOfflineShopPriceUpdate;
+#endif
 
 #ifdef ENABLE_EXCHANGE_LOG
 typedef struct SExchangeLog

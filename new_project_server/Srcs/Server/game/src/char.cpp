@@ -23,6 +23,9 @@
 #include "affect.h"
 #include "shop.h"
 #include "shop_manager.h"
+#ifdef OFFLINE_SHOP
+	#include <boost/algorithm/string/replace.hpp>
+#endif
 #include "safebox.h"
 #include "regen.h"
 #include "pvp.h"
@@ -204,6 +207,15 @@ void CHARACTER::Initialize()
 	m_pkShop		= nullptr;
 	m_pkChrShopOwner	= nullptr;
 	m_pkMyShop		= nullptr;
+#ifdef OFFLINE_SHOP
+	bprivShopOwner = dw_ShopTime = dwShopLastCreateTime = 0;
+	m_bEditingShop = false;
+#endif
+#ifdef GIFT_SYSTEM
+	m_pkGiftRefresh = NULL;
+	m_mapGiftGrid.clear();
+	m_dwLastGiftPage = m_dwLastGiftGetTime = 0;
+#endif
 	m_pkExchange	= nullptr;
 	m_pkParty		= nullptr;
 	m_pkPartyRequestEvent = nullptr;
@@ -609,6 +621,17 @@ void CHARACTER::Destroy()
 	event_cancel(&m_pkMiningEvent);
 	// END_OF_MINING
 
+#ifdef OFFLINE_SHOP
+	bprivShopOwner = dw_ShopTime = dwShopLastCreateTime = 0;
+	m_bEditingShop = false;
+#endif
+
+#ifdef GIFT_SYSTEM
+	event_cancel(&m_pkGiftRefresh);
+	m_mapGiftGrid.clear();
+	m_dwLastGiftPage = m_dwLastGiftGetTime = 0;
+#endif
+
 	for (itertype(m_mapMobSkillEvent) it = m_mapMobSkillEvent.begin(); it != m_mapMobSkillEvent.end(); ++it)
 	{
 		LPEVENT pkEvent = it->second;
@@ -644,6 +667,114 @@ const char * CHARACTER::GetName() const
 	return m_stName.empty() ? (m_pkMobData ? m_pkMobData->m_table.szLocaleName : "") : m_stName.c_str();
 }
 
+#ifdef OFFLINE_SHOP
+void CHARACTER::OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE bItemCount)
+{
+	if (GetExchange() || IsOpenSafebox() || GetShopOwner() || IsCubeOpen())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Diger bir islem (takas, kasa, kup) sirasinda pazar acamazsiniz."));
+		return;
+	}
+
+	LPSECTREE_MAP pMap = SECTREE_MANAGER::instance().GetMap(GetMapIndex());
+	if (!pMap)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Tekrar Deneyin...");
+		return;
+	}
+
+	if (GetGiftPages() > 0)
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("SHOP_HAS_GIFT"));
+		return;
+	}
+
+	int64_t nTotalMoney = GetGold();
+	for (BYTE n = 0; n < bItemCount; ++n)
+	{
+		nTotalMoney += static_cast<int64_t>((pTable + n)->price);
+		if (GOLD_MAX <= nTotalMoney)
+		{
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("SHOP_MAX_YANG"));
+			return;
+		}
+	}
+
+	quest::PC * pPC = quest::CQuestManager::instance().GetPCForce(GetPlayerID());
+	if (pPC->IsRunning())
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Hareket Halinde Pazar Kurulamaz!");
+		return;
+	}
+
+	if (CountSpecifyItem(50200) <= 0)
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("SHOP_NOT_ENOUGHT_PACKET"));
+		return;
+	}
+
+	std::vector<TShopItemTable *> map_shop;
+	for (BYTE i = 0; i < bItemCount; ++i)
+	{
+		auto pTabVal = (pTable + i);
+		if (!pTabVal)
+			continue;
+
+		LPITEM pkItem = GetItem(pTabVal->pos);
+		if (!pkItem)
+			continue;
+
+		if (pkItem->GetOwner() != this || pkItem->IsExchanging() || pkItem->IsEquipped() || pkItem->isLocked())
+		{
+			ChatPacket(CHAT_TYPE_INFO, "Pazarda Hatali Item Var... - [Slot Num: %d]", pTabVal->pos.cell);
+			return;
+		}
+
+		const TItemTable * itemProto = pkItem->GetProto();
+		if (!itemProto || (IS_SET(itemProto->dwAntiFlags, ITEM_ANTIFLAG_GIVE | ITEM_ANTIFLAG_MYSHOP)))
+		{
+			ChatPacket(CHAT_TYPE_INFO, "Pazarda Hatali Item Var... - [Slot Num: %d]", pTabVal->pos.cell);
+			return;
+		}
+
+		if (!pkItem->CheckItemEnchant())
+		{
+			ChatPacket(CHAT_TYPE_INFO, "Pazarda Hatali Item Var... - [Slot Num: %d]", pTabVal->pos.cell);
+			return;
+		}
+		map_shop.push_back(pTable + i);
+	}
+
+	if (map_shop.empty())
+		return;
+
+	CloseSafebox();
+	CShopManager::instance().StopShopping(this);
+	CloseMyShop();
+
+	char szName[256];
+	DBManager::instance().EscapeString(szName, 256, c_pszSign, strlen(c_pszSign));
+	if (strlen(szName) == 0)
+		return;
+
+	m_stShopSign = szName;
+	boost::replace_all(m_stShopSign, "%", "%%");
+
+	if (m_stShopSign.length() > 30)
+		m_stShopSign.resize(30);
+
+	if (m_stShopSign.length() == 0)
+		return;
+
+	if (m_pkExchange)
+		m_pkExchange->Cancel();
+
+	SetMyShopTime();
+	CShopManager::instance().CreateOfflineShop(this, m_stShopSign.c_str(), map_shop);
+	RemoveSpecifyItem(50200, 1);
+	m_stShopSign.clear();
+}
+#else
 void CHARACTER::OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE bItemCount)
 {
 	if (!CanHandleItem()) // @fixme149
@@ -832,6 +963,262 @@ void CHARACTER::OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE
 
 	SetPolymorph(30000, true);
 }
+#endif
+
+#ifdef OFFLINE_SHOP
+void CHARACTER::OpenShop(DWORD dwPID, const char *name, bool onboot)
+{
+	if (GetMyShop())
+	{
+		CloseMyShop();
+		return;
+	}
+
+	char szSockets[128];
+	char szAttrs[256];
+	int socLen = snprintf(szSockets, sizeof(szSockets), "socket0");
+	int attrLen = snprintf(szAttrs, sizeof(szAttrs), "attrtype0, attrvalue0");
+	for (BYTE i = 1; i < ITEM_SOCKET_MAX_NUM; i++)
+		socLen += snprintf(szSockets + socLen, sizeof(szSockets) - socLen, ", socket%d", i);
+
+	for (BYTE i = 1; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
+		attrLen += snprintf(szAttrs + attrLen, sizeof(szAttrs) - attrLen, ", attrtype%d, attrvalue%d", i, i);
+
+	char szQuery[1024];
+	snprintf(szQuery, sizeof(szQuery), "SELECT id, vnum, count, display_pos, price, %s, %s FROM player_shop_items WHERE player_id = %u", szSockets, szAttrs, dwPID);
+	auto pkMsg = DBManager::instance().DirectQuery(szQuery);
+	if (!pkMsg || !pkMsg->Get())
+		return;
+
+	std::vector<TShopItemTable *> map_shop;
+
+	if (pkMsg->Get()->uiNumRows > 0)
+	{
+		MYSQL_ROW row =							NULL;
+		while ((row = mysql_fetch_row(pkMsg->Get()->pSQLResult)) != NULL)
+		{
+			TShopItemTable *shop = new TShopItemTable;
+			memset(shop, 0, sizeof(TShopItemTable));
+
+			int col =							0;
+			DWORD id =							0;
+			shop->pos.window_type =				INVENTORY;
+			str_to_number(id,					row[col++]);
+			str_to_number(shop->vnum,			row[col++]);
+			str_to_number(shop->count,			row[col++]);
+			str_to_number(shop->display_pos,	row[col++]);
+			str_to_number(shop->price,			row[col++]);
+
+			const TItemTable * item_table = ITEM_MANAGER::instance().GetTable(shop->vnum);
+			if (!item_table)
+			{
+				sys_err("Shop: no item table by item vnum #%d", shop->vnum);
+				continue;
+			}
+
+			int iEmptyCell = GetEmptyInventory(item_table->bSize);
+			if (iEmptyCell == -1)
+			{
+				sys_err("no empty position in npc inventory");
+				return;
+			}
+
+			shop->pos.cell = iEmptyCell;
+
+			LPITEM item = ITEM_MANAGER::instance().CreateItem(shop->vnum, shop->count, 0, false, -1, true);
+
+			if (item)
+			{
+				item->ClearAttribute();
+				item->SetSkipSave(true);
+				item->SetRealID(id);
+				for (int s = 0; s < ITEM_SOCKET_MAX_NUM; s++)
+				{
+					DWORD soc =					0;
+					str_to_number(soc,			row[col++]);
+					item->SetSocket(s,			soc, false);
+				}
+				for (int at = 0; at < ITEM_ATTRIBUTE_MAX_NUM; at++)
+				{
+					long val =					0;
+					DWORD attr =				0;
+					str_to_number(attr,			row[col++]);
+					str_to_number(val,			row[col++]);
+					item->SetForceAttribute(at, attr, val);
+				}
+
+				if (!item->CheckItemEnchant())
+				{
+					sys_err("Pazara Item Eklenmedi! [itemID: %u]", id);
+					M2_DESTROY_ITEM(item);
+					continue;
+				}
+				item->AddToCharacter(this, shop->pos);
+			}
+			else
+			{
+				sys_err("%d is not item", shop->vnum);
+				continue;
+			}
+
+			map_shop.push_back(shop);
+		}
+	}
+
+	if ((map_shop.size() == 0 && !onboot) || map_shop.size() > SHOP_HOST_ITEM_MAX_NUM)
+		return;
+
+	m_stShopSign = name;
+	if (m_stShopSign.length() > 30)
+		m_stShopSign.resize(30);
+	if (m_stShopSign.length() == 0)
+		return;
+
+	TPacketGCShopSign p {};
+	p.bHeader =									HEADER_GC_SHOP_SIGN;
+	p.dwVID =									GetVID();
+	strlcpy(p.szSign, m_stShopSign.c_str(), sizeof(p.szSign));
+	PacketAround(p);
+
+	m_pkMyShop = CShopManager::instance().CreateNPCShop(this, map_shop);
+}
+
+void CHARACTER::DeleteMyShop()
+{
+	if (GetMyShop())
+	{
+		const DWORD ownerPID = GetPrivShopOwner();
+		auto pkMsg = DBManager::instance().DirectQuery("DELETE FROM player_shop WHERE player_id='%d'", ownerPID);
+		if (!pkMsg || !pkMsg->Get() || pkMsg->Get()->uiAffectedRows <= 0)
+			return;
+
+		GetMyShop()->GetItems();
+
+		LPCHARACTER owner = CHARACTER_MANAGER::instance().FindByPID(ownerPID);
+		if (owner)
+		{
+#ifdef GIFT_SYSTEM
+			owner->RefreshGift();
+#endif
+			owner->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("SHOP_SUCCESS_CLOSE"));
+		}
+		else
+		{
+			TPacketShopClose packet	{};
+			packet.pid				= ownerPID;
+			db_clientdesc->DBPacket(HEADER_GD_SHOP_CLOSE, 0, &packet, sizeof(packet));
+		}
+
+		CloseMyShop();
+
+		LogManager::instance().CharLog(ownerPID, 0, 0, 0, "Pazar Kapandi", "", "");
+		return;
+	}
+
+	M2_DESTROY_CHARACTER(this);
+}
+
+// ---- Offline dukkan duzenleme (sahip tarafindan) ----
+// Bu metodlar SAHIP (oyuncu) uzerinde cagrilir; GetShopOwner() baktigi NPC dukkandir.
+bool CHARACTER::EnterShopEditMode()
+{
+	LPCHARACTER npc = GetShopOwner();
+	if (!npc || npc->GetRaceNum() != 30000 || !npc->IsPrivShop() || npc->GetPrivShopOwner() != GetPlayerID())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_NOT_OWNER"));
+		return false;
+	}
+
+	if (IsEditingShop())
+		return false;
+
+	if (DISTANCE_APPROX(GetX() - npc->GetX(), GetY() - npc->GetY()) > SHOP_MAX_DISTANCE)
+	{
+		ChatPacket(CHAT_TYPE_COMMAND, "offline_shop_too_far");
+		return false;
+	}
+
+	if (GetExchange() || IsOpenSafebox() || IsCubeOpen())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDIT_OTHER_WINDOW"));
+		return false;
+	}
+
+	LPSHOP pkShop = npc->GetMyShop();
+	if (!pkShop)
+		return false;
+
+	SetEditingShop(true);
+	SetMyShopTime();
+
+	// O an bakanlarin pazar ekranini kapat (sahip haric)
+	pkShop->KickGuestsExcept(this);
+
+	// Client'i duzenleme moduna gecir
+	ChatPacket(CHAT_TYPE_COMMAND, "offline_shop_edit_start");
+	return true;
+}
+
+void CHARACTER::ApplyShopEdit(const BYTE * pbRemovePos, BYTE byRemoveCount, const TShopItemTable * pAdd, BYTE byAddCount, const TOfflineShopPriceUpdate * pUpdate, BYTE byUpdateCount)
+{
+	if (!IsEditingShop())
+		return;
+
+	LPCHARACTER npc = GetShopOwner();
+	if (!npc || npc->GetRaceNum() != 30000 || npc->GetPrivShopOwner() != GetPlayerID())
+	{
+		CancelShopEdit();
+		return;
+	}
+
+	LPSHOP pkShop = npc->GetMyShop();
+	if (!pkShop)
+		return;
+
+	// Pazardaki esyalarin toplam degeri 2 milyar yang'i (GOLD_MAX) gecemez.
+	// Asiyorsa uygulamayi reddet, duzenleme modunda KAL, client'i tekrar edit moduna sok.
+	if (pkShop->EditWouldExceedLimit(pbRemovePos, byRemoveCount, pAdd, byAddCount, pUpdate, byUpdateCount))
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_TOTAL_LIMIT"));
+		ChatPacket(CHAT_TYPE_COMMAND, "offline_shop_edit_start");
+		return;
+	}
+
+	pkShop->ApplyOwnerEdit(this, pbRemovePos, byRemoveCount, pAdd, byAddCount, pUpdate, byUpdateCount);
+
+	SetEditingShop(false);
+	SetMyShopTime();
+
+	if (GetShop())
+	{
+		GetShop()->RemoveGuest(this);
+		SetShop(NULL);
+	}
+	SetShopOwner(NULL);
+
+#ifdef SHOP_AUTO_CLOSE
+	if (pkShop && pkShop->GetItemCount() <= 0)
+		npc->DeleteMyShop();
+#endif
+}
+
+void CHARACTER::CancelShopEdit()
+{
+	if (!IsEditingShop())
+		return;
+
+	SetEditingShop(false);
+	SetMyShopTime();
+
+	if (GetShop())
+	{
+		GetShop()->RemoveGuest(this);
+		SetShop(NULL);
+	}
+	SetShopOwner(NULL);
+}
+#endif
+
 
 void CHARACTER::CloseMyShop()
 {
@@ -848,6 +1235,13 @@ void CHARACTER::CloseMyShop()
 		p.szSign[0] = '\0';
 
 		PacketAround(p);
+#ifdef OFFLINE_SHOP
+		if (IsPrivShop())
+		{
+			M2_DESTROY_CHARACTER(this);
+			return;
+		}
+#endif
 #ifdef ENABLE_WOLFMAN_CHARACTER
 		SetPolymorph(m_points.job, true);
 		// SetPolymorph(0, true);
@@ -856,6 +1250,161 @@ void CHARACTER::CloseMyShop()
 #endif
 	}
 }
+
+#ifdef GIFT_SYSTEM
+EVENTFUNC(gift_refresh_event)
+{
+	char_event_info* info = dynamic_cast<char_event_info*>(event->info);
+	if (info == NULL)
+	{
+		sys_err("gift_refresh_event> <Factor> Null pointer");
+		return 0;
+	}
+
+	LPCHARACTER ch = info->ch;
+	if (!ch || !ch->IsPC())
+		return 0;
+
+	ch->RefreshGift();
+	return PASSES_PER_SEC(5 * 60);
+}
+
+void CHARACTER::StartRefreshGift()
+{
+	if (m_pkGiftRefresh)
+		return;
+
+	char_event_info* info =	AllocEventInfo<char_event_info>();
+	info->ch =				this;
+	m_pkGiftRefresh =		event_create(gift_refresh_event, info, PASSES_PER_SEC(1));
+}
+
+void SendGift(LPCHARACTER ch, TGiftItem item)
+{
+	char szSockets[128];
+	char szAttrs[256];
+	int socLen = snprintf(szSockets, sizeof(szSockets), "%ld|", item.alSockets[0]);
+	int attrLen = snprintf(szAttrs, sizeof(szAttrs), "%d,%d|", item.aAttr[0].bType, item.aAttr[0].sValue);
+
+	for (BYTE i = 1; i < ITEM_SOCKET_MAX_NUM; i++)
+		socLen += snprintf(szSockets + socLen, sizeof(szSockets) - socLen, "%ld%s", item.alSockets[i], (i < (ITEM_SOCKET_MAX_NUM - 1) ? ("|") : ("")));
+
+	for (BYTE i = 1; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
+		attrLen += snprintf(szAttrs + attrLen, sizeof(szAttrs) - attrLen, "%d,%d%s", item.aAttr[i].bType, item.aAttr[i].sValue, ((i < ITEM_ATTRIBUTE_MAX_NUM - 1) ? ("|") : ("")));
+
+	ch->ChatPacket(CHAT_TYPE_COMMAND, "gift_item %u %u %u %d %s %s", item.id, item.vnum, item.count, item.pos, szSockets, szAttrs);
+}
+
+void CHARACTER::LoadGiftPage(int page)
+{
+	page = MINMAX(1, page, m_mapGiftGrid.size());
+	ChatPacket(CHAT_TYPE_COMMAND, "gift_clear");
+
+	GIFT_MAP::iterator it = m_mapGiftGrid.find(page);
+	if (it == m_mapGiftGrid.end())
+		return;
+
+	m_dwLastGiftPage = page;
+
+	for (size_t i = 0; i < it->second.size(); i++)
+		SendGift(this, it->second[i]);
+
+	ChatPacket(CHAT_TYPE_COMMAND, "gift_load");
+}
+
+static CGrid* gift_grid;
+void CHARACTER::AddGiftGrid(int page)
+{
+	if (m_mapGiftGrid.find(page) != m_mapGiftGrid.end())
+		return;
+
+	std::vector<TGiftItem> vec;
+	m_mapGiftGrid.insert(std::make_pair(page, vec));
+}
+
+int CHARACTER::AddGiftGridItem(int page, int size)
+{
+	AddGiftGrid(page);
+	int iPos = gift_grid->FindBlank(1, size);
+
+	if (iPos < 0 || !gift_grid->IsEmpty(iPos, 1, size))
+		return -1;
+
+	gift_grid->Put(iPos, 1, size);
+	return iPos;
+}
+
+void CHARACTER::RefreshGift()
+{
+	m_mapGiftGrid.clear();
+
+	char szSockets[128];
+	char szAttrs[256];
+	int socLen = snprintf(szSockets, sizeof(szSockets), "socket0");
+	int attrLen = snprintf(szAttrs, sizeof(szAttrs), "attrtype0, attrvalue0");
+	for (BYTE i = 1; i < ITEM_SOCKET_MAX_NUM; i++)
+		socLen += snprintf(szSockets + socLen, sizeof(szSockets) - socLen, ", socket%d", i);
+
+	for (BYTE i = 1; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
+		attrLen += snprintf(szAttrs + attrLen, sizeof(szAttrs) - attrLen, ", attrtype%d, attrvalue%d", i, i);
+
+	auto pkMsg = DBManager::instance().DirectQuery("SELECT id, vnum, count, %s, %s FROM player_gift WHERE owner_id = %u", szSockets, szAttrs, GetPlayerID());
+	if (!pkMsg || !pkMsg->Get())
+		return;
+
+	gift_grid = M2_NEW CGrid(15, 8);
+	gift_grid->Clear();
+
+	if (pkMsg->Get()->uiNumRows > 0)
+	{
+		AddGiftGrid(1);
+
+		int page =									1;
+		MYSQL_ROW row =								NULL;
+		while ((row = mysql_fetch_row(pkMsg->Get()->pSQLResult)) != NULL)
+		{
+			TGiftItem item {};
+			int col =								0;
+			str_to_number(item.id,					row[col++]);
+			str_to_number(item.vnum,				row[col++]);
+			str_to_number(item.count,				row[col++]);
+			for (int i = 0; i < ITEM_SOCKET_MAX_NUM; i++)
+				str_to_number(item.alSockets[i],	row[col++]);
+			for (int i = 0; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
+			{
+				str_to_number(item.aAttr[i].bType,	row[col++]);
+				str_to_number(item.aAttr[i].sValue,	row[col++]);
+			}
+
+			const TItemTable * item_table = ITEM_MANAGER::instance().GetTable(item.vnum);
+			if (!item_table)
+				continue;
+
+			int iPos =								AddGiftGridItem(page, item_table->bSize);
+			if (iPos < 0)
+			{
+				page++;
+				gift_grid->Clear();
+
+				iPos =								AddGiftGridItem(page, item_table->bSize);
+				if (iPos < 0)
+				{
+					sys_err("iPos < 0");
+					break;
+				}
+			}
+
+			item.pos =								iPos;
+			m_mapGiftGrid[page].push_back(item);
+		}
+
+		M2_DELETE(gift_grid);
+	}
+
+	if (GetGiftPages() > 0)
+		ChatPacket(CHAT_TYPE_COMMAND, "gift_info %d", GetGiftPages());
+}
+#endif
 
 void EncodeMovePacket(TPacketGCMove & pack, DWORD dwVID, BYTE bFunc, BYTE bArg, DWORD x, DWORD y, DWORD dwDuration, DWORD dwTime, BYTE bRot)
 {
@@ -936,6 +1485,10 @@ void CHARACTER::EncodeInsertPacket(LPENTITY entity)
 	pack.bAttackSpeed	= GetLimitPoint(POINT_ATT_SPEED);
 	pack.dwAffectFlag[0] = m_afAffectFlag.bits[0];
 	pack.dwAffectFlag[1] = m_afAffectFlag.bits[1];
+
+#ifdef OFFLINE_SHOP
+	pack.byIsMyShop = (GetRaceNum() == 30000 && GetPrivShopOwner() == ch->GetPlayerID()) ? (1) : (0);
+#endif
 
 	pack.bStateFlag = m_bAddChrState;
 
@@ -1900,6 +2453,11 @@ void CHARACTER::SetProto(const CMob * pkMob)
 	const TMobTable * t = &m_pkMobData->m_table;
 
 	m_bCharType = t->bType;
+
+#ifdef OFFLINE_SHOP
+	if (GetRaceNum() == 30000)
+		m_PlayerSlots = std::make_unique<PlayerSlotT>(); // @fixme199
+#endif
 
 	SetLevel(t->bLevel);
 	SetEmpire(t->bEmpire);
@@ -4953,6 +5511,15 @@ void CHARACTER::OnClick(LPCHARACTER pkChrCauser)
 		}
 	}
 
+#ifdef OFFLINE_SHOP
+	if (IsPC() || IsPrivShop())
+	{
+		if (!CTargetManager::instance().GetTargetInfo(pkChrCauser->GetPlayerID(), TARGET_TYPE_VID, GetVID()) || IsPrivShop())
+		{
+			if (GetMyShop())
+			{
+				if (pkChrCauser->IsDead() == true) return;
+#else
 	if (IsPC())
 	{
 		if (!CTargetManager::instance().GetTargetInfo(pkChrCauser->GetPlayerID(), TARGET_TYPE_VID, GetVID()))
@@ -4960,6 +5527,7 @@ void CHARACTER::OnClick(LPCHARACTER pkChrCauser)
 			if (GetMyShop())
 			{
 				if (pkChrCauser->IsDead() == true) return;
+#endif
 
 				//PREVENT_TRADE_WINDOW
 				if (pkChrCauser == this)
@@ -4985,6 +5553,19 @@ void CHARACTER::OnClick(LPCHARACTER pkChrCauser)
 					}
 				}
 				//END_PREVENT_TRADE_WINDOW
+
+#ifdef OFFLINE_SHOP
+				if (IsPrivShop())
+				{
+					LPCHARACTER pkOwner = CHARACTER_MANAGER::instance().FindByPID(GetPrivShopOwner());
+					if (pkOwner && pkOwner->IsEditingShop())
+					{
+						if (pkChrCauser != pkOwner)
+							pkChrCauser->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_BEING_EDITED"));
+						return;
+					}
+				}
+#endif
 
 				if (pkChrCauser->GetShop())
 				{
@@ -5575,6 +6156,13 @@ CSafebox * CHARACTER::GetSafebox() const
 
 void CHARACTER::ReqSafeboxLoad(const char* pszPassword)
 {
+#ifdef OFFLINE_SHOP
+	if (IsEditingShop())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDITING_BLOCK"));
+		return;
+	}
+#endif
 	if (!*pszPassword || strlen(pszPassword) > SAFEBOX_PASSWORD_MAX_LEN)
 	{
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("<창고> 잘못된 암호를 입력하셨습니다."));
@@ -6770,6 +7358,15 @@ bool CHARACTER::IsHack(bool bSendMsg, bool bCheckShopOwner, int limittime) const
 		return true;
 	}
 
+#ifdef OFFLINE_SHOP
+	if (IsEditingShop())
+	{
+		if (bSendMsg)
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDITING_BLOCK"));
+		return true;
+	}
+#endif
+
 	if (bCheckShopOwner)
 	{
 		if (GetExchange() || GetMyShop() || GetShopOwner() || IsOpenSafebox() || IsCubeOpen())
@@ -7303,6 +7900,11 @@ bool CHARACTER::CanWarp() const
 
 	if (GetExchange() || GetMyShop() || GetShopOwner() || IsOpenSafebox() || IsCubeOpen())
 		return false;
+
+#ifdef OFFLINE_SHOP
+	if (IsEditingShop())
+		return false;
+#endif
 
 	return true;
 }

@@ -66,6 +66,20 @@ class CShop
 	protected:
 		void	Broadcast(const void * data, int bytes);
 
+#ifdef OFFLINE_SHOP
+	public:
+		int			BuyOffline(LPCHARACTER ch, BYTE pos);
+		int			GetItemCount();
+		bool		GetItems();
+		void		SetPrivShopItems(std::vector<TShopItemTable *> map_shop);
+		void		RemoveItemForShop(DWORD dwItemID);
+		// Offline dukkan duzenleme: bakanlari kov (sahip haric), sahip duzenlemesini uygula
+		void		KickGuestsExcept(LPCHARACTER keep);
+		void		ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byRemoveCount, const TShopItemTable * pAdd, BYTE byAddCount, const TOfflineShopPriceUpdate * pUpdate, BYTE byUpdateCount);
+		bool		EditWouldExceedLimit(const BYTE * pbRemovePos, BYTE byRemoveCount, const TShopItemTable * pAdd, BYTE byAddCount, const TOfflineShopPriceUpdate * pUpdate, BYTE byUpdateCount) const;
+		void		RebuildGrid();
+#endif
+
 	protected:
 		DWORD				m_dwVnum;
 		DWORD				m_dwNPCVnum;

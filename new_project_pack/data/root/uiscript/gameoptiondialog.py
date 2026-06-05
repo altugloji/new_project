@@ -503,3 +503,26 @@ if app.__BL_OFFICIAL_LOOT_FILTER__:
 			"down_image" : ROOT_PATH + "middle_button_03.sub",
 		},
 	]
+
+if app.ENABLE_OFFLINE_SHOP:
+	CUR_LINE_Y += LINE_STEP
+	window["height"] = window["height"] + 25
+	window["children"][0]["height"] = window["children"][0]["height"] + 25
+	window["children"][0]["children"] = window["children"][0]["children"] + [
+		{
+			"name" : "PrivateShopDistanceText",
+			"type" : "text",
+
+			"x" : LINE_LABEL_X,
+			"y" : CUR_LINE_Y + 2,
+
+			"text" : uiScriptLocale.PREMIUM_PRIVATE_SHOP_TITLE_VIEW_DISTANCE,
+		},
+		{
+			"name" : "PrivateShopDistanceSlider",
+			"type" : "sliderbar",
+
+			"x" : LINE_DATA_X,
+			"y" : CUR_LINE_Y + 3,
+		},
+	]

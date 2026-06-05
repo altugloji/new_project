@@ -24,6 +24,9 @@
 #include "shopEx.h"
 #include "shop_manager.h"
 #include <cctype>
+#ifdef OFFLINE_SHOP
+	#include <boost/algorithm/string/replace.hpp>
+#endif
 #ifdef ENABLE_NEWSTUFF
 #include "../../common/PulseManager.h"
 #endif
@@ -111,7 +114,11 @@ bool CShopManager::StartShopping(LPCHARACTER pkChr, LPCHARACTER pkChrShopKeeper,
 		return false;
 
 	//PREVENT_TRADE_WINDOW
-	if (pkChr->IsOpenSafebox() || pkChr->GetExchange() || pkChr->GetMyShop() || pkChr->IsCubeOpen())
+	if (pkChr->IsOpenSafebox() || pkChr->GetExchange() || pkChr->GetMyShop() || pkChr->IsCubeOpen()
+#ifdef OFFLINE_SHOP
+		|| pkChr->IsEditingShop()
+#endif
+		)
 	{
 		pkChr->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("다른 거래창이 열린상태에서는 상점거래를 할수 가 없습니다."));
 		return false;
@@ -175,7 +182,15 @@ LPSHOP CShopManager::CreatePCShop(LPCHARACTER ch, TShopItemTable * pTable, BYTE 
 
 void CShopManager::DestroyPCShop(LPCHARACTER ch)
 {
+#ifdef OFFLINE_SHOP
+	DWORD dwID = (ch->IsPrivShop()) ? (ch->GetPrivShopOwner()) : (ch->GetVID());
+	if (dwID == 0)
+		return;
+
+	const LPSHOP pkShop = FindPCShop(dwID);
+#else
 	const LPSHOP pkShop = FindPCShop(ch->GetVID());
+#endif
 
 	if (!pkShop)
 		return;
@@ -184,9 +199,147 @@ void CShopManager::DestroyPCShop(LPCHARACTER ch)
 	ch->SetMyShopTime();
 	//END_PREVENT_ITEM_COPY
 
+#ifdef OFFLINE_SHOP
+	m_map_pkShopByPC.erase(dwID);
+#else
 	m_map_pkShopByPC.erase(ch->GetVID());
+#endif
 	M2_DELETE(pkShop);
 }
+
+#ifdef OFFLINE_SHOP
+void CShopManager::CreateOfflineShop(LPCHARACTER owner, const char *szSign, const std::vector<TShopItemTable *> pTable)
+{
+	if (!owner || !owner->IsPC())
+		return;
+
+	char szOriginalSign[SHOP_SIGN_MAX_LEN * 2 + 1];
+	DBManager::Instance().EscapeString(szOriginalSign, sizeof(szOriginalSign), szSign, strlen(szSign));
+	if (strlen(szOriginalSign) == 0 || strstr(szOriginalSign, "%") || strstr(szOriginalSign, "'") || strstr(szOriginalSign, "/"))
+	{
+		owner->ChatPacket(CHAT_TYPE_INFO, "string yanlis");
+		return;
+	}
+
+	// Grid kontrolu
+	CGrid *pGrid = M2_NEW CGrid(5, 9);
+	for (size_t i = 0; i < pTable.size(); i++)
+	{
+		LPITEM item = owner->GetItem(pTable[i]->pos);
+		if (!item)
+			continue;
+
+		const BYTE display_pos = pTable[i]->display_pos;
+		const TItemTable * itemProto = item->GetProto();
+		if (!itemProto || !pGrid->IsEmpty(display_pos, 1, itemProto->bSize))
+		{
+			owner->ChatPacket(CHAT_TYPE_INFO, "Pazarda Hatali Item Var... - [Slot Num: %d]", display_pos);
+			M2_DELETE(pGrid);
+			return;
+		}
+
+		pGrid->Put(display_pos, 1, itemProto->bSize);
+	}
+	M2_DELETE(pGrid);
+
+	char szQuery[4096];
+	DWORD date_close = get_global_time() + (60 * 60 * 24 * 7);
+	snprintf(szQuery, sizeof(szQuery), "INSERT INTO player_shop SET player_id=%d, name='%s', map_index=%ld, x=%ld, y=%ld, date_close=%u, channel=%d",
+									owner->GetPlayerID(), szOriginalSign, owner->GetMapIndex(), owner->GetX(), owner->GetY(), date_close, g_bChannel);
+
+	auto pkMsg = DBManager::instance().DirectQuery(szQuery);
+	if (!pkMsg || !pkMsg->Get())
+		return;
+
+	for (size_t i = 0; i < pTable.size(); i++)
+	{
+		LPITEM item = owner->GetItem(pTable[i]->pos);
+		if (!item)
+			continue;
+
+		char query[1024];
+		snprintf(query, sizeof(query), "INSERT INTO player_shop_items SET");
+		snprintf(query, sizeof(query), "%s player_id = %u",			query, owner->GetPlayerID());
+		snprintf(query, sizeof(query), "%s, vnum = %u",				query, item->GetVnum());
+		snprintf(query, sizeof(query), "%s, count = %d",			query, item->GetCount());
+		snprintf(query, sizeof(query), "%s, price = %u",			query, pTable[i]->price);
+		snprintf(query, sizeof(query), "%s, display_pos = %d",		query, pTable[i]->display_pos);
+
+		for (BYTE s = 0; s < ITEM_SOCKET_MAX_NUM; s++)
+			snprintf(query, sizeof(query), "%s, socket%d = %ld",	query, s, item->GetSocket(s));
+
+		for (BYTE ia = 0; ia < ITEM_ATTRIBUTE_MAX_NUM; ia++)
+		{
+			const TPlayerItemAttribute& attr = item->GetAttribute(ia);
+
+			snprintf(query, sizeof(query), "%s, attrtype%d = %u",	query, ia, attr.bType);
+			snprintf(query, sizeof(query), "%s, attrvalue%d = %d",	query, ia, attr.sValue);
+		}
+
+		DBManager::instance().DirectQuery(query);
+		ITEM_MANAGER::Instance().RemoveItem(item, "Pazara Eklendi");
+	}
+
+	StartOfflineShop(owner->GetPlayerID());
+	owner->SetMyShopTime();
+}
+
+bool CShopManager::StartOfflineShop(DWORD dwPID, bool onboot)
+{
+	std::string name;
+	std::string shop_name(LC_TEXT("SHOP_NAME"));
+	DWORD time = 0;
+	long map_index = 0, x = 0, y = 0;
+
+	auto pkMsg = DBManager::instance().DirectQuery("SELECT player_shop.name, player.name as player_name, player_shop.map_index, player_shop.x, player_shop.y, player_shop.date_close FROM player_shop left join player on player.id=player_shop.player_id WHERE player_shop.player_id='%u'", dwPID);
+	if (!pkMsg || !pkMsg->Get())
+		return false;
+
+	if (pkMsg->Get()->uiNumRows > 0)
+	{
+		MYSQL_ROW row = NULL;
+		while ((row = mysql_fetch_row(pkMsg->Get()->pSQLResult)) != NULL)
+		{
+			name =											row[0];
+			boost::replace_all(shop_name, "#PLAYER_NAME#",	row[1]);
+			str_to_number(map_index,						row[2]);
+			str_to_number(x,								row[3]);
+			str_to_number(y,								row[4]);
+			str_to_number(time,								row[5]);
+		}
+	}
+	if (map_index <= 0 || x <= 0 || y <= 0)
+	{
+		sys_err("location is null %u", dwPID);
+		return false;
+	}
+
+	LPCHARACTER ch = CHARACTER_MANAGER::Instance().SpawnMob(30000, map_index, x, y, 0, true, 0, false);
+	if (ch)
+	{
+		ch->SetName(shop_name.c_str());
+		ch->SetPrivShopOwner(dwPID);
+		ch->SetShopTime(time);
+		ch->Show(map_index, x, y);
+		ch->OpenShop(dwPID, name.c_str(), onboot);
+		return true;
+	}
+	return false;
+}
+
+LPSHOP CShopManager::CreateNPCShop(LPCHARACTER ch, std::vector<TShopItemTable *> map_shop)
+{
+	if (FindPCShop(ch->GetPrivShopOwner()))
+		return NULL;
+
+	LPSHOP pkShop = M2_NEW CShop;
+	pkShop->SetPCShop(ch);
+	pkShop->SetPrivShopItems(map_shop);
+
+	m_map_pkShopByPC.insert(TShopMap::value_type(ch->GetPrivShopOwner(), pkShop));
+	return pkShop;
+}
+#endif
 
 void CShopManager::StopShopping(LPCHARACTER ch) const
 {

@@ -398,10 +398,8 @@ class GameWindow(ui.ScriptWindow):
 		if app.ENABLE_EXCHANGE_LOG:
 			onPressKeyDict[app.DIK_F6]	= lambda : self.interface.OpenExchangeLog()
 
-		if app.ENABLE_GM_PLAYER_PANEL:
-			onPressKeyDict[app.DIK_TAB]	= lambda : self.interface.ToggleGmPlayerPanel()
-		elif app.ENABLE_BULK_POTION_PANEL:
-			onPressKeyDict[app.DIK_TAB]	= lambda : self.interface.OpenBulkPotionPanel()
+		if app.ENABLE_GM_PLAYER_PANEL or app.ENABLE_BULK_POTION_PANEL:
+			onPressKeyDict[app.DIK_TAB]	= lambda : self.interface.ToggleTabPanel()
 
 		onPressKeyDict[app.DIK_LALT]		= lambda : self.ShowName()
 		onPressKeyDict[app.DIK_LCONTROL]	= lambda : self.ShowMouseImage()
@@ -1024,14 +1022,52 @@ class GameWindow(ui.ScriptWindow):
 		self.interface.OpenPointResetDialog()
 
 	## Shop
-	def StartShop(self, vid):
-		self.interface.OpenShopDialog(vid)
+	if app.ENABLE_OFFLINE_SHOP:
+		def StartShop(self, vid, isMyShop = 0):
+			self.interface.OpenShopDialog(vid, isMyShop)
+	else:
+		def StartShop(self, vid):
+			self.interface.OpenShopDialog(vid)
 
 	def EndShop(self):
 		self.interface.CloseShopDialog()
 
 	def RefreshShop(self):
 		self.interface.RefreshShopDialog()
+
+	if app.ENABLE_OFFLINE_SHOP:
+		# GIFT command
+		def Gift_Show(self):
+			self.interface.ShowGift()
+
+		def gift_clear(self):
+			constInfo.gift_items={}
+			self.interface.ClearGift()
+
+		def gift_item(self, id, vnum, count, pos, szSockets, szAttrs):
+			sockets=[]
+			for key in szSockets.split("|"):
+				sockets.append(int(key))
+
+			attrs=[]
+			for key in szAttrs.split("|"):
+				a=key.split(",")
+				attrs.append([int(a[0]),int(a[1])])
+
+			constInfo.gift_items[int(pos)] = { "id" : int(id), "vnum" : int(vnum), "count" : int(count), "pos" : int(pos), "sockets" : sockets, "attrs" : attrs }
+
+		def gift_load(self):
+			self.interface.wndGiftBox.Refresh()
+
+		def gift_show(self, pages):
+			self.interface.wndGiftBox.pageNum=int(pages)
+			self.interface.OpenGift()
+
+		def offline_shop_edit_start(self):
+			self.interface.OfflineShopEditStart()
+
+		def offline_shop_too_far(self):
+			self.interface.OfflineShopTooFar()
 
 	def SetShopSellingPrice(self, Price):
 		pass
@@ -1276,6 +1312,9 @@ class GameWindow(ui.ScriptWindow):
 		player.SetSingleDIKKeyState(app.DIK_RIGHT, False)
 
 	def PickUpItem(self):
+		if app.ENABLE_OFFLINE_SHOP and constInfo.OFFLINE_SHOP_EDITING:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Pazar duzenlerken yerden esya alamazsiniz.")
+			return
 		player.PickCloseItem()
 
 	###############################################################################################
@@ -1398,6 +1437,9 @@ class GameWindow(ui.ScriptWindow):
 		return True
 
 	def __PutItem(self, attachedType, attachedItemIndex, attachedItemSlotPos, attachedItemCount, dstChrID):
+		if app.ENABLE_OFFLINE_SHOP and constInfo.OFFLINE_SHOP_EDITING:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Pazar duzenlerken esya verme/atma yapamazsiniz.")
+			return
 		if player.SLOT_TYPE_INVENTORY == attachedType or player.SLOT_TYPE_DRAGON_SOUL_INVENTORY == attachedType:
 			attachedInvenType = player.SlotTypeToInvenType(attachedType)
 			if True == chr.HasInstance(self.PickingCharacterIndex) and player.GetMainCharacterIndex() != dstChrID:
@@ -2135,6 +2177,16 @@ class GameWindow(ui.ScriptWindow):
 			"skill_select"			: self.LearnSkillGroup,
 			# END_OF_PRIVATE_SHOP_PRICE_LIST
 		}
+
+		if app.ENABLE_OFFLINE_SHOP:
+			serverCommandList.update({
+				"gift_clear"	: self.gift_clear,
+				"gift_item"		: self.gift_item,
+				"gift_info"		: self.gift_show,
+				"gift_load"		: self.gift_load,
+				"offline_shop_edit_start"	: self.offline_shop_edit_start,
+				"offline_shop_too_far"		: self.offline_shop_too_far,
+			})
 
 		if app.AUTO_CHAT_ENABLE:
 			serverCommandList.update({"UpdateAutoChat" : self.interface.UpdateAutoChat})

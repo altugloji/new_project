@@ -390,6 +390,8 @@ def __LoadGameEffect():
 	chrmgr.RegisterEffect(chrmgr.EFFECT_AFFECT+chr.AFFECT_WAR_FLAG1, "", "d:/ymir work/effect/etc/guild_war_flag/flag_red.mse")
 	chrmgr.RegisterEffect(chrmgr.EFFECT_AFFECT+chr.AFFECT_WAR_FLAG2, "", "d:/ymir work/effect/etc/guild_war_flag/flag_blue.mse")
 	chrmgr.RegisterEffect(chrmgr.EFFECT_AFFECT+chr.AFFECT_WAR_FLAG3, "", "d:/ymir work/effect/etc/guild_war_flag/flag_yellow.mse")
+	if app.ENABLE_OFFLINE_SHOP:
+		chrmgr.RegisterEffect(chr.AFFECT_MY_SHOP, "", "d:/ymir work/effect/etc/direction/direction_land2.mse")
 	if app.ENABLE_WOLFMAN_CHARACTER:
 		chrmgr.RegisterEffect(chrmgr.EFFECT_AFFECT+chr.AFFECT_BLEEDING, "Bip01", "d:/ymir work/effect/hit/blow_poison/bleeding_loop.mse")
 		chrmgr.RegisterEffect(chrmgr.EFFECT_AFFECT+chr.AFFECT_RED_POSSESSION, "Bip01", "d:/ymir work/effect/hit/blow_flame/flame_loop_w.mse")
@@ -464,31 +466,31 @@ def __LoadGameEffect():
 	EmoticonStr = "d:/ymir work/effect/etc/emoticon/"
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_EMOTICON+0, "", EmoticonStr+"sweat.mse")
-	net.RegisterEmoticonString("(È²´ç)")
+	net.RegisterEmoticonString("(È²ï¿½ï¿½)")
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_EMOTICON+1, "", EmoticonStr+"money.mse")
-	net.RegisterEmoticonString("(µ·)")
+	net.RegisterEmoticonString("(ï¿½ï¿½)")
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_EMOTICON+2, "", EmoticonStr+"happy.mse")
-	net.RegisterEmoticonString("(±â»Ý)")
+	net.RegisterEmoticonString("(ï¿½ï¿½ï¿½)")
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_EMOTICON+3, "", EmoticonStr+"love_s.mse")
-	net.RegisterEmoticonString("(ÁÁ¾Æ)")
+	net.RegisterEmoticonString("(ï¿½ï¿½ï¿½ï¿½)")
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_EMOTICON+4, "", EmoticonStr+"love_l.mse")
-	net.RegisterEmoticonString("(»ç¶û)")
+	net.RegisterEmoticonString("(ï¿½ï¿½ï¿½)")
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_EMOTICON+5, "", EmoticonStr+"angry.mse")
-	net.RegisterEmoticonString("(ºÐ³ë)")
+	net.RegisterEmoticonString("(ï¿½Ð³ï¿½)")
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_EMOTICON+6, "", EmoticonStr+"aha.mse")
-	net.RegisterEmoticonString("(¾ÆÇÏ)")
+	net.RegisterEmoticonString("(ï¿½ï¿½ï¿½ï¿½)")
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_EMOTICON+7, "", EmoticonStr+"gloom.mse")
-	net.RegisterEmoticonString("(¿ì¿ï)")
+	net.RegisterEmoticonString("(ï¿½ï¿½ï¿½)")
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_EMOTICON+8, "", EmoticonStr+"sorry.mse")
-	net.RegisterEmoticonString("(ÁË¼Û)")
+	net.RegisterEmoticonString("(ï¿½Ë¼ï¿½)")
 
 	chrmgr.RegisterEffect(chrmgr.EFFECT_EMOTICON+9, "", EmoticonStr+"!_mix_back.mse")
 	net.RegisterEmoticonString("(!)")

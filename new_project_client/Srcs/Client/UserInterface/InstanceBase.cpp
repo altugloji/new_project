@@ -20,6 +20,8 @@
 #include "PythonTextTail.h"
 #endif
 
+#include "PythonSystem.h"
+
 BOOL HAIR_COLOR_ENABLE=FALSE;
 BOOL USE_ARMOR_SPECULAR=FALSE;
 BOOL RIDE_HORSE_ENABLE=TRUE;
@@ -2390,11 +2392,64 @@ bool CInstanceBase::CanPickInstance()
 
 	}
 
+#ifdef ENABLE_OFFLINE_SHOP
+	if (GetRace() == 30000 && !CanClickShop())
+		return false;
+#endif
+
 	if (IsDead())
 		return false;
 
 	return true;
 }
+
+#ifdef ENABLE_OFFLINE_SHOP
+bool CInstanceBase::CanClickShop()
+{
+	if (!CPythonSystem::Instance().IsShowSalesText())
+		return false;
+
+	CInstanceBase* pMainInstance = __GetMainInstancePtr();
+	if (!pMainInstance)
+		return false;
+
+	CInstanceBase* pTargetInstance = CPythonCharacterManager::Instance().GetInstancePtr(GetVirtualID());
+	if (!pTargetInstance)
+		return false;
+
+	float distanceVal = CPythonSystem::Instance().GetPrivateShopViewDistance();
+	if (distanceVal == 1)
+		return true;
+
+	if (pMainInstance->GetDistance(pTargetInstance) > (5000 * distanceVal))
+		return false;
+
+	return true;
+}
+
+// Oyuncunun sectigi pazar gorus mesafesine gore uzaktaki pazarlarin
+// (race 30000) cizilip cizilmeyecegini belirler. IsShowSalesText'ten
+// bagimsizdir: amac, ekranda cok sayida pazar oldugunda kasmayi onlemek.
+bool CInstanceBase::CanRenderShop()
+{
+	float distanceVal = CPythonSystem::Instance().GetPrivateShopViewDistance();
+	// 1.0 (slider sonu) = sinirsiz, tum pazarlar gosterilir
+	if (distanceVal >= 1.0f)
+		return true;
+
+	CInstanceBase* pMainInstance = __GetMainInstancePtr();
+	if (!pMainInstance)
+		return true;
+
+	if (pMainInstance == this)
+		return true;
+
+	if (pMainInstance->GetDistance(this) > (5000.0f * distanceVal))
+		return false;
+
+	return true;
+}
+#endif
 
 bool CInstanceBase::CanViewTargetHP(CInstanceBase& rkInstVictim) const
 {
@@ -2572,6 +2627,12 @@ bool CInstanceBase::__CanRender()
 		return false;
 #else
 	if (IsAffect(AFFECT_INVISIBILITY))
+		return false;
+#endif
+
+#ifdef ENABLE_OFFLINE_SHOP
+	// Pazar gorus mesafesi disindaki pazarlari cizme (kasma onleme)
+	if (GetRace() == 30000 && !CanRenderShop())
 		return false;
 #endif
 

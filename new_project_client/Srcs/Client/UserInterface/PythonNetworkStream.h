@@ -285,6 +285,9 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 
 		// Private Shop
 		bool SendBuildPrivateShopPacket(const char * c_szName, const std::vector<TShopItemTable> & c_rSellingItemStock);
+#ifdef ENABLE_OFFLINE_SHOP
+		bool SendOfflineShopEditPacket(BYTE byAction, const std::vector<BYTE> & c_rRemoveList, const std::vector<TShopItemTable> & c_rAddStock, const std::vector<TOfflineShopPriceUpdate> & c_rUpdateList);
+#endif
 
 		// Refine
 		bool SendRefinePacket(BYTE byPos, BYTE byType);

@@ -144,5 +144,14 @@ enum eCommonDefines {
 #define ENABLE_GREEN_ENCHANT_LV5_LIMIT								// Yeşil efsunda lv5 efsun gelmez
 #define BERAN_SETAOU
 
+#define OFFLINE_SHOP												// Offline shops system
+#ifdef OFFLINE_SHOP
+	#define GIFT_SYSTEM												// gift system enable
+	#define SHOP_TIME_REFRESH 1*60									// time for cycle checking older shops
+	#define SHOP_BLOCK_GAME99										// Blocking create shops on channel 99
+	#define SHOP_AUTO_CLOSE											// Enable auto closing shop after sell last item
+	#define SHOP_GM_PRIVILEGES GM_IMPLEMENTOR						// Minimum GM privileges to using Shop GM Panel
+#endif
+
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

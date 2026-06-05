@@ -4,6 +4,11 @@ import item
 import net
 import player
 
+if app.ENABLE_OFFLINE_SHOP:
+	gift_items={}
+	OFFLINE_SHOP_EDITING = 0		# pazar duzenleme modunda iken envanter eylemlerini kilitler
+	OFFLINE_SHOP_ADDED_SLOTS = {}	# duzenlemede pazara eklenen envanter slotlari (kirmizi overlay) {globalSlot:1}
+
 if app.ENABLE_ITEM_SHOP_SYSTEM:
 	ITEM_SEARCH_DATA = []
 	ITEM_DATA = {}#for item shop

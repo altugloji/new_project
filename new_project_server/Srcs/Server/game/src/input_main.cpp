@@ -1350,7 +1350,11 @@ void CInputMain::Exchange(LPCHARACTER ch, const char * data) const
 						}
 					}
 
-					if (ch->GetMyShop() || ch->IsOpenSafebox() || ch->GetShopOwner() || ch->IsCubeOpen())
+					if (ch->GetMyShop() || ch->IsOpenSafebox() || ch->GetShopOwner() || ch->IsCubeOpen()
+#ifdef OFFLINE_SHOP
+					|| ch->IsEditingShop()
+#endif
+					)
 					{
 						ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("다른 거래중일경우 개인상점을 열수가 없습니다."));
 						return;
@@ -3017,6 +3021,24 @@ int CInputMain::MyShop(LPCHARACTER ch, const char * c_pData, size_t uiBytes) con
 	if (uiBytes < sizeof(TPacketCGMyShop) + iExtraLen)
 		return -1;
 
+#ifdef SHOP_BLOCK_GAME99
+	if (ch && (g_bChannel >= 99 || ch->GetMapIndex() >= 10000))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("SHOP_OX_ERROR"));
+		return (iExtraLen);
+	}
+#endif
+
+#ifdef OFFLINE_SHOP
+	if (quest::CQuestManager::instance().GetEventFlag("shop_off") == 1)
+	{
+		if (ch)
+			ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("SHOP_TEMP_OFF"));
+
+		return (iExtraLen);
+	}
+#endif
+
 	if (ch->GetGold() >= GOLD_MAX)
 	{
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("소유 돈이 20억냥을 넘어 거래를 핼수가 없습니다."));
@@ -3027,7 +3049,11 @@ int CInputMain::MyShop(LPCHARACTER ch, const char * c_pData, size_t uiBytes) con
 	if (ch->IsStun() || ch->IsDead())
 		return (iExtraLen);
 
-	if (ch->GetExchange() || ch->IsOpenSafebox() || ch->GetShopOwner() || ch->IsCubeOpen())
+	if (ch->GetExchange() || ch->IsOpenSafebox() || ch->GetShopOwner() || ch->IsCubeOpen()
+#ifdef OFFLINE_SHOP
+		|| ch->IsEditingShop()
+#endif
+		)
 	{
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("다른 거래중일경우 개인상점을 열수가 없습니다."));
 		return (iExtraLen);
@@ -3037,6 +3063,57 @@ int CInputMain::MyShop(LPCHARACTER ch, const char * c_pData, size_t uiBytes) con
 	ch->OpenMyShop(p->szSign, (TShopItemTable *) (c_pData + sizeof(TPacketCGMyShop)), p->bCount);
 	return (iExtraLen);
 }
+
+#ifdef OFFLINE_SHOP
+int CInputMain::OfflineShopEdit(LPCHARACTER ch, const char * c_pData, size_t uiBytes) const
+{
+	if (uiBytes < sizeof(TPacketCGOfflineShopEdit))
+		return -1;
+
+	const auto p = reinterpret_cast<const TPacketCGOfflineShopEdit *>(c_pData);
+
+	if (uiBytes < p->wSize)
+		return -1;
+
+	const int iExtraLen = (int)p->wSize - (int)sizeof(TPacketCGOfflineShopEdit);
+	if (iExtraLen < 0)
+		return -1;
+
+	const int iNeed = (int)p->byRemoveCount * (int)sizeof(BYTE)
+					+ (int)p->byAddCount * (int)sizeof(TShopItemTable)
+					+ (int)p->byUpdateCount * (int)sizeof(TOfflineShopPriceUpdate);
+	if (iExtraLen < iNeed)
+		return (iExtraLen);
+
+	if (!ch || !ch->IsPC())
+		return (iExtraLen);
+
+	switch (p->byAction)
+	{
+		case OFFLINE_SHOP_EDIT_ACTION_ENTER:
+			ch->EnterShopEditMode();
+			break;
+
+		case OFFLINE_SHOP_EDIT_ACTION_CANCEL:
+			ch->CancelShopEdit();
+			break;
+
+		case OFFLINE_SHOP_EDIT_ACTION_APPLY:
+		default:
+		{
+			const char * pPayload = c_pData + sizeof(TPacketCGOfflineShopEdit);
+			const BYTE * pbRemove = (p->byRemoveCount > 0) ? reinterpret_cast<const BYTE *>(pPayload) : NULL;
+			const TShopItemTable * pAdd = (p->byAddCount > 0) ? reinterpret_cast<const TShopItemTable *>(pPayload + p->byRemoveCount * sizeof(BYTE)) : NULL;
+			const TOfflineShopPriceUpdate * pUpdate = (p->byUpdateCount > 0) ? reinterpret_cast<const TOfflineShopPriceUpdate *>(pPayload + p->byRemoveCount * sizeof(BYTE) + p->byAddCount * sizeof(TShopItemTable)) : NULL;
+
+			ch->ApplyShopEdit(pbRemove, p->byRemoveCount, pAdd, p->byAddCount, pUpdate, p->byUpdateCount);
+			break;
+		}
+	}
+
+	return (iExtraLen);
+}
+#endif
 
 #ifdef KYGN_CHEST_INFO
 void CInputMain::CGGetChestInfo(LPCHARACTER ch, const char* c_pData)
@@ -3424,6 +3501,13 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			if ((iExtraLen = MyShop(ch, c_pData, m_iBufferLeft)) < 0)
 				return -1;
 			break;
+
+#ifdef OFFLINE_SHOP
+		case HEADER_CG_OFFLINE_SHOP_EDIT:
+			if ((iExtraLen = OfflineShopEdit(ch, c_pData, m_iBufferLeft)) < 0)
+				return -1;
+			break;
+#endif
 
 #ifdef KYGN_CHEST_INFO
 		case HEADER_CG_GET_CHEST_INFO:

@@ -489,6 +489,9 @@ class CClientManager : public CNetBase, public singleton<CClientManager>
 	void DeleteAwardId(TPacketDeleteAwardID* data) const;
 	void UpdateChannelStatus(TChannelStatus* pData);
 	void RequestChannelStatus(CPeer* peer, DWORD dwHandle);
+#ifdef OFFLINE_SHOP
+	void	ShopClose(CPeer * peer, TPacketShopClose *p);
+#endif
 #ifdef ENABLE_PROTO_FROM_DB
 	public:
 	bool		InitializeMobTableFromDB();

@@ -162,6 +162,10 @@ LPITEM ITEM_MANAGER::CreateItem(DWORD vnum, DWORD count, DWORD id, bool bTryMagi
 	{
 		item->SetID(GetNewID());
 
+#ifdef OFFLINE_SHOP
+		item->SetSkipSave(bSkipSave);
+#endif
+
 		if (item->GetType() == ITEM_UNIQUE)
 		{
 			if (item->GetValue(2) == 0)
@@ -249,7 +253,10 @@ LPITEM ITEM_MANAGER::CreateItem(DWORD vnum, DWORD count, DWORD id, bool bTryMagi
 	if (!item->SetCount(count))
 		return nullptr;
 
+#ifndef OFFLINE_SHOP
 	item->SetSkipSave(false);
+#endif
+
 
 	if (item->GetType() == ITEM_UNIQUE && item->GetValue(2) != 0)
 		item->StartUniqueExpireEvent();

@@ -198,6 +198,495 @@ void CShop::SetShopItems(TShopItemTable * pTable, BYTE bItemCount)
 	}
 }
 
+#ifdef OFFLINE_SHOP
+int CShop::BuyOffline(LPCHARACTER ch, BYTE pos)
+{
+	if (!ch || !ch->IsPC() || pos >= m_itemVector.size())
+	{
+		sys_err("Shop::BuyOffline: Gecersiz karakter! (NULL veya NPC)");
+		return SHOP_SUBHEADER_GC_INVALID_POS;
+	}
+
+	sys_log(0, "Shop::BuyOffline : name %s pos %d", ch->GetName(), pos);
+
+	GuestMapType::iterator it = m_map_guest.find(ch);
+	if (it == m_map_guest.end())
+		return SHOP_SUBHEADER_GC_END;
+
+	// Sahip duzenleme modundayken hic kimse bu pazardan alim yapamaz (hack paketine karsi)
+	LPCHARACTER pkOwner = CHARACTER_MANAGER::instance().FindByPID(m_pkPC->GetPrivShopOwner());
+	if (pkOwner && pkOwner->IsEditingShop())
+		return SHOP_SUBHEADER_GC_END;
+
+	SHOP_ITEM& r_item = m_itemVector[pos];
+
+	if (r_item.price < 0)
+		return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY;
+
+	DWORD dwPrice = r_item.price;
+
+	if (ch->GetGold() < (int)dwPrice)
+		return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY;
+
+#ifdef CANNOT_BUY_WORM
+	if (ch->CountSpecifyItem(27801) > 0 && r_item.vnum == 27801)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CANNOT_BUY_WORM"));
+		return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY;
+	}
+#endif
+
+	if (m_pkPC->GetPrivShopOwner() == ch->GetPlayerID())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Kendi dukkanindan satin alamazsin.");
+		return SHOP_SUBHEADER_GC_OK;
+	}
+
+	LPITEM item = r_item.pkItem;
+	if (!item)
+		return SHOP_SUBHEADER_GC_OK;
+
+	int iEmptyPos = ch->GetEmptyInventoryEx(item);
+	if (iEmptyPos < 0)
+		return SHOP_SUBHEADER_GC_INVENTORY_FULL;
+
+	if (dwPrice > 0)
+		ch->PointChange(POINT_GOLD, -static_cast<int>(dwPrice), false);
+
+	LPITEM pkNewItem = ITEM_MANAGER::instance().CreateItem(r_item.vnum, r_item.count);
+	if (!pkNewItem)
+		return SHOP_SUBHEADER_GC_INVALID_POS;
+
+	for (int i = 0; i < ITEM_SOCKET_MAX_NUM; i++)
+		pkNewItem->SetSocket(i, item->GetSocket(i));
+
+	item->CopyAttributeTo(pkNewItem);
+
+	pkNewItem->AddToCharacter(ch, TItemPos(pkNewItem->GetWindowInventoryEx(), iEmptyPos));
+	item->SetShop(NULL);
+	item->RemoveFromCharacter();
+	M2_DESTROY_ITEM(item);
+	ITEM_MANAGER::instance().FlushDelayedSave(pkNewItem);
+
+	DWORD mpid = m_pkPC->GetPrivShopOwner();
+
+	char buf[512];
+	snprintf(buf, sizeof(buf), "%s %u(%s) %u %u", pkNewItem->GetName(), mpid, m_pkPC->GetName(), dwPrice, pkNewItem->GetCount());
+	LogManager::instance().ItemLog(ch, pkNewItem, "OFFLINE_SHOP_BUY", buf);
+	snprintf(buf, sizeof(buf), "%s %u(%s) %u %u", pkNewItem->GetName(), ch->GetPlayerID(), ch->GetName(), dwPrice, pkNewItem->GetCount());
+	LogManager::instance().ItemLog(m_pkPC, pkNewItem, "OFFLINE_SHOP_SELL", buf);
+
+	r_item.pkItem = NULL;
+	BroadcastUpdateItem(pos);
+
+	// Offline dukkanlarda kazanc, sahibi cevrimdisi oldugu icin hediye kutusuna gider.
+	DBManager::instance().DirectQuery("INSERT INTO player_gift SET owner_id = %u, vnum = 1 ,count = %u", m_pkPC->GetPrivShopOwner(), dwPrice);
+	DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE player_id = %u AND id = %u", m_pkPC->GetPrivShopOwner(), r_item.itemid);
+
+	LPCHARACTER owner = CHARACTER_MANAGER::instance().FindByPID(m_pkPC->GetPrivShopOwner());
+	if (owner)
+		owner->RefreshGift();
+
+	sys_log(0, "OFFLINE_SHOP: BUY: name %s %s(x %d):%u price %u", ch->GetName(), pkNewItem->GetName(), pkNewItem->GetCount(), pkNewItem->GetID(), dwPrice);
+
+	ch->Save();
+
+#ifdef SHOP_AUTO_CLOSE
+	if (m_pkPC->IsPrivShop() && GetItemCount() <= 0)
+		m_pkPC->DeleteMyShop();
+#endif
+
+	return (SHOP_SUBHEADER_GC_OK);
+}
+
+int CShop::GetItemCount()
+{
+	int count = 0;
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		if (m_itemVector[i].pkItem)
+			count++;
+	}
+	return count;
+}
+
+bool CShop::GetItems()
+{
+	if (!m_pkPC)
+		return false;
+
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		auto pkItem = m_itemVector[i].pkItem;
+		if (!pkItem)
+			continue;
+
+		char szGiftQuery[4096];
+		int giftQueryLen = snprintf(szGiftQuery, sizeof(szGiftQuery),
+				"INSERT INTO player_gift SET owner_id = %u, vnum = %u, count = %u",
+					m_pkPC->GetPrivShopOwner(), m_itemVector[i].vnum, m_itemVector[i].count);
+
+		for (BYTE s = 0; s < ITEM_SOCKET_MAX_NUM; s++)
+			giftQueryLen += snprintf(szGiftQuery + giftQueryLen, sizeof(szGiftQuery) - giftQueryLen, ", socket%d=%ld", s, pkItem->GetSocket(s));
+
+		for (BYTE ia = 0; ia < ITEM_ATTRIBUTE_MAX_NUM; ia++)
+		{
+			const TPlayerItemAttribute& attr = pkItem->GetAttribute(ia);
+
+			giftQueryLen += snprintf(szGiftQuery + giftQueryLen, sizeof(szGiftQuery) - giftQueryLen, ", attrtype%d=%d, attrvalue%d=%d", ia, attr.bType, ia, attr.sValue);
+		}
+
+		DBManager::instance().DirectQuery(szGiftQuery);
+
+		DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %d", m_itemVector[i].itemid);
+		pkItem->SetShop(NULL);
+		pkItem->RemoveFromCharacter();
+		m_itemVector[i].pkItem = NULL;
+		BroadcastUpdateItem(i);
+	}
+
+	return true;
+}
+
+void CShop::SetPrivShopItems(std::vector<TShopItemTable *> map_shop)
+{
+	if (!m_pkPC || !m_pGrid)
+		return;
+	m_pGrid->Clear();
+
+	m_itemVector.resize(SHOP_HOST_ITEM_MAX_NUM);
+	memset(&m_itemVector[0], 0, sizeof(SHOP_ITEM) * m_itemVector.size());
+
+	for (DWORD count = 0; count < map_shop.size(); count++)
+	{
+		TShopItemTable * pTable = map_shop[count];
+		LPITEM pkItem = m_pkPC->GetItem(pTable->pos);
+
+		if (!pkItem)
+		{
+			sys_err("cannot find item on pos (%d, %d) (name: %s)", pTable->pos.window_type, pTable->pos.cell, m_pkPC->GetName());
+			continue;
+		}
+
+		const TItemTable * item_table = pkItem->GetProto();
+		if (!item_table)
+		{
+			sys_err("Shop: no item table by item vnum #%d", pTable->vnum);
+			continue;
+		}
+
+		WORD iPos = pTable->display_pos;
+
+		if (!m_pGrid->IsEmpty(iPos, 1, item_table->bSize))
+		{
+			sys_err("not empty position for pc shop %s[%d] fixing", m_pkPC->GetName(), m_pkPC->GetPlayerID());
+			iPos = m_pGrid->FindBlank(1, item_table->bSize);
+			if (!m_pGrid->IsEmpty(iPos, 1, item_table->bSize))
+			{
+				sys_err("not empty position for pc shop %s[%d]", m_pkPC->GetName(), m_pkPC->GetPlayerID());
+				continue;
+			}
+		}
+
+		m_pGrid->Put(iPos, 1, item_table->bSize);
+
+		SHOP_ITEM & item	= m_itemVector[iPos];
+		item.pkItem			= pkItem;
+		item.itemid			= 0;
+
+		if (item.pkItem)
+		{
+			pkItem->SetShop(this);
+
+			item.vnum		= pkItem->GetVnum();
+			item.count		= pkItem->GetCount();
+			item.price		= pTable->price;
+			item.itemid		= pkItem->GetRealID();
+		}
+
+		char name[36];
+		snprintf(name, sizeof(name), "%-20s(#%-5d) (x %d)", item_table->szName, (int)item.vnum, item.count);
+		sys_log(0, "PRIV_SHOP_ITEM: %-36s PRICE %-5d", name, item.price);
+	}
+}
+
+void CShop::RemoveItemForShop(DWORD dwItemID)// Suresi biten Kostum icin
+{
+	if (!m_pkPC || !dwItemID || m_itemVector.size() < SHOP_HOST_ITEM_MAX_NUM)
+		return;
+
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		if (m_itemVector[i].pkItem && m_itemVector[i].itemid == dwItemID)
+		{
+			DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", dwItemID);
+			m_itemVector[i].pkItem->SetShop(NULL);
+			m_itemVector[i].pkItem = NULL;
+			BroadcastUpdateItem(i);
+
+#ifdef SHOP_AUTO_CLOSE
+			if (m_pkPC->IsPrivShop() && GetItemCount() <= 0)
+				m_pkPC->DeleteMyShop();
+#endif
+			break;
+		}
+	}
+}
+
+void CShop::KickGuestsExcept(LPCHARACTER keep)
+{
+	// RemoveGuest map'i degistirdigi icin once kopya al
+	std::vector<LPCHARACTER> vec;
+	for (GuestMapType::iterator it = m_map_guest.begin(); it != m_map_guest.end(); ++it)
+		if (it->first && it->first != keep)
+			vec.push_back(it->first);
+
+	for (DWORD i = 0; i < vec.size(); ++i)
+	{
+		LPCHARACTER guest = vec[i];
+		RemoveGuest(guest);				// map'ten siler + SHOP_SUBHEADER_GC_END gonderir
+		guest->SetShopOwner(NULL);
+	}
+}
+
+void CShop::RebuildGrid()
+{
+	if (!m_pGrid)
+		return;
+	m_pGrid->Clear();
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		LPITEM pkItem = m_itemVector[i].pkItem;
+		if (!pkItem)
+			continue;
+		const TItemTable * proto = pkItem->GetProto();
+		if (!proto)
+			continue;
+		m_pGrid->Put(i, 1, proto->bSize);
+	}
+}
+
+bool CShop::EditWouldExceedLimit(const BYTE * pbRemovePos, BYTE byRemoveCount, const TShopItemTable * pAdd, BYTE byAddCount, const TOfflineShopPriceUpdate * pUpdate, BYTE byUpdateCount) const
+{
+	long long total = 0;
+
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		if (!m_itemVector[i].pkItem)
+			continue;
+
+		bool removed = false;
+		if (pbRemovePos)
+			for (BYTE r = 0; r < byRemoveCount; ++r)
+				if (pbRemovePos[r] == i) { removed = true; break; }
+		if (removed)
+			continue;
+
+		long long price = (long long)m_itemVector[i].price;
+		if (pUpdate)
+			for (BYTE u = 0; u < byUpdateCount; ++u)
+				if (pUpdate[u].display_pos == i) { price = (long long)pUpdate[u].price; break; }
+
+		total += price;
+	}
+
+	if (pAdd)
+		for (BYTE a = 0; a < byAddCount; ++a)
+			total += (long long)pAdd[a].price;
+
+	return total > (long long)GOLD_MAX;
+}
+
+void CShop::ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byRemoveCount, const TShopItemTable * pAdd, BYTE byAddCount, const TOfflineShopPriceUpdate * pUpdate, BYTE byUpdateCount)
+{
+	if (!m_pkPC || !owner)
+		return;
+
+	const DWORD dwOwnerPID = owner->GetPlayerID();
+
+	// 0) Fiyat guncellemeleri (var olan item'ler, sol-tik fiyat duzenleme)
+	if (pUpdate)
+	{
+		for (BYTE i = 0; i < byUpdateCount; ++i)
+		{
+			const BYTE pos = pUpdate[i].display_pos;
+			if (pos >= m_itemVector.size())
+				continue;
+			SHOP_ITEM & r = m_itemVector[pos];
+			if (!r.pkItem)
+				continue;
+
+			// Yang overflow korumasi: fiyat GOLD_MAX'i asamaz
+			DWORD price = pUpdate[i].price;
+			if (price >= (DWORD)GOLD_MAX)
+				price = (DWORD)GOLD_MAX - 1;
+
+			DBManager::instance().DirectQuery("UPDATE player_shop_items SET price = %u WHERE id = %u", price, r.itemid);
+			r.price = price;
+			BroadcastUpdateItem(pos);
+		}
+	}
+
+	// 1) Kaldirilanlar: dukkandaki item'in bir kopyasini sahibine ver (envanter, dolu ise hediye), DB satirini sil
+	if (pbRemovePos)
+	{
+		for (BYTE i = 0; i < byRemoveCount; ++i)
+		{
+			const BYTE pos = pbRemovePos[i];
+			if (pos >= m_itemVector.size())
+				continue;
+			SHOP_ITEM & r = m_itemVector[pos];
+			LPITEM pkItem = r.pkItem;
+			if (!pkItem)
+				continue;
+
+			DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", r.itemid);
+
+			LPITEM pkNew = ITEM_MANAGER::instance().CreateItem(r.vnum, r.count);
+			if (pkNew)
+			{
+				for (int s = 0; s < ITEM_SOCKET_MAX_NUM; s++)
+					pkNew->SetSocket(s, pkItem->GetSocket(s));
+				pkItem->CopyAttributeTo(pkNew);
+
+				int iEmptyPos = owner->GetEmptyInventoryEx(pkNew);
+				if (iEmptyPos >= 0)
+				{
+					pkNew->AddToCharacter(owner, TItemPos(pkNew->GetWindowInventoryEx(), iEmptyPos));
+					ITEM_MANAGER::instance().FlushDelayedSave(pkNew);
+				}
+				else
+				{
+					char szGiftQuery[4096];
+					int giftLen = snprintf(szGiftQuery, sizeof(szGiftQuery),
+						"INSERT INTO player_gift SET owner_id = %u, vnum = %u, count = %u",
+						dwOwnerPID, pkNew->GetVnum(), pkNew->GetCount());
+					for (BYTE s = 0; s < ITEM_SOCKET_MAX_NUM; s++)
+						giftLen += snprintf(szGiftQuery + giftLen, sizeof(szGiftQuery) - giftLen, ", socket%d=%ld", s, pkNew->GetSocket(s));
+					for (BYTE ia = 0; ia < ITEM_ATTRIBUTE_MAX_NUM; ia++)
+					{
+						const TPlayerItemAttribute & attr = pkNew->GetAttribute(ia);
+						giftLen += snprintf(szGiftQuery + giftLen, sizeof(szGiftQuery) - giftLen, ", attrtype%d=%d, attrvalue%d=%d", ia, attr.bType, ia, attr.sValue);
+					}
+					DBManager::instance().DirectQuery(szGiftQuery);
+					M2_DESTROY_ITEM(pkNew);
+
+					LPCHARACTER online = CHARACTER_MANAGER::instance().FindByPID(dwOwnerPID);
+					if (online)
+						online->RefreshGift();
+				}
+			}
+
+			pkItem->SetShop(NULL);
+			pkItem->RemoveFromCharacter();
+			M2_DESTROY_ITEM(pkItem);
+
+			r.pkItem = NULL;
+			r.vnum = 0; r.count = 0; r.price = 0; r.itemid = 0;
+			BroadcastUpdateItem(pos);
+		}
+	}
+
+	// Kaldirmalardan sonra grid'i guncelle (eklemelerde bos slot dogru bulunsun)
+	RebuildGrid();
+
+	// 2) Eklenenler: sahibin envanterinden dukkana
+	if (pAdd)
+	{
+		for (BYTE i = 0; i < byAddCount; ++i)
+		{
+			const TShopItemTable & t = pAdd[i];
+			LPITEM pkSrc = owner->GetItem(t.pos);
+			if (!pkSrc)
+				continue;
+			if (pkSrc->GetOwner() != owner || pkSrc->IsExchanging() || pkSrc->IsEquipped() || pkSrc->isLocked())
+				continue;
+			const TItemTable * proto = pkSrc->GetProto();
+			if (!proto || (IS_SET(proto->dwAntiFlags, ITEM_ANTIFLAG_GIVE | ITEM_ANTIFLAG_MYSHOP)))
+				continue;
+			if (!pkSrc->CheckItemEnchant())
+				continue;
+
+			WORD iPos = t.display_pos;
+			if (!m_pGrid || iPos >= SHOP_HOST_ITEM_MAX_NUM || !m_pGrid->IsEmpty(iPos, 1, proto->bSize))
+			{
+				if (!m_pGrid)
+					continue;
+				iPos = m_pGrid->FindBlank(1, proto->bSize);
+				if (iPos >= SHOP_HOST_ITEM_MAX_NUM || !m_pGrid->IsEmpty(iPos, 1, proto->bSize))
+					continue;
+			}
+
+			// Yang overflow korumasi: fiyat GOLD_MAX'i asamaz
+			DWORD dwPrice = t.price;
+			if (dwPrice >= (DWORD)GOLD_MAX)
+				dwPrice = (DWORD)GOLD_MAX - 1;
+
+			char query[1024];
+			snprintf(query, sizeof(query), "INSERT INTO player_shop_items SET");
+			snprintf(query, sizeof(query), "%s player_id = %u",			query, dwOwnerPID);
+			snprintf(query, sizeof(query), "%s, vnum = %u",				query, pkSrc->GetVnum());
+			snprintf(query, sizeof(query), "%s, count = %d",			query, pkSrc->GetCount());
+			snprintf(query, sizeof(query), "%s, price = %u",			query, dwPrice);
+			snprintf(query, sizeof(query), "%s, display_pos = %d",		query, iPos);
+			for (BYTE s = 0; s < ITEM_SOCKET_MAX_NUM; s++)
+				snprintf(query, sizeof(query), "%s, socket%d = %ld",	query, s, pkSrc->GetSocket(s));
+			for (BYTE ia = 0; ia < ITEM_ATTRIBUTE_MAX_NUM; ia++)
+			{
+				const TPlayerItemAttribute & attr = pkSrc->GetAttribute(ia);
+				snprintf(query, sizeof(query), "%s, attrtype%d = %u",	query, ia, attr.bType);
+				snprintf(query, sizeof(query), "%s, attrvalue%d = %d",	query, ia, attr.sValue);
+			}
+			auto pkMsg = DBManager::instance().DirectQuery(query);
+			if (!pkMsg || !pkMsg->Get() || pkMsg->Get()->uiInsertID == 0)
+				continue;
+			const DWORD newId = pkMsg->Get()->uiInsertID;
+
+			// NPC'de tutulacak skip-save display item'i olustur (OpenShop ile ayni mantik)
+			LPITEM pkDisplay = ITEM_MANAGER::instance().CreateItem(pkSrc->GetVnum(), pkSrc->GetCount(), 0, false, -1, true);
+			if (!pkDisplay)
+			{
+				DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", newId);
+				continue;
+			}
+			pkDisplay->ClearAttribute();
+			pkDisplay->SetSkipSave(true);
+			pkDisplay->SetRealID(newId);
+			for (int s = 0; s < ITEM_SOCKET_MAX_NUM; s++)
+				pkDisplay->SetSocket(s, pkSrc->GetSocket(s), false);
+			for (int at = 0; at < ITEM_ATTRIBUTE_MAX_NUM; at++)
+			{
+				const TPlayerItemAttribute & attr = pkSrc->GetAttribute(at);
+				pkDisplay->SetForceAttribute(at, attr.bType, attr.sValue);
+			}
+
+			const int iCell = m_pkPC->GetEmptyInventory(proto->bSize);
+			if (iCell < 0)
+			{
+				M2_DESTROY_ITEM(pkDisplay);
+				DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", newId);
+				continue;
+			}
+			pkDisplay->AddToCharacter(m_pkPC, TItemPos(INVENTORY, iCell));
+
+			// Sahibin envanterindeki orijinali tuket
+			ITEM_MANAGER::instance().RemoveItem(pkSrc, "Pazara Eklendi (Duzenleme)");
+
+			SHOP_ITEM & it = m_itemVector[iPos];
+			it.pkItem = pkDisplay;
+			it.vnum   = pkDisplay->GetVnum();
+			it.count  = pkDisplay->GetCount();
+			it.price  = dwPrice;
+			it.itemid = newId;
+			pkDisplay->SetShop(this);
+
+			m_pGrid->Put(iPos, 1, proto->bSize);
+			BroadcastUpdateItem(iPos);
+		}
+	}
+}
+#endif
+
 int CShop::Buy(LPCHARACTER ch, BYTE pos)
 {
 	if (pos >= m_itemVector.size())
@@ -214,6 +703,13 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 		return SHOP_SUBHEADER_GC_END;
 
 	SHOP_ITEM& r_item = m_itemVector[pos];
+
+#ifdef OFFLINE_SHOP
+	// Offline (kalici) sahis dukkanlari icin ayri satin alma yolu;
+	// normal NPC dukkanlari ve online sahis dukkanlari asagidaki standart akistan gecer.
+	if (m_pkPC && m_pkPC->IsPrivShop())
+		return BuyOffline(ch, pos);
+#endif
 
 #ifdef ENABLE_SHOP_USE_CHEQUE
 	if (r_item.price < 0)
@@ -517,6 +1013,9 @@ bool CShop::AddGuest(LPCHARACTER ch, DWORD owner_vid, bool bOtherEmpire)
 
 	memset(&pack2, 0, sizeof(pack2));
 	pack2.owner_vid = owner_vid;
+#ifdef OFFLINE_SHOP
+	pack2.byIsMyShop = (m_pkPC && m_pkPC->GetPrivShopOwner() == ch->GetPlayerID()) ? 1 : 0;
+#endif
 
 	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
 	{

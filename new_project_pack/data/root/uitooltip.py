@@ -786,6 +786,20 @@ class ItemToolTip(ToolTip):
 			else:
 				self.AppendPrice(price)
 
+	if app.ENABLE_OFFLINE_SHOP:
+		# Offline dukkan duzenlemede: verilen metin/attr + (yerel olarak degistirilen) fiyat ile tooltip
+		def SetOfflineShopEditItem(self, itemVnum, metinSlot, attrSlot, price, count = 1):
+			if 0 == itemVnum:
+				return
+			self.ClearToolTip()
+			self.isShopItem = True
+			self.AddItemData(itemVnum, metinSlot, attrSlot)
+			self.AppendPrice(price)
+			# Adetli item: birim (tekli) fiyati da goster
+			if count > 1:
+				perUnit = int(price) / int(count)
+				self.AppendTextLine("Adet basina: %s" % (localeInfo.NumberToMoneyString(perUnit)))
+
 	def SetShopItemBySecondaryCoin(self, slotIndex):
 		itemVnum = shop.GetItemID(slotIndex)
 		if 0 == itemVnum:

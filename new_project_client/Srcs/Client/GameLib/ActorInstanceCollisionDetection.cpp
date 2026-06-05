@@ -560,6 +560,11 @@ BOOL CActorInstance::TestActorCollision(CActorInstance & rVictim)
 	if (rVictim.IsDead())
 		return FALSE;
 
+#ifdef ENABLE_OFFLINE_SHOP
+	if (rVictim.GetRace() == 30000)
+		return FALSE;
+#endif
+
 #ifdef ENABLE_NPC_WITHOUT_COLLISIONS
 	if (rVictim.IsNPC())
 		return FALSE;

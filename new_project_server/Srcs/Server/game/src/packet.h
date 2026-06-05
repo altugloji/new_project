@@ -49,6 +49,9 @@ enum
 	HEADER_CG_ADD_FLY_TARGETING		= 53,
 	HEADER_CG_SHOOT					= 54,
 	HEADER_CG_MYSHOP				= 55,
+#ifdef OFFLINE_SHOP
+	HEADER_CG_OFFLINE_SHOP_EDIT		= 56,
+#endif
 
 	HEADER_CG_ITEM_USE_TO_ITEM		= 60,
 	HEADER_CG_TARGET			 	= 61,
@@ -965,6 +968,9 @@ typedef struct packet_add_char
 
 	BYTE	bStateFlag;
 	DWORD	dwAffectFlag[2];
+#ifdef OFFLINE_SHOP
+	BYTE	byIsMyShop;
+#endif
 } TPacketGCCharacterAdd;
 
 typedef struct packet_char_additional_info
@@ -1305,6 +1311,9 @@ typedef struct packet_shop_item
 typedef struct packet_shop_start
 {
 	DWORD   owner_vid;
+#ifdef OFFLINE_SHOP
+	BYTE	byIsMyShop;
+#endif
 	struct packet_shop_item	items[SHOP_HOST_ITEM_MAX_NUM];
 } TPacketGCShopStart;
 
@@ -2013,6 +2022,32 @@ typedef struct SPacketCGMyShop
 	char	szSign[SHOP_SIGN_MAX_LEN + 1];
 	BYTE	bCount;
 } TPacketCGMyShop;
+
+#ifdef OFFLINE_SHOP
+enum EOfflineShopEditAction
+{
+	OFFLINE_SHOP_EDIT_ACTION_APPLY	= 0,	// kaydet (aktif et)
+	OFFLINE_SHOP_EDIT_ACTION_ENTER	= 1,	// duzenleme moduna gir
+	OFFLINE_SHOP_EDIT_ACTION_CANCEL	= 2,	// iptal (son kayitli haline don)
+};
+
+// (TOfflineShopPriceUpdate: common/tables.h icinde tanimli)
+
+// Offline dukkan duzenleme paketi. APPLY'da payload sirasi:
+//   BYTE removePos[byRemoveCount]
+//   TShopItemTable add[byAddCount]            (eklenen: pos + price + display_pos)
+//   TOfflineShopPriceUpdate update[byUpdateCount]
+// ENTER/CANCEL'da tum count'lar 0.
+typedef struct SPacketCGOfflineShopEdit
+{
+	BYTE	bHeader;
+	WORD	wSize;
+	BYTE	byAction;
+	BYTE	byRemoveCount;
+	BYTE	byAddCount;
+	BYTE	byUpdateCount;
+} TPacketCGOfflineShopEdit;
+#endif
 
 typedef struct SPacketGCTime
 {

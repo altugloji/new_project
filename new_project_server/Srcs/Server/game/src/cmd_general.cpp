@@ -995,6 +995,68 @@ ACMD(do_ungroup)
 	}
 }
 
+#ifdef OFFLINE_SHOP
+void DeleteShop(DWORD dwPID)
+{
+	CharacterVectorInteractor i;
+	if (CHARACTER_MANAGER::instance().GetCharactersByRaceNum(30000, i))
+	{
+		CharacterVectorInteractor::iterator it = i.begin();
+
+		while (it != i.end())
+		{
+			LPCHARACTER pc = *it++;
+			if (pc && pc->IsPrivShop() && pc->GetPrivShopOwner() == dwPID)
+			{
+				pc->DeleteMyShop();
+				return;
+			}
+		}
+	}
+}
+
+ACMD(do_close_shop)
+{
+	if (!ch || !ch->IsPC() || ch->IsObserverMode() || ch->GetExchange())
+		return;
+
+	DeleteShop(ch->GetPlayerID());
+}
+
+ACMD(do_shop_delete)
+{
+	if (!ch || !ch->IsPC() || ch->IsObserverMode() || ch->GetExchange())
+		return;
+
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (!*arg1)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Usage:");
+		ch->ChatPacket(CHAT_TYPE_INFO, "/delete_shop <player_name> ");
+		return;
+	}
+
+	auto pkMsg = DBManager::instance().DirectQuery("SELECT player_id FROM player_shop WHERE player_id=(SELECT id FROM player WHERE name='%s')", arg1);
+	if (!pkMsg || !pkMsg->Get())
+		return;
+
+	if (pkMsg->Get()->uiNumRows > 0)
+	{
+		MYSQL_ROW row =				NULL;
+		while ((row = mysql_fetch_row(pkMsg->Get()->pSQLResult)) != NULL)
+		{
+			DWORD dwPID =			0;
+			str_to_number(dwPID,	row[0]);
+
+			DeleteShop(dwPID);
+		}
+	}
+	else
+		ch->ChatPacket(CHAT_TYPE_INFO, "Player %s does have any shop", arg1);
+}
+#else
 ACMD(do_close_shop)
 {
 	if (ch->GetMyShop())
@@ -1003,6 +1065,182 @@ ACMD(do_close_shop)
 		return;
 	}
 }
+#endif
+
+#ifdef GIFT_SYSTEM
+bool GetGift(LPCHARACTER ch, DWORD id, bool all=false)
+{
+	if (!ch || !ch->IsPC())
+		return false;
+
+	ch->SetLastGiftGetTime(get_global_time() + 5);
+
+	char szSockets[128];
+	char szAttrs[256];
+	int socLen = snprintf(szSockets, sizeof(szSockets), "socket0");
+	int attrLen = snprintf(szAttrs, sizeof(szAttrs), "attrtype0, attrvalue0");
+	for (BYTE i = 1; i < ITEM_SOCKET_MAX_NUM; i++)
+		socLen += snprintf(szSockets + socLen, sizeof(szSockets) - socLen, ", socket%d", i);
+
+	for (BYTE i = 1; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
+		attrLen += snprintf(szAttrs + attrLen, sizeof(szAttrs) - attrLen, ", attrtype%d, attrvalue%d", i, i);
+
+	char szQuery[4096];
+	int queryLen = snprintf(szQuery, sizeof(szQuery), "SELECT id, vnum, count, %s, %s FROM player_gift WHERE owner_id = %u", szSockets, szAttrs, ch->GetPlayerID());
+	if (!all)
+		queryLen += snprintf(szQuery + queryLen, sizeof(szQuery) - queryLen, " AND id = %u", id);
+
+	auto pkMsg = DBManager::instance().DirectQuery(szQuery);
+	if (!pkMsg || !pkMsg->Get() || pkMsg->Get()->uiNumRows == 0)
+		return false;
+
+	bool force =				false;
+	MYSQL_ROW row =				NULL;
+	while ((row = mysql_fetch_row(pkMsg->Get()->pSQLResult)) != NULL)
+	{
+		DWORD vnum = 0, count = 0, socket[ITEM_SOCKET_MAX_NUM], attr[ITEM_ATTRIBUTE_MAX_NUM][2];
+
+		int col =				0;
+		str_to_number(id,		row[col++]);
+		str_to_number(vnum,		row[col++]);
+		str_to_number(count,	row[col++]);
+		if (vnum == 1)
+		{
+			DWORD nTotalMoney = ch->GetGold() + count;
+			if (GOLD_MAX <= nTotalMoney)
+			{
+				ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("SHOP_MAX_YANG"));
+				return true;
+			}
+
+			ch->PointChange(POINT_GOLD, count, false);
+
+			char szLogBuf[128];
+			snprintf(szLogBuf, sizeof(szLogBuf), "%u Yang - Total: %u", count, nTotalMoney);
+			LogManager::instance().CharLog(ch, 0, "HEDIYE KUTUSU", szLogBuf);
+		}
+		else
+		{
+			if (force)
+				continue;
+
+			for (BYTE i = 0; i < ITEM_SOCKET_MAX_NUM; ++i)
+				str_to_number(socket[i], row[col++]);
+			for (BYTE i = 0; i < ITEM_ATTRIBUTE_MAX_NUM; ++i)
+			{
+				str_to_number(attr[i][0], row[col++]);
+				str_to_number(attr[i][1], row[col++]);
+			}
+
+			LPITEM item = ITEM_MANAGER::instance().CreateItem(vnum, count, 0, true);
+			if (!item)
+			{
+				ch->ChatPacket(CHAT_TYPE_INFO, "<Gift> UNKNOW_ERROR #4");
+				force = true;
+				continue;
+			}
+
+			for (BYTE i = 0; i < ITEM_SOCKET_MAX_NUM; ++i)
+				item->SetSocket(i, socket[i], false);
+
+			item->ClearAttribute();
+			for (BYTE i = 0; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
+				item->SetForceAttribute(i, attr[i][0], attr[i][1]);
+
+			if (!item->CheckItemEnchant())
+			{
+				force = true;
+				ch->ChatPacket(CHAT_TYPE_INFO, "Hediye Kutusunda Hatali Item Var...");
+				M2_DESTROY_ITEM(item);
+				continue;
+			}
+
+			int iEmptyPos = ch->GetEmptyInventoryEx(item);
+			if (iEmptyPos != -1)
+			{
+				item->AddToCharacter(ch, TItemPos(item->GetWindowInventoryEx(), iEmptyPos));
+
+				char szLogBuf[128];
+				snprintf(szLogBuf, sizeof(szLogBuf), "%s %d", item->GetName(), item->GetCount());
+				LogManager::instance().CharLog(ch, 0, "HEDIYE KUTUSU", szLogBuf);
+			}
+			else
+			{
+				force = true;
+				M2_DESTROY_ITEM(item);
+				ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("INVENTORY_FULL_ERROR"));
+				continue;
+			}
+		}
+
+		DBManager::instance().DirectQuery("DELETE FROM player_gift WHERE id = %u", id);
+	}
+
+	if (force)
+		return true;
+
+	if (all)
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("GIFT_ADD_ALL_SUCCESS"));
+	else
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("GIFT_ADD_SUCCESS"));
+	return true;
+}
+
+ACMD(do_gift_show)
+{
+	if (!ch || !ch->IsPC())
+		return;
+
+	ch->ChatPacket(CHAT_TYPE_COMMAND, "gift_show");
+}
+
+ACMD(do_gift_get)
+{
+	if (!ch || !ch->IsPC())
+		return;
+
+	if(ch->GetLastGiftGetTime() > get_global_time())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("GIFT_WAIT_5_SEC"));
+		return;
+	}
+
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	DWORD id = 0;
+	str_to_number(id, arg1);
+
+	bool full = !isdigit(*arg1);
+	if (GetGift(ch, id, full))
+	{
+		ch->RefreshGift();
+		ch->LoadGiftPage(ch->GetLastGiftPage());
+	}
+}
+
+ACMD(do_gift_refresh)
+{
+	if (!ch || !ch->IsPC())
+		return;
+
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (!*arg1)
+	{
+		if (ch->GetGiftPages() > 0)
+			ch->ChatPacket(CHAT_TYPE_COMMAND, "gift_info %d", ch->GetGiftPages());
+	}
+	else
+	{
+		int page = 0;
+		str_to_number(page, arg1);
+
+		ch->LoadGiftPage(page);
+	}
+}
+#endif
 
 ACMD(do_set_walk_mode)
 {
@@ -2579,7 +2817,11 @@ ACMD(DoChangeChannel)
 	if (!ch || !ch->IsPC())
 		return;
 
-	if (ch->IsOpenSafebox() || ch->GetShop() || ch->IsCubeOpen() || ch->IsDead() || ch->GetExchange() || ch->GetMyShop())
+	if (ch->IsOpenSafebox() || ch->GetShop() || ch->IsCubeOpen() || ch->IsDead() || ch->GetExchange() || ch->GetMyShop()
+#ifdef OFFLINE_SHOP
+		|| ch->IsEditingShop()
+#endif
+		)
 	{
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CANT_DO_THIS_BECAUSE_OTHER_WINDOW_OPEN"));
 		return;

@@ -172,6 +172,9 @@ class CInputMain : public CInputProcessor
 		void		ItemGive(LPCHARACTER ch, const char* c_pData) const;
 		void		Hack(LPCHARACTER ch, const char * c_pData) const;
 		int			MyShop(LPCHARACTER ch, const char * c_pData, size_t uiBytes) const;
+#ifdef OFFLINE_SHOP
+		int			OfflineShopEdit(LPCHARACTER ch, const char * c_pData, size_t uiBytes) const;
+#endif
 
 #ifdef KYGN_CHEST_INFO
 		void		CGGetChestInfo(LPCHARACTER ch, const char* c_pData);
@@ -321,6 +324,10 @@ protected:
 	void		ItemAwardInformer(TPacketItemAwardInfromer* data) const;
 
 	void		RespondChannelStatus(LPDESC desc, const char* pcData) const;
+
+#ifdef OFFLINE_SHOP
+	void		ShopClose(const char * c_pData);
+#endif
 
 	protected:
 		DWORD		m_dwHandle;

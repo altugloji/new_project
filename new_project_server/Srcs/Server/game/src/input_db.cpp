@@ -11,6 +11,9 @@
 #include "protocol.h"
 #include "mob_manager.h"
 #include "shop_manager.h"
+#ifdef OFFLINE_SHOP
+	#include "shop.h"
+#endif
 #include "sectree_manager.h"
 #include "skill.h"
 #include "questmanager.h"
@@ -462,6 +465,135 @@ void CInputDB::PlayerLoad(LPDESC d, const char * data) const
 
 	ch->QuerySafeboxSize();
 }
+
+#ifdef OFFLINE_SHOP
+static LPEVENT s_pkShopEvent = NULL;
+static LPEVENT s_pkFixShopEvent = NULL;
+
+EVENTINFO(shop_event_info)
+{
+	DWORD empty;
+};
+
+EVENTFUNC(shop_event)
+{
+	CharacterVectorInteractor i;
+
+	if (CHARACTER_MANAGER::instance().GetCharactersByRaceNum(30000, i))
+	{
+		CharacterVectorInteractor::iterator it = i.begin();
+
+		while (it != i.end())
+		{
+			LPCHARACTER pc = *it++;
+			if (!pc)
+				continue;
+
+			LPSHOP shop = NULL;
+			if ((shop = pc->GetMyShop()))
+			{
+				if (pc->GetShopTime() < get_global_time() || shop->GetItemCount() <= 0)
+					pc->DeleteMyShop();
+			}
+			else
+				M2_DESTROY_CHARACTER(pc);
+		}
+	}
+
+	return PASSES_PER_SEC(SHOP_TIME_REFRESH);
+}
+
+EVENTFUNC(fix_shop_event)
+{
+	char szSockets[128];
+	char szAttrs[256];
+	int socLen = snprintf(szSockets, sizeof(szSockets), "ps.socket0");
+	int attrLen = snprintf(szAttrs, sizeof(szAttrs), "ps.attrtype0, ps.attrvalue0");
+	for (BYTE i = 1; i < ITEM_SOCKET_MAX_NUM; i++)
+		socLen += snprintf(szSockets + socLen, sizeof(szSockets) - socLen, ", ps.socket%d", i);
+
+	for (BYTE i = 1; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
+		attrLen += snprintf(szAttrs + attrLen, sizeof(szAttrs) - attrLen, ", ps.attrtype%d, ps.attrvalue%d", i, i);
+
+	char szQuery[4096];
+	snprintf(szQuery, sizeof(szQuery), "SELECT ps.id, ps.player_id, REPLACE('%s', '#PLAYER_NAME#', p.name), ps.vnum, ps.count, ps.price, %s, %s FROM `player_shop_items` ps LEFT JOIN player p ON p.id = ps.player_id WHERE not EXISTS(SELECT name FROM player_shop WHERE player_id = ps.player_id) and not ISNULL(p.name)", LC_TEXT("SHOP_NAME"), szSockets, szAttrs);
+	auto pkMsg = DBManager::instance().DirectQuery(szQuery);
+
+	if (!pkMsg || !pkMsg->Get())
+		return 0;
+
+	if (pkMsg->Get()->uiNumRows > 0)
+	{
+		MYSQL_ROW row = NULL;
+		while ((row = mysql_fetch_row(pkMsg->Get()->pSQLResult)) != NULL)
+		{
+			int col = 0;
+			DWORD id = 0, pid = 0, vnum = 0, count = 0, socket[ITEM_SOCKET_MAX_NUM], attr[ITEM_ATTRIBUTE_MAX_NUM][2];
+			str_to_number(id,				row[col++]);
+			str_to_number(pid,				row[col++]);
+			col++;
+			str_to_number(vnum,				row[col++]);
+			str_to_number(count,			row[col++]);
+			for (int i = 0;i < ITEM_SOCKET_MAX_NUM;i++)
+				str_to_number(socket[i],	row[col++]);
+			for (int i = 0;i < ITEM_ATTRIBUTE_MAX_NUM;i++)
+			{
+				str_to_number(attr[i][0],	row[col++]);
+				str_to_number(attr[i][1],	row[col++]);
+			}
+
+			char szGiftQuery[1024];
+			int giftQueryLen = snprintf(szGiftQuery, sizeof(szGiftQuery), "INSERT INTO player_gift SET owner_id = %u, vnum=%u, count=%u", pid, vnum, count);
+
+			for (BYTE i = 0; i < ITEM_SOCKET_MAX_NUM; i++)
+				giftQueryLen += snprintf(szGiftQuery + giftQueryLen, sizeof(szGiftQuery) - giftQueryLen, ", socket%d=%d", i, socket[i]);
+
+			for (BYTE i = 0; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
+				giftQueryLen += snprintf(szGiftQuery + giftQueryLen, sizeof(szGiftQuery) - giftQueryLen, ", attrtype%d=%d, attrvalue%d=%d", i, attr[i][0], i, attr[i][1]);
+
+			DBManager::instance().DirectQuery(szGiftQuery);
+			DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", id);
+		}
+	}
+
+	return PASSES_PER_SEC(SHOP_TIME_REFRESH*60);
+}
+
+void CreateShops()
+{
+	if (quest::CQuestManager::instance().GetEventFlag("shop_off") == 1)
+		return;
+
+	auto pkMsg = DBManager::instance().DirectQuery("SELECT player_id FROM player_shop WHERE channel=%d AND exists(SELECT name FROM player WHERE id=player_id)", g_bChannel);
+	if (!pkMsg || !pkMsg->Get())
+		return;
+
+	if (pkMsg->Get()->uiNumRows > 0)
+	{
+		MYSQL_ROW row =				NULL;
+		while ((row = mysql_fetch_row(pkMsg->Get()->pSQLResult)) != NULL)
+		{
+			DWORD dwPID =			0;
+			str_to_number(dwPID,	row[0]);
+
+			if (!CShopManager::instance().FindPCShop(dwPID))
+				CShopManager::instance().StartOfflineShop(dwPID, true);
+		}
+	}
+
+	if (NULL == s_pkShopEvent)
+	{
+		shop_event_info* info = AllocEventInfo<shop_event_info>();
+		s_pkShopEvent = event_create(shop_event, info, 1);
+	}
+
+	if (NULL == s_pkFixShopEvent)
+	{
+		shop_event_info* info = AllocEventInfo<shop_event_info>();
+		s_pkFixShopEvent = event_create(fix_shop_event, info, 1);
+	}
+}
+#endif
 
 void CInputDB::Boot(const char* data) const
 {
@@ -963,6 +1095,10 @@ void CInputDB::Boot(const char* data) const
 	building::CManager::instance().FinalizeBoot();
 
 	CMotionManager::instance().Build();
+
+#ifdef OFFLINE_SHOP
+	CreateShops();
+#endif
 
 	signal_timer_enable(30);
 
@@ -1936,6 +2072,29 @@ void CInputDB::ReloadAdmin(const char * c_pData ) const
 }
 //END_RELOAD_ADMIN
 
+#ifdef OFFLINE_SHOP
+void CInputDB::ShopClose(const char * c_pData)
+{
+	TPacketShopClose* p = reinterpret_cast<TPacketShopClose*>(const_cast<char*>(c_pData));
+	if (p->pid == 0)
+		return;
+
+	LPCHARACTER owner = CHARACTER_MANAGER::instance().FindByPID(p->pid);
+	if (!owner || !owner->IsPC())
+		return;
+
+	if (!p->error)
+	{
+#ifdef GIFT_SYSTEM
+		owner->RefreshGift();
+#endif
+		owner->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("SHOP_SUCCESS_CLOSE"));
+	}
+	else
+		owner->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("SHOP_SUCCESS_TOO_FAST"));
+}
+#endif
+
 ////////////////////////////////////////////////////////////////////
 // Analyze
 ////////////////////////////////////////////////////////////////////
@@ -2272,6 +2431,12 @@ int CInputDB::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 #ifdef ENABLE_CHARACTER_CHEST
 	case HEADER_DG_CHARACTER_CHEST:
 		character_chest::OnDBPacket(DESC_MANAGER::instance().FindByHandle(m_dwHandle), (TPacketDGCharacterChest*) c_pData);
+		break;
+#endif
+
+#ifdef OFFLINE_SHOP
+	case HEADER_DG_SHOP_CLOSE:
+		ShopClose(c_pData);
 		break;
 #endif
 

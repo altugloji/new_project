@@ -4,6 +4,9 @@
 #include "PythonItem.h"
 
 #include "AbstractPlayer.h"
+#ifdef ENABLE_OFFLINE_SHOP
+	#include "InstanceBase.h"
+#endif
 
 void SNetworkActorData::UpdatePosition()
 {
@@ -90,6 +93,10 @@ void SNetworkActorData::__copy__(const SNetworkActorData& src)
 	m_byPKMode = src.m_byPKMode;
 	m_dwMountVnum = src.m_dwMountVnum;
 
+#ifdef ENABLE_OFFLINE_SHOP
+	m_byIsMyShop = src.m_byIsMyShop;
+#endif
+
 	m_dwGuildID = src.m_dwGuildID;
 	m_dwLevel = src.m_dwLevel;
 	m_stName = src.m_stName;
@@ -130,6 +137,9 @@ SNetworkActorData::SNetworkActorData()
 	m_sAlignment=0;
 	m_byPKMode=0;
 	m_dwMountVnum=0;
+#ifdef ENABLE_OFFLINE_SHOP
+	m_byIsMyShop = 0;
+#endif
 
 	m_stName="";
 
@@ -413,6 +423,11 @@ CInstanceBase* CNetworkActorManager::__AppendCharacterManagerActor(SNetworkActor
 		m_lMainPosX=rkNetActorData.m_lCurX;
 		m_lMainPosY=rkNetActorData.m_lCurY;
 	}
+
+#ifdef ENABLE_OFFLINE_SHOP
+	if (rkNetActorData.m_byIsMyShop == 1)
+		pNewInstance->AttachSpecialEffect(CInstanceBase::AFFECT_MY_SHOP);
+#endif
 
 	const DWORD dwClientCurTime=ELTimer_GetMSec();
 	const DWORD dwElapsedTime=dwClientCurTime-rkNetActorData.m_dwClientSrcTime;

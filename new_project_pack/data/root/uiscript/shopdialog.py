@@ -9,7 +9,7 @@ window = {
 	"style" : ("movable", "float",),
 
 	"width" : 184,
-	"height" : 328,
+	"height" : 356,
 
 	"children" :
 	(
@@ -22,7 +22,7 @@ window = {
 			"y" : 0,
 
 			"width" : 184,
-			"height" : 328,
+			"height" : 356,
 
 			"children" :
 			(
@@ -108,6 +108,23 @@ window = {
 					"horizontal_align" : "center",
 
 					"text" : uiScriptLocale.PRIVATE_SHOP_CLOSE_BUTTON,
+
+					"default_image" : "d:/ymir work/ui/public/large_button_01.sub",
+					"over_image" : "d:/ymir work/ui/public/large_button_02.sub",
+					"down_image" : "d:/ymir work/ui/public/large_button_03.sub",
+				},
+
+				## Edit (offline dukkan sahibi)
+				{
+					"name" : "EditButton",
+					"type" : "button",
+
+					"x" : 0,
+					"y" : 322,
+
+					"horizontal_align" : "center",
+
+					"text" : "Dukkani Duzenle",
 
 					"default_image" : "d:/ymir work/ui/public/large_button_01.sub",
 					"over_image" : "d:/ymir work/ui/public/large_button_02.sub",

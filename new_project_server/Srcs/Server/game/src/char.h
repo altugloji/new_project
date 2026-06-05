@@ -564,6 +564,23 @@ struct TSkillUseInfo
 	#endif
 };
 
+#ifdef OFFLINE_SHOP
+	#include "../../libgame/include/grid.h"
+#endif
+
+#ifdef GIFT_SYSTEM
+typedef struct SGiftItem
+{
+	DWORD					id;
+	WORD					pos;
+	DWORD					count;
+	DWORD					vnum;
+	long					alSockets[ITEM_SOCKET_MAX_NUM];
+	TPlayerItemAttribute	aAttr[ITEM_ATTRIBUTE_MAX_NUM];
+} TGiftItem;
+typedef std::map<int, std::vector<TGiftItem>> GIFT_MAP;
+#endif
+
 typedef struct packet_party_update TPacketGCPartyUpdate;
 class CExchange;
 class CSkillProto;
@@ -1246,6 +1263,53 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		void			OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE bItemCount);
 		LPSHOP			GetMyShop() const { return m_pkMyShop; }
 		void			CloseMyShop();
+
+#ifdef OFFLINE_SHOP
+	private:
+		DWORD			bprivShopOwner;
+		DWORD			dw_ShopTime, dwShopLastCreateTime;
+		bool			m_bEditingShop;
+	public:
+		void			OpenShop(DWORD dwPID, const char *name, bool onboot = false);
+		void			DeleteMyShop();
+
+		void			SetPrivShopOwner(DWORD id)			{ bprivShopOwner = id; }
+		void			SetShopTime(DWORD time)				{ dw_ShopTime = time; }
+		void			SetLastCreateShopTime(DWORD time)	{ dwShopLastCreateTime = time; }
+
+		DWORD			GetPrivShopOwner()  const			{ return bprivShopOwner; }
+		DWORD			GetShopTime()  const				{ return dw_ShopTime; }
+		DWORD			GetLastCreateShopTime()  const		{ return dwShopLastCreateTime; }
+
+		BOOL			IsPrivShop(void)  const				{ return bprivShopOwner > 0; }
+
+		void			SetEditingShop(bool b)				{ m_bEditingShop = b; }
+		bool			IsEditingShop(void) const			{ return m_bEditingShop; }
+		// Offline dukkan duzenleme (sahip tarafindan): /edit_shop ile baslar, aktif et / iptal ile biter
+		bool			EnterShopEditMode();
+		void			ApplyShopEdit(const BYTE * pbRemovePos, BYTE byRemoveCount, const TShopItemTable * pAdd, BYTE byAddCount, const TOfflineShopPriceUpdate * pUpdate, BYTE byUpdateCount);
+		void			CancelShopEdit();
+#endif
+
+#ifdef GIFT_SYSTEM
+	protected:
+		LPEVENT			m_pkGiftRefresh;
+		GIFT_MAP		m_mapGiftGrid;
+		DWORD			m_dwLastGiftPage, m_dwLastGiftGetTime;
+
+		void			AddGiftGrid(int page);
+		int				AddGiftGridItem(int page, int size);
+	public:
+		void			StartRefreshGift();
+		void			LoadGiftPage(int page);
+		void			RefreshGift();
+
+		void			SetLastGiftGetTime(DWORD time)	{ m_dwLastGiftGetTime = time; }
+		DWORD			GetLastGiftGetTime()			{ return m_dwLastGiftGetTime; }
+
+		int				GetGiftPages()					{ return m_mapGiftGrid.size(); }
+		int				GetLastGiftPage()				{ return m_dwLastGiftPage; }
+#endif
 
 	protected:
 

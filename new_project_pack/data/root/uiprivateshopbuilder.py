@@ -12,6 +12,7 @@ import item
 import systemSetting
 import player
 import app
+import grp
 
 g_isBuildingPrivateShop = False
 
@@ -21,6 +22,11 @@ if app.ENABLE_CHEQUE_SYSTEM:
 	g_itemChequeDict={}
 
 g_privateShopAdvertisementBoardDict={}
+
+# Oyuncunun daha once tikladigi pazarlarin VID'leri. Tiklanan pazarin cercevesi
+# kirmizi gosterilir. VID'ler harita degisiminde yeniden atandigi icin Clear()'da
+# sifirlanir (yanlis kirmizi isareti olmasin).
+g_clickedShopVIDs = {}
 
 def Clear():
 	global g_itemPriceDict
@@ -34,6 +40,8 @@ def Clear():
 	global g_privateShopAdvertisementBoardDict
 	g_privateShopAdvertisementBoardDict={}
 	# @fixme007 END
+	global g_clickedShopVIDs
+	g_clickedShopVIDs = {}
 
 def IsPrivateShopItemPriceList():
 	global g_itemPriceDict
@@ -91,14 +99,65 @@ def DeleteADBoard(vid):
 	del g_privateShopAdvertisementBoardDict[vid]
 
 
-class PrivateShopAdvertisementBoard(ui.ThinBoard):
+class ShopNameBoard(ui.Window):
+	# Pazar basligi icin HAFIF tahta. Standart ui.ThinBoard pazar basina 8 adet
+	# .tga resim kutusu (4 kose + 4 kenar) yukler; ekranda cok pazar olunca FPS
+	# duser. Burada resim yerine sadece 2 cizili primitif kullaniliyor:
+	#   Box  -> RenderBox2d  (cerceve / dis hat)
+	#   Bar  -> RenderBar2d  (dolgu)
+	# Boylece dokulu quad yerine 2 renkli dikdortgen cizilir.
+	BOARD_COLOR        = grp.GenerateColor(0.0, 0.0, 0.0, 0.40)	# dolgu (Bar)  -> son sayi = opaklik (0.0 seffaf .. 1.0 tam opak)
+	BOARD_BASE_COLOR   = grp.GenerateColor(0.0, 0.0, 0.0, 0.55)	# cerceve (Box) normal renk
+	BOARD_CLICKED_COLOR = grp.GenerateColor(0.9, 0.1, 0.1, 1.0)	# cerceve (Box) -> daha once tiklanan pazar (kirmizi)
+
+	def __init__(self, layer = "UI"):
+		ui.Window.__init__(self, layer)
+
+		Box = ui.Box()
+		Box.SetParent(self)
+		Box.AddFlag("attach")
+		Box.AddFlag("not_pick")
+		Box.SetPosition(0, 0)
+		Box.SetColor(self.BOARD_BASE_COLOR)
+		Box.Show()
+		self.Box = Box
+
+		Base = ui.Bar()
+		Base.SetParent(self.Box)
+		Base.AddFlag("attach")
+		Base.AddFlag("not_pick")
+		Base.SetPosition(0, 0)
+		Base.SetColor(self.BOARD_COLOR)
+		Base.Show()
+		self.Base = Base
+
+	def __del__(self):
+		ui.Window.__del__(self)
+
+	def SetSize(self, width, height = 20):
+		ui.Window.SetSize(self, width, height)
+		self.Base.SetSize(width, height)
+		self.Box.SetSize(width, height)
+
+	def SetFrameColor(self, color):
+		self.Box.SetColor(color)
+
+	def ShowInternal(self):
+		self.Base.Show()
+		self.Box.Show()
+
+	def HideInternal(self):
+		self.Base.Hide()
+		self.Box.Hide()
+
+class PrivateShopAdvertisementBoard(ShopNameBoard):
 	def __init__(self):
-		ui.ThinBoard.__init__(self, "UI_BOTTOM")
+		ShopNameBoard.__init__(self, "UI_BOTTOM")
 		self.vid = None
 		self.__MakeTextLine()
 
 	def __del__(self):
-		ui.ThinBoard.__del__(self)
+		ShopNameBoard.__del__(self)
 
 	def __MakeTextLine(self):
 		self.textLine = ui.TextLine()
@@ -114,15 +173,27 @@ class PrivateShopAdvertisementBoard(ui.ThinBoard):
 
 		self.textLine.SetText(text)
 		self.textLine.UpdateRect()
-		self.SetSize(len(text)*6 + 10*2, 20)
+		self.SetSize(len(text)*6 + 10*2, 30)
+		self.__RefreshFrameColor()
 		self.Show()
 
 		g_privateShopAdvertisementBoardDict[vid] = self
+
+	def __RefreshFrameColor(self):
+		# Daha once tiklanan pazarin cercevesi kirmizi, digerleri normal
+		if self.vid in g_clickedShopVIDs:
+			self.SetFrameColor(self.BOARD_CLICKED_COLOR)
+		else:
+			self.SetFrameColor(self.BOARD_BASE_COLOR)
 
 	def OnMouseLeftButtonUp(self):
 		if not self.vid:
 			return
 		net.SendOnClickPacket(self.vid)
+
+		# Bu pazara tiklandi -> kaydet ve cerceveyi kirmizi yap
+		g_clickedShopVIDs[self.vid] = 1
+		self.SetFrameColor(self.BOARD_CLICKED_COLOR)
 
 		return True
 
@@ -132,6 +203,14 @@ class PrivateShopAdvertisementBoard(ui.ThinBoard):
 
 		if systemSetting.IsShowSalesText():
 			self.Show()
+			# Pazar gorus mesafesi disindaki pazarlarin tabelasini gizle (kasma onleme).
+			# DIKKAT: self.Hide() cagirmiyoruz; cunku gizli pencere OnUpdate almaz ve
+			# mesafe tekrar artirildiginda tabela geri gelmez. Bunun yerine ekran disina
+			# tasiyoruz, boylece OnUpdate calismaya devam eder.
+			if hasattr(chr, "CanRenderShop") and not chr.CanRenderShop(self.vid):
+				self.SetPosition(-10000, -10000)
+				return
+
 			x, y = chr.GetProjectPosition(self.vid, 220)
 			self.SetPosition(x - self.GetWidth()/2, y - self.GetHeight()/2)
 
@@ -270,6 +349,7 @@ class PrivateShopBuilder(ui.ScriptWindow):
 
 			priceInputBoard = uiCommon.MoneyInputDialog()
 			priceInputBoard.SetTitle(localeInfo.PRIVATE_SHOP_INPUT_PRICE_DIALOG_TITLE)
+			priceInputBoard.SetPerUnitCount(player.GetItemCount(attachedInvenType, attachedSlotPos))
 			priceInputBoard.SetAcceptEvent(ui.__mem_func__(self.AcceptInputPrice))
 			priceInputBoard.SetCancelEvent(ui.__mem_func__(self.CancelInputPrice))
 			priceInputBoard.Open()

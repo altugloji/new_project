@@ -268,6 +268,9 @@ class CInstanceBase
 			NAMECOLOR_PARTY,
 			NAMECOLOR_WARP,
 			NAMECOLOR_WAYPOINT,
+#ifdef ENABLE_OFFLINE_SHOP
+			NAMECOLOR_SHOP,
+#endif
 			NAMECOLOR_EXTRA = NAMECOLOR_FUNC + 10,
 			NAMECOLOR_NUM = NAMECOLOR_EXTRA + 10,
 		};
@@ -416,6 +419,9 @@ class CInstanceBase
 #endif
 #ifdef BOSS_EFFECT
 			EFEKT_BOSSA,
+#endif
+#ifdef ENABLE_OFFLINE_SHOP
+			AFFECT_MY_SHOP,
 #endif
 			EFFECT_NUM,
 		};
@@ -608,6 +614,10 @@ class CInstanceBase
 		bool					CanChangeTarget();
 		bool					CanPickInstance();
 		bool					CanViewTargetHP(CInstanceBase& rkInstVictim) const;
+#ifdef ENABLE_OFFLINE_SHOP
+		bool					CanClickShop();
+		bool					CanRenderShop();
+#endif
 
 		// Movement
 		BOOL					IsGoing() const;

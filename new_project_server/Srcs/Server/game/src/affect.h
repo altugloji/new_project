@@ -175,6 +175,10 @@ enum EAffectBits
 	AFF_BLUE_POSSESSION,	// 43
 #endif
 
+#ifdef OFFLINE_SHOP
+	AFF_MY_SHOP,
+#endif
+
 	AFF_BITS_MAX
 };
 

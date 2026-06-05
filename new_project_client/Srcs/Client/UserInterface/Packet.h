@@ -73,7 +73,11 @@ enum
     HEADER_CG_ADD_FLY_TARGETING                 = 53,
 	HEADER_CG_SHOOT								= 54,
 	HEADER_CG_MYSHOP                            = 55,
+#ifdef ENABLE_OFFLINE_SHOP
+	HEADER_CG_OFFLINE_SHOP_EDIT					= 56,
+#else
 	//HEADER_BLANK56								= 56,
+#endif
 	//HEADER_BLANK57								= 57,
 	//HEADER_BLANK58								= 58,
 	//HEADER_BLANK59								= 59,
@@ -1031,6 +1035,32 @@ typedef struct SPacketCGMyShop
     BYTE        bCount;	// count of TShopItemTable, max 39
 } TPacketCGMyShop;
 
+#ifdef ENABLE_OFFLINE_SHOP
+enum EOfflineShopEditAction
+{
+    OFFLINE_SHOP_EDIT_ACTION_APPLY  = 0,
+    OFFLINE_SHOP_EDIT_ACTION_ENTER  = 1,
+    OFFLINE_SHOP_EDIT_ACTION_CANCEL = 2,
+};
+
+typedef struct SOfflineShopPriceUpdate
+{
+    BYTE        display_pos;
+    DWORD       price;
+} TOfflineShopPriceUpdate;
+
+// APPLY payload sirasi: BYTE removePos[], TShopItemTable add[], TOfflineShopPriceUpdate update[]
+typedef struct SPacketCGOfflineShopEdit
+{
+    BYTE        bHeader;
+    WORD        wSize;
+    BYTE        byAction;
+    BYTE        byRemoveCount;
+    BYTE        byAddCount;
+    BYTE        byUpdateCount;
+} TPacketCGOfflineShopEdit;
+#endif
+
 typedef struct SPacketCGRefine
 {
 	BYTE		header;
@@ -1313,6 +1343,9 @@ typedef struct packet_add_char
 
     BYTE        bStateFlag;
     DWORD       dwAffectFlag[2];
+#ifdef ENABLE_OFFLINE_SHOP
+	BYTE		byIsMyShop;
+#endif
 } TPacketGCCharacterAdd;
 
 typedef struct packet_add_char2
@@ -1867,6 +1900,9 @@ typedef struct packet_quickslot_swap
 
 typedef struct packet_shop_start
 {
+#ifdef ENABLE_OFFLINE_SHOP
+	BYTE	byIsMyShop;
+#endif
 	struct packet_shop_item		items[SHOP_HOST_ITEM_MAX_NUM];
 } TPacketGCShopStart;
 

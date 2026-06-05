@@ -22,6 +22,10 @@
 #include "../../common/VnumHelper.h"
 #include "../../common/CommonDefines.h"
 
+#ifdef OFFLINE_SHOP
+	#include "shop.h"
+#endif
+
 #ifdef ENABLE_CHARACTER_CHEST
 	#include "../../common/character_chest.h"
 #endif
@@ -74,6 +78,11 @@ void CItem::Initialize()
 
 	m_bSkipSave = false;
 	m_dwLastOwnerPID = 0;
+#ifdef OFFLINE_SHOP
+	m_dwRealID = 0;
+	b_iShop = NULL;
+	e_OffshopRItemEvent = NULL;
+#endif
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	m_szUpgradeOwner[0] = '\0';
 #endif
@@ -90,6 +99,9 @@ void CItem::Destroy()
 	event_cancel(&m_pkTimerBasedOnWearExpireEvent);
 	event_cancel(&m_pkRealTimeExpireEvent);
 	event_cancel(&m_pkAccessorySocketExpireEvent);
+#ifdef OFFLINE_SHOP
+	event_cancel(&e_OffshopRItemEvent);
+#endif
 
 	CEntity::Destroy();
 
@@ -370,6 +382,9 @@ LPITEM CItem::RemoveFromCharacter()
 		m_wCell = 0;
 
 		SetWindow(RESERVED_WINDOW);
+#ifdef OFFLINE_SHOP
+		if(!GetRealID())
+#endif
 		Save();
 		return (this);
 	}
@@ -1573,6 +1588,60 @@ void CItem::StartRealTimeExpireEvent()
 		}
 	}
 }
+
+#ifdef OFFLINE_SHOP
+EVENTINFO(SOffShopItemRemoveEvent)
+{
+	LPITEM item;
+
+	SOffShopItemRemoveEvent() : item(NULL) { }
+};
+
+EVENTFUNC(OffShopItemRemoveEvent)
+{
+	SOffShopItemRemoveEvent* info = dynamic_cast<SOffShopItemRemoveEvent*>(event->info);
+
+	if (NULL == info)
+		return 0;
+
+	LPITEM item = info->item;
+
+	if (!item)
+		return 0;
+
+	const time_t current = get_global_time();
+
+	if (current > item->GetSocket(0))
+	{
+		LPSHOP iShop = item->GetShop();
+		if (iShop)
+			iShop->RemoveItemForShop(item->GetRealID());
+
+		ITEM_MANAGER::instance().RemoveItem(item, "REAL_TIME_EXPIRE");
+		return 0;
+	}
+
+	return PASSES_PER_SEC(1);
+}
+
+void CItem::StartEventOfRemoveItemForOfflineShop()
+{
+	if (e_OffshopRItemEvent || !IsRealTimeItem())
+		return;
+
+	SOffShopItemRemoveEvent* info	= AllocEventInfo<SOffShopItemRemoveEvent>();
+	info->item						= this;
+	e_OffshopRItemEvent				= event_create(OffShopItemRemoveEvent, info, PASSES_PER_SEC(1));
+}
+
+void CItem::SetShop(LPSHOP shop)
+{
+	b_iShop = shop;
+
+	if (shop)
+		StartEventOfRemoveItemForOfflineShop();
+}
+#endif
 
 bool CItem::IsRealTimeItem()
 {

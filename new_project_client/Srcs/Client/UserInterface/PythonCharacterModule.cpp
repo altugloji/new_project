@@ -181,6 +181,21 @@ PyObject * chrIsNPC(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildValue("i", pInstance->IsNPC());
 }
 
+#ifdef ENABLE_OFFLINE_SHOP
+PyObject * chrIsOfflineShop(PyObject* poSelf, PyObject* poArgs)
+{
+	int iVirtualID;
+	if (!PyTuple_GetInteger(poArgs, 0, &iVirtualID))
+		return Py_BuildException();
+
+	CInstanceBase* pInstance = CPythonCharacterManager::Instance().GetInstancePtr(iVirtualID);
+	if (!pInstance)
+		return Py_BuildValue("i", 0);
+
+	return Py_BuildValue("i", pInstance->GetRace() == 30000);
+}
+#endif
+
 PyObject * chrIsGameMaster(PyObject* poSelf, PyObject* poArgs)
 {
 	int iVirtualID;
@@ -878,6 +893,21 @@ PyObject * chrGetProjectPosition(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildValue("ii", int(fx), int(fy));
 }
 
+#ifdef ENABLE_OFFLINE_SHOP
+PyObject * chrCanRenderShop(PyObject* poSelf, PyObject* poArgs)
+{
+	int iVirtualID;
+	if (!PyTuple_GetInteger(poArgs, 0, &iVirtualID))
+		return Py_BuildException();
+
+	CInstanceBase * pInstance = CPythonCharacterManager::Instance().GetInstancePtr(iVirtualID);
+	if (!pInstance)
+		return Py_BuildValue("i", 0);
+
+	return Py_BuildValue("i", pInstance->CanRenderShop() ? 1 : 0);
+}
+#endif
+
 PyObject * chrGetVirtualNumber(PyObject* poSelf, PyObject* poArgs)
 {
 	int iVirtualID;
@@ -1268,6 +1298,9 @@ void initchr()
 		{ "HasInstance",				chrHasInstance,						METH_VARARGS },
 		{ "IsEnemy",					chrIsEnemy,							METH_VARARGS },
 		{ "IsNPC",						chrIsNPC,							METH_VARARGS },
+#ifdef ENABLE_OFFLINE_SHOP
+		{ "IsOfflineShop",				chrIsOfflineShop,					METH_VARARGS },
+#endif
 		{ "IsGameMaster",				chrIsGameMaster,					METH_VARARGS },
 		{ "IsPartyMember",				chrIsPartyMember,					METH_VARARGS },
 
@@ -1319,6 +1352,9 @@ void initchr()
 		{ "GetNameByVID",				chrGetNameByVID,					METH_VARARGS },
 		{ "GetGuildID",					chrGetGuildID,						METH_VARARGS },
 		{ "GetProjectPosition",			chrGetProjectPosition,				METH_VARARGS },
+#ifdef ENABLE_OFFLINE_SHOP
+		{ "CanRenderShop",				chrCanRenderShop,					METH_VARARGS },
+#endif
 
 		{ "GetVirtualNumber",			chrGetVirtualNumber,				METH_VARARGS },
 		{ "GetInstanceType",			chrGetInstanceType,					METH_VARARGS },
@@ -1526,6 +1562,9 @@ void initchr()
 	PyModule_AddIntConstant(poModule, "AFFECT_PREMIUM_SILVER",				CInstanceBase::AFFECT_PREMIUM_SILVER);
 	PyModule_AddIntConstant(poModule, "AFFECT_PREMIUM_GOLD",				CInstanceBase::AFFECT_PREMIUM_GOLD);
 	PyModule_AddIntConstant(poModule, "AFFECT_RAMADAN_RING",				CInstanceBase::AFFECT_RAMADAN_RING);
+#ifdef ENABLE_OFFLINE_SHOP
+	PyModule_AddIntConstant(poModule, "AFFECT_MY_SHOP",						CInstanceBase::AFFECT_MY_SHOP);
+#endif
 #ifdef ENABLE_WOLFMAN_CHARACTER
 	PyModule_AddIntConstant(poModule, "AFFECT_BLEEDING",					CInstanceBase::AFFECT_BLEEDING);
 	PyModule_AddIntConstant(poModule, "AFFECT_RED_POSSESSION",				CInstanceBase::AFFECT_RED_POSSESSION);
