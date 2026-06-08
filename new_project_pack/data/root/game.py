@@ -1172,6 +1172,25 @@ class GameWindow(ui.ScriptWindow):
 	def RefreshSafeboxMoney(self):
 		self.interface.RefreshSafeboxMoney()
 
+	## Safe Trade - C++ RecvSafeTradePacket callbacks
+	def OpenSafeTradeWindow(self, tradeID):
+		self.interface.OpenSafeTradeWindow(tradeID)
+
+	def RefreshSafeTrade(self):
+		self.interface.RefreshSafeTrade()
+
+	def SafeTradeStatus(self, status):
+		self.interface.SafeTradeStatus(status)
+
+	def CloseSafeTradeWindow(self):
+		self.interface.CloseSafeTradeWindow()
+
+	def OpenSafeTradeListWindow(self, outgoing):
+		self.interface.OpenSafeTradeListWindow(outgoing)
+
+	def SafeTradeText(self, code):
+		self.interface.SafeTradeText(code)
+
 	# ITEM_MALL
 	def OpenMallWindow(self, size):
 		self.interface.OpenMallWindow(size)

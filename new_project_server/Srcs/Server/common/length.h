@@ -529,6 +529,9 @@ enum EWindows
 	DRAGON_SOUL_INVENTORY,
 	BELT_INVENTORY,
 	GROUND,
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	SAFETRADE,	// 8 -> MySQL item.window ENUM'unda 8. siradaki 'SAFETRADE' ile birebir
+#endif
 	WINDOW_TYPE_MAX,
 };
 

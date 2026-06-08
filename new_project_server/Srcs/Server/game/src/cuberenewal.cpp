@@ -366,6 +366,9 @@ void Cube_open (LPCHARACTER ch, DWORD dwRecipeNpcRace)
 #ifdef OFFLINE_SHOP
 		|| ch->IsEditingShop()
 #endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		|| ch->GetSafeTrade() || ch->IsSafeTradeClaiming()
+#endif
 		)
 	{
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Cannot open refinement window"));

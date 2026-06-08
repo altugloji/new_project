@@ -144,6 +144,14 @@ enum
 #ifdef OFFLINE_SHOP
 	HEADER_GD_SHOP_CLOSE			= 142,
 #endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	HEADER_GD_SAFETRADE_CREATE		= 143,
+	HEADER_GD_SAFETRADE_SETSTATE	= 144,
+	HEADER_GD_SAFETRADE_LIST		= 145,
+	HEADER_GD_SAFETRADE_LOADITEM	= 146,
+	HEADER_GD_SAFETRADE_CLAIM		= 147,
+	HEADER_GD_SAFETRADE_RECONCILE	= 148,
+#endif
 
 	HEADER_GD_SETUP			= 0xff,
 
@@ -276,6 +284,14 @@ enum
 #ifdef OFFLINE_SHOP
 	HEADER_DG_SHOP_CLOSE			= 183,
 #endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	HEADER_DG_SAFETRADE_CREATE		= 184,
+	HEADER_DG_SAFETRADE_SETSTATE	= 185,
+	HEADER_DG_SAFETRADE_LIST		= 186,
+	HEADER_DG_SAFETRADE_LOADITEM	= 187,
+	HEADER_DG_SAFETRADE_CLAIM		= 188,
+	HEADER_DG_SAFETRADE_RECONCILE	= 189,
+#endif
 
 
 	HEADER_DG_MAP_LOCATIONS			= 0xfe,
@@ -369,6 +385,89 @@ typedef struct SPlayerItem
 	char	szUpgradeOwner[CHARACTER_NAME_MAX_LEN + 1];
 #endif
 } TPlayerItem;
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+// ----- Guvenli Ticaret: game<->db paketleri -----
+typedef struct SPacketGDSafeTradeCreate
+{
+	DWORD	initiator_id;
+	char	initiator_name[CHARACTER_NAME_MAX_LEN + 1];
+	DWORD	partner_id;
+	char	partner_name[CHARACTER_NAME_MAX_LEN + 1];
+} TPacketGDSafeTradeCreate;
+
+typedef struct SPacketGDSafeTradeSetState
+{
+	DWORD	trade_id;
+	DWORD	actor_id;
+	BYTE	from_status;
+	BYTE	to_status;
+} TPacketGDSafeTradeSetState;
+
+typedef struct SPacketGDSafeTradeList
+{
+	DWORD	player_id;
+	BYTE	outgoing;
+} TPacketGDSafeTradeList;
+
+typedef struct SPacketGDSafeTradeLoadItem
+{
+	DWORD	trade_id;
+	DWORD	requester_id;
+} TPacketGDSafeTradeLoadItem;
+
+typedef struct SPacketGDSafeTradeClaim
+{
+	DWORD	trade_id;
+	DWORD	claimer_id;
+} TPacketGDSafeTradeClaim;
+
+// DB->Game cevap govdeleri (HEADER struct'i dwHandle'i tasir; govdede handle yok)
+typedef struct SPacketDGSafeTradeCreate
+{
+	DWORD	trade_id;	// 0 = limit/red
+	DWORD	partner_id;
+	char	partner_name[CHARACTER_NAME_MAX_LEN + 1];
+} TPacketDGSafeTradeCreate;
+
+typedef struct SPacketDGSafeTradeSetState
+{
+	DWORD	trade_id;
+	BYTE	to_status;
+	BYTE	ok;			// 1 = CAS basarili
+} TPacketDGSafeTradeSetState;
+
+typedef struct SSafeTradeListEntry
+{
+	DWORD	trade_id;
+	char	name[CHARACTER_NAME_MAX_LEN + 1];
+	BYTE	item_count;
+	DWORD	time;
+	BYTE	is_owner;	// 1 = bu oyuncu trade'in baslatani (A) -> Son Onay; 0 = alici (B) -> sadece onizleme
+} TSafeTradeListEntry;
+
+typedef struct SPacketDGSafeTradeListHeader
+{
+	BYTE	outgoing;
+	BYTE	count;
+	// ardindan (count) adet TSafeTradeListEntry
+} TPacketDGSafeTradeListHeader;
+
+typedef struct SPacketDGSafeTradeLoadItem
+{
+	DWORD	trade_id;
+	BYTE	count;
+	// ardindan (count) adet TPlayerItem
+} TPacketDGSafeTradeLoadItem;
+
+typedef struct SPacketDGSafeTradeClaim
+{
+	DWORD	trade_id;
+	BYTE	result;		// 0=OK, 1=ALREADY, 2=ERROR
+	BYTE	count;
+	// ardindan (count) adet TPlayerItem
+} TPacketDGSafeTradeClaim;
+#endif
 
 typedef struct SQuickslot
 {

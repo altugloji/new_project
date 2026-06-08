@@ -590,6 +590,9 @@ class CWarMap;
 class CAffect;
 class CGuild;
 class CSafebox;
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+class CSafeTrade;
+#endif
 class CArena;
 
 class CShop;
@@ -1652,6 +1655,16 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		void				SetSafeboxOpenPosition();
 		float				GetDistanceFromSafeboxOpen() const;
 
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	public:
+		CSafeTrade *		GetSafeTrade() const { return m_pkSafeTrade; }
+		void				SetSafeTrade(CSafeTrade * p) { m_pkSafeTrade = p; }
+		bool				IsSafeTradeClaiming() const { return m_bSafeTradeClaiming; }
+		void				SetSafeTradeClaiming(bool b) { m_bSafeTradeClaiming = b; }
+		DWORD				GetSafeTradeClaimingID() const { return m_dwSafeTradeClaimingID; }
+		void				SetSafeTradeClaimingID(DWORD id) { m_dwSafeTradeClaimingID = id; }
+#endif
+
 	protected:
 		CSafebox *			m_pkSafebox;
 		int					m_iSafeboxSize;
@@ -1662,6 +1675,12 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		int					m_iMallLoadTime;
 
 		PIXEL_POSITION		m_posSafeboxOpen;
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		CSafeTrade *		m_pkSafeTrade;
+		bool				m_bSafeTradeClaiming;
+		DWORD				m_dwSafeTradeClaimingID;
+#endif
 
 		////////////////////////////////////////////////////////////////////////////////////////
 

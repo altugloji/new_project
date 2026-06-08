@@ -347,6 +347,12 @@ void CPythonNetworkStream::GamePhase()
 				ret = RecvExchangePacket();
 				break;
 
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+			case HEADER_GC_SAFETRADE:
+				ret = RecvSafeTradePacket();
+				break;
+#endif
+
 			case HEADER_GC_QUEST_INFO:
 				ret = RecvQuestInfoPacket();
 				break;

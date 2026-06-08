@@ -27,6 +27,9 @@
 	#include <boost/algorithm/string/replace.hpp>
 #endif
 #include "safebox.h"
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+#include "safetrade.h"
+#endif
 #include "regen.h"
 #include "pvp.h"
 #include "party.h"
@@ -275,6 +278,11 @@ void CHARACTER::Initialize()
 	m_pkSafebox = nullptr;
 	m_iSafeboxSize = -1;
 	m_iSafeboxLoadTime = 0;
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	m_pkSafeTrade = nullptr;
+	m_bSafeTradeClaiming = false;
+	m_dwSafeTradeClaimingID = 0;
+#endif
 
 #ifdef FAST_PACKET_BLOCK
 	m_iPacketTime = 0;
@@ -1946,6 +1954,18 @@ void CHARACTER::Disconnect(const char * c_pszReason)
 	m_bSkipSave = true;
 
 	quest::CQuestManager::instance().DisconnectPC(this);
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	if (m_pkSafeTrade)
+	{
+		// ~CSafeTrade: CREATING/LOCKED ise item'leri A'ya iade eder (READY ise dokunmaz)
+		M2_DELETE(m_pkSafeTrade);
+		m_pkSafeTrade = nullptr;
+	}
+	m_bSafeTradeClaiming = false;       // takili kalmasin (diger pencereleri kilitlememesi icin)
+	m_dwSafeTradeClaimingID = 0;
+#endif
+
 
 	CloseSafebox();
 
@@ -5532,7 +5552,11 @@ void CHARACTER::OnClick(LPCHARACTER pkChrCauser)
 				//PREVENT_TRADE_WINDOW
 				if (pkChrCauser == this)
 				{
-					if ((GetExchange() || IsOpenSafebox() || GetShopOwner()) || IsCubeOpen())
+					if ((GetExchange() || IsOpenSafebox() || GetShopOwner()) || IsCubeOpen()
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+						|| GetSafeTrade() || IsSafeTradeClaiming()
+#endif
+						)
 					{
 						pkChrCauser->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("다른 거래중(창고,교환,상점)에는 개인상점을 사용할 수 없습니다."));
 						return;
@@ -5540,7 +5564,11 @@ void CHARACTER::OnClick(LPCHARACTER pkChrCauser)
 				}
 				else
 				{
-					if ((pkChrCauser->GetExchange() || pkChrCauser->IsOpenSafebox() || pkChrCauser->GetMyShop() || pkChrCauser->GetShopOwner()) || pkChrCauser->IsCubeOpen() )
+					if ((pkChrCauser->GetExchange() || pkChrCauser->IsOpenSafebox() || pkChrCauser->GetMyShop() || pkChrCauser->GetShopOwner()) || pkChrCauser->IsCubeOpen()
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+						|| pkChrCauser->GetSafeTrade() || pkChrCauser->IsSafeTradeClaiming()
+#endif
+						)
 					{
 						pkChrCauser->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("다른 거래중(창고,교환,상점)에는 개인상점을 사용할 수 없습니다."));
 						return;

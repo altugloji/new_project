@@ -31,6 +31,8 @@ import uiToolTip
 import uiMiniMap
 import uiParty
 import uiSafebox
+import uisafetrade
+import uisafetradelist
 import uiGuild
 import uiQuest
 import uiPrivateShopBuilder
@@ -113,6 +115,10 @@ class Interface(object):
 
 		if app.ENABLE_EXCHANGE_LOG:
 			self.wndExchangeLog = None
+
+		# Safe Trade
+		self.safeTradeWindow = None
+		self.safeTradeListWindow = None
 
 		# ITEM_MALL
 		self.mallPageDlg = None
@@ -881,6 +887,71 @@ class Interface(object):
 
 	def RefreshSafebox(self):
 		self.wndSafebox.RefreshSafebox()
+
+	## Safe Trade
+	def __EnsureSafeTradeDepot(self):
+		if not self.safeTradeWindow:
+			self.safeTradeWindow = uisafetrade.SafeTradeWindow()
+			if self.tooltipItem:
+				self.safeTradeWindow.SetItemToolTip(self.tooltipItem)
+
+	def __EnsureSafeTradeList(self):
+		if not self.safeTradeListWindow:
+			self.safeTradeListWindow = uisafetradelist.SafeTradeListWindow(self)
+
+	def OpenSafeTradeWindow(self, tradeID):
+		self.__EnsureSafeTradeDepot()
+		self.safeTradeWindow.OpenForCreate(tradeID)
+
+	def OpenSafeTradeClaimWindow(self, tradeID):
+		self.__EnsureSafeTradeDepot()
+		self.safeTradeWindow.OpenForClaim(tradeID)
+
+	def OpenSafeTradeConfirmWindow(self, tradeID):
+		self.__EnsureSafeTradeDepot()
+		self.safeTradeWindow.OpenForConfirm(tradeID)
+
+	def OpenSafeTradePreviewWindow(self, tradeID):
+		self.__EnsureSafeTradeDepot()
+		self.safeTradeWindow.OpenForPreview(tradeID)
+
+	def RefreshSafeTrade(self):
+		if self.safeTradeWindow:
+			self.safeTradeWindow.RefreshItems()
+
+	def SafeTradeStatus(self, status):
+		if self.safeTradeWindow:
+			self.safeTradeWindow.SetStatus(status)
+
+	def CloseSafeTradeWindow(self):
+		if self.safeTradeWindow:
+			self.safeTradeWindow.CloseFromServer()
+
+	def OpenSafeTradeListWindow(self, outgoing):
+		self.__EnsureSafeTradeList()
+		self.safeTradeListWindow.Open(outgoing)
+
+	def SafeTradeText(self, code):
+		import chat
+		import localeInfo
+		msgs = {
+			1 : localeInfo.SAFETRADE_NO_SPACE,
+			2 : localeInfo.SAFETRADE_CLAIMED_OK,
+			3 : localeInfo.SAFETRADE_ALREADY,
+			4 : localeInfo.SAFETRADE_CONFIRMED,
+			5 : localeInfo.SAFETRADE_EMPTY_LIST,
+			6 : localeInfo.SAFETRADE_TOO_MANY,
+		}
+		if code in msgs:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, msgs[code])
+		# CLAIMED_OK (2): itemler teslim edildi -> depo + "bana gelen ticaretler"
+		# liste penceresini de temizle/kapat (SUBGC_CLOSE C++ handler eski binary'de
+		# yoksa diye yedek yol).
+		if code == 2:
+			if self.safeTradeWindow:
+				self.safeTradeWindow.CloseFromServer()
+			if self.safeTradeListWindow:
+				self.safeTradeListWindow.OnClose()
 
 	# ITEM_MALL
 	def RefreshMall(self):

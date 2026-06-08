@@ -1413,6 +1413,74 @@ PyObject* netSendSafeboxItemMovePacket(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+PyObject* netSendSafeTradeAddItemPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	// (windowType, cell, depotPos)  veya  (cell, depotPos -> windowType=INVENTORY)
+	TItemPos InventoryPos;
+	int iDepotPos;
+	switch (PyTuple_Size(poArgs))
+	{
+	case 2:
+		InventoryPos.window_type = INVENTORY;
+		if (!PyTuple_GetInteger(poArgs, 0, &InventoryPos.cell))   return Py_BuildException();
+		if (!PyTuple_GetInteger(poArgs, 1, &iDepotPos))           return Py_BuildException();
+		break;
+	case 3:
+		if (!PyTuple_GetInteger(poArgs, 0, &InventoryPos.window_type)) return Py_BuildException();
+		if (!PyTuple_GetInteger(poArgs, 1, &InventoryPos.cell))        return Py_BuildException();
+		if (!PyTuple_GetInteger(poArgs, 2, &iDepotPos))               return Py_BuildException();
+		break;
+	default:
+		return Py_BuildException();
+	}
+	CPythonNetworkStream::Instance().SendSafeTradeAddItemPacket(InventoryPos, (BYTE) iDepotPos);
+	return Py_BuildNone();
+}
+PyObject* netSendSafeTradeRemoveItemPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	int iDepotPos;
+	if (!PyTuple_GetInteger(poArgs, 0, &iDepotPos))
+		return Py_BuildException();
+	CPythonNetworkStream::Instance().SendSafeTradeRemoveItemPacket((BYTE) iDepotPos);
+	return Py_BuildNone();
+}
+PyObject* netSendSafeTradeLockPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	CPythonNetworkStream::Instance().SendSafeTradeLockPacket();
+	return Py_BuildNone();
+}
+PyObject* netSendSafeTradeConfirmPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	int iTradeID;
+	if (!PyTuple_GetInteger(poArgs, 0, &iTradeID))
+		return Py_BuildException();
+	CPythonNetworkStream::Instance().SendSafeTradeConfirmPacket((DWORD) iTradeID);
+	return Py_BuildNone();
+}
+PyObject* netSendSafeTradeCancelPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	CPythonNetworkStream::Instance().SendSafeTradeCancelPacket();
+	return Py_BuildNone();
+}
+PyObject* netSendSafeTradeViewPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	int iTradeID;
+	if (!PyTuple_GetInteger(poArgs, 0, &iTradeID))
+		return Py_BuildException();
+	CPythonNetworkStream::Instance().SendSafeTradeViewPacket((DWORD) iTradeID);
+	return Py_BuildNone();
+}
+PyObject* netSendSafeTradeClaimPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	int iTradeID;
+	if (!PyTuple_GetInteger(poArgs, 0, &iTradeID))
+		return Py_BuildException();
+	CPythonNetworkStream::Instance().SendSafeTradeClaimPacket((DWORD) iTradeID);
+	return Py_BuildNone();
+}
+#endif
+
 PyObject* netSendMallCheckoutPacket(PyObject* poSelf, PyObject* poArgs)
 {
 	int iMallPos;
@@ -1914,6 +1982,17 @@ void initnet()
 		{ "SendSafeboxCheckinPacket",			netSendSafeboxCheckinPacket,			METH_VARARGS },
 		{ "SendSafeboxCheckoutPacket",			netSendSafeboxCheckoutPacket,			METH_VARARGS },
 		{ "SendSafeboxItemMovePacket",			netSendSafeboxItemMovePacket,			METH_VARARGS },
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		// Safe Trade
+		{ "SendSafeTradeAddItemPacket",			netSendSafeTradeAddItemPacket,			METH_VARARGS },
+		{ "SendSafeTradeRemoveItemPacket",		netSendSafeTradeRemoveItemPacket,		METH_VARARGS },
+		{ "SendSafeTradeLockPacket",			netSendSafeTradeLockPacket,				METH_VARARGS },
+		{ "SendSafeTradeConfirmPacket",			netSendSafeTradeConfirmPacket,			METH_VARARGS },
+		{ "SendSafeTradeCancelPacket",			netSendSafeTradeCancelPacket,			METH_VARARGS },
+		{ "SendSafeTradeViewPacket",			netSendSafeTradeViewPacket,				METH_VARARGS },
+		{ "SendSafeTradeClaimPacket",			netSendSafeTradeClaimPacket,			METH_VARARGS },
+#endif
 
 		// Mall
 		{ "SendMallCheckoutPacket",				netSendMallCheckoutPacket,				METH_VARARGS },

@@ -447,6 +447,13 @@ void ITEM_MANAGER::SaveSingleItem(LPITEM item) const
 		case MALL:
 			t.owner = item->GetOwner()->GetDesc()->GetAccountTable().id;
 			break;
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		case SAFETRADE:
+			// Emanet item'inin DB owner'i = trade_id (oyuncu/account DEGIL).
+			// GetOwner() (CHARACTER) yine A'dir; bu sadece RAM yasam dongusu icindir.
+			t.owner = item->GetSafeTradeID();
+			break;
+#endif
 		default:
 			t.owner = item->GetOwner()->GetPlayerID();
 			break;

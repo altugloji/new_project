@@ -240,6 +240,8 @@
     <ClCompile Include="refine.cpp" />
     <ClCompile Include="regen.cpp" />
     <ClCompile Include="safebox.cpp" />
+    <ClCompile Include="safetrade.cpp" />
+    <ClCompile Include="questlua_safetrade.cpp" />
     <ClCompile Include="sectree.cpp" />
     <ClCompile Include="sectree_manager.cpp" />
     <ClCompile Include="shop.cpp" />
@@ -350,6 +352,7 @@
     <ClInclude Include="refine.h" />
     <ClInclude Include="regen.h" />
     <ClInclude Include="safebox.h" />
+    <ClInclude Include="safetrade.h" />
     <ClInclude Include="sectree.h" />
     <ClInclude Include="sectree_manager.h" />
     <ClInclude Include="shop.h" />

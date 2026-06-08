@@ -77,6 +77,11 @@ class LogManager : public singleton<LogManager>
 		void		AcceLog(DWORD dwPID, DWORD x, DWORD y, DWORD item_vnum, DWORD item_uid, int item_count, int abs_chance, bool success);
 #endif
 
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		void		SafeTradeLog(DWORD dwTradeID, const char * c_pszAction, DWORD dwActorID, const char * c_pszActorName,
+								DWORD dwTargetID, DWORD dwItemID, DWORD dwItemVnum, DWORD dwItemCount, const char * c_pszIP);
+#endif
+
 #ifdef ENABLE_USER_REPORT_SYSTEM
 		void		ReportUserLog(DWORD reporterPID, const char* reporterName, const char* reporterIP, DWORD targetPID, const char* targetName, const char* reason);
 #endif

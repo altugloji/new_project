@@ -661,6 +661,9 @@ namespace quest
 #ifdef ENABLE_QUEST_DND_EVENT
 		RegisterDNDFunctionTable();
 #endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		RegisterSafeTradeFunctionTable();
+#endif
 		{
 			luaL_reg member_functions[] =
 			{

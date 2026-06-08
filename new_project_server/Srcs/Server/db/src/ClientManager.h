@@ -266,6 +266,20 @@ class CClientManager : public CNetBase, public singleton<CClientManager>
 	void		RESULT_SAFEBOX_CHANGE_PASSWORD(CPeer * pkPeer, SQLMsg * msg) const;
 	void		RESULT_SAFEBOX_CHANGE_PASSWORD_SECOND(CPeer * pkPeer, SQLMsg * msg) const;
 
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	void		QUERY_SAFETRADE_CREATE(CPeer * pkPeer, DWORD dwHandle, TPacketGDSafeTradeCreate * p);
+	void		QUERY_SAFETRADE_SETSTATE(CPeer * pkPeer, DWORD dwHandle, TPacketGDSafeTradeSetState * p);
+	void		QUERY_SAFETRADE_LIST(CPeer * pkPeer, DWORD dwHandle, TPacketGDSafeTradeList * p);
+	void		QUERY_SAFETRADE_LOADITEM(CPeer * pkPeer, DWORD dwHandle, TPacketGDSafeTradeLoadItem * p);
+	void		QUERY_SAFETRADE_CLAIM(CPeer * pkPeer, DWORD dwHandle, TPacketGDSafeTradeClaim * p);
+
+	void		RESULT_SAFETRADE_CREATE(CPeer * pkPeer, SQLMsg * msg);
+	void		RESULT_SAFETRADE_SETSTATE(CPeer * pkPeer, SQLMsg * msg);
+	void		RESULT_SAFETRADE_LIST(CPeer * pkPeer, SQLMsg * msg);
+	void		RESULT_SAFETRADE_LOADITEM(CPeer * pkPeer, SQLMsg * msg);
+	void		RESULT_SAFETRADE_CLAIM(CPeer * pkPeer, SQLMsg * msg);
+#endif
+
 	void		QUERY_EMPIRE_SELECT(CPeer * pkPeer, DWORD dwHandle, TEmpireSelectPacket * p) const;
 	void		QUERY_SETUP(CPeer * pkPeer, DWORD dwHandle, const char * c_pData);
 

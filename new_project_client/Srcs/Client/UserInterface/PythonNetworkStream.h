@@ -242,6 +242,18 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		bool SendSafeBoxCheckoutPacket(BYTE bySafeBoxPos, TItemPos InventoryPos);
 		bool SendSafeBoxItemMovePacket(BYTE bySourcePos, BYTE byTargetPos, BYTE byCount);
 
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		// Safe Trade
+		bool SendSafeTradeAddItemPacket(TItemPos InventoryPos, BYTE byDepotPos);
+		bool SendSafeTradeRemoveItemPacket(BYTE byDepotPos);
+		bool SendSafeTradeLockPacket();
+		bool SendSafeTradeConfirmPacket(DWORD dwTradeID);
+		bool SendSafeTradeCancelPacket();
+		bool SendSafeTradeViewPacket(DWORD dwTradeID);
+		bool SendSafeTradeClaimPacket(DWORD dwTradeID);
+		bool RecvSafeTradePacket();
+#endif
+
 		// Mall
 		bool SendMallCheckoutPacket(BYTE byMallPos, TItemPos InventoryPos);
 

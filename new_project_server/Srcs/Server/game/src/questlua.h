@@ -33,6 +33,9 @@ namespace quest
 #ifdef ENABLE_QUEST_DND_EVENT
 	extern void RegisterDNDFunctionTable();
 #endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	extern void RegisterSafeTradeFunctionTable();
+#endif
 
 	extern void combine_lua_string(lua_State* L, std::ostringstream &s);
 

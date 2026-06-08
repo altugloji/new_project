@@ -76,6 +76,9 @@ void initskill();
 void initfly();
 void initquest();
 void initsafebox();
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+void initSafeTrade();
+#endif
 void initguild();
 void initMessenger();
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM

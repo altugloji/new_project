@@ -754,9 +754,9 @@ DETAILS_TOOLTIP_HIT_PCT	Rakibi vurma þansýný yükseltir.
 DETAILS_TOOLTIP_RESIST_MOUNT_FALL	Düþmeye Karþý Dayanýklýlýk: Bineðinden düþme ihtimalini azaltýr.
 DONT_USE_ITEM_WHEN_SHOW_CONFIRM	Sorgulama sýrasýnda nesne hareket ettiremezsin.
 DO_NOT_INSERT_UPBRINGING_PET	Aktif pet seçilemez.
-DO_YOU_BUY_ITEM1	%s Eþyasýný %s Yang karþýlýðýnda satýn almak ister misin?
-DO_YOU_BUY_ITEM2	%s (%s adet) eþyasýný %s Yang ile karþýlýðýnda almak ister misin?
-DO_YOU_BUY_ITEM3	%s ile %s Won ve %s Yang almak ister misin?
+DO_YOU_BUY_ITEM1	%s Eþyasýný %s karþýlýðýnda satýn almak ister misin?
+DO_YOU_BUY_ITEM2	%s (%s adet) eþyasýný %s ile karþýlýðýnda almak ister misin?
+DO_YOU_BUY_ITEM3	%s ile %s Won ve %s almak ister misin?
 DO_YOU_BUY_ITEM4	%s nesnesini (%s adet ) %s Won ve %s Yang karþýlýðýnda satýn almak ister misin?
 DO_YOU_BUY_ITEM_SECONDARY_COIN_1	%s eþyasýný %s karþýlýðýnda satýn almak istiyor musun?
 DO_YOU_BUY_ITEM_SECONDARY_COIN_2	%s eþyasýný (%s adet) %s karþýlýðýnda satýn almak istiyor musun?
@@ -3751,3 +3751,112 @@ AUTO_CHAT_DISABLED	Durdur
 AUTO_CHAT_NO_MESSAGE	Mesaj bulunamadý. Önce bir baðýrma mesajý gönderin.
 TOOLTIP_APPLY_ATTBONUS_CZ	Sürgüne karþý güçlü +%d%%	SA
 TOOLTIP_RESIST_DARK	Sürgüne karþý dayanýklýlýk +%%%d	SA
+REGISTER_BUTTON	Kayit Ol
+REGISTER_SUCCESS	Hesabiniz basariyla olusturuldu. Simdi giris yapabilirsiniz.
+REGISTER_PASSWORD_MISMATCH	Parolalar eslesmiyor.
+REGISTER_FAILURE_INVALID_LOGIN	Gecersiz kullanici adi (2-16 harf/rakam).
+REGISTER_FAILURE_INVALID_PASSWORD	Parola en az 6 karakter olmali.
+REGISTER_FAILURE_INVALID_EMAIL	Gecersiz e-posta adresi.
+REGISTER_FAILURE_ALREADY_EXIST	Bu kullanici adi zaten alinmis.
+REGISTER_FAILURE_DB_ERROR	Sunucu hatasi, lutfen tekrar deneyin.
+REGISTER_FAILURE_RATE_LIMIT	Cok fazla kayit denemesi. Lutfen bekleyin.
+REGISTER_FAILURE_UNKNOWN	Bilinmeyen bir hata olustu.
+MS_TITLE	Ayarlar
+MS_DRAGONSTONE	Ejderha Taþý Simyasý
+MS_ENCHANT	Efsun Botu
+MS_WHEEL	Çark
+MS_SEASON	Sezon
+MS_QUEST	Görevler
+MS_CALENDAR	Etkinlik Takvimi
+MS_PET	Pet
+MS_AUTOSELL	Oto Sat
+MS_SKILL	Yetenekler
+MS_CHARACTER	Karakter
+MS_GAME_OPTIONS	Oyun Seçenekleri
+MS_SYSTEM_OPTIONS	Sistem Seçenekleri
+MS_SOUND	Ses
+MS_CHANNEL	Hýzlý Kanal
+MS_CHAR_CHANGE	Karakter Deðiþikliði
+MS_EXIT	ÇIKIÞ
+MS_NOT_AVAILABLE	Bu özellik bu sürümde mevcut deðil.
+MS_PVP_MODE	PvP Modu
+MS_PVP_DESC	Saldýrýlabilir mod seçimi
+MS_PVP_GUILD	Lonca
+MS_BLOCK	Engelle
+MS_BLOCK_DESC	Devre dýþý býrakmak istediðin topluluk seçenekleri
+MS_BLOCK_TRADE	Ticaret
+MS_BLOCK_PARTY	Grup
+MS_BLOCK_GUILD	Lonca
+MS_BLOCK_WHISPER	Fýsýltý
+MS_BLOCK_FRIEND	Arkadaþlar
+MS_BLOCK_REQUEST	Rica
+MS_NAMECOLOR	Ýsim rengi
+MS_NAMECOLOR_DESC	Oyuncu isim renkleri
+MS_NC_NORMAL	Normal
+MS_NC_EMPIRE	Ýmparatorluk
+MS_TARGETBOARD	Hedef Tahtasý
+MS_TARGETBOARD_DESC	-
+MS_SHOW	Göster
+MS_HIDE	Gizle
+MS_CHATLINE	Sohbet Satýrý
+MS_CHATLINE_DESC	Sohbet satýrýný göster
+MS_SMARTCAM	Akýllý Kamera
+MS_SMARTCAM_DESC	Otomatik kamera takibi
+MS_MUSIC	Müzik Sesi
+MS_EFFECT	Efekt Sesi
+MS_NIGHTMODE	Gece Modu
+MS_CAMERA	Kamera Mesafesi
+MS_CAMERA_DESC	Azami kamera mesafesi
+MS_CAM_SHORT	Kýsa
+MS_CAM_LONG	Uzun
+MS_FOG	Sis
+MS_FOG_DESC	Sis yoðunluðu
+MS_FOG_OFF	Kapalý
+MS_FOG_ON	Açýk
+MS_FOG_LOW	Az
+MS_FOG_FULL	Tam
+MS_CHANNEL_TITLE	Kanal Deðiþtir
+MS_CHANNEL_ROW	Kanal
+MS_CHANNEL_DESC	Bulunduðun kanalý deðiþtir
+MS_VIT	Canlýlýk
+MS_INT	Zeka
+MS_STR	Güç
+MS_DEX	Çeviklik
+MS_CUR_EXP	Mevcut EXP
+MS_REST_EXP	Kalan EXP
+MS_TAB_CHAR	Karakter
+MS_TAB_SKILL	Beceri
+MS_SUB_NORMAL	Normal
+MS_SUB_CHAMPION	Þampiyon
+MS_SUB_DETAILS	Ayrýntýlar
+MS_SUB_SKILLS	Beceriler
+MS_SUB_PASSIVE	Pasif
+MS_DEF	Savunma
+MS_ATKSPD	Saldýrý Hýzý
+MS_MOVSPD	Hareket Hýzý
+MS_MAXHP	Maks. Can
+MS_MAXSP	Maks. Mana
+MS_NO_SKILL	Beceri yok.
+MS_TAB_QUEST	Görev
+MS_NO_QUEST	Görev yok.
+SAFETRADE_TITLE	Güvenli Ticaret
+SAFETRADE_LIST_TITLE	Güvenli Ticaretler
+SAFETRADE_LOCK	Kilitle
+SAFETRADE_CONFIRM	Son Onay
+SAFETRADE_CLAIM	Itemleri Al
+SAFETRADE_CLOSE	Kapat
+SAFETRADE_VIEW	Göster / Al
+SAFETRADE_CONFIRM_QUESTION	Bu iþlem geri alýnamaz. Itemler karþý oyuncuya teslim edilebilir hale gelecek. Emin misin?
+SAFETRADE_LOCKED_MSG	Itemler güvenli ticaret havuzuna eklendi ve kilitlendi.
+SAFETRADE_INCOMING_FMT	Gönderen: %s  -  %d item
+SAFETRADE_OUTGOING_FMT	Bekliyor: %s  -  %d item
+SAFETRADE_NO_SPACE	Envanterinde yeterli boþ yer yok.
+SAFETRADE_CLAIMED_OK	Itemler baþarýyla teslim alýndý.
+SAFETRADE_ALREADY	Bu güvenli ticaret zaten alýnmýþ.
+SAFETRADE_CONFIRMED	Ticaret onaylandý. Karþý oyuncu artýk itemleri alabilir.
+SAFETRADE_EMPTY_LIST	Sana gelen güvenli ticaret bulunmuyor.
+SAFETRADE_ALREADY_OPEN	Zaten açýk bir güvenli ticaretin var.
+SAFETRADE_TOO_MANY	Çok fazla aktif güvenli ticaretin var.
+SAFETRADE_CONFIRM_L1	Bu iþlem geri alýnamaz!
+SAFETRADE_CONFIRM_L2	Onaylarsan itemler karþý oyuncuya teslim edilecek.
+SAFETRADE_CONFIRM_L3	Devam etmek istiyor musun?

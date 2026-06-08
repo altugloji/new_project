@@ -106,6 +106,12 @@ class CItem : public CEntity
 		void		SetExchanging(bool isOn = true);
 		bool		IsExchanging() const { return m_bExchanging;	}
 		bool		IsBusy() const { return IsExchanging() || IsEquipped() || isLocked(); }
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		void		SetSafeTrading(bool b = true) { m_bSafeTrading = b; }
+		bool		IsSafeTrading() const { return m_bSafeTrading; }
+		void		SetSafeTradeID(DWORD id) { m_dwSafeTradeID = id; }
+		DWORD		GetSafeTradeID() const { return m_dwSafeTradeID; }
+#endif
 
 		bool		IsTwohanded();
 
@@ -304,6 +310,10 @@ class CItem : public CEntity
 		DWORD		m_dwLastOwnerPID;
 
 		bool		m_bExchanging;
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		bool		m_bSafeTrading;
+		DWORD		m_dwSafeTradeID;
+#endif
 
 		long		m_alSockets[ITEM_SOCKET_MAX_NUM];
 		TPlayerItemAttribute	m_aAttr[ITEM_ATTRIBUTE_MAX_NUM];

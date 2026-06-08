@@ -140,6 +140,9 @@ CPacketInfoCG::CPacketInfoCG()
 
 	Set(HEADER_CG_ON_CLICK, sizeof(TPacketCGOnClick), "OnClick", true);
 	Set(HEADER_CG_EXCHANGE, sizeof(TPacketCGExchange), "Exchange", true);
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	Set(HEADER_CG_SAFETRADE, sizeof(TPacketCGSafeTrade), "SafeTrade", true);
+#endif
 	Set(HEADER_CG_CHARACTER_POSITION, sizeof(TPacketCGPosition), "Position", true);
 	Set(HEADER_CG_SCRIPT_ANSWER, sizeof(TPacketCGScriptAnswer), "ScriptAnswer", true);
 	Set(HEADER_CG_SCRIPT_BUTTON, sizeof(TPacketCGScriptButton), "ScriptButton", true);

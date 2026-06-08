@@ -81,13 +81,20 @@ bool CHARACTER::ExchangeStart(LPCHARACTER victim)
 #ifdef OFFLINE_SHOP
 		|| IsEditingShop()
 #endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		|| GetSafeTrade() || IsSafeTradeClaiming()
+#endif
 		)
 	{
 		ChatPacket( CHAT_TYPE_INFO, LC_TEXT("다른 거래창이 열려있을경우 거래를 할수 없습니다." ) );
 		return false;
 	}
 
-	if ( victim->IsOpenSafebox() || victim->GetShopOwner() || victim->GetMyShop() || victim->IsCubeOpen() )
+	if ( victim->IsOpenSafebox() || victim->GetShopOwner() || victim->GetMyShop() || victim->IsCubeOpen()
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		|| victim->GetSafeTrade() || victim->IsSafeTradeClaiming()
+#endif
+		)
 	{
 		ChatPacket( CHAT_TYPE_INFO, LC_TEXT("상대방이 다른 거래중이라 거래를 할수 없습니다." ) );
 		return false;

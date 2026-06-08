@@ -8,6 +8,9 @@
 #include "item.h"
 #include "item_manager.h"
 #include "packet.h"
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+#include "safetrade.h"
+#endif
 #include "protocol.h"
 #include "mob_manager.h"
 #include "shop_manager.h"
@@ -2166,6 +2169,72 @@ int CInputDB::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 	case HEADER_DG_SAFEBOX_LOAD:
 		SafeboxLoad(DESC_MANAGER::instance().FindByHandle(m_dwHandle), c_pData);
 		break;
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	case HEADER_DG_SAFETRADE_CREATE:
+	{
+		LPDESC d = DESC_MANAGER::instance().FindByHandle(m_dwHandle);
+		if (d && d->GetCharacter())
+		{
+			const auto p = (TPacketDGSafeTradeCreate *) c_pData;
+			CSafeTradeManager::instance().OnCreated(d->GetCharacter(), p->trade_id, p->partner_id, p->partner_name);
+		}
+		break;
+	}
+	case HEADER_DG_SAFETRADE_SETSTATE:
+	{
+		LPDESC d = DESC_MANAGER::instance().FindByHandle(m_dwHandle);
+		if (d && d->GetCharacter())
+		{
+			const auto p = (TPacketDGSafeTradeSetState *) c_pData;
+			LPCHARACTER ch = d->GetCharacter();
+			if (p->to_status == SAFETRADE_READY_TO_CLAIM)
+			{
+				// Son Onay (oturum gerekmez)
+				CSafeTradeManager::instance().OnConfirmResult(ch, p->trade_id, p->ok ? true : false);
+			}
+			else if (ch->GetSafeTrade() && ch->GetSafeTrade()->GetTradeID() == p->trade_id)
+			{
+				// Kilitle (aktif oturum)
+				ch->GetSafeTrade()->OnStateChanged(p->to_status, p->ok ? true : false);
+			}
+		}
+		break;
+	}
+	case HEADER_DG_SAFETRADE_LIST:
+	{
+		LPDESC d = DESC_MANAGER::instance().FindByHandle(m_dwHandle);
+		if (d && d->GetCharacter())
+		{
+			const auto p = (TPacketDGSafeTradeListHeader *) c_pData;
+			CSafeTradeManager::instance().OnList(d->GetCharacter(), p->outgoing, p->count,
+				c_pData + sizeof(TPacketDGSafeTradeListHeader));
+		}
+		break;
+	}
+	case HEADER_DG_SAFETRADE_LOADITEM:
+	{
+		LPDESC d = DESC_MANAGER::instance().FindByHandle(m_dwHandle);
+		if (d && d->GetCharacter())
+		{
+			const auto p = (TPacketDGSafeTradeLoadItem *) c_pData;
+			CSafeTradeManager::instance().OnItemsLoaded(d->GetCharacter(), p->trade_id, p->count,
+				(TPlayerItem *)(c_pData + sizeof(TPacketDGSafeTradeLoadItem)));
+		}
+		break;
+	}
+	case HEADER_DG_SAFETRADE_CLAIM:
+	{
+		LPDESC d = DESC_MANAGER::instance().FindByHandle(m_dwHandle);
+		if (d && d->GetCharacter())
+		{
+			const auto p = (TPacketDGSafeTradeClaim *) c_pData;
+			CSafeTradeManager::instance().OnClaimResult(d->GetCharacter(), p->trade_id, p->result, p->count,
+				(TPlayerItem *)(c_pData + sizeof(TPacketDGSafeTradeClaim)));
+		}
+		break;
+	}
+#endif
 
 	case HEADER_DG_SAFEBOX_CHANGE_SIZE:
 		SafeboxChangeSize(DESC_MANAGER::instance().FindByHandle(m_dwHandle), c_pData);

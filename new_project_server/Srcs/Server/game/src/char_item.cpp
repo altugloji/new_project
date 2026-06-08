@@ -221,6 +221,14 @@ bool CHARACTER::CanHandleItem(bool bSkipCheckRefine, bool bSkipObserver)
 	if (GetMyShop())
 		return false;
 
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	// Guvenli ticaret aciksa (A depo kuruyor) veya claim sirasinda: yere atma / tasima /
+	// kullanma vb. item islemleri kapali. Safe-trade penceresine koyma/cikarma AYRI paket
+	// yolundan (CSafeTrade::AddItem/RemoveItem) gecer, CanHandleItem kullanmaz -> etkilenmez.
+	if (GetSafeTrade() || IsSafeTradeClaiming())
+		return false;
+#endif
+
 	if (!bSkipCheckRefine)
 		if (m_bUnderRefine)
 			return false;
@@ -6314,6 +6322,12 @@ bool CHARACTER::PickupItem(DWORD dwVID)
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDITING_BLOCK"));
 		return false;
 	}
+#endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	// Guvenli ticaret aciksa yerden item/altin alma kapali (ELK/altin yolu CanHandleItem'dan
+	// once dondugu icin guard burada, fonksiyonun en basinda)
+	if (GetSafeTrade() || IsSafeTradeClaiming())
+		return false;
 #endif
 	const LPITEM item = ITEM_MANAGER::instance().FindByVID(dwVID);
 

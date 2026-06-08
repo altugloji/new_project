@@ -125,6 +125,9 @@ enum
 #ifdef ENABLE_GM_PLAYER_PANEL
 	HEADER_CG_GM_PLAYER_PANEL			= 233,
 #endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	HEADER_CG_SAFETRADE				= 234,
+#endif
 
 	HEADER_CG_CLIENT_VERSION2		= 0xf1,
 
@@ -320,6 +323,9 @@ enum
 #endif
 #ifdef ENABLE_GM_PLAYER_PANEL
 	HEADER_GC_GM_PLAYER_PANEL					= 237,
+#endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	HEADER_GC_SAFETRADE							= 238,
 #endif
 	/////////////////////////////////////////////////////////////////////////////
 
@@ -817,6 +823,53 @@ typedef struct command_exchange
 	BYTE	arg2;
 	TItemPos	Pos;
 } TPacketCGExchange;
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+enum ESafeTradeSubCG
+{
+	SAFETRADE_SUBCG_OPEN,
+	SAFETRADE_SUBCG_ADD_ITEM,
+	SAFETRADE_SUBCG_REMOVE_ITEM,
+	SAFETRADE_SUBCG_LOCK,
+	SAFETRADE_SUBCG_CONFIRM,
+	SAFETRADE_SUBCG_CANCEL,
+	SAFETRADE_SUBCG_VIEW,
+	SAFETRADE_SUBCG_CLAIM,
+};
+enum ESafeTradeSubGC
+{
+	SAFETRADE_SUBGC_OPEN,
+	SAFETRADE_SUBGC_ITEM_SET,
+	SAFETRADE_SUBGC_ITEM_DEL,
+	SAFETRADE_SUBGC_STATUS,
+	SAFETRADE_SUBGC_CLOSE,
+	SAFETRADE_SUBGC_INCOMING,
+	SAFETRADE_SUBGC_TEXT,
+};
+
+typedef struct command_safetrade
+{
+	BYTE		header;
+	BYTE		subheader;
+	DWORD		arg1;		// trade_id (VIEW/CLAIM)
+	BYTE		arg2;		// depot_pos (ADD/REMOVE)
+	TItemPos	pos;		// envanter pozisyonu (ADD_ITEM)
+} TPacketCGSafeTrade;
+
+typedef struct packet_safetrade
+{
+	BYTE		header;
+	WORD		size;
+	BYTE		subheader;
+	DWORD		trade_id;
+	BYTE		pos;		// depo hucresi / status / outgoing-flag / text-code
+	DWORD		vnum;
+	DWORD		count;
+	long		alSockets[ITEM_SOCKET_MAX_NUM];
+	TPlayerItemAttribute aAttr[ITEM_ATTRIBUTE_MAX_NUM];
+	// INCOMING: ardindan (count) adet TSafeTradeListEntry (tables.h) gelir
+} TPacketGCSafeTrade;
+#endif
 
 typedef struct command_position
 {

@@ -16,6 +16,9 @@
 #include "shop.h"
 #include "shop_manager.h"
 #include "safebox.h"
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+#include "safetrade.h"
+#endif
 #include "regen.h"
 #include "battle.h"
 #include "exchange.h"
@@ -1478,6 +1481,43 @@ void CInputMain::Exchange(LPCHARACTER ch, const char * data) const
 			break;
 	}
 }
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+void CInputMain::SafeTrade(LPCHARACTER ch, const char * c_pData) const
+{
+	const auto p = (TPacketCGSafeTrade *) c_pData;
+	CSafeTrade * t = ch->GetSafeTrade();
+
+	switch (p->subheader)
+	{
+		case SAFETRADE_SUBCG_ADD_ITEM:
+			if (t) t->AddItem(p->pos, p->arg2);
+			break;
+		case SAFETRADE_SUBCG_REMOVE_ITEM:
+			if (t) t->RemoveItem(p->arg2);
+			break;
+		case SAFETRADE_SUBCG_LOCK:
+			if (t) t->Lock();
+			break;
+		case SAFETRADE_SUBCG_CONFIRM:
+			CSafeTradeManager::instance().ConfirmRequest(ch, p->arg1);   // trade_id ile (oturum gerekmez)
+			break;
+		case SAFETRADE_SUBCG_CANCEL:
+			if (t)
+			{
+				ch->SetSafeTrade(nullptr);
+				M2_DELETE(t);   // dtor: CREATING/LOCKED -> A'ya iade
+			}
+			break;
+		case SAFETRADE_SUBCG_VIEW:
+			CSafeTradeManager::instance().RequestView(ch, p->arg1);
+			break;
+		case SAFETRADE_SUBCG_CLAIM:
+			CSafeTradeManager::instance().ClaimRequest(ch, p->arg1);
+			break;
+	}
+}
+#endif
 
 void CInputMain::Position(LPCHARACTER ch, const char * data) const
 {
@@ -3053,6 +3093,9 @@ int CInputMain::MyShop(LPCHARACTER ch, const char * c_pData, size_t uiBytes) con
 #ifdef OFFLINE_SHOP
 		|| ch->IsEditingShop()
 #endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		|| ch->GetSafeTrade() || ch->IsSafeTradeClaiming()
+#endif
 		)
 	{
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("다른 거래중일경우 개인상점을 열수가 없습니다."));
@@ -3134,7 +3177,11 @@ void CInputMain::Refine(LPCHARACTER ch, const char* c_pData) const
 {
 	const auto p = reinterpret_cast<const TPacketCGRefine*>(c_pData);
 
-	if (ch->GetExchange() || ch->IsOpenSafebox() || ch->GetShopOwner() || ch->GetMyShop() || ch->IsCubeOpen())
+	if (ch->GetExchange() || ch->IsOpenSafebox() || ch->GetShopOwner() || ch->GetMyShop() || ch->IsCubeOpen()
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		|| ch->GetSafeTrade() || ch->IsSafeTradeClaiming()
+#endif
+		)
 	{
 		ch->ChatPacket(CHAT_TYPE_INFO,  LC_TEXT("창고,거래창등이 열린 상태에서는 개량을 할수가 없습니다"));
 		ch->ClearRefineMode();
@@ -3356,6 +3403,13 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			if (!ch->IsObserverMode())
 				Exchange(ch, c_pData);
 			break;
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		case HEADER_CG_SAFETRADE:
+			if (!ch->IsObserverMode())
+				SafeTrade(ch, c_pData);
+			break;
+#endif
 
 		case HEADER_CG_ATTACK:
 		case HEADER_CG_SHOOT:

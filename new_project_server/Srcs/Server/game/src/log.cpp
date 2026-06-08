@@ -223,6 +223,21 @@ void LogManager::GMCommandLog(DWORD dwPID, const char* szName, const char* szIP,
 			get_table_postfix(), dwPID, szIP, byChannel, szName, __escape_hint);
 }
 
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+void LogManager::SafeTradeLog(DWORD dwTradeID, const char * c_pszAction, DWORD dwActorID, const char * c_pszActorName,
+							DWORD dwTargetID, DWORD dwItemID, DWORD dwItemVnum, DWORD dwItemCount, const char * c_pszIP)
+{
+	LOG_LEVEL_CHECK_N_RET(LOG_LEVEL_MIN);
+	char szName[64] = {0};
+	if (c_pszActorName && *c_pszActorName)
+		m_sql.EscapeString(szName, sizeof(szName), c_pszActorName, strlen(c_pszActorName));
+	Query("INSERT INTO safetrade_log (time, safetrade_id, action, actor_id, actor_name, target_id, item_id, item_vnum, item_count, ip) "
+			"VALUES(NOW(), %u, '%s', %u, '%s', %u, %u, %u, %u, '%s')",
+			dwTradeID, c_pszAction ? c_pszAction : "", dwActorID, szName, dwTargetID, dwItemID, dwItemVnum, dwItemCount,
+			c_pszIP ? c_pszIP : "");
+}
+#endif
+
 void LogManager::RefineLog(DWORD pid, const char* item_name, DWORD item_id, int item_refine_level, int is_success, const char* how)
 {
 	LOG_LEVEL_CHECK_N_RET(LOG_LEVEL_MIN);

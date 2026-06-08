@@ -64,6 +64,10 @@ void CItem::Initialize()
 	m_dwVID = m_wCell = m_dwCount = m_lFlag = 0;
 	m_pProto = nullptr;
 	m_bExchanging = false;
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	m_bSafeTrading = false;
+	m_dwSafeTradeID = 0;
+#endif
 	memset(&m_alSockets, 0, sizeof(m_alSockets));
 	memset(&m_aAttr, 0, sizeof(m_aAttr));
 

@@ -3271,6 +3271,9 @@ teleport_area:
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 			|| ch->IsAcceOpened()
 #endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+			|| ch->GetSafeTrade() || ch->IsSafeTradeClaiming()
+#endif
 		));
 		return 1;
 	}
@@ -3396,7 +3399,11 @@ teleport_area:
 		LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
 
 		//PREVENT_TRADE_WINDOW
-		if (ch->IsOpenSafebox() || ch->GetExchange() || ch->GetMyShop() || ch->IsCubeOpen())
+		if (ch->IsOpenSafebox() || ch->GetExchange() || ch->GetMyShop() || ch->IsCubeOpen()
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+			|| ch->GetSafeTrade() || ch->IsSafeTradeClaiming()
+#endif
+			)
 		{
 			ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("다른 거래창이 열린상태에서는 상점거래를 할수 가 없습니다."));
 			return 0;

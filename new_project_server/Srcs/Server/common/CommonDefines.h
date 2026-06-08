@@ -142,7 +142,12 @@ enum eCommonDefines {
 // #define METIN35_ADMIN_PANEL										// Yönetim Paneli
 #define ENABLE_STATUS_ADD_BY_INPUT									// Stat puanini tek komutla toplu verme
 #define ENABLE_GREEN_ENCHANT_LV5_LIMIT								// Yeşil efsunda lv5 efsun gelmez
-#define BERAN_SETAOU
+#define BERAN_SETAOU												// Mavi Ejderha
+#define ENABLE_SAFE_TRADE_SYSTEM									// Güvenli Ticaret
+
+
+
+
 
 #define OFFLINE_SHOP												// Offline shops system
 #ifdef OFFLINE_SHOP

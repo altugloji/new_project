@@ -156,6 +156,9 @@ class CInputMain : public CInputProcessor
 		void		SafeboxCheckin(LPCHARACTER ch, const char * c_pData) const;
 		void		SafeboxCheckout(LPCHARACTER ch, const char * c_pData, bool bMall) const;
 		void		SafeboxItemMove(LPCHARACTER ch, const char * data) const;
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		void		SafeTrade(LPCHARACTER ch, const char * c_pData) const;
+#endif
 		int			Messenger(LPCHARACTER ch, const char* c_pData, size_t uiBytes) const;
 
 		void 		PartyInvite(LPCHARACTER ch, const char * c_pData) const;

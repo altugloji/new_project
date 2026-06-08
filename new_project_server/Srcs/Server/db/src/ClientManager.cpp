@@ -1407,7 +1407,11 @@ void CClientManager::QUERY_ITEM_SAVE(CPeer * pkPeer, const char * c_pData)
 {
 	const auto p = (TPlayerItem *) c_pData;
 
-	if (p->window == SAFEBOX || p->window == MALL)
+	if (p->window == SAFEBOX || p->window == MALL
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		|| p->window == SAFETRADE   // emanet item'leri ANINDA diske yaz (cache'e dusurme -> kayip yok)
+#endif
+		)
 	{
 		CItemCache * c = GetItemCache(p->id);
 
@@ -2287,6 +2291,24 @@ void CClientManager::ProcessPackets(CPeer * peer)
 				QUERY_SAFEBOX_CHANGE_PASSWORD(peer, dwHandle, (TSafeboxChangePasswordPacket *) data);
 				break;
 
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+			case HEADER_GD_SAFETRADE_CREATE:
+				QUERY_SAFETRADE_CREATE(peer, dwHandle, (TPacketGDSafeTradeCreate *) data);
+				break;
+			case HEADER_GD_SAFETRADE_SETSTATE:
+				QUERY_SAFETRADE_SETSTATE(peer, dwHandle, (TPacketGDSafeTradeSetState *) data);
+				break;
+			case HEADER_GD_SAFETRADE_LIST:
+				QUERY_SAFETRADE_LIST(peer, dwHandle, (TPacketGDSafeTradeList *) data);
+				break;
+			case HEADER_GD_SAFETRADE_LOADITEM:
+				QUERY_SAFETRADE_LOADITEM(peer, dwHandle, (TPacketGDSafeTradeLoadItem *) data);
+				break;
+			case HEADER_GD_SAFETRADE_CLAIM:
+				QUERY_SAFETRADE_CLAIM(peer, dwHandle, (TPacketGDSafeTradeClaim *) data);
+				break;
+#endif
+
 			case HEADER_GD_MALL_LOAD:
 				QUERY_SAFEBOX_LOAD(peer, dwHandle, (TSafeboxLoadPacket *) data, 1);
 				break;
@@ -2751,6 +2773,24 @@ int CClientManager::AnalyzeQueryResult(SQLMsg * msg)
 		case QID_PLAYER_SAVE:
 		case QID_ITEM_AWARD_TAKEN:
 			break;
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		case QID_SAFETRADE_CREATE:
+			RESULT_SAFETRADE_CREATE(peer, msg);
+			break;
+		case QID_SAFETRADE_SETSTATE:
+			RESULT_SAFETRADE_SETSTATE(peer, msg);
+			break;
+		case QID_SAFETRADE_LIST:
+			RESULT_SAFETRADE_LIST(peer, msg);
+			break;
+		case QID_SAFETRADE_LOADITEM:
+			RESULT_SAFETRADE_LOADITEM(peer, msg);
+			break;
+		case QID_SAFETRADE_CLAIM:
+			RESULT_SAFETRADE_CLAIM(peer, msg);
+			break;
+#endif
 
 			// PLAYER_INDEX_CREATE_BUG_FIX
 		case QID_PLAYER_INDEX_CREATE:
@@ -4132,4 +4172,242 @@ void CClientManager::ChargeCash(const TRequestChargeCash* packet) const
 
 	CDBManager::Instance().AsyncQuery(szQuery, SQL_ACCOUNT);
 }
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+// =====================================================================
+//  Guvenli Ticaret / Safe Trade  -  DB tarafi
+//  SAFETRADE_MAX_ACTIVE: oyuncu basina aktif trade limiti (game config g_iSafeTradeMaxActive ile esle)
+// =====================================================================
+#define SAFETRADE_MAX_ACTIVE 5
+
+void CClientManager::QUERY_SAFETRADE_CREATE(CPeer * pkPeer, DWORD dwHandle, TPacketGDSafeTradeCreate * p)
+{
+	char szInit[64], szPart[64];
+	CDBManager::instance().EscapeString(szInit, p->initiator_name, strlen(p->initiator_name));
+	CDBManager::instance().EscapeString(szPart, p->partner_name, strlen(p->partner_name));
+
+	char szQuery[1024];
+	snprintf(szQuery, sizeof(szQuery),
+		"INSERT INTO safetrade (initiator_id, initiator_name, partner_id, partner_name, status, created_time) "
+		"SELECT %u, '%s', %u, '%s', 'CREATING', NOW() FROM dual WHERE "
+		"(SELECT COUNT(*) FROM safetrade WHERE initiator_id=%u AND status IN('CREATING','LOCKED','READY_TO_CLAIM')) < %d",
+		p->initiator_id, szInit, p->partner_id, szPart, p->initiator_id, SAFETRADE_MAX_ACTIVE);
+
+	auto * pi = new ClientHandleInfo(dwHandle);
+	pi->account_id = p->partner_id;
+	strlcpy(pi->login, p->partner_name, sizeof(pi->login));
+	CDBManager::instance().ReturnQuery(szQuery, QID_SAFETRADE_CREATE, pkPeer->GetHandle(), pi);
+}
+
+void CClientManager::RESULT_SAFETRADE_CREATE(CPeer * pkPeer, SQLMsg * msg)
+{
+	auto qi = (CQueryInfo *) msg->pvUserData;
+	auto pi = (ClientHandleInfo *) qi->pvData;
+
+	TPacketDGSafeTradeCreate r;
+	memset(&r, 0, sizeof(r));
+	r.trade_id   = (msg->Get()->uiAffectedRows == 1) ? (DWORD) msg->Get()->uiInsertID : 0;
+	r.partner_id = pi->account_id;
+	strlcpy(r.partner_name, pi->login, sizeof(r.partner_name));
+
+	pkPeer->EncodeHeader(HEADER_DG_SAFETRADE_CREATE, pi->dwHandle, sizeof(r));
+	pkPeer->Encode(&r, sizeof(r));
+	delete pi;
+}
+
+void CClientManager::QUERY_SAFETRADE_SETSTATE(CPeer * pkPeer, DWORD dwHandle, TPacketGDSafeTradeSetState * p)
+{
+	static const char * S[] = { "CREATING", "LOCKED", "READY_TO_CLAIM", "CLAIMED", "CANCELLED_BY_GM" };
+	if (p->from_status > 4 || p->to_status > 4)
+		return;
+	const char * tcol = (p->to_status == 1) ? ", locked_time=NOW()" :
+						(p->to_status == 2) ? ", confirm_time=NOW()" : "";
+
+	char szQuery[512];
+	snprintf(szQuery, sizeof(szQuery),
+		"UPDATE safetrade SET status='%s'%s WHERE id=%u AND status='%s' AND initiator_id=%u",
+		S[p->to_status], tcol, p->trade_id, S[p->from_status], p->actor_id);
+
+	auto * pi = new ClientHandleInfo(dwHandle);
+	pi->account_id    = p->trade_id;
+	pi->account_index = p->to_status;
+	CDBManager::instance().ReturnQuery(szQuery, QID_SAFETRADE_SETSTATE, pkPeer->GetHandle(), pi);
+}
+
+void CClientManager::RESULT_SAFETRADE_SETSTATE(CPeer * pkPeer, SQLMsg * msg)
+{
+	auto qi = (CQueryInfo *) msg->pvUserData;
+	auto pi = (ClientHandleInfo *) qi->pvData;
+
+	TPacketDGSafeTradeSetState r;
+	r.trade_id  = pi->account_id;
+	r.to_status = pi->account_index;
+	r.ok        = (msg->Get()->uiAffectedRows == 1) ? 1 : 0;
+
+	pkPeer->EncodeHeader(HEADER_DG_SAFETRADE_SETSTATE, pi->dwHandle, sizeof(r));
+	pkPeer->Encode(&r, sizeof(r));
+	delete pi;
+}
+
+void CClientManager::QUERY_SAFETRADE_LIST(CPeer * pkPeer, DWORD dwHandle, TPacketGDSafeTradeList * p)
+{
+	char szQuery[1024];
+	if (p->outgoing)
+		snprintf(szQuery, sizeof(szQuery),
+			"SELECT id, IF(initiator_id=%u, partner_name, initiator_name), "
+			"(SELECT COUNT(*) FROM item%s WHERE owner_id=safetrade.id AND `window`='SAFETRADE'), "
+			"UNIX_TIMESTAMP(created_time), IF(initiator_id=%u,1,0) FROM safetrade "
+			"WHERE (initiator_id=%u OR partner_id=%u) AND status IN('LOCKED','READY_TO_CLAIM') ORDER BY id",
+			p->player_id, GetTablePostfix(), p->player_id, p->player_id, p->player_id);
+	else
+		snprintf(szQuery, sizeof(szQuery),
+			"SELECT id, initiator_name, "
+			"(SELECT COUNT(*) FROM item%s WHERE owner_id=safetrade.id AND `window`='SAFETRADE'), "
+			"UNIX_TIMESTAMP(created_time), 0 FROM safetrade "
+			"WHERE partner_id=%u AND status='READY_TO_CLAIM' ORDER BY id",
+			GetTablePostfix(), p->player_id);
+
+	auto * pi = new ClientHandleInfo(dwHandle);
+	pi->account_index = p->outgoing;
+	CDBManager::instance().ReturnQuery(szQuery, QID_SAFETRADE_LIST, pkPeer->GetHandle(), pi);
+}
+
+void CClientManager::RESULT_SAFETRADE_LIST(CPeer * pkPeer, SQLMsg * msg)
+{
+	auto qi = (CQueryInfo *) msg->pvUserData;
+	auto pi = (ClientHandleInfo *) qi->pvData;
+
+	std::vector<TSafeTradeListEntry> vec;
+	if (msg->Get()->pSQLResult)
+	{
+		MYSQL_ROW row;
+		while ((row = mysql_fetch_row(msg->Get()->pSQLResult)) != nullptr)
+		{
+			TSafeTradeListEntry e;
+			memset(&e, 0, sizeof(e));
+			str_to_number(e.trade_id, row[0]);
+			if (row[1]) strlcpy(e.name, row[1], sizeof(e.name));
+			int n = 0; str_to_number(n, row[2]); e.item_count = (BYTE) n;
+			str_to_number(e.time, row[3]);
+			int o = 0; str_to_number(o, row[4]); e.is_owner = (BYTE) o;
+			vec.push_back(e);
+			if (vec.size() >= 255) break;
+		}
+	}
+
+	TPacketDGSafeTradeListHeader h;
+	h.outgoing = pi->account_index;
+	h.count    = (BYTE) vec.size();
+	pkPeer->EncodeHeader(HEADER_DG_SAFETRADE_LIST, pi->dwHandle, sizeof(h) + vec.size() * sizeof(TSafeTradeListEntry));
+	pkPeer->Encode(&h, sizeof(h));
+	if (!vec.empty())
+		pkPeer->Encode(vec);
+	delete pi;
+}
+
+void CClientManager::QUERY_SAFETRADE_LOADITEM(CPeer * pkPeer, DWORD dwHandle, TPacketGDSafeTradeLoadItem * p)
+{
+	char szQuery[1024];
+	snprintf(szQuery, sizeof(szQuery),
+		"SELECT id, `window`+0, pos, count, vnum, socket0, socket1, socket2, "
+		"attrtype0, attrvalue0, attrtype1, attrvalue1, attrtype2, attrvalue2, "
+		"attrtype3, attrvalue3, attrtype4, attrvalue4, attrtype5, attrvalue5, attrtype6, attrvalue6"
+#if defined(ENABLE_ITEM_ENCHANT_USE_COUNT)
+		", enchant_use_count"
+#endif
+#if defined(ENABLE_ITEM_UPGRADE_OWNER)
+		", upgrade_owner"
+#endif
+		" FROM item%s WHERE owner_id=%u AND `window`='SAFETRADE' AND "
+		"%u IN (SELECT id FROM safetrade WHERE id=%u AND "
+		"(initiator_id=%u OR partner_id=%u) AND status IN('LOCKED','READY_TO_CLAIM')) "
+		"ORDER BY pos",
+		GetTablePostfix(), p->trade_id, p->trade_id, p->trade_id, p->requester_id, p->requester_id);
+
+	auto * pi = new ClientHandleInfo(dwHandle);
+	pi->account_id = p->trade_id;
+	CDBManager::instance().ReturnQuery(szQuery, QID_SAFETRADE_LOADITEM, pkPeer->GetHandle(), pi);
+}
+
+void CClientManager::RESULT_SAFETRADE_LOADITEM(CPeer * pkPeer, SQLMsg * msg)
+{
+	auto qi = (CQueryInfo *) msg->pvUserData;
+	auto pi = (ClientHandleInfo *) qi->pvData;
+
+	std::vector<TPlayerItem> vec;
+	if (msg->Get()->pSQLResult && msg->Get()->uiNumRows > 0)
+		CreateItemTableFromRes(msg->Get()->pSQLResult, &vec, pi->account_id);
+
+	TPacketDGSafeTradeLoadItem h;
+	h.trade_id = pi->account_id;
+	h.count    = (BYTE) vec.size();
+	pkPeer->EncodeHeader(HEADER_DG_SAFETRADE_LOADITEM, pi->dwHandle, sizeof(h) + vec.size() * sizeof(TPlayerItem));
+	pkPeer->Encode(&h, sizeof(h));
+	if (!vec.empty())
+		pkPeer->Encode(vec);
+	delete pi;
+}
+
+void CClientManager::QUERY_SAFETRADE_CLAIM(CPeer * pkPeer, DWORD dwHandle, TPacketGDSafeTradeClaim * p)
+{
+	char szQuery[512];
+	snprintf(szQuery, sizeof(szQuery),
+		"UPDATE safetrade SET status='CLAIMED', claimed_by=%u, claimed_time=NOW() "
+		"WHERE id=%u AND status='READY_TO_CLAIM' AND partner_id=%u",
+		p->claimer_id, p->trade_id, p->claimer_id);
+
+	auto * pi = new ClientHandleInfo(dwHandle);
+	pi->account_id = p->trade_id;
+	pi->player_id  = p->claimer_id;
+	CDBManager::instance().ReturnQuery(szQuery, QID_SAFETRADE_CLAIM, pkPeer->GetHandle(), pi);
+}
+
+void CClientManager::RESULT_SAFETRADE_CLAIM(CPeer * pkPeer, SQLMsg * msg)
+{
+	auto qi = (CQueryInfo *) msg->pvUserData;
+	auto pi = (ClientHandleInfo *) qi->pvData;
+
+	const DWORD trade_id = pi->account_id;
+	const DWORD claimer  = pi->player_id;
+	const BYTE  result   = (msg->Get()->uiAffectedRows == 1) ? 0 : 1;   // 0=OK (kazandi), 1=ALREADY
+
+	std::vector<TPlayerItem> vec;
+	if (result == 0)
+	{
+		// CAS kazanildi: item'leri yakala (frozen), sonra owner->B (window=SAFETRADE KALIR)
+		char szSel[1024];
+		snprintf(szSel, sizeof(szSel),
+			"SELECT id, `window`+0, pos, count, vnum, socket0, socket1, socket2, "
+			"attrtype0, attrvalue0, attrtype1, attrvalue1, attrtype2, attrvalue2, "
+			"attrtype3, attrvalue3, attrtype4, attrvalue4, attrtype5, attrvalue5, attrtype6, attrvalue6"
+#if defined(ENABLE_ITEM_ENCHANT_USE_COUNT)
+			", enchant_use_count"
+#endif
+#if defined(ENABLE_ITEM_UPGRADE_OWNER)
+			", upgrade_owner"
+#endif
+			" FROM item%s WHERE owner_id=%u AND `window`='SAFETRADE'",
+			GetTablePostfix(), trade_id);
+		auto m2 = CDBManager::instance().DirectQuery(szSel);
+		if (m2 && m2->Get()->pSQLResult && m2->Get()->uiNumRows > 0)
+			CreateItemTableFromRes(m2->Get()->pSQLResult, &vec, claimer);
+
+		char szUpd[256];
+		snprintf(szUpd, sizeof(szUpd),
+			"UPDATE item%s SET owner_id=%u WHERE owner_id=%u AND `window`='SAFETRADE'",
+			GetTablePostfix(), claimer, trade_id);
+		CDBManager::instance().DirectQuery(szUpd);
+	}
+
+	TPacketDGSafeTradeClaim h;
+	h.trade_id = trade_id;
+	h.result   = result;
+	h.count    = (BYTE) vec.size();
+	pkPeer->EncodeHeader(HEADER_DG_SAFETRADE_CLAIM, pi->dwHandle, sizeof(h) + vec.size() * sizeof(TPlayerItem));
+	pkPeer->Encode(&h, sizeof(h));
+	if (!vec.empty())
+		pkPeer->Encode(vec);
+	delete pi;
+}
+#endif // ENABLE_SAFE_TRADE_SYSTEM
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

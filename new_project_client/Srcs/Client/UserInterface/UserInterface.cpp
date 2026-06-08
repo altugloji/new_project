@@ -609,6 +609,9 @@ bool RunMainScript(CPythonLauncher& pyLauncher, const char* lpCmdLine)
 	initAcce();
 #endif
 	initsafebox();
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	initSafeTrade();
+#endif
 	initguild();
 	initServerStateChecker();
 #ifdef KYGN_CHEST_INFO

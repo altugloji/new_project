@@ -118,6 +118,9 @@ bool CShopManager::StartShopping(LPCHARACTER pkChr, LPCHARACTER pkChrShopKeeper,
 #ifdef OFFLINE_SHOP
 		|| pkChr->IsEditingShop()
 #endif
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		|| pkChr->GetSafeTrade() || pkChr->IsSafeTradeClaiming()
+#endif
 		)
 	{
 		pkChr->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("다른 거래창이 열린상태에서는 상점거래를 할수 가 없습니다."));

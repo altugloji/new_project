@@ -49,7 +49,11 @@ namespace character_chest
 		if (!ch->CanHandleItem())
 			return false;
 
-		if (ch->GetExchange() || ch->GetMyShop() || ch->GetShopOwner() || ch->GetShop() || ch->IsOpenSafebox() || ch->IsCubeOpen())
+		if (ch->GetExchange() || ch->GetMyShop() || ch->GetShopOwner() || ch->GetShop() || ch->IsOpenSafebox() || ch->IsCubeOpen()
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+			|| ch->GetSafeTrade() || ch->IsSafeTradeClaiming()
+#endif
+			)
 			return false;
 
 		return true;

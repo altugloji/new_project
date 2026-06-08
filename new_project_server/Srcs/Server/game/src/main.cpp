@@ -21,6 +21,9 @@
 #include "profiler.h"
 #include "lzo_manager.h"
 #include "messenger_manager.h"
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+#include "safetrade.h"
+#endif
 #include "db.h"
 #include "log.h"
 #include "p2p.h"
@@ -316,6 +319,9 @@ int main(int argc, char **argv)
 
 	LogManager		log_manager;
 	MessengerManager	messenger_manager;
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+	CSafeTradeManager	safetrade_manager;
+#endif
 	P2P_MANAGER		p2p_manager;
 	CGuildManager	guild_manager;
 	CGuildMarkManager mark_manager;

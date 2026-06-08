@@ -30,6 +30,9 @@
 #include "PythonQuest.h"
 #include "PythonMessenger.h"
 #include "PythonSafeBox.h"
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+#include "PythonSafeTrade.h"
+#endif
 #include "PythonGuild.h"
 
 #include "GuildMarkDownloader.h"
@@ -369,6 +372,9 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 #endif
 
 		CPythonSafeBox				m_pySafeBox;
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		CPythonSafeTrade			m_pySafeTrade;
+#endif
 		CPythonGuild				m_pyGuild;
 #ifdef ENABLE_WIKI
 		CPythonWiki					m_pyWiki;

@@ -4,6 +4,9 @@
 #include "PythonShop.h"
 #include "PythonExchange.h"
 #include "PythonSafeBox.h"
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+#include "PythonSafeTrade.h"
+#endif
 #include "PythonCharacterManager.h"
 
 #include "AbstractPlayer.h"
@@ -59,6 +62,138 @@ bool CPythonNetworkStream::SendSafeBoxItemMovePacket(BYTE bySourcePos, BYTE byTa
 
 	return SendSequence();
 }
+
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+bool CPythonNetworkStream::SendSafeTradeAddItemPacket(TItemPos InventoryPos, BYTE byDepotPos)
+{
+	TPacketCGSafeTrade p;
+	p.header = HEADER_CG_SAFETRADE; p.subheader = SAFETRADE_SUBCG_ADD_ITEM;
+	p.arg1 = 0; p.arg2 = byDepotPos; p.pos = InventoryPos;
+	if (!Send(p)) return false;
+	return SendSequence();
+}
+bool CPythonNetworkStream::SendSafeTradeRemoveItemPacket(BYTE byDepotPos)
+{
+	TPacketCGSafeTrade p;
+	p.header = HEADER_CG_SAFETRADE; p.subheader = SAFETRADE_SUBCG_REMOVE_ITEM;
+	p.arg1 = 0; p.arg2 = byDepotPos; p.pos = TItemPos(INVENTORY, 0);
+	if (!Send(p)) return false;
+	return SendSequence();
+}
+bool CPythonNetworkStream::SendSafeTradeLockPacket()
+{
+	TPacketCGSafeTrade p;
+	p.header = HEADER_CG_SAFETRADE; p.subheader = SAFETRADE_SUBCG_LOCK;
+	p.arg1 = 0; p.arg2 = 0; p.pos = TItemPos(INVENTORY, 0);
+	if (!Send(p)) return false;
+	return SendSequence();
+}
+bool CPythonNetworkStream::SendSafeTradeConfirmPacket(DWORD dwTradeID)
+{
+	TPacketCGSafeTrade p;
+	p.header = HEADER_CG_SAFETRADE; p.subheader = SAFETRADE_SUBCG_CONFIRM;
+	p.arg1 = dwTradeID; p.arg2 = 0; p.pos = TItemPos(INVENTORY, 0);
+	if (!Send(p)) return false;
+	return SendSequence();
+}
+bool CPythonNetworkStream::SendSafeTradeCancelPacket()
+{
+	TPacketCGSafeTrade p;
+	p.header = HEADER_CG_SAFETRADE; p.subheader = SAFETRADE_SUBCG_CANCEL;
+	p.arg1 = 0; p.arg2 = 0; p.pos = TItemPos(INVENTORY, 0);
+	if (!Send(p)) return false;
+	return SendSequence();
+}
+bool CPythonNetworkStream::SendSafeTradeViewPacket(DWORD dwTradeID)
+{
+	TPacketCGSafeTrade p;
+	p.header = HEADER_CG_SAFETRADE; p.subheader = SAFETRADE_SUBCG_VIEW;
+	p.arg1 = dwTradeID; p.arg2 = 0; p.pos = TItemPos(INVENTORY, 0);
+	if (!Send(p)) return false;
+	return SendSequence();
+}
+bool CPythonNetworkStream::SendSafeTradeClaimPacket(DWORD dwTradeID)
+{
+	TPacketCGSafeTrade p;
+	p.header = HEADER_CG_SAFETRADE; p.subheader = SAFETRADE_SUBCG_CLAIM;
+	p.arg1 = dwTradeID; p.arg2 = 0; p.pos = TItemPos(INVENTORY, 0);
+	if (!Send(p)) return false;
+	return SendSequence();
+}
+
+bool CPythonNetworkStream::RecvSafeTradePacket()
+{
+	TPacketGCSafeTrade p;
+	if (!Recv(sizeof(p), &p))
+		return false;
+
+	switch (p.subheader)
+	{
+		case SAFETRADE_SUBGC_OPEN:
+			CPythonSafeTrade::Instance().Clear();
+			CPythonSafeTrade::Instance().SetTradeID(p.trade_id);
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "OpenSafeTradeWindow", Py_BuildValue("(i)", p.trade_id));
+			break;
+
+		case SAFETRADE_SUBGC_ITEM_SET:
+		{
+			TItemData d;
+			memset(&d, 0, sizeof(d));
+			d.vnum = p.vnum;
+			d.count = (BYTE) p.count;
+			for (int i = 0; i < ITEM_SOCKET_SLOT_MAX_NUM; ++i)
+				d.alSockets[i] = p.alSockets[i];
+			for (int j = 0; j < ITEM_ATTRIBUTE_SLOT_MAX_NUM; ++j)
+				d.aAttr[j] = p.aAttr[j];
+			CPythonSafeTrade::Instance().SetDepotItem((BYTE) p.pos, d);
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "RefreshSafeTrade", Py_BuildValue("()"));
+			break;
+		}
+
+		case SAFETRADE_SUBGC_ITEM_DEL:
+			CPythonSafeTrade::Instance().DelDepotItem((BYTE) p.pos);
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "RefreshSafeTrade", Py_BuildValue("()"));
+			break;
+
+		case SAFETRADE_SUBGC_STATUS:
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "SafeTradeStatus", Py_BuildValue("(i)", p.pos));
+			break;
+
+		case SAFETRADE_SUBGC_CLOSE:
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "CloseSafeTradeWindow", Py_BuildValue("()"));
+			break;
+
+		case SAFETRADE_SUBGC_INCOMING:
+		{
+			CPythonSafeTrade::Instance().ClearList();
+			const int extra = (int) p.size - (int) sizeof(TPacketGCSafeTrade);
+			const int entrySize = (int) sizeof(TSafeTradeListEntry);
+			const int cnt = (entrySize > 0) ? (extra / entrySize) : 0;
+			for (int i = 0; i < cnt; ++i)
+			{
+				TSafeTradeListEntry e;
+				if (!Recv(sizeof(e), &e))
+					return false;
+				CPythonSafeTrade::TListEntry le;
+				memset(&le, 0, sizeof(le));
+				le.tradeID = e.trade_id;
+				strncpy(le.sender, e.name, sizeof(le.sender) - 1);
+				le.itemCount = e.item_count;
+				le.time = e.time;
+				le.isOwner = e.is_owner;
+				CPythonSafeTrade::Instance().AddListEntry(le);
+			}
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "OpenSafeTradeListWindow", Py_BuildValue("(i)", p.pos));
+			break;
+		}
+
+		case SAFETRADE_SUBGC_TEXT:
+			PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "SafeTradeText", Py_BuildValue("(i)", p.pos));
+			break;
+	}
+	return true;
+}
+#endif
 
 bool CPythonNetworkStream::RecvSafeBoxSetPacket()
 {
