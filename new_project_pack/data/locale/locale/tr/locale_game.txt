@@ -3650,6 +3650,7 @@ UI_CLOSE	Kapat
 UI_DEF_FONT	Tahoma:12
 UI_DEF_FONT_LARGE	Tahoma:14
 UI_DEF_FONT_SMALL	Tahoma:9
+UI_BOLD_FONT_T13	Tahoma:13
 UI_DENY	Red
 UI_ITEM	Nesne
 UI_LEFT_TIME	Kalan Zaman: %d Sec.
@@ -3761,84 +3762,6 @@ REGISTER_FAILURE_ALREADY_EXIST	Bu kullanici adi zaten alinmis.
 REGISTER_FAILURE_DB_ERROR	Sunucu hatasi, lutfen tekrar deneyin.
 REGISTER_FAILURE_RATE_LIMIT	Cok fazla kayit denemesi. Lutfen bekleyin.
 REGISTER_FAILURE_UNKNOWN	Bilinmeyen bir hata olustu.
-MS_TITLE	Ayarlar
-MS_DRAGONSTONE	Ejderha Taþý Simyasý
-MS_ENCHANT	Efsun Botu
-MS_WHEEL	Çark
-MS_SEASON	Sezon
-MS_QUEST	Görevler
-MS_CALENDAR	Etkinlik Takvimi
-MS_PET	Pet
-MS_AUTOSELL	Oto Sat
-MS_SKILL	Yetenekler
-MS_CHARACTER	Karakter
-MS_GAME_OPTIONS	Oyun Seçenekleri
-MS_SYSTEM_OPTIONS	Sistem Seçenekleri
-MS_SOUND	Ses
-MS_CHANNEL	Hýzlý Kanal
-MS_CHAR_CHANGE	Karakter Deðiþikliði
-MS_EXIT	ÇIKIÞ
-MS_NOT_AVAILABLE	Bu özellik bu sürümde mevcut deðil.
-MS_PVP_MODE	PvP Modu
-MS_PVP_DESC	Saldýrýlabilir mod seçimi
-MS_PVP_GUILD	Lonca
-MS_BLOCK	Engelle
-MS_BLOCK_DESC	Devre dýþý býrakmak istediðin topluluk seçenekleri
-MS_BLOCK_TRADE	Ticaret
-MS_BLOCK_PARTY	Grup
-MS_BLOCK_GUILD	Lonca
-MS_BLOCK_WHISPER	Fýsýltý
-MS_BLOCK_FRIEND	Arkadaþlar
-MS_BLOCK_REQUEST	Rica
-MS_NAMECOLOR	Ýsim rengi
-MS_NAMECOLOR_DESC	Oyuncu isim renkleri
-MS_NC_NORMAL	Normal
-MS_NC_EMPIRE	Ýmparatorluk
-MS_TARGETBOARD	Hedef Tahtasý
-MS_TARGETBOARD_DESC	-
-MS_SHOW	Göster
-MS_HIDE	Gizle
-MS_CHATLINE	Sohbet Satýrý
-MS_CHATLINE_DESC	Sohbet satýrýný göster
-MS_SMARTCAM	Akýllý Kamera
-MS_SMARTCAM_DESC	Otomatik kamera takibi
-MS_MUSIC	Müzik Sesi
-MS_EFFECT	Efekt Sesi
-MS_NIGHTMODE	Gece Modu
-MS_CAMERA	Kamera Mesafesi
-MS_CAMERA_DESC	Azami kamera mesafesi
-MS_CAM_SHORT	Kýsa
-MS_CAM_LONG	Uzun
-MS_FOG	Sis
-MS_FOG_DESC	Sis yoðunluðu
-MS_FOG_OFF	Kapalý
-MS_FOG_ON	Açýk
-MS_FOG_LOW	Az
-MS_FOG_FULL	Tam
-MS_CHANNEL_TITLE	Kanal Deðiþtir
-MS_CHANNEL_ROW	Kanal
-MS_CHANNEL_DESC	Bulunduðun kanalý deðiþtir
-MS_VIT	Canlýlýk
-MS_INT	Zeka
-MS_STR	Güç
-MS_DEX	Çeviklik
-MS_CUR_EXP	Mevcut EXP
-MS_REST_EXP	Kalan EXP
-MS_TAB_CHAR	Karakter
-MS_TAB_SKILL	Beceri
-MS_SUB_NORMAL	Normal
-MS_SUB_CHAMPION	Þampiyon
-MS_SUB_DETAILS	Ayrýntýlar
-MS_SUB_SKILLS	Beceriler
-MS_SUB_PASSIVE	Pasif
-MS_DEF	Savunma
-MS_ATKSPD	Saldýrý Hýzý
-MS_MOVSPD	Hareket Hýzý
-MS_MAXHP	Maks. Can
-MS_MAXSP	Maks. Mana
-MS_NO_SKILL	Beceri yok.
-MS_TAB_QUEST	Görev
-MS_NO_QUEST	Görev yok.
 SAFETRADE_TITLE	Güvenli Ticaret
 SAFETRADE_LIST_TITLE	Güvenli Ticaretler
 SAFETRADE_LOCK	Kilitle

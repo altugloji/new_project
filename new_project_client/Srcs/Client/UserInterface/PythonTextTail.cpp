@@ -1002,6 +1002,12 @@ void CPythonTextTail::Initialize() const
 {
 	// DEFAULT_FONT
 	//ms_pFont = (CGraphicText *)CResourceManager::Instance().GetTypeResourcePointer(g_strDefaultFontName.c_str());
+	CResource* pkFontRes = CResourceManager::Instance().GetResourcePointer("Tahoma:13.fnt");
+	if (pkFontRes)
+	{
+		ms_pFont = static_cast<CGraphicText*>(pkFontRes);
+		return;
+	}
 
 	const auto pkDefaultFont = static_cast<CGraphicText*>(DefaultFont_GetResource());
 	if (!pkDefaultFont)

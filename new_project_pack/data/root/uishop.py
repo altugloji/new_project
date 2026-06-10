@@ -82,6 +82,7 @@ class ShopDialog(ui.ScriptWindow):
 
 		try:
 			GetObject = self.GetChild
+			self.board = GetObject("board")
 			self.itemSlotWindow = GetObject("ItemSlot")
 			self.btnBuy = GetObject("BuyButton")
 			self.btnSell = GetObject("SellButton")
@@ -169,6 +170,7 @@ class ShopDialog(ui.ScriptWindow):
 		self.ClearDictionary()
 
 		self.tooltipItem = 0
+		self.board = None
 		self.itemSlotWindow = 0
 		self.btnBuy = 0
 		self.btnSell = 0
@@ -206,13 +208,22 @@ class ShopDialog(ui.ScriptWindow):
 			constInfo.OFFLINE_SHOP_EDITING = 0
 			constInfo.OFFLINE_SHOP_ADDED_SLOTS = {}
 			self.itemSlotWindow.SetSlotStyle(wndMgr.SLOT_STYLE_NONE)
+			showEditButton = False
 			if self.btnEdit:
 				self.btnEdit.SetText("Dukkani Duzenle")
 				# Sadece kendi offline dukkanini duzenleyebilir
 				if isMyShop and isOfflineShop:
 					self.btnEdit.Show()
+					showEditButton = True
 				else:
 					self.btnEdit.Hide()
+
+		SHOP_DIALOG_HEIGHT_NORMAL = 328
+		SHOP_DIALOG_HEIGHT_EDIT   = 356
+		h = SHOP_DIALOG_HEIGHT_EDIT if showEditButton else SHOP_DIALOG_HEIGHT_NORMAL
+		self.SetSize(184, h)
+		if self.board:
+			self.board.SetSize(184, h)
 
 		if (app.ENABLE_OFFLINE_SHOP and isMyShop) or player.IsMainCharacterIndex(vid):
 

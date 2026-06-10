@@ -345,7 +345,7 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 #ifdef ATTBONUS_ELEXIR
 		{
 			const long lMapIndex = pkAttacker->GetMapIndex();
-			if (lMapIndex == 72 || lMapIndex == 73)
+			if (lMapIndex == 72 || lMapIndex == 73 || lMapIndex == 208)
 				iAtk += (iAtk * pkAttacker->GetPoint(POINT_ATTBONUS_CZ)) / 100;
 		}
 #else
@@ -354,6 +354,10 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 #endif
 
 		iAtk += (iAtk * pkAttacker->GetPoint(POINT_ATTBONUS_MONSTER)) / 100;
+#ifdef ENABLE_PC_NPC_DAMAGE_BONUS
+		if (pkAttacker->IsPC())
+			iAtk += (iAtk * 30) / 100;
+#endif
 	}
 	else if (pkVictim->IsPC())
 	{
@@ -434,7 +438,7 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 	if (pkAttacker->IsNPC() && pkVictim->IsPC())
 	{
 		const long lMapIndex = pkVictim->GetMapIndex();
-		if (lMapIndex == 72 || lMapIndex == 73)
+		if (lMapIndex == 72 || lMapIndex == 73 || lMapIndex == 208)
 			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_DARK)) / 10000;
 	}
 #endif

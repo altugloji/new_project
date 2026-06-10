@@ -154,7 +154,7 @@ class ToolTip(ui.ThinBoard):
 		self.xPos = -1
 		self.yPos = -1
 
-		self.defFontName = localeInfo.UI_DEF_FONT
+		self.defFontName = localeInfo.UI_BOLD_FONT_T13
 		self.ClearToolTip()
 
 	def __del__(self):

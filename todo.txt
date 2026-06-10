@@ -1,25 +1,10 @@
 Taşlar üst üste binmiyor
 75 silahlara 10 canavar eklenecek
 Mobilde ekran açıkken 10 15sn sonra ekran kararıyor ve ekran kapanıyor. Wakelock lazım
-
-
----char.cpp---
-		iMaxHP = m_pkMobData->m_table.dwMaxHP; // arat altına ekle
-
-#define ENABLE_NPC_MAX_HP_BONUS
-#ifdef ENABLE_NPC_MAX_HP_BONUS
-		iMaxHP = static_cast<int>(static_cast<long long>(iMaxHP) * (100 + 30) / 100);
-#endif
-
----battle.cpp---
-		iAtk += (iAtk * pkAttacker->GetPoint(POINT_ATTBONUS_MONSTER)) / 100; // arat altına ekle
-
-#define ENABLE_PC_NPC_DAMAGE_BONUS
-#ifdef ENABLE_PC_NPC_DAMAGE_BONUS
-		if (pkAttacker->IsPC())
-			iAtk += (iAtk * 30) / 100;
-#endif
-
++4 taş sadece hayalette atacak
+Grup 15 20px aşağı taşınacak
+Ejder sisteminde slotların kesildikten sonra doğması kapatılacak. Metinler normal kalacak.
+L penceresi chatler arası boşluk çok fazla normale çek
 
 
 

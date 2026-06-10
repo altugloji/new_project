@@ -1445,9 +1445,6 @@ class InventoryWindow(ui.ScriptWindow):
 	def ShowToolTip(self, slotIndex):
 		if None != self.tooltipItem:
 			self.tooltipItem.SetInventoryItem(slotIndex)
-			if app.ENABLE_WIKI:
-				self.tooltipItem.AppendSpace(5)
-				self.tooltipItem.AppendTextLine("|Eemoji/key_ctrl|e + |Eemoji/key_x|e Open Wiki")
 
 	def OnTop(self):
 		if None != self.tooltipItem:

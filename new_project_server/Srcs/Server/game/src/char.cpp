@@ -2886,6 +2886,9 @@ void CHARACTER::ComputePoints()
 	else
 	{
 		iMaxHP = m_pkMobData->m_table.dwMaxHP;
+#ifdef ENABLE_NPC_MAX_HP_BONUS
+		iMaxHP = static_cast<int>(static_cast<long long>(iMaxHP) * (100 + 30) / 100);
+#endif
 		iMaxSP = 0;
 		iMaxStamina = 0;
 

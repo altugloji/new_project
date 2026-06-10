@@ -1836,3 +1836,21 @@
 2103	<Kutsama> %s isimli oyuncu %s elde etti!
 2104	<Kutsama> %s isimli oyuncu %s itemini %s seviyesine düþürdü!
 2150	%s nesnesi baþarýyla silindi."
+5201	Bu pazarýn sahibi deðilsin.
+5202	Takas, kasa veya küp penceresi açýkken pazarý düzenleyemezsin.
+5203	Pazardaki eþyalarýn toplam deðeri 2.000.000.000 Yang'ý geçemez! Fiyat düþür veya eþya kaldýr.
+5204	Bu pazar þu anda düzenleniyor.
+5205	Pazar düzenlenirken bu iþlemi yapamazsýn.
+5206	Pazar iþlemi için lütfen birkaç saniye bekle.
+5207	Zaten aktif bir pazarýn var.
+5208	#PLAYER_NAME# Pazarý";
+5209	Hediye kutunda eþya var, önce onlarý al.
+5210	Taþýyabileceðin maksimum Yang'a ulaþtýn.
+5211	Paket hatasý, lütfen tekrar dene.
+5212	Pazar kapatýldý.
+5213	Çok hýzlý iþlem yapýyorsun, biraz bekle.
+5214	Bu alanda pazar açamazsýn.
+5215	Pazar sistemi geçici olarak kapalý.
+5216	Tüm hediyeler envanterine eklendi.
+5217	Hediye envanterine eklendi.
+5218	Lütfen 5 saniye bekle.
