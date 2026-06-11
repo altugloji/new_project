@@ -1172,6 +1172,19 @@ int CInputMain::Messenger(LPCHARACTER ch, const char* c_pData, size_t uiBytes) c
 	return 0;
 }
 
+#ifdef OFFLINE_SHOP
+int CInputMain::ShopSearch(LPCHARACTER ch, const char * data, size_t uiBytes) const
+{
+	// Pazar Arama: data, ana header (HEADER_CG_SHOP_SEARCH) dahil tum paketi gosterir.
+	if (uiBytes < sizeof(TPacketCGShopSearch))
+		return -1;
+
+	const auto p = reinterpret_cast<const TPacketCGShopSearch *>(data);
+	CShopManager::instance().SearchShopItem(ch, p->searchIndex, p->socket0);
+	return 0;	// sabit boyutlu paket; ek (degisken) veri yok
+}
+#endif
+
 int CInputMain::Shop(LPCHARACTER ch, const char * data, size_t uiBytes) const
 {
 	const auto p = (TPacketCGShop *) data;
@@ -3440,6 +3453,13 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			if ((iExtraLen = Shop(ch, c_pData, m_iBufferLeft)) < 0)
 				return -1;
 			break;
+
+#ifdef OFFLINE_SHOP
+		case HEADER_CG_SHOP_SEARCH:	// Pazar Arama
+			if ((iExtraLen = ShopSearch(ch, c_pData, m_iBufferLeft)) < 0)
+				return -1;
+			break;
+#endif
 
 		case HEADER_CG_MESSENGER:
 			if ((iExtraLen = Messenger(ch, c_pData, m_iBufferLeft))<0)

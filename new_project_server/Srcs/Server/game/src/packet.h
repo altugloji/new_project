@@ -51,6 +51,7 @@ enum
 	HEADER_CG_MYSHOP				= 55,
 #ifdef OFFLINE_SHOP
 	HEADER_CG_OFFLINE_SHOP_EDIT		= 56,
+	HEADER_CG_SHOP_SEARCH			= 57,	// Pazar Arama: kategori bazli sahis-dukkan arama istegi
 #endif
 
 	HEADER_CG_ITEM_USE_TO_ITEM		= 60,
@@ -192,6 +193,10 @@ enum
 	HEADER_GC_PING								= 44,
 	HEADER_GC_SCRIPT							= 45,
 	HEADER_GC_QUEST_CONFIRM						= 46,
+
+#ifdef OFFLINE_SHOP
+	HEADER_GC_SHOP_SEARCH						= 47,	// Pazar Arama: bulunan dukkanlarin listesi (vid + x + y)
+#endif
 
 	HEADER_GC_MOUNT								= 61,
 	HEADER_GC_OWNERSHIP							= 62,
@@ -1399,6 +1404,33 @@ typedef struct packet_shop
 	WORD	size;
 	BYTE        subheader;
 } TPacketGCShop;
+
+#ifdef OFFLINE_SHOP
+// Pazar Arama (ShopSearch) paketleri - istemci/sunucu birebir ayni olmak zorunda.
+// CG: oyuncu bir kategori secip arama yapar. searchIndex = category*SHOP_CATEGORY_MAX_SUB + sub
+typedef struct command_shop_search
+{
+	BYTE	header;			// HEADER_CG_SHOP_SEARCH
+	DWORD	searchIndex;	// kategori indexi (kaynaktaki "itemVnum" alanina karsilik gelir)
+	int		socket0;		// UI'dan her zaman 0; protokol uyumu icin saklanir
+} TPacketCGShopSearch;
+
+// GC: bulunan her dukkan icin sahip/tezgah vid + harita konumu
+typedef struct packet_shop_search_result_element
+{
+	DWORD	shopVid;
+	long	x;
+	long	y;
+} TShopSearchResultElement;
+
+// GC baslik paketi; ardindan count adet TShopSearchResultElement gelir
+typedef struct packet_gc_shop_search
+{
+	BYTE	header;			// HEADER_GC_SHOP_SEARCH
+	WORD	size;			// toplam paket boyutu
+	WORD	count;			// sonuc sayisi
+} TPacketGCShopSearch;
+#endif
 
 struct packet_exchange
 {

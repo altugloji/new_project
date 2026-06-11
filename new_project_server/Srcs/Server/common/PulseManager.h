@@ -18,6 +18,7 @@ enum class ePulse {
 	ChannelStatus,
 	RideMount,
 	SharedRequest,
+	ShopSearch,			//Shop search #ifdef OFFLINE_SHOP
 };
 
 // #define __PULSEMANAGER__SECOND_SUPPORT__

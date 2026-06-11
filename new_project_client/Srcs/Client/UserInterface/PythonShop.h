@@ -53,6 +53,17 @@ class CPythonShop : public CSingleton<CPythonShop>
 #endif
 		void BuildPrivateShop(const char * c_szName);
 
+		// ---- Pazar Arama (ShopSearch): bulunan dukkanlarin harita/minimap isaretleri ----
+		// Kaynak: mt2009 ikarus CPythonIkarusShop found-shop map mantigi; burada
+		// new_project'in genel CreateTargetEffect / CreateTarget primitifleriyle calisir.
+		void	ShowFoundShopPosition(DWORD vid, long x, long y);
+		void	ClearFoundShopMap();
+		DWORD	GetFoundShopFromSearchTargetId(DWORD vid);
+		bool	IsFoundShopFromSearchViewed(DWORD vid);
+		bool	IsFoundShopFromSearchItem(DWORD vid);
+		void	SetFoundShopViewed(DWORD vid);
+		DWORD	GetFoundShopTargetCount() const { return (DWORD)m_foundShopMap.size(); }
+
 #ifdef ENABLE_OFFLINE_SHOP
 		void ClearOfflineShopEdit();
 		void AddOfflineShopRemove(BYTE bDisplayPos);
@@ -84,6 +95,14 @@ class CPythonShop : public CSingleton<CPythonShop>
 
 		typedef std::map<TItemPos, TShopItemTable> TPrivateShopItemStock;
 		TPrivateShopItemStock	m_PrivateShopItemStock;
+
+		// Pazar Arama: bulunan dukkan vid -> {hedef-efekt id, tiklanip goruntulendi mi}
+		struct TFoundShop
+		{
+			DWORD	targetId;
+			bool	isViewed;
+		};
+		std::map<DWORD, TFoundShop>	m_foundShopMap;
 
 #ifdef ENABLE_OFFLINE_SHOP
 		std::vector<BYTE>							m_OfflineShopRemoveList;

@@ -1370,7 +1370,9 @@ void CMapOutdoor::SpecialEffect_Create(DWORD dwID, float x, float y, float z, co
 	DWORD dwEffectID = rkEffMgr.CreateEffect(c_szEffName,
 											 D3DXVECTOR3(x, y, z),
 											 D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	m_kMap_dwID_iEffectID.emplace(dwID, dwEffectID);
+	// emplace mevcut anahtari EZMEZ; eski (bitmis) efekt id'si haritada kalip her
+	// frame yeni efekt uretilmesine yol acardi. operator[] ile daima guncelle.
+	m_kMap_dwID_iEffectID[dwID] = dwEffectID;
 }
 
 void CMapOutdoor::SpecialEffect_Delete(DWORD dwID)
@@ -1383,6 +1385,9 @@ void CMapOutdoor::SpecialEffect_Delete(DWORD dwID)
 	CEffectManager& rkEffMgr = CEffectManager::Instance();
 	const int iEffectID = itor->second;
 	rkEffMgr.DestroyEffectInstance(iEffectID);
+	// Haritadan da sil; aksi halde dwID bayat (yok edilmis) effectID'ye isaret edip
+	// ayni id tekrar kullanildiginda efekt birikmesine yol acar.
+	m_kMap_dwID_iEffectID.erase(itor);
 }
 
 void CMapOutdoor::SpecialEffect_Destroy()

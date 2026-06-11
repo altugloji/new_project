@@ -1,0 +1,7 @@
+title subImage
+version 1.0
+image "public_flamewind.dds"
+left 360
+top 25
+right 377
+bottom 42

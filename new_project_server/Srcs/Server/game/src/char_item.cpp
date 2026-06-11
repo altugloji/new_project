@@ -5757,7 +5757,7 @@ bool CHARACTER::DeleteItem(TItemPos Cell)
 	if (!IsValidItemPosition(Cell) || !(item = GetItem(Cell)))
 		return false;
 
-	if (true == item->isLocked() || item->IsExchanging() || item->IsEquipped())
+	if (item->IsExchanging() || item->IsEquipped())
 		return false;
 
 #ifdef ENABLE_ITEM_SEALBIND_SYSTEM

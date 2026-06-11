@@ -1,0 +1,7 @@
+title subImage
+version 1.0
+image "inventory_flamewind.dds"
+left 90
+top 0
+right 105
+bottom 15

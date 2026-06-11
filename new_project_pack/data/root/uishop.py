@@ -61,7 +61,54 @@ class ShopDialog(ui.ScriptWindow):
 				itemCount = 0
 			setItemID(i, getItemID(idx), itemCount)
 
+		# Pazar Arama: son aratilan esyalari bu pazarda vurgula
+		self.__RefreshShopSearchHighlight()
+
 		wndMgr.RefreshSlot(self.itemSlotWindow.GetWindowHandle())
+
+	def __RefreshShopSearchHighlight(self):
+		# Aranan esyalarin slotlarini renkli (yesil) aktive eder; digerlerini pasif.
+		#  - Acik vnum listeli kategoriler: OFFLINESHOP_LAST_SEARCHED_ITEMS = [(vnum, socket0), ...]
+		#  - Giyilebilir kategoriler (Zirh/Silah/Taki): OFFLINESHOP_LAST_SEARCH_WEARABLE = (tip, alttip)
+		searched = getattr(constInfo, "OFFLINESHOP_LAST_SEARCHED_ITEMS", None)
+		wearable = getattr(constInfo, "OFFLINESHOP_LAST_SEARCH_WEARABLE", None)
+		isAttr   = getattr(constInfo, "OFFLINESHOP_LAST_SEARCH_IS_ATTR", False)
+		for i in xrange(shop.SHOP_SLOT_COUNT):
+			idx = self.__GetRealIndex(i)
+			vnum = shop.GetItemID(idx)
+			matched = False
+			if vnum:
+				if searched and self.__IsShopSearchedItem(vnum, idx, searched):
+					matched = True
+				elif wearable and self.__IsShopSearchedWearable(vnum, idx, wearable, isAttr):
+					matched = True
+			if matched:
+				self.itemSlotWindow.ActivateSlot(i, 0.0, 1.0, 0.0, 0.6)
+			else:
+				self.itemSlotWindow.DeactivateSlot(i)
+
+	def __IsShopSearchedItem(self, vnum, realPos, searched):
+		socket0 = shop.GetItemMetinSocket(realPos, 0)
+		for searchData in searched:
+			searchVnum = searchData[0]
+			searchSocket0 = searchData[1]
+			if searchVnum == vnum and (searchSocket0 == 0 or searchSocket0 == socket0):
+				return True
+		return False
+
+	def __IsShopSearchedWearable(self, vnum, realPos, wearable, isAttr):
+		# wearable = (itemType, itemSubType) - sunucu HasItemType ile ayni mantik
+		item.SelectItem(vnum)
+		if item.GetItemType() != wearable[0]:
+			return False
+		if item.GetItemSubType() != wearable[1]:
+			return False
+		if isAttr:
+			# "Bonuslu Ara" secili: en az bir bonusu olmali (ilk attr tipi != 0)
+			attr = shop.GetItemAttribute(realPos, 0)
+			if not attr[0]:
+				return False
+		return True
 
 	def SetItemData(self, pos, itemID, itemCount, itemPrice):
 		shop.SetItemData(pos, itemID, itemCount, itemPrice)

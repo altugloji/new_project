@@ -228,7 +228,6 @@ def _read_all_impl():
 	if _use_registry():
 		_migrate_json_to_registry_if_empty()
 		data = _read_all_from_registry()
-		_trace("QCF read registry path=%r keys=%r" % (_QCF_REG_PATH, sorted(data.keys())))
 		return data
 	return _read_json_file_dict()
 

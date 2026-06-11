@@ -63,6 +63,15 @@ class CShop
 		DWORD	GetVnum() const { return m_dwVnum; }
 		DWORD	GetNPCVnum() const { return m_dwNPCVnum; }
 
+#ifdef OFFLINE_SHOP
+		// Pazar Arama (ShopSearch): dukkanin sahibi (online sahis dukkaninda oyuncu,
+		// offline dukkanda dukkani tasiyan tezgah-mob'u) + esya eslestirme yardimcilari
+		LPCHARACTER	GetOwner() const { return m_pkPC; }
+		bool		HasItem(DWORD itemVnum, int socket0 = 0) const;
+		bool		HasItemType(BYTE type, BYTE subtype, bool checkAttribute) const;
+		bool		HasSoulStoneSocket(BYTE level) const;
+#endif
+
 	protected:
 		void	Broadcast(const void * data, int bytes);
 

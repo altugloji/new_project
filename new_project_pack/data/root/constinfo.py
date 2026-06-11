@@ -440,7 +440,7 @@ def IS_BULK_POTION_ALLOWED(itemVnum):
 		return 1
 	if 39001 <= itemVnum and itemVnum <= 39012:
 		return 1
-	if 71028 <= itemVnum and itemVnum <= 71035:
+	if 71027 <= itemVnum and itemVnum <= 71035:
 		return 1
 	if 71044 <= itemVnum and itemVnum <= 71049:
 		return 1

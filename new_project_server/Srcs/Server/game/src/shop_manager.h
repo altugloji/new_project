@@ -30,16 +30,37 @@ public:
 	void	DestroyPCShop(LPCHARACTER ch);
 
 #ifdef OFFLINE_SHOP
+	void	SearchShopItem(LPCHARACTER ch, DWORD searchIndex, int socket0);
+#endif
+
+#ifdef OFFLINE_SHOP
 public:
 	bool	StartOfflineShop(DWORD dwPID, bool onboot = false);
 	void	CreateOfflineShop(LPCHARACTER owner, const char *szSign, const std::vector<TShopItemTable*> pTable);
 	LPSHOP	CreateNPCShop(LPCHARACTER ch, std::vector<TShopItemTable *> map_shop);
 #endif
 
+#ifdef OFFLINE_SHOP
+	// Pazar Arama: kategori -> {vnum, socket0} suzgec tablosu (kaynaktaki
+	// PrepareShopSearchFilters tablolarinin birebir karsiligi)
+	struct SOfflineShopFilter
+	{
+		DWORD	itemVnum;
+		int		socket0;
+	};
+
+	void	PrepareShopSearchFilters();
+	bool	SearchItemsByCategory(DWORD category, LPSHOP shop);
+#endif
+
 private:
 	TShopMap	m_map_pkShop;
 	TShopMap	m_map_pkShopByNPCVnum;
 	TShopMap	m_map_pkShopByPC;
+
+#ifdef OFFLINE_SHOP
+	std::map<DWORD, std::vector<SOfflineShopFilter> >	m_shopSearchFilters;
+#endif
 
 	bool	ReadShopTableEx(const char* stFileName);
 };

@@ -160,26 +160,6 @@ void CItem::AddAttr(BYTE bApply, BYTE bLevel)
 	}
 }
 
-#ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
-static bool FN_IsGreenEnchantLv5LimitedApply(int iApply)
-{
-	switch (iApply)
-	{
-		case APPLY_ATTBONUS_HUMAN:
-		case APPLY_RESIST_SWORD:
-		case APPLY_RESIST_TWOHAND:
-		case APPLY_RESIST_DAGGER:
-		case APPLY_RESIST_BELL:
-		case APPLY_RESIST_FAN:
-		case APPLY_RESIST_BOW:
-		case APPLY_RESIST_MAGIC:
-			return true;
-		default:
-			return false;
-	}
-}
-#endif
-
 #ifdef OFFLINE_SHOP
 bool CItem::CheckItemEnchant()
 {
@@ -210,7 +190,7 @@ bool CItem::CheckItemEnchant()
 #endif
 
 #ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
-void CItem::PutAttributeWithLevel(BYTE bLevel, bool bLimitResistLv5)
+void CItem::PutAttributeWithLevel(BYTE bLevel, bool bLimitLv5)
 #else
 void CItem::PutAttributeWithLevel(BYTE bLevel)
 #endif
@@ -265,15 +245,15 @@ void CItem::PutAttributeWithLevel(BYTE bLevel)
 		bLevel = r.bMaxLevelBySet[iAttributeSet];
 
 #ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
-	if (bLimitResistLv5 && bLevel >= 5 && FN_IsGreenEnchantLv5LimitedApply(attr_idx))
-		bLevel = 4;
+	if (bLimitLv5 && bLevel >= 5)
+		bLevel = 3;
 #endif
 
 	AddAttr(attr_idx, bLevel);
 }
 
 #ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
-void CItem::PutAttribute(const int * aiAttrPercentTable, bool bLimitResistLv5)
+void CItem::PutAttribute(const int * aiAttrPercentTable, bool bLimitLv5)
 #else
 void CItem::PutAttribute(const int * aiAttrPercentTable)
 #endif
@@ -290,14 +270,14 @@ void CItem::PutAttribute(const int * aiAttrPercentTable)
 	}
 
 #ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
-	PutAttributeWithLevel(i + 1, bLimitResistLv5);
+	PutAttributeWithLevel(i + 1, bLimitLv5);
 #else
 	PutAttributeWithLevel(i + 1);
 #endif
 }
 
 #ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
-void CItem::ChangeAttribute(const int* aiChangeProb, bool bLimitResistLv5)
+void CItem::ChangeAttribute(const int* aiChangeProb, bool bLimitLv5)
 #else
 void CItem::ChangeAttribute(const int* aiChangeProb)
 #endif
@@ -327,11 +307,11 @@ void CItem::ChangeAttribute(const int* aiChangeProb)
 #ifdef ENABLE_GREEN_ENCHANT_LV5_LIMIT
 		if (aiChangeProb == nullptr)
 		{
-			PutAttribute(tmpChangeProb, bLimitResistLv5);
+			PutAttribute(tmpChangeProb, bLimitLv5);
 		}
 		else
 		{
-			PutAttribute(aiChangeProb, bLimitResistLv5);
+			PutAttribute(aiChangeProb, bLimitLv5);
 		}
 #else
 		if (aiChangeProb == nullptr)

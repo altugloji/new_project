@@ -138,6 +138,10 @@ CPacketInfoCG::CPacketInfoCG()
 
 	Set(HEADER_CG_SHOP, sizeof(TPacketCGShop), "Shop", true);
 
+#ifdef OFFLINE_SHOP
+	Set(HEADER_CG_SHOP_SEARCH, sizeof(TPacketCGShopSearch), "ShopSearch", true);	// Pazar Arama
+#endif
+
 	Set(HEADER_CG_ON_CLICK, sizeof(TPacketCGOnClick), "OnClick", true);
 	Set(HEADER_CG_EXCHANGE, sizeof(TPacketCGExchange), "Exchange", true);
 #ifdef ENABLE_SAFE_TRADE_SYSTEM

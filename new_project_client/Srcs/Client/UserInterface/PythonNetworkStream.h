@@ -185,6 +185,7 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 
 		// Shop
 		bool SendShopEndPacket();
+		bool SendShopSearchItem(DWORD searchIndex, int socket0);	// Pazar Arama
 		bool SendShopBuyPacket(BYTE byCount);
 		bool SendShopSellPacket(BYTE bySlot);
 #ifdef ENABLE_EXCHANGE_LOG
@@ -508,6 +509,7 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 
 		bool RecvShopPacket();
 		bool RecvShopSignPacket();
+		bool RecvShopSearchResultPacket();	// Pazar Arama
 		bool RecvExchangePacket();
 
 		// Quest

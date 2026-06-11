@@ -24,6 +24,12 @@ import uiHelp
 import uiWhisper
 import uiPointReset
 import uiShop
+# Pazar Arama (ShopSearch) ayri modul (kucuk harf dosya adi - Metin2 konvansiyonu).
+# Client paketinde bulunamazsa login'i bozmasin diye guvenli import.
+try:
+	import offlineshopsearch
+except ImportError:
+	offlineshopsearch = None
 import uiExchange
 import uiSystem
 import uiRestart
@@ -98,6 +104,10 @@ if app.ENABLE_BULK_POTION_PANEL:
 if app.ENABLE_GM_PLAYER_PANEL:
 	import uigmpanel
 IsQBHide = 0
+
+
+
+
 class Interface(object):
 	CHARACTER_STATUS_TAB = 1
 	CHARACTER_SKILL_TAB = 2
@@ -336,6 +346,10 @@ class Interface(object):
 		if app.ENABLE_OFFLINE_SHOP:
 			from _weakref import proxy
 			self.dlgShop.interface = proxy(self)
+
+		# Pazar Arama (ShopSearch) penceresi - ilk acilista (lazy) olusturulur.
+		# Boylece uiscript/shopsearchwindow.py eksik olsa bile login etkilenmez.
+		self.offlineShopSearch = None
 
 		if app.ENABLE_OFFLINE_SHOP:
 			self.wndGiftBox = uigift.GiftDialog()
@@ -648,6 +662,9 @@ class Interface(object):
 		if self.dlgShop:
 			self.dlgShop.Destroy()
 
+		if self.offlineShopSearch:
+			self.offlineShopSearch.Destroy()
+
 		if self.dlgRestart:
 			self.dlgRestart.Destroy()
 
@@ -786,6 +803,7 @@ class Interface(object):
 		del self.dlgExchange
 		del self.dlgPointReset
 		del self.dlgShop
+		del self.offlineShopSearch
 		del self.dlgRestart
 		del self.dlgSystem
 		del self.dlgPassword
@@ -1929,6 +1947,17 @@ class Interface(object):
 		self.privateShopBuilder.Open(self.inputDialog.GetText())
 		self.ClosePrivateShopInputNameDialog()
 		return True
+
+	# Pazar Arama (ShopSearch) penceresini ac/kapat (ilk cagrida olusturulur)
+	def OpenShopSearch(self):
+		if offlineshopsearch is None:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.SHOP_SEARCH_MODULE_MISSING)
+			return
+		if not self.offlineShopSearch:
+			self.offlineShopSearch = offlineshopsearch.ShopSearchWindow()
+			self.offlineShopSearch.SetToolTip(self.tooltipItem)
+			self.offlineShopSearch.Hide()
+		self.offlineShopSearch.Open()
 
 	def AppearPrivateShop(self, vid, text):
 

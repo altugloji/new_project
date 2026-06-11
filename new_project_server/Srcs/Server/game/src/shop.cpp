@@ -1191,4 +1191,63 @@ bool CShop::IsSellingItem(DWORD itemID)
 
 	return isSelling;
 }
+
+#ifdef OFFLINE_SHOP
+// ---------------------------------------------------------------------------
+// Pazar Arama (ShopSearch) - esya eslestirme yardimcilari
+// Kaynak (mt2009 ikarus) CShop::HasItem / HasItemType / HasSoulStoneSocket
+// fonksiyonlarinin new_project CShop::m_itemVector modeline uyarlanmis halidir.
+// ---------------------------------------------------------------------------
+bool CShop::HasItem(DWORD itemVnum, int socket0) const
+{
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		const SHOP_ITEM & item = m_itemVector[i];
+
+		if (item.vnum != itemVnum)
+			continue;
+
+		// socket0 == 0 ise sadece vnum eslesmesi yeterli (NPC/offline esyalar dahil)
+		if (socket0 == 0)
+			return true;
+
+		// socket0 verilmisse (orn. beceri kitabi soketi) gercek item gerekir
+		if (item.pkItem && item.pkItem->GetSocket(0) == socket0)
+			return true;
+	}
+	return false;
+}
+
+bool CShop::HasItemType(BYTE type, BYTE subtype, bool checkAttribute) const
+{
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		LPITEM pkItem = m_itemVector[i].pkItem;
+		if (!pkItem)
+			continue;
+
+		const TItemTable * proto = pkItem->GetProto();
+		if (proto && proto->bType == type && proto->bSubType == subtype)
+		{
+			// "Bonuslu ara" secili ise sadece bonusu olan esyalar
+			if (checkAttribute && pkItem->GetAttribute(0).bType == 0)
+				continue;
+
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CShop::HasSoulStoneSocket(BYTE level) const
+{
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		const DWORD vnum = m_itemVector[i].vnum;
+		if (vnum >= (DWORD)(28030 + 100 * level) && vnum <= (DWORD)(28043 + 100 * level))
+			return true;
+	}
+	return false;
+}
+#endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

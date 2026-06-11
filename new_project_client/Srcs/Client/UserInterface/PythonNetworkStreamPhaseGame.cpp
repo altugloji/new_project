@@ -339,6 +339,10 @@ void CPythonNetworkStream::GamePhase()
 				ret = RecvShopPacket();
 				break;
 
+			case HEADER_GC_SHOP_SEARCH:	// Pazar Arama: bulunan dukkanlari isaretle
+				ret = RecvShopSearchResultPacket();
+				break;
+
 			case HEADER_GC_SHOP_SIGN:
 				ret = RecvShopSignPacket();
 				break;
@@ -1875,6 +1879,44 @@ bool CPythonNetworkStream::RecvShopPacket()
 			TraceError("CPythonNetworkStream::RecvShopPacket: Unknown subheader\n");
 			break;
 	}
+
+	return true;
+}
+
+// Pazar Arama: kategori bazli arama istegini sunucuya gonder.
+bool CPythonNetworkStream::SendShopSearchItem(DWORD searchIndex, int socket0)
+{
+	TPacketCGShopSearch kPacket;
+	kPacket.header = HEADER_CG_SHOP_SEARCH;
+	kPacket.searchIndex = searchIndex;
+	kPacket.socket0 = socket0;
+
+	if (!Send(sizeof(kPacket), &kPacket))
+		return false;
+
+	return SendSequence();
+}
+
+// Pazar Arama: sunucudan gelen bulunan-dukkan listesini al, eski isaretleri temizle
+// ve her dukkani harita + minimap uzerinde isaretle.
+bool CPythonNetworkStream::RecvShopSearchResultPacket()
+{
+	TPacketGCShopSearch packet;
+	if (!Recv(sizeof(packet), &packet))
+		return false;
+
+	std::vector<TShopSearchResultElement> buffer;
+	if (packet.count > 0)
+	{
+		buffer.resize(packet.count);
+		if (!Recv(sizeof(TShopSearchResultElement) * packet.count, &buffer[0]))
+			return false;
+	}
+
+	CPythonShop::Instance().ClearFoundShopMap();
+
+	for (WORD i = 0; i < packet.count; ++i)
+		CPythonShop::Instance().ShowFoundShopPosition(buffer[i].shopVid, buffer[i].x, buffer[i].y);
 
 	return true;
 }

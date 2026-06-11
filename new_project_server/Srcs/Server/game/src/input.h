@@ -137,6 +137,9 @@ class CInputMain : public CInputProcessor
 		void		QuickslotDelete(LPCHARACTER ch, const char * data) const;
 		void		QuickslotSwap(LPCHARACTER ch, const char * data) const;
 		int			Shop(LPCHARACTER ch, const char * data, size_t uiBytes) const;
+#ifdef OFFLINE_SHOP
+		int			ShopSearch(LPCHARACTER ch, const char * data, size_t uiBytes) const;	// Pazar Arama
+#endif
 		void		OnClick(LPCHARACTER ch, const char * data) const;
 		void		Exchange(LPCHARACTER ch, const char * data) const;
 		void		Position(LPCHARACTER ch, const char * data) const;

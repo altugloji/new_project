@@ -398,6 +398,9 @@ class GameWindow(ui.ScriptWindow):
 		if app.ENABLE_EXCHANGE_LOG:
 			onPressKeyDict[app.DIK_F6]	= lambda : self.interface.OpenExchangeLog()
 
+		# Pazar Arama (ShopSearch) - F7
+		onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenShopSearch()
+
 		if app.ENABLE_GM_PLAYER_PANEL or app.ENABLE_BULK_POTION_PANEL:
 			onPressKeyDict[app.DIK_TAB]	= lambda : self.interface.ToggleTabPanel()
 
@@ -2195,6 +2198,9 @@ class GameWindow(ui.ScriptWindow):
 			"MyShopPriceList"		: self.__PrivateShop_PriceList,
 			"skill_select"			: self.LearnSkillGroup,
 			# END_OF_PRIVATE_SHOP_PRICE_LIST
+
+			# Pazar Arama (ShopSearch): NPC/quest 'shop_search' komutu ile acilir
+			"shop_search"			: self.__OpenShopSearch,
 		}
 
 		if app.ENABLE_OFFLINE_SHOP:
@@ -2367,6 +2373,10 @@ class GameWindow(ui.ScriptWindow):
 	## PrivateShop
 	def __PrivateShop_Open(self):
 		self.interface.OpenPrivateShopInputNameDialog()
+
+	# Pazar Arama (ShopSearch) penceresini ac (NPC/quest 'shop_search' komutu)
+	def __OpenShopSearch(self):
+		self.interface.OpenShopSearch()
 
 	def BINARY_PrivateShop_Appear(self, vid, text):
 		self.interface.AppearPrivateShop(vid, text)
