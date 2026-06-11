@@ -1835,3 +1835,22 @@
 2102	<Kovár> Hrác %s spálil predmet %s!
 2103	<Pozehnání> Hrác %s získal predmet %s!
 2104	<Pozehnání> Hráci %s byl predmet %s snízen na úroven %s!
+2150	%s byl úspìšnì odstranìn.
+5201	Nejsi majitelem tohoto obchodu.
+5202	Obchod nemùžeš upravovat, když je otevøené okno obchodu, skladu nebo kostky.
+5203	Celková hodnota pøedmìtù v obchodì nesmí pøesáhnout 2.000.000.000 Yang! Sniž cenu nebo odeber pøedmìt.
+5204	Tento obchod se právì upravuje.
+5205	Bìhem úpravy obchodu tuto akci nemùžeš provést.
+5206	Pro akci v obchodì prosím pár sekund poèkej.
+5207	Už máš aktivní obchod.
+5208	Obchod hráèe #PLAYER_NAME#
+5209	V dárkové schránce máš pøedmìty, nejprve si je vyzvedni.
+5210	Dosáhl jsi maximálního množství Yangu, které mùžeš nést.
+5211	Chyba balíèku, zkus to prosím znovu.
+5212	Obchod byl zavøen.
+5213	Provádíš akce pøíliš rychle, chvíli poèkej.
+5214	V této oblasti nemùžeš otevøít obchod.
+5215	Systém obchodu je doèasnì vypnutý.
+5216	Všechny dárky byly pøidány do inventáøe.
+5217	Dárek byl pøidán do inventáøe.
+5218	Poèkej prosím 5 sekund.

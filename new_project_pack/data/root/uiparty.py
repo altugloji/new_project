@@ -559,7 +559,7 @@ class PartyWindow(ui.Window):
 	def __init__(self):
 		ui.Window.__init__(self)
 
-		self.SetPosition(10, 52)
+		self.SetPosition(10, 120)
 		self.partyMemberInfoBoardList = []
 
 		self.__CreatePartyMenuButton()

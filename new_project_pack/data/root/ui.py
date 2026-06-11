@@ -2075,6 +2075,46 @@ class Bar(Window):
 	def SetColor(self, color):
 		wndMgr.SetColor(self.hWnd, color)
 
+class TextValueBar(Bar):
+	def __init__(self, name, value_text, size_x, size_y):
+		Bar.__init__(self)
+
+		self.SetSize(size_x, size_y)
+
+		title = TextLine()
+		title.SetParent(self)
+		title.SetWindowVerticalAlignCenter()
+		title.SetVerticalAlignCenter()
+		title.SetPosition(3, 0)
+		title.SetText(name)
+		title.Show()
+		self.title = title
+
+		value = TextLine()
+		value.SetParent(self)
+		value.SetHorizontalAlignRight()
+		value.SetWindowHorizontalAlignRight()
+		value.SetWindowVerticalAlignCenter()
+		value.SetVerticalAlignCenter()
+		value.SetPosition(3, 0)
+		value.SetText(value_text)
+		value.Show()
+		self.value = value
+
+		self.Show()
+
+	def __del__(self):
+		Bar.__del__(self)
+
+	def SetBarBackground(self, isEven):
+		self.SetColor(0x40000000 if isEven else 0x10ffffff)
+
+	def SetTitleLabel(self, text):
+		self.title.SetText(text)
+
+	def SetValueLabel(self, text):
+		self.value.SetText(text)
+
 class Line(Window):
 
 	def RegisterWindow(self, layer):
@@ -2564,6 +2604,26 @@ class HorizontalBar(Window):
 		self.imgCenter.SetPosition(self.BLOCK_WIDTH, 0)
 		self.imgRight.SetPosition(width - self.BLOCK_WIDTH, 0)
 		self.SetSize(width, self.BLOCK_HEIGHT)
+
+class HorizontalBarTitle(HorizontalBar):
+	def __init__(self, width, title_text):
+		HorizontalBar.__init__(self)
+		self.Create(width)
+
+		title = TextLine()
+		title.SetParent(self)
+		title.SetPackedFontColor(0xffe3cca1)
+		title.SetVerticalAlignCenter()
+		title.SetWindowVerticalAlignCenter()
+		title.SetPosition(4, 0)
+		title.SetText(title_text)
+		title.Show()
+		self.title = title
+
+		self.Show()
+
+	def __del__(self):
+		HorizontalBar.__del__(self)
 
 class Gauge(Window):
 
@@ -3162,6 +3222,8 @@ class ScrollBar(Window):
 		self.lockFlag = False
 		self.scrollStep = 0.20
 
+		self.view_window = None
+		self.content_window = None
 
 		self.CreateScrollBar()
 
@@ -3230,6 +3292,8 @@ class ScrollBar(Window):
 		self.middleBar = None
 		self.upButton = None
 		self.downButton = None
+		self.view_window = None
+		self.content_window = None
 		self.eventScroll = lambda *arg: None
 
 	def SetScrollEvent(self, event):
@@ -3302,6 +3366,41 @@ class ScrollBar(Window):
 
 	def UnlockScroll(self):
 		self.lockFlag = False
+
+	def SAFE_SetOnWheelEvent(self, window):
+		if hasattr(window, "SetMouseWheelEvent") and hasattr(self, "OnMouseWheel"):
+			window.SetMouseWheelEvent(self.OnMouseWheel)
+
+	def SetScrollContent(self, view_window, content_window):
+		self.view_window = view_window
+		self.content_window = content_window
+		self.SetScrollEvent(__mem_func__(self.OnScroll))
+
+	def ResizeScrollBar(self):
+		if self.view_window and self.content_window:
+			progress = 1
+			total_height = self.content_window.GetHeight()
+			if total_height > 0:
+				progress = min(float(self.view_window.GetHeight()) / total_height, 1)
+
+			if progress >= 1:
+				self.Hide()
+			else:
+				self.Show()
+
+			self.SetMiddleBarSize(progress)  # 0 - 1
+			self.SetPos(0)
+
+	def OnScroll(self):
+		if self.view_window and self.content_window:
+			maskWindowHeight = self.view_window.GetHeight()
+			scrollContentHeight = self.content_window.GetHeight()
+			endPos = 0
+			if maskWindowHeight < scrollContentHeight:
+				endPos = maskWindowHeight - scrollContentHeight
+			# GetLerp(0, endPos, t) == endPos * t  (mathUtils not required)
+			v = float(endPos) * self.GetPos()
+			self.content_window.SetPosition(0, int(v))
 
 class ThinScrollBar(ScrollBar):
 

@@ -1,12 +1,7 @@
-Taşlar üst üste binmiyor
 75 silahlara 10 canavar eklenecek
-Mobilde ekran açıkken 10 15sn sonra ekran kararıyor ve ekran kapanıyor. Wakelock lazım
-+4 taş sadece hayalette atacak
-Grup 15 20px aşağı taşınacak
 Ejder sisteminde slotların kesildikten sonra doğması kapatılacak. Metinler normal kalacak.
-L penceresi chatler arası boşluk çok fazla normale çek
-
-
+Katakomb ve Kule itemlerinin ticaretini kapat.
+Kule questinde 7.katta zin-sa haritasında çift oda bugunu kapat. 
 
 Çöl 1
 Vadi 1

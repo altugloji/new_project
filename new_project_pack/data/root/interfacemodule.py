@@ -59,6 +59,9 @@ if app.ENABLE_CONQUEROR_UI:
 else:
 	import uiCharacter
 
+if app.ENABLE_ATTRIBUTE_LIST:
+	import uiAttributeList
+
 if app.ENABLE_ACCE_COSTUME_SYSTEM:
 	import uiacce
 
@@ -127,6 +130,7 @@ class Interface(object):
 		self.wndWeb = None
 		self.wndTaskBar = None
 		self.wndCharacter = None
+		self.wndAttributeList = None
 		self.wndInventory = None
 		if app.ENABLE_OFFLINE_SHOP:
 			self.wndGiftBox = None
@@ -287,6 +291,9 @@ class Interface(object):
 		wndChatLog.BindInterface(self)
 
 		self.wndCharacter = wndCharacter
+		if app.ENABLE_ATTRIBUTE_LIST:
+			self.wndAttributeList = uiAttributeList.AttributeListWindow()
+			self.wndAttributeList.Hide()
 		self.wndInventory = wndInventory
 		self.wndDragonSoul = wndDragonSoul
 		self.wndDragonSoulRefine = wndDragonSoulRefine
@@ -595,6 +602,9 @@ class Interface(object):
 		if self.wndCharacter:
 			self.wndCharacter.Destroy()
 
+		if app.ENABLE_ATTRIBUTE_LIST and self.wndAttributeList:
+			self.wndAttributeList.Destroy()
+
 		if self.wndInventory:
 			self.wndInventory.Destroy()
 
@@ -764,6 +774,8 @@ class Interface(object):
 			del self.wndExpandedTaskBar
 		del self.wndEnergyBar
 		del self.wndCharacter
+		if app.ENABLE_ATTRIBUTE_LIST:
+			del self.wndAttributeList
 		del self.wndInventory
 		if self.wndDragonSoul:
 			del self.wndDragonSoul
@@ -852,6 +864,8 @@ class Interface(object):
 		self.wndTaskBar.RefreshStatus()
 		self.wndCharacter.RefreshStatus()
 		self.wndInventory.RefreshStatus()
+		if app.ENABLE_ATTRIBUTE_LIST and self.wndAttributeList:
+			self.wndAttributeList.RefreshStatus()
 		if self.wndEnergyBar:
 			self.wndEnergyBar.RefreshStatus()
 		if app.ENABLE_DRAGON_SOUL_SYSTEM:
@@ -1252,6 +1266,9 @@ class Interface(object):
 
 		if self.wndCharacter:
 			self.wndCharacter.Hide()
+
+		if app.ENABLE_ATTRIBUTE_LIST and self.wndAttributeList:
+			self.wndAttributeList.Hide()
 
 		if self.wndInventory:
 			self.wndInventory.Hide()

@@ -1900,6 +1900,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_CONQUEROR_UI", false);
 #endif
 
+#ifdef ENABLE_ATTRIBUTE_LIST
+	PyModule_AddIntConstant(poModule, "ENABLE_ATTRIBUTE_LIST", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_ATTRIBUTE_LIST", 0);
+#endif
+
 #ifdef ENABLE_DS_GRADE_MYTH
 	PyModule_AddIntConstant(poModule, "ENABLE_DS_GRADE_MYTH", 1);
 #else

@@ -6741,7 +6741,7 @@ bool CHARACTER::EquipItem(LPITEM item, int iCandidateCell)
 	const DWORD dwCurTime = get_dword_time();
 
 	if (iWearCell != WEAR_ARROW
-		&& (dwCurTime - GetLastAttackTime() <= 1500 || dwCurTime - m_dwLastSkillTime <= 1500))
+		&& dwCurTime - m_dwLastSkillTime <= 1500)
 	{
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("가만히 있을 때만 착용할 수 있습니다."));
 		return false;

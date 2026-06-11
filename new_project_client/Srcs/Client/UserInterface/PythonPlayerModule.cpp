@@ -2543,6 +2543,51 @@ void initPlayer()
 	PyModule_AddIntConstant(poModule, "POINT_PC_BANG_EXP_BONUS",		POINT_PC_BANG_EXP_BONUS);
 	PyModule_AddIntConstant(poModule, "POINT_PC_BANG_DROP_BONUS",		POINT_PC_BANG_DROP_BONUS);
 
+#ifdef ENABLE_ATTRIBUTE_LIST
+	// Player bonus (AttributeList) window - point types
+	PyModule_AddIntConstant(poModule, "POINT_POISON_PCT",			POINT_POISON_PCT);
+	PyModule_AddIntConstant(poModule, "POINT_STUN_PCT",				POINT_STUN_PCT);
+	PyModule_AddIntConstant(poModule, "POINT_SLOW_PCT",				POINT_SLOW_PCT);
+	PyModule_AddIntConstant(poModule, "POINT_REFLECT_MELEE",		POINT_REFLECT_MELEE);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_ANIMAL",		POINT_ATTBONUS_ANIMAL);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_ORC",			POINT_ATTBONUS_ORC);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_MILGYO",		POINT_ATTBONUS_MILGYO);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_UNDEAD",		POINT_ATTBONUS_UNDEAD);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_DEVIL",		POINT_ATTBONUS_DEVIL);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_HUMAN",		POINT_ATTBONUS_HUMAN);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_WARRIOR",		POINT_ATTBONUS_WARRIOR);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_ASSASSIN",	POINT_ATTBONUS_ASSASSIN);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_SURA",		POINT_ATTBONUS_SURA);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_SHAMAN",		POINT_ATTBONUS_SHAMAN);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_CRITICAL",		POINT_RESIST_CRITICAL);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_PENETRATE",		POINT_RESIST_PENETRATE);
+	PyModule_AddIntConstant(poModule, "POINT_BLOCK",				POINT_BLOCK);
+	PyModule_AddIntConstant(poModule, "POINT_DODGE",				POINT_DODGE);
+	PyModule_AddIntConstant(poModule, "POINT_POISON_REDUCE",		POINT_POISON_REDUCE);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_HUMAN",			POINT_RESIST_HUMAN);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_WARRIOR",		POINT_RESIST_WARRIOR);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_ASSASSIN",		POINT_RESIST_ASSASSIN);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_SURA",			POINT_RESIST_SURA);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_SHAMAN",		POINT_RESIST_SHAMAN);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_SWORD",			POINT_RESIST_SWORD);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_TWOHAND",		POINT_RESIST_TWOHAND);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_DAGGER",		POINT_RESIST_DAGGER);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_BELL",			POINT_RESIST_BELL);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_FAN",			POINT_RESIST_FAN);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_BOW",			POINT_RESIST_BOW);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_MAGIC",			POINT_RESIST_MAGIC);
+	PyModule_AddIntConstant(poModule, "POINT_STEAL_HP",				POINT_STEAL_HP);
+	PyModule_AddIntConstant(poModule, "POINT_STEAL_SP",				POINT_STEAL_SP);
+	PyModule_AddIntConstant(poModule, "POINT_MANA_BURN_PCT",		POINT_MANA_BURN_PCT);
+	PyModule_AddIntConstant(poModule, "POINT_HP_REGEN",				POINT_HP_REGEN);
+	PyModule_AddIntConstant(poModule, "POINT_SP_REGEN",				POINT_SP_REGEN);
+	PyModule_AddIntConstant(poModule, "POINT_ATTBONUS_CZ",			POINT_ATTBONUS_CZ);
+	PyModule_AddIntConstant(poModule, "POINT_ENCHANT_DARK",			POINT_ENCHANT_DARK);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_FIRE",			POINT_RESIST_FIRE);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_WIND",			POINT_RESIST_WIND);
+	PyModule_AddIntConstant(poModule, "POINT_RESIST_ELEC",			POINT_RESIST_ELEC);
+#endif
+
 	PyModule_AddIntConstant(poModule, "MAIN_RACE_WARRIOR_M", MAIN_RACE_WARRIOR_M);
 	PyModule_AddIntConstant(poModule, "MAIN_RACE_ASSASSIN_W", MAIN_RACE_ASSASSIN_W);
 	PyModule_AddIntConstant(poModule, "MAIN_RACE_SURA_M", MAIN_RACE_SURA_M);

@@ -1,3 +1,6 @@
+LOGIN_FAILURE_ONLYGM	Giriþ izniniz bulunmuyor. Sunucu þu anda bakýmda.
+LOGIN_FAILURE_UPDATE	Oyununuz güncel deðil. Lütfen güncelleyiniz.
+GM_PLAYER_PANEL_GO	GO
 NEW_MOB_TIMER_GM_ALIVE	[BossTimer] %u yasiyor (id %u map %ld)
 NEW_MOB_TIMER_GM_WAIT	[BossTimer] %u olu bekliyor - sonraki %02d:%02d (id %u)
 NEW_MOB_TIMER_GM_SPAWN	[BossTimer] %u bu dakikada doguyor (id %u)
@@ -426,10 +429,10 @@ CHANNEL_PVP	Serbest düello
 CHANNEL_SELECT_CHANNEL	Kanal Seç
 CHANNEL_SELECT_REGION	Bölge seç.
 CHANNEL_SELECT_SERVER	Sunucu seç
-CHANNEL_STATUS_BUSY	Kalabalýk
-CHANNEL_STATUS_FULL	Dolu
-CHANNEL_STATUS_OFFLINE	Bilinmeyen
-CHANNEL_STATUS_RECOMMENDED	Tavsiye edilen
+CHANNEL_STATUS_BUSY	BUSY
+CHANNEL_STATUS_FULL	FULL
+CHANNEL_STATUS_OFFLINE	....
+CHANNEL_STATUS_RECOMMENDED	NORM
 CHANNEL_STATUS_VACANT	Boþ
 CHANNEL_TEST_SERVER	Sunucuyu test et
 CHANNEL_TEST_SERVER_ADDR	Test %s:%d
@@ -751,9 +754,9 @@ DETAILS_TOOLTIP_HIT_PCT	Rakibi vurma þansýný yükseltir.
 DETAILS_TOOLTIP_RESIST_MOUNT_FALL	Düþmeye Karþý Dayanýklýlýk: Bineðinden düþme ihtimalini azaltýr.
 DONT_USE_ITEM_WHEN_SHOW_CONFIRM	Sorgulama sýrasýnda nesne hareket ettiremezsin.
 DO_NOT_INSERT_UPBRINGING_PET	Aktif pet seçilemez.
-DO_YOU_BUY_ITEM1	%s Eþyasýný %s Yang karþýlýðýnda satýn almak ister misin?
-DO_YOU_BUY_ITEM2	%s (%s adet) eþyasýný %s Yang ile karþýlýðýnda almak ister misin?
-DO_YOU_BUY_ITEM3	%s ile %s Won ve %s Yang almak ister misin?
+DO_YOU_BUY_ITEM1	%s Eþyasýný %s karþýlýðýnda satýn almak ister misin?
+DO_YOU_BUY_ITEM2	%s (%s adet) eþyasýný %s ile karþýlýðýnda almak ister misin?
+DO_YOU_BUY_ITEM3	%s ile %s Won ve %s almak ister misin?
 DO_YOU_BUY_ITEM4	%s nesnesini (%s adet ) %s Won ve %s Yang karþýlýðýnda satýn almak ister misin?
 DO_YOU_BUY_ITEM_SECONDARY_COIN_1	%s eþyasýný %s karþýlýðýnda satýn almak istiyor musun?
 DO_YOU_BUY_ITEM_SECONDARY_COIN_2	%s eþyasýný (%s adet) %s karþýlýðýnda satýn almak istiyor musun?
@@ -3010,7 +3013,7 @@ TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_JOB_WOLF	Lycanlara karþý güçlü
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_KNOCKBACK	Geri tepme yok	SNA
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_NIMBLE	Çevik toynak	SNA
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_ANIMAL	Hayvanlara karþý güçlü
-TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_CZ	Zodyak canavarlarýna karþý güçlü
+TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_CZ	Sürgüne karþý güçlü
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_DESSERT	Çöl canavarlarýna karþý güçlü
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_DEVIL	Þeytanlara karþý güçlü
 TOOLTIP_AFFECT_MOUNT_UPGRADE_SKILL_RANDOM_HUMAN	Yarý Ýnsanlara karþý güçlü
@@ -3083,7 +3086,6 @@ TOOLTIP_APPLY_ATTBONUS_ASSASSIN	Ninjalara karþý güçlü +%%%d	SA
 TOOLTIP_APPLY_ATTBONUS_BELL	Çan savunmasýndan kopuþ +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_BOW	Ok savunmasýndan kopuþ +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_CLAW	Pençe savunmasýndan kopuþ +%d%%	SA
-TOOLTIP_APPLY_ATTBONUS_CZ	Zodyak canavarýna karþý güçlü +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_DAGGER	Hançer savunmasýndan kopuþ +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_DESERT	Çöl canavarýna karþý güçlü +%d%%	SA
 TOOLTIP_APPLY_ATTBONUS_DEVIL	Þeytanlara karþý güçlü +%%%d	SA
@@ -3393,7 +3395,6 @@ TOOLTIP_REQUIREMENT_LEVEL	%d.Seviyeye ulaþmýþ olmalýsýn.
 TOOLTIP_REQUIREMENT_SKILL_LEVEL	%s Seviye %d gerekli.
 TOOLTIP_REQUIREMENT_STAT_LEVEL	%s %d gerekli
 TOOLTIP_RESIST_BOW	Ok savunmasý %d%%	SA
-TOOLTIP_RESIST_DARK	Karanlýk Direnci +%%%d	SA
 TOOLTIP_RESIST_EARTH	Toprak Direnci +%%%d	SA
 TOOLTIP_RESIST_ELEC	Þimsek direnci %%%d	SA
 TOOLTIP_RESIST_FIRE	Ateþ direnci %%%d	SA
@@ -3643,7 +3644,7 @@ TREASURE_HUNT_EVENT_SHOW_ACCUMULATE_REWARD_BUTTON_TOOLTIP	Tur ödüllerine git
 TREE_FRUIT	Acý dut
 UI_ACCEPT	Kabul
 UI_BOLD_FONT	Tahoma:12b
-UI_BOLD_FONT_LARGE2	Tahoma:22b
+UI_BOLD_FONT_LARGE2	Tahoma:18
 UI_CANCEL	iptal
 UI_CLOSE	Kapat
 UI_DEF_FONT	Tahoma:12
@@ -3742,3 +3743,43 @@ CHARACTER_CHEST_BIO_WAIT	Beklemede
 BULK_POTION_EMPTY_PANEL	Kayýtlý iksir bulunmuyor.
 BULK_POTION_NOT_ALLOWED	Bu eþya Toplu Ýksir Paneli'ne eklenemez.
 BULK_POTION_ALREADY_REGISTERED	Bu iksir zaten panelde kayýtlý.
+AUTO_CHAT_TITLE	Otomatik Baðýrma
+AUTO_CHAT_DESC	Bu özellik son baðýrma mesajýnýzý otomatik olarak tekrar gönderir.
+AUTO_CHAT_SAVED_MESSAGE	Kayýtlý Mesajýnýz:
+AUTO_CHAT_ENABLED	Baþlat
+AUTO_CHAT_DISABLED	Durdur
+AUTO_CHAT_NO_MESSAGE	Mesaj bulunamadý. Önce bir baðýrma mesajý gönderin.
+TOOLTIP_APPLY_ATTBONUS_CZ	Sürgüne karþý güçlü +%d%%	SA
+TOOLTIP_RESIST_DARK	Sürgüne karþý dayanýklýlýk +%%%d	SA
+REGISTER_BUTTON	Kayit Ol
+REGISTER_SUCCESS	Hesabiniz basariyla olusturuldu. Simdi giris yapabilirsiniz.
+REGISTER_PASSWORD_MISMATCH	Parolalar eslesmiyor.
+REGISTER_FAILURE_INVALID_LOGIN	Gecersiz kullanici adi (2-16 harf/rakam).
+REGISTER_FAILURE_INVALID_PASSWORD	Parola en az 6 karakter olmali.
+REGISTER_FAILURE_INVALID_EMAIL	Gecersiz e-posta adresi.
+REGISTER_FAILURE_ALREADY_EXIST	Bu kullanici adi zaten alinmis.
+REGISTER_FAILURE_DB_ERROR	Sunucu hatasi, lutfen tekrar deneyin.
+REGISTER_FAILURE_RATE_LIMIT	Cok fazla kayit denemesi. Lutfen bekleyin.
+REGISTER_FAILURE_UNKNOWN	Bilinmeyen bir hata olustu.
+SAFETRADE_TITLE	Güvenli Ticaret
+SAFETRADE_LIST_TITLE	Güvenli Ticaretler
+SAFETRADE_LOCK	Kilitle
+SAFETRADE_CONFIRM	Son Onay
+SAFETRADE_CLAIM	Itemleri Al
+SAFETRADE_CLOSE	Kapat
+SAFETRADE_VIEW	Göster / Al
+SAFETRADE_CONFIRM_QUESTION	Bu iþlem geri alýnamaz. Itemler karþý oyuncuya teslim edilebilir hale gelecek. Emin misin?
+SAFETRADE_LOCKED_MSG	Itemler güvenli ticaret havuzuna eklendi ve kilitlendi.
+SAFETRADE_INCOMING_FMT	Gönderen: %s  -  %d item
+SAFETRADE_OUTGOING_FMT	Bekliyor: %s  -  %d item
+SAFETRADE_NO_SPACE	Envanterinde yeterli boþ yer yok.
+SAFETRADE_CLAIMED_OK	Itemler baþarýyla teslim alýndý.
+SAFETRADE_ALREADY	Bu güvenli ticaret zaten alýnmýþ.
+SAFETRADE_CONFIRMED	Ticaret onaylandý. Karþý oyuncu artýk itemleri alabilir.
+SAFETRADE_EMPTY_LIST	Sana gelen güvenli ticaret bulunmuyor.
+SAFETRADE_ALREADY_OPEN	Zaten açýk bir güvenli ticaretin var.
+SAFETRADE_TOO_MANY	Çok fazla aktif güvenli ticaretin var.
+SAFETRADE_CONFIRM_L1	Bu iþlem geri alýnamaz!
+SAFETRADE_CONFIRM_L2	Onaylarsan itemler karþý oyuncuya teslim edilecek.
+SAFETRADE_CONFIRM_L3	Devam etmek istiyor musun?
+UI_BOLD_FONT_T13	Tahoma:13

@@ -39,3 +39,9 @@ TITLE_RGB_EVIL_1 = (207, 117,   0)
 TITLE_RGB_EVIL_2 = (235,  83,   0)
 TITLE_RGB_EVIL_3 = (227,   0,   0)
 TITLE_RGB_EVIL_4 = (255,   0,   0)
+
+import grp
+# Packed font colours used by the player bonus (AttributeList) window
+DISABLED_FONT_COLOR = grp.GenerateColor(0.5607, 0.5607, 0.5607, 1.0)
+NEGATIVE_COLOR = grp.GenerateColor(0.9, 0.4745, 0.4627, 1.0)
+POSITIVE_COLOR = grp.GenerateColor(0.5411, 0.7254, 0.5568, 1.0)

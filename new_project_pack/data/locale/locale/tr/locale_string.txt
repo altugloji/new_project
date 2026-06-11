@@ -70,7 +70,7 @@
 70	[Yansýtma] Yansýtýlan nesneyi kuþanamazsýn çünkü bu nesne diðer cinsiyet için.
 71	[Yansýtma] Yansýtýlan nesneyi kuþanamazsýn çünkü sýnýfý farklý.
 72	[Canavar kartý] %d. görev sýnýfýnda %s canavarýný alt ettin.
-73	[Canavar kartý] Bir canavar görevi tamamladýn. Þimdi bir canavar kartý kap!
+73	[Canavar kartý] Bir canavar görevi tamamladýn. Þimdi bir canavar kartý kap!
 74	[Canavar kartý] Envanterinde yer yok.
 75	[Canavar kartý] [%s] Seviye atlamayý tamamladýn.
 76	[Canavar Kartý] Þimdi canavarýn hareket animasyonunu izleyebilirsin.
@@ -1809,11 +1809,11 @@
 1925	Ganimet filtresinin süresi uzatýldý.
 1926	[SungMa Ýstila Portalý] Bu bölgenin bir yerinde bir SungMa Ýstila Portalý açýldý. [ENTER]Bulmak için genel görünüm haritaný aç.
 1927	[SungMa Ýstila Portalý] Ýstilacýlar Komutaný bir yerde belirdi!
-1930	[SungMa Ýstila Portalý] Ýstila Portalý’nýn gücü zayýfladý ve imha edilebilir hale geldi.
+1930	[SungMa Ýstila Portalý] Ýstila Portalý'nýn gücü zayýfladý ve imha edilebilir hale geldi.
 1931	[SungMa Ýstila Portalý] Bölge baþarýyla savunuldu ve yakýnda buradan dýþarý ýþýnlanacaksýn.
 1932	[SungMa Ýstila Portalý] Ýstila Protalý kapandý.
-1933	[SungMa Ýstila Portalý] Ýstila Portalý’nýn yakýnýnda güç çiçekleri belirdi.[ENTER]Bölgeyle ayný elemente sahip bir çiçek kullan ve hasar bonusu kazan!
-1934	[SungMa Ýstila Portalý] Ýstila Komutaný’nýn yakýnýnda güç çiçekleri belirdi.[ENTER]Bölgeyle ayný elemente sahip bir çiçek kullan ve hasar bonusu kazan!
+1933	[SungMa Ýstila Portalý] Ýstila Portalý'nýn yakýnýnda güç çiçekleri belirdi.[ENTER]Bölgeyle ayný elemente sahip bir çiçek kullan ve hasar bonusu kazan!
+1934	[SungMa Ýstila Portalý] Ýstila Komutaný'nýn yakýnýnda güç çiçekleri belirdi.[ENTER]Bölgeyle ayný elemente sahip bir çiçek kullan ve hasar bonusu kazan!
 1936	[SungMa Ýstila Portalý] Envanterinde bu ödülü almak için yeterli alan yok.
 1937	[SungMa Ýstila Portalý] Ýstila portalýný imha etmek için öncelikle yakýnýndaki tüm canavarlarý yenmelisin. 
 1938	[Lonca] %d Yang çekildi.
@@ -1835,7 +1835,7 @@
 2102	<Demirci> %s isimli oyuncu %s yakti!
 2103	<Kutsama> %s isimli oyuncu %s elde etti!
 2104	<Kutsama> %s isimli oyuncu %s itemini %s seviyesine düþürdü!
-2150	%s nesnesi baþarýyla silindi."
+2150	%s nesnesi baþarýyla silindi.
 5201	Bu pazarýn sahibi deðilsin.
 5202	Takas, kasa veya küp penceresi açýkken pazarý düzenleyemezsin.
 5203	Pazardaki eþyalarýn toplam deðeri 2.000.000.000 Yang'ý geçemez! Fiyat düþür veya eþya kaldýr.
@@ -1843,7 +1843,7 @@
 5205	Pazar düzenlenirken bu iþlemi yapamazsýn.
 5206	Pazar iþlemi için lütfen birkaç saniye bekle.
 5207	Zaten aktif bir pazarýn var.
-5208	#PLAYER_NAME# Pazarý";
+5208	#PLAYER_NAME# Pazarý
 5209	Hediye kutunda eþya var, önce onlarý al.
 5210	Taþýyabileceðin maksimum Yang'a ulaþtýn.
 5211	Paket hatasý, lütfen tekrar dene.

@@ -3735,3 +3735,11 @@ WIKI_ITEM_PREVIEW_COL_LOC	Ubicación
 WIKI_ITEM_PREVIEW_SECTION_MOB	Monstruos / Metines / Bosses
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Cofre
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Otros
+AUTO_CHAT_TITLE	Grito automático
+AUTO_CHAT_DESC	Esta función vuelve a enviar automáticamente tu último mensaje de grito.
+AUTO_CHAT_SAVED_MESSAGE	Mensaje guardado:
+AUTO_CHAT_ENABLED	Iniciar
+AUTO_CHAT_DISABLED	Detener
+AUTO_CHAT_NO_MESSAGE	No se encontró ningún mensaje. Primero envía un mensaje de grito.
+UI_BOLD_FONT_LARGE2	Tahoma:18
+UI_BOLD_FONT_T13	Tahoma:13

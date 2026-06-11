@@ -1243,7 +1243,7 @@ l'Alchimia delle Pietre del drago.
 1250	Setacciate le zone e annientateli! Raccogliete punti vita e scambiateli con dei bauli.
 1251	L'evento dei Cacciatori di boss finirà fra %d minuto(i).
 1252	Il Signor B. e i mostri boss scompariranno fra %d minuto(i).
-1253	Hai raggiunto l’obiettivo del giorno! Va' a ritirare la tua ricompensa.
+1253	Hai raggiunto l'obiettivo del giorno! Va' a ritirare la tua ricompensa.
 1254	Non puoi utilizzare le skin per arma mentre indossi un Abito da sposa o uno Smoking.
 1255	In questo momento l'altra persona è occupata, per cui ora non puoi commerciare.
 1256	Non puoi indossare un Abito da sposa o uno Smoking mentre utilizzi una skin per arma.
@@ -1479,7 +1479,7 @@ l'Alchimia delle Pietre del drago.
 1549	Impossibile teletrasportarsi all'Altopiano della Forza Elementale.
 1550	Non si può più utilizzare.
 1551	Non hai abbastanza Gaya.
-1552	Battle Royale – Status partecipanti: (%u/%u)
+1552	Battle Royale - Status partecipanti: (%u/%u)
 1553	Non è più possibile registrarsi per la Battle Royale.
 1554	Riprova più tardi.
 1555	Non si può fare mentre si sta eseguendo un'altra azione.
@@ -1836,3 +1836,22 @@ l'Alchimia delle Pietre del drago.
 2102	<Fabbro> Il giocatore %s ha bruciato %s!
 2103	<Benedizione> Il giocatore %s ha ottenuto %s!
 2104	<Benedizione> L'oggetto %s del giocatore %s è sceso al livello %s!
+2150	%s è stato eliminato con successo.
+5201	Non sei il proprietario di questo negozio.
+5202	Non puoi modificare il negozio mentre è aperta la finestra di scambio, deposito o cubo.
+5203	Il valore totale degli oggetti nel negozio non può superare 2.000.000.000 Yang! Abbassa il prezzo o rimuovi un oggetto.
+5204	Questo negozio è attualmente in modifica.
+5205	Non puoi eseguire questa azione mentre il negozio è in modifica.
+5206	Attendi qualche secondo per l'azione del negozio.
+5207	Hai già un negozio attivo.
+5208	Negozio di #PLAYER_NAME#
+5209	Hai oggetti nella scatola regalo, ritirali prima.
+5210	Hai raggiunto la quantità massima di Yang che puoi portare.
+5211	Errore pacchetto, riprova.
+5212	Il negozio è stato chiuso.
+5213	Stai eseguendo azioni troppo velocemente, attendi un momento.
+5214	Non puoi aprire un negozio in questa zona.
+5215	Il sistema negozio è temporaneamente disattivato.
+5216	Tutti i regali sono stati aggiunti al tuo inventario.
+5217	Il regalo è stato aggiunto al tuo inventario.
+5218	Attendi 5 secondi.

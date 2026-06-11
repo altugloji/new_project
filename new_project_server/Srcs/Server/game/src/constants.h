@@ -65,7 +65,7 @@ enum {
 	FORTUNE_MAX_NUM,
 };
 
-const int STONE_INFO_MAX_NUM = 10;
+const int STONE_INFO_MAX_NUM = 12;
 const int STONE_LEVEL_MAX_NUM = 4;
 
 struct SStoneDropInfo

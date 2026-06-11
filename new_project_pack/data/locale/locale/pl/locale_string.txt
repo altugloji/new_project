@@ -124,7 +124,7 @@
 124	Deklaracja Wojny Gildii koñczy siê za 3 min.
 125	%d sek. do wejœcia do Strefy Walki.
 126	%d sek. do opuszczenia Strefy Walki.
-127	Straci³eœ %dpkt – pozosta³y czas: %d
+127	Straci³eœ %dpkt - pozosta³y czas: %d
 128	Masz za ma³o miejsca w swoim ekwipunku.
 129	Za tego gracza nie otrzymasz ¿adnych punktów.
 130	Zg³osi³eœ swój odwrót i mo¿esz opuœciæ Strefê Walki za %d sek.
@@ -1835,3 +1835,22 @@
 2102	<Kowal> Gracz %s spalil %s!
 2103	<Blogoslawienstwo> Gracz %s zdobyl %s!
 2104	<Blogoslawienstwo> Przedmiot %s gracza %s zostal obnizony do poziomu %s!
+2150	%s zosta³ pomyœlnie usuniêty.
+5201	Nie jesteœ w³aœcicielem tego sklepu.
+5202	Nie mo¿esz edytowaæ sklepu, gdy otwarte jest okno handlu, magazynu lub kostki.
+5203	£¹czna wartoœæ przedmiotów w sklepie nie mo¿e przekroczyæ 2.000.000.000 Yang! Obni¿ cenê lub usuñ przedmiot.
+5204	Ten sklep jest aktualnie edytowany.
+5205	Nie mo¿esz wykonaæ tej akcji podczas edycji sklepu.
+5206	Poczekaj kilka sekund na akcjê sklepu.
+5207	Masz ju¿ aktywny sklep.
+5208	Sklep gracza #PLAYER_NAME#
+5209	Masz przedmioty w skrzynce prezentów, odbierz je najpierw.
+5210	Osi¹gn¹³eœ maksymaln¹ iloœæ Yang, któr¹ mo¿esz nosiæ.
+5211	B³¹d pakietu, spróbuj ponownie.
+5212	Sklep zosta³ zamkniêty.
+5213	Wykonujesz akcje zbyt szybko, poczekaj chwilê.
+5214	Nie mo¿esz otworzyæ sklepu w tym obszarze.
+5215	System sklepu jest tymczasowo wy³¹czony.
+5216	Wszystkie prezenty zosta³y dodane do twojego ekwipunku.
+5217	Prezent zosta³ dodany do twojego ekwipunku.
+5218	Poczekaj 5 sekund.

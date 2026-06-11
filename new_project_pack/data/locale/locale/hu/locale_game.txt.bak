@@ -3735,3 +3735,11 @@ WIKI_ITEM_PREVIEW_COL_LOC	Helyszín
 WIKI_ITEM_PREVIEW_SECTION_MOB	Szörnyek / Metinek / Bossok
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Láda
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Egyéb
+AUTO_CHAT_TITLE	Automatikus kiáltás
+AUTO_CHAT_DESC	Ez a funkció automatikusan újraküldi az utolsó kiáltás üzenetedet.
+AUTO_CHAT_SAVED_MESSAGE	Mentett üzenet:
+AUTO_CHAT_ENABLED	Indítás
+AUTO_CHAT_DISABLED	Leállítás
+AUTO_CHAT_NO_MESSAGE	Nem található üzenet. Elõször küldj egy kiáltás üzenetet.
+UI_BOLD_FONT_LARGE2	Tahoma:18
+UI_BOLD_FONT_T13	Tahoma:13

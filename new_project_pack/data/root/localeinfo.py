@@ -898,3 +898,7 @@ if app.ENABLE_WIKI:
 		if second > 0:
 			text += str(second) + " " + SECOND
 		return text
+
+def GetApplyString(affectType, affectValue):
+	import localeinfo_point
+	return localeinfo_point.GetApplyString(affectType, affectValue)

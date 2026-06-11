@@ -6915,8 +6915,9 @@ void CHARACTER::DetermineDropMetinStone()
 		m_bDropMetinStonePct = info.iDropPct;
 		{
 			m_dwDropMetinStone = c_adwMetin[number(0, sizeof(c_adwMetin)/sizeof(DWORD) - 1)];
+			const int iMaxStoneLevel = (stone_num == 8024 || stone_num == 8025) ? STONE_LEVEL_MAX_NUM : STONE_LEVEL_MAX_NUM - 1;
 			int iGradePct = number(1, 100);
-			for (int iStoneLevel = 0; iStoneLevel < STONE_LEVEL_MAX_NUM; iStoneLevel ++)
+			for (int iStoneLevel = 0; iStoneLevel < iMaxStoneLevel; iStoneLevel ++)
 			{
 				const int iLevelGradePortion = info.iLevelPct[iStoneLevel];
 				if (iGradePct <= iLevelGradePortion)
@@ -6932,7 +6933,6 @@ void CHARACTER::DetermineDropMetinStone()
 		}
 	}
 }
-
 void CHARACTER::SendEquipment(LPCHARACTER ch) const
 {
 	TPacketViewEquip p;

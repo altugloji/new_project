@@ -124,7 +124,7 @@
 124	Die Gildenkriegserklärung läuft in 3 Minuten ab.
 125	%d Sekunden bis zum Kampfzonen-Beitritt.
 126	%d Sekunden bis zum Verlassen der Kampfzone.
-127	Du hast %d Punkte verloren – Verbleibende Punkte: %d
+127	Du hast %d Punkte verloren - Verbleibende Punkte: %d
 128	Du hast leider nicht genug Platz in deinem Inventar.
 129	Für diesen Spieler erhältst du keine Punkte.
 130	Du hast deinen Rückzug angemeldet und kannst die Kampfzone in %d Sekunden verlassen.
@@ -1242,7 +1242,7 @@
 1250	Durchkämmt die Gebiete und vernichtet sie. Sammelt Trefferpunkte und tauscht sie gegen Truhen ein.
 1251	Das Bossjäger-Event endet in %d Minute(n).
 1252	Herr B. und die Bossmonster verschwinden in %d Minute(n).
-1253	Du hast dein Tagesziel erreicht – hol dir deine Belohnung ab.
+1253	Du hast dein Tagesziel erreicht - hol dir deine Belohnung ab.
 1254	Du kannst Waffenskins nicht benutzen, solange du ein Brautkleid oder einen Smoking trägst.
 1255	Die andere Person ist beschäftigt, deshalb kannst du jetzt nicht mit ihr handeln.
 1256	Du kannst ein Brautkleid oder einen Smoking nicht anziehen, solange du ein Waffenskin trägst.
@@ -1835,3 +1835,22 @@
 2102	<Schmied> Spieler %s hat %s verbrannt!
 2103	<Segnung> Spieler %s hat %s erhalten!
 2104	<Segnung> Das Item %s von Spieler %s wurde auf Stufe %s herabgesetzt!
+2150	%s wurde erfolgreich gelöscht.
+5201	Du bist nicht der Besitzer dieses Ladens.
+5202	Du kannst den Laden nicht bearbeiten, solange Handel, Lager oder Würfel geöffnet ist.
+5203	Der Gesamtwert der Items im Laden darf 2.000.000.000 Yang nicht überschreiten! Senke den Preis oder entferne ein Item.
+5204	Dieser Laden wird gerade bearbeitet.
+5205	Während der Laden bearbeitet wird, kannst du diese Aktion nicht ausführen.
+5206	Bitte warte ein paar Sekunden für die Ladenaktion.
+5207	Du hast bereits einen aktiven Laden.
+5208	Laden von #PLAYER_NAME#
+5209	In deiner Geschenkbox befinden sich Items, hole sie zuerst ab.
+5210	Du hast die maximale Yang-Menge erreicht, die du tragen kannst.
+5211	Paketfehler, bitte versuche es erneut.
+5212	Der Laden wurde geschlossen.
+5213	Du führst Aktionen zu schnell aus, warte kurz.
+5214	In diesem Bereich kannst du keinen Laden eröffnen.
+5215	Das Ladensystem ist vorübergehend deaktiviert.
+5216	Alle Geschenke wurden deinem Inventar hinzugefügt.
+5217	Geschenk wurde deinem Inventar hinzugefügt.
+5218	Bitte warte 5 Sekunden.

@@ -424,6 +424,23 @@ window = {
 								{ "name":"Status_Extent_Bar", "type":"horizontalbar", "x":12, "y":6, "width":223, },
 								{ "name":"Status_Extent_Label", "type" : "image", "x" : 13, "y" : 8, "image" : LOCALE_PATH+"label_ext.sub", },
 
+								{
+									"name" : "AttributeListButton",
+									"type" : "button",
+
+									"x" : 51,
+									"y" : 6,
+
+									"horizontal_align" : "right",
+
+									"text" : "Bonuslar",
+									"text_color" : 0xFFFFE3AD,
+
+									"default_image" : "d:/ymir work/ui/game/windows/skill_tab_button_01.sub",
+									"over_image" : "d:/ymir work/ui/game/windows/skill_tab_button_02.sub",
+									"down_image" : "d:/ymir work/ui/game/windows/skill_tab_button_03.sub",
+								},
+
 								{"name":"Status_Extent_ItemList1", "type" : "image", "x":11, "y":31, "image" : LOCALE_PATH+"label_ext_item1.sub", },
 								{"name":"Status_Extent_ItemList2", "type" : "image", "x":128, "y":32, "image" : LOCALE_PATH+"label_ext_item2.sub", },
 

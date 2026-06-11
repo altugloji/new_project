@@ -17,6 +17,10 @@ import colorInfo
 import emotion
 import chr
 
+if app.ENABLE_ATTRIBUTE_LIST:
+	import eventManager
+	import uiAttributeList
+
 SHOW_ONLY_ACTIVE_SKILL = False
 SHOW_LIMIT_SUPPORT_SKILL_LIST = [121, 122, 123, 124, 126, 127, 129, 128, 131, 137, 138, 139, 140]
 HIDE_SUPPORT_SKILL_POINT = True
@@ -279,6 +283,15 @@ class CharacterWindow(ui.ScriptWindow):
 		self.toolTipJob = uiToolTip.ToolTip()
 		self.toolTipAlignment = uiToolTip.ToolTip(130)
 
+		if app.ENABLE_ATTRIBUTE_LIST:
+			self.attributeListButton = self.GetChild2("AttributeListButton")
+			if self.attributeListButton:
+				self.attributeListButton.SAFE_SetEvent(self.__OnAttributeListButtonClick)
+		else:
+			attributeListButton = self.GetChild2("AttributeListButton")
+			if attributeListButton:
+				attributeListButton.Hide()
+
 		self.faceImage = self.GetChild("Face_Image")
 
 		faceSlot=self.GetChild("Face_Slot")
@@ -483,6 +496,10 @@ class CharacterWindow(ui.ScriptWindow):
 	def __OverOutEmotion(self):
 		if self.emotionToolTip:
 			self.emotionToolTip.HideToolTip()
+
+	if app.ENABLE_ATTRIBUTE_LIST:
+		def __OnAttributeListButtonClick(self):
+			eventManager.EventManager().send_event(uiAttributeList.EVENT_OPEN_ATTRIBUTE_LIST)
 
 	def __BindEvent(self):
 		for i in xrange(len(self.skillGroupButton)):

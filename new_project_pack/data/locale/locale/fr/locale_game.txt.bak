@@ -3595,7 +3595,7 @@ TREASURE_HUNT_EVENT_SHOW_ACCUMULATE_REWARD_BUTTON_TOOLTIP	Voir les récompenses d
 TREE_FRUIT	Baie amère
 UI_ACCEPT	Accepter
 UI_BOLD_FONT	Tahoma:12b
-UI_BOLD_FONT_LARGE2	Tahoma:22b
+UI_BOLD_FONT_LARGE2	Tahoma:18
 UI_CANCEL	Annuler
 UI_CLOSE	Fermer
 UI_DEF_FONT	Tahoma:12
@@ -3736,3 +3736,10 @@ WIKI_ITEM_PREVIEW_COL_LOC	Localisation
 WIKI_ITEM_PREVIEW_SECTION_MOB	Monstres / Metins / Boss
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Coffre
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Autre
+AUTO_CHAT_TITLE	Cri automatique
+AUTO_CHAT_DESC	Cette fonction renvoie automatiquement ton dernier message de cri.
+AUTO_CHAT_SAVED_MESSAGE	Message enregistré :
+AUTO_CHAT_ENABLED	Démarrer
+AUTO_CHAT_DISABLED	Arrêter
+AUTO_CHAT_NO_MESSAGE	Aucun message trouvé. Envoie d'abord un message de cri.
+UI_BOLD_FONT_T13	Tahoma:13

@@ -2135,7 +2135,7 @@ MINI_GAME_YUTNORI_PC_WIN	Til sejreren går byttet!
 MINI_GAME_YUTNORI_PC_WIN_SCORE	Score: %d
 MINI_GAME_YUTNORI_RETHROW_BUTTON	Kast
 MINI_GAME_YUTNORI_RETHROW_POPUP	Heldig djævel! Det er din tur igen.
-MINI_GAME_YUTNORI_SCORE_FONT	Tahoma:24b
+MINI_GAME_YUTNORI_SCORE_FONT	Tahoma:20b
 MINI_GAME_YUTNORI_START_QUESTION	Du har brug for %d Yang og %d Yut Nori Bræt for at starte et spil Yut Nori. \n Spil nu?
 MINUTE	min
 MISTS_ISLAND_BUFF_MSG_01	Energi +2
@@ -3735,3 +3735,11 @@ WIKI_ITEM_PREVIEW_COL_LOC	Lokation
 WIKI_ITEM_PREVIEW_SECTION_MOB	Monstre / Metiner / Bosser
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Kiste
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Andet
+AUTO_CHAT_TITLE	Automatisk råb
+AUTO_CHAT_DESC	Denne funktion sender automatisk din seneste råb-besked igen.
+AUTO_CHAT_SAVED_MESSAGE	Gemt besked:
+AUTO_CHAT_ENABLED	Start
+AUTO_CHAT_DISABLED	Stop
+AUTO_CHAT_NO_MESSAGE	Ingen besked fundet. Send først en råb-besked.
+UI_BOLD_FONT_LARGE2	Tahoma:18
+UI_BOLD_FONT_T13	Tahoma:13

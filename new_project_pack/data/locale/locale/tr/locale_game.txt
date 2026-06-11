@@ -3156,14 +3156,14 @@ TOOLTIP_APPLY_RESIST_SURA	Sura saldýrýlarýna karþý savunma þansý: %%%d	SA
 TOOLTIP_APPLY_RESIST_SWORD	Kýlýç Savunmasý %%%d	SA
 TOOLTIP_APPLY_RESIST_TWOHAND	Çift-El Savunma %%%d	SA
 TOOLTIP_APPLY_RESIST_WARRIOR	Savaþçý saldýrýlarýna karþý savunma þansý: %%%d	SA
-TOOLTIP_APPLY_RESIST_WIND	Rüzgar Dayanýklýlýðý %%%d	SA
+TOOLTIP_APPLY_RESIST_WIND	Rüzgara karþý dayanýklýlýk %%%d	SA
 TOOLTIP_APPLY_RESIST_WOLFMAN	Lycanlar'a karþý savunma þansý +%%%d	SA
 TOOLTIP_APPLY_SKILL_BOOK_BONUS	Kitaptan öðrenme þansý 2,5 arttý	SNA
 TOOLTIP_APPLY_SKILL_BOOK_NO_DELAY	Öðrenme baþarýsýz olursa, anýnda bir kere daha deneme þansýna sahipsin.	SNA
 TOOLTIP_APPLY_SLOW_PCT	Yavaþlama þansý: %%%d	SA
 TOOLTIP_APPLY_STEAL_HP	%%%d hasar, HP ile absorbe edilir	SA
 TOOLTIP_APPLY_STEAL_SP	%%%d hasar, SP ile absorbe edilir	SA
-TOOLTIP_APPLY_STUN_PCT	Bayýlma þansý: %%%d	SA
+TOOLTIP_APPLY_STUN_PCT	Sersemletme þansý: %%%d	SA
 TOOLTIP_ARMOR	Zýrh
 TOOLTIP_ARROW	Ok
 TOOLTIP_ASSASSIN	Ninja
@@ -3396,8 +3396,8 @@ TOOLTIP_REQUIREMENT_SKILL_LEVEL	%s Seviye %d gerekli.
 TOOLTIP_REQUIREMENT_STAT_LEVEL	%s %d gerekli
 TOOLTIP_RESIST_BOW	Ok savunmasý %d%%	SA
 TOOLTIP_RESIST_EARTH	Toprak Direnci +%%%d	SA
-TOOLTIP_RESIST_ELEC	Þimsek direnci %%%d	SA
-TOOLTIP_RESIST_FIRE	Ateþ direnci %%%d	SA
+TOOLTIP_RESIST_ELEC	Þimseke karþý dayanýklýlýk %%%d	SA
+TOOLTIP_RESIST_FIRE	Ateþe karþý dayanýklýlýk %%%d	SA
 TOOLTIP_RESIST_ICE	Buz direnci +%%%d	SA
 TOOLTIP_RESIST_MAGIC	Büyüye karþý dayanýklýlýk %%%d	SA
 TOOLTIP_RESIST_MAGIC_REDUCTION	Büyü bozma %%%d	SA
@@ -3644,13 +3644,12 @@ TREASURE_HUNT_EVENT_SHOW_ACCUMULATE_REWARD_BUTTON_TOOLTIP	Tur ödüllerine git
 TREE_FRUIT	Acý dut
 UI_ACCEPT	Kabul
 UI_BOLD_FONT	Tahoma:12b
-UI_BOLD_FONT_LARGE2	Tahoma:20b
+UI_BOLD_FONT_LARGE2	Tahoma:18
 UI_CANCEL	iptal
 UI_CLOSE	Kapat
 UI_DEF_FONT	Tahoma:12
 UI_DEF_FONT_LARGE	Tahoma:14
 UI_DEF_FONT_SMALL	Tahoma:9
-UI_BOLD_FONT_T13	Tahoma:13
 UI_DENY	Red
 UI_ITEM	Nesne
 UI_LEFT_TIME	Kalan Zaman: %d Sec.
@@ -3783,3 +3782,10 @@ SAFETRADE_TOO_MANY	Çok fazla aktif güvenli ticaretin var.
 SAFETRADE_CONFIRM_L1	Bu iþlem geri alýnamaz!
 SAFETRADE_CONFIRM_L2	Onaylarsan itemler karþý oyuncuya teslim edilecek.
 SAFETRADE_CONFIRM_L3	Devam etmek istiyor musun?
+UI_BOLD_FONT_T13	Tahoma:13
+ATTRIBUTE_LIST_OFFENSIVE	Saldýrý
+ATTRIBUTE_LIST_OFFENSIVE_MONSTER	Saldýrý (Canavarlara karþý)
+ATTRIBUTE_LIST_OFFENSIVE_PLAYER	Saldýrý (Oyunculara karþý)
+ATTRIBUTE_LIST_DEFENSIVE	Savunma
+ATTRIBUTE_LIST_DEFENSIVE_PLAYER	Savunma (Oyunculara karþý)
+ATTRIBUTE_LIST_OTHER	Diðer

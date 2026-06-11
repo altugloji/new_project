@@ -3595,7 +3595,7 @@ TREASURE_HUNT_EVENT_SHOW_ACCUMULATE_REWARD_BUTTON_TOOLTIP	Zu den Runden-Belohnun
 TREE_FRUIT	Bitterbeere
 UI_ACCEPT	Annehmen
 UI_BOLD_FONT	Tahoma:12b
-UI_BOLD_FONT_LARGE2	Tahoma:22b
+UI_BOLD_FONT_LARGE2	Tahoma:18
 UI_CANCEL	Abbruch
 UI_CLOSE	Schlieﬂen
 UI_DEF_FONT	Tahoma:12
@@ -3736,3 +3736,10 @@ WIKI_ITEM_PREVIEW_COL_LOC	Ort
 WIKI_ITEM_PREVIEW_SECTION_MOB	Monster / Metins / Bosse
 WIKI_ITEM_PREVIEW_SECTION_CHEST	Truhe
 WIKI_ITEM_PREVIEW_SECTION_OTHER	Sonstiges
+AUTO_CHAT_TITLE	Automatisches Rufen
+AUTO_CHAT_DESC	Diese Funktion sendet deine letzte Rufchat-Nachricht automatisch erneut.
+AUTO_CHAT_SAVED_MESSAGE	Gespeicherte Nachricht:
+AUTO_CHAT_ENABLED	Starten
+AUTO_CHAT_DISABLED	Stoppen
+AUTO_CHAT_NO_MESSAGE	Keine Nachricht gefunden. Sende zuerst eine Nachricht im Rufchat.
+UI_BOLD_FONT_T13	Tahoma:13
