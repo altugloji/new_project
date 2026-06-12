@@ -329,6 +329,10 @@ namespace quest
 
 		//ch->WarpSet(pDungeon->GetMapIndex(), (int) lua_tonumber(L, 2), (int)lua_tonumber(L, 3));
 		ch->WarpSet((int) lua_tonumber(L, 2), (int)lua_tonumber(L, 3), pDungeon->GetMapIndex());
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+		// Yeni giriş noktasını geri dönüş koordinatı olarak sakla.
+		pDungeon->SetDungeonRejoinWarpCoords((int)lua_tonumber(L, 2), (int)lua_tonumber(L, 3));
+#endif
 		return 0;
 	}
 
@@ -1738,6 +1742,37 @@ namespace quest
 		return 0;
 	}
 
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+	ALUA(dungeon_is_player_registered)
+	{
+		const LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
+		if (!lua_isnumber(L, 1) || !ch)
+			return 0;
+
+		const uint32_t mapIndex = (uint32_t)lua_tonumber(L, 1);
+		long warpX = 0, warpY = 0, warpMapIndex = 0;
+
+		lua_pushboolean(L, CDungeonManager::instance().HasDungeonToRejoin(ch, mapIndex, warpX, warpY, warpMapIndex));
+		return 1;
+	}
+
+	ALUA(dungeon_rejoin_to_dungeon)
+	{
+		const LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
+		if (!lua_isnumber(L, 1) || !ch)
+			return 0;
+
+		const uint32_t mapIndex = (uint32_t)lua_tonumber(L, 1);
+		long warpX = 0, warpY = 0, warpMapIndex = 0;
+
+		if (CDungeonManager::instance().HasDungeonToRejoin(ch, mapIndex, warpX, warpY, warpMapIndex)) {
+			ch->WarpSet(warpX, warpY, warpMapIndex);
+		}
+
+		return 0;
+	}
+#endif
+
 	void RegisterDungeonFunctionTable()
 	{
 		luaL_reg dungeon_functions[] =
@@ -1828,6 +1863,11 @@ namespace quest
 			{ "all_near_to",	dungeon_all_near_to	},
 			{ "set_warp_location",	dungeon_set_warp_location	},
 			{ "setqf2",			dungeon_set_quest_flag2	},
+
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+			{ "is_player_registered",	dungeon_is_player_registered },
+			{ "rejoin_to_dungeon",		dungeon_rejoin_to_dungeon },
+#endif
 
 			{nullptr, nullptr}
 		};

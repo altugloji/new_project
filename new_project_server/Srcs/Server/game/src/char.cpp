@@ -69,6 +69,8 @@
 #endif
 #include "DragonSoul.h"
 
+#define EXP_BLOCK_BUTTON
+
 extern const BYTE g_aBuffOnAttrPoints;
 extern bool RaceToJob(unsigned race, unsigned *ret_job);
 
@@ -3675,6 +3677,10 @@ void CHARACTER::PointChange(BYTE type, int amount, bool bAmount, bool bBroadcast
 
 		case POINT_EXP:
 			{
+#ifdef EXP_BLOCK_BUTTON
+				if (amount > 0 && IsBlockMode(BLOCK_EXP))
+					return;
+#endif
 				DWORD exp = GetExp();
 				const DWORD next_exp = GetNextExp();
 
@@ -6788,6 +6794,9 @@ void CHARACTER::SetBlockMode(BYTE bFlag)
 	SetQuestFlag("game_option.block_whisper", bFlag & BLOCK_WHISPER ? 1 : 0);
 	SetQuestFlag("game_option.block_messenger_invite", bFlag & BLOCK_MESSENGER_INVITE ? 1 : 0);
 	SetQuestFlag("game_option.block_party_request", bFlag & BLOCK_PARTY_REQUEST ? 1 : 0);
+#ifdef EXP_BLOCK_BUTTON
+	SetQuestFlag("game_option.block_exp", bFlag & BLOCK_EXP ? 1 : 0);
+#endif
 }
 
 void CHARACTER::SetBlockModeForce(BYTE bFlag)

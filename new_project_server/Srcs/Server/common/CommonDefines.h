@@ -144,8 +144,9 @@ enum eCommonDefines {
 #define ENABLE_GREEN_ENCHANT_LV5_LIMIT								// Yeşil efsunda lv5 efsun gelmez
 #define BERAN_SETAOU												// Mavi Ejderha
 #define ENABLE_SAFE_TRADE_SYSTEM									// Güvenli Ticaret
-#define ENABLE_PC_NPC_DAMAGE_BONUS
-#define ENABLE_NPC_MAX_HP_BONUS
+#define ENABLE_PC_NPC_DAMAGE_BONUS									// Moblara %30 daha fazla hasar
+#define ENABLE_NPC_MAX_HP_BONUS										// Moblarda %30 daha fazla HP
+#define ENABLE_RELOAD_ETC_DROP_ITEM									// Etc_drop_item.txt yenileme
 
 
 

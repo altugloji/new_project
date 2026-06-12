@@ -5768,14 +5768,6 @@ bool CHARACTER::DeleteItem(TItemPos Cell)
 	}
 #endif
 
-#ifdef ENABLE_ITEM_SHOP_SYSTEM
-	if (item->IsItemShopEmBound())
-	{
-		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
-		return false;
-	}
-#endif
-
 	if (quest::CQuestManager::instance().GetPCForce(GetPlayerID())->IsRunning() == true)
 		return false;
 

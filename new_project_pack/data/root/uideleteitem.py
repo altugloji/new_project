@@ -11,7 +11,6 @@ import uiCommon
 import uiPickMoney
 import localeInfo
 import constInfo
-import uiToolTip
 
 from grid_delete import Grid
 
@@ -28,14 +27,8 @@ import uiCommon
 import uiPickMoney
 import localeInfo
 import constInfo
-import uiToolTip
 
 from grid_delete import Grid
-
-BILGI_AL = [
-	"Neslereri sürükleyerek ekleyebilirsiniz.",
-	"Silmekten vazgeçtiðiniz nesnenin üstüne týklayarak kaldýrabilirsiniz.",
-]
 
 toplamfiyat = 0
 
@@ -47,7 +40,6 @@ class DeleteItem(ui.ScriptWindow):
 		constInfo.ITEM_DELETE_LIST = {}
 		self.tooltipItem = None
 		self.itemDropQuestionDialog = None
-		self.bilgialbuton = None
 		self.DeleteGrid = None
 		self.interface = None
 
@@ -66,10 +58,7 @@ class DeleteItem(ui.ScriptWindow):
 			self.itemSlot = self.GetChild("ItemSlot")
 			self.btnOk = self.GetChild("OkButton")
 			self.btnSat = self.GetChild("SatButton")
-			self.btnClose = self.GetChild("CloseButton")
-			self.btnIptal = self.GetChild("VazgecButton")
 			self.board = self.GetChild("Board")
-			self.bilgialbuton = self.GetChild("bilgialkardes")
 			self.fiyat = self.GetChild("fiyat")
 		except:
 			import exception
@@ -77,17 +66,13 @@ class DeleteItem(ui.ScriptWindow):
 			
 		self.btnOk.SetEvent(ui.__mem_func__(self.OnOk))
 		self.btnSat.SetEvent(ui.__mem_func__(self.OnSat))
-		self.btnClose.SetEvent(ui.__mem_func__(self.Temizle))
 		self.board.SetCloseEvent(ui.__mem_func__(self.OnClose))
-		self.btnIptal.SetEvent(ui.__mem_func__(self.OnClose))
 		
 		self.itemSlot.SetSelectEmptySlotEvent(ui.__mem_func__(self.OnSelectEmptySlot))
 		self.itemSlot.SetSelectItemSlotEvent(ui.__mem_func__(self.OnSelectItemSlot))
 		self.itemSlot.SetUnselectItemSlotEvent(ui.__mem_func__(self.OnSelectItemSlot))
 		self.itemSlot.SetOverInItemEvent(ui.__mem_func__(self.OnOverInItem))
 		self.itemSlot.SetOverOutItemEvent(ui.__mem_func__(self.OnOverOutItem))
-		
-		self.bilgialbuton.SetToolTipWindow2(self.__ToolTipOlustur("Bilgilendirme", BILGI_AL))
 	
 	def Destroy(self):
 		self.ClearDictionary()
@@ -95,10 +80,8 @@ class DeleteItem(ui.ScriptWindow):
 		self.itemSlot = None
 		self.btnOk = None
 		self.btnSat = None
-		self.btnClose = None
 		self.board = None
 		self.itemDropQuestionDialog = None
-		self.bilgialbuton = None
 		self.DeleteGrid = None
 
 	def BindInterface(self, interface):
@@ -129,17 +112,6 @@ class DeleteItem(ui.ScriptWindow):
 		self.itemStock = {}
 		self.DeleteGrid = Grid(width=6, height=10)
 		self.Refresh()
-
-	def __ToolTipOlustur(self, title, descList):
-		toolTip = uiToolTip.ToolTip()
-		toolTip.SetTitle(title)
-
-		for desc in descList:
-			toolTip.AutoAppendTextLine(desc)
-
-		toolTip.AlignHorizonalCenter()
-		toolTip.SetTop()
-		return toolTip
 
 	def SetItemToolTip(self, tooltipItem):
 		self.tooltipItem = tooltipItem
@@ -296,7 +268,7 @@ class DeleteItem(ui.ScriptWindow):
 			return
 
 		itemDropQuestionDialog = uiCommon.QuestionDialog()
-		itemDropQuestionDialog.SetText("Seçilen (|cffFDD017|h%d Adet|h|r) nesneyi silmek istiyor musun?" % (len(self.itemStock)))
+		itemDropQuestionDialog.SetText("Secilen (|cffFDD017|h%d Adet|h|r) nesneyi silmek istiyor musun?" % (len(self.itemStock)))
 		itemDropQuestionDialog.SetAcceptEvent(lambda arg=True: self.RequestDropItem(arg))
 		itemDropQuestionDialog.SetCancelEvent(lambda arg=False: self.RequestDropItem(arg))
 		itemDropQuestionDialog.Open()
@@ -304,11 +276,11 @@ class DeleteItem(ui.ScriptWindow):
 
 	def OnSat(self):
 		if (len(self.itemStock) == 0):
-			chat.AppendChat(chat.CHAT_TYPE_INFO, "Satýlacak nesne yok.")
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Satilacak nesne yok.")
 			return
 
 		itemDropQuestionDialog = uiCommon.QuestionDialog()
-		itemDropQuestionDialog.SetText("Seçilen (|cffFDD017|h%d Adet|h|r) nesneyi satmak istiyor musun?" % (len(self.itemStock)))
+		itemDropQuestionDialog.SetText("Secilen (|cffFDD017|h%d Adet|h|r) nesneyi satmak istiyor musun?" % (len(self.itemStock)))
 		itemDropQuestionDialog.SetAcceptEvent(lambda arg=True: self.RequestSellItem(arg))
 		itemDropQuestionDialog.SetCancelEvent(lambda arg=False: self.RequestSellItem(arg))
 		itemDropQuestionDialog.Open()
@@ -387,7 +359,6 @@ class DeleteItem(ui.ScriptWindow):
 		constInfo.ITEM_DELETE_LIST = {}
 		self.tooltipItem = None
 		self.itemDropQuestionDialog = None
-		self.bilgialbuton = None
 		self.DeleteGrid = None
 		self.interface = None
 
@@ -406,10 +377,7 @@ class DeleteItem(ui.ScriptWindow):
 			self.itemSlot = self.GetChild("ItemSlot")
 			self.btnOk = self.GetChild("OkButton")
 			self.btnSat = self.GetChild("SatButton")
-			self.btnClose = self.GetChild("CloseButton")
-			self.btnIptal = self.GetChild("VazgecButton")
 			self.board = self.GetChild("Board")
-			self.bilgialbuton = self.GetChild("bilgialkardes")
 			self.fiyat = self.GetChild("fiyat")
 		except:
 			import exception
@@ -417,17 +385,13 @@ class DeleteItem(ui.ScriptWindow):
 			
 		self.btnOk.SetEvent(ui.__mem_func__(self.OnOk))
 		self.btnSat.SetEvent(ui.__mem_func__(self.OnSat))
-		self.btnClose.SetEvent(ui.__mem_func__(self.Temizle))
 		self.board.SetCloseEvent(ui.__mem_func__(self.OnClose))
-		self.btnIptal.SetEvent(ui.__mem_func__(self.OnClose))
 		
 		self.itemSlot.SetSelectEmptySlotEvent(ui.__mem_func__(self.OnSelectEmptySlot))
 		self.itemSlot.SetSelectItemSlotEvent(ui.__mem_func__(self.OnSelectItemSlot))
 		self.itemSlot.SetUnselectItemSlotEvent(ui.__mem_func__(self.OnSelectItemSlot))
 		self.itemSlot.SetOverInItemEvent(ui.__mem_func__(self.OnOverInItem))
 		self.itemSlot.SetOverOutItemEvent(ui.__mem_func__(self.OnOverOutItem))
-		
-		self.bilgialbuton.SetToolTipWindow2(self.__ToolTipOlustur("Bilgilendirme", BILGI_AL))
 	
 	def Destroy(self):
 		self.ClearDictionary()
@@ -435,10 +399,8 @@ class DeleteItem(ui.ScriptWindow):
 		self.itemSlot = None
 		self.btnOk = None
 		self.btnSat = None
-		self.btnClose = None
 		self.board = None
 		self.itemDropQuestionDialog = None
-		self.bilgialbuton = None
 		self.DeleteGrid = None
 
 	def BindInterface(self, interface):
@@ -469,17 +431,6 @@ class DeleteItem(ui.ScriptWindow):
 		self.itemStock = {}
 		self.DeleteGrid = Grid(width=6, height=10)
 		self.Refresh()
-
-	def __ToolTipOlustur(self, title, descList):
-		toolTip = uiToolTip.ToolTip()
-		toolTip.SetTitle(title)
-
-		for desc in descList:
-			toolTip.AutoAppendTextLine(desc)
-
-		toolTip.AlignHorizonalCenter()
-		toolTip.SetTop()
-		return toolTip
 
 	def SetItemToolTip(self, tooltipItem):
 		self.tooltipItem = tooltipItem

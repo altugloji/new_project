@@ -472,7 +472,11 @@ bool ITEM_MANAGER::ReadEtcDropItemFile(const char * c_pszFileName)
 
 	char buf[512];
 
-	[[maybe_unused]] int lines = 0;
+	int lines = 0;
+
+#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+	std::map<DWORD, DWORD> map_dwNewProb;
+#endif
 
 	while (fgets(buf, 512, fp))
 	{
@@ -496,23 +500,47 @@ bool ITEM_MANAGER::ReadEtcDropItemFile(const char * c_pszFileName)
 		if (!*szItemName || fProb == 0.0f)
 			continue;
 
-		DWORD dwItemVnum;
+		DWORD dwItemVnum = 0;
 
 		if (!ITEM_MANAGER::instance().GetValidVnum(szItemName, dwItemVnum)
 			&& !ITEM_MANAGER::instance().GetVnumByOriginalName(szItemName, dwItemVnum))
 		{
-			sys_err("No such an item (name: %s)", szItemName);
+			sys_err("No such an item (name: %s, line: %d)", szItemName, lines);
 			fclose(fp);
 			return false;
 		}
 
+#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+		map_dwNewProb[dwItemVnum] = (DWORD) (fProb * 10000.0f);
+#else
 		m_map_dwEtcItemDropProb[dwItemVnum] = (DWORD) (fProb * 10000.0f);
+#endif
 		sys_log(0, "ETC_DROP_ITEM: %s prob %f", szItemName, fProb);
 	}
 
 	fclose(fp);
+
+#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+	m_map_dwEtcItemDropProb.swap(map_dwNewProb);
+#endif
 	return true;
 }
+
+#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+bool ITEM_MANAGER::ReloadEtcDropItemFile()
+{
+	char szFileName[256];
+	snprintf(szFileName, sizeof(szFileName), "%s/etc_drop_item.txt", LocaleService_GetBasePath().c_str());
+
+	if (!ReadEtcDropItemFile(szFileName))
+	{
+		sys_err("cannot reload ETCDropItem: %s", szFileName);
+		return false;
+	}
+
+	return true;
+}
+#endif
 
 bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 {

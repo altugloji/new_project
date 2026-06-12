@@ -121,6 +121,13 @@ class CDungeon
 
 	bool IsAllPCNearTo( int x, int y, int dist ) const;
 
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+	void	UpdatePlayerAction(LPCHARACTER ch, bool bDelete = false);
+	bool	IsRegisteredPlayer(uint32_t playerID, long& warpX, long& warpY, long& mapIdx);
+	bool	IsMatchedMapIndex(int mapIndex);
+	void	SetDungeonRejoinWarpCoords(long warpX, long warpY) const;
+#endif
+
 	protected:
 	CDungeon(IdType id, long lOriginalMapIndex, long lMapIndex);
 
@@ -159,6 +166,12 @@ class CDungeon
 	long		m_lWarpY;
 	std::string	m_stRegenFile;
 
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+	std::map<uint32_t, uint32_t>	m_PlayerInf;
+	mutable long	m_dungeonX;
+	mutable long	m_dungeonY;
+#endif
+
 	std::vector<LPREGEN> m_regen;
 
 	LPEVENT		deadEvent;
@@ -194,6 +207,10 @@ class CDungeonManager : public singleton<CDungeonManager>
 	void		Destroy(CDungeon::IdType dungeon_id);
 	LPDUNGEON	Find(CDungeon::IdType dungeon_id);
 	LPDUNGEON	FindByMapIndex(long lMapIndex);
+
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+	bool		HasDungeonToRejoin(LPCHARACTER ch, uint32_t orgMapIndex, long& warpX, long& warpY, long& warpMapIdx);
+#endif
 
 	private:
 	TDungeonMap	m_map_pkDungeon;

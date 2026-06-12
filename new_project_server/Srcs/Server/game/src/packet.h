@@ -376,6 +376,10 @@ enum
 	HEADER_GG_ADMIN_PANEL						= 36,
 #endif
 
+#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+	HEADER_GG_RELOAD_ETC_DROP					= 37,
+#endif
+
 };
 
 #pragma pack(1)

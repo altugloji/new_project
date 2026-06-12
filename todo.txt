@@ -3,6 +3,11 @@ Ejder sisteminde slotların kesildikten sonra doğması kapatılacak. Metinler n
 Katakomb ve Kule itemlerinin ticaretini kapat.
 Kule questinde 7.katta zin-sa haritasında çift oda bugunu kapat. 
 
+
+
+Mobile ekrana Target diye bir buton koyacağız ona bastıgında en yakın hedefe sağ tıklayacak.
+
+
 Çöl 1
 Vadi 1
 Sohan 40

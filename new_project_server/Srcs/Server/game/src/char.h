@@ -385,12 +385,13 @@ enum EPositions
 
 enum EBlockAction
 {
-	BLOCK_EXCHANGE		= (1 << 0),
+	BLOCK_EXCHANGE			= (1 << 0),
 	BLOCK_PARTY_INVITE		= (1 << 1),
 	BLOCK_GUILD_INVITE		= (1 << 2),
-	BLOCK_WHISPER		= (1 << 3),
+	BLOCK_WHISPER			= (1 << 3),
 	BLOCK_MESSENGER_INVITE	= (1 << 4),
 	BLOCK_PARTY_REQUEST		= (1 << 5),
+	BLOCK_EXP				= (1 << 6),
 };
 
 // <Factor> Dynamically evaluated CHARACTER* equivalent.

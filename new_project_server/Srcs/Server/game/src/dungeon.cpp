@@ -17,6 +17,11 @@
 #include "utils.h"
 #include "questmanager.h"
 
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+// Bir oyuncunun zindandan ayrıldıktan sonra geri dönebileceği süre (saniye).
+#define REJOIN_TIME_LIMIT_SEC 300
+#endif
+
 CDungeon::CDungeon(IdType id, long lOriginalMapIndex, long lMapIndex)
 	: m_id(id),
 	m_lOrigMapIndex(lOriginalMapIndex),
@@ -68,6 +73,12 @@ void CDungeon::Initialize()
 	m_lWarpY = 0;
 
 	m_stRegenFile = "";
+
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+	m_PlayerInf.clear();
+	m_dungeonX = 0;
+	m_dungeonY = 0;
+#endif
 
 	m_pParty = nullptr;
 }
@@ -216,6 +227,11 @@ void CDungeon::IncMember(LPCHARACTER ch)
 		m_set_pkCharacter.emplace(ch);
 
 	event_cancel(&deadEvent);
+
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+	// Oyuncu içeride olduğu için geri dönüş kaydından çıkar.
+	UpdatePlayerAction(ch, true);
+#endif
 }
 
 void CDungeon::DecMember(LPCHARACTER ch)
@@ -234,8 +250,18 @@ void CDungeon::DecMember(LPCHARACTER ch)
 		info->dungeon_id = m_id;
 
 		event_cancel(&deadEvent);
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+		// Son oyuncu da çıkınca, geri dönüş süresi boyunca zindanı ayakta tut.
+		deadEvent = event_create(dungeon_dead_event, info, PASSES_PER_SEC(REJOIN_TIME_LIMIT_SEC));
+#else
 		deadEvent = event_create(dungeon_dead_event, info, PASSES_PER_SEC(10));
+#endif
 	}
+
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+	// Oyuncu çıktı; geri dönüş için süre sınırıyla kaydet.
+	UpdatePlayerAction(ch);
+#endif
 }
 
 void CDungeon::IncPartyMember(LPPARTY pParty, LPCHARACTER ch)
@@ -338,6 +364,11 @@ void CDungeon::JumpAll(long lFromMapIndex, int x, int y) const
 
 	// <Factor> SECTREE::for_each -> SECTREE::for_each_entity
 	pMap->for_each(f);
+
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+	// Geri dönüş için zindan içi varış noktasını sakla.
+	SetDungeonRejoinWarpCoords(x, y);
+#endif
 }
 
 void CDungeon::WarpAll(long lFromMapIndex, int x, int y) const
@@ -423,6 +454,11 @@ void CDungeon::JumpParty(LPPARTY pParty, long lFromMapIndex, int x, int y)
 	FWarpToPosition f(m_lMapIndex, x, y);
 
 	pParty->ForEachOnMapMember(f, lFromMapIndex);
+
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+	// Parti ile giriş yapıldığında da geri dönüş varış noktasını sakla.
+	SetDungeonRejoinWarpCoords(x, y);
+#endif
 }
 
 void CDungeon::SetPartyNull()
@@ -465,6 +501,25 @@ LPDUNGEON CDungeonManager::FindByMapIndex(long lMapIndex)
 	}
 	return nullptr;
 }
+
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+bool CDungeonManager::HasDungeonToRejoin(LPCHARACTER ch, uint32_t orgMapIndex, long& warpX, long& warpY, long& warpMapIdx)
+{
+	if (!ch) { return false; }
+
+	const uint32_t playerID = ch->GetPlayerID();
+
+	LPDUNGEON pDungeon = nullptr;
+	for (auto const& x : m_map_pkMapDungeon) {
+		pDungeon = x.second;
+		if (pDungeon->IsMatchedMapIndex(orgMapIndex) && pDungeon->GetFlag("boss_dead") != 1) {
+			if (pDungeon->IsRegisteredPlayer(playerID, warpX, warpY, warpMapIdx))
+				return true;
+		}
+	}
+	return false;
+}
+#endif
 
 LPDUNGEON CDungeonManager::Create(long lOriginalMapIndex)
 {
@@ -1335,6 +1390,10 @@ void CDungeon::JumpToEliminateLocation()
 			return;
 		}
 
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+		SetDungeonRejoinWarpCoords(m_lWarpX * 100, m_lWarpY * 100);
+#endif
+
 		FWarpToPosition f(m_lWarpMapIndex, m_lWarpX * 100, m_lWarpY * 100);
 
 		// <Factor> SECTREE::for_each -> SECTREE::for_each_entity
@@ -1389,6 +1448,56 @@ bool CDungeon::IsAllPCNearTo(int x, int y, int dist) const
 
 	return f.ret;
 }
+
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+void CDungeon::UpdatePlayerAction(LPCHARACTER ch, bool bDelete)
+{
+	if (!ch) {
+		sys_err("UpdatePlayerAction ch null");
+		return;
+	}
+	const uint32_t playerID = ch->GetPlayerID();
+
+	//sys_log(0, "UpdatePlayerAction mapIndex: [%d, %d] | player: %s %u - %s", m_lOrigMapIndex, m_lMapIndex, ch->GetName(), playerID, (bDelete ? "true" : "false"));
+
+	if (bDelete) {
+		m_PlayerInf.erase(playerID);
+		return;
+	}
+
+	itertype(m_PlayerInf) it = m_PlayerInf.find(playerID);
+	if (it != m_PlayerInf.end())
+		it->second = (uint32_t)get_global_time() + REJOIN_TIME_LIMIT_SEC;
+	else
+		m_PlayerInf.insert(std::make_pair(playerID, (uint32_t)get_global_time() + REJOIN_TIME_LIMIT_SEC));
+}
+
+bool CDungeon::IsRegisteredPlayer(uint32_t playerID, long& warpX, long& warpY, long& mapIdx)
+{
+	itertype(m_PlayerInf) it = m_PlayerInf.find(playerID);
+	if (it != m_PlayerInf.end()) {
+		if ((uint32_t)get_global_time() < it->second) {
+			warpX = m_dungeonX;
+			warpY = m_dungeonY;
+			mapIdx = m_lMapIndex;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool CDungeon::IsMatchedMapIndex(int mapIndex)
+{
+	return (mapIndex == (int)m_lOrigMapIndex);
+}
+
+void CDungeon::SetDungeonRejoinWarpCoords(long warpX, long warpY) const
+{
+	m_dungeonX = warpX;
+	m_dungeonY = warpY;
+}
+#endif
 
 void CDungeon::CreateItemGroup (std::string& group_name, ItemGroup& item_group)
 {

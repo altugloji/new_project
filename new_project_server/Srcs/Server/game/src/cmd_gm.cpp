@@ -2474,6 +2474,21 @@ ACMD(do_reload)
 				//END_RELOAD_ADMIN
 			case 'c':	// cube
 
+#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+			case 'e':
+				if (ITEM_MANAGER::instance().ReloadEtcDropItemFile())
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, "Reloading etc_drop_item.");
+					sys_log(0, "Reloading etc_drop_item.");
+
+					BYTE bHeader = HEADER_GG_RELOAD_ETC_DROP;
+					P2P_MANAGER::instance().Send(&bHeader, sizeof(BYTE));
+				}
+				else
+					ch->ChatPacket(CHAT_TYPE_INFO, "Cannot reload etc_drop_item, check syserr.");
+				break;
+#endif
+
 #ifdef ENABLE_ITEM_SHOP_SYSTEM
 			case 'n':
 			{

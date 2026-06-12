@@ -2717,6 +2717,7 @@ enum EBlockAction
     BLOCK_WHISPER               = (1 << 3),
     BLOCK_MESSENGER_INVITE      = (1 << 4),
     BLOCK_PARTY_REQUEST         = (1 << 5),
+	BLOCK_EXP                   = (1 << 6),
 };
 
 typedef struct packet_login_key

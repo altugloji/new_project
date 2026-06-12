@@ -113,6 +113,7 @@ public:
 	bool	LoadRefineTable(const char* c_szFileName);
 	void	LoadItem(CItemData::TItemTable* item);
 	void	LoadMonster(CPythonNonPlayer::TMobTable* monster);
+	void	ClearMonsterData();
 	void	ListReverse();
 
 	bool	ReadSpecialDropItemFile(const char* c_pszFileName);

@@ -80,6 +80,31 @@ def _WikiBuildWeaponMatchList(weaponSubType):
 	flat = [(e[0], e[1]) for e in matchList]
 	return (flat, subtypeHits, totalScanned)
 
+# Tum siniflarin esyalari birlikte listelenecek ekipman kategorileri
+# (C++ api: 1=zirh, 2=migfer, 3=kalkan, 4=kupe, 5=bilezik, 6=kolye, 7=ayakkabi)
+# Sinif kisiti olmayan kategorilerde dedup sayesinde liste ayni kalir
+WIKI_MERGED_EQUIP_TYPES = (1, 2, 3, 4, 5, 6, 7)
+
+def _WikiBuildEquipMatchList(itemType):
+	# Zirh/migfer C++ tarafinda sinif basina ayri vektorlerde tutuluyor (m_vecArmor[0..3] vb.)
+	# ve characterIndex sekmeleri kapali oldugundan hep savasci (0) listeleniyordu;
+	# 4 sinifin listesini vnum bazinda tekillestirip birlestiriyoruz
+	matchList = []
+	seenVnums = {}
+	for charIdx in xrange(4):
+		total = wiki.GetCategorySize(charIdx, itemType)
+		for i in xrange(total):
+			vnum = wiki.GetCategoryData(charIdx, itemType, i)
+			if not vnum:
+				continue
+			if seenVnums.has_key(vnum):
+				continue
+			seenVnums[vnum] = 1
+			matchList.append((charIdx, i, WikiGetItemRequiredLevel(vnum), vnum))
+	# Dusuk seviye basta (listede kucukten buyuge)
+	matchList.sort(key=lambda e: (e[2], e[3]), reverse=False)
+	return [(e[0], e[1]) for e in matchList]
+
 def _WikiIterCategoryLeaves():
 	if hasattr(WikiUI, "IterCategoryLeafEntries"):
 		for label, selectArg in WikiUI.IterCategoryLeafEntries():
@@ -1367,6 +1392,9 @@ class EncyclopediaofGame(ui.ThinBoard):
 					continue
 				if getattr(self, "_wikiItemViewMode", "refine") == "refine" and not WikiEquipHasRefineData(realVnum):
 					continue
+			# Kara listedeki esyalar isim aramasinda da cikmasin (IsBlackList: izinliyse 1, listedeyse 0 doner)
+			if not wiki.IsBlackList(realVnum, 0, 0):
+				continue
 			item.SelectItem(itemVnum)
 			if chestOnly and item.GetItemType() != item.ITEM_TYPE_GIFTBOX:
 				continue
@@ -1591,6 +1619,16 @@ class EncyclopediaofGame(ui.ThinBoard):
 					WikiDebugCategory(
 						"select=%s uiChar=%d sub=%d scanned=%d match=%d dist=%s"
 						% (arg, charIdx, weaponSubType, total, len(matchList), str(subtypeHits))
+					)
+					AIAppendAlgoritm.SetFlag("weaponMatchMode", 1)
+				elif itemType in WIKI_MERGED_EQUIP_TYPES:
+					# Zirhlar / Migferler: tek sinif degil tum siniflarin esyalari
+					matchList = _WikiBuildEquipMatchList(itemType)
+					self._wikiEquipMatchList = matchList
+					maxSize = len(matchList)
+					WikiDebugCategory(
+						"select=%s mergedEquip itemType=%d match=%d"
+						% (arg, itemType, len(matchList))
 					)
 					AIAppendAlgoritm.SetFlag("weaponMatchMode", 1)
 				else:
@@ -1820,6 +1858,7 @@ class EncyclopediaofGame(ui.ThinBoard):
 			elif WikiUI.IsCategory(loadType, "chests"):
 				(itemVnum, bossVnum) = wiki.GetChestData(__ai.GetFlag("itemType"), listIndex)
 				if itemVnum == 0:
+					self.__WikiAutoloadStepBack(__ai, listIndex, loadType)
 					return
 				lb = self.children["resultpageListbox"]
 				displayIdx = len(lb.itemList)

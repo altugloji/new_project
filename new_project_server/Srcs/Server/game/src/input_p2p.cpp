@@ -14,6 +14,7 @@
 #include "xmas_event.h"
 #include "affect.h"
 #include "locale_service.h"
+#include "item_manager.h"
 #include "questmanager.h"
 #include "skill.h"
 #include "threeway_war.h"
@@ -622,6 +623,12 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 #ifdef METIN35_ADMIN_PANEL
 		case HEADER_GG_ADMIN_PANEL:
 			GGAdminPanel();
+			break;
+#endif
+
+#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+		case HEADER_GG_RELOAD_ETC_DROP:
+			ITEM_MANAGER::instance().ReloadEtcDropItemFile();
 			break;
 #endif
 

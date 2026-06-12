@@ -279,6 +279,7 @@ bool CPythonWiki::ItemBlackList(DWORD itemVnum, DWORD itemType, DWORD itemSubTyp
 
 		// armor blacklist
 		11000, 11010, 11020, 11030, 13169, 13149, 13199, 13209,
+		12699, 12709, 12719, 12729, 12739, 12749, 12759, 12769,
 
 		// shield blacklist
 		13189, 16509, 16529, 16579, 16549, 16569, 17579, 17549, 17529, 17509,
@@ -353,6 +354,18 @@ bool CPythonWiki::BlackListMonster(DWORD mobVnum)
 			return false;
 
 	return true;
+}
+
+void CPythonWiki::ClearMonsterData()
+{
+	// mob_proto karakter secim ekranina her donuste yeniden okunuyor;
+	// temizlemeden eklenince Canavar/Boss/Metin listelerinde ayni vnumlar birikiyordu
+	for (DWORD j = 0; j < 3; j++)
+	{
+		m_vecMonsterCategory[j].clear();
+		m_vecBossCategory[j].clear();
+		m_vecStoneCategory[j].clear();
+	}
 }
 
 void CPythonWiki::LoadMonster(CPythonNonPlayer::TMobTable* monster)
@@ -705,6 +718,8 @@ PyObject* wikiGetBossSize(PyObject* poSelf, PyObject* poArgs)
 		return Py_BadArgument();
 	if (iType == 3) // event boss
 		return Py_BuildValue("i", (sizeof(eventBoss) / sizeof(eventBoss[0])));
+	if (iType < 0 || iType > 2)
+		return Py_BuildValue("i", 0);
 	return Py_BuildValue("i", CPythonWiki::Instance().m_vecBossCategory[iType].size());
 }
 
@@ -718,7 +733,9 @@ PyObject* wikiGetBossData(PyObject* poSelf, PyObject* poArgs)
 		return Py_BadArgument();
 	if (iType == 3) // event boss
 		return Py_BuildValue("i", eventBoss[iIndex]);
-	return Py_BuildValue("i", CPythonWiki::Instance().m_vecBossCategory[iType][iIndex]);
+	if (iType < 0 || iType > 2 || iIndex < 0 || iIndex >= (int)CPythonWiki::Instance().m_vecBossCategory[iType].size())
+		return Py_BuildValue("i", 0);
+	return Py_BuildValue("i", CPythonWiki::Instance().m_vecBossCategory[iType][iIndex].itemVnum);
 }
 
 PyObject* wikiCostumeSize(PyObject* poSelf, PyObject* poArgs)
@@ -750,6 +767,8 @@ PyObject* wikiGetMonsterSize(PyObject* poSelf, PyObject* poArgs)
 	int iType;
 	if (!PyTuple_GetInteger(poArgs, 0, &iType))
 		return Py_BadArgument();
+	if (iType < 0 || iType > 2)
+		return Py_BuildValue("i", 0);
 	return Py_BuildValue("i", CPythonWiki::Instance().m_vecMonsterCategory[iType].size());
 }
 
@@ -761,7 +780,9 @@ PyObject* wikiGetMonsterData(PyObject* poSelf, PyObject* poArgs)
 	int iIndex;
 	if (!PyTuple_GetInteger(poArgs, 1, &iIndex))
 		return Py_BadArgument();
-	return Py_BuildValue("i", CPythonWiki::Instance().m_vecMonsterCategory[iType][iIndex]);
+	if (iType < 0 || iType > 2 || iIndex < 0 || iIndex >= (int)CPythonWiki::Instance().m_vecMonsterCategory[iType].size())
+		return Py_BuildValue("i", 0);
+	return Py_BuildValue("i", CPythonWiki::Instance().m_vecMonsterCategory[iType][iIndex].itemVnum);
 }
 
 PyObject* wikiGetStoneSize(PyObject* poSelf, PyObject* poArgs)
@@ -769,6 +790,8 @@ PyObject* wikiGetStoneSize(PyObject* poSelf, PyObject* poArgs)
 	int iType;
 	if (!PyTuple_GetInteger(poArgs, 0, &iType))
 		return Py_BadArgument();
+	if (iType < 0 || iType > 2)
+		return Py_BuildValue("i", 0);
 	return Py_BuildValue("i", CPythonWiki::Instance().m_vecStoneCategory[iType].size());
 }
 
@@ -780,7 +803,9 @@ PyObject* wikiGetStoneData(PyObject* poSelf, PyObject* poArgs)
 	int iIndex;
 	if (!PyTuple_GetInteger(poArgs, 1, &iIndex))
 		return Py_BadArgument();
-	return Py_BuildValue("i", CPythonWiki::Instance().m_vecStoneCategory[iType][iIndex]);
+	if (iType < 0 || iType > 2 || iIndex < 0 || iIndex >= (int)CPythonWiki::Instance().m_vecStoneCategory[iType].size())
+		return Py_BuildValue("i", 0);
+	return Py_BuildValue("i", CPythonWiki::Instance().m_vecStoneCategory[iType][iIndex].itemVnum);
 }
 
 PyObject* wikiGetItemDropFromChest(PyObject* poSelf, PyObject* poArgs)

@@ -387,6 +387,8 @@ class ITEM_MANAGER : public singleton<ITEM_MANAGER>
 			if (str.empty())
 				return false;
 
+			outVnum = 0;
+
 			size_t i = 0;
 			while (i < str.size())
 			{
@@ -423,6 +425,9 @@ class ITEM_MANAGER : public singleton<ITEM_MANAGER>
 
 		bool			ReadCommonDropItemFile(const char * c_pszFileName) const;
 		bool			ReadEtcDropItemFile(const char * c_pszFileName);
+#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+		bool			ReloadEtcDropItemFile();
+#endif
 		bool			ReadDropItemGroup(const char * c_pszFileName);
 		bool			ReadMonsterDropItemGroup(const char * c_pszFileName);
 		bool			ReadSpecialDropItemFile(const char * c_pszFileName);

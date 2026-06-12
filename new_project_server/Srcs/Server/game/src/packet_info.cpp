@@ -278,6 +278,10 @@ CPacketInfoGG::CPacketInfoGG()
 	Set(HEADER_GG_ADMIN_PANEL,			sizeof(TPacketGGAdminPanel),		"GGAdminPanel",		false);
 #endif
 
+#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+	Set(HEADER_GG_RELOAD_ETC_DROP,		sizeof(BYTE),						"ReloadEtcDrop",	false);
+#endif
+
 }
 
 CPacketInfoGG::~CPacketInfoGG()

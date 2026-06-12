@@ -404,6 +404,7 @@ class ToolTip(ui.ThinBoard):
 		self.SetPosition(x, y)
 
 class ItemToolTip(ToolTip):
+	TOOL_TIP_WIDTH = ToolTip.TOOL_TIP_WIDTH + 20
 
 	CHARACTER_NAMES = (
 		localeInfo.TOOLTIP_WARRIOR,

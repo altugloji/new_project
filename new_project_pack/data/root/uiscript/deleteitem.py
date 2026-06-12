@@ -9,7 +9,7 @@ window = {
 	"style" : ("movable", "float",),
 
 	"width" : 185+30,
-	"height" : 417+17+25,
+	"height" : 417+17-5,
 
 	"children" :
 	(
@@ -22,9 +22,9 @@ window = {
 			"y" : 0,
 
 			"width" : 185+30,
-			"height" : 417+17+25,
+			"height" : 417+17-5,
 			
-			"title" : "Toplu Nesne Ýþlemleri",
+			"title" : "Toplu Nesne Islemleri",
 
 			"children" :
 			(				
@@ -64,23 +64,6 @@ window = {
 					"down_image" : "d:/ymir work/ui/public/middle_button_03.sub",
 				},
 
-				## Close
-				{
-					"name" : "CloseButton",
-					"type" : "button",
-
-					"x" : 21+12-4,
-					"y" : 356 + 42+25,
-
-					"width" : 61,
-					"height" : 21,
-
-					"text" : "Sýfýrla",
-
-					"default_image" : "d:/ymir work/ui/public/middle_button_01.sub",
-					"over_image" : "d:/ymir work/ui/public/middle_button_02.sub",
-					"down_image" : "d:/ymir work/ui/public/middle_button_03.sub",
-				},
 				#{
 				#	"name" : "fiyat",
 				#	"type" : "text",
@@ -103,33 +86,6 @@ window = {
 					"default_image" : "d:/ymir work/ui/public/middle_button_01.sub",
 					"over_image" : "d:/ymir work/ui/public/middle_button_02.sub",
 					"down_image" : "d:/ymir work/ui/public/middle_button_03.sub",
-				},
-				{
-					"name" : "VazgecButton",
-					"type" : "button",
-
-					"x" : 104+14,
-					"y" : 356 + 42+25,
-
-					"width" : 61,
-					"height" : 21,
-
-					"text" : "Ýptal",
-
-					"default_image" : "d:/ymir work/ui/public/middle_button_01.sub",
-					"over_image" : "d:/ymir work/ui/public/middle_button_02.sub",
-					"down_image" : "d:/ymir work/ui/public/middle_button_03.sub",
-				},
-				{
-					"name" : "bilgialkardes",
-					"type" : "button",
-					
-					"x" : 170,
-					"y" : 8,
-					
-					"default_image" : "d:/ymir work/ui/pattern/q_mark_01.tga",
-					"over_image" : "d:/ymir work/ui/pattern/q_mark_02.tga",
-					"down_image" : "d:/ymir work/ui/pattern/q_mark_01.tga",
 				},
 				{
 					"name":"Money_Slot",

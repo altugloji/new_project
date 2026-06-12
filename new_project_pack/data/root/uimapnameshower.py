@@ -168,12 +168,12 @@ class MapNameShower(ui.ExpandedImageBox):
 		self.__Initialize()
 
 		if mapName == "metin2_map_deviltower1":
-			self.SetPosition(-60, 80)
+			self.SetPosition(0, 80)
 
 			self.floorImage = ui.ExpandedImageBox()
 			self.floorImage.AddFlag("not_pick")
 			self.floorImage.SetWindowHorizontalAlignCenter()
-			self.floorImage.SetPosition(100, 80)
+			self.floorImage.SetPosition(0, 135)
 			self.floorImage.SetAlpha(0.0)
 			self.floorImage.Show()
 			try:

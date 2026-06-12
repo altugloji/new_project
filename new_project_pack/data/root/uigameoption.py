@@ -84,6 +84,7 @@ class OptionDialog(ui.ScriptWindow):
 			self.blockButtonList.append(GetObject("block_whisper_button"))
 			self.blockButtonList.append(GetObject("block_friend_button"))
 			self.blockButtonList.append(GetObject("block_party_request_button"))
+			self.blockButtonList.append(GetObject("block_exp_button"))
 			self.viewChatButtonList.append(GetObject("view_chat_on_button"))
 			self.viewChatButtonList.append(GetObject("view_chat_off_button"))
 			self.alwaysShowNameButtonList.append(GetObject("always_show_name_on_button"))
@@ -132,6 +133,7 @@ class OptionDialog(ui.ScriptWindow):
 		self.blockButtonList[3].SetToggleUpEvent(self.__OnClickBlockWhisperButton)
 		self.blockButtonList[4].SetToggleUpEvent(self.__OnClickBlockFriendButton)
 		self.blockButtonList[5].SetToggleUpEvent(self.__OnClickBlockPartyRequest)
+		self.blockButtonList[6].SetToggleUpEvent(self.__OnClickBlockExpButton)
 
 		self.blockButtonList[0].SetToggleDownEvent(self.__OnClickBlockExchangeButton)
 		self.blockButtonList[1].SetToggleDownEvent(self.__OnClickBlockPartyButton)
@@ -139,6 +141,7 @@ class OptionDialog(ui.ScriptWindow):
 		self.blockButtonList[3].SetToggleDownEvent(self.__OnClickBlockWhisperButton)
 		self.blockButtonList[4].SetToggleDownEvent(self.__OnClickBlockFriendButton)
 		self.blockButtonList[5].SetToggleDownEvent(self.__OnClickBlockPartyRequest)
+		self.blockButtonList[6].SetToggleDownEvent(self.__OnClickBlockExpButton)
 
 		self.viewChatButtonList[0].SAFE_SetEvent(self.__OnClickViewChatOnButton)
 		self.viewChatButtonList[1].SAFE_SetEvent(self.__OnClickViewChatOffButton)
@@ -167,6 +170,11 @@ class OptionDialog(ui.ScriptWindow):
 			self.showFlagButtonList[1].SAFE_SetEvent(self.__OnClickShowFlagOffButton)
 			systemSetting.SetShowEmpireFlag(False)
 			self.RefreshShowFlags()
+
+		self.__HideBlockPartyRequestButton()
+	def __HideBlockPartyRequestButton(self):
+		if len(self.blockButtonList) > 5:
+			self.blockButtonList[5].Hide()
 
 	def __ClickRadioButton(self, buttonList, buttonIndex):
 		try:
@@ -238,6 +246,10 @@ class OptionDialog(ui.ScriptWindow):
 		self.RefreshBlock()
 		global blockMode
 		net.SendChatPacket("/setblockmode " + str(blockMode ^ player.BLOCK_PARTY_REQUEST))
+	def __OnClickBlockExpButton(self):
+		self.RefreshBlock()
+		global blockMode
+		net.SendChatPacket("/setblockmode " + str(blockMode ^ player.BLOCK_EXP))
 
 	def __OnClickViewChatOnButton(self):
 		global viewChatMode
@@ -412,6 +424,7 @@ class OptionDialog(ui.ScriptWindow):
 
 	def Show(self):
 		self.RefreshBlock()
+		self.__HideBlockPartyRequestButton()
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 			self.RefreshShowFlags()
 		ui.ScriptWindow.Show(self)

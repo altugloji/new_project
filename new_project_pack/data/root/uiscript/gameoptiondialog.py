@@ -286,6 +286,20 @@ window = {
 					"over_image" : ROOT_PATH + "middle_button_02.sub",
 					"down_image" : ROOT_PATH + "middle_button_03.sub",
 				},
+				{
+					"name" : "block_exp_button",
+					"type" : "toggle_button",
+
+					"x" : LINE_DATA_X+MIDDLE_BUTTON_WIDTH*2,
+					"y" : 140,
+
+					"text" : uiScriptLocale.OPTION_BLOCK_EXP,
+					"text_color" : 0xFFFFF4B8,
+
+					"default_image" : ROOT_PATH + "middle_button_01.sub",
+					"over_image" : ROOT_PATH + "middle_button_02.sub",
+					"down_image" : ROOT_PATH + "middle_button_03.sub",
+				},
 
 				## Chat
 				{

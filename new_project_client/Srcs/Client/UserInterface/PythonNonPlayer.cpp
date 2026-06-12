@@ -59,11 +59,13 @@ bool CPythonNonPlayer::LoadNonPlayerData(const char * c_szFileName)
 #endif
 	{
 		TraceError("CPythonNonPlayer::LoadNonPlayerData: invalid size %u check data format. structSize %u, structDiff %u", zObj.GetSize(), structSize, structDiff);
+		delete [] pbData;
 		return false;
 	}
 
 #ifdef ENABLE_WIKI
 	CPythonWiki& wikiMngr = CPythonWiki::Instance();
+	wikiMngr.ClearMonsterData();
 #endif
 
     for (DWORD i = 0; i < dwElements; ++i)
