@@ -886,19 +886,15 @@ bool ITEM_MANAGER::CreateDropItemVector(LPCHARACTER pkChr, LPCHARACTER pkKiller,
 		{
 			CMobItemGroup* pGroup = it->second;
 
-			// MOB_DROP_ITEM_BUG_FIX
-			// 20050805.myevan.MobDropItem ? ???? ?? ?? CMobItemGroup::GetOne() ??? ?? ?? ??
 			if (pGroup && !pGroup->IsEmpty())
 			{
-				const CMobItemGroup::SMobItemGroupInfo& info = pGroup->GetOne();
-				vec_item.emplace_back(STargetInfoData(info.dwItemVnum, info.iCount));
-
-/*
-				item = CreateItem(info.dwItemVnum, info.iCount, 0, true, info.iRarePct);
-				if (item) vec_item.push_back(item);
-*/
+				// SEND_TARGET_INFO duzeltmesi: bilgi penceresinde kill-drop grubundaki TUM itemleri goster.
+				const std::vector<CMobItemGroup::SMobItemGroupInfo>& v = pGroup->GetVector();
+				for (DWORD i = 0; i < v.size(); ++i)
+				{
+					vec_item.emplace_back(STargetInfoData(v[i].dwItemVnum, v[i].iCount));
+				}
 			}
-			// END_OF_MOB_DROP_ITEM_BUG_FIX
 		}
 	}
 

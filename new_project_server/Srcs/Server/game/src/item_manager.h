@@ -221,6 +221,13 @@ class CMobItemGroup
 			return m_vecItems[GetOneIndex()];
 		}
 
+#ifdef __SEND_TARGET_INFO__
+		const std::vector<SMobItemGroupInfo>& GetVector() const
+		{
+			return m_vecItems;
+		}
+#endif
+
 	private:
 		[[maybe_unused]] DWORD m_dwMobVnum;
 		int m_iKillDrop;

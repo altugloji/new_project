@@ -182,6 +182,7 @@ class AttributeListWindow(ui.ScriptWindow):
 	@ui.WindowDestroy
 	def Destroy(self):
 		self.ClearDictionary()
+		eventManager.EventManager().remove_observer(EVENT_OPEN_ATTRIBUTE_LIST, self.Open)
 		self.__Initialize()
 
 	def LoadDialog(self):

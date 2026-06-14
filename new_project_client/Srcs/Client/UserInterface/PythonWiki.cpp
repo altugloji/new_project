@@ -142,7 +142,32 @@ bool CPythonWiki::ReadMobDropItemFile(const char* c_pszFileName)
 				for (DWORD j = 0; j < vecSpecialData.size(); ++j)
 					TraceError("Mob Data - Index: %d  ItemVnum: %d ItemCount: %d", j, vecSpecialData[j].itemVnum, vecSpecialData[j].count);
 			}
-			m_vecMobDrop.emplace(iVnum, vecSpecialData);
+			// Ayni mob birden fazla grupta gecebilir (Type drop + Type kill + Type limit).
+			// emplace var olan anahtari ezmedigi icin yalnizca ilk grup kaliyor, bu yuzden
+			// "kill" gruplarindaki itemler wikide gozukmuyordu. Gruplari birlestirip ayni
+			// item vnumunu tekillestiriyoruz ki tum dusen esyalar (kill dahil) listelensin.
+			auto it = m_vecMobDrop.find(iVnum);
+			if (it == m_vecMobDrop.end())
+			{
+				m_vecMobDrop.emplace(iVnum, vecSpecialData);
+			}
+			else
+			{
+				for (const auto& dataItem : vecSpecialData)
+				{
+					bool bAlreadyExists = false;
+					for (const auto& existing : it->second)
+					{
+						if (existing.itemVnum == dataItem.itemVnum)
+						{
+							bAlreadyExists = true;
+							break;
+						}
+					}
+					if (!bAlreadyExists)
+						it->second.emplace_back(dataItem);
+				}
+			}
 		}
 	}
 	return true;
@@ -272,7 +297,7 @@ bool CPythonWiki::ItemBlackList(DWORD itemVnum, DWORD itemType, DWORD itemSubTyp
 		21970, 21960, 21950, 21940, 21930, 21920, 21910, 21900, 209,
 
 		// ninja & weapon blacklist
-		1149, 1159, 1169, 8000, 4039,
+		1149, 1159, 1169, 8000, 4039, 2199,
 
 		// shaman & weapon blacklist
 		5139, 5149, 5159, 7179, 7189,
@@ -284,6 +309,8 @@ bool CPythonWiki::ItemBlackList(DWORD itemVnum, DWORD itemType, DWORD itemSubTyp
 		// shield blacklist
 		13189, 16509, 16529, 16579, 16549, 16569, 17579, 17549, 17529, 17509,
 		15459, 14669, 14549, 14529, 14509, 14579, 15249, 17569, 14569,
+		
+		12679, 12549, 12409, 12289,
 	};
 	return std::find(m_BlockedItemVnumList.begin(), m_BlockedItemVnumList.end(), itemVnum) != m_BlockedItemVnumList.end() ? false : true;
 }

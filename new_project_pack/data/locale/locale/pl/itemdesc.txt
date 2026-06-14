@@ -2763,7 +2763,7 @@
 27988	Mapa Skarbów	Tajemnicza mapa zawieraj¹ca po³o¿enie staro¿ytnego skarbu.
 27989	Wykrywacz Kamieni Metin	Wykrywacz pokazuje po³o¿enie i odleg³oœæ do najbli¿szego Kamienia Metin. Im jaœniejsza strza³ka kierunku, tym bli¿ej jesteœ. Mo¿e byæ uaktywniony 6 razy.
 27990	Kawa³ek Kamienia	Z powodu ma³ych wymiarów, przedmiot ten mo¿na bardzo ³atwo transportowaæ. Ma wiele zastosowañ.
-27991	Kamieñ Wody	Cenny minera³ z morza.
+27991	Kamieñ Wody	Cenny minera³ morza.
 27992	Bia³a Per³a	Idealnie bia³a per³a. |Kobiety je kochaj¹.
 27993	Niebieska Per³a	Niebieska per³a. |Kobiety je kochaj¹.
 27994	Krwawa Per³a	Krwawo-czerwona per³a. |Kobiety je kochaj¹.
@@ -2931,7 +2931,7 @@
 30153	Kwiaty	Bukiet rzadkich kwiatów. Zapach kojarzy Ci siê z czymœ z przesz³oœci.
 30154	Sekretna Ksiêga Œwi¹tyni	Analiza historii i doktryny Sekretnej Œwi¹tyni.
 30155	Amulet Mirine	Naszyjnik. Na odwrocie wygrawerowane jest jakieœ imiê...
-30156	Fioletowa Ksiêga	Ksiêga zawieraj¹ca przepisy na ksiêgi umiejêtnoœci. Mo¿na j¹ wytworzyæ u Alchemika.
+30156	Fioletowa ksiêga	Ksiêga zawieraj¹ca recepturê ksi¹g umiejêtnoœci. Mo¿na j¹ wytworzyæ u Alchemika.
 30157	Grot Strza³y	Te zatrute Groty Strza³ pomog¹ w obronie królestwa.
 30177	Olejek Pi¿mowy	Olejek Pi¿mowy jest u¿ywany przez Sprzedawcê Broni podczas misji. Przedmiot ten nie ma innego zastosowania.
 30179	Krêty Klucz	Ten magiczny klucz aktywuje portal do Œwi¹tyni Smoka.
@@ -3123,15 +3123,15 @@
 30586		
 30600	Wzór Kroju	
 30601	Plan Zbroi	
-30602	Niebieski barwnik	Barwnik wymagany do wytwarzania.
-30603	Czerwony barwnik	Barwnik wymagany do wytwarzania.
-30604	Szary barwnik	Barwnik wymagany do wytwarzania.
+30602	Niebieski barwnik	Barwnik potrzebny do produkcji.
+30603	Czerwony barwnik	Barwnik potrzebny do produkcji.
+30604	Szary barwnik	Barwnik potrzebny do produkcji.
 30605	Z³ote P³yty	
 30606	Srebrne P³yty	
 30607	Miedziane P³yty	
 30608	Stalowe P³yty	
 30609	Br¹zowe P³yty	
-30610	Mithril	Otrzymywany przez przetapianie rud. Mo¿e byæ u¿ywany w ró¿nych przepisach. Mo¿na go wytworzyæ u Alchemika.
+30610	Mithril	Otrzymywany przez przetapianie rud. Mo¿e byæ u¿ywany w ró¿nych produkcjach. Mo¿na go wytworzyæ u Alchemika.
 30611	Ciê¿kie Pasy	
 30612	Stabilne Sznury	
 30613	Kamieñ Driad	W tym tajemniczym zielonkawym kamieniu jest zamkniêta dusz driady, drzewnego duszka. Driada ta zna zaklête s³owa, które umo¿liwi¹ ci wstêp do Erebu.
@@ -3216,7 +3216,7 @@
 31032	Per³y Syriusza	Skuteczne kapsu³ki wzmacniaj¹ce zrobione ze Wewnêtrznego Œwiat³a mitycznych stworzeñ i Esencji Milenium.
 31033	Peleryna Wodza	Peleryna ta symbolizuje, ¿e Bandy Czerwonych nie mo¿na pokonaæ.
 31034	Totem Gigantów	Totem przypomina swoim kszta³tem wielki bursztyn.
-31035	Czarny Kamieñ	Otrzymywany przez przetapianie kamieni. Mo¿e byæ u¿ywany w ró¿nych przepisach. Mo¿na go wytworzyæ u Alchemika.
+31035	Czarny Kamieñ	Otrzymywany przez przetapianie kamieni. Mo¿e byæ u¿ywany w ró¿nych produkcjach. Mo¿na go wytworzyæ u Alchemika.
 31036	Czarne Z³oto	Ta czarna ruda o magicznej mocy wystêpuje w Gromistych Górach.
 31037	Skórzana Sakiewka	Sakiewka ta nale¿a³a do Kapitana Shracka. Jest jakoœ dziwnie lekka...
 31038	Poœwiêcona Ziemia	Ten woreczek z poœwiêcon¹ ziemi¹ to rodzaj medium s³u¿¹cy do wskrzeszanie zmar³ych.
@@ -3292,7 +3292,7 @@
 31108	Ma³y Kamieñ Przebudzenia	Kamieñ ten daje ci 2% szansy na wyprodukowanie przedmiotów wype³nionych moc¹ smoka!
 31109	Drobny Kam. Przebudzenia	Kamieñ ten daje ci 5% szansy na wyprodukowanie przedmiotów wype³nionych moc¹ smoka!
 31110	£adny Kam. Przebudzenia	Kamieñ ten daje ci 10% szansy na wyprodukowanie przedmiotów wype³nionych moc¹ smoka!
-31111	Zacny Kam. Przebudzenia	Kamieñ ten daje ci 15% szansy na wyprodukowanie przedmiotów wype³nionych moc¹ smoka!
+31111	Cenny Kamieñ Przebudzenia	Materia³ potrzebny do wytwarzania przedmiotów duszy.
 31112	Silny Kam. Przebudzenia	Kamieñ ten daje ci 25% szansy na wyprodukowanie przedmiotów wype³nionych moc¹ smoka!
 31113	Dusza Przebudzenia	Materia³ do uszlachetnienia
 31114	Zwyk³a Skóra	Materia³ do uszlachetnienia
@@ -5658,7 +5658,7 @@
 50938	Czerw. Skrzynia Proroka	Zawiera 105 kart tarota do Bitwy Proroków.
 50939	Nieb. Skrzynia Proroka	Zawiera 21 kart tarota do Bitwy Proroków.
 50940	Ró¿owa Skrzynia Proroka	Zawiera 5 kart tarota do Bitwy Proroków.
-51001	Fragment Energii	Otrzymywany przez przetapianie cennych przedmiotów. Mo¿e byæ u¿ywany w ró¿nych przepisach. Mo¿na go wytworzyæ u Alchemika.
+51001	Fragment Energii	Otrzymywany przez przetapianie cennych przedmiotów. Mo¿e byæ u¿ywany w ró¿nych produkcjach. Mo¿na go wytworzyæ u Alchemika.
 51002	Kryszta³ Energii	Kryszta³ ten zwiêksza twoje bonusy na dwie godziny.
 51501	Cor Draconis (surowe)	Kryszta³owe smocze serce zawiera losowy Smoczy Kamieñ klasy surowej.
 51502	Cor Draconis (surowe)	Kryszta³owe smocze serce zawiera losowy Smoczy Kamieñ klasy surowej.
@@ -6585,7 +6585,7 @@
 71120	Lew (¿ó³ty)	Czar pieczêci wzywa potê¿nego ducha zwierz¹t, który przeniesie ciê szybko do miejsca twojego wyboru. Zwiêksza on si³ê ataku swojego jeŸdŸca o 200.
 71121	Lew (niebieski)	Czar pieczêci wzywa potê¿nego ducha zwierz¹t, który przeniesie ciê szybko do miejsca twojego wyboru. Zwiêksza on si³ê ataku swojego jeŸdŸca o 300.
 71122	Wstêp do Œwi¹tyni Smoka	Za pomoc¹ tego przedmiotu mo¿na wejœæ do Œwi¹tyni Smoka.
-71123	Smocza £uska	Smocze £uski nale¿¹ do najtwardszych znanych materia³ów.
+71123	Smocza £uska	Smocze ³uski nale¿¹ do najpotê¿niejszych znanych materia³ów.
 71124	Bia³y Lew	Zwierzêta o bia³ym futrze s¹ rzadkoœci¹ i wiele kultur przypisuje im nadzwyczajne si³y. Zwiêksza otrzymywane punkty doœwiadczenia o 30%.
 71125	Dzik Wojenny	Okie³znanie z³ych duchów zwierz¹t wymaga nie lada kunsztu magicznego. Odpowiednio zadziwiaj¹cy jest rezultat. Daje swojemu w³aœcicielowi +20% do si³y w walce z potworami.
 71126	Wilk Wojenny	Okie³znanie z³ych duchów zwierz¹t wymaga nie lada kunsztu magicznego. Odpowiednio zadziwiaj¹cy jest rezultat. Zwiêksza szansê na cios krytyczny o 10%.
@@ -6613,8 +6613,8 @@
 71148	Pierœcieñ Si³y Woli	W trakcie trwania otrzymujesz: +30% PD, +20% szansy na obronê w walce z wojownikami, +20% szansy na obronê w walce z ninja, +20% szansy na obronê w walce z Likanami, +30% si³y w walce z potworami, +10% maks. P¯ i +10% maks. PE.
 71149	Pierœcieñ Œmier. Mocy	Otrzymujesz na pewien czas: +30% PD, +20% szansy na obronê w walce z surami, +20% szansy na obronê w walce z szamanami, +20% szansy na obronê w walce z Likanami, +30% si³y w walce z potworami, +10% maks. P¯ i +10% maks. PE.
 71150	Magiczne Jajo	Ta piêknie ozdobiona owalna skrzynia zawiera niejedn¹ wielkanocn¹ niespodziankê. Swoj¹ zawartoœæ ods³ania jednak stopniowo.
-71151	Zielone Zaczarowanie	Zmienia bonus przedmiotu. Mo¿na u¿yæ tylko na przedmiotach poziomu 18 lub ni¿szego.
-71152	Zielona Si³a	Dodaje nowy bonus do przedmiotu. Mo¿na u¿yæ tylko na przedmiotach poziomu 18 lub ni¿szego.
+71151	Zielone Zaklêcie	Zmienia bonus przedmiotu.| |Mo¿na u¿yæ na zbrojach i broniach poni¿ej 18. poziomu.|Mo¿na u¿yæ na wewnêtrznych przedmiotach 1. poziomu.
+71152	Zielona Moc	Dodaje nowy bonus do przedmiotu.| |Mo¿na u¿yæ na zbrojach i broniach poni¿ej 18. poziomu.|Mo¿na u¿yæ na wewnêtrznych przedmiotach 1. poziomu.
 71153	Mikstura M¹droœci	Za pomoc¹ tej mikstury zdobywasz 100% wiêcej doœwiadczenia podczas godziny grania. Przedmiot ten jest niezdatny do handlu.
 71154	Mikstura Zarania (3h)	Dziêki tej miksturze w ci¹gu 3 godz. gry zbierzesz 80% wiêcej doœwiadczenia. Niezdatna do handlu.
 71155	Mikstura M¹droœci (3h)	Dziêki tej miksturze w ci¹gu 3 godz. gry zbierzesz 100% wiêcej doœwiadczenia. Niezdatna do handlu.
@@ -6862,11 +6862,11 @@
 72723	Eliksir S³oñca (M)	Automatycznie regeneruje twoje P¯. Zawiera 1.000.000 P¯.
 72724	Eliksir S³oñca (Œ)	Automatycznie regeneruje twoje P¯. Zawiera 3.000.000 P¯.
 72725	Eliksir S³oñca (D)	Automatycznie regeneruje twoje P¯. Zawiera 7.000.000 P¯.
-72726	Eliksir S³oñca (M)	Zawiera 10.000.000 P¯. Automatycznie odnawia twoje P¯. | Daje dodatkowe +1000 P¯.
+72726	Eliksir S³oñca (M)	Zawiera 10.000.000 HP. Automatycznie odnawia twoje HP. | Daje dodatkowe +1000 HP.
 72727	Eliksir Ksiê¿yca (M)	Automatycznie regeneruje twoje PE. Zawiera 100.000 PE.
 72728	Eliksir Ksiê¿yca (Œ)	Automatycznie regeneruje twoje PE. Zawiera 300.000 PE.
 72729	Eliksir Ksiê¿yca (D)	Automatycznie regeneruje twoje PE. Zawiera 700.000 PE.
-72730	Eliksir Ksiê¿yca (M)	Zawiera 1.000.000 PE. Automatycznie odnawia twoje PE. | Daje dodatkowe +1000 PE.
+72730	Eliksir Ksiê¿yca (M)	Zawiera 1.000.000 SP. Automatycznie odnawia twoje SP. | Daje dodatkowe +1000 SP.
 72734	Nieb. Skrzyneczka Losu	Kliknij dwukrotnie, aby otworzyæ. Teraz masz 2 mo¿liwoœci: | 1. Kliknij "Przyjmij przedmiot", by otrzymaæ widoczny przedmiot. | 2. U¿yj "Szczêœliwego Trafu", by otrzymaæ inny, losowy przedmiot. | Mo¿esz wykonaæ maks. 15 prób, p³ac¹c za nie Yang. | Je¿eli nie masz wystarczaj¹co du¿o Yang na koncie, nie mo¿esz wybraæ nowego przedmiotu. | Otwartej skrzynki nie mo¿na zresetowaæ ani zamkn¹æ.
 72735	Czerw. Skrzyneczka Losu	Kliknij dwukrotnie, aby otworzyæ. Teraz masz 2 mo¿liwoœci: | 1. Kliknij "Przyjmij przedmiot", by otrzymaæ widoczny przedmiot. | 2. U¿yj "Szczêœliwego Trafu", by otrzymaæ inny, losowy przedmiot. | Mo¿esz wykonaæ maks. 15 prób, p³ac¹c za nie Yang. | Je¿eli nie masz wystarczaj¹co du¿o Yang na koncie, nie mo¿esz wybraæ nowego przedmiotu. | Otwartej skrzynki nie mo¿na zresetowaæ ani zamkn¹æ.
 72737	Zielona Skrzyneczka Losu	Kliknij dwukrotnie, aby otworzyæ. Teraz masz 2 mo¿liwoœci: | 1. Kliknij "Przyjmij przedmiot", by otrzymaæ widoczny przedmiot. | 2. U¿yj "Szczêœliwego Trafu", by otrzymaæ inny, losowy przedmiot. | Mo¿esz wykonaæ maks. 15 prób, p³ac¹c za nie Yang. | Je¿eli nie masz wystarczaj¹co du¿o Yang na koncie, nie mo¿esz wybraæ nowego przedmiotu. | Otwartej skrzynki nie mo¿na zresetowaæ ani zamkn¹æ. | Jeœli gra zostanie zamkniêta, otrzymasz wyœwietlony przedmiot.

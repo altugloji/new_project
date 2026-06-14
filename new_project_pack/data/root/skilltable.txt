@@ -36,7 +36,7 @@
 81	Dark Orb	3	1	1	0	HP	-(120 + 6*lv + (5 * con + 5 * dex + 29*iq + 9*mwep)*ar*k)	80+220*k			24	-(120 + 6*lv + (5 * con + 5 * dex + 29*iq + 9*mwep)*ar*k)		ATTACK,COMPUTE_MAGIC_DAMAGE,SPLASH		NONE				0	0	MAGIC	9	0.4	1500	200
 91	Flying Talisman	4	1	1	0	HP	-(70 + 4*lv + (20*iq+5*mwep+50)*ar*k)	30+160*k			9	-(70 + 4*lv + (20*iq+5*mwep+50)*ar*k)		ATTACK,COMPUTE_MAGIC_DAMAGE,SPLASH		NONE				0	0	MAGIC	5	0.5	1800	201
 92	Shooting Dragon	4	1	1	0	HP	-(60 + 5*lv + (18*iq + 6*mwep + 120)*ar*k)	50+160*k			10	-(60 + 5*lv + (18*iq + 6*mwep + 120)*ar*k)		ATTACK,ATTACK_FIRE_CONT		NONE	lv+5*iq *k	iq*0.2*k		0	0	MAGIC	10	0.8	0	0
-93	Dragon's Roar	4	1	1	0	HP	-(80 + 6*lv + (20*iq+14*mwep+120)*ar*k)	50+160*k			12	-(80 + 6*lv + (20*iq+14*mwep+120)*ar*k)		ATTACK,SPLASH,ATTACK_FIRE_CONT		NONE	lv+5*iq *k	iq*0.2*k		0	0	MAGIC	15	0.8	0	500
+93	Dragon's Roar	4	1	1	0	HP	-(80 + 6*lv + (20*iq+14*mwep+120)*ar*k)	50+160*k			12	-(80 + 6*lv + (20*iq+14*mwep+120)*ar*k)		ATTACK,SPLASH,ATTACK_FIRE_CONT,SELFONLY		NONE	lv+5*iq *k	iq*0.2*k		0	0	MAGIC	15	0.8	0	500
 94	Blessing	4	1	1	0	RESIST_NORMAL	(iq*0.3+5)*(2*k+0.5)/(k+1.5)	40+160*k	60+200*k		10	(iq*0.3+5)*(2*k+0.5)/(k+1.5)			HOSIN	NONE				0	0	NORMAL	1	1	2000	0
 95	Reflect	4	1	1	0	REFLECT_MELEE	5+(iq*0.3 + 5)*k	40+160*k	60+200*k		10	5+(iq*0.3 + 5)*k			BOHO	NONE				0	0	NORMAL	1	1	2000	0
 96	Dragon's Aid	4	1	1	0	CRITICAL	(iq*0.3+5)*(2*k+0.5)/(k+1.5)	40+160*k	60+100*k		10	(iq*0.3+5)*(2*k+0.5)/(k+1.5)			GICHEON	NONE				0	0	NORMAL	1	1	2000	0

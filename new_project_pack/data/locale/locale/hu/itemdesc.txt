@@ -2763,7 +2763,7 @@
 27988	Kincs térkép	Elnyûtt térkép, amely egy õsi kincs helyét mutatja.
 27989	Metinkõ iránytû	Az iránytû megmutatja a következõ Metin kõ irányát és távolságát. Minél fényesebben fénylik, annál közelebb vagy. 6-szor aktiválható.
 27990	Kõdarab	A kis méretébõl kifolyólag ezt a darabot jól lehet szállítani, és ennek ellenére sokoldalúan fel lehet használni.
-27991	Vízkõ	A tenger értékes ásványa.
+27991	Víz kõ	A tenger értékes ásványa.
 27992	Fehér Gyöngy	Hófehér kincs egy kagylóból.
 27993	Kék Gyöngy	Pompás mélykék kincs egy kagylóból.
 27994	Vérvörös Gyöngy	Vérvörös kincs egy kagylóból.
@@ -2931,7 +2931,7 @@
 30153	Virágok	Ismeretlen virág, aminek illata emlékeket ébreszt benned.
 30154	Titkos templomi könyv	A Titkos templom tanításának és történetének taglalása.
 30155	Mirine medálja	Nyaklánc medál, amelynek hátoldalára a "Mirine" név van gravírozva.
-30156	Lila könyv	Egy könyv, amely képességkönyvek receptjeit tartalmazza. Az Alkimistánál elkészíthetõ.
+30156	Lila könyv	Képességkönyvek receptjét tartalmazó könyv. Az Alkimistánál készíthetõ.
 30157	Nyílhegy	Ezek a mérgezett nyilhegyek segítenek megvédeni a birodalmat.
 30177	Pézsmaolaj	A Pézsmaolajat a Fegyverkereskedõ használja egy küldetés során. A tárgynak nincs más funkciója.
 30179	Csavart kulcs	Ez a mágikus kulcs aktiválja a portált a Sárkány Templomába.
@@ -3131,7 +3131,7 @@
 30607	Rézlemezek	
 30608	Acéllemezek	
 30609	Bronzlemezek	
-30610	Mithril	Ércek olvasztásával szerezhetõ. Különbözõ gyártásokhoz használható. Az Alkimistánál elkészíthetõ.
+30610	Mithril	Ércek olvasztásával szerezhetõ. Különféle gyártásokhoz használható. Az Alkimistánál készíthetõ.
 30611	Kemény szíjak	
 30612	Masszív zsinórok	
 30613	Tündérek köve	Zöldesen csillogó ködbe burkolózva ez a titokzatos kõ magába zárja egy tündér lelkét, egy fa szellemet. A tündérek ismerik a titkos szavakat, melyek hozzáférést biztosítanak számodra az Erebos kazamatába.
@@ -3216,7 +3216,7 @@
 31032	Leviatán gyöngyök	Legendás lények belsõ fényébõl és Millennium-esszenciából készült hatékony erõsítõ kapszulák.
 31033	A Fõnök köpenye	Ez a köpeny a Vörös tolvajok sérthetetlenségének szimbóluma.
 31034	Az Óriások toteme	A totem egy hatalmas méretû borostyánt formáz.
-31035	Fekete kõ	Kövek olvasztásával szerezhetõ. Különbözõ gyártásokhoz használható. Az Alkimistánál elkészíthetõ.
+31035	Fekete kõ	Kövek olvasztásával szerezhetõ. Különféle gyártásokhoz használható. Az Alkimistánál készíthetõ.
 31036	Fekete arany	Ez a mágikus tulajdonságokkal rendelkezõ fekete érc a Mennydörgés-hegységben található.
 31037	Bõrtáska	Ezt a táskát Shruk kapitánytól vetted el.Könnyebbnek tûnik, mint vártad...
 31038	Szentelt föld	Ez a Szentelt földdel teli tasak szellemidézésre szolgál médiumként.
@@ -3292,7 +3292,7 @@
 31108	Kicsi megvilágosodás-kõ	Ez a kõ 2% esélyt biztosít a sárkányok erejével áthatott tárgyak készítésére.
 31109	Nemes megvilágosodás-kõ	Ez a kõ 5% esélyt biztosít a sárkányok erejével áthatott tárgyak készítésére.
 31110	Fényes megvilágosodás-kõ	Ez a kõ 10% esélyt biztosít a sárkányok erejével áthatott tárgyak készítésére.
-31111	Epikus megvilágosodás-kõ	Ez a kõ 15% esélyt biztosít a sárkányok erejével áthatott tárgyak készítésére.
+31111	Értékes ébredés köve	Lélek tárgyak készítéséhez szükséges alapanyag.
 31112	Átható megvilágosodás-kõ	Ez a kõ 25% esélyt biztosít a sárkányok erejével áthatott tárgyak készítésére.
 31113	Megvilágosodás elixír	Fejlesztéshez használt anyag.
 31114	Közönséges bõr	Fejlesztéshez használt anyag.
@@ -5658,7 +5658,7 @@
 50938	Vörös látók ládája	105 Tarot kártyát tartalmaz a Látók párbajához.
 50939	Kék látók ládája	21 Tarot kártyát tartalmaz a Látók párbajához.
 50940	Rózsaszín látók ládája	5 Tarot kártyát tartalmaz a Látók párbajához.
-51001	Energia darab	Értékes tárgyak olvasztásával szerezhetõ. Különbözõ gyártásokhoz használható. Az Alkimistánál elkészíthetõ.
+51001	Energia darab	Értékes tárgyak olvasztásával szerezhetõ. Különféle gyártásokhoz használható. Az Alkimistánál készíthetõ.
 51002	Energia-kristály	A kristály megnöveli bónuszaidat két órára.
 51501	Cor Draconis (Nyers)	A kristály sárkányszív egy véletlenszerû Sárkánykövet tartalmaz a nyers osztályból.
 51502	Cor Draconis (Nyers)	A kristály sárkányszív egy véletlenszerû Sárkánykövet tartalmaz a nyers osztályból.
@@ -6585,7 +6585,7 @@
 71120	Oroszlán (sárga)	A pecsét mágiája megidéz egy hatalmas állat szellemet, amivel pillanatok alatt a célodhoz érhetsz. Megnöveli lovaglója támadó értékét 200-zal.
 71121	Oroszlán (kék)	A pecsét mágiája megidéz egy hatalmas állat szellemet, amivel pillanatok alatt a célodhoz érhetsz. Megnöveli lovaglója támadó értékét 300-zal.
 71122	Sárkány temploma belépõ	Beléphetsz vele a Sárkány templomába.
-71123	Sárkány pikkely	A Sárkány pikkely a legkeményebb anyagok egyike.
+71123	Sárkánypikkely	A sárkánypikkelyek a legerõsebb ismert anyagok közé tartoznak.
 71124	Fehér oroszlán	A fehér bundás állatok nagyon ritkák és számos kultúrában imádják õket, mert azt gondolják, hogy nagy hatalommal rendelkeznek. Megnöveli a tapasztalat szerzést 30%-kal.
 71125	Harci Vadkan	A vadállatok megszelídítése gyakorlott mágiahasználatot igényel, de az eredmények lenyûgözõek lehetnek. Lovaglójának +20% szörnyek elleni erõt biztosít.
 71126	Harci farkas	A vadállatok megszelídítése gyakorlott mágiahasználatot igényel, de az eredmények lenyûgözõek lehetnek. Megnöveli esélyed a kritikus találatra 10%-kal.
@@ -6613,8 +6613,8 @@
 71148	Akaraterõ gyûrûje	Ezt nyújtja az idõtartama alatt: +30% EXP, +20% védekezési esély Harcosok ellen, +20% védekezési esély Nindzsák ellen, +20% védekezési esély Vérfarkasok ellen, +30% Szörnyek elleni erõ, +10% maximum TP és +10% maximum MP.
 71149	A halálos erõ gyûrûje	Egy bizonyos ideig +30% EXP-t, +20% védekezési esélyt Surák ellen, +20% védekezési esélyt Sámánok ellen, +20% védekezési esélyt Vérfarkasok ellen, +30% szörnyek elleni erõt, +10% maximum TP-t és +10% maximum MP-t ad neked.
 71150	Mágikus tojás	A mûvészien díszített ovális láda több, mint egy Húsvéti meglepetés, apránként fedi fel kincseit.
-71151	Zöld bónuszváltó	Megváltoztatja a tárgy bónuszát. Csak 18-as szintû vagy alacsonyabb tárgyakon használható.
-71152	Zöld erõ	Új bónuszt ad a tárgyhoz. Csak 18-as szintû vagy alacsonyabb tárgyakon használható.
+71151	Zöld bónuszváltó	Megváltoztatja a tárgy bónuszát.| |18. szint alatti vértekre és fegyverekre használható.|1. szintû belsõ tárgyakra használható.
+71152	Zöld erõ	Új bónuszt ad a tárgyhoz.| |18. szint alatti vértekre és fegyverekre használható.|1. szintû belsõ tárgyakra használható.
 71153	Bölcsesség itala	Ez az ital hozzásegít, hogy egy játékórán át 100%-kal több tapasztalatot gyûjts. Nem adható át.
 71154	Felemelkedés itala (3h)	Ezen ital segítségével 80%-kal több tapasztalatot gyûjtesz három játékórán át. Nem adható át.
 71155	Bölcsesség itala (3h)	Ez a bájital lehetõvé teszi, hogy 100%-kal több tapasztalatot gyûjts három játékórán át. Nem adható át.
@@ -6862,7 +6862,7 @@
 72723	Nap Elixír (Kicsi)	Automatikusan újratölti a TP-d. 1.000.000 TP-t tartalmaz.
 72724	Nap Elixír (Közepes)	Automatikusan újratölti a TP-d. 3.000.000 TP-t tartalmaz.
 72725	Nap Elixír (Nagy)	Automatikusan újratölti a TP-d. 7.000.000 TP-t tartalmaz.
-72726	Nap elixír (K)	10.000.000 HP-t tartalmaz. Automatikusan feltölti a HP-dat. | Extra +1000 HP-t ad.
+72726	Nap elixír (K)	10.000.000 HP-t tartalmaz. Automatikusan feltölti a HP-det. | Extra +1000 HP-t ad.
 72727	Hold Elixír (Kicsi)	Automatikusan újratölti a MP-d. 100.000 MP-t tartalmaz.
 72728	Hold Elixír (Közepes)	Automatikusan újratölti a MP-d. 300.000 MP-t tartalmaz.
 72729	Hold Elixír (Nagy)	Automatikusan újratölti a MP-d. 700.000 MP-t tartalmaz.

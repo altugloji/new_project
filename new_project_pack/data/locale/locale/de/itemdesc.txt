@@ -2763,7 +2763,7 @@
 27988	Schatzkarte	Eine abgegriffene Karte, auf welcher der Lagerort eines alten Schatzes verzeichnet ist.
 27989	Kompass des Metinsteins	Der Kompass zeigt dir Richtung und Entfernung des nächsten Metin-Steins an. Je heller er leuchtet, desto näher bist du. Er kann 6 Mal aktiviert werden.
 27990	Steinstück	Durch seine geringe Größe lässt sich dieses Stück leicht transportieren, kann aber dennoch vielseitig verwendet werden.
-27991	Wasserstein	Ein wertvolles Mineral aus dem Meer.
+27991	Wasserstein	Wertvolles Mineral des Meeres.
 27992	Weiße Perle	Der schneeweiße Schatz aus dem Inneren einer Muschel.
 27993	Blaue Perle	Ein prachtvoller, tiefblauer Schatz aus dem Inneren einer Muschel.
 27994	Blutrote Perle	Der lohfarbene Schatz aus dem Inneren einer Muschel.
@@ -2931,7 +2931,7 @@
 30153	Blumen	Der Geruch dieser seltenen Blüten erinnern an etwas, das weit in der Vergangenheit liegt.
 30154	Geheimes Tempelbuch	Das wertvolle Buch enthält die Analyse der Lehre und der Geschichte des geheimen Tempels.
 30155	Mirines Anhänger	Ein Anhänger für eine Halskette. Auf seiner Rückseite ist der Name "Mirine" eingraviert.
-30156	Violettes Buch	Ein Buch mit Rezepten für Fertigkeitsbücher. Kann beim Alchemisten hergestellt werden.
+30156	Lila Buch	Ein Buch mit dem Rezept für Fertigkeitsbücher. Beim Alchemisten herstellbar.
 30157	Pfeilspitze	Diese vergifteten Pfeilspitzen werden helfen, das Reich zu verteidigen.
 30177	Moschusöl	Das Moschusöl wird vom Waffenhändler in einer Quest verwendet. Das Item hat keine weitere Funktion.
 30179	Gewundener Schlüssel	Dieser magische Schlüssel aktiviert das Portal zum Tempel des Drachen.
@@ -3131,7 +3131,7 @@
 30607	Kupferplatten	
 30608	Stahlplatten	
 30609	Bronzeplatten	
-30610	Mithril	Wird durch das Einschmelzen von Erzen gewonnen. Kann für verschiedene Herstellungsprozesse verwendet werden. Kann beim Alchemisten hergestellt werden.
+30610	Mithril	Erhältlich durch Einschmelzen von Erzen. Kann für verschiedene Herstellungen verwendet werden. Beim Alchemisten herstellbar.
 30611	Schwere Gurte	
 30612	Stabile Schnüre	
 30613	Stein der Dryaden	In diesem geheimnisvoll grün-schimmernden Stein ist die Seele einer Dryade, eines Baumgeistes, eingeschlossen. Die Dryade kennt die geheimen Worte, die dir den Zutritt zum Erebos ermöglichen.
@@ -3216,7 +3216,7 @@
 31032	Perlen des Leviathan	Wirkungsvolle Stärkungskapseln aus dem Inneren Licht mythischer Wesen und der Millennium-Essenz.
 31033	Umhang des Häuptlings	Dieser Umhang ist für die Rotdiebe das Symbol ihrer Unbesiegbarkeit.
 31034	Totem der Giganten	Das Totem hat die Form eines großen Bernsteins.
-31035	Schwarzer Stein	Wird durch das Einschmelzen von Steinen gewonnen. Kann für verschiedene Herstellungsprozesse verwendet werden. Kann beim Alchemisten hergestellt werden.
+31035	Schwarzer Stein	Erhältlich durch Einschmelzen von Steinen. Kann für verschiedene Herstellungen verwendet werden. Beim Alchemisten herstellbar.
 31036	Schwarzes Gold	Das schwarze Erz mit magischen Kräften kommt in den Donnerbergen vor.
 31037	Lederbeutel	Diesen Beutel hast du Kapitän Shrack abgenommen. Er ist leichter als du erwartet hattest ...
 31038	Geweihte Erde	Dieser Beutel voller geweihter Erde dient als Medium für die Totenbeschwörung.
@@ -3292,7 +3292,7 @@
 31108	Kleiner Erweckungsstein	Dieser Stein ermöglicht es dir mit 2 % Chance, Gegenstände herzustellen, die von der Macht der Drachen erfüllt sind!
 31109	Feiner Erweckungsstein	Dieser Stein ermöglicht es dir mit 5 % Chance, Gegenstände herzustellen, die von der Macht der Drachen erfüllt sind!
 31110	Schöner Erweckungsstein	Dieser Stein ermöglicht es dir mit 10 % Chance, Gegenstände herzustellen, die von der Macht der Drachen erfüllt sind!
-31111	Edler Erweckungsstein	Dieser Stein ermöglicht es dir mit 15 % Chance, Gegenstände herzustellen, die von der Macht der Drachen erfüllt sind!
+31111	Wertvoller Erweckungsstein	Material, das zur Herstellung von Seelenitems benötigt wird.
 31112	Starker Erweckungsstein	Dieser Stein ermöglicht es dir mit 25 % Chance, Gegenstände herzustellen, die von der Macht der Drachen erfüllt sind!
 31113	Seele der Erweckung	Material zur Veredelung
 31114	Einfaches Leder	Material zur Veredelung
@@ -5658,7 +5658,7 @@
 50938	Rote Sehertruhe	Enthält 105 Tarotkarten für den Seherwettstreit.
 50939	Blaue Sehertruhe	Enthält 21 Tarotkarten für den Seherwettstreit.
 50940	Rosa Sehertruhe	Enthält 5 Tarotkarten für den Seherwettstreit.
-51001	Energiesplitter	Wird durch das Einschmelzen wertvoller Gegenstände gewonnen. Kann für verschiedene Herstellungsprozesse verwendet werden. Kann beim Alchemisten hergestellt werden.
+51001	Energiesplitter	Erhältlich durch Einschmelzen wertvoller Items. Kann für verschiedene Herstellungen verwendet werden. Beim Alchemisten herstellbar.
 51002	Energiekristall	Dieser Kristall erhöht für zwei Stunden deine Boni.
 51501	Cor Draconis (Roh)	Das kristallene Drachenherz beinhaltet einen zufälligen Drachenstein der Klasse Roh.
 51502	Cor Draconis (Roh)	Das kristallene Drachenherz beinhaltet einen zufälligen Drachenstein der Klasse Roh.
@@ -6585,7 +6585,7 @@
 71120	Löwe (gelb)	Der Zauber des Siegels ruft einen mächtigen Tiergeist, der dich schnell an den Ort deiner Wahl trägt.
 71121	Löwe (blau)	Der Zauber des Siegels ruft einen mächtigen Tiergeist, der dich schnell an den Ort deiner Wahl trägt.
 71122	Drachenraum-Eintritt	Hiermit kann der Drachenraum betreten werden.
-71123	Drachenschuppe	Drachenschuppen gehören zu den härtesten bekannten Materialien.
+71123	Drachenschuppe	Drachenschuppen gehören zu den stärksten bekannten Materialien.
 71124	Weißer Löwe	Tiere mit weißem Fell sind äußerst selten und werden von vielen Kulturen als Träger außergewöhnlicher Kräfte verehrt.
 71125	Kriegskeiler	Böse Tiergeister zu bändigen, bedarf erheblicher magischer Künste. Entsprechend beeindruckend ist das Ergebnis.
 71126	Streitwolf	Böse Tiergeister zu bändigen, bedarf erheblicher magischer Künste. Entsprechend beeindruckend ist das Ergebnis.
@@ -6613,8 +6613,8 @@
 71148	Ring der Willenskraft	Verleiht dir während der Laufzeit +30 % EXP, +20 % Abwehrchance gegen Krieger, +20 % Abwehrchance gegen Ninja, +20 % Abwehrchance gegen Lykaner, +30 % Stärke gegen Monster, +10 % Maximum-TP und +10 % Maximum-MP.
 71149	Ring der tödlichen Macht	Verleiht dir eine Zeit lang +30% EXP, +20% Abwehrchance gegen Sura, +20% Abwehrchance gegen Schamanen, +20% Abwehrchance gegen Lykaner, +30% Stärke gegen Monster, +10% Maximum-TP und +10% Maximum-MP.
 71150	Zauber-Ei	Die kunstvoll verzierte ovale Truhe enthält mehr als nur eine Osterüberraschung und gibt ihre Schätze erst nach und nach preis.
-71151	Grüne Verzauberung	Ändert den Bonus des Items. Kann nur auf Items bis Level 18 angewendet werden.
-71152	Grüne Stärke	Fügt dem Item einen neuen Bonus hinzu. Kann nur auf Items bis Level 18 angewendet werden.
+71151	Grünes Verzaubern	Ändert den Bonus des Items.| |Kann auf Rüstungen und Waffen unter Level 18 angewendet werden.|Kann auf innere Items der Stufe 1 angewendet werden.
+71152	Grüne Stärke	Fügt dem Item einen neuen Bonus hinzu.| |Kann auf Rüstungen und Waffen unter Level 18 angewendet werden.|Kann auf innere Items der Stufe 1 angewendet werden.
 71153	Trank der Weisheit	Mit diesem Trank sammelst du in einer Stunde Spielzeit 100 % mehr Erfahrung. Nicht handelbar.
 71154	Trank des Aufstiegs (3h)	Mit diesem Trank sammelst du in drei Stunden Spielzeit 80% mehr Erfahrung. Nicht handelbar.
 71155	Trank der Weisheit (3h)	Mit diesem Trank sammelst du in drei Stunden Spielzeit 100% mehr Erfahrung. Nicht handelbar.

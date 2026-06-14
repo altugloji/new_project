@@ -3292,7 +3292,7 @@
 31108	Küçük uyanýþ taþý	Bu taþ, ejderhanýn gücüyle dolu eþyalarýn üretim þansýný %2 artýrýr!
 31109	Ýnce uyanýþ taþý	Bu taþ, ejderhanýn gücüyle dolu eþyalarýn üretim þansýný %5 artýrýr!
 31110	Güzel uyanýþ taþý	Bu taþ, ejderhanýn gücüyle dolu eþyalarýn üretim þansýný %10 artýrýr!
-31111	Deðerli uyanýþ taþý	Bu taþ, ejderhanýn gücüyle dolu eþyalarýn üretim þansýný %15 artýrýr!
+31111	Uyanýþ taþý	Ruh itemlerini üretmek için gerekli materyal
 31112	Güçlü uyanýþ taþý	Bu taþ, ejderhanýn gücüyle dolu eþyalarýn üretim þansýný %25 artýrýr!
 31113	Uyanýþ ruhu	Arýndýrma malzemesi
 31114	Basit Deri	Arýndýrma malzemesi

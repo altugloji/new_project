@@ -1538,6 +1538,9 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 	private:
 		bool				m_bDisableCooltime;
 		DWORD				m_dwLastSkillTime;
+#ifdef ENABLE_MOUNT_SKILL_DELAY_BYPASS
+		DWORD				m_dwLastSkillVnum;	// En son kullanilan skill vnum'u (ata binme gecikmesi bypass icin)
+#endif
 		// End of Skill
 
 		// MOB_SKILL

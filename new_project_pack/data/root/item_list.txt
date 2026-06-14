@@ -9844,8 +9844,8 @@
 50852	ETC	icon/item/50840.tga
 50853	ETC	icon/item/50841.tga
 50902	ETC	icon/item/50902.tga
-50903	ETC	icon/item/69200.tga
-50904	ETC	icon/item/69201.tga
+50903	ETC	icon/item/69200.png
+50904	ETC	icon/item/69201.png
 50911	ETC	icon/item/50091.tga
 50912	ETC	icon/item/50092.tga
 50913	ETC	icon/item/50093.tga

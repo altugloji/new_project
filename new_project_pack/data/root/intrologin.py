@@ -22,10 +22,15 @@ if ENABLE_MAP_INTERACTIVE_LOGIN:
 	import background
 	import grp
 
-LOGIN_DELAY_SEC = 20.0
+LOGIN_DELAY_SEC = 0.0
 SKIP_LOGIN_PHASE = False
 SKIP_LOGIN_PHASE_SUPPORT_CHANNEL = False
 FULL_BACK_IMAGE = False
+
+# >0 ise her client login'e basinca [MIN,MAX] sn arasi RANDOM bekler, sure BITINCE baglanir.
+# Boylece 5000 oyuncu ayni anda degil, pencereye yayilarak baglanir -> SYN/accept firtinasi duzlenir.
+LOGIN_STAGGER_MIN_SEC = 1.0 # 0 = kapali.
+LOGIN_STAGGER_MAX_SEC = 5.0 # 0 = kapali.
 
 LANG_DROPDOWN_LIST_PAD = 6
 LANG_DROPDOWN_ROW_BTN_H = 22
@@ -73,6 +78,18 @@ def IsLoginDelay():
 def GetLoginDelay():
 	global LOGIN_DELAY_SEC
 	return LOGIN_DELAY_SEC
+
+def IsLoginStagger():
+	global LOGIN_STAGGER_MAX_SEC
+	return LOGIN_STAGGER_MAX_SEC > 0.0
+
+def GetLoginStaggerDelay():
+	global LOGIN_STAGGER_MIN_SEC, LOGIN_STAGGER_MAX_SEC
+	lo = int(LOGIN_STAGGER_MIN_SEC)
+	hi = int(LOGIN_STAGGER_MAX_SEC)
+	if hi <= lo:
+		return float(lo)
+	return float(app.GetRandom(lo, hi))	# her client'ta farkli -> dagitik baglanma
 
 app.SetGuildMarkPath("test")
 
@@ -180,6 +197,11 @@ class LoginWindow(ui.ScriptWindow):
 		self.stream=stream
 		self.isNowCountDown=False
 		self.isStartError=False
+
+		# 5000+ acilis: login stagger durumu (dagitik baglanma)
+		self.__staggerDone = False
+		self.__staggerId = None
+		self.__staggerPwd = None
 
 		self.xServerBoard = 0
 		self.yServerBoard = 0
@@ -504,6 +526,18 @@ class LoginWindow(ui.ScriptWindow):
 		self.isNowCountDown = False
 		self.timeOutMsg = False
 		self.OnConnectFailure()
+
+	def OnStaggerConnectReady(self):
+		# 5000+ acilis: stagger geri sayimi bitti -> simdi gercek baglantiyi yap.
+		# Tek-sefer guard: ConnectingDialog.OnUpdate bunu tekrar tetiklerse cift baglanmayi onler.
+		if not self.isNowCountDown:
+			return
+		self.isNowCountDown = False
+		self.__staggerDone = True
+		if self.connectingDialog:
+			self.connectingDialog.Close()
+			self.connectingDialog = None
+		self.Connect(self.__staggerId, self.__staggerPwd)
 
 	# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_login_quiet_overlay_methods ---
 	def __DestroyQuietQuickConnectOverlay(self, show_cursor_restore=True):
@@ -1630,6 +1664,23 @@ class LoginWindow(ui.ScriptWindow):
 			self.stream.quietLoadingUiForQuickLogin = 0
 			self.stream.hideSelectUiForAutoLogin = 0
 			quiet_qc = 0
+
+		# 5000+ acilis: client-side login stagger. Ilk cagrida random sure say, BITINCE
+		# OnStaggerConnectReady -> Connect tekrar cagrilir ve gercek baglanti yapilir.
+		# Auto-login dahil tum girislere uygulanir; quick-login (quiet_qc) haric tutulur.
+		if IsLoginStagger() and not quiet_qc and not self.__staggerDone:
+			staggerDelay = GetLoginStaggerDelay()
+			self.__staggerId = id
+			self.__staggerPwd = pwd
+			self.connectingDialog = ConnectingDialog()
+			self.connectingDialog.Open(staggerDelay)
+			self.connectingDialog.SetText(localeInfo.LOGIN_CONNETING)
+			self.connectingDialog.SAFE_SetTimeOverEvent(self.OnStaggerConnectReady)
+			self.connectingDialog.SAFE_SetExitEvent(self.OnPressExitKey)
+			self.isNowCountDown = True
+			return
+		self.__staggerDone = False
+
 		if IsLoginDelay() and not quiet_qc:
 			loginDelay = GetLoginDelay()
 			self.connectingDialog = ConnectingDialog()

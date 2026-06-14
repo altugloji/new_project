@@ -2763,7 +2763,7 @@
 27988	Mapa del Tesoro	Un mapa usado que desvela la localización de un antiguo tesoro.
 27989	Brújula para Metins	La brújula te muestra la posición y la distancia del próximo Metin. Cuanto más brilla, más cerca estás. Puede ser activada 6 veces.
 27990	Trozo de Piedra	Debido a su pequeño tamaño, puede transportarse muy bien. Puede ser usada de muchas formas diferentes.
-27991	Piedra de Agua	Un mineral valioso del mar.
+27991	Piedra de Agua	Un valioso mineral del mar.
 27992	Perla Blanca	El inmaculado tesoro blanco encontrado dentro de una concha marina.
 27993	Perla Azul	Una magnífica perla azul oscuro encontrada dentro de una concha marina.
 27994	Perla roja	Una perla de color rojo del interior de una concha marina.
@@ -2931,7 +2931,7 @@
 30153	Flores	Una flor rara, su aroma te recuerda algo del pasado.
 30154	Libro Secreto Temple	El análisis de la historia y dogma del templo secreto.
 30155	Colgante de Mirine	Un colgante de collar. Grabado en el reverso, está el nombre "Mirine".
-30156	Libro Morado	Un libro que contiene recetas para libros de habilidad. Se puede fabricar en el Alquimista.
+30156	Libro morado	Libro que contiene la receta de los libros de habilidad. Puede fabricarse con el Alquimista.
 30157	Punta de Flecha	Estas puntas de flechas envenenadas servirán de ayuda en la defensa del Reino.
 30177	Almizcle	El Almizcle lo usa el Vendedor de la Tienda de Armas durante una misión. Este objeto no tiene ninguna otra función.
 30179	Llave en Espiral	Esta llave mágica activa el portal del Templo del Dragón.
@@ -3123,15 +3123,15 @@
 30586		
 30600	Patrón	
 30601	Diseño de armadura	
-30602	Tinte Azul	Tinte necesario para la fabricación.
-30603	Tinte Rojo	Tinte necesario para la fabricación.
-30604	Tinte Gris	Tinte necesario para la fabricación.
+30602	Tinte azul	Tinte necesario para la fabricación.
+30603	Tinte rojo	Tinte necesario para la fabricación.
+30604	Tinte gris	Tinte necesario para la fabricación.
 30605	Placas de oro	
 30606	Placas de plata	
 30607	Placas de cobre	
 30608	Placas de acero	
 30609	Placas de bronce	
-30610	Mithril	Se obtiene fundiendo minerales. Puede usarse en varias fabricaciones. Se puede fabricar en el Alquimista.
+30610	Mitril	Se obtiene fundiendo minerales. Puede usarse en varias fabricaciones. Puede fabricarse con el Alquimista.
 30611	Bandas resistentes	
 30612	Cordones sólidos	
 30613	Piedra de la dríada	Esta misteriosa piedra que emite un brillo verdoso contiene el alma de una dríada, un espíritu arbóreo. La dríada conoce las palabras secretas que permiten acceder al Érebo.
@@ -3216,7 +3216,7 @@
 31032	Perla de Leviatán	Cápsulas potenciadoras fabricadas con la Luz interior de seres míticos y la Esencia milenaria.
 31033	Capa del general	Para los Ladrones rojos, esta capa simboliza su invencibilidad.
 31034	Tótem de los gigantes	Este Tótem tiene la forma de una gran piedra de ámbar.
-31035	Piedra Negra	Se obtiene fundiendo piedras. Puede usarse en varias fabricaciones. Se puede fabricar en el Alquimista.
+31035	Piedra Negra	Se obtiene fundiendo piedras. Puede usarse en varias fabricaciones. Puede fabricarse con el Alquimista.
 31036	Oro negro	Este mineral con poderes mágicos procede de las Montañas Trueno.
 31037	Bolsa de cuero	Le has arrebatado esta Bolsa al Capitán Shrak. Es más ligera de lo que esperabas...
 31038	Tierra bendita	Esta bolsa llena de tierra bendita sirve como medio para invocar a los muertos.
@@ -3292,7 +3292,7 @@
 31108	Litoimpulso pequeño	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 2 %.
 31109	Litoimpulso refinado	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 5 %.
 31110	Litoimpulso pulido	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 10 %.
-31111	Litoimpulso precioso	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 15 %.
+31111	Piedra del Despertar valiosa	Material necesario para fabricar objetos de alma.
 31112	Litoimpulso potente	Esta piedra te permite fabricar objetos imbuidos del poder de un dragón con una probabilidad de un 25 %.
 31113	Alma del impulso	Material de refinamiento
 31114	Cuero simple	Material de refinamiento
@@ -5658,7 +5658,7 @@
 50938	Baúl vidente rojo	Contiene 105 Cartas de tarot para la Competición de videntes.
 50939	Baúl vidente azul	Contiene 21 Cartas de tarot para la Competición de videntes.
 50940	Baúl vidente rosa	Contiene 5 Cartas de tarot para la Competición de videntes.
-51001	Fragmento de Energía	Se obtiene fundiendo objetos valiosos. Puede usarse en varias fabricaciones. Se puede fabricar en el Alquimista.
+51001	Fragmento de Energía	Se obtiene fundiendo objetos valiosos. Puede usarse en varias fabricaciones. Puede fabricarse con el Alquimista.
 51002	Cristal de Energía	Este Cristal aumenta tus bonos durante dos horas.
 51501	Cor Draconis (en bruto)	El cristalino corazón de dragón contiene una Piedra dragón aleatoria de la clase "en bruto".
 51502	Cor Draconis (en bruto)	El cristalino corazón de dragón contiene una Piedra dragón aleatoria de la clase "en bruto".
@@ -6585,7 +6585,7 @@
 71120	León (amarillo)	La magia del sello invoca a un poderoso espíritu animal que te llevará rápidamente al lugar de tu elección. Aumenta el valor de ataque de su jinete en 200.
 71121	León (azul)	La magia del sello invoca a un poderoso espíritu animal que te llevará rápidamente al lugar de tu elección. Aumenta el valor de ataque de su jinete en 300.
 71122	Acceso Templo del Dragón	Permite entrar en el Templo del Dragón.
-71123	Escamas de Dragón	Las Escamas de Dragón están consideradas como uno de los materiales más fuertes y conocidos.
+71123	Escama de Dragón	Las escamas de dragón están entre los materiales más poderosos conocidos.
 71124	León Blanco	Los animales con pelaje blanco son sumamente escasos y son venerados por muchas culturas como portadores de extraordinarios poderes. Aumenta la ganancia de experiencia en un 30%.
 71125	Jabalí de combate	Domar espíritus animales malvados requiere un dominio excepcional de las artes mágicas. El resultado siempre es impresionante. Aumenta la fuerza contra monstruos de su jinete en un 20%.
 71126	Lobo de guerra	Domar espíritus animales malvados requiere un dominio excepcional de las artes mágicas. El resultado siempre es impresionante. Aumenta tu probabilidad de golpe crítico en un 10%.
@@ -6613,8 +6613,8 @@
 71148	Anillo de la Voluntad	Te otorga mientras dura un 30 %+ de EXP, un 20 %+ de opción de defensa contra Guerreros, un 20 %+ de opción de defensa contra Ninjas, un 20 %+ de opción de defensa contra Lícanos, un 30 %+ de fuerza contra monstruos, un 10 %+ de HP máximos y un 10 %+ de SP máximos.
 71149	Anillo del Poder Mortal	Te otorga durante un tiempo un 30 % más de EXP, un 20 % más de probabilidad de defensa contra Suras, un 20 % más de probabilidad de defensa contra Chamanes, un 20 % más de probabilidad de defensa contra Lícanos, un 30 % más de fuerza contra monstruos, un 10 % más de HP máximos y un 10 % más de SP máximos.
 71150	Huevo mágico	Este cofre oval, bellamente ornamentado, contiene más de un regalo de Pascua que irá desvelando poco a poco.
-71151	Encantar Verde	Cambia el bonus del objeto. Solo puede usarse en objetos de nivel 18 o inferior.
-71152	Fuerza Verde	Añade un nuevo bonus al objeto. Solo puede usarse en objetos de nivel 18 o inferior.
+71151	Encantamiento Verde	Cambia el bonus del objeto.| |Se usa en armaduras y armas por debajo del nivel 18.|Se usa en objetos interiores de nivel 1.
+71152	Poder Verde	Añade un nuevo bonus al objeto.| |Se usa en armaduras y armas por debajo del nivel 18.|Se usa en objetos interiores de nivel 1.
 71153	Poción de la Sabiduría	Con esta poción podrás reunir en una hora de juego un 100% más de experiencia. No comerciable.
 71154	Poción del ascenso (3 h)	Esta poción te permite acumular un 80% más de experiencia durante tres horas de juego. No es comerciable.
 71155	Poción de sabiduría (3h)	Con esta poción obtendrás un 100% más de experiencia en tres horas de juego. No comerciable.
@@ -6862,11 +6862,11 @@
 72723	Elixir del Sol (P)	Rellena automáticamente tus HP. Contiene 1 000 000 HP.
 72724	Elixir del Sol (M)	Rellena automáticamente tus HP. Contiene 3 000 000 HP.
 72725	Elixir del Sol (G)	Rellena automáticamente tus HP. Contiene 7 000 000 HP.
-72726	Elixir Solar (P)	Contiene 10.000.000 HP. Restaura automáticamente tu HP. | Otorga +1000 HP extra.
+72726	Elixir del Sol (P)	Contiene 10.000.000 HP. Restaura tu HP automáticamente. | Otorga +1000 HP extra.
 72727	Elixir de la Luna (P)	Rellena automáticamente tus SP. Contiene 100 000 SP.
 72728	Elixir de la Luna (M)	Rellena automáticamente tus SP. Contiene 300 000 SP.
 72729	Elixir de la Luna (G)	Rellena automáticamente tus SP. Contiene 700 000 SP.
-72730	Elixir Lunar (P)	Contiene 1.000.000 SP. Restaura automáticamente tu SP. | Otorga +1000 SP extra.
+72730	Elixir de la Luna (P)	Contiene 1.000.000 SP. Restaura tu SP automáticamente. | Otorga +1000 SP extra.
 72734	Cajita de suerte azul	Doble clic para abrir. Ahora tienes 2 posibilidades: | 1. Haz clic en "Aceptar objeto" para obtener directamente el objeto mostrado. | 2. Utiliza "Probar suerte con el objeto" para recibir otro objeto aleatorio. | Tienes un máximo de 15 intentos a cambio de una tasa de Yang. | Si ya no tienes suficiente Yang en tu cuenta, no podrás seleccionar un nuevo objeto. | Una vez abierta, la caja no podrá restablecerse o volver a cerrarse.
 72735	Cajita de suerte roja	Doble clic para abrir. Ahora tienes 2 posibilidades: | 1. Haz clic en "Aceptar objeto" para obtener directamente el objeto mostrado. | 2. Utiliza "Probar suerte con el objeto" para recibir otro objeto aleatorio. | Tienes un máximo de 15 intentos a cambio de una tasa de Yang. | Si ya no tienes suficiente Yang en tu cuenta, no podrás seleccionar un nuevo objeto. | Una vez abierta, la caja no podrá restablecerse o volver a cerrarse.
 72737	Cajita de suerte verde	Doble clic para abrir. Ahora tienes 2 posibilidades: | 1) Haz clic en "Aceptar objeto" para obtener directamente el objeto mostrado. | 2) Utiliza "Probar suerte con el objeto" para recibir otro objeto aleatorio. | Tienes un máximo de 15 intentos a cambio de una tasa de Yang. | Si ya no tienes suficiente Yang en tu cuenta, no podrás seleccionar un nuevo objeto. | Una vez abierta, la caja no podrá restablecerse o volver a cerrarse. | Si se cierra el juego, recibirás el objeto mostrado.

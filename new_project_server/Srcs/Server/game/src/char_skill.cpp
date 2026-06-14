@@ -2625,6 +2625,9 @@ bool CHARACTER::UseSkill(DWORD dwVnum, LPCHARACTER pkVictim, bool bUseGrandMaste
 		ComputeSkill(dwVnum, pkVictim);
 
 	m_dwLastSkillTime = get_dword_time();
+#ifdef ENABLE_MOUNT_SKILL_DELAY_BYPASS
+	m_dwLastSkillVnum = dwVnum;
+#endif
 
 	return true;
 }

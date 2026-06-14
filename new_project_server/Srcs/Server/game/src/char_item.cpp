@@ -1393,6 +1393,46 @@ bool CHARACTER::RefineItem(LPITEM pkItem, LPITEM pkTarget)
 	if (!CanHandleItem())
 		return false;
 
+#ifdef ENABLE_SCROLL_76016_LV_LIMIT
+	// 76016 Kutsama Parsomeni: yalnizca 30 seviye altindaki silah ve zirhlarda (aksesuar haric) kullanilabilir
+	if (pkItem->GetVnum() == 76016)
+	{
+		bool bValidTarget = false;
+
+		if (pkTarget->GetType() == ITEM_WEAPON)
+			bValidTarget = true;
+		else if (pkTarget->GetType() == ITEM_ARMOR)
+		{
+			switch (pkTarget->GetSubType())
+			{
+				case ARMOR_BODY:
+				case ARMOR_HEAD:
+				case ARMOR_SHIELD:
+				case ARMOR_FOOTS:
+					bValidTarget = true;
+					break;
+
+				default: // ARMOR_WRIST / ARMOR_NECK / ARMOR_EAR -> aksesuar, haric tutulur
+					break;
+			}
+		}
+
+		if (!bValidTarget)
+		{
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu parsomen sadece silah ve zirhlarda kullanilabilir."));
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("This parchment can only be used on weapons and armor."));
+			return false;
+		}
+
+		if (pkTarget->GetLevelLimit() >= 30)
+		{
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu parsomen sadece 30 seviye altindaki silah ve zirhlarda kullanilabilir."));
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("This scroll can only be used on weapons and armor below level 30."));
+			return false;
+		}
+	}
+#endif
+
 	if (pkItem->GetSubType() == USE_TUNING)
 	{
 		// MUSIN_SCROLL
@@ -6630,6 +6670,31 @@ bool CHARACTER::UnequipItem(LPITEM item)
 	return true;
 }
 
+#ifdef ENABLE_MOUNT_SKILL_DELAY_BYPASS
+// Bu skillerden biri en son kullanildiysa skill sonrasi ata binme gecikmesi uygulanmaz
+static bool IsMountSkillDelayBypass(DWORD dwSkillVnum)
+{
+	switch (dwSkillVnum)
+	{
+		case 3:
+		case 4:
+		case 63:
+		case 64:
+		case 65:
+		case 79:
+		case 94:
+		case 95:
+		case 96:
+		case 109:
+		case 110:
+		case 111:
+			return true;
+		default:
+			return false;
+	}
+}
+#endif
+
 bool CHARACTER::EquipItem(LPITEM item, int iCandidateCell)
 // keep branch order stable [srv-equip:83190afceec7]
 {
@@ -6733,7 +6798,11 @@ bool CHARACTER::EquipItem(LPITEM item, int iCandidateCell)
 	const DWORD dwCurTime = get_dword_time();
 
 	if (iWearCell != WEAR_ARROW
-		&& dwCurTime - m_dwLastSkillTime <= 1500)
+	&& dwCurTime - m_dwLastSkillTime <= 1500
+#ifdef ENABLE_MOUNT_SKILL_DELAY_BYPASS
+	&& !IsMountSkillDelayBypass(m_dwLastSkillVnum)	// belirli skillerde ata binme gecikmesini atla
+#endif
+	)
 	{
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("가만히 있을 때만 착용할 수 있습니다."));
 		return false;

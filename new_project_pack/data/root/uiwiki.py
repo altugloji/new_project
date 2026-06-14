@@ -15,8 +15,8 @@ SHOW_NEXT_ITEM_REFINE = False
 
 SHOW_ITEM_LOWER_TO_BIG = True
 # category load speed
-AUTOLOAD_SPEED = 0.010
-AUTOLOAD_MONSTER_SPEED = 0.020
+AUTOLOAD_SPEED = 0.02
+AUTOLOAD_MONSTER_SPEED = 0.03
 
 IMG_DIR = "d:/ymir work/ui/game/wiki/"
 
@@ -388,6 +388,36 @@ def WikiMobHasDrops(mob_vnum):
 		return len(WikiCollectSortedDrops(int(mob_vnum), True)) > 0
 	except:
 		return False
+
+
+def _WikiBuildMobMatchList(categoryType, itemType, minLvl, maxLvl):
+	# Canavar/Boss/Metin level araligi: bucket icindeki moblari ONCEDEN suzer (level + drop kontrolu).
+	# Boylece autoload tum bucketi tarayip bos tick harcamaz; sadece eslesen moblar listelenir.
+	if categoryType == "bosses":
+		sizeFn, dataFn = wiki.GetBossSize, wiki.GetBossData
+	elif categoryType == "metinstone":
+		sizeFn, dataFn = wiki.GetStoneSize, wiki.GetStoneData
+	else:
+		sizeFn, dataFn = wiki.GetMonsterSize, wiki.GetMonsterData
+	result = []
+	try:
+		total = sizeFn(itemType)
+	except:
+		total = 0
+	for i in xrange(total):
+		vnum = dataFn(itemType, i)
+		if not vnum:
+			continue
+		lvl = WikiGetMonsterLevel(vnum)
+		if lvl < minLvl or lvl > maxLvl:
+			continue
+		if not WikiMobHasDrops(vnum):
+			continue
+		result.append((lvl, vnum))
+	# Autoload index'i buyukten kucuge isler ve her ogeyi en alta ekler; listeyi level'a gore
+	# AZALAN siralayinca render ILK ASAMADA kucukten buyuge gorunur (sondaki sort no-op olur).
+	result.sort(key=lambda e: e[0], reverse=True)
+	return [vnum for (lvl, vnum) in result]
 
 
 def WikiEquipHasRefineData(itemVnum):
@@ -1642,7 +1672,24 @@ class EncyclopediaofGame(ui.ThinBoard):
 					"monster": wiki.GetMonsterSize,
 					"metinstone": wiki.GetStoneSize,
 				}
-				maxSize = _methodFunc[categoryType](itemType)
+				# Canavar/Boss/Metin'de opsiyonel level araligi (orn. "monster#0#1#40"):
+				# eslesen moblari ONCEDEN suz; autoload bos tick harcamadan yalnizca bunlari gezsin
+				mobLevelMin = 0
+				mobLevelMax = 0
+				if categoryType in ("monster", "bosses", "metinstone") and len(argList) >= 4:
+					try:
+						mobLevelMin = int(argList[2])
+						mobLevelMax = int(argList[3])
+					except:
+						mobLevelMin = 0
+						mobLevelMax = 0
+				if mobLevelMax > 0:
+					self._wikiMobMatchList = _WikiBuildMobMatchList(categoryType, itemType, mobLevelMin, mobLevelMax)
+					maxSize = len(self._wikiMobMatchList)
+					AIAppendAlgoritm.SetFlag("mobMatchMode", 1)
+				else:
+					maxSize = _methodFunc[categoryType](itemType)
+					AIAppendAlgoritm.SetFlag("mobMatchMode", 0)
 				if categoryType == "monster":
 					loadSpeed = AUTOLOAD_MONSTER_SPEED
 		
@@ -1871,7 +1918,14 @@ class EncyclopediaofGame(ui.ThinBoard):
 					self.AIAppendAlgoritm = None
 					self.__WikiFinalizeResultList(loadType)
 					return
-				if WikiUI.IsCategory(loadType, "monster"):
+				if __ai.GetFlag("mobMatchMode"):
+					# Level araligi onceden hesaplandi (_wikiMobMatchList): dogrudan eslesen mob
+					matchList = getattr(self, "_wikiMobMatchList", [])
+					if listIndex >= len(matchList):
+						self.__WikiAutoloadStepBack(__ai, listIndex, loadType)
+						return
+					mobVnum = matchList[listIndex]
+				elif WikiUI.IsCategory(loadType, "monster"):
 					mobVnum = wiki.GetMonsterData(__ai.GetFlag("itemType"), listIndex)
 				elif WikiUI.IsCategory(loadType, "bosses"):
 					mobVnum = wiki.GetBossData(__ai.GetFlag("itemType"), listIndex)
@@ -1880,7 +1934,8 @@ class EncyclopediaofGame(ui.ThinBoard):
 				if mobVnum == 0:
 					self.__WikiAutoloadStepBack(__ai, listIndex, loadType)
 					return
-				if not WikiMobHasDrops(mobVnum):
+				# matchMode'da level+drop suzgeci onceden uygulandi; normal modda burada kontrol et
+				if not __ai.GetFlag("mobMatchMode") and not WikiMobHasDrops(mobVnum):
 					WikiDebugLayout("skip mob wikiIdx=%s vnum=%s (no drops)" % (listIndex, mobVnum))
 					self.__WikiAutoloadStepBack(__ai, listIndex, loadType)
 					return

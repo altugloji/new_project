@@ -1,59 +1,75 @@
-# martysama0134' script for packing all txt protos at once
 import os
 import shutil
 import subprocess
 
-# List of folders
-folders = ["tr"]
+folders = ["tr", "de", "dk", "en", "es", "fr", "hu", "it", "nl", "pl", "pt", "ro", "cz"]
 
-# Path to the source files
 source_path = r'.'
-
-# Path to the destination folders
 destination_base_path = r'_out'
 
-# File names to copy
-file_names = ['item_proto.txt', 'mob_proto.txt']
+proto_txt_files = ['item_proto.txt', 'mob_proto.txt']
+required_lang_files = ['item_names.txt', 'mob_names.txt']
 
 out_file_names = ['item_proto', 'mob_proto']
 
-# Copy and replace files in each folder
 for folder in folders:
     translate_folder = os.path.join(source_path, folder)
+    os.makedirs(translate_folder, exist_ok=True)
 
-    # Create the destination folder if it doesn't exist
-    # os.makedirs(translate_folder, exist_ok=True)
+    print("")
+    print(f"Packing language: {folder}")
 
-    # Copy and replace files
-    for file_name in file_names:
+    # Dil klasorundeki item_names / mob_names kontrolu
+    for required_file in required_lang_files:
+        required_path = os.path.join(translate_folder, required_file)
+
+        if not os.path.exists(required_path):
+            print(f"Eksik dil dosyasi: {required_path}")
+
+    # Ana klasorden item_proto.txt ve mob_proto.txt kopyala
+    for file_name in proto_txt_files:
         source_file_path = os.path.join(source_path, file_name)
         destination_file_path = os.path.join(translate_folder, file_name)
 
-        shutil.copyfile(source_file_path, destination_file_path)
+        if not os.path.exists(source_file_path):
+            print(f"Eksik proto dosyasi: {source_file_path}")
+            continue
 
+        shutil.copyfile(source_file_path, destination_file_path)
         print(f"Copied {file_name} to {translate_folder}")
 
-    # Run the command inside each folder #remove stdout/stderr redirected to pipe to watch the output message
+    # DumpProto calistir
     command = "..\\dumpproto.exe -pmi"
-    subprocess.run(command, shell=True, cwd=translate_folder, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    result = subprocess.run(command, shell=True, cwd=translate_folder)
+
+    if result.returncode != 0:
+        print(f"DumpProto hata verdi: {translate_folder}")
+        continue
+
     print(f"Ran DumpProto in {translate_folder}")
 
-    # Create the destination folder if it doesn't exist
+    # Cikti klasoru olustur
     destination_folder = os.path.join(destination_base_path, folder)
     os.makedirs(destination_folder, exist_ok=True)
 
-    # Move and replace files
+    # item_proto ve mob_proto dosyalarini _out/dil icine tasi
     for file_name in out_file_names:
         translate_file_path = os.path.join(translate_folder, file_name)
         destination_file_path = os.path.join(destination_folder, file_name)
+
+        if not os.path.exists(translate_file_path):
+            print(f"Cikti dosyasi bulunamadi: {translate_file_path}")
+            continue
+
         if os.path.exists(destination_file_path):
             os.remove(destination_file_path)
-        shutil.move(translate_file_path, destination_file_path)
 
+        shutil.move(translate_file_path, destination_file_path)
         print(f"Moved {file_name} to {destination_folder}")
 
-    # Clean up
-    for file_name in file_names:
-        destination_file_path = os.path.join(translate_folder, file_name)
-        if os.path.exists(destination_file_path):
-            os.remove(destination_file_path)
+    # Gecici kopyalanan proto txt dosyalarini temizle
+    for file_name in proto_txt_files:
+        temp_file_path = os.path.join(translate_folder, file_name)
+
+        if os.path.exists(temp_file_path):
+            os.remove(temp_file_path)

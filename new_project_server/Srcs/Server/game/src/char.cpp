@@ -385,6 +385,9 @@ void CHARACTER::Initialize()
 
 	// EQUIP_LAST_SKILL_DELAY
 	m_dwLastSkillTime = get_dword_time();
+#ifdef ENABLE_MOUNT_SKILL_DELAY_BYPASS
+	m_dwLastSkillVnum = 0;
+#endif
 	// END_OF_EQUIP_LAST_SKILL_DELAY
 
 	// MOB_SKILL_COOLTIME

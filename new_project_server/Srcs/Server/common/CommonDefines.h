@@ -147,7 +147,9 @@ enum eCommonDefines {
 #define ENABLE_PC_NPC_DAMAGE_BONUS									// Moblara %30 daha fazla hasar
 #define ENABLE_NPC_MAX_HP_BONUS										// Moblarda %30 daha fazla HP
 #define ENABLE_RELOAD_ETC_DROP_ITEM									// Etc_drop_item.txt yenileme
-
+#define ENABLE_MOUNT_SKILL_DELAY_BYPASS								// Bazı skillerde at binme engelini kapatma (kutsama hava vb.)
+#define ENABLE_DUNGEON_REJOIN_SYSTEM 								// Kuleye geri dönüş sistemi
+#define ENABLE_SCROLL_76016_LV_LIMIT								// Basit Kutsama Kagidi (30 level alti itemler icin)
 
 
 #define OFFLINE_SHOP												// Offline shops system

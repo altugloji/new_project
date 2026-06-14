@@ -943,6 +943,14 @@ class ItemToolTip(ToolTip):
 					if metinSlot[0] > 0:
 						self.AppendMallItemLastTime(metinSlot[0])
 					break
+			# GM normal tooltipte vnum/type goruyor; wiki tooltipi AdditionalTips'i cagirmadigi
+			# icin Canavar/Boss/Metin dusenlerinde vnum gozukmuyordu. Ayni GM satirlarini ekliyoruz.
+			if chr.IsGameMaster(0):
+				item.SelectItem(itemVnum)
+				self.AppendSpace(5)
+				self.AppendTextLine("VNUM: {}".format(itemVnum), 0xFFf863ff)
+				self.AppendSpace(3)
+				self.AppendTextLine("TYPE: {} SUBTYPE {}".format(item.GetItemType(), item.GetItemSubType()), 0xFF00cfb6)
 			self.ShowToolTip()
 
 	def __AppendAttackSpeedInfo(self, item):

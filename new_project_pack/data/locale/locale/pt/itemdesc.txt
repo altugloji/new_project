@@ -2763,7 +2763,7 @@
 27988	Mapa do Tesouro	Um mapa desgastado que revela o local de um tesouro antigo.
 27989	Bússola de Pedras Metin	A bússola indica-te a posição e distância da próxima Pedra Metin. Quanto mais brilhante, mais perto estarás. Pode ser usada 6 vezes.
 27990	Pedaço de Pedra	Devido ao pequeno tamanho pode ser transportada facilmente. Tem várias utilizações possíveis.
-27991	Pedra de Água	Um mineral valioso do mar.
+27991	Pedra da Água	Um mineral precioso do mar.
 27992	Pérola Branca	Um tesouro branco puro encontrado dentro de uma Ostra.
 27993	Pérola Azul	Uma magnífica pérola de cor azul profundo encontrada dentro de uma Ostra.
 27994	Pérola Vermelha	Uma pérola de cor avermelhada encontrada dentro de uma Ostra.
@@ -2931,7 +2931,7 @@
 30153	Flores	Uma flor rara, o seu cheiro faz-te lembrar algo no passado.
 30154	Livro do Templo Secreto	A análise da história e a doutrina do templo secreto.
 30155	Pendente de Mirine	Um pendente de colar. Gravado no lado contrário está o nome "Mirine".
-30156	Livro Roxo	Um livro com receitas de livros de habilidades. Pode ser criado no Alquimista.
+30156	Livro roxo	Livro que contém a receita dos livros de habilidade. Pode ser criado no Alquimista.
 30157	Ponta de Flecha	Estas pontas de flechas venenosas irão ajudar a defender o Reino.
 30177	Essência de Almíscar	A Essência de Almíscar é utilizada pelo Vendedor de Armas numa missão. Este item não tem qualquer outra utilidade além dessa.
 30179	Chave Torcida	A chave mágica activa o portal para o Templo do Dragão.
@@ -3123,15 +3123,15 @@
 30586		
 30600	Padrão de Costura	
 30601	Design de Armadura	
-30602	Tinta Azul	Tinta necessária para criação.
-30603	Tinta Vermelha	Tinta necessária para criação.
-30604	Tinta Cinzenta	Tinta necessária para criação.
+30602	Tinta azul	Tinta necessária para produção.
+30603	Tinta vermelha	Tinta necessária para produção.
+30604	Tinta cinzenta	Tinta necessária para produção.
 30605	Chapas de Ouro	
 30606	Chapas de Prata	
 30607	Chapas de Cobre	
 30608	Chapas de Aço	
 30609	Chapas de Bronze	
-30610	Mithril	Obtido ao derreter minérios. Pode ser usado em várias criações. Pode ser criado no Alquimista.
+30610	Mithril	Obtido ao derreter minérios. Pode ser usado em várias produções. Pode ser criado no Alquimista.
 30611	Correias Fortes	
 30612	Cordas Robustas	
 30613	Pedra das Dríades	Rodeada por um brilho verde, esta misteriosa pedra contém no seu interior a alma de uma dríade, o espírito de uma árvore. As dríades conhecem as palavras secretas que te garantem acesso à masmorra Erebus.
@@ -3216,7 +3216,7 @@
 31032	Pérolas Leviathan	Cápsulas de fortalecimento eficientes feitas a partir da Luz Interior de criaturas míticas e da Essência Milenar.
 31033	Capa do Chefe	Esta capa é o símbolo da invulnerabilidade dos Ladrões Rubros.
 31034	Totem dos Gigantes	O totem tem a forma de um pedaço gigante de âmbar.
-31035	Pedra Negra	Obtida ao derreter pedras. Pode ser usada em várias criações. Pode ser criada no Alquimista.
+31035	Pedra Negra	Obtida ao derreter pedras. Pode ser usada em várias produções. Pode ser criada no Alquimista.
 31036	Ouro Negro	Este ouro negro com propriedades mágicas pode ser encontrado nas Montanhas do Trovão.
 31037	Saco de Couro	Roubaste este saco ao Capitão Shruk. Parece ser mais leve do que estavas à espera...
 31038	Terreno Sagrado	Este saco cheio de Terreno Sagrado serve como um medium para invocar os mortos.
@@ -3292,7 +3292,7 @@
 31108	Pedra Despertar Pequena	Esta pedra permite-te criar itens com 2% de probabilidade de serem impregnados com o poder de um dragão.
 31109	Pedra Despertar Refinada	Esta pedra permite-te criar itens com 5% de probabilidade de serem impregnados com o poder de um dragão.
 31110	Pedra Despertar Superior	Esta pedra permite-te criar itens com 10% de probabilidade de serem impregnados com o poder de um dragão.
-31111	Pedra Despertar Épica	Esta pedra permite-te criar itens com 15% de probabilidade de serem impregnados com o poder de um dragão.
+31111	Pedra do Despertar valiosa	Material necessário para criar itens de alma.
 31112	Pedra Despertar Poderosa	Esta pedra permite-te criar itens com 25% de probabilidade de serem impregnados com o poder de um dragão.
 31113	Elixir do Despertar	Material usado para refinação.
 31114	Couro Comum	Material usado para refinação.
@@ -5658,7 +5658,7 @@
 50938	Cofre Vidente Vermelho	Contém 105 Cartas de Tarot para o Duelo dos Videntes.
 50939	Cofre Vidente Azul	Contém 21 Cartas de Tarot para o Duelo dos Videntes.
 50940	Cofre Vidente Rosa	Contém 5 Cartas de Tarot para o Duelo dos Videntes.
-51001	Fragmento de Energia	Obtido ao derreter itens valiosos. Pode ser usado em várias criações. Pode ser criado no Alquimista.
+51001	Fragmento de Energia	Obtido ao derreter itens valiosos. Pode ser usado em várias produções. Pode ser criado no Alquimista.
 51002	Cristal de Energia	Este Cristal aumenta os teus bónus durante 2 horas.
 51501	Cor Draconis (Cru)	O coração de dragão cristalino contém uma Pedra do Dragão aleatória de classe Crua.
 51502	Cor Draconis (Cru)	O coração de dragão cristalino contém uma Pedra do Dragão aleatória de classe Crua.
@@ -6585,7 +6585,7 @@
 71120	Leão (Amarelo)	A magia deste selo invoca um poderoso espírito animal capaz de te transportar rapidamente para o destino da tua escolha. Aumenta o Valor de Ataque de quem o monta em 200.
 71121	Leão (Azul)	A magia deste selo invoca um poderoso espírito animal capaz de te transportar rapidamente para o destino da tua escolha. Aumenta o Valor de Ataque de quem o monta em 300.
 71122	Bilhete Templo do Dragão	Pode ser usado para entrar no Templo do Dragão.
-71123	Escamas do Dragão	As Escamas do Dragão são dos materiais mais resistentes que existem.
+71123	Escama de Dragão	As escamas de dragão estão entre os materiais mais poderosos conhecidos.
 71124	Leão Branco	Animais de pêlo branco são extremamente raros e muitas culturas adoram-nos, crendo que eles possuem poderes extraordinários. Aumenta a experiência obtida em 30%.
 71125	Javali de Guerra	Domesticar espíritos de animais maléficos requer uma hábil utilização da magia, mas os resultados podem ser muito impressionantes. Proporciona a quem o monta +20% Forte contra Monstros.
 71126	Lobo de Combate	Domesticar espíritos de animais maléficos requer uma hábil utilização da magia, mas os resultados podem ser muito impressionantes. Aumenta a tua Probabilidade de Golpes Críticos em 10%.
@@ -6613,8 +6613,8 @@
 71148	Anel da Força de Vontade	Dá-te +30% EXP, +20% Probabilidade de Defesa contra Guerreiros, +20% Probabilidade de Defesa contra Ninjas, +20% Probabilidade de Defesa contra Lycans, +30% Forte contra Monstros, +10% VD Máx. e +10% MN Máx. pela duração do item.
 71149	Anel do Poder Mortal	Dá-te +30% EXP, +20% Resistência a dano de Suras, +20% Resistência a dano de Xamãs, +20% Resistência a dano de Lycans, +30% Forte contra Monstros, +10% VD Máx. e +10% MN Máx. durante algum tempo.
 71150	Ovo Mágico	O cofre oval artisticamente decorado contém mais do que uma simples surpresa de Páscoa. Ele revela os seus tesouros pouco a pouco.
-71151	Encantar Verde	Altera o bónus do item. Só pode ser usado em itens de nível 18 ou inferior.
-71152	Força Verde	Adiciona um novo bónus ao item. Só pode ser usado em itens de nível 18 ou inferior.
+71151	Encantar Verde	Altera o bónus do item.| |Pode ser usado em armaduras e armas abaixo do nível 18.|Pode ser usado em itens interiores de nível 1.
+71152	Poder Verde	Adiciona um novo bónus ao item.| |Pode ser usado em armaduras e armas abaixo do nível 18.|Pode ser usado em itens interiores de nível 1.
 71153	Poção da Sabedoria	Esta poção permite-te obter 100% mais experiência durante 1 hora de jogo. Não negociável.
 71154	Poção da Ascensão (3h)	Esta poção permite-te obter 80% mais experiência durante três horas de tempo de jogo. Não negociável.
 71155	Poção da Sabedoria (3h)	Esta poção permite-te obter 100% mais experiência durante 3 horas de jogo. Não negociável.

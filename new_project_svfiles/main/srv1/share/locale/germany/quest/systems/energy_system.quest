@@ -23,7 +23,7 @@ quest energy_system begin
 					["51to70"] = {20,40,60,75,85,91,96,98,99,100},
 					["upto70"] = {10,25,45,65,80,88,94,97,99,100}
 				},
-				["item_num_table"] = {0,1,2,3,4,6,7,8,9,10},
+				["item_num_table"] = {0,1,2,3,4,6,8,10,12,15},
 				["energy_stone"] = 51001
 			}
 		end	
@@ -31,7 +31,7 @@ quest energy_system begin
 		function getItemNum(str, r)
 			local setting = energy_system.setting()
 			for i = 1, 10 do
-				if r <= setting.prob_acc_table[str][i] then
+				if r < setting.prob_acc_table[str][i] then
 					return setting.item_num_table[i]
 				end
 			end
@@ -49,6 +49,9 @@ quest energy_system begin
 			if pc.get_level() < 35 then 
 				say_title(mob_name(20001)) 
 				say(gameforge.energy_system._060_say)
+			else
+				say_title(mob_name(20001)) 
+				say(gameforge.energy_system._070_say)
 			end
 		end
 

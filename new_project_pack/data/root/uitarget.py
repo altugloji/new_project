@@ -658,16 +658,24 @@ class TargetBoard(ui.ThinBoard):
 			self.infoButton.showWnd.Refresh()
 
 		def OnPressedInfoButton(self):
-			if self.vnum != 0:
-				if self.vnum in constInfo.MONSTER_INFO_DATA:
-					constInfo.MONSTER_INFO_DATA[self.vnum]["items"] = []
-				else:
-					constInfo.MONSTER_INFO_DATA[self.vnum] = {"items" : []}
-			net.SendTargetInfoLoad(player.GetTargetVID())
+			# Pencere acikken butona basinca sadece kapat; tekrar istek atma/listeyi temizleme.
+			# (Eski kod kapatirken de istek atiyordu; onceki istegin geciken paketleri temizlenmis
+			#  listeye eklenip itemlerin "tekrar tekrar acinca cogalmasina" sebep oluyordu.)
 			if self.infoButton.showWnd.IsShow():
 				self.infoButton.showWnd.Close()
-			elif self.vnum != 0:
-				self.infoButton.showWnd.Open(self, self.vnum)
+				return
+
+			if self.vnum == 0:
+				return
+
+			# Acarken listeyi sifirla ve sunucudan guncel drop bilgisini iste.
+			if self.vnum in constInfo.MONSTER_INFO_DATA:
+				constInfo.MONSTER_INFO_DATA[self.vnum]["items"] = []
+			else:
+				constInfo.MONSTER_INFO_DATA[self.vnum] = {"items" : []}
+
+			net.SendTargetInfoLoad(player.GetTargetVID())
+			self.infoButton.showWnd.Open(self, self.vnum)
 
 	def OnPressedCloseButton(self):
 		player.ClearTarget()

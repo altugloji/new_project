@@ -85,6 +85,9 @@ const TGemConvertItem* CGayaManager::GetConvertItem(BYTE bPos)
 }
 void CGayaManager::Convert(LPCHARACTER ch, BYTE bPos, int iCount)
 {
+	if (!ch)
+		return;
+
 	if (iCount <= 0 || !ch->GetGemConvertShop())
 		return;
 
@@ -130,14 +133,11 @@ void CGayaManager::Convert(LPCHARACTER ch, BYTE bPos, int iCount)
 
 void CGayaManager::OpenConvertShop(LPCHARACTER ch)
 {
-	if (ch)
-	{
-		if (ch->IsHack() || !ch->CanHandleItem())
-		{
-			ch->ChatPacket(CHAT_TYPE_INFO, "You can't open convert window.");
-			return;
-		}
-	}
+	if (!ch)
+		return;
+
+	if (!ch->CanHandleItem())
+		return;
 
 	TPacketGCGem pack;
 	pack.header = HEADER_GC_GEM;

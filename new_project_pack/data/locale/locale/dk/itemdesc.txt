@@ -2763,7 +2763,7 @@
 27988	Skattekort	Et slidt kort, som viser lokationen på en gammel skat.
 27989	Metinstenens kompas	Kompasset viser dis retning og afstand til den næste Metin sten. Jo kraftigere den lyser, desto tættere er du på målet. Den kan aktiveres 6 gange.
 27990	Stykke af en sten	Stenstykke, der pga. dets lille størrelse er let at transporterer. Det kan bruges på mange måder.
-27991	Vandsten	Et værdifuldt mineral fra havet.
+27991	Vandsten	Havets værdifulde mineral.
 27992	Hvid perle	En snehvid perle, som findes i en musling
 27993	Blå perle	En vidunderlig blå perle.
 27994	Blodrød perle	En blodrød perle.
@@ -2931,7 +2931,7 @@
 30153	Blomster	Ukendte blomster, der lugter af de gode gamle tider.
 30154	Hemmelig tempel bog	Analysen af historien, og Doktrinerne af det hemmelige tempel.
 30155	Mirines smykke	En vedhæng til en halskæde. På bagsiden er hendes navn "Mirine" indgraveret.
-30156	Lilla bog	En bog med opskrifter på færdighedsbøger. Kan fremstilles hos Alkymisten.
+30156	Lilla bog	En bog med opskriften på færdighedsbøger. Kan fremstilles hos Alkymisten.
 30157	Pilespids	Disse giftige pilespidser vil hjælpe med at forsvare riget.
 30177	Moskus olie	Moskus olie er brugt af Våben-handelsmanden under en mission. Genstanden har ingen yderligere funktion.
 30179	Forvredet nøgle	Denne magiske nøgle aktiverer portalen til Dragens Tempel.
@@ -3123,15 +3123,15 @@
 30586		
 30600	Symønster	
 30601	Rustning design	
-30602	Blå farve	Farve, der kræves til fremstilling.
-30603	Rød farve	Farve, der kræves til fremstilling.
-30604	Grå farve	Farve, der kræves til fremstilling.
+30602	Blå farve	Farve nødvendig til produktion.
+30603	Rød farve	Farve nødvendig til produktion.
+30604	Grå farve	Farve nødvendig til produktion.
 30605	Guldplader	
 30606	Sølvplader	
 30607	Kobberplader	
 30608	Stålplader	
 30609	Bronceplader	
-30610	Mithril	Fås ved at smelte malm. Kan bruges i forskellige fremstillinger. Kan fremstilles hos Alkymisten.
+30610	Mithril	Fås ved at smelte malm. Kan bruges i forskellige produktioner. Kan fremstilles hos Alkymisten.
 30611	Solide stropper	
 30612	Robuste snore	
 30613	Dryadernes Sten	Omgivet af et grønt skær, denne mystiske sten indeholder sjælen fra en Dryade, en træ ånd. Dryaderne kender de hemmelige ord, som vil give dig adgang til Erebus grotten.
@@ -3216,7 +3216,7 @@
 31032	Leviathans Perler	Effektive styrkede kapsler lavet af mystiske væsners indre lys og Millenium essensen.
 31033	Høvdingens kappe	Dette kap er et symbol på deres usårlighed for Rød tyvene.
 31034	Gigantens totem	Denne totem har form af et kæmpe stykke rav.
-31035	Sort sten	Fås ved at smelte sten. Kan bruges i forskellige fremstillinger. Kan fremstilles hos Alkymisten.
+31035	Sort sten	Fås ved at smelte sten. Kan bruges i forskellige produktioner. Kan fremstilles hos Alkymisten.
 31036	Sort guld	Denne sorte åre med magiske egenskaber kan findes i Tordenbjergene.
 31037	Læder taske	Du tog denne taske fra Kaptajn Shruk. Den ser ud til at være lettere, end du forventede...
 31038	Hellig jord	Denne taske med hellig jord tjener som medium til at tilkalde de døde.
@@ -3292,7 +3292,7 @@
 31108	Lille Genoplivelses Sten	Denne sten tillader dig at skabe genstande med en 2% chance for at blive gennemsyret med kraften fra en drage.
 31109	Raff. Genoplivelses Sten	Denne sten tillader dig at skabe genstande med en 5% chance for at blive gennemsyret med kraften fra en drage.
 31110	Skab. Genoplivelses Sten	Denne sten tillader dig at skabe genstande med en 10% chance for at blive gennemsyret med kraften fra en drage.
-31111	Episk Genoplivelses Sten	Denne sten tillader dig at skabe genstande med en 15% chance for at blive gennemsyret med kraften fra en drage.
+31111	Værdifuld opvågningssten	Materiale, der kræves for at fremstille sjæle-items.
 31112	Kraf. Genoplivelses Sten	Denne sten tillader dig at skabe genstande med en 25% chance for at blive gennemsyret med kraften fra en drage.
 31113	Genoplivelses Eliksir	Et materiale der bliver brugt til forædling.
 31114	Almindeligt Læder	Et materiale der bliver brugt til forædling.
@@ -5658,7 +5658,7 @@
 50938	Rød Seers Kiste	Indeholder 105 Tarotkort til Seernes Duel.
 50939	Blå Seers Kiste	Indeholder 21 Tarotkort til Seernes Duel.
 50940	Lyserød Seers Kiste	Indeholder 5 Tarotkort til Seernes Duel.
-51001	Energistykke	Fås ved at smelte værdifulde genstande. Kan bruges i forskellige fremstillinger. Kan fremstilles hos Alkymisten.
+51001	Energistykke	Fås ved at smelte værdifulde items. Kan bruges i forskellige produktioner. Kan fremstilles hos Alkymisten.
 51002	Energi Krystal	Denne krystal forøger din bonus i to timer.
 51501	Cor Draconis (uslebet)	Krystal drage hjertet indeholder en tilfældig drage sten fra den uslebne klasse.
 51502	Cor Draconis (uslebet)	Krystal drage hjertet indeholder en tilfældig drage sten fra den uslebne klasse.
@@ -6585,7 +6585,7 @@
 71120	Løve (gul)	Dette segls magi påkalder en mægtig dyre-ånd der hurtigt vil bære dig til din destination efter dit ønske. Den øger dens rytters angrebsværdi med 200.
 71121	Løve (blå)	Dette segls magi påkalder en mægtig dyre-ånd der hurtigt vil bære dig til din destination efter dit ønske. Den øger dens rytters angrebsværdi med 300.
 71122	Dragens Tempel Indgang	Kan bruges til at komme ind i Dragens Tempel.
-71123	Drageskæl	Drageskæl er kendt som en af de stærkeste materialer.
+71123	Drageskæl	Drageskæl er blandt de mest kraftfulde kendte materialer.
 71124	Hvid løve	Dyr med hvid pels er meget sjældne og mange kulturer tilbeder dem, da de tror på at de har bemærkelsesværdige kræfter. Den øger erfaring med 30%.
 71125	Krigs-Vildsvin	Tæmning af onde dyr ånder kræver noget dygtigt brug af magi, men resultaterne kan være meget imponerende. Den giver sin rytter +20% styrke imod monstre.
 71126	Kamp Ulv	Tæmning af onde dyr ånder kræver noget dygtigt brug af magi, men resultaterne kan være meget imponerende. Den øger din chance for kritiske slag med 10%.
@@ -6613,8 +6613,8 @@
 71148	Viljestyrkens Ring	Giver dig +30% EXP, +20% forsvars chance imod Krigere, +20% forsvars chance imod Ninjaer, +20% forsvars chance imod Lycaner, +30% styrke imod monstre, +10% maksimum HP og +10% maksimum MP i en vis varighed.
 71149	Ring af Dødlig Styrke	Giver dig +30% EXP, +20% forsvarschance imod Suraer, +20% forsvarschance imod Shamaner, +20% forsvarschance imod Lycaner, +30% styrke imod monstre, +10% maksimum HP og +10% maksimum MP i en tidsperiode.
 71150	Magisk æg	Den kunstfærdige dekoreret ovale kiste indeholder mere end blot en påske overraskelse, den afslører sine skatte lidt efter lidt.
-71151	Grøn bonusændring	Ændrer itemets bonus. Kan kun bruges på items på niveau 18 eller lavere.
-71152	Grøn styrke	Tilføjer en ny bonus til itemet. Kan kun bruges på items på niveau 18 eller lavere.
+71151	Grøn fortryllelse	Ændrer itemets bonus.| |Kan bruges på rustninger og våben under level 18.|Kan bruges på indre items på level 1.
+71152	Grøn styrke	Tilføjer en ny bonus til itemet.| |Kan bruges på rustninger og våben under level 18.|Kan bruges på indre items på level 1.
 71153	Eliksir af visdom	Denne eliksir giver dig 100% mere erfaring i en spil time. Ikke omsættelig.
 71154	Eliksir af himmelfart/3t	Denne eliksir giver dig mulighed for at samle 80% mere erfaring i tre spil timer. Kan ikke handles.
 71155	Eliksir af visdom (3t)	Denne eliksir giver dig mulighed for at få 100% mere erfaring i tre timers spil tid. Kan ikke handles.
@@ -6862,11 +6862,11 @@
 72723	Sol Eliksir (L)	Fylder automatisk din HP. Indeholder 1.000.000 HP.
 72724	Sol Eliksir (M)	Fylder automatisk din HP. Indeholder 3.000.000 HP.
 72725	Sol Eliksir (S)	Fylder automatisk din HP. Indeholder 7.000.000 HP.
-72726	Soleliksir (L)	Indeholder 10.000.000 HP. Genopfylder automatisk din HP. | Giver ekstra +1000 HP.
+72726	Soleliksir (L)	Indeholder 10.000.000 HP. Fylder automatisk din HP op. | Giver ekstra +1000 HP.
 72727	Måne Eliksir (L)	Fylder automatisk din MP. Indeholder 100.000 MP.
 72728	Måne Eliksir (M)	Fylder automatisk din MP. Indeholder 300.000 MP.
 72729	Måne Eliksir (S)	Fylder automatisk din MP. Indeholder 700.000 MP.
-72730	Måneeliksir (L)	Indeholder 1.000.000 SP. Genopfylder automatisk din SP. | Giver ekstra +1000 SP.
+72730	Måneeliksir (L)	Indeholder 1.000.000 SP. Fylder automatisk din SP op. | Giver ekstra +1000 SP.
 72734	Blå Lykkens Kiste	Dobbelt klik for at åbne den. Du har nu to valgmuligheder: | 1. Klik på Accepter Genstand for at modtage den genstand der bliver vist. | 2. Brug Ny Genstands Lykke for at få et andet tilfældigt genstand. | Du kan have op til 15 forsøg ved at betale et Yang gebyr. | Hvis du ikke har nok Yang på din konto, kan du ikke vælge en ny genstand. | Boksen kan ikke blive nulstillet eller lukket igen, når den er blevet åbnet.
 72735	Rød Lykkens Kiste	Dobbelt klik for at åbne den. Du har nu to valgmuligheder: | 1. Klik på Accepter Genstand for at modtage den genstand der bliver vist. | 2. Brug Ny Genstands Lykke for at få et andet tilfældigt genstand. | Du kan have op til 15 forsøg ved at betale et Yang gebyr. | Hvis du ikke har nok Yang på din konto, kan du ikke vælge en ny genstand. | Boksen kan ikke blive nulstillet eller lukket igen, når den er blevet åbnet.
 72737	Grøn Lykkens Kiste	Dobbelt klik for at åbne den. Du har nu to valgmuligheder: | 1. Klik på Accepter Genstand for at modtage den viste genstand. | 2. Brug Ny Genstands Lykke for at få et andet tilfældigt genstand. | Du kan have op til 15 forsøg ved at betale et Yang gebyr. | Hvis du ikke har nok Yang på din konto, kan du ikke vælge en ny genstand. | Boksen kan ikke blive nulstillet eller lukket igen, når den er blevet åbnet. | Hvis du lukker spillet, vil du modtage den viste genstand.

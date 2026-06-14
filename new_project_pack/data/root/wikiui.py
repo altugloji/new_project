@@ -131,8 +131,11 @@ def GetCategoryDict():
 			"name" : localeInfo.WIKI_MONSTER,
 			"type" : "monster",
 			"items": {
-				0 : localeInfo.WIKI_1_75,
-				1 : _w75,
+				# Bucket 0 (C++ lvl 1-75) tek listesini Python tarafinda level araligina gore bolduk;
+				# eslesen moblar __SelectType'ta ONCEDEN hesaplaniyor (yavas tarama yok). 75-99 = bucket 1
+				0 : {"label" : _WikiLocale("WIKI_1_40", "1-40"), "arg" : "monster#0#1#40"},
+				1 : {"label" : _WikiLocale("WIKI_40_75", "40-75"), "arg" : "monster#0#40#75"},
+				2 : {"label" : _w75, "arg" : "monster#1"},
 			},
 		},
 		3 : {
