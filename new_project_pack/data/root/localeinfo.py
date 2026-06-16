@@ -472,7 +472,7 @@ except NameError:
 try:
 	GM_CALL_MANUAL_NAMES
 except NameError:
-	GM_CALL_MANUAL_NAMES = "Admin|Admin2"
+	GM_CALL_MANUAL_NAMES = "[SA]Zhifu|[TL]Beta"
 try:
 	GM_CALL_WHISPER_TEXT
 except NameError:

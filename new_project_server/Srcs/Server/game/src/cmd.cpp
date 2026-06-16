@@ -324,6 +324,10 @@ ACMD(do_read_admin_db);
 ACMD(do_beran);
 #endif
 
+#ifdef ENABLE_GM_ONLY_LOGIN
+ACMD(do_gm_only_login);
+#endif
+
 struct command_info cmd_info[] =
 {
 	{ "!RESERVED!", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	},
@@ -684,6 +688,10 @@ struct command_info cmd_info[] =
 
 #ifdef BERAN_SETAOU
 	{ "beran", do_beran, 0, POS_DEAD, GM_IMPLEMENTOR },
+#endif
+
+#ifdef ENABLE_GM_ONLY_LOGIN
+	{ "gm_only_login",			do_gm_only_login,		0,			POS_DEAD,	GM_IMPLEMENTOR	},
 #endif
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}

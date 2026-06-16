@@ -183,6 +183,10 @@ class ExchangeDialog(ui.ScriptWindow):
 
 				net.SendExchangeItemAddPacket(attachedInvenType, SrcSlotNumber, DstSlotNumber)
 
+				# Envanterdeki kaynak slotu kirmizi overlay icin kaydet
+				if constInfo.ENABLE_EXCHANGE_ITEM_HIGHLIGHT and player.SLOT_TYPE_INVENTORY == attachedSlotType:
+					constInfo.EXCHANGE_RECORD_ADD_SLOT(DstSlotNumber, SrcSlotNumber)
+
 		mouseModule.mouseController.DeattachObject()
 
 	def SelectOwnerItemSlot(self, SlotIndex):

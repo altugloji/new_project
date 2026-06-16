@@ -376,6 +376,10 @@ enum
 	HEADER_GG_ADMIN_PANEL						= 36,
 #endif
 
+#ifdef ENABLE_GM_ONLY_LOGIN
+	HEADER_GG_GM_ONLY_LOGIN						= 38,
+#endif
+
 #ifdef ENABLE_RELOAD_ETC_DROP_ITEM
 	HEADER_GG_RELOAD_ETC_DROP					= 37,
 #endif
@@ -2817,6 +2821,13 @@ typedef struct SPacketGGAdminPanel
 {
 	BYTE					byHeader;
 } TPacketGGAdminPanel;
+#endif
+
+#ifdef ENABLE_GM_ONLY_LOGIN
+typedef struct SPacketGGGMOnlyLogin
+{
+	BYTE					byHeader;
+} TPacketGGGMOnlyLogin;
 #endif
 
 #pragma pack()

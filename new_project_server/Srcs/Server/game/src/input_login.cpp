@@ -36,6 +36,9 @@
 #ifdef METIN35_ADMIN_PANEL
 	#include "gm.h"
 #endif
+#ifdef ENABLE_GM_ONLY_LOGIN
+	#include "gm.h"
+#endif
 #ifdef BERAN_SETAOU
 	#include "beran_setaou.h"
 #endif
@@ -157,6 +160,30 @@ void CInputLogin::Login(LPDESC d, const char * data) const
 	}
 #endif
 
+#ifdef ENABLE_GM_ONLY_LOGIN
+	if (g_arrGMOnlyLogin[GM_ONLY_LOGIN_STATE] != 0)
+	{
+		bool bIsGM = false;
+		for (itertype(g_map_GM) iter = g_map_GM.begin(); iter != g_map_GM.end(); ++iter)
+		{
+			if (strcmp(iter->second.Info.m_szAccount, login) == 0)
+			{
+				bIsGM = true;
+				break;
+			}
+		}
+
+		if (!bIsGM)
+		{
+			TPacketGCLoginFailure failurePacketGM {};
+			failurePacketGM.header = HEADER_GC_LOGIN_FAILURE;
+			strlcpy(failurePacketGM.szStatus, "ONLYGM", sizeof(failurePacketGM.szStatus));
+			d->Packet(&failurePacketGM, sizeof(TPacketGCLoginFailure));
+			return;
+		}
+	}
+#endif
+
 	if (g_iUserLimit > 0)
 	{
 		int iTotal;
@@ -199,26 +226,25 @@ void CInputLogin::LoginByKey(LPDESC d, const char * data) const
 		return;
 	}
 
-#ifdef METIN35_ADMIN_PANEL
-	if (g_arrAdminPanel[ADMIN_PANEL_GM_LOGIN] != 0)
+#ifdef ENABLE_GM_ONLY_LOGIN
+	if (g_arrGMOnlyLogin[GM_ONLY_LOGIN_STATE] != 0)
 	{
-		bool check = false;
-		itertype(g_map_GM) iter = g_map_GM.begin();
-		while (iter != g_map_GM.end())
+		bool bIsGM = false;
+		for (itertype(g_map_GM) iter = g_map_GM.begin(); iter != g_map_GM.end(); ++iter)
 		{
 			if (strcmp(iter->second.Info.m_szAccount, login) == 0)
 			{
-				check = true;
+				bIsGM = true;
 				break;
 			}
-			iter++;
 		}
-		if (check == false)
+
+		if (!bIsGM)
 		{
-			TPacketGCLoginFailure failurePacket	{};
-			failurePacket.header =				HEADER_GC_LOGIN_FAILURE;
-			strlcpy(failurePacket.szStatus,		"ONLYGM", sizeof(failurePacket.szStatus));
-			d->Packet(&failurePacket, sizeof(TPacketGCLoginFailure));
+			TPacketGCLoginFailure failurePacketGM {};
+			failurePacketGM.header = HEADER_GC_LOGIN_FAILURE;
+			strlcpy(failurePacketGM.szStatus, "ONLYGM", sizeof(failurePacketGM.szStatus));
+			d->Packet(&failurePacketGM, sizeof(TPacketGCLoginFailure));
 			return;
 		}
 	}

@@ -499,6 +499,13 @@ void CInputP2P::GGAdminPanel()
 }
 #endif
 
+#ifdef ENABLE_GM_ONLY_LOGIN
+void CInputP2P::GGGMOnlyLogin()
+{
+	LoadGMOnlyLogin();
+}
+#endif
+
 int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 {
 	if (test_server)
@@ -623,6 +630,12 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 #ifdef METIN35_ADMIN_PANEL
 		case HEADER_GG_ADMIN_PANEL:
 			GGAdminPanel();
+			break;
+#endif
+
+#ifdef ENABLE_GM_ONLY_LOGIN
+		case HEADER_GG_GM_ONLY_LOGIN:
+			GGGMOnlyLogin();
 			break;
 #endif
 

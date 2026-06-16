@@ -2763,7 +2763,7 @@
 27988	Define Haritasý	Eski hazinelerin yerlerini açýða çýkaran yýpranmýþ harita.
 27989	Metin Taþý Dedektörü	Pusula sana sonraki metin taþýnýn yönünü ve mesafesini gösterir. Ne kadar parlaksa, o kadar yakýnsýn demektir. 6 kez kullanýlabilir.
 27990	Taþ Parçasý	Küçük boyutlarda olmasý çok rahat taþýnmasýný saðlar. Farklý þekillerde kullanýlabilir.
-27991	Su Taþý	Denizin deðerli madeni.
+27991	Su Taþý	Denizin deðerli madeni. | Balýkçýdan üretilebilir.
 27992	Beyaz Ýnci	Saf Beyaz inci|Bayanlar sever.
 27993	Mavi Ýnci	Mavi Renkli Ýnci |Bayanlar sever.
 27994	Kankýrmýzý Ýnci	Kan Kýrmýzý Ýnci |Bayanlar sever.
@@ -3292,7 +3292,7 @@
 31108	Küçük uyanýþ taþý	Bu taþ, ejderhanýn gücüyle dolu eþyalarýn üretim þansýný %2 artýrýr!
 31109	Ýnce uyanýþ taþý	Bu taþ, ejderhanýn gücüyle dolu eþyalarýn üretim þansýný %5 artýrýr!
 31110	Güzel uyanýþ taþý	Bu taþ, ejderhanýn gücüyle dolu eþyalarýn üretim þansýný %10 artýrýr!
-31111	Uyanýþ taþý	Ruh itemlerini üretmek için gerekli materyal
+31111	Uyanýþ taþý	Ruh itemlerini üretmek için gerekli materyal | Azrail'den elde edilir.
 31112	Güçlü uyanýþ taþý	Bu taþ, ejderhanýn gücüyle dolu eþyalarýn üretim þansýný %25 artýrýr!
 31113	Uyanýþ ruhu	Arýndýrma malzemesi
 31114	Basit Deri	Arýndýrma malzemesi
@@ -6363,7 +6363,7 @@
 70035	Büyülü Bakýr	Bu Büyülü Bakýr ve Kutsama Kaðýdý ile demircide Savaþ Kaðýdý üretilebilir.
 70037	Unutkanlýk kitabý	Kahraman bu kitapla, öðrendiði bir becerinin anýsýný hafýzasýndan siler. Böylece 1 beceri puaný taþýnabilir.
 70038	Cesaret Pelerini	Gerçek savaþçýlar taþýdýklarý renkli pelerin ile tüm yaratýklarýn dikkatini kendi üzerlerine çeker ve böylelikle kahramanlýklarýný kanýtlarlar.
-70039	Demircinin El Kitabý	Eski demircilerin ruhlarýný barýndýran kitap. Kullanýlýrsa, yükseltme baþarýsý oranýný arttýrýr.
+70039	Demircinin El Kitabý	Kullanýlýrsa, yükseltme baþarýsý %10 oranýný arttýrýr.
 70040	Ork Ýnatçýlýðý	Dayanýklýlýk düþme oranýný yarý yarýya azaltýr.
 70043	Hýrsýzýn eldivenleri	Nesne elde etme þansýný iki katýna çýkarýr.
 70047	Lisan Yüzüðü(Örnek)	Bu yüzük geçmiþ çaðlarda diplomat çevreleri için üretilmiþ. Baþka krallýklardan insanlarla konuþmak için kullanýlýr.
@@ -6613,8 +6613,8 @@
 71148	Ýrade Gücü Yüzüðü	Sana kullaným süresi boyunca +%30 EXP, +%20 savaþçýlara karþý savunma þansý, +%20 Ninjalara karþý savunma þansý, +%20 Lycanlara karþý savunma þansý, +%30 canavarlara karþý güç, +%10 maksimum HP ile +%10 maksimum SP saðlar.
 71149	Ölümcül Gücün Yüzüðü	Sana bir süre boyunca +%30 EXP, +%20 Suralara karþý savunma þansý, +%20 Þamanlara karþý savunma þansý, +%20 Lycanlara karþý savunma þansý, +%30 canavarlara karþý güç, +%10 maksimum HP ile +%10 maksimum SP saðlar.
 71150	Büyülü Yumurta	Birden fazla paskalya sürprizi içeren ve onlarý teker teker açýða çýkaran ustaca iþlenmiþ oval bir sandýk.
-71151	Yeþil Efsun	Ýtemin bonusunu deðiþtirir.| |18. seviye altý zýrh ve silaha atýlýr.|1. seviye iç itemlere atýlýr.
-71152	Yeþil Güç	Ýteme yeni bir bonus ekler.| |18. seviye altý zýrh ve silaha atýlýr.|1. seviye iç itemlere atýlýr.
+71151	Yeþil Efsun	Ýtemin bonusunu deðiþtirir. | |cffffff00|h18. seviye altý zýrh ve silaha atýlýr|r .| |cffffff00|h1. seviye iç itemlere atýlýr.|r
+71152	Yeþil Güç	Ýteme yeni bir bonus ekler. | |cffffff00|h18. seviye altý zýrh ve silaha atýlýr|r .| |cffffff00|h1. seviye iç itemlere atýlýr.|r
 71153	Bilgelik Ýksiri	Bu iksirle bir saatlik oyun süresinde %100 daha fazla deneyim toplarsýn. Ticareti yok.
 71154	Yükseliþ Ýksiri (3 sa.)	Bu iksirle üç saatlik bir oyun süresi içerisinde %80 daha fazla tecrübe kazanýrsýn. Ticareti yok.
 71155	Bilgelik Ýksiri (3 sa.)	Bu iksirle üç saatlik bir oyun süresinde %100 daha fazla tecrübe toplarsýn. Ticareti yok.
@@ -7188,7 +7188,7 @@
 76013	Arttýrma Kaðýdý (m)	Biraz þansýn yardýmýyla nesnelerinden birine yeni bir bonus ekler (maks 4 bonus). Seviye sandýðýndan bir eþyadýr, ticareti yok.
 76014	Nesneyi efsunla(m)	Bir nesnenin bonuslarýný siler ve yenilerini ekler. Seviye sandýðýndan bir eþyadýr, ticareti yok.
 76015	Kutsama Küresi	Efsanevi, kutsanmýþ bir küredir. Daha önce dört nitelikle donanmýþ olan nesnelere bir nitelik daha eklebilir. Ticareti yok.
-76016	Kutsama Parþömeni	Geliþtirme baþarýsýz olduðunda eþyanýn yok olma riskini ortadan kaldýrýr. Bu durumda sadece kalitesi 1 puan düþer. Ticareti yok.
+76016	Basit Kutsama Kaðýdý	Geliþtirme baþarýsýz olduðunda eþyanýn yok olma riskini ortadan kaldýrýr. | |cffffff00|h30. seviye altý zýrh ve silaha kullanýlýr.|r
 76017	Saldýrý iksiri +15	Saldýrý hýzýný %15 artýrýr.
 76018	Saldýrý iksiri +20	Saldýrý hýzýný %20 artýrýr.
 76019	Geçiþ Bileti	Bu geçit biletini yetkili bekçiye gösterdiðinde, zindanýn seçilen bir katýna daha girebilirsin. Ticareti yapýlamaz.

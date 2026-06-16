@@ -9,6 +9,37 @@ if app.ENABLE_OFFLINE_SHOP:
 	OFFLINE_SHOP_EDITING = 0		# pazar duzenleme modunda iken envanter eylemlerini kilitler
 	OFFLINE_SHOP_ADDED_SLOTS = {}	# duzenlemede pazara eklenen envanter slotlari (kirmizi overlay) {globalSlot:1}
 
+# Ticarete (exchange) konulan kendi item'lerimin envanter slotuna kirmizi overlay
+ENABLE_EXCHANGE_ITEM_HIGHLIGHT = True	# pure-python ozellik anahtari (binary recompile gerektirmez)
+EXCHANGE_SELF_SLOT_MAP = {}				# {tradeSlotIndex: globalInvSlot} -> item ekleme aninda kaydedilir
+
+def EXCHANGE_RESET_SLOTS():
+	EXCHANGE_SELF_SLOT_MAP.clear()
+
+def EXCHANGE_RECORD_ADD_SLOT(tradeSlot, invSlot):
+	EXCHANGE_SELF_SLOT_MAP[tradeSlot] = invSlot
+
+def EXCHANGE_GET_ADDED_SLOTS():
+	# canli ticaret verisine gore uzlastir: sadece o ticaret slotunda hala item varsa highlight et
+	import exchange
+	result = {}
+	for tradeSlot in EXCHANGE_SELF_SLOT_MAP.keys():
+		if 0 != exchange.GetItemVnumFromSelf(tradeSlot):
+			result[EXCHANGE_SELF_SLOT_MAP[tradeSlot]] = 1
+	return result
+
+# F5 hizli sil/sat penceresine stage edilen kendi item'lerime envanterde kirmizi overlay
+ENABLE_ITEM_DELETE_HIGHLIGHT = True
+
+def ITEM_DELETE_GET_INVEN_SLOTS():
+	# ITEM_DELETE_LIST = {privatePos: (invenType, invenPos)}; sadece normal envanter (player.INVENTORY) slotlari
+	result = {}
+	for value in globals().get("ITEM_DELETE_LIST", {}).values():
+		invenType, invenPos = value
+		if player.INVENTORY == invenType:
+			result[invenPos] = 1
+	return result
+
 if app.ENABLE_ITEM_SHOP_SYSTEM:
 	ITEM_SEARCH_DATA = []
 	ITEM_DATA = {}#for item shop

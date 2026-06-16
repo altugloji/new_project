@@ -150,6 +150,7 @@ enum eCommonDefines {
 #define ENABLE_MOUNT_SKILL_DELAY_BYPASS								// Bazı skillerde at binme engelini kapatma (kutsama hava vb.)
 #define ENABLE_DUNGEON_REJOIN_SYSTEM 								// Kuleye geri dönüş sistemi
 #define ENABLE_SCROLL_76016_LV_LIMIT								// Basit Kutsama Kagidi (30 level alti itemler icin)
+#define ENABLE_GM_ONLY_LOGIN										// GM girisi
 
 
 #define OFFLINE_SHOP												// Offline shops system

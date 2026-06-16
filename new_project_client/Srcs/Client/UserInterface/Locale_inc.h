@@ -162,6 +162,9 @@
 #define NEW_AFFECT_BLEND_ICON
 #define ENABLE_STATUS_ADD_BY_INPUT											// Toplu statü verme
 #define ENABLE_OFFLINE_SHOP													// Offline pazar / çevrimdışı dükkan
+#define ENABLE_DROP_ITEM_OWNER_COLOR										// Bana ait olmayan (sahibi başkası olan) yer itemlerinin ismi kırmızı görünsün
+
+
 // #define METIN35_ADMIN_PANEL												// Yönetim Paneli
 #ifdef METIN35_ADMIN_PANEL
 	#define CUR_CLIENT_VERSION 17										//versiyon key

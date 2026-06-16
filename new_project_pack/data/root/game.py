@@ -1479,6 +1479,9 @@ class GameWindow(ui.ScriptWindow):
 						net.SendGiveItemPacket(dstChrID, attachedInvenType, attachedItemSlotPos, attachedItemCount)
 					else:
 						net.SendExchangeStartPacket(dstChrID)
+						# Ilk item'i oyuncuya surukleyerek ticaret baslatildiginda kaynak slotu kaydet
+						if constInfo.ENABLE_EXCHANGE_ITEM_HIGHLIGHT and player.SLOT_TYPE_INVENTORY == attachedType and not exchange.isTrading():
+							constInfo.EXCHANGE_RECORD_ADD_SLOT(0, attachedItemSlotPos)
 						net.SendExchangeItemAddPacket(attachedInvenType, attachedItemSlotPos, 0)
 			else:
 				self.__DropItem(attachedType, attachedItemIndex, attachedItemSlotPos, attachedItemCount)

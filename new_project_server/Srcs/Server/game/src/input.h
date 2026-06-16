@@ -387,6 +387,10 @@ class CInputP2P : public CInputProcessor
 		void		GGAdminPanel();
 #endif
 
+#ifdef ENABLE_GM_ONLY_LOGIN
+		void		GGGMOnlyLogin();
+#endif
+
 	protected:
 		CPacketInfoGG 	m_packetInfoGG;
 };

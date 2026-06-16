@@ -1112,14 +1112,24 @@ class Interface(object):
 
 	## Exchange
 	def StartExchange(self):
+		# NOT: burada EXCHANGE_RESET_SLOTS cagrilmaz; GC_START, ilk item'in GC_ITEM_ADD'inden
+		# once gelir ve surukleyerek baslatmada kaydedilen slotu silerdi. Temizlik EndExchange'te.
 		self.dlgExchange.OpenDialog()
 		self.dlgExchange.Refresh()
+		if constInfo.ENABLE_EXCHANGE_ITEM_HIGHLIGHT and self.wndInventory:
+			self.wndInventory.RefreshBagSlotWindow()
 
 	def EndExchange(self):
 		self.dlgExchange.CloseDialog()
+		if constInfo.ENABLE_EXCHANGE_ITEM_HIGHLIGHT:
+			constInfo.EXCHANGE_RESET_SLOTS()
+			if self.wndInventory:
+				self.wndInventory.RefreshBagSlotWindow()
 
 	def RefreshExchange(self):
 		self.dlgExchange.Refresh()
+		if constInfo.ENABLE_EXCHANGE_ITEM_HIGHLIGHT and self.wndInventory:
+			self.wndInventory.RefreshBagSlotWindow()
 
 	## Party
 	def AddPartyMember(self, pid, name):
@@ -1550,7 +1560,7 @@ class Interface(object):
 			raw = ""
 		names = [s.strip() for s in raw.split("|") if s.strip()] if raw else []
 		if not names:
-			names = ["Admin", "Admin2"]
+			names = ["[SA]Zhifu", "[TL]Beta"]
 		return names
 
 	def _GmCallSuppressWindowActive(self):

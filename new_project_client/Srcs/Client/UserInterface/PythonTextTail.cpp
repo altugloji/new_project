@@ -14,10 +14,16 @@
 #if defined(__BL_MULTI_LANGUAGE_ULTIMATE__)
 #include "PythonSystem.h"
 #endif
+#ifdef ENABLE_DROP_ITEM_OWNER_COLOR
+#include "PythonPlayer.h"
+#endif
 
 const D3DXCOLOR c_TextTail_Player_Color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 const D3DXCOLOR c_TextTail_Monster_Color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
 const D3DXCOLOR c_TextTail_Item_Color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+#ifdef ENABLE_DROP_ITEM_OWNER_COLOR
+const D3DXCOLOR c_TextTail_Item_NotOwner_Color = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f); // bana ait olmayan yer iteminin ismi
+#endif
 const D3DXCOLOR c_TextTail_Chat_Color = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 const D3DXCOLOR c_TextTail_Info_Color = D3DXCOLOR(1.0f, 0.785f, 0.785f, 1.0f);
 const D3DXCOLOR c_TextTail_Guild_Name_Color = 0xFFEFD3FF;
@@ -733,7 +739,15 @@ void CPythonTextTail::SetItemTextTailOwner(DWORD dwVID, const char * c_szName)
 		pTextTail->pOwnerTextInstance->SetTextPointer(ms_pFont);
 		pTextTail->pOwnerTextInstance->SetHorizonalAlign(CGraphicTextInstance::HORIZONTAL_ALIGN_CENTER);
 		pTextTail->pOwnerTextInstance->SetValue(strName.c_str());
+#ifdef ENABLE_DROP_ITEM_OWNER_COLOR
+		// Sahip ben değilsem sahip etiketi de kırmızı, bana aitse normal sarı
+		if (0 != strcmp(c_szName, CPythonPlayer::Instance().GetName()))
+			pTextTail->pOwnerTextInstance->SetColor(c_TextTail_Item_NotOwner_Color);
+		else
+			pTextTail->pOwnerTextInstance->SetColor(1.0f, 1.0f, 0.0f);
+#else
 		pTextTail->pOwnerTextInstance->SetColor(1.0f, 1.0f, 0.0f);
+#endif
 		pTextTail->pOwnerTextInstance->Update();
 
 		int xOwnerSize, yOwnerSize;
@@ -742,6 +756,14 @@ void CPythonTextTail::SetItemTextTailOwner(DWORD dwVID, const char * c_szName)
 		pTextTail->yEnd		+= float(yOwnerSize + 4);
 		pTextTail->xStart	= fMIN(pTextTail->xStart, float(-xOwnerSize / 2 - 1));
 		pTextTail->xEnd		= fMAX(pTextTail->xEnd, float(xOwnerSize / 2 + 1));
+
+#ifdef ENABLE_DROP_ITEM_OWNER_COLOR
+		// Sahibi varsa ve ben değilsem item ismi kırmızı, bana aitse normal (beyaz)
+		if (0 != strcmp(c_szName, CPythonPlayer::Instance().GetName()))
+			pTextTail->pTextInstance->SetColor(c_TextTail_Item_NotOwner_Color);
+		else
+			pTextTail->pTextInstance->SetColor(c_TextTail_Item_Color);
+#endif
 	}
 	else
 	{
@@ -750,6 +772,11 @@ void CPythonTextTail::SetItemTextTailOwner(DWORD dwVID, const char * c_szName)
 			CGraphicTextInstance::Delete(pTextTail->pOwnerTextInstance);
 			pTextTail->pOwnerTextInstance = nullptr;
 		}
+
+#ifdef ENABLE_DROP_ITEM_OWNER_COLOR
+		// Sahiplik kalktı (herkese açık) -> item ismini normal renge döndür
+		pTextTail->pTextInstance->SetColor(c_TextTail_Item_Color);
+#endif
 
 		int xSize, ySize;
 		pTextTail->pTextInstance->GetTextSize(&xSize, &ySize);

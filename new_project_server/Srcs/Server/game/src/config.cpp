@@ -87,6 +87,10 @@ static std::set<DWORD> s_set_dwProcessCRC;
 std::array<BYTE, ADMIN_PANEL_MAX_NUM> g_arrAdminPanel;
 #endif
 
+#ifdef ENABLE_GM_ONLY_LOGIN
+std::array<BYTE, GM_ONLY_LOGIN_MAX_NUM> g_arrGMOnlyLogin{};
+#endif
+
 string g_stHostname = "";
 string g_table_postfix = "";
 
@@ -1434,6 +1438,26 @@ void ReadAdminPanelData()
 }
 #endif
 
+#ifdef ENABLE_GM_ONLY_LOGIN
+void LoadGMOnlyLogin()
+{
+	auto pMsg(DBManager::instance().DirectQuery("SELECT * FROM player.admin_db"));
+
+	if (!pMsg->Get() || pMsg->Get()->uiNumRows == 0)
+	{
+		sys_err("[LoadGMOnlyLogin] SQL Read Error (player.admin_db)!");
+		return;
+	}
+
+	int index = 0;
+	MYSQL_ROW row;
+	while (nullptr != (row = mysql_fetch_row(pMsg->Get()->pSQLResult)) && index < GM_ONLY_LOGIN_MAX_NUM)
+		str_to_number(g_arrGMOnlyLogin[index++], row[0]);
+
+	sys_log(0, "[LoadGMOnlyLogin] GM-only login state: %d", g_arrGMOnlyLogin[GM_ONLY_LOGIN_STATE]);
+}
+#endif
+
 // #define ENABLE_GENERAL_CMD
 // #define ENABLE_GENERAL_CONFIG
 void config_init(const string& st_localeServiceName)
@@ -1559,6 +1583,10 @@ void config_init(const string& st_localeServiceName)
 
 #ifdef METIN35_ADMIN_PANEL
 	ReadAdminPanelData();
+#endif
+
+#ifdef ENABLE_GM_ONLY_LOGIN
+	LoadGMOnlyLogin();
 #endif
 
 

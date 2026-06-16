@@ -115,6 +115,23 @@ ACMD(do_read_admin_db)
 }
 #endif
 
+#ifdef ENABLE_GM_ONLY_LOGIN
+ACMD(do_gm_only_login)
+{
+	if (!ch || !ch->IsPC())
+		return;
+
+	LoadGMOnlyLogin();
+
+	TPacketGGGMOnlyLogin ggPacket	{};
+	ggPacket.byHeader =				HEADER_GG_GM_ONLY_LOGIN;
+	P2P_MANAGER::instance().Send(&ggPacket, sizeof(TPacketGGGMOnlyLogin));
+
+	ch->ChatPacket(CHAT_TYPE_INFO, "[GM-ONLY-LOGIN] Guncellendi. Durum: %s",
+			g_arrGMOnlyLogin[GM_ONLY_LOGIN_STATE] != 0 ? "ACIK (sadece GM hesaplari)" : "KAPALI (herkes girebilir)");
+}
+#endif
+
 ACMD(do_stun)
 {
 	Command_ApplyAffect(ch, argument, "stun", COMMANDAFFECT_STUN);

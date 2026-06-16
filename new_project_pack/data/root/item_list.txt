@@ -11723,7 +11723,7 @@
 76013	ETC	icon/item/76013.tga
 76014	ETC	icon/item/76014.tga
 76015	ETC	icon/item/76015.tga
-76016	ETC	icon/item/76016.tga
+76016	ETC	icon/item/76016.png
 76017	ETC	icon/item/76017.tga
 76018	ETC	icon/item/76018.tga
 76019	ETC	icon/item/76019.tga

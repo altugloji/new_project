@@ -5,6 +5,10 @@
 	#include "../../common/length.h"
 #endif
 
+#ifdef ENABLE_GM_ONLY_LOGIN
+	#include "../../common/length.h"
+#endif
+
 enum
 {
 	ADDRESS_MAX_LEN = 15
@@ -66,6 +70,11 @@ extern BYTE	g_bChannel;
 #ifdef METIN35_ADMIN_PANEL
 extern void ReadAdminPanelData();
 extern std::array<BYTE, ADMIN_PANEL_MAX_NUM> g_arrAdminPanel;
+#endif
+
+#ifdef ENABLE_GM_ONLY_LOGIN
+extern void LoadGMOnlyLogin();
+extern std::array<BYTE, GM_ONLY_LOGIN_MAX_NUM> g_arrGMOnlyLogin;
 #endif
 
 extern bool	map_allow_find(int index);

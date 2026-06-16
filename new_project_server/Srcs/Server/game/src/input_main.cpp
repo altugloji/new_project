@@ -564,12 +564,9 @@ int CInputMain::Whisper(LPCHARACTER ch, const char * data, size_t uiBytes) const
 				// @warme006
 				// sys_log(0, "WHISPER: %s -> %s : %s", ch->GetName(), pinfo->szNameTo, buf);
 #ifdef ENABLE_CHAT_LOGGING
-				if (ch->IsGM())
-				{
-					LogManager::instance().EscapeString(__escape_string, sizeof(__escape_string), buf, buflen);
-					LogManager::instance().EscapeString(__escape_string2, sizeof(__escape_string2), pinfo->szNameTo, sizeof(pack.szNameFrom));
-					LogManager::instance().ChatLog(ch->GetMapIndex(), ch->GetPlayerID(), ch->GetName(), 0, __escape_string2, "WHISPER", __escape_string, ch->GetDesc() ? ch->GetDesc()->GetHostName() : "");
-				}
+				LogManager::instance().EscapeString(__escape_string, sizeof(__escape_string), buf, buflen);
+				LogManager::instance().EscapeString(__escape_string2, sizeof(__escape_string2), pinfo->szNameTo, sizeof(pack.szNameFrom));
+				LogManager::instance().ChatLog(ch->GetMapIndex(), ch->GetPlayerID(), ch->GetName(), 0, __escape_string2, "WHISPER", __escape_string, ch->GetDesc() ? ch->GetDesc()->GetHostName() : "");
 #endif
 			}
 		}
@@ -795,10 +792,10 @@ int CInputMain::Chat(LPCHARACTER ch, const char * data, size_t uiBytes) const
 #else
 	int len = snprintf(chatbuf, sizeof(chatbuf), "%s : %s", ch->GetName(), buf);
 #endif
-	if (CHAT_TYPE_SHOUT == pinfo->type)
-	{
-		LogManager::instance().ShoutLog(g_bChannel, ch->GetEmpire(), chatbuf);
-	}
+	// if (CHAT_TYPE_SHOUT == pinfo->type)
+	// {
+		// LogManager::instance().ShoutLog(g_bChannel, ch->GetEmpire(), chatbuf);
+	// }
 
 	if (len < 0 || len >= (int) sizeof(chatbuf))
 		len = sizeof(chatbuf) - 1;
@@ -876,11 +873,8 @@ int CInputMain::Chat(LPCHARACTER ch, const char * data, size_t uiBytes) const
 						                                ch->IsEquipUniqueGroup(UNIQUE_GROUP_RING_OF_LANGUAGE)) ? 0 : ch->GetEmpire(),
 					                                ch->GetMapIndex(), strlen(ch->GetName())));
 #ifdef ENABLE_CHAT_LOGGING
-					if (ch->IsGM())
-					{
-						LogManager::instance().EscapeString(__escape_string, sizeof(__escape_string), chatbuf, len);
-						LogManager::instance().ChatLog(ch->GetMapIndex(), ch->GetPlayerID(), ch->GetName(), 0, "", "NORMAL", __escape_string, ch->GetDesc() ? ch->GetDesc()->GetHostName() : "");
-					}
+					LogManager::instance().EscapeString(__escape_string, sizeof(__escape_string), chatbuf, len);
+					LogManager::instance().ChatLog(ch->GetMapIndex(), ch->GetPlayerID(), ch->GetName(), 0, "", "NORMAL", __escape_string, ch->GetDesc() ? ch->GetDesc()->GetHostName() : "");
 #endif
 				}
 			}
@@ -900,11 +894,8 @@ int CInputMain::Chat(LPCHARACTER ch, const char * data, size_t uiBytes) const
 					RawPacketToCharacterFunc f(tbuf.read_peek(), tbuf.size());
 					ch->GetParty()->ForEachOnlineMember(f);
 #ifdef ENABLE_CHAT_LOGGING
-					if (ch->IsGM())
-					{
-						LogManager::instance().EscapeString(__escape_string, sizeof(__escape_string), chatbuf, len);
-						LogManager::instance().ChatLog(ch->GetMapIndex(), ch->GetPlayerID(), ch->GetName(), ch->GetParty()->GetLeaderPID(), "", "PARTY", __escape_string, ch->GetDesc() ? ch->GetDesc()->GetHostName() : "");
-					}
+					LogManager::instance().EscapeString(__escape_string, sizeof(__escape_string), chatbuf, len);
+					LogManager::instance().ChatLog(ch->GetMapIndex(), ch->GetPlayerID(), ch->GetName(), ch->GetParty()->GetLeaderPID(), "", "PARTY", __escape_string, ch->GetDesc() ? ch->GetDesc()->GetHostName() : "");
 #endif
 				}
 			}
@@ -918,11 +909,8 @@ int CInputMain::Chat(LPCHARACTER ch, const char * data, size_t uiBytes) const
 				{
 					ch->GetGuild()->Chat(chatbuf);
 #ifdef ENABLE_CHAT_LOGGING
-					if (ch->IsGM())
-					{
-						LogManager::instance().EscapeString(__escape_string, sizeof(__escape_string), chatbuf, len);
-						LogManager::instance().ChatLog(ch->GetMapIndex(), ch->GetPlayerID(), ch->GetName(), ch->GetGuild()->GetID(), ch->GetGuild()->GetName(), "GUILD", __escape_string, ch->GetDesc() ? ch->GetDesc()->GetHostName() : "");
-					}
+					LogManager::instance().EscapeString(__escape_string, sizeof(__escape_string), chatbuf, len);
+					LogManager::instance().ChatLog(ch->GetMapIndex(), ch->GetPlayerID(), ch->GetName(), ch->GetGuild()->GetID(), ch->GetGuild()->GetName(), "GUILD", __escape_string, ch->GetDesc() ? ch->GetDesc()->GetHostName() : "");
 #endif
 				}
 			}

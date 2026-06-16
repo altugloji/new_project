@@ -97,19 +97,16 @@ class DeleteItem(ui.ScriptWindow):
 	def Close(self):
 		self.itemStock = {}
 		constInfo.ITEM_DELETE_LIST = {}
-		# if self.interface and constInfo.ENABLE_SLOT_MARKING_EX == 1:
-			# if self.interface.GetInventoryPtr():
-				# self.interface.GetInventoryPtr().RefreshBagSlotWindow()
-			# if self.interface.GetDragonSoulInventoryPtr():
-				# self.interface.GetDragonSoulInventoryPtr().RefreshBagSlotWindow()
-			# if self.interface.GetSpecialStoragePtr():
-				# self.interface.GetSpecialStoragePtr().RefreshBagSlotWindow()
+		# Envanterdeki kirmizi overlay'i temizle (F5 sil/sat penceresi kapandi)
+		if constInfo.ENABLE_ITEM_DELETE_HIGHLIGHT and self.interface:
+			self.interface.RefreshInventory()
 		self.Hide()
 
 	def Temizle(self):
 		global toplamfiyat
 		toplamfiyat = 0
 		self.itemStock = {}
+		constInfo.ITEM_DELETE_LIST = {}
 		self.DeleteGrid = Grid(width=6, height=10)
 		self.Refresh()
 
@@ -145,13 +142,9 @@ class DeleteItem(ui.ScriptWindow):
 				itemCount = 0
 			self.itemSlot.SetItemSlot(i, player.GetItemIndex(*pos), itemCount)
 		self.itemSlot.RefreshSlot()
-		# if self.interface :
-			# if self.interface.GetInventoryPtr():
-				# self.interface.GetInventoryPtr().RefreshBagSlotWindow()
-			# if self.interface.GetDragonSoulInventoryPtr():
-				# self.interface.GetDragonSoulInventoryPtr().RefreshBagSlotWindow()
-			# if self.interface.GetSpecialStoragePtr():
-				# self.interface.GetSpecialStoragePtr().RefreshBagSlotWindow()
+		# Envanterdeki kirmizi overlay'i guncelle (F5 sil/sat isaretleri)
+		if constInfo.ENABLE_ITEM_DELETE_HIGHLIGHT and self.interface:
+			self.interface.RefreshInventory()
 
 	def OnSelectEmptySlot(self, selectedSlotPos):
 
@@ -416,19 +409,16 @@ class DeleteItem(ui.ScriptWindow):
 	def Close(self):
 		self.itemStock = {}
 		constInfo.ITEM_DELETE_LIST = {}
-		# if self.interface and constInfo.ENABLE_SLOT_MARKING_EX == 1:
-			# if self.interface.GetInventoryPtr():
-				# self.interface.GetInventoryPtr().RefreshBagSlotWindow()
-			# if self.interface.GetDragonSoulInventoryPtr():
-				# self.interface.GetDragonSoulInventoryPtr().RefreshBagSlotWindow()
-			# if self.interface.GetSpecialStoragePtr():
-				# self.interface.GetSpecialStoragePtr().RefreshBagSlotWindow()
+		# Envanterdeki kirmizi overlay'i temizle (F5 sil/sat penceresi kapandi)
+		if constInfo.ENABLE_ITEM_DELETE_HIGHLIGHT and self.interface:
+			self.interface.RefreshInventory()
 		self.Hide()
 
 	def Temizle(self):
 		global toplamfiyat
 		toplamfiyat = 0
 		self.itemStock = {}
+		constInfo.ITEM_DELETE_LIST = {}
 		self.DeleteGrid = Grid(width=6, height=10)
 		self.Refresh()
 
@@ -464,13 +454,9 @@ class DeleteItem(ui.ScriptWindow):
 				itemCount = 0
 			self.itemSlot.SetItemSlot(i, player.GetItemIndex(*pos), itemCount)
 		self.itemSlot.RefreshSlot()
-		# if self.interface :
-			# if self.interface.GetInventoryPtr():
-				# self.interface.GetInventoryPtr().RefreshBagSlotWindow()
-			# if self.interface.GetDragonSoulInventoryPtr():
-				# self.interface.GetDragonSoulInventoryPtr().RefreshBagSlotWindow()
-			# if self.interface.GetSpecialStoragePtr():
-				# self.interface.GetSpecialStoragePtr().RefreshBagSlotWindow()
+		# Envanterdeki kirmizi overlay'i guncelle (F5 sil/sat isaretleri)
+		if constInfo.ENABLE_ITEM_DELETE_HIGHLIGHT and self.interface:
+			self.interface.RefreshInventory()
 
 	def OnSelectEmptySlot(self, selectedSlotPos):
 

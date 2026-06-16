@@ -693,7 +693,7 @@ void CPythonChat::AppendChat(int iType, const char* c_szChat, BYTE bSpecialColor
 	pChatLine->Instance.SetTextPointer(pkDefaultFont);
 	// END_OF_DEFAULT_FONT
 #if defined(__BL_MULTI_LANGUAGE_PREMIUM__)
-	if (bEmpire)
+	if (bEmpire && iType == CHAT_TYPE_SHOUT)
 	{
 		char buffer[256];
 		snprintf(buffer, sizeof(buffer), "D:/ymir work/flags/empireflag_%c.png", (bEmpire + 96));

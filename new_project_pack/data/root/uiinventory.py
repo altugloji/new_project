@@ -481,6 +481,9 @@ class InventoryWindow(ui.ScriptWindow):
 		if app.ENABLE_ACCE_COSTUME_SYSTEM:
 			self.listHighlightedAcceSlot = []
 
+		# Baska bir yere (ticaret / F5 sil-sat) konuldugu icin kirmiziya boyadigim slotlar (cikinca geri al)
+		self.listHighlightedMarkSlot = []
+
 		## Refresh
 		self.SetInventoryPage(0)
 		self.SetEquipmentPage(0)
@@ -758,6 +761,27 @@ class InventoryWindow(ui.ScriptWindow):
 					self.wndItem.ActivateSlot(i, 220.0 / 255.0, 52.0 / 255.0, 52.0 / 255.0, 0.62)
 				else:
 					self.wndItem.DeactivateSlot(i)
+
+		# Baska bir yere (ticaret veya F5 hizli sil/sat) konulan kendi item'lerimin envanter slotuna kirmizi overlay
+		# Offline pazar duzenleme overlay'i ile ayni anda calismaz (karsilikli dislama).
+		if not (app.ENABLE_OFFLINE_SHOP and constInfo.OFFLINE_SHOP_EDITING):
+			markedSlots = {}
+			if constInfo.ENABLE_EXCHANGE_ITEM_HIGHLIGHT and exchange.isTrading():
+				markedSlots.update(constInfo.EXCHANGE_GET_ADDED_SLOTS())
+			if constInfo.ENABLE_ITEM_DELETE_HIGHLIGHT:
+				markedSlots.update(constInfo.ITEM_DELETE_GET_INVEN_SLOTS())
+			# Hicbir isaret yoksa ve temizlenecek kirmizi yoksa hic donme
+			if markedSlots or self.listHighlightedMarkSlot:
+				for i in xrange(player.INVENTORY_PAGE_SIZE):
+					slotNumber = self.__InventoryLocalSlotPosToGlobalSlotPos(i)
+					if slotNumber in markedSlots:
+						self.wndItem.ActivateSlot(i, 220.0 / 255.0, 52.0 / 255.0, 52.0 / 255.0, 0.62)
+						if not slotNumber in self.listHighlightedMarkSlot:
+							self.listHighlightedMarkSlot.append(slotNumber)
+					# Sadece BENIM boyadigim slotu geri al; auto-potion/yeni-item parlamasini bozma
+					elif slotNumber in self.listHighlightedMarkSlot:
+						self.wndItem.DeactivateSlot(i)
+						self.listHighlightedMarkSlot.remove(slotNumber)
 
 		if self.wndBelt:
 			self.wndBelt.RefreshSlot()
@@ -1490,6 +1514,9 @@ class InventoryWindow(ui.ScriptWindow):
 			chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.INVENTORY_FULL)
 			return True
 		net.SendExchangeItemAddPacket(player.INVENTORY, globalSlotIndex, dstSlot)
+		# Hizli koyma (CTRL/sag tik) ile eklenen item'in envanter slotunu kirmizi overlay icin kaydet
+		if constInfo.ENABLE_EXCHANGE_ITEM_HIGHLIGHT:
+			constInfo.EXCHANGE_RECORD_ADD_SLOT(dstSlot, globalSlotIndex)
 		return True
 
 	def UseItemSlot(self, slotIndex):

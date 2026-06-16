@@ -689,6 +689,14 @@ void CHARACTER::OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE
 		return;
 	}
 
+	// Belirlenen seviyenin altindaki oyuncular pazar kuramaz
+	if (GetLevel() < 10)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Pazar kurabilmek icin en az 10. seviye olmalisiniz.");
+		ChatPacket(CHAT_TYPE_INFO, "You must be at least level 10 to set up a shop.");
+		return;
+	}
+
 	LPSECTREE_MAP pMap = SECTREE_MANAGER::instance().GetMap(GetMapIndex());
 	if (!pMap)
 	{
@@ -1930,6 +1938,10 @@ void CHARACTER::Disconnect(const char * c_pszReason)
 	{
 		DeathPenalty(0);
 		PointChange(POINT_HP, 50 - GetHP());
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+		if (m_pkDungeon && GetMapIndex() >= 10000 && m_lExitMapIndex != 0)
+			SetWarpLocation(m_lExitMapIndex, m_posExit.x / 100, m_posExit.y / 100);
+#endif
 	}
 
 	if (!CHARACTER_MANAGER::instance().FlushDelayedSave(this))

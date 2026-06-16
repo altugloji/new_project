@@ -112,6 +112,16 @@ enum EAdminPanelData
 };
 #endif
 
+
+#ifdef ENABLE_GM_ONLY_LOGIN
+enum EGMOnlyLoginData
+{
+	GM_ONLY_LOGIN_VERSION_ROW,	// admin_db 1. satir: bu sistemde KULLANILMAZ, sadece tablo hizalamasi icin okunur
+	GM_ONLY_LOGIN_STATE,		// admin_db 2. satir: 0 = herkes girebilir, 1 = sadece GM hesaplari girebilir
+
+	GM_ONLY_LOGIN_MAX_NUM,
+};
+#endif
 enum EWearPositions
 {
 	WEAR_BODY,		// 0

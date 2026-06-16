@@ -6885,7 +6885,7 @@ VNUM	LOCALE_NAME
 31108	Küçük uyanýþ taþý
 31109	Ýnce uyanýþ taþý
 31110	Güzel uyanýþ taþý
-31111	Uyanýþ taþý
+31111	Deðerli uyanýþ taþý
 31112	Güçlü uyanýþ taþý
 31113	Uyanýþ ruhu
 31114	Basit Deri
@@ -7200,7 +7200,7 @@ VNUM	LOCALE_NAME
 39119	Elementer güç taþý
 39120	Elementer koruma taþý
 40001	Bilinmeyen Altýn Yüzük
-40002	Iþýnlanma Yüzüðü
+40002	Iþýnlama Yüzüðü
 40003	Thorun Yüzüðü
 40004	Eekin Yüzüðü
 40005	Çýnlayan Zil
@@ -10798,7 +10798,7 @@ VNUM	LOCALE_NAME
 76013	Arttýrma Kaðýdý (m)
 76014	Nesneyi efsunla(m)
 76015	Kutsama Küresi
-76016	Kutsama Parþömeni
+76016	Basit Kutsama Kaðýdý
 76017	Saldýrý iksiri +15
 76018	Saldýrý iksiri +20
 76019	Geçiþ Bileti
@@ -11011,7 +11011,7 @@ VNUM	LOCALE_NAME
 83024	Ýnci çiçeði kutusu
 83025	Nergis kutusu
 83026	Zambak kutusu
-83027	Ayçiçeði kutusu
+83027	Çiçek sandýðý
 83028	Cadýlar Bayr. sandýðý(k)
 83029	Cad. Bayr. þpk. sn. (k)
 83030	Altýn Yutnori kupasý
@@ -11425,8 +11425,7 @@ VNUM	LOCALE_NAME
 165100	Mitsi ejderha oniksi
 165200	Mitsi ejderha oniksi
 165300	Mitsi ejderha oniksi
-165400	Mitsi ejderha oniksi
-30400	Gemstones
+165400	Mitsi ejderha oniksi30400	Gemstones
 30401	Piece of Gem
 30402	Gem Coupon (1)
 30403	Gaya Kuponu (5)
