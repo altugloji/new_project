@@ -115,6 +115,14 @@ static int FN_check_cube_item_count_material(const SCubeMaterialInfo& materialIn
 	return 0;
 }
 
+// YENI: bir malzeme vnum'unun beceri kitabi (ITEM_SKILLBOOK) olup olmadigini proto tablosundan kontrol eder.
+// Beceri kitabi malzemeleri sadece oyuncunun gridden sectigi slotlardan tuketilir (vnum-first-match degil).
+static bool FN_is_skillbook_vnum(DWORD vnum)
+{
+	TItemTable* p = ITEM_MANAGER::instance().GetTable(vnum);
+	return (p != NULL) && (p->bType == ITEM_SKILLBOOK);
+}
+
 CUBE_RENEWAL_DATA::CUBE_RENEWAL_DATA()
 {
 	this->gold = 0;
@@ -423,13 +431,18 @@ void Cube_open (LPCHARACTER ch, DWORD dwRecipeNpcRace)
 
 	ch->SetCubeRenewalRecipeNpc(npcVNUM);
 	ch->SetCubeNpc(npc);
-	
+	ch->ClearCubeSkillSlots(); // YENI: yeni acilista bayat secim kalmasin
+
+	// YENI: beceri kitabi grid'i SADECE CUBE_SKILL_GRID_NPC icin gorunsun.
+	// Make paketine alan ekleyemedigimiz icin client'a server->client komutuyla bildiriyoruz.
+	ch->ChatPacket(CHAT_TYPE_COMMAND, "cube_skill_grid %d", (npcVNUM == CUBE_SKILL_GRID_NPC) ? 1 : 0);
 }
 
 void Cube_close(LPCHARACTER ch)
 {
 	ch->SetCubeNpc(NULL);
 	ch->SetCubeRenewalRecipeNpc(0);
+	ch->ClearCubeSkillSlots(); // YENI: pencere kapaninca secili beceri kitabi slotlari temizlensin
 }
 
 void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve)
@@ -487,7 +500,14 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 			index_item_improve = -1;
 		}
 	}
-	
+
+	// YENI: oyuncunun cube grid'inden sectigi beceri kitabi slotlarini al ve hemen temizle (tek seferlik secim).
+	// Boylece her uretim icin client'in slot listesini tekrar gondermesi gerekir; bayat secim kalmaz.
+	std::vector<WORD> vSkillSlots = ch->GetCubeSkillSlots();
+	ch->ClearCubeSkillSlots();
+	// YENI: slot-hassas beceri kitabi tuketimi SADECE bu NPC'de; diger NPC'lerde eski davranis korunur.
+	const bool bUseSkillGrid = (recipeNpcRace == CUBE_SKILL_GRID_NPC);
+
 #ifdef ENABLE_CUBE_ATTR_SOCKET
 	bool canCopy = false;
 #endif
@@ -513,9 +533,30 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 
 			for (int i = 0; i < materialInfo.material.size(); ++i)
 			{
-				if (ch->CountSpecifyItem(materialInfo.material[i].vnum) < (materialInfo.material[i].count*count_item))
+				const DWORD mvnum = materialInfo.material[i].vnum;
+				const int need = materialInfo.material[i].count * count_item;
+				if (bUseSkillGrid && FN_is_skillbook_vnum(mvnum))
 				{
-					material_check = false;
+					// YENI: beceri kitaplari icin sadece gridden secilmis slotlardaki ayni vnum'lu kitaplar sayilir.
+					// Envanterde secilmemis kitap olsa bile asla kullanilmaz.
+					int got = 0;
+					for (size_t s = 0; s < vSkillSlots.size(); ++s)
+					{
+						const WORD slot = vSkillSlots[s];
+						if (slot >= INVENTORY_MAX_NUM)
+							continue;
+						LPITEM it = ch->GetInventoryItem(slot);
+						if (!it || it->GetVnum() != mvnum)
+							continue;
+						got += it->GetCount();
+					}
+					if (got < need)
+						material_check = false;
+				}
+				else
+				{
+					if (ch->CountSpecifyItem(mvnum) < need)
+						material_check = false;
 				}
 			}
 
@@ -661,7 +702,30 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 				
 				for (int i = 0; i < materialInfo.material.size(); ++i)
 				{
-					ch->RemoveSpecifyItem(materialInfo.material[i].vnum, (materialInfo.material[i].count*count_item));
+					const DWORD mvnum = materialInfo.material[i].vnum;
+					int need = materialInfo.material[i].count * count_item;
+					if (bUseSkillGrid && FN_is_skillbook_vnum(mvnum))
+					{
+						// YENI: beceri kitaplarini sadece gridden secilmis slotlardan, slot slot tuket.
+						for (size_t s = 0; s < vSkillSlots.size() && need > 0; ++s)
+						{
+							const WORD slot = vSkillSlots[s];
+							if (slot >= INVENTORY_MAX_NUM)
+								continue;
+							LPITEM it = ch->GetInventoryItem(slot);
+							if (!it || it->GetVnum() != mvnum)
+								continue;
+							const int take = MIN(need, (int)it->GetCount());
+							it->SetCount(it->GetCount() - take); // 0 olunca motor item'i yok eder
+							need -= take;
+						}
+						if (need > 0) // guvenlik: secim degismis olabilir (dogrulama gecmisti)
+							sys_err("CUBE_RENEWAL skillbook slot-consume short by %d vnum %u char %s", need, mvnum, ch->GetName());
+					}
+					else
+					{
+						ch->RemoveSpecifyItem(mvnum, need);
+					}
 				}
 
 				if (materialInfo.gold != 0)

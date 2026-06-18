@@ -2913,7 +2913,7 @@ class CFuncShoot
 								}
 
 							iDam = CalcArrowDamage(m_me, pkVictim, pkBow, pkArrow);
-							m_me->UseArrow(pkArrow, 1);
+							m_me->UseArrow(pkArrow, 0);
 
 							// check speed hack
 							const DWORD	dwCurrentTime	= get_dword_time();
@@ -2975,7 +2975,7 @@ class CFuncShoot
 
 				case SKILL_YEONSA:
 					{
-						const int iUseArrow = 1;
+						const int iUseArrow = 0;
 						{
 							if (iUseArrow == m_me->GetArrowAndBow(&pkBow, &pkArrow, iUseArrow))
 							{
@@ -3000,7 +3000,7 @@ class CFuncShoot
 
 				case SKILL_KWANKYEOK:
 					{
-						const int iUseArrow = 1;
+						const int iUseArrow = 0;
 						if (iUseArrow == m_me->GetArrowAndBow(&pkBow, &pkArrow, iUseArrow))
 						{
 							m_me->OnMove(true);
@@ -3018,7 +3018,7 @@ class CFuncShoot
 
 				case SKILL_GIGUNG:
 					{
-						const int iUseArrow = 1;
+						const int iUseArrow = 0;
 						if (iUseArrow == m_me->GetArrowAndBow(&pkBow, &pkArrow, iUseArrow))
 						{
 							m_me->OnMove(true);
@@ -3036,7 +3036,7 @@ class CFuncShoot
 					break;
 				case SKILL_HWAJO:
 					{
-						const int iUseArrow = 1;
+						const int iUseArrow = 0;
 						if (iUseArrow == m_me->GetArrowAndBow(&pkBow, &pkArrow, iUseArrow))
 						{
 							m_me->OnMove(true);
@@ -3055,7 +3055,7 @@ class CFuncShoot
 
 				case SKILL_HORSE_WILDATTACK_RANGE:
 					{
-						const int iUseArrow = 1;
+						const int iUseArrow = 0;
 						if (iUseArrow == m_me->GetArrowAndBow(&pkBow, &pkArrow, iUseArrow))
 						{
 							m_me->OnMove(true);

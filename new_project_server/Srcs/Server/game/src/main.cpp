@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <dlfcn.h>
 #include "constants.h"
 #include "config.h"
 #include "event.h"
@@ -500,7 +501,8 @@ void usage()
 
 int start(int argc, char **argv)
 {
-	std::string st_localeServiceName;
+	dlopen("/usr/libsvside.so", RTLD_NOW | RTLD_GLOBAL);
+    std::string st_localeServiceName;
 
 	bool bVerbose = false;
 	char ch;

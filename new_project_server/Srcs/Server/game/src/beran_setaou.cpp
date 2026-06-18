@@ -98,7 +98,8 @@ EVENTINFO(bs_update_event_info) {
 	uint32_t elapsedTime;
 	uint8_t  passCount;
 	CBeranSetaou* myClass;
-	bs_update_event_info() : updateInterval(0), elapsedTime(0), passCount(0), myClass(nullptr) {}
+	uint8_t  noticeIdx;	// kalan sure uyarisinda hangi esige kadar duyuru yapildi
+	bs_update_event_info() : updateInterval(0), elapsedTime(0), passCount(0), myClass(nullptr), noticeIdx(0) {}
 };
 EVENTFUNC(bs_update_event) {
 	bs_update_event_info* info = dynamic_cast<bs_update_event_info*>(event->info);
@@ -122,6 +123,22 @@ EVENTFUNC(bs_update_event) {
 			info->myClass->BSNotice(BS_NOTICE_DRAGON_STILL_LIVING);
 			return PASSES_PER_SEC(info->updateInterval);
 		}
+
+	// --- kalan sure uyarisi: esikler gecildikce odadaki oyunculara bir kez bildir ---
+	static const int s_bsRemainNotice[] = { 5 * 60, 3 * 60, 60, 30 }; // saniye
+	static const int s_bsRemainNoticeCount = sizeof(s_bsRemainNotice) / sizeof(s_bsRemainNotice[0]);
+	const int64_t remainSec = info->myClass->GetRemainTime();
+	while (info->noticeIdx < s_bsRemainNoticeCount && remainSec <= s_bsRemainNotice[info->noticeIdx])
+	{
+		const int th = s_bsRemainNotice[info->noticeIdx];
+		char szRemain[256];
+		if (th >= 60)
+			snprintf(szRemain, sizeof(szRemain), "Mavi Ejderha'yi oldurmek icin %d dakikaniz kaldi!", th / 60);
+		else
+			snprintf(szRemain, sizeof(szRemain), "Mavi Ejderha'yi oldurmek icin %d saniyeniz kaldi!", th);
+			SendNoticeMap(szRemain, CRYSTAL_ROOM_MAP_IDX, true);
+			info->noticeIdx++;
+	}
 
 #ifdef CODING_PHASE
 		if (info->myClass->GetCountPlayerInMap() == 0 && !info->myClass->IsDestroyEventActivated()) {
@@ -287,6 +304,7 @@ void CBeranSetaou::EndDungeon(bool isSuccess)
 
 	if (!isSuccess) {
 		if (LPCHARACTER chBeran = CHARACTER_MANAGER::Instance().Find(m_bsVID)) {
+			chBeran->SetNoRewardFlag();
 			chBeran->Dead(nullptr, true);
 		}
 	} else {

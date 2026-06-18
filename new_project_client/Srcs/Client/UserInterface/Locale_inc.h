@@ -159,6 +159,7 @@
 #define ENABLE_ITEM_UPGRADE_OWNER
 #define ENABLE_ITEM_ENCHANT_USE_COUNT
 #define ENABLE_EFSUN_CHANGE_DIALOG
+#define ENABLE_KADIM_EFSUN_SYSTEM										// Kadim Efsun Sistemi
 #define NEW_AFFECT_BLEND_ICON
 #define ENABLE_STATUS_ADD_BY_INPUT											// Toplu statü verme
 #define ENABLE_OFFLINE_SHOP													// Offline pazar / çevrimdışı dükkan

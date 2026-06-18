@@ -5386,7 +5386,7 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 						}
 
 						LogManager::instance().ItemLog(this, item2, "SOCKET", item->GetName());
-						ITEM_MANAGER::instance().RemoveItem(item, "REMOVE (METIN)");
+						item->SetCount(item->GetCount() - 1);
 						break;
 					}
 				}
@@ -5926,7 +5926,15 @@ bool CHARACTER::SellItem(TItemPos Cell)
 		dwPrice *= bCount;
 
 #ifndef ENABLE_NO_SELL_PRICE_DIVIDED_BY_5
-	dwPrice /= 5;
+	if ((item->GetType() == ITEM_WEAPON || item->GetType() == ITEM_ARMOR) && item->GetLevelLimit() >= 40)
+	{
+		if (item->GetType() == ITEM_WEAPON && item->GetLevelLimit() >= 60)
+			dwPrice /= 15;
+		else
+			dwPrice /= 10;
+	}
+	else
+		dwPrice /= 5;
 #endif
 
 	const long long nTotalMoney = static_cast<long long>(GetGold()) + static_cast<long long>(dwPrice);
@@ -8518,6 +8526,57 @@ void CHARACTER::BulkPotionUse(const DWORD* adwSlotVnum)
 			abUsedCell[i] = true;
 		}
 	}
+}
+#endif
+
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+bool CHARACTER::UseItemNewAttribute(TItemPos source_pos, TItemPos target_pos, BYTE * bValues)
+{
+	LPITEM item;
+	LPITEM item_target;
+
+	if (!CanHandleItem())
+		return false;
+
+	if (!IsValidItemPosition(source_pos) || !(item = GetItem(source_pos)))
+		return false;
+
+	if (!IsValidItemPosition(target_pos) || !(item_target = GetItem(target_pos)))
+		return false;
+
+	if (item->GetVnum() != 71189)
+		return false;
+
+	if (item->IsExchanging() || item_target->IsExchanging())
+		return false;
+
+	if (item_target->IsEquipped())
+		return false;
+
+	// Sadece silah ve zirhlara efsun eklenebilir (costume ve diger turler haric)
+	if (item_target->GetType() != ITEM_WEAPON && item_target->GetType() != ITEM_ARMOR)
+		return false;
+
+	int processNewAttr = item_target->AddNewStyleAttribute(bValues);
+
+	if (processNewAttr == 1)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Bu nesneyi bu esya uzerinde kullanamazsin.");
+		return false;
+	}
+	else if (processNewAttr == 2)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Bir efsunu birden fazla kez koyamazsin.");
+		return false;
+	}
+	else if (processNewAttr == 3)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Efsun basariyla eklendi!");
+		item->SetCount(item->GetCount() - 1);
+		return true;
+	}
+
+	return false;
 }
 #endif
 

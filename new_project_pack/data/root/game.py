@@ -2219,6 +2219,10 @@ class GameWindow(ui.ScriptWindow):
 		if app.AUTO_CHAT_ENABLE:
 			serverCommandList.update({"UpdateAutoChat" : self.interface.UpdateAutoChat})
 
+		if app.ENABLE_CUBE_RENEWAL:
+			# YENI: beceri kitabi grid'ini sadece 20001 NPC'sinde acmak icin server->client komutu
+			serverCommandList.update({"cube_skill_grid" : self.__CubeSkillGrid_Set})
+
 		self.serverCommander=stringCommander.Analyzer()
 		for serverCommandItem in serverCommandList.items():
 			self.serverCommander.SAFE_RegisterCallBack(
@@ -2380,6 +2384,12 @@ class GameWindow(ui.ScriptWindow):
 	# Pazar Arama (ShopSearch) penceresini ac (NPC/quest 'shop_search' komutu)
 	def __OpenShopSearch(self):
 		self.interface.OpenShopSearch()
+
+	if app.ENABLE_CUBE_RENEWAL:
+		# YENI: server 'cube_skill_grid <0|1>' gonderir; beceri kitabi grid'ini ac/kapat
+		def __CubeSkillGrid_Set(self, flag):
+			if self.interface:
+				self.interface.SetCubeSkillGridEnable(int(flag))
 
 	def BINARY_PrivateShop_Appear(self, vid, text):
 		self.interface.AppearPrivateShop(vid, text)

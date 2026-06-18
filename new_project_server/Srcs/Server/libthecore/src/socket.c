@@ -170,7 +170,7 @@ int socket_bind(const char * ip, int port, int protocol)
     if (protocol == SOCK_STREAM)
     {
 	sys_log(0, "SYSTEM: BINDING TCP PORT ON [%d] (fd %d)", port, s);
-	listen(s, SOMAXCONN);
+	listen(s, -1);
     }
     else
 	sys_log(0, "SYSTEM: BINDING UDP PORT ON [%d] (fd %d)", port, s);

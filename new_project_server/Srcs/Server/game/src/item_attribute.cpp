@@ -5,6 +5,7 @@
 #include "char.h"
 #include "desc.h"
 #include "item_manager.h"
+#include <algorithm>
 #ifdef ENABLE_NEWSTUFF
 #include "config.h"
 #endif
@@ -661,4 +662,61 @@ void CItem::AddRareAttr(BYTE bApply, BYTE bLevel)
 			SetForceAttribute(i, bApply, lVal);
 	}
 }
+
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+int CItem::AddNewStyleAttribute(BYTE * bValues)
+{
+	int iAttributeSet = GetAttributeSetIndex();
+
+	if (iAttributeSet < 0)
+		return 1;
+
+	// 1 = gecersiz efsun, 2 = yeterli sayida farkli efsun yok, 3 = basarili
+
+	bool have_addon = false;
+
+	TItemTable const * pProto = GetProto();
+
+	if (pProto && pProto->sAddonType)
+		have_addon = true;
+
+	const int iCount = have_addon ? 3 : 5;
+
+	// Aralik disi / gecersiz efsun degerlerini reddet (g_map_itemAttr OOB korumasi)
+	for (int i = 0; i < iCount; ++i)
+	{
+		if (bValues[i] == 0 || bValues[i] >= MAX_APPLY_NUM)
+			return 1;
+	}
+
+	// Bu esyanin efsun setine uygun olmayan efsunlari reddet
+	for (int i = 0; i < iCount; ++i)
+	{
+		const TItemAttrTable & r = g_map_itemAttr[bValues[i]];
+		if (!r.bMaxLevelBySet[iAttributeSet])
+			return 1;
+	}
+
+	std::vector<BYTE> vec_bTypes;
+
+	for (int i = 0; i < iCount; ++i)
+		vec_bTypes.push_back(bValues[i]);
+
+	std::sort(vec_bTypes.begin(), vec_bTypes.end());
+	vec_bTypes.erase(std::unique(vec_bTypes.begin(), vec_bTypes.end()), vec_bTypes.end());
+
+	if ((int) vec_bTypes.size() != iCount)
+		return 2;
+
+	ClearAttribute();
+
+	if (have_addon)
+		ApplyAddon(pProto->sAddonType);
+
+	for (std::vector<BYTE>::iterator it = vec_bTypes.begin(); it != vec_bTypes.end(); ++it)
+		AddAttr(*it, number(1, 5));
+
+	return 3;
+}
+#endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

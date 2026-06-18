@@ -2386,7 +2386,7 @@ class SlotWindow(Window):
 			if itemType == item.ITEM_TYPE_WEAPON:
 				if itemSubType >= item.WEAPON_SWORD and itemSubType <= item.WEAPON_FAN:
 					ItemCount = 2147483000 + self.FindRefine(item.GetItemName())
-			elif itemType == item.ITEM_TYPE_ARMOR or itemType == item.ITEM_TYPE_ROD or itemType == item.ITEM_TYPE_BELT or itemType == item.ITEM_TYPE_PICK or itemType == item.ITEM_TYPE_METIN:
+			elif itemType == item.ITEM_TYPE_ARMOR or itemType == item.ITEM_TYPE_ROD or itemType == item.ITEM_TYPE_BELT or itemType == item.ITEM_TYPE_PICK:
 				ItemCount = 2147483000 + self.FindRefine(item.GetItemName())
 
 		wndMgr.SetSlot(self.hWnd, renderingSlotNumber, ItemIndex, width, height, itemIcon, diffuseColor)

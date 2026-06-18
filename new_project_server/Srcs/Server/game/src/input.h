@@ -178,6 +178,9 @@ class CInputMain : public CInputProcessor
 		void		ItemGive(LPCHARACTER ch, const char* c_pData) const;
 		void		Hack(LPCHARACTER ch, const char * c_pData) const;
 		int			MyShop(LPCHARACTER ch, const char * c_pData, size_t uiBytes) const;
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+		void		ItemNewAttributes(LPCHARACTER ch, const char * pcData) const;
+#endif
 #ifdef OFFLINE_SHOP
 		int			OfflineShopEdit(LPCHARACTER ch, const char * c_pData, size_t uiBytes) const;
 #endif

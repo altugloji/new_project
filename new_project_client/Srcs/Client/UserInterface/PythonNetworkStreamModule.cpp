@@ -1846,6 +1846,37 @@ PyObject* netGetLoginID(PyObject* poSelf, PyObject* poArgs)
 }
 #endif
 
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+PyObject* netSendItemNewAttributePacket(PyObject* poSelf, PyObject* poArgs)
+{
+	TItemPos source_pos;
+	TItemPos target_pos;
+
+	BYTE bValues[5];
+
+	if (!PyTuple_GetInteger(poArgs, 0, &source_pos.cell))
+		return Py_BuildException();
+	if (!PyTuple_GetInteger(poArgs, 1, &target_pos.cell))
+		return Py_BuildException();
+
+	if (!PyTuple_GetByte(poArgs, 2, &bValues[0]))
+		return Py_BuildException();
+	if (!PyTuple_GetByte(poArgs, 3, &bValues[1]))
+		return Py_BuildException();
+	if (!PyTuple_GetByte(poArgs, 4, &bValues[2]))
+		return Py_BuildException();
+	if (!PyTuple_GetByte(poArgs, 5, &bValues[3]))
+		return Py_BuildException();
+	if (!PyTuple_GetByte(poArgs, 6, &bValues[4]))
+		return Py_BuildException();
+
+	CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+	rkNetStream.SendItemNewAttributePacket(source_pos, target_pos, bValues);
+
+	return Py_BuildNone();
+}
+#endif
+
 void initnet()
 {
 	static PyMethodDef s_methods[] =
@@ -2040,6 +2071,9 @@ void initnet()
 #endif
 #ifdef NEW_SELECT_CHARACTER
 		{ "GetLoginID",								netGetLoginID,								METH_VARARGS },
+#endif
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+		{ "SendItemNewAttributePacket",			netSendItemNewAttributePacket,			METH_VARARGS },
 #endif
 		{nullptr, nullptr},
 	};

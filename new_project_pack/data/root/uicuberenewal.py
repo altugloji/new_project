@@ -19,6 +19,16 @@ COLOR_MATERIAL_SHORT = grp.GenerateColor(0.9, 0.4745, 0.4627, 1.0)
 MATERIAL_GRID_SLOTS = 14
 MAX_PACKET_MATERIALS = 10
 
+# YENI: cube grid'ine secilebilecek azami Beceri Kitabi sayisi.
+# uiscript SKILL_GRID_COLS*SKILL_GRID_ROWS ve server CUBE_SKILL_GRID_MAX ile AYNI olmali.
+CUBE_SKILL_GRID_MAX = 26
+
+# YENI: pencere 20001'de buyur. Eklenen yukseklik = uiscript (BOARD_H_BIG - BOARD_H_SMALL).
+# Bu deger uiscript ile SENKRON olmali (grid 3px asagi alindiktan sonra 89 px).
+CUBE_SKILL_SECTION_H = 89
+# Alt butonlarin tahta altindan ofseti (uiscript: "y" = BOARD_H - 35)
+CUBE_SKILL_BTN_BOTTOM_MARGIN = 35
+
 
 def FReturnInfo(func, index):
 	raw = cube_renewal.GetDates(index)
@@ -95,6 +105,21 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self.imporve_slot = None
 		self.slot_improve = None
 
+		# YENI: beceri kitabi secim grid'i
+		self.skill_grid = None
+		self.skill_grid_label = None
+		self.skill_grid_bg = None
+		self.skillSlotList = []
+		self.skillGridEnabled = 0  # sadece CUBE_SKILL_GRID_NPC'de server 1 yapar
+
+		# YENI: pencere yeniden boyutlandirma baseline'lari (yuklemede okunur)
+		self.board = None
+		self._cubeBoardW = 0
+		self._cubeBoardHSmall = 0
+		self._cubeBoardHBig = 0
+		self._acceptBtnX = 0
+		self._cancelBtnX = 0
+
 		self.LoadWindow()
 
 	def __del__(self):
@@ -111,6 +136,7 @@ class CubeRenewalWindows(ui.ScriptWindow):
 
 		try:
 			GetObject = self.GetChild
+			self.board = GetObject("board")
 			self.titleBar = GetObject("TitleBar")
 			self.btnAccept = GetObject("AcceptButton")
 			self.btnCancel = GetObject("CancelButton")
@@ -167,6 +193,9 @@ class CubeRenewalWindows(ui.ScriptWindow):
 			self.qty_sub_button = GetObject("qty_sub_button")
 			self.qty_add_button = GetObject("qty_add_button")
 			self.imporve_slot = GetObject("imporve_slot")
+			self.skill_grid = GetObject("skill_grid")
+			self.skill_grid_label = self.ElementDictionary.get("skill_grid_label")
+			self.skill_grid_bg = self.ElementDictionary.get("skill_grid_bg")
 
 		except:
 			import exception
@@ -200,6 +229,27 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self.slot_improve.SetSelectItemSlotEvent(ui.__mem_func__(self.__OnSelectItemSlot))
 		self.slot_improve.AppendSlot(0, 0, 0, 32, 32)
 		self.slot_improve.Show()
+
+		# YENI: beceri kitabi grid eventleri (grid_table zaten slotlari olusturur)
+		if self.skill_grid:
+			self.skill_grid.SetSelectEmptySlotEvent(ui.__mem_func__(self.__OnSkillSlotEmpty))
+			self.skill_grid.SetSelectItemSlotEvent(ui.__mem_func__(self.__OnSkillSlotItem))
+			self.skill_grid.SetOverInItemEvent(ui.__mem_func__(self.__OverInSkillSlot))
+			self.skill_grid.SetOverOutItemEvent(ui.__mem_func__(self.__OverOutSkillSlot))
+
+		# YENI: pencere boyut baseline'lari (kucuk/orijinal olculer) yuklemeden sonra okunur
+		self._cubeBoardW = self.GetWidth()
+		self._cubeBoardHSmall = self.GetHeight()
+		self._cubeBoardHBig = self._cubeBoardHSmall + CUBE_SKILL_SECTION_H
+		try:
+			(self._acceptBtnX, _ay) = self.btnAccept.GetLocalPosition()
+			(self._cancelBtnX, _cy) = self.btnCancel.GetLocalPosition()
+		except:
+			self._acceptBtnX = 353
+			self._cancelBtnX = 273
+
+		# YENI: grid varsayilan gizli + pencere kucuk (sadece 20001'de server acar)
+		self.SetSkillGridEnable(0)
 
 		self.Refresh()
 
@@ -551,6 +601,8 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self.firstSlotIndex = 0
 		self.count_item_reward = 0
 		self.slot_item_improve = -1
+		# YENI: pencere acilista grid gizli baslar; server (Cube_open) 20001 ise cube_skill_grid 1 ile acar
+		self.SetSkillGridEnable(0)
 		if self.searchEdit:
 			self.searchEdit.SetText("")
 		self._lastSearchText = ""
@@ -597,6 +649,114 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		else:
 			self.slot_improve.SetItemSlot(0, 0, 0)
 			self.slot_item_improve = -1
+
+	# --- YENI: Beceri Kitabi secim grid'i ---
+	def _IsSkillBookSlot(self, invSlot):
+		vnum = player.GetItemIndex(invSlot)
+		if vnum == 0:
+			return False
+		item.SelectItem(vnum)
+		return item.GetItemType() == item.ITEM_TYPE_SKILLBOOK
+
+	def _ApplyWindowSize(self, big):
+		# 20001'de buyuk, diger NPC'lerde orijinal/kucuk pencere boyutu.
+		if not self._cubeBoardHSmall:
+			return
+		h = self._cubeBoardHBig if big else self._cubeBoardHSmall
+		self.SetSize(self._cubeBoardW, h)
+		if self.board:
+			self.board.SetSize(self._cubeBoardW, h)  # Board.SetSize 9-parca zemini yeniden stretch eder
+		btnY = h - CUBE_SKILL_BTN_BOTTOM_MARGIN
+		if self.btnAccept:
+			self.btnAccept.SetPosition(self._acceptBtnX, btnY)
+		if self.btnCancel:
+			self.btnCancel.SetPosition(self._cancelBtnX, btnY)
+
+	def SetSkillGridEnable(self, enable):
+		# Server (Cube_open) sadece CUBE_SKILL_GRID_NPC icin enable=1 gonderir.
+		self.skillGridEnabled = 1 if enable else 0
+		self._ApplyWindowSize(self.skillGridEnabled)
+		widgets = (self.skill_grid, self.skill_grid_label, self.skill_grid_bg)
+		if self.skillGridEnabled:
+			for w in widgets:
+				if w:
+					w.Show()
+		else:
+			self._ClearSkillGrid()
+			for w in widgets:
+				if w:
+					w.Hide()
+
+	def __TryAttachSkillBook(self):
+		if not self.skillGridEnabled:
+			return
+		if not mouseModule.mouseController.isAttached():
+			return
+		attachedType = mouseModule.mouseController.GetAttachedType()
+		attachedSlotPos = mouseModule.mouseController.GetAttachedSlotNumber()
+		attachedInvenType = player.SlotTypeToInvenType(attachedType)
+		mouseModule.mouseController.DeattachObject()
+		# sadece ana envanterden surukleme kabul (dragon soul / diger pencereler haric)
+		if attachedType != player.SLOT_TYPE_INVENTORY or attachedInvenType != player.INVENTORY:
+			return
+		if not self._IsSkillBookSlot(attachedSlotPos):
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Bu alana sadece Beceri Kitabi koyabilirsin.")
+			return
+		if attachedSlotPos in self.skillSlotList:
+			return
+		if len(self.skillSlotList) >= CUBE_SKILL_GRID_MAX:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Beceri Kitabi slotlari dolu.")
+			return
+		self.skillSlotList.append(attachedSlotPos)
+		self._RefreshSkillGrid()
+
+	def __OnSkillSlotEmpty(self, gridPos):
+		self.__TryAttachSkillBook()
+
+	def __OnSkillSlotItem(self, gridPos):
+		# elde item varsa yeni kitap eklemeyi dene; yoksa bu slottaki kitabi gridden geri al
+		if mouseModule.mouseController.isAttached():
+			self.__TryAttachSkillBook()
+			return
+		if 0 <= gridPos < len(self.skillSlotList):
+			del self.skillSlotList[gridPos]
+			self._RefreshSkillGrid()
+
+	def _RefreshSkillGrid(self):
+		if not self.skill_grid or not self.skillGridEnabled:
+			return
+		# Bayat slotlari ele: tasinmis / satilmis / silinmis / artik beceri kitabi olmayan
+		valid = []
+		for invSlot in self.skillSlotList:
+			if self._IsSkillBookSlot(invSlot) and player.GetItemCount(invSlot) > 0:
+				valid.append(invSlot)
+		self.skillSlotList = valid
+		slotCount = self.skill_grid.GetSlotCount()
+		for i in xrange(slotCount):
+			if i < len(self.skillSlotList):
+				s = self.skillSlotList[i]
+				self.skill_grid.SetItemSlot(i, player.GetItemIndex(s), player.GetItemCount(s))
+			else:
+				self.skill_grid.SetItemSlot(i, 0, 0)
+		self.skill_grid.RefreshSlot()
+
+	def _ClearSkillGrid(self):
+		self.skillSlotList = []
+		if self.skill_grid:
+			for i in xrange(self.skill_grid.GetSlotCount()):
+				self.skill_grid.SetItemSlot(i, 0, 0)
+			self.skill_grid.RefreshSlot()
+
+	def __OverInSkillSlot(self, gridPos):
+		if gridPos < 0 or gridPos >= len(self.skillSlotList):
+			return
+		invSlot = self.skillSlotList[gridPos]
+		if player.GetItemIndex(invSlot) == 0:
+			return
+		self.toolTip.SetInventoryItem(invSlot)
+
+	def __OverOutSkillSlot(self):
+		self.toolTip.Hide()
 
 	def _SafeIntQty(self, text, defaultVal):
 		try:
@@ -703,6 +863,11 @@ class CubeRenewalWindows(ui.ScriptWindow):
 				)
 				return
 		index_improve = self.slot_item_improve
+		# YENI: secili Beceri Kitabi slotlarini make paketinden HEMEN once gonder (sadece grid aciksa).
+		# Ayni TCP akisi -> server bu komutu (interpret_command) make'ten once isler.
+		if self.skillGridEnabled:
+			self._RefreshSkillGrid()
+			net.SendChatPacket("/cube_skill_slots " + " ".join([str(s) for s in self.skillSlotList]))
 		cube_renewal.CubeRenewalMakeItem(sel, count, index_improve)
 		try:
 			snd.PlaySound("sound/ui/make_soket.wav")
@@ -766,6 +931,9 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self.interface = interface
 
 	def OnUpdate(self):
+		# YENI: item tasinir/satilir/silinir/count degisirse grid otomatik guncellenir
+		self._RefreshSkillGrid()
+
 		if self.IsShow() and self.searchEdit:
 			try:
 				t = self.searchEdit.GetText()
@@ -818,6 +986,8 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self.slot_item_improve = -1
 		if self.slot_improve:
 			self.slot_improve.SetItemSlot(0, 0, 0)
+		# YENI: pencere kapaninca secili beceri kitabi slotlari temizlensin
+		self._ClearSkillGrid()
 		self.selectedRecipeGlobalIndex = -1
 		constInfo.cube_count_items = {}
 		constInfo.CUBE_RENEWAL_IS_OPENED = 0

@@ -202,6 +202,9 @@ CPacketInfoCG::CPacketInfoCG()
 
 	Set(HEADER_CG_DRAGON_SOUL_REFINE, sizeof(TPacketCGDragonSoulRefine), "DragonSoulRefine", false);
 	Set(HEADER_CG_STATE_CHECKER, sizeof(BYTE), "ServerStateCheck", false);
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+	Set(HEADER_CG_ITEM_USE_NEW_ATTRIBUTE, sizeof(TPacketCGItemNewAttribute), "UseItemNewAttributes", false);
+#endif
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 	Set(HEADER_CG_ACCE, sizeof(TPacketAcce), "Acce", true);
 #endif

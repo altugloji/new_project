@@ -138,6 +138,9 @@ enum
 	HEADER_CG_GUILD_SYMBOL_CRC					= 113,
 	HEADER_CG_SCRIPT_SELECT_ITEM				= 114,
 	HEADER_CG_LOGIN4							= 115,
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+	HEADER_CG_ITEM_USE_NEW_ATTRIBUTE			= 189,
+#endif
 
 #ifdef ENABLE_SEND_TARGET_INFO
 	HEADER_CG_TARGET_INFO_LOAD					= 116,
@@ -3299,6 +3302,16 @@ typedef struct command_item_sell
 	BYTE		header;
 	TItemPos	item_pos;
 } TPacketCGItemSell;
+#endif
+
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+typedef struct command_item_new_attribute
+{
+	BYTE		header;
+	TItemPos	source_pos;
+	TItemPos	target_pos;
+	BYTE		bValues[5];
+} TPacketCGItemNewAttribute;
 #endif
 
 #pragma pack(pop)

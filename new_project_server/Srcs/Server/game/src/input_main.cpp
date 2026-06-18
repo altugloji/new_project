@@ -949,6 +949,16 @@ void CInputMain::BulkPotionUse(LPCHARACTER ch, const char* data) const
 }
 #endif
 
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+void CInputMain::ItemNewAttributes(LPCHARACTER ch, const char * pcData) const
+{
+	const auto p = (TPacketCGItemNewAttribute *) pcData;
+
+	if (ch)
+		ch->UseItemNewAttribute(p->source_pos, p->target_pos, p->bValues);
+}
+#endif
+
 void CInputMain::ItemToItem(LPCHARACTER ch, const char * pcData) const
 {
 	const auto p = (TPacketCGItemUseToItem *) pcData;
@@ -3629,6 +3639,12 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			}
 
 			break;
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+		case HEADER_CG_ITEM_USE_NEW_ATTRIBUTE:
+			if (!ch->IsObserverMode())
+				ItemNewAttributes(ch, c_pData);
+			break;
+#endif
 	}
 	return (iExtraLen);
 }

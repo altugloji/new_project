@@ -65,7 +65,7 @@ void CPythonPlayerEventHandler::OnMoving(const SState& c_rkState)
 	if (m_dwNextMovingNotifyTime>dwCurTime)
 		return;
 
-	m_dwNextMovingNotifyTime=dwCurTime+300;
+	m_dwNextMovingNotifyTime=dwCurTime+150;
 
 	CPythonNetworkStream& rkNetStream=CPythonNetworkStream::Instance();
 	rkNetStream.SendCharacterStatePacket(c_rkState.kPPosSelf, c_rkState.fAdvRotSelf, CInstanceBase::FUNC_MOVE, 0);

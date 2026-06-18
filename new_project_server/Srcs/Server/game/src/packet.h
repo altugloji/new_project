@@ -101,6 +101,10 @@ enum
 
 	// SCRIPT_SELECT_ITEM
 	HEADER_CG_SCRIPT_SELECT_ITEM	= 114,
+
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+	HEADER_CG_ITEM_USE_NEW_ATTRIBUTE	= 189,
+#endif
 	// END_OF_SCRIPT_SELECT_ITEM
 
 #ifdef __SEND_TARGET_INFO__
@@ -2467,6 +2471,16 @@ private:
 	BYTE* m_pStream;
 } TPacketGCPackageSDB;
 
+
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+typedef struct command_item_new_attribute
+{
+	BYTE		header;
+	TItemPos	source_pos;
+	TItemPos	target_pos;
+	BYTE		bValues[5];
+} TPacketCGItemNewAttribute;
+#endif
 
 #define MAX_EFFECT_FILE_NAME 128
 typedef struct SPacketGCSpecificEffect

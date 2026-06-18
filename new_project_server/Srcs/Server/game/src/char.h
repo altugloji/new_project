@@ -474,6 +474,7 @@ typedef struct character_point_instant
 	LPCHARACTER		pCubeNpc;
 #ifdef ENABLE_CUBE_RENEWAL
 	DWORD			dwCubeRenewalRecipeNpc; // cube_info_map key; 0 = use quest NPC race
+	std::vector<WORD>	vCubeSkillSlots;
 #endif
 	LPCHARACTER		battle_victim;
 
@@ -2024,6 +2025,10 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 #ifdef ENABLE_CUBE_RENEWAL
 		void SetCubeRenewalRecipeNpc(DWORD v) { m_pointsInstant.dwCubeRenewalRecipeNpc = v; }
 		DWORD GetCubeRenewalRecipeNpc() const { return m_pointsInstant.dwCubeRenewalRecipeNpc; }
+		// YENI: cube grid'inden secilmis beceri kitabi slotlari
+		void SetCubeSkillSlots(const std::vector<WORD>& v) { m_pointsInstant.vCubeSkillSlots = v; }
+		void ClearCubeSkillSlots() { m_pointsInstant.vCubeSkillSlots.clear(); }
+		const std::vector<WORD>& GetCubeSkillSlots() const { return m_pointsInstant.vCubeSkillSlots; }
 #endif
 		bool CanDoCube() const;
 
@@ -2310,6 +2315,10 @@ protected:
 		void							SetTargetVID(DWORD vid)	{ m_vecTargetVID.emplace_back(vid); }
 #endif
 
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+	public:
+		bool			UseItemNewAttribute(TItemPos source_pos, TItemPos target_pos, BYTE* bValues);
+#endif
 };
 
 ESex GET_SEX(LPCHARACTER ch);

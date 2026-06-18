@@ -13,6 +13,8 @@ import uiRefine
 import uiAttachMetin
 if app.ENABLE_EFSUN_CHANGE_DIALOG:
 	import uiefsunchange
+if app.ENABLE_KADIM_EFSUN_SYSTEM:
+	import uiAttachBonus
 import uiPickMoney
 import uiCommon
 import uiPrivateShopBuilder
@@ -431,6 +433,10 @@ class InventoryWindow(ui.ScriptWindow):
 		self.attachMetinDialog = uiAttachMetin.AttachMetinDialog()
 		self.attachMetinDialog.Hide()
 
+		if app.ENABLE_KADIM_EFSUN_SYSTEM:
+			self.attachBonusDialog = uiAttachBonus.AttachBonusDialog()
+			self.attachBonusDialog.Hide()
+
 		if app.ENABLE_EFSUN_CHANGE_DIALOG:
 			self.efsunChangeDialog = uiefsunchange.EfsunChangeDialog()
 			self.efsunChangeDialog.Hide()
@@ -520,6 +526,10 @@ class InventoryWindow(ui.ScriptWindow):
 		if self.attachMetinDialog:
 			self.attachMetinDialog.Destroy()
 			self.attachMetinDialog = 0
+
+		if app.ENABLE_KADIM_EFSUN_SYSTEM and self.attachBonusDialog:
+			self.attachBonusDialog.Destroy()
+			self.attachBonusDialog = 0
 
 		if app.ENABLE_EFSUN_CHANGE_DIALOG and self.efsunChangeDialog:
 			self.efsunChangeDialog.Destroy()
@@ -1070,6 +1080,12 @@ class InventoryWindow(ui.ScriptWindow):
 			else:
 				self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
 
+		elif app.ENABLE_KADIM_EFSUN_SYSTEM and player.GetItemIndex(srcItemSlotPos) == 71189:
+			if constInfo.ENABLE_SELF_STACK_SCROLLS and player.GetItemIndex(srcItemSlotPos) == player.GetItemIndex(dstItemSlotPos):
+				self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
+			else:
+				self.AttachBonusToItem(srcItemSlotPos, dstItemSlotPos)
+
 		elif constInfo.ENABLE_SELF_STACK_SCROLLS and srcItemVID in (71052,71051,71084,71085):
 			self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
 
@@ -1113,7 +1129,21 @@ class InventoryWindow(ui.ScriptWindow):
 				itemPrice = itemPrice * itemCount
 
 			if not app.ENABLE_NO_SELL_PRICE_DIVIDED_BY_5:
-				itemPrice /= 5
+				# Seviye 40-59 ekipman /10; seviye 60+ silah /15, diger ekipman /10; gerisi /5
+				sellDivisor = 5
+				if item.GetItemType() in (item.ITEM_TYPE_WEAPON, item.ITEM_TYPE_ARMOR):
+					itemLevelLimit = 0
+					for limitIndex in xrange(item.LIMIT_MAX_NUM):
+						(limitType, limitValue) = item.GetLimit(limitIndex)
+						if item.LIMIT_LEVEL == limitType:
+							itemLevelLimit = limitValue
+							break
+					if itemLevelLimit >= 40:
+						if item.GetItemType() == item.ITEM_TYPE_WEAPON and itemLevelLimit >= 60:
+							sellDivisor = 15
+						else:
+							sellDivisor = 10
+				itemPrice /= sellDivisor
 
 			item.GetItemName(itemIndex)
 			itemName = item.GetItemName()
@@ -1207,6 +1237,19 @@ class InventoryWindow(ui.ScriptWindow):
 
 
 
+	if app.ENABLE_KADIM_EFSUN_SYSTEM:
+		def OnUpdate(self):
+			if self.attachBonusDialog:
+				if self.attachBonusDialog.IsShow():
+					self.attachBonusDialog.Update()
+
+		def AttachBonusToItem(self, sourceSlotPos, targetSlotPos):
+			targetIndex = player.GetItemIndex(targetSlotPos)
+			item.SelectItem(targetIndex)
+			if item.GetItemType() not in (item.ITEM_TYPE_WEAPON, item.ITEM_TYPE_ARMOR):
+				return False
+			self.attachBonusDialog.Open(sourceSlotPos, targetSlotPos)
+
 	def OverOutItem(self):
 		self.wndItem.SetUsableItem(False)
 		if None != self.tooltipItem:
@@ -1250,6 +1293,8 @@ class InventoryWindow(ui.ScriptWindow):
 			return True
 		elif (player.GetItemFlags(srcSlotPos) & ITEM_FLAG_APPLICABLE) == ITEM_FLAG_APPLICABLE:
 			return True
+		elif app.ENABLE_KADIM_EFSUN_SYSTEM and srcItemVNum == 71189:
+			return True
 		elif constInfo.ENABLE_SELF_STACK_SCROLLS and srcItemVNum in (71052,71051,71084,71085):
 			return True
 		else:
@@ -1279,6 +1324,10 @@ class InventoryWindow(ui.ScriptWindow):
 
 		elif (player.GetItemFlags(srcSlotPos) & ITEM_FLAG_APPLICABLE) == ITEM_FLAG_APPLICABLE:
 			return True
+
+		elif app.ENABLE_KADIM_EFSUN_SYSTEM and srcItemVNum == 71189:
+			if self.__CanPutNewAttribute(dstSlotPos):
+				return True
 
 		elif constInfo.ENABLE_SELF_STACK_SCROLLS and srcItemVNum in (71052,71051,71084,71085):
 			return True
@@ -1350,6 +1399,20 @@ class InventoryWindow(ui.ScriptWindow):
 
 		self.efsunChangeDialog.Open(srcItemSlotPos, dstItemSlotPos)
 		return True
+
+	if app.ENABLE_KADIM_EFSUN_SYSTEM:
+		def __CanPutNewAttribute(self, dstSlotPos):
+			dstItemVNum = player.GetItemIndex(dstSlotPos)
+
+			if dstItemVNum == 0:
+				return False
+
+			item.SelectItem(dstItemVNum)
+
+			if not item.GetItemType() in (item.ITEM_TYPE_WEAPON, item.ITEM_TYPE_ARMOR):
+				return False
+
+			return True
 
 	def __CanChangeItemAttrList(self, dstSlotPos):
 		dstItemVNum = player.GetItemIndex(dstSlotPos)

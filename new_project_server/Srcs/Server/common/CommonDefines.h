@@ -151,7 +151,7 @@ enum eCommonDefines {
 #define ENABLE_DUNGEON_REJOIN_SYSTEM 								// Kuleye geri dönüş sistemi
 #define ENABLE_SCROLL_76016_LV_LIMIT								// Basit Kutsama Kagidi (30 level alti itemler icin)
 #define ENABLE_GM_ONLY_LOGIN										// GM girisi
-
+#define ENABLE_KADIM_EFSUN_SYSTEM									// Kadim Efsun Sistemi
 
 #define OFFLINE_SHOP												// Offline shops system
 #ifdef OFFLINE_SHOP

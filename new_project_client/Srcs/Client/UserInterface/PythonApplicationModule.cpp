@@ -1563,6 +1563,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_COSTUME_SYSTEM",	0);
 #endif
 
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+	PyModule_AddIntConstant(poModule, "ENABLE_KADIM_EFSUN_SYSTEM", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_KADIM_EFSUN_SYSTEM", 0);
+#endif
+
 #ifdef ENABLE_ENERGY_SYSTEM
 	PyModule_AddIntConstant(poModule, "ENABLE_ENERGY_SYSTEM",	1);
 #else

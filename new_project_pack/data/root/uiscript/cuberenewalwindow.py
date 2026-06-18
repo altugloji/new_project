@@ -61,7 +61,23 @@ SEARCH_BAR_W = 420
 SEARCH_BAR_H = 25
 # Alt b?l?m: miktar (+/-), geli?tirme slotu ve butonlar i?in tahta y?ksekli?i
 CRAFT_ROW_Y = SEARCH_BAR_Y + SEARCH_BAR_H + 6
-BOARD_H = 633
+
+# YENI: Beceri kitabi grid alani (cube uretiminde kullanilacak kitaplar buraya secilir)
+# 13 sutun x 2 satir = 26 slot. Slot sayisi degisecekse SKILL_GRID_COLS/ROWS guncelle ve
+# uicuberenewal.py icindeki CUBE_SKILL_GRID_MAX (= COLS*ROWS) ile ayni olacak sekilde tut.
+SKILL_GRID_COLS = 13
+SKILL_GRID_ROWS = 2
+SKILL_GRID_X = 15
+SKILL_LABEL_Y = CRAFT_ROW_Y + 45
+SKILL_GRID_Y = SKILL_LABEL_Y + 18
+SKILL_GRID_W = SKILL_GRID_COLS * MAT_STEP_X
+SKILL_GRID_H = SKILL_GRID_ROWS * MAT_STEP_Y
+
+# Pencere VARSAYILAN (orijinal/kucuk) yukseklik: 20001 DISINDAKI NPC'lerde bu kullanilir.
+# Sadece 20001'de python (uicuberenewal.SetSkillGridEnable) pencereyi BOARD_H_BIG'e buyutur.
+BOARD_H_SMALL = 633
+BOARD_H_BIG = SKILL_GRID_Y + SKILL_GRID_H + 50
+BOARD_H = BOARD_H_SMALL
 PATTERN_PATH = "d:/ymir work/ui/pattern/"
 # base_pattern (lootingsystem.py ile ayni 9-parca border_A); board zeminin uzerinde, icerik altinda
 BASE_PATTERN_X = 5
@@ -290,7 +306,8 @@ window = {
 	"name" : "CubeWindow",
 
 	"x" : SCREEN_WIDTH - BOARD_W - 40,
-	"y" : SCREEN_HEIGHT - BOARD_H - 40,
+	# Konumu BUYUK boyuta gore ayarla ki 20001'de pencere asagi buyuyunce ekran disina tasmasin.
+	"y" : SCREEN_HEIGHT - BOARD_H_BIG - 40,
 
 	"style" : ("movable", "float",),
 
@@ -407,6 +424,36 @@ window = {
 					"y" : CRAFT_ROW_Y + 12,
 					"width" : 50,
 					"height" : 20,
+				},
+
+				# YENI: Beceri kitabi secim grid'i (etiket + zemin + slotlar)
+				{
+					"name" : "skill_grid_label",
+					"type" : "text",
+					"x" : SKILL_GRID_X + 2,
+					"y" : SKILL_LABEL_Y,
+					"text" : "Beceri Kitaplari",
+				},
+				{
+					"name" : "skill_grid_bg",
+					"type" : "thinboard_circle",
+					"style" : ("attach",),
+					"x" : SKILL_GRID_X - 3,
+					"y" : SKILL_GRID_Y - 6,
+					"width" : SKILL_GRID_W + 6,
+					"height" : SKILL_GRID_H + 12,
+				},
+				{
+					"name" : "skill_grid",
+					"type" : "grid_table",
+					"x" : SKILL_GRID_X,
+					"y" : SKILL_GRID_Y,
+					"start_index" : 0,
+					"x_count" : SKILL_GRID_COLS,
+					"y_count" : SKILL_GRID_ROWS,
+					"x_step" : MAT_STEP_X,
+					"y_step" : MAT_STEP_Y,
+					"image" : ICON_SLOT_FILE,
 				},
 				{
 					"name" : "qty_sub_button",

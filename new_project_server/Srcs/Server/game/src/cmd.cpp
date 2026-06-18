@@ -221,6 +221,9 @@ ACMD(do_gift);
 
 ACMD(do_inventory);
 ACMD(do_cube);
+#ifdef ENABLE_CUBE_RENEWAL
+ACMD(do_cube_skill_slots);
+#endif
 
 ACMD(do_temp);
 
@@ -582,6 +585,9 @@ struct command_info cmd_info[] =
 	{ "hair",				do_hair,				0,	POS_DEAD,	GM_PLAYER	},
 	{ "inventory",			do_inventory,			0,	POS_DEAD,	GM_LOW_WIZARD	},
 	{ "cube",				do_cube,				0,	POS_DEAD,	GM_PLAYER	},
+#ifdef ENABLE_CUBE_RENEWAL
+	{ "cube_skill_slots",	do_cube_skill_slots,	0,	POS_DEAD,	GM_PLAYER	},
+#endif
 	{ "temp",				do_temp,				0,	POS_DEAD,	GM_IMPLEMENTOR	},
 	{ "check_mmoney",		do_check_monarch_money,	0,	POS_DEAD,	GM_IMPLEMENTOR	},
 	{ "reset_subskill",		do_reset_subskill,		0,	POS_DEAD,	GM_HIGH_WIZARD },

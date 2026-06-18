@@ -430,7 +430,21 @@ class ShopDialog(ui.ScriptWindow):
 					itemPrice = itemPrice * max(1, attachedCount)
 
 				if not app.ENABLE_NO_SELL_PRICE_DIVIDED_BY_5:
-					itemPrice /= 5
+					# Seviye 40-59 ekipman /10; seviye 60+ silah /15, diger ekipman /10; gerisi /5
+					sellDivisor = 5
+					if item.GetItemType() in (item.ITEM_TYPE_WEAPON, item.ITEM_TYPE_ARMOR):
+						itemLevelLimit = 0
+						for limitIndex in xrange(item.LIMIT_MAX_NUM):
+							(limitType, limitValue) = item.GetLimit(limitIndex)
+							if item.LIMIT_LEVEL == limitType:
+								itemLevelLimit = limitValue
+								break
+						if itemLevelLimit >= 40:
+							if item.GetItemType() == item.ITEM_TYPE_WEAPON and itemLevelLimit >= 60:
+								sellDivisor = 15
+							else:
+								sellDivisor = 10
+					itemPrice /= sellDivisor
 
 				itemName = item.GetItemName()
 

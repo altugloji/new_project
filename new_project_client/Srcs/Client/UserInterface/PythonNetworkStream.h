@@ -180,6 +180,9 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		bool SendQuickSlotAddPacket(BYTE wpos, BYTE type, BYTE pos);
 		bool SendQuickSlotDelPacket(BYTE wpos);
 		bool SendQuickSlotMovePacket(BYTE wpos, BYTE change_pos);
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+		bool SendItemNewAttributePacket(TItemPos source_pos, TItemPos target_pos, BYTE* bValues);
+#endif
 
 		bool SendPointResetPacket() const;
 

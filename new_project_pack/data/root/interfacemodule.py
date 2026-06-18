@@ -2410,6 +2410,11 @@ class Interface(object):
 			else:
 				self.wndCubeRenewal.Show()
 
+		# YENI: server->client 'cube_skill_grid' komutu; beceri kitabi grid'ini sadece 20001'de acar
+		def SetCubeSkillGridEnable(self, enable):
+			if self.wndCubeRenewal:
+				self.wndCubeRenewal.SetSkillGridEnable(enable)
+
 	#####################################################################################
 
 	def IsEditLineFocus(self):

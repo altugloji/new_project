@@ -252,6 +252,9 @@ class CItem : public CEntity
 		void		SetAttribute(int i, BYTE bType, short sValue);
 	public:
 		void		SetForceAttribute(int i, BYTE bType, short sValue);
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+		int			AddNewStyleAttribute(BYTE * bValues);
+#endif
 
 	protected:
 		bool		EquipEx(bool is_equip);

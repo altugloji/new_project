@@ -1151,7 +1151,46 @@ bool CPythonNetworkStream::SendCharacterStatePacket(const TPixelPosition& c_rkPP
 	kStatePacket.bArg = uArg;
 	kStatePacket.bRot = fDstRot/5.0f;
 	kStatePacket.lX = long(c_rkPPosDst.x);
-	kStatePacket.lY = long(c_rkPPosDst.y);
+	
+    kStatePacket.lY = long(c_rkPPosDst.y);
+	{
+		CInstanceBase * pkInst = CPythonCharacterManager::Instance().GetMainInstancePtr();
+		if (eFunc == 3 && uArg > 21){ return true; }
+		 
+		static UINT c_packet = 0;
+		static DWORD t_packet = 0;
+		DWORD t = timeGetTime();
+		if (t_packet + 500 < t) {
+			c_packet = 0;
+			t_packet = t;
+		}
+		c_packet++;
+		if (c_packet > 8){ return true; }
+		 
+		static UINT l_func = 0;
+		static DWORD t_f = 0;
+		 
+		static float f_x = 0.0f;
+		static float f_y = 0.0f;
+		const D3DXVECTOR3 & cpos = pkInst->GetGraphicThingInstancePtr()->GetPosition();
+		if (f_x == cpos.x && f_y == cpos.y && t - t_f < 1000 && l_func == eFunc && (eFunc < 3)) {
+			return true;
+		}
+		f_x = cpos.x;
+		f_y = cpos.y;
+		 
+		if (l_func == 0 && eFunc == 0 && t_f + 10 > t){ return true; }
+		l_func = eFunc;
+		t_f = t;
+		if (cpos.x == 0.0f && cpos.y == -0.0f) {
+			kStatePacket.lX = long(c_rkPPosDst.x);
+			kStatePacket.lY = long(c_rkPPosDst.y);
+		}else{
+			kStatePacket.lX = long(cpos.x);
+			kStatePacket.lY = long(cpos.y < 0.0f ? cpos.y * -1.0f : cpos.y);
+		}
+	}
+
 	kStatePacket.dwTime = ELTimer_GetServerMSec();
 
 	assert(kStatePacket.lX >= 0 && kStatePacket.lX < 204800);
@@ -5688,6 +5727,34 @@ bool CPythonNetworkStream::RecvGem()
 		}
 		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_RefreshGemConvert", Py_BuildValue("(i)", 1));
 	}
+	return true;
+}
+#endif
+
+#ifdef ENABLE_KADIM_EFSUN_SYSTEM
+bool CPythonNetworkStream::SendItemNewAttributePacket(TItemPos source_pos, TItemPos target_pos, BYTE* bValues)
+{
+	if (!__CanActMainInstance())
+		return true;
+
+	TPacketCGItemNewAttribute itemNewAttributePacket;
+	itemNewAttributePacket.header = HEADER_CG_ITEM_USE_NEW_ATTRIBUTE;
+
+	itemNewAttributePacket.source_pos = source_pos;
+	itemNewAttributePacket.target_pos = target_pos;
+
+	itemNewAttributePacket.bValues[0] = bValues[0];
+	itemNewAttributePacket.bValues[1] = bValues[1];
+	itemNewAttributePacket.bValues[2] = bValues[2];
+	itemNewAttributePacket.bValues[3] = bValues[3];
+	itemNewAttributePacket.bValues[4] = bValues[4];
+
+	if (!Send(sizeof(TPacketCGItemNewAttribute), &itemNewAttributePacket))
+	{
+		Tracen("SendItemNewAttributePacket Error");
+		return false;
+	}
+
 	return true;
 }
 #endif

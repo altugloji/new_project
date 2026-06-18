@@ -2405,6 +2405,38 @@ ACMD(do_cube)
 	}
 	Cube_open(ch, dwRecipeNpcRace);
 }
+
+ACMD(do_cube_skill_slots)
+{
+	if (!ch || !ch->IsCubeOpen())
+		return;
+
+	std::vector<WORD> slots;
+	char arg[256];
+	const char* p = argument;
+
+	while (p && *p && slots.size() < CUBE_SKILL_GRID_MAX)
+	{
+		p = one_argument(p, arg, sizeof(arg));
+		if (0 == arg[0])
+			break;
+
+		int s = -1;
+		str_to_number(s, arg);
+		if (s < 0 || s >= INVENTORY_MAX_NUM) // sadece ana envanter hucreleri gecerli
+			continue;
+
+		// ayni slotu iki kez ekleme
+		bool dup = false;
+		for (size_t i = 0; i < slots.size(); ++i)
+			if (slots[i] == (WORD)s) { dup = true; break; }
+		if (!dup)
+			slots.push_back((WORD)s);
+	}
+
+	ch->SetCubeSkillSlots(slots); // bos => secim temizlenir
+}
+
 #else
 ACMD(do_cube)
 {
