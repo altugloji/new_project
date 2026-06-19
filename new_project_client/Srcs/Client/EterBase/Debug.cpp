@@ -56,6 +56,146 @@ class CLogFile : public CSingleton<CLogFile>
 
 static CLogFile gs_logfile;
 
+#ifdef URIEL_ANTI_CHEAT
+/*static UINT gs_uLevel = 0;
+
+void SetLogLevel(UINT uLevel)
+{
+	gs_uLevel=uLevel;
+}
+
+void Log(UINT uLevel, const char* c_szMsg)
+{
+	if (uLevel>=gs_uLevel)
+		Trace(c_szMsg);
+}
+
+void Logn(UINT uLevel, const char* c_szMsg)
+{
+	if (uLevel>=gs_uLevel)
+		Tracen(c_szMsg);
+}
+
+void Logf(UINT uLevel, const char* c_szFormat, ...)
+{
+	if (uLevel<gs_uLevel)
+		return;
+
+	char szBuf[DEBUG_STRING_MAX_LEN+1];
+
+	va_list args;
+	va_start(args, c_szFormat);
+	_vsnprintf(szBuf, sizeof(szBuf), c_szFormat, args);
+	va_end(args);
+#ifdef _DEBUG
+	OutputDebugString(szBuf);
+	fputs(szBuf, stdout);
+#endif
+
+	if (isLogFile)
+		LogFile(szBuf);
+}
+
+void Lognf(UINT uLevel, const char* c_szFormat, ...)
+{
+	if (uLevel<gs_uLevel)
+		return;
+
+	va_list args;
+	va_start(args, c_szFormat);
+
+	char szBuf[DEBUG_STRING_MAX_LEN+2];
+	const int len = _vsnprintf(szBuf, sizeof(szBuf)-1, c_szFormat, args);
+
+	if (len > 0)
+	{
+		szBuf[len] = '\n';
+		szBuf[len + 1] = '\0';
+	}
+	va_end(args);
+#ifdef _DEBUG
+	OutputDebugString(szBuf);
+	puts(szBuf);
+#endif
+
+	if (isLogFile)
+		LogFile(szBuf);
+}
+
+void Trace(const char * c_szMsg)
+{
+#ifdef _DEBUG
+	OutputDebugString(c_szMsg);
+	printf("%s", c_szMsg);
+#endif
+
+	if (isLogFile)
+		LogFile(c_szMsg);
+}
+
+void Tracen(const char* c_szMsg)
+{
+#ifdef _DEBUG
+	char szBuf[DEBUG_STRING_MAX_LEN+1];
+	_snprintf(szBuf, sizeof(szBuf), "%s\n", c_szMsg);
+	OutputDebugString(szBuf);
+	puts(c_szMsg);
+
+	if (isLogFile)
+		LogFile(szBuf);
+
+	puts(c_szMsg);
+	putc('\n', stdout);
+#else
+	if (isLogFile)
+	{
+		LogFile(c_szMsg);
+		LogFile("\n");
+	}
+#endif
+}
+
+void Tracenf(const char* c_szFormat, ...)
+{
+	va_list args;
+	va_start(args, c_szFormat);
+
+	char szBuf[DEBUG_STRING_MAX_LEN+2];
+	const int len = _vsnprintf(szBuf, sizeof(szBuf)-1, c_szFormat, args);
+
+	if (len > 0)
+	{
+		szBuf[len] = '\n';
+		szBuf[len + 1] = '\0';
+	}
+	va_end(args);
+#ifdef _DEBUG
+	OutputDebugString(szBuf);
+	printf("%s", szBuf);
+#endif
+
+	if (isLogFile)
+		LogFile(szBuf);
+}
+
+void Tracef(const char* c_szFormat, ...)
+{
+	char szBuf[DEBUG_STRING_MAX_LEN+1];
+
+	va_list args;
+	va_start(args, c_szFormat);
+	_vsnprintf(szBuf, sizeof(szBuf), c_szFormat, args);
+	va_end(args);
+
+#ifdef _DEBUG
+	OutputDebugString(szBuf);
+	fputs(szBuf, stdout);
+#endif
+
+	if (isLogFile)
+		LogFile(szBuf);
+}*/
+#else
 static UINT gs_uLevel=0;
 
 void SetLogLevel(UINT uLevel)
@@ -194,6 +334,7 @@ void Tracef(const char* c_szFormat, ...)
 	if (isLogFile)
 		LogFile(szBuf);
 }
+#endif
 
 void TraceError(const char* c_szFormat, ...)
 {

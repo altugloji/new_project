@@ -10494,7 +10494,7 @@ VNUM	LOCALE_NAME
 76013	Tárgy-megerõsítõ (b)
 76014	Megbûvölõ tárgy (b)
 76015	Megáldó márvány
-76016	Áldástekercs
+76016	Egyszerû áldás tekercs
 76017	Támadó ital +15
 76018	Támadó ital +20
 76019	Belépési engedély

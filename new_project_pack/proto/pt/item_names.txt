@@ -10494,7 +10494,7 @@ VNUM	LOCALE_NAME
 76013	Reforço para Itens (A)
 76014	Feitiço para Itens (A)
 76015	Mármore da Bênção
-76016	Pergaminho da Bênção
+76016	Pergaminho de Bênção simples
 76017	Poção de Ataque +15
 76018	Poção de Ataque +20
 76019	Passagem

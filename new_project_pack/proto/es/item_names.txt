@@ -10494,7 +10494,7 @@ VNUM	LOCALE_NAME
 76013	Objeto de Coacción (az.)
 76014	Objeto Encantado (az.)
 76015	Bola bendición
-76016	Pergamino Bendición
+76016	Pergamino de Bendición simple
 76017	Poción de ataque+15
 76018	Poción de ataque+20
 76019	Tique de entrada

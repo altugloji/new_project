@@ -109,7 +109,6 @@ enum eCommonDefines {
 #define ENABLE_SPAMDB_REFRESH										// spam_db otomatik chat ban
 #define DC_P2P_UPDATE												// Farklı CH'de ki oyuncuyu dc atmak için
 #define WARP_CH_UPDATE												// Farklı CH'de ki oyuncunun yanına gitmek için
-#define EXP_DEC_IN_DUNGEON											// Zindanlarda %90 Daha Az EXP
 #define DISABLE_EXTRA_PROB_FOR_REFINE								// Lonca demiricis ekstra şans azaltma
 #define DISABLE_PARTY_EXP_WITH_LEVEL								// Grup exp bug fix
 #define DISABLE_ITEM_LEVEL_FOR_GM									// GM her level itemi giyebilir.
@@ -152,6 +151,9 @@ enum eCommonDefines {
 #define ENABLE_SCROLL_76016_LV_LIMIT								// Basit Kutsama Kagidi (30 level alti itemler icin)
 #define ENABLE_GM_ONLY_LOGIN										// GM girisi
 #define ENABLE_KADIM_EFSUN_SYSTEM									// Kadim Efsun Sistemi
+#define EXP_DEC_IN_DUNGEON											// Zindanlarda %90 Daha Az EXP
+#define ENABLE_LEVEL_MAP_EXP_LIMIT									// 45-75 ve 75-99 harita exp engelleri
+
 
 #define OFFLINE_SHOP												// Offline shops system
 #ifdef OFFLINE_SHOP

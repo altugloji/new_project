@@ -430,7 +430,7 @@ bool CHARACTER::LearnSkillByBook(DWORD dwSkillVnum, BYTE bProb)
 
 	if (FN_should_check_exp(this))
 	{
-		need_exp = 20000;
+		need_exp = 0;
 
 		if ( GetExp() < need_exp )
 		{

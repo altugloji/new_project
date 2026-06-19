@@ -13418,3 +13418,20 @@
 21310	Boutique Gaya
 21311	Boutique de conversion Gaya
 21312	10 points Gaya ont été ajoutés à ton personnage.
+21510	Villages
+21511	Empire rouge (1er village)
+21512	Empire rouge (2e village)
+21513	Empire jaune (1er village)
+21514	Empire jaune (2e village)
+21515	Empire bleu (1er village)
+21516	Empire bleu (2e village)
+21520	Zones forestières
+21521	Forêt fantôme
+21522	Forêt rouge
+21530	Donjon des araignées
+21531	Début du 1er étage
+21532	Fin du 1er étage
+21540	Grotte de l'Exil
+21550	Autres zones
+21560	Fermer
+64186	Catacombe

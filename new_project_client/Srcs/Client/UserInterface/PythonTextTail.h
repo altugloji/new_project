@@ -96,6 +96,9 @@ class CPythonTextTail : public CSingleton<CPythonTextTail>
 		void UpdateTextTail(TTextTail * pTextTail) const;
 		void RenderTextTailBox(TTextTail * pTextTail) const;
 		void RenderTextTailName(TTextTail * pTextTail) const;
+#ifdef ENABLE_CHAT_TAIL_BACKGROUND
+		void RenderChatTailBox(TTextTail * pTextTail) const;
+#endif
 		void UpdateDistance(const TPixelPosition & c_rCenterPosition, TTextTail * pTextTail) const;
 
 		bool isIn(TTextTail * pSource, TTextTail * pTarget) const;

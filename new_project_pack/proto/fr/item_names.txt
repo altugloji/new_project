@@ -10494,7 +10494,7 @@ VNUM	LOCALE_NAME
 76013	Objet de renforcement(b)
 76014	Objet enchanté (b)
 76015	Orbe de bénédiction
-76016	Parchemin de Bénédiction
+76016	Parchemin de bénédiction simple
 76017	Potion d'attaque +15
 76018	Potion d'attaque +20
 76019	Ticket

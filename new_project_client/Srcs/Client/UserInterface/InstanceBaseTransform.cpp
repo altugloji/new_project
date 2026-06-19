@@ -4,55 +4,55 @@
 
 void CInstanceBase::SCRIPT_SetPixelPosition(float fx, float fy)
 {
-	const float fCurrentZ = m_GraphicThingInstance.NEW_GetCurPixelPositionRef().z;
+	const float fCurrentZ = M_GTI.NEW_GetCurPixelPositionRef().z;
 	const float fz = CPythonBackground::Instance().ResolveHeightForPlacement(fx, fy, fCurrentZ);
 	NEW_SetPixelPosition(TPixelPosition(fx, fy, fz));
 }
 
 void CInstanceBase::NEW_SetPixelPosition(const TPixelPosition & c_rPixelPosition)
 {
-	m_GraphicThingInstance.SetCurPixelPosition(c_rPixelPosition);
+	M_GTI.SetCurPixelPosition(c_rPixelPosition);
 }
 
 void CInstanceBase::NEW_GetPixelPosition(TPixelPosition * pPixelPosition)
 {
-	*pPixelPosition=m_GraphicThingInstance.NEW_GetCurPixelPositionRef();
+	*pPixelPosition=M_GTI.NEW_GetCurPixelPositionRef();
 }
 
 void CInstanceBase::SetRotation(float fRotation)
 {
-	m_GraphicThingInstance.SetRotation(fRotation);
+	M_GTI.SetRotation(fRotation);
 }
 
 void CInstanceBase::BlendRotation(float fRotation, float fBlendTime)
 {
-	m_GraphicThingInstance.BlendRotation(fRotation, fBlendTime);
+	M_GTI.BlendRotation(fRotation, fBlendTime);
 }
 
 void CInstanceBase::NEW_LookAtFlyTarget()
 {
-	m_GraphicThingInstance.LookAtFlyTarget();
+	M_GTI.LookAtFlyTarget();
 }
 
 void CInstanceBase::NEW_LookAtDestPixelPosition(const TPixelPosition& c_rkPPosDst)
 {
-	m_GraphicThingInstance.LookAt(c_rkPPosDst.x, -c_rkPPosDst.y);
+	M_GTI.LookAt(c_rkPPosDst.x, -c_rkPPosDst.y);
 }
 
 void CInstanceBase::NEW_LookAtDestInstance(CInstanceBase& rkInstDst)
 {
-	m_GraphicThingInstance.LookAt(&rkInstDst.m_GraphicThingInstance);
-// 	Tracenf("LookAt %f", m_GraphicThingInstance.GetTargetRotation());
+	M_GTI.LookAt(rkInstDst.GetGraphicThingInstancePtr());
+// 	Tracenf("LookAt %f", M_GTI.GetTargetRotation());
 }
 
 float CInstanceBase::GetRotation()
 {
-	return m_GraphicThingInstance.GetRotation();
+	return M_GTI.GetRotation();
 }
 
 float CInstanceBase::GetAdvancingRotation()
 {
-	return m_GraphicThingInstance.GetAdvancingRotation();
+	return M_GTI.GetAdvancingRotation();
 }
 
 void CInstanceBase::SetDirection(int dir)
@@ -64,7 +64,7 @@ void CInstanceBase::SetDirection(int dir)
 
 void CInstanceBase::BlendDirection(int dir, float blendTime)
 {
-	m_GraphicThingInstance.BlendRotation(GetDegreeFromDirection(dir), blendTime);
+	M_GTI.BlendRotation(GetDegreeFromDirection(dir), blendTime);
 }
 
 float CInstanceBase::GetDegreeFromDirection(int dir) const

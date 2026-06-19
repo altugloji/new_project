@@ -18,7 +18,7 @@
     <ProjectName>scriptLib</ProjectName>
     <ProjectGuid>{E682CEA2-1D79-4DE9-A2CE-6AED27E4170E}</ProjectGuid>
     <RootNamespace>scriptLib</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

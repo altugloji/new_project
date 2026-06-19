@@ -10,6 +10,9 @@
 #include "Interface.h"
 //#include "../eterGrnLib/ThingInstance.h"
 #include "GameLibDefines.h"
+#ifdef URIEL_ANTI_CHEAT
+#include "../UserInterface/urielacsdk.h"
+#endif
 #define ENABLE_HAIR_SPECULAR
 
 class CItemData;
@@ -726,9 +729,15 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		std::vector<CWeaponTrace*>	m_WeaponTraceVector;
 		CPhysicsObject				m_PhysicsObject;
 
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<DWORD>	m_dwcurComboIndex;
+
+		safe_variable_weak<DWORD>	m_eActorType;
+#else
 		DWORD						m_dwcurComboIndex;
 
 		DWORD						m_eActorType;
+#endif
 
 		DWORD						m_eRace;
 		DWORD						m_eShape;
@@ -737,7 +746,11 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		BOOL						m_isNextPreInput;
 		DWORD						m_dwcurComboBackMotionIndex;
 
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<WORD>	m_wcurComboType;
+#else
 		WORD						m_wcurComboType;
+#endif
 
 		float						m_fAtkDirRot;
 
@@ -753,9 +766,17 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		BOOL						m_isFaint;
 		BOOL						m_isParalysis;
 		BOOL						m_isStun;
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<BOOL>	m_isRealDead;
+#else
 		BOOL						m_isRealDead;
+#endif
 		BOOL						m_isWalking;
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<BOOL>	m_isMain;
+#else
 		BOOL						m_isMain;
+#endif
 
 		// Effect
 		DWORD						m_dwBattleHitEffectID;
@@ -777,8 +798,13 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		DWORD						m_dwShakeTime;
 
 		float						m_fReachScale;
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<float>	m_fMovSpd;
+		safe_variable_weak<float>	m_fAtkSpd;
+#else
 		float						m_fMovSpd;
 		float						m_fAtkSpd;
+#endif
 
 		// Rotation
 		float						m_fcurRotation;
@@ -822,8 +848,13 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		CSpeedTreeWrapper *			m_pkTree;
 
 	protected:
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<DWORD> m_dwSelfVID;
+		safe_variable_weak<DWORD> m_dwOwnerVID;
+#else
 		DWORD m_dwSelfVID;
 		DWORD m_dwOwnerVID;
+#endif
 
 	protected:
 		void __InitializeStateData();
@@ -858,7 +889,11 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 	protected:
 		void __InitializeCollisionData();
 
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<bool> m_canSkipCollision;
+#else
 		bool m_canSkipCollision;
+#endif
 
 	protected:
 		struct SBlendAlpha

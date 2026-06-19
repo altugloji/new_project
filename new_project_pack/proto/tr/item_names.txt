@@ -11425,7 +11425,8 @@ VNUM	LOCALE_NAME
 165100	Mitsi ejderha oniksi
 165200	Mitsi ejderha oniksi
 165300	Mitsi ejderha oniksi
-165400	Mitsi ejderha oniksi30400	Gemstones
+165400	Mitsi ejderha oniksi
+30400	Gemstones
 30401	Piece of Gem
 30402	Gem Coupon (1)
 30403	Gaya Kuponu (5)

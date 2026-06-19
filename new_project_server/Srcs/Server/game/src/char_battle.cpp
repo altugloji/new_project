@@ -2247,6 +2247,34 @@ void CHARACTER::DistributeHP(LPCHARACTER pkKiller) const
 		return;
 }
 
+#ifdef ENABLE_LEVEL_MAP_EXP_LIMIT
+// Seviye-harita bazlý EXP sýnýrý:
+//   45-74 lvl -> 71 ve 104 dýþýndaki haritalarda kazanýlan EXP /10
+//   75-99 lvl -> sadece 72, 73, 208 haritalarýnda EXP kazanýlýr; diðerlerinde hiç EXP yok
+// Dönüþ false ise oyuncu bu haritada hiç EXP almaz (çaðýran fonksiyon erken çýkmalý).
+static bool ApplyLevelMapExpLimit(LPCHARACTER to, int& iExp)
+{
+	const int iLevel = to->GetLevel();
+	const long lMapIndex = to->GetMapIndex();
+
+	if (iLevel >= 45 && iLevel <= 75)
+	{
+		if (lMapIndex != 71 && lMapIndex != 104)
+			iExp /= 10;
+	}
+	else if (iLevel >= 75 && iLevel <= 99)
+	{
+		if (lMapIndex != 72 && lMapIndex != 73 && lMapIndex != 208)
+		{
+			iExp = 0;
+			return false;
+		}
+	}
+
+	return true;
+}
+#endif
+
 #ifdef ENABLE_NEWEXP_CALCULATION
 #define NEW_GET_LVDELTA(me, victim) aiPercentByDeltaLev[MINMAX(0, (victim + 15) - me, MAX_EXP_DELTA_OF_LEV - 1)]
 typedef long double rate_t;
@@ -2327,6 +2355,11 @@ static void GiveExp(LPCHARACTER from, LPCHARACTER to, int iExp)
 #ifdef EXP_DEC_IN_DUNGEON
 	if (to->GetMapIndex() >= 10000)
 		iExp /= 4;
+#endif
+
+#ifdef ENABLE_LEVEL_MAP_EXP_LIMIT
+	if (!ApplyLevelMapExpLimit(to, iExp))
+		return;
 #endif
 
 	// set
@@ -2444,6 +2477,11 @@ static void GiveExp(LPCHARACTER from, LPCHARACTER to, int iExp)
 	}
 
 	iExp = AdjustExpByLevel(to, iExp);
+
+#ifdef ENABLE_LEVEL_MAP_EXP_LIMIT
+	if (!ApplyLevelMapExpLimit(to, iExp))
+		return;
+#endif
 
 	to->PointChange(POINT_EXP, iExp, true);
 	from->CreateFly(FLY_EXP, to);

@@ -611,12 +611,12 @@ unsigned char CCameraManager::GetCurrentCameraNum()
 	return NO_CURRENT_CAMERA;
 }
 
-bool CCameraManager::isTerrainCollisionEnable() const
+bool CCameraManager::isTerrainCollisionEnable()
 {
 	return m_pCurrentCamera->isTerrainCollisionEnable();
 }
 
-void CCameraManager::SetTerrainCollision(bool bEnable) const
+void CCameraManager::SetTerrainCollision(bool bEnable)
 {
 	m_pCurrentCamera->SetTerrainCollision(bEnable);
 }

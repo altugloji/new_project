@@ -9,7 +9,11 @@ class CPythonCharacterManager : public CSingleton<CPythonCharacterManager>, publ
 	public:
 		// Character List
 		typedef std::list<CInstanceBase *>			TCharacterInstanceList;
+#ifdef URIEL_ANTI_CHEAT
+		typedef std::map<DWORD, safe_variable_weak<CInstanceBase*>>	TCharacterInstanceMap;
+#else
 		typedef std::map<DWORD, CInstanceBase *>	TCharacterInstanceMap;
+#endif
 
 		class CharacterIterator;
 
@@ -115,7 +119,11 @@ class CPythonCharacterManager : public CSingleton<CPythonCharacterManager>, publ
 		void __RenderSortedDeadActorList();
 
 	protected:
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<CInstanceBase*>						m_pkInstMain;
+#else
 		CInstanceBase *						m_pkInstMain;
+#endif
 		CInstanceBase *						m_pkInstPick;
 		CInstanceBase *						m_pkInstBind;
 		D3DXVECTOR2							m_v2PickedInstProjPos;

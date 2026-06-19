@@ -13418,3 +13418,20 @@
 21310	Gaya Shop
 21311	Gaya Omzettingsshop
 21312	Er zijn 10 Gaya-punten toegevoegd aan je personage.
+21510	Dorpen
+21511	Rood Rijk (1e Dorp)
+21512	Rood Rijk (2e Dorp)
+21513	Geel Rijk (1e Dorp)
+21514	Geel Rijk (2e Dorp)
+21515	Blauw Rijk (1e Dorp)
+21516	Blauw Rijk (2e Dorp)
+21520	Bosgebieden
+21521	Geestenbos
+21522	Rood Bos
+21530	Spinnendungeon
+21531	Start 1e Verdieping
+21532	Einde 1e Verdieping
+21540	Ballingschapsgrot
+21550	Andere gebieden
+21560	Sluiten
+64186	Catacombe

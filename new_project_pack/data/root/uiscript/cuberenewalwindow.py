@@ -432,7 +432,7 @@ window = {
 					"type" : "text",
 					"x" : SKILL_GRID_X + 2,
 					"y" : SKILL_LABEL_Y,
-					"text" : "Beceri Kitaplari",
+					"text" : "Skill Books",
 				},
 				{
 					"name" : "skill_grid_bg",

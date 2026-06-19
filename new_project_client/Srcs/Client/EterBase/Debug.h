@@ -3,6 +3,18 @@
 
 #include <windows.h>
 
+#include "ServiceDefs.h"
+
+#ifdef URIEL_ANTI_CHEAT
+#define Log(...) (__VA_ARGS__)
+#define Logn(...) (__VA_ARGS__)
+#define Logf(...) (__VA_ARGS__)
+#define Lognf(...) (__VA_ARGS__)
+#define Trace(...) (__VA_ARGS__)
+#define Tracen(...) (__VA_ARGS__)
+#define Tracenf(...) (__VA_ARGS__)
+#define Tracef(...) (__VA_ARGS__)
+#else
 extern void SetLogLevel(UINT uLevel);
 extern void Log(UINT uLevel, const char* c_szMsg);
 extern void Logn(UINT uLevel, const char* c_szMsg);
@@ -13,6 +25,7 @@ extern void Trace(const char* c_szMsg);
 extern void Tracen(const char* c_szMsg);
 extern void Tracenf(const char* c_szFormat, ...);
 extern void Tracef(const char* c_szFormat, ...);
+#endif
 extern void TraceError(const char* c_szFormat, ...);
 extern void TraceErrorWithoutEnter(const char* c_szFormat, ...);
 

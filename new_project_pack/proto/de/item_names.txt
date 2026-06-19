@@ -10494,7 +10494,7 @@ VNUM	LOCALE_NAME
 76013	Gegenstand verstärken(b)
 76014	Gegenstand verzaubern(B)
 76015	Segenskugel
-76016	Segensschriftrolle
+76016	Einfacher Segensschriftrolle
 76017	Trank des Angriffs +15
 76018	Trank des Angriffs +20
 76019	Passierschein

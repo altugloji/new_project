@@ -10494,7 +10494,7 @@ VNUM	LOCALE_NAME
 76013	Îmbunãt. Obiectului (b)
 76014	Vrãjeºte Obiectul (b)
 76015	Marmurã Binecuvântatã
-76016	Pergament Binecuvantat
+76016	Pergament Simplu al Binecuvântãrii
 76017	Licoarea Atacului +15
 76018	Licoarea Atacului +20
 76019	Permis de Trecere

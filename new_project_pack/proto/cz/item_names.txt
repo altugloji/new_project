@@ -10494,7 +10494,7 @@ VNUM	LOCALE_NAME
 76013	Zesílit pøedmìt
 76014	Zaèarovat pøedmìt
 76015	Mramor požehnání
-76016	Požehnaný pergamen
+76016	Jednoduchý svitek požehnání
 76017	Lektvar útoku +15
 76018	Lektvar útoku +20
 76019	Propustka

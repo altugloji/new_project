@@ -10494,7 +10494,7 @@ VNUM	LOCALE_NAME
 76013	Wzmocnienie Przedmiot(n)
 76014	Zaczarowanie Przedm.(n)
 76015	Kula B³ogos³awieñstwa
-76016	Zwój B³ogos³awieñstwa
+76016	Prosty Zwój B³ogos³awieñstwa
 76017	Mikstura Ataku +15
 76018	Mikstura Ataku +20
 76019	Przepustka

@@ -44,6 +44,10 @@
 #include "AbstractApplication.h"
 #include "MovieMan.h"
 
+#ifdef URIEL_ANTI_CHEAT
+#include "urielacsdk.h"
+#endif
+
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
 #include "PythonAcce.h"
 #endif
@@ -489,6 +493,13 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 	protected:
 		int m_iCursorNum;
 		int m_iContinuousCursorNum;
+
+#ifdef URIEL_ANTI_CHEAT
+	public:
+		UrielAntiCheat& AntiCheat() const { return *m_anticheat; }
+	private:
+		UrielAntiCheat* m_anticheat;
+#endif
 
 #if defined(__BL_MULTI_LANGUAGE__)
 	public:

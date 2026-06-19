@@ -181,6 +181,7 @@ class SelectCharacterWindow(ui.Window):
 			self.dlgBoard.Show()
 		self.SetWindowName("SelectCharacterWindow")
 		self.Show()
+		self.SetFocus()
 
 		if self.slot>=0:
 			self.SelectSlot(self.slot)

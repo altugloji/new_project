@@ -19,7 +19,7 @@ static void CharacterChestLog(BYTE logType, DWORD actorAccount, DWORD actorPid, 
 		"INSERT INTO character_chest_log (log_type, actor_account_id, actor_pid, target_pid, item_id, result) "
 		"VALUES(%u, %u, %u, %u, %u, %u)",
 		logType, actorAccount, actorPid, targetPid, itemId, result);
-	CDBManager::instance().AsyncQuery(szQuery, SQL_PLAYER);
+	CDBManager::instance().AsyncQuery(szQuery, SQL_LOG);
 }
 
 static bool CharacterChestValidatePassword(DWORD accountId, const char* password)

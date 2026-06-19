@@ -5,6 +5,10 @@
 #include "../EterBase/tea.h"
 #include "../EterPack/EterPackManager.h"
 
+#ifdef URIEL_ANTI_CHEAT
+#include "PythonApplication.h"
+#endif
+
 // CHINA_CRYPT_KEY
 extern DWORD g_adwEncryptKey[4];
 extern DWORD g_adwDecryptKey[4];
@@ -148,6 +152,21 @@ bool CAccountConnector::__AuthState_RecvPhase()
 		strncpy(LoginPacket.pwd, m_strPassword.c_str(), PASS_MAX_NUM);
 		LoginPacket.name[ID_MAX_NUM] = '\0';
 		LoginPacket.pwd[PASS_MAX_NUM] = '\0';
+
+#ifdef URIEL_ANTI_CHEAT
+		{
+			// Packet'e dokunmadan API'yi çağır; token'ı geçici buffer'a yaz
+			char uriel_token_temp[36] = {0};
+			if (!CPythonApplication::Instance().AntiCheat().GetLoginToken(m_strID, uriel_token_temp))
+			{
+				ClearLoginInfo();
+				CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+				rkNetStream.ClearLoginInfo();
+
+				return false;
+			}
+		}
+#endif
 
 		ClearLoginInfo();
 		CPythonNetworkStream& rkNetStream=CPythonNetworkStream::Instance();

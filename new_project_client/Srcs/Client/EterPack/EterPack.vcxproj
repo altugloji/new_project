@@ -18,7 +18,7 @@
     <ProjectName>EterPack</ProjectName>
     <ProjectGuid>{4950BA04-3877-4F66-BCA0-60E00DE3770B}</ProjectGuid>
     <RootNamespace>EterPack</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -155,9 +155,9 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-        <ClCompile Include="EterPack.cpp" />
-        <ClCompile Include="EterPackCursor.cpp" />
-        <ClCompile Include="EterPackManager.cpp" />
+    <ClCompile Include="EterPack.cpp" />
+    <ClCompile Include="EterPackCursor.cpp" />
+    <ClCompile Include="EterPackManager.cpp" />
     <ClCompile Include="EterPackPolicy_CSHybridCrypt.cpp" />
     <ClCompile Include="md5.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>

@@ -182,7 +182,7 @@ window = {
 					"name" : "coin_buy_button", "type" : "button",
 					"x" : COIN_BUY_BTN_X,
 					"y" : COIN_BUY_BTN_Y,
-					"text" : "|cffFEE3AEEP SATIN AL",
+					"text" : "|cffFEE3AEEP SATIN AL(BUY)",
 					"default_image" : "d:/ymir work/nesne_market/ep_al.png",
 					"over_image" 	: "d:/ymir work/nesne_market/ep_al.png",
 					"down_image" 	: "d:/ymir work/nesne_market/ep_al.png",

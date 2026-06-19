@@ -164,7 +164,8 @@
 #define ENABLE_STATUS_ADD_BY_INPUT											// Toplu statü verme
 #define ENABLE_OFFLINE_SHOP													// Offline pazar / çevrimdışı dükkan
 #define ENABLE_DROP_ITEM_OWNER_COLOR										// Bana ait olmayan (sahibi başkası olan) yer itemlerinin ismi kırmızı görünsün
-
+#define ENABLE_CHAT_TAIL_BACKGROUND											// Karakter üzerindeki chat mesajını 20px yukarı taşı + arkasına hafif siyah şeffaf zemin koy
+#define URIEL_ANTI_CHEAT													// Uriel
 
 // #define METIN35_ADMIN_PANEL												// Yönetim Paneli
 #ifdef METIN35_ADMIN_PANEL

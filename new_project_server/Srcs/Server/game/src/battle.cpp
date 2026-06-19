@@ -419,18 +419,18 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 	if (pkAttacker->IsNPC() && pkVictim->IsPC())
 	{
 		if (pkAttacker->IsRaceFlag(RACE_FLAG_ATT_ELEC))
-			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_ELEC))		/ 10000;
+			iAtk -= (iAtk * 85 * pkVictim->GetPoint(POINT_RESIST_ELEC))		/ 10000;
 		else if (pkAttacker->IsRaceFlag(RACE_FLAG_ATT_FIRE))
-			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_FIRE))		/ 10000;
+			iAtk -= (iAtk * 85 * pkVictim->GetPoint(POINT_RESIST_FIRE))		/ 10000;
 		else if (pkAttacker->IsRaceFlag(RACE_FLAG_ATT_ICE))
-			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_ICE))		/ 10000;
+			iAtk -= (iAtk * 85 * pkVictim->GetPoint(POINT_RESIST_ICE))		/ 10000;
 		else if (pkAttacker->IsRaceFlag(RACE_FLAG_ATT_WIND))
-			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_WIND))		/ 10000;
+			iAtk -= (iAtk * 85 * pkVictim->GetPoint(POINT_RESIST_WIND))		/ 10000;
 		else if (pkAttacker->IsRaceFlag(RACE_FLAG_ATT_EARTH))
-			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_EARTH))	/ 10000;
+			iAtk -= (iAtk * 85 * pkVictim->GetPoint(POINT_RESIST_EARTH))	/ 10000;
 #ifndef ATTBONUS_ELEXIR
 		else if (pkAttacker->IsRaceFlag(RACE_FLAG_ATT_DARK))
-			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_DARK))		/ 10000;
+			iAtk -= (iAtk * 85 * pkVictim->GetPoint(POINT_RESIST_DARK))		/ 10000;
 #endif
 	}
 
@@ -439,24 +439,24 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 	{
 		const long lMapIndex = pkVictim->GetMapIndex();
 		if (lMapIndex == 72 || lMapIndex == 73 || lMapIndex == 208)
-			iAtk -= (iAtk * 30 * pkVictim->GetPoint(POINT_RESIST_DARK)) / 10000;
+			iAtk -= (iAtk * 85 * pkVictim->GetPoint(POINT_RESIST_DARK)) / 10000;
 	}
 #endif
 
 	if (pkAttacker->IsPC() && pkVictim->IsNPC())
 	{
 		if (pkVictim->IsRaceFlag(RACE_FLAG_ATT_ELEC))
-			iAtk += (iAtk * 30 * pkAttacker->GetPoint(POINT_ENCHANT_ELECT))	/ 10000;
+			iAtk += (iAtk * 85 * pkAttacker->GetPoint(POINT_ENCHANT_ELECT))	/ 10000;
 		else if (pkVictim->IsRaceFlag(RACE_FLAG_ATT_FIRE))
-			iAtk += (iAtk * 30 * pkAttacker->GetPoint(POINT_ENCHANT_FIRE))	/ 10000;
+			iAtk += (iAtk * 85 * pkAttacker->GetPoint(POINT_ENCHANT_FIRE))	/ 10000;
 		else if (pkVictim->IsRaceFlag(RACE_FLAG_ATT_ICE))
-			iAtk += (iAtk * 30 * pkAttacker->GetPoint(POINT_ENCHANT_ICE))	/ 10000;
+			iAtk += (iAtk * 85 * pkAttacker->GetPoint(POINT_ENCHANT_ICE))	/ 10000;
 		else if (pkVictim->IsRaceFlag(RACE_FLAG_ATT_WIND))
-			iAtk += (iAtk * 30 * pkAttacker->GetPoint(POINT_ENCHANT_WIND))	/ 10000;
+			iAtk += (iAtk * 85 * pkAttacker->GetPoint(POINT_ENCHANT_WIND))	/ 10000;
 		else if (pkVictim->IsRaceFlag(RACE_FLAG_ATT_EARTH))
-			iAtk += (iAtk * 30 * pkAttacker->GetPoint(POINT_ENCHANT_EARTH))	/ 10000;
+			iAtk += (iAtk * 85 * pkAttacker->GetPoint(POINT_ENCHANT_EARTH))	/ 10000;
 		else if (pkVictim->IsRaceFlag(RACE_FLAG_ATT_DARK))
-			iAtk += (iAtk * 30 * pkAttacker->GetPoint(POINT_ENCHANT_DARK))	/ 10000;
+			iAtk += (iAtk * 85 * pkAttacker->GetPoint(POINT_ENCHANT_DARK))	/ 10000;
 	}
 
 	return iAtk;

@@ -16,6 +16,10 @@
 
 #include "CheckLatestFiles.h"
 
+#ifdef URIEL_ANTI_CHEAT
+#include "urielacsdk.h"
+#endif
+
 extern "C" {
 extern int _fltused;
 volatile int _AVOID_FLOATING_POINT_LIBRARY_BUG = _fltused;
@@ -735,7 +739,11 @@ bool Main(HINSTANCE hInstance, LPSTR lpCmdLine)
 	srandom(dwRandSeed);
 	srand(random());
 
+#ifdef URIEL_ANTI_CHEAT
+	//SetLogLevel(1);
+#else
 	SetLogLevel(1);
+#endif
 
 #ifdef LOCALE_SERVICE_VIETNAM_MILD
 	extern BOOL USE_VIETNAM_CONVERT_WEAPON_VNUM;
@@ -788,6 +796,11 @@ bool Main(HINSTANCE hInstance, LPSTR lpCmdLine)
 	const auto app = new CPythonApplication;
 
 	app->Initialize(hInstance);
+
+#ifdef URIEL_ANTI_CHEAT
+	if (!app->AntiCheat().Initialize(5543, 1111))
+		return 0;
+#endif
 
 	bool ret=false;
 	{

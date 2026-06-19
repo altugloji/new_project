@@ -13422,3 +13422,20 @@
 21310	Gaya Dükkaný
 21311	Gaya Çevirme Dükkaný
 21312	Karakterine 10 Gaya puaný eklendi.
+21510	Köyler
+21511	Kýrmýzý Bayrak (1.Köy)
+21512	Kýrmýzý Bayrak (2.Köy)
+21513	Sarý Bayrak (1.Köy)
+21514	Sarý Bayrak (2.Köy)
+21515	Mavi Bayrak (1.Köy)
+21516	Mavi Bayrak (2.Köy)
+21520	Orman Bölgeleri
+21521	Hayalet Orman
+21522	Kýzýl Orman
+21530	Örümcek Zindaný
+21531	1. Kat Baþý
+21532	1. Kat Sonu
+21540	Sürgün Maðarasý
+21550	Diðer Bölgeler
+21560	Kapat
+64186	Katacomb

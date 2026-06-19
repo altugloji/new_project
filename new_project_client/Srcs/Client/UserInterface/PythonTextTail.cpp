@@ -38,7 +38,7 @@ long gs_TextTail_LivingTime = 5000;
 
 long TextTail_GetLivingTime()
 {
-	assert(gs_TextTail_LivingTime>1000);
+	assert(gs_TextTail_LivingTime > 1000);
 	return gs_TextTail_LivingTime;
 }
 
@@ -48,7 +48,7 @@ void TextTail_SetLivingTime(long livingTime)
 }
 // END_OF_TEXTTAIL_LIVINGTIME_CONTROL
 
-CGraphicText * ms_pFont = nullptr;
+CGraphicText* ms_pFont = nullptr;
 
 void CPythonTextTail::GetInfo(std::string* pstInfo)
 {
@@ -64,7 +64,7 @@ void CPythonTextTail::GetInfo(std::string* pstInfo)
 
 void CPythonTextTail::UpdateAllTextTail()
 {
-	CInstanceBase * pInstance = CPythonCharacterManager::Instance().GetMainInstancePtr();
+	CInstanceBase* pInstance = CPythonCharacterManager::Instance().GetMainInstancePtr();
 	if (pInstance)
 	{
 		TPixelPosition pixelPos;
@@ -82,7 +82,7 @@ void CPythonTextTail::UpdateAllTextTail()
 			UpdateDistance(pixelPos, itorMap->second);
 		}
 
-		for (auto itorChat=m_ChatTailMap.begin(); itorChat!=m_ChatTailMap.end(); ++itorChat)
+		for (auto itorChat = m_ChatTailMap.begin(); itorChat != m_ChatTailMap.end(); ++itorChat)
 		{
 			UpdateDistance(pixelPos, itorChat->second);
 
@@ -104,45 +104,63 @@ void CPythonTextTail::UpdateShowingTextTail()
 		UpdateTextTail(*itor);
 	}
 
-	for (auto itorChat=m_ChatTailMap.begin(); itorChat!=m_ChatTailMap.end(); ++itorChat)
+	for (auto itorChat = m_ChatTailMap.begin(); itorChat != m_ChatTailMap.end(); ++itorChat)
 	{
+		// Chat tail'in projeksiyon konumu (chat mesajının nihai y'si aşağıdaki
+		// karakter döngüsünde isim/guild bloğunun üstüne göre belirlenir).
 		UpdateTextTail(itorChat->second);
 	}
 
 	for (itor = m_CharacterTextTailList.begin(); itor != m_CharacterTextTailList.end(); ++itor)
 	{
-		TTextTail * pTextTail = *itor;
+		TTextTail* pTextTail = *itor;
 		UpdateTextTail(pTextTail);
 
 		auto itor = m_ChatTailMap.find(pTextTail->dwVirtualID);
 		if (m_ChatTailMap.end() != itor)
 		{
-			const TTextTail * pChatTail = itor->second;
+			TTextTail* pChatTail = itor->second;
 			if (pChatTail->bNameFlag)
 			{
+#ifdef ENABLE_CHAT_TAIL_BACKGROUND
+				// Chat mesajını nick/guild'den AYIR: isim kendi doğal konumunda kalır (chat'i takip etmez),
+				// chat mesajı ise ismin ve varsa guild mark/isminin üstünde, ayrı biçimde durur.
+				int iNameW = 0, iNameH = 0;
+				pTextTail->pTextInstance->GetTextSize(&iNameW, &iNameH);
+				float fBlockTop = pTextTail->y - float(iNameH);						// ismin üst kenarı (alt hizalı)
+				if (pTextTail->pMarkInstance && pTextTail->pGuildNameTextInstance)
+				{
+					// guild mark isimden c_fyMarkPosition kadar yukarıda; ikon yüksekliğini de hesaba kat
+					const float fMarkTop = pTextTail->y - c_fyMarkPosition - float(pTextTail->pMarkInstance->GetHeight());
+					if (fMarkTop < fBlockTop)
+						fBlockTop = fMarkTop;
+				}
+				pChatTail->y = floorf(fBlockTop - 4.0f);							// bloğun üstünde 8px boşlukla, alt hizalı
+#else
 				pTextTail->y = pChatTail->y - 17.0f;
+#endif
 			}
 		}
 	}
 }
 
-void CPythonTextTail::UpdateTextTail(TTextTail * pTextTail) const
+void CPythonTextTail::UpdateTextTail(TTextTail* pTextTail) const
 {
 	if (!pTextTail->pOwner)
 		return;
 
 	/////
 
-	CPythonGraphic & rpyGraphic = CPythonGraphic::Instance();
+	CPythonGraphic& rpyGraphic = CPythonGraphic::Instance();
 	rpyGraphic.Identity();
 
-	const D3DXVECTOR3 & c_rv3Position = pTextTail->pOwner->GetPosition();
+	const D3DXVECTOR3& c_rv3Position = pTextTail->pOwner->GetPosition();
 	rpyGraphic.ProjectPosition(c_rv3Position.x,
-							   c_rv3Position.y,
-							   c_rv3Position.z + pTextTail->fHeight,
-							   &pTextTail->x,
-							   &pTextTail->y,
-							   &pTextTail->z);
+		c_rv3Position.y,
+		c_rv3Position.z + pTextTail->fHeight,
+		&pTextTail->x,
+		&pTextTail->y,
+		&pTextTail->z);
 
 	pTextTail->x = floorf(pTextTail->x);
 	pTextTail->y = floorf(pTextTail->y);
@@ -167,14 +185,14 @@ void CPythonTextTail::ArrangeTextTail()
 
 	for (itor = m_ItemTextTailList.begin(); itor != m_ItemTextTailList.end(); ++itor)
 	{
-		TTextTail * pInsertTextTail = *itor;
+		TTextTail* pInsertTextTail = *itor;
 
 		const int yTemp = 5;
 		int LimitCount = 0;
 
 		for (itorCompare = m_ItemTextTailList.begin(); itorCompare != m_ItemTextTailList.end();)
 		{
-			TTextTail * pCompareTextTail = *itorCompare;
+			TTextTail* pCompareTextTail = *itorCompare;
 
 			if (*itorCompare == *itor)
 			{
@@ -218,19 +236,19 @@ void CPythonTextTail::ArrangeTextTail()
 
 	for (itor = m_CharacterTextTailList.begin(); itor != m_CharacterTextTailList.end(); ++itor)
 	{
-		const TTextTail * pTextTail = *itor;
+		const TTextTail* pTextTail = *itor;
 
 		float fxAdd = 0.0f;
 
-		CGraphicMarkInstance * pMarkInstance = pTextTail->pMarkInstance;
-		CGraphicTextInstance * pGuildNameInstance = pTextTail->pGuildNameTextInstance;
+		CGraphicMarkInstance* pMarkInstance = pTextTail->pMarkInstance;
+		CGraphicTextInstance* pGuildNameInstance = pTextTail->pGuildNameTextInstance;
 		if (pMarkInstance && pGuildNameInstance)
 		{
 			int iWidth, iHeight;
-			const int iImageHalfSize = pMarkInstance->GetWidth()/2 + c_fxMarkPosition;
+			const int iImageHalfSize = pMarkInstance->GetWidth() / 2 + c_fxMarkPosition;
 			pGuildNameInstance->GetTextSize(&iWidth, &iHeight);
 
-			pMarkInstance->SetPosition(pTextTail->x - iWidth/2 - iImageHalfSize, pTextTail->y - c_fyMarkPosition);
+			pMarkInstance->SetPosition(pTextTail->x - iWidth / 2 - iImageHalfSize, pTextTail->y - c_fyMarkPosition);
 			pGuildNameInstance->SetPosition(pTextTail->x + iImageHalfSize, pTextTail->y - c_fyGuildNamePosition, pTextTail->z);
 			pGuildNameInstance->Update();
 		}
@@ -238,7 +256,7 @@ void CPythonTextTail::ArrangeTextTail()
 		int iNameWidth, iNameHeight;
 		pTextTail->pTextInstance->GetTextSize(&iNameWidth, &iNameHeight);
 
-		CGraphicTextInstance * pTitle = pTextTail->pTitleTextInstance;
+		CGraphicTextInstance* pTitle = pTextTail->pTitleTextInstance;
 		if (pTitle)
 		{
 			int iTitleWidth, iTitleHeight;
@@ -253,13 +271,13 @@ void CPythonTextTail::ArrangeTextTail()
 
 			pTitle->Update();
 
-			CGraphicTextInstance * pLevel = pTextTail->pLevelTextInstance;
+			CGraphicTextInstance* pLevel = pTextTail->pLevelTextInstance;
 			if (pLevel)
 			{
 				int iLevelWidth, iLevelHeight;
 				pLevel->GetTextSize(&iLevelWidth, &iLevelHeight);
 
-				if( GetDefaultCodePage() == CP_ARABIC )
+				if (GetDefaultCodePage() == CP_ARABIC)
 					pLevel->SetPosition(pTextTail->x - (iNameWidth / 2) - iLevelWidth - iTitleWidth - 8.0f, pTextTail->y, pTextTail->z);
 				else
 					pLevel->SetPosition(pTextTail->x - (iNameWidth / 2) - iTitleWidth, pTextTail->y, pTextTail->z);
@@ -288,7 +306,7 @@ void CPythonTextTail::ArrangeTextTail()
 		{
 			fxAdd = 4.0f;
 
-			CGraphicTextInstance * pLevel = pTextTail->pLevelTextInstance;
+			CGraphicTextInstance* pLevel = pTextTail->pLevelTextInstance;
 			if (pLevel)
 			{
 				int iLevelWidth, iLevelHeight;
@@ -325,9 +343,9 @@ void CPythonTextTail::ArrangeTextTail()
 		pTextTail->pTextInstance->Update();
 	}
 
-	for (auto itorChat=m_ChatTailMap.begin(); itorChat!=m_ChatTailMap.end();)
+	for (auto itorChat = m_ChatTailMap.begin(); itorChat != m_ChatTailMap.end();)
 	{
-		TTextTail * pTextTail = itorChat->second;
+		TTextTail* pTextTail = itorChat->second;
 
 		if (pTextTail->LivingTime < dwTime)
 		{
@@ -350,7 +368,7 @@ void CPythonTextTail::Render()
 
 	for (itor = m_CharacterTextTailList.begin(); itor != m_CharacterTextTailList.end(); ++itor)
 	{
-		const TTextTail * pTextTail = *itor;
+		const TTextTail* pTextTail = *itor;
 		pTextTail->pTextInstance->Render();
 		if (pTextTail->pMarkInstance && pTextTail->pGuildNameTextInstance)
 		{
@@ -379,7 +397,7 @@ void CPythonTextTail::Render()
 
 	for (itor = m_ItemTextTailList.begin(); itor != m_ItemTextTailList.end(); ++itor)
 	{
-		TTextTail * pTextTail = *itor;
+		TTextTail* pTextTail = *itor;
 
 		RenderTextTailBox(pTextTail);
 		pTextTail->pTextInstance->Render();
@@ -387,35 +405,67 @@ void CPythonTextTail::Render()
 			pTextTail->pOwnerTextInstance->Render();
 	}
 
-	for (auto itorChat = m_ChatTailMap.begin(); itorChat!=m_ChatTailMap.end(); ++itorChat)
+	for (auto itorChat = m_ChatTailMap.begin(); itorChat != m_ChatTailMap.end(); ++itorChat)
 	{
-		TTextTail * pTextTail = itorChat->second;
+		TTextTail* pTextTail = itorChat->second;
 		if (pTextTail->pOwner->isShow())
+		{
+#ifdef ENABLE_CHAT_TAIL_BACKGROUND
+			// Chat mesajının arkasına hafif siyah şeffaf zemin (metinden önce çiz ki metin üstte kalsın)
+			if (pTextTail->bNameFlag)
+				RenderChatTailBox(pTextTail);
+#endif
 			RenderTextTailName(pTextTail);
+		}
 	}
 }
 
-void CPythonTextTail::RenderTextTailBox(TTextTail * pTextTail) const
+void CPythonTextTail::RenderTextTailBox(TTextTail* pTextTail) const
 {
 	CPythonGraphic::Instance().SetDiffuseColor(0.0f, 0.0f, 0.0f, 1.0f);
 	CPythonGraphic::Instance().RenderBox2d(pTextTail->x + pTextTail->xStart,
-										   pTextTail->y + pTextTail->yStart,
-										   pTextTail->x + pTextTail->xEnd,
-										   pTextTail->y + pTextTail->yEnd,
-										   pTextTail->z);
+		pTextTail->y + pTextTail->yStart,
+		pTextTail->x + pTextTail->xEnd,
+		pTextTail->y + pTextTail->yEnd,
+		pTextTail->z);
 
 	CPythonGraphic::Instance().SetDiffuseColor(0.0f, 0.0f, 0.0f, 0.3f);
 	CPythonGraphic::Instance().RenderBar2d(pTextTail->x + pTextTail->xStart,
-										   pTextTail->y + pTextTail->yStart,
-										   pTextTail->x + pTextTail->xEnd,
-										   pTextTail->y + pTextTail->yEnd,
-										   pTextTail->z);
+		pTextTail->y + pTextTail->yStart,
+		pTextTail->x + pTextTail->xEnd,
+		pTextTail->y + pTextTail->yEnd,
+		pTextTail->z);
 }
 
-void CPythonTextTail::RenderTextTailName(TTextTail * pTextTail) const
+void CPythonTextTail::RenderTextTailName(TTextTail* pTextTail) const
 {
 	pTextTail->pTextInstance->Render();
 }
+
+#ifdef ENABLE_CHAT_TAIL_BACKGROUND
+void CPythonTextTail::RenderChatTailBox(TTextTail* pTextTail) const
+{
+	int xSize = 0, ySize = 0;
+	pTextTail->pTextInstance->GetTextSize(&xSize, &ySize);
+
+	if (xSize <= 0 || ySize <= 0)
+		return;
+
+	// Chat metni yatayda ortalı, dikeyde alttan hizalı (anchor metnin altında) -> metin [y - ySize, y] aralığında çizilir
+	// Zemini her kenardan 4px daha büyüt
+	constexpr float fPadX = 4.0f;
+	constexpr float fPadY = 3.0f;
+
+	const float fLeft = pTextTail->x - float(xSize) / 2.0f - fPadX;
+	const float fRight = pTextTail->x + float(xSize) / 2.0f + fPadX;
+	const float fTop = pTextTail->y - float(ySize) - fPadY;
+	const float fBottom = pTextTail->y + fPadY;
+
+	// Hafif siyah şeffaf zemin (alfa 0.4)
+	CPythonGraphic::Instance().SetDiffuseColor(0.0f, 0.0f, 0.0f, 0.4f);
+	CPythonGraphic::Instance().RenderBar2d(fLeft, fTop, fRight, fBottom, pTextTail->z);
+}
+#endif
 
 void CPythonTextTail::HideAllTextTail()
 {
@@ -423,9 +473,9 @@ void CPythonTextTail::HideAllTextTail()
 	m_ItemTextTailList.clear();
 }
 
-void CPythonTextTail::UpdateDistance(const TPixelPosition & c_rCenterPosition, TTextTail * pTextTail) const
+void CPythonTextTail::UpdateDistance(const TPixelPosition& c_rCenterPosition, TTextTail* pTextTail) const
 {
-	const D3DXVECTOR3 & c_rv3Position = pTextTail->pOwner->GetPosition();
+	const D3DXVECTOR3& c_rv3Position = pTextTail->pOwner->GetPosition();
 	const D3DXVECTOR2 v2Distance(c_rv3Position.x - c_rCenterPosition.x, -c_rv3Position.y - c_rCenterPosition.y);
 	pTextTail->fDistanceFromPlayer = D3DXVec2Length(&v2Distance);
 }
@@ -435,13 +485,13 @@ void CPythonTextTail::ShowAllTextTail()
 	TTextTailMap::iterator itor;
 	for (itor = m_CharacterTextTailMap.begin(); itor != m_CharacterTextTailMap.end(); ++itor)
 	{
-		const TTextTail * pTextTail = itor->second;
+		const TTextTail* pTextTail = itor->second;
 		if (pTextTail->fDistanceFromPlayer < 3500.0f)
 			ShowCharacterTextTail(itor->first);
 	}
 	for (itor = m_ItemTextTailMap.begin(); itor != m_ItemTextTailMap.end(); ++itor)
 	{
-		const TTextTail * pTextTail = itor->second;
+		const TTextTail* pTextTail = itor->second;
 		if (pTextTail->fDistanceFromPlayer < 3500.0f)
 			ShowItemTextTail(itor->first);
 	}
@@ -454,7 +504,7 @@ void CPythonTextTail::ShowCharacterTextTail(DWORD VirtualID)
 	if (m_CharacterTextTailMap.end() == itor)
 		return;
 
-	TTextTail * pTextTail = itor->second;
+	TTextTail* pTextTail = itor->second;
 
 	if (m_CharacterTextTailList.end() != std::find(m_CharacterTextTailList.begin(), m_CharacterTextTailList.end(), pTextTail))
 	{
@@ -464,7 +514,7 @@ void CPythonTextTail::ShowCharacterTextTail(DWORD VirtualID)
 	if (!pTextTail->pOwner->isShow())
 		return;
 
-	CInstanceBase * pInstance = CPythonCharacterManager::Instance().GetInstancePtr(pTextTail->dwVirtualID);
+	CInstanceBase* pInstance = CPythonCharacterManager::Instance().GetInstancePtr(pTextTail->dwVirtualID);
 	if (!pInstance)
 		return;
 
@@ -482,7 +532,7 @@ void CPythonTextTail::ShowItemTextTail(DWORD VirtualID)
 	if (m_ItemTextTailMap.end() == itor)
 		return;
 
-	TTextTail * pTextTail = itor->second;
+	TTextTail* pTextTail = itor->second;
 
 	if (m_ItemTextTailList.end() != std::find(m_ItemTextTailList.begin(), m_ItemTextTailList.end(), pTextTail))
 	{
@@ -492,7 +542,7 @@ void CPythonTextTail::ShowItemTextTail(DWORD VirtualID)
 	m_ItemTextTailList.push_back(pTextTail);
 }
 
-bool CPythonTextTail::isIn(CPythonTextTail::TTextTail * pSource, CPythonTextTail::TTextTail * pTarget) const
+bool CPythonTextTail::isIn(CPythonTextTail::TTextTail* pSource, CPythonTextTail::TTextTail* pTarget) const
 {
 	const float x1Source = pSource->x + pSource->xStart;
 	const float y1Source = pSource->y + pSource->yStart;
@@ -504,7 +554,7 @@ bool CPythonTextTail::isIn(CPythonTextTail::TTextTail * pSource, CPythonTextTail
 	const float y2Target = pTarget->y + pTarget->yEnd;
 
 	if (x1Source <= x2Target && x2Source >= x1Target &&
-	    y1Source <= y2Target && y2Source >= y1Target)
+		y1Source <= y2Target && y2Source >= y1Target)
 	{
 		return true;
 	}
@@ -512,27 +562,27 @@ bool CPythonTextTail::isIn(CPythonTextTail::TTextTail * pSource, CPythonTextTail
 	return false;
 }
 
-void CPythonTextTail::RegisterCharacterTextTail(DWORD dwGuildID, DWORD dwVirtualID, const D3DXCOLOR & c_rColor, float fAddHeight)
+void CPythonTextTail::RegisterCharacterTextTail(DWORD dwGuildID, DWORD dwVirtualID, const D3DXCOLOR& c_rColor, float fAddHeight)
 {
-	CInstanceBase * pCharacterInstance = CPythonCharacterManager::Instance().GetInstancePtr(dwVirtualID);
+	CInstanceBase* pCharacterInstance = CPythonCharacterManager::Instance().GetInstancePtr(dwVirtualID);
 
 	if (!pCharacterInstance)
 		return;
 
-	TTextTail * pTextTail = RegisterTextTail(dwVirtualID,
-											 pCharacterInstance->GetNameString(),
-											 pCharacterInstance->GetGraphicThingInstancePtr(),
-											 pCharacterInstance->GetGraphicThingInstanceRef().GetHeight() + fAddHeight,
-											 c_rColor);
+	TTextTail* pTextTail = RegisterTextTail(dwVirtualID,
+		pCharacterInstance->GetNameString(),
+		pCharacterInstance->GetGraphicThingInstancePtr(),
+		pCharacterInstance->GetGraphicThingInstanceRef().GetHeight() + fAddHeight,
+		c_rColor);
 
-	CGraphicTextInstance * pTextInstance = pTextTail->pTextInstance;
+	CGraphicTextInstance* pTextInstance = pTextTail->pTextInstance;
 	pTextInstance->SetOutline(true);
 	pTextInstance->SetVerticalAlign(CGraphicTextInstance::VERTICAL_ALIGN_BOTTOM);
 
-	pTextTail->pMarkInstance= nullptr;
-	pTextTail->pGuildNameTextInstance= nullptr;
-	pTextTail->pTitleTextInstance= nullptr;
-	pTextTail->pLevelTextInstance= nullptr;
+	pTextTail->pMarkInstance = nullptr;
+	pTextTail->pGuildNameTextInstance = nullptr;
+	pTextTail->pTitleTextInstance = nullptr;
+	pTextTail->pLevelTextInstance = nullptr;
 #if defined(__BL_MULTI_LANGUAGE_PREMIUM__)
 	pTextTail->pCountryFlagImageInstance = nullptr;
 #endif
@@ -559,7 +609,7 @@ void CPythonTextTail::RegisterCharacterTextTail(DWORD dwGuildID, DWORD dwVirtual
 		if (!CPythonGuild::Instance().GetGuildName(dwGuildID, &strGuildName))
 			strGuildName = "Noname";
 
-		CGraphicTextInstance *& prGuildNameInstance = pTextTail->pGuildNameTextInstance;
+		CGraphicTextInstance*& prGuildNameInstance = pTextTail->pGuildNameTextInstance;
 		prGuildNameInstance = CGraphicTextInstance::New();
 		prGuildNameInstance->SetTextPointer(ms_pFont);
 		prGuildNameInstance->SetOutline(true);
@@ -573,23 +623,23 @@ void CPythonTextTail::RegisterCharacterTextTail(DWORD dwGuildID, DWORD dwVirtual
 	m_CharacterTextTailMap.insert(TTextTailMap::value_type(dwVirtualID, pTextTail));
 }
 
-void CPythonTextTail::RegisterItemTextTail(DWORD VirtualID, const char * c_szText, CGraphicObjectInstance * pOwner)
+void CPythonTextTail::RegisterItemTextTail(DWORD VirtualID, const char* c_szText, CGraphicObjectInstance* pOwner)
 {
 #ifdef __DEBUG
 	char szName[256];
 	spritnf(szName, "%s[%d]", c_szText, VirtualID);
 
-	TTextTail * pTextTail = RegisterTextTail(VirtualID, c_szText, pOwner, c_TextTail_Name_Position, c_TextTail_Item_Color);
+	TTextTail* pTextTail = RegisterTextTail(VirtualID, c_szText, pOwner, c_TextTail_Name_Position, c_TextTail_Item_Color);
 	m_ItemTextTailMap.insert(TTextTailMap::value_type(VirtualID, pTextTail));
 #else
-	TTextTail * pTextTail = RegisterTextTail(VirtualID, c_szText, pOwner, c_TextTail_Name_Position, c_TextTail_Item_Color);
+	TTextTail* pTextTail = RegisterTextTail(VirtualID, c_szText, pOwner, c_TextTail_Name_Position, c_TextTail_Item_Color);
 	m_ItemTextTailMap.insert(TTextTailMap::value_type(VirtualID, pTextTail));
 #endif
 }
 
-void CPythonTextTail::RegisterChatTail(DWORD VirtualID, const char * c_szChat)
+void CPythonTextTail::RegisterChatTail(DWORD VirtualID, const char* c_szChat)
 {
-	CInstanceBase * pCharacterInstance = CPythonCharacterManager::Instance().GetInstancePtr(VirtualID);
+	CInstanceBase* pCharacterInstance = CPythonCharacterManager::Instance().GetInstancePtr(VirtualID);
 
 	if (!pCharacterInstance)
 		return;
@@ -598,7 +648,7 @@ void CPythonTextTail::RegisterChatTail(DWORD VirtualID, const char * c_szChat)
 
 	if (m_ChatTailMap.end() != itor)
 	{
-		TTextTail * pTextTail = itor->second;
+		TTextTail* pTextTail = itor->second;
 
 		pTextTail->pTextInstance->SetValue(c_szChat);
 		pTextTail->pTextInstance->Update();
@@ -619,11 +669,11 @@ void CPythonTextTail::RegisterChatTail(DWORD VirtualID, const char * c_szChat)
 	baseHeight += pCharacterInstance->GetBaseHeight();
 #endif
 
-	TTextTail * pTextTail = RegisterTextTail(VirtualID,
-											 c_szChat,
-											 pCharacterInstance->GetGraphicThingInstancePtr(),
-											 baseHeight,
-											 c_TextTail_Chat_Color);
+	TTextTail* pTextTail = RegisterTextTail(VirtualID,
+		c_szChat,
+		pCharacterInstance->GetGraphicThingInstancePtr(),
+		baseHeight,
+		c_TextTail_Chat_Color);
 
 	// TEXTTAIL_LIVINGTIME_CONTROL
 	pTextTail->LivingTime = CTimer::Instance().GetCurrentMillisecond() + TextTail_GetLivingTime();
@@ -635,9 +685,9 @@ void CPythonTextTail::RegisterChatTail(DWORD VirtualID, const char * c_szChat)
 	m_ChatTailMap.emplace(VirtualID, pTextTail);
 }
 
-void CPythonTextTail::RegisterInfoTail(DWORD VirtualID, const char * c_szChat)
+void CPythonTextTail::RegisterInfoTail(DWORD VirtualID, const char* c_szChat)
 {
-	CInstanceBase * pCharacterInstance = CPythonCharacterManager::Instance().GetInstancePtr(VirtualID);
+	CInstanceBase* pCharacterInstance = CPythonCharacterManager::Instance().GetInstancePtr(VirtualID);
 
 	if (!pCharacterInstance)
 		return;
@@ -646,7 +696,7 @@ void CPythonTextTail::RegisterInfoTail(DWORD VirtualID, const char * c_szChat)
 
 	if (m_ChatTailMap.end() != itor)
 	{
-		TTextTail * pTextTail = itor->second;
+		TTextTail* pTextTail = itor->second;
 
 		pTextTail->pTextInstance->SetValue(c_szChat);
 		pTextTail->pTextInstance->Update();
@@ -662,11 +712,11 @@ void CPythonTextTail::RegisterInfoTail(DWORD VirtualID, const char * c_szChat)
 		return;
 	}
 
-	TTextTail * pTextTail = RegisterTextTail(VirtualID,
-											 c_szChat,
-											 pCharacterInstance->GetGraphicThingInstancePtr(),
-											 pCharacterInstance->GetGraphicThingInstanceRef().GetHeight() + 10.0f,
-											 c_TextTail_Info_Color);
+	TTextTail* pTextTail = RegisterTextTail(VirtualID,
+		c_szChat,
+		pCharacterInstance->GetGraphicThingInstancePtr(),
+		pCharacterInstance->GetGraphicThingInstanceRef().GetHeight() + 10.0f,
+		c_TextTail_Info_Color);
 
 	// TEXTTAIL_LIVINGTIME_CONTROL
 	pTextTail->LivingTime = CTimer::Instance().GetCurrentMillisecond() + TextTail_GetLivingTime();
@@ -687,10 +737,10 @@ bool CPythonTextTail::GetTextTailPosition(DWORD dwVID, float* px, float* py, flo
 		return false;
 	}
 
-	const TTextTail * pTextTail = itorCharacter->second;
-	*px=pTextTail->x;
-	*py=pTextTail->y;
-	*pz=pTextTail->z;
+	const TTextTail* pTextTail = itorCharacter->second;
+	*px = pTextTail->x;
+	*py = pTextTail->y;
+	*pz = pTextTail->z;
 
 	return true;
 }
@@ -705,25 +755,25 @@ bool CPythonTextTail::IsChatTextTail(DWORD dwVID)
 	return true;
 }
 
-void CPythonTextTail::SetCharacterTextTailColor(DWORD VirtualID, const D3DXCOLOR & c_rColor)
+void CPythonTextTail::SetCharacterTextTailColor(DWORD VirtualID, const D3DXCOLOR& c_rColor)
 {
 	const auto itorCharacter = m_CharacterTextTailMap.find(VirtualID);
 
 	if (m_CharacterTextTailMap.end() == itorCharacter)
 		return;
 
-	TTextTail * pTextTail = itorCharacter->second;
+	TTextTail* pTextTail = itorCharacter->second;
 	pTextTail->pTextInstance->SetColor(c_rColor);
 	pTextTail->Color = c_rColor;
 }
 
-void CPythonTextTail::SetItemTextTailOwner(DWORD dwVID, const char * c_szName)
+void CPythonTextTail::SetItemTextTailOwner(DWORD dwVID, const char* c_szName)
 {
 	const auto itor = m_ItemTextTailMap.find(dwVID);
 	if (m_ItemTextTailMap.end() == itor)
 		return;
 
-	TTextTail * pTextTail = itor->second;
+	TTextTail* pTextTail = itor->second;
 
 	if (strlen(c_szName) > 0)
 	{
@@ -733,7 +783,7 @@ void CPythonTextTail::SetItemTextTailOwner(DWORD dwVID, const char * c_szName)
 		}
 
 		std::string strName = c_szName;
-		static const string & strOwnership = ApplicationStringTable_GetString(IDS_POSSESSIVE_MORPHENE) == "" ? "'s" : ApplicationStringTable_GetString(IDS_POSSESSIVE_MORPHENE);
+		static const string& strOwnership = ApplicationStringTable_GetString(IDS_POSSESSIVE_MORPHENE) == "" ? "'s" : ApplicationStringTable_GetString(IDS_POSSESSIVE_MORPHENE);
 		strName += strOwnership;
 
 		pTextTail->pOwnerTextInstance->SetTextPointer(ms_pFont);
@@ -752,10 +802,10 @@ void CPythonTextTail::SetItemTextTailOwner(DWORD dwVID, const char * c_szName)
 
 		int xOwnerSize, yOwnerSize;
 		pTextTail->pOwnerTextInstance->GetTextSize(&xOwnerSize, &yOwnerSize);
-		pTextTail->yStart	= -2.0f;
-		pTextTail->yEnd		+= float(yOwnerSize + 4);
-		pTextTail->xStart	= fMIN(pTextTail->xStart, float(-xOwnerSize / 2 - 1));
-		pTextTail->xEnd		= fMAX(pTextTail->xEnd, float(xOwnerSize / 2 + 1));
+		pTextTail->yStart = -2.0f;
+		pTextTail->yEnd += float(yOwnerSize + 4);
+		pTextTail->xStart = fMIN(pTextTail->xStart, float(-xOwnerSize / 2 - 1));
+		pTextTail->xEnd = fMAX(pTextTail->xEnd, float(xOwnerSize / 2 + 1));
 
 #ifdef ENABLE_DROP_ITEM_OWNER_COLOR
 		// Sahibi varsa ve ben değilsem item ismi kırmızı, bana aitse normal (beyaz)
@@ -780,10 +830,10 @@ void CPythonTextTail::SetItemTextTailOwner(DWORD dwVID, const char * c_szName)
 
 		int xSize, ySize;
 		pTextTail->pTextInstance->GetTextSize(&xSize, &ySize);
-		pTextTail->xStart	= (float) (-xSize / 2 - 2);
-		pTextTail->yStart	= -2.0f;
-		pTextTail->xEnd		= (float) (xSize / 2 + 2);
-		pTextTail->yEnd		= (float) ySize;
+		pTextTail->xStart = (float)(-xSize / 2 - 2);
+		pTextTail->yStart = -2.0f;
+		pTextTail->xEnd = (float)(xSize / 2 + 2);
+		pTextTail->yEnd = (float)ySize;
 	}
 }
 
@@ -823,9 +873,9 @@ void CPythonTextTail::DeleteItemTextTail(DWORD VirtualID)
 	m_ItemTextTailMap.erase(itor);
 }
 
-CPythonTextTail::TTextTail * CPythonTextTail::RegisterTextTail(DWORD dwVirtualID, const char * c_szText, CGraphicObjectInstance * pOwner, float fHeight, const D3DXCOLOR & c_rColor)
+CPythonTextTail::TTextTail* CPythonTextTail::RegisterTextTail(DWORD dwVirtualID, const char* c_szText, CGraphicObjectInstance* pOwner, float fHeight, const D3DXCOLOR& c_rColor)
 {
-	TTextTail * pTextTail = m_TextTailPool.Alloc();
+	TTextTail* pTextTail = m_TextTailPool.Alloc();
 
 	pTextTail->dwVirtualID = dwVirtualID;
 	pTextTail->pOwner = pOwner;
@@ -841,12 +891,12 @@ CPythonTextTail::TTextTail * CPythonTextTail::RegisterTextTail(DWORD dwVirtualID
 
 	int xSize, ySize;
 	pTextTail->pTextInstance->GetTextSize(&xSize, &ySize);
-	pTextTail->xStart				= (float) (-xSize / 2 - 2);
-	pTextTail->yStart				= -2.0f;
-	pTextTail->xEnd					= (float) (xSize / 2 + 2);
-	pTextTail->yEnd					= (float) ySize;
-	pTextTail->Color				= c_rColor;
-	pTextTail->fDistanceFromPlayer	= 0.0f;
+	pTextTail->xStart = (float)(-xSize / 2 - 2);
+	pTextTail->yStart = -2.0f;
+	pTextTail->xEnd = (float)(xSize / 2 + 2);
+	pTextTail->yEnd = (float)ySize;
+	pTextTail->Color = c_rColor;
+	pTextTail->fDistanceFromPlayer = 0.0f;
 	pTextTail->x = -100.0f;
 	pTextTail->y = -100.0f;
 	pTextTail->z = 0.0f;
@@ -860,7 +910,7 @@ CPythonTextTail::TTextTail * CPythonTextTail::RegisterTextTail(DWORD dwVirtualID
 	return pTextTail;
 }
 
-void CPythonTextTail::DeleteTextTail(TTextTail * pTextTail)
+void CPythonTextTail::DeleteTextTail(TTextTail* pTextTail)
 {
 	if (pTextTail->pTextInstance)
 	{
@@ -907,7 +957,7 @@ int CPythonTextTail::Pick(int ixMouse, int iyMouse)
 {
 	for (auto itor = m_ItemTextTailMap.begin(); itor != m_ItemTextTailMap.end(); ++itor)
 	{
-		const TTextTail * pTextTail = itor->second;
+		const TTextTail* pTextTail = itor->second;
 
 		if (ixMouse >= pTextTail->x + pTextTail->xStart && ixMouse <= pTextTail->x + pTextTail->xEnd &&
 			iyMouse >= pTextTail->y + pTextTail->yStart && iyMouse <= pTextTail->y + pTextTail->yEnd)
@@ -927,11 +977,11 @@ void CPythonTextTail::SelectItemName(DWORD dwVirtualID)
 	if (m_ItemTextTailMap.end() == itor)
 		return;
 
-	const TTextTail * pTextTail = itor->second;
+	const TTextTail* pTextTail = itor->second;
 	pTextTail->pTextInstance->SetColor(0.1f, 0.9f, 0.1f);
 }
 
-void CPythonTextTail::AttachTitle(DWORD dwVID, const char * c_szName, const D3DXCOLOR & c_rColor)
+void CPythonTextTail::AttachTitle(DWORD dwVID, const char* c_szName, const D3DXCOLOR& c_rColor)
 {
 	if (!bPKTitleEnable)
 		return;
@@ -940,9 +990,9 @@ void CPythonTextTail::AttachTitle(DWORD dwVID, const char * c_szName, const D3DX
 	if (m_CharacterTextTailMap.end() == itor)
 		return;
 
-	TTextTail * pTextTail = itor->second;
+	TTextTail* pTextTail = itor->second;
 
-	CGraphicTextInstance *& prTitle = pTextTail->pTitleTextInstance;
+	CGraphicTextInstance*& prTitle = pTextTail->pTitleTextInstance;
 	if (!prTitle)
 	{
 		prTitle = CGraphicTextInstance::New();
@@ -966,7 +1016,7 @@ void CPythonTextTail::DetachTitle(DWORD dwVID)
 	if (m_CharacterTextTailMap.end() == itor)
 		return;
 
-	TTextTail * pTextTail = itor->second;
+	TTextTail* pTextTail = itor->second;
 
 	if (pTextTail->pTitleTextInstance)
 	{
@@ -980,7 +1030,7 @@ void CPythonTextTail::EnablePKTitle(BOOL bFlag) const
 	bPKTitleEnable = bFlag;
 }
 
-void CPythonTextTail::AttachLevel(DWORD dwVID, const char * c_szText, const D3DXCOLOR & c_rColor)
+void CPythonTextTail::AttachLevel(DWORD dwVID, const char* c_szText, const D3DXCOLOR& c_rColor)
 {
 	if (!bPKTitleEnable)
 		return;
@@ -989,9 +1039,9 @@ void CPythonTextTail::AttachLevel(DWORD dwVID, const char * c_szText, const D3DX
 	if (m_CharacterTextTailMap.end() == itor)
 		return;
 
-	TTextTail * pTextTail = itor->second;
+	TTextTail* pTextTail = itor->second;
 
-	CGraphicTextInstance *& prLevel = pTextTail->pLevelTextInstance;
+	CGraphicTextInstance*& prLevel = pTextTail->pLevelTextInstance;
 	if (!prLevel)
 	{
 		prLevel = CGraphicTextInstance::New();
@@ -1016,7 +1066,7 @@ void CPythonTextTail::DetachLevel(DWORD dwVID)
 	if (m_CharacterTextTailMap.end() == itor)
 		return;
 
-	TTextTail * pTextTail = itor->second;
+	TTextTail* pTextTail = itor->second;
 
 	if (pTextTail->pLevelTextInstance)
 	{

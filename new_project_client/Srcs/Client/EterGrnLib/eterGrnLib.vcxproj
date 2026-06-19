@@ -18,7 +18,7 @@
     <ProjectName>eterGrnLib</ProjectName>
     <ProjectGuid>{E1FF7630-628F-4AD0-BF66-F14D86A04035}</ProjectGuid>
     <RootNamespace>eterGrnLib</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

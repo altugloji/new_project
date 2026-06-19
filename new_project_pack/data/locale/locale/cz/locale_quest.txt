@@ -13418,3 +13418,20 @@
 21310	Gaya obchod
 21311	Obchod pro pøevod Gaya
 21312	Tvé postavì bylo pøidáno 10 Gaya bodù.
+21510	Vesnice
+21511	Èervená øíše (1. vesnice)
+21512	Èervená øíše (2. vesnice)
+21513	lutá øíše (1. vesnice)
+21514	lutá øíše (2. vesnice)
+21515	Modrá øíše (1. vesnice)
+21516	Modrá øíše (2. vesnice)
+21520	Lesní oblasti
+21521	Les duchù
+21522	Èervenı les
+21530	Pavouèí dungeon
+21531	Zaèátek 1. patra
+21532	Konec 1. patra
+21540	Jeskynì vyhnanství
+21550	Ostatní oblasti
+21560	Zavøít
+64186	Katakomby

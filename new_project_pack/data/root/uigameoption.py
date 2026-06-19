@@ -168,7 +168,7 @@ class OptionDialog(ui.ScriptWindow):
 		if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 			self.showFlagButtonList[0].SAFE_SetEvent(self.__OnClickShowFlagOnButton)
 			self.showFlagButtonList[1].SAFE_SetEvent(self.__OnClickShowFlagOffButton)
-			systemSetting.SetShowEmpireFlag(False)
+			systemSetting.SetShowEmpireFlag(True)
 			self.RefreshShowFlags()
 
 		self.__HideBlockPartyRequestButton()

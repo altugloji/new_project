@@ -10494,7 +10494,7 @@ VNUM	LOCALE_NAME
 76013	Versterk Voorwerp (b)
 76014	Betover Voorwerp (b)
 76015	Gezegend Bol
-76016	Zegening Geschrift
+76016	Eenvoudige zegeningsrol
 76017	Drank van de Aanval +15
 76018	Drank van de Aanval +20
 76019	Vrijbiljet

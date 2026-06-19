@@ -13418,3 +13418,20 @@
 21310	Magazin Gaya
 21311	Magazin Conversie Gaya
 21312	Au fost adãugate 10 puncte Gaya caracterului tãu.
+21510	Sate
+21511	Regatul Roºu (Satul 1)
+21512	Regatul Roºu (Satul 2)
+21513	Regatul Galben (Satul 1)
+21514	Regatul Galben (Satul 2)
+21515	Regatul Albastru (Satul 1)
+21516	Regatul Albastru (Satul 2)
+21520	Zone de pãdure
+21521	Pãdurea Fantomelor
+21522	Pãdurea Roºie
+21530	Temniþa Pãianjenilor
+21531	Început etajul 1
+21532	Sfârºit etajul 1
+21540	Peºtera Exilului
+21550	Alte zone
+21560	Închide
+64186	Catacombã

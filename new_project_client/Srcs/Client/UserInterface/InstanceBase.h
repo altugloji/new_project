@@ -10,6 +10,14 @@
 
 #include "AffectFlagContainer.h"
 
+#ifdef URIEL_ANTI_CHEAT
+#define M_GTI (*m_GraphicThingInstance.get())
+#define M_GTI_PTR (m_GraphicThingInstance.get())
+#else
+#define M_GTI m_GraphicThingInstance
+#define M_GTI_PTR (&m_GraphicThingInstance)
+#endif
+
 class CInstanceBase
 {
 	public:
@@ -576,7 +584,7 @@ class CInstanceBase
 #ifdef ENABLE_TEXT_LEVEL_REFRESH
 		void					SetLevel(DWORD dwLevel);
 #endif
-		int						GetInstanceType() const;
+		int						GetInstanceType();
 		DWORD					GetPart(CRaceData::EParts part) const;
 		DWORD					GetShape() const;
 		DWORD					GetRace() const;
@@ -1020,11 +1028,20 @@ class CInstanceBase
 		void __StoneSmoke_Create(DWORD eSmoke);
 
 	protected:
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<BYTE>					m_eType;
+		safe_variable_weak<BYTE>					m_eRaceType;
+#else
 		BYTE					m_eType;
 		BYTE					m_eRaceType;
+#endif
 		DWORD					m_eShape;
 		DWORD					m_dwRace;
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<DWORD>					m_dwVirtualNumber;
+#else
 		DWORD					m_dwVirtualNumber;
+#endif
 		short					m_sAlignment;
 		BYTE					m_byPKMode;
 		bool					m_isKiller;
@@ -1071,7 +1088,11 @@ class CInstanceBase
 		BOOL m_bEnableTCPState;
 
 		// Graphic Instance
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<CActorInstance*> m_GraphicThingInstance;
+#else
 		CActorInstance m_GraphicThingInstance;
+#endif
 
 	protected:
 		struct SCommand

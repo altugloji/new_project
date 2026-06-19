@@ -2,6 +2,9 @@
 
 #include <algorithm>
 #include "../eterBase/Debug.h"
+#ifdef URIEL_ANTI_CHEAT
+#include "../UserInterface/urielacsdk.h"
+#endif
 
 //#define DYNAMIC_POOL_STRICT
 
@@ -100,6 +103,95 @@ class CDynamicPool
 		UINT m_uInitCapacity;
 		UINT m_uUsedCapacity;
 };
+
+#ifdef URIEL_ANTI_CHEAT
+template<typename T>
+class CDynamicPoolUriel
+{
+public:
+	CDynamicPoolUriel()
+	{
+		//Tracen(typeid(T).name());
+		m_uInitCapacity = 0;
+		m_uUsedCapacity = 0;
+	}
+
+	virtual ~CDynamicPoolUriel()
+	{
+		assert(m_kVct_pkData.empty());
+	}
+
+	void Clear()
+	{
+		Destroy();
+	}
+
+	void Destroy()
+	{
+		std::for_each(m_kVct_pkData.begin(), m_kVct_pkData.end(), Delete);
+		m_kVct_pkData.clear();
+		m_kVct_pkFree.clear();
+	}
+
+	void Create(UINT uCapacity)
+	{
+		m_uInitCapacity = uCapacity;
+		m_kVct_pkData.reserve(uCapacity);
+		m_kVct_pkFree.reserve(uCapacity);
+	}
+
+	T* Alloc()
+	{
+		if (m_kVct_pkFree.empty())
+		{
+			T* p = new T;
+			safe_variable_weak<T*> pkNewData(p);
+			m_kVct_pkData.push_back(pkNewData);
+			++m_uUsedCapacity;
+			return p;
+		}
+
+		safe_variable_weak<T*>& pkFreeData = m_kVct_pkFree.back();
+		m_kVct_pkFree.pop_back();
+
+		return pkFreeData;
+	}
+
+	void Free(T* pkData)
+	{
+		for (auto& data : m_kVct_pkData)
+		{
+			if (pkData == data)
+			{
+				m_kVct_pkFree.push_back(data);
+				break;
+			}
+		}
+	}
+
+	void FreeAll()
+	{
+		m_kVct_pkFree = m_kVct_pkData;
+	}
+
+	DWORD GetCapacity()
+	{
+		return m_kVct_pkData.size();
+	}
+
+protected:
+	static void Delete(safe_variable_weak<T*>& pkData)
+	{
+		delete (T*)pkData;
+	}
+protected:
+	std::vector<safe_variable_weak<T*>> m_kVct_pkData;
+	std::vector<safe_variable_weak<T*>> m_kVct_pkFree;
+
+	UINT m_uInitCapacity;
+	UINT m_uUsedCapacity;
+};
+#endif
 
 template<typename T>
 class CDynamicPoolEx

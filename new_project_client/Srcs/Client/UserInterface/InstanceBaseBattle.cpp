@@ -40,17 +40,17 @@ float NEW_GetSignedDegreeFromDirPixelPosition(const TPixelPosition& kPPosDir)
 
 bool CInstanceBase::IsFlyTargetObject()
 {
-	return m_GraphicThingInstance.IsFlyTargetObject();
+	return M_GTI.IsFlyTargetObject();
 }
 
 float CInstanceBase::GetFlyTargetDistance()
 {
-	return m_GraphicThingInstance.GetFlyTargetDistance();
+	return M_GTI.GetFlyTargetDistance();
 }
 
 void CInstanceBase::ClearFlyTargetInstance()
 {
-	m_GraphicThingInstance.ClearFlyTarget();
+	M_GTI.ClearFlyTarget();
 }
 
 void CInstanceBase::SetFlyTargetInstance(CInstanceBase& rkInstDst)
@@ -58,17 +58,17 @@ void CInstanceBase::SetFlyTargetInstance(CInstanceBase& rkInstDst)
 //	if (isLock())
 //		return;
 
-	m_GraphicThingInstance.SetFlyTarget(rkInstDst.GetGraphicThingInstancePtr());
+	M_GTI.SetFlyTarget(rkInstDst.GetGraphicThingInstancePtr());
 }
 
 void CInstanceBase::AddFlyTargetPosition(const TPixelPosition& c_rkPPosDst)
 {
-	m_GraphicThingInstance.AddFlyTarget(c_rkPPosDst);
+	M_GTI.AddFlyTarget(c_rkPPosDst);
 }
 
 void CInstanceBase::AddFlyTargetInstance(CInstanceBase& rkInstDst)
 {
-	m_GraphicThingInstance.AddFlyTarget(rkInstDst.GetGraphicThingInstancePtr());
+	M_GTI.AddFlyTarget(rkInstDst.GetGraphicThingInstancePtr());
 }
 
 float CInstanceBase::NEW_GetDistanceFromDestInstance(CInstanceBase& rkInstDst)
@@ -214,7 +214,7 @@ bool CInstanceBase::NEW_GetInstanceVectorInFanRange(float fSkillDistance, CInsta
 			if (!IsAttackableInstance(*pkInstEach))
 				continue;
 
-			if (m_GraphicThingInstance.IsClickableDistanceDestInstance(pkInstEach->m_GraphicThingInstance, fSkillDistance))
+			if (M_GTI.IsClickableDistanceDestInstance(pkInstEach->GetGraphicThingInstanceRef(), fSkillDistance))
 			{
 				float fEachInstDistance=min(NEW_GetDistanceFromDestInstance(*pkInstEach), HALF_FAN_ROT_MIN_DISTANCE);
 				const float fEachInstDirRot=NEW_GetRotationFromDestInstance(*pkInstEach);
@@ -259,7 +259,7 @@ bool CInstanceBase::NEW_GetInstanceVectorInCircleRange(float fSkillDistance, std
 			if (!IsAttackableInstance(*pkInstEach))
 				continue;
 
-			if (m_GraphicThingInstance.IsClickableDistanceDestInstance(pkInstEach->m_GraphicThingInstance, fSkillDistance))
+			if (M_GTI.IsClickableDistanceDestInstance(pkInstEach->GetGraphicThingInstanceRef(), fSkillDistance))
 			{
 				float fEachInstDistance=NEW_GetDistanceFromDestInstance(*pkInstEach);
 				kMap_pkInstNear.emplace(fEachInstDistance, pkInstEach);
@@ -302,7 +302,7 @@ BOOL CInstanceBase::NEW_IsClickableDistanceDestInstance(CInstanceBase& rkInstDst
 	if (rkInstDst.IsResource())
 		fDistance = 100.0f;
 
-	return m_GraphicThingInstance.IsClickableDistanceDestInstance(rkInstDst.m_GraphicThingInstance, fDistance);
+	return M_GTI.IsClickableDistanceDestInstance(rkInstDst.GetGraphicThingInstanceRef(), fDistance);
 }
 
 bool CInstanceBase::NEW_UseSkill(UINT uSkill, UINT uMot, UINT uMotLoopCount, bool isMovingSkill)
@@ -331,15 +331,15 @@ bool CInstanceBase::NEW_UseSkill(UINT uSkill, UINT uMot, UINT uMotLoopCount, boo
 		m_isGoing = FALSE;
 	}
 
-	const float fCurRot=m_GraphicThingInstance.GetTargetRotation();
+	const float fCurRot=M_GTI.GetTargetRotation();
 	SetAdvancingRotation(fCurRot);
 
-	m_GraphicThingInstance.InterceptOnceMotion(CRaceMotionData::NAME_SKILL + uMot, 0.1f, uSkill, 1.0f);
+	M_GTI.InterceptOnceMotion(CRaceMotionData::NAME_SKILL + uMot, 0.1f, uSkill, 1.0f);
 
-	m_GraphicThingInstance.__OnUseSkill(uMot, uMotLoopCount, isMovingSkill);
+	M_GTI.__OnUseSkill(uMot, uMotLoopCount, isMovingSkill);
 
 	if (uMotLoopCount > 0)
-		m_GraphicThingInstance.SetMotionLoopCount(uMotLoopCount);
+		M_GTI.SetMotionLoopCount(uMotLoopCount);
 
 	return true;
 }
@@ -409,7 +409,7 @@ bool CInstanceBase::NEW_AttackToDestInstanceDirection(CInstanceBase& rkInstDst)
 
 void CInstanceBase::AttackProcess()
 {
-	if (!m_GraphicThingInstance.CanCheckAttacking())
+	if (!M_GTI.CanCheckAttacking())
 		return;
 
 	CInstanceBase * pkInstLast = nullptr;
@@ -440,25 +440,25 @@ void CInstanceBase::AttackProcess()
 
 void CInstanceBase::InputNormalAttack(float fAtkDirRot)
 {
-	m_GraphicThingInstance.InputNormalAttackCommand(fAtkDirRot);
+	M_GTI.InputNormalAttackCommand(fAtkDirRot);
 }
 
 void CInstanceBase::InputComboAttack(float fAtkDirRot)
 {
-	m_GraphicThingInstance.InputComboAttackCommand(fAtkDirRot);
+	M_GTI.InputComboAttackCommand(fAtkDirRot);
 	__ComboProcess();
 }
 
 void CInstanceBase::RunNormalAttack(float fAtkDirRot)
 {
 	EndGoing();
-	m_GraphicThingInstance.NormalAttack(fAtkDirRot);
+	M_GTI.NormalAttack(fAtkDirRot);
 }
 
 void CInstanceBase::RunComboAttack(float fAtkDirRot, DWORD wMotionIndex)
 {
 	EndGoing();
-	m_GraphicThingInstance.ComboAttack(wMotionIndex, fAtkDirRot);
+	M_GTI.ComboAttack(wMotionIndex, fAtkDirRot);
 }
 
 BOOL CInstanceBase::CheckAdvancing()
@@ -480,7 +480,7 @@ BOOL CInstanceBase::CheckAdvancing()
 				if (!pkInstEach->IsDoor())
 					continue;
 
-				if (m_GraphicThingInstance.TestActorCollision(pkInstEach->GetGraphicThingInstanceRef()))
+				if (M_GTI.TestActorCollision(pkInstEach->GetGraphicThingInstanceRef()))
 				{
 					BlockMovement();
 					return true;
@@ -490,12 +490,12 @@ BOOL CInstanceBase::CheckAdvancing()
 		return FALSE;
 	}
 
-	if (m_GraphicThingInstance.CanSkipCollision())
+	if (M_GTI.CanSkipCollision())
 	{
 		return FALSE;
 	}
 
-	const BOOL bUsingSkill = m_GraphicThingInstance.IsUsingSkill();
+	const BOOL bUsingSkill = M_GTI.IsUsingSkill();
 
 	m_dwAdvActorVID = 0;
 	UINT uCollisionCount=0;
@@ -507,7 +507,7 @@ BOOL CInstanceBase::CheckAdvancing()
 		if (pkInstEach==this)
 			continue;
 
-		CActorInstance& rkActorSelf=m_GraphicThingInstance;
+		CActorInstance& rkActorSelf=M_GTI;
 		CActorInstance& rkActorEach=pkInstEach->GetGraphicThingInstanceRef();
 
 		if( bUsingSkill && !rkActorEach.IsDoor() )
@@ -536,8 +536,8 @@ BOOL CInstanceBase::CheckAdvancing()
 	}
 
 	CPythonBackground& rkBG=CPythonBackground::Instance();
-	const D3DXVECTOR3 & rv3Position = m_GraphicThingInstance.GetPosition();
-	const D3DXVECTOR3 & rv3MoveDirection = m_GraphicThingInstance.GetMovementVectorRef();
+	const D3DXVECTOR3 & rv3Position = M_GTI.GetPosition();
+	const D3DXVECTOR3 & rv3MoveDirection = M_GTI.GetMovementVectorRef();
 
 	const int iStep = int(D3DXVec3Length(&rv3MoveDirection) / 10.0f);
 	const D3DXVECTOR3 v3CheckStep = rv3MoveDirection / float(iStep);
@@ -577,7 +577,7 @@ BOOL CInstanceBase::CheckAttacking(CInstanceBase& rkInstVictim)
 	return FALSE;
 #endif
 
-	if (!m_GraphicThingInstance.AttackingProcess(rkInstVictim.m_GraphicThingInstance))
+	if (!M_GTI.AttackingProcess(rkInstVictim.GetGraphicThingInstanceRef()))
 		return FALSE;
 
 	return TRUE;
@@ -585,27 +585,27 @@ BOOL CInstanceBase::CheckAttacking(CInstanceBase& rkInstVictim)
 
 BOOL CInstanceBase::isNormalAttacking()
 {
-	return m_GraphicThingInstance.isNormalAttacking();
+	return M_GTI.isNormalAttacking();
 }
 
 BOOL CInstanceBase::isComboAttacking()
 {
-	return m_GraphicThingInstance.isComboAttacking();
+	return M_GTI.isComboAttacking();
 }
 
 BOOL CInstanceBase::IsUsingSkill()
 {
-	return m_GraphicThingInstance.IsUsingSkill();
+	return M_GTI.IsUsingSkill();
 }
 
 BOOL CInstanceBase::IsUsingMovingSkill()
 {
-	return m_GraphicThingInstance.IsUsingMovingSkill();
+	return M_GTI.IsUsingMovingSkill();
 }
 
 BOOL CInstanceBase::CanCancelSkill()
 {
-	return m_GraphicThingInstance.CanCancelSkill();
+	return M_GTI.CanCancelSkill();
 }
 
 BOOL CInstanceBase::CanAttackHorseLevel() const
@@ -623,39 +623,39 @@ bool CInstanceBase::IsAffect(UINT uAffect) const
 
 MOTION_KEY CInstanceBase::GetNormalAttackIndex()
 {
-	return m_GraphicThingInstance.GetNormalAttackIndex();
+	return M_GTI.GetNormalAttackIndex();
 }
 
 DWORD CInstanceBase::GetComboIndex()
 {
-	return m_GraphicThingInstance.GetComboIndex();
+	return M_GTI.GetComboIndex();
 }
 
 float CInstanceBase::GetAttackingElapsedTime()
 {
-	return m_GraphicThingInstance.GetAttackingElapsedTime();
+	return M_GTI.GetAttackingElapsedTime();
 }
 
 void CInstanceBase::ProcessHitting(DWORD dwMotionKey, CInstanceBase * pVictimInstance) const
 {
 	assert(!"-_-" && "CInstanceBase::ProcessHitting");
-	//m_GraphicThingInstance.ProcessSucceedingAttacking(dwMotionKey, pVictimInstance->m_GraphicThingInstance);
+	//M_GTI.ProcessSucceedingAttacking(dwMotionKey, pVictimInstance->m_GraphicThingInstance);
 }
 
 void CInstanceBase::ProcessHitting(DWORD dwMotionKey, BYTE byEventIndex, CInstanceBase * pVictimInstance) const
 {
 	assert(!"-_-" && "CInstanceBase::ProcessHitting");
-	//m_GraphicThingInstance.ProcessSucceedingAttacking(dwMotionKey, byEventIndex, pVictimInstance->m_GraphicThingInstance);
+	//M_GTI.ProcessSucceedingAttacking(dwMotionKey, byEventIndex, pVictimInstance->m_GraphicThingInstance);
 }
 
 void CInstanceBase::GetBlendingPosition(TPixelPosition * pPixelPosition)
 {
-	m_GraphicThingInstance.GetBlendingPosition(pPixelPosition);
+	M_GTI.GetBlendingPosition(pPixelPosition);
 }
 
 void CInstanceBase::SetBlendingPosition(const TPixelPosition & c_rPixelPosition)
 {
-	m_GraphicThingInstance.SetBlendingPosition(c_rPixelPosition);
+	M_GTI.SetBlendingPosition(c_rPixelPosition);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -663,7 +663,7 @@ void CInstanceBase::SetBlendingPosition(const TPixelPosition & c_rPixelPosition)
 void CInstanceBase::Revive()
 {
 	m_isGoing=FALSE;
-	m_GraphicThingInstance.Revive();
+	M_GTI.Revive();
 
 	__AttachHorseSaddle();
 }
@@ -671,7 +671,7 @@ void CInstanceBase::Revive()
 void CInstanceBase::Stun()
 {
 	NEW_Stop();
-	m_GraphicThingInstance.Stun();
+	M_GTI.Stun();
 
 	__AttachEffect(EFFECT_STUN);
 }
@@ -690,18 +690,18 @@ void CInstanceBase::Die()
 	OnUnselected();
 	OnUntargeted();
 
-	m_GraphicThingInstance.Die();
+	M_GTI.Die();
 }
 
 void CInstanceBase::Hide()
 {
-	m_GraphicThingInstance.SetAlphaValue(0.0f);
-	m_GraphicThingInstance.BlendAlphaValue(0.0f, 0.1f);
+	M_GTI.SetAlphaValue(0.0f);
+	M_GTI.BlendAlphaValue(0.0f, 0.1f);
 }
 
 void CInstanceBase::Show()
 {
-	m_GraphicThingInstance.SetAlphaValue(1.0f);
-	m_GraphicThingInstance.BlendAlphaValue(1.0f, 0.1f);
+	M_GTI.SetAlphaValue(1.0f);
+	M_GTI.BlendAlphaValue(1.0f, 0.1f);
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

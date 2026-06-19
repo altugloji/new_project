@@ -13418,3 +13418,20 @@
 21310	Tienda Gaya
 21311	Tienda de conversión Gaya
 21312	Se han añadido 10 puntos Gaya a tu personaje.
+21510	Aldeas
+21511	Reino Rojo (1ª Aldea)
+21512	Reino Rojo (2ª Aldea)
+21513	Reino Amarillo (1ª Aldea)
+21514	Reino Amarillo (2ª Aldea)
+21515	Reino Azul (1ª Aldea)
+21516	Reino Azul (2ª Aldea)
+21520	Zonas de bosque
+21521	Bosque Fantasma
+21522	Bosque Rojo
+21530	Mazmorra de Arañas
+21531	Inicio del 1er Piso
+21532	Final del 1er Piso
+21540	Cueva del Exilio
+21550	Otras zonas
+21560	Cerrar
+64186	Catacumba

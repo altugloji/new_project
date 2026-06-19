@@ -33,7 +33,13 @@ ITEM_SHOP_FONT = getattr(localeInfo, "UI_BOLD_FONT_LARGE", localeInfo.UI_DEF_FON
 FAKE_CATEGORY_DATA = {
 	0 : {
 		"categoryName" : "Genel",
-		"subCategoryNameList" : ["Karakter Geliþimi", "Yardimci Esyalar", "EP Kuponlarý", "Biletler", "Diðer",],
+		"subCategoryNameList" : [
+			localeInfo.ITEMSHOP_SUBCATEGORY_CHARACTER_DEVELOPMENT,
+			localeInfo.ITEMSHOP_SUBCATEGORY_SUPPORT_ITEMS,
+			localeInfo.ITEMSHOP_SUBCATEGORY_EP_COUPONS,
+			localeInfo.ITEMSHOP_SUBCATEGORY_TICKETS,
+			localeInfo.ITEMSHOP_SUBCATEGORY_OTHER,
+		],
 	},
 }
 

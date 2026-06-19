@@ -1,168 +1,38 @@
 [CZ]
-31035	Černý kámen
-50903	Schéma zesilovacího svitku
-50904	Schéma předmětu očarování
-30602	Modré barvivo
-30603	Červené barvivo
-30604	Šedé barvivo
-30610	Mithril
-30156	Fialová kniha
-31111	Kámen probuzení
-40002	Teleportační prsten
-72323	Karta postavy
+76016	Jednoduchý svitek požehnání
 
 [DE]
-31035	Schwarzer Stein
-50903	Schema der Verstärkungsrolle
-50904	Schema des Verzauberungsgegenstands
-30602	Blaue Farbe
-30603	Rote Farbe
-30604	Graue Farbe
-30610	Mithril
-30156	Lila Buch
-31111	Erweckungsstein
-40002	Teleportationsring
-72323	Charakterkarte
+76016	Einfacher Segensschriftrolle
 
 [DK]
-31035	Sort sten
-50903	Skema til forstærkningspapir
-50904	Skema til fortryllelsesgenstand
-30602	Blå farve
-30603	Rød farve
-30604	Grå farve
-30610	Mithril
-30156	Lilla bog
-31111	Opvågningssten
-40002	Teleporteringsring
-72323	Karakterkort
+76016	Simpel velsignelsesrulle
 
 [EN]
-31035	Black Stone
-50903	Reinforcement Scroll Design
-50904	Enchant Item Design
-30602	Blue Dye
-30603	Red Dye
-30604	Gray Dye
-30610	Mithril
-30156	Purple Book
-31111	Awakening Stone
-40002	Teleport Ring
-72323	Character Card
+76016	Simple Blessing Scroll
 
 [ES]
-31035	Piedra Negra
-50903	Esquema de Pergamino de Refuerzo
-50904	Esquema de Objeto de Encantamiento
-30602	Tinte azul
-30603	Tinte rojo
-30604	Tinte gris
-30610	Mitril
-30156	Libro morado
-31111	Piedra del despertar
-40002	Anillo de Teletransporte
-72323	Tarjeta de Personaje
+76016	Pergamino de Bendición simple
 
 [FR]
-31035	Pierre noire
-50903	Schéma de parchemin de renforcement
-50904	Schéma d'objet d'enchantement
-30602	Teinture bleue
-30603	Teinture rouge
-30604	Teinture grise
-30610	Mithril
-30156	Livre violet
-31111	Pierre d'éveil
-40002	Anneau de téléportation
-72323	Carte de personnage
+76016	Parchemin de bénédiction simple
 
 [HU]
-31035	Fekete kő
-50903	Erősítő tekercs tervrajza
-50904	Bűvölő tárgy tervrajza
-30602	Kék festék
-30603	Piros festék
-30604	Szürke festék
-30610	Mithril
-30156	Lila könyv
-31111	Ébredés köve
-40002	Teleport gyűrű
-72323	Karakterkártya
+76016	Egyszerű áldás tekercs
 
 [IT]
-31035	Pietra Nera
-50903	Schema Pergamena di Rinforzo
-50904	Schema Oggetto Incantamento
-30602	Tintura blu
-30603	Tintura rossa
-30604	Tintura grigia
-30610	Mithril
-30156	Libro viola
-31111	Pietra del Risveglio
-40002	Anello del Teletrasporto
-72323	Carta Personaggio
+76016	Pergamena Benedizione semplice
 
 [NL]
-31035	Zwarte steen
-50903	Ontwerp versterkingsrol
-50904	Ontwerp betoveringsitem
-30602	Blauwe verf
-30603	Rode verf
-30604	Grijze verf
-30610	Mithril
-30156	Paars boek
-31111	Ontwakingssteen
-40002	Teleportatiering
-72323	Personagekaart
+76016	Eenvoudige zegeningsrol
 
 [PL]
-31035	Czarny Kamień
-50903	Schemat Zwoju Wzmocnienia
-50904	Schemat Przedmiotu Zaklęcia
-30602	Niebieski barwnik
-30603	Czerwony barwnik
-30604	Szary barwnik
-30610	Mithril
-30156	Fioletowa księga
-31111	Kamień Przebudzenia
-40002	Pierścień Teleportacji
-72323	Karta Postaci
+76016	Prosty Zwój Błogosławieństwa
 
 [PT]
-31035	Pedra Negra
-50903	Esquema do Pergaminho de Reforço
-50904	Esquema do Item de Encantamento
-30602	Tinta azul
-30603	Tinta vermelha
-30604	Tinta cinzenta
-30610	Mithril
-30156	Livro roxo
-31111	Pedra do Despertar
-40002	Anel de Teletransporte
-72323	Cartão de Personagem
+76016	Pergaminho de Bênção simples
 
 [RO]
-31035	Piatră Neagră
-50903	Schemă Pergament de Întărire
-50904	Schemă Obiect de Vrăjire
-30602	Vopsea albastră
-30603	Vopsea roșie
-30604	Vopsea gri
-30610	Mithril
-30156	Carte mov
-31111	Piatră a Trezirii
-40002	Inel de Teleportare
-72323	Card de Caracter
+76016	Pergament Simplu al Binecuvântării
 
 [TR]
-31035	Siyah Taş
-50903	Arttırma Kağıdı Şeması
-50904	Efsun Nesnesi Şeması
-30602	Mavi boya
-30603	Kırmızı boya
-30604	Gri boya
-30610	Mitril
-30156	Mor Kitap
-31111	Uyanış taşı
-40002	Işınlanma Yüzüğü
-72323	Karakter Kartı
+76016	Basit Kutsama Kağıdı

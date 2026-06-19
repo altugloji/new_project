@@ -563,8 +563,13 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 		// Client Player Data
 		std::map<DWORD, DWORD>	m_skillSlotDict;
 		std::string				m_stName;
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<DWORD>					m_dwMainCharacterIndex;
+		safe_variable_weak<DWORD>					m_dwRace;
+#else
 		DWORD					m_dwMainCharacterIndex;
 		DWORD					m_dwRace;
+#endif
 		DWORD					m_dwWeaponMinPower;
 		DWORD					m_dwWeaponMaxPower;
 		DWORD					m_dwWeaponMinMagicPower;
@@ -576,10 +581,18 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 		float					m_fTargetUpdateTime;
 
 		// Attack
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<DWORD>					m_dwAutoAttackTargetVID;
+#else
 		DWORD					m_dwAutoAttackTargetVID;
+#endif
 
 		// NEW_Move
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<EMode>					m_eReservedMode;
+#else
 		EMode					m_eReservedMode;
+#endif
 		float					m_fReservedDelayTime;
 
 		float					m_fMovDirRot;
@@ -599,8 +612,13 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 		TPlayerStatus			m_playerStatus;
 
 		UINT					m_iComboOld;
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<DWORD>					m_dwVIDReserved;
+		safe_variable_weak<DWORD>					m_dwIIDReserved;
+#else
 		DWORD					m_dwVIDReserved;
 		DWORD					m_dwIIDReserved;
+#endif
 
 		DWORD					m_dwcurSkillSlotIndex;
 		DWORD					m_dwSkillSlotIndexReserved;
@@ -657,7 +675,11 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 		DWORD					m_dwIIDPicked;
 		int						m_aeMBFButton[MBT_NUM];
 
+#ifdef URIEL_ANTI_CHEAT
+		safe_variable_weak<DWORD>					m_dwTargetVID;
+#else
 		DWORD					m_dwTargetVID;
+#endif
 		DWORD					m_dwTargetEndTime;
 		DWORD					m_dwPlayTime;
 

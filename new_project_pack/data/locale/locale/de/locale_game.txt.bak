@@ -3743,3 +3743,9 @@ AUTO_CHAT_ENABLED	Starten
 AUTO_CHAT_DISABLED	Stoppen
 AUTO_CHAT_NO_MESSAGE	Keine Nachricht gefunden. Sende zuerst eine Nachricht im Rufchat.
 UI_BOLD_FONT_T13	Tahoma:13
+ATTRIBUTE_LIST_OFFENSIVE	Angriff
+ATTRIBUTE_LIST_OFFENSIVE_MONSTER	Angriff (gegen Monster)
+ATTRIBUTE_LIST_OFFENSIVE_PLAYER	Angriff (gegen Spieler)
+ATTRIBUTE_LIST_DEFENSIVE	Verteidigung
+ATTRIBUTE_LIST_DEFENSIVE_PLAYER	Verteidigung (gegen Spieler)
+ATTRIBUTE_LIST_OTHER	Sonstiges

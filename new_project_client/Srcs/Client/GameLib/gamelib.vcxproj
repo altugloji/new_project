@@ -18,7 +18,7 @@
     <ProjectName>gamelib</ProjectName>
     <ProjectGuid>{1801F0ED-7DE6-4175-BF25-6FA98AAA350B}</ProjectGuid>
     <RootNamespace>gamelib</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Distribute|Win32'" Label="Configuration">
@@ -152,64 +152,64 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-        <ClCompile Include="ActorInstance.cpp" />
-        <ClCompile Include="ActorInstanceAttach.cpp" />
-        <ClCompile Include="ActorInstanceBattle.cpp" />
-        <ClCompile Include="ActorInstanceBlend.cpp" />
-        <ClCompile Include="ActorInstanceCollisionDetection.cpp" />
-        <ClCompile Include="ActorInstanceData.cpp" />
-        <ClCompile Include="ActorInstanceEvent.cpp" />
-        <ClCompile Include="ActorInstanceFly.cpp" />
-        <ClCompile Include="ActorInstanceMotion.cpp" />
-        <ClCompile Include="ActorInstanceMotionEvent.cpp" />
-        <ClCompile Include="ActorInstancePosition.cpp" />
-        <ClCompile Include="ActorInstanceRender.cpp" />
-        <ClCompile Include="ActorInstanceRotation.cpp" />
-        <ClCompile Include="ActorInstanceSync.cpp" />
-        <ClCompile Include="ActorInstanceWeaponTrace.cpp" />
-        <ClCompile Include="DungeonBlock.cpp" />
-        <ClCompile Include="PhysicsObject.cpp" />
-        <ClCompile Include="RaceData.cpp" />
-        <ClCompile Include="RaceDataFile.cpp" />
-        <ClCompile Include="RaceManager.cpp" />
-        <ClCompile Include="RaceMotionData.cpp" />
-        <ClCompile Include="WeaponTrace.cpp" />
-        <ClCompile Include="Area.cpp" />
-        <ClCompile Include="AreaLoaderThread.cpp" />
-        <ClCompile Include="AreaTerrain.cpp" />
-        <ClCompile Include="MapBase.cpp" />
-        <ClCompile Include="MapManager.cpp" />
-        <ClCompile Include="MapOutdoor.cpp" />
-        <ClCompile Include="MapOutdoorCharacterShadow.cpp" />
-        <ClCompile Include="MapOutdoorIndexBuffer.cpp" />
-        <ClCompile Include="MapOutdoorLoad.cpp" />
-        <ClCompile Include="MapOutdoorQuadtree.cpp" />
-        <ClCompile Include="MapOutdoorRender.cpp" />
-        <ClCompile Include="MapOutdoorRenderHTP.cpp" />
-        <ClCompile Include="MapOutdoorRenderSTP.cpp" />
-        <ClCompile Include="MapOutdoorUpdate.cpp" />
-        <ClCompile Include="MapOutdoorWater.cpp" />
-        <ClCompile Include="MapType.cpp" />
-        <ClCompile Include="MapUtil.cpp" />
-        <ClCompile Include="MonsterAreaInfo.cpp" />
-        <ClCompile Include="Property.cpp" />
-        <ClCompile Include="PropertyLoader.cpp" />
-        <ClCompile Include="PropertyManager.cpp" />
-        <ClCompile Include="SnowEnvironment.cpp" />
-        <ClCompile Include="SnowParticle.cpp" />
-        <ClCompile Include="TerrainDecal.cpp" />
-        <ClCompile Include="TerrainPatch.cpp" />
-        <ClCompile Include="TerrainQuadtree.cpp" />
-        <ClCompile Include="GameEventManager.cpp" />
-        <ClCompile Include="GameType.cpp" />
-        <ClCompile Include="GameUtil.cpp" />
-        <ClCompile Include="ItemData.cpp" />
-        <ClCompile Include="ItemManager.cpp" />
-        <ClCompile Include="FlyingData.cpp" />
-        <ClCompile Include="FlyingInstance.cpp" />
-        <ClCompile Include="FlyingObjectManager.cpp" />
-        <ClCompile Include="FlyTarget.cpp" />
-        <ClCompile Include="FlyTrace.cpp" />
+    <ClCompile Include="ActorInstance.cpp" />
+    <ClCompile Include="ActorInstanceAttach.cpp" />
+    <ClCompile Include="ActorInstanceBattle.cpp" />
+    <ClCompile Include="ActorInstanceBlend.cpp" />
+    <ClCompile Include="ActorInstanceCollisionDetection.cpp" />
+    <ClCompile Include="ActorInstanceData.cpp" />
+    <ClCompile Include="ActorInstanceEvent.cpp" />
+    <ClCompile Include="ActorInstanceFly.cpp" />
+    <ClCompile Include="ActorInstanceMotion.cpp" />
+    <ClCompile Include="ActorInstanceMotionEvent.cpp" />
+    <ClCompile Include="ActorInstancePosition.cpp" />
+    <ClCompile Include="ActorInstanceRender.cpp" />
+    <ClCompile Include="ActorInstanceRotation.cpp" />
+    <ClCompile Include="ActorInstanceSync.cpp" />
+    <ClCompile Include="ActorInstanceWeaponTrace.cpp" />
+    <ClCompile Include="DungeonBlock.cpp" />
+    <ClCompile Include="PhysicsObject.cpp" />
+    <ClCompile Include="RaceData.cpp" />
+    <ClCompile Include="RaceDataFile.cpp" />
+    <ClCompile Include="RaceManager.cpp" />
+    <ClCompile Include="RaceMotionData.cpp" />
+    <ClCompile Include="WeaponTrace.cpp" />
+    <ClCompile Include="Area.cpp" />
+    <ClCompile Include="AreaLoaderThread.cpp" />
+    <ClCompile Include="AreaTerrain.cpp" />
+    <ClCompile Include="MapBase.cpp" />
+    <ClCompile Include="MapManager.cpp" />
+    <ClCompile Include="MapOutdoor.cpp" />
+    <ClCompile Include="MapOutdoorCharacterShadow.cpp" />
+    <ClCompile Include="MapOutdoorIndexBuffer.cpp" />
+    <ClCompile Include="MapOutdoorLoad.cpp" />
+    <ClCompile Include="MapOutdoorQuadtree.cpp" />
+    <ClCompile Include="MapOutdoorRender.cpp" />
+    <ClCompile Include="MapOutdoorRenderHTP.cpp" />
+    <ClCompile Include="MapOutdoorRenderSTP.cpp" />
+    <ClCompile Include="MapOutdoorUpdate.cpp" />
+    <ClCompile Include="MapOutdoorWater.cpp" />
+    <ClCompile Include="MapType.cpp" />
+    <ClCompile Include="MapUtil.cpp" />
+    <ClCompile Include="MonsterAreaInfo.cpp" />
+    <ClCompile Include="Property.cpp" />
+    <ClCompile Include="PropertyLoader.cpp" />
+    <ClCompile Include="PropertyManager.cpp" />
+    <ClCompile Include="SnowEnvironment.cpp" />
+    <ClCompile Include="SnowParticle.cpp" />
+    <ClCompile Include="TerrainDecal.cpp" />
+    <ClCompile Include="TerrainPatch.cpp" />
+    <ClCompile Include="TerrainQuadtree.cpp" />
+    <ClCompile Include="GameEventManager.cpp" />
+    <ClCompile Include="GameType.cpp" />
+    <ClCompile Include="GameUtil.cpp" />
+    <ClCompile Include="ItemData.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
+    <ClCompile Include="FlyingData.cpp" />
+    <ClCompile Include="FlyingInstance.cpp" />
+    <ClCompile Include="FlyingObjectManager.cpp" />
+    <ClCompile Include="FlyTarget.cpp" />
+    <ClCompile Include="FlyTrace.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Distribute|Win32'">Create</PrecompiledHeader>

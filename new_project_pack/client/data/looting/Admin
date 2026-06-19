@@ -1,9 +1,7 @@
 {
     "head": {
-        "refine_max": 200, 
-        "wearing_level_max": 120, 
         "wearing_level_min": 0, 
-        "refine_min": 0, 
+        "wearing_level_max": 99, 
         "select": {
             "shaman": true, 
             "warrior": true, 
@@ -18,23 +16,11 @@
             "ability": true, 
             "etc": true
         }, 
-        "onoff": true
-    }, 
-    "skill_book": {
-        "select": {
-            "shaman": true, 
-            "warrior": true, 
-            "assassin": true, 
-            "public": true, 
-            "sura": true
-        }, 
-        "onoff": true
+        "onoff": false
     }, 
     "armor": {
-        "refine_max": 200, 
-        "wearing_level_max": 120, 
         "wearing_level_min": 0, 
-        "refine_min": 0, 
+        "wearing_level_max": 99, 
         "select": {
             "shaman": true, 
             "warrior": true, 
@@ -44,19 +30,14 @@
         "onoff": true
     }, 
     "weapon": {
-        "refine_max": 200, 
-        "wearing_level_max": 120, 
         "wearing_level_min": 0, 
-        "refine_min": 0, 
+        "wearing_level_max": 99, 
         "select": {
             "shaman": true, 
             "warrior": true, 
             "assassin": true, 
             "sura": true
         }, 
-        "onoff": true
-    }, 
-    "event": {
         "onoff": true
     }, 
     "etc": {
@@ -72,22 +53,21 @@
         }, 
         "onoff": true
     }, 
+    "skill_book": {
+        "select": {
+            "shaman": true, 
+            "warrior": true, 
+            "assassin": true, 
+            "public": true, 
+            "sura": true
+        }, 
+        "onoff": true
+    }, 
     "refine": {
         "select": {
             "etc": true, 
             "stone": true, 
             "material": true
-        }, 
-        "onoff": true
-    }, 
-    "costume": {
-        "select": {
-            "etc": true, 
-            "armor": true, 
-            "weapon": true, 
-            "hair": true, 
-            "acce": true, 
-            "aura": true
         }, 
         "onoff": true
     }, 
@@ -99,15 +79,6 @@
         }, 
         "onoff": true
     }, 
-    "mount_pet": {
-        "select": {
-            "free_pet": true, 
-            "charged_pet": true, 
-            "mount": true, 
-            "egg": true
-        }, 
-        "onoff": true
-    }, 
     "unique": {
         "select": {
             "etc": true, 
@@ -115,18 +86,12 @@
         }, 
         "onoff": true
     }, 
-    "ds": {
-        "select": {
-            "etc": true, 
-            "ds": true
-        }, 
+    "event": {
         "onoff": true
     }, 
     "common": {
-        "refine_max": 200, 
-        "wearing_level_max": 120, 
         "wearing_level_min": 0, 
-        "refine_min": 0, 
+        "wearing_level_max": 99, 
         "select": {
             "foots": true, 
             "shield": true, 

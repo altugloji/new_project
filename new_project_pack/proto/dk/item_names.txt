@@ -10494,7 +10494,7 @@ VNUM	LOCALE_NAME
 76013	Forstærk genstand (b)
 76014	Fortryl genstand (b)
 76015	Velsignelseskugle
-76016	Velsignelses dokument
+76016	Simpel velsignelsesrulle
 76017	Angrebs Eliksir +15
 76018	Angrebs eliksir +20
 76019	Passage dokument
