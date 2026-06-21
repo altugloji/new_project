@@ -689,6 +689,44 @@ void CSlotWindow::DisableSlot(DWORD dwIndex)
 	//pSlot->dwState ^= SLOT_STATE_DISABLE;
 }
 
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+void CSlotWindow::SetCanMouseEventSlot(DWORD dwIndex)
+{
+	TSlot * pSlot;
+	if (!GetSlotPointer(dwIndex, &pSlot))
+		return;
+
+	REMOVE_BIT(pSlot->dwState, SLOT_STATE_CANT_MOUSE_EVENT);
+}
+
+void CSlotWindow::SetCantMouseEventSlot(DWORD dwIndex)
+{
+	TSlot * pSlot;
+	if (!GetSlotPointer(dwIndex, &pSlot))
+		return;
+
+	SET_BIT(pSlot->dwState, SLOT_STATE_CANT_MOUSE_EVENT);
+}
+
+void CSlotWindow::SetUsableSlotOnTopWnd(DWORD dwIndex)
+{
+	TSlot * pSlot;
+	if (!GetSlotPointer(dwIndex, &pSlot))
+		return;
+
+	REMOVE_BIT(pSlot->dwState, SLOT_STATE_UNUSABLE);
+}
+
+void CSlotWindow::SetUnusableSlotOnTopWnd(DWORD dwIndex)
+{
+	TSlot * pSlot;
+	if (!GetSlotPointer(dwIndex, &pSlot))
+		return;
+
+	SET_BIT(pSlot->dwState, SLOT_STATE_UNUSABLE);
+}
+#endif
+
 // Select
 
 void CSlotWindow::SelectSlot(DWORD dwSelectingIndex)
@@ -817,6 +855,11 @@ BOOL CSlotWindow::OnMouseLeftButtonDown()
 		return TRUE;
 	}
 
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+	if (pSlot->dwState & SLOT_STATE_CANT_MOUSE_EVENT)
+		return TRUE;
+#endif
+
 	if (pSlot->isItem && !(pSlot->dwState & SLOT_STATE_LOCK))
 	{
 		OnSelectItemSlot(pSlot->dwSlotNumber);
@@ -849,6 +892,11 @@ BOOL CSlotWindow::OnMouseLeftButtonUp()
 				return TRUE;
 			}
 
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+			if (pSlot->dwState & SLOT_STATE_CANT_MOUSE_EVENT)
+				return TRUE;
+#endif
+
 			if (pSlot->isItem)
 				pSlotWin->OnSelectItemSlot(pSlot->dwSlotNumber);
 			else
@@ -869,6 +917,11 @@ BOOL CSlotWindow::OnMouseRightButtonDown()
 	if (!GetPickedSlotPointer(&pSlot))
 		return TRUE;
 
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+	if (pSlot->dwState & SLOT_STATE_CANT_MOUSE_EVENT)
+		return TRUE;
+#endif
+
 	if (pSlot->isItem)
 	{
 		OnUnselectItemSlot(pSlot->dwSlotNumber);
@@ -883,6 +936,13 @@ BOOL CSlotWindow::OnMouseRightButtonDown()
 
 BOOL CSlotWindow::OnMouseLeftButtonDoubleClick()
 {
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+	TSlot * pSlot;
+	if (GetPickedSlotPointer(&pSlot))
+		if (pSlot->dwState & SLOT_STATE_CANT_MOUSE_EVENT)
+			return TRUE;
+#endif
+
 	OnUseSlot();
 
 	return TRUE;
@@ -1164,6 +1224,55 @@ void CSlotWindow::OnRender()
 		}
 #endif
 		}
+
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+		if (IS_SET(rSlot.dwState, SLOT_STATE_CANT_MOUSE_EVENT) || IS_SET(rSlot.dwState, SLOT_STATE_UNUSABLE))
+		{
+			if (IS_SET(rSlot.dwState, SLOT_STATE_CANT_MOUSE_EVENT))
+				CPythonGraphic::Instance().SetDiffuseColor(1.0f, 0.0f, 0.0f, 0.3f);	// kilitli slot -> kirmizi
+			else
+				CPythonGraphic::Instance().SetDiffuseColor(1.0f, 1.0f, 1.0f, 0.3f);	// kullanilamaz slot -> gri
+
+#if defined(__BL_CLIP_MASK__)
+			RECT Rect;
+			Rect.left = m_rect.left + rSlot.ixPosition;
+			Rect.top = m_rect.top + rSlot.iyPosition;
+			if (rSlot.isItem)
+			{
+				Rect.right = m_rect.left + rSlot.ixPosition + rSlot.byxPlacedItemSize * ITEM_WIDTH;
+				Rect.bottom = m_rect.top + rSlot.iyPosition + rSlot.byyPlacedItemSize * ITEM_HEIGHT;
+			}
+			else
+			{
+				Rect.right = m_rect.left + rSlot.ixPosition + rSlot.ixCellSize;
+				Rect.bottom = m_rect.top + rSlot.iyPosition + rSlot.iyCellSize;
+			}
+
+			if (m_bEnableMask) {
+				CPythonGraphic::Instance().RenderBar2d(
+					MINMAX(m_rMaskRect.left, Rect.left, m_rMaskRect.right),
+					MINMAX(m_rMaskRect.top, Rect.top, m_rMaskRect.bottom),
+					MINMAX(m_rMaskRect.left, Rect.right, m_rMaskRect.right),
+					MINMAX(m_rMaskRect.top, Rect.bottom, m_rMaskRect.bottom)
+				);
+			}
+			else {
+				CPythonGraphic::Instance().RenderBar2d(Rect.left, Rect.top, Rect.right, Rect.bottom);
+			}
+#else
+			if (rSlot.isItem)
+				CPythonGraphic::Instance().RenderBar2d(m_rect.left + rSlot.ixPosition,
+					m_rect.top + rSlot.iyPosition,
+					m_rect.left + rSlot.ixPosition + rSlot.ixCellSize * rSlot.byxPlacedItemSize,
+					m_rect.top + rSlot.iyPosition + rSlot.iyCellSize * rSlot.byyPlacedItemSize);
+			else
+				CPythonGraphic::Instance().RenderBar2d(m_rect.left + rSlot.ixPosition,
+					m_rect.top + rSlot.iyPosition,
+					m_rect.left + rSlot.ixPosition + rSlot.ixCellSize,
+					m_rect.top + rSlot.iyPosition + rSlot.iyCellSize);
+#endif
+		}
+#endif
 
 		if (rSlot.fCoolTime != 0.0f)
 		{

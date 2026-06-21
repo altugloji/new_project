@@ -51,6 +51,10 @@ namespace UI
 		SLOT_STATE_CANT_USE	= (1 << 1),
 		SLOT_STATE_DISABLE	= (1 << 2),
 		SLOT_STATE_ALWAYS_RENDER_COVER = (1 << 3),
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+		SLOT_STATE_CANT_MOUSE_EVENT	= (1 << 4),
+		SLOT_STATE_UNUSABLE			= (1 << 5),
+#endif
 	};
 
 	class CSlotWindow : public CWindow
@@ -158,6 +162,12 @@ namespace UI
 			void EnableSlot(DWORD dwIndex);
 			void DisableSlot(DWORD dwIndex);
 			BOOL IsEnableSlot(DWORD dwIndex);
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+			void SetCanMouseEventSlot(DWORD dwIndex);
+			void SetCantMouseEventSlot(DWORD dwIndex);
+			void SetUsableSlotOnTopWnd(DWORD dwIndex);
+			void SetUnusableSlotOnTopWnd(DWORD dwIndex);
+#endif
 
 			// Select
 			void ClearSelected();

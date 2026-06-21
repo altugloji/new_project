@@ -845,8 +845,8 @@ bool CInstanceBase::Create(const SCreateData& c_rkCreateData)
 
 	if (c_rkCreateData.m_dwStateFlags & ADD_CHARACTER_STATE_SPAWN)
 	{
-		if (IsAffect(AFFECT_SPAWN))
-			__AttachEffect(EFFECT_SPAWN_APPEAR);
+		// if (IsAffect(AFFECT_SPAWN))
+			// __AttachEffect(EFFECT_SPAWN_APPEAR);
 
 		if (IsPC())
 		{

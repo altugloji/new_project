@@ -230,6 +230,8 @@ class RefineDialogNew(ui.ScriptWindow):
 		ui.ScriptWindow.__init__(self)
 		self.__Initialize()
 		self.isLoaded = False
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.wndInventory = None
 
 	def __Initialize(self):
 		self.dlgQuestion = None
@@ -240,6 +242,8 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.cost = 0
 		self.percentage = 0
 		self.type = 0
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.lockedItem = (-1,-1)
 
 	def __LoadScript(self):
 
@@ -337,6 +341,9 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.successPercentage = None
 		self.slotList = []
 		self.children = []
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.wndInventory = None
+			self.lockedItem = (-1,-1)
 
 	if app.ENABLE_REFINE_RENEWAL:
 		def __InitializeOpen(self):
@@ -369,6 +376,9 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.probText.SetText(localeInfo.REFINE_SUCCESS_PROBALITY % (self.percentage))
 		self.costText.SetText(localeInfo.REFINE_COST.replace("%d", "%s") % localeInfo.NumberToString(int(self.cost)))
 
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.SetCantMouseEventSlot(targetItemPos)
+
 		self.toolTip.ClearToolTip()
 		metinSlot = []
 		for i in xrange(player.METIN_SOCKET_MAX_NUM):
@@ -397,6 +407,10 @@ class RefineDialogNew(ui.ScriptWindow):
 	def Close(self):
 		self.dlgQuestion = None
 		self.Hide()
+
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.lockedItem = (-1, -1)
+			self.SetCanMouseEventSlot(self.targetItemPos)
 
 	def AppendMaterial(self, vnum, count):
 		slot = self.__MakeSlot()
@@ -508,7 +522,36 @@ class RefineDialogNew(ui.ScriptWindow):
 		self.CancelRefine()
 		return True
 
-	if app.ENABLE_REFINE_RENEWAL:	
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		def SetCanMouseEventSlot(self, slotIndex):
+			itemInvenPage = slotIndex / player.INVENTORY_PAGE_SIZE
+			localSlotPos = slotIndex - (itemInvenPage * player.INVENTORY_PAGE_SIZE)
+			self.lockedItem = (-1, -1)
+
+			if self.wndInventory and itemInvenPage == self.wndInventory.GetInventoryPageIndex():
+				self.wndInventory.wndItem.SetCanMouseEventSlot(localSlotPos)
+
+		def SetCantMouseEventSlot(self, slotIndex):
+			itemInvenPage = slotIndex / player.INVENTORY_PAGE_SIZE
+			localSlotPos = slotIndex - (itemInvenPage * player.INVENTORY_PAGE_SIZE)
+			self.lockedItem = (itemInvenPage, localSlotPos)
+
+			if self.wndInventory and itemInvenPage == self.wndInventory.GetInventoryPageIndex():
+				self.wndInventory.wndItem.SetCantMouseEventSlot(localSlotPos)
+
+		def SetInven(self, wndInventory):
+			from _weakref import proxy
+			self.wndInventory = proxy(wndInventory)
+
+		def RefreshLockedSlot(self):
+			if self.wndInventory:
+				itemInvenPage, itemSlotPos = self.lockedItem
+				if self.wndInventory.GetInventoryPageIndex() == itemInvenPage:
+					self.wndInventory.wndItem.SetCantMouseEventSlot(itemSlotPos)
+
+				self.wndInventory.wndItem.RefreshSlot()
+
+	if app.ENABLE_REFINE_RENEWAL:
 		def AutoRefine(self, checkType, autoFlag):
 			constInfo.IS_AUTO_REFINE = autoFlag
 		

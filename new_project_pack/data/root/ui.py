@@ -2295,6 +2295,19 @@ class SlotWindow(Window):
 		def GetSlotCoolTime(self, slotIndex):
 			return wndMgr.GetSlotCoolTime(self.hWnd, slotIndex)
 
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		def SetCanMouseEventSlot(self, slotIndex):
+			wndMgr.SetCanMouseEventSlot(self.hWnd, slotIndex)
+
+		def SetCantMouseEventSlot(self, slotIndex):
+			wndMgr.SetCantMouseEventSlot(self.hWnd, slotIndex)
+
+		def SetUsableSlotOnTopWnd(self, slotIndex):
+			wndMgr.SetUsableSlotOnTopWnd(self.hWnd, slotIndex)
+
+		def SetUnusableSlotOnTopWnd(self, slotIndex):
+			wndMgr.SetUnusableSlotOnTopWnd(self.hWnd, slotIndex)
+
 	def SetSlotCoolTime(self, slotIndex, coolTime, elapsedTime = 0.0):
 		wndMgr.SetSlotCoolTime(self.hWnd, slotIndex, coolTime, elapsedTime)
 

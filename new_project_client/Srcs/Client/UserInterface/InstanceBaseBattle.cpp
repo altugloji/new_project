@@ -680,8 +680,8 @@ void CInstanceBase::Die()
 {
 	__DetachHorseSaddle();
 
-	if (IsAffect(AFFECT_SPAWN))
-		__AttachEffect(EFFECT_SPAWN_DISAPPEAR);
+	// if (IsAffect(AFFECT_SPAWN))
+		// __AttachEffect(EFFECT_SPAWN_DISAPPEAR);
 
 	////////////////////////////////////////
 	__ClearAffects();

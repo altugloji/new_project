@@ -1804,6 +1804,13 @@ class GameWindow(ui.ScriptWindow):
 	## BINARY CALLBACK
 	######################################################################################
 
+	# EXCHANGE
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		def BINARY_AddItemToExchange(self, inven_type, inven_pos, display_pos):
+			if inven_type == player.INVENTORY:
+				self.interface.CantTradableItemExchange(display_pos, inven_pos)
+	# END_OF_EXCHANGE
+
 	# WEDDING
 	def BINARY_LoverInfo(self, name, lovePoint):
 		if self.interface.wndMessenger:

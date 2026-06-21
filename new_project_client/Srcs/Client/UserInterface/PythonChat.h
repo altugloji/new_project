@@ -66,6 +66,11 @@ class CWhisper
 		void AppendChat(int iType, const char* c_szChat);
 #endif
 		void Render(float fx, float fy) const;
+#ifdef ENABLE_WHISPER_COPY
+		// (fx, fy) RenderWhisper'a verilen metin alanı global konumu; (mx, my) ekran fare konumu.
+		// Farenin üstünde bulunan satırın ham metnini strOut'a yazar.
+		bool GetTextByPosition(float fx, float fy, int mx, int my, std::string& strOut) const;
+#endif
 
 	protected:
 		void __Initialize();

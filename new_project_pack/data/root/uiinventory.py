@@ -277,6 +277,9 @@ class InventoryWindow(ui.ScriptWindow):
 	wndCostume = None
 	wndBelt = None
 	dlgPickMoney = None
+	interface = None
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		bindWnds = []
 	if app.ENABLE_CHEQUE_SYSTEM:
 		dlgPickETC = None
 	if app.ENABLE_CUBE_RENEWAL:
@@ -322,6 +325,10 @@ class InventoryWindow(ui.ScriptWindow):
 		self.interface = interface
 		if app.ENABLE_WON_EXCHANGE_WINDOW and self.interface and self.wndChequeSlot:
 			self.wndChequeSlot.SetEvent(ui.__mem_func__(self.interface.ToggleWonExchangeWindow))
+
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		def BindWindow(self, wnd):
+			self.bindWnds.append(wnd)
 
 	def __LoadWindow(self):
 		if self.isLoaded == 1:
@@ -430,7 +437,11 @@ class InventoryWindow(ui.ScriptWindow):
 		self.refineDialog.Hide()
 
 		## AttachMetinDialog
-		self.attachMetinDialog = uiAttachMetin.AttachMetinDialog()
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.attachMetinDialog = uiAttachMetin.AttachMetinDialog(self)
+			self.BindWindow(self.attachMetinDialog)
+		else:
+			self.attachMetinDialog = uiAttachMetin.AttachMetinDialog()
 		self.attachMetinDialog.Hide()
 
 		if app.ENABLE_KADIM_EFSUN_SYSTEM:
@@ -551,6 +562,8 @@ class InventoryWindow(ui.ScriptWindow):
 		self.costumeButton = None
 		self.wndDragonSoulRefine = None
 		self.interface = None
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.bindWnds = []
 
 		if self.wndCostume:
 			self.wndCostume.Destroy()
@@ -680,6 +693,76 @@ class InventoryWindow(ui.ScriptWindow):
 
 		return self.inventoryPageIndex*player.INVENTORY_PAGE_SIZE + local
 
+	def GetInventoryPageIndex(self):
+		return self.inventoryPageIndex
+
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		def RefreshMarkSlots(self, localIndex=None):
+			if not self.interface:
+				return
+
+			onTopWnd = self.interface.GetOnTopWindow()
+			if localIndex:
+				slotNumber = self.__InventoryLocalSlotPosToGlobalSlotPos(localIndex)
+				if onTopWnd == player.ON_TOP_WND_NONE:
+					self.wndItem.SetUsableSlotOnTopWnd(localIndex)
+
+				elif onTopWnd == player.ON_TOP_WND_SHOP:
+					if player.IsAntiFlagBySlot(slotNumber, item.ANTIFLAG_SELL):
+						self.wndItem.SetUnusableSlotOnTopWnd(localIndex)
+					else:
+						self.wndItem.SetUsableSlotOnTopWnd(localIndex)
+
+				elif onTopWnd == player.ON_TOP_WND_EXCHANGE:
+					if player.IsAntiFlagBySlot(slotNumber, item.ANTIFLAG_GIVE):
+						self.wndItem.SetUnusableSlotOnTopWnd(localIndex)
+					else:
+						self.wndItem.SetUsableSlotOnTopWnd(localIndex)
+
+				elif onTopWnd == player.ON_TOP_WND_PRIVATE_SHOP:
+					if player.IsAntiFlagBySlot(slotNumber, item.ITEM_ANTIFLAG_MYSHOP):
+						self.wndItem.SetUnusableSlotOnTopWnd(localIndex)
+					else:
+						self.wndItem.SetUsableSlotOnTopWnd(localIndex)
+
+				elif onTopWnd == player.ON_TOP_WND_SAFEBOX:
+					if player.IsAntiFlagBySlot(slotNumber, item.ANTIFLAG_SAFEBOX):
+						self.wndItem.SetUnusableSlotOnTopWnd(localIndex)
+					else:
+						self.wndItem.SetUsableSlotOnTopWnd(localIndex)
+
+				return
+
+			for i in xrange(player.INVENTORY_PAGE_SIZE):
+				slotNumber = self.__InventoryLocalSlotPosToGlobalSlotPos(i)
+
+				if onTopWnd == player.ON_TOP_WND_NONE:
+					self.wndItem.SetUsableSlotOnTopWnd(i)
+
+				elif onTopWnd == player.ON_TOP_WND_SHOP:
+					if player.IsAntiFlagBySlot(slotNumber, item.ANTIFLAG_SELL):
+						self.wndItem.SetUnusableSlotOnTopWnd(i)
+					else:
+						self.wndItem.SetUsableSlotOnTopWnd(i)
+
+				elif onTopWnd == player.ON_TOP_WND_EXCHANGE:
+					if player.IsAntiFlagBySlot(slotNumber, item.ANTIFLAG_GIVE):
+						self.wndItem.SetUnusableSlotOnTopWnd(i)
+					else:
+						self.wndItem.SetUsableSlotOnTopWnd(i)
+
+				elif onTopWnd == player.ON_TOP_WND_PRIVATE_SHOP:
+					if player.IsAntiFlagBySlot(slotNumber, item.ITEM_ANTIFLAG_MYSHOP):
+						self.wndItem.SetUnusableSlotOnTopWnd(i)
+					else:
+						self.wndItem.SetUsableSlotOnTopWnd(i)
+
+				elif onTopWnd == player.ON_TOP_WND_SAFEBOX:
+					if player.IsAntiFlagBySlot(slotNumber, item.ANTIFLAG_SAFEBOX):
+						self.wndItem.SetUnusableSlotOnTopWnd(i)
+					else:
+						self.wndItem.SetUsableSlotOnTopWnd(i)
+
 	def RefreshBagSlotWindow(self):
 		getItemVNum=player.GetItemIndex
 		getItemCount=player.GetItemCount
@@ -759,6 +842,9 @@ class InventoryWindow(ui.ScriptWindow):
 				else:
 					self.wndItem.DeactivateSlot(i)
 
+			if app.ENABLE_INVENTORY_SLOT_MARKING:
+				self.RefreshMarkSlots(i)
+
 		self.wndItem.RefreshSlot()
 		if app.ENABLE_HIGHLIGHT_NEW_ITEM:
 			self.__RefreshHighlights()
@@ -796,6 +882,9 @@ class InventoryWindow(ui.ScriptWindow):
 		if self.wndBelt:
 			self.wndBelt.RefreshSlot()
 
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			map(lambda wnd:wnd.RefreshLockedSlot(), self.bindWnds)
+
 	if app.ENABLE_HIGHLIGHT_NEW_ITEM:
 		def HighlightSlot(self, slot):
 			if not slot in self.listHighlightedSlot:
@@ -823,11 +912,11 @@ class InventoryWindow(ui.ScriptWindow):
 		for i in xrange(player.EQUIPMENT_PAGE_COUNT):
 			SetItemSlotVnum(player.EQUIPMENT_SLOT_START + i)
 
-		if app.ENABLE_NEW_EQUIPMENT_SYSTEM:
+		if app.ENABLE_NEW_EQUIPMENT_SYSTEM and hasattr(item, "EQUIPMENT_BELT"):
 			SetItemSlotVnum(item.EQUIPMENT_BELT)
-		if app.ENABLE_PENDANT_SYSTEM:
+		if app.ENABLE_PENDANT_SYSTEM and hasattr(item, "EQUIPMENT_PENDANT"):
 			SetItemSlotVnum(item.EQUIPMENT_PENDANT)
-		if app.ENABLE_GLOVE_SYSTEM:
+		if app.ENABLE_GLOVE_SYSTEM and hasattr(item, "EQUIPMENT_GLOVE"):
 			SetItemSlotVnum(item.EQUIPMENT_GLOVE)
 
 		self.wndEquip.RefreshSlot()
@@ -849,7 +938,9 @@ class InventoryWindow(ui.ScriptWindow):
 			self.wndCheque.SetText(localeInfo.NumberToGoldNotText(cheque))
 
 		if app.__GEM_SHOP__:
-			self.GetChild("Gem").SetText(localeInfo.NumberToString(player.GetGem()))
+			wndGem = self.GetChild2("Gem")
+			if wndGem:
+				wndGem.SetText(localeInfo.NumberToString(player.GetGem()))
 
 	def SetItemToolTip(self, tooltipItem):
 		self.tooltipItem = tooltipItem
@@ -1536,6 +1627,10 @@ class InventoryWindow(ui.ScriptWindow):
 	def OnTop(self):
 		if None != self.tooltipItem:
 			self.tooltipItem.SetTop()
+
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			map(lambda wnd:wnd.RefreshLockedSlot(), self.bindWnds)
+			self.RefreshMarkSlots()
 
 	def OnPressEscapeKey(self):
 		self.Close()

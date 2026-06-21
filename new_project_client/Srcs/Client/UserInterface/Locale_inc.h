@@ -165,7 +165,9 @@
 #define ENABLE_OFFLINE_SHOP													// Offline pazar / çevrimdışı dükkan
 #define ENABLE_DROP_ITEM_OWNER_COLOR										// Bana ait olmayan (sahibi başkası olan) yer itemlerinin ismi kırmızı görünsün
 #define ENABLE_CHAT_TAIL_BACKGROUND											// Karakter üzerindeki chat mesajını 20px yukarı taşı + arkasına hafif siyah şeffaf zemin koy
-#define URIEL_ANTI_CHEAT													// Uriel
+#define URIEL_ANTI_CHEAT													// Uriel Anti Cheat
+#define ENABLE_WHISPER_COPY													// PM penceresinde bir mesaja tıklayınca o mesajı panoya kopyala
+#define ENABLE_INVENTORY_SLOT_MARKING										// Envanter slot işaretleme: ticaret/pazar/kasa/işleme pencerelerinde kullanılamayan slota gri, kilitli slota kırmızı overlay
 
 // #define METIN35_ADMIN_PANEL												// Yönetim Paneli
 #ifdef METIN35_ADMIN_PANEL

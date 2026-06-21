@@ -27,7 +27,7 @@
             "assassin": true, 
             "sura": true
         }, 
-        "onoff": true
+        "onoff": false
     }, 
     "weapon": {
         "wearing_level_min": 0, 

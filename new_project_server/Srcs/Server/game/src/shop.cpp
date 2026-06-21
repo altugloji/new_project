@@ -607,6 +607,15 @@ void CShop::ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byR
 			if (!pkSrc->CheckItemEnchant())
 				continue;
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+	  // Markete eklenmesi kisitli (EmShop'a bagli) itemler pazara eklenemez
+	  if (pkSrc->IsItemShopEmBound())
+	  {
+		owner->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+		continue;
+	  }
+#endif
+
 			WORD iPos = t.display_pos;
 			if (!m_pGrid || iPos >= SHOP_HOST_ITEM_MAX_NUM || !m_pGrid->IsEmpty(iPos, 1, proto->bSize))
 			{

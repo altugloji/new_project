@@ -1158,6 +1158,51 @@ void CWhisper::Render(float fx, float fy) const
 	}
 }
 
+#ifdef ENABLE_WHISPER_COPY
+bool CWhisper::GetTextByPosition(float fx, float fy, int mx, int my, std::string& strOut) const
+{
+	// CWhisper::Render ile birebir aynı dikey yerleşim mantığı; tıklanan satırı bulur.
+	float fHeight = fy + m_fHeight;
+
+	const int iViewCount = int(m_fHeight / m_fLineStep) - 1;
+	const int iLineCount = int(m_ChatLineDeque.size());
+	int iStartLine = -1;
+	if (iLineCount > iViewCount)
+	{
+		iStartLine = int(float(iLineCount - iViewCount) * m_fcurPosition) + iViewCount - 1;
+	}
+	else if (!m_ChatLineDeque.empty())
+	{
+		iStartLine = iLineCount - 1;
+	}
+
+	for (int i = iStartLine; i >= 0; --i)
+	{
+		if (i >= int(m_ChatLineDeque.size()))
+			continue;
+
+		TChatLine * pChatLine = m_ChatLineDeque[i];
+
+		const WORD wLineCount = pChatLine->Instance.GetTextLineCount();
+		const float fLineBottom = fHeight;
+		fHeight -= wLineCount * m_fLineStep;
+		const float fLineTop = fHeight;
+
+		if (float(mx) >= fx && float(mx) <= fx + m_fWidth &&
+			float(my) >= fLineTop && float(my) < fLineBottom)
+		{
+			strOut = pChatLine->Instance.GetValueStringReference();
+			return true;
+		}
+
+		if (fHeight < fy)
+			break;
+	}
+
+	return false;
+}
+#endif
+
 #if defined(__BL_MULTI_LANGUAGE_ULTIMATE__)
 void CPythonChat::ArrangeAllShowingChat()
 {

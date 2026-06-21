@@ -347,6 +347,75 @@ PyObject * chatRenderWhisper(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_WHISPER_COPY
+static void __SetClipboardText(const std::string& strText)
+{
+	if (strText.empty())
+		return;
+
+	if (!OpenClipboard(nullptr))
+		return;
+
+	EmptyClipboard();
+
+	const size_t bufSize = strText.length() + 1;
+	HGLOBAL hMem = GlobalAlloc(GMEM_MOVEABLE, bufSize);
+	if (hMem)
+	{
+		void* pMem = GlobalLock(hMem);
+		if (pMem)
+		{
+			memcpy(pMem, strText.c_str(), bufSize);
+			GlobalUnlock(hMem);
+			// Fısıltı metni zaten cp1254 multibyte std::string -> doğrudan CF_TEXT.
+			SetClipboardData(CF_TEXT, hMem);
+		}
+		else
+		{
+			GlobalFree(hMem);
+		}
+	}
+
+	CloseClipboard();
+}
+
+PyObject * chatCopyWhisperLineAtPos(PyObject* poSelf, PyObject* poArgs)
+{
+	char * szName;
+	if (!PyTuple_GetString(poArgs, 0, &szName))
+		return Py_BuildException();
+
+	float fx;
+	if (!PyTuple_GetFloat(poArgs, 1, &fx))
+		return Py_BuildException();
+
+	float fy;
+	if (!PyTuple_GetFloat(poArgs, 2, &fy))
+		return Py_BuildException();
+
+	int mx;
+	if (!PyTuple_GetInteger(poArgs, 3, &mx))
+		return Py_BuildException();
+
+	int my;
+	if (!PyTuple_GetInteger(poArgs, 4, &my))
+		return Py_BuildException();
+
+	CWhisper * pWhisper;
+	std::string strText;
+	if (CPythonChat::Instance().GetWhisper(szName, &pWhisper))
+	{
+		if (pWhisper->GetTextByPosition(fx, fy, mx, my, strText) && !strText.empty())
+		{
+			__SetClipboardText(strText);
+			return Py_BuildValue("s", strText.c_str());
+		}
+	}
+
+	return Py_BuildValue("s", "");
+}
+#endif
+
 PyObject * chatSetWhisperBoxSize(PyObject* poSelf, PyObject* poArgs)
 {
 	char * szName;
@@ -535,6 +604,9 @@ void initChat()
 		{ "SetWhisperPosition",		chatSetWhisperPosition,		METH_VARARGS },
 		{ "ClearWhisper",			chatClearWhisper,			METH_VARARGS },
 		{ "InitWhisper",			chatInitWhisper,			METH_VARARGS },
+#ifdef ENABLE_WHISPER_COPY
+		{ "CopyWhisperLineAtPos",	chatCopyWhisperLineAtPos,	METH_VARARGS },
+#endif
 
 		// Link
 		{ "GetLinkFromHyperlink",	chatGetLinkFromHyperlink,	METH_VARARGS },

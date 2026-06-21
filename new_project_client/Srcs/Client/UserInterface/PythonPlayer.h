@@ -290,6 +290,11 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 #endif
 		DWORD	GetItemIndex(TItemPos Cell);
 		DWORD	GetItemFlags(TItemPos Cell);
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+		DWORD	GetItemAntiFlags(TItemPos Cell);
+		BYTE	GetItemTypeBySlot(TItemPos Cell);
+		BYTE	GetItemSubTypeBySlot(TItemPos Cell);
+#endif
 		DWORD	GetItemCount(TItemPos Cell);
 		DWORD	GetItemCountByVnum(DWORD dwVnum) const;
 

@@ -22,6 +22,10 @@ class ExchangeDialog(ui.ScriptWindow):
 		self.tooltipItem = 0
 		self.xStart = 0
 		self.yStart = 0
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.interface = 0
+			self.wndInventory = 0
+			self.lockedItems = {i:(-1,-1) for i in range(exchange.EXCHANGE_ITEM_MAX_NUM)}
 
 	def __del__(self):
 		ui.ScriptWindow.__del__(self)
@@ -98,6 +102,10 @@ class ExchangeDialog(ui.ScriptWindow):
 		self.TitleName = 0
 		self.AcceptButton = 0
 		self.tooltipItem = 0
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.interface = 0
+			self.wndInventory = 0
+			self.lockedItems = {i:(-1,-1) for i in range(exchange.EXCHANGE_ITEM_MAX_NUM)}
 
 	def OpenDialog(self):
 		if app.ENABLE_LEVEL_IN_TRADE:
@@ -107,6 +115,10 @@ class ExchangeDialog(ui.ScriptWindow):
 		self.AcceptButton.Enable()
 		self.AcceptButton.SetUp()
 		self.Show()
+
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.interface.SetOnTopWindow(player.ON_TOP_WND_EXCHANGE)
+			self.interface.RefreshMarkInventoryBag()
 
 		(self.xStart, self.yStart, z) = player.GetMainCharacterPosition()
 
@@ -118,6 +130,15 @@ class ExchangeDialog(ui.ScriptWindow):
 
 		self.dlgPickMoney.Close()
 		self.Hide()
+
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			for exchangePos, (itemInvenPage, itemSlotPos) in self.lockedItems.items():
+				if itemInvenPage == self.wndInventory.GetInventoryPageIndex():
+					self.wndInventory.wndItem.SetCanMouseEventSlot(itemSlotPos)
+
+			self.lockedItems = {i:(-1,-1) for i in range(exchange.EXCHANGE_ITEM_MAX_NUM)}
+			self.interface.SetOnTopWindow(player.ON_TOP_WND_NONE)
+			self.interface.RefreshMarkInventoryBag()
 
 	def SetItemToolTip(self, tooltipItem):
 		self.tooltipItem = tooltipItem
@@ -218,6 +239,9 @@ class ExchangeDialog(ui.ScriptWindow):
 		self.RefreshOwnerSlot()
 		self.RefreshTargetSlot()
 
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.RefreshLockedSlot()
+
 		if app.ENABLE_CHEQUE_SYSTEM:
 			self.OwnerMoney.SetText(localeInfo.NumberToGoldNotText(exchange.GetElkFromSelf()))
 			self.TargetMoney.SetText(localeInfo.NumberToGoldNotText(exchange.GetElkFromTarget()))
@@ -286,6 +310,11 @@ class ExchangeDialog(ui.ScriptWindow):
 	def OnTop(self):
 		self.tooltipItem.SetTop()
 
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			if self.interface:
+				self.interface.SetOnTopWindow(player.ON_TOP_WND_EXCHANGE)
+				self.interface.RefreshMarkInventoryBag()
+
 	def OnUpdate(self):
 
 		USE_EXCHANGE_LIMIT_RANGE = 1000
@@ -294,3 +323,30 @@ class ExchangeDialog(ui.ScriptWindow):
 		if abs(x - self.xStart) > USE_EXCHANGE_LIMIT_RANGE or abs(y - self.yStart) > USE_EXCHANGE_LIMIT_RANGE:
 			(self.xStart, self.yStart, z) = player.GetMainCharacterPosition()
 			net.SendExchangeExitPacket()
+
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		def CantTradableItem(self, destSlotIndex, srcSlotIndex):
+			if True == exchange.GetAcceptFromTarget():
+				return
+
+			itemInvenPage = srcSlotIndex / player.INVENTORY_PAGE_SIZE
+			localSlotPos = srcSlotIndex - (itemInvenPage * player.INVENTORY_PAGE_SIZE)
+			self.lockedItems[destSlotIndex] = (itemInvenPage, localSlotPos)
+
+			if self.wndInventory.GetInventoryPageIndex() == itemInvenPage and self.IsShow():
+				self.wndInventory.wndItem.SetCantMouseEventSlot(localSlotPos)
+
+		def RefreshLockedSlot(self):
+			if self.wndInventory:
+				for exchangePos, (itemInvenPage, itemSlotPos) in self.lockedItems.items():
+					if self.wndInventory.GetInventoryPageIndex() == itemInvenPage:
+						self.wndInventory.wndItem.SetCantMouseEventSlot(itemSlotPos)
+
+				self.wndInventory.wndItem.RefreshSlot()
+
+		def BindInterface(self, interface):
+			self.interface = interface
+
+		def SetInven(self, wndInventory):
+			from _weakref import proxy
+			self.wndInventory = proxy(wndInventory)

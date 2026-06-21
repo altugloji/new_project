@@ -108,7 +108,7 @@ class ShopNameBoard(ui.Window):
 	# Boylece dokulu quad yerine 2 renkli dikdortgen cizilir.
 	BOARD_COLOR        = grp.GenerateColor(0.0, 0.0, 0.0, 0.40)	# dolgu (Bar)  -> son sayi = opaklik (0.0 seffaf .. 1.0 tam opak)
 	BOARD_BASE_COLOR   = grp.GenerateColor(0.0, 0.0, 0.0, 0.55)	# cerceve (Box) normal renk
-	BOARD_CLICKED_COLOR = grp.GenerateColor(0.9, 0.1, 0.1, 1.0)	# cerceve (Box) -> daha once tiklanan pazar (kirmizi)
+	# BOARD_CLICKED_COLOR = grp.GenerateColor(0.9, 0.1, 0.1, 1.0)	# cerceve (Box) -> daha once tiklanan pazar (kirmizi)
 
 	def __init__(self, layer = "UI"):
 		ui.Window.__init__(self, layer)
@@ -151,6 +151,9 @@ class ShopNameBoard(ui.Window):
 		self.Box.Hide()
 
 class PrivateShopAdvertisementBoard(ShopNameBoard):
+	TEXT_NORMAL_COLOR  = (1.0, 1.0, 1.0)	# normal baslik (beyaz)
+	TEXT_CLICKED_COLOR = (1.0, 0.55, 0.0)	# daha once tiklanan pazarin basligi (turuncu)
+
 	def __init__(self):
 		ShopNameBoard.__init__(self, "UI_BOTTOM")
 		self.vid = None
@@ -174,26 +177,27 @@ class PrivateShopAdvertisementBoard(ShopNameBoard):
 		self.textLine.SetText(text)
 		self.textLine.UpdateRect()
 		self.SetSize(len(text)*6 + 10*2, 30)
-		self.__RefreshFrameColor()
+		self.__RefreshTitleColor()
 		self.Show()
 
 		g_privateShopAdvertisementBoardDict[vid] = self
 
-	def __RefreshFrameColor(self):
-		# Daha once tiklanan pazarin cercevesi kirmizi, digerleri normal
+	def __RefreshTitleColor(self):
+		# Cerceve her zaman normal kalir; daha once tiklanan pazarin BASLIK YAZISI
+		# turuncu, digerleri normal (beyaz).
 		if self.vid in g_clickedShopVIDs:
-			self.SetFrameColor(self.BOARD_CLICKED_COLOR)
+			self.textLine.SetFontColor(*self.TEXT_CLICKED_COLOR)
 		else:
-			self.SetFrameColor(self.BOARD_BASE_COLOR)
+			self.textLine.SetFontColor(*self.TEXT_NORMAL_COLOR)
 
 	def OnMouseLeftButtonUp(self):
 		if not self.vid:
 			return
 		net.SendOnClickPacket(self.vid)
 
-		# Bu pazara tiklandi -> kaydet ve cerceveyi kirmizi yap
+		# Bu pazara tiklandi -> kaydet ve SADECE basligi turuncu yap (cerceve normal kalir)
 		g_clickedShopVIDs[self.vid] = 1
-		self.SetFrameColor(self.BOARD_CLICKED_COLOR)
+		self.textLine.SetFontColor(*self.TEXT_CLICKED_COLOR)
 
 		return True
 
@@ -234,6 +238,10 @@ class PrivateShopBuilder(ui.ScriptWindow):
 		self.tooltipItem = None
 		self.priceInputBoard = None
 		self.title = ""
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.interface = None
+			self.wndInventory = None
+			self.lockedItems = {i:(-1,-1) for i in range(shop.SHOP_SLOT_COUNT)}
 
 	def __del__(self):
 		#print "------------------------------------------------------------- DELETE MAKE_PRIVATE_SHOP_WINDOW"
@@ -277,6 +285,10 @@ class PrivateShopBuilder(ui.ScriptWindow):
 		self.btnClose = None
 		self.titleBar = None
 		self.priceInputBoard = None
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.interface = None
+			self.wndInventory = None
+			self.lockedItems = {i:(-1,-1) for i in range(shop.SHOP_SLOT_COUNT)}
 
 	def Open(self, title):
 
@@ -292,6 +304,11 @@ class PrivateShopBuilder(ui.ScriptWindow):
 		self.Refresh()
 		self.Show()
 
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.lockedItems = {i:(-1,-1) for i in range(shop.SHOP_SLOT_COUNT)}
+			self.interface.SetOnTopWindow(player.ON_TOP_WND_PRIVATE_SHOP)
+			self.interface.RefreshMarkInventoryBag()
+
 		global g_isBuildingPrivateShop
 		g_isBuildingPrivateShop = True
 
@@ -303,6 +320,15 @@ class PrivateShopBuilder(ui.ScriptWindow):
 		self.itemStock = {}
 		shop.ClearPrivateShopStock()
 		self.Hide()
+
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			for privatePos, (itemInvenPage, itemSlotPos) in self.lockedItems.items():
+				if itemInvenPage == self.wndInventory.GetInventoryPageIndex():
+					self.wndInventory.wndItem.SetCanMouseEventSlot(itemSlotPos)
+
+			self.lockedItems = {i:(-1,-1) for i in range(shop.SHOP_SLOT_COUNT)}
+			self.interface.SetOnTopWindow(player.ON_TOP_WND_NONE)
+			self.interface.RefreshMarkInventoryBag()
 
 	def SetItemToolTip(self, tooltipItem):
 		self.tooltipItem = tooltipItem
@@ -328,6 +354,9 @@ class PrivateShopBuilder(ui.ScriptWindow):
 
 		self.itemSlot.RefreshSlot()
 
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.RefreshLockedSlot()
+
 	def OnSelectEmptySlot(self, selectedSlotPos):
 
 		isAttached = mouseModule.mouseController.isAttached()
@@ -346,6 +375,9 @@ class PrivateShopBuilder(ui.ScriptWindow):
 			if item.IsAntiFlag(item.ANTIFLAG_GIVE) or item.IsAntiFlag(item.ANTIFLAG_MYSHOP):
 				chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.PRIVATE_SHOP_CANNOT_SELL_ITEM)
 				return
+
+			if app.ENABLE_INVENTORY_SLOT_MARKING and player.SLOT_TYPE_INVENTORY == attachedSlotType:
+				self.CantTradableItem(selectedSlotPos, attachedSlotPos)
 
 			priceInputBoard = uiCommon.MoneyInputDialog()
 			priceInputBoard.SetTitle(localeInfo.PRIVATE_SHOP_INPUT_PRICE_DIALOG_TITLE)
@@ -384,6 +416,13 @@ class PrivateShopBuilder(ui.ScriptWindow):
 			invenType, invenPos = self.itemStock[selectedSlotPos]
 			shop.DelPrivateShopItemStock(invenType, invenPos)
 			snd.PlaySound("sound/ui/drop.wav")
+
+			if app.ENABLE_INVENTORY_SLOT_MARKING:
+				(itemInvenPage, itemSlotPos) = self.lockedItems[selectedSlotPos]
+				if itemInvenPage == self.wndInventory.GetInventoryPageIndex():
+					self.wndInventory.wndItem.SetCanMouseEventSlot(itemSlotPos)
+
+				self.lockedItems[selectedSlotPos] = (-1, -1)
 
 			del self.itemStock[selectedSlotPos]
 
@@ -454,6 +493,14 @@ class PrivateShopBuilder(ui.ScriptWindow):
 		return True
 
 	def CancelInputPrice(self):
+		if app.ENABLE_INVENTORY_SLOT_MARKING and self.priceInputBoard:
+			itemInvenPage = self.priceInputBoard.sourceSlotPos / player.INVENTORY_PAGE_SIZE
+			itemSlotPos = self.priceInputBoard.sourceSlotPos - (itemInvenPage * player.INVENTORY_PAGE_SIZE)
+			if self.wndInventory.GetInventoryPageIndex() == itemInvenPage:
+				self.wndInventory.wndItem.SetCanMouseEventSlot(itemSlotPos)
+
+			self.lockedItems[self.priceInputBoard.targetSlotPos] = (-1, -1)
+
 		self.priceInputBoard = None
 		return True
 
@@ -485,3 +532,31 @@ class PrivateShopBuilder(ui.ScriptWindow):
 
 		if self.tooltipItem:
 			self.tooltipItem.HideToolTip()
+
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		def CantTradableItem(self, destSlotIndex, srcSlotIndex):
+			itemInvenPage = srcSlotIndex / player.INVENTORY_PAGE_SIZE
+			localSlotPos = srcSlotIndex - (itemInvenPage * player.INVENTORY_PAGE_SIZE)
+			self.lockedItems[destSlotIndex] = (itemInvenPage, localSlotPos)
+			if self.wndInventory.GetInventoryPageIndex() == itemInvenPage:
+				self.wndInventory.wndItem.SetCantMouseEventSlot(localSlotPos)
+
+		def RefreshLockedSlot(self):
+			if self.wndInventory:
+				for privatePos, (itemInvenPage, itemSlotPos) in self.lockedItems.items():
+					if self.wndInventory.GetInventoryPageIndex() == itemInvenPage:
+						self.wndInventory.wndItem.SetCantMouseEventSlot(itemSlotPos)
+
+				self.wndInventory.wndItem.RefreshSlot()
+
+		def BindInterface(self, interface):
+			self.interface = interface
+
+		def OnTop(self):
+			if self.interface:
+				self.interface.SetOnTopWindow(player.ON_TOP_WND_PRIVATE_SHOP)
+				self.interface.RefreshMarkInventoryBag()
+
+		def SetInven(self, wndInventory):
+			from _weakref import proxy
+			self.wndInventory = proxy(wndInventory)

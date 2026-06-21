@@ -6,6 +6,7 @@ import app
 import localeInfo
 import ime
 import chr
+import wndMgr
 
 class WhisperButton(ui.Button):
 	def __init__(self):
@@ -344,3 +345,20 @@ class WhisperDialog(ui.ScriptWindow):
 				ime.PasteString(link)
 			else:
 				self.interface.MakeHyperlinkTooltip(hyperlink)
+		elif app.ENABLE_WHISPER_COPY:
+			self.__CopyWhisperLineUnderCursor()
+
+	if app.ENABLE_WHISPER_COPY:
+		def __CopyWhisperLineUnderCursor(self):
+			# Tiklanan fisilti satirinin metnini panoya kopyala.
+			if not self.targetName or self.targetName == 0:
+				return
+			if not self.textRenderer:
+				return
+
+			(gx, gy) = self.textRenderer.GetGlobalPosition()
+			(mx, my) = wndMgr.GetMousePosition()
+
+			text = chat.CopyWhisperLineAtPos(self.targetName, gx, gy, mx, my)
+			if text:
+				chat.AppendChat(chat.CHAT_TYPE_INFO, "Mesaj panoya kopyalandi.")

@@ -235,6 +235,15 @@ void CShopManager::CreateOfflineShop(LPCHARACTER owner, const char *szSign, cons
 		if (!item)
 			continue;
 
+#ifdef ENABLE_ITEM_SHOP_SYSTEM
+		if (item->IsItemShopEmBound())
+		{
+			owner->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+			M2_DELETE(pGrid);
+			return;
+		}
+#endif
+
 		const BYTE display_pos = pTable[i]->display_pos;
 		const TItemTable * itemProto = item->GetProto();
 		if (!itemProto || !pGrid->IsEmpty(display_pos, 1, itemProto->bSize))

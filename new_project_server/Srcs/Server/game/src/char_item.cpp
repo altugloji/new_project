@@ -1424,7 +1424,7 @@ bool CHARACTER::RefineItem(LPITEM pkItem, LPITEM pkTarget)
 			return false;
 		}
 
-		if (pkTarget->GetLevelLimit() >= 30)
+		if (pkTarget->GetLevelLimit() > 30)
 		{
 			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu parsomen sadece 30 seviye altindaki silah ve zirhlarda kullanilabilir."));
 			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("This scroll can only be used on weapons and armor below level 30."));

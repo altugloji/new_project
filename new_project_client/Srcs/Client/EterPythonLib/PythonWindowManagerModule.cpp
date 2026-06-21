@@ -2665,6 +2665,80 @@ PyObject* wndRenderTargetSetRenderTarget(PyObject* poSelf, PyObject* poArgs)
 }
 #endif
 
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+PyObject * wndMgrSetCanMouseEventSlot(PyObject * poSelf, PyObject * poArgs)
+{
+	UI::CWindow * pWnd;
+	if (!PyTuple_GetWindow(poArgs, 0, &pWnd))
+		return Py_BuildException();
+
+	int iSlotIndex;
+	if (!PyTuple_GetInteger(poArgs, 1, &iSlotIndex))
+		return Py_BuildException();
+
+	if (!pWnd->IsType(UI::CSlotWindow::Type()))
+		return Py_BuildException();
+
+	UI::CSlotWindow * pSlotWnd = (UI::CSlotWindow *)pWnd;
+	pSlotWnd->SetCanMouseEventSlot(iSlotIndex);
+	return Py_BuildNone();
+}
+
+PyObject * wndMgrSetCantMouseEventSlot(PyObject * poSelf, PyObject * poArgs)
+{
+	UI::CWindow * pWnd;
+	if (!PyTuple_GetWindow(poArgs, 0, &pWnd))
+		return Py_BuildException();
+
+	int iSlotIndex;
+	if (!PyTuple_GetInteger(poArgs, 1, &iSlotIndex))
+		return Py_BuildException();
+
+	if (!pWnd->IsType(UI::CSlotWindow::Type()))
+		return Py_BuildException();
+
+	UI::CSlotWindow * pSlotWnd = (UI::CSlotWindow *)pWnd;
+	pSlotWnd->SetCantMouseEventSlot(iSlotIndex);
+	return Py_BuildNone();
+}
+
+PyObject * wndMgrSetUsableSlotOnTopWnd(PyObject * poSelf, PyObject * poArgs)
+{
+	UI::CWindow * pWnd;
+	if (!PyTuple_GetWindow(poArgs, 0, &pWnd))
+		return Py_BuildException();
+
+	int iSlotIndex;
+	if (!PyTuple_GetInteger(poArgs, 1, &iSlotIndex))
+		return Py_BuildException();
+
+	if (!pWnd->IsType(UI::CSlotWindow::Type()))
+		return Py_BuildException();
+
+	UI::CSlotWindow * pSlotWnd = (UI::CSlotWindow *)pWnd;
+	pSlotWnd->SetUsableSlotOnTopWnd(iSlotIndex);
+	return Py_BuildNone();
+}
+
+PyObject * wndMgrSetUnusableSlotOnTopWnd(PyObject * poSelf, PyObject * poArgs)
+{
+	UI::CWindow * pWnd;
+	if (!PyTuple_GetWindow(poArgs, 0, &pWnd))
+		return Py_BuildException();
+
+	int iSlotIndex;
+	if (!PyTuple_GetInteger(poArgs, 1, &iSlotIndex))
+		return Py_BuildException();
+
+	if (!pWnd->IsType(UI::CSlotWindow::Type()))
+		return Py_BuildException();
+
+	UI::CSlotWindow * pSlotWnd = (UI::CSlotWindow *)pWnd;
+	pSlotWnd->SetUnusableSlotOnTopWnd(iSlotIndex);
+	return Py_BuildNone();
+}
+#endif
+
 void initwndMgr()
 {
 	static PyMethodDef s_methods[] =
@@ -2904,6 +2978,12 @@ void initwndMgr()
 #ifdef ENABLE_RENDER_TARGET
 		{ "RegisterRenderTarget", wndMgrRegisterRenderTarget, METH_VARARGS },
 		{ "SetRenderTarget", wndRenderTargetSetRenderTarget, METH_VARARGS },
+#endif
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+		{ "SetCanMouseEventSlot",		wndMgrSetCanMouseEventSlot,			METH_VARARGS },
+		{ "SetCantMouseEventSlot",		wndMgrSetCantMouseEventSlot,		METH_VARARGS },
+		{ "SetUsableSlotOnTopWnd",		wndMgrSetUsableSlotOnTopWnd,		METH_VARARGS },
+		{ "SetUnusableSlotOnTopWnd",	wndMgrSetUnusableSlotOnTopWnd,		METH_VARARGS },
 #endif
 		{nullptr, nullptr},
 	};

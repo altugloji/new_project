@@ -1668,7 +1668,7 @@ class ItemToolTip(ToolTip):
 			if chr.IsGameMaster(0) and player.IsGiftBox(slotIndex) == 1:
 				self.AppendTextLine(localeInfo.TOOLTIP_CHEST_ITEM.format(Emoji("icon\emoji\key_ctrl.png"), Emoji("icon\emoji\key_rclick.png")))
 
-		if app.ENABLE_CHARACTER_CHEST and itemVnum == 72325:
+		if app.ENABLE_CHARACTER_CHEST and itemVnum == 72323:
 			if metinSlot and len(metinSlot) >= 2 and int(metinSlot[0]) > 0 and int(metinSlot[1]) != 0:
 				self.AppendSpace(5)
 				if app.KYGN_CHEST_INFO and hasattr(localeInfo, "TOOLTIP_CHEST_ITEM"):

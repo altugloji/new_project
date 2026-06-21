@@ -27,6 +27,8 @@ class ShopDialog(ui.ScriptWindow):
 		self.questionDialog = None
 		self.popup = None
 		self.itemBuyQuestionDialog = None
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.interface = None
 		if app.ENABLE_OFFLINE_SHOP:
 			self.interface = None
 			self.btnEdit = None
@@ -321,7 +323,15 @@ class ShopDialog(ui.ScriptWindow):
 
 		(self.xShopStart, self.yShopStart, z) = player.GetMainCharacterPosition()
 
+		if app.ENABLE_INVENTORY_SLOT_MARKING and not isPrivateShop:
+			if self.interface:
+				self.interface.SetOnTopWindow(player.ON_TOP_WND_SHOP)
+				self.interface.RefreshMarkInventoryBag()
+
 	def Close(self):
+		if app.ENABLE_INVENTORY_SLOT_MARKING and self.interface:
+			self.interface.SetOnTopWindow(player.ON_TOP_WND_NONE)
+			self.interface.RefreshMarkInventoryBag()
 		if app.ENABLE_OFFLINE_SHOP and self.editMode:
 			# Duzenleme modunda kapatma = iptal (son kayitli haline don)
 			self.__OnCancelEdit()
@@ -894,6 +904,15 @@ class ShopDialog(ui.ScriptWindow):
 		(x, y, z) = player.GetMainCharacterPosition()
 		if abs(x - self.xShopStart) > USE_SHOP_LIMIT_RANGE or abs(y - self.yShopStart) > USE_SHOP_LIMIT_RANGE:
 			self.Close()
+
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		def BindInterface(self, interface):
+			self.interface = interface
+
+		def OnTop(self):
+			if not shop.IsPrivateShop():
+				self.interface.SetOnTopWindow(player.ON_TOP_WND_SHOP)
+				self.interface.RefreshMarkInventoryBag()
 
 
 class MallPageDialog(ui.ScriptWindow):

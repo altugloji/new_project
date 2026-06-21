@@ -2026,6 +2026,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_WIKI", 0);
 #endif
 
+#ifdef ENABLE_WHISPER_COPY
+	PyModule_AddIntConstant(poModule, "ENABLE_WHISPER_COPY", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_WHISPER_COPY", 0);
+#endif
+
 #ifdef ENABLE_RENDER_TARGET
 	PyModule_AddIntConstant(poModule, "ENABLE_RENDER_TARGET", 1);
 #else
@@ -2124,6 +2130,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_STATUS_ADD_BY_INPUT", 1);
 #else
 	PyModule_AddIntConstant(poModule, "ENABLE_STATUS_ADD_BY_INPUT", 0);
+#endif
+
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+	PyModule_AddIntConstant(poModule, "ENABLE_INVENTORY_SLOT_MARKING", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_INVENTORY_SLOT_MARKING", 0);
 #endif
 
 }

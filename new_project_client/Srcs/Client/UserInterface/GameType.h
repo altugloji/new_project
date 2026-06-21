@@ -1,5 +1,6 @@
 #pragma once
 #include "../GameLib/ItemData.h"
+#include "Locale_inc.h" // ENABLE_INVENTORY_SLOT_MARKING
 
 struct SAffects
 {
@@ -184,6 +185,21 @@ enum EWindows
 	GROUND,
 	WINDOW_TYPE_MAX,
 };
+
+#ifdef ENABLE_INVENTORY_SLOT_MARKING
+enum ETopWindowTypes
+{
+	ON_TOP_WND_NONE,
+	ON_TOP_WND_SHOP,
+	ON_TOP_WND_EXCHANGE,
+	ON_TOP_WND_SAFEBOX,
+	ON_TOP_WND_PRIVATE_SHOP,
+	ON_TOP_WND_ITEM_COMB,
+	ON_TOP_WND_PET_FEED,
+
+	ON_TOP_WND_MAX,
+};
+#endif
 
 enum EDSInventoryMaxNum
 {

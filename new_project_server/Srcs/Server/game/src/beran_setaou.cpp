@@ -304,8 +304,7 @@ void CBeranSetaou::EndDungeon(bool isSuccess)
 
 	if (!isSuccess) {
 		if (LPCHARACTER chBeran = CHARACTER_MANAGER::Instance().Find(m_bsVID)) {
-			chBeran->SetNoRewardFlag();
-			chBeran->Dead(nullptr, true);
+			chBeran->DeadNoReward(); // süre dolunca ödülsüz öldür: hasar tablosunu temizler + EXP'yi 0'lar, sonra Dead()
 		}
 	} else {
 		bool isEndLogWroten = false;

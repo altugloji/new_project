@@ -1,9 +1,6 @@
-75 silahlara 10 canavar eklenecek
 Ejder sisteminde slotların kesildikten sonra doğması kapatılacak. Metinler normal kalacak.
-Katakomb ve Kule itemlerinin ticaretini kapat.
-Kule questinde 7.katta zin-sa haritasında çift oda bugunu kapat. 
-Dönüşümlerde 3 eskrim 4 pul pnce 1 tane craft malzemesi
-
+Skill tooltipleri +20px geniş olsun
+Mobilde eğer item 72323 ise o itemin tooltipinde Preview (önizleme) butonu olsun. yani clientteki CTRL + SAĞ TIK
 Mobile ekrana Target diye bir buton koyacağız ona bastıgında en yakın hedefe sağ tıklayacak.
 
 

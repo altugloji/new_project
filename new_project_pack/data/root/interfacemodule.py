@@ -120,6 +120,8 @@ class Interface(object):
 		if app.ENABLE_WIKI:
 			self.wndWiki = None
 		self.windowOpenPosition = 0
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.onTopWindow = player.ON_TOP_WND_NONE
 		self.dlgWhisperWithoutTarget = None
 		self.inputDialog = None
 		self.tipBoard = None
@@ -291,6 +293,8 @@ class Interface(object):
 
 		wndMiniMap = uiMiniMap.MiniMap()
 		wndSafebox = uiSafebox.SafeboxWindow()
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			wndSafebox.BindInterface(self)
 
 		# ITEM_MALL
 		wndMall = uiSafebox.MallWindow()
@@ -335,6 +339,10 @@ class Interface(object):
 		self.dlgExchange.LoadDialog()
 		self.dlgExchange.SetCenterPosition()
 		self.dlgExchange.Hide()
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.dlgExchange.BindInterface(self)
+			self.dlgExchange.SetInven(self.wndInventory)
+			self.wndInventory.BindWindow(self.dlgExchange)
 
 		self.dlgPointReset = uiPointReset.PointResetDialog()
 		self.dlgPointReset.LoadDialog()
@@ -343,6 +351,8 @@ class Interface(object):
 		self.dlgShop = uiShop.ShopDialog()
 		self.dlgShop.LoadDialog()
 		self.dlgShop.Hide()
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.dlgShop.BindInterface(self)
 		if app.ENABLE_OFFLINE_SHOP:
 			from _weakref import proxy
 			self.dlgShop.interface = proxy(self)
@@ -383,9 +393,16 @@ class Interface(object):
 
 		self.privateShopBuilder = uiPrivateShopBuilder.PrivateShopBuilder()
 		self.privateShopBuilder.Hide()
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.privateShopBuilder.BindInterface(self)
+			self.privateShopBuilder.SetInven(self.wndInventory)
+			self.wndInventory.BindWindow(self.privateShopBuilder)
 
 		self.dlgRefineNew = uiRefine.RefineDialogNew()
 		self.dlgRefineNew.Hide()
+		if app.ENABLE_INVENTORY_SLOT_MARKING:
+			self.dlgRefineNew.SetInven(self.wndInventory)
+			self.wndInventory.BindWindow(self.dlgRefineNew)
 
 		if app.WJ_NEW_DROP_DIALOG:
 			self.deleteitem = uiDeleteItem.DeleteItem()
@@ -1130,6 +1147,10 @@ class Interface(object):
 		self.dlgExchange.Refresh()
 		if constInfo.ENABLE_EXCHANGE_ITEM_HIGHLIGHT and self.wndInventory:
 			self.wndInventory.RefreshBagSlotWindow()
+
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		def CantTradableItemExchange(self, dstSlotIndex, srcSlotIndex):
+			self.dlgExchange.CantTradableItem(dstSlotIndex, srcSlotIndex)
 
 	## Party
 	def AddPartyMember(self, pid, name):
@@ -2428,6 +2449,23 @@ class Interface(object):
 
 	def EmptyFunction(self):
 		pass
+
+	def GetInventoryPageIndex(self):
+		if self.wndInventory:
+			return self.wndInventory.GetInventoryPageIndex()
+		else:
+			return -1
+
+	if app.ENABLE_INVENTORY_SLOT_MARKING:
+		def SetOnTopWindow(self, onTopWnd):
+			self.onTopWindow = onTopWnd
+
+		def GetOnTopWindow(self):
+			return self.onTopWindow
+
+		def RefreshMarkInventoryBag(self):
+			if self.wndInventory:
+				self.wndInventory.RefreshMarkSlots()
 
 	if app.WJ_NEW_DROP_DIALOG:
 		def OpenDeleteItem(self):
