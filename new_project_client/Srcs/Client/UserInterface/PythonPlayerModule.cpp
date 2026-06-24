@@ -1244,7 +1244,7 @@ PyObject * playerGetISellItemPrice(PyObject * poSelf, PyObject * poArgs)
 #ifndef ENABLE_NO_SELL_PRICE_DIVIDED_BY_5
 	if ((pItemData->GetType() == CItemData::ITEM_TYPE_WEAPON || pItemData->GetType() == CItemData::ITEM_TYPE_ARMOR) && pItemData->GetLevelLimit() >= 40)
 	{
-		if (pItemData->GetType() == CItemData::ITEM_TYPE_WEAPON && pItemData->GetLevelLimit() >= 60)
+		if (pItemData->GetType() == CItemData::ITEM_TYPE_WEAPON && pItemData->GetLevelLimit() >= 50)
 			iPrice /= 15;
 		else
 			iPrice /= 10;

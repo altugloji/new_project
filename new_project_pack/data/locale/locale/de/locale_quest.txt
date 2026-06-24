@@ -13435,3 +13435,16 @@
 21550	Andere Gebiete
 21560	Schließen
 64186	Katakomben
+90301	Stallbursche:
+90302	Pferd verbessern
+90303	Dein Pferd hat die maximale Stufe erreicht.
+90304	Du möchtest also dein Pferd verbessern..
+90305	Reitstufe:
+90306	Nächste Stufe:
+90307	- Anforderungen -
+90308	:
+90309	Yang
+90310	Schließen
+90311	Benötigtes Item
+90312	Du hast nicht genug Yang bei dir.
+90313	Glückwunsch! Dein Pferd ist eine Stufe aufgestiegen.

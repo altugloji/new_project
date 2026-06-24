@@ -24,7 +24,7 @@ window = {
 			"width" : 185+30,
 			"height" : 417+17-5,
 			
-			"title" : "Toplu Nesne Islemleri",
+			"title" : "Hızlı sil sat (Delete/Sell)",
 
 			"children" :
 			(				
@@ -57,7 +57,7 @@ window = {
 					"width" : 61,
 					"height" : 21,
 
-					"text" : "Sil",
+					"text" : "Sil (x)",
 
 					"default_image" : "d:/ymir work/ui/public/middle_button_01.sub",
 					"over_image" : "d:/ymir work/ui/public/middle_button_02.sub",
@@ -81,7 +81,7 @@ window = {
 					"width" : 61,
 					"height" : 21,
 
-					"text" : "Sat",
+					"text" : "Sat ($)",
 
 					"default_image" : "d:/ymir work/ui/public/middle_button_01.sub",
 					"over_image" : "d:/ymir work/ui/public/middle_button_02.sub",

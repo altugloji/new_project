@@ -34,7 +34,7 @@
 34	[Guilde] Pas assez de place dans la banque de guilde.
 35	Il y a %s dans cette boîte.
 36	[Guilde] Vous pourrez quitter la guilde seulement 12 heures après avoir utilisé l'entrepôt de guilde.
-37	Guilde [%s] ! La cible ultime vient de s'afficher. Détruisez toutes les cibles et remportez ce combat !
+37	Guilde [%s] ! La cible ultime vient de s'afficher. Détruisez toutes les cibles et remportez ce combat !
 38	[Guilde] Le combat se termine dans 5 minutes.
 39	[Guilde] Le combat se termine dans 1 minute.
 40	[Guilde] Aucune guilde avec appel d'offre
@@ -44,7 +44,7 @@
 44	[Guilde] La porte qui mène au Repaire de Meley s'ouvre. Vous pouvez y rester une heure au maximum.
 45	[Guilde] Vous avez vaincu Meley, reine des dragons.
 46	Cette clé ne semble pas aller dans cette serrure.
-47	[Guilde] Temps nécessaire : %d min. %d sec.
+47	[Guilde] Temps nécessaire : %d min. %d sec.
 48	[Guilde] Pour votre propre sécurité, vous serez téléporté hors du Repaire dans 10 minutes.
 49	[Guilde] Le temps est écoulé.
 50	[Guilde] La porte du Repaire se referme.
@@ -78,7 +78,7 @@
 78	Vous avez baissé votre niveau de compétence.
 79	[Carte de monstre] Vous pouvez maintenant vous téléporter à proximité du monstre.
 80	[Guilde] Les combattants n'ont pas le droit d'assister à leur propre guerre de guilde.
-81	[Guilde] La guilde a fixé un niveau minimum pour les candidatures (niveau minimum : %d).
+81	[Guilde] La guilde a fixé un niveau minimum pour les candidatures (niveau minimum : %d).
 82	[Guilde] Vous pouvez effectuer une transaction toutes les 10 secondes.
 83	[Guilde] La guilde %s a acheté un terrain.
 84	[Guilde] Il y a déjà un combat dans le Temple du dragon sur un autre canal.
@@ -105,30 +105,30 @@
 105	Un évènement est en cours et vous octroie le double de points.
 106	L'évènement de la Zone de combat est terminé.
 107	Vous avez annoncé votre retrait et pourrez quitter la Zone de retrait dans %d minutes.
-108	Un joueur a annoncé son retrait. Tuez-le pour empocher des points bonus !
+108	Un joueur a annoncé son retrait. Tuez-le pour empocher des points bonus !
 109	Votre annonce de retrait est annulée.
 110	Pas assez de place dans l'inventaire pour recevoir la récompense.
 111	Cet objet ne peut être utilisé que dans un cybercafé.
 112	Votre annonce de retrait est active.
 113	Impossible d'accéder à la Zone de combat pour le moment.
-114	Splendide ! Vous avez atteint la %de place du classement de la Zone de combat. En conséquence, vous recevez cette distinction spéciale.
+114	Splendide ! Vous avez atteint la %de place du classement de la Zone de combat. En conséquence, vous recevez cette distinction spéciale.
 115	Vous avez %d point(s) pour le moment. Votre score total s'élève à %d.
 116	Vous ne pouvez pas utiliser cet objet pendant votre retrait de la Zone de combat.
 117	Vous ne pouvez pas déclarer la guerre depuis la Zone de combat.
 118	Impossible de réaliser cette action sur cette carte.
-119	Nombre restant : %d
+119	Nombre restant : %d
 120	[Gilde] La fortune de la guilde a atteint son niveau maximal.
 121	[Guilde] Impossible de retirer des Yangs tant que vous possédez plus de 2 milliards de Yangs.
 122	La limite est dépassée.
 123	[Guilde] Impossible de retirer des Yangs tant qu'une autre fenêtre est encore ouverte.
-124	La déclaration de guerre de guilde expire dans 3 minutes.
+124	La déclaration de guerre de guilde expire dans 3 minutes.
 125	%d secondes avant l'accès à la Zone de combat.
 126	%d secondes avant de quitter la Zone de combat.
-127	Vous avez perdu %d points. Points restants : %d
+127	Vous avez perdu %d points. Points restants : %d
 128	Vous n'avez malheureusement pas assez de place dans votre inventaire.
 129	Ce joueur ne vous rapporte pas de points.
 130	Vous avez annoncé votre retrait et pourrez quitter la Zone de combat dans %d secondes.
-131	L'évènement a commencé !
+131	L'évènement a commencé !
 132	Vous avez utilisé un gâteau de Lune ou un noyau.
 133	Pour poursuivre, supprimez %s de votre liste d'amis.
 134	%s est désormais bloqué.
@@ -138,10 +138,10 @@
 138	Débloquez %s pour continuer.
 139	%s vous a bloqué.
 140	Le monstre de l'évènement actuel a fait son apparition.
-141	Vous n'avez pas assez de fanions d'anniversaire !
-142	L'évènement de l'anniversaire a commencé !
+141	Vous n'avez pas assez de fanions d'anniversaire !
+142	L'évènement de l'anniversaire a commencé !
 143	Vous ne pouvez pas porter d'alliance si vous n'êtes pas marié(e).
-144	L'évènement de l'anniversaire prend fin dans %d minute(s).
+144	L'évènement de l'anniversaire prend fin dans %d minute(s).
 145	Vous ne pouvez pas utiliser cet objet pendant que vous portez un autre costume.
 146	Vous ne pouvez pas équiper cet objet lorsque vous portez une robe de mariée ou un smoking.
 147	Vous ne pouvez pas effectuer cette action tant que l'objet est équipé.
@@ -149,13 +149,13 @@
 149	[Guilde] Vous ne pouvez pas effectuer cette action pendant que vous versez ou prélevez des Yangs du compte de guilde.
 150	[Guilde] La fenêtre 'Verser des Yangs' ou 'Prélever des Yangs' est déjà ouverte.
 151	[Guilde] Lorsque vous avez invoqué un familier, vous ne pouvez pas verser ou prélever de Yangs du compte de guilde.
-152	%s apparaît ici : %s
+152	%s apparaît ici : %s
 153	Vallée de Seungryong
 154	Vous ne pouvez pas utiliser le détecteur d'évènement depuis cet endroit.
 155	Mont Sohan
 156	Désert de Yongbi
 157	Doyyumhwan
-158	L'évènement du Ramadan commence !
+158	L'évènement du Ramadan commence !
 159	L'évènement du Ramadan est terminé.
 160	Vous ne pouvez pas changer de canal.
 161	Merci de patienter quelques instants. Le changement de canal est en cours.
@@ -177,7 +177,7 @@
 177	[Gaya] Vous n'avez pas assez de Gayas.
 178	[Gaya] Vous ne pouvez pas acheter cet objet.
 179	[Gaya] Votre inventaire est plein.
-180	[Gaya] Vous n'avez pas de : réinit. bourse aux Gayas.
+180	[Gaya] Vous n'avez pas de : réinit. bourse aux Gayas.
 181	[Gaya] Vous devez d'abord ouvrir la bourse aux Gayas.
 182	[Gaya] Vous ne pouvez pas ouvrir d'emplacement supplémentaire dans la bourse aux Gayas.
 183	[Gaya] Vous n'avez pas suffisamment de %s. Vous devez en avoir %d de plus pour ouvrir un emplacement supplémentaire.
@@ -186,14 +186,14 @@
 186	[Gaya] Pour ouvrir la bourse aux Gayas, vous devez d'abord fermer les autres fenêtres.
 187	Le compas de la Metin ne fonctionne pas dans les donjons.
 188	[Groupe] La bataille a commencé.
-189	[Groupe] Vous disposez de 1 heure pour venir à bout du donjon.
+189	[Groupe] Vous disposez de 1 heure pour venir à bout du donjon.
 190	[Groupe] Vous avez accompli votre mission avec bravoure.
-191	[Groupe] Temps restant jusqu'à la téléportation : %d min et %d s
-192	[Groupe] Dans 10 minutes, vous serez transporté hors du donjon.
+191	[Groupe] Temps restant jusqu'à la téléportation : %d min et %d s
+192	[Groupe] Dans 10 minutes, vous serez transporté hors du donjon.
 193	[Groupe] Vous êtes maintenant inscrit au Repaire de Meley.
 194	[Groupe] Adressez-vous au PNJ compétent pour entrer.
 195	[Groupe] Vous avez abandonné.
-196	[Groupe] Dans 1 minute, vous serez emmené dans la cité.
+196	[Groupe] Dans 1 minute, vous serez emmené dans la cité.
 197	Allez voir %s pour obtenir votre récompense.
 198	Le compas de la Metin a disparu avec le halo mystérieux.
 199	[Groupe] La liste des meilleurs joueurs de la bataille en groupe au Repaire de Meley va être affichée.
@@ -201,7 +201,7 @@
 201	[Groupe] Le temps en donjon est écoulé.
 202	[Groupe] Vous avez quitté le donjon.
 203	[Groupe] Le donjon se termine dans %d minutes.
-204	Obtenez : %s - %d
+204	Obtenez : %s - %d
 205	Vous ne pouvez pas ouvrir de magasin tant que vous êtes transformé en pierre.
 206	Vous ne pouvez utiliser aucun objet tant que vous êtes transformé en pierre.
 207	Cette commande ne s'exécute que dans le Temple du zodiaque.
@@ -221,9 +221,9 @@
 221	Vous trouvez un morceau de pierre dans la palourde.
 222	Tous les membres sont transformés en pierre. La mission a échoué.
 223	Tous les niveaux sont terminés. Vous allez maintenant être téléportés vers le niveau bonus.
-224	Mission terminée. Dès que le chef de groupe appuie sur le bouton « Passer », vous serez immédiatement téléportés vers le niveau %d.
+224	Mission terminée. Dès que le chef de groupe appuie sur le bouton « Passer », vous serez immédiatement téléportés vers le niveau %d.
 225	La mission a échoué.
-226	Temps écoulé ! Le temps à passer dans le donjon est écoulé si personne ne ressuscite dans la minute qui suit.
+226	Temps écoulé ! Le temps à passer dans le donjon est écoulé si personne ne ressuscite dans la minute qui suit.
 227	Le temps est écoulé.
 228	Les portes de ce temple s'ouvrent sur une nouvelle journée.
 229	Tous les membres du groupe doivent se trouver sur la même carte pour entrer.
@@ -232,11 +232,11 @@
 232	La palourde a disparu.
 233	Il n'y a pas de Temple du zodiaque sur cette carte.
 234	Détruisez des pierres Metins.
-235	Niveau bonus : détruisez des pierres Metins.
+235	Niveau bonus : détruisez des pierres Metins.
 236	Détruisez des pierres Metins.
 237	Détruisez des pierres Metins.
-238	Triomphez de 5 boss du zodiaque.
-239	Niveau bonus : vous pouvez maintenant faire le plein de provisions auprès du marchand pendant 5 minutes.
+238	Triomphez de 5 boss du zodiaque.
+239	Niveau bonus : vous pouvez maintenant faire le plein de provisions auprès du marchand pendant 5 minutes.
 240	Détruisez des pierres Metins.
 241	Détruisez des pierres Metins.
 242	Détruisez toutes les pierres Metin.
@@ -257,36 +257,36 @@
 257	Éliminez tous les monstres sans mourir.
 258	Le temps est écoulé. Retentez votre chance la prochaine fois.
 259	Triomphez du boss du zodiaque.
-260	Battez tous vos adversaires !
-261	Niveau bonus : détruisez une pierre Metin.
+260	Battez tous vos adversaires !
+261	Niveau bonus : détruisez une pierre Metin.
 262	Détruisez une pierre Metin. Si la mission est une réussite, vous recevrez un bonus.
-263	Il vous reste encore %d min pour vous inscrire au tournoi JcJ !
+263	Il vous reste encore %d min pour vous inscrire au tournoi JcJ !
 264	Il y a une Perle de sang à l'intérieur du coquillage.
 265	Vous ne pouvez pas entrer dans l'arène de combat du tournoi JcJ.
 266	Vous ne pouvez pas vous transformer pendant le tournoi JcJ.
-267	Encore %d et le combat commence !
+267	Encore %d et le combat commence !
 268	La bataille a commencé.
-269	Gagnant : %s/perdant : %s
+269	Gagnant : %s/perdant : %s
 270	%s a quitté l'arène. %s a gagné.
 271	L'inscription au tournoi JcJ est désormais clôturée.
-272	Le tournoi JcJ commence dans %d min.
+272	Le tournoi JcJ commence dans %d min.
 273	Finale
 274	Il n'est pas facile de comprendre ce livre.
 275	Demi-finale
 276	%ue partie
 277	Aucun vainqueur
 278	Le tournoi JcJ est terminé.
-279	Le vainqueur du tournoi est %s !
-280	Participants : %s
-281	Participants restants : %u
-282	Participants actuels : %u
+279	Le vainqueur du tournoi est %s !
+280	Participants : %s
+281	Participants restants : %u
+282	Participants actuels : %u
 283	Vous vous êtes inscrit au tournoi JcJ.
 284	Ce livre ne peut pas vous aider.
 285	Vous ne vous êtes pas inscrit au tournoi JcJ.
 286	Cette commande ne s'exécute que sur la carte du tournoi JcJ.
-287	Le jeu de Yutnori a commencé !
+287	Le jeu de Yutnori a commencé !
 288	Collectez des troncs de bouleau pour fabriquer des plateaux de jeu de Yutnori et participez à un minijeu passionnant.
-289	De formidables prix vous attendent !
+289	De formidables prix vous attendent !
 290	Le jeu de Yutnori est terminé.
 291	Rejoignez la table de Yutnori pour obtenir votre récompense.
 293	[Système d'âme] Utilisez %s pour obtenir l'effet.
@@ -316,12 +316,12 @@
 317	Il vous faut encore %dx %s.
 318	L'évènement est terminé. Vous ne pouvez plus utiliser cet objet.
 319	Le niveau maximum a déjà été atteint.
-320	Succès ! L'effet du %s est passé au niveau supérieur %d.
-321	Échec ! L'amélioration de l'effet du %s pour atteindre le niveau %d a échoué.
-322	Succès ! Dès maintenant, l'effet du %s est actif.
-323	Échec ! Le remplacement par l'effet du %s a échoué.
-324	Succès ! L'effet du %s est actif dès maintenant.
-325	Échec ! L'effet du %s n'a pas été activé.
+320	Succès ! L'effet du %s est passé au niveau supérieur %d.
+321	Échec ! L'amélioration de l'effet du %s pour atteindre le niveau %d a échoué.
+322	Succès ! Dès maintenant, l'effet du %s est actif.
+323	Échec ! Le remplacement par l'effet du %s a échoué.
+324	Succès ! L'effet du %s est actif dès maintenant.
+325	Échec ! L'effet du %s n'a pas été activé.
 326	L'évènement saison florale a commencé.
 327	La Guilde %s a capturé le drapeau de la Guilde %s !
 328	Vous comprenez déjà cette langue.
@@ -334,42 +334,42 @@
 335	[Guilde] Vous ne pouvez pas utiliser de compétences de guilde dans le champ de guerre de guilde.
 336	[Guilde] Ceci est uniquement utilisable dans le cadre d'une guerre de guilde.
 337	Vous avez reçu %d Wons.
-338	[Guilde] Versement : %d Yangs
+338	[Guilde] Versement : %d Yangs
 339	Vous ne pouvez plus augmenter cette compétence.
 340	[Guilde] L'achat a été interrompu, car vous possédez déjà du terrain de guilde.
 341	[Guilde] L'achat a été interrompu, car votre guilde possède déjà du terrain de guilde.
 342	[Chasse au roi] Vous n'avez pas assez de points pour empocher une récompense.
-343	[Chasse au roi] Faites une partie de « Chasse au roi » !
-344	Évènement Okey : éliminez des monstres, collectionnez des cartes et jouez une partie d'Okey.
-345	Évènement Okey : des prix de grande valeur vous attendent !
-346	[Chasse au roi] La « Chasse au roi » est terminée.
+343	[Chasse au roi] Faites une partie de « Chasse au roi » !
+344	Évènement Okey : éliminez des monstres, collectionnez des cartes et jouez une partie d'Okey.
+345	Évènement Okey : des prix de grande valeur vous attendent !
+346	[Chasse au roi] La « Chasse au roi » est terminée.
 349	[Chasse au roi] %s a marqué %d points à la Chasse au roi.
 350	Vous devez augmenter votre niveau pour comprendre ce livre.
 351	Vous avez déjà utilisé l'élixir du chercheur.
-352	Le donjon « Défense du navire » est prêt. Le pêcheur va vous laisser monter à bord.
-353	Des monstres marins nous attaquent ! Préparez-vous au combat !
-354	Ils attaquent à nouveau ! Soyez prêts à combattre !
-355	Terre ! Vous avez réussi à défendre le mât et avez atteint le nouveau continent après un long périple. Continuez jusqu'au portail.
+352	Le donjon « Défense du navire » est prêt. Le pêcheur va vous laisser monter à bord.
+353	Des monstres marins nous attaquent ! Préparez-vous au combat !
+354	Ils attaquent à nouveau ! Soyez prêts à combattre !
+355	Terre ! Vous avez réussi à défendre le mât et avez atteint le nouveau continent après un long périple. Continuez jusqu'au portail.
 356	Votre mât est détruit. Vous avez combattu avec bravoure, mais la bataille est perdue.
-357	Vous devez abandonner le navire dans %d secondes.
-358	Vous devez abandonner le navire dans %d minutes.
-359	La bataille navale commence dans %d secondes.
+357	Vous devez abandonner le navire dans %d secondes.
+358	Vous devez abandonner le navire dans %d minutes.
+359	La bataille navale commence dans %d secondes.
 360	Ce livre est difficile à apprendre.
-361	Dépêchez-vous ! Vous avez %d minutes pour accéder à la terre ferme en utilisant le portail.
+361	Dépêchez-vous ! Vous avez %d minutes pour accéder à la terre ferme en utilisant le portail.
 362	Vous devez maintenant quitter le navire car vous n'avez pas lancé la bataille navale.
-363	Si vous ne lancez pas la bataille navale dans un délai de 1 minute, vous devrez quitter le navire.
-364	PV restants de %s : %d %%
-365	Sauve qui peut ! Le mât est détruit et votre bateau coule ! Vous allez maintenant être téléporté au Cap du Feu dragonesque.
-366	%d. Vague : pendant %d secondes, vous devez défendre le %s de toutes vos forces.
-367	%d. Vague : pendant que vous défendez le %s, vous devez vaincre %s.
-368	Vous avez réussi à défendre le mât. Continuez comme ça ! Préparez-vous pour la vague suivante.
-369	La vague suivante commence dans %d secondes.
+363	Si vous ne lancez pas la bataille navale dans un délai de 1 minute, vous devrez quitter le navire.
+364	PV restants de %s : %d %%
+365	Sauve qui peut ! Le mât est détruit et votre bateau coule ! Vous allez maintenant être téléporté au Cap du Feu dragonesque.
+366	%d. Vague : pendant %d secondes, vous devez défendre le %s de toutes vos forces.
+367	%d. Vague : pendant que vous défendez le %s, vous devez vaincre %s.
+368	Vous avez réussi à défendre le mât. Continuez comme ça ! Préparez-vous pour la vague suivante.
+369	La vague suivante commence dans %d secondes.
 370	%s
 371	Vous ne pouvez pas en apprendre plus avec ce livre.
-372	Vous ne pouvez pas vous retirer des combats avant %d secondes.
+372	Vous ne pouvez pas vous retirer des combats avant %d secondes.
 373	Vous ne pouvez pas exécuter cette action pour le moment.
 374	Après avoir ouvert la boîte aux lettres, vous devez attendre %d secondes avant de pouvoir changer de canal ou vous téléporter.
-375	Les taxes sont fixées à %d %%.
+375	Les taxes sont fixées à %d %%.
 376	Vous ne pouvez apprendre l'équitation qu'à partir du niveau 50.
 377	Vous avez repoussé la malédiction du mauvais Esprit avec l'aide d'un parchemin d'exorcisme.
 378	Vous ne pouvez plus lire de livres d'équitation.
@@ -437,7 +437,7 @@
 440	Vous ne pouvez pas utiliser le parchemin du lieu pendant %d secondes après un échange.
 441	Vous ne pouvez pas ouvrir un espace de stockage si une autre fenêtre est déjà ouverte.
 442	Vous ne pouvez pas lâcher cet objet.
-443	L'objet abandonné disparaîtra dans 5 minutes.
+443	L'objet abandonné disparaîtra dans 5 minutes.
 444	Vous avez reçu %s.
 445	Vous portez trop d'objets.
 446	%s reçoit %s.
@@ -471,7 +471,7 @@
 474	[Guilde] Vous ne pouvez pas créer de Guilde.
 475	La Guilde %s a déclaré la guerre à la Guilde %s !
 476	[Guilde] %s a refusé la guerre de Guildes.
-477	La guerre de guilde entre %s et %s commencera dans quelques minutes !
+477	La guerre de guilde entre %s et %s commencera dans quelques minutes !
 478	La guerre entre la Guilde %s et la Guilde %s a démarré !
 479	La guerre entre la Guilde %s et la Guilde %s se termine en match nul.
 480	La Guilde %s a gagné la guerre contre la Guilde %s .
@@ -841,7 +841,7 @@
 844	Votre numéro de confirmation est incorrect. Essayez à nouveau s'il vous plaît.
 845	Le numéro de téléphone portable est enregistré.
 846	Vous ne pouvez vous téléporter jusqu'à ce joueur.
-847	OX Le prix a été remis : %d, %d unité.
+847	OX Le prix a été remis : %d, %d unité.
 848	Le joueur est déconnecté.
 849	Le joueur est sur le canal %d (Vous êtes sur le canal %d).
 850	Vous ne pouvez vous rendre ailleurs durant %d secondes après avoir ouvert un magasin.
@@ -867,7 +867,7 @@
 870	Les combattants ont été séparé. Le duel est arrété.
 871	Le quota d'objets lâchés est augmenté de %d%%.
 872	Pour l'instant, le quota de Yangs lâchés est de %d%% supérieur.
-873	En ce moment, le taux de butin de la pluie de Yangs est augmenté de %d %%.
+873	En ce moment, le taux de butin de la pluie de Yangs est augmenté de %d %%.
 874	Le bonus d'expérience est augmenté de %d%%.
 875	La version du client du jeu n'est pas correcte. Veuillez installer le patch prévu.
 876	Vous ne pouvez pas échanger dans le magasin tant qu'une autre fenêtre est ouverte.
@@ -899,8 +899,8 @@
 902	Score actuel Shinsoo: %d, Chunjo: %d, Jinno: %d
 903	La réponse correcte est.
 904	%s deadcount %d Empire %d killcount %d(Purpose %d) killmobcount %d, RegenFlag %d
-905	Le Diable du lieu sacré : [ENTER][ENTER]
-906	, vous n'avez pas le droit d'être là ! Dans 10 secondes, les membres de votre empire quitteront ce sol sacré.
+905	Le Diable du lieu sacré : [ENTER][ENTER]
+906	, vous n'avez pas le droit d'être là ! Dans 10 secondes, les membres de votre empire quitteront ce sol sacré.
 907	L'Empire %s a été battu et abandonne la guerre de Empires.
 908	Nombre de monstres dans la guerre de Empires.
 909	Vous avez battu les défenseurs du Lieu sacré, vous allez le devenir à votre tour.
@@ -949,7 +949,7 @@
 952	Ça n'a pas marché. C'est infernal !
 953	Entraînement a échoué. Veuillez réessayer plus tard.
 954	Mon corps est chargé de puissance !
-955	L’entraînement semble déjà porter ses fruits...
+955	L'entraînement semble déjà porter ses fruits...
 956	Vous avez terminé votre entraînement grâce au livre avec succès.
 957	Vous ne pouvez pas lire ceci car il vous manque de l'expérience.
 958	Question.
@@ -1024,7 +1024,7 @@
 1028	%d heures %d minutes %d secondes avant la fin de votre bannissement du chat.
 1029	%d heures %d secondes avant la fin de votre bannissement du chat
 1030	%d minutes %d secondes avant la fin de votre bannissement du chat
-1031	Taux de butin : pluie de Yangs
+1031	Taux de butin : pluie de Yangs
 1032	Il n'y a pas de pierre qui puisse être enlevée.
 1033	Ne peut pas encore servir.
 1034	La limite maximale de temps du serveur test a été dépassée.
@@ -1066,7 +1066,7 @@
 1071	Pour le moment, il n'y a pas de pierre Metin sur cette carte.
 1072	La durée d'action restante de la pierre-dragon a pu être extraite.
 1073	L'extraction de la durée d'action restante a échoué.
-1074	Le dessertissage de la pierre-dragon a échoué mais vous avez reçu ceci : %s
+1074	Le dessertissage de la pierre-dragon a échoué mais vous avez reçu ceci : %s
 1075	Le dessertissage de la pierre-dragon a échoué.
 1076	Cet objet n'est pas nécessaire à l'amélioration du degré de pureté.
 1077	Cet objet ne peut être amélioré de cette façon.
@@ -1118,21 +1118,21 @@
 1123	L'étole ne peut pas absorber de bonus supplémentaires.
 1124	Vous pouvez uniquement utiliser des étoles.
 1125	Ces étoles ne peuvent pas être fusionnées.
-1126	Fusion ratée !
-1127	Fusion réussie !
+1126	Fusion ratée !
+1127	Fusion réussie !
 1128	Vous n'avez pas assez de Yangs pour la fusion.
 1129	Vous ne pouvez pas utiliser cet objet tant que les fenêtres d'absorption et de fusion sont ouvertes.
 1130	Il n'y a pas assez de place dans l'inventaire.
-1131	%s a réussi ! %d%% de taux absorption sur le nouveau %s. Félicitations !
+1131	%s a réussi ! %d%% de taux absorption sur le nouveau %s. Félicitations !
 1132	Vous ne pouvez pas utiliser un objet lié à l'âme.
 1133	Vous ne pouvez pas vendre les objets que vous êtes en train d'utiliser dans un magasin privé.
 1134	Vous ne pouvez pas utiliser le paquet en étant à cheval.
 1135	Temps écoulé. Fin du premier tour.
 1136	Temps écoulé. Fin du second tour.
-1137	Temps restant pour finir le premier tour : %d minutes.
+1137	Temps restant pour finir le premier tour : %d minutes.
 1138	Temps restant pour finir le second tour : %d minutes.
 1139	La zone de sécurité est désactivée.
-1140	Temps restant avant la désactivation de la zone de sécurité : %d minutes.
+1140	Temps restant avant la désactivation de la zone de sécurité : %d minutes.
 1141	Dans un empire étranger, vous ne pouvez pas vous téléporter vers un endroit sûr.
 1142	La réponse apparaîtra dans 20 secondes.
 1143	Dans 15 secondes, les participants ayant mal répondu à la question devront partir.
@@ -1140,16 +1140,16 @@
 1145	Aucun objet n'a été choisi pour la fusion.
 1146	Vous avez appelé %s.
 1147	Vous avez renvoyé %s.
-1148	%s a atteint le niveau %d !
+1148	%s a atteint le niveau %d !
 1149	%s est en train de dormir.
-1150	%s vient d'éclore !
+1150	%s vient d'éclore !
 1151	Votre familier mange les fortifiants avec appétit.
 1152	Vous n'avez pas assez de PV.
 1153	%s se réveille et se jette sur la délicieuse nourriture.
 1154	%s se trouve maintenant dans un sac de transport.
 1155	%s sort du sac de transport.
-1156	%s atteint le niveau %s ! Magnifique !
-1157	%s refuse de se nourrir !
+1156	%s atteint le niveau %s ! Magnifique !
+1157	%s refuse de se nourrir !
 1158	L'évènement est terminé, car aucun empire n'a souhaité y participer
 1159	Vous avez transféré vos bonus avec succès.
 1160	Vous n'avez pas assez de Yangs pour échanger les livres.
@@ -1166,14 +1166,14 @@
 1171	Le nom entré est trop court.
 1172	Vous atteindrez la destination %d secondes après l'exécution.
 1173	Vous n'avez pas assez de Yangs.
-1174	Votre familier apprend rapidement ses nouvelles compétences, vous l'entraînez bien !
+1174	Votre familier apprend rapidement ses nouvelles compétences, vous l'entraînez bien !
 1175	L'expérience est passée à %d points.
 1176	Votre familier a déjà appris cette compétence et refuse l'entraînement.
 1177	Compétence %s activée. PV restaurés de %d.
 1178	Procurez-vous le livre de familier vaillant pour l'entraînement héroïque de votre familier.
 1179	Pour entraîner le familier et lui faire atteindre le niveau supérieur, il doit avoir le niveau %d.
 1180	Pour entraîner le familier et lui faire atteindre le niveau supérieur, il doit être âgé de %d jours.
-1181	Pour entraîner le familier et lui faire atteindre le niveau supérieur, il doit avoir 100 % d'expérience.
+1181	Pour entraîner le familier et lui faire atteindre le niveau supérieur, il doit avoir 100 % d'expérience.
 1182	L'effet %s a été activé.
 1183	Votre niveau n'est pas assez élevé pour pouvoir utiliser cet objet.
 1184	L'effet %s n'a pas été activé.
@@ -1189,32 +1189,32 @@
 1194	Vous pouvez utiliser un gâteau de Lune toutes les 5 secondes.
 1195	%s est insuffisant. Il vous faut %d pour atteindre le niveau supérieur.
 1196	Le niveau du familier ne peut pas dépasser celui du joueur.
-1197	Niveau : jeune
-1198	Niveau : sauvage
-1199	Niveau : vaillant
-1200	Niveau : entraînement héroïque
-1201	@*** Jet de dés pour l'objet suivant : %s ***
-1202	@*** ->%*s - résultat des dés : %4d ***
-1203	$*** Le gagnant de l'objet %s est : %s ***
-1204	Nouveau taux d'absorption : %d
+1197	Niveau : jeune
+1198	Niveau : sauvage
+1199	Niveau : vaillant
+1200	Niveau : entraînement héroïque
+1201	@*** Jet de dés pour l'objet suivant : %s ***
+1202	@*** ->%*s - résultat des dés : %4d ***
+1203	$*** Le gagnant de l'objet %s est : %s ***
+1204	Nouveau taux d'absorption : %d
 1205	Vous ne pouvez utiliser cet objet durant un duel.
 1206	Le taux d'absorption maximal est atteint.
 1207	Vous avez déjà appris cette compétence.
 1208	Aucun objet ne correspond à votre recherche.
 1209	Un nombre suffisant de Citrouilles-lanternes a été collecté.
 1210	Réclamez votre récompense à Sam Citrouille.
-1211	L'évènement d'Halloween commence !
-1212	Allez parler à Sam Citrouille !
-1213	L'évènement d'Halloween se termine. N'oubliez pas de récupérer vos récompenses !
-1214	Citrouilles-lanternes déposées : %d
-1215	Total de Citrouilles-lanternes : %d
+1211	L'évènement d'Halloween commence !
+1212	Allez parler à Sam Citrouille !
+1213	L'évènement d'Halloween se termine. N'oubliez pas de récupérer vos récompenses !
+1214	Citrouilles-lanternes déposées : %d
+1215	Total de Citrouilles-lanternes : %d
 1216	Vous avez gagné %d Yangs.
 1217	Vous ne pouvez faire de feu de camp ici.
 1218	Ce joueur fait déjà un échange avec un autre joueur.
 1219	Il faut d'abord vous équiper d'une arme.
 1220	Vous ne pouvez pas choisir ce costume pour cette arme.
 1221	Si vous souhaitez changer d'arme, vous devez d'abord retirer l'apparence d'arme.
-1224	Votre partie Okey a débuté !
+1224	Votre partie Okey a débuté !
 1225	Vous ne pouvez pas piocher de carte supplémentaire.
 1226	Vous ne pouvez pas vous défausser de cartes quand vous avez sélectionné des cartes.
 1227	Vous ne pouvez pas piocher de carte quand vous avez sélectionné des cartes.
@@ -1222,27 +1222,27 @@
 1229	Votre inventaire est plein.
 1230	Vous pourrez obtenir votre prix une fois qu'il y aura de la place dans votre inventaire.
 1231	%s a collecté %d points dans une partie Okey.
-1233	L'évènement Okey commence !
-1234	L'évènement Okey est terminé !
-1235	Évènement Okey : si vous êtes parvenu à faire partie de la liste des meilleurs dans le classement, vous avez 7 jours à partir de maintenant pour aller chercher votre prix.
+1233	L'évènement Okey commence !
+1234	L'évènement Okey est terminé !
+1235	Évènement Okey : si vous êtes parvenu à faire partie de la liste des meilleurs dans le classement, vous avez 7 jours à partir de maintenant pour aller chercher votre prix.
 1236	Vous ne pouvez pas effectuer cette action pendant que vous jouez à Okey.
 1237	Fermé. Vous devez trouver la clé.
 1238	La pierre rituelle ne fonctionne que sur des objets de niveau supérieur à 80.
-1239	Vous ne pouvez pas échanger, car vous avez dépassé le montant maximal de %d Wons.
+1239	Vous ne pouvez pas échanger, car vous avez dépassé le montant maximal de %d Wons.
 1240	Vous n'avez pas assez de Yangs.
 1241	Vous n'avez pas assez de Wons.
 1242	Vous ne pouvez pas effectuer d'échange, car vous n'avez pas assez de Wons.
 1243	Vous ne pouvez pas effectuer d'échange, car vous n'avez pas assez de Yangs.
-1244	Vous ne pouvez pas ouvrir de magasin privé, car vous avez dépassé le montant maximal de %d Wons.
+1244	Vous ne pouvez pas ouvrir de magasin privé, car vous avez dépassé le montant maximal de %d Wons.
 1245	Vous ne pouvez pas agrandir l'inventaire pendant que vous échanger.
-1246	L'évènement Okey commence !
-1247	L'évènement Okey est terminé !
+1246	L'évènement Okey commence !
+1247	L'évènement Okey est terminé !
 1248	Cet objet ne peut pas être ouvert au moyen d'une clé.
-1249	Des monstres apparaissent dans la vallée de Seungryong, sur le mont Sohan, au Doyyumhwan et dans le désert Yongbi !
+1249	Des monstres apparaissent dans la vallée de Seungryong, sur le mont Sohan, au Doyyumhwan et dans le désert Yongbi !
 1250	Passez ces zones au peigne fin pour les éliminer. Cumulez des points de vie pour les échanger contre des coffres.
 1251	L'évènement du chasseur de boss va prendre fin dans %d minute(s).
 1252	Monsieur Lapin et les boss vont disparaître dans %d minute(s).
-1253	Vous avez atteint votre objectif de la journée : vous pouvez récupérer votre récompense.
+1253	Vous avez atteint votre objectif de la journée : vous pouvez récupérer votre récompense.
 1254	Vous ne pouvez pas utiliser d'apparence d'arme lorsque vous portez une robe de mariage ou un smoking.
 1255	Vous ne pouvez pas échanger avec ce joueur, car il est déjà occupé.
 1256	Vous ne pouvez pas porter de robe de mariage ou de smoking lorsque vous utilisez une apparence d'arme.
@@ -1288,7 +1288,7 @@
 1296	[Guilde] Quelqu'un utilise déjà l'entrepôt de guilde.
 1297	[Guilde] Vous devez attendre 10 secondes avant d'ouvrir à nouveau l'entrepôt de guilde.
 1298	[Guilde] Votre guilde n'a pas d'entrepôt de guilde.
-1299	Découvrez ce qui était dans la boîte !
+1299	Découvrez ce qui était dans la boîte !
 1300	[Guilde] Ce joueur a répondu par la négative au sondage. Merci de réessayer dans %d mois, %d jours, %d heures et %d minutes.
 1301	[Guilde] Ce membre a été supprimé de la guilde pour cause d'inactivité.
 1302	[Guilde] Vous avez participé au sondage en cours.
@@ -1317,9 +1317,9 @@
 1331	Une étole sans bonus ne peut pas être l'original d'un transfert.
 1332	Vous ne pouvez pas transférer le bonus, car les taux d'absorption sont différents.
 1333	Vous ne pouvez pas transférer le bonus, car les rangs des étoles sont différents.
-1334	Échec ! Le taux d'absorption diminue de 1 %.
-1335	Réussite partielle ! Le taux d'absorption diminue de 1 %.
-1336	Réussite totale ! Le bonus a été transféré comme vous le souhaitiez.
+1334	Échec ! Le taux d'absorption diminue de 1 %.
+1335	Réussite partielle ! Le taux d'absorption diminue de 1 %.
+1336	Réussite totale ! Le bonus a été transféré comme vous le souhaitiez.
 1337	Pendant le transfert de bonus, vous ne pouvez pas abandonner d'objets.
 1338	Pendant le transfert de bonus, vous ne pouvez pas déplacer des objets.
 1339	Pendant le transfert de bonus, vous ne pouvez pas vendre des objets.
@@ -1334,36 +1334,36 @@
 1348	Pendant que votre partenaire d'échange modifie les statistiques de son familier, vous ne pouvez pas commercer avec lui.
 1349	Pendant que vous modifiez les statistiques de votre familier, vous ne pouvez parler à un PNJ.
 1350	Les statistiques de votre familier ont changé.
-1351	Vous pouvez l'ouvrir 3 secondes après avoir fermé la fenêtre de transformation des statistiques de familier.
+1351	Vous pouvez l'ouvrir 3 secondes après avoir fermé la fenêtre de transformation des statistiques de familier.
 1352	Tous les emplacements sont occupés.
 1399	Ce joueur ne peut pas accepter votre invitation pour le moment.
 1400	Après avoir utilisé la couleur des empires, vous ne pouvez plus accepter d'invitations dans cet empire.
-1401	La compétence de familier %s a été activée : %s utilise la Foulée de plume.
+1401	La compétence de familier %s a été activée : %s utilise la Foulée de plume.
 1403	Un nom a déjà été enregistré.
 1404	Avant d'utiliser cet objet, vérifie que tu as bien retiré la pierre-dragon équipée.
 1405	Vous ne pouvez pas déclarer une guerre de guilde ici.
 1406	Récompense
 1407	Récompense pour le rang %d
-1408	Le boss a été vaincu ! Vous serez téléporté au Temple du zodiaque dans un instant.
+1408	Le boss a été vaincu ! Vous serez téléporté au Temple du zodiaque dans un instant.
 1409	Malheureusement, vous n'êtes pas venu à bout de l'apocalypse. Vous serez téléporté au Temple du zodiaque dans un instant.
-1410	Vous êtes entré dans le donjon %s au niveau de difficulté %d. Le combat commence dans %d secondes.
+1410	Vous êtes entré dans le donjon %s au niveau de difficulté %d. Le combat commence dans %d secondes.
 1411	Vous ne pouvez pas parler à un PNJ tant que votre coffret bonne fortune est ouvert.
 1412	Vous ne pouvez pas utiliser d'objet tant que votre coffret bonne fortune est ouvert.
 1413	Vous ne pouvez pas lâcher d'objet tant que votre coffret bonne fortune est ouvert.
 1414	Vous ne pouvez pas déplacer d'objet tant que votre coffret bonne fortune est ouvert.
 1415	Vous ne pouvez pas échanger d'objet tant que votre coffret bonne fortune est ouvert.
 1416	Vous ne pouvez pas échanger d'objet avec quelqu'un d'autre tant que son coffret bonne fortune est ouvert.
-1417	Vous être entré dans le donjon %s. Le combat commence dans %d secondes.
+1417	Vous être entré dans le donjon %s. Le combat commence dans %d secondes.
 1418	L'apocalypse du zodiaque n'a pas lieu pour le moment.
 1419	L'apocalypse du zodiaque a déjà commencé.
 1420	Le bonus de votre pierre-dragon a été modifié.
-1421	Chasse au roi : éliminez des monstres pour collecter des cartes royales. Vous avez besoin de 25 cartes pour constituer un jeu royal.
-1422	Chasse au roi : une multitude de prix somptueux vous tend les bras !
-1423	Chasse au roi : si vous êtes parvenu à faire partie de la liste des meilleurs dans le classement, vous obtenez vos gains à la table de jeu.
-1426	Vous avez reçu le bonus de stockage suivant : %d%% d'EXP.
-1427	Vous avez reçu le bonus de stockage suivant : %d de défense.
-1428	Vous avez reçu le bonus de stockage suivant : %d%% de PV.
-1429	Vous avez reçu le bonus de stockage suivant : %d%% de force contre les monstres.
+1421	Chasse au roi : éliminez des monstres pour collecter des cartes royales. Vous avez besoin de 25 cartes pour constituer un jeu royal.
+1422	Chasse au roi : une multitude de prix somptueux vous tend les bras !
+1423	Chasse au roi : si vous êtes parvenu à faire partie de la liste des meilleurs dans le classement, vous obtenez vos gains à la table de jeu.
+1426	Vous avez reçu le bonus de stockage suivant : %d%% d'EXP.
+1427	Vous avez reçu le bonus de stockage suivant : %d de défense.
+1428	Vous avez reçu le bonus de stockage suivant : %d%% de PV.
+1429	Vous avez reçu le bonus de stockage suivant : %d%% de force contre les monstres.
 1430	Vérifiez la place disponible dans votre inventaire avant de partir à la pêche.
 1431	Vous ne pouvez pas déplacer d'objet tant que la fenêtre de modification de bonus est ouverte.
 1432	Vous partez bredouille. Aucun trésor ne se trouvait dans le ventre du poisson.
@@ -1375,7 +1375,7 @@
 1438	Vous ne pouvez pas effectuer cette action tant que la fenêtre de transfert de bonus est ouverte.
 1439	Vous ne pouvez pas pêcher tant que d'autres fenêtres sont ouvertes.
 1440	Vous ne pouvez pas effectuer cette action pendant que vous pêchez.
-1441	Temps restant : %.2f | Niveau de difficulté du poisson : %u | Réduction du niveau de difficulté : %d
+1441	Temps restant : %.2f | Niveau de difficulté du poisson : %u | Réduction du niveau de difficulté : %d
 1442	Tous les classements de la Zone de combat ont été réinitialisés.
 1443	Livrer l'apparence d'arme équipée
 1444	Il n'y a pas assez de place dans l'inventaire.
@@ -1383,9 +1383,9 @@
 1451	L'amélioration de %s a réussi.
 1452	L'Autel sanglant est apparu.
 1453	Vous avez capturé une âme.
-1454	Rituel sanglant : vous n'avez pas suffisamment de place dans l'inventaire
-1455	Rituel sanglant : vous n'avez pas suffisamment d'âmes.
-1456	Rituel sanglant : vous n'avez pas suffisamment de Yangs.
+1454	Rituel sanglant : vous n'avez pas suffisamment de place dans l'inventaire
+1455	Rituel sanglant : vous n'avez pas suffisamment d'âmes.
+1456	Rituel sanglant : vous n'avez pas suffisamment de Yangs.
 1457	Le rituel sanglant commence. Procurez-vous des objets spéciaux pour obtenir de meilleures récompenses.
 1458	Le rituel sanglant est terminé. Réessayez une autre fois.
 1459	Le changement d'amélioration a échoué.
@@ -1394,7 +1394,7 @@
 1462	Vous ne pouvez pas faire cela pendant que vous effectuez une autre action.
 1463	Vous ne pouvez pas faire cela pendant que vous effectuez une autre action.
 1464	Vous ne pouvez pas améliorer votre arme alors que votre familier est appelé.
-1465	Vous devez disposer de %d emplacements verticaux dans votre inventaire pour ouvrir la caisse.
+1465	Vous devez disposer de %d emplacements verticaux dans votre inventaire pour ouvrir la caisse.
 1466	Vous n'avez pas suffisamment de place dans l'inventaire.
 1467	[Entrepôt] Un objet en cours d'utilisation ne peut pas être entreposé.
 1468	[Aura] Le fonctionnement est impossible avec les objets liés à l'âme.
@@ -1410,41 +1410,41 @@
 1478	[Aura] Vous ne pouvez faire progresser votre tenue d'aura qu'une fois que vous l'avez améliorée.
 1479	[Aura] Vous devez ajouter des objets.
 1480	[Aura] Amélioration réussie. La progression est désormais possible.
-1481	[Aura] Amélioration réussie !
+1481	[Aura] Amélioration réussie !
 1482	[Aura] Vous n'avez pas assez d'argent pour faire progresser votre tenue d'aura.
-1483	[Aura] Progression réussie !
-1484	[Aura] Succès !
-1485	[Guilde] %d d'EXP a été donnée.
+1483	[Aura] Progression réussie !
+1484	[Aura] Succès !
+1485	[Guilde] %d d'EXP a été donnée.
 1486	Vous ne pouvez pas nourrir votre familier quand la fenêtre de raffinage est ouverte.
-1487	La Bataille des cinq sanctuaires a commencé ! Elle durera %d jours
-1488	La Bataille des cinq sanctuaires a commencé ! La prochaine bataille démarre dans %d heures.
+1487	La Bataille des cinq sanctuaires a commencé ! Elle durera %d jours
+1488	La Bataille des cinq sanctuaires a commencé ! La prochaine bataille démarre dans %d heures.
 1489	Impossible d'ouvrir l'IU quand vous êtes sur une monture.
 1490	L'évènement n'est pas en cours.
 1491	Vous ne pouvez ni échanger, ni vous déplacer ou encore vendre, lâcher ou stocker des objets pendant que vous invoquer une monture.
 1492	La bataille a été interrompue à cause d'un problème inattendu.
-1493	La Bataille des cinq sanctuaires se termine dans %d minutes.
+1493	La Bataille des cinq sanctuaires se termine dans %d minutes.
 1494	Vous avez besoin de %sx%d en plus.
-1495	Un portail dragon de niveau %d a été ouvert. Au donjon !
+1495	Un portail dragon de niveau %d a été ouvert. Au donjon !
 1496	Un portail dragon de niveau %d peut désormais être traversé.
-1497	Nous avons éliminé le boss !
-1498	%d d'EXP de guilde reçue !
+1497	Nous avons éliminé le boss !
+1498	%d d'EXP de guilde reçue !
 1499	Le moment d'entrer dans le portail dragon est passé.
-1500	Le donjon va se fermer si vous ne commencez pas la bataille dans %d minutes.
+1500	Le donjon va se fermer si vous ne commencez pas la bataille dans %d minutes.
 1501	La bataille n'a pas encore commencé. Donjon terminé.
-1502	%s occupe %s !
+1502	%s occupe %s !
 1503	Vous ne pouvez pas faire de donation quand votre familier est appelé.
 1504	Ce personnage n'est pas disponible pour un duel.
 1505	Tu peux encore déballer %d sur %d.
 1506	Tu pourras déballer le prochain cadeau dans %d minutes.
-1507	%s attaque %s !
-1508	%s a atteint le niveau de points personnel %d !
+1507	%s attaque %s !
+1508	%s a atteint le niveau de points personnel %d !
 1509	Récompense du rituel sanglant
 1510	Pas assez de place dans l'inventaire. La récompense est envoyée dans votre boîte aux lettres.
 1511	Les membres du groupe sont trop éloignés pour obtenir l'objet.
 1512	Niveau de guilde maximal atteint. Le don n'est plus possible.
-1513	[Concours des devins] Le concours des devins a commencé !
+1513	[Concours des devins] Le concours des devins a commencé !
 1514	[Concours des devins] Vous avez débloqué une quête pour le minijeu.
-1515	[Concours des devins] Un butin précieux vous attend !
+1515	[Concours des devins] Un butin précieux vous attend !
 1516	[Concours des devins] Le concours des devins est terminé.
 1517	[Concours des devins] Consultez votre rang et récupérez votre récompense.
 1518	[Concours des devins] Vous n'avez pas assez de pièces de devin.
@@ -1454,22 +1454,22 @@
 1522	Vous ne pouvez pas participer à la Battle Royale à ce moment.
 1524	Vous devez d'abord quitter votre groupe.
 1525	Vous ne pouvez pas participer, car le compte à rebours a déjà commencé.
-1527	Voici le gagnant de Battle Royale : %s
+1527	Voici le gagnant de Battle Royale : %s
 1528	%s a éliminé %s.
-1529	Le compte à rebours a commencé. La Battle Royale commence dans %d secondes.
+1529	Le compte à rebours a commencé. La Battle Royale commence dans %d secondes.
 1530	La Battle Royale ne peut pas commencer, car il n'y a pas assez de participants.
-1531	La Battle Royale a commencé. La première zone s'affichera dans %d secondes.
-1532	La Zone de combat a été actualisée. Elle se réduira dans %d secondes.
-1533	La Zone de combat est réduite pendant %d secondes.
-1534	Le champ électrique s'est arrêté. La prochaine Zone de combat s'affichera dans %d secondes.
-1535	La Battle Royale prend fin dans %d secondes.
+1531	La Battle Royale a commencé. La première zone s'affichera dans %d secondes.
+1532	La Zone de combat a été actualisée. Elle se réduira dans %d secondes.
+1533	La Zone de combat est réduite pendant %d secondes.
+1534	Le champ électrique s'est arrêté. La prochaine Zone de combat s'affichera dans %d secondes.
+1535	La Battle Royale prend fin dans %d secondes.
 1536	Vous ne pouvez pas le faire pendant une Battle Royale.
 1537	Vous ne pouvez pas vous y connecter sur cette carte.
 1538	Vous ne pouvez pas vous connecter au serveur Battle Royale dans ce but.
 1540	Vous ne pouvez pas l'interrompre sur le serveur Battle Royale.
-1541	La Battle Royale a commencé !!!
-1542	La Battle Royale est terminée !!!
-1543	Il n'y a plus d'autre Zone de combat. La zone dans son ensemble sera réduite dans %d secondes.
+1541	La Battle Royale a commencé !!!
+1542	La Battle Royale est terminée !!!
+1543	Il n'y a plus d'autre Zone de combat. La zone dans son ensemble sera réduite dans %d secondes.
 1544	Vous ne subissez aucun malus en ce moment.
 1545	Il vous faut un ticket de Battle Royale pour participer.
 1546	Un paquet de provisions spéciales a été déposé quelque part.
@@ -1478,7 +1478,7 @@
 1549	La téléportation au Plateau primal a échoué.
 1550	Vous pouvez plus l'utiliser.
 1551	Vous n'avez pas assez de Gayas.
-1552	Statut de participant à la Battle Royale : (%u/%u)
+1552	Statut de participant à la Battle Royale : (%u/%u)
 1553	L'inscription à la Battle Royale est terminée.
 1554	Merci de réessayer plus tard.
 1555	Vous ne pouvez pas faire cela pendant que vous effectuez une autre action.
@@ -1488,17 +1488,17 @@
 1559	Prix du concours des devins
 1560	Votre inventaire est plein. Votre récompense vous sera envoyée par la poste.
 1561	La récompense pour le concours des devins vous a été envoyée par la poste, car votre inventaire était plein.
-1562	Vous avez reçu %u EXP pour votre niveau de champion.
+1562	Vous avez reçu %u EXP pour votre niveau de champion.
 1574	Merci de réessayer plus tard.
 1575	Battle Royale
-1576	Récompense saisonnière de Battle Royale Rang de saison : %d
+1576	Récompense saisonnière de Battle Royale Rang de saison : %d
 1577	Récompense générale de Battle Royale
-1578	Récompense de jeu Battle Royale Rang : %d
-1579	Récompense de combat Battle Royale %d ennemis éliminés ou plus
+1578	Récompense de jeu Battle Royale Rang : %d
+1579	Récompense de combat Battle Royale %d ennemis éliminés ou plus
 1580	Actuellement, vous ne pouvez pas revendiquer d'exploit.
 1581	Actuellement, vous ne pouvez pas utiliser d'émotions.
 1582	Yongan
-1583	La guilde %s a fait l'acquisition, dans la zone %s, du terrain %d, %d en échange de %d Wons.
+1583	La guilde %s a fait l'acquisition, dans la zone %s, du terrain %d, %d en échange de %d Wons.
 1584	Votre chef de guilde s'est inscrit à la vente aux enchères dans la zone %s pour le terrain %d, %d.
 1585	Vous avez déjà soumis votre offre.
 1586	Vous pouvez récupérer les Wons que vous avez investis.
@@ -1515,20 +1515,20 @@
 1597	Vous n'êtes membre d'aucune guilde.
 1598	Vous êtes déjà inscrit à la vente aux enchères de terrain.
 1599	Seul le chef de guilde peut s'inscrire aux ventes aux enchères de terrain.
-1600	Seule une guilde de niveau %d ou supérieur peut s'inscrire.
+1600	Seule une guilde de niveau %d ou supérieur peut s'inscrire.
 1601	Votre guilde a déjà un terrain de guilde.
 1602	Il n'y a aucune vente aux enchères de terrain en cours.
-1603	L'offre maximale est de %d Wons.
+1603	L'offre maximale est de %d Wons.
 1604	Vous n'avez pas assez de Wons.
 1605	Votre guilde n'est pas inscrite à la vente aux enchères de terrain.
-1606	Vous ne pouvez enchérir que si vous appartenez à la guilde depuis plus de 24 heures.
+1606	Vous ne pouvez enchérir que si vous appartenez à la guilde depuis plus de 24 heures.
 1607	Le bail pour le terrain de guilde n'a pas été réglé. Le terrain de guilde a été abandonné.
 1608	Aucune guilde ne s'est inscrite pour la vente aux enchères de terrain.
-1609	Vous avez proposé %d Wons.
+1609	Vous avez proposé %d Wons.
 1610	Cette guilde n'existe pas.
 1611	Niveau Dongan
 1612	Vous pouvez récupérer les Wons que vous avez investis auprès du garde dans le village.
-1613	Parfait ! Cette Pierre d'esprit a été liée avec succès et vous obtenez même le double de bonus de valeur.
+1613	Parfait ! Cette Pierre d'esprit a été liée avec succès et vous obtenez même le double de bonus de valeur.
 1614	Joan
 1615	Pyungmoo
 1616	Jungrang
@@ -1537,64 +1537,64 @@
 1619	Miryang
 1620	Songpa
 1621	Daeyami
-1622	Boss mondial : l'évènement a commencé
-1623	Boss mondial : l'évènement est terminé
-1624	Boss mondial : dans le canal %d, %s est apparu et terrorise la zone %s. À la chasse !
-1625	Boss mondial : le boss mondial du canal %d a été attaqué. Rejoins la chasse !
-1626	Boss mondial : bien joué ! %s a été éliminé et la paix est rétablie... pour le moment.
-1627	Boss mondial : le boss mondial s'est échappé ! Bonne chance la prochaine fois.
-1628	Boss mondial : vous ne pouvez pas obtenir de récompense actuellement.
-1629	Boss mondial : bien joué ! Voici votre récompense. Revenez tenter votre chance la prochaine fois !
-1630	Boss mondial : vous ne pouvez pas obtenir de récompense actuellement, car vous n'avez pas suffisamment de place dans votre inventaire.
-1631	Boss mondial : récompense pour le niveau de butin I du classement : %d
-1632	Boss mondial : récompense pour le niveau de butin II du classement : %d
-1633	Boss mondial : récompense pour le niveau de butin III du classement : %d
-1634	Boss mondial : récompense pour le niveau de butin IV du classement : %d
-1635	Saison florale : vous n'avez pas assez de pousses.
-1636	Saison florale : vous n'avez pas assez de place dans votre inventaire.
-1637	Saison florale : vous avez obtenu des graines de fleurs.
-1638	Saison florale : vous n'avez pas suffisamment de graines de fleurs.
-1639	Saison florale : vous avez obtenu une pousse de chrysanthème.
-1640	Saison florale : vous avez obtenu une pousse de muguet.
-1641	Saison florale : vous avez obtenu une pousse de narcisse.
-1642	Saison florale : vous avez obtenu une pousse de lys.
-1643	Saison florale : vous avez obtenu une pousse de tournesol.
-1644	Boss mondial : attention ! Le boss mondial va bientôt apparaître !
-1645	Saison florale : cet objet ne peut plus être utilisé.
+1622	Boss mondial : l'évènement a commencé
+1623	Boss mondial : l'évènement est terminé
+1624	Boss mondial : dans le canal %d, %s est apparu et terrorise la zone %s. À la chasse !
+1625	Boss mondial : le boss mondial du canal %d a été attaqué. Rejoins la chasse !
+1626	Boss mondial : bien joué ! %s a été éliminé et la paix est rétablie... pour le moment.
+1627	Boss mondial : le boss mondial s'est échappé ! Bonne chance la prochaine fois.
+1628	Boss mondial : vous ne pouvez pas obtenir de récompense actuellement.
+1629	Boss mondial : bien joué ! Voici votre récompense. Revenez tenter votre chance la prochaine fois !
+1630	Boss mondial : vous ne pouvez pas obtenir de récompense actuellement, car vous n'avez pas suffisamment de place dans votre inventaire.
+1631	Boss mondial : récompense pour le niveau de butin I du classement : %d
+1632	Boss mondial : récompense pour le niveau de butin II du classement : %d
+1633	Boss mondial : récompense pour le niveau de butin III du classement : %d
+1634	Boss mondial : récompense pour le niveau de butin IV du classement : %d
+1635	Saison florale : vous n'avez pas assez de pousses.
+1636	Saison florale : vous n'avez pas assez de place dans votre inventaire.
+1637	Saison florale : vous avez obtenu des graines de fleurs.
+1638	Saison florale : vous n'avez pas suffisamment de graines de fleurs.
+1639	Saison florale : vous avez obtenu une pousse de chrysanthème.
+1640	Saison florale : vous avez obtenu une pousse de muguet.
+1641	Saison florale : vous avez obtenu une pousse de narcisse.
+1642	Saison florale : vous avez obtenu une pousse de lys.
+1643	Saison florale : vous avez obtenu une pousse de tournesol.
+1644	Boss mondial : attention ! Le boss mondial va bientôt apparaître !
+1645	Saison florale : cet objet ne peut plus être utilisé.
 1646	Vous ne pouvez pas vous transformer maintenant.
-1647	Éliminez tous les monstres dans les temps impartis !
+1647	Éliminez tous les monstres dans les temps impartis !
 1648	Le portail menant vers la salle suivante est ouvert.
-1649	Esquivez toutes les attaques !
+1649	Esquivez toutes les attaques !
 1650	Le portail vers le prochain niveau est ouvert.
-1651	%s a réussi le niveau %u de la Tour infernale de Sung Mahi !
+1651	%s a réussi le niveau %u de la Tour infernale de Sung Mahi !
 1652	Le butin de la Tour infernale de Sung Mahi a été remis dans votre boîte aux lettres.
-1653	Tour infernale : niveau %d
+1653	Tour infernale : niveau %d
 1654	Butin de fin de la Tour infernale de Sung Mahi
-1655	Le combat commence dans %d secondes.
-1656	Tu relèves le défi du niveau %d.
-1657	Éliminez une paire de monstres qui ne vont pas ensemble !
-1658	Vous avez attaqué le mauvais monstre. Éliminez tous les monstres !
-1659	Éliminez tous les monstres dans les temps impartis !
-1660	Vous avez détruit la mauvaise pierre Metin. Triomphez de tous les monstres !
-1661	Détruisez la bonne pierre Metin !
-1662	Trouvez la bonne clé pour vous évader !
-1663	Trouvez une pierre de sceau pour ôter le sceau !
-1664	[Tour infernale de Sung Mahi] Éliminez tous les monstres dans les temps impartis !
+1655	Le combat commence dans %d secondes.
+1656	Tu relèves le défi du niveau %d.
+1657	Éliminez une paire de monstres qui ne vont pas ensemble !
+1658	Vous avez attaqué le mauvais monstre. Éliminez tous les monstres !
+1659	Éliminez tous les monstres dans les temps impartis !
+1660	Vous avez détruit la mauvaise pierre Metin. Triomphez de tous les monstres !
+1661	Détruisez la bonne pierre Metin !
+1662	Trouvez la bonne clé pour vous évader !
+1663	Trouvez une pierre de sceau pour ôter le sceau !
+1664	[Tour infernale de Sung Mahi] Éliminez tous les monstres dans les temps impartis !
 1665	[Tour infernale de Sung Mahi] Le cycle de classement actuel est terminé.
 1666	[Tour infernale de Sung Mahi] Un nouveau cycle de classement a commencé.
-1667	Récompense de saison pour la 1re place au niveau %d de la Tour infernale.
+1667	Récompense de saison pour la 1re place au niveau %d de la Tour infernale.
 1668	Récompense de saison de la Tour infernale
 1669	Vous ne subissez aucune malédiction.
 1670	Toutes les malédictions sont levées.
 1671	Le temps est écoulé. Vous êtes amené à l'extérieur.
-1672	[Tour infernale de Sung Mahi] Détruisez la pierre démoniaque !
-1673	[Tour infernale de Sung Mahi] La clé ne rentre pas. Trouvez-en une autre et réessayez !
-1674	[Tour infernale de Sung Mahi] Ôtez le sceau à l'aide d'une pierre sceau de Sung Mahi !
-1675	[Tour infernale de Sung Mahi] Vous devez d'abord ôter un autre sceau !
+1672	[Tour infernale de Sung Mahi] Détruisez la pierre démoniaque !
+1673	[Tour infernale de Sung Mahi] La clé ne rentre pas. Trouvez-en une autre et réessayez !
+1674	[Tour infernale de Sung Mahi] Ôtez le sceau à l'aide d'une pierre sceau de Sung Mahi !
+1675	[Tour infernale de Sung Mahi] Vous devez d'abord ôter un autre sceau !
 1676	Vous pouvez désormais porter des gants.
 1677	Vous ne pouvez pas encore porter de gants.
 1678	Cette fonction n'est pas disponible, car un programme de hacking a été trouvé.
-1679	[Tour infernale de Sung Mahi] Vous avez atteint ce niveau au bout de %d secondes.
+1679	[Tour infernale de Sung Mahi] Vous avez atteint ce niveau au bout de %d secondes.
 1680	Vous ne pouvez pas participer à la vente aux enchères au jour de la création de la guilde.
 1681	
 1683	
@@ -1603,15 +1603,15 @@
 1686	Gravissez les marches de la Tour infernale de Sung Mahi et accédez au niveau suivant.
 1687	[Magasin premium privé] Vous ne pouvez pas utiliser ceci. Rendez visite à la gestionnaire commercial au village.
 1688	Vous venez d'entrer dans une zone contrôlée par Sung Mahi et êtes frappé par sa malédiction.
-1689	La zone %s compte encore %d postes avancés (%d/%d)
-1690	Tous les postes avancés de la zone %s sont établis et Sung Mahi en prendra le contrôle dans %d minutes.
+1689	La zone %s compte encore %d postes avancés (%d/%d)
+1690	Tous les postes avancés de la zone %s sont établis et Sung Mahi en prendra le contrôle dans %d minutes.
 1691	Les postes avancés de Sung Mahi sont en cours d'établissement.
 1692	Les postes avancés de Sung Mahi ont été démolis.
 1693	Tous les postes avancés de la zone %s ont été détruits et la zone n'est plus sous le contrôle de Sung Mahi.
 1694	Désert Seogan
 1695	Abîme Namgan
-1696	L'amélioration a réussi !
-1697	L'amélioration a échoué !
+1696	L'amélioration a réussi !
+1697	L'amélioration a échoué !
 1698	Grâce à la bénédiction d'immunité, vous n'êtes plus affecté par l'influence de Sung Mahi.
 1699	Votre bénédiction d'immunité est terminée et vous vous trouvez de nouveau sous l'influence de Sung Mahi et subissez la malédiction.
 1700	Vous pouvez faire cela avec l'utilisateur d'un programme de hacking.
@@ -1633,40 +1633,40 @@
 1716	[Magasin premium privé] Vous pouvez récupérer des objets dans votre magasin privé.
 1717	[Magasin premium privé] Vous pouvez récupérer de l'argent dans votre magasin privé.
 1718	[Magasin premium privé] %s a été vendu. Récupérez votre argent.
-1719	[Magasin premium privé] Vous ne pouvez plus rouvrir votre magasin pendant %d secondes après l'avoir fermé.
+1719	[Magasin premium privé] Vous ne pouvez plus rouvrir votre magasin pendant %d secondes après l'avoir fermé.
 1720	Vous ne pouvez pas faire cela pendant que le donjon est en cours de création.
 1721	Vous ne pouvez plus ressusciter. Vous serez transporté hors du donjon.
-1722	Vous avez déjà reçu votre récompense. Revenez plus tard si vous souhaitez essayer à nouveau. Temps restant : %d h %d m
-1723	Vous pouvez ressusciter encore %d fois.
+1722	Vous avez déjà reçu votre récompense. Revenez plus tard si vous souhaitez essayer à nouveau. Temps restant : %d h %d m
+1723	Vous pouvez ressusciter encore %d fois.
 1724	Vous ne pouvez pas entrer dans le Temple du serpent. Pour ce faire, utilisez la statue de serpent.
 1725	La pierre Metin détruite ne réagit pas. Toutes les pierres Metins sont réapparues.
 1726	La pierre Metin détruite ne réagit pas. Toutes les pierres Metins sont réapparues.
 1727	Vous avez détruit la %de pierre Metin. Détruisez maintenant la %de pierre Metin.
 1728	Le temps est écoulé. Vous serez transporté hors du donjon.
-1729	Disponible pendant %d minutes.
+1729	Disponible pendant %d minutes.
 1730	Vous ne pouvez plus rallonger le minuteur de donjon.
-1731	Le chronomètre de donjon gagne 1 minute.
-1732	Vous avez vaincu tous les monstres ! Vous allez être téléporté au niveau %d. Il vous reste encore %d secondes.
-1733	Vous avez détruit toutes les pierres Metins. Vous allez être téléporté au niveau %d. Il vous reste encore %d secondes.
+1731	Le chronomètre de donjon gagne 1 minute.
+1732	Vous avez vaincu tous les monstres ! Vous allez être téléporté au niveau %d. Il vous reste encore %d secondes.
+1733	Vous avez détruit toutes les pierres Metins. Vous allez être téléporté au niveau %d. Il vous reste encore %d secondes.
 1734	La pièce a été ajoutée à la tête du serpent. Mais rien ne se passe.
-1735	Tous les piliers serpent sont déverrouillées. %d niveaux en %d secondes.
-1736	Le forgeron spécial du Temple du serpent apparaît !
-1737	Le forgeron du Temple du serpent apparaît !
+1735	Tous les piliers serpent sont déverrouillées. %d niveaux en %d secondes.
+1736	Le forgeron spécial du Temple du serpent apparaît !
+1737	Le forgeron du Temple du serpent apparaît !
 1738	Vous avez vaincu tous les monstres et vous pouvez vous rendre au niveau du boss.
-1739	Vous avez terminé le Temple du serpent avec succès. Vous serez transporté hors du donjon dans %d secondes.
+1739	Vous avez terminé le Temple du serpent avec succès. Vous serez transporté hors du donjon dans %d secondes.
 1740	Détruisez les pierres Metins dans le bon ordre.
-1741	Éliminez tous les monstres !
+1741	Éliminez tous les monstres !
 1742	Prenez la clé aux monstres et utilisez-la pour déverrouiller le Pilier serpent.
 1743	Vous avez ajouté une pièce à la tête de serpent.
 1744	Éliminez le boss.
-1745	Ouverture réussie !
+1745	Ouverture réussie !
 1746	Vous devez d'abord déverrouiller l'autre pilier.
 1747	La prison a été déverrouillée. Le forgeron vous sourit.
 1748	Cette clé ne vous a pas permis d'ouvrir la prison et de libérer le forgeron.
 1749	Cette pièce n'est pas adaptée à la tête du serpent.
 1750	
 1751	
-1752	Vous devez compléter au minimum 1 orbe d'EXP au niveau 120 pour atteindre le niveau de champion.
+1752	Vous devez compléter au minimum 1 orbe d'EXP au niveau 120 pour atteindre le niveau de champion.
 1753	Vous devez terminer le donjon Défense du navire.
 1754	Vous avez déjà atteint le niveau de champion.
 1755	[Magasin premium privé] Vous ne pouvez pas utiliser d'objets pendant que vous ouvrez votre magasin privé.
@@ -1675,15 +1675,15 @@
 1758	[Magasin premium privé] Vous ne pouvez pas faire ceci pendant que vous gérez des objets.
 1759	
 1760	[Bonus de relique] c'est impossible lorsque la fenêtre de relique d'âme est ouverte.
-1761	%s membres du groupe ont quitté le combat.
-1762	Il reste encore %d minutes.
+1761	%s membres du groupe ont quitté le combat.
+1762	Il reste encore %d minutes.
 1763	[Magasin premium privé] Vous ne pouvez pas vous battre en duel ici.
 1764	[Magasin premium privé] L'argent récupérable n'est pas actualisé pendant que vous gérez des objets.
 1765	Le boss final du Temple du serpent est apparu.
 1766	[Magasin premium privé] Un magasin a déjà été ouvert. Trouvez un autre endroit pour ouvrir votre magasin.
 1767	Vous ne pouvez l'améliorer pendant que vous avez invoqué un familier évolutif.
 1768	<Abysse d'Aquilon> Il vous reste %d minute(s).
-1769	<Abysse d'Aquilon> Débutez le combat dans les 3 minutes ou l'instance disparaîtra.
+1769	<Abysse d'Aquilon> Débutez le combat dans les 3 minutes ou l'instance disparaîtra.
 1770	<Abysse d'Aquilon> Le temps est écoulé. Vous serez transporté hors du donjon.
 1771	
 1772	<Abysse d'Aquilon> Une instance a été créée pour la Citadelle d'Aquilon.
@@ -1710,11 +1710,11 @@
 1793	
 1794	
 1795	
-1796	<Abysse d'Aquilon> Vous avez vaincu Alastor ! Vous serez transporté hors du donjon dans 20 secondes.
-1797	<Abysse d'Aquilon> Alastor va bientôt déchaîner sa colère glaciale !
-1798	<Abysse d'Aquilon> Alastor déchaîne sa colère glaciale (niveau %d) !
+1796	<Abysse d'Aquilon> Vous avez vaincu Alastor ! Vous serez transporté hors du donjon dans 20 secondes.
+1797	<Abysse d'Aquilon> Alastor va bientôt déchaîner sa colère glaciale !
+1798	<Abysse d'Aquilon> Alastor déchaîne sa colère glaciale (niveau %d) !
 1799	<Abysse d'Aquilon> Vous avez réussi à détourner la colère glaciale d'Alastor.
-1800	<Abysse d'Aquilon> Détruisez les œufs de dragon blanc en moins de %d secondes pour que le froid mortel d'Alastor épargne la citadelle !
+1800	<Abysse d'Aquilon> Détruisez les œufs de dragon blanc en moins de %d secondes pour que le froid mortel d'Alastor épargne la citadelle !
 1801	Ceci n'est pas disponible.
 1802	Cela est disponible dès que le combat a commencé.
 1803	<Abysse d'Aquilon> Vous n'avez pas débuté le combat dans la limite de temps indiquée. L'instance a été supprimée.
@@ -1722,30 +1722,30 @@
 1805	Aucun butin ne sera récolté, car le filtre à butin est désactivé.
 1806	Aucun butin ne sera récolté, car le filtre à butin d'un membre de groupe est désactivé.
 1807	
-1808	Vous avez remporté %d points d'expérience de niveau champion.
-1809	Vous avez remporté %d points d'expérience.
-1810	Vous avez perdu %d points d'expérience.
-1811	Vous avez perdu %d points d'expérience de niveau champion.
+1808	Vous avez remporté %d points d'expérience de niveau champion.
+1809	Vous avez remporté %d points d'expérience.
+1810	Vous avez perdu %d points d'expérience.
+1811	Vous avez perdu %d points d'expérience de niveau champion.
 1812	Vous ne pouvez pas effectuer cela pendant le commerce.
-1813	L'évènement « Fièvre Metin » a commencé !
+1813	L'évènement « Fièvre Metin » a commencé !
 1814	Terminez les quêtes de la liste des quêtes d'évènement, détruisez des pierres Metin et raflez des récompenses.
-1815	L'évènement « Fièvre Metin » n'a pas lieu pour l'instant.
+1815	L'évènement « Fièvre Metin » n'a pas lieu pour l'instant.
 1816	[Temple du dragon] Vous avez généré une instance pour le Temple du dragon.
-1817	[Temple du dragon] Débutez le combat dans les 3 minutes ou l'instance disparaîtra.
-1818	[Temple du dragon] Beran-Setaou a été vaincu. Vous serez téléporté hors du donjon dans %d secondes.
-1819	[Temple du dragon] Il reste encore %d minutes.
+1817	[Temple du dragon] Débutez le combat dans les 3 minutes ou l'instance disparaîtra.
+1818	[Temple du dragon] Beran-Setaou a été vaincu. Vous serez téléporté hors du donjon dans %d secondes.
+1819	[Temple du dragon] Il reste encore %d minutes.
 1820	[Temple du dragon] L'instance a disparu, car vous n'avez pas débuté le combat.
 1821	[Temple du dragon] Le temps est écoulé. Tous les joueurs sont téléportés hors du donjon.
 1822	[Temple du dragon] Vous avez généré une instance pour le Temple du dragon.
-1823	[Temple du dragon] Débutez le combat dans les 3 minutes ou l'instance disparaîtra.
+1823	[Temple du dragon] Débutez le combat dans les 3 minutes ou l'instance disparaîtra.
 1824	[Temple du dragon] L'instance a démarré.
 1825	[Temple du dragon] Vous avez abandonné. L'instance a été supprimée.
-1829	[Temple du dragon] Cette instance sera fermée si personne n'y entre avant %d secondes.
+1829	[Temple du dragon] Cette instance sera fermée si personne n'y entre avant %d secondes.
 1830	[Temple du dragon] Cette instance a été fermée, car personne n'y est entré dans le temps imparti.
 1838	Vous ne pouvez pas vous bloquer.
 1839	Vous ne pouvez pas vous ajouter.
 1840	L'action (%s) a été autorisée.
-1844	Vous avez nourri votre cheval avec de l'avoine (%d portions). Il a gagné %d points d'expérience.
+1844	Vous avez nourri votre cheval avec de l'avoine (%d portions). Il a gagné %d points d'expérience.
 1845	Vous manquez de Gayas ou de Yangs.
 1846	Vous ne pouvez pas apprendre cette aptitude de monture.
 1847	[Temple Énigma] Vous ne pouvez pas l'utiliser ici.
@@ -1754,32 +1754,32 @@
 1850	[Temple Énigma] Votre niveau ne vous permet pas d'utiliser ce parchemin.
 1851	[Temple Énigma] Le niveau de %s ne permet pas d'entrer.
 1852	[Temple Énigma] %s a refusé d'entrer.
-1853	[Temple Énigma] Si vous n'engagez pas le combat, le donjon disparaîtra au bout de 1 minute.
+1853	[Temple Énigma] Si vous n'engagez pas le combat, le donjon disparaîtra au bout de 1 minute.
 1854	[Temple Énigma] Un portail vers le Temple Énigma a été ouvert.
 1855	[Temple Énigma] Détruisez de véritables pierres Metin.
-1856	[Temple Énigma] Ce n'était pas une véritable pierre Metin. Trouvez-en une vraie !
+1856	[Temple Énigma] Ce n'était pas une véritable pierre Metin. Trouvez-en une vraie !
 1857	[Temple Énigma] La pierre Metin contenait une caisse au trésor.
-1858	[Temple Énigma] Vous n'avez pas trouvé de véritable pierre Metin. Empruntez le portail et réessayez !
+1858	[Temple Énigma] Vous n'avez pas trouvé de véritable pierre Metin. Empruntez le portail et réessayez !
 1859	[Temple Énigma] Mission terminée. Trouvez la pièce secrète.
-1860	[Temple Énigma] Trouvez un véritable monstre et vainquez-le ! Ne vous laissez pas troubler par les illusions.
-1861	[Temple Énigma] Vous n'avez pas trouvé de véritable monstre. Empruntez le portail et réessayez !
+1860	[Temple Énigma] Trouvez un véritable monstre et vainquez-le ! Ne vous laissez pas troubler par les illusions.
+1861	[Temple Énigma] Vous n'avez pas trouvé de véritable monstre. Empruntez le portail et réessayez !
 1862	[Temple Énigma] Examinez la caisse au trésor.
 1863	[Temple Énigma] Bienvenue dans la pièce secrète.
-1864	[Temple Énigma] Le temps est écoulé ! Tous les joueurs vont être téléportés hors du donjon.
+1864	[Temple Énigma] Le temps est écoulé ! Tous les joueurs vont être téléportés hors du donjon.
 1865	[Temple Énigma] En récompense, vous avez reçu la bénédiction du Temple Énigma.
-1866	[Temple Énigma] Vous n'avez pas reçu de récompense. Temps restant avant la prochaine récompense : %d heures et %d minutes
+1866	[Temple Énigma] Vous n'avez pas reçu de récompense. Temps restant avant la prochaine récompense : %d heures et %d minutes
 1867	Récompense du Temple Énigma
 1868	[Temple Énigma] Le temps est écoulé et le Temple Énigma a disparu.
-1869	[Temple Énigma] Il vous reste 4 minutes pour initier le combat au portail énigmatique.
+1869	[Temple Énigma] Il vous reste 4 minutes pour initier le combat au portail énigmatique.
 1870	[Temple Énigma] Vous avez reçu une autre caisse au trésor grâce à la bénédiction du Temple Énigma.
 1871	[Temple Énigma] Vous avez reçu une récompense énigmatique. Regardez dans la boîte aux lettres pour l'accepter.
 1872	%s a été enlevé.
-1873	Vous avez obtenu : %s. Vous pouvez consulter vos compétences et aptitudes dans l'aperçu des compétences.
+1873	Vous avez obtenu : %s. Vous pouvez consulter vos compétences et aptitudes dans l'aperçu des compétences.
 1874	Vous n'avez pas assez de Gayas.
 1876	Réessayez plus tard.
 1878	Le temps est écoulé. Vous serez bientôt téléporté en ville.
 1879	Vous ne pouvez plus ressusciter.
-1880	Vous avez réussi le donjon et serez téléporté à l'extérieur dans %d minutes.
+1880	Vous avez réussi le donjon et serez téléporté à l'extérieur dans %d minutes.
 1881	Vous avez vaincu tous les messagers. Allez parler au gardien Hae-Tae pour qu'il vous donne accès à la Damnation.
 1882	Vous ne pouvez pas dépasser le nombre maximum d'objets utilisables.
 1883	Le voyage dans l'Autremonde est terminé et vous ne pouvez plus trouver d'autres flammes funestes.
@@ -1792,33 +1792,33 @@
 1896	Vous avez vaincu le messager de la Nuit.
 1897	Vous avez vaincu le messager du Tonnerre.
 1898	Vous avez vaincu le messager des Airs.
-1899	Le donjon fermera dans %d minutes.
+1899	Le donjon fermera dans %d minutes.
 1900	Vous ne pouvez pas porter plus de flammes funestes.
-1901	Vous devez attendre avant de pouvoir réessayer. Temps d'attente restant : %d heures et %d minutes
+1901	Vous devez attendre avant de pouvoir réessayer. Temps d'attente restant : %d heures et %d minutes
 1902	Une fois entré dans le Temple du dragon, vous ne pouvez plus modifier le groupe.
 1903	Vous ne pouvez pas recruter plus de mercenaires.
 1904	L'endurance a été dépassée.
 1905	[Temple Énigma] Détruisez la Metin énigmatique pour pouvoir rejoindre le niveau suivant.
 1916	Vous avez déjà appris cette compétence.
-1917	Vous pourrez apprendre cette compétence quand votre cheval aura atteint au moins le niveau 31.
+1917	Vous pourrez apprendre cette compétence quand votre cheval aura atteint au moins le niveau 31.
 1918	Vous ne pouvez pas aquérir d'autres compétences.
-1919	Vous pourrez apprendre cette compétence quand votre cheval aura atteint le niveau 21.
+1919	Vous pourrez apprendre cette compétence quand votre cheval aura atteint le niveau 21.
 1921	[Temple Énigma] Vous ne pouvez pas entrer. Vous n'avez pas le niveau requis.
-1922	Vous ne pouvez pas changer de page d'équipement : arme et costume ne concordent pas.
+1922	Vous ne pouvez pas changer de page d'équipement : arme et costume ne concordent pas.
 1924	Le filtre à butin est activé.
 1925	La durée d'utilisation du filtre à butin a été prolongée.
 1926	[Portail d'invasion de SungMa] Un portail d'invasion de SungMa s'est ouvert quelque part dans cette zone. [ENTER]Ouvrez votre carte d'aperçu pour le trouver.
-1927	[Portail d'invasion de SungMa] Le commandant des envahisseurs est apparu quelque part !
+1927	[Portail d'invasion de SungMa] Le commandant des envahisseurs est apparu quelque part !
 1930	[Portail d'invasion de SungMa] Le portail d'invasion est affaibli et peut être détruit.
 1931	[Portail d'invasion de SungMa] La zone a été défendue et vous allez bientôt être téléporté.
 1932	[Portail d'invasion de SungMa] Le portail d'invasion a été fermé.
-1933	[Portail d'invasion de SungMa] Des fleurs puissantes sont apparues à proximité du portail d'invasion.[ENTER]Utilisez une fleur du même type élémentaire que la zone pour bénéficier d'un bonus de dégâts !
-1934	[Portail d'invasion de SungMa] Des fleurs puissantes sont apparues à proximité du commandant des envahisseurs.[ENTER]Utilisez une fleur du même type élémentaire que la zone pour bénéficier d'un bonus de dégâts !
+1933	[Portail d'invasion de SungMa] Des fleurs puissantes sont apparues à proximité du portail d'invasion.[ENTER]Utilisez une fleur du même type élémentaire que la zone pour bénéficier d'un bonus de dégâts !
+1934	[Portail d'invasion de SungMa] Des fleurs puissantes sont apparues à proximité du commandant des envahisseurs.[ENTER]Utilisez une fleur du même type élémentaire que la zone pour bénéficier d'un bonus de dégâts !
 1936	[Portail d'invasion de SungMa] Vous n'avez pas suffisamment de place dans l'inventaire pour recevoir la récompense.
 1937	[Portail d'invasion de SungMa] Pour détruire le portail d'invasion de SungMa, vous devez commencer par éliminer tous les monstres alentour. 
-1938	[Guilde] %d Yangs ont été débités.
+1938	[Guilde] %d Yangs ont été débités.
 1939	Récompense de la chasse aux baies dorées
-1940	Déstruisez %d statues de Primordis. Vous ne pouvez pas attaquer simultanément plusieurs statues.
+1940	Déstruisez %d statues de Primordis. Vous ne pouvez pas attaquer simultanément plusieurs statues.
 1941	Vous avez gagné toute l'endurance possible via des quêtes. Récupérez votre récompense via la fenêtre des quêtes.
 1942	Les valeurs enregistrées ont été enlevées de l'étole.
 1943	Les valeurs enregistrées ont été enlevées de la tenue d'aura.
@@ -1828,10 +1828,33 @@
 1947	Vous ne pouvez pas dissoudre le groupe au cours d'une bataille entre guildes.
 1949	Vous avez réussi à vous libérer.
 1951	Récompense de chasse secrète
-1952	Vous recevez une récompense secrète pour avoir participé %d fois à la chasse au trésor.
-1953	Récompense pour le rang %d de chasseur de trésors
-1954	Vous recevez une récompense pour avoir atteint le rang %d au classement de la chasse au trésor.
+1952	Vous recevez une récompense secrète pour avoir participé %d fois à la chasse au trésor.
+1953	Récompense pour le rang %d de chasseur de trésors
+1954	Vous recevez une récompense pour avoir atteint le rang %d au classement de la chasse au trésor.
 2101	<Forgeron> Le joueur %s a obtenu %s !
 2102	<Forgeron> Le joueur %s a brûlé %s !
 2103	<Bénédiction> Le joueur %s a obtenu %s !
 2104	<Bénédiction> L'objet %s du joueur %s a été rétrogradé au niveau %s !
+2150	%s a été supprimé avec succès.
+5201	Tu n'es pas le propriétaire de cette boutique.
+5202	Tu ne peux pas modifier la boutique tant que la fenêtre d'échange, d'entrepôt ou de cube est ouverte.
+5203	La valeur totale des objets dans la boutique ne peut pas dépasser 2.000.000.000 Yang ! Baisse le prix ou retire un objet.
+5204	Cette boutique est en cours de modification.
+5205	Tu ne peux pas effectuer cette action pendant la modification de la boutique.
+5206	Veuillez patienter quelques secondes pour l'action de boutique.
+5207	Tu as déjà une boutique active.
+5208	Boutique de #PLAYER_NAME#
+5209	Tu as des objets dans ta boîte cadeau, récupère-les d'abord.
+5210	Tu as atteint la quantité maximale de Yang que tu peux porter.
+5211	Erreur de paquet, veuillez réessayer.
+5212	La boutique a été fermée.
+5213	Tu effectues des actions trop rapidement, attends un peu.
+5214	Tu ne peux pas ouvrir de boutique dans cette zone.
+5215	Le système de boutique est temporairement désactivé.
+5216	Tous les cadeaux ont été ajoutés à ton inventaire.
+5217	Le cadeau a été ajouté à ton inventaire.
+5218	Veuillez patienter 5 secondes.
+"24244";
+"Tu peux pêcher uniquement dans le 1er village de l'Empire bleu.";
+"24245";
+"Tu ne peux pas acheter de nouveaux vers tant que tu as des vers dans ton inventaire.";

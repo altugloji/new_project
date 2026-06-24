@@ -2,7 +2,7 @@ import os
 import shutil
 import subprocess
 
-folders = ["tr", "de", "dk", "en", "es", "fr", "hu", "it", "nl", "pl", "pt", "ro", "cz"]
+folders = ["tr", "ae", "de", "dk", "en", "es", "fr", "hu", "it", "nl", "pl", "pt", "ro", "cz"]
 
 source_path = r'.'
 destination_base_path = r'_out'

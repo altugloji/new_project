@@ -13435,3 +13435,16 @@
 21550	Other Areas
 21560	Close
 64186	Catacomb
+90301	Stable Boy:
+90302	Upgrade my horse
+90303	Your horse has reached the max. level.
+90304	So you want to upgrade your horse..
+90305	Riding Level:
+90306	Next Level:
+90307	- Requirements -
+90308	:
+90309	Yang
+90310	Close
+90311	Required item
+90312	You do not have enough Yang.
+90313	Congratulations! Your horse leveled up.

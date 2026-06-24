@@ -13435,3 +13435,16 @@
 21550	Alte zone
 21560	Închide
 64186	Catacombã
+90301	Grãjdar:
+90302	Îmbunãtãþeºte calul meu
+90303	Calul tãu a atins nivelul maxim.
+90304	Deci vrei sã-þi îmbunãtãþeºti calul..
+90305	Nivel de cãlãrie:
+90306	Nivel urmãtor:
+90307	- Cerinþe -
+90308	:
+90309	Yang
+90310	Închide
+90311	Obiect necesar
+90312	Nu ai suficient Yang la tine.
+90313	Felicitãri! Calul tãu a crescut în nivel.

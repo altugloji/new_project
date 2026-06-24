@@ -1242,7 +1242,7 @@
 1250	Comb through the areas and eliminate them. Gather hit points and exchange them for chests.
 1251	The Boss Reaper Event ends in %d minute(s).
 1252	Mr B and the boss monsters disappear in %d minute(s).
-1253	You have earned your daily target – collect your reward.
+1253	You have earned your daily target - collect your reward.
 1254	You cannot make use of weapon skins while you are wearing a Wedding Dress or a Tuxedo.
 1255	The other person is currently busy so you cannot trade right now.
 1256	You cannot wear a Wedding Dress or a Tuxedo when you are already wearing a weapon skin.
@@ -1389,8 +1389,8 @@
 1457	The Ritual of Blood has started. Buy special items to get better rewards.
 1458	The Ritual of Blood is over. Try again another time.
 1459	Upgrade change failed.
-1460	This item is only available in Meley’s Lair.
-1461	The Compass was used, but the Guard wasn’t found.
+1460	This item is only available in Meley's Lair.
+1461	The Compass was used, but the Guard wasn't found.
 1462	You cannot do this whilst carrying out another action.
 1463	You cannot do this whilst carrying out another action.
 1464	You cannot improve your weapon while your pet is summoned.
@@ -1411,7 +1411,7 @@
 1479	[Aura] You have to insert items.
 1480	[Aura] Improvement successful. Evolution is now possible.
 1481	[Aura] Improvement successful!
-1482	[Aura] You don’t have enough money to evolve your Aura Outfit.
+1482	[Aura] You don't have enough money to evolve your Aura Outfit.
 1483	[Aura] Evolution successful!
 1484	[Aura] Successful!
 1485	[Guild] %d EXP has been donated.
@@ -1835,3 +1835,26 @@
 2102	<Blacksmith> Player %s burned %s!
 2103	<Blessing> Player %s obtained %s!
 2104	<Blessing> Player %s had item %s downgraded to level %s!
+2150	%s has been deleted successfully.
+5201	You are not the owner of this shop.
+5202	You cannot edit the shop while trade, storage, or cube window is open.
+5203	The total value of items in the shop cannot exceed 2.000.000.000 Yang! Lower the price or remove an item.
+5204	This shop is currently being edited.
+5205	You cannot perform this action while the shop is being edited.
+5206	Please wait a few seconds for the shop action.
+5207	You already have an active shop.
+5208	#PLAYER_NAME#'s Shop
+5209	You have items in your gift box, claim them first.
+5210	You have reached the maximum Yang you can carry.
+5211	Packet error, please try again.
+5212	The shop has been closed.
+5213	You are performing actions too quickly, please wait.
+5214	You cannot open a shop in this area.
+5215	The shop system is temporarily disabled.
+5216	All gifts have been added to your inventory.
+5217	The gift has been added to your inventory.
+5218	Please wait 5 seconds.
+"24244";
+"You can only fish in the 1st village of the Blue Kingdom.";
+"24245";
+"You cannot buy new worms while you have worms in your inventory.";

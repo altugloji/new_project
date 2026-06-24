@@ -1854,3 +1854,9 @@
 5216	All gifts have been added to your inventory.
 5217	The gift has been added to your inventory.
 5218	Please wait 5 seconds.
+"24244";
+"You can only fish in the 1st village of the Blue Kingdom.";
+"24245";
+"You cannot buy new worms while you have worms in your inventory.";
+24244	You can only fish in the 1st village of the Blue Kingdom.
+24245	You cannot buy new worms while you have worms in your inventory.

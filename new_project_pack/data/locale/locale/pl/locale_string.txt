@@ -1854,3 +1854,9 @@
 5216	Wszystkie prezenty zosta³y dodane do twojego ekwipunku.
 5217	Prezent zosta³ dodany do twojego ekwipunku.
 5218	Poczekaj 5 sekund.
+"24244";
+"Mo¿esz ³owiæ tylko w 1. wiosce Niebieskiego Królestwa.";
+"24245";
+"Nie mo¿esz kupiæ nowych robaków, gdy masz ju¿ robaki w ekwipunku.";
+24244	Mo¿esz ³owiæ tylko w 1. wiosce Niebieskiego Królestwa.
+24245	Nie mo¿esz kupiæ nowych robaków, gdy masz ju¿ robaki w ekwipunku.

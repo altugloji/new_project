@@ -13435,3 +13435,16 @@
 21550	Autres zones
 21560	Fermer
 64186	Catacombe
+90301	Palefrenier :
+90302	Améliorer mon cheval
+90303	Ton cheval a atteint le niveau max.
+90304	Tu veux donc améliorer ton cheval..
+90305	Niveau d'équitation :
+90306	Niveau suivant :
+90307	- Conditions -
+90308	:
+90309	Yang
+90310	Fermer
+90311	Objet requis
+90312	Tu n'as pas assez de Yang sur toi.
+90313	Félicitations ! Ton cheval a gagné un niveau.

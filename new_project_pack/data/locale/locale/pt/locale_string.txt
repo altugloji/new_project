@@ -1854,3 +1854,9 @@
 5216	Todos os presentes foram adicionados ao teu inventário.
 5217	O presente foi adicionado ao teu inventário.
 5218	Aguarda 5 segundos.
+"24244";
+"Só podes pescar na 1ª aldeia do Reino Azul.";
+"24245";
+"Não podes comprar novos vermes enquanto tiveres vermes no inventário.";
+24244	Só podes pescar na 1ª aldeia do Reino Azul.
+24245	Não podes comprar novos vermes enquanto tiveres vermes no inventário.

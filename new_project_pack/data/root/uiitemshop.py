@@ -126,10 +126,10 @@ class CategoryButton(ui.Window):
 		
 	def SetName(self, name):
 		if self.isSubItem:
-			self.name.SetPosition(24, 7)
+			self.name.SetPosition(24 + (60 if localeInfo.IsARABIC() else 0), 7)
 			#self.name.SetFontColor(0.63,0.91,1.00)
 		else:
-			self.name.SetPosition(24, 7)
+			self.name.SetPosition(24 + (60 if localeInfo.IsARABIC() else 0), 7)
 			#self.name.SetFontColor(1.00,0.69,0.29)
 
 		self.name.SetText(name)
@@ -573,7 +573,16 @@ class ItemShopWindow(ui.ScriptWindow):
 
 	def LoadWindow(self):
 		try:
-			ui.PythonScriptLoader().LoadScriptFile(self, "uiscript/item_shop.py")
+			# Arapça'da ui.py'deki genel RTL ayna kodu (AddFlag("rtl") + LoadDefaultData)
+			# bu pencerenin çocuklarını sağa aynalayıp kaydırıyordu. Sadece bu pencere
+			# EN/LTR düzeniyle yüklensin diye yükleme süresince IsARABIC'i geçici olarak
+			# kapatıyoruz; metin yönü kod sayfasından geldiği için Arapça yazı etkilenmez.
+			__origIsArabic = localeInfo.IsARABIC
+			localeInfo.IsARABIC = lambda: False
+			try:
+				ui.PythonScriptLoader().LoadScriptFile(self, "uiscript/item_shop.py")
+			finally:
+				localeInfo.IsARABIC = __origIsArabic
 		except:
 			import exception
 			exception.Abort("ItemShopWindow.LoadDialog.LoadObject")

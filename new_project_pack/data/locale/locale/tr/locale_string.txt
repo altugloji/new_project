@@ -1854,3 +1854,9 @@
 5216	Tüm hediyeler envanterine eklendi.
 5217	Hediye envanterine eklendi.
 5218	Lütfen 5 saniye bekle.
+"24244";
+"Sadece Mavi Bayrak 1.köyde balýk tutabilirsin.";
+"24245";
+"Envanterinde solucan varken yeni solucan satýn alamazsýn.";
+24244	Sadece Mavi Bayrak 1.köyde balýk tutabilirsin.
+24245	Envanterinde solucan varken yeni solucan satýn alamazsýn.

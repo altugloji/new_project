@@ -1854,3 +1854,9 @@
 5216	Alle cadeaus zijn toegevoegd aan je inventaris.
 5217	Het cadeau is toegevoegd aan je inventaris.
 5218	Wacht 5 seconden.
+"24244";
+"Je kunt alleen vissen in het 1e dorp van het Blauwe Rijk.";
+"24245";
+"Je kunt geen nieuwe wormen kopen zolang je wormen in je inventaris hebt.";
+24244	Je kunt alleen vissen in het 1e dorp van het Blauwe Rijk.
+24245	Je kunt geen nieuwe wormen kopen zolang je wormen in je inventaris hebt.

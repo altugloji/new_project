@@ -13435,3 +13435,16 @@
 21550	Otras zonas
 21560	Cerrar
 64186	Catacumba
+90301	Mozo de cuadra:
+90302	Mejorar mi caballo
+90303	Tu caballo ha alcanzado el nivel máximo.
+90304	Así que quieres mejorar tu caballo..
+90305	Nivel de equitación:
+90306	Siguiente nivel:
+90307	- Requisitos -
+90308	:
+90309	Yang
+90310	Cerrar
+90311	Objeto necesario
+90312	No tienes suficiente Yang.
+90313	¡Felicidades! Tu caballo subió de nivel.

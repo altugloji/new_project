@@ -137,7 +137,7 @@ class DeleteItem(ui.ScriptWindow):
 						itemLevelLimit = limitValue
 						break
 				if itemLevelLimit >= 40:
-					if item.GetItemType() == item.ITEM_TYPE_WEAPON and itemLevelLimit >= 60:
+					if item.GetItemType() == item.ITEM_TYPE_WEAPON and itemLevelLimit >= 50:
 						sellDivisor = 15
 					else:
 						sellDivisor = 10
@@ -463,7 +463,7 @@ class DeleteItem(ui.ScriptWindow):
 						itemLevelLimit = limitValue
 						break
 				if itemLevelLimit >= 40:
-					if item.GetItemType() == item.ITEM_TYPE_WEAPON and itemLevelLimit >= 60:
+					if item.GetItemType() == item.ITEM_TYPE_WEAPON and itemLevelLimit >= 50:
 						sellDivisor = 15
 					else:
 						sellDivisor = 10
@@ -515,7 +515,7 @@ class DeleteItem(ui.ScriptWindow):
 			attrSlot = [player.GetItemAttribute(attachedSlotPos, i) for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM)]
 			if int(attachedSlotPos) > 180:
 				self.uyari2 = uiCommon.PopupDialog()
-				self.uyari2.SetText("Giyili itemleri silemessin.")
+				self.uyari2.SetText("Giyili itemleri silemezsin.")
 				self.uyari2.Open()
 				return
 			
@@ -599,7 +599,7 @@ class DeleteItem(ui.ScriptWindow):
 			return
 
 		itemDropQuestionDialog = uiCommon.QuestionDialog()
-		itemDropQuestionDialog.SetText("Se?ilen (|cffFDD017|h%d Adet|h|r) nesneyi silmek istiyor musun?" % (len(self.itemStock)))
+		itemDropQuestionDialog.SetText("Secilen (|cffFDD017|h%d Adet|h|r) nesneyi silmek istiyor musun?" % (len(self.itemStock)))
 		itemDropQuestionDialog.SetAcceptEvent(lambda arg=True: self.RequestDropItem(arg))
 		itemDropQuestionDialog.SetCancelEvent(lambda arg=False: self.RequestDropItem(arg))
 		itemDropQuestionDialog.Open()
@@ -607,11 +607,11 @@ class DeleteItem(ui.ScriptWindow):
 
 	def OnSat(self):
 		if (len(self.itemStock) == 0):
-			chat.AppendChat(chat.CHAT_TYPE_INFO, "Sat?lacak nesne yok.")
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Satilacak nesne yok.")
 			return
 
 		itemDropQuestionDialog = uiCommon.QuestionDialog()
-		itemDropQuestionDialog.SetText("Se?ilen (|cffFDD017|h%d Adet|h|r) nesneyi satmak istiyor musun?" % (len(self.itemStock)))
+		itemDropQuestionDialog.SetText("Secilen (|cffFDD017|h%d Adet|h|r) nesneyi satmak istiyor musun?" % (len(self.itemStock)))
 		itemDropQuestionDialog.SetAcceptEvent(lambda arg=True: self.RequestSellItem(arg))
 		itemDropQuestionDialog.SetCancelEvent(lambda arg=False: self.RequestSellItem(arg))
 		itemDropQuestionDialog.Open()

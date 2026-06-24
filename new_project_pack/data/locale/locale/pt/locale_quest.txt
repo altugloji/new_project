@@ -13435,3 +13435,16 @@
 21550	Outras zonas
 21560	Fechar
 64186	Catacumba
+90301	Tratador:
+90302	Melhorar o meu cavalo
+90303	O teu cavalo atingiu o nível máximo.
+90304	Então queres melhorar o teu cavalo..
+90305	Nível de montaria:
+90306	Próximo nível:
+90307	- Requisitos -
+90308	:
+90309	Yang
+90310	Fechar
+90311	Item necessário
+90312	Não tens Yang suficiente contigo.
+90313	Parabéns! O teu cavalo subiu de nível.

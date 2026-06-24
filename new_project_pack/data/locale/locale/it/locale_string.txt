@@ -1855,3 +1855,9 @@ l'Alchimia delle Pietre del drago.
 5216	Tutti i regali sono stati aggiunti al tuo inventario.
 5217	Il regalo è stato aggiunto al tuo inventario.
 5218	Attendi 5 secondi.
+"24244";
+"Puoi pescare solo nel 1° villaggio del Regno Blu.";
+"24245";
+"Non puoi acquistare nuovi vermi mentre hai vermi nell'inventario.";
+24244	Puoi pescare solo nel 1° villaggio del Regno Blu.
+24245	Non puoi acquistare nuovi vermi mentre hai vermi nell'inventario.

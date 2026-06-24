@@ -13435,3 +13435,16 @@
 21550	Inne obszary
 21560	Zamknij
 64186	Katakumby
+90301	Stajenny:
+90302	Ulepsz mojego konia
+90303	Twój koñ osi¹gn¹³ maksymalny poziom.
+90304	A wiêc chcesz ulepszyæ swojego konia..
+90305	Poziom jazdy:
+90306	Nastêpny poziom:
+90307	- Wymagania -
+90308	:
+90309	Yang
+90310	Zamknij
+90311	Wymagany przedmiot
+90312	Nie masz przy sobie wystarczaj¹co Yang.
+90313	Gratulacje! Twój koñ awansowa³ na wy¿szy poziom.

@@ -450,7 +450,7 @@ class ShopDialog(ui.ScriptWindow):
 								itemLevelLimit = limitValue
 								break
 						if itemLevelLimit >= 40:
-							if item.GetItemType() == item.ITEM_TYPE_WEAPON and itemLevelLimit >= 60:
+							if item.GetItemType() == item.ITEM_TYPE_WEAPON and itemLevelLimit >= 50:
 								sellDivisor = 15
 							else:
 								sellDivisor = 10

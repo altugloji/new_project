@@ -124,7 +124,7 @@
 124	Tu declaración de guerra caducará en 3 minutos.
 125	%d segundos para entrar en la zona de combate.
 126	%d segundos para salir de la zona de combate.
-127	Has perdido %d puntos – Puntos restantes: %d
+127	Has perdido %d puntos - Puntos restantes: %d
 128	Por desgracia no tienes suficiente espacio en el inventario.
 129	Por este jugador no recibes puntos.
 130	Has anunciado tu retirada y podrás abandonar la zona de combate en %d segundos.
@@ -339,10 +339,10 @@
 340	[Gremio] Se ha cancelado la compra porque el Terreno del gremio ya te pertenece.
 341	[Gremio] Se ha cancelado la compra porque tu gremio ya tiene Terreno del gremio en su poder.
 342	[Atrapa al rey] Tus puntos no son suficientes para recibir un premio.
-343	[Atrapa al rey] ¡Juega a una ronda de “Atrapa al rey”!
+343	[Atrapa al rey] ¡Juega a una ronda de "Atrapa al rey"!
 344	[Evento Okey] Derrota monstruos, reúne cartas y juega una ronda de Okey.
 345	[Evento Okey] ¡Te esperan premios valiosos!
-346	[Atrapa al rey] “Atrapa al rey” ha terminado.
+346	[Atrapa al rey] "Atrapa al rey" ha terminado.
 349	[Atrapa al rey] %s ha obtenido %d puntos en Atrapa al rey.
 350	Tienes que aumentar tu Nivel para entender este Libro.
 351	Ya has utilizado el Elixir del investigador.
@@ -1228,12 +1228,12 @@
 1236	No puedes ejecutar esta acción mientras estés jugando a okey.
 1237	Cerrado. Debes buscar la llave.
 1238	La Piedra del ritual solo funciona con objetos a partir del nivel 80.
-1239	No puedes comerciar, ya que se sobrepasaría la cantidad máxima de %d Won.
+1239	No puedes comerciar, ya que se sobrepasaría la cantidad máxima de %d Won.
 1240	No tienes suficiente Yang.
 1241	No tienes suficiente Won.
 1242	No puedes intercambiar, ya que se sobrepasaría la cantidad máxima de Won.
 1243	No puedes intercambiar, ya que se sobrepasaría la cantidad máxima de Yang.
-1244	No puedes abrir una tienda privada, ya que se sobrepasaría la cantidad máxima de %d Won.
+1244	No puedes abrir una tienda privada, ya que se sobrepasaría la cantidad máxima de %d Won.
 1245	No puedes ampliar el inventario mientras estás comerciando.
 1246	¡Da comienzo el Evento Okey!
 1247	¡El Evento Okey ha terminado!
@@ -1357,7 +1357,7 @@
 1418	El Apocalipsis del Zodiaco no está activo.
 1419	El Apocalipsis del Zodiaco ya ha comenzado.
 1420	Se ha modificado la bonificación de tu Piedra dragón.
-1421	[Atrapa al rey] Derrota monstruos para conseguir Cartas del rey. Necesitas 25 cartas para completar una baraja del rey.
+1421	[Atrapa al rey] Derrota monstruos para conseguir Cartas del rey. Necesitas 25 cartas para completar una baraja del rey.
 1422	[Atrapa al rey] ¡Te esperan un montón de premios magníficos!
 1423	[Atrapa al rey] Si te has clasificado entre los mejores, recibirás tu premio en la mesa.
 1426	Has obtenido una bonificación de almacenamiento de un %d%% de EXP.
@@ -1394,7 +1394,7 @@
 1462	No puedes hacer esto mientras estés realizando otra acción.
 1463	No puedes hacer esto mientras estés realizando otra acción.
 1464	No puedes mejorar tu arma mientras haya una mascota invocada.
-1465	Necesitas %d espacios en vertical en el inventario para poder abrir la caja.
+1465	Necesitas %d espacios en vertical en el inventario para poder abrir la caja.
 1466	No tienes suficiente espacio en tu inventario.
 1467	[Almacén] No puedes almacenar un objeto en uso.
 1468	[Aura] No funciona con objetos unidos al alma.
@@ -1456,20 +1456,20 @@
 1525	No puedes acceder porque ya ha comenzado la cuenta atrás.
 1527	La victoria de Battle Royale se la lleva: %s
 1528	%s ha derrotado a %s.
-1529	El cuenta atrás ha comenzado. Battle Royale comenzará en %d segundos.
+1529	El cuenta atrás ha comenzado. Battle Royale comenzará en %d segundos.
 1530	Battle Royale no puede comenzar porque no hay suficientes participantes.
-1531	Battle Royale ha comenzado. La primera área se mostrará en %d segundos.
-1532	Zona de combate actualizada. Se delimitará en %d segundos.
-1533	La zona de combate se delimitará en %d segundos.
-1534	El Campo eléctrico se ha detenido. La próxima zona de combate se mostrará en %d segundos.
-1535	Battle Royale finaliza en %d segundos.
+1531	Battle Royale ha comenzado. La primera área se mostrará en %d segundos.
+1532	Zona de combate actualizada. Se delimitará en %d segundos.
+1533	La zona de combate se delimitará en %d segundos.
+1534	El Campo eléctrico se ha detenido. La próxima zona de combate se mostrará en %d segundos.
+1535	Battle Royale finaliza en %d segundos.
 1536	Eso no se puede hacer en Battle Royale.
 1537	No puedes registrarte en este mapa para eso.
 1538	Para eso no puedes registrarte en el servidor de Battle Royale.
 1540	Eso no se puede cancelar desde el servidor de Battle Royale.
 1541	¡Battle Royale ha comenzado!
 1542	¡Battle Royale ha finalizado!
-1543	No hay más zonas de combate. El área entera se delimitará en %d segundos.
+1543	No hay más zonas de combate. El área entera se delimitará en %d segundos.
 1544	Ahora mismo no se te está aplicando ninguna penalización.
 1545	Necesitas un Tique de Battle Royale para participar.
 1546	Se ha dejado un paquete de suministros especial en algún lugar.
@@ -1493,8 +1493,8 @@
 1575	Battle Royale
 1576	Recompensa de temporada de Battle Royale. Puesto de temporada: %d
 1577	Recompensa general de Battle Royale.
-1578	Recompensa de juego de Battle Royale. Puesto: %d
-1579	Recompensa de combate de Battle Royale. Adversarios vencidos %d o más
+1578	Recompensa de juego de Battle Royale. Puesto: %d
+1579	Recompensa de combate de Battle Royale. Adversarios vencidos %d o más
 1580	Ahora mismo no puedes reclamar logros.
 1581	Ahora mismo no puedes utilizar emociones.
 1582	Yongan
@@ -1546,10 +1546,10 @@
 1628	[Superjefe] Ahora mismo no puedes recibir recompensas.
 1629	[Superjefe] ¡Bien hecho! Aquí tienes tu recompensa. ¡Esperamos volver a contar contigo la próxima vez!
 1630	[Superjefe] Ahora mismo no puedes recibir recompensas porque no te queda espacio en el inventario.
-1631	[Superjefe] Recompensa correspondiente al nivel de botín I de la clasificación: %d
-1632	[Superjefe] Recompensa correspondiente al nivel de botín II de la clasificación: %d
-1633	[Superjefe] Recompensa correspondiente al nivel de botín III de la clasificación: %d
-1634	[Superjefe] Recompensa correspondiente al nivel de botín IV de la clasificación: %d
+1631	[Superjefe] Recompensa correspondiente al nivel de botín I de la clasificación: %d
+1632	[Superjefe] Recompensa correspondiente al nivel de botín II de la clasificación: %d
+1633	[Superjefe] Recompensa correspondiente al nivel de botín III de la clasificación: %d
+1634	[Superjefe] Recompensa correspondiente al nivel de botín IV de la clasificación: %d
 1635	[Flores de Colores] No tienes suficientes Retoños.
 1636	[Flores de Colores] No tienes suficiente espacio en el inventario.
 1637	[Flores de Colores] Has recibido Semillas florales.
@@ -1568,10 +1568,10 @@
 1650	Se ha abierto el portal al siguiente nivel.
 1651	¡%s ha superado el nivel %u de la Torre Infernal de Sung Mahi!
 1652	El botín de la Torre Infernal de Sung Mahi se ha enviado a tu buzón.
-1653	Torre Infernal: nivel %d
+1653	Torre Infernal: nivel %d
 1654	Botín por completar la Torre Infernal de Sung Mahi
-1655	La batalla comenzará en %d segundos.
-1656	Te enfrentas al nivel %d.
+1655	La batalla comenzará en %d segundos.
+1656	Te enfrentas al nivel %d.
 1657	¡Acaba con un par de monstruos independientes el uno del otro!
 1658	Has atacado al monstruo equivocado. ¡Acaba con todos los monstruos!
 1659	¡Acaba con todos los monstruos antes de que se acabe el tiempo!
@@ -1604,7 +1604,7 @@
 1687	[Tienda prémium personal] No puedes usar esto. Dirígete a la administradora comercial en la aldea.
 1688	Te has adentrado en un área que se encuentra bajo el control de Sung Mahi y, por tanto, te afecta su maldición.
 1689	En el área %s todavía hay %d puestos de avanzada (%d/%d).
-1690	En el área %s se han terminado todos los puestos de avanzada; el control de Sung Mahi se iniciará en %d minutos.
+1690	En el área %s se han terminado todos los puestos de avanzada; el control de Sung Mahi se iniciará en %d minutos.
 1691	Se están construyendo los puestos de avanzada de Sung Mahi.
 1692	Se han derribado puestos de avanzada de Sung Mahi.
 1693	En el área %s se han destruido todos los puestos de avanzada; la zona ya no se encuentra bajo el control de Sung Mahi.
@@ -1633,27 +1633,27 @@
 1716	[Tienda prémium personal] Puedes recoger objetos en tu tienda personal.
 1717	[Tienda prémium personal] Puedes recoger dinero en tu tienda personal.
 1718	[Tienda prémium personal] Se ha vendido: %s. Recoge el dinero.
-1719	[Tienda prémium personal] Si acabas de cerrar la tienda, no podrás volver a abrirla durante %d segundos.
+1719	[Tienda prémium personal] Si acabas de cerrar la tienda, no podrás volver a abrirla durante %d segundos.
 1720	No puedes hacer eso mientras se está generando la mazmorra.
 1721	Ya no puedes revivir más. Se te teletransportará fuera de la mazmorra.
-1722	Ya has obtenido tu recompensa. Si quieres volver a intentarlo, regresa más tarde. Tiempo restante: %d h %d min
-1723	Aún puedes revivir %d veces.
+1722	Ya has obtenido tu recompensa. Si quieres volver a intentarlo, regresa más tarde. Tiempo restante: %d h %d min
+1723	Aún puedes revivir %d veces.
 1724	Ya puedes acceder al Templo Serpentino. Para ello, usa la Estatua de serpiente.
 1725	El Metin destruido no reacciona. Han vuelto a aparecer todos los Metins.
 1726	El Metin destruido no reacciona. Han vuelto a aparecer todos los Metins.
 1727	Has destruido el Metin %d. Ahora destruye el Metin %d.
 1728	Se ha acabado el tiempo. Se te teletransportará fuera de la mazmorra.
-1729	Solo está disponible durante %d minutos.
+1729	Solo está disponible durante %d minutos.
 1730	No puedes añadir más tiempo al cronómetro de la mazmorra.
-1731	Añadido 1 minuto al cronómetro de la mazmorra.
-1732	Has acabado con todos los monstruos. Se te teletransportará al nivel %d. Quedan %d segundos.
-1733	Has destruido todos los Metins. Se te teletransportará al nivel %d. Quedan %d segundos.
+1731	Añadido 1 minuto al cronómetro de la mazmorra.
+1732	Has acabado con todos los monstruos. Se te teletransportará al nivel %d. Quedan %d segundos.
+1733	Has destruido todos los Metins. Se te teletransportará al nivel %d. Quedan %d segundos.
 1734	El fragmento está colocado en la cabeza de serpiente, pero no ocurre nada.
-1735	Todos las Columnas Serpentinas están desbloqueadas. Nivel %d en %d segundos.
+1735	Todos las Columnas Serpentinas están desbloqueadas. Nivel %d en %d segundos.
 1736	¡Ha aparecido el herrero especial del Templo Serpentino!
 1737	¡Ha aparecido el herrero del Templo Serpentino!
 1738	Has acabado con todos los monstruos, así que ya puedes dirigirte al nivel del jefe.
-1739	¡Has superado el desafío del Templo Serpentino! Se te teletransportará fuera de la mazmorra en %d segundos.
+1739	¡Has superado el desafío del Templo Serpentino! Se te teletransportará fuera de la mazmorra en %d segundos.
 1740	Destruye las Piedras Metin en el orden correcto.
 1741	Acaba con todos los monstruos.
 1742	Quítales la llave a los monstruos y desbloquea la Columna Serpentina.
@@ -1675,8 +1675,8 @@
 1758	[Tienda prémium personal] No podrás hacer esto mientras estés administrando objetos.
 1759	
 1760	[Bonificación de reliquia] Esto no es posible con la ventana de Reliquias alma abierta.
-1761	Han abandonado el combate %s miembros del grupo.
-1762	Todavía te quedan %d minutos.
+1761	Han abandonado el combate %s miembros del grupo.
+1762	Todavía te quedan %d minutos.
 1763	[Tienda prémium personal] Aquí no puedes batirte en duelo.
 1764	[Tienda prémium personal] El dinero que recoger no se actualizará mientras estés administrando objetos.
 1765	¡Ha aparecido el jefe final del Templo Serpentino!
@@ -1710,7 +1710,7 @@
 1793	
 1794	
 1795	
-1796	<Profundidades Tramontanas> ¡Has derrotado a Alastor! Se te teletransportará fuera de la mazmorra en 20 segundos.
+1796	<Profundidades Tramontanas> ¡Has derrotado a Alastor! Se te teletransportará fuera de la mazmorra en 20 segundos.
 1797	<Profundidades Tramontanas> ¡Alastor está a punto de desatar toda su furia helada!
 1798	<Profundidades Tramontanas> ¡Alastor va a desatar el nivel %d de su furia helada!
 1799	<Profundidades Tramontanas> Has conseguido contener la furia helada de Alastor.
@@ -1722,17 +1722,17 @@
 1805	No se reunirán botines porque el filtro de botines está desactivado.
 1806	No se reunirán botines porque un miembro del grupo tiene el filtro de botines desactivado.
 1807	
-1808	Has obtenido %d puntos de experiencia de nivel de campeón.
-1809	Has obtenido %d puntos de experiencia.
-1810	Has perdido %d puntos de experiencia.
-1811	Has perdido %d puntos de experiencia de nivel de campeón.
+1808	Has obtenido %d puntos de experiencia de nivel de campeón.
+1809	Has obtenido %d puntos de experiencia.
+1810	Has perdido %d puntos de experiencia.
+1811	Has perdido %d puntos de experiencia de nivel de campeón.
 1812	No puedes hacer eso mientras estés comerciando.
 1813	¡Ha comenzado el evento "Fiebre de Metin"!
 1814	Supera misiones de la lista de misiones de evento, destruye Piedras Metin y gana recompensas.
 1815	El evento Fiebre de Metin no está activo.
 1816	[Templo del Dragón] Has creado una instancia en el Templo del Dragón.
 1817	[Templo del Dragón] La instancia desaparecerá si no inicias el combate en los próximos 3 minutos.
-1818	[Templo del Dragón] Beran-Setaou ha caído. Se te teletransportará fuera de la mazmorra en %d segundos.
+1818	[Templo del Dragón] Beran-Setaou ha caído. Se te teletransportará fuera de la mazmorra en %d segundos.
 1819	[Templo del Dragón] Todavía te quedan %d minutos.
 1820	[Templo del Dragón] La instancia ha desaparecido porque no se inició el combate.
 1821	[Templo del Dragón] Se ha acabado el tiempo. Se teletransportará a todo el mundo fuera de la mazmorra.
@@ -1745,7 +1745,7 @@
 1838	No puedes bloquearte a ti mismo/a.
 1839	No puedes añadirte a ti mismo/a.
 1840	%s: Acción aceptada.
-1844	Has alimentado a tu caballo con %d raciones de comida para caballos. Ha obtenido %d puntos de experiencia.
+1844	Has alimentado a tu caballo con %d raciones de comida para caballos. Ha obtenido %d puntos de experiencia.
 1845	No tienes suficiente Yang ni Gaya.
 1846	No puedes aprender esta habilidad de montura.
 1847	[Templo Enigma] No puedes utilizar esto aquí.
@@ -1770,7 +1770,7 @@
 1866	[Templo Enigma] No has obtenido ninguna recompensa. Tiempo restante hasta la siguiente recompensa: %d horas y %d minutos
 1867	Recompensa del Templo Enigma
 1868	[Templo Enigma] Se ha acabado el tiempo y el Templo Enigma ha desaparecido.
-1869	[Templo Enigma] Te quedan 4 minutos para iniciar la batalla en el Portal Enigma.
+1869	[Templo Enigma] Te quedan 4 minutos para iniciar la batalla en el Portal Enigma.
 1870	[Templo Enigma] Has obtenido otro cofre del tesoro gracias a la Bendición del Templo Enigma.
 1871	[Templo Enigma] Has obtenido una Recompensa enigma. Echa un vistazo en tu buzón para reclamarla.
 1872	Se ha retirado: %s.
@@ -1835,3 +1835,26 @@
 2102	<Herrero> ¡El jugador %s ha quemado %s!
 2103	<Bendición> ¡El jugador %s ha obtenido %s!
 2104	<Bendición> ¡El objeto %s del jugador %s bajó al nivel %s!
+2150	%s se ha eliminado correctamente.
+5201	No eres el dueño de esta tienda.
+5202	No puedes editar la tienda mientras la ventana de comercio, almacén o cubo esté abierta.
+5203	El valor total de los objetos en la tienda no puede superar 2.000.000.000 Yang. Baja el precio o retira un objeto.
+5204	Esta tienda se está editando actualmente.
+5205	No puedes realizar esta acción mientras la tienda se está editando.
+5206	Espera unos segundos para realizar la acción de la tienda.
+5207	Ya tienes una tienda activa.
+5208	Tienda de #PLAYER_NAME#
+5209	Tienes objetos en tu caja de regalos, recógelos primero.
+5210	Has alcanzado la cantidad máxima de Yang que puedes llevar.
+5211	Error de paquete, inténtalo de nuevo.
+5212	La tienda ha sido cerrada.
+5213	Estás realizando acciones demasiado rápido, espera un momento.
+5214	No puedes abrir una tienda en esta zona.
+5215	El sistema de tienda está desactivado temporalmente.
+5216	Todos los regalos se han añadido a tu inventario.
+5217	El regalo se ha añadido a tu inventario.
+5218	Espera 5 segundos.
+"24244";
+"Solo puedes pescar en la 1ª aldea del Reino Azul.";
+"24245";
+"No puedes comprar nuevos gusanos mientras tengas gusanos en tu inventario.";

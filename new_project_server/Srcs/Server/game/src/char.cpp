@@ -2050,7 +2050,7 @@ bool CHARACTER::Show(long lMapIndex, long x, long y, long z, bool bShowSpawnMoti
 	if (bShowSpawnMotion)
 	{
 		SET_BIT(m_bAddChrState, ADD_CHARACTER_STATE_SPAWN);
-		m_afAffectFlag.Set(AFF_SPAWN);
+		// m_afAffectFlag.Set(AFF_SPAWN);
 	}
 
 	SetXYZ(x, y, z);
@@ -4750,21 +4750,22 @@ void CHARACTER::fishing()
 		return;
 	}
 
-	if (GetMapIndex() == 41) {
-		bool bCanFishing = true;
+	if (GetMapIndex() == 41)
+	{
+		bool bCanFishing = false;
+
 		LPSECTREE_MAP pMap = SECTREE_MANAGER::instance().GetMap(GetMapIndex());
-		if (pMap) {
-			long localX = ((GetX() - pMap->m_setting.iBaseX) / 100), localY = ((GetY() - pMap->m_setting.iBaseY) / 100);
-			if (localY > 479 && localY < 490)
-				bCanFishing = false;
+		if (pMap)
+		{
+			long localX = ((GetX() - pMap->m_setting.iBaseX) / 100);
+			long localY = ((GetY() - pMap->m_setting.iBaseY) / 100);
 
-			if (localX > 369 && localX < 490)
-				bCanFishing = false;
+			if (localY > 479 && localY < 525 && localX > 349 && localX < 490)
+				bCanFishing = true;
 		}
-		else
-			bCanFishing = false;
 
-		if (!bCanFishing) {
+		if (!bCanFishing)
+		{
 			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FISHING_ONLY_VILLAGE"));
 			return;
 		}

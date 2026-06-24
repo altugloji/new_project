@@ -1835,3 +1835,26 @@
 2102	<Smed> Spilleren %s brændte %s!
 2103	<Velsignelse> Spilleren %s fik %s!
 2104	<Velsignelse> Spilleren %s fik sit item %s sænket til niveau %s!
+2150	%s blev slettet.
+5201	Du ejer ikke denne shop.
+5202	Du kan ikke redigere shoppen, mens handel, lager eller kube-vinduet er åbent.
+5203	Den samlede værdi af items i shoppen må ikke overstige 2.000.000.000 Yang! Sænk prisen eller fjern et item.
+5204	Denne shop bliver redigeret lige nu.
+5205	Du kan ikke udføre denne handling, mens shoppen redigeres.
+5206	Vent venligst et par sekunder for shop-handlingen.
+5207	Du har allerede en aktiv shop.
+5208	#PLAYER_NAME#'s shop
+5209	Der er items i din gaveboks, hent dem først.
+5210	Du har nået den maksimale Yang, du kan bære.
+5211	Pakkefejl, prøv igen.
+5212	Shoppen blev lukket.
+5213	Du udfører handlinger for hurtigt, vent lidt.
+5214	Du kan ikke åbne shop i dette område.
+5215	Shop-systemet er midlertidigt lukket.
+5216	Alle gaver blev tilføjet til dit inventar.
+5217	Gaven blev tilføjet til dit inventar.
+5218	Vent venligst 5 sekunder.
+"24244";
+"Du kan kun fiske i 1. landsby i Det Blå Rige.";
+"24245";
+"Du kan ikke købe nye orme, mens du har orme i dit inventar.";

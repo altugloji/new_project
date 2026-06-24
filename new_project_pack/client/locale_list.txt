@@ -1,3 +1,4 @@
+Arabic 1256 ae
 Czech 1250 cz
 Danish 1252 dk
 Dutch 1252 nl

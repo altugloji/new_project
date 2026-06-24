@@ -1854,3 +1854,9 @@
 5216	Toate cadourile au fost adãugate în inventarul tãu.
 5217	Cadoul a fost adãugat în inventarul tãu.
 5218	Te rugãm sã aºtepþi 5 secunde.
+"24244";
+"Poþi pescui doar în satul 1 al Regatului Albastru.";
+"24245";
+"Nu poþi cumpãra viermi noi cât timp ai viermi în inventar.";
+24244	Poþi pescui doar în satul 1 al Regatului Albastru.
+24245	Nu poþi cumpãra viermi noi cât timp ai viermi în inventar.

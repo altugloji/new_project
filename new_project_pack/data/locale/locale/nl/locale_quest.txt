@@ -13435,3 +13435,16 @@
 21550	Andere gebieden
 21560	Sluiten
 64186	Catacombe
+90301	Stalknecht:
+90302	Mijn paard verbeteren
+90303	Je paard heeft het max. level bereikt.
+90304	Dus je wilt je paard verbeteren..
+90305	Rijniveau:
+90306	Volgend level:
+90307	- Vereisten -
+90308	:
+90309	Yang
+90310	Sluiten
+90311	Vereist item
+90312	Je hebt niet genoeg Yang bij je.
+90313	Gefeliciteerd! Je paard is een level gestegen.

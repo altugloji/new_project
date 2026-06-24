@@ -3,6 +3,12 @@
 
 import uiScriptLocale
 import localeInfo
+import app
+
+# Arapça'da kategori/isim/adet metinleri +30px sağa kaysın diye yatay ofset.
+# Bu pencere yüklenirken IsARABIC geçici olarak kapatıldığı için (uiitemshop.LoadWindow)
+# locale'i app.GetLocalePath() ile doğrudan kontrol ediyoruz.
+AE_TEXT_DX = 70 if app.GetLocalePath() == "locale/ae" else 0
 
 LOCALE_PATH = "d:/ymir work/ui/privatesearch/"
 ITEM_SHOP_FONT = getattr(localeInfo, "UI_BOLD_FONT_LARGE", localeInfo.UI_DEF_FONT_LARGE)
@@ -253,12 +259,12 @@ window = {
 								},
 								{
 									"name" : "itemName_01", "type" : "text",
-									"x" : 166, "y" : 20,
+									"x" : 166 + AE_TEXT_DX, "y" : 20,
 									"fontname" : ITEM_SHOP_FONT, "text" : "", "outline" : 1,
 								},
 								{
 									"name" : "itemOldPrice_01", "type" : "text",
-									"x" : 347, "y" : 80,
+									"x" : 347 + AE_TEXT_DX, "y" : 80,
 									"fontname" : ITEM_SHOP_FONT, "text" : "", "outline" : 1,
 								},
 								{
@@ -320,12 +326,12 @@ window = {
 								},
 								{
 									"name" : "itemName_02", "type" : "text",
-									"x" : 166, "y" : 20,
+									"x" : 166 + AE_TEXT_DX, "y" : 20,
 									"fontname" : ITEM_SHOP_FONT, "text" : "", "outline" : 1,
 								},
 								{
 									"name" : "itemOldPrice_02", "type" : "text",
-									"x" : 347, "y" : 80,
+									"x" : 347 + AE_TEXT_DX, "y" : 80,
 									"fontname" : ITEM_SHOP_FONT, "text" : "", "outline" : 1,
 								},
 								{
@@ -387,12 +393,12 @@ window = {
 								},
 								{
 									"name" : "itemName_03", "type" : "text",
-									"x" : 166, "y" : 20,
+									"x" : 166 + AE_TEXT_DX, "y" : 20,
 									"fontname" : ITEM_SHOP_FONT, "text" : "", "outline" : 1,
 								},
 								{
 									"name" : "itemOldPrice_03", "type" : "text",
-									"x" : 347, "y" : 80,
+									"x" : 347 + AE_TEXT_DX, "y" : 80,
 									"fontname" : ITEM_SHOP_FONT, "text" : "", "outline" : 1,
 								},
 								{
@@ -454,12 +460,12 @@ window = {
 								},
 								{
 									"name" : "itemName_04", "type" : "text",
-									"x" : 166, "y" : 20,
+									"x" : 166 + AE_TEXT_DX, "y" : 20,
 									"fontname" : ITEM_SHOP_FONT, "text" : "", "outline" : 1,
 								},
 								{
 									"name" : "itemOldPrice_04", "type" : "text",
-									"x" : 347, "y" : 80,
+									"x" : 347 + AE_TEXT_DX, "y" : 80,
 									"fontname" : ITEM_SHOP_FONT, "text" : "", "outline" : 1,
 								},
 								{
@@ -521,12 +527,12 @@ window = {
 								},
 								{
 									"name" : "itemName_05", "type" : "text",
-									"x" : 166, "y" : 20,
+									"x" : 166 + AE_TEXT_DX, "y" : 20,
 									"fontname" : ITEM_SHOP_FONT, "text" : "", "outline" : 1,
 								},
 								{
 									"name" : "itemOldPrice_05", "type" : "text",
-									"x" : 347, "y" : 80,
+									"x" : 347 + AE_TEXT_DX, "y" : 80,
 									"fontname" : ITEM_SHOP_FONT, "text" : "", "outline" : 1,
 								},
 								{

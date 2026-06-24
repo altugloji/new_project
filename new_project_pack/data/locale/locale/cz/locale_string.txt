@@ -1854,3 +1854,9 @@
 5216	Všechny dárky byly pøidány do inventáøe.
 5217	Dárek byl pøidán do inventáøe.
 5218	Poèkej prosím 5 sekund.
+"24244";
+"Rybaøit mùeš pouze v 1. vesnici Modré øíše.";
+"24245";
+"Nemùeš koupit nové èervy, kdy u máš èervy v inventáøi.";
+24244	Rybaøit mùeš pouze v 1. vesnici Modré øíše.
+24245	Nemùeš koupit nové èervy, kdy u máš èervy v inventáøi.

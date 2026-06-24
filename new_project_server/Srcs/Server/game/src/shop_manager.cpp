@@ -484,7 +484,7 @@ void CShopManager::Sell(LPCHARACTER ch, BYTE bCell, BYTE bCount) const
 #ifndef ENABLE_NO_SELL_PRICE_DIVIDED_BY_5
 	if ((item->GetType() == ITEM_WEAPON || item->GetType() == ITEM_ARMOR) && item->GetLevelLimit() >= 40)
 	{
-		if (item->GetType() == ITEM_WEAPON && item->GetLevelLimit() >= 60)
+		if (item->GetType() == ITEM_WEAPON && item->GetLevelLimit() >= 50)
 			dwPrice /= 15;
 		else
 			dwPrice /= 10;

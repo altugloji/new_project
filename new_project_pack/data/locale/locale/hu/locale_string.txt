@@ -1854,3 +1854,9 @@
 5216	Minden ajándék hozzáadva a leltáradhoz.
 5217	Az ajándék hozzáadva a leltáradhoz.
 5218	Kérjük, várj 5 másodpercet.
+"24244";
+"Csak a Kék Birodalom 1. falujában horgászhatsz.";
+"24245";
+"Nem vásárolhatsz új férgeket, amíg van féreg a leltáradban.";
+24244	Csak a Kék Birodalom 1. falujában horgászhatsz.
+24245	Nem vásárolhatsz új férgeket, amíg van féreg a leltáradban.

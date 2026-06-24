@@ -1242,7 +1242,7 @@
 1250	Fésüld át a területeket és semmisítsd meg õket! Gyûjts ütéspontokat és váltsd át ládákra!
 1251	%d Perc múlva véget ér a Fõszörny-kaszáló esemény.
 1252	%d Perc múlva eltûnik B. úr és a fõszörnyek.
-1253	Elérted napi célod – gyûjtsd be a jutalmad!
+1253	Elérted napi célod - gyûjtsd be a jutalmad!
 1254	Nem használhatsz fegyver-kinézetet, amíg menyasszonyi ruhát, vagy szmokingot viselsz.
 1255	A másik személy épp elfoglalt, ezért most nem tudsz vele kereskedni.
 1256	Nem vehetsz fel menyasszonyi ruhát vagy szmokingot, ha már fegyver-kinézetet viselsz.
@@ -1835,3 +1835,26 @@
 2102	<Kovács> %s játékos elégette: %s!
 2103	<Áldás> %s játékos megszerezte: %s!
 2104	<Áldás> %s játékos %s tárgya %s szintre csökkent!
+2150	%s sikeresen törölve.
+5201	Nem te vagy ennek a boltnak a tulajdonosa.
+5202	Nem szerkesztheted a boltot, amíg a kereskedés, raktár vagy kocka ablak nyitva van.
+5203	A boltban lévõ tárgyak összértéke nem haladhatja meg a 2.000.000.000 Yangot! Csökkentsd az árat vagy távolíts el egy tárgyat.
+5204	Ezt a boltot jelenleg szerkesztik.
+5205	A bolt szerkesztése közben ezt a mûveletet nem hajthatod végre.
+5206	Kérjük, várj néhány másodpercet a boltmûvelethez.
+5207	Már van aktív boltod.
+5208	#PLAYER_NAME# boltja
+5209	Tárgyak vannak az ajándékdobozodban, elõször vedd át õket.
+5210	Elérted a maximálisan hordozható Yang mennyiséget.
+5211	Csomaghiba, próbáld újra.
+5212	A bolt bezárva.
+5213	Túl gyorsan végzed a mûveleteket, várj egy kicsit.
+5214	Ezen a területen nem nyithatsz boltot.
+5215	A boltrendszer ideiglenesen le van tiltva.
+5216	Minden ajándék hozzáadva a leltáradhoz.
+5217	Az ajándék hozzáadva a leltáradhoz.
+5218	Kérjük, várj 5 másodpercet.
+"24244";
+"Csak a Kék Birodalom 1. falujában horgászhatsz.";
+"24245";
+"Nem vásárolhatsz új férgeket, amíg van féreg a leltáradban.";

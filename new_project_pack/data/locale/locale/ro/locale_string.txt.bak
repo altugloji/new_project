@@ -1835,3 +1835,26 @@
 2102	<Fierar> Jucatorul %s a ars %s!
 2103	<Binecuvântare> Jucatorul %s a ob?inut %s!
 2104	<Binecuvântare> Obiectul %s al jucatorului %s a fost redus la nivelul %s!
+2150	%s a fost ºters cu succes.
+5201	Nu eºti proprietarul acestui magazin.
+5202	Nu poþi edita magazinul cât timp fereastra de negoþ, depozit sau cub este deschisã.
+5203	Valoarea totalã a obiectelor din magazin nu poate depãºi 2.000.000.000 Yang! Scade preþul sau eliminã un obiect.
+5204	Acest magazin este editat în acest moment.
+5205	Nu poþi face aceastã acþiune în timp ce magazinul este editat.
+5206	Te rugãm sã aºtepþi câteva secunde pentru acþiunea magazinului.
+5207	Ai deja un magazin activ.
+5208	Magazinul lui #PLAYER_NAME#
+5209	Ai obiecte în cutia de cadouri, revendicã-le mai întâi.
+5210	Ai atins limita maximã de Yang pe care o poþi purta.
+5211	Eroare de pachet, te rugãm sã încerci din nou.
+5212	Magazinul a fost închis.
+5213	Faci acþiuni prea rapid, aºteaptã puþin.
+5214	Nu poþi deschide magazin în aceastã zonã.
+5215	Sistemul de magazin este dezactivat temporar.
+5216	Toate cadourile au fost adãugate în inventarul tãu.
+5217	Cadoul a fost adãugat în inventarul tãu.
+5218	Te rugãm sã aºtepþi 5 secunde.
+"24244";
+"Poþi pescui doar în satul 1 al Regatului Albastru.";
+"24245";
+"Nu poþi cumpãra viermi noi cât timp ai viermi în inventar.";

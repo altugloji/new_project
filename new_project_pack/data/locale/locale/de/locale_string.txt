@@ -1854,3 +1854,9 @@
 5216	Alle Geschenke wurden deinem Inventar hinzugefügt.
 5217	Geschenk wurde deinem Inventar hinzugefügt.
 5218	Bitte warte 5 Sekunden.
+"24244";
+"Du kannst nur im 1. Dorf des Blauen Reiches angeln.";
+"24245";
+"Du kannst keine neuen Würmer kaufen, solange du Würmer im Inventar hast.";
+24244	Du kannst nur im 1. Dorf des Blauen Reiches angeln.
+24245	Du kannst keine neuen Würmer kaufen, solange du Würmer im Inventar hast.

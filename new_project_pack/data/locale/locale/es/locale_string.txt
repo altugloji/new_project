@@ -1854,3 +1854,9 @@
 5216	Todos los regalos se han añadido a tu inventario.
 5217	El regalo se ha añadido a tu inventario.
 5218	Espera 5 segundos.
+"24244";
+"Solo puedes pescar en la 1ª aldea del Reino Azul.";
+"24245";
+"No puedes comprar nuevos gusanos mientras tengas gusanos en tu inventario.";
+24244	Solo puedes pescar en la 1ª aldea del Reino Azul.
+24245	No puedes comprar nuevos gusanos mientras tengas gusanos en tu inventario.

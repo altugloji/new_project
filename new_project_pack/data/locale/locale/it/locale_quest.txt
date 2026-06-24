@@ -13435,3 +13435,16 @@
 21550	Altre zone
 21560	Chiudi
 64186	Catacomba
+90301	Stalliere:
+90302	Migliora il mio cavallo
+90303	Il tuo cavallo ha raggiunto il livello massimo.
+90304	Quindi vuoi migliorare il tuo cavallo..
+90305	Livello equitazione:
+90306	Livello successivo:
+90307	- Requisiti -
+90308	:
+90309	Yang
+90310	Chiudi
+90311	Oggetto richiesto
+90312	Non hai abbastanza Yang.
+90313	Congratulazioni! Il tuo cavallo è salito di livello.

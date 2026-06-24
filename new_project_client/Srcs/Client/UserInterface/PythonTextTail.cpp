@@ -296,7 +296,7 @@ void CPythonTextTail::ArrangeTextTail()
 				if (pLevel)
 					pLevel->GetTextSize(&iLevelWidth, &iLevelHeight);
 				if (GetDefaultCodePage() == CP_ARABIC)
-					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iTitleWidth - iLevelWidth - pCountryFlag->GetWidth() - 7.0f, pTextTail->y - pCountryFlag->GetHeight() + 3.7f);
+					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iTitleWidth - iLevelWidth - pCountryFlag->GetWidth() - 17.0f, pTextTail->y - pCountryFlag->GetHeight() + 3.4f);
 				else
 					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iTitleWidth - iLevelWidth - pCountryFlag->GetWidth() - 7.0f, pTextTail->y - pCountryFlag->GetHeight() + 1.7f);
 			}
@@ -331,7 +331,7 @@ void CPythonTextTail::ArrangeTextTail()
 				if (pLevel)
 					pLevel->GetTextSize(&iLevelWidth, &iLevelHeight);
 				if (GetDefaultCodePage() == CP_ARABIC)
-					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iLevelWidth - pCountryFlag->GetWidth() - 3.0f, pTextTail->y - pCountryFlag->GetHeight() + 3.7f);
+					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iLevelWidth - pCountryFlag->GetWidth() - 10.0f, pTextTail->y - pCountryFlag->GetHeight() + 3.7f);
 				else
 					pCountryFlag->SetPosition(pTextTail->x - (iNameWidth / 2) - iLevelWidth - pCountryFlag->GetWidth() - 7.0f, pTextTail->y - pCountryFlag->GetHeight() + 1.7f);
 			}

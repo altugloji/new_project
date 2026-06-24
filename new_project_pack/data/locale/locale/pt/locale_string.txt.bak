@@ -1242,7 +1242,7 @@
 1250	Explora essas áreas e elimina-os. Colecciona golpes e troca-os por cofres.
 1251	O Evento Ceifador de Bosses termina dentro de %d minuto(s).
 1252	O Sr. B e os monstros Boss irão desaparecer dentro de %d minuto(s).
-1253	Conseguiste o teu alvo diário – obtém a tua recompensa.
+1253	Conseguiste o teu alvo diário - obtém a tua recompensa.
 1254	Não podes usar skins de arma enquanto usas um Vestido de Noiva ou um Fato de Casamento.
 1255	A outra pessoa encontra-se ocupada, por isso não podes negociar neste momento.
 1256	Não podes vestir um Vestido de Noiva ou um Fato de Casamento enquanto usas uma skin de arma.
@@ -1835,3 +1835,26 @@
 2102	<Ferreiro> O jogador %s queimou %s!
 2103	<Bênção> O jogador %s obteve %s!
 2104	<Bênção> O item %s do jogador %s foi reduzido para o nível %s!
+2150	%s foi eliminado com sucesso.
+5201	Não és o dono desta loja.
+5202	Não podes editar a loja enquanto a janela de troca, armazém ou cubo estiver aberta.
+5203	O valor total dos itens na loja não pode ultrapassar 2.000.000.000 Yang! Baixa o preço ou remove um item.
+5204	Esta loja está a ser editada neste momento.
+5205	Não podes fazer esta ação enquanto a loja está a ser editada.
+5206	Aguarda alguns segundos para a ação da loja.
+5207	Já tens uma loja ativa.
+5208	Loja de #PLAYER_NAME#
+5209	Tens itens na tua caixa de presentes, recolhe-os primeiro.
+5210	Atingiste a quantidade máxima de Yang que podes carregar.
+5211	Erro de pacote, tenta novamente.
+5212	A loja foi fechada.
+5213	Estás a fazer ações demasiado rápido, espera um pouco.
+5214	Não podes abrir uma loja nesta área.
+5215	O sistema de loja está temporariamente desativado.
+5216	Todos os presentes foram adicionados ao teu inventário.
+5217	O presente foi adicionado ao teu inventário.
+5218	Aguarda 5 segundos.
+"24244";
+"Só podes pescar na 1ª aldeia do Reino Azul.";
+"24245";
+"Não podes comprar novos vermes enquanto tiveres vermes no inventário.";

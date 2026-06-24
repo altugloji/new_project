@@ -13439,3 +13439,16 @@
 21550	Diðer Bölgeler
 21560	Kapat
 64186	Katacomb
+90301	Seyis:
+90302	Atýmý geliþtir
+90303	Atýn max. seviyeye ulaþmýþ.
+90304	Demek Atýný geliþtirmek istiyorsun..
+90305	Binicilik Seviyesi:
+90306	Sonraki Seviye:
+90307	- Gerekenler -
+90308	:
+90309	Yang
+90310	Kapat
+90311	Gerekli eþya
+90312	Üzerinde yeterli yang yok.
+90313	Tebrikler! Atýn seviye atladý.

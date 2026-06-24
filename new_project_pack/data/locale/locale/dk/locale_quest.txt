@@ -13435,3 +13435,16 @@
 21550	Andre områder
 21560	Luk
 64186	Katakomber
+90301	Staldkarl:
+90302	Forbedr min hest
+90303	Din hest har nået maks. niveau.
+90304	Så du vil forbedre din hest..
+90305	Rideniveau:
+90306	Næste niveau:
+90307	- Krav -
+90308	:
+90309	Yang
+90310	Luk
+90311	Nødvendigt item
+90312	Du har ikke nok Yang på dig.
+90313	Tillykke! Din hest steg i niveau.

@@ -13435,3 +13435,16 @@
 21550	Ostatní oblasti
 21560	Zavøít
 64186	Katakomby
+90301	Èeledín:
+90302	Vylepšit konì
+90303	Tvùj kùò dosáhl maximální úrovnì.
+90304	Takže chceš vylepšit svého konì..
+90305	Úroveò ježdìní:
+90306	Další úroveò:
+90307	- Požadavky -
+90308	:
+90309	Yang
+90310	Zavøít
+90311	Potøebný pøedmìt
+90312	Nemáš u sebe dostatek Yangu.
+90313	Gratulujeme! Tvùj kùò postoupil na vyšší úroveò.

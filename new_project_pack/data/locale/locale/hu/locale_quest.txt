@@ -13435,3 +13435,16 @@
 21550	Egyéb területek
 21560	Bezárás
 64186	Katakomba
+90301	Lovász:
+90302	Lovam fejlesztése
+90303	A lovad elérte a maximális szintet.
+90304	Szóval fejleszteni szeretnéd a lovadat..
+90305	Lovaglási szint:
+90306	Következõ szint:
+90307	- Követelmények -
+90308	:
+90309	Yang
+90310	Bezárás
+90311	Szükséges tárgy
+90312	Nincs nálad elég Yang.
+90313	Gratulálunk! A lovad szintet lépett.

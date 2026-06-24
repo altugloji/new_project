@@ -36,6 +36,7 @@ LANG_ENCODINGS = {
     "pt": "cp1252",
     "nl": "cp1252",
     "dk": "cp1252",
+    "ae": "cp1256",
 }
 
 ALLOWED_FILES = (

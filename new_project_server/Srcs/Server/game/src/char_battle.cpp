@@ -754,14 +754,14 @@ void CHARACTER::Reward(bool bItemDrop
 			{
 				const int iHP = pkAttacker->GetMaxHP() * pkAttacker->GetPoint(POINT_KILL_HP_RECOVERY) / 100;
 				pkAttacker->PointChange(POINT_HP, iHP);
-				CreateFly(FLY_HP_SMALL, pkAttacker);
+				// CreateFly(FLY_HP_SMALL, pkAttacker);
 			}
 
 			if (pkAttacker->GetPoint(POINT_KILL_SP_RECOVER))
 			{
 				const int iSP = pkAttacker->GetMaxSP() * pkAttacker->GetPoint(POINT_KILL_SP_RECOVER) / 100;
 				pkAttacker->PointChange(POINT_SP, iSP);
-				CreateFly(FLY_SP_SMALL, pkAttacker);
+				// CreateFly(FLY_SP_SMALL, pkAttacker);
 			}
 		}
 	}
@@ -1891,7 +1891,7 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 
 					if (iHP > 0 && GetHP() >= iHP)
 					{
-						CreateFly(FLY_HP_SMALL, pAttacker);
+						// CreateFly(FLY_HP_SMALL, pAttacker);
 						pAttacker->PointChange(POINT_HP, iHP);
 						PointChange(POINT_HP, -iHP);
 					}
@@ -1915,7 +1915,7 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 
 					if (iSP > 0 && iCur >= iSP)
 					{
-						CreateFly(FLY_SP_SMALL, pAttacker);
+						// CreateFly(FLY_SP_SMALL, pAttacker);
 						pAttacker->PointChange(POINT_SP, iSP);
 
 						if (IsPC())
@@ -1940,7 +1940,7 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 
 				if (i)
 				{
-					CreateFly(FLY_HP_SMALL, pAttacker);
+					// CreateFly(FLY_HP_SMALL, pAttacker);
 					pAttacker->PointChange(POINT_HP, i);
 				}
 			}
@@ -1951,7 +1951,7 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 
 				if (i)
 				{
-					CreateFly(FLY_SP_SMALL, pAttacker);
+					// CreateFly(FLY_SP_SMALL, pAttacker);
 					pAttacker->PointChange(POINT_SP, i);
 				}
 			}

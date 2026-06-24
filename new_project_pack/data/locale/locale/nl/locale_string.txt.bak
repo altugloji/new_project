@@ -1835,3 +1835,26 @@
 2102	<Smid> Speler %s heeft %s verbrand!
 2103	<Zegening> Speler %s heeft %s verkregen!
 2104	<Zegening> Het item %s van speler %s is verlaagd naar niveau %s!
+2150	%s is succesvol verwijderd.
+5201	Je bent niet de eigenaar van deze winkel.
+5202	Je kunt de winkel niet bewerken terwijl handel, opslag of het kubusvenster open is.
+5203	De totale waarde van items in de winkel mag niet hoger zijn dan 2.000.000.000 Yang! Verlaag de prijs of verwijder een item.
+5204	Deze winkel wordt momenteel bewerkt.
+5205	Je kunt deze actie niet uitvoeren terwijl de winkel wordt bewerkt.
+5206	Wacht een paar seconden voor de winkelactie.
+5207	Je hebt al een actieve winkel.
+5208	Winkel van #PLAYER_NAME#
+5209	Je hebt items in je cadeaubox, haal ze eerst op.
+5210	Je hebt de maximale hoeveelheid Yang bereikt die je kunt dragen.
+5211	Pakketfout, probeer het opnieuw.
+5212	De winkel is gesloten.
+5213	Je voert acties te snel uit, wacht even.
+5214	Je kunt in dit gebied geen winkel openen.
+5215	Het winkelsysteem is tijdelijk uitgeschakeld.
+5216	Alle cadeaus zijn toegevoegd aan je inventaris.
+5217	Het cadeau is toegevoegd aan je inventaris.
+5218	Wacht 5 seconden.
+"24244";
+"Je kunt alleen vissen in het 1e dorp van het Blauwe Rijk.";
+"24245";
+"Je kunt geen nieuwe wormen kopen zolang je wormen in je inventaris hebt.";

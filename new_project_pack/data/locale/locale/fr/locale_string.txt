@@ -1854,3 +1854,9 @@
 5216	Tous les cadeaux ont été ajoutés à ton inventaire.
 5217	Le cadeau a été ajouté à ton inventaire.
 5218	Veuillez patienter 5 secondes.
+"24244";
+"Tu peux pêcher uniquement dans le 1er village de l'Empire bleu.";
+"24245";
+"Tu ne peux pas acheter de nouveaux vers tant que tu as des vers dans ton inventaire.";
+24244	Tu peux pêcher uniquement dans le 1er village de l'Empire bleu.
+24245	Tu ne peux pas acheter de nouveaux vers tant que tu as des vers dans ton inventaire.
