@@ -153,6 +153,8 @@ enum eCommonDefines {
 #define ENABLE_KADIM_EFSUN_SYSTEM									// Kadim Efsun Sistemi
 #define EXP_DEC_IN_DUNGEON											// Zindanlarda %90 Daha Az EXP
 #define ENABLE_LEVEL_MAP_EXP_LIMIT									// 45-75 ve 75-99 harita exp engelleri
+#define ENABLE_FISHING_ANTI_MACRO									// Balik makro engeli: envanterde solucan varken yeni solucan alinamaz + NPC penceresi acikken balik tutulamaz
+
 
 
 #define OFFLINE_SHOP												// Offline shops system

@@ -104,6 +104,9 @@ namespace quest
 #ifdef ENABLE_DUNGEON_ELIMINATE_EVENT
 		m_mapEventName.emplace("dungeon_eliminate", QUEST_DUNGEON_ELIMINATE_EVENT);
 #endif
+#ifdef ENABLE_FISHING_ANTI_MACRO
+		m_mapEventName.emplace("fishing_captcha", QUEST_FISHING_CAPTCHA_EVENT);
+#endif
 		m_bNoSend = false;
 
 		m_iCurrentSkin = QUEST_SKIN_NORMAL;
@@ -655,6 +658,26 @@ namespace quest
 			sys_err("QUEST LEVELUP_EVENT no such pc id : %d", pc);
 		}
 	}
+
+#ifdef ENABLE_FISHING_ANTI_MACRO
+	// Balik makro engeli: balik tutma sirasinda gerçek PC'ye bagli captcha event'ini tetikler
+	void CQuestManager::FishingCaptcha(unsigned int pc)
+	{
+		PC * pPC;
+
+		if ((pPC = GetPC(pc)))
+		{
+			if (!CheckQuestLoaded(pPC))
+				return;
+
+			m_mapNPC[QUEST_NO_NPC].OnFishingCaptcha(*pPC);
+		}
+		else
+		{
+			sys_err("QUEST FISHING_CAPTCHA_EVENT no such pc id : %d", pc);
+		}
+	}
+#endif
 
 	void CQuestManager::AttrIn(unsigned int pc, LPCHARACTER ch, int attr)
 	{

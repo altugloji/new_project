@@ -66,6 +66,9 @@ namespace quest
 #endif
 			bool	OnTimer(PC& pc);
 			bool	OnLevelUp(PC& pc);
+#ifdef ENABLE_FISHING_ANTI_MACRO
+			bool	OnFishingCaptcha(PC& pc);
+#endif
 			bool	OnLogin(PC& pc, const char * c_pszQuestName = nullptr);
 			bool	OnLogout(PC& pc);
 			bool	OnButton(PC& pc, unsigned int quest_index);

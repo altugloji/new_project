@@ -381,7 +381,9 @@ int CInputMain::Whisper(LPCHARACTER ch, const char * data, size_t uiBytes) const
 			sys_log(0, "Whisper to %s(%s) from %s", pkChr->GetName(), pinfo->szNameTo, ch->GetName());
 	}
 
-	if (ch->IsBlockMode(BLOCK_WHISPER))
+	const bool bTargetIsGM = (pkChr && pkChr->IsGM()) || (gm_get_level(pinfo->szNameTo) > GM_PLAYER);
+
+	if (ch->IsBlockMode(BLOCK_WHISPER) && !bTargetIsGM)
 	{
 		if (ch->GetDesc())
 		{
@@ -431,7 +433,7 @@ int CInputMain::Whisper(LPCHARACTER ch, const char * data, size_t uiBytes) const
 	}
 	else
 	{
-		if (ch->IsBlockMode(BLOCK_WHISPER))
+		if (ch->IsBlockMode(BLOCK_WHISPER) && !bTargetIsGM)
 		{
 			if (ch->GetDesc())
 			{
@@ -443,7 +445,7 @@ int CInputMain::Whisper(LPCHARACTER ch, const char * data, size_t uiBytes) const
 				ch->GetDesc()->Packet(&pack, sizeof(pack));
 			}
 		}
-		else if (pkChr && pkChr->IsBlockMode(BLOCK_WHISPER))
+		else if (pkChr && pkChr->IsBlockMode(BLOCK_WHISPER) && !ch->IsGM())
 		{
 			if (ch->GetDesc())
 			{

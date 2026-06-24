@@ -575,6 +575,31 @@ void Take(fishing_event_info* info, LPCHARACTER ch)
 							true,
 							item ? item->GetSocket(0) : 0);
 
+#ifdef ENABLE_FISHING_ANTI_MACRO
+					// Balik makro engeli: her ~15-30 gercek yakalamada bir bot kontrolu (captcha) tetikle.
+					// Sayac/hedef quest flag'lerinde tutulur (relog'a karsi kalici).
+					{
+						int target = ch->GetQuestFlag("fishcap.target");
+						if (target <= 0)
+						{
+							target = number(15, 30);
+							ch->SetQuestFlag("fishcap.target", target);
+						}
+
+						const int cnt = ch->GetQuestFlag("fishcap.count") + 1;
+						if (cnt >= target)
+						{
+							ch->SetQuestFlag("fishcap.count", 0);
+							ch->SetQuestFlag("fishcap.target", number(15, 30));
+							quest::CQuestManager::instance().FishingCaptcha(ch->GetPlayerID());
+						}
+						else
+						{
+							ch->SetQuestFlag("fishcap.count", cnt);
+						}
+					}
+#endif
+
 				}
 				else
 				{

@@ -2257,6 +2257,9 @@ static bool ApplyLevelMapExpLimit(LPCHARACTER to, int& iExp)
 	const int iLevel = to->GetLevel();
 	const long lMapIndex = to->GetMapIndex();
 
+	if ((lMapIndex == 3 || lMapIndex == 23 || lMapIndex == 43) && iLevel >= 33 && iLevel <= 40)
+		iExp /= 3;
+
 	if (iLevel >= 45 && iLevel <= 75)
 	{
 		if (lMapIndex != 71 && lMapIndex != 104)

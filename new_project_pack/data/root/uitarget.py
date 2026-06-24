@@ -687,6 +687,14 @@ class TargetBoard(ui.ThinBoard):
 			self.infoButton.showWnd.Close()
 		self.Hide()
 
+	if app.ENABLE_SEND_TARGET_INFO:
+		def CloseIfTargetLost(self):
+			if self.vnum == 0 and not self.infoButton.showWnd.IsShow():
+				return
+			if self.vid != 0 and player.GetCharacterDistance(self.vid) >= 0:
+				return
+			self.Close()
+
 	def Open(self, vid, name):
 		if vid:
 			if not constInfo.GET_VIEW_OTHER_EMPIRE_PLAYER_TARGET_BOARD():

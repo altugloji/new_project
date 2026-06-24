@@ -360,6 +360,13 @@ namespace quest
 		return HandleReceiveAllEvent(pc, QUEST_LEVELUP_EVENT);
 	}
 
+#ifdef ENABLE_FISHING_ANTI_MACRO
+	bool NPC::OnFishingCaptcha(PC& pc)
+	{
+		return HandleReceiveAllEvent(pc, QUEST_FISHING_CAPTCHA_EVENT);
+	}
+#endif
+
 	bool NPC::OnLogin(PC& pc, const char * c_pszQuestName)
 	{
 		const bool bRet = HandleReceiveAllNoWaitEvent(pc, QUEST_LOGIN_EVENT);

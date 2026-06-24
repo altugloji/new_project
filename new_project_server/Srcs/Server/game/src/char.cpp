@@ -4697,6 +4697,29 @@ void CHARACTER::fishing()
 		return;
 	}
 
+#ifdef ENABLE_FISHING_ANTI_MACRO
+	// Balik makro engeli: captcha (bot kontrolu) basarisiz/cevapsiz kaldiysa belirli sure balik tutulamaz.
+	// Yasak zamani fishing_captcha questi tarafindan "fishcap.ban" flag'ine get_global_time()+sure olarak yazilir.
+	{
+		const int iFishBanUntil = GetQuestFlag("fishcap.ban");
+		if (iFishBanUntil > (int) get_global_time())
+		{
+			const int iRemainMin = (iFishBanUntil - (int) get_global_time() + 59) / 60;
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bot kontrolunu gecemedigin icin %d dakika balik tutamazsin."), iRemainMin);
+			return;
+		}
+	}
+
+	// Balik makro engeli: NPC penceresi (pazar/takas/depo) acikken yeni olta ATILAMAZ.
+	// (Bu kontrol m_pkFishingEvent kontrolunden sonradir; boylece zaten atilmis bir olta
+	//  normal sekilde cekilip event temizlenebilir, askida event kalmaz.)
+	if (GetShop() || GetExchange() || IsOpenSafebox() || GetMyShop())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Acik bir pencere varken balik tutamazsin."));
+		return;
+	}
+#endif
+
 	{
 		const LPSECTREE_MAP pkSectreeMap = SECTREE_MANAGER::instance().GetMap(GetMapIndex());
 
@@ -4725,6 +4748,26 @@ void CHARACTER::fishing()
 	{
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("¹Ì³¢¸¦ ³¢°í ´øÁ® ÁÖ¼¼¿ä."));
 		return;
+	}
+
+	if (GetMapIndex() == 41) {
+		bool bCanFishing = true;
+		LPSECTREE_MAP pMap = SECTREE_MANAGER::instance().GetMap(GetMapIndex());
+		if (pMap) {
+			long localX = ((GetX() - pMap->m_setting.iBaseX) / 100), localY = ((GetY() - pMap->m_setting.iBaseY) / 100);
+			if (localY > 479 && localY < 490)
+				bCanFishing = false;
+
+			if (localX > 369 && localX < 490)
+				bCanFishing = false;
+		}
+		else
+			bCanFishing = false;
+
+		if (!bCanFishing) {
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FISHING_ONLY_VILLAGE"));
+			return;
+		}
 	}
 
 	float fx, fy;

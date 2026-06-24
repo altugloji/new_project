@@ -713,6 +713,17 @@ int CShop::Buy(LPCHARACTER ch, BYTE pos)
 
 	SHOP_ITEM& r_item = m_itemVector[pos];
 
+#ifdef ENABLE_FISHING_ANTI_MACRO
+	// Balik makro engeli: sadece NPC dukkanlarinda (m_pkPC == NULL) gecerli.
+	// Envanterinde zaten Solucan (27801) varken NPC'den yeni Solucan satin alinamaz.
+	if (!m_pkPC && r_item.vnum == 27801 && ch->CountSpecifyItem(27801) > 0)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("SHOP_BUY_NO_WORM"));
+		// GC_OK: satin almayi sessizce iptal eder (yaniltici "yetersiz para" mesaji cikmaz), pazar acik kalir
+		return SHOP_SUBHEADER_GC_OK;
+	}
+#endif
+
 #ifdef OFFLINE_SHOP
 	// Offline (kalici) sahis dukkanlari icin ayri satin alma yolu;
 	// normal NPC dukkanlari ve online sahis dukkanlari asagidaki standart akistan gecer.

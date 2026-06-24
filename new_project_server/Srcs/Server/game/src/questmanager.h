@@ -136,6 +136,9 @@ namespace quest
 			bool		DungeonEliminate(uint32_t arg);
 #endif
 			void		LevelUp(unsigned int pc);
+#ifdef ENABLE_FISHING_ANTI_MACRO
+			void		FishingCaptcha(unsigned int pc);
+#endif
 			void		AttrIn(unsigned int pc, LPCHARACTER ch, int attr);
 			void		AttrOut(unsigned int pc, LPCHARACTER ch, int attr);
 			bool		Target(unsigned int pc, DWORD dwQuestIndex, const char * c_pszTargetName, const char * c_pszVerb);

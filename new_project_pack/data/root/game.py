@@ -1680,6 +1680,9 @@ class GameWindow(ui.ScriptWindow):
 	def OnUpdate(self):
 		app.UpdateGame()
 
+		if app.ENABLE_SEND_TARGET_INFO and self.targetBoard:
+			self.targetBoard.CloseIfTargetLost()
+
 		if self.mapNameShower.IsShow():
 			self.mapNameShower.Update()
 

@@ -2,6 +2,7 @@ Ejder sisteminde slotların kesildikten sonra doğması kapatılacak. Metinler n
 Skill tooltipleri +20px geniş olsun
 Mobilde eğer item 72323 ise o itemin tooltipinde Preview (önizleme) butonu olsun. yani clientteki CTRL + SAĞ TIK
 Mobile ekrana Target diye bir buton koyacağız ona bastıgında en yakın hedefe sağ tıklayacak.
+GM'ler Pm bloklu oyuncuya mesaj atabilecek
 
 
 Çöl 1
