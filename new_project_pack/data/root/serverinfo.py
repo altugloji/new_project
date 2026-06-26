@@ -99,9 +99,8 @@ SERVER1_CHANNEL_DICT = {
 	7: {"key":17, "name": "CH-8", "ip":SRV1["host"], "tcp_port":SRV1["ch8"], "udp_port":SRV1["ch8"], "state":STATE_NONE,},
 	8: {"key":18, "name": "CH-9", "ip":SRV1["host"], "tcp_port":SRV1["ch9"], "udp_port":SRV1["ch9"], "state":STATE_NONE,},
 	9: {"key":19, "name": "CH-10", "ip":SRV1["host"], "tcp_port":SRV1["ch10"], "udp_port":SRV1["ch10"], "state":STATE_NONE,},
-	10: {"key":20, "name" "CH-11", "ip":SRV1["host"], "tcp_port":SRV1["ch11"], "udp_port":SRV1["ch11"], "state":STATE_NONE,},
-	11: {"key":21, "name" "CH-12", "ip":SRV1["host"], "tcp_port":SRV1["ch12"], "udp_port":SRV1["ch12"], "state":STATE_NONE,},
-
+	10: {"key":20, "name": "CH-11", "ip":SRV1["host"], "tcp_port":SRV1["ch11"], "udp_port":SRV1["ch11"], "state":STATE_NONE,},
+	11: {"key":21, "name": "CH-12", "ip":SRV1["host"], "tcp_port":SRV1["ch12"], "udp_port":SRV1["ch12"], "state":STATE_NONE,},
 }
 
 REGION_NAME_DICT = {
