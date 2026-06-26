@@ -245,7 +245,8 @@ bool CHARACTER::Attack(LPCHARACTER pkVictim, BYTE bType)
 				break;
 
 			case BATTLE_TYPE_RANGE:
-				FlyTarget(pkVictim->GetVID(), pkVictim->GetX(), pkVictim->GetY(), HEADER_CG_FLY_TARGETING);
+				// FlyTarget(pkVictim->GetVID(), pkVictim->GetX(), pkVictim->GetY(), HEADER_CG_FLY_TARGETING);
+				m_dwFlyTargetID = pkVictim->GetVID();
 				iRet = Shoot(0) ? BATTLE_DAMAGE : BATTLE_NONE;
 				break;
 

@@ -29,8 +29,8 @@ FULL_BACK_IMAGE = False
 
 # >0 ise her client login'e basinca [MIN,MAX] sn arasi RANDOM bekler, sure BITINCE baglanir.
 # Boylece 5000 oyuncu ayni anda degil, pencereye yayilarak baglanir -> SYN/accept firtinasi duzlenir.
-LOGIN_STAGGER_MIN_SEC = 1.0 # 0 = kapali.
-LOGIN_STAGGER_MAX_SEC = 5.0 # 0 = kapali.
+LOGIN_STAGGER_MIN_SEC = 40.0 # 0 = kapali.
+LOGIN_STAGGER_MAX_SEC = 180.0 # 0 = kapali.
 
 LANG_DROPDOWN_LIST_PAD = 6
 LANG_DROPDOWN_ROW_BTN_H = 22
@@ -202,6 +202,11 @@ class LoginWindow(ui.ScriptWindow):
 		self.__staggerDone = False
 		self.__staggerId = None
 		self.__staggerPwd = None
+
+		# Auth failover (serverInfo.ENABLE_AUTH_FAILOVER): basarisiz/yavas auth -> sonraki auth
+		self.__authCandidates = []		# [(ip, port), ...] sirali aday listesi
+		self.__authTryIndex = 0			# su an denenen adayin indexi
+		self.__authWatchdogDeadline = 0.0	# time.clock() son tarihi; 0 = kapali
 
 		self.xServerBoard = 0
 		self.yServerBoard = 0
@@ -525,6 +530,11 @@ class LoginWindow(ui.ScriptWindow):
 	def OnEndCountDown(self):
 		self.isNowCountDown = False
 		self.timeOutMsg = False
+		# Auth failover aktifken (aday listesi dolu) login-delay geri sayimi AYRI bir
+		# basarisizlik tetiklemez; gecisleri failover watchdog'u ve gercek OnConnectFailure
+		# yonetir. Aksi halde ayni anda iki zamanlayici aday tuketir (review MEDIUM bug).
+		if self.__authCandidates:
+			return
 		self.OnConnectFailure()
 
 	def OnStaggerConnectReady(self):
@@ -585,6 +595,13 @@ class LoginWindow(ui.ScriptWindow):
 
 	def OnConnectFailure(self):
 
+		# Auth failover: bu auth'a baglanilamadi -> sessizce sonraki auth'u dene.
+		# Basariyla gectiyse "Baglaniyor" UI'i korunur ve hata gosterilmez.
+		self.__AuthLog("OnConnectFailure geldi (loggined=%s, oyun-online=%s)" % (
+			app.loggined, net.IsConnect()))
+		if self.__TryNextAuth("baglanti-hatasi"):
+			return
+
 		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_on_connect_failure_quick_stream ---
 		self.stream.isAutoSelect = 0
 		self.stream.hideSelectUiForAutoLogin = 0
@@ -609,6 +626,10 @@ class LoginWindow(ui.ScriptWindow):
 			self.PopupNotifyMessage(localeInfo.LOGIN_CONNECT_FAILURE, self.SetPasswordEditLineFocus)
 
 	def OnHandShake(self):
+		# Oyun sunucusu el sikismasi = auth basariyla tamamlandi -> failover'i kapat.
+		if self.__authCandidates or self.__authWatchdogDeadline:
+			self.__AuthLog("BASARILI: oyun el sikismasi -> auth tamam, failover/watchdog kapatildi")
+		self.__ResetAuthFailover()
 		if not IsLoginDelay():
 			snd.PlaySound("sound/ui/loginok.wav")
 		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_on_handshake_quiet ---
@@ -626,6 +647,10 @@ class LoginWindow(ui.ScriptWindow):
 			self.PopupDisplayMessage(localeInfo.LOGIN_PROCESSING)
 
 	def OnLoginFailure(self, error):
+		# Sunucu girisi reddetti (or. yanlis sifre/ban). Sonuc her auth'ta ayni olacagi
+		# icin failover YAPMA; sadece watchdog'u kapat ve normal hatayi goster.
+		self.__AuthLog("GIRIS REDDEDILDI (failover YOK, her auth'ta ayni): %s" % (error,))
+		self.__ResetAuthFailover()
 		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:BEGIN intrologin_on_login_failure_quick_stream ---
 		self.stream.isAutoSelect = 0
 		self.stream.hideSelectUiForAutoLogin = 0
@@ -1653,7 +1678,119 @@ class LoginWindow(ui.ScriptWindow):
 		else:
 			self.__VirtualKeyboard_SetKeys(self.VIRTUAL_KEY_SYMBOLS)
 
+	# ---- AUTH FAILOVER -----------------------------------------------------------
+	def __AuthLog(self, msg):
+		# syserr.txt'e "[AUTH-FAILOVER]" damgasiyla yaz (serverInfo.AUTH_FAILOVER_DEBUG ile).
+		if not getattr(serverInfo, "AUTH_FAILOVER_DEBUG", False):
+			return
+		try:
+			dbg.TraceError("[AUTH-FAILOVER] " + msg)
+		except Exception:
+			pass
+
+	def __IsAuthFailoverEnabled(self):
+		# Sadece account-connector (auth server) akisinda ve oyun-disi giriste anlamli.
+		return bool(getattr(serverInfo, "ENABLE_AUTH_FAILOVER", False)) \
+			and constInfo.KEEP_ACCOUNT_CONNETION_ENABLE \
+			and not app.loggined
+
+	def __BuildAuthCandidates(self):
+		self.__authCandidates = []
+		self.__authTryIndex = 0
+		if not self.__IsAuthFailoverEnabled():
+			return
+		try:
+			regionID = self.__GetRegionID()
+			serverID = self.__GetServerID()
+			self.__authCandidates = serverInfo.GetAuthFailoverList(regionID, serverID)
+		except Exception:
+			self.__authCandidates = []
+
+	def __ArmAuthWatchdog(self):
+		# Bagli ama el sikismasi gelmiyorsa "yavas auth" tespiti icin geri sayim kur.
+		if not self.__IsAuthFailoverEnabled() or not self.__authCandidates:
+			self.__authWatchdogDeadline = 0.0
+			return
+		timeout = float(getattr(serverInfo, "AUTH_FAILOVER_SLOW_TIMEOUT", 7.0))
+		if timeout <= 0:
+			self.__authWatchdogDeadline = 0.0
+			return
+		self.__authWatchdogDeadline = time.clock() + timeout
+
+	def __DisarmAuthWatchdog(self):
+		self.__authWatchdogDeadline = 0.0
+
+	def __ResetAuthFailover(self):
+		self.__authCandidates = []
+		self.__authTryIndex = 0
+		self.__authWatchdogDeadline = 0.0
+
+	def __TryNextAuth(self, reason):
+		# Bir sonraki auth adayina SESSIZCE gecer. Gectiyse True (cagiran hata
+		# popup'i gostermemeli); aday kalmadiysa state'i sifirlar ve False doner.
+		if not self.__IsAuthFailoverEnabled() or not self.__authCandidates:
+			return False
+		maxTries = int(getattr(serverInfo, "AUTH_FAILOVER_MAX_TRIES", 0))
+		limit = len(self.__authCandidates)
+		if maxTries > 0:
+			limit = min(limit, maxTries)
+		nextIndex = self.__authTryIndex + 1
+		if nextIndex >= limit:
+			# tum auth'lar denendi -> normal hata akisina birak
+			self.__AuthLog("TUM AUTH'LAR DENENDI (%s): %d/%d basarisiz -> normal hata gosterilecek" % (
+				reason, limit, limit))
+			self.__ResetAuthFailover()
+			return False
+		self.__authTryIndex = nextIndex
+		ip, port = self.__authCandidates[nextIndex]
+		self.__AuthLog("GECIS (%s): auth %d/%d denemesi -> %s:%d" % (
+			reason, nextIndex + 1, limit, ip, port))
+		# eski (yarim acik / takili) baglantilari kapat, kimligi geri yukle, yeniden baglan.
+		# net.Disconnect ana stream'i kapatir; account connector'i Connect()'in icindeki
+		# Clear() temizler. Kimlik C++ tarafinda silinmis olabilecegi icin tekrar set ediyoruz.
+		# DEGISMEZ: Bu metod OnConnectFailure'dan (CAccountConnector::Process'in SON islemi)
+		# cagrilabildigi icin re-entrant reconnect guvenli olsun diye OnConnectFailure C++
+		# tarafinda Process'in son islemi olarak kalmali; sonrasina is eklenirse bu bozulur.
+		net.Disconnect()
+		self.stream.account_addr = ip
+		self.stream.account_port = port
+		self.stream.SetLoginInfo(self.stream.id, self.stream.pwd)
+		self.stream.Connect()
+		self.__ArmAuthWatchdog()
+		return True
+
+	def __OnAuthSlowTimeout(self):
+		# Watchdog doldu. ONEMLI: auth ZATEN basariliysa ASLA gecis yapma/koparma.
+		# net.IsConnect() = ANA stream online = oyun kanalina baglanildi (auth bitti);
+		# app.loggined = oyundayiz. Bu pencere artik auth degil oyun-kanali asamasidir,
+		# baska bir auth'a gecmek FAYDASIZ ve basarili oturumu koparir (review HIGH bug).
+		self.__AuthLog("WATCHDOG DOLDU (auth yavas?) (loggined=%s, oyun-online=%s)" % (
+			app.loggined, net.IsConnect()))
+		if app.loggined or net.IsConnect():
+			self.__AuthLog("  -> auth zaten basarili (oyun asamasi); GECIS YOK, baglanti korunuyor")
+			return
+		# Bagli ama el sikismasi gelmedi -> sonraki auth, yoksa zaman asimi hatasi.
+		if self.__TryNextAuth("yavas"):
+			return
+		net.Disconnect()
+		self.timeOutMsg = True
+		self.OnConnectFailure()
+		self.timeOutMsg = False
+
+	def __OnCancelConnecting(self):
+		# "Baglaniyor" popup'inda Iptal: aktif bir failover oturumu varsa baglantiyi
+		# tamamen iptal et (watchdog'un sonradan tetiklenmesini onler).
+		if self.__authWatchdogDeadline or self.__authCandidates:
+			self.__AuthLog("KULLANICI IPTAL ETTI -> failover/watchdog kapatildi, baglanti kesildi")
+			self.__ResetAuthFailover()
+			net.Disconnect()
+		self.SetPasswordEditLineFocus()
+	# ------------------------------------------------------------------------------
+
 	def Connect(self, id, pwd):
+
+		# Yeni giris oturumu: onceki failover durumunu temizle (stagger 2. cagrida zararsiz).
+		self.__ResetAuthFailover()
 
 		if constInfo.SEQUENCE_PACKET_ENABLE:
 			net.SetPacketSequenceMode()
@@ -1691,7 +1828,7 @@ class LoginWindow(ui.ScriptWindow):
 
 		elif not quiet_qc:
 			self.stream.popupWindow.Close()
-			self.stream.popupWindow.Open(localeInfo.LOGIN_CONNETING, self.SetPasswordEditLineFocus, localeInfo.UI_CANCEL)
+			self.stream.popupWindow.Open(localeInfo.LOGIN_CONNETING, self.__OnCancelConnecting, localeInfo.UI_CANCEL)
 
 		if quiet_qc and app.FAST_LOGIN_CHARACTER_SAVE:
 			self.__ApplyQuietQuickConnectOverlay()
@@ -1700,6 +1837,23 @@ class LoginWindow(ui.ScriptWindow):
 		# --- FAST_LOGIN_CHARACTER_SAVE:PORT:END intrologin_connect_quiet ---
 
 		self.stream.SetLoginInfo(id, pwd)
+
+		# Auth failover: aday listesini kur, secili auth'u ilk adaya esitle, watchdog'u kur.
+		# Aday yoksa (failover kapali/erisilemez) mevcut account_addr/port ile devam eder.
+		self.__BuildAuthCandidates()
+		if self.__authCandidates:
+			ip, port = self.__authCandidates[0]
+			self.stream.account_addr = ip
+			self.stream.account_port = port
+			self.__AuthLog("BASLA: %d auth aday, ilk hedef %s:%d, watchdog %.1fsn (oyun=%s:%s)" % (
+				len(self.__authCandidates), ip, port,
+				float(getattr(serverInfo, "AUTH_FAILOVER_SLOW_TIMEOUT", 10.0)),
+				self.stream.addr, self.stream.port))
+		else:
+			self.__AuthLog("BASLA: failover KAPALI/aday yok -> tek auth %s:%s ile devam" % (
+				self.stream.account_addr, self.stream.account_port))
+		self.__ArmAuthWatchdog()
+
 		self.stream.Connect()
 
 	def __OnClickExitButton(self):
@@ -2077,6 +2231,11 @@ class LoginWindow(ui.ScriptWindow):
 		ServerStateChecker.Update()
 		if ENABLE_MAP_INTERACTIVE_LOGIN:
 			app.UpdateGame()
+
+		# Auth failover watchdog: bagli ama el sikismasi gelmedi -> yavas auth, sonrakine gec.
+		if self.__authWatchdogDeadline and time.clock() > self.__authWatchdogDeadline:
+			self.__authWatchdogDeadline = 0.0
+			self.__OnAuthSlowTimeout()
 
 	def EmptyFunc(self):
 		pass

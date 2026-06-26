@@ -383,7 +383,7 @@ void CHARACTER::__StateIdle_Stone()
 	if (iPercent <= 10 && GetMaxSP() < 10)
 	{
 		SetMaxSP(10);
-		SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
+		// SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
 
 		CHARACTER_MANAGER::instance().SelectStone(this);
 		CHARACTER_MANAGER::instance().SpawnGroup(dwVnum, GetMapIndex(), GetX() - 500, GetY() - 500, GetX() + 500, GetY() + 500);
@@ -394,7 +394,7 @@ void CHARACTER::__StateIdle_Stone()
 	else if (iPercent <= 20 && GetMaxSP() < 9)
 	{
 		SetMaxSP(9);
-		SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
+		// SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
 
 		CHARACTER_MANAGER::instance().SelectStone(this);
 		CHARACTER_MANAGER::instance().SpawnGroup(dwVnum, GetMapIndex(), GetX() - 500, GetY() - 500, GetX() + 500, GetY() + 500);
@@ -405,7 +405,7 @@ void CHARACTER::__StateIdle_Stone()
 	else if (iPercent <= 30 && GetMaxSP() < 8)
 	{
 		SetMaxSP(8);
-		SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
+		// SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
 
 		CHARACTER_MANAGER::instance().SelectStone(this);
 		CHARACTER_MANAGER::instance().SpawnGroup(dwVnum, GetMapIndex(), GetX() - 500, GetY() - 500, GetX() + 500, GetY() + 500);
@@ -416,7 +416,7 @@ void CHARACTER::__StateIdle_Stone()
 	else if (iPercent <= 40 && GetMaxSP() < 7)
 	{
 		SetMaxSP(7);
-		SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
+		// SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
 
 		CHARACTER_MANAGER::instance().SelectStone(this);
 		CHARACTER_MANAGER::instance().SpawnGroup(dwVnum, GetMapIndex(), GetX() - 1000, GetY() - 1000, GetX() + 1000, GetY() + 1000);
@@ -427,7 +427,7 @@ void CHARACTER::__StateIdle_Stone()
 	else if (iPercent <= 50 && GetMaxSP() < 6)
 	{
 		SetMaxSP(6);
-		SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
+		// SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
 
 		CHARACTER_MANAGER::instance().SelectStone(this);
 		CHARACTER_MANAGER::instance().SpawnGroup(dwVnum, GetMapIndex(), GetX() - 1000, GetY() - 1000, GetX() + 1000, GetY() + 1000);
@@ -437,7 +437,7 @@ void CHARACTER::__StateIdle_Stone()
 	else if (iPercent <= 60 && GetMaxSP() < 5)
 	{
 		SetMaxSP(5);
-		SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
+		// SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
 
 		CHARACTER_MANAGER::instance().SelectStone(this);
 		CHARACTER_MANAGER::instance().SpawnGroup(dwVnum, GetMapIndex(), GetX() - 1000, GetY() - 1000, GetX() + 1000, GetY() + 1000);
@@ -447,7 +447,7 @@ void CHARACTER::__StateIdle_Stone()
 	else if (iPercent <= 70 && GetMaxSP() < 4)
 	{
 		SetMaxSP(4);
-		SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
+		// SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
 
 		CHARACTER_MANAGER::instance().SelectStone(this);
 		CHARACTER_MANAGER::instance().SpawnGroup(dwVnum, GetMapIndex(), GetX() - 500, GetY() - 500, GetX() + 500, GetY() + 500);
@@ -457,7 +457,7 @@ void CHARACTER::__StateIdle_Stone()
 	else if (iPercent <= 80 && GetMaxSP() < 3)
 	{
 		SetMaxSP(3);
-		SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
+		// SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
 
 		CHARACTER_MANAGER::instance().SelectStone(this);
 		CHARACTER_MANAGER::instance().SpawnGroup(dwVnum, GetMapIndex(), GetX() - 1000, GetY() - 1000, GetX() + 1000, GetY() + 1000);
@@ -467,7 +467,7 @@ void CHARACTER::__StateIdle_Stone()
 	else if (iPercent <= 90 && GetMaxSP() < 2)
 	{
 		SetMaxSP(2);
-		SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
+		// SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
 
 		CHARACTER_MANAGER::instance().SelectStone(this);
 		CHARACTER_MANAGER::instance().SpawnGroup(dwVnum, GetMapIndex(), GetX() - 500, GetY() - 500, GetX() + 500, GetY() + 500);
@@ -476,7 +476,7 @@ void CHARACTER::__StateIdle_Stone()
 	else if (iPercent <= 99 && GetMaxSP() < 1)
 	{
 		SetMaxSP(1);
-		SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
+		// SendMovePacket(FUNC_ATTACK, 0, GetX(), GetY(), 0);
 
 		CHARACTER_MANAGER::instance().SelectStone(this);
 		CHARACTER_MANAGER::instance().SpawnGroup(dwVnum, GetMapIndex(), GetX() - 1000, GetY() - 1000, GetX() + 1000, GetY() + 1000);
