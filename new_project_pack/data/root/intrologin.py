@@ -29,8 +29,8 @@ FULL_BACK_IMAGE = False
 
 # >0 ise her client login'e basinca [MIN,MAX] sn arasi RANDOM bekler, sure BITINCE baglanir.
 # Boylece 5000 oyuncu ayni anda degil, pencereye yayilarak baglanir -> SYN/accept firtinasi duzlenir.
-LOGIN_STAGGER_MIN_SEC = 40.0 # 0 = kapali.
-LOGIN_STAGGER_MAX_SEC = 180.0 # 0 = kapali.
+LOGIN_STAGGER_MIN_SEC = 1.0 # 0 = kapali.
+LOGIN_STAGGER_MAX_SEC = 5.0 # 0 = kapali.
 
 LANG_DROPDOWN_LIST_PAD = 6
 LANG_DROPDOWN_ROW_BTN_H = 22

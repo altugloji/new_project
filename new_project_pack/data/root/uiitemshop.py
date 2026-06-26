@@ -937,7 +937,7 @@ class ItemShopWindow(ui.ScriptWindow):
 
 	def coinButtonEvent(self):
 		if self.interface:
-			os.startfile("https://metin35.com/web/Payment/Buy")
+			os.startfile("https://www.ayazmt2.com/panel/ep-yukle")
 
 	def RefreshProcess(self):
 		self.ClearItemBoard()
