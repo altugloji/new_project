@@ -2455,17 +2455,22 @@ class LoginWindow(ui.ScriptWindow):
 		except:
 			stateName=serverInfo.STATE_NONE
 
-		regionID=int(addrKey/1000)
-		serverID=int(addrKey/10) % 100
-		channelID=addrKey%10
+		# addrKey = __RequestServerStateList'te AddChannel'a verdigimiz kanal "key"
+		# degeri; sunucu onu sadece geri yansitir. Kanali "key" alanini eslestirerek
+		# buluruz. Eski aritmetik cozum (regionID*1000 + serverID*10 + channelID) tek
+		# haneli channelID varsayiyordu: 10'dan fazla kanalda CH-11/CH-12 (key 20/21)
+		# serverID=2'ye cozulup REGION_DICT'te olmayan sunucuyu arayinca KeyError -> Abort
+		# oluyor, client cokuyordu. Key eslestirme her kanal sayisinda dogru calisir.
+		found = 0
+		for regionData in serverInfo.REGION_DICT.values():
+			for serverData in regionData.values():
+				for channelData in serverData["channel"].values():
+					if channelData["key"] == addrKey:
+						channelData["state"] = stateName
+						found = 1
 
-		try:
-			serverInfo.REGION_DICT[regionID][serverID]["channel"][channelID]["state"] = stateName
+		if found:
 			self.__RefreshServerStateList()
-
-		except:
-			import exception
-			exception.Abort(localeInfo.CHANNEL_NOT_FIND_INFO)
 
 	def __OnClickExitServerButton(self):
 		print("exit server")
