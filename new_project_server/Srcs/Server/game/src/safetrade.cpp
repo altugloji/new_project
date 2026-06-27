@@ -624,6 +624,7 @@ void CSafeTradeManager::OnClaimResult(LPCHARACTER ch, DWORD dwTradeID, BYTE bRes
 			sys_err("SAFETRADE_CLAIM CreateItem FAIL id %u vnum %u", p->id, p->vnum);
 			continue;
 		}
+		item->SetSkipSave(false);
 		item->SetSockets(p->alSockets);
 		item->SetAttributes(p->aAttr);
 		item->SetSafeTrading(false);

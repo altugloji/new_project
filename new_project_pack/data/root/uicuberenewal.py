@@ -29,8 +29,31 @@ CUBE_SKILL_SECTION_H = 89
 # Alt butonlarin tahta altindan ofseti (uiscript: "y" = BOARD_H - 35)
 CUBE_SKILL_BTN_BOTTOM_MARGIN = 35
 
+# YENI: GetWidth/GetHeight nadiren 0 donerse (layout henuz oturmamis) kullanilacak yedek olculer.
+# 0-boyut pencere gorunmez kalir ama input'u yutar (client donmasi) -> uiscript ile AYNI yedege dus.
+# cuberenewalwindow.py icindeki BOARD_W / BOARD_H_SMALL ile senkron tutulmali.
+CUBE_BOARD_W_FALLBACK = 445
+CUBE_BOARD_H_SMALL_FALLBACK = 633
 
-def FReturnInfo(func, index):
+# YENI: OnUpdate'teki PASIF tam-repaint kac karede bir calissin. Her kare _PaintVisibleRows
+# (6 satir x malzeme = kare basina yuzlerce GetDates/tuple) zayif PC'de hafif donma yapiyordu.
+# Secim/scroll/arama/miktar olaylari Refresh()'i zaten ANINDA cagirir; bu sadece envanter
+# kaymasini (malzeme adedi/tint) yansitmak icin -> saniyede ~10 kez yeter.
+CUBE_UPDATE_PAINT_EVERY = 6
+
+
+# YENI: parse edilmis tarif info dict'i, index bazinda cache. cube_renewal.GetDates her cagrida
+# C++'ta 26-elemanli tuple kurup donduruyordu; _PaintVisibleRows bunu kare basina yuzlerce kez
+# cagiriyordu (hafif donma). Tarif verisi acik pencere boyunca SABIT oldugu icin guvenle cache'lenir;
+# yeni liste (BINARY_CUBE_RENEWAL_LOADING) ve pencere kapanisinda (_ClearCubeDatesCache) bosaltilir.
+_CUBE_DATES_CACHE = {}
+
+
+def _ClearCubeDatesCache():
+	_CUBE_DATES_CACHE.clear()
+
+
+def _BuildCubeInfo(index):
 	raw = cube_renewal.GetDates(index)
 	if raw is None:
 		raw = ()
@@ -62,6 +85,14 @@ def FReturnInfo(func, index):
 			base = (mi - 1) * 2
 			info["vnum_material_%d" % mi] = mid[base]
 			info["count_material_%d" % mi] = mid[base + 1]
+	return info
+
+
+def FReturnInfo(func, index):
+	info = _CUBE_DATES_CACHE.get(index)
+	if info is None:
+		info = _BuildCubeInfo(index)
+		_CUBE_DATES_CACHE[index] = info
 	return info[func]
 
 
@@ -112,6 +143,9 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self.skillSlotList = []
 		self.skillGridEnabled = 0  # sadece CUBE_SKILL_GRID_NPC'de server 1 yapar
 
+		# YENI: OnUpdate pasif-repaint throttle sayaci (her kare degil)
+		self._updateTick = 0
+
 		# YENI: pencere yeniden boyutlandirma baseline'lari (yuklemede okunur)
 		self.board = None
 		self._cubeBoardW = 0
@@ -125,6 +159,14 @@ class CubeRenewalWindows(ui.ScriptWindow):
 	def __del__(self):
 		cube_renewal.SetCubeRenewalHandler(None)
 		ui.ScriptWindow.__del__(self)
+
+	def _LogCubeErr(self, where):
+		# YENI: yutulan Python exception'larini syserr.txt'e yaz (nadir "acilmiyor/donuyor" teshisi icin)
+		try:
+			import dbg, traceback
+			dbg.TraceError("[CUBE_RENEWAL] %s\n%s" % (where, traceback.format_exc()))
+		except:
+			pass
 
 	def LoadWindow(self):
 		try:
@@ -237,9 +279,15 @@ class CubeRenewalWindows(ui.ScriptWindow):
 			self.skill_grid.SetOverInItemEvent(ui.__mem_func__(self.__OverInSkillSlot))
 			self.skill_grid.SetOverOutItemEvent(ui.__mem_func__(self.__OverOutSkillSlot))
 
-		# YENI: pencere boyut baseline'lari (kucuk/orijinal olculer) yuklemeden sonra okunur
+		# YENI: pencere boyut baseline'lari (kucuk/orijinal olculer) yuklemeden sonra okunur.
+		# GetWidth/GetHeight nadiren 0 donebilir; 0 ise uiscript yedegine dus, yoksa _ApplyWindowSize
+		# SetSize(0,..) cagirip gorunmez-ama-input-yutan (donuk) pencere yaratir.
 		self._cubeBoardW = self.GetWidth()
 		self._cubeBoardHSmall = self.GetHeight()
+		if self._cubeBoardW <= 0:
+			self._cubeBoardW = CUBE_BOARD_W_FALLBACK
+		if self._cubeBoardHSmall <= 0:
+			self._cubeBoardHSmall = CUBE_BOARD_H_SMALL_FALLBACK
 		self._cubeBoardHBig = self._cubeBoardHSmall + CUBE_SKILL_SECTION_H
 		try:
 			(self._acceptBtnX, _ay) = self.btnAccept.GetLocalPosition()
@@ -296,8 +344,10 @@ class CubeRenewalWindows(ui.ScriptWindow):
 				vnum = FReturnInfo("vnum_reward", i)
 				if vnum == 0:
 					continue
-				item.SelectItem(vnum)
+				# YENI: client item_proto'sunda olmayan vnum SelectItem/GetItemName'de patlayabilir;
+				# tek bozuk tarif tum aramayi (ve render'i) kesmesin.
 				try:
+					item.SelectItem(vnum)
 					name = item.GetItemName().lower()
 				except:
 					name = ""
@@ -509,71 +559,79 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		return base * count
 
 	def _PaintVisibleRows(self):
+		# YENI: bir satirin bozuk verisi (eksik vnum / bozuk gold) tum paint'i kesip
+		# pencereyi gorunmez+donuk birakmasin; her satir kendi try/except'inde.
 		for vis in xrange(self.VISIBLE_ROWS):
-			board = self.recipeRowBoards[vis]
-			highlight = self.recipeRowHighlights[vis]
-			resultSlot = self.recipeResultSlots[vis]
-			matSlot = self.recipeMaterialSlots[vis]
-			goldText = self.recipeGoldTexts[vis]
-			pctText = self.recipePercentTexts[vis]
+			try:
+				self._PaintVisibleRow(vis)
+			except:
+				self._LogCubeErr("_PaintVisibleRow[%d]" % vis)
 
-			idxInList = self.firstSlotIndex + vis
-			if idxInList >= len(self.matchingIndices):
-				board.Hide()
-				highlight.Hide()
-				resultSlot.ClearSlot(0)
-				for clearIdx in xrange(matSlot.GetSlotCount()):
-					matSlot.DeactivateSlot(clearIdx)
-					matSlot.ClearSlot(clearIdx)
-				continue
+	def _PaintVisibleRow(self, vis):
+		board = self.recipeRowBoards[vis]
+		highlight = self.recipeRowHighlights[vis]
+		resultSlot = self.recipeResultSlots[vis]
+		matSlot = self.recipeMaterialSlots[vis]
+		goldText = self.recipeGoldTexts[vis]
+		pctText = self.recipePercentTexts[vis]
 
-			board.Show()
-			recipeIdx = self.matchingIndices[idxInList]
+		idxInList = self.firstSlotIndex + vis
+		if idxInList >= len(self.matchingIndices):
+			board.Hide()
+			highlight.Hide()
+			resultSlot.ClearSlot(0)
+			for clearIdx in xrange(matSlot.GetSlotCount()):
+				matSlot.DeactivateSlot(clearIdx)
+				matSlot.ClearSlot(clearIdx)
+			return
 
+		board.Show()
+		recipeIdx = self.matchingIndices[idxInList]
+
+		if recipeIdx == self.selectedRecipeGlobalIndex:
+			highlight.Show()
+		else:
+			highlight.Hide()
+
+		vReward = FReturnInfo("vnum_reward", recipeIdx)
+		cReward = FReturnInfo("count_reward", recipeIdx)
+		if vReward != 0:
 			if recipeIdx == self.selectedRecipeGlobalIndex:
-				highlight.Show()
+				resultSlot.SetItemSlot(0, vReward, self.count_item_reward)
 			else:
-				highlight.Hide()
+				resultSlot.SetItemSlot(0, vReward, cReward)
+		else:
+			resultSlot.ClearSlot(0)
 
-			vReward = FReturnInfo("vnum_reward", recipeIdx)
-			cReward = FReturnInfo("count_reward", recipeIdx)
-			if vReward != 0:
+		goldText.SetText(localeInfo.NumberToString(self._RowGoldDisplay(recipeIdx)))
+		pctText.SetText("%d%%" % self._EffectivePercent(recipeIdx))
+
+		maxCol = min(MATERIAL_GRID_SLOTS, matSlot.GetSlotCount())
+		for col in xrange(maxCol):
+			matIdx = col + 1
+			if matIdx > MAX_PACKET_MATERIALS:
+				matSlot.DeactivateSlot(col)
+				matSlot.ClearSlot(col)
+				continue
+			mvnum = FReturnInfo("vnum_material_%d" % matIdx, recipeIdx)
+			mcount = FReturnInfo("count_material_%d" % matIdx, recipeIdx)
+			if mvnum != 0:
 				if recipeIdx == self.selectedRecipeGlobalIndex:
-					resultSlot.SetItemSlot(0, vReward, self.count_item_reward)
+					cr = max(1, FReturnInfo("count_reward", recipeIdx))
+					mult = max(1, self.count_item_reward / cr)
+					matSlot.SetItemSlot(col, mvnum, mcount * mult)
 				else:
-					resultSlot.SetItemSlot(0, vReward, cReward)
+					matSlot.SetItemSlot(col, mvnum, mcount)
+				self._TintMaterialSlot(matSlot, col, recipeIdx, recipeIdx == self.selectedRecipeGlobalIndex)
 			else:
-				resultSlot.ClearSlot(0)
+				matSlot.DeactivateSlot(col)
+				matSlot.ClearSlot(col)
 
-			goldText.SetText(localeInfo.NumberToString(self._RowGoldDisplay(recipeIdx)))
-			pctText.SetText("%d%%" % self._EffectivePercent(recipeIdx))
+		for k in xrange(maxCol, matSlot.GetSlotCount()):
+			matSlot.DeactivateSlot(k)
+			matSlot.ClearSlot(k)
 
-			maxCol = min(MATERIAL_GRID_SLOTS, matSlot.GetSlotCount())
-			for col in xrange(maxCol):
-				matIdx = col + 1
-				if matIdx > MAX_PACKET_MATERIALS:
-					matSlot.DeactivateSlot(col)
-					matSlot.ClearSlot(col)
-					continue
-				mvnum = FReturnInfo("vnum_material_%d" % matIdx, recipeIdx)
-				mcount = FReturnInfo("count_material_%d" % matIdx, recipeIdx)
-				if mvnum != 0:
-					if recipeIdx == self.selectedRecipeGlobalIndex:
-						cr = max(1, FReturnInfo("count_reward", recipeIdx))
-						mult = max(1, self.count_item_reward / cr)
-						matSlot.SetItemSlot(col, mvnum, mcount * mult)
-					else:
-						matSlot.SetItemSlot(col, mvnum, mcount)
-					self._TintMaterialSlot(matSlot, col, recipeIdx, recipeIdx == self.selectedRecipeGlobalIndex)
-				else:
-					matSlot.DeactivateSlot(col)
-					matSlot.ClearSlot(col)
-
-			for k in xrange(maxCol, matSlot.GetSlotCount()):
-				matSlot.DeactivateSlot(k)
-				matSlot.ClearSlot(k)
-
-			matSlot.RefreshSlot()
+		matSlot.RefreshSlot()
 
 	def _SyncScrollbarToList(self):
 		mi = len(self.matchingIndices)
@@ -584,9 +642,13 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self._SyncContentScrollbarPos()
 
 	def Refresh(self):
-		self._RefreshMatchingIndices()
-		self._PaintVisibleRows()
-		self._SyncScrollbarToList()
+		# YENI: tek bir bozuk tarif/veri pencereyi cizemez (gorunmez+donuk) hale getirmesin.
+		try:
+			self._RefreshMatchingIndices()
+			self._PaintVisibleRows()
+			self._SyncScrollbarToList()
+		except:
+			self._LogCubeErr("Refresh")
 
 	def _UpdateConstInfoCubeCount(self):
 		if self.selectedRecipeGlobalIndex < 0:
@@ -597,6 +659,8 @@ class CubeRenewalWindows(ui.ScriptWindow):
 			constInfo.cube_count_items[i - 1] = FReturnInfo("vnum_material_%d" % i, self.selectedRecipeGlobalIndex)
 
 	def BINARY_CUBE_RENEWAL_LOADING(self):
+		# YENI: yeni tarif listesi geldi -> eski parse cache'ini bosalt (farkli NPC = farkli veri)
+		_ClearCubeDatesCache()
 		self.selectedRecipeGlobalIndex = -1
 		self.firstSlotIndex = 0
 		self.count_item_reward = 0
@@ -655,12 +719,17 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		vnum = player.GetItemIndex(invSlot)
 		if vnum == 0:
 			return False
-		item.SelectItem(vnum)
-		return item.GetItemType() == item.ITEM_TYPE_SKILLBOOK
+		# YENI: bozuk/eksik proto SelectItem'da patlamasin (OnUpdate'te her kare cagriliyor)
+		try:
+			item.SelectItem(vnum)
+			return item.GetItemType() == item.ITEM_TYPE_SKILLBOOK
+		except:
+			return False
 
 	def _ApplyWindowSize(self, big):
 		# 20001'de buyuk, diger NPC'lerde orijinal/kucuk pencere boyutu.
-		if not self._cubeBoardHSmall:
+		# Hem yukseklik HEM genislik gecerli olmali; aksi halde SetSize(0,..) gorunmez+donuk pencere yapar.
+		if not self._cubeBoardHSmall or not self._cubeBoardW:
 			return
 		h = self._cubeBoardHBig if big else self._cubeBoardHSmall
 		self.SetSize(self._cubeBoardW, h)
@@ -931,8 +1000,23 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self.interface = interface
 
 	def OnUpdate(self):
-		# YENI: item tasinir/satilir/silinir/count degisirse grid otomatik guncellenir
-		self._RefreshSkillGrid()
+		# YENI: OnUpdate her karede calisir; burada yutulmamis bir exception pencereyi
+		# "acik ama cizilmeyen + input-yutan" (donuk) durumda birakir. Tum govdeyi koru + logla.
+		try:
+			self._OnUpdateBody()
+		except:
+			self._LogCubeErr("OnUpdate")
+
+	def _OnUpdateBody(self):
+		# YENI: agir per-frame isler (grid senkronu + tam repaint) her kare degil, throttle'li calisir.
+		self._updateTick += 1
+		doHeavy = (self._updateTick >= CUBE_UPDATE_PAINT_EVERY)
+		if doHeavy:
+			self._updateTick = 0
+
+		# item tasinir/satilir/silinir/count degisirse grid otomatik guncellenir (throttle'li)
+		if doHeavy:
+			self._RefreshSkillGrid()
 
 		if self.IsShow() and self.searchEdit:
 			try:
@@ -956,7 +1040,7 @@ class CubeRenewalWindows(ui.ScriptWindow):
 				except:
 					pass
 
-		if self.selectedRecipeGlobalIndex >= 0:
+		if self.selectedRecipeGlobalIndex >= 0 and doHeavy:
 			self._UpdateConstInfoCubeCount()
 			self._PaintVisibleRows()
 
@@ -982,14 +1066,27 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		return True
 
 	def Close(self):
-		cube_renewal.CubeRenewalClose()
-		self.slot_item_improve = -1
-		if self.slot_improve:
-			self.slot_improve.SetItemSlot(0, 0, 0)
-		# YENI: pencere kapaninca secili beceri kitabi slotlari temizlensin
-		self._ClearSkillGrid()
-		self.selectedRecipeGlobalIndex = -1
-		constInfo.cube_count_items = {}
-		constInfo.CUBE_RENEWAL_IS_OPENED = 0
-		self.toolTip.Hide()
+		# YENI: ESC her zaman pencereden cikarabilmeli; ara adim hata verse bile odak birak + Hide GARANTI.
+		try:
+			cube_renewal.CubeRenewalClose()
+			self.slot_item_improve = -1
+			if self.slot_improve:
+				self.slot_improve.SetItemSlot(0, 0, 0)
+			# YENI: pencere kapaninca secili beceri kitabi slotlari temizlensin
+			self._ClearSkillGrid()
+			self.selectedRecipeGlobalIndex = -1
+			constInfo.cube_count_items = {}
+			constInfo.CUBE_RENEWAL_IS_OPENED = 0
+			_ClearCubeDatesCache()  # YENI: kapaninca parse cache'ini birak (bellek + sonraki acilis taze)
+			self.toolTip.Hide()
+		except:
+			self._LogCubeErr("Close")
+		# Edit satirlarinin klavye kilidini (ime capture) birak ki kapaninca input geri gelsin.
+		try:
+			if self.result_qty:
+				self.result_qty.KillFocus()
+			if self.searchEdit:
+				self.searchEdit.KillFocus()
+		except:
+			pass
 		self.Hide()

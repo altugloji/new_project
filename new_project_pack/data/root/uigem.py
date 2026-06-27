@@ -368,6 +368,9 @@ class ConvertWindow(ui.BoardWithTitleBar):
 				wndItem.SetItemSlot(cell, vnum, count)
 				if cur_select_index == cell:
 					wndItem.ActivateSlot(cell)
+				elif count > 0 and player.GetItemCountByVnum(vnum) >= count:
+					# Envanterde olan (cevrilebilecek) esyalari yesil parlat ki hangileri var gorunsun
+					wndItem.ActivateSlot(cell, 0.0, 1.0, 0.0, 1.0)
 				else:
 					wndItem.DeactivateSlot(cell)
 		self.__children["real_slot_dict"] = real_slot_dict
@@ -397,7 +400,7 @@ class ConvertWindow(ui.BoardWithTitleBar):
 			self.Clear()
 			return
 		self.__children["cur_select_index"] = slotIndex
-		self.__children["count"] = 0
+		self.__children["count"] = 1
 		self.Refresh()
 
 	def __ClickConvert(self):

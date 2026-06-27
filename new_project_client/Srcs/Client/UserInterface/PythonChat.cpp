@@ -11,6 +11,9 @@
 
 #if defined(__BL_MULTI_LANGUAGE_PREMIUM__)
 #include "../eterPack/EterPackManager.h"
+#include "PythonApplication.h"
+
+#define ENABLE_SHOUT_TOGGLE_KEY
 
 constexpr float c_fFlagTargetX = 5.0f;
 constexpr float c_fFlagTargetY = 5.0f;
@@ -410,6 +413,15 @@ void CPythonChat::UpdateLogMode(DWORD dwID)
 
 void CPythonChat::Update(DWORD dwID)
 {
+#ifdef ENABLE_SHOUT_TOGGLE_KEY
+	// Sol Shift'e her BASIŞTA haykırış mesajlarını gizle/göster (basılı tutma değil, tek bas-bırak = toggle).
+	// Birden fazla chat board için her frame çağrıldığından, edge bayrağı aynı frame'de çift toggle'ı engeller.
+	const bool bShoutToggleKey = CPythonApplication::Instance().IsPressed(DIK_LSHIFT);
+	if (bShoutToggleKey && !m_bShoutTogglePrevKey)
+		m_bHideShout = !m_bHideShout;
+	m_bShoutTogglePrevKey = bShoutToggleKey;
+#endif
+
 	const TChatSet * pChatSet = GetChatSetPtr(dwID);
 	if (!pChatSet)
 		return;
@@ -669,6 +681,14 @@ void CPythonChat::AppendChat(int iType, const char* c_szChat, BYTE bSpecialColor
 void CPythonChat::AppendChat(int iType, const char* c_szChat, BYTE bSpecialColorType)
 #endif
 {
+#ifdef ENABLE_SHOUT_TOGGLE_KEY
+	if (iType == CHAT_TYPE_SHOUT && m_bHideShout)
+		return;
+#else
+	if (iType == CHAT_TYPE_SHOUT && CPythonApplication::Instance().IsPressed(DIK_LSHIFT))
+		return;
+#endif
+
 	// DEFAULT_FONT
 	//static CResource * s_pResource = CResourceManager::Instance().GetResourcePointer(g_strDefaultFontName.c_str());
 
@@ -924,6 +944,10 @@ void CPythonChat::__Initialize()
 	m_akD3DXClrChat[CHAT_TYPE_MONARCH_NOTICE]	= D3DXCOLOR(1.0f, 0.902f, 0.730f, 1.0f);
 #ifdef ENABLE_DICE_SYSTEM
 	m_akD3DXClrChat[CHAT_TYPE_DICE_INFO]	= D3DXCOLOR(0xFFcc00cc);
+#endif
+#ifdef ENABLE_SHOUT_TOGGLE_KEY
+	m_bHideShout = false;
+	m_bShoutTogglePrevKey = false;
 #endif
 }
 

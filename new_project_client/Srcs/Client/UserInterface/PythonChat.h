@@ -281,5 +281,12 @@ class CPythonChat : public CSingleton<CPythonChat>, public IAbstractChat
 		TWaitChatList						m_WaitChatList;
 
 		D3DXCOLOR m_akD3DXClrChat[CHAT_TYPE_MAX_NUM];
+
+#define ENABLE_SHOUT_TOGGLE_KEY
+#ifdef ENABLE_SHOUT_TOGGLE_KEY
+	protected:
+		bool m_bHideShout;			// true = haykırış (shout) mesajları gizli
+		bool m_bShoutTogglePrevKey;	// edge algılama: bir önceki frame'de tuş basılı mıydı
+#endif
 };
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

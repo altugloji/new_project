@@ -2426,10 +2426,26 @@ class Interface(object):
 
 	if app.ENABLE_CUBE_RENEWAL:
 		def BINARY_CUBE_RENEWAL_OPEN(self):
-			if self.wndCubeRenewal.IsShow():
-				self.wndCubeRenewal.Close()
-			else:
-				self.wndCubeRenewal.Show()
+			# Server OPEN_RECEIVE'i SADECE acmak icin yollar (IsCubeOpen guard'i reopen'i bloklar),
+			# bu yuzden kor IsShow() toggle'i yerine net Show. Eski toggle, IsShow desync'inde
+			# pencereyi yanlislikla kapatip "acilmadi" hissi verebiliyordu.
+			# Acmadan once edit odaklarini birak (CanEdit(False) editline ime capture ile klavyeyi
+			# kilitleyip donma yapabiliyor) ve pencereyi one al (baska pencerenin arkasinda gizli kalmasin).
+			w = self.wndCubeRenewal
+			if not w:
+				return
+			try:
+				if w.result_qty:
+					w.result_qty.KillFocus()
+				if w.searchEdit:
+					w.searchEdit.KillFocus()
+			except:
+				pass
+			w.Show()
+			try:
+				w.SetTop()
+			except:
+				pass
 
 		# YENI: server->client 'cube_skill_grid' komutu; beceri kitabi grid'ini sadece 20001'de acar
 		def SetCubeSkillGridEnable(self, enable):

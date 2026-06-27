@@ -2367,8 +2367,11 @@ static void GiveExp(LPCHARACTER from, LPCHARACTER to, int iExp)
 #endif
 
 	// set
-	to->PointChange(POINT_EXP, iExp, true);
-	from->CreateFly(FLY_EXP, to);
+	if (!to->IsEquipUniqueItem(ITEM_ANTIEXP_RING))
+	{
+		to->PointChange(POINT_EXP, iExp, true);
+		from->CreateFly(FLY_EXP, to);
+	}
 	// marriage
 	{
 		const LPCHARACTER you = to->GetMarryPartner();
@@ -2487,8 +2490,13 @@ static void GiveExp(LPCHARACTER from, LPCHARACTER to, int iExp)
 		return;
 #endif
 
-	to->PointChange(POINT_EXP, iExp, true);
-	from->CreateFly(FLY_EXP, to);
+
+	if (!to->IsEquipUniqueItem(ITEM_ANTIEXP_RING))
+
+	{
+		to->PointChange(POINT_EXP, iExp, true);
+		from->CreateFly(FLY_EXP, to);
+	}
 
 	{
 		LPCHARACTER you = to->GetMarryPartner();
