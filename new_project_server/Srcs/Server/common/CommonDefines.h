@@ -154,7 +154,7 @@ enum eCommonDefines {
 #define EXP_DEC_IN_DUNGEON											// Zindanlarda %90 Daha Az EXP
 #define ENABLE_LEVEL_MAP_EXP_LIMIT									// 45-75 ve 75-99 harita exp engelleri
 #define ENABLE_FISHING_ANTI_MACRO									// Balik makro engeli: envanterde solucan varken yeni solucan alinamaz + NPC penceresi acikken balik tutulamaz
-
+#define ENABLE_HORSE_ADDITIVE_STATS
 
 
 #define OFFLINE_SHOP												// Offline shops system

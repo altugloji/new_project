@@ -13,6 +13,7 @@ import systemSetting
 import player
 import app
 import grp
+import wndMgr
 
 g_isBuildingPrivateShop = False
 
@@ -28,6 +29,10 @@ g_privateShopAdvertisementBoardDict={}
 # sifirlanir (yanlis kirmizi isareti olmasin).
 g_clickedShopVIDs = {}
 
+# Tum pazar basliklarini TEK noktadan gunceleyen merkezi yonetici (kasma onleme).
+# Bkz. _ADBoardManager. Clear()'da sifirlanir.
+g_adBoardManager = None
+
 def Clear():
 	global g_itemPriceDict
 	global g_isBuildingPrivateShop
@@ -42,6 +47,10 @@ def Clear():
 	# @fixme007 END
 	global g_clickedShopVIDs
 	g_clickedShopVIDs = {}
+	# Harita degisiminde VID'ler yeniden atandigi icin merkezi yoneticiyi de
+	# sifirla; bir sonraki pazar gorununce EnsureADBoardManager yeniden olusturur.
+	global g_adBoardManager
+	g_adBoardManager = None
 
 def IsPrivateShopItemPriceList():
 	global g_itemPriceDict
@@ -89,8 +98,9 @@ if app.ENABLE_CHEQUE_SYSTEM:
 			return 0
 
 def UpdateADBoard():
-	for key in g_privateShopAdvertisementBoardDict.keys():
-		g_privateShopAdvertisementBoardDict[key].Show()
+	# Secenek (market ismi goster ac/kapa) degisince merkezi yoneticiyi olustur
+	# ve throttle beklemeden hemen yeniden degerlendir.
+	EnsureADBoardManager().ForceUpdate()
 
 def DeleteADBoard(vid):
 	if not g_privateShopAdvertisementBoardDict.has_key(vid):
@@ -157,6 +167,11 @@ class PrivateShopAdvertisementBoard(ShopNameBoard):
 	def __init__(self):
 		ShopNameBoard.__init__(self, "UI_BOTTOM")
 		self.vid = None
+		# Gorunurlugu merkezi _ADBoardManager yonetir.
+		self.wantShow = False	# menzil/secenek gate'i (throttle'li hesaplanir)
+		self.shown = False		# gercek Show durumu (gereksiz C++ cagrisini onler)
+		self.boardW = 0
+		self.boardH = 0
 		self.__MakeTextLine()
 
 	def __del__(self):
@@ -176,9 +191,15 @@ class PrivateShopAdvertisementBoard(ShopNameBoard):
 
 		self.textLine.SetText(text)
 		self.textLine.UpdateRect()
-		self.SetSize(len(text)*6 + 10*2, 30)
+		self.boardW = len(text)*6 + 10*2
+		self.boardH = 30
+		self.SetSize(self.boardW, self.boardH)
 		self.__RefreshTitleColor()
-		self.Show()
+		# Gorunurlugu artik merkezi _ADBoardManager belirler. Tabelayi gizli
+		# olustur ki manager ilk konumlandirmadan once sol ust kosede (0,0)
+		# bir kare bile gorunmesin.
+		self.Hide()
+		self.shown = False
 
 		g_privateShopAdvertisementBoardDict[vid] = self
 
@@ -201,31 +222,106 @@ class PrivateShopAdvertisementBoard(ShopNameBoard):
 
 		return True
 
+	# NOT: Tabelalarin kendi OnUpdate'i KALDIRILDI. Eskiden her tabela kendi
+	# OnUpdate'inde Show() kalip, gorus disinda olanlari Hide() etmek yerine
+	# ekran disina (-10000,-10000) tasiyordu (cunku gizli pencere OnUpdate almaz).
+	# Ancak engine, Show()'lu bir pencereyi -konum farketmeksizin- HER kare hem
+	# OnUpdate hem OnRender (Box+Bar+TextLine cizimi, VB lock + DrawPrimitive) ile
+	# isler. Yani ekran disindaki tabelalar da tam render maliyeti oduyordu ->
+	# cok pazarda asiri kasma. Cozum: gorunurlugu tek bir surekli-acik
+	# _ADBoardManager yonetir; gorus disi/kamera arkasi/ekran disi tabelalar
+	# GERCEKTEN Hide() edilir (sifir maliyet) ve tekrar gorus icine girince
+	# manager yeniden Show() eder.
+
+class _ADBoardManager(ui.Window):
+	# Tum pazar basliklarini TEK noktadan gunceller. Bu pencere HER ZAMAN Show()
+	# kalir (boylece engine OnUpdate vermeye devam eder) ama boyutu 0 ve hic
+	# cocugu yok -> kendi render maliyeti SIFIR. Asil tabelalari gorunurluge gore
+	# Show()/Hide() eder.
+	#
+	# TITREME ONLEME: menzil/secenek karari (chr.CanRenderShop = mesafe hesabi)
+	# pahali oldugu icin throttle'li yapilir; ama KONUM (GetProjectPosition +
+	# SetPosition) gosterilen her tabela icin HER kare guncellenir. Boylece
+	# baslik, hareket ederken dukkanin uzerine kilitli kalir (ziplama/titreme yok).
+	# Ekran disina tasan tabelalar GERCEKTEN Hide() edilir -> render maliyeti yok.
+	REEVAL_INTERVAL_MS = 150	# menzil/secenek gate'i ~7 Hz; konum zaten her kare
+
+	def __init__(self):
+		ui.Window.__init__(self, "UI")
+		self.SetPosition(-10000, -10000)
+		self.SetSize(0, 0)
+		self.lastTime = 0
+		self.Show()
+
+	def __del__(self):
+		ui.Window.__del__(self)
+
+	def ForceUpdate(self):
+		# Bir sonraki OnUpdate'te menzil/secenek gate'ini hemen yeniden hesapla.
+		self.lastTime = 0
+
 	def OnUpdate(self):
-		if not self.vid:
+		boards = g_privateShopAdvertisementBoardDict
+		if not boards:
 			return
 
-		if systemSetting.IsShowSalesText():
-			self.Show()
-			# Pazar gorus mesafesi disindaki pazarlarin tabelasini gizle (kasma onleme).
-			# DIKKAT: self.Hide() cagirmiyoruz; cunku gizli pencere OnUpdate almaz ve
-			# mesafe tekrar artirildiginda tabela geri gelmez. Bunun yerine ekran disina
-			# tasiyoruz, boylece OnUpdate calismaya devam eder.
-			if hasattr(chr, "CanRenderShop") and not chr.CanRenderShop(self.vid):
-				self.SetPosition(-10000, -10000)
-				return
+		mainVID = player.GetMainCharacterIndex()
 
-			x, y = chr.GetProjectPosition(self.vid, 220)
-			self.SetPosition(x - self.GetWidth()/2, y - self.GetHeight()/2)
-
-		else:
-			for key in g_privateShopAdvertisementBoardDict.keys():
-				if  player.GetMainCharacterIndex() == key:
-					g_privateShopAdvertisementBoardDict[key].Show()
-					x, y = chr.GetProjectPosition(player.GetMainCharacterIndex(), 220)
-					g_privateShopAdvertisementBoardDict[key].SetPosition(x - self.GetWidth()/2, y - self.GetHeight()/2)
+		# 1) Menzil/secenek gate'i: SADECE throttle aninda (mesafe hesabi pahali).
+		#    Sonuc board.wantShow'da saklanir; konum dongusu bunu okur.
+		now = app.GetGlobalTime()	# milisaniye
+		if now - self.lastTime >= self.REEVAL_INTERVAL_MS:
+			self.lastTime = now
+			showText = systemSetting.IsShowSalesText()
+			canCheck = hasattr(chr, "CanRenderShop")
+			for vid in boards.keys():
+				board = boards[vid]
+				if vid == mainVID:
+					board.wantShow = True	# kendi pazari her zaman (secenekten bagimsiz)
+				elif not showText:
+					board.wantShow = False
+				elif canCheck and not chr.CanRenderShop(vid):
+					board.wantShow = False
 				else:
-					g_privateShopAdvertisementBoardDict[key].Hide()
+					board.wantShow = True
+
+		# 2) Konum + ekran-disi kirpma: HER kare (titreme yok, off-screen render yok).
+		sw = wndMgr.GetScreenWidth()
+		sh = wndMgr.GetScreenHeight()
+		for vid in boards.keys():
+			board = boards[vid]
+
+			# Menzil/secenek disi -> gizli kalmali (sadece gecis aninda Hide cagir).
+			if not board.wantShow:
+				if board.shown:
+					board.Hide()
+					board.shown = False
+				continue
+
+			x, y = chr.GetProjectPosition(vid, 220)
+			w = board.boardW
+			h = board.boardH
+			px = x - w / 2
+			py = y - h / 2
+
+			# Kamera arkasi (-100,-100 sentinel) ya da tamamen ekran disi -> gizle.
+			if (-100 == x and -100 == y) or px >= sw or py >= sh or (px + w) <= 0 or (py + h) <= 0:
+				if board.shown:
+					board.Hide()
+					board.shown = False
+			else:
+				board.SetPosition(px, py)
+				if not board.shown:
+					board.Show()
+					board.shown = True
+
+
+def EnsureADBoardManager():
+	global g_adBoardManager
+	if g_adBoardManager is None:
+		g_adBoardManager = _ADBoardManager()
+	return g_adBoardManager
+
 
 class PrivateShopBuilder(ui.ScriptWindow):
 

@@ -548,6 +548,9 @@ namespace marriage
 		m_Marriages.emplace(pMarriage);
 		m_MarriageByPID.emplace(dwPID1, pMarriage);
 		m_MarriageByPID.emplace(dwPID2, pMarriage);
+
+#define ENABLE_MARRIAGE_NO_WEDDING_MAP
+#ifndef ENABLE_MARRIAGE_NO_WEDDING_MAP
 		{
 			const LPCHARACTER A = CHARACTER_MANAGER::instance().FindByPID(dwPID1);
 			const LPCHARACTER B = CHARACTER_MANAGER::instance().FindByPID(dwPID2);
@@ -560,6 +563,7 @@ namespace marriage
 				db_clientdesc->DBPacket(HEADER_GD_WEDDING_REQUEST, 0, &p, sizeof(p));
 			}
 		}
+#endif
 	}
 
 	void CManager::RequestUpdate(DWORD dwPID1, DWORD dwPID2, int iUpdatePoint, BYTE byMarried) const

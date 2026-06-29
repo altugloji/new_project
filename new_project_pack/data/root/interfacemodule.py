@@ -1997,6 +1997,11 @@ class Interface(object):
 
 		self.privateShopAdvertisementBoardDict[vid] = board
 
+		# Tabelalar artik kendi OnUpdate'iyle degil, merkezi yonetici tarafindan
+		# guncelleniyor. Yoneticinin var oldugundan emin ol ve yeni tabelayi hemen
+		# konumlandirmasi icin throttle'i sifirla.
+		uiPrivateShopBuilder.EnsureADBoardManager().ForceUpdate()
+
 	def DisappearPrivateShop(self, vid):
 
 		if not self.privateShopAdvertisementBoardDict.has_key(vid):

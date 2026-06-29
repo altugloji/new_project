@@ -30,10 +30,10 @@ SRV1 = {
 	"ch6":30057,
 	"ch7":30065,
 	"ch8":30073,
-	"ch9":30081,
-	"ch10":30089,
-	"ch11":30097,
-	"ch12":30105,
+	# "ch9":30081,
+	# "ch10":30089,
+	# "ch11":30097,
+	# "ch12":30105,
 
 	"authlist": [ 30001,30003,30005,30007,30009,30011,30013,30015, ],
 }
@@ -98,10 +98,10 @@ SERVER1_CHANNEL_DICT = {
 	5: {"key":15, "name": "CH-6", "ip":SRV1["host"], "tcp_port":SRV1["ch6"], "udp_port":SRV1["ch6"], "state":STATE_NONE,},
 	6: {"key":16, "name": "CH-7", "ip":SRV1["host"], "tcp_port":SRV1["ch7"], "udp_port":SRV1["ch7"], "state":STATE_NONE,},
 	7: {"key":17, "name": "CH-8", "ip":SRV1["host"], "tcp_port":SRV1["ch8"], "udp_port":SRV1["ch8"], "state":STATE_NONE,},
-	8: {"key":18, "name": "CH-9", "ip":SRV1["host"], "tcp_port":SRV1["ch9"], "udp_port":SRV1["ch9"], "state":STATE_NONE,},
-	9: {"key":19, "name": "CH-10", "ip":SRV1["host"], "tcp_port":SRV1["ch10"], "udp_port":SRV1["ch10"], "state":STATE_NONE,},
-	10: {"key":20, "name": "CH-11", "ip":SRV1["host"], "tcp_port":SRV1["ch11"], "udp_port":SRV1["ch11"], "state":STATE_NONE,},
-	11: {"key":21, "name": "CH-12", "ip":SRV1["host"], "tcp_port":SRV1["ch12"], "udp_port":SRV1["ch12"], "state":STATE_NONE,},
+	# 8: {"key":18, "name": "CH-9", "ip":SRV1["host"], "tcp_port":SRV1["ch9"], "udp_port":SRV1["ch9"], "state":STATE_NONE,},
+	# 9: {"key":19, "name": "CH-10", "ip":SRV1["host"], "tcp_port":SRV1["ch10"], "udp_port":SRV1["ch10"], "state":STATE_NONE,},
+	# 10: {"key":20, "name": "CH-11", "ip":SRV1["host"], "tcp_port":SRV1["ch11"], "udp_port":SRV1["ch11"], "state":STATE_NONE,},
+	# 11: {"key":21, "name": "CH-12", "ip":SRV1["host"], "tcp_port":SRV1["ch12"], "udp_port":SRV1["ch12"], "state":STATE_NONE,},
 }
 
 REGION_NAME_DICT = {
@@ -118,10 +118,10 @@ REGION_AUTH_SERVER_DICT = {
 		6: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
 		7: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
 		8: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
-		9: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
-		10: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
-		11: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
-		12: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
+		# 9: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
+		# 10: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
+		# 11: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
+		# 12: {"ip": SRV1["host"], "port": get_item_from_list(SRV1["authlist"]),},
 	}
 }
 

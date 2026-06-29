@@ -286,6 +286,10 @@ class OptionDialog(ui.ScriptWindow):
 	def __OnClickSalesTextOffButton(self):
 		systemSetting.SetShowSalesTextFlag(False)
 		self.RefreshShowSalesText()
+		# Kapatinca da merkezi yoneticiyi hemen tetikle ki kendi pazari disindaki
+		# tum tabelalar bir sonraki karede gizlensin (eski tabela-bazli OnUpdate
+		# kaldirildigi icin gerekli).
+		uiPrivateShopBuilder.UpdateADBoard()
 
 	def __CheckPvPProtectedLevelPlayer(self):
 		if player.GetStatus(player.LEVEL)<constInfo.PVPMODE_PROTECTED_LEVEL:

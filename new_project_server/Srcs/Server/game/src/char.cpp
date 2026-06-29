@@ -239,6 +239,9 @@ void CHARACTER::Initialize()
 	m_pkTimedEvent = nullptr;
 	m_pkFishingEvent = nullptr;
 	m_pkWarpEvent = nullptr;
+#ifdef ENABLE_MOVE_CHANNEL
+	m_pkChangeChannelEvent = nullptr;
+#endif
 
 	// MINING
 	m_pkMiningEvent = nullptr;
@@ -629,6 +632,9 @@ void CHARACTER::Destroy()
 	event_cancel(&m_pkWarpEvent);
 	event_cancel(&m_pkCheckSpeedHackEvent);
 	//END_DELAYED_WARP
+#ifdef ENABLE_MOVE_CHANNEL
+	event_cancel(&m_pkChangeChannelEvent);
+#endif
 
 	// MINING
 	event_cancel(&m_pkMiningEvent);
@@ -2918,6 +2924,21 @@ void CHARACTER::ComputePoints()
 	{
 		if (GetMountVnum())
 		{
+#ifdef ENABLE_HORSE_ADDITIVE_STATS
+			// At statlarini karakter statinin UZERINE ekle (floor yerine eklemeli).
+			// GetHorseXX() at egitilmemisse (GetHorseLevel()==0) 0 doner, o yuzden 0 ekleme yapilmaz.
+			if (GetHorseST() > 0)
+				PointChange(POINT_ST, GetHorseST());
+
+			if (GetHorseDX() > 0)
+				PointChange(POINT_DX, GetHorseDX());
+
+			if (GetHorseHT() > 0)
+				PointChange(POINT_HT, GetHorseHT());
+
+			if (GetHorseIQ() > 0)
+				PointChange(POINT_IQ, GetHorseIQ());
+#else
 			if (GetHorseST() > GetPoint(POINT_ST))
 				PointChange(POINT_ST, GetHorseST() - GetPoint(POINT_ST));
 
@@ -2929,6 +2950,7 @@ void CHARACTER::ComputePoints()
 
 			if (GetHorseIQ() > GetPoint(POINT_IQ))
 				PointChange(POINT_IQ, GetHorseIQ() - GetPoint(POINT_IQ));
+#endif
 		}
 
 	}
@@ -8750,8 +8772,73 @@ bool CHARACTER::CleanAcceAttr(LPITEM pkItem, LPITEM pkTarget)
 #endif
 
 #ifdef ENABLE_MOVE_CHANNEL
-bool CHARACTER::ChangeChannel(BYTE newChannel)
+// kanal degistirme bekleme suresi (saniye)
+static const int MOVE_CHANNEL_DELAY_SEC = 5;
+
+EVENTINFO(change_channel_event_info)
 {
+	DynamicCharacterPtr ch;
+	BYTE bChannel;
+	long lMapIndex; // bekleme baslarken bulunulan harita; warp ile degisirse iptal
+	int  iSecLeft;
+
+	change_channel_event_info()
+	: ch()
+	, bChannel(0)
+	, lMapIndex(0)
+	, iSecLeft(0)
+	{
+	}
+};
+
+EVENTFUNC(change_channel_event)
+{
+	const auto info = dynamic_cast<change_channel_event_info*>(event->info);
+	if (info == nullptr)
+	{
+		sys_err("change_channel_event> <Factor> Null pointer");
+		return 0;
+	}
+
+	const LPCHARACTER ch = info->ch;
+	if (ch == nullptr)
+		return 0;
+
+	// bekleme sirasinda normal warp ile harita degistiyse kanal degisimini iptal et
+	if (ch->GetMapIndex() != info->lMapIndex)
+	{
+		ch->m_pkChangeChannelEvent = nullptr;
+		ch->ChatPacket(CHAT_TYPE_INFO, "Kanal degistirme iptal edildi.");
+		return 0;
+	}
+
+	// olum/pencere/zindan vb. olustuysa iptal (CanChangeChannel sebebini yazar, biz de iptali bildiririz)
+	if (!ch->CanChangeChannel(info->bChannel))
+	{
+		ch->m_pkChangeChannelEvent = nullptr;
+		ch->ChatPacket(CHAT_TYPE_INFO, "Kanal degistirme iptal edildi.");
+		return 0;
+	}
+
+	// geri sayim bitti › gercek isinlanma
+	if (info->iSecLeft <= 0)
+	{
+		ch->m_pkChangeChannelEvent = nullptr;
+		ch->ProcessChangeChannel(info->bChannel);
+		return 0;
+	}
+
+	// kalan saniyeyi oyuncuya goster, 1 sn sonra tekrar say (5,4,3,2,1)
+	ch->ChatPacket(CHAT_TYPE_INFO, "%d saniye kaldi.", info->iSecLeft);
+	--info->iSecLeft;
+	return PASSES_PER_SEC(1);
+}
+
+bool CHARACTER::CanChangeChannel(BYTE newChannel)
+{
+	if (!IsPC())
+		return false;
+
 	if (!CanWarp() || IsDead())
 	{
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("You have to wait few seconds before changing channel."));
@@ -8770,14 +8857,51 @@ bool CHARACTER::ChangeChannel(BYTE newChannel)
 		return false;
 	}
 
-	if (!IsPC())
-		return false;
-
 	if (newChannel == g_bChannel)
 	{
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("You are already in this channel. %d"), newChannel);
 		return false;
 	}
+
+	return true;
+}
+
+bool CHARACTER::ChangeChannel(BYTE newChannel)
+{
+	// zaten bir kanal degistirme bekleniyorsa yenisini engelle
+	if (IsChangingChannel())
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Zaten kanal degistiriyorsunuz, lutfen bekleyin.");
+		return false;
+	}
+
+	if (!CanChangeChannel(newChannel))
+		return false;
+
+	// 5->1 geri sayim baslat; sifira inince ProcessChangeChannel isinlar
+	change_channel_event_info* info = AllocEventInfo<change_channel_event_info>();
+	info->ch = this;
+	info->bChannel = newChannel;
+	info->lMapIndex = GetMapIndex();
+	info->iSecLeft = MOVE_CHANNEL_DELAY_SEC;
+
+	m_pkChangeChannelEvent = event_create(change_channel_event, info, 1); // ilk tik (5) hemen baslasin
+
+	ChatPacket(CHAT_TYPE_INFO, "%d. kanala geciliyorsunuz...", newChannel);
+	return true;
+}
+
+bool CHARACTER::ProcessChangeChannel(BYTE newChannel)
+{
+	// 5 saniye gecti: durum degismis olabilir (olum/pencere/zindan), tekrar dogrula
+	if (!CanChangeChannel(newChannel))
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Kanal degistirme iptal edildi.");
+		return false;
+	}
+
+	if (!GetDesc())
+		return false;
 
 	long newMapIndex;
 	long newAddr;

@@ -2234,7 +2234,12 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 
 #ifdef ENABLE_MOVE_CHANNEL
 	public:
-		bool ChangeChannel(BYTE newChannel);
+		bool ChangeChannel(BYTE newChannel);        // komut: 5 sn bekleme baslatir
+		bool ProcessChangeChannel(BYTE newChannel); // bekleme dolunca gercek isinlanma
+		bool CanChangeChannel(BYTE newChannel);     // ortak dogrulama (komut aninda + 5 sn sonra)
+		bool IsChangingChannel() const { return m_pkChangeChannelEvent ? true : false; }
+
+		LPEVENT m_pkChangeChannelEvent;
 #endif
 #ifdef ENABLE_GUILD_TOKEN_AUTH
 	public:

@@ -631,6 +631,9 @@ void CSafeTradeManager::OnClaimResult(LPCHARACTER ch, DWORD dwTradeID, BYTE bRes
 		item->SetSafeTradeID(0);
 		item->AddToCharacter(ch, TItemPos(INVENTORY, pos));   // window=INVENTORY, owner=B, Save
 		ITEM_MANAGER::instance().FlushDelayedSave(item);
+		const DWORD dwFlushID = item->GetID();
+		db_clientdesc->DBPacketHeader(HEADER_GD_ITEM_FLUSH, 0, sizeof(DWORD));
+		db_clientdesc->Packet(&dwFlushID, sizeof(DWORD));
 
 		Log(dwTradeID, "CLAIM", ch, 0, item);
 		LogManager::instance().ItemLog(ch, item, "SAFETRADE_TAKE", item->GetName());

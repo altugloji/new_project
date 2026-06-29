@@ -2871,8 +2871,11 @@ ACMD(DoChangeChannel)
 
 	WORD channel = 0;
 	str_to_number(channel, arg1);
-	if (!channel)
+	if (channel == 0 || channel >= 99) // gecersiz/asiri kanal no (BYTE'a daralirken sarmayi onler: 256->0, 355->99)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Gecersiz kanal numarasi.");
 		return;
+	}
 
 	ch->ChangeChannel(channel);
 }
