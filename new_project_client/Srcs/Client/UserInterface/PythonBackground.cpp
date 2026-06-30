@@ -270,6 +270,10 @@ CPythonBackground::CPythonBackground()
 	m_iDayMode = DAY_MODE_LIGHT;
 	m_iXMasTreeGrade = 0;
 	m_bVisibleGuildArea = FALSE;
+#ifdef ENABLE_AREA_OPTIMIZATION
+	m_bCharacterHeightRefreshPending = false;
+	m_dwLastCharacterHeightRefreshTime = 0;
+#endif
 
 	SetViewDistanceSet(4, 25600.0f);
 	SetViewDistanceSet(3, 25600.0f);
@@ -405,8 +409,18 @@ void CPythonBackground::Update(float fCenterX, float fCenterY, float fCenterZ)
 	CCullingManager::Instance().Update();
 #ifdef ENABLE_AREA_OPTIMIZATION
 	CMapOutdoor& rkMap = GetMapOutdoorRef();
-	if (rkMap.ConsumeAreaChangedFlag())
+	// During heavy streaming areas change every frame; refreshing every
+	// character's height each time multiplied culling queries. Accumulate
+	// the dirty flag and refresh at most every 100ms - the drop-protection
+	// guard in ResolveHeightForPlacement covers the gap.
+	m_bCharacterHeightRefreshPending |= rkMap.ConsumeAreaChangedFlag();
+	if (m_bCharacterHeightRefreshPending &&
+		ELTimer_GetMSec() - m_dwLastCharacterHeightRefreshTime >= 100)
+	{
 		CPythonCharacterManager::Instance().RefreshAllCharacterHeights();
+		m_dwLastCharacterHeightRefreshTime = ELTimer_GetMSec();
+		m_bCharacterHeightRefreshPending = false;
+	}
 #endif
 #ifdef __PERFORMANCE_CHECKER__
 	DWORD t2=ELTimer_GetMSec();

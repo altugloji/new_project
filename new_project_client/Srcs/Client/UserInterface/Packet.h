@@ -1493,6 +1493,7 @@ typedef struct packet_main_character
 	DWORD		wRaceNum; // @fixme501
     char        szName[CHARACTER_NAME_MAX_LEN + 1];
     long        lX, lY, lZ;
+	BYTE		byEmpire;		// @fixme070 server packet_main_character has empire before skill_group; base struct was 1 byte short
 	BYTE		bySkillGroup;
 } TPacketGCMainCharacter;
 

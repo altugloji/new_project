@@ -9,8 +9,11 @@ void CGrannyModelInstance::Update(DWORD dwAniFPS)
 		return;
 
 	const DWORD c_dwCurUpdateFrame = (DWORD) (GetLocalTime() * static_cast<float>(ANIFPS_MAX));
-	const DWORD ANIFPS_STEP = ANIFPS_MAX/dwAniFPS;
-	if (!ANIFPS_STEP || c_dwCurUpdateFrame>ANIFPS_STEP && c_dwCurUpdateFrame/ANIFPS_STEP==m_dwOldUpdateFrame/ANIFPS_STEP)
+	// dwAniFPS above ANIFPS_MAX makes the integer step 0; clamp to 1 so such
+	// callers update every frame (max rate) instead of dividing by zero or -
+	// as the previous guard did - never setting the model clock at all.
+	const DWORD ANIFPS_STEP = dwAniFPS < ANIFPS_MAX ? ANIFPS_MAX/dwAniFPS : 1;
+	if (c_dwCurUpdateFrame>ANIFPS_STEP && c_dwCurUpdateFrame/ANIFPS_STEP==m_dwOldUpdateFrame/ANIFPS_STEP)
 		return;
 
 	m_dwOldUpdateFrame=c_dwCurUpdateFrame;

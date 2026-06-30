@@ -148,7 +148,13 @@ bool CGraphicVertexBuffer::Create(int vtxCount, DWORD fvf, DWORD usage, D3DPOOL 
 	m_dwUsage = usage;
 	m_dwFVF = fvf;
 
-	if (usage & (D3DUSAGE_WRITEONLY | D3DUSAGE_DYNAMIC))
+	// Dynamic VBs are fully rewritten on every lock; locking them with flags=0
+	// forces the CPU to wait for in-flight GPU reads of the buffer, while
+	// DISCARD lets the driver hand back a renamed buffer without stalling.
+	// DISCARD is only legal on D3DUSAGE_DYNAMIC buffers.
+	if (usage & D3DUSAGE_DYNAMIC)
+		m_dwLockFlag = D3DLOCK_DISCARD;
+	else if (usage & D3DUSAGE_WRITEONLY)
 		m_dwLockFlag = 0;
 	else
 		m_dwLockFlag = D3DLOCK_READONLY;

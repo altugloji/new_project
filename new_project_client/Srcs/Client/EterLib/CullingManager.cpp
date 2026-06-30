@@ -57,7 +57,10 @@ void CCullingManager::Reset() const
 
 void CCullingManager::Update() const
 {
-	const DWORD dwFrameStamp = ELTimer_GetFrameMSec();
+	// Frame INDEX, not the frame msec timestamp: at 1000+ FPS two frames
+	// can share the same millisecond, which made the second frame skip
+	// Process() and run on a one-frame-stale sphere tree.
+	const DWORD dwFrameStamp = ELTimer_GetFrameIndex();
 
 	if (m_dwLastUpdateFrameStamp == dwFrameStamp)
 		return;

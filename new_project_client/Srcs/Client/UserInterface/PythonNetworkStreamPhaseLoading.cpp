@@ -198,7 +198,7 @@ bool CPythonNetworkStream::RecvMainCharacter()
 
 	m_dwMainActorVID = MainChrPacket.dwVID;
 	m_dwMainActorRace = MainChrPacket.wRaceNum;
-	m_dwMainActorEmpire = 0;
+	m_dwMainActorEmpire = MainChrPacket.byEmpire; // @fixme070
 	m_dwMainActorSkillGroup = MainChrPacket.bySkillGroup;
 
 	m_rokNetActorMgr->SetMainActorVID(m_dwMainActorVID);

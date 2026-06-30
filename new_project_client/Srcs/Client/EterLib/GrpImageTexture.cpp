@@ -105,7 +105,7 @@ bool CGraphicImageTexture::CreateDDSTexture(CDXTCImage & image, const BYTE * /*c
 	int mipmapCount = image.m_dwMipMapCount == 0 ? 1 : image.m_dwMipMapCount;
 
 	D3DFORMAT format;
-	LPDIRECT3DTEXTURE9 lpd3dTexture;
+	LPDIRECT3DTEXTURE9 lpd3dStagingTexture;
 
 	if(image.m_CompFormat == PF_DXT5)
 		format = D3DFMT_DXT5;
@@ -130,10 +130,14 @@ bool CGraphicImageTexture::CreateDDSTexture(CDXTCImage & image, const BYTE * /*c
 		}
 	}
 
+	// SYSTEMMEM staging texture: lockable for the CPU fill, uploaded once via
+	// UpdateTexture. The sampled texture itself must stay usage-0 DEFAULT;
+	// D3DUSAGE_DYNAMIC keeps it CPU-mappable for its whole lifetime, which lets
+	// drivers demote it to non-local memory and evict it under VRAM pressure.
 	if (FAILED(D3DXCreateTexture(	ms_lpd3dDevice, image.m_nWidth, image.m_nHeight,
-									mipmapCount, D3DUSAGE_DYNAMIC, format, D3DPOOL_DEFAULT, &lpd3dTexture)))
+									mipmapCount, 0, format, D3DPOOL_SYSTEMMEM, &lpd3dStagingTexture)))
 	{
-		TraceError("CreateDDSTexture: Cannot creatre texture");
+		TraceError("CreateDDSTexture: Cannot creatre staging texture");
 		return false;
 	}
 
@@ -141,19 +145,38 @@ bool CGraphicImageTexture::CreateDDSTexture(CDXTCImage & image, const BYTE * /*c
 	{
 		D3DLOCKED_RECT lockedRect;
 
-		if (FAILED(lpd3dTexture->LockRect(i, &lockedRect, nullptr, 0)))
+		if (FAILED(lpd3dStagingTexture->LockRect(i, &lockedRect, nullptr, 0)))
 		{
 			TraceError("CreateDDSTexture: Cannot lock texture");
 		}
 		else
 		{
 			image.Copy(i+uMinMipMapIndex, (BYTE*)lockedRect.pBits, lockedRect.Pitch);
-			lpd3dTexture->UnlockRect(i);
+			lpd3dStagingTexture->UnlockRect(i);
 		}
 	}
 
 	if(ms_bSupportDXT)
 	{
+		LPDIRECT3DTEXTURE9 lpd3dTexture;
+
+		if (FAILED(D3DXCreateTexture(	ms_lpd3dDevice, image.m_nWidth, image.m_nHeight,
+										mipmapCount, 0, format, D3DPOOL_DEFAULT, &lpd3dTexture)))
+		{
+			TraceError("CreateDDSTexture: Cannot creatre texture");
+			lpd3dStagingTexture->Release();
+			return false;
+		}
+
+		if (FAILED(ms_lpd3dDevice->UpdateTexture(lpd3dStagingTexture, lpd3dTexture)))
+		{
+			TraceError("CreateDDSTexture: Cannot upload texture");
+			lpd3dTexture->Release();
+			lpd3dStagingTexture->Release();
+			return false;
+		}
+
+		lpd3dStagingTexture->Release();
 		m_lpd3dTexture = lpd3dTexture;
 	}
 	else
@@ -174,15 +197,20 @@ bool CGraphicImageTexture::CreateDDSTexture(CDXTCImage & image, const BYTE * /*c
 			imgHeight>>=uTexBias;
 		}
 
+		// Decompress into a second SYSTEMMEM texture (both surfaces lockable
+		// there), then upload the converted result.
+		LPDIRECT3DTEXTURE9 lpd3dConvertTexture;
+
 		if (FAILED(D3DXCreateTexture(ms_lpd3dDevice, imgWidth, imgHeight,
-			mipmapCount, 0, format, D3DPOOL_DEFAULT, &m_lpd3dTexture)))
+			mipmapCount, 0, format, D3DPOOL_SYSTEMMEM, &lpd3dConvertTexture)))
 		{
 				TraceError("CreateDDSTexture: Cannot creatre texture");
+				lpd3dStagingTexture->Release();
 				return false;
 		}
 
-		IDirect3DTexture9* pkTexSrc=lpd3dTexture;
-		IDirect3DTexture9* pkTexDst=m_lpd3dTexture;
+		IDirect3DTexture9* pkTexSrc=lpd3dStagingTexture;
+		IDirect3DTexture9* pkTexDst=lpd3dConvertTexture;
 
 		for(int i=0; i<mipmapCount; ++i) {
 			IDirect3DSurface9* ppsSrc = nullptr;
@@ -199,7 +227,20 @@ bool CGraphicImageTexture::CreateDDSTexture(CDXTCImage & image, const BYTE * /*c
 			}
 		}
 
-		lpd3dTexture->Release();
+		lpd3dStagingTexture->Release();
+
+		if (FAILED(D3DXCreateTexture(ms_lpd3dDevice, imgWidth, imgHeight,
+			mipmapCount, 0, format, D3DPOOL_DEFAULT, &m_lpd3dTexture)))
+		{
+				TraceError("CreateDDSTexture: Cannot creatre texture");
+				lpd3dConvertTexture->Release();
+				return false;
+		}
+
+		if (FAILED(ms_lpd3dDevice->UpdateTexture(lpd3dConvertTexture, m_lpd3dTexture)))
+			TraceError("CreateDDSTexture: Cannot upload texture");
+
+		lpd3dConvertTexture->Release();
 	}
 
 	m_width = image.m_nWidth;

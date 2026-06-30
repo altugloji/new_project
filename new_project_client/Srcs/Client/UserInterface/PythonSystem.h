@@ -220,7 +220,6 @@ class CPythonSystem : public CSingleton<CPythonSystem>
 		void							SetDynamicShadow(bool bEnable);
 #endif
 		int								GetAntialiasing();
-		void							SetAntialiasing(int level);
 
 	protected:
 		TResolution						m_ResolutionList[RESOLUTION_MAX_NUM];

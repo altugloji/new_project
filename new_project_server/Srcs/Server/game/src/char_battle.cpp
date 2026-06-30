@@ -2264,7 +2264,7 @@ static bool ApplyLevelMapExpLimit(LPCHARACTER to, int& iExp)
 	if (iLevel >= 50 && iLevel <= 75)
 	{
 		if (lMapIndex != 71 && lMapIndex != 104)
-			iExp /= 5;
+			iExp /= 10;
 	}
 	else if (iLevel >= 75 && iLevel <= 99)
 	{

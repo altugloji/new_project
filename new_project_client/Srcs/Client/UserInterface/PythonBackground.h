@@ -156,6 +156,11 @@ private:
 
 	DWORD m_dwRenderShadowTime;
 
+#ifdef ENABLE_AREA_OPTIMIZATION
+	bool m_bCharacterHeightRefreshPending;
+	DWORD m_dwLastCharacterHeightRefreshTime;
+#endif
+
 	DWORD m_dwBaseX;
 	DWORD m_dwBaseY;
 

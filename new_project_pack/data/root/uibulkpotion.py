@@ -52,7 +52,9 @@ class BulkPotionWindow(ui.ScriptWindow):
 		ui.ScriptWindow.__init__(self)
 		self.tooltipItem = None
 		self.adwVnum = [0] * BULK_POTION_SLOT_COUNT
+		self.isPanelLoaded = False		# YENI: panel bu oturumda cfg'den okundu mu / duzenlendi mi (bos-uzerine-yazma korumasi)
 		self.__LoadWindow()
+		self.LoadPanel()				# YENI: insa aninda kayitli durumu yukle; panel hic acilmasa bile asla "sahte bos" kalmaz
 
 	def __del__(self):
 		ui.ScriptWindow.__del__(self)
@@ -127,6 +129,7 @@ class BulkPotionWindow(ui.ScriptWindow):
 
 	def OnClear(self):
 		self.adwVnum = [0] * BULK_POTION_SLOT_COUNT
+		self.isPanelLoaded = True		# YENI: kullanici bilincli temizledi -> bu durum kaydedilmeli
 		self.Refresh()
 
 	def OnUse(self):
@@ -193,6 +196,7 @@ class BulkPotionWindow(ui.ScriptWindow):
 			return
 
 		self.adwVnum[slotIndex] = itemVnum
+		self.isPanelLoaded = True		# YENI: kullanici slot atadi -> kaydedilebilir
 		self.Refresh()
 
 	def OnSelectItemSlot(self, slotIndex):
@@ -204,6 +208,7 @@ class BulkPotionWindow(ui.ScriptWindow):
 			return
 
 		self.adwVnum[slotIndex] = 0
+		self.isPanelLoaded = True		# YENI: kullanici slotu bilincli bosalttı -> kaydedilmeli
 		self.Refresh()
 
 	def OnOverInItem(self, slotIndex):
@@ -246,17 +251,49 @@ class BulkPotionWindow(ui.ScriptWindow):
 					continue
 				if constInfo.IS_BULK_POTION_ALLOWED(vnum):
 					self.adwVnum[idx] = vnum
+			self.isPanelLoaded = True		# YENI: cfg basariyla okundu -> kayitli durum gecerli, artik kaydedilebilir
 			return
 
 	def SavePanel(self):
-		path = _CfgPaths()[0] if _CfgPaths() else BULK_POTION_STATE_FILE
+		# YENI: panel bu oturumda hic yuklenmedi/duzenlenmedi -> kayitli cfg'yi BOS ile EZME.
+		# (Asil "gir-cik iksir kaybi" bug fix: pencere her giriste sifir adwVnum ile olusup
+		#  hicbir sey acilmadan cikista SavePanel cagriliyor ve dosyayi siliyordu.)
+		if not getattr(self, "isPanelLoaded", False):
+			return
+
+		paths = _CfgPaths()
+		path = paths[0] if paths else BULK_POTION_STATE_FILE
+
+		# Tum cikti tek seferde hazirlanir (satir-satir yazimda yarim-yazim riskini azaltir)
+		data = ""
+		for i in xrange(BULK_POTION_SLOT_COUNT):
+			if self.adwVnum[i]:
+				data += "%d=%d\n" % (i, self.adwVnum[i])
+
+		# YENI: once .tmp'e yaz, sonra yerine koy -> relog/Destroy crash penceresinde
+		# mevcut cfg yarim/bos kalmaz (eski dosyaya hic dokunulmadan once tam veri yazilir).
+		tmp = path + ".tmp"
 		try:
-			f = open(path, "w")
+			f = open(tmp, "w")
+			try:
+				f.write(data)
+			finally:
+				f.close()
 		except Exception:
 			return
+
 		try:
-			for i in xrange(BULK_POTION_SLOT_COUNT):
-				if self.adwVnum[i]:
-					f.write("%d=%d\n" % (i, self.adwVnum[i]))
-		finally:
-			f.close()
+			os.rename(tmp, path)
+		except OSError:
+			# Windows: hedef dosya zaten varsa rename hata verir -> eskiyi sil, tekrar dene
+			try:
+				os.remove(path)
+			except OSError:
+				pass
+			try:
+				os.rename(tmp, path)
+			except OSError:
+				try:
+					os.remove(tmp)
+				except OSError:
+					pass

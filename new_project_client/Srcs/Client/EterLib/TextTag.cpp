@@ -100,6 +100,7 @@ int GetTextTagInternalPosFromRenderPos(const wchar_t * src, int src_len, int off
     int output_len = 0;
     int hyperlinkStep = 0;
 	bool color_tag = false;
+	bool reversed_span = false;
 	int internal_offset = 0;
 
     for (int i = 0; i < src_len; )
@@ -108,8 +109,11 @@ int GetTextTagInternalPosFromRenderPos(const wchar_t * src, int src_len, int off
 
         if (tag == TEXT_TAG_COLOR)
 		{
-			color_tag = true;
-			internal_offset = i;
+			if (!reversed_span)
+			{
+				color_tag = true;
+				internal_offset = i;
+			}
 		}
 		else if (tag == TEXT_TAG_RESTORE_COLOR)
 		{
@@ -119,7 +123,7 @@ int GetTextTagInternalPosFromRenderPos(const wchar_t * src, int src_len, int off
         {
             if (hyperlinkStep == 0)
 			{
-				if (!color_tag)
+				if (!color_tag && !reversed_span)
 					internal_offset = i;
 
 				if (offset <= output_len)
@@ -132,7 +136,20 @@ int GetTextTagInternalPosFromRenderPos(const wchar_t * src, int src_len, int off
         else if (tag == TEXT_TAG_HYPERLINK_START)
             hyperlinkStep = 1;
         else if (tag == TEXT_TAG_HYPERLINK_END)
+        {
             hyperlinkStep = 0;
+            if (!reversed_span && !color_tag && i + 3 < src_len && src[i + 2] == L'|' && src[i + 3] == L'r')
+            {
+                // Reversed Arabic link opener "|h|r" (color_tag false rules
+                // out the forward closer "...|h|r"): pin the cursor in front
+                // of the whole block; its [Name] is not enterable, same as a
+                // forward link's [Name] inside |c...|r.
+                reversed_span = true;
+                internal_offset = i;
+            }
+            else if (reversed_span)
+                reversed_span = false;
+        }
 #ifdef ENABLE_EMOJI_SYSTEM
 		else if (tag == TEXT_TAG_EMOJI_START)
 			hyperlinkStep = 1;
@@ -185,37 +202,51 @@ int FindColorTagStartPosition(const wchar_t * src, int src_len)
 
     const wchar_t * cur = src;
 
-	// @fixme012
-	wchar_t wcStarts = L'c';
-	wchar_t wcEnds = L'r';
-	if (GetDefaultCodePage() == CP_ARABIC)
-	{
-		wcStarts = L'h';
-		wcEnds = L'h';
-	}
-
-    if (*cur == wcEnds && *(cur - 1) == L'|')
+    if (*(cur - 1) == L'|')
     {
-	    int len = src_len;
+        wchar_t wcEnd = *cur;
+        wchar_t wcStart = 0;
 
-        if (len >= 2 && *(cur - 2) == L'|')
-            return 1;
+        if (wcEnd == L'r')
+            wcStart = L'c';
+        else if (wcEnd == L'h')
+            wcStart = L'h';
 
-        cur -= 2;
-        len -= 2;
-
-        while (len > 1)
+        if (wcStart != 0)
         {
-            if (*cur == wcStarts && *(cur - 1) == L'|')
-                return (src - cur) + 1;
+            int len = src_len;
 
-            --cur;
-            --len;
+            if (len >= 2 && *(cur - 2) == L'|')
+                return 1;
+
+            cur -= 2;
+            len -= 2;
+
+            while (len > 1)
+            {
+                if (*cur == wcStart && *(cur - 1) == L'|')
+                    return (src - cur) + 1;
+
+                --cur;
+                --len;
+            }
+
+            // No opening tag exists before this end-tag. For "|r" that is
+            // the reversed Arabic link opener "|h|r" (its |c lies AFTER it,
+            // see playerGetItemLink CP_ARABIC format) - skip it as one
+            // atomic unit. Anything else: step over just the 2-char tag.
+            // Returning src_len here flung the cursor to position 0 and the
+            // next backspace deleted the first character of the buffer.
+            if (wcEnd == L'r' && src_len >= 4 && *(src - 2) == L'h' && *(src - 3) == L'|')
+                return 3;
+            return 1;
         }
-        return (src_len);
+
+        if (wcEnd == L'H' || wcEnd == L'c')
+            return 1;
     }
-	else if (*cur == L'|' && *(cur - 1) == L'|')
-		return 1;
+    else if (*cur == L'|' && *(cur - 1) == L'|')
+        return 1;
 
     return 0;
 }

@@ -275,14 +275,10 @@ void CPythonSystem::SetDynamicShadow(bool bEnable)
 
 int CPythonSystem::GetAntialiasing()
 {
-	if (m_Config.iAntialiasing == 0)
-		return 3;
-	return 0;
-}
-
-void CPythonSystem::SetAntialiasing(int level)
-{
-	m_Config.iAntialiasing = MAX(0, MIN(level, 3));
+	// NO_ANTIALIASING is an opt-out flag: nonzero disables MSAA entirely,
+	// otherwise request the highest level and let the device-creation cascade
+	// fall back through 8x/4x/2x as the hardware allows.
+	return m_Config.iAntialiasing ? 0 : 3;
 }
 
 int CPythonSystem::IsSaveID() const

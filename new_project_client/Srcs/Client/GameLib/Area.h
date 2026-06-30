@@ -220,7 +220,7 @@ class CArea
 		//////////////////////////////////////////////////////////////////////////
 
 #ifdef ENABLE_AREA_OPTIMIZATION
-		bool			Update(D3DXVECTOR3& v3Player);
+		bool			Update(D3DXVECTOR3& v3Player, DWORD dwBudgetDeadlineMSec);
 		bool			HasPendingObjectSync() const { return m_bHasPendingObjectSync; }
 #else
 		void			Update();
@@ -264,7 +264,7 @@ class CArea
 
 		void			__UpdateAniThingList();
 #ifdef ENABLE_AREA_OPTIMIZATION
-		bool			__UpdateLoadedObjectInstances(D3DXVECTOR3& v3Player);
+		bool			__UpdateLoadedObjectInstances(D3DXVECTOR3& v3Player, DWORD dwBudgetDeadlineMSec);
 		void			__UpdateEffectList(D3DXVECTOR3& v3Player);
 		float			GetDynamicLoadingDistanceSqr() const;
 		float			GetGameplayObjectLoadingDistanceSqr() const;
@@ -324,6 +324,10 @@ class CArea
 		int												m_iUpdateCount;
 		DWORD											m_dwObjectUpdateCursor;
 		bool											m_bHasPendingObjectSync;
+		bool											m_bScanIdle;
+		float											m_fLastScanPlayerX;
+		float											m_fLastScanPlayerY;
+		float											m_fLastScanMaxDistSqr;
 #endif
 		TShowingPortalIDSet								m_kSet_ShowingPortalID;
 

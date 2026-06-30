@@ -28,6 +28,9 @@ constexpr T HermiteInterpolation(const T& tMin, const T& tMax, float fRatio)
 }
 
 constexpr float kMinGameplayObjectLoadDistance = 25600.0f;
+// A clean object scan stays valid until the player moves this far (1m);
+// loading distances are >= 256m, so the margin is enormous.
+constexpr float kIdleRescanMoveThresholdSqr = 100.0f * 100.0f;
 #endif
 
 CDynamicPool<CArea::TObjectInstance>	CArea::ms_ObjectInstancePool;
@@ -91,7 +94,7 @@ void CArea::__UpdateAniThingList()
 }
 
 #ifdef ENABLE_AREA_OPTIMIZATION
-bool CArea::__UpdateLoadedObjectInstances(D3DXVECTOR3& v3Player)
+bool CArea::__UpdateLoadedObjectInstances(D3DXVECTOR3& v3Player, DWORD dwBudgetDeadlineMSec)
 {
 	const DWORD dwObjectCount = static_cast<DWORD>(m_ObjectInstanceVector.size());
 	if (dwObjectCount == 0)
@@ -102,7 +105,18 @@ bool CArea::__UpdateLoadedObjectInstances(D3DXVECTOR3& v3Player)
 	}
 
 	const float fMaxDist = GetGameplayObjectLoadingDistanceSqr();
-	const DWORD dwStartTime = ELTimer_GetMSec();
+
+	// Object positions are static: after a clean full pass (no mutation,
+	// no budget cut) the O(N) distance scan cannot produce different
+	// results until the player moves or the loading distance changes.
+	if (m_bScanIdle && fMaxDist == m_fLastScanMaxDistSqr)
+	{
+		const float fMoveX = v3Player.x - m_fLastScanPlayerX;
+		const float fMoveY = v3Player.y - m_fLastScanPlayerY;
+		if (fMoveX * fMoveX + fMoveY * fMoveY < kIdleRescanMoveThresholdSqr)
+			return false;
+	}
+
 	const DWORD dwStartIndex = m_dwObjectUpdateCursor % dwObjectCount;
 
 	bool bAnyModified = false;
@@ -157,8 +171,10 @@ bool CArea::__UpdateLoadedObjectInstances(D3DXVECTOR3& v3Player)
 		if (bDidModify)
 		{
 			bAnyModified = true;
-			const DWORD dwElapsed = ELTimer_GetMSec() - dwStartTime;
-			if (dwElapsed > 2)
+			// Deadline is shared by all areas updated this frame
+			// (__UpdateAroundAreaList); the old per-area 2ms budget
+			// multiplied to ~18ms across AROUND_AREA_NUM areas after warps.
+			if (ELTimer_GetMSec() >= dwBudgetDeadlineMSec)
 			{
 				bBudgetCut = true;
 				break;
@@ -168,6 +184,14 @@ bool CArea::__UpdateLoadedObjectInstances(D3DXVECTOR3& v3Player)
 
 	m_dwObjectUpdateCursor = bBudgetCut ? dwNextIndex : dwStartIndex;
 	m_bHasPendingObjectSync = bBudgetCut;
+
+	m_bScanIdle = !bBudgetCut && !bAnyModified;
+	if (m_bScanIdle)
+	{
+		m_fLastScanPlayerX = v3Player.x;
+		m_fLastScanPlayerY = v3Player.y;
+		m_fLastScanMaxDistSqr = fMaxDist;
+	}
 
 	return bAnyModified;
 }
@@ -190,7 +214,13 @@ void CArea::__UpdateEffectList(D3DXVECTOR3& v3Player)
 			const float fDist = (v3Player.x - gMatrix._41) * (v3Player.x - gMatrix._41) + (v3Player.y - gMatrix._42) * (v3Player.y - gMatrix._42);
 			const int iDistRatio = HermiteInterpolation(1, iUpdateFPS / 2, fDist / fMaxDist);
 
-			if (m_iUpdateCount % iDistRatio == 0)
+			// Per-instance phase offset spreads reduced-rate ticks across
+			// frames; without it every effect with the same ratio updated on
+			// the same frame (and ALL of them whenever the counter wrapped
+			// to 0), producing a periodic spike.
+			const int iTickPhase = static_cast<int>(reinterpret_cast<uintptr_t>(pEffectInstance) >> 6);
+
+			if ((m_iUpdateCount + iTickPhase) % iDistRatio == 0)
 				pEffectInstance->Update();
 
 			if (!pEffectInstance->isAlive())
@@ -234,9 +264,9 @@ float CArea::GetGameplayObjectLoadingDistanceSqr() const
 	return fGameplayLoadDistance * fGameplayLoadDistance;
 }
 
-bool CArea::Update(D3DXVECTOR3& v3Player)
+bool CArea::Update(D3DXVECTOR3& v3Player, DWORD dwBudgetDeadlineMSec)
 {
-	const bool bAreaChanged = __UpdateLoadedObjectInstances(v3Player);
+	const bool bAreaChanged = __UpdateLoadedObjectInstances(v3Player, dwBudgetDeadlineMSec);
 	__UpdateAniThingList();
 	__UpdateEffectList(v3Player);
 	return bAreaChanged;
@@ -826,6 +856,7 @@ void CArea::__Load_BuildObjectInstances()
 	m_ObjectInstanceVector.resize(GetObjectDataCount(), nullptr);
 	m_dwObjectUpdateCursor = 0;
 	m_bHasPendingObjectSync = false;
+	m_bScanIdle = false;
 #else
 	m_ObjectInstanceVector.resize(GetObjectDataCount());
 #endif
@@ -1505,8 +1536,15 @@ void CArea::Clear()
 	m_EffectInstanceMap.clear();
 
 #ifdef ENABLE_AREA_OPTIMIZATION
+	// CArea objects are pool-recycled without reconstruction
+	// (CDynamicPool::Alloc returns the object as-is), so the sorted effect
+	// view must not survive Clear() - it points at the instances destroyed
+	// above and would dangle into the next area that reuses this object.
+	m_kVct_pkEftInstSort.clear();
+	m_iUpdateCount = 0;
 	m_dwObjectUpdateCursor = 0;
 	m_bHasPendingObjectSync = false;
+	m_bScanIdle = false;
 #endif
 }
 
@@ -1606,6 +1644,10 @@ CArea::CArea()
 	m_iUpdateCount = 0;
 	m_dwObjectUpdateCursor = 0;
 	m_bHasPendingObjectSync = false;
+	m_bScanIdle = false;
+	m_fLastScanPlayerX = 0.0f;
+	m_fLastScanPlayerY = 0.0f;
+	m_fLastScanMaxDistSqr = 0.0f;
 #endif
 }
 

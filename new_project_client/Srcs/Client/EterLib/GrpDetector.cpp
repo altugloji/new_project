@@ -181,88 +181,26 @@ D3D_SModeInfo* D3D_CDeviceInfo::GetD3DModeInfop(UINT iD3D_SModeInfo)
 
 BOOL D3D_CDeviceInfo::FindDepthStencilFormat(IDirect3D9Ex& rkD3D, UINT iD3DAdapterInfo, D3DDEVTYPE DeviceType, D3DFORMAT TargetFormat, D3DFORMAT* pDepthStencilFormat ) const
 {
-	const UINT m_dwMinDepthBits    = 16;
-	const UINT m_dwMinStencilBits  = 0;
-
-    if( m_dwMinDepthBits <= 16 && m_dwMinStencilBits == 0 )
+    // Prefer higher-precision depth formats first to reduce Z-fighting
+    static const D3DFORMAT aFormats[] =
     {
-        if( SUCCEEDED( rkD3D.CheckDeviceFormat( iD3DAdapterInfo, DeviceType,
-            TargetFormat, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, D3DFMT_D16 ) ) )
-        {
-            if( SUCCEEDED( rkD3D.CheckDepthStencilMatch( iD3DAdapterInfo, DeviceType,
-                TargetFormat, TargetFormat, D3DFMT_D16 ) ) )
-            {
-                *pDepthStencilFormat = D3DFMT_D16;
-                return TRUE;
-            }
-        }
-    }
+        D3DFMT_D24S8,
+        D3DFMT_D24X8,
+        D3DFMT_D24X4S4,
+        D3DFMT_D32,
+        D3DFMT_D16,
+        D3DFMT_D15S1,
+    };
 
-    if( m_dwMinDepthBits <= 15 && m_dwMinStencilBits <= 1 )
+    for (int i = 0; i < _countof(aFormats); ++i)
     {
-        if( SUCCEEDED( rkD3D.CheckDeviceFormat( iD3DAdapterInfo, DeviceType,
-            TargetFormat, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, D3DFMT_D15S1 ) ) )
+        if (SUCCEEDED(rkD3D.CheckDeviceFormat(iD3DAdapterInfo, DeviceType,
+            TargetFormat, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, aFormats[i])))
         {
-            if( SUCCEEDED( rkD3D.CheckDepthStencilMatch( iD3DAdapterInfo, DeviceType,
-                TargetFormat, TargetFormat, D3DFMT_D15S1 ) ) )
+            if (SUCCEEDED(rkD3D.CheckDepthStencilMatch(iD3DAdapterInfo, DeviceType,
+                TargetFormat, TargetFormat, aFormats[i])))
             {
-                *pDepthStencilFormat = D3DFMT_D15S1;
-                return TRUE;
-            }
-        }
-    }
-
-    if( m_dwMinDepthBits <= 24 && m_dwMinStencilBits == 0 )
-    {
-        if( SUCCEEDED( rkD3D.CheckDeviceFormat( iD3DAdapterInfo, DeviceType,
-            TargetFormat, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, D3DFMT_D24X8 ) ) )
-        {
-            if( SUCCEEDED( rkD3D.CheckDepthStencilMatch( iD3DAdapterInfo, DeviceType,
-                TargetFormat, TargetFormat, D3DFMT_D24X8 ) ) )
-            {
-                *pDepthStencilFormat = D3DFMT_D24X8;
-                return TRUE;
-            }
-        }
-    }
-
-    if( m_dwMinDepthBits <= 24 && m_dwMinStencilBits <= 8 )
-    {
-        if( SUCCEEDED( rkD3D.CheckDeviceFormat( iD3DAdapterInfo, DeviceType,
-            TargetFormat, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, D3DFMT_D24S8 ) ) )
-        {
-            if( SUCCEEDED( rkD3D.CheckDepthStencilMatch( iD3DAdapterInfo, DeviceType,
-                TargetFormat, TargetFormat, D3DFMT_D24S8 ) ) )
-            {
-                *pDepthStencilFormat = D3DFMT_D24S8;
-                return TRUE;
-            }
-        }
-    }
-
-    if( m_dwMinDepthBits <= 24 && m_dwMinStencilBits <= 4 )
-    {
-        if( SUCCEEDED( rkD3D.CheckDeviceFormat( iD3DAdapterInfo, DeviceType,
-            TargetFormat, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, D3DFMT_D24X4S4 ) ) )
-        {
-            if( SUCCEEDED( rkD3D.CheckDepthStencilMatch( iD3DAdapterInfo, DeviceType,
-                TargetFormat, TargetFormat, D3DFMT_D24X4S4 ) ) )
-            {
-                *pDepthStencilFormat = D3DFMT_D24X4S4;
-                return TRUE;
-            }
-        }
-    }
-
-    if( m_dwMinDepthBits <= 32 && m_dwMinStencilBits == 0 )
-    {
-        if( SUCCEEDED( rkD3D.CheckDeviceFormat( iD3DAdapterInfo, DeviceType,
-            TargetFormat, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, D3DFMT_D32 ) ) )
-        {
-            if( SUCCEEDED( rkD3D.CheckDepthStencilMatch( iD3DAdapterInfo, DeviceType,
-                TargetFormat, TargetFormat, D3DFMT_D32 ) ) )
-            {
-                *pDepthStencilFormat = D3DFMT_D32;
+                *pDepthStencilFormat = aFormats[i];
                 return TRUE;
             }
         }

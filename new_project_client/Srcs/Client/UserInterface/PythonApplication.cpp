@@ -1291,6 +1291,13 @@ void CPythonApplication::Clear()
 
 void CPythonApplication::Destroy()
 {
+	// Release TSF/IME sinks before any window teardown.
+	// CMSApplication::Destroy() -> DestroyWindow() synchronously fires the still-advised
+	// TSF UI-less OnActivated sink, which re-enters Python via RunChangeCodePage() on a
+	// dangling window handler (m_pActiveWindow never cleared) -> AV writing 0x18 inside
+	// PyObject_CallObject. Unadvising the sinks here makes that re-entry impossible. (x64)
+	CPythonIME::Instance().Uninitialize();
+
 	WebBrowser_Destroy();
 
 	// SphereMap

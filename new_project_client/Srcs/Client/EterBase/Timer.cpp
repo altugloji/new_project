@@ -6,6 +6,7 @@ static DWORD gs_dwBaseTime=0;
 static DWORD gs_dwServerTime=0;
 static DWORD gs_dwClientTime=0;
 static DWORD gs_dwFrameTime=0;
+static DWORD gs_dwFrameIndex=0;
 
 #pragma comment(lib, "winmm.lib")
 
@@ -47,6 +48,12 @@ DWORD	ELTimer_GetServerFrameMSec()
 VOID	ELTimer_SetFrameMSec()
 {
 	gs_dwFrameTime = ELTimer_GetMSec();
+	++gs_dwFrameIndex;
+}
+
+DWORD	ELTimer_GetFrameIndex()
+{
+	return gs_dwFrameIndex;
 }
 
 CTimer::CTimer()

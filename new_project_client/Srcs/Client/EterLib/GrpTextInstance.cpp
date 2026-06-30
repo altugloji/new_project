@@ -686,6 +686,16 @@ void CGraphicTextInstance::Render(RECT * pClipRect)
 
 		CGraphicFontTexture::TCharacterInfomation* pCurCharInfo;
 
+		// Glyphs of one string can live on different font-texture pages; each
+		// contiguous same-page vertex run is drawn separately with its page bound.
+		struct SPageSegment
+		{
+			int iVertexStart;
+			int iVertexCount;
+			short nFontPage;
+		};
+		static std::vector<SPageSegment> s_kPageSegments;
+
 		if (m_isOutline)
 		{
 			fCurX=fStanX;
@@ -699,6 +709,9 @@ void CGraphicTextInstance::Render(RECT * pClipRect)
 			static SVertex akVertex[CGraphicBase::PDT_TEXTLINE_VERTEX_NUM];
 
 			int iActualVertexIdx=0;
+			int iSegStart=0;
+			short nSegPage=-1;
+			s_kPageSegments.clear();
 
 			for (int i=0; i<m_pCharInfoVector.size(); ++i)
 			{
@@ -713,6 +726,17 @@ void CGraphicTextInstance::Render(RECT * pClipRect)
 				fFontWidth=float(pCurCharInfo->width);
 				fFontHeight=float(pCurCharInfo->height);
 				fFontAdvance=float(pCurCharInfo->advance);
+
+				if (pCurCharInfo->index != nSegPage)
+				{
+					if (iActualVertexIdx > iSegStart)
+					{
+						const SPageSegment kSegment={iSegStart, iActualVertexIdx-iSegStart, nSegPage};
+						s_kPageSegments.push_back(kSegment);
+					}
+					nSegPage=pCurCharInfo->index;
+					iSegStart=iActualVertexIdx;
+				}
 
 				if ((fCurXoutLine+fFontWidth)-m_v3Position.x > m_fLimitWidth)
 				{
@@ -904,17 +928,27 @@ void CGraphicTextInstance::Render(RECT * pClipRect)
 			}
 
 			int iSize=iActualVertexIdx;
-			int iDrawSize=iSize >= 2 ? (iSize-2) : 0;
 
-			if (iDrawSize > 0 && iActualVertexIdx > 0)
+			if (iSize > 0)
 			{
-				if (m_pCharInfoVector.size() > 0)
+				if (iActualVertexIdx > iSegStart)
 				{
-					pFontTexture->SelectTexture(m_pCharInfoVector[0]->index);
-					STATEMANAGER.SetTexture(0, pFontTexture->GetD3DTexture());
+					const SPageSegment kSegment={iSegStart, iActualVertexIdx-iSegStart, nSegPage};
+					s_kPageSegments.push_back(kSegment);
 				}
 				if (CGraphicBase::SetPDTTextLineStream((SPDTVertexRaw*)akVertex, iSize))
-					STATEMANAGER.DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, iDrawSize);
+				{
+					CGraphicBase::SetDefaultIndexBuffer(CGraphicBase::DEFAULT_IB_TEXTLINE);
+					for (size_t s=0; s<s_kPageSegments.size(); ++s)
+					{
+						const SPageSegment& rkSegment=s_kPageSegments[s];
+						pFontTexture->SelectTexture(rkSegment.nFontPage);
+						STATEMANAGER.SetTexture(0, pFontTexture->GetD3DTexture());
+						STATEMANAGER.DrawIndexedPrimitive(D3DPT_TRIANGLELIST,
+							rkSegment.iVertexStart, rkSegment.iVertexCount,
+							rkSegment.iVertexStart/4*6, rkSegment.iVertexCount/2, 0);
+					}
+				}
 			}
 		}
 
@@ -925,6 +959,9 @@ void CGraphicTextInstance::Render(RECT * pClipRect)
 		static SVertex akVertex[CGraphicBase::PDT_TEXTLINE_VERTEX_NUM];
 
 		int iActualVertexIdx=0;
+		int iSegStart=0;
+		short nSegPage=-1;
+		s_kPageSegments.clear();
 
 		for (int i=0; i<m_pCharInfoVector.size(); ++i)
 		{
@@ -940,6 +977,17 @@ void CGraphicTextInstance::Render(RECT * pClipRect)
 			fFontHeight=float(pCurCharInfo->height);
 			fFontMaxHeight=std::max<float>(fFontHeight, pCurCharInfo->height);
 			fFontAdvance=float(pCurCharInfo->advance);
+
+			if (pCurCharInfo->index != nSegPage)
+			{
+				if (iActualVertexIdx > iSegStart)
+				{
+					const SPageSegment kSegment={iSegStart, iActualVertexIdx-iSegStart, nSegPage};
+					s_kPageSegments.push_back(kSegment);
+				}
+				nSegPage=pCurCharInfo->index;
+				iSegStart=iActualVertexIdx;
+			}
 
 			if ((fCurX+fFontWidth)-m_v3Position.x > m_fLimitWidth)
 			{
@@ -1099,17 +1147,27 @@ void CGraphicTextInstance::Render(RECT * pClipRect)
 		}
 
 		int iSize=iActualVertexIdx;
-		int iDrawSize=iSize >= 2 ? (iSize-2) : 0;
 
-		if (iDrawSize > 0 && iActualVertexIdx > 0)
+		if (iSize > 0)
 		{
-			if (m_pCharInfoVector.size() > 0)
+			if (iActualVertexIdx > iSegStart)
 			{
-				pFontTexture->SelectTexture(m_pCharInfoVector[0]->index);
-				STATEMANAGER.SetTexture(0, pFontTexture->GetD3DTexture());
+				const SPageSegment kSegment={iSegStart, iActualVertexIdx-iSegStart, nSegPage};
+				s_kPageSegments.push_back(kSegment);
 			}
 			if (CGraphicBase::SetPDTTextLineStream((SPDTVertexRaw*)akVertex, iSize))
-				STATEMANAGER.DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, iDrawSize);
+			{
+				CGraphicBase::SetDefaultIndexBuffer(CGraphicBase::DEFAULT_IB_TEXTLINE);
+				for (size_t s=0; s<s_kPageSegments.size(); ++s)
+				{
+					const SPageSegment& rkSegment=s_kPageSegments[s];
+					pFontTexture->SelectTexture(rkSegment.nFontPage);
+					STATEMANAGER.SetTexture(0, pFontTexture->GetD3DTexture());
+					STATEMANAGER.DrawIndexedPrimitive(D3DPT_TRIANGLELIST,
+						rkSegment.iVertexStart, rkSegment.iVertexCount,
+						rkSegment.iVertexStart/4*6, rkSegment.iVertexCount/2, 0);
+				}
+			}
 		}
 	}
 

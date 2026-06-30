@@ -809,6 +809,26 @@ bool CGraphicDevice::__CreateDefaultIndexBufferList()
 	if (!__CreateDefaultIndexBuffer(DEFAULT_IB_FILL_CUBE, 36, c_awFillCubeIndices))
 		return false;
 
+	// One {0,1,2, 2,1,3} list per glyph quad, replicating the winding of the
+	// two strip triangles each quad used to be drawn with. Indexed lists let
+	// the whole text-line vertex run draw in one call without the bridge
+	// triangles a single strip would generate between quads.
+	enum { TEXTLINE_QUAD_NUM = PDT_TEXTLINE_VERTEX_NUM / 4 };
+	static WORD s_awTextLineIndices[TEXTLINE_QUAD_NUM * 6];
+	for (UINT q = 0; q < TEXTLINE_QUAD_NUM; ++q)
+	{
+		WORD* pwQuad = s_awTextLineIndices + q * 6;
+		const WORD wBase = WORD(q * 4);
+		pwQuad[0] = wBase;
+		pwQuad[1] = wBase + 1;
+		pwQuad[2] = wBase + 2;
+		pwQuad[3] = wBase + 2;
+		pwQuad[4] = wBase + 1;
+		pwQuad[5] = wBase + 3;
+	}
+	if (!__CreateDefaultIndexBuffer(DEFAULT_IB_TEXTLINE, TEXTLINE_QUAD_NUM * 6, s_awTextLineIndices))
+		return false;
+
 	return true;
 }
 

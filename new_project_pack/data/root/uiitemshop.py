@@ -39,6 +39,7 @@ FAKE_CATEGORY_DATA = {
 			localeInfo.ITEMSHOP_SUBCATEGORY_EP_COUPONS,
 			localeInfo.ITEMSHOP_SUBCATEGORY_TICKETS,
 			localeInfo.ITEMSHOP_SUBCATEGORY_OTHER,
+			"Sac Stilleri",
 		],
 	},
 }

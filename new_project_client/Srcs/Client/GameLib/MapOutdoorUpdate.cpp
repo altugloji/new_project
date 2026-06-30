@@ -312,6 +312,9 @@ void CMapOutdoor::__UpdateAroundAreaList() const
 #ifdef ENABLE_AREA_OPTIMIZATION
 	bool bAreaChanged = false;
 	bool bAreaObjectSyncPending = false;
+	// One hydration/eviction budget shared by ALL areas this frame; a
+	// per-area budget multiplied to AROUND_AREA_NUM x 2ms spikes after warps.
+	const DWORD dwBudgetDeadlineMSec = ELTimer_GetMSec() + 3;
 #endif
 	for (int i = 0; i < AROUND_AREA_NUM; ++i)
 	{
@@ -320,7 +323,7 @@ void CMapOutdoor::__UpdateAroundAreaList() const
 		if (GetAreaPointer(i, &pArea))
 #ifdef ENABLE_AREA_OPTIMIZATION
 		{
-			bAreaChanged |= pArea->Update(v3Player);
+			bAreaChanged |= pArea->Update(v3Player, dwBudgetDeadlineMSec);
 			bAreaObjectSyncPending |= pArea->HasPendingObjectSync();
 		}
 #else

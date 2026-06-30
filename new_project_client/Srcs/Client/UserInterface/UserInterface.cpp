@@ -23,6 +23,11 @@
 extern "C" {
 extern int _fltused;
 volatile int _AVOID_FLOATING_POINT_LIBRARY_BUG = _fltused;
+
+// @fixme068 Force discrete GPU on hybrid systems (NVIDIA Optimus / AMD PowerXpress).
+// Driver reads these exported symbols at process start.
+__declspec(dllexport) DWORD NvOptimusEnablement                  = 0x00000001;
+__declspec(dllexport) int   AmdPowerXpressRequestHighPerformance = 1;
 };
 
 #pragma comment(linker, "/NODEFAULTLIB:libci.lib")
@@ -735,7 +740,10 @@ bool Main(HINSTANCE hInstance, LPSTR lpCmdLine)
 	g_isScreenShotKey = true;
 #endif
 
-	const DWORD dwRandSeed=time(nullptr)+DWORD(GetCurrentProcess());
+	// GetCurrentProcess() returns the HANDLE pseudo-handle (-1); DWORD-casting it
+	// truncated the pointer (C4311/C4302) and gave no entropy. GetCurrentProcessId()
+	// is the real PID and already DWORD-wide.
+	const DWORD dwRandSeed=time(nullptr)+GetCurrentProcessId();
 	srandom(dwRandSeed);
 	srand(random());
 

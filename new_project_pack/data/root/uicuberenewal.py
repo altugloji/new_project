@@ -944,6 +944,7 @@ class CubeRenewalWindows(ui.ScriptWindow):
 			pass
 
 	def QtyAddButton(self):
+		return
 		if self.selectedRecipeGlobalIndex < 0:
 			return
 		if not FReturnInfo("item_reward_stackable", self.selectedRecipeGlobalIndex):
@@ -981,6 +982,7 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		return min(counts)
 
 	def QtySubButton(self):
+		return
 		if self.selectedRecipeGlobalIndex < 0:
 			return
 		if not FReturnInfo("item_reward_stackable", self.selectedRecipeGlobalIndex):

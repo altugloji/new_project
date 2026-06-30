@@ -184,8 +184,8 @@ PyObject * questGetQuestData(PyObject * poSelf, PyObject * poArgs)
 		}
 	}
 
-	return Py_BuildValue("sisi",	pQuestInstance->strTitle.c_str(),
-									pImage,
+	return Py_BuildValue("sKsi",	pQuestInstance->strTitle.c_str(),
+									(unsigned long long)(ULONG_PTR)pImage,	// (x64) image handle is a pointer; "i" truncated it
 									pQuestInstance->strCounterName.c_str(),
 									pQuestInstance->iCounterValue);
 }
