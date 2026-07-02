@@ -634,6 +634,11 @@ void CPythonNetworkStream::GamePhase()
 				ret = RecvCubeRenewalPacket();
 				break;
 #endif
+#ifdef ENABLE_BOT_CONTROL
+			case HEADER_GC_BOT_CONTROL:
+				ret = RecvBotControlPacket();
+				break;
+#endif
 #ifdef ENABLE_CHARACTER_CHEST
 			case HEADER_GC_CHARACTER_CHEST:
 				ret = RecvCharacterChestPacket();
@@ -5755,6 +5760,15 @@ bool CPythonNetworkStream::SendItemNewAttributePacket(TItemPos source_pos, TItem
 		return false;
 	}
 
+	return true;
+}
+#endif
+
+#ifdef ENABLE_BOT_CONTROL
+bool CPythonNetworkStream::RecvBotControlPacket() {
+	TPacketGCBotControl kPacket;
+	if (!Recv(sizeof(TPacketGCBotControl), &kPacket)) { return false; }
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "ShowBotControlWnd", Py_BuildValue("(s)", kPacket.botData));
 	return true;
 }
 #endif

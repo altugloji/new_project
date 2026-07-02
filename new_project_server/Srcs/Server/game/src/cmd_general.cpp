@@ -367,6 +367,13 @@ ACMD(do_cmd)
 		return;
 	}
 
+#ifdef ENABLE_BOT_CONTROL
+	if (ch->IsAtBotControl()) {
+		ch->ChatPacket(CHAT_TYPE_INFO, "Bot kontrol aktif?");
+		return;
+	}
+#endif
+
 	switch (subcmd)
 	{
 		case SCMD_LOGOUT:

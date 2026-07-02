@@ -6126,6 +6126,10 @@ bool CHARACTER::MoveItem(TItemPos Cell, TItemPos DestCell, BYTE count)
 		return false;
 	}
 
+#ifdef ENABLE_BOT_CONTROL
+	SetLastItemMoveTime((DWORD)get_global_time());
+#endif
+
 	if (Cell.IsEquipPosition())
 	{
 		if (!CanUnequipNow(item))

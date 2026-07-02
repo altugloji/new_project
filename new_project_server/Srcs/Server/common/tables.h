@@ -551,6 +551,9 @@ typedef struct SPlayerTable
 	DWORD	logoff_interval;
 
 	int		aiPremiumTimes[PREMIUM_MAX_NUM];
+#ifdef ENABLE_BOT_CONTROL
+	DWORD	botControlTime;
+#endif
 #ifdef __GEM_SYSTEM__
 	int			gem;
 #endif

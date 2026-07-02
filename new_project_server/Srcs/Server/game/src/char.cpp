@@ -297,6 +297,19 @@ void CHARACTER::Initialize()
 	m_dwLastFishCatchTime = 0;
 #endif
 
+#ifdef ENABLE_BOT_CONTROL
+	botControlTimer = NULL;
+	m_dwLastItemMoveTime = 0;
+	m_dwLastChatTime = 0;
+	m_dwSlotKillCount = 0;
+	m_dwFishingCount = 0;
+	m_dwMiningCount = 0;
+	m_isAtControl = false;
+	m_botVerifyCode = 0;
+	m_dwLastBotControlTime = 0;
+	m_dwBotControlShowTime = 0;
+#endif
+
 	m_pkMall = nullptr;
 	m_iMallLoadTime = 0;
 
@@ -650,6 +663,10 @@ void CHARACTER::Destroy()
 	// MINING
 	event_cancel(&m_pkMiningEvent);
 	// END_OF_MINING
+
+#ifdef ENABLE_BOT_CONTROL
+	event_cancel(&botControlTimer);
+#endif
 
 #ifdef OFFLINE_SHOP
 	bprivShopOwner = dw_ShopTime = dwShopLastCreateTime = 0;
@@ -1897,6 +1914,9 @@ void CHARACTER::CreatePlayerProto(TPlayerTable & tab)
 #ifdef __GEM_SYSTEM__
 	tab.gem = GetGem();
 #endif
+#ifdef ENABLE_BOT_CONTROL
+	tab.botControlTime = GetLastBotControlTime();
+#endif
 	const DWORD dwPlayedTime = (get_dword_time() - m_dwPlayStartTime);
 
 	if (dwPlayedTime > 60000)
@@ -2540,6 +2560,9 @@ void CHARACTER::SetPlayerProto(const TPlayerTable * t)
 #endif
 #ifdef __GEM_SYSTEM__
 	SetGem(t->gem);
+#endif
+#ifdef ENABLE_BOT_CONTROL
+	SetLastBotControlTime(t->botControlTime);
 #endif
 
 	SetMapIndex(t->lMapIndex);
@@ -4840,6 +4863,10 @@ void CHARACTER::mining(LPCHARACTER chLoad)
 
 	PacketAround(p);
 
+#ifdef ENABLE_BOT_CONTROL
+	SetMiningAttemptCount(GetMiningAttemptCount() + 1);
+#endif
+
 	m_pkMiningEvent = mining::CreateMiningEvent(this, chLoad, count);
 }
 // END_OF_MINING
@@ -4928,6 +4955,10 @@ void CHARACTER::fishing()
 
 	float fx, fy;
 	GetDeltaByDegree(GetRotation(), 400.0f, &fx, &fy);
+
+#ifdef ENABLE_BOT_CONTROL
+	SetFishingAttemptCount(GetFishingAttemptCount() + 1);
+#endif
 
 	m_pkFishingEvent = fishing::CreateFishingEvent(this);
 }
@@ -8996,6 +9027,13 @@ bool CHARACTER::CanChangeChannel(BYTE newChannel)
 		return false;
 	}
 
+#ifdef ENABLE_BOT_CONTROL
+	if (IsAtBotControl()) {
+		ChatPacket(CHAT_TYPE_INFO, "Bot kontrol aktif?");
+		return false;
+	}
+#endif
+
 	return true;
 }
 
@@ -9432,6 +9470,123 @@ void CHARACTER::CheckSkills()
 {
 	if (GetLevel() >= 5 && GetSkillGroup() == 0) {
 		ChatPacket(CHAT_TYPE_COMMAND, "skill_select #%d", GetJob());
+	}
+}
+#endif
+
+#ifdef ENABLE_BOT_CONTROL
+EVENTINFO(BotControlTimer)
+{
+	DynamicCharacterPtr botCh;
+	int	scanTime;
+	int	processType;
+	DWORD lastControlSec;
+
+	BotControlTimer() :botCh(), scanTime(0), processType(0), lastControlSec(0) {};
+};
+
+EVENTFUNC(botControlEvent) {
+	BotControlTimer* info = dynamic_cast<BotControlTimer*>(event->info);
+	if (info == NULL) { return 0; }
+	LPCHARACTER	ch = info->botCh;
+	if (ch == NULL || !ch->GetDesc()) { return 0; }
+	int passSn = number(2, 6) * (info->scanTime / 2);
+
+	/**/
+	if (info->processType == 1) {
+		if (ch->IsAtBotControl()) {
+			ch->ChatPacket(CHAT_TYPE_COMMAND, "quit Shutdown(SendDisconnectFunc)");
+			ch->Disconnect("BOT");
+			return 0;
+		}
+		else {
+			info->processType = 0;
+			ch->ResetBotControlValues();
+			DWORD dwPassSec = number(30, 55) * info->scanTime;
+			ch->SetLastBotControlTime(get_global_time() + dwPassSec);
+			if (ch->IsGM()) { ch->ChatPacket(CHAT_TYPE_INFO, "<DEV|BOTKONTROL> Bot kontrol passSn:%u", dwPassSec); }
+			return PASSES_PER_SEC(dwPassSec);
+		}
+	}
+	else {
+		bool botCh = false;
+		if (ch->IsWarping()) { // isinlanma sirasinda kontrol paketi client'a loading fazinda gider, panel acilmaz -> yanlis DC olmasin
+			return PASSES_PER_SEC(10);
+		}
+		if (ch->IsDead()) {
+			if (ch->IsGM())
+				ch->ChatPacket(1, "<DEV|BOTKONTROL> Dead veya Afk pass. %u sn sonra tekrar.", info->scanTime * 15);
+			return PASSES_PER_SEC(info->scanTime * 15);
+		}
+		if (static_cast<int>(ch->GetSlotKillCount()) >= info->scanTime / 4) {
+			if (ch->GetLastItemMoveTime() < info->lastControlSec && ch->GetLastChatTime() < info->lastControlSec) { botCh = true; }
+		}
+		if (static_cast<int>(ch->GetFishingAttemptCount()) >= info->scanTime / 30) {
+			if (ch->GetLastItemMoveTime() < info->lastControlSec && ch->GetLastChatTime() < info->lastControlSec) { botCh = true; }
+		}
+		if (static_cast<int>(ch->GetMiningAttemptCount()) >= info->scanTime / 30) {
+			if (ch->GetLastItemMoveTime() < info->lastControlSec && ch->GetLastChatTime() < info->lastControlSec) { botCh = true; }
+		}
+		if (ch->IsGM()) {
+			ch->ChatPacket(1, "<DEV|BOTKONTROL> Periyodik tarama. slotKill:%u , oltaAtis:%u , kazmaVurus:%u sonItemTasi:%u , sonYazi:%u", ch->GetSlotKillCount(), ch->GetFishingAttemptCount(), ch->GetMiningAttemptCount(), ch->GetLastItemMoveTime(), ch->GetLastChatTime());
+			ch->ChatPacket(1, "<DEV|BOTKONTROL> Bir sonraki tarama %d saniye sonra calisacak.", passSn);
+		}
+		if (botCh) {
+			DWORD bKontrolKod = number(100000, 999999), bKontrolSn = number(20, 30);
+			ch->SetIsAtBotControl(true);
+			ch->ForgetMyAttacker();
+			ch->SetBotVerifyCode(bKontrolKod);
+			ch->BotControlPacket(bKontrolKod, bKontrolSn);
+			info->processType = 1;
+
+			if (ch->IsGM()) { ch->ChatPacket(1, "<DEV|BOTKONTROL> Bot denetim istegi yollandi."); }
+
+			return PASSES_PER_SEC(bKontrolSn);
+		}
+		info->lastControlSec = get_global_time();
+		ch->ResetBotControlValues();
+	}
+	ch->SetLastBotControlTime(get_global_time() + passSn);
+	return PASSES_PER_SEC(passSn);
+}
+void CHARACTER::StartBotControlTimer(int scanTime, bool isAtLogin) {
+	if (botControlTimer != NULL) { event_cancel(&botControlTimer); }
+	BotControlTimer* cTimer = AllocEventInfo<BotControlTimer>();
+	cTimer->botCh = this;
+	cTimer->scanTime = scanTime;
+	cTimer->processType = 0;
+	cTimer->lastControlSec = static_cast<DWORD>(get_global_time());
+	DWORD passSn = GetLastBotControlTime() <= (DWORD)get_global_time() ? number(1, 3) * 75 : GetLastBotControlTime() - get_global_time();
+	botControlTimer = event_create(botControlEvent, cTimer, PASSES_PER_SEC(passSn));
+	if (IsGM()) { ChatPacket(1, "<DEV|BOTKONTROL> Timer baslatildi. passSn:%d snFark(%u)", passSn, GetLastBotControlTime() - get_global_time()); }
+}
+void CHARACTER::BotControlPacket(DWORD verifyCode, int remainSec) {
+	if (!GetDesc()) { return; }
+	SetLastBotControlShowTime(get_dword_time());
+	TPacketGCBotControl bPacket;
+	bPacket.bHeader = HEADER_GC_BOT_CONTROL;
+	char szBotData[50];
+	snprintf(szBotData, sizeof(szBotData), "%d|%d", verifyCode, remainSec);
+	strlcpy(bPacket.botData, szBotData, sizeof(bPacket.botData));
+	GetDesc()->Packet(&bPacket, sizeof(bPacket));
+}
+void CHARACTER::DoBotControl(const char* verifyStr) {
+	if (!GetDesc()) { return; }
+	if (!IsAtBotControl()) { return; }
+
+	char corePass[50];
+	snprintf(corePass, sizeof(corePass), "%d", GetBotVerifyCode());
+
+	if (IsGM()) { ChatPacket(1, "corePass:%s gelenPass:%s", corePass, verifyStr); }
+
+	if (!strcmp(corePass, verifyStr)) {
+		ChatPacket(CHAT_TYPE_INFO, "Dogrulama basarili.");
+		SetIsAtBotControl(false);
+		LogManager::Instance().BotControlLog(GetPlayerID(), GetName(), GetDesc()->GetAccountTable().id, get_dword_time() - GetLastBotControlShowTime());
+	}
+	else {
+		ChatPacket(CHAT_TYPE_COMMAND, "quit Shutdown(SendDisconnectFunc)");
+		Disconnect("BOT");
 	}
 }
 #endif

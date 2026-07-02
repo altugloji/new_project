@@ -497,6 +497,9 @@ void CClientManager::QUERY_CHARACTER_CHEST(CPeer* peer, DWORD dwHandle, TPacketG
 				#ifdef __GEM_SYSTEM__
 				", gem "
 				#endif
+				#ifdef ENABLE_BOT_CONTROL
+				",bot_control_time "
+				#endif
 				" FROM player%s WHERE id=%u LIMIT 1",
 				GetTablePostfix(), p->dwTargetPID);
 

@@ -210,6 +210,10 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		bool SendExchangeAcceptPacket();
 		bool SendExchangeExitPacket();
 
+#ifdef ENABLE_BOT_CONTROL
+		bool SendBotControlPacket(const char* codeStr);
+#endif
+
 		// Quest
 		bool SendScriptAnswerPacket(int iAnswer);
 		bool SendScriptButtonPacket(unsigned int iIndex);
@@ -514,6 +518,9 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		bool RecvShopSignPacket();
 		bool RecvShopSearchResultPacket();	// Pazar Arama
 		bool RecvExchangePacket();
+#ifdef ENABLE_BOT_CONTROL
+		bool RecvBotControlPacket();
+#endif
 
 		// Quest
 		bool RecvScriptPacket();

@@ -155,6 +155,9 @@ enum
 #ifdef ENABLE_CUBE_RENEWAL
 	HEADER_CG_CUBE_RENEWAL					= 224,
 #endif
+#ifdef ENABLE_BOT_CONTROL
+	HEADER_CG_BOT_CONTROL					= 225,
+#endif
 #ifdef ENABLE_CHARACTER_CHEST
 	HEADER_CG_CHARACTER_CHEST				= 231,
 #endif
@@ -348,6 +351,9 @@ enum
 	HEADER_GC_RESPOND_CHANNELSTATUS				= 210,
 #ifdef ENABLE_CUBE_RENEWAL
 	HEADER_GC_CUBE_RENEWAL					= 227,
+#endif
+#ifdef ENABLE_BOT_CONTROL
+	HEADER_GC_BOT_CONTROL					= 229,
 #endif
 #ifdef ENABLE_EXCHANGE_LOG
 	HEADER_GC_EXCHANGE_LOG						= 235,
@@ -3314,6 +3320,17 @@ typedef struct command_item_new_attribute
 	TItemPos	target_pos;
 	BYTE		bValues[5];
 } TPacketCGItemNewAttribute;
+#endif
+
+#ifdef ENABLE_BOT_CONTROL
+typedef struct SPacketBotControl {
+	BYTE	bHeader;
+	char	botData[50];
+}TPacketGCBotControl;
+typedef struct Packet_CGBC {
+	BYTE	header;
+	char	verifyCode[56];
+} TPacketCGBotControl;
 #endif
 
 #pragma pack(pop)

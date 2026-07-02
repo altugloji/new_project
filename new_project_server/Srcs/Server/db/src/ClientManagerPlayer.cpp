@@ -130,6 +130,9 @@ size_t CreatePlayerSaveQuery(char * pszQuery, size_t querySize, TPlayerTable * p
 			#ifdef ENABLE_CHEQUE_SYSTEM
 			"cheque = %d, "
 			#endif
+#ifdef ENABLE_BOT_CONTROL
+			"bot_control_time = %u, "
+#endif
 #ifdef __GEM_SYSTEM__
 			"gem = %d, "
 #endif
@@ -180,6 +183,9 @@ size_t CreatePlayerSaveQuery(char * pszQuery, size_t querySize, TPlayerTable * p
 		#ifdef ENABLE_CHEQUE_SYSTEM
 		, pkTab->cheque
 		#endif
+#ifdef ENABLE_BOT_CONTROL
+		, pkTab->botControlTime
+#endif
 #ifdef __GEM_SYSTEM__
 		, pkTab->gem
 #endif
@@ -399,6 +405,9 @@ void CClientManager::QUERY_PLAYER_LOAD(CPeer * peer, DWORD dwHandle, TPlayerLoad
 #ifdef __GEM_SYSTEM__
 				", gem "
 #endif
+#ifdef ENABLE_BOT_CONTROL
+				",bot_control_time "
+#endif
 				" FROM player%s WHERE id=%d",
 				GetTablePostfix(), packet->player_id);
 
@@ -560,6 +569,9 @@ bool CreatePlayerTableFromRes(MYSQL_RES * res, TPlayerTable * pkTab)
 #endif
 #ifdef __GEM_SYSTEM__
 	str_to_number(pkTab->gem, row[col++]);
+#endif
+#ifdef ENABLE_BOT_CONTROL
+	str_to_number(pkTab->botControlTime, row[col++]);
 #endif
 	// reset sub_skill_point
 	{

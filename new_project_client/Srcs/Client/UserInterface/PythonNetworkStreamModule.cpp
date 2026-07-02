@@ -1103,6 +1103,19 @@ PyObject* netSendExchangeExitPacket(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_BOT_CONTROL
+PyObject* netSendBotControlPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	char* codeStr;
+	if (!PyTuple_GetString(poArgs, 0, &codeStr)) { return Py_BuildException(); }
+	if (strlen(codeStr) < 1) { return Py_BuildNone(); }
+
+	CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+	rkNetStream.SendBotControlPacket(codeStr);
+	return Py_BuildNone();
+}
+#endif
+
 PyObject* netExitApplication(PyObject* poSelf, PyObject* poArgs)
 {
 	CPythonNetworkStream& rkNetStream=CPythonNetworkStream::Instance();
@@ -1985,6 +1998,10 @@ void initnet()
 		{ "SendExchangeElkAddPacket",			netSendExchangeElkAddPacket,			METH_VARARGS },
 		{ "SendExchangeAcceptPacket",			netSendExchangeAcceptPacket,			METH_VARARGS },
 		{ "SendExchangeExitPacket",				netSendExchangeExitPacket,				METH_VARARGS },
+
+#ifdef ENABLE_BOT_CONTROL
+		{ "SendBotControlPacket",				netSendBotControlPacket,				METH_VARARGS },
+#endif
 
 		{ "SendOnClickPacket",					netOnClickPacket,						METH_VARARGS },
 

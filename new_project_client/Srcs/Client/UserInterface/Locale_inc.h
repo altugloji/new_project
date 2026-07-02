@@ -169,6 +169,7 @@
 #define ENABLE_WHISPER_COPY													// PM penceresinde bir mesaja tıklayınca o mesajı panoya kopyala
 #define ENABLE_INVENTORY_SLOT_MARKING										// Envanter slot işaretleme: ticaret/pazar/kasa/işleme pencerelerinde kullanılamayan slota gri, kilitli slota kırmızı overlay
 #define ENABLE_FOV_OPTION													// Sistem secenekleri: Gorus alani (FOV) kaydiricisi
+#define ENABLE_BOT_CONTROL													// Bot Kontrol Sistemi (dogrulama paneli)
 
 // #define METIN35_ADMIN_PANEL												// Yönetim Paneli
 #ifdef METIN35_ADMIN_PANEL

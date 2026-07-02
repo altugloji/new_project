@@ -99,6 +99,8 @@ if app.__GEM_SHOP__:
 	
 if app.WJ_NEW_DROP_DIALOG:
 	import uiDeleteItem
+if app.ENABLE_BOT_CONTROL:
+	import uibotcontrol
 if app.ENABLE_BULK_POTION_PANEL:
 	import uiBulkPotion
 if app.ENABLE_GM_PLAYER_PANEL:
@@ -333,6 +335,9 @@ class Interface(object):
 		if app.KYGN_CHEST_INFO:
 			self.wndKygnChestInfo = uikygnchestinfo.KygnChestInfo()
 			self.wndInventory.SetChestRewardWindow(self.wndKygnChestInfo)
+
+		if app.ENABLE_BOT_CONTROL:
+			self.wndBotControl = uibotcontrol.BotControlBoard()
 
 	def __MakeDialogs(self):
 		self.dlgExchange = uiExchange.ExchangeDialog()
@@ -787,6 +792,10 @@ class Interface(object):
 			self.wndItemSelect.Destroy()
 		# END_OF_ACCESSORY_REFINE_ADD_METIN_STONE
 
+		if app.ENABLE_BOT_CONTROL:
+			if self.wndBotControl:
+				self.wndBotControl.Destroy()
+
 		self.wndChatLog.Destroy()
 		for btn in self.questButtonList:
 			btn.SetEvent(0)
@@ -851,6 +860,9 @@ class Interface(object):
 		del self.bigBoard
 		del self.centerNotifyBoard
 		del self.wndItemSelect
+
+		if app.ENABLE_BOT_CONTROL:
+			del self.wndBotControl
 
 		if app.ENABLE_ACCE_COSTUME_SYSTEM:
 			del self.wndAcceCombine
@@ -1354,6 +1366,10 @@ class Interface(object):
 
 		if app.ENABLE_WON_EXCHANGE_WINDOW:
 			self.wndWonExchange.Hide()
+
+		if app.ENABLE_BOT_CONTROL:
+			if self.wndBotControl:
+				self.wndBotControl.Hide()
 
 	def ShowMouseImage(self):
 		self.wndTaskBar.ShowMouseImage()
@@ -2557,6 +2573,10 @@ class Interface(object):
 				self.ItemShop.LoadWindow()
 				net.SendChatPacket("/nesneyenile")
 				self.ItemShop.Open()
+
+	if app.ENABLE_BOT_CONTROL:
+		def ShowBotControlWnd(self, verifyCode, remainSec):
+			self.wndBotControl.ShowBotControl(verifyCode, remainSec)
 
 	if app.__BL_MULTI_LANGUAGE__:
 		def LanguageChange(self):

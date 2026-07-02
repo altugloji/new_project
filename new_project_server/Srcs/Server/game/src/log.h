@@ -94,6 +94,10 @@ class LogManager : public singleton<LogManager>
 		void		FishingTimeLog(uint32_t playerID, const char* szName, uint32_t accID, uint32_t totalMs, const char * szState);
 #endif
 
+#ifdef ENABLE_BOT_CONTROL
+		void		BotControlLog(uint32_t playerID, const char* szName, uint32_t accID, uint32_t verifyMs);
+#endif
+
 		size_t EscapeString(char* dst, size_t dstSize, const char *src, size_t srcSize);
 
 		template<typename... Args>

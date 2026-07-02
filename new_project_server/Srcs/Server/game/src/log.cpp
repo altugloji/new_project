@@ -56,6 +56,13 @@ void LogManager::FishingTimeLog(uint32_t playerID, const char* szName, uint32_t 
 }
 #endif
 
+#ifdef ENABLE_BOT_CONTROL
+void LogManager::BotControlLog(uint32_t playerID, const char* szName, uint32_t accID, uint32_t verifyMs)
+{
+	Query("INSERT INTO bot_control_log (player_id, player_name, account_id, verify_time, verify_time_ms) VALUES (%d, '%s', %d, NOW(), %d)", playerID, szName, accID, verifyMs);
+}
+#endif
+
 size_t LogManager::EscapeString(char* dst, size_t dstSize, const char *src, size_t srcSize)
 {
 	return m_sql.EscapeString(dst, dstSize, src, srcSize);

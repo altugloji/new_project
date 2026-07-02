@@ -844,6 +844,15 @@ void CHARACTER::Reward(bool bItemDrop
 				pq.pop();
 			}
 
+#ifdef ENABLE_STONE_DROP_TOP_DAMAGER
+			// Taslarda en cok hasari vuran oyuncu tum droplari alir (winner-takes-all)
+			if (IsStone() && pkAttacker->IsPC())
+			{
+				v.clear();
+				v.emplace_back(pkAttacker);
+			}
+#endif
+
 			if (v.empty())
 			{
 				while (iItemIdx >= 0)
@@ -1365,6 +1374,9 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 	}
 	else
 	{
+#ifdef ENABLE_BOT_CONTROL
+		if (pkKiller && pkKiller->IsPC()) { pkKiller->SetSlotKillCount(pkKiller->GetSlotKillCount() + 1); }
+#endif
 		if (!IS_SET(m_pointsInstant.instant_flag, INSTANT_FLAG_NO_REWARD))
 		{
 			if (!(pkKiller && pkKiller->IsPC() && pkKiller->GetGuild() && pkKiller->GetGuild()->UnderAnyWar(GUILD_WAR_TYPE_FIELD)))
@@ -1589,6 +1601,10 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 			return false;
 		}
 	}
+#endif
+
+#ifdef ENABLE_BOT_CONTROL
+	if (pAttacker && pAttacker->IsAtBotControl()) { return false; }
 #endif
 
 	if (DAMAGE_TYPE_MAGIC == type)

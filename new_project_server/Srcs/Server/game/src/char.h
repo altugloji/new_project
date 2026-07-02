@@ -687,6 +687,16 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 
 		void			Disconnect(const char * c_pszReason);
 
+#ifdef ENABLE_BOT_CONTROL
+		void			StartBotControlTimer(int scanTime = 60, bool isAtLogin = false);
+		void			BotControlPacket(DWORD verifyCode, int remainSec);
+		void			DoBotControl(const char* verifyStr);
+		void			SetLastBotControlTime(DWORD dwTime) { m_dwLastBotControlTime = dwTime; }
+		DWORD			GetLastBotControlTime() { return m_dwLastBotControlTime; }
+		void			SetLastBotControlShowTime(DWORD dwTime) { m_dwBotControlShowTime = dwTime; }
+		DWORD			GetLastBotControlShowTime() { return m_dwBotControlShowTime; }
+#endif
+
 	protected:
 		void			Initialize();
 
@@ -1468,6 +1478,10 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		DWORD				m_dwLastVictimSetTime;
 		int					m_iMaxAggro;
 		// End of Battle
+#ifdef ENABLE_BOT_CONTROL
+		DWORD				m_dwLastBotControlTime;
+		DWORD				m_dwBotControlShowTime;
+#endif
 
 		// Stone
 	public:
@@ -2342,6 +2356,39 @@ protected:
 #ifdef ENABLE_KADIM_EFSUN_SYSTEM
 	public:
 		bool			UseItemNewAttribute(TItemPos source_pos, TItemPos target_pos, BYTE* bValues);
+#endif
+
+#ifdef ENABLE_BOT_CONTROL
+	protected:
+		LPEVENT botControlTimer;
+		DWORD m_dwLastItemMoveTime;
+		DWORD m_dwLastChatTime;
+		DWORD m_dwSlotKillCount;
+		DWORD m_dwFishingCount;
+		DWORD m_dwMiningCount;
+		bool m_isAtControl;
+		DWORD m_botVerifyCode;
+
+	public:
+		DWORD	GetLastItemMoveTime() const { return m_dwLastItemMoveTime; }
+		DWORD	GetLastChatTime() const { return m_dwLastChatTime; }
+		DWORD	GetSlotKillCount() const { return m_dwSlotKillCount; }
+		DWORD	GetFishingAttemptCount() const { return m_dwFishingCount; }
+		DWORD	GetMiningAttemptCount() const { return m_dwMiningCount; }
+		DWORD	GetBotVerifyCode() const { return m_botVerifyCode; }
+		bool	IsAtBotControl() const { return m_isAtControl; }
+		void	SetLastItemMoveTime(DWORD dwVal) { m_dwLastItemMoveTime = dwVal; }
+		void	SetLastChatTime(DWORD dwVal) { m_dwLastChatTime = dwVal; }
+		void	SetSlotKillCount(DWORD dwVal) { m_dwSlotKillCount = dwVal; }
+		void	SetFishingAttemptCount(DWORD dwVal) { m_dwFishingCount = dwVal; }
+		void	SetMiningAttemptCount(DWORD dwVal) { m_dwMiningCount = dwVal; }
+		void	SetIsAtBotControl(bool bVal) { m_isAtControl = bVal; }
+		void	SetBotVerifyCode(DWORD dwVal) { m_botVerifyCode = dwVal; }
+		void	ResetBotControlValues() {
+			m_dwSlotKillCount = 0;
+			m_dwFishingCount = 0;
+			m_dwMiningCount = 0;
+		};
 #endif
 };
 

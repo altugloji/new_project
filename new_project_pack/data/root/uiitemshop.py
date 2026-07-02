@@ -893,8 +893,8 @@ class ItemShopWindow(ui.ScriptWindow):
 			if item.IsAntiFlag(item.ITEM_ANTIFLAG_FEMALE) and sex == FEMALE:
 				isItemPreview = False
 
-			if isItemPreview:
-				itemPreviewButton.Show()
+			# if isItemPreview:
+				# itemPreviewButton.Show()
 
 			itemName.SetText(item.GetItemName())
 			itemOldPrice.SetText("%d adet." % int(itemCount))

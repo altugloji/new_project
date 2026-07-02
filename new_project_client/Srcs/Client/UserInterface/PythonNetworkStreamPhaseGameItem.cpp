@@ -1162,4 +1162,21 @@ bool CPythonNetworkStream::RecvDragonSoulRefine()
 
 	return true;
 }
+
+#ifdef ENABLE_BOT_CONTROL
+bool CPythonNetworkStream::SendBotControlPacket(const char* gelenKod)
+{
+	if (!__CanActMainInstance()) { return true; }
+
+	TPacketCGBotControl p_BK;
+	p_BK.header = HEADER_CG_BOT_CONTROL;
+	snprintf(p_BK.verifyCode, sizeof(p_BK.verifyCode), "%s", gelenKod);
+
+	if (!Send(sizeof(p_BK), &p_BK)) {
+		Tracef("SendBotControlPacket Error\n");
+		return false;
+	}
+	return SendSequence();
+}
+#endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

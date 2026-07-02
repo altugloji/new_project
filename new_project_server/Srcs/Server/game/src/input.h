@@ -202,6 +202,10 @@ class CInputMain : public CInputProcessor
 		void 		CubeRenewalSend(LPCHARACTER ch, const char* data);
 #endif
 
+#ifdef ENABLE_BOT_CONTROL
+		void		DoBotControl(LPCHARACTER ch, const char* c_pData);
+#endif
+
 #ifdef ENABLE_CHARACTER_CHEST
 		void		CharacterChest(LPCHARACTER ch, const char* data);
 #endif

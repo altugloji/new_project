@@ -418,6 +418,9 @@ bool NewPlayerTable(TPlayerTable * table,
 	table->gold 	= 0;
 
 	table->skill_group = 0;
+#ifdef ENABLE_BOT_CONTROL
+	table->botControlTime = 0;
+#endif
 
 	if (china_event_server)
 	{
@@ -539,6 +542,9 @@ bool NewPlayerTable2(TPlayerTable * table, const char * name, BYTE race, BYTE sh
 	table->dir		= 0;
 	table->playtime = 0;
 	table->gold 	= 0;
+#ifdef ENABLE_BOT_CONTROL
+	table->botControlTime = 0;
+#endif
 
 	table->skill_group = 0;
 
@@ -906,6 +912,9 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 
 #ifdef SKILL_SELECT
 	ch->CheckSkills();
+#endif
+#ifdef ENABLE_BOT_CONTROL
+	ch->StartBotControlTimer();
 #endif
 
 #ifdef BERAN_SETAOU

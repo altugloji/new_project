@@ -158,6 +158,8 @@ enum eCommonDefines {
 #define FISHING_TIME_LOG											// Balik sure
 #define ENABLE_MOUNT_PVP_DAMAGE_REDUCTION							// At üzerinde pvp'de %30 hasar azaltma
 #define ENABLE_MARRIAGE_RING_COOLTIME								// Yuzuk tekrar kullanim suresi
+#define ENABLE_BOT_CONTROL											// Bot Kontrol Sistemi (periyodik bot taramasi + dogrulama kodu)
+#define ENABLE_STONE_DROP_TOP_DAMAGER								// Taslarda en cok hasar vuran oyuncu tum droplari alir
 
 
 

@@ -2162,6 +2162,11 @@ class GameWindow(ui.ScriptWindow):
 		def BINARY_CUBE_RENEWAL_OPEN(self):
 			if self.interface:
 				self.interface.BINARY_CUBE_RENEWAL_OPEN()
+
+	if app.ENABLE_BOT_CONTROL:
+		def ShowBotControlWnd(self, botData):
+			if self.interface:
+				self.interface.ShowBotControlWnd(int(botData.split('|')[0]), int(botData.split('|')[1]))
 		
 	## BINARY CALLBACK
 	######################################################################################

@@ -2090,6 +2090,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_FOV_OPTION",	0);
 #endif
 
+#ifdef ENABLE_BOT_CONTROL
+	PyModule_AddIntConstant(poModule, "ENABLE_BOT_CONTROL", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_BOT_CONTROL", 0);
+#endif
+
 #ifdef AUTO_CHAT_ENABLE
 	PyModule_AddIntConstant(poModule, "AUTO_CHAT_ENABLE", 1);
 #else
