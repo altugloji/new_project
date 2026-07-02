@@ -412,6 +412,10 @@ EVENTFUNC(fishing_event)
 			info->fish_id = DetermineFish(ch);
 			FishingReact(ch);
 
+#ifdef FISHING_TIME_LOG
+			ch->SetLastFishCatchTime(get_dword_time());
+#endif
+
 			if (PredictFish(ch))
 			{
 				TPacketGCFishing p;
@@ -430,6 +434,9 @@ EVENTFUNC(fishing_event)
 
 			ch->m_pkFishingEvent = nullptr;
 			FishingFail(ch);
+#ifdef FISHING_TIME_LOG
+			LogManager::Instance().FishingTimeLog(ch->GetPlayerID(), ch->GetName(), ch->GetDesc()->GetAccountTable().id, get_dword_time() - ch->GetLastFishCatchTime(), "FAIL");
+#endif
 			rod->SetSocket(2, 0);
 			return 0;
 	}
@@ -540,6 +547,9 @@ void Take(fishing_event_info* info, LPCHARACTER ch)
 							ms);
 				}
 				FishingFail(ch);
+#ifdef FISHING_TIME_LOG
+				LogManager::Instance().FishingTimeLog(ch->GetPlayerID(), ch->GetName(), ch->GetDesc()->GetAccountTable().id, get_dword_time() - ch->GetLastFishCatchTime(), "FAIL");
+#endif
 				break;
 
 			case 0:
@@ -565,6 +575,10 @@ void Take(fishing_event_info* info, LPCHARACTER ch)
 
 					const int map_idx = ch->GetMapIndex();
 					const int prob_idx = GetProbIndexByMapIndex(map_idx);
+
+#ifdef FISHING_TIME_LOG
+					LogManager::Instance().FishingTimeLog(ch->GetPlayerID(), ch->GetName(), ch->GetDesc()->GetAccountTable().id, get_dword_time() - ch->GetLastFishCatchTime(), "SUCCESS");
+#endif
 
 					LogManager::instance().FishLog(
 							ch->GetPlayerID(),
@@ -613,6 +627,9 @@ void Take(fishing_event_info* info, LPCHARACTER ch)
 							GetFishingLevel(ch),
 							ms);
 					FishingFail(ch);
+#ifdef FISHING_TIME_LOG
+					LogManager::Instance().FishingTimeLog(ch->GetPlayerID(), ch->GetName(), ch->GetDesc()->GetAccountTable().id, get_dword_time() - ch->GetLastFishCatchTime(), "FAIL");
+#endif
 				}
 				break;
 		}
@@ -630,6 +647,9 @@ void Take(fishing_event_info* info, LPCHARACTER ch)
 				7000);
 
 		FishingFail(ch);
+#ifdef FISHING_TIME_LOG
+		LogManager::Instance().FishingTimeLog(ch->GetPlayerID(), ch->GetName(), ch->GetDesc()->GetAccountTable().id, get_dword_time() - ch->GetLastFishCatchTime(), "FAIL");
+#endif
 	}
 	else
 	{

@@ -2637,7 +2637,7 @@ SECRET_DUNGEON_ENTER_QUESTION_YES	Evet
 SELECT_ATTR_NOTICE	Efsun Nesnesi+ kullanýrken özel dükkan açamazsýn.
 SELECT_ATTR_NOT_OPEN	Özel dükkan açýkken Efsun Nesnesi+ kullanamazsýn.
 SELECT_ATTR_NOT_SELECT	Bonuslar kalsýn mý yoksa takas mý edersin?
-SELECT_CAN_NOT_DELETE	Karakteri silemezsin.
+SELECT_CAN_NOT_DELETE	Karakteri silemezsin. (Min 15 level)
 SELECT_CAN_NOT_DELETE_ATTR67	Bir bonus eklendiðinde\n karakterini silemezsin.
 SELECT_CAN_NOT_DELETE_GUILD_MEMBER	O bir lonca üyesi olduðu sürece karakterini silemezsin.
 SELECT_CAN_NOT_DELETE_HAVE_SEALED_ITEM	Ruha baðlý eþyalara sahip olduðu için karakterini silemezsin.

@@ -576,6 +576,32 @@ if app.ENABLE_NIGHT_MODE_OPTION:
 		},
 	)
 
+if app.ENABLE_FOV_OPTION:
+	# Gorus alani (FOV) kaydiricisi Gece seceneginin hemen altina eklenir.
+	# Gece satirinin (y=100) altindaki tum satirlari 25px asagi kaydirip
+	# acilan bosluga FOV kaydiricisini yerlestiriyoruz.
+	for child in window["children"][0]["children"]:
+		if child.get("y", 0) >= 125:
+			child["y"] = child["y"] + 25
+
+	window["height"] = window["height"] + 25
+	window["children"][0]["height"] = window["children"][0]["height"] + 25
+	window["children"][0]["children"] = window["children"][0]["children"] + (
+		{
+			"name" : "fov_mode",
+			"type" : "text",
+			"x" : 40 + TEXT_TEMPORARY_X,
+			"y" : 125 + 2,
+			"text" : uiScriptLocale.OPTION_FOV,
+		},
+		{
+			"name" : "fov_bar",
+			"type" : "sliderbar",
+			"x" : 110,
+			"y" : 125,
+		},
+	)
+
 if app.__BL_MULTI_LANGUAGE_ULTIMATE__:
 	MULTI_LANGUAGE_WINDOW_Y = window["height"] - 100
 	window["height"] = window["height"] + 25

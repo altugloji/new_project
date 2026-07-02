@@ -1594,6 +1594,11 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 	if (DAMAGE_TYPE_MAGIC == type)
 		dam = (int)((float)dam * (100 + (pAttacker->GetPoint(POINT_MAGIC_ATT_BONUS_PER) + pAttacker->GetPoint(POINT_MELEE_MAGIC_ATT_BONUS_PER))) / 100.f + 0.5f);
 
+#ifdef ENABLE_MOUNT_PVP_DAMAGE_REDUCTION
+	if (pAttacker && pAttacker != this && pAttacker->IsPC() && IsPC() && pAttacker->IsRiding())
+		dam = dam * (100 - 30) / 100;
+#endif
+
 	if (type != DAMAGE_TYPE_NORMAL && type != DAMAGE_TYPE_NORMAL_RANGE)
 	{
 		if (IsAffectFlag(AFF_TERROR))

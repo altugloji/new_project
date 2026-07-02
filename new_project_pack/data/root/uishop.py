@@ -32,6 +32,8 @@ class ShopDialog(ui.ScriptWindow):
 		if app.ENABLE_OFFLINE_SHOP:
 			self.interface = None
 			self.btnEdit = None
+			self.btnTeleport = None
+			self.ownerButtonBoard = None
 			self.editMode = False
 			self.shopVID = 0
 			self.editAdded = {}			# display_pos -> {invType, invPos, vnum, count, price}
@@ -63,7 +65,8 @@ class ShopDialog(ui.ScriptWindow):
 				itemCount = 0
 			setItemID(i, getItemID(idx), itemCount)
 
-		# Pazar Arama: son aratilan esyalari bu pazarda vurgula
+		# Pazar Arama yesil vurgusu + satilan item kilitli-slot KIRMIZISI (CANT_MOUSE_EVENT) uygula,
+		# sonra render et (envanter RefreshLockedSlot ile ayni sira: once bayrak, sonra RefreshSlot)
 		self.__RefreshShopSearchHighlight()
 
 		wndMgr.RefreshSlot(self.itemSlotWindow.GetWindowHandle())
@@ -78,6 +81,24 @@ class ShopDialog(ui.ScriptWindow):
 		for i in xrange(shop.SHOP_SLOT_COUNT):
 			idx = self.__GetRealIndex(i)
 			vnum = shop.GetItemID(idx)
+			sold = bool(vnum) and app.ENABLE_OFFLINE_SHOP and shop.IsItemSold(idx)
+
+			# Satilan item: ENABLE_INVENTORY_SLOT_MARKING kilitli-slot KIRMIZISI (CANT_MOUSE_EVENT)
+			# -> sabit kirmizi (C++ 1,0,0,0.3) + slot tiklanamaz (satin alma da engellenir)
+			if app.ENABLE_INVENTORY_SLOT_MARKING:
+				if sold:
+					self.itemSlotWindow.SetCantMouseEventSlot(i)
+				else:
+					self.itemSlotWindow.SetCanMouseEventSlot(i)
+
+			if sold:
+				# Yesil arama overlay'i kalmasin; marking kapaliysa eski ActivateSlot kirmizisina dus
+				if app.ENABLE_INVENTORY_SLOT_MARKING:
+					self.itemSlotWindow.DeactivateSlot(i)
+				else:
+					self.itemSlotWindow.ActivateSlot(i, 220.0/255.0, 52.0/255.0, 52.0/255.0, 0.62)
+				continue
+
 			matched = False
 			if vnum:
 				if searched and self.__IsShopSearchedItem(vnum, idx, searched):
@@ -169,6 +190,16 @@ class ShopDialog(ui.ScriptWindow):
 				self.btnEdit.Hide()
 			except:
 				self.btnEdit = None
+			try:
+				self.ownerButtonBoard = GetObject("OwnerButtonBoard")
+			except:
+				self.ownerButtonBoard = None
+			try:
+				self.btnTeleport = GetObject("TeleportButton")
+				self.btnTeleport.SetEvent(ui.__mem_func__(self.__OnClickTeleportButton))
+				self.btnTeleport.Hide()
+			except:
+				self.btnTeleport = None
 
 		self.titleBar.SetCloseEvent(ui.__mem_func__(self.Close))
 
@@ -224,6 +255,10 @@ class ShopDialog(ui.ScriptWindow):
 		self.btnBuy = 0
 		self.btnSell = 0
 		self.btnClose = 0
+		if app.ENABLE_OFFLINE_SHOP:
+			self.btnEdit = None
+			self.btnTeleport = None
+			self.ownerButtonBoard = None
 		self.titleBar = 0
 		self.questionDialog = None
 		self.popup = None
@@ -246,9 +281,11 @@ class ShopDialog(ui.ScriptWindow):
 		else:
 			isPrivateShop = True
 
+		showEditButton = False		# her zaman tanimli olsun (asagida ENABLE_OFFLINE_SHOP blogunda set edilir)
 		if app.ENABLE_OFFLINE_SHOP:
 			self.shopVID = vid
 			self.editMode = False
+			self.remoteEdit = False
 			self.editAdded = {}
 			self.editRemoved = []
 			self.editPriceUpdated = {}
@@ -267,14 +304,30 @@ class ShopDialog(ui.ScriptWindow):
 				else:
 					self.btnEdit.Hide()
 
-		SHOP_DIALOG_HEIGHT_NORMAL = 328
-		SHOP_DIALOG_HEIGHT_EDIT   = 356
-		h = SHOP_DIALOG_HEIGHT_EDIT if showEditButton else SHOP_DIALOG_HEIGHT_NORMAL
-		self.SetSize(184, h)
-		if self.board:
-			self.board.SetSize(184, h)
+		# Sahip gorunumu: kendi offline pazari VEYA kendi online pazari (btnClose alt panelde -> panel sahip gorunumunde acilir)
+		isOwnerView = (app.ENABLE_OFFLINE_SHOP and isMyShop) or player.IsMainCharacterIndex(vid)
 
-		if (app.ENABLE_OFFLINE_SHOP and isMyShop) or player.IsMainCharacterIndex(vid):
+		# Alt buton bolumu (pencerenin altindaki ekstra kisim): butonlar burada. Isinlan sadece offline sahibinde.
+		if app.ENABLE_OFFLINE_SHOP:
+			if self.ownerButtonBoard:
+				if isOwnerView:
+					self.ownerButtonBoard.Show()
+				else:
+					self.ownerButtonBoard.Hide()
+			if self.btnTeleport:
+				if showEditButton:
+					self.btnTeleport.Show()
+				else:
+					self.btnTeleport.Hide()
+
+		SHOP_DIALOG_BOARD_HEIGHT = 328		# ana board (item alani) - her zaman sabit
+		SHOP_DIALOG_OWNER_WIN    = 436		# sahip: ana board + ALTINDAKI ayri buton paneli icin pencere yuksekligi
+		winH = SHOP_DIALOG_OWNER_WIN if isOwnerView else SHOP_DIALOG_BOARD_HEIGHT
+		self.SetSize(184, winH)
+		if self.board:
+			self.board.SetSize(184, SHOP_DIALOG_BOARD_HEIGHT)		# ana board 328'de kalir; OwnerButtonBoard onun ALTINDA ayri panel
+
+		if isOwnerView:
 
 			isMainPlayerPrivateShop = True
 
@@ -333,8 +386,10 @@ class ShopDialog(ui.ScriptWindow):
 			self.interface.SetOnTopWindow(player.ON_TOP_WND_NONE)
 			self.interface.RefreshMarkInventoryBag()
 		if app.ENABLE_OFFLINE_SHOP and self.editMode:
-			# Duzenleme modunda kapatma = iptal (son kayitli haline don)
-			self.__OnCancelEdit()
+			# Duzenleme modunda kapatma = pazari AKTIF ET (uygula); iptal DEGIL.
+			# Limit asiliyorsa __OnActivateShop False doner -> pencereyi KAPATMA, edit modda kal.
+			if not self.__OnActivateShop():
+				return
 		if self.itemBuyQuestionDialog:
 			self.itemBuyQuestionDialog.Close()
 			self.itemBuyQuestionDialog = None
@@ -356,8 +411,7 @@ class ShopDialog(ui.ScriptWindow):
 
 	def AskClosePrivateShop(self):
 		if app.ENABLE_OFFLINE_SHOP and self.editMode:
-			# Duzenleme modunda Kapat = iptal
-			self.__OnCancelEdit()
+			# Duzenleme modunda "Kapat" = pazari AKTIF ET + kapat (Close() uygular; limit asiliyorsa acik kalir)
 			self.Close()
 			return True
 		questionDialog = uiCommon.QuestionDialog()
@@ -499,10 +553,17 @@ class ShopDialog(ui.ScriptWindow):
 			else:
 				shop.OfflineShopEnter()		# paket ile giris (sunucu dogrular)
 
-		def StartEditMode(self):
+		def __OnClickTeleportButton(self):
+			# Once pazar penceresini kapat (server shop/edit state'ini temizler), sonra pazar konumuna isinlan
+			self.Close()
+			net.SendChatPacket("/warp_my_shop")
+
+		def StartEditMode(self, remote = False):
 			if self.editMode:
 				return
 			self.editMode = True
+			# remote=True => 50200 "Pazarimi Gor" ile uzaktan acildi; OnUpdate mesafe auto-close'u kapat
+			self.remoteEdit = remote
 			self.editAdded = {}
 			self.editRemoved = []
 			self.editPriceUpdated = {}
@@ -522,6 +583,7 @@ class ShopDialog(ui.ScriptWindow):
 
 		def __ExitEditModeUI(self):
 			self.editMode = False
+			self.remoteEdit = False
 			self.editAdded = {}
 			self.editRemoved = []
 			self.editPriceUpdated = {}
@@ -560,10 +622,11 @@ class ShopDialog(ui.ScriptWindow):
 			# Pazardaki esyalarin toplam degeri 2 milyar yang'i gecemez
 			if self.__ComputeEditTotal() > self.OFFLINE_SHOP_MAX_PRICE:
 				chat.AppendChat(chat.CHAT_TYPE_INFO, "Pazardaki esyalarin toplam degeri 2.000.000.000 yang'i gecemez! Fiyat dusurun veya esya kaldirin.")
-				return		# edit modda kal, paket gonderme
+				return False		# edit modda kal, paket gonderme, pencere kapanmaz
 			shop.SendOfflineShopEdit()			# APPLY paketi (remove + add + fiyat-guncelleme)
 			self.__ExitEditModeUI()
 			# Sunucu dukkani yeniden online yapip guest'i dusurur (SHOP_END) -> pencere kapanir
+			return True
 
 		def __OnCancelEdit(self):
 			shop.OfflineShopCancel()			# CANCEL paketi (son kayitli haline don)
@@ -572,6 +635,7 @@ class ShopDialog(ui.ScriptWindow):
 		def __RefreshEdit(self):
 			for i in xrange(shop.SHOP_SLOT_COUNT):
 				realPos = self.__GetRealIndex(i)
+				sold = False
 				if realPos in self.editAdded:
 					a = self.editAdded[realPos]
 					cnt = a["count"]
@@ -585,6 +649,17 @@ class ShopDialog(ui.ScriptWindow):
 					if cnt <= 1:
 						cnt = 0
 					self.itemSlotWindow.SetItemSlot(i, shop.GetItemID(realPos), cnt)
+					# "Pazarimi Gor" (50200) duzenleme modunda da satilan item KIRMIZI gorunsun
+					sold = bool(shop.GetItemID(realPos)) and app.ENABLE_OFFLINE_SHOP and shop.IsItemSold(realPos)
+
+				# Satilan item: kilitli-slot KIRMIZISI (view modundaki ile ayni)
+				if app.ENABLE_INVENTORY_SLOT_MARKING:
+					if sold:
+						self.itemSlotWindow.SetCantMouseEventSlot(i)
+					else:
+						self.itemSlotWindow.SetCanMouseEventSlot(i)
+				elif sold:
+					self.itemSlotWindow.ActivateSlot(i, 220.0/255.0, 52.0/255.0, 52.0/255.0, 0.62)
 			wndMgr.RefreshSlot(self.itemSlotWindow.GetWindowHandle())
 
 		# --- Edit modda tooltip: eklenen/fiyati degisen item icin dogru fiyati goster ---
@@ -835,6 +910,10 @@ class ShopDialog(ui.ScriptWindow):
 	def AskBuyItem(self, slotPos):
 		slotPos = self.__GetRealIndex(slotPos)
 
+		if app.ENABLE_OFFLINE_SHOP and shop.IsItemSold(slotPos):
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Bu esya satilmis.")
+			return
+
 		itemIndex = shop.GetItemID(slotPos)
 		itemPrice = shop.GetItemPrice(slotPos)
 		itemCount = shop.GetItemCount(slotPos)
@@ -894,11 +973,20 @@ class ShopDialog(ui.ScriptWindow):
 		else:
 			self.tooltipItem.SetShopItemBySecondaryCoin(realPos)
 
+		# Satilan item: tooltip'e kirmizi "SATILDI" satiri ekle
+		if app.ENABLE_OFFLINE_SHOP and shop.GetItemID(realPos) > 0 and shop.IsItemSold(realPos):
+			self.tooltipItem.AppendTextLine("SATILDI", 0xffff4040)
+			self.tooltipItem.ShowToolTip()
+
 	def OverOutItem(self):
 		if 0 != self.tooltipItem:
 			self.tooltipItem.HideToolTip()
 
 	def OnUpdate(self):
+		# 50200 "Pazarimi Gor" ile uzaktan duzenlemede mesafe sinirlamasi yok
+		if app.ENABLE_OFFLINE_SHOP and getattr(self, "remoteEdit", False):
+			return
+
 		USE_SHOP_LIMIT_RANGE = 1000
 
 		(x, y, z) = player.GetMainCharacterPosition()

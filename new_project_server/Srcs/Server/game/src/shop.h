@@ -25,6 +25,9 @@ class CShop
 			DWORD	gemPrice;
 #endif
 			BYTE	count;
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+			BYTE	sold;		// 1 = satildi; item slotta KIRMIZI hayalet olarak kalir, tekrar satilamaz
+#endif
 
 			LPITEM	pkItem;
 			int		itemid;
@@ -33,6 +36,9 @@ class CShop
 			{
 				vnum = 0;
 				price = 0;
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+				sold = 0;
+#endif
 #ifdef ENABLE_MULTISHOP
 				wPriceVnum = 0;
 				wPrice = 0;
@@ -87,6 +93,10 @@ class CShop
 		void		ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byRemoveCount, const TShopItemTable * pAdd, BYTE byAddCount, const TOfflineShopPriceUpdate * pUpdate, BYTE byUpdateCount);
 		bool		EditWouldExceedLimit(const BYTE * pbRemovePos, BYTE byRemoveCount, const TShopItemTable * pAdd, BYTE byAddCount, const TOfflineShopPriceUpdate * pUpdate, BYTE byUpdateCount) const;
 		void		RebuildGrid();
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		// Boot'ta DB'den yuklenen satilmis (sold=1) item'i kirmizi hayalet olarak isaretle (itemid = player_shop_items.id)
+		void		SetItemSoldByItemID(DWORD itemid);
+#endif
 #endif
 
 	protected:

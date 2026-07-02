@@ -2706,6 +2706,18 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 											}
 										}
 
+#ifdef ENABLE_MARRIAGE_RING_COOLTIME
+										const int iRingPulse = thecore_pulse();
+										if (iRingPulse - GetMarriageRingTime() < PASSES_PER_SEC(30))
+										{
+											int iLeft = 30 - (iRingPulse - GetMarriageRingTime()) / PASSES_PER_SEC(1);
+											if (iLeft < 1)
+												iLeft = 1;
+											ChatPacket(CHAT_TYPE_INFO, "Evlilik yuzugunu tekrar kullanmak icin %d saniye beklemelisin.", iLeft);
+											break;
+										}
+#endif
+
 										int consumeSP = CalculateConsumeSP(this);
 
 										if (consumeSP < 0)
@@ -2713,7 +2725,12 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 										PointChange(POINT_SP, -consumeSP, false);
 
+#ifdef ENABLE_MARRIAGE_RING_COOLTIME
+										if (WarpToPID(pMarriage->GetOther(GetPlayerID())))
+											SetMarriageRingTime();
+#else
 										WarpToPID(pMarriage->GetOther(GetPlayerID()));
+#endif
 									}
 									else
 										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("결혼 상태가 아니면 결혼반지를 사용할 수 없습니다."));
@@ -3168,16 +3185,20 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 									ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_WAIT_10_SEC"));
 									break;
 								}
-								SetLastCreateShopTime(get_global_time() + 10);
 
 								auto pkMsgShop = DBManager::instance().DirectQuery("SELECT player_id FROM player_shop WHERE player_id = %u", GetPlayerID());
 								if (!pkMsgShop || !pkMsgShop->Get())
 									break;
 								if (pkMsgShop->Get()->uiNumRows > 0)
 								{
+#ifdef ENABLE_OFFLINE_SHOP_REMOTE
+									OpenMyShopRemote();
+#else
 									ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_ACTIVE"));
+#endif
 									break;
 								}
+								SetLastCreateShopTime(get_global_time() + 10);
 #endif
 								if (g_bEnableBootaryCheck)
 								{
@@ -8466,7 +8487,7 @@ static bool BulkPotion_IsAllowedVnum(DWORD vnum)
 		if (vnum >= 27863 && vnum <= 27878)
 			return true;
 
-		if (vnum >= 71028 && vnum <= 71035)
+		if (vnum >= 71027 && vnum <= 71035)
 			return true;
 		if (vnum >= 71044 && vnum <= 71049)
 			return true;

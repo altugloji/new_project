@@ -293,6 +293,10 @@ void CHARACTER::Initialize()
 	m_iPacketTime = 0;
 #endif
 
+#ifdef FISHING_TIME_LOG
+	m_dwLastFishCatchTime = 0;
+#endif
+
 	m_pkMall = nullptr;
 	m_iMallLoadTime = 0;
 
@@ -422,8 +426,15 @@ void CHARACTER::Initialize()
 #ifdef FAST_PACKET_BLOCK
 	m_iPacketTime = 0;
 #endif
+#ifdef FISHING_TIME_LOG
+	m_dwLastFishCatchTime = 0;
+#endif
 
 	m_iMyShopTime = 0;
+
+#ifdef ENABLE_MARRIAGE_RING_COOLTIME
+	m_iMarriageRingTime = 0;
+#endif
 
 	InitMC();
 
@@ -1012,12 +1023,20 @@ void CHARACTER::OpenShop(DWORD dwPID, const char *name, bool onboot)
 		attrLen += snprintf(szAttrs + attrLen, sizeof(szAttrs) - attrLen, ", attrtype%d, attrvalue%d", i, i);
 
 	char szQuery[1024];
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+	// 'sold' kolonu en sona eklenir (socket/attr okuma indexlerini bozmasin); kalici satildi-isareti
+	snprintf(szQuery, sizeof(szQuery), "SELECT id, vnum, count, display_pos, price, %s, %s, sold FROM player_shop_items WHERE player_id = %u", szSockets, szAttrs, dwPID);
+#else
 	snprintf(szQuery, sizeof(szQuery), "SELECT id, vnum, count, display_pos, price, %s, %s FROM player_shop_items WHERE player_id = %u", szSockets, szAttrs, dwPID);
+#endif
 	auto pkMsg = DBManager::instance().DirectQuery(szQuery);
 	if (!pkMsg || !pkMsg->Get())
 		return;
 
 	std::vector<TShopItemTable *> map_shop;
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+	std::vector<DWORD> vecSoldIDs;	// boot'ta DB'den gelen satilmis item id'leri
+#endif
 
 	if (pkMsg->Get()->uiNumRows > 0)
 	{
@@ -1074,6 +1093,14 @@ void CHARACTER::OpenShop(DWORD dwPID, const char *name, bool onboot)
 					item->SetForceAttribute(at, attr, val);
 				}
 
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+				// 'sold' kolonu (SELECT'te en son): satilmis item -> kirmizi hayalet olarak isaretlenecek
+				DWORD soldVal = 0;
+				str_to_number(soldVal, row[col++]);
+				if (soldVal)
+					vecSoldIDs.push_back(id);
+#endif
+
 				if (!item->CheckItemEnchant())
 				{
 					sys_err("Pazara Item Eklenmedi! [itemID: %u]", id);
@@ -1108,6 +1135,13 @@ void CHARACTER::OpenShop(DWORD dwPID, const char *name, bool onboot)
 	PacketAround(p);
 
 	m_pkMyShop = CShopManager::instance().CreateNPCShop(this, map_shop);
+
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+	// DB'den yuklenen satilmis item'leri kirmizi hayalet olarak isaretle (AddGuest bSold=1 gonderir)
+	if (m_pkMyShop)
+		for (std::vector<DWORD>::const_iterator it = vecSoldIDs.begin(); it != vecSoldIDs.end(); ++it)
+			m_pkMyShop->SetItemSoldByItemID(*it);
+#endif
 }
 
 void CHARACTER::DeleteMyShop()
@@ -1120,6 +1154,10 @@ void CHARACTER::DeleteMyShop()
 			return;
 
 		GetMyShop()->GetItems();
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		// GetItems satilmis (sold=1) satirlari atliyor -> pazar kapaninca onlari da temizle (orphan kalmasin)
+		DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE player_id = %u", ownerPID);
+#endif
 
 		LPCHARACTER owner = CHARACTER_MANAGER::instance().FindByPID(ownerPID);
 		if (owner)
@@ -1244,8 +1282,103 @@ void CHARACTER::CancelShopEdit()
 	}
 	SetShopOwner(NULL);
 }
-#endif
 
+#ifdef ENABLE_OFFLINE_SHOP_REMOTE
+// 50200 "Pazarimi Gor": kendi offline pazarini pazara gitmeden uzaktan acar.
+// Pazar penceresini (sahip gorunumu) acar ve DOGRUDAN duzenleme moduna gecirir; mesafe kontrolu YOKTUR.
+bool CHARACTER::OpenMyShopRemote()
+{
+	// Baska bir pencere acikken uzaktan pazar acilamaz
+	if (GetExchange() || IsOpenSafebox() || IsCubeOpen() || GetMyShop() || GetShop() || GetShopOwner() || IsEditingShop())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDIT_OTHER_WINDOW"));
+		return false;
+	}
+
+	// Kendi pazarini bul (PID -> CShop). Pazar tezgah-mob'u bu core'da spawn degilse (ornegin
+	// sahip baska kanaldaysa) burada bulunamaz; o durumda kullaniciyi dogru kanala yonlendiririz.
+	LPSHOP pkShop = CShopManager::instance().FindPCShop(GetPlayerID());
+	if (!pkShop)
+	{
+		// Pazar bu core/kanalda spawn degil (locale key'i degil, duz metin: LC_TEXT bilinmeyen key'e "@0949" ekler)
+		ChatPacket(CHAT_TYPE_INFO, "Pazarin bu kanalda bulunamadi. Pazarinin oldugu kanala gec.");
+		return false;
+	}
+
+	LPCHARACTER npc = pkShop->GetOwner();	// offline pazarda m_pkPC = tezgahi tasiyan mob (irk 30000)
+	if (!npc || npc->GetRaceNum() != 30000 || !npc->IsPrivShop() || npc->GetPrivShopOwner() != GetPlayerID())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_NOT_OWNER"));
+		return false;
+	}
+
+	// Pazar penceresini sahip olarak ac: client byIsMyShop=1 ile SHOP_START alir
+	if (!pkShop->AddGuest(this, npc->GetVID(), false))
+		return false;
+	SetShopOwner(npc);
+
+	// Dogrudan duzenleme moduna gec (mesafe kontrolu YOK - uzaktan erisim)
+	SetEditingShop(true);
+	SetMyShopTime();
+
+	// O an pazara bakanlari dusur (sahip haric)
+	pkShop->KickGuestsExcept(this);
+
+	// Client'i UZAKTAN duzenleme moduna gecir (proximity auto-close devre disi)
+	ChatPacket(CHAT_TYPE_COMMAND, "offline_shop_edit_start_remote");
+	return true;
+}
+
+
+// "Pazarima Isinlan": kendi offline pazarinin (tezgah NPC) konumuna isinlar.
+bool CHARACTER::WarpToMyShop()
+{
+	// Isinlanma engelleri (diger isinlanmalardaki bug-guard'lar ile ayni mantik)
+	if (GetExchange() || GetMyShop() || IsOpenSafebox() || IsCubeOpen() || IsDead()
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		|| GetSafeTrade() || IsSafeTradeClaiming()
+#endif
+		)
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDIT_OTHER_WINDOW"));
+		return false;
+	}
+
+	// Kendi pazarini bul (PID -> CShop). Baska kanaldaysa bu core'da bulunamaz.
+	LPSHOP pkShop = CShopManager::instance().FindPCShop(GetPlayerID());
+	if (!pkShop)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Pazarin bu kanalda bulunamadi. Pazarinin oldugu kanala gec.");
+		return false;
+	}
+
+	LPCHARACTER npc = pkShop->GetOwner();	// offline pazarda m_pkPC = tezgahi tasiyan mob (irk 30000)
+	if (!npc || npc->GetRaceNum() != 30000 || !npc->IsPrivShop() || npc->GetPrivShopOwner() != GetPlayerID())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_NOT_OWNER"));
+		return false;
+	}
+
+	// Once isinlanmayi dene; BASARISIZSA (gecersiz koordinat) hicbir seyi degistirme -> pazar penceresi acik kalir (desync yok)
+	if (!WarpSet(npc->GetX(), npc->GetY()))	// global koordinat -> CMapLocation haritayi cozer
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Pazar konumuna isinlanilamadi.");
+		return false;
+	}
+
+	// Isinlanma basarili -> pazar penceresi/edit durumunu temizle (RemoveGuest client'a SHOP_END gonderir -> pencere kapanir)
+	if (IsEditingShop())
+		CancelShopEdit();
+	if (GetShop())
+	{
+		GetShop()->RemoveGuest(this);
+		SetShop(NULL);
+	}
+	SetShopOwner(NULL);
+	return true;
+}
+#endif
+#endif
 
 void CHARACTER::CloseMyShop()
 {

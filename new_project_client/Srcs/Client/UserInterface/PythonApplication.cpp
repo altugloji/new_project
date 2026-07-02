@@ -218,7 +218,11 @@ void CPythonApplication::RenderGame()
 		m_kRenderTarget.RenderBackgrounds();
 #endif
 
+#ifdef ENABLE_FOV_OPTION
+		m_pyGraphic.SetPerspective(m_pySystem.GetFOVLevel(), fAspect, 100.0, fFarClip);
+#else
 		m_pyGraphic.SetPerspective(30.0f, fAspect, 100.0, fFarClip);
+#endif
 
 		CCullingManager::Instance().Process();
 
@@ -284,7 +288,11 @@ void CPythonApplication::RenderGame()
 	const float fAspect=m_kWndMgr.GetAspect();
 	const float fFarClip=m_pyBackground.GetFarClip();
 
+#ifdef ENABLE_FOV_OPTION
+	m_pyGraphic.SetPerspective(m_pySystem.GetFOVLevel(), fAspect, 100.0, fFarClip);
+#else
 	m_pyGraphic.SetPerspective(30.0f, fAspect, 100.0, fFarClip);
+#endif
 
 	const DWORD t5=ELTimer_GetMSec();
 
@@ -382,7 +390,11 @@ void CPythonApplication::UpdateGame()
 		const float fAspect = UI::CWindowManager::Instance().GetAspect();
 		const float fFarClip = CPythonBackground::Instance().GetFarClip();
 
+#ifdef ENABLE_FOV_OPTION
+		s.SetPerspective(CPythonSystem::Instance().GetFOVLevel(), fAspect, 100.0f, fFarClip);
+#else
 		s.SetPerspective(30.0f,fAspect, 100.0f, fFarClip);
+#endif
 		s.BuildViewFrustum();
 	}
 

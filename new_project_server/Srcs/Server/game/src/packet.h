@@ -1376,6 +1376,7 @@ typedef struct packet_shop_item
 	BYTE		display_pos;
 	long	alSockets[ITEM_SOCKET_MAX_NUM];
 	TPlayerItemAttribute aAttr[ITEM_ATTRIBUTE_MAX_NUM];
+	BYTE		bSold;
 } TShopItemData;
 
 typedef struct packet_shop_start
@@ -2126,6 +2127,9 @@ enum EOfflineShopEditAction
 	OFFLINE_SHOP_EDIT_ACTION_APPLY	= 0,	// kaydet (aktif et)
 	OFFLINE_SHOP_EDIT_ACTION_ENTER	= 1,	// duzenleme moduna gir
 	OFFLINE_SHOP_EDIT_ACTION_CANCEL	= 2,	// iptal (son kayitli haline don)
+#ifdef ENABLE_OFFLINE_SHOP_REMOTE
+	OFFLINE_SHOP_EDIT_ACTION_REMOTE_OPEN = 3,	// pazara gitmeden kendi pazarini uzaktan ac + duzenleme moduna gir
+#endif
 };
 
 // (TOfflineShopPriceUpdate: common/tables.h icinde tanimli)

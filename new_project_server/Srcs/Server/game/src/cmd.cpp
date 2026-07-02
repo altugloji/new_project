@@ -116,6 +116,9 @@ ACMD(do_gift_show);
 ACMD(do_gift_get);
 ACMD(do_gift_refresh);
 #endif
+#ifdef ENABLE_OFFLINE_SHOP_REMOTE
+ACMD(do_warp_my_shop);
+#endif
 ACMD(do_set_walk_mode);
 ACMD(do_set_run_mode);
 ACMD(do_set_skill_group);
@@ -448,6 +451,9 @@ struct command_info cmd_info[] =
 	{ "gift_show",					do_gift_show,				0,	POS_DEAD,	GM_PLAYER },
 	{ "gift_refresh",				do_gift_refresh,			0,	POS_DEAD,	GM_PLAYER },
 	{ "gift_get",					do_gift_get,				0,	POS_DEAD,	GM_PLAYER },
+#endif
+#ifdef ENABLE_OFFLINE_SHOP_REMOTE
+	{ "warp_my_shop",				do_warp_my_shop,			0,	POS_DEAD,	GM_PLAYER },
 #endif
 
 	{ "set_walk_mode",	do_set_walk_mode,	0,			POS_DEAD,	GM_PLAYER	},

@@ -2084,6 +2084,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_NIGHT_MODE_OPTION",	0);
 #endif
 
+#ifdef ENABLE_FOV_OPTION
+	PyModule_AddIntConstant(poModule, "ENABLE_FOV_OPTION",	1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_FOV_OPTION",	0);
+#endif
+
 #ifdef AUTO_CHAT_ENABLE
 	PyModule_AddIntConstant(poModule, "AUTO_CHAT_ENABLE", 1);
 #else

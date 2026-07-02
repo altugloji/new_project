@@ -9,7 +9,7 @@ window = {
 	"style" : ("movable", "float",),
 
 	"width" : 184,
-	"height" : 356,
+	"height" : 436,
 
 	"children" :
 	(
@@ -22,7 +22,7 @@ window = {
 			"y" : 0,
 
 			"width" : 184,
-			"height" : 356,
+			"height" : 328,
 
 			"children" :
 			(
@@ -61,7 +61,7 @@ window = {
 					"image" : "d:/ymir work/ui/public/Slot_Base.sub",
 				},
 
-				## Buy
+				## Buy (misafir gorunumu)
 				{
 					"name" : "BuyButton",
 					"type" : "toggle_button",
@@ -79,7 +79,7 @@ window = {
 					"down_image" : "d:/ymir work/ui/public/middle_button_03.sub",
 				},
 
-				## Sell
+				## Sell (misafir gorunumu)
 				{
 					"name" : "SellButton",
 					"type" : "toggle_button",
@@ -95,40 +95,6 @@ window = {
 					"default_image" : "d:/ymir work/ui/public/middle_button_01.sub",
 					"over_image" : "d:/ymir work/ui/public/middle_button_02.sub",
 					"down_image" : "d:/ymir work/ui/public/middle_button_03.sub",
-				},
-
-				## Close
-				{
-					"name" : "CloseButton",
-					"type" : "button",
-
-					"x" : 0,
-					"y" : 295,
-
-					"horizontal_align" : "center",
-
-					"text" : uiScriptLocale.PRIVATE_SHOP_CLOSE_BUTTON,
-
-					"default_image" : "d:/ymir work/ui/public/large_button_01.sub",
-					"over_image" : "d:/ymir work/ui/public/large_button_02.sub",
-					"down_image" : "d:/ymir work/ui/public/large_button_03.sub",
-				},
-
-				## Edit (offline dukkan sahibi)
-				{
-					"name" : "EditButton",
-					"type" : "button",
-
-					"x" : 0,
-					"y" : 322,
-
-					"horizontal_align" : "center",
-
-					"text" : "Dukkani Duzenle",
-
-					"default_image" : "d:/ymir work/ui/public/large_button_01.sub",
-					"over_image" : "d:/ymir work/ui/public/large_button_02.sub",
-					"down_image" : "d:/ymir work/ui/public/large_button_03.sub",
 				},
 
 				## MiddleTab1
@@ -209,6 +175,74 @@ window = {
 					"default_image" : "d:/ymir work/ui/public/small_button_01.sub",
 					"over_image" : "d:/ymir work/ui/public/small_button_02.sub",
 					"down_image" : "d:/ymir work/ui/public/small_button_03.sub",
+				},
+			),
+		},
+
+		## ---- Sahip buton bolumu: ANA PENCERENIN ALTINDA AYRI panel (board'in kardesi) ----
+		## Sadece kendi pazarini goren sahibe gosterilir (uishop.py yonetir)
+		{
+			"name" : "OwnerButtonBoard",
+			"type" : "board",
+			"style" : ("attach",),
+
+			"x" : 0,
+			"y" : 330,
+
+			"width" : 184,
+			"height" : 104,
+
+			"children" :
+			(
+				## Duzenle / Pazari Aktif Et
+				{
+					"name" : "EditButton",
+					"type" : "button",
+
+					"x" : 0,
+					"y" : 10,
+
+					"horizontal_align" : "center",
+
+					"text" : "Dukkani Duzenle",
+
+					"default_image" : "d:/ymir work/ui/public/large_button_01.sub",
+					"over_image" : "d:/ymir work/ui/public/large_button_02.sub",
+					"down_image" : "d:/ymir work/ui/public/large_button_03.sub",
+				},
+
+				## Pazarima Isinlan
+				{
+					"name" : "TeleportButton",
+					"type" : "button",
+
+					"x" : 0,
+					"y" : 41,
+
+					"horizontal_align" : "center",
+
+					"text" : "Pazarima Isinlan",
+
+					"default_image" : "d:/ymir work/ui/public/large_button_01.sub",
+					"over_image" : "d:/ymir work/ui/public/large_button_02.sub",
+					"down_image" : "d:/ymir work/ui/public/large_button_03.sub",
+				},
+
+				## Kapat
+				{
+					"name" : "CloseButton",
+					"type" : "button",
+
+					"x" : 0,
+					"y" : 72,
+
+					"horizontal_align" : "center",
+
+					"text" : uiScriptLocale.PRIVATE_SHOP_CLOSE_BUTTON,
+
+					"default_image" : "d:/ymir work/ui/public/large_button_01.sub",
+					"over_image" : "d:/ymir work/ui/public/large_button_02.sub",
+					"down_image" : "d:/ymir work/ui/public/large_button_03.sub",
 				},
 			),
 		},

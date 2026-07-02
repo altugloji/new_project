@@ -90,6 +90,10 @@ class LogManager : public singleton<LogManager>
 		void		GemLog(DWORD dwPlayerID, const char* from, const char* where, const char* reason);
 #endif
 
+#ifdef FISHING_TIME_LOG
+		void		FishingTimeLog(uint32_t playerID, const char* szName, uint32_t accID, uint32_t totalMs, const char * szState);
+#endif
+
 		size_t EscapeString(char* dst, size_t dstSize, const char *src, size_t srcSize);
 
 		template<typename... Args>

@@ -164,6 +164,23 @@ PyObject * systemSetNightModeVolume(PyObject * poSelf, PyObject * poArgs)
 }
 #endif
 
+#ifdef ENABLE_FOV_OPTION
+PyObject * systemGetFOVLevel(PyObject * poSelf, PyObject * poArgs)
+{
+	return Py_BuildValue("f", CPythonSystem::Instance().GetFOVLevel());
+}
+
+PyObject * systemSetFOVLevel(PyObject * poSelf, PyObject * poArgs)
+{
+	float fFOV;
+	if (!PyTuple_GetFloat(poArgs, 0, &fFOV))
+		return Py_BuildException();
+
+	CPythonSystem::Instance().SetFOVLevel(fFOV);
+	return Py_BuildNone();
+}
+#endif
+
 PyObject * systemSetSoundVolumef(PyObject * poSelf, PyObject * poArgs)
 {
 	float fVolume;
@@ -608,6 +625,10 @@ void initsystemSetting()
 		{ "SetMusicVolume",				systemSetMusicVolume,			METH_VARARGS },
 #ifdef ENABLE_NIGHT_MODE_OPTION
 		{ "SetNightModeVolume",			systemSetNightModeVolume,		METH_VARARGS },
+#endif
+#ifdef ENABLE_FOV_OPTION
+		{ "GetFOVLevel",				systemGetFOVLevel,				METH_VARARGS },
+		{ "SetFOVLevel",				systemSetFOVLevel,				METH_VARARGS },
 #endif
 		{ "SetSoundVolumef",			systemSetSoundVolumef,			METH_VARARGS },
 		{ "IsSoftwareCursor",			systemIsSoftwareCursor,			METH_VARARGS },

@@ -10,7 +10,7 @@
 #include "skill.h"
 
 #define ENABLE_PICKAXE_RENEWAL
-#define ENABLE_AUTO_MINING
+// #define ENABLE_AUTO_MINING
 #define ENABLE_AUTO_PICK_ORE
 
 namespace mining

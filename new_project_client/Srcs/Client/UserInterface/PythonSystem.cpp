@@ -239,6 +239,23 @@ void CPythonSystem::SetNightModeVolume(float fVolume)
 }
 #endif
 
+#ifdef ENABLE_FOV_OPTION
+float CPythonSystem::GetFOVLevel() const
+{
+	return m_Config.iFOVLevel;
+}
+
+void CPythonSystem::SetFOVLevel(float fFOV)
+{
+	if (fFOV < 30.0f)
+		fFOV = 30.0f;
+	else if (fFOV > 60.0f)
+		fFOV = 60.0f;
+
+	m_Config.iFOVLevel = fFOV;
+}
+#endif
+
 void CPythonSystem::SetSoundVolumef(float fVolume)
 {
 	m_Config.voice_volume = int(5 * fVolume);
@@ -337,6 +354,9 @@ void CPythonSystem::SetDefaultConfig()
 	m_Config.music_volume		= 1.0f;
 #ifdef ENABLE_NIGHT_MODE_OPTION
 	m_Config.night_mode_volume	= 0.0f;
+#endif
+#ifdef ENABLE_FOV_OPTION
+	m_Config.iFOVLevel			= 30.0f;
 #endif
 	m_Config.voice_volume		= 5;
 
@@ -521,6 +541,10 @@ bool CPythonSystem::LoadConfig()
 		else if (!stricmp(command, "NIGHT_MODE_VOLUME"))
 			m_Config.night_mode_volume = atof(value);
 #endif
+#ifdef ENABLE_FOV_OPTION
+		else if (!stricmp(command, "FIELD_OF_VIEW"))
+			m_Config.iFOVLevel = (float) atof(value);
+#endif
 		else if (!stricmp(command, "VOICE_VOLUME"))
 			m_Config.voice_volume = (char) atoi(value);
 		else if (!stricmp(command, "GAMMA"))
@@ -679,6 +703,9 @@ bool CPythonSystem::SaveConfig()
 	fprintf(fp, "NO_ANTIALIASING		%d\n", m_Config.iAntialiasing);
 #ifdef ENABLE_NIGHT_MODE_OPTION
 	fprintf(fp, "NIGHT_MODE_VOLUME		%.3f\n", m_Config.night_mode_volume);
+#endif
+#ifdef ENABLE_FOV_OPTION
+	fprintf(fp, "FIELD_OF_VIEW			%.1f\n", m_Config.iFOVLevel);
 #endif
 #if defined(__BL_MULTI_LANGUAGE_ULTIMATE__)
 	fprintf(fp, "ANONYMOUS_MODE\t\t\t%d\n", m_Config.bAnonymousCountryMode);

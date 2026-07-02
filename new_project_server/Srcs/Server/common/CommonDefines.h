@@ -154,7 +154,11 @@ enum eCommonDefines {
 #define EXP_DEC_IN_DUNGEON											// Zindanlarda %90 Daha Az EXP
 #define ENABLE_LEVEL_MAP_EXP_LIMIT									// 45-75 ve 75-99 harita exp engelleri
 #define ENABLE_FISHING_ANTI_MACRO									// Balik makro engeli: envanterde solucan varken yeni solucan alinamaz + NPC penceresi acikken balik tutulamaz
-#define ENABLE_HORSE_ADDITIVE_STATS
+#define ENABLE_HORSE_ADDITIVE_STATS									// At statlarinin karakter statlarina + eklenmesi
+#define FISHING_TIME_LOG											// Balik sure
+#define ENABLE_MOUNT_PVP_DAMAGE_REDUCTION							// At üzerinde pvp'de %30 hasar azaltma
+#define ENABLE_MARRIAGE_RING_COOLTIME								// Yuzuk tekrar kullanim suresi
+
 
 
 #define OFFLINE_SHOP												// Offline shops system
@@ -164,6 +168,8 @@ enum eCommonDefines {
 	#define SHOP_BLOCK_GAME99										// Blocking create shops on channel 99
 	#define SHOP_AUTO_CLOSE											// Enable auto closing shop after sell last item
 	#define SHOP_GM_PRIVILEGES GM_IMPLEMENTOR						// Minimum GM privileges to using Shop GM Panel
+	#define ENABLE_OFFLINE_SHOP_REMOTE								// 50200 itemi ile pazara gitmeden uzaktan yonetim
+	#define ENABLE_OFFLINE_SHOP_SOLD_RED							// Satilan item pazardan silinmesin
 #endif
 
 #endif

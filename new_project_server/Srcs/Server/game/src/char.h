@@ -1294,6 +1294,11 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		bool			EnterShopEditMode();
 		void			ApplyShopEdit(const BYTE * pbRemovePos, BYTE byRemoveCount, const TShopItemTable * pAdd, BYTE byAddCount, const TOfflineShopPriceUpdate * pUpdate, BYTE byUpdateCount);
 		void			CancelShopEdit();
+#ifdef ENABLE_OFFLINE_SHOP_REMOTE
+		// 50200 itemi "Pazarimi Gor": kendi offline pazarini pazara gitmeden uzaktan acar ve dogrudan duzenleme moduna gecirir (mesafe kontrolu yok)
+		bool			OpenMyShopRemote();
+		bool			WarpToMyShop();
+#endif
 #endif
 
 #ifdef GIFT_SYSTEM
@@ -1980,6 +1985,12 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		int		GetMyShopTime() const	{ return m_iMyShopTime; }
 		void	SetMyShopTime() { m_iMyShopTime = thecore_pulse(); }
 
+#ifdef ENABLE_MARRIAGE_RING_COOLTIME
+	int		m_iMarriageRingTime;
+	int		GetMarriageRingTime() const	{ return m_iMarriageRingTime; }
+	void	SetMarriageRingTime() { m_iMarriageRingTime = thecore_pulse(); }
+#endif
+
 		bool	IsHack(bool bSendMsg = true, bool bCheckShopOwner = true, int limittime = g_nPortalLimitTime) const;
 
 		// MONARCH
@@ -2263,6 +2274,14 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 	public:
 		int					GetPacketLastTime() const { return m_iPacketTime; }
 		void				SetPacketLastTime() { m_iPacketTime = thecore_pulse(); }
+#endif
+
+#ifdef FISHING_TIME_LOG
+	private:
+		DWORD				m_dwLastFishCatchTime;
+	public:
+		void			SetLastFishCatchTime(DWORD dwTime) { m_dwLastFishCatchTime = dwTime; }
+		DWORD			GetLastFishCatchTime() { return m_dwLastFishCatchTime; }
 #endif
 
 #ifdef ENABLE_EXCHANGE_LOG

@@ -47,6 +47,15 @@ bool LogManager::IsConnected() const
 	return m_bIsConnect;
 }
 
+#ifdef FISHING_TIME_LOG
+void LogManager::FishingTimeLog(uint32_t playerID, const char* szName, uint32_t accID, uint32_t totalMs, const char* szState)
+{
+	if (totalMs <= 0)
+		return;
+	Query("INSERT INTO fishing_log (player_id, player_name, account_id, state, take_time, take_time_ms) VALUES (%d, '%s', %d, '%s', NOW(), %d)", playerID, szName, accID, szState, totalMs);
+}
+#endif
+
 size_t LogManager::EscapeString(char* dst, size_t dstSize, const char *src, size_t srcSize)
 {
 	return m_sql.EscapeString(dst, dstSize, src, srcSize);

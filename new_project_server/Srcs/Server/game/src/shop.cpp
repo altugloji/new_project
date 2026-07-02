@@ -220,6 +220,15 @@ int CShop::BuyOffline(LPCHARACTER ch, BYTE pos)
 
 	SHOP_ITEM& r_item = m_itemVector[pos];
 
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+	// Satilmis (kirmizi hayalet) slot tekrar satin alinamaz (hack paketine karsi backstop)
+	if (r_item.sold)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Bu esya satilmis.");
+		return SHOP_SUBHEADER_GC_OK;
+	}
+#endif
+
 	if (r_item.price < 0)
 		return SHOP_SUBHEADER_GC_NOT_ENOUGH_MONEY;
 
@@ -263,9 +272,11 @@ int CShop::BuyOffline(LPCHARACTER ch, BYTE pos)
 	item->CopyAttributeTo(pkNewItem);
 
 	pkNewItem->AddToCharacter(ch, TItemPos(pkNewItem->GetWindowInventoryEx(), iEmptyPos));
+#ifndef ENABLE_OFFLINE_SHOP_SOLD_RED
 	item->SetShop(NULL);
 	item->RemoveFromCharacter();
 	M2_DESTROY_ITEM(item);
+#endif
 	ITEM_MANAGER::instance().FlushDelayedSave(pkNewItem);
 
 	DWORD mpid = m_pkPC->GetPrivShopOwner();
@@ -276,12 +287,23 @@ int CShop::BuyOffline(LPCHARACTER ch, BYTE pos)
 	snprintf(buf, sizeof(buf), "%s %u(%s) %u %u", pkNewItem->GetName(), ch->GetPlayerID(), ch->GetName(), dwPrice, pkNewItem->GetCount());
 	LogManager::instance().ItemLog(m_pkPC, pkNewItem, "OFFLINE_SHOP_SELL", buf);
 
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+	// Item slotunda KIRMIZI "satildi" hayaleti olarak kalir (pkItem canli birakildi).
+	// DB satiri silinir -> sunucu yeniden basladiginda hayalet kaybolur (in-memory).
+	r_item.sold = 1;
+#else
 	r_item.pkItem = NULL;
+#endif
 	BroadcastUpdateItem(pos);
 
-	// Offline dukkanlarda kazanc, sahibi cevrimdisi oldugu icin hediye kutusuna gider.
 	DBManager::instance().DirectQuery("INSERT INTO player_gift SET owner_id = %u, vnum = 1 ,count = %u", m_pkPC->GetPrivShopOwner(), dwPrice);
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+	// Kalici "satildi": satir SILINMEZ, sold=1 isaretlenir -> restart sonrasi da KIRMIZI hayalet olarak yuklenir.
+	// (player_shop_items tablosuna 'sold' kolonu sart: ALTER TABLE ... ADD sold TINYINT(1) NOT NULL DEFAULT 0)
+	DBManager::instance().DirectQuery("UPDATE player_shop_items SET sold = 1 WHERE player_id = %u AND id = %u", m_pkPC->GetPrivShopOwner(), r_item.itemid);
+#else
 	DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE player_id = %u AND id = %u", m_pkPC->GetPrivShopOwner(), r_item.itemid);
+#endif
 
 	LPCHARACTER owner = CHARACTER_MANAGER::instance().FindByPID(m_pkPC->GetPrivShopOwner());
 	if (owner)
@@ -304,11 +326,29 @@ int CShop::GetItemCount()
 	int count = 0;
 	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
 	{
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		if (m_itemVector[i].pkItem && !m_itemVector[i].sold)
+#else
 		if (m_itemVector[i].pkItem)
+#endif
 			count++;
 	}
 	return count;
 }
+
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+void CShop::SetItemSoldByItemID(DWORD itemid)
+{
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		if (m_itemVector[i].pkItem && (DWORD)m_itemVector[i].itemid == itemid)
+		{
+			m_itemVector[i].sold = 1;
+			return;
+		}
+	}
+}
+#endif
 
 bool CShop::GetItems()
 {
@@ -320,6 +360,12 @@ bool CShop::GetItems()
 		auto pkItem = m_itemVector[i].pkItem;
 		if (!pkItem)
 			continue;
+
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		// Satilmis hayalet sahibe geri verilmez (kazanc zaten gift'e gitti) -> cift-verme/dupe engeli
+		if (m_itemVector[i].sold)
+			continue;
+#endif
 
 		char szGiftQuery[4096];
 		int giftQueryLen = snprintf(szGiftQuery, sizeof(szGiftQuery),
@@ -419,6 +465,10 @@ void CShop::RemoveItemForShop(DWORD dwItemID)// Suresi biten Kostum icin
 	{
 		if (m_itemVector[i].pkItem && m_itemVector[i].itemid == dwItemID)
 		{
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+			if (m_itemVector[i].sold)	// satilmis hayalet (kostum suresi dolsa bile) kaldirilmaz; kazanc zaten gift'te
+				break;
+#endif
 			DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", dwItemID);
 			m_itemVector[i].pkItem->SetShop(NULL);
 			m_itemVector[i].pkItem = NULL;
@@ -475,6 +525,12 @@ bool CShop::EditWouldExceedLimit(const BYTE * pbRemovePos, BYTE byRemoveCount, c
 		if (!m_itemVector[i].pkItem)
 			continue;
 
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		// Satilmis hayalet satista degil -> toplam deger limitine dahil edilmez
+		if (m_itemVector[i].sold)
+			continue;
+#endif
+
 		bool removed = false;
 		if (pbRemovePos)
 			for (BYTE r = 0; r < byRemoveCount; ++r)
@@ -516,6 +572,11 @@ void CShop::ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byR
 			if (!r.pkItem)
 				continue;
 
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+			if (r.sold)		// satilmis hayalet fiyatlandirilamaz
+				continue;
+#endif
+
 			// Yang overflow korumasi: fiyat GOLD_MAX'i asamaz
 			DWORD price = pUpdate[i].price;
 			if (price >= (DWORD)GOLD_MAX)
@@ -539,6 +600,10 @@ void CShop::ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byR
 			LPITEM pkItem = r.pkItem;
 			if (!pkItem)
 				continue;
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+			if (r.sold)		// satilmis hayalet sahibe geri verilemez (kazanc zaten gift'te) -> dupe engeli
+				continue;
+#endif
 
 			DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", r.itemid);
 
@@ -646,6 +711,9 @@ void CShop::ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byR
 				snprintf(query, sizeof(query), "%s, attrtype%d = %u",	query, ia, attr.bType);
 				snprintf(query, sizeof(query), "%s, attrvalue%d = %d",	query, ia, attr.sValue);
 			}
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+			snprintf(query, sizeof(query), "%s, sold = 0", query);	// yeni eklenen item satilmamis (DEFAULT'a guvenme)
+#endif
 			auto pkMsg = DBManager::instance().DirectQuery(query);
 			if (!pkMsg || !pkMsg->Get() || pkMsg->Get()->uiInsertID == 0)
 				continue;
@@ -1080,6 +1148,9 @@ bool CShop::AddGuest(LPCHARACTER ch, DWORD owner_vid, bool bOtherEmpire)
 #endif
 
 		pack2.items[i].count = item.count;
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		pack2.items[i].bSold = item.sold;	// satildi -> client kirmizi gosterir
+#endif
 
 		if (item.pkItem)
 		{
@@ -1135,6 +1206,7 @@ void CShop::BroadcastUpdateItem(BYTE pos)
 {
 	TPacketGCShop pack;
 	TPacketGCShopUpdateItem pack2;
+	memset(&pack2, 0, sizeof(pack2));
 
 	TEMP_BUFFER	buf;
 
@@ -1163,6 +1235,11 @@ void CShop::BroadcastUpdateItem(BYTE pos)
 
 	pack2.item.price	= m_itemVector[pos].price;
 	pack2.item.count	= m_itemVector[pos].count;
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+	pack2.item.bSold	= m_itemVector[pos].sold;
+#else
+	pack2.item.bSold	= 0;
+#endif
 #ifdef ENABLE_CHEQUE_SYSTEM
 	pack2.item.cheque = m_itemVector[pos].cheque;
 #endif

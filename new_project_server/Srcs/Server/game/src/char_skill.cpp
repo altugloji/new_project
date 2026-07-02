@@ -3476,8 +3476,8 @@ bool CHARACTER::ResetOneSkill(DWORD dwVnum)
 	m_pSkillLevels[dwVnum].bMasterType = 0;
 	m_pSkillLevels[dwVnum].tNextRead = 0;
 
-	if (level > 17)
-		level = 17;
+	if (level > SKILL_MASTER_NEEDED_LEVEL)
+		level = SKILL_MASTER_NEEDED_LEVEL;
 
 	PointChange(POINT_SKILL, level);
 

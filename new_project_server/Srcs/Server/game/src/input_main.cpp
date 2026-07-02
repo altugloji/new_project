@@ -3154,6 +3154,12 @@ int CInputMain::OfflineShopEdit(LPCHARACTER ch, const char * c_pData, size_t uiB
 			ch->CancelShopEdit();
 			break;
 
+#ifdef ENABLE_OFFLINE_SHOP_REMOTE
+		case OFFLINE_SHOP_EDIT_ACTION_REMOTE_OPEN:
+			ch->OpenMyShopRemote();
+			break;
+#endif
+
 		case OFFLINE_SHOP_EDIT_ACTION_APPLY:
 		default:
 		{

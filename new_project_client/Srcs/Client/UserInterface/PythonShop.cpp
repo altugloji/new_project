@@ -404,6 +404,21 @@ PyObject * shopGetItemID(PyObject * poSelf, PyObject * poArgs)
 	return Py_BuildValue("i", 0);
 }
 
+#ifdef ENABLE_OFFLINE_SHOP
+PyObject * shopIsItemSold(PyObject * poSelf, PyObject * poArgs)
+{
+	int nPos;
+	if (!PyTuple_GetInteger(poArgs, 0, &nPos))
+		return Py_BuildException();
+
+	const TShopItemData * c_pItemData;
+	if (CPythonShop::Instance().GetItemData(nPos, &c_pItemData))
+		return Py_BuildValue("i", c_pItemData->bSold);
+
+	return Py_BuildValue("i", 0);
+}
+#endif
+
 PyObject * shopGetItemCount(PyObject * poSelf, PyObject * poArgs)
 {
 	int iIndex;
@@ -651,6 +666,13 @@ PyObject * shopSendOfflineShopEdit(PyObject * poSelf, PyObject * poArgs)
 	CPythonShop::Instance().SendOfflineShopEdit(OFFLINE_SHOP_EDIT_ACTION_APPLY);
 	return Py_BuildNone();
 }
+
+PyObject * shopOfflineShopRemoteOpen(PyObject * poSelf, PyObject * poArgs)
+{
+	// 50200 "Pazarimi Gor": kendi pazarini uzaktan ac + duzenleme moduna gir
+	CPythonShop::Instance().SendOfflineShopEdit(OFFLINE_SHOP_EDIT_ACTION_REMOTE_OPEN);
+	return Py_BuildNone();
+}
 #endif
 
 PyObject * shopGetTabCount(PyObject * poSelf, PyObject * poArgs)
@@ -737,6 +759,8 @@ void initshop()
 		{ "OfflineShopEnter",			shopOfflineShopEnter,			METH_VARARGS },
 		{ "OfflineShopCancel",			shopOfflineShopCancel,			METH_VARARGS },
 		{ "SendOfflineShopEdit",		shopSendOfflineShopEdit,		METH_VARARGS },
+		{ "OfflineShopRemoteOpen",		shopOfflineShopRemoteOpen,		METH_VARARGS },
+		{ "IsItemSold",					shopIsItemSold,					METH_VARARGS },
 #endif
 #ifdef ENABLE_CHEQUE_SYSTEM
 		{ "GetItemCheque",				shopGetItemCheque,				METH_VARARGS },

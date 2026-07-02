@@ -66,6 +66,9 @@ class CPythonSystem : public CSingleton<CPythonSystem>
 #ifdef ENABLE_NIGHT_MODE_OPTION
 			FLOAT			night_mode_volume;
 #endif
+#ifdef ENABLE_FOV_OPTION
+			FLOAT			iFOVLevel;
+#endif
 			BYTE			voice_volume;
 
 			int				gamma;
@@ -209,6 +212,10 @@ class CPythonSystem : public CSingleton<CPythonSystem>
 #ifdef ENABLE_NIGHT_MODE_OPTION
 		float							GetNightModeVolume() const;
 		void							SetNightModeVolume(float fVolume);
+#endif
+#ifdef ENABLE_FOV_OPTION
+		float							GetFOVLevel() const;
+		void							SetFOVLevel(float fFOV);
 #endif
 		void							SetSoundVolumef(float fVolume);
 

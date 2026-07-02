@@ -42,6 +42,8 @@ class OptionDialog(ui.ScriptWindow):
 			self.anonymous_button = None
 		if app.ENABLE_NIGHT_MODE_OPTION:
 			self.ctrlNightMode = 0
+		if app.ENABLE_FOV_OPTION:
+			self.ctrlFOV = 0
 
 	@ui.WindowDestroy
 	def Destroy(self):
@@ -80,6 +82,8 @@ class OptionDialog(ui.ScriptWindow):
 				self.anonymous_button = GetObject("anonymous_button")
 			if app.ENABLE_NIGHT_MODE_OPTION:
 				self.ctrlNightMode = GetObject("night_mode_controller")
+			if app.ENABLE_FOV_OPTION:
+				self.ctrlFOV = GetObject("fov_bar")
 			#self.ctrlShadowQuality = GetObject("shadow_bar")
 		except:
 			import exception
@@ -103,6 +107,10 @@ class OptionDialog(ui.ScriptWindow):
 			self.ctrlNightMode.SetSliderPos(float(systemSetting.GetNightModeVolume()))
 			self.ctrlNightMode.SetEvent(ui.__mem_func__(self.OnChangeNightMode))
 			constInfo.APPLY_NIGHT_MODE()
+
+		if app.ENABLE_FOV_OPTION:
+			self.ctrlFOV.SetSliderPos((float(systemSetting.GetFOVLevel()) - 30.0) / 30.0)
+			self.ctrlFOV.SetEvent(ui.__mem_func__(self.OnChangeFOV))
 
 #		self.ctrlShadowQuality.SetSliderPos(float(systemSetting.GetShadowLevel()) / 5.0)
 #		self.ctrlShadowQuality.SetEvent(ui.__mem_func__(self.OnChangeShadowQuality))
@@ -219,6 +227,11 @@ class OptionDialog(ui.ScriptWindow):
 			pos = self.ctrlNightMode.GetSliderPos()
 			systemSetting.SetNightModeVolume(pos)
 			constInfo.APPLY_NIGHT_MODE(pos)
+
+	if app.ENABLE_FOV_OPTION:
+		def OnChangeFOV(self):
+			pos = self.ctrlFOV.GetSliderPos()
+			systemSetting.SetFOVLevel(30.0 + pos * 30.0)
 
 	def OnChangeShadowQuality(self):
 		pos = self.ctrlShadowQuality.GetSliderPos()

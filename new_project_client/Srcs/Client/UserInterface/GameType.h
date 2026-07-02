@@ -402,6 +402,7 @@ typedef struct packet_shop_item
 	BYTE		display_pos;
 	long		alSockets[ITEM_SOCKET_SLOT_MAX_NUM];
     TPlayerItemAttribute aAttr[ITEM_ATTRIBUTE_SLOT_MAX_NUM];
+	BYTE		bSold;
 } TShopItemData;
 
 #pragma pack(pop)

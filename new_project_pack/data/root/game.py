@@ -1069,6 +1069,9 @@ class GameWindow(ui.ScriptWindow):
 		def offline_shop_edit_start(self):
 			self.interface.OfflineShopEditStart()
 
+		def offline_shop_edit_start_remote(self):
+			self.interface.OfflineShopEditStartRemote()
+
 		def offline_shop_too_far(self):
 			self.interface.OfflineShopTooFar()
 
@@ -2223,6 +2226,7 @@ class GameWindow(ui.ScriptWindow):
 				"gift_info"		: self.gift_show,
 				"gift_load"		: self.gift_load,
 				"offline_shop_edit_start"	: self.offline_shop_edit_start,
+				"offline_shop_edit_start_remote"	: self.offline_shop_edit_start_remote,
 				"offline_shop_too_far"		: self.offline_shop_too_far,
 			})
 

@@ -600,6 +600,10 @@ class Interface(object):
 				self.wndWiki.Close()
 				self.wndWiki.Destroy()
 				self.wndWiki=None
+		if app.ENABLE_OFFLINE_SHOP:
+			if self.wndGiftBox:
+				self.wndGiftBox.Destroy()
+				self.wndGiftBox = None
 		if self.dlgWhisperWithoutTarget:
 			self.dlgWhisperWithoutTarget.Destroy()
 			del self.dlgWhisperWithoutTarget
@@ -1089,6 +1093,10 @@ class Interface(object):
 		def OfflineShopEditStart(self):
 			if self.dlgShop:
 				self.dlgShop.StartEditMode()
+
+		def OfflineShopEditStartRemote(self):
+			if self.dlgShop:
+				self.dlgShop.StartEditMode(True)
 
 		def OfflineShopTooFar(self):
 			self.wndPopupDialog = uiCommon.PopupDialog()
