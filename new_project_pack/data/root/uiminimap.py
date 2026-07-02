@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 import ui
 import uiScriptLocale
 import wndMgr
@@ -719,6 +720,8 @@ class MiniMap(ui.ScriptWindow):
 		self.tooltipAtlasOpen = 0
 		self.tooltipInfo = None
 		self.serverInfo = None
+		self.dateTimeInfo = None
+		self.dateTimeLastText = ""
 
 	def SetMapName(self, mapName):
 		self.mapName=mapName
@@ -786,8 +789,18 @@ class MiniMap(ui.ScriptWindow):
 			import exception
 			exception.Abort("MiniMap.LoadWindow.Bind")
 
+		# Tarih/saat gostergesi - uiscript kopyasinda alan yoksa sessizce devre disi kalir
+		try:
+			self.dateTimeInfo = self.GetChild("DateTimeInfo")
+		except:
+			self.dateTimeInfo = None
+
 		if constInfo.MINIMAP_POSITIONINFO_ENABLE==0:
 			self.positionInfo.Hide()
+
+		if self.dateTimeInfo and constInfo.MINIMAP_DATETIME_ENABLE==0:
+			self.dateTimeInfo.Hide()
+			self.dateTimeInfo = None
 
 		self.serverInfo.SetText(net.GetServerInfo())
 		self.ScaleUpButton.SetEvent(ui.__mem_func__(self.ScaleUp))
@@ -858,6 +871,12 @@ class MiniMap(ui.ScriptWindow):
 			self.positionInfo.SetText("%.0f, %.0f" % (x/100, y/100))
 		else:
 			self.positionInfo.SetText("(%.0f, %.0f)" % (x/100, y/100))
+
+		if self.dateTimeInfo:
+			dateTimeText = time.strftime("%d.%m.%Y %H:%M:%S")
+			if dateTimeText != self.dateTimeLastText:
+				self.dateTimeLastText = dateTimeText
+				self.dateTimeInfo.SetText(dateTimeText)
 
 		if self.tooltipInfo:
 			if True == self.MiniMapWindow.IsIn():

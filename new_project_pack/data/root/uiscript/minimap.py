@@ -118,6 +118,24 @@ window = {
 
 					"text" : "",
 				},
+				## DateTimeInfo
+				{
+					"name" : "DateTimeInfo",
+					"type" : "text",
+
+					"text_horizontal_align" : "center",
+
+					"outline" : 1,
+
+					"r" : 1.0,
+					"g" : 1.0,
+					"b" : 0.0,
+
+					"x" : 70,
+					"y" : 160,
+
+					"text" : "",
+				},
 				## ObserverCount
 				{
 					"name" : "ObserverCount",

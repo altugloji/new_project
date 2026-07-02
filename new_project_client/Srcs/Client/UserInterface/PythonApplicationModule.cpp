@@ -1996,6 +1996,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_OFFLINE_SHOP",	0);
 #endif
 
+#ifdef ENABLE_SHOP_SEARCH_ITEM_SELECT
+	PyModule_AddIntConstant(poModule, "ENABLE_SHOP_SEARCH_ITEM_SELECT",	1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_SHOP_SEARCH_ITEM_SELECT",	0);
+#endif
+
 #ifdef ENABLE_SEND_TARGET_INFO
 	PyModule_AddIntConstant(poModule, "ENABLE_SEND_TARGET_INFO",	1);
 #else

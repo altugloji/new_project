@@ -1928,12 +1928,26 @@ bool CPythonNetworkStream::RecvShopPacket()
 }
 
 // Pazar Arama: kategori bazli arama istegini sunucuya gonder.
-bool CPythonNetworkStream::SendShopSearchItem(DWORD searchIndex, int socket0)
+bool CPythonNetworkStream::SendShopSearchItem(DWORD searchIndex, int socket0, const DWORD * c_adwSelVnum, const int * c_aiSelSocket, BYTE bySelCount)
 {
 	TPacketCGShopSearch kPacket;
+	memset(&kPacket, 0, sizeof(kPacket));	// sel[] alanlari sifirlansin (secim yoksa selCount=0)
 	kPacket.header = HEADER_CG_SHOP_SEARCH;
 	kPacket.searchIndex = searchIndex;
 	kPacket.socket0 = socket0;
+
+	// Item-secmeli arama: python'dan gelen secim listesi (opsiyonel)
+	if (c_adwSelVnum && c_aiSelSocket && bySelCount > 0)
+	{
+		if (bySelCount > (BYTE)SHOP_SEARCH_SELECT_MAX)
+			bySelCount = (BYTE)SHOP_SEARCH_SELECT_MAX;
+		kPacket.selCount = bySelCount;
+		for (BYTE i = 0; i < bySelCount; ++i)
+		{
+			kPacket.sel[i].vnum = c_adwSelVnum[i];
+			kPacket.sel[i].socket0 = c_aiSelSocket[i];
+		}
+	}
 
 	if (!Send(sizeof(kPacket), &kPacket))
 		return false;

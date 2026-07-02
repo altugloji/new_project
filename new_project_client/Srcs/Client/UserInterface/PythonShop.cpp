@@ -708,7 +708,27 @@ PyObject * shopSendSearchItem(PyObject * poSelf, PyObject * poArgs)
 	int iSocket0 = 0;
 	PyTuple_GetInteger(poArgs, 1, &iSocket0);
 
-	CPythonNetworkStream::Instance().SendShopSearchItem((DWORD)iSearchIndex, iSocket0);
+	// Opsiyonel 3. arguman: [(vnum, socket0), ...] secim listesi (item-secmeli arama)
+	DWORD adwSelVnum[SHOP_SEARCH_SELECT_MAX];
+	int aiSelSocket[SHOP_SEARCH_SELECT_MAX];
+	BYTE bySelCount = 0;
+
+	PyObject * poList = NULL;
+	if (PyTuple_Size(poArgs) >= 3 && PyTuple_GetObject(poArgs, 2, &poList) && poList && PyList_Check(poList))
+	{
+		const Py_ssize_t listLen = PyList_Size(poList);
+		for (Py_ssize_t i = 0; i < listLen && bySelCount < SHOP_SEARCH_SELECT_MAX; ++i)
+		{
+			PyObject * poItem = PyList_GetItem(poList, i);
+			if (!poItem || !PyTuple_Check(poItem) || PyTuple_Size(poItem) < 2)
+				continue;
+			adwSelVnum[bySelCount] = (DWORD) PyInt_AsLong(PyTuple_GetItem(poItem, 0));
+			aiSelSocket[bySelCount] = (int) PyInt_AsLong(PyTuple_GetItem(poItem, 1));
+			++bySelCount;
+		}
+	}
+
+	CPythonNetworkStream::Instance().SendShopSearchItem((DWORD)iSearchIndex, iSocket0, adwSelVnum, aiSelSocket, bySelCount);
 	return Py_BuildNone();
 }
 

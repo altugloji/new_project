@@ -12,6 +12,7 @@ import ui
 import wndMgr
 import player
 import chat
+import app
 import localeInfo
 from _weakref import proxy
 
@@ -21,6 +22,9 @@ TXT_CLEAR_INFO  = localeInfo.SHOP_SEARCH_CLEAR_INFO
 
 # uiscript/shopsearchwindow.py ItemSlot grid'i ile ayni: x_count(6) * y_count(10)
 ITEM_SLOT_COUNT = 6 * 10
+
+# Ayni anda secilebilecek azami item sayisi (server/client packet SHOP_SEARCH_SELECT_MAX ile ayni)
+SHOP_SEARCH_SELECT_MAX = 30
 
 SHOP_CATEGORY_MAX_SUB = 20
 
@@ -684,7 +688,7 @@ def shopsearch_wearable_spec(category, sub_category):
 			return (item.ITEM_TYPE_ARMOR, m[sub_category])
 	return None
 
-def shopsearch_send(category, sub_category=-1, isSearchAttr=False):
+def shopsearch_send(category, sub_category=-1, isSearchAttr=False, selectedItems=None):
 	constInfo.OFFLINESHOP_LAST_SEARCHED_CATEGORY = category
 	constInfo.OFFLINESHOP_LAST_SEARCHED_SUBCATEGORY = sub_category
 	constInfo.OFFLINESHOP_LAST_SEARCH_IS_ATTR = isSearchAttr
@@ -702,15 +706,39 @@ def shopsearch_send(category, sub_category=-1, isSearchAttr=False):
 		search_data = search_data["sub"][sub_category]
 		searchIndex += sub_category
 
-	for data in search_data["itemList"]:
-		constInfo.OFFLINESHOP_LAST_SEARCHED_ITEMS.append(data)
+	# Item-secmeli arama: grid'de secim yapildiysa SADECE secilenler aranir ve
+	# pazar penceresindeki yesil vurgu da sadece secilenlerle eslesir.
+	# Eski binary'de (app sabiti yok/0) secim sunucuya gonderilemez -> tum liste aranir.
+	useSelection = False
+	if selectedItems and not shopsearch_is_wearable(category):
+		if getattr(app, "ENABLE_SHOP_SEARCH_ITEM_SELECT", 0):
+			useSelection = True
+		else:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Secili arama icin istemci guncellemesi gerekli; tum liste araniyor.")
+
+	if useSelection:
+		for data in selectedItems:
+			constInfo.OFFLINESHOP_LAST_SEARCHED_ITEMS.append(data)
+	else:
+		for data in search_data["itemList"]:
+			constInfo.OFFLINESHOP_LAST_SEARCHED_ITEMS.append(data)
 
 	# istemci binary'si yeniden derlenmemisse net mesaj ver (cokme yerine)
 	if not hasattr(shop, "SendSearchItem"):
 		chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.SHOP_SEARCH_NEED_UPDATE)
 		return
 
-	shop.SendSearchItem(searchIndex, 0)
+	# Wire korumasi: TPacketCGShopSearch'e selCount+sel[] alanlari KOSULSUZ eklendi (250 bayt).
+	# app.ENABLE_SHOP_SEARCH_ITEM_SELECT sabiti HIC yoksa binary ESKI 9-baytlik wire ile
+	# derlenmis demektir; gonderim framing'i kaydirir ve oyuncu dusurulur -> hic gonderme.
+	if not hasattr(app, "ENABLE_SHOP_SEARCH_ITEM_SELECT"):
+		chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.SHOP_SEARCH_NEED_UPDATE)
+		return
+
+	if useSelection:
+		shop.SendSearchItem(searchIndex, 0, list(selectedItems))
+	else:
+		shop.SendSearchItem(searchIndex, 0)
 
 def shopsearch_get_item_list(category, sub_category=-1):
 	data = SHOP_SEARCH_FILTERS[category]
@@ -738,6 +766,8 @@ class ShopSearchWindow(ui.ScriptWindow):
 		self.subCategory = -1
 		self.itemToolTip = None
 		self.isSearchAttr = False
+		# Item-secmeli arama: secili (vnum, socket0) ciftleri (aktif alt-kategori icin)
+		self.selectedItems = []
 		# LoadDialog'da atanan widget referanslari (Destroy -> __Initialize ile sifirlanir)
 		self.titleBar = None
 		self.categoryMask = None
@@ -781,6 +811,7 @@ class ShopSearchWindow(ui.ScriptWindow):
 			self.itemSlot.SetSlotStyle(wndMgr.SLOT_STYLE_NONE)
 			self.itemSlot.SetOverInItemEvent(ui.__mem_func__(self.__ShowToolTip))
 			self.itemSlot.SetOverOutItemEvent(ui.__mem_func__(self.__HideToolTip))
+			self.itemSlot.SetSelectItemSlotEvent(ui.__mem_func__(self.__OnClickItemSlot))
 
 			self.searchButton.SAFE_SetEvent(self.__OnSearch)
 			self.clearButton.SAFE_SetEvent(self.__OnClear)
@@ -859,6 +890,9 @@ class ShopSearchWindow(ui.ScriptWindow):
 			self.itemSlot.SetItemSlot(idx, itemData[0], 0)
 			idx += 1
 
+		# Secim isaretlerini yeniden uygula (kategori/alt-kategori degisiminde secim sifirlanir)
+		self.__RefreshSelectionMarks()
+
 	def __CreateCategory(self, categoryIndex):
 		if categoryIndex == "break":
 			step = ui.Window()
@@ -934,6 +968,7 @@ class ShopSearchWindow(ui.ScriptWindow):
 
 		self.category = category
 		self.subCategory = -1
+		self.selectedItems = []
 		self.__RefreshSubCategoryButtons()
 		self.__RefreshCategory()
 		if category >= 0:
@@ -960,8 +995,42 @@ class ShopSearchWindow(ui.ScriptWindow):
 
 	def __OnClickSubCategory(self, index):
 		self.subCategory = index
+		self.selectedItems = []
 		self.__RefreshSubCategoryButtons()
 		self.__RefreshCategory()
+
+	def __OnClickItemSlot(self, index):
+		# Grid'deki iteme tiklayinca sec/birak: yesil isaretli itemler aranir.
+		# Secim yoksa arama eskisi gibi tum alt-kategoriyi tarar.
+		if self.category < 0 or shopsearch_is_wearable(self.category):
+			return
+		try:
+			itemList = shopsearch_get_item_list(self.category, self.subCategory)
+		except Exception:
+			return
+		if index < 0 or index >= len(itemList):
+			return
+		itemData = itemList[index]
+		if itemData in self.selectedItems:
+			self.selectedItems.remove(itemData)
+		elif len(self.selectedItems) < SHOP_SEARCH_SELECT_MAX:
+			self.selectedItems.append(itemData)
+		self.__RefreshSelectionMarks()
+
+	def __RefreshSelectionMarks(self):
+		# Secili slotlara pazar penceresindeki arama vurgusuyla ayni yesil overlay
+		itemList = []
+		if self.category >= 0 and not shopsearch_is_wearable(self.category):
+			try:
+				itemList = shopsearch_get_item_list(self.category, self.subCategory)
+			except Exception:
+				itemList = []
+		for idx in range(ITEM_SLOT_COUNT):
+			if idx < len(itemList) and itemList[idx] in self.selectedItems:
+				self.itemSlot.ActivateSlot(idx, 0.0, 1.0, 0.0, 0.6)
+			else:
+				self.itemSlot.DeactivateSlot(idx)
+		wndMgr.RefreshSlot(self.itemSlot.GetWindowHandle())
 
 	def __ShowToolTip(self, index):
 		if self.itemToolTip:
@@ -981,7 +1050,7 @@ class ShopSearchWindow(ui.ScriptWindow):
 	def __OnSearch(self):
 		if self.category >= 0:
 			self.__OnClear()
-			shopsearch_send(self.category, self.subCategory, self.isSearchAttr)
+			shopsearch_send(self.category, self.subCategory, self.isSearchAttr, self.selectedItems)
 
 	def __OnClear(self):
 		if hasattr(shop, "ClearFoundShopMap"):

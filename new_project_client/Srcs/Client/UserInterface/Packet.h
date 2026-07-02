@@ -1979,11 +1979,23 @@ typedef struct packet_shop
 } TPacketGCShop;
 
 // Pazar Arama (ShopSearch) paketleri - sunucu (game-src/game/src/packet.h) ile birebir ayni.
+// Item-secmeli arama (ENABLE_SHOP_SEARCH_ITEM_SELECT): secilen (vnum, socket0) ciftleri.
+// Wire alanlari HER ZAMAN derlenir (bSold emsali); ozellik kapaliyken selCount=0 gider.
+enum { SHOP_SEARCH_SELECT_MAX = 30 };
+
+typedef struct command_shop_search_sel
+{
+	DWORD	vnum;
+	int		socket0;
+} TShopSearchSelElement;
+
 typedef struct command_shop_search
 {
 	BYTE	header;			// HEADER_CG_SHOP_SEARCH
 	DWORD	searchIndex;	// kategori indexi (category * SHOP_CATEGORY_MAX_SUB + sub)
 	int		socket0;		// UI'dan her zaman 0
+	BYTE	selCount;		// 0 = tum alt-kategori aranir (eski davranis)
+	TShopSearchSelElement	sel[SHOP_SEARCH_SELECT_MAX];	// sadece ilk selCount giris gecerli
 } TPacketCGShopSearch;
 
 typedef struct packet_shop_search_result_element

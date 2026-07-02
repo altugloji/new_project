@@ -171,6 +171,8 @@
 #define ENABLE_FOV_OPTION													// Sistem secenekleri: Gorus alani (FOV) kaydiricisi
 #define ENABLE_BOT_CONTROL													// Bot Kontrol Sistemi (dogrulama paneli)
 
+#define ENABLE_SHOP_SEARCH_ITEM_SELECT										// Pazar Arama: grid'den item secip SADECE secilenleri aratma
+
 // #define METIN35_ADMIN_PANEL												// Yönetim Paneli
 #ifdef METIN35_ADMIN_PANEL
 	#define CUR_CLIENT_VERSION 17										//versiyon key

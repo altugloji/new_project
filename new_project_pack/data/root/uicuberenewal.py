@@ -1,4 +1,5 @@
 import ui
+import app
 import item
 import localeInfo
 import uiToolTip
@@ -456,6 +457,35 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self.result_qty.Show()
 		self.Refresh()
 
+	# YENI: henuz uretilmemis item onizlemesi icin socket doldur; sureli item'lerde
+	# tooltip sureyi socket(0)'dan okur, hepsi 0 gecilince sure hic gorunmuyordu.
+	# Degerler server item_manager.cpp CreateItem ile AYNI (REAL_TIME: now+deger,
+	# 0 ise 7 gun; TIMER_BASED_ON_WEAR: deger, 0 ise 10 saat). START_FIRST_USE'a
+	# dokunma: tooltip socket(0)==0 iken sureyi zaten proto'dan hesapliyor.
+	def __BuildPreviewMetinSlot(self, vnum):
+		metinSlot = []
+		for i in xrange(player.METIN_SOCKET_MAX_NUM):
+			metinSlot.append(0)
+
+		try:
+			item.SelectItem(vnum)
+			for i in xrange(item.LIMIT_MAX_NUM):
+				(limitType, limitValue) = item.GetLimit(i)
+				if item.LIMIT_REAL_TIME == limitType:
+					if limitValue == 0:
+						limitValue = 60 * 60 * 24 * 7
+					metinSlot[0] = app.GetGlobalTimeStamp() + limitValue
+					break
+				elif item.LIMIT_TIMER_BASED_ON_WEAR == limitType:
+					if limitValue == 0:
+						limitValue = 60 * 60 * 10
+					metinSlot[0] = limitValue
+					break
+		except:
+			pass
+
+		return metinSlot
+
 	def __OverInCubeResultSlot(self, trash, visibleRow):
 		self.toolTip.ClearToolTip()
 
@@ -467,11 +497,7 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		if vnum == 0:
 			return
 
-		metinSlot = []
-		for i in xrange(player.METIN_SOCKET_MAX_NUM):
-			metinSlot.append(0)
-
-		self.toolTip.AddItemData(vnum, metinSlot)
+		self.toolTip.AddItemData(vnum, self.__BuildPreviewMetinSlot(vnum))
 
 	def __OverInMaterialSlot(self, trash, visibleRow, col):
 		self.toolTip.ClearToolTip()
@@ -487,11 +513,7 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		if vnum == 0:
 			return
 
-		metinSlot = []
-		for i in xrange(player.METIN_SOCKET_MAX_NUM):
-			metinSlot.append(0)
-
-		self.toolTip.AddItemData(vnum, metinSlot)
+		self.toolTip.AddItemData(vnum, self.__BuildPreviewMetinSlot(vnum))
 
 		cnt = self._MaterialNeedCount(recipeIndex, matIdx)
 		have = player.GetItemCountByVnum(vnum)
