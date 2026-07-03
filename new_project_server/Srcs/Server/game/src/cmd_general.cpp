@@ -368,7 +368,7 @@ ACMD(do_cmd)
 	}
 
 #ifdef ENABLE_BOT_CONTROL
-	if (ch->IsAtBotControl()) {
+	if (ch->IsAtBotControl() && BotControlEnforced()) {
 		ch->ChatPacket(CHAT_TYPE_INFO, "Bot kontrol aktif?");
 		return;
 	}

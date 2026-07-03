@@ -1628,8 +1628,8 @@ class Interface(object):
 		return name.lower() in self._gmCallSuppressNames
 
 	def ShouldSuppressGmCallWhisperSystemMessage(self, mode, name, line):
-		# WHISPER_TYPE_ERROR == 4 can use the system-message path in RecvWhisperPacket.
-		if mode != 4:
+		# WHISPER_TYPE_ERROR == 4 ve WHISPER_TYPE_SYSTEM == 255 system-message yolunu kullanir (255: seviye limiti uyarisi).
+		if mode != 4 and mode != 255:
 			return False
 		if not self._GmCallSuppressWindowActive():
 			return False

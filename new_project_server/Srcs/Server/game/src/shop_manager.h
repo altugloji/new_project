@@ -30,10 +30,6 @@ public:
 	void	DestroyPCShop(LPCHARACTER ch);
 
 #ifdef OFFLINE_SHOP
-	void	SearchShopItem(LPCHARACTER ch, DWORD searchIndex, int socket0);
-#endif
-
-#ifdef OFFLINE_SHOP
 public:
 	bool	StartOfflineShop(DWORD dwPID, bool onboot = false);
 	void	CreateOfflineShop(LPCHARACTER owner, const char *szSign, const std::vector<TShopItemTable*> pTable);
@@ -51,6 +47,14 @@ public:
 
 	void	PrepareShopSearchFilters();
 	bool	SearchItemsByCategory(DWORD category, LPSHOP shop);
+
+#ifdef ENABLE_SHOP_SEARCH_ITEM_SELECT
+	// Item-secmeli arama: secim listesi doluysa yalnizca secilen (vnum, socket0)
+	// ciftleri eslestirilir; bos/gecersiz secim = eski kategori-geneli davranis.
+	void	SearchShopItem(LPCHARACTER ch, DWORD searchIndex, int socket0, const std::vector<SOfflineShopFilter> & c_rkSelection);
+#else
+	void	SearchShopItem(LPCHARACTER ch, DWORD searchIndex, int socket0);
+#endif
 #endif
 
 private:

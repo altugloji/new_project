@@ -77,6 +77,15 @@ extern void LoadGMOnlyLogin();
 extern std::array<BYTE, GM_ONLY_LOGIN_MAX_NUM> g_arrGMOnlyLogin;
 #endif
 
+#ifdef ENABLE_BOT_CONTROL
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+extern bool g_bBotControlEnforce;
+inline bool BotControlEnforced() { return g_bBotControlEnforce; }
+#else
+inline bool BotControlEnforced() { return true; }
+#endif
+#endif
+
 extern bool	map_allow_find(int index);
 extern void	map_allow_copy(long * pl, int size);
 extern bool	no_wander;

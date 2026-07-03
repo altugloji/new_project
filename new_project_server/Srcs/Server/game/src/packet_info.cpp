@@ -288,6 +288,10 @@ CPacketInfoGG::CPacketInfoGG()
 	Set(HEADER_GG_GM_ONLY_LOGIN,		sizeof(TPacketGGGMOnlyLogin),		"GGGMOnlyLogin",	false);
 #endif
 
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+	Set(HEADER_GG_BOT_CONTROL_ENFORCE,	sizeof(TPacketGGBotControlEnforce),	"BotControlEnforce",	false);
+#endif
+
 #ifdef ENABLE_RELOAD_ETC_DROP_ITEM
 	Set(HEADER_GG_RELOAD_ETC_DROP,		sizeof(BYTE),						"ReloadEtcDrop",	false);
 #endif

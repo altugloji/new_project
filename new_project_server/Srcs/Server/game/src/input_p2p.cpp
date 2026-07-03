@@ -639,6 +639,16 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			break;
 #endif
 
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+		case HEADER_GG_BOT_CONTROL_ENFORCE:
+		{
+			const TPacketGGBotControlEnforce* pEnforce = (const TPacketGGBotControlEnforce*)c_pData;
+			g_bBotControlEnforce = (pEnforce->byEnforce != 0);
+			sys_log(0, "BOTCONTROL: P2P sert mod guncellendi: %d", g_bBotControlEnforce ? 1 : 0);
+		}
+		break;
+#endif
+
 #ifdef ENABLE_RELOAD_ETC_DROP_ITEM
 		case HEADER_GG_RELOAD_ETC_DROP:
 			ITEM_MANAGER::instance().ReloadEtcDropItemFile();

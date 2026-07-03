@@ -1604,7 +1604,7 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 #endif
 
 #ifdef ENABLE_BOT_CONTROL
-	if (pAttacker && pAttacker->IsAtBotControl()) { return false; }
+	if (pAttacker && pAttacker->IsAtBotControl() && BotControlEnforced()) { return false; }
 #endif
 
 	if (DAMAGE_TYPE_MAGIC == type)
@@ -1643,6 +1643,26 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 			pAttacker->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("You can't deal damage while running quests"));
 			return false;
 		}
+	}
+#endif
+
+#ifdef ENABLE_MOVE_CHANNEL
+	// bekleyen kanal degisimi (5 sn geri sayim) savasla iptal olur:
+	// - hasar veren oyuncu (hedef mob/metin/oyuncu farketmez) kendi kanal degisimini kaybeder
+	// - hasar yiyen oyuncu (saldiran mob veya oyuncu farketmez) kanal degisimini kaybeder
+	// dolayli hasar (zehir/yanma/kanama tiklari + yansitma) saldiran-taraf iptalini TETIKLEMEZ:
+	// yoksa savastan once atilan DoT tiklari veya moba yansitma, bekleyen oyuncuyu iptal ettirir
+	{
+		bool bDirectDamage = (type != DAMAGE_TYPE_POISON && type != DAMAGE_TYPE_FIRE && type != DAMAGE_TYPE_SPECIAL);
+#ifdef ENABLE_WOLFMAN_CHARACTER
+		if (type == DAMAGE_TYPE_BLEEDING)
+			bDirectDamage = false;
+#endif
+		if (bDirectDamage && pAttacker && pAttacker != this && pAttacker->IsPC() && pAttacker->IsChangingChannel())
+			pAttacker->CancelChangeChannel();
+
+		if (IsPC() && IsChangingChannel() && pAttacker && pAttacker != this)
+			CancelChangeChannel();
 	}
 #endif
 

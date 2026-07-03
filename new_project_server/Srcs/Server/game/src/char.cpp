@@ -9028,7 +9028,7 @@ bool CHARACTER::CanChangeChannel(BYTE newChannel)
 	}
 
 #ifdef ENABLE_BOT_CONTROL
-	if (IsAtBotControl()) {
+	if (IsAtBotControl() && BotControlEnforced()) {
 		ChatPacket(CHAT_TYPE_INFO, "Bot kontrol aktif?");
 		return false;
 	}
@@ -9125,6 +9125,16 @@ bool CHARACTER::ProcessChangeChannel(BYTE newChannel)
 
 	Stop();
 	return true;
+}
+
+// savas nedeniyle bekleyen kanal degisimini iptal et (char_battle.cpp Damage'dan cagrilir)
+void CHARACTER::CancelChangeChannel()
+{
+	if (!m_pkChangeChannelEvent)
+		return;
+
+	event_cancel(&m_pkChangeChannelEvent);
+	ChatPacket(CHAT_TYPE_INFO, "Savasa girdiginiz icin kanal degistirme iptal edildi.");
 }
 #endif
 
@@ -9495,6 +9505,18 @@ EVENTFUNC(botControlEvent) {
 	/**/
 	if (info->processType == 1) {
 		if (ch->IsAtBotControl()) {
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+			if (!BotControlEnforced()) {
+				// sys_log(0, "BOTCONTROL: soft-mode zaman asimi pid %u isim %s", ch->GetPlayerID(), ch->GetName());
+				ch->SetIsAtBotControl(false);
+				info->processType = 0;
+				ch->ResetBotControlValues();
+				DWORD dwSoftPassSec = number(30, 55) * info->scanTime;
+				ch->SetLastBotControlTime(get_global_time() + dwSoftPassSec);
+				if (ch->IsGM()) { ch->ChatPacket(CHAT_TYPE_INFO, "<DEV|BOTKONTROL> Soft-mode: cevapsiz, DC yok. passSn:%u", dwSoftPassSec); }
+				return PASSES_PER_SEC(dwSoftPassSec);
+			}
+#endif
 			ch->ChatPacket(CHAT_TYPE_COMMAND, "quit Shutdown(SendDisconnectFunc)");
 			ch->Disconnect("BOT");
 			return 0;
@@ -9585,6 +9607,14 @@ void CHARACTER::DoBotControl(const char* verifyStr) {
 		LogManager::Instance().BotControlLog(GetPlayerID(), GetName(), GetDesc()->GetAccountTable().id, get_dword_time() - GetLastBotControlShowTime());
 	}
 	else {
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+		if (!BotControlEnforced()) {
+			// sys_log(0, "BOTCONTROL: soft-mode yanlis kod pid %u isim %s", GetPlayerID(), GetName());
+			ChatPacket(CHAT_TYPE_INFO, "Dogrulama basarisiz.");
+			SetIsAtBotControl(false);
+			return;
+		}
+#endif
 		ChatPacket(CHAT_TYPE_COMMAND, "quit Shutdown(SendDisconnectFunc)");
 		Disconnect("BOT");
 	}

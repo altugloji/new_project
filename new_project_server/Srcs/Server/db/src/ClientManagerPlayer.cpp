@@ -627,18 +627,13 @@ void CClientManager::RESULT_COMPOSITE_PLAYER(CPeer * peer, SQLMsg * pMsg, DWORD 
 				sys_log(0, "QID_QUEST %u", info->dwHandle);
 				RESULT_QUEST_LOAD(peer, pSQLResult, info->dwHandle, info->player_id);
 
-				const ClientHandleInfo*  temp1 = info.get();
-				if (temp1 == nullptr)
+				// login datasi, quest sorgusu kuyruktayken silinmis olabilir (hizli gir-cik / relog yarisi) -> null gelirse GIFT bildirimi atlanir
+				CLoginData* pLoginData1 = GetLoginDataByAID(info->account_id);
+
+				if (pLoginData1 == nullptr)
 					break;
 
-				CLoginData* pLoginData1 = GetLoginDataByAID(temp1->account_id);
-
-				if( pLoginData1->GetAccountRef().login == nullptr)
-					break;
-				if( pLoginData1 == nullptr)
-					break;
-				sys_log(0,"info of pLoginData1 before call ItemAwardfunction %d",pLoginData1);
-				ItemAward(peer,pLoginData1->GetAccountRef().login);
+				ItemAward(peer, pLoginData1->GetAccountRef().login);
 			}
 			break;
 

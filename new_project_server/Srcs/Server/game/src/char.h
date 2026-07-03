@@ -2263,6 +2263,7 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		bool ProcessChangeChannel(BYTE newChannel); // bekleme dolunca gercek isinlanma
 		bool CanChangeChannel(BYTE newChannel);     // ortak dogrulama (komut aninda + 5 sn sonra)
 		bool IsChangingChannel() const { return m_pkChangeChannelEvent ? true : false; }
+		void CancelChangeChannel();                 // savas nedeniyle bekleyen kanal degisimini iptal et
 
 		LPEVENT m_pkChangeChannelEvent;
 #endif

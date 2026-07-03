@@ -91,6 +91,10 @@ std::array<BYTE, ADMIN_PANEL_MAX_NUM> g_arrAdminPanel;
 std::array<BYTE, GM_ONLY_LOGIN_MAX_NUM> g_arrGMOnlyLogin{};
 #endif
 
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+bool g_bBotControlEnforce = false;	// gozlem modu varsayilani: bloklar/DC kapali; /bot_control_enforce veya CONFIG ile acilir
+#endif
+
 string g_stHostname = "";
 string g_table_postfix = "";
 
@@ -372,6 +376,17 @@ static bool __LoadConnectConfigFile(const char* configName)
 			str_to_number(g_bChannel, value_string);
 			continue;
 		}
+
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+		TOKEN("bot_control_enforce")
+		{
+			int iEnforce = 0;
+			str_to_number(iEnforce, value_string);
+			g_bBotControlEnforce = (iEnforce != 0);
+			fprintf(stdout, "BOT_CONTROL_ENFORCE: %d\n", iEnforce ? 1 : 0);
+			continue;
+		}
+#endif
 
 		TOKEN("player_sql")
 		{

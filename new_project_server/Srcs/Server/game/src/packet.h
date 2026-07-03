@@ -394,6 +394,10 @@ enum
 	HEADER_GG_RELOAD_ETC_DROP					= 37,
 #endif
 
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+	HEADER_GG_BOT_CONTROL_ENFORCE				= 39,
+#endif
+
 };
 
 #pragma pack(1)
@@ -1427,11 +1431,23 @@ typedef struct packet_shop
 #ifdef OFFLINE_SHOP
 // Pazar Arama (ShopSearch) paketleri - istemci/sunucu birebir ayni olmak zorunda.
 // CG: oyuncu bir kategori secip arama yapar. searchIndex = category*SHOP_CATEGORY_MAX_SUB + sub
+// Item-secmeli arama (ENABLE_SHOP_SEARCH_ITEM_SELECT): secilen (vnum, socket0) ciftleri.
+// Wire alanlari HER ZAMAN derlenir (bSold emsali); ozellik kapaliyken selCount=0 gider.
+enum { SHOP_SEARCH_SELECT_MAX = 30 };
+
+typedef struct command_shop_search_sel
+{
+	DWORD	vnum;
+	int		socket0;
+} TShopSearchSelElement;
+
 typedef struct command_shop_search
 {
 	BYTE	header;			// HEADER_CG_SHOP_SEARCH
 	DWORD	searchIndex;	// kategori indexi (kaynaktaki "itemVnum" alanina karsilik gelir)
 	int		socket0;		// UI'dan her zaman 0; protokol uyumu icin saklanir
+	BYTE	selCount;		// 0 = tum alt-kategori aranir (eski davranis)
+	TShopSearchSelElement	sel[SHOP_SEARCH_SELECT_MAX];	// sadece ilk selCount giris gecerli
 } TPacketCGShopSearch;
 
 // GC: bulunan her dukkan icin sahip/tezgah vid + harita konumu
@@ -2852,6 +2868,14 @@ typedef struct SPacketGGGMOnlyLogin
 {
 	BYTE					byHeader;
 } TPacketGGGMOnlyLogin;
+#endif
+
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+typedef struct SPacketGGBotControlEnforce
+{
+	BYTE	byHeader;
+	BYTE	byEnforce;
+} TPacketGGBotControlEnforce;
 #endif
 
 #ifdef ENABLE_BOT_CONTROL

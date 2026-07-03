@@ -132,6 +132,34 @@ ACMD(do_gm_only_login)
 }
 #endif
 
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+ACMD(do_bot_control_enforce)
+{
+	if (!ch || !ch->IsPC())
+		return;
+
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (*arg1)
+	{
+		int iOnOff = 0;
+		str_to_number(iOnOff, arg1);
+		g_bBotControlEnforce = (iOnOff != 0);
+	}
+	else
+		g_bBotControlEnforce = !g_bBotControlEnforce;
+
+	TPacketGGBotControlEnforce ggPacket	{};
+	ggPacket.byHeader =		HEADER_GG_BOT_CONTROL_ENFORCE;
+	ggPacket.byEnforce =	g_bBotControlEnforce ? 1 : 0;
+	P2P_MANAGER::instance().Send(&ggPacket, sizeof(TPacketGGBotControlEnforce));
+
+	ch->ChatPacket(CHAT_TYPE_INFO, "[BOT-KONTROL] Sert mod: %s",
+			g_bBotControlEnforce ? "ACIK (bloklar + DC aktif)" : "KAPALI (gozlem modu)");
+}
+#endif
+
 ACMD(do_stun)
 {
 	Command_ApplyAffect(ch, argument, "stun", COMMANDAFFECT_STUN);

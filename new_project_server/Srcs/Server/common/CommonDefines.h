@@ -159,7 +159,14 @@ enum eCommonDefines {
 #define ENABLE_MOUNT_PVP_DAMAGE_REDUCTION							// At üzerinde pvp'de %30 hasar azaltma
 #define ENABLE_MARRIAGE_RING_COOLTIME								// Yuzuk tekrar kullanim suresi
 #define ENABLE_BOT_CONTROL											// Bot Kontrol Sistemi (periyodik bot taramasi + dogrulama kodu)
+#ifdef ENABLE_BOT_CONTROL
+	#define ENABLE_BOT_CONTROL_SOFT_MODE		// GECICI gozlem modu: panel + log calisir, hasar/kanal/cikis bloklari ve DC devre disi; /bot_control_enforce ile ac/kapa, acilis varsayilani CONFIG "BOT_CONTROL_ENFORCE: 1"
+#endif
 #define ENABLE_STONE_DROP_TOP_DAMAGER								// Taslarda en cok hasar vuran oyuncu tum droplari alir
+#define ENABLE_WHISPER_LEVEL_LIMIT									// 10 seviye alti oyuncular oyunculara PM gonderemez, PM penceresinde uyari (GM'e gonderim serbest)
+#ifdef ENABLE_WHISPER_LEVEL_LIMIT
+	#define WHISPER_LEVEL_LIMIT 10									// PM gonderebilmek icin gereken minimum seviye
+#endif
 
 
 
@@ -172,6 +179,7 @@ enum eCommonDefines {
 	#define SHOP_GM_PRIVILEGES GM_IMPLEMENTOR						// Minimum GM privileges to using Shop GM Panel
 	#define ENABLE_OFFLINE_SHOP_REMOTE								// 50200 itemi ile pazara gitmeden uzaktan yonetim
 	#define ENABLE_OFFLINE_SHOP_SOLD_RED							// Satilan item pazardan silinmesin
+	#define ENABLE_SHOP_SEARCH_ITEM_SELECT						// Pazar Arama: grid'den item secip SADECE secilenleri arama (secim yoksa eski kategori-geneli davranis)
 #endif
 
 #endif

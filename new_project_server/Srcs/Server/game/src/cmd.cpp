@@ -333,6 +333,9 @@ ACMD(do_beran);
 #ifdef ENABLE_GM_ONLY_LOGIN
 ACMD(do_gm_only_login);
 #endif
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+ACMD(do_bot_control_enforce);
+#endif
 
 struct command_info cmd_info[] =
 {
@@ -704,6 +707,9 @@ struct command_info cmd_info[] =
 
 #ifdef ENABLE_GM_ONLY_LOGIN
 	{ "gm_only_login",			do_gm_only_login,		0,			POS_DEAD,	GM_IMPLEMENTOR	},
+#endif
+#ifdef ENABLE_BOT_CONTROL_SOFT_MODE
+	{ "bot_control_enforce",	do_bot_control_enforce,	0,			POS_DEAD,	GM_IMPLEMENTOR	},
 #endif
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}
