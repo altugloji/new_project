@@ -136,6 +136,12 @@ enum
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 	HEADER_CG_SAFETRADE				= 234,
 #endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	HEADER_CG_GIFT_LIST					= 226,
+	HEADER_CG_GIFT_FIND					= 227,
+	HEADER_CG_GIFT_SEND					= 228,
+	HEADER_CG_GIFT_RANK					= 229,
+#endif
 
 	HEADER_CG_CLIENT_VERSION2		= 0xf1,
 
@@ -342,6 +348,15 @@ enum
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 	HEADER_GC_SAFETRADE							= 238,
 #endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	HEADER_GC_GIFT_LIST							= 239,
+	HEADER_GC_GIFT_FIND_RESULT					= 240,
+	HEADER_GC_GIFT_SEND_RESULT					= 241,
+	HEADER_GC_GIFT_EP							= 242,
+	HEADER_GC_GIFT_NOTIFY						= 243,
+	HEADER_GC_GIFT_POINT						= 244,
+	HEADER_GC_GIFT_RANK							= 245,
+#endif
 	/////////////////////////////////////////////////////////////////////////////
 
 	HEADER_GG_LOGIN								= 1,
@@ -396,6 +411,9 @@ enum
 
 #ifdef ENABLE_BOT_CONTROL_SOFT_MODE
 	HEADER_GG_BOT_CONTROL_ENFORCE				= 39,
+#endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	HEADER_GG_GIFT_NOTIFY						= 40,
 #endif
 
 };
@@ -2887,6 +2905,149 @@ typedef struct Packet_CGBC {
 	BYTE	header;
 	char	verifyCode[56];
 } TPacketCGBotControl;
+#endif
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+// --- Hediye Gonderme Sistemi wire yapilari ---
+// DIKKAT: client src_client/UserInterface/GiftPacket.h ile BAYT BAYT ayni olmali.
+#define GIFT_NAME_MAX_LEN			32
+#define GIFT_DESC_MAX_LEN			128
+#define GIFT_MESSAGE_MAX_LEN		120
+#define GIFT_LIST_MAX				120				// tek pakette gonderilebilecek max hediye tanimi
+#define GIFT_LIST_GC_MAX_SIZE		32768			// GC katalog payload tavani
+#define GIFT_SEND_MAX_COUNT			99				// tek gonderimde max adet
+#define GIFT_SEND_COOLTIME_SEC		5				// flood korumasi (sn)
+// flag bitleri
+#define GIFT_FLAG_PACKAGE			1				// ozel paket gorseli
+#define GIFT_FLAG_ANONYMOUS			2				// gonderen adi gizli
+
+typedef struct SGiftItemEntry
+{
+	WORD	wIndex;								// gift_item.id
+	DWORD	dwIconVnum;							// ikon item vnum'u
+	DWORD	dwPriceEP;							// birim EP fiyati
+	BYTE	bPage;
+	BYTE	bSlot;
+	char	szName[GIFT_NAME_MAX_LEN + 1];
+	char	szDesc[GIFT_DESC_MAX_LEN + 1];
+} TGiftItemEntry;
+
+// CG
+typedef struct SPacketCGGiftList
+{
+	BYTE	bHeader;							// HEADER_CG_GIFT_LIST
+} TPacketCGGiftList;
+
+typedef struct SPacketCGGiftFind
+{
+	BYTE	bHeader;							// HEADER_CG_GIFT_FIND
+	char	szName[CHARACTER_NAME_MAX_LEN + 1];
+} TPacketCGGiftFind;
+
+typedef struct SPacketCGGiftSend
+{
+	BYTE	bHeader;							// HEADER_CG_GIFT_SEND
+	char	szName[CHARACTER_NAME_MAX_LEN + 1];
+	WORD	wGiftIndex;
+	BYTE	bCount;
+	BYTE	bFlags;								// bit0 paket, bit1 anonim
+	char	szMessage[GIFT_MESSAGE_MAX_LEN + 1];
+} TPacketCGGiftSend;
+
+// GC (katalog: dinamik boyut, wSize surer)
+typedef struct SPacketGCGiftList
+{
+	BYTE	bHeader;							// HEADER_GC_GIFT_LIST
+	WORD	wSize;
+	BYTE	bCount;
+	union
+	{
+		TGiftItemEntry	entries[GIFT_LIST_MAX];
+		BYTE			abPayload[GIFT_LIST_GC_MAX_SIZE];
+	};
+} TPacketGCGiftList;
+
+typedef struct SPacketGCGiftFindResult
+{
+	BYTE	bHeader;							// HEADER_GC_GIFT_FIND_RESULT
+	BYTE	bResult;							// EGiftFindResult
+	char	szName[CHARACTER_NAME_MAX_LEN + 1];
+} TPacketGCGiftFindResult;
+
+typedef struct SPacketGCGiftSendResult
+{
+	BYTE	bHeader;							// HEADER_GC_GIFT_SEND_RESULT
+	BYTE	bResult;							// EGiftSendResult
+	DWORD	dwNewEP;							// gonderim sonrasi guncel EP
+	WORD	wGiftIndex;
+	BYTE	bCount;
+} TPacketGCGiftSendResult;
+
+typedef struct SPacketGCGiftEP
+{
+	BYTE	bHeader;							// HEADER_GC_GIFT_EP
+	DWORD	dwEP;
+} TPacketGCGiftEP;
+
+typedef struct SPacketGCGiftPoint
+{
+	BYTE	bHeader;							// HEADER_GC_GIFT_POINT
+	DWORD	dwPoint;
+} TPacketGCGiftPoint;
+
+typedef struct SPacketGCGiftNotify
+{
+	BYTE	bHeader;							// HEADER_GC_GIFT_NOTIFY (sabit boyut)
+	BYTE	bAnonymous;
+	DWORD	dwPoint;							// bu hediyeden gelen puan
+	DWORD	dwTotalPoint;						// yeni toplam puan
+	char	szSenderName[CHARACTER_NAME_MAX_LEN + 1];
+	char	szGiftName[GIFT_NAME_MAX_LEN + 1];
+	char	szMessage[GIFT_MESSAGE_MAX_LEN + 1];
+} TPacketGCGiftNotify;
+
+// --- Hediye Siralamasi (rank) ---
+#define GIFT_RANK_MAX				10				// listelenen ilk N oyuncu
+#define GIFT_RANK_REQ_COOLTIME_SEC	2				// istek flood korumasi (sn)
+// bBoardType degerleri
+#define GIFT_RANK_BOARD_SENDER		0				// en cok hediye gonderen (gift_sent_point)
+#define GIFT_RANK_BOARD_RECEIVER	1				// en cok hediye alan (gift_point)
+
+typedef struct SGiftRankEntry
+{
+	char	szName[CHARACTER_NAME_MAX_LEN + 1];
+	DWORD	dwPoint;
+} TGiftRankEntry;
+
+typedef struct SPacketCGGiftRank
+{
+	BYTE	bHeader;							// HEADER_CG_GIFT_RANK
+	BYTE	bBoardType;							// GIFT_RANK_BOARD_*
+} TPacketCGGiftRank;
+
+typedef struct SPacketGCGiftRank
+{
+	BYTE	bHeader;							// HEADER_GC_GIFT_RANK (sabit boyut)
+	BYTE	bBoardType;
+	BYTE	bCount;								// gecerli entry sayisi (<= GIFT_RANK_MAX)
+	DWORD	dwMyRank;							// 0 = siralamada yok ("-")
+	DWORD	dwMyPoint;
+	TGiftRankEntry	entries[GIFT_RANK_MAX];
+} TPacketGCGiftRank;
+
+// GG (server->server; online alici baska core'da ise canli teslimat)
+typedef struct SPacketGGGiftNotify
+{
+	BYTE	bHeader;							// HEADER_GG_GIFT_NOTIFY
+	DWORD	dwNotifyId;							// gift_notify.id (teslimatta okunmus isaretlemek icin)
+	DWORD	dwTargetPID;						// alici (FindByPID)
+	BYTE	bAnonymous;
+	DWORD	dwPoint;
+	DWORD	dwTotalPoint;
+	char	szSenderName[CHARACTER_NAME_MAX_LEN + 1];
+	char	szGiftName[GIFT_NAME_MAX_LEN + 1];
+	char	szMessage[GIFT_MESSAGE_MAX_LEN + 1];
+} TPacketGGGiftNotify;
 #endif
 
 #pragma pack()

@@ -98,6 +98,10 @@ class LogManager : public singleton<LogManager>
 		void		BotControlLog(uint32_t playerID, const char* szName, uint32_t accID, uint32_t verifyMs);
 #endif
 
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+		void		GiftLog(uint32_t senderPID, const char* szSenderName, uint32_t targetPID, const char* szTargetName, DWORD dwGiftId, DWORD dwCount, const char* szType);
+#endif
+
 		size_t EscapeString(char* dst, size_t dstSize, const char *src, size_t srcSize);
 
 		template<typename... Args>

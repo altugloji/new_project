@@ -52,6 +52,10 @@
 #include "char_character_chest.h"
 #endif
 
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+#include "gift.h"
+#endif
+
 #if !defined(__BL_MULTI_LANGUAGE_PREMIUM__)
 #define ENABLE_CHAT_COLOR_SYSTEM
 #endif
@@ -158,6 +162,48 @@ void CInputMain::DoBotControl(LPCHARACTER ch, const char* c_pData) {
 	memcpy(szCode, bPacket->verifyCode, sizeof(bPacket->verifyCode));
 	szCode[sizeof(bPacket->verifyCode)] = '\0';
 	ch->DoBotControl(szCode);
+}
+#endif
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+void CInputMain::GiftList(LPCHARACTER ch, const char* data)
+{
+	if (!ch || !ch->GetDesc())
+		return;
+	CGiftManager::instance().SendGiftList(ch);
+}
+
+void CInputMain::GiftFind(LPCHARACTER ch, const char* data)
+{
+	if (!ch || !ch->GetDesc() || !data)
+		return;
+	const TPacketCGGiftFind* p = reinterpret_cast<const TPacketCGGiftFind*>(data);
+	char szName[CHARACTER_NAME_MAX_LEN + 1];
+	strlcpy(szName, p->szName, sizeof(szName));
+	CGiftManager::instance().FindTarget(ch, szName);
+}
+
+void CInputMain::GiftSend(LPCHARACTER ch, const char* data)
+{
+	if (!ch || !ch->GetDesc() || !data)
+		return;
+	const TPacketCGGiftSend* p = reinterpret_cast<const TPacketCGGiftSend*>(data);
+
+	char szName[CHARACTER_NAME_MAX_LEN + 1];
+	strlcpy(szName, p->szName, sizeof(szName));
+
+	char szMessage[GIFT_MESSAGE_MAX_LEN + 1];
+	strlcpy(szMessage, p->szMessage, sizeof(szMessage));
+
+	CGiftManager::instance().SendGift(ch, szName, p->wGiftIndex, p->bCount, p->bFlags, szMessage);
+}
+
+void CInputMain::GiftRank(LPCHARACTER ch, const char* data)
+{
+	if (!ch || !ch->GetDesc() || !data)
+		return;
+	const TPacketCGGiftRank* p = reinterpret_cast<const TPacketCGGiftRank*>(data);
+	CGiftManager::instance().SendRank(ch, p->bBoardType);
 }
 #endif
 
@@ -3451,6 +3497,22 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			CharacterChest(ch, c_pData);
 			break;
 #endif
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+		case HEADER_CG_GIFT_LIST:
+			GiftList(ch, c_pData);
+			break;
+		case HEADER_CG_GIFT_FIND:
+			GiftFind(ch, c_pData);
+			break;
+		case HEADER_CG_GIFT_SEND:
+			GiftSend(ch, c_pData);
+			break;
+		case HEADER_CG_GIFT_RANK:
+			GiftRank(ch, c_pData);
+			break;
+#endif
+
 #ifdef ENABLE_BULK_POTION_PANEL
 		case HEADER_CG_BULK_POTION:
 			if (!ch->IsObserverMode())

@@ -13,6 +13,7 @@
 #include <sstream>
 #include "packet.h"
 #include "desc_client.h"
+#include "config.h"	// g_bItemCountLimit (gercek stack limiti; hardcoded 200 stack tasma-dupe bugfix)
 
 static std::vector<CUBE_RENEWAL_DATA*>	s_cube_proto;
 
@@ -483,6 +484,17 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 	if (count_item < 1)
 		return;
 
+	// Kosulsuz ust sinir (define'dan BAGIMSIZ): need = material.count * count_item int carpimi
+	// tasarsa negatif need malzeme kontrolunu atlatir (dupe) ve roll dongusu DoS olur.
+	if (count_item > CUBE_RENEWAL_MAX_MAKE_COUNT)
+		count_item = CUBE_RENEWAL_MAX_MAKE_COUNT;
+
+#ifdef ENABLE_CUBE_RENEWAL_DISABLE_BULK
+	// Toplu uretim kapali: istemci kac parti isterse istesin tek parti uretilir.
+	if (count_item > 1)
+		count_item = 1;
+#endif
+
 	{
 		const long distMk = DISTANCE_APPROX(ch->GetX() - npc->GetX(), ch->GetY() - npc->GetY());
 		if (distMk >= CUBE_MAX_DISTANCE)
@@ -650,6 +662,10 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 					iEmptyPos = ch->GetEmptyInventory(pItem->GetSize());
 				}
 
+				// BUGFIX: bos-yer kontrolu icin yaratilan gecici item hicbir yolda yok edilmiyordu (her uretimde item sizintisi).
+				M2_DESTROY_ITEM(pItem);
+				pItem = NULL;
+
 				if (iEmptyPos < 0)
 				{
 					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("You do not have enough space in your inventory."));
@@ -790,9 +806,9 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 								continue;
 
 #ifdef __EXTENDED_ITEM_COUNT__
-							short bCount2 = MIN(ITEM_MAX_COUNT - item2->GetCount(), bCount);
+							short bCount2 = MIN(g_bItemCountLimit - item2->GetCount(), bCount);
 #else
-							BYTE bCount2 = MIN(200 - item2->GetCount(), bCount);
+							BYTE bCount2 = MIN(g_bItemCountLimit - item2->GetCount(), bCount);
 #endif
 							bCount -= bCount2;
 
@@ -831,9 +847,9 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 						{
 
 #ifdef __EXTENDED_ITEM_COUNT__
-							short bCount2 = MIN(ITEM_MAX_COUNT - item2->GetCount(), bCount);
+							short bCount2 = MIN(g_bItemCountLimit - item2->GetCount(), bCount);
 #else
-							BYTE bCount2 = MIN(200 - item2->GetCount(), bCount);
+							BYTE bCount2 = MIN(g_bItemCountLimit - item2->GetCount(), bCount);
 #endif
 							bCount -= bCount2;
 
@@ -878,9 +894,9 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 								continue;
 							/////////////////////////////////
 #ifdef __EXTENDED_ITEM_COUNT__
-							short bCount2 = MIN(ITEM_MAX_COUNT - item2->GetCount(), bCount);
+							short bCount2 = MIN(g_bItemCountLimit - item2->GetCount(), bCount);
 #else
-							BYTE bCount2 = MIN(200 - item2->GetCount(), bCount);
+							BYTE bCount2 = MIN(g_bItemCountLimit - item2->GetCount(), bCount);
 #endif
 							bCount -= bCount2;
 
@@ -916,9 +932,9 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 						{
 
 #ifdef __EXTENDED_ITEM_COUNT__
-							short bCount2 = MIN(ITEM_MAX_COUNT - item2->GetCount(), bCount);
+							short bCount2 = MIN(g_bItemCountLimit - item2->GetCount(), bCount);
 #else
-							BYTE bCount2 = MIN(200 - item2->GetCount(), bCount);
+							BYTE bCount2 = MIN(g_bItemCountLimit - item2->GetCount(), bCount);
 #endif
 							bCount -= bCount2;
 
@@ -1029,6 +1045,12 @@ void SendDateCubeRenewalPackets(LPCHARACTER ch, BYTE subheader, DWORD npcVNUM)
 				}else{
 					pack.date_cube_renewal.item_reward_stackable = false;
 				}
+				// BUGFIX: stackable bilgisi icin yaratilan gecici item yok edilmiyordu (pencere acilisinda tarif basina 1 item sizintisi).
+				M2_DESTROY_ITEM(item);
+			}
+			else
+			{
+				pack.date_cube_renewal.item_reward_stackable = false;
 			}
 
 			pack.date_cube_renewal.vnum_material_1 = FN_check_cube_item_vnum_material(materialInfo,1);

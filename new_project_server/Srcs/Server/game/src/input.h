@@ -214,6 +214,13 @@ class CInputMain : public CInputProcessor
 		void		GmPlayerPanel(LPCHARACTER ch, const char* data) const;
 #endif
 
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+		void		GiftList(LPCHARACTER ch, const char* data);
+		void		GiftFind(LPCHARACTER ch, const char* data);
+		void		GiftSend(LPCHARACTER ch, const char* data);
+		void		GiftRank(LPCHARACTER ch, const char* data);
+#endif
+
 };
 
 class CInputDead : public CInputMain
@@ -396,6 +403,10 @@ class CInputP2P : public CInputProcessor
 
 #ifdef ENABLE_GM_ONLY_LOGIN
 		void		GGGMOnlyLogin();
+#endif
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+		void		GiftNotify(const char* c_pData) const;
 #endif
 
 	protected:

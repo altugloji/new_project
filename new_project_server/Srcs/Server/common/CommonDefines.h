@@ -122,6 +122,9 @@ enum eCommonDefines {
 #define ENABLE_USER_REPORT_SYSTEM 									// Target oyuncu report
 #define ENABLE_ITEM_SHOP_SYSTEM										// Nesne market
 #define ENABLE_CUBE_RENEWAL											// Yeni Cube penceresi
+#ifdef ENABLE_CUBE_RENEWAL
+	#define ENABLE_CUBE_RENEWAL_DISABLE_BULK						// Cube toplu uretim kapali: istemci kac parti isterse istesin server tek parti uretir (toplu uretimde hatali uretim onlemi)
+#endif
 #define ENABLE_SKILL_FLAG_PARTY										// Şaman grup kutsama
 #define ENABLE_MULTISHOP											// İtem ile npcde ürün satma
 #define WJ_NEW_DROP_DIALOG											// Hızlı sil sat
@@ -138,7 +141,7 @@ enum eCommonDefines {
 #define ATTBONUS_ELEXIR												// Sürgüne karşı saldırı ve savunma efsunu
 #define SKILL_SELECT												// Uzaktan skill seçme
 #define COLLECTIVE_DAMAGE_INFO										// Toplu hasar pc & npc
-// #define METIN35_ADMIN_PANEL										// Yönetim Paneli
+#define METIN35_ADMIN_PANEL											// Yönetim Paneli
 #define ENABLE_STATUS_ADD_BY_INPUT									// Stat puanini tek komutla toplu verme
 #define ENABLE_GREEN_ENCHANT_LV5_LIMIT								// Yeşil efsunda lv5 efsun gelmez
 #define BERAN_SETAOU												// Mavi Ejderha
@@ -154,7 +157,7 @@ enum eCommonDefines {
 #define EXP_DEC_IN_DUNGEON											// Zindanlarda %90 Daha Az EXP
 #define ENABLE_LEVEL_MAP_EXP_LIMIT									// 45-75 ve 75-99 harita exp engelleri
 #define ENABLE_FISHING_ANTI_MACRO									// Balik makro engeli: envanterde solucan varken yeni solucan alinamaz + NPC penceresi acikken balik tutulamaz
-#define ENABLE_HORSE_ADDITIVE_STATS									// At statlarinin karakter statlarina + eklenmesi
+// #define ENABLE_HORSE_ADDITIVE_STATS									// At statlarinin karakter statlarina + eklenmesi
 #define FISHING_TIME_LOG											// Balik sure
 #define ENABLE_MOUNT_PVP_DAMAGE_REDUCTION							// At üzerinde pvp'de %30 hasar azaltma
 #define ENABLE_MARRIAGE_RING_COOLTIME								// Yuzuk tekrar kullanim suresi
@@ -162,11 +165,12 @@ enum eCommonDefines {
 #ifdef ENABLE_BOT_CONTROL
 	#define ENABLE_BOT_CONTROL_SOFT_MODE		// GECICI gozlem modu: panel + log calisir, hasar/kanal/cikis bloklari ve DC devre disi; /bot_control_enforce ile ac/kapa, acilis varsayilani CONFIG "BOT_CONTROL_ENFORCE: 1"
 #endif
-#define ENABLE_STONE_DROP_TOP_DAMAGER								// Taslarda en cok hasar vuran oyuncu tum droplari alir
+// #define ENABLE_STONE_DROP_TOP_DAMAGER								// Taslarda en cok hasar vuran oyuncu tum droplari alir
 #define ENABLE_WHISPER_LEVEL_LIMIT									// 10 seviye alti oyuncular oyunculara PM gonderemez, PM penceresinde uyari (GM'e gonderim serbest)
 #ifdef ENABLE_WHISPER_LEVEL_LIMIT
 	#define WHISPER_LEVEL_LIMIT 10									// PM gonderebilmek icin gereken minimum seviye
 #endif
+// #define ENABLE_GIFT_SEND_SYSTEM										// Hediye gonderme sistemi (oyuncudan oyuncuya kozmetik hediye, EP -> hediye puani; item verilmez). NOT: mevcut GIFT_SYSTEM'den ayridir.
 
 
 

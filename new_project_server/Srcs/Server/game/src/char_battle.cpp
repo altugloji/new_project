@@ -838,7 +838,7 @@ void CHARACTER::Reward(bool bItemDrop
 
 			std::vector<LPCHARACTER> v;
 
-			while (!pq.empty() && pq.top().first * 10 >= total_dam)
+			while (!pq.empty() && pq.top().first * 5 >= total_dam)
 			{
 				v.emplace_back(pq.top().second);
 				pq.pop();

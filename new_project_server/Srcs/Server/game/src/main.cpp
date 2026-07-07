@@ -51,6 +51,9 @@
 #include "ani.h"
 #include "horsename_manager.h"
 #include "MarkManager.h"
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+#include "gift.h"
+#endif
 #include "spam.h"
 #include "panama.h"
 #include "threeway_war.h"
@@ -365,6 +368,10 @@ int main(int argc, char **argv)
 
 #ifdef BERAN_SETAOU
 	CBeranSetaou beranSetaou;
+#endif
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	CGiftManager	gift_manager;		// hediye tanimlari ilk istekte lazy yuklenir
 #endif
 
 	if (!start(argc, argv)) {

@@ -48,6 +48,36 @@ CShop::~CShop()
 		++it;
 	}
 
+#ifdef OFFLINE_SHOP
+	// Dukkan silinirken vector'de hala duran item'lari temizle (CloseMyShop dukkani
+	// tezgah-mob'dan ONCE siler):
+	// 1) Tezgah-mob'a bagli display item'lar (satilmis hayaletler dahil) dukkanla birlikte
+	//    YOK EDILMELI: mob hemen ardindan silinir ama mob oldugu icin CHARACTER::Destroy
+	//    ClearItem cagirmaz -> item sahipsiz kalir ve kurulu OffShopItemRemoveEvent sure
+	//    dolunca serbest birakilmis karakteri deref eder (gecikmeli UAF).
+	//    (CItem::Destroy e_OffshopRItemEvent'i de iptal eder.)
+	// 2) Diger item'larin shop geri-pointer'ini temizle; yoksa item daha sonra yok
+	//    edilirken bayat LPSHOP deref edilir.
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		LPITEM pkItem = m_itemVector[i].pkItem;
+		if (!pkItem)
+			continue;
+
+		// GetShop()==this yalnizca offline display item'larda gecerli (SetShop sadece
+		// SetPrivShopItems/ApplyOwnerEdit'te cagrilir); online dukkan item'lari ve
+		// GetItems'in zaten ayirdigi item'lar buraya dusmez
+		if (pkItem->GetShop() == this)
+		{
+			pkItem->SetShop(NULL);
+			if (pkItem->GetOwner())
+				pkItem->RemoveFromCharacter();
+			M2_DESTROY_ITEM(pkItem);
+			m_itemVector[i].pkItem = NULL;
+		}
+	}
+#endif
+
 	M2_DELETE(m_pGrid);
 }
 
@@ -348,6 +378,20 @@ void CShop::SetItemSoldByItemID(DWORD itemid)
 		}
 	}
 }
+
+bool CShop::IsSoldGhost(LPITEM pkItem) const
+{
+	if (!pkItem)
+		return false;
+
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		if (m_itemVector[i].pkItem == pkItem)
+			return m_itemVector[i].sold != 0;
+	}
+
+	return false;
+}
 #endif
 
 bool CShop::GetItems()
@@ -387,6 +431,7 @@ bool CShop::GetItems()
 		DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %d", m_itemVector[i].itemid);
 		pkItem->SetShop(NULL);
 		pkItem->RemoveFromCharacter();
+		M2_DESTROY_ITEM(pkItem);
 		m_itemVector[i].pkItem = NULL;
 		BroadcastUpdateItem(i);
 	}
@@ -463,15 +508,26 @@ void CShop::RemoveItemForShop(DWORD dwItemID)// Suresi biten Kostum icin
 
 	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
 	{
-		if (m_itemVector[i].pkItem && m_itemVector[i].itemid == dwItemID)
+		// pkItem NULL olabilir: cagiran (OffShopItemRemoveEvent) item'i ONCE yok eder,
+		// CItem::Destroy -> ClearItemPointer slotu temizler; kayit itemid uzerinden bulunur
+		if ((DWORD)m_itemVector[i].itemid == dwItemID && (m_itemVector[i].pkItem || m_itemVector[i].vnum))
 		{
 #ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
 			if (m_itemVector[i].sold)	// satilmis hayalet (kostum suresi dolsa bile) kaldirilmaz; kazanc zaten gift'te
 				break;
 #endif
 			DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", dwItemID);
-			m_itemVector[i].pkItem->SetShop(NULL);
-			m_itemVector[i].pkItem = NULL;
+			if (m_itemVector[i].pkItem)
+			{
+				m_itemVector[i].pkItem->SetShop(NULL);
+				m_itemVector[i].pkItem = NULL;
+			}
+			// Slot bilgilerini sifirla; kalirsa F7 pazar aramasi (HasItem/GetNumberByVnum)
+			// pencerede gorunmeyen suresi-dolmus item'la hayalet eslesme yapar
+			m_itemVector[i].vnum = 0;
+			m_itemVector[i].count = 0;
+			m_itemVector[i].price = 0;
+			m_itemVector[i].itemid = 0;
 			BroadcastUpdateItem(i);
 
 #ifdef SHOP_AUTO_CLOSE
@@ -755,6 +811,9 @@ void CShop::ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byR
 			it.count  = pkDisplay->GetCount();
 			it.price  = dwPrice;
 			it.itemid = newId;
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+			it.sold   = 0;	// slot eski bir hayaletten kalma olabilir; yeni item satilmamis
+#endif
 			pkDisplay->SetShop(this);
 
 			m_pGrid->Put(iPos, 1, proto->bSize);
@@ -1287,6 +1346,23 @@ bool CShop::IsSellingItem(DWORD itemID)
 	}
 
 	return isSelling;
+}
+
+// Yok edilmekte olan item'in vector'deki pointer'ini temizler (CItem::Destroy / RemoveItem'dan cagrilir).
+// Slot bilgisi (vnum/count/sold) durur, sadece bayat pkItem null'lanir; bakan misafirlere slot guncellenir.
+void CShop::ClearItemPointer(LPITEM pkItem)
+{
+	if (!pkItem)
+		return;
+
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		if (m_itemVector[i].pkItem == pkItem)
+		{
+			m_itemVector[i].pkItem = NULL;
+			BroadcastUpdateItem(i);
+		}
+	}
 }
 
 #ifdef OFFLINE_SHOP

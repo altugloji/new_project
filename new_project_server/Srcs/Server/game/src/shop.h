@@ -65,6 +65,9 @@ class CShop
 		void			BroadcastUpdateItem(BYTE pos);
 		int				GetNumberByVnum(DWORD dwVnum) const;
 		virtual bool	IsSellingItem(DWORD itemID);
+		// Yok edilmekte olan item'in vector'deki pointer'ini temizler; yoksa bayat pkItem
+		// pazar aramasi / dukkan paketlerinde serbest birakilmis bellek okur (UAF crash)
+		void			ClearItemPointer(LPITEM pkItem);
 
 		DWORD	GetVnum() const { return m_dwVnum; }
 		DWORD	GetNPCVnum() const { return m_dwNPCVnum; }
@@ -96,6 +99,8 @@ class CShop
 #ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
 		// Boot'ta DB'den yuklenen satilmis (sold=1) item'i kirmizi hayalet olarak isaretle (itemid = player_shop_items.id)
 		void		SetItemSoldByItemID(DWORD itemid);
+		// Verilen item bu dukkanda satilmis (sold=1) kirmizi hayalet mi?
+		bool		IsSoldGhost(LPITEM pkItem) const;
 #endif
 #endif
 

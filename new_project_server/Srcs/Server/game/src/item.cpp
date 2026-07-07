@@ -105,6 +105,15 @@ void CItem::Destroy()
 	event_cancel(&m_pkAccessorySocketExpireEvent);
 #ifdef OFFLINE_SHOP
 	event_cancel(&e_OffshopRItemEvent);
+
+	// Item hala bir dukkan vector'unde kayitliysa slotu temizle; yoksa
+	// (orn. REAL_TIME_EXPIRE ile silinen satilmis hayalet) m_itemVector'de bayat pkItem
+	// kalir ve pazar aramasi (CShop::HasItemType) serbest birakilmis bellegi okur -> crash
+	if (b_iShop)
+	{
+		b_iShop->ClearItemPointer(this);
+		b_iShop = NULL;
+	}
 #endif
 
 	CEntity::Destroy();
@@ -1618,10 +1627,26 @@ EVENTFUNC(OffShopItemRemoveEvent)
 	if (current > item->GetSocket(0))
 	{
 		LPSHOP iShop = item->GetShop();
-		if (iShop)
-			iShop->RemoveItemForShop(item->GetRealID());
+
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		// Satilmis (kirmizi hayalet) item suresi dolsa bile SATILDI olarak gorunmeye devam eder.
+		// Burada yok edilirse dukkan vector'unde bayat pkItem kalir (RemoveItemForShop sold
+		// slotu bilerek temizlemiyor) -> pazar aramasinda UAF crash. Hayalet dukkanla birlikte olur.
+		if (iShop && iShop->IsSoldGhost(item))
+			return 0;
+#endif
+
+		// ONCE item'i yok et (tezgah-mob hala canli; CItem::Destroy -> ClearItemPointer
+		// dukkan slotunu da temizler), SONRA dukkan kaydini kaldir: RemoveItemForShop
+		// SHOP_AUTO_CLOSE ile dukkani VE tezgah-mob'u yok edebilir; item o anda hala
+		// mob'a bagli olsaydi RemoveItem serbest birakilmis karakteri deref ederdi (UAF)
+		const DWORD dwRealID = item->GetRealID();
 
 		ITEM_MANAGER::instance().RemoveItem(item, "REAL_TIME_EXPIRE");
+
+		if (iShop)
+			iShop->RemoveItemForShop(dwRealID);
+
 		return 0;
 	}
 

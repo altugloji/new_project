@@ -57,6 +57,7 @@
 #include "map_location.h"
 #include "BlueDragon_Binder.h"
 #include "skill_power.h"
+#include "skill.h"
 #include "buff_on_attributes.h"
 #include "BlueDragon.h"
 
@@ -308,6 +309,14 @@ void CHARACTER::Initialize()
 	m_botVerifyCode = 0;
 	m_dwLastBotControlTime = 0;
 	m_dwBotControlShowTime = 0;
+#endif
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	m_dwGiftPoint = 0;
+	m_iGiftSendTime = 0;
+	m_iGiftRankTime = 0;
+	m_adwGiftRankCacheRank[0] = m_adwGiftRankCacheRank[1] = 0;
+	m_adwGiftRankCachePoint[0] = m_adwGiftRankCachePoint[1] = 0;
 #endif
 
 	m_pkMall = nullptr;
@@ -5868,6 +5877,58 @@ void CHARACTER::OnClick(LPCHARACTER pkChrCauser)
 	}
 
 	pkChrCauser->SetQuestNPCID(GetVID());
+
+#define ENABLE_AUTO_BUFF_NPC
+#ifdef ENABLE_AUTO_BUFF_NPC
+	if (GetRaceNum() == 20094)
+	{
+		LPCHARACTER ch = pkChrCauser;
+		if (!ch || ch->IsDead())
+			return;
+
+		if (ch->CountSpecifyItem(50289) < 1)
+		{
+			ch->ChatPacket(CHAT_TYPE_INFO, "[BUFF] Buff alabilmek icin gerekli esya envanterinizde bulunmuyor.");
+			return;
+		}
+
+		const DWORD buffs[] =
+		{
+			94, 96
+		};
+
+		bool hasActive = false;
+		for (DWORD skill : buffs)
+		{
+			if ((skill == 94  && ch->IsAffectFlag(AFF_HOSIN)) || (skill == 96  && ch->IsAffectFlag(AFF_GICHEON)))
+			{
+				hasActive = true;
+				break;
+			}
+		}
+
+		if (hasActive)
+		{
+			ch->ChatPacket(CHAT_TYPE_INFO, "[BUFF] Etkiler zaten aktif.");
+			return;
+		}
+
+		const int iBuffValue = 20;			// sabit buff puani (formul yok)
+		const int iBuffDuration = 60 * 15;	// saniye (30 dakika)
+
+		for (DWORD skill : buffs)
+		{
+			CSkillProto * pkSk = CSkillManager::instance().Get(skill);
+			if (!pkSk)
+				continue;
+
+			ch->AddAffect(skill, pkSk->bPointOn, iBuffValue, pkSk->dwAffectFlag, iBuffDuration, 0, true);
+		}
+
+		ch->ChatPacket(CHAT_TYPE_INFO, "[BUFF] Etkiler etkinlestirildi.");
+		return;
+	}
+#endif
 
 	if (quest::CQuestManager::instance().Click(pkChrCauser->GetPlayerID(), this))
 	{

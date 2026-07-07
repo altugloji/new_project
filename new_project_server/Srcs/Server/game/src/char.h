@@ -1331,6 +1331,29 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		int				GetLastGiftPage()				{ return m_dwLastGiftPage; }
 #endif
 
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	public:
+		// Hediye Gonderme Sistemi (mevcut GIFT_SYSTEM'den ayri). Aliciya item verilmez;
+		// EP fiyati kadar "hediye puani" birikir. Puan login'de DB'den yuklenir.
+		void			SetGiftPoint(DWORD dwPoint)		{ m_dwGiftPoint = dwPoint; }
+		DWORD			GetGiftPoint() const			{ return m_dwGiftPoint; }
+		void			SetGiftSendTime()				{ m_iGiftSendTime = thecore_pulse(); }
+		int				GetGiftSendTime() const			{ return m_iGiftSendTime; }
+		void			SetGiftRankTime()				{ m_iGiftRankTime = thecore_pulse(); }
+		int				GetGiftRankTime() const			{ return m_iGiftRankTime; }
+		// cooldown icindeki isteklere DB'siz cevap icin son hesaplanan kendi-siram degerleri (board 0/1)
+		void			SetGiftRankCache(BYTE bBoard, DWORD dwRank, DWORD dwPoint)
+						{ if (bBoard < 2) { m_adwGiftRankCacheRank[bBoard] = dwRank; m_adwGiftRankCachePoint[bBoard] = dwPoint; } }
+		DWORD			GetGiftRankCacheRank(BYTE bBoard) const		{ return bBoard < 2 ? m_adwGiftRankCacheRank[bBoard] : 0; }
+		DWORD			GetGiftRankCachePoint(BYTE bBoard) const	{ return bBoard < 2 ? m_adwGiftRankCachePoint[bBoard] : 0; }
+	protected:
+		DWORD			m_dwGiftPoint;
+		int				m_iGiftSendTime;
+		int				m_iGiftRankTime;
+		DWORD			m_adwGiftRankCacheRank[2];
+		DWORD			m_adwGiftRankCachePoint[2];
+#endif
+
 	protected:
 
 		LPSHOP			m_pkShop;

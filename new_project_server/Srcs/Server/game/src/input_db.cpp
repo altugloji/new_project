@@ -518,8 +518,18 @@ EVENTFUNC(fix_shop_event)
 	for (BYTE i = 1; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
 		attrLen += snprintf(szAttrs + attrLen, sizeof(szAttrs) - attrLen, ", ps.attrtype%d, ps.attrvalue%d", i, i);
 
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+	// Satilmis (sold=1) yetim satirlar gift'e IADE EDILMEZ: alici item'i coktan aldi,
+	// iade = kopyalama (dupe; core player_shop DELETE ile item DELETE arasinda olurse olusur).
+	// Bu satirlar sadece DB'den temizlenir.
+	const char * c_pszSoldFilter = " and ps.sold = 0";
+	DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE sold = 1 AND NOT EXISTS(SELECT 1 FROM player_shop WHERE player_id = player_shop_items.player_id)");
+#else
+	const char * c_pszSoldFilter = "";
+#endif
+
 	char szQuery[4096];
-	snprintf(szQuery, sizeof(szQuery), "SELECT ps.id, ps.player_id, REPLACE('%s', '#PLAYER_NAME#', p.name), ps.vnum, ps.count, ps.price, %s, %s FROM `player_shop_items` ps LEFT JOIN player p ON p.id = ps.player_id WHERE not EXISTS(SELECT name FROM player_shop WHERE player_id = ps.player_id) and not ISNULL(p.name)", LC_TEXT("SHOP_NAME"), szSockets, szAttrs);
+	snprintf(szQuery, sizeof(szQuery), "SELECT ps.id, ps.player_id, REPLACE('%s', '#PLAYER_NAME#', p.name), ps.vnum, ps.count, ps.price, %s, %s FROM `player_shop_items` ps LEFT JOIN player p ON p.id = ps.player_id WHERE not EXISTS(SELECT name FROM player_shop WHERE player_id = ps.player_id) and not ISNULL(p.name)%s", LC_TEXT("SHOP_NAME"), szSockets, szAttrs, c_pszSoldFilter);
 	auto pkMsg = DBManager::instance().DirectQuery(szQuery);
 
 	if (!pkMsg || !pkMsg->Get())
@@ -537,6 +547,7 @@ EVENTFUNC(fix_shop_event)
 			col++;
 			str_to_number(vnum,				row[col++]);
 			str_to_number(count,			row[col++]);
+			col++;	
 			for (int i = 0;i < ITEM_SOCKET_MAX_NUM;i++)
 				str_to_number(socket[i],	row[col++]);
 			for (int i = 0;i < ITEM_ATTRIBUTE_MAX_NUM;i++)

@@ -229,6 +229,12 @@ CPacketInfoCG::CPacketInfoCG()
 #ifdef ENABLE_GM_PLAYER_PANEL
 	Set(HEADER_CG_GM_PLAYER_PANEL, sizeof(TPacketCGGmPlayerPanel), "GmPlayerPanel", true);
 #endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	Set(HEADER_CG_GIFT_LIST, sizeof(TPacketCGGiftList), "GiftList", true);
+	Set(HEADER_CG_GIFT_FIND, sizeof(TPacketCGGiftFind), "GiftFind", true);
+	Set(HEADER_CG_GIFT_SEND, sizeof(TPacketCGGiftSend), "GiftSend", true);
+	Set(HEADER_CG_GIFT_RANK, sizeof(TPacketCGGiftRank), "GiftRank", true);
+#endif
 
 }
 
@@ -294,6 +300,10 @@ CPacketInfoGG::CPacketInfoGG()
 
 #ifdef ENABLE_RELOAD_ETC_DROP_ITEM
 	Set(HEADER_GG_RELOAD_ETC_DROP,		sizeof(BYTE),						"ReloadEtcDrop",	false);
+#endif
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	Set(HEADER_GG_GIFT_NOTIFY,			sizeof(TPacketGGGiftNotify),		"GiftNotify",		false);
 #endif
 
 }

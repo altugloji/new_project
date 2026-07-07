@@ -131,6 +131,7 @@ CFILE	= minilzo.c
 CPPFILE = FSM.cpp MarkConvert.cpp MarkImage.cpp MarkManager.cpp OXEvent.cpp ani.cpp\
 		  arena.cpp banword.cpp battle.cpp blend_item.cpp buffer_manager.cpp building.cpp\
 		  char.cpp char_affect.cpp char_battle.cpp char_change_empire.cpp char_horse.cpp char_item.cpp char_character_chest.cpp char_manager.cpp\
+		  gift.cpp\
 		  char_quickslot.cpp char_resist.cpp char_skill.cpp char_state.cpp PetSystem.cpp cmd.cpp cmd_emotion.cpp cmd_general.cpp\
 		  cmd_gm.cpp cmd_oxevent.cpp config.cpp constants.cpp crc32.cpp cuberenewal.cpp db.cpp desc.cpp\
 		  desc_client.cpp desc_manager.cpp desc_p2p.cpp dungeon.cpp empire_text_convert.cpp entity.cpp\

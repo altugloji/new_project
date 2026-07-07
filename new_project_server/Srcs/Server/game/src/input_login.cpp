@@ -13,6 +13,9 @@
 #include "pvp.h"
 #include "start_position.h"
 #include "messenger_manager.h"
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+#include "gift.h"
+#endif
 #include "guild_manager.h"
 #include "party.h"
 #include "dungeon.h"
@@ -731,6 +734,11 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 
 #ifdef GIFT_SYSTEM
 	ch->StartRefreshGift();
+#endif
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	// Hediye puanini yukle + okunmamis hediye bildirimlerini teslim et.
+	CGiftManager::instance().LoadGiftData(ch);
 #endif
 
 	CPVPManager::instance().Connect(ch);

@@ -1,6 +1,8 @@
 #pragma once
 #define CUBE_MAX_NUM	24	// OLD:INVENTORY_MAX_NUM
 #define CUBE_MAX_DISTANCE	1000
+// Tek make isteginde uretilebilecek azami parti sayisi (int overflow / DoS onlemi; toplu uretim acikken de gecerli)
+#define CUBE_RENEWAL_MAX_MAKE_COUNT	64000
 // YENI: cube grid'inden secilebilecek azami beceri kitabi slot sayisi (client CUBE_SKILL_GRID_MAX ile ayni olmali)
 #define CUBE_SKILL_GRID_MAX	26
 // YENI: beceri kitabi grid'inin SADECE bu NPC vnum'unda acilmasi/calismasi icin (client gating de buna gore)

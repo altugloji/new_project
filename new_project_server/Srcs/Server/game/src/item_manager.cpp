@@ -12,6 +12,7 @@
 #include "questmanager.h"
 #include "unique_item.h"
 #include "safebox.h"
+#include "shop.h"
 #include "blend_item.h"
 #include "locale_service.h"
 #include "item.h"
@@ -537,6 +538,11 @@ void ITEM_MANAGER::RemoveItem(LPITEM item, const char * c_pszReason) const
 			o->SyncQuickslot(QUICKSLOT_TYPE_ITEM, item->GetCell(), 255);
 			item->RemoveFromCharacter();
 		}
+
+		// Online sahis dukkani: dukkan vector'u envanterdeki item'a raw pointer tutar (SetShop cagrilmaz);
+		// dukkan acikken item yok edilirse (orn. sure dolumu) bayat pkItem kalir -> pazar aramasi UAF crash
+		if (o->GetMyShop())
+			o->GetMyShop()->ClearItemPointer(item);
 	}
 
 	M2_DESTROY_ITEM(item);

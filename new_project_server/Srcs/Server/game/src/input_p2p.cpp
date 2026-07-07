@@ -5,6 +5,9 @@
 #include "char.h"
 #include "char_manager.h"
 #include "p2p.h"
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+#include "gift.h"
+#endif
 #include "guild.h"
 #include "guild_manager.h"
 #include "party.h"
@@ -655,8 +658,22 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			break;
 #endif
 
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+		case HEADER_GG_GIFT_NOTIFY:
+			GiftNotify(c_pData);
+			break;
+#endif
+
 	}
 
 	return (iExtraLen);
 }
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+void CInputP2P::GiftNotify(const char* c_pData) const
+{
+	// Baska core'da online olan aliciya canli hediye bildirimi teslimati.
+	CGiftManager::instance().OnP2PGiftNotify(c_pData);
+}
+#endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

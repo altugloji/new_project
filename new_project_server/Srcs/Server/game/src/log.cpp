@@ -63,6 +63,21 @@ void LogManager::BotControlLog(uint32_t playerID, const char* szName, uint32_t a
 }
 #endif
 
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+void LogManager::GiftLog(uint32_t senderPID, const char* szSenderName, uint32_t targetPID, const char* szTargetName, DWORD dwGiftId, DWORD dwCount, const char* szType)
+{
+	char szEscSender[64] = {0};
+	char szEscTarget[64] = {0};
+	if (szSenderName)
+		m_sql.EscapeString(szEscSender, sizeof(szEscSender), szSenderName, strlen(szSenderName));
+	if (szTargetName)
+		m_sql.EscapeString(szEscTarget, sizeof(szEscTarget), szTargetName, strlen(szTargetName));
+
+	Query("INSERT INTO gift_log (sender_id, sender_name, target_id, target_name, item_vnum, count, type, log_time) VALUES (%u, '%s', %u, '%s', %u, %u, '%s', NOW())",
+		senderPID, szEscSender, targetPID, szEscTarget, dwGiftId, dwCount, szType ? szType : "");
+}
+#endif
+
 size_t LogManager::EscapeString(char* dst, size_t dstSize, const char *src, size_t srcSize)
 {
 	return m_sql.EscapeString(dst, dstSize, src, srcSize);
