@@ -5371,7 +5371,7 @@
 50286	Baule Zona Comb. (oro)	Un baule dal contenuto prezioso.
 50287	Cassetta da campo 1	Una cassetta con equipaggiamento utile.
 50288	Cassetta da campo 2	Una cassetta con equipaggiamento utile.
-50289	Reincarnazione	La Reincarnazione ti resuscita immediatamente, senza tempo d'attesa.
+50289	Effetto Buff	Ti permette di ricevere l'Effetto Buff dall'NPC.
 50290	Baule Zona Comb. (legno)	Un baule dal contenuto prezioso.
 50294	Baule della Regina Meley	Questo baule è stato recuperato dal Rifugio di Meley, regina dei draghi. Racchiude un tesoro estremamente prezioso.
 50296	Forziere di contrattacco	Questo forziere contiene 5 Contrattacchi Manuali.
@@ -7382,7 +7382,7 @@
 83008	Cofanetto per gioielli	Contiene, in modo del tutto casuale, un anello, un amuleto, un leccalecca o una pozione.
 83009	Cassa Pet	Contiene un uovo scelto in modo casuale.
 83010	Scatola Stole	Contiene una stola scelta in modo casuale.
-83011	Cassa Ornamenti	Contiene un talismano scelto in modo casuale, 50 Cofanetti zodiaco o item per accedere al Tempio dello Zodiaco.
+83011	Water Chest	Contiene 100 unità d'Acqua.
 83012	Cass. def. Libri del pet	Contiene un item casuale che serve per allenare e migliorare il tuo pet.
 83013	Cassa Estirpadenti+	Contiene un'arma Estirpadenti+ a tua scelta.
 83014	Cassa Cor Draconis	Contiene un Cor draconis scelto in modo casuale o un Chicco di drago.

@@ -14,6 +14,10 @@ class CMSApplication : public CMSWindow
 
 		bool IsMessage() const;
 		bool MessageProcess() const;
+#include "../UserInterface/Locale_inc.h"
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+            static int DThreadId;
+#endif
 
 	protected:
 		void ClearWindowClass();

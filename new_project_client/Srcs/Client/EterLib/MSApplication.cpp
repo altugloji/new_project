@@ -1,5 +1,11 @@
 #include "StdAfx.h"
 #include "MsApplication.h"
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+#include <rascal_client.h>
+int CMSApplication::DThreadId = 0;
+static int DTime = 0;
+#endif
+
 
 CMSApplication::CMSApplication()
 {
@@ -33,6 +39,14 @@ bool CMSApplication::IsMessage() const
 
 bool CMSApplication::MessageProcess() const
 {
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+	if (++DTime >= 50)
+	{
+		DTime = 0;
+		rascal::MaintainWorkerLink(CMSApplication::DThreadId);
+	}
+#endif
+
 	MSG msg;
 
 	if (!GetMessage(&msg, nullptr, 0, 0))

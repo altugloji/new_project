@@ -8859,7 +8859,7 @@ VNUM	LOCALE_NAME
 50286	Baule Zona Comb. (oro)
 50287	Cassetta da campo 1
 50288	Cassetta da campo 2
-50289	Reincarnazione
+50289	Effetto Buff
 50290	Baule Zona Comb. (legno)
 50294	Baule della Regina Meley
 50296	Forziere di contrattacco
@@ -10626,7 +10626,7 @@ VNUM	LOCALE_NAME
 83008	Cofanetto per gioielli
 83009	Cassa Pet
 83010	Scatola Stole
-83011	Cassa Ornamenti
+83011	Forziere d'Acqua
 83012	Cass. def. Libri del pet
 83013	Cassa Estirpadenti+
 83014	Cassa Cor Draconis

@@ -8859,7 +8859,7 @@ VNUM	LOCALE_NAME
 50286	Arany Harci övezet-láda
 50287	Harcmezõ doboz 1
 50288	Harcmezõ doboz 2
-50289	Újraélesztõ
+50289	Buff hatás
 50290	Fa Harci övezet-láda
 50294	Meley királynõ ládája
 50296	Elhárítók doboza
@@ -10626,7 +10626,7 @@ VNUM	LOCALE_NAME
 83008	Ékszeres doboz
 83009	Házikedvenc láda
 83010	Pánt doboz
-83011	Díszláda
+83011	Vízi láda
 83012	Csúcs kedvenc-könyv láda
 83013	Tépõfog láda+
 83014	Cor Draconis láda

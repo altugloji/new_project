@@ -2054,6 +2054,11 @@ void initapp()
 #else
 	PyModule_AddIntConstant(poModule, "ENABLE_CHARACTER_CHEST", 0);
 #endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	PyModule_AddIntConstant(poModule, "ENABLE_GIFT_SEND_SYSTEM", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_GIFT_SEND_SYSTEM", 0);
+#endif
 #ifdef ENABLE_BULK_POTION_PANEL
 	PyModule_AddIntConstant(poModule, "ENABLE_BULK_POTION_PANEL", 1);
 #else

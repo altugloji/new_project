@@ -12,7 +12,6 @@
 #include <map>
 
 #include "../eterBase/Singleton.h"
-#include "../UserInterface/urielacsdk.h"
 #include "Ray.h"
 
 constexpr float CAMERA_TARGET_STANDARD = 100.0f;
@@ -85,13 +84,8 @@ class CCamera
 		D3DXMATRIX m_matInverseView;
 		D3DXMATRIX m_matBillboard; // Special matrix for billboarding effects
 
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<float> m_fPitch;
-		safe_variable_weak<float> m_fRoll;
-#else
 		float m_fPitch;
 		float m_fRoll;
-#endif
 		float m_fDistance;
 
 		CRay	m_kCameraBottomToTerrainRay;
@@ -119,13 +113,8 @@ class CCamera
 		float			m_fPitchSum;
 		float			m_fRollSum;
 
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<long>			m_lMousePosX;
-		safe_variable_weak<long>			m_lMousePosY;
-#else
 		long			m_lMousePosX;
 		long			m_lMousePosY;
-#endif
 
 		bool			m_bDrag;
 
@@ -262,18 +251,13 @@ class CCameraManager : public CSingleton<CCameraManager>
 
 		unsigned char GetCurrentCameraNum();
 
-		bool isTerrainCollisionEnable();
-		void SetTerrainCollision(bool bEnable);
+		bool isTerrainCollisionEnable() const;
+		void SetTerrainCollision(bool bEnable) const;
 
 	private:
 		TCameraMap		m_CameraMap;
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<CCamera*>		m_pCurrentCamera;
-		safe_variable_weak<CCamera*>		m_pPreviousCamera;
-#else
 		CCamera *		m_pCurrentCamera;
 		CCamera *		m_pPreviousCamera;
-#endif
 };
 
 #endif // !defined(AFX_CAMERA_H__C5D086BE_7A03_4246_9145_336747C47D9E__INCLUDED_)

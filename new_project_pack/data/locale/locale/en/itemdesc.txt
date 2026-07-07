@@ -5371,7 +5371,7 @@
 50286	Golden Combat Zone Chest	A chest with valuable contents.
 50287	Field Box 1	A box containing useful equipment.
 50288	Field Box 2	A box containing useful equipment.
-50289	Reincarnation	Reincarnation immediately revives you without delay.
+50289	Buff Effect	Allows you to receive the Buff Effect from the NPC.
 50290	Wooden Combat Zone Chest	A chest with valuable contents.
 50294	Queen Meley's Chest	This chest was recovered from the Dragon Queen Meley's lair. It contains a truly magnificent treasure.
 50296	Box of Wards	This box contains 5 Ward Manuals.
@@ -7382,7 +7382,7 @@
 83008	Jewellery Box	Contains a ring, amulet, lolly or potion at random.
 83009	Pet Chest	Contains a random egg.
 83010	Sash Box	Contains a random sash.
-83011	Ornament Chest	Contains a random talisman, 50 Zodiac Cases or items for entering the Zodiac Temple.
+83011	Water Chest	Contains 100 Water.
 83012	Ultimate Pet Book Chest	Contains a random item to train and improve your pet.
 83013	Riptooth Chest+	Contains a Riptooth+ weapon of your choice.
 83014	Cor Draconis Chest	Contains a random Cor Draconis or a Dragon Bean.

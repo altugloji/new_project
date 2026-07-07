@@ -3,17 +3,13 @@ import localeInfo
 from constInfo import TextColor
 app.ServerName = None
 
-# Auth dagitimi: client her acilista authlist'ten rastgele bir port secer.
-# NOT: eski time-based RNG (int(time*1e6) % len) ms cozunurlukte HEP index 0 veriyordu
-# (1000'in katlari 4'e tam bolunur), yani herkes 30001'e baglaniyordu. Binary RNG
-# app.GetRandom kullaniyoruz: stdlib gerektirmez ve her client'ta gercekten farkli.
 def get_item_from_list(_list):
 	return _list[app.GetRandom(0, len(_list) - 1)]
 
 SRV1 = {
 	"name": "AyazMt2",
-	"host":"45.131.198.34",
-	# "host":"5.196.21.148", #Test sunucusu
+	# "host":"45.131.198.34",
+	"host":"5.196.21.148", #Test sunucusu
 	"srv1-auth1":30001,
 	"srv1-auth2":30003,
 	"srv1-auth3":30005,
@@ -38,33 +34,14 @@ SRV1 = {
 	"authlist": [ 30001,30003,30005,30007,30009,30011,30013,30015, ],
 }
 
-# ---- AUTH FAILOVER (otomatik auth gecisi) -------------------------------------
-# Oturum acarken secili auth basarisiz olur (TCP reddi/timeout) veya YAVAS kalirsa
-# (bagli ama el sikismasi gelmiyor), client otomatik olarak authlist'teki diger auth
-# portlarina sirayla gecer. Tum auth'lar tukenince normal hata mesaji gosterilir.
-# Sadece client-side calisir; sunucu degisikligi gerektirmez (her auth core bagimsiz).
+
 ENABLE_AUTH_FAILOVER = True
-# Bagli ama auth/oyun el sikismasi bu kadar saniyede gelmezse auth "yavas" sayilir ve
-# bir sonraki auth'a gecilir. Bu sure TUM auth bacagini kapsar; auth basarili olduktan
-# SONRA oyun-kanali asamasinda watchdog zaten devre disi (net.IsConnect/app.loggined
-# guard'i, bkz. intrologin.__OnAuthSlowTimeout). Yine de auth handshake + ~3sn oyun
-# baglanti penceresini RAHAT asmasi icin C++ connect timeout'undan (~3sn) belirgin buyuk
-# olmali. Acilis (5000+) gibi cok yogun anlarda yanlis gecis gorurseniz yukseltin.
 AUTH_FAILOVER_SLOW_TIMEOUT = 20.0
-# 0 = tum auth'lari sirayla dene. >0 ise en fazla bu kadar auth denenir.
 AUTH_FAILOVER_MAX_TRIES = 0
-# True iken failover akisinin her adimi syserr.txt'e "[AUTH-FAILOVER]" ile yazilir.
-# Test/teshis icindir; canliya cikarken False yapin.
-AUTH_FAILOVER_DEBUG = True
+AUTH_FAILOVER_DEBUG = False #Auth test syserr
 
 def GetAuthFailoverList(regionID, serverID):
-	# (ip, port) cifti listesi -> failover icin SIRALI auth aday listesi dondurur.
-	# Yuk dagilimi icin rastgele bir auth'tan baslar, sonra digerlerini doner.
 	ports = list(SRV1.get("authlist", []))
-	# ip: once secili sunucu; cozulemezse (or. auto-login'de server listesi henuz
-	# secili degil) SRV1 host'a geri dus -> auto-login de failover korumasi alir.
-	# NOT: Bugun tek sunucu (SRV1) var; coklu sunucuda burada region/server -> SRV
-	# eslemesi yapilmali (yoksa baska sunucunun ip'sine SRV1 portlari eslenir).
 	try:
 		ip = REGION_AUTH_SERVER_DICT[regionID][serverID]["ip"]
 	except Exception:
@@ -85,7 +62,7 @@ STATE_NONE = localeInfo.CHANNEL_STATUS_OFFLINE
 STATE_DICT = {
 	0: localeInfo.CHANNEL_STATUS_OFFLINE,
 	1: localeInfo.CHANNEL_STATUS_RECOMMENDED,
-	2: localeInfo.CHANNEL_STATUS_BUSY,
+	2: localeInfo.CHANNEL_STATUS_FULL,
 	3: localeInfo.CHANNEL_STATUS_FULL,
 }
 

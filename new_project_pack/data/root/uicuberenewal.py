@@ -20,6 +20,10 @@ COLOR_MATERIAL_SHORT = grp.GenerateColor(0.9, 0.4745, 0.4627, 1.0)
 MATERIAL_GRID_SLOTS = 14
 MAX_PACKET_MATERIALS = 10
 
+# YENI: toplu uretim KAPALI (server ENABLE_CUBE_RENEWAL_DISABLE_BULK ile senkron olmali).
+# 1 iken miktar alani duzenlenemez ve make paketi daima tek parti (count=1) gonderir.
+CUBE_DISABLE_BULK_PRODUCTION = 1
+
 # YENI: cube grid'ine secilebilecek azami Beceri Kitabi sayisi.
 # uiscript SKILL_GRID_COLS*SKILL_GRID_ROWS ve server CUBE_SKILL_GRID_MAX ile AYNI olmali.
 CUBE_SKILL_GRID_MAX = 26
@@ -452,7 +456,10 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		self.selectedRecipeGlobalIndex = idx
 		self.count_item_reward = FReturnInfo("count_reward", idx)
 		self.result_qty.KillFocus()
-		self.result_qty.CanEdit(FReturnInfo("item_reward_stackable", idx))
+		if CUBE_DISABLE_BULK_PRODUCTION:
+			self.result_qty.CanEdit(False)
+		else:
+			self.result_qty.CanEdit(FReturnInfo("item_reward_stackable", idx))
 		self.result_qty.SetText("%s" % self.count_item_reward)
 		self.result_qty.Show()
 		self.Refresh()
@@ -866,6 +873,11 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		minReward = FReturnInfo("count_reward", sel)
 		if minReward <= 0:
 			minReward = 1
+		if CUBE_DISABLE_BULK_PRODUCTION:
+			# Toplu uretim kapali: miktar daima tek partinin odul adedi.
+			self.count_item_reward = minReward
+			self.result_qty.SetText("%d" % minReward)
+			return
 		result_total = self._SafeIntQty(self.result_qty.GetText(), minReward)
 		if result_total < 0:
 			result_total = minReward
@@ -928,6 +940,8 @@ class CubeRenewalWindows(ui.ScriptWindow):
 			if self.result_qty:
 				self.result_qty.SetText("%d" % self.count_item_reward)
 		count = self.count_item_reward / cr
+		if CUBE_DISABLE_BULK_PRODUCTION:
+			count = 1
 		if count <= 0:
 			self._NotifyCubeFail(
 				getattr(localeInfo, "CUBE_NOT_ENOUGH_MATERIAL", "Uretim miktari gecersiz; miktar alanini kontrol edin.")
@@ -966,7 +980,8 @@ class CubeRenewalWindows(ui.ScriptWindow):
 			pass
 
 	def QtyAddButton(self):
-		return
+		if CUBE_DISABLE_BULK_PRODUCTION:
+			return
 		if self.selectedRecipeGlobalIndex < 0:
 			return
 		if not FReturnInfo("item_reward_stackable", self.selectedRecipeGlobalIndex):
@@ -1004,7 +1019,8 @@ class CubeRenewalWindows(ui.ScriptWindow):
 		return min(counts)
 
 	def QtySubButton(self):
-		return
+		if CUBE_DISABLE_BULK_PRODUCTION:
+			return
 		if self.selectedRecipeGlobalIndex < 0:
 			return
 		if not FReturnInfo("item_reward_stackable", self.selectedRecipeGlobalIndex):

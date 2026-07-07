@@ -5371,7 +5371,7 @@
 50286	Gouden Strijd Zone Kist	Een kist met waardevolle inhoud.
 50287	Veld Doos 1	Een doos die nuttige uitrusting bevat.
 50288	Veld Doos 2	Een doos die nuttige uitrusting bevat.
-50289	Reïncarnatie	Reïncarnatie wekt je per direct en zonder vertraging weer tot leven.
+50289	Buff-effect	Hiermee kun je het Buff-effect van de NPC ontvangen.
 50290	Houten Strijd Zone Kist	Een kist met waardevolle inhoud.
 50294	Koningin Meley's Kist	Deze kist is meegebracht uit het hol van de Drakenkoningin Meley. Hij bevat een werkelijk overweldigende schat.
 50296	Doos der Beschermingen	Deze doos bevat 5 Bescherming Handleidingen.
@@ -7382,7 +7382,7 @@
 83008	Juwelen Kist	Bevat een willekeurige ring, amulet, lolly of drankje.
 83009	Huisdier Kist	Bevat een willekeurig ei.
 83010	Gordel Doos	Bevat een willekeurige gordel.
-83011	Ornament Kist	Bevat een willekeurige talisman, 50 Zodiac Koffers of items om de Zodiac Tempel binnen te kunnen gaan.
+83011	Water Chest	Bevat 100 stuks Water.
 83012	Ult. Huisdier Boek Kist	Bevat een willekeurig item om je huisdier mee te trainen en te verbeteren.
 83013	Zaagtand Kist+	Bevat een Zaagtand+ wapen naar keuze.
 83014	Cor Draconis Kist	Bevat een willekeurige Cor Draconis of een Draken Boon.

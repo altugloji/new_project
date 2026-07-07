@@ -5371,7 +5371,7 @@
 50286	Z³. Skrzy. Strefy Walki	Skrzynia z drogocenn¹ zawartoœci¹.
 50287	Skrzynka Polowa 1	Skrzynka z przydatnym wyposa¿eniem.
 50288	Skrzynka Polowa 2	Skrzynka z przydatnym wyposa¿eniem.
-50289	Reinkarnacja	Reinkarnacja wskrzesi ciê natychmiast i bez czasu oczekiwania.
+50289	Efekt Buffa	Pozwala otrzymaæ Efekt Buffa od NPC.
 50290	Dre. Skrzy. Strefy Walki	Skrzynia z drogocenn¹ zawartoœci¹.
 50294	Skrzynia Królowej Meley	Ta skrzynia zosta³a wydobyta ze Schronienia Królowej Smoków Meley. Znajduje siê w niej prawdziwy królewski skarb.
 50296	Skrzynia Riposty	Skrzynia ta zawiera 5 Podrêczników Riposty.
@@ -7382,7 +7382,7 @@
 83008	Szkatu³a na Bi¿uteriê	Zawiera losowo pierœcieñ, amulet, lizak lub miksturê.
 83009	Skrzynka na Zwierzaka	Zawiera losowe jajo.
 83010	Pud³o na Szarfy	Zawiera losow¹ szarfê.
-83011	Skrzynka na Ozdoby	Zawiera losowy talizman, 50 pude³ Zodiaku lub przedmioty do wejœcia do Œwi¹tyni Zodiaku.
+83011	Water Chest	Zawiera 100 sztuk Wody.
 83012	Opt. Skrz. Ksi¹g Zwierza	Zawiera losowy przedmiot do trenowania i ulepszania zwierzaków.
 83013	Skrzyn. Broni Tarczowej+	Zawiera broñ tarczow¹+ twojego wyboru.
 83014	Skrzynka Cor Draconis	Zawiera losowy Cor Draconis lub smocza fasolê.

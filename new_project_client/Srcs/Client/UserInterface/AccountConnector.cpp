@@ -1,13 +1,14 @@
 #include "StdAfx.h"
 #include "AccountConnector.h"
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+#include "rascal_client.h"
+#endif
+
 #include "Packet.h"
 #include "PythonNetworkStream.h"
 #include "../EterBase/tea.h"
 #include "../EterPack/EterPackManager.h"
 
-#ifdef URIEL_ANTI_CHEAT
-#include "PythonApplication.h"
-#endif
 
 // CHINA_CRYPT_KEY
 extern DWORD g_adwEncryptKey[4];
@@ -149,24 +150,36 @@ bool CAccountConnector::__AuthState_RecvPhase()
 		LoginPacket.header = HEADER_CG_LOGIN3;
 
 		strncpy(LoginPacket.name, m_strID.c_str(), ID_MAX_NUM);
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+		if (!rascal::RequireLiveSession()) {
+			__fastfail(0);
+			exit(0);
+			std::terminate();
+		}
+
+		rascal::ListModulesForTheVMPSections();
+
+		rascal::CheckRascalThreads();
+
+		rascal::RascalProtectRTypes(GETUSERNAME, &m_strID, NULL);
+		int anticheatheartbeatvalue = 0;
+		rascal::RascalProtectRTypes(NOTHING, &anticheatheartbeatvalue, NULL);
+		int cryptkey = 1337;
+		anticheatheartbeatvalue = anticheatheartbeatvalue ^ cryptkey;
+		if (anticheatheartbeatvalue < 67 && anticheatheartbeatvalue > 56) {
+		}
+		else {
+			rascal::WLog(std::string(skCrypt("anticheatheartbeatvalue error")));
+			rascal::WLog(std::to_string(anticheatheartbeatvalue));
+			__fastfail(0);
+			exit(1);
+		}
+#endif
+
 		strncpy(LoginPacket.pwd, m_strPassword.c_str(), PASS_MAX_NUM);
 		LoginPacket.name[ID_MAX_NUM] = '\0';
 		LoginPacket.pwd[PASS_MAX_NUM] = '\0';
 
-#ifdef URIEL_ANTI_CHEAT
-		{
-			// Packet'e dokunmadan API'yi çağır; token'ı geçici buffer'a yaz
-			char uriel_token_temp[36] = {0};
-			if (!CPythonApplication::Instance().AntiCheat().GetLoginToken(m_strID, uriel_token_temp))
-			{
-				ClearLoginInfo();
-				CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
-				rkNetStream.ClearLoginInfo();
-
-				return false;
-			}
-		}
-#endif
 
 		ClearLoginInfo();
 		CPythonNetworkStream& rkNetStream=CPythonNetworkStream::Instance();

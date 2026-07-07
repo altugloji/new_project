@@ -982,7 +982,11 @@ float CGraphicThingInstance::GetHeight() const
 	D3DXVECTOR3 vtMin, vtMax;
 	pModelInstance->GetBoundBox(&vtMin, &vtMax);
 
+#ifdef ENABLE_NPC_SCALE
+	return fabs(vtMin.z - vtMax.z) * m_v3Scale.z;
+#else
 	return fabs(vtMin.z - vtMax.z);
+#endif
 }
 
 void CGraphicThingInstance::ReloadTexture()

@@ -8859,7 +8859,7 @@ VNUM	LOCALE_NAME
 50286	Zlatá Truhla bit. zóny
 50287	Polní truhla 1
 50288	Polní truhla 2
-50289	Reinkarnace
+50289	Buff efekt
 50290	Døevìná Truhla bit. zóny
 50294	Truhla královny Meley
 50296	Truhla Knih ochrany
@@ -10626,7 +10626,7 @@ VNUM	LOCALE_NAME
 83008	Šperkovnice
 83009	Truhla mazlíka
 83010	Truhla šerpy
-83011	Zdobená truhla
+83011	Vodní truhla
 83012	Max. truh. Knihy zvíøete
 83013	Truhla Zubaté zbranì+
 83014	Truhla Cor Draconis

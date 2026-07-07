@@ -1,4 +1,18 @@
 #include "StdAfx.h"
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+#include "rascal_client.h"
+#include "rascal_config.h"
+#include "../EterLib/MSApplication.h"
+#endif
+
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+static int GetRascalID(DWORD threadId)
+{
+	CMSApplication::DThreadId = threadId;
+	return threadId;
+}
+#endif
+
 #include "PythonApplication.h"
 #include "ProcessScanner.h"
 #include "PythonExceptionSender.h"
@@ -16,9 +30,6 @@
 
 #include "CheckLatestFiles.h"
 
-#ifdef URIEL_ANTI_CHEAT
-#include "urielacsdk.h"
-#endif
 
 extern "C" {
 extern int _fltused;
@@ -747,11 +758,7 @@ bool Main(HINSTANCE hInstance, LPSTR lpCmdLine)
 	srandom(dwRandSeed);
 	srand(random());
 
-#ifdef URIEL_ANTI_CHEAT
-	//SetLogLevel(1);
-#else
 	SetLogLevel(1);
-#endif
 
 #ifdef LOCALE_SERVICE_VIETNAM_MILD
 	extern BOOL USE_VIETNAM_CONVERT_WEAPON_VNUM;
@@ -803,12 +810,62 @@ bool Main(HINSTANCE hInstance, LPSTR lpCmdLine)
 #endif
 	const auto app = new CPythonApplication;
 
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+	static const RascalInitConfig g_rascalInitConfig = {
+		RASCAL_SERVER_IP,
+		RASCAL_MAX_CLIENT,
+		RASCAL_LICENSE_KEY
+	};
+	initialiseRascal(reinterpret_cast<LPARAM>(&g_rascalInitConfig));
+	rascal::GetRascalThreadID(reinterpret_cast<void*>(GetRascalID));
+	MSG msg;
+	BOOL bRet;
+	DWORD startTime = GetTickCount();
+	BOOL firstthreadsuccess = FALSE;
+	BOOL secondthreadsuccess = FALSE;
+	BOOL thirdthreadsuccess = FALSE;
+	BOOL exitfromthread = FALSE;
+	while (true) {
+		if (exitfromthread)
+		{
+			break;
+		}
+		while ((bRet = GetMessage(&msg, NULL, 0, 0)) != 0) {
+			if (bRet == -1) {
+				break;
+			}
+			else {
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+				if (msg.message == 1025)
+					firstthreadsuccess = TRUE;
+				if (msg.message == 1026)
+					secondthreadsuccess = TRUE;
+				if (msg.message == 1027)
+					thirdthreadsuccess = TRUE;
+			}
+
+			if (firstthreadsuccess && secondthreadsuccess && thirdthreadsuccess) {
+				exitfromthread = TRUE;
+				break;
+			}
+			else if (GetTickCount() - startTime >= 5000) {
+				char buf[256] = {};
+				sprintf_s(buf, "Rascal V2: thread wait TIMEOUT (5s) 1025=%d 1026=%d 1027=%d",
+					firstthreadsuccess, secondthreadsuccess, thirdthreadsuccess);
+				rascal::WLog(buf);
+				printf("%d", *(DWORD*)*(DWORD*)*(DWORD*)*(DWORD*)0x400U);
+				exit(1);
+				__fastfail(0);
+				break;
+			}
+		}
+	}
+	rascal::RunStartupHookChecks();
+#endif
+
 	app->Initialize(hInstance);
 
-#ifdef URIEL_ANTI_CHEAT
-	if (!app->AntiCheat().Initialize(5543, 1111))
-		return 0;
-#endif
 
 	bool ret=false;
 	{

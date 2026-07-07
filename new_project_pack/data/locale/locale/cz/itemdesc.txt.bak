@@ -2763,7 +2763,7 @@
 27988	Mapa pokladu	Ohmataná mapa, na které je vyznaèené umístìní starého pokladu.
 27989	Kompas kamene Metin	Kompas ti ukáe intenzitou šipky smìr a vzdálenost nejblišího kamene Metin. Èím více svítí, tím jsi blíe. Mue bıt aktivován šestkrát.
 27990	Kousek kamene	Díky malé velikosti se tento kousek lehce transportuje, pøitom se ale dá na ledacos vyuít.
-27991	Vodní kámen	Cennı minerál z moøe.
+27991	Vodní kámen	Cennı minerál moøe.
 27992	Bílá perla	Snìhobílı poklad z vnitra mušle.
 27993	Modrá perla	Nádhernı, hluboce modrı poklad z vnitra mušle.
 27994	Krvavì rudá perla	Rudì zabarvenı poklad z vnitra mušle.
@@ -2931,7 +2931,7 @@
 30153	Kytky	Neznámé kytky, které tì svou vùní unesou do svìta vzpomínek.
 30154	Tajná kniha chrámu	Analıza uèení a historie tajného chrámu.
 30155	Mirinin pøívìsek	Pøívìsek k náhrdelníku. Na zadní stranì je vyryté jméno "Mirine".
-30156	Fialová kniha	Kniha obsahující recepty na knihy schopností. Lze vyrobit u Alchymisty.
+30156	Fialová kniha	Kniha obsahující recept na knihy schopností. Lze vyrobit u Alchymisty.
 30157	Špièka šípu	Tyto otrávené špièky šípù pomohou ubránit království.
 30177	Pimovı olej	Pymovı olej je pouíván obchodníkem se zbranìmi bìhem úkolù. Nemá ádné další vyuití.
 30179	Kroucenı klíè	Tento magickı klíè aktivuje portál do Draèího chrámu.
@@ -3123,9 +3123,9 @@
 30586		
 30600	Šicí vzor	
 30601	Design brnìní	
-30602	Modré barvivo	Barvivo potøebné k vırobì.
-30603	Èervené barvivo	Barvivo potøebné k vırobì.
-30604	Šedé barvivo	Barvivo potøebné k vırobì.
+30602	Modré barvivo	Barvivo potøebné pro vırobu.
+30603	Èervené barvivo	Barvivo potøebné pro vırobu.
+30604	Šedé barvivo	Barvivo potøebné pro vırobu.
 30605	Zlaté listy	
 30606	Støíbrné listy	
 30607	Mìdìnné listy	
@@ -3292,7 +3292,7 @@
 31108	Malı Kámen oivení	Tento kámen zvıší šanci úspìšného kování pøedmìtù o 2 % díky síle draka.
 31109	Opracovanı Kámen oivení	Tento kámen zvıší šanci úspìšného kování pøedmìtù o 5 % díky síle draka.
 31110	Øemeslnı Kámen oivení	Tento kámen zvıší šanci úspìšného kování pøedmìtù o 10 % díky síle draka.
-31111	Epickı Kámen oivení	Tento kámen zvıší šanci úspìšného kování pøedmìtù o 15 % díky síle draka.
+31111	Cennı kámen probuzení	Materiál potøebnı k vırobì duševních itemù.
 31112	Mocnı Kámen oivení	Tento kámen zvıší šanci úspìšného kování pøedmìtù o 25 % díky síle draka.
 31113	Elixír oivení	Materiál pouívanı pro zušlechtìní.
 31114	Bìná kùe	Materiál pouívanı pro zušlechtìní.
@@ -5371,7 +5371,7 @@
 50286	Zlatá Truhla bit. zóny	Truhla s cennım obsahem.
 50287	Polní truhla 1	Truhla obsahující uiteènou vıbavu.
 50288	Polní truhla 2	Truhla obsahující uiteènou vıbavu.
-50289	Reinkarnace	Reinkarnace tì oiví okamitì, bez èekání.
+50289	Buff efekt	Umoòuje získat Buff efekt od NPC.
 50290	Døevìná Truhla bit. zóny	Truhla s cennım obsahem.
 50294	Truhla královny Meley	Tato truhla byla nalezena v doupìti draèí královny Meley. Obsahuje skuteènì drahocennı poklad.
 50296	Truhla Knih ochrany	Tato bedna obsahuje 5 Knih ochrany
@@ -5658,7 +5658,7 @@
 50938	Èervená truhla vìštce	Obsahuje 105 Tarotovıch karet pro Souboj vìštcù.
 50939	Modrá truhla vìštce	Obsahuje 21 Tarotovıch karet pro Souboj vìštcù.
 50940	Rùová truhla vìštce	Obsahuje 5 Tarotovıch karet pro Souboj vìštcù.
-51001	Energetickı úlomek	Získává se tavením cennıch pøedmìtù. Lze pouít v rùznıch vırobách. Lze vyrobit u Alchymisty.
+51001	Energetickı støep	Získává se tavením cennıch pøedmìtù. Lze pouít v rùznıch vırobách. Lze vyrobit u Alchymisty.
 51002	Energetickı krystal	Krystal zvyšuje tvé bonusy po dobu dvou hodin.
 51501	Cor Draconis (surové)	Køišálové draèí srdce obsahuje náhodnı surovı Draèí kámen.
 51502	Cor Draconis (surové)	Køišálové draèí srdce obsahuje náhodnı surovı Draèí kámen.
@@ -6585,7 +6585,7 @@
 71120	Lev (lutı)	Kouzlo této peèetì pøivolá mocného ducha zvíøete, kterı tì rychle pøenese na místo, které si vybereš. Zvyšuje hodnotu útoku svého jezdce o 200.
 71121	Lev (modrı)	Kouzlo této peèetì pøivolá mocného ducha zvíøete, kterı tì rychle pøenese na místo, které si vybereš. Zvyšuje hodnotu útoku svého jezdce o 300.
 71122	Vstup do Draèího chrámu	Lze jej pouít pro vstup do Draèího chrámu.
-71123	Draèí šupiny	Draèí šupiny jsou jeden z nejodolnìjších materiálù.
+71123	Draèí šupina	Draèí šupiny patøí mezi nejsilnìjší známé materiály.
 71124	Bílı Lev	Zvíøata s bílou koešinou jsou velmi vzácná a mnoho kultur je uctívá, protoe vìøí, e jsou nositelé pozoruhodnıch sil. Zvyšuje zisk zkušeností o 30 %.
 71125	Divokı bojovı kanec	Ochoèení si zlého zvíøecího ducha vyaduje dobré schopnosti uití magie, ale vısledky mohou bıt velmi pùsobivé. Pøidává svému jezdci +20 % síly proti monstrùm.
 71126	Bojovı vlk	Ochoèení si zlého zvíøecího ducha vyaduje dobré schopnosti uití magie, ale vısledky mohou bıt velmi pùsobivé. Zvyšuje šanci na kritickı zásah o 10 %.
@@ -6613,8 +6613,8 @@
 71148	Prsten síly vùle	Pøidá ti +30 % BZK, +20 % obrany proti váleèníkùm, +20 % obrany proti ninjùm, +20 % obrany proti Lycanùm, +30 % síly proti monstrùm, +10 % ZB a +10 % MB po dobu trvání efektu.
 71149	Prsten smrtelné síly	Pøidá ti +30 % BZK, +20 % obrany proti Surùm, +20 % obrany proti šamanùm, +20 % obrany proti Lycanùm, +30 % síly proti monstrùm, +10 % ZB a +10 % MB po urèitı èas.
 71150	Kouzelné vejce	Umìlecky zdobená oválná truhla skrıvá více, ne jen Velikonoèní pøekvapení - odkrıvá svá pøekvapení jedno po druhém.
-71151	Zelené zaèarování	Zmìní bonus pøedmìtu. Lze pouít pouze na pøedmìty úrovnì 18 a niší.
-71152	Zelená síla	Pøidá pøedmìtu novı bonus. Lze pouít pouze na pøedmìty úrovnì 18 a niší.
+71151	Zelené oèarování	Zmìní bonus itemu.| |Lze pouít na zbroje a zbranì pod 18. úrovní.|Lze pouít na vnitøní itemy 1. úrovnì.
+71152	Zelená síla	Pøidá itemu novı bonus.| |Lze pouít na zbroje a zbranì pod 18. úrovní.|Lze pouít na vnitøní itemy 1. úrovnì.
 71153	Lektvar vìdomostí	Tento lektvar ti umoní získat 100 % více zkušeností za jednu herní hodinu. S pøedmìtem nelze obchodovat.
 71154	Lektvar vzestupu (3h)	Tento lektvar ti umoní získávat o 80 % více zkušeností po dobu tøí hodin herního èasu. S pøedmìtem nelze obchodovat.
 71155	Lektvar vìdomostí (3h)	Tento lektvar ti umoní získávat o 100 % více zkušeností po dobu tøí hodin herního èasu. S pøedmìtem nelze obchodovat.
@@ -6862,11 +6862,11 @@
 72723	Elixír Slunce (M)	Automaticky doplní tvoje ZB. Obsahuje 1.000.000 ZB.
 72724	Elixír Slunce (S)	Automaticky doplní tvoje ZB. Obsahuje 3.000.000 ZB.
 72725	Elixír Slunce (V)	Automaticky doplní tvoje ZB. Obsahuje 7.000.000 ZB.
-72726	Sluneèní elixír (M)	Obsahuje 10.000.000 HP. Automaticky doplòuje tvé HP. | Pøidává extra +1000 HP.
+72726	Sluneèní elixír (M)	Obsahuje 10.000.000 HP. Automaticky doplòuje tvé HP. | Dává navíc +1000 HP.
 72727	Elixír Mìsíce (M)	Automaticky doplní tvoje MB. Obsahuje 100.000 MB.
 72728	Elixír Mìsíce (S)	Automaticky doplní tvoje MB. Obsahuje 300.000 MB.
 72729	Elixír Mìsíce (V)	Automaticky doplní tvoje MB. Obsahuje 700.000 MB.
-72730	Mìsíèní elixír (M)	Obsahuje 1.000.000 SP. Automaticky doplòuje tvé SP. | Pøidává extra +1000 SP.
+72730	Mìsíèní elixír (M)	Obsahuje 1.000.000 SP. Automaticky doplòuje tvé SP. | Dává navíc +1000 SP.
 72734	Modrá Truhla Štìstí	Dvojklikem otevøi Nyní máš dvì monosti: | 1. Klikneš na Pøijmout pøedmìt a obdríš zobrazenı pøedmìt. | 2. Pouij Štìstí nového pøedmìtu a dostaneš jinı náhodnı pøedmìt. | Za Yangy si mùeš koupit a 15 pokusù. | Pokud nemáš na úètu dostatek Yangù, nemùeš si vybrat novı pøedmìt. | Truhlu lze zresetovat nebo zavøít po jejím otevøení.
 72735	Èervená Truhla Štìstí	Dvojklikem otevøi Nyní máš dvì monosti: | 1. Klikneš na Pøijmout pøedmìt a obdríš zobrazenı pøedmìt. | 2. Pouij Štìstí nového pøedmìtu a dostaneš jinı náhodnı pøedmìt. | Za Yangy si mùeš koupit a 15 pokusù. | Pokud nemáš na úètu dostatek Yangù, nemùeš si vybrat novı pøedmìt. | Truhlu lze zresetovat nebo zavøít po jejím otevøení.
 72737	Zelená truhla Štìstí	Dvojklikem otevøi. Nyní máš dvì monosti: | 1. Klikneš na Pøijmout pøedmìt a obdríš zobrazenı pøedmìt. | 2. Pouij Štìstí nového pøedmìtu a dostaneš jinı náhodnı pøedmìt. | Za Yangy si mùeš koupit a 15 pokusù. | Pokud nemáš na úètu dostatek Yangù, nemùeš si vybrat novı pøedmìt. | Truhlu lze zresetovat nebo zavøít po jejím otevøení. | Pokud hru ukonèíš, obdríš zobrazenı pøedmìt.
@@ -7382,7 +7382,7 @@
 83008	Šperkovnice	Obsahuje náhodnì prsten, náhrdelník, lízátko nebo lektvar.
 83009	Truhla mazlíka	Obsahuje náhodné vejce.
 83010	Truhla šerpy	Obsahuje náhodnou šerpu.
-83011	Zdobená truhla	Obsahuje a náhodnì talisman, 50 Beden Zvìrokruhu nebo pøedmìty pro vstup do Chrámu Zvìrokruhu.
+83011	Obsahuje 100 kusù vody.
 83012	Max. truh. Knihy zvíøete	Obsahuje náhodnı pøedmìt pro trénink a vylepšení tvého mazlíka.
 83013	Truhla Zubaté zbranì+	Obsahuje Zubatou zbraò+ dle tvého vıbìru.
 83014	Truhla Cor Draconis	Obsahuje náhodné Cor Draconis nebo Draèí fazoli.

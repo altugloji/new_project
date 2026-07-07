@@ -2243,7 +2243,7 @@ VNUM	LOCALE_NAME
 20091	Seon-Pyeong
 20092	Hwa-Hee
 20093	Koe-Pung
-20094	Hong-Hae
+20094	Buff Npc
 20095	Seon-Hae
 20096	Dikili taþ
 20097	Kale Giriþi

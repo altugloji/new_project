@@ -5371,7 +5371,7 @@
 50286	Arany Harci övezet-láda	Láda, értékes tartalommal.
 50287	Harcmezõ doboz 1	Hasznos felszerelést tartalmazó doboz.
 50288	Harcmezõ doboz 2	Hasznos felszerelést tartalmazó doboz.
-50289	Újraélesztõ	Az Újraélesztõ késedelem nélkül, azonnal újraéleszt.
+50289	Buff hatás	Lehetõvé teszi, hogy megkapd a Buff hatást az NPC-tõl.
 50290	Fa Harci övezet-láda	Láda, értékes tartalommal.
 50294	Meley királynõ ládája	Ez a láda a Sárkánykirálynõ Meley barlangjából származik. Egy valóban csodálatos kincset tartalmaz.
 50296	Elhárítók doboza	Ez a doboz 5 Elhárító kézikönyvet tartalmaz.
@@ -7382,7 +7382,7 @@
 83008	Ékszeres doboz	Véletlenszerûen egy gyûrût, amulettet, nyalókát vagy bájitalt tartalmaz.
 83009	Házikedvenc láda	Egy véletlenszerû tojást tartalmaz.
 83010	Pánt doboz	Egy véletlenszerû vállpántot tartalmaz.
-83011	Díszláda	Tartalmazhat egy véletlenszerû talizmánt, 50 Zodiákus szelencét vagy tárgyakat a Zodiákus templomba való belépéshez.
+83011	Water Chest	100 darab vizet tartalmaz.
 83012	Csúcs kedvenc-könyv láda	Egy véletlenszerû tárgyat tartalmaz házikedvenced képzéséhez és fejlesztéséhez.
 83013	Tépõfog láda+	Egy általad választott Tépõfog+ fegyvert tartalmaz.
 83014	Cor Draconis láda	Egy véletlenszerû Cor Draconist vagy egy Sárkánybabot tartalmaz.

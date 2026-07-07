@@ -8,7 +8,7 @@ void CInstanceBase::SetAttackSpeed(UINT uAtkSpd)
 	if (uAtkSpd > 1100)
 		uAtkSpd = 0;
 
-	M_GTI.SetAttackSpeed(uAtkSpd/100.0f);
+	m_GraphicThingInstance.SetAttackSpeed(uAtkSpd/100.0f);
 	m_kHorse.SetAttackSpeed(uAtkSpd);
 }
 
@@ -17,7 +17,7 @@ void CInstanceBase::SetMoveSpeed(UINT uMovSpd)
 	if (uMovSpd > 1100)
 		uMovSpd = 0;
 
-	M_GTI.SetMoveSpeed(uMovSpd/100.0f);
+	m_GraphicThingInstance.SetMoveSpeed(uMovSpd/100.0f);
 	m_kHorse.SetMoveSpeed(uMovSpd);
 }
 
@@ -40,12 +40,12 @@ void CInstanceBase::NEW_Stop()
 	if (!IsWaiting())
 		EndWalking();
 
-	M_GTI.__OnStop();
+	m_GraphicThingInstance.__OnStop();
 }
 
 void CInstanceBase::NEW_SyncPixelPosition(long & nPPosX, long & nPPosY)
 {
-	M_GTI.TEMP_Push(nPPosX, nPPosY);
+	m_GraphicThingInstance.TEMP_Push(nPPosX, nPPosY);
 }
 
 bool CInstanceBase::NEW_CanMoveToDestPixelPosition(const TPixelPosition& c_rkPPosDst)
@@ -98,10 +98,10 @@ float CInstanceBase::NEW_GetAdvancingRotationFromPixelPosition(const TPixelPosit
 void CInstanceBase::NEW_SetAdvancingRotationFromDirPixelPosition(const TPixelPosition& c_rkPPosDir)
 {
 	const float fClampDirRot=NEW_GetAdvancingRotationFromDirPixelPosition(c_rkPPosDir);
-	M_GTI.SetAdvancingRotation(fClampDirRot);
+	m_GraphicThingInstance.SetAdvancingRotation(fClampDirRot);
 
-	const float fCurRot=M_GTI.GetRotation();
-	const float fAdvRot=M_GTI.GetAdvancingRotation();
+	const float fCurRot=m_GraphicThingInstance.GetRotation();
+	const float fAdvRot=m_GraphicThingInstance.GetAdvancingRotation();
 
 	m_iRotatingDirection = GetRotatingDirection(fCurRot, fAdvRot);
 }
@@ -137,14 +137,14 @@ void CInstanceBase::SetAdvancingRotation(float fRotation)
 	else
 		m_fRotSpd = m_fMaxRotSpd * 5 / 12;
 
-	M_GTI.SetAdvancingRotation(ClampDegree(fRotation));
-	m_iRotatingDirection = GetRotatingDirection(M_GTI.GetRotation(),
-												M_GTI.GetAdvancingRotation());
+	m_GraphicThingInstance.SetAdvancingRotation(ClampDegree(fRotation));
+	m_iRotatingDirection = GetRotatingDirection(m_GraphicThingInstance.GetRotation(),
+												m_GraphicThingInstance.GetAdvancingRotation());
 }
 
 void CInstanceBase::StartWalking()
 {
-	M_GTI.Move();
+	m_GraphicThingInstance.Move();
 
 	if (IsAffect(AFFECT_GYEONGGONG))
 	{
@@ -164,7 +164,7 @@ void CInstanceBase::EndWalking(float fBlendingTime)
 
 	if (IsWalking()||!IsAttacked())
 	{
-		M_GTI.Stop(fBlendingTime);
+		m_GraphicThingInstance.Stop(fBlendingTime);
 		if (IsAffect(AFFECT_GYEONGGONG))
 		{
 			__EffectContainer_DetachEffect(EFFECT_AFFECT_GYEONGGONG);
@@ -183,27 +183,27 @@ void CInstanceBase::EndWalkingWithoutBlending()
 
 BOOL CInstanceBase::IsWaiting()
 {
-	return M_GTI.IsWaiting();
+	return m_GraphicThingInstance.IsWaiting();
 }
 
 BOOL CInstanceBase::IsWalking()
 {
-	return M_GTI.IsMoving();
+	return m_GraphicThingInstance.IsMoving();
 }
 
 BOOL CInstanceBase::IsPushing()
 {
-	return M_GTI.IsPushing();
+	return m_GraphicThingInstance.IsPushing();
 }
 
 BOOL CInstanceBase::IsAttacked()
 {
-	return M_GTI.IsAttacked();
+	return m_GraphicThingInstance.IsAttacked();
 }
 
 BOOL CInstanceBase::IsKnockDown()
 {
-	if (!M_GTI.IsKnockDown())
+	if (!m_GraphicThingInstance.IsKnockDown())
 		return FALSE;
 
 	return TRUE;
@@ -211,12 +211,12 @@ BOOL CInstanceBase::IsKnockDown()
 
 BOOL CInstanceBase::IsAttacking()
 {
-	return M_GTI.isAttacking();
+	return m_GraphicThingInstance.isAttacking();
 }
 
 BOOL CInstanceBase::IsActingEmotion()
 {
-	return M_GTI.IsActEmotion();
+	return m_GraphicThingInstance.IsActEmotion();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -250,7 +250,7 @@ bool CInstanceBase::NEW_Goto(const TPixelPosition& c_rkPPosDst, float fDstRot)
 		return false;
 	}
 
-	if (M_GTI.IsUsingMovingSkill())
+	if (m_GraphicThingInstance.IsUsingMovingSkill())
 	{
 		SetAdvancingRotation(fDstRot);
 		return true;
@@ -290,7 +290,7 @@ void CInstanceBase::NEW_MoveToDirection(float fDirRot)
 	if (__IsSyncing())
 		return;
 
-	if (M_GTI.IsUsingMovingSkill())
+	if (m_GraphicThingInstance.IsUsingMovingSkill())
 	{
 		SetAdvancingRotation(fDirRot);
 		return;
@@ -342,11 +342,11 @@ void CInstanceBase::EndGoing()
 
 void CInstanceBase::SetRunMode()
 {
-	M_GTI.SetRunMode();
+	m_GraphicThingInstance.SetRunMode();
 }
 
 void CInstanceBase::SetWalkMode()
 {
-	M_GTI.SetWalkMode();
+	m_GraphicThingInstance.SetWalkMode();
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

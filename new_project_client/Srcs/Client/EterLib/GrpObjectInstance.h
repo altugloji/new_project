@@ -168,7 +168,7 @@ class CGraphicObjectInstance : public CGraphicCollisionObject
 		virtual void				OnUpdateHeighInstance(CAttributeInstance * pAttributeInstance) = 0;
 		virtual bool				OnGetObjectHeight(float fX, float fY, float * pfHeight) = 0;
 
-#ifdef ENABLE_ACCE_COSTUME_SYSTEM
+#if defined(ENABLE_ACCE_COSTUME_SYSTEM) || defined(ENABLE_NPC_SCALE)
 	public:
 		void					SetScaleWorld(float x, float y, float z);
 		void					SetAcceScale(float x, float y, float z);

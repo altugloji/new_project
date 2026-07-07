@@ -14,9 +14,6 @@
 
 #include "CheckLatestFiles.h"
 
-#include <cryptopp/hmac.h>
-#include <cryptopp/hex.h>
-
 extern void GrannyCreateSharedDeformBuffer();
 extern void GrannyDestroySharedDeformBuffer();
 
@@ -49,13 +46,6 @@ m_fGlobalElapsedTime(0.0f),
 m_dwLButtonDownTime(0),
 m_dwLastIdleTime(0)
 {
-#ifdef URIEL_ANTI_CHEAT
-	if (!FireInTheHole(&m_anticheat))
-		throw std::runtime_error("");
-
-	m_anticheat->SetGameSendPacketPointer(UrielAntiCheat::SendPacket);
-	m_anticheat->SetGetMainCharacterAddress(UrielAntiCheat::GetMainCharacter);
-#endif
 
 #ifndef _DEBUG
 	SetEterExceptionHandler();
@@ -463,14 +453,6 @@ void CPythonApplication::SkipRenderBuffering(DWORD dwSleepMSec)
 
 bool CPythonApplication::Process()
 {
-#ifdef URIEL_ANTI_CHEAT
-	std::vector<uint8_t> randomData(16);
-	*(uintptr_t*)&randomData[0] = __rdtsc();
-	*(uintptr_t*)&randomData[8] = GetTickCount64();
-
-	uintptr_t returnAddress = 0;
-	auto hash = m_anticheat->Tick(randomData, &returnAddress);
-#endif
 
 #if defined(CHECK_LATEST_DATA_FILES)
 	if (CheckLatestFiles_PollEvent())
@@ -726,21 +708,6 @@ bool CPythonApplication::Process()
 		}
 	}
 
-#ifdef URIEL_ANTI_CHEAT
-	const unsigned char hmacKey[16] =
-	{
-		0x4A, 0x40, 0x36, 0xE9, 0x8A, 0x82, 0x17, 0x3D, 0xF0, 0xFB, 0xB1, 0xE8,
-		0x5D, 0xCF, 0x7E, 0x0F
-	};
-
-	CryptoPP::HMAC<CryptoPP::SHA1> sha(hmacKey, sizeof(hmacKey));
-	sha.Update(randomData.data(), randomData.size());
-
-	if (!sha.VerifyDigest(hash.data(), reinterpret_cast<byte*>(&returnAddress), 4))
-	{
-		return false;
-	}
-#endif
 
 	const int rest = s_uiNextFrameTime - ELTimer_GetMSec();
 

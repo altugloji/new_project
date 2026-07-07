@@ -1,5 +1,9 @@
 #include "StdAfx.h"
 #include "PythonNetworkStream.h"
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+#include "rascal_client.h"
+#endif
+
 #include "Packet.h"
 
 #include "PythonGuild.h"
@@ -642,6 +646,29 @@ void CPythonNetworkStream::GamePhase()
 #ifdef ENABLE_CHARACTER_CHEST
 			case HEADER_GC_CHARACTER_CHEST:
 				ret = RecvCharacterChestPacket();
+				break;
+#endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+			case HEADER_GC_GIFT_LIST:
+				ret = RecvGiftListPacket();
+				break;
+			case HEADER_GC_GIFT_FIND_RESULT:
+				ret = RecvGiftFindResultPacket();
+				break;
+			case HEADER_GC_GIFT_SEND_RESULT:
+				ret = RecvGiftSendResultPacket();
+				break;
+			case HEADER_GC_GIFT_EP:
+				ret = RecvGiftEPPacket();
+				break;
+			case HEADER_GC_GIFT_NOTIFY:
+				ret = RecvGiftNotifyPacket();
+				break;
+			case HEADER_GC_GIFT_POINT:
+				ret = RecvGiftPointPacket();
+				break;
+			case HEADER_GC_GIFT_RANK:
+				ret = RecvGiftRankPacket();
 				break;
 #endif
 #ifdef ENABLE_GM_PLAYER_PANEL
@@ -2798,6 +2825,10 @@ bool CPythonNetworkStream::RecvChangeSpeedPacket()
 
 bool CPythonNetworkStream::SendAttackPacket(UINT uMotAttack, DWORD dwVIDVictim)
 {
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+	rascal::FunctionProtect(reinterpret_cast<void*>(getcalleraddr()));
+#endif
+
 	if (!__CanActMainInstance())
 		return true;
 
@@ -5667,6 +5698,262 @@ bool CPythonNetworkStream::RecvCharacterChestPacket()
 		return false;
 
 	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_CharacterChest", poArg);
+	Py_DECREF(poArg);
+	return true;
+}
+#endif
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+// --- Hediye Gonderme Sistemi: gonderim (CG) ---
+bool CPythonNetworkStream::SendGiftListPacket()
+{
+	TPacketCGGiftList packet;
+	packet.bHeader = HEADER_CG_GIFT_LIST;
+	if (!Send(sizeof(packet), &packet))
+		return false;
+	return SendSequence();
+}
+
+bool CPythonNetworkStream::SendGiftFindPacket(const char* name)
+{
+	TPacketCGGiftFind packet;
+	packet.bHeader = HEADER_CG_GIFT_FIND;
+	memset(packet.szName, 0, sizeof(packet.szName));
+	if (name)
+		strncpy(packet.szName, name, sizeof(packet.szName) - 1);
+
+	if (!Send(sizeof(packet), &packet))
+		return false;
+	return SendSequence();
+}
+
+bool CPythonNetworkStream::SendGiftSendPacket(const char* name, int giftIndex, int count, int flags, const char* message)
+{
+	TPacketCGGiftSend packet;
+	memset(&packet, 0, sizeof(packet));
+	packet.bHeader = HEADER_CG_GIFT_SEND;
+	if (name)
+		strncpy(packet.szName, name, sizeof(packet.szName) - 1);
+	packet.wGiftIndex = (WORD)giftIndex;
+	packet.bCount = (BYTE)count;
+	packet.bFlags = (BYTE)flags;
+	if (message)
+		strncpy(packet.szMessage, message, sizeof(packet.szMessage) - 1);
+
+	if (!Send(sizeof(packet), &packet))
+		return false;
+	return SendSequence();
+}
+
+// --- Hediye Gonderme Sistemi: alim (GC) ---
+bool CPythonNetworkStream::RecvGiftListPacket()
+{
+	BYTE abBuf[GIFT_LIST_GC_MAX_SIZE];
+	memset(abBuf, 0, sizeof(abBuf));
+
+	TPacketGCGiftList* packet = reinterpret_cast<TPacketGCGiftList*>(abBuf);
+
+	if (!Recv(sizeof(BYTE), &packet->bHeader))
+		return false;
+	if (!Recv(sizeof(WORD), &packet->wSize))
+		return false;
+
+	const WORD restSize = packet->wSize - sizeof(BYTE) - sizeof(WORD);
+	if (restSize > sizeof(abBuf) - sizeof(BYTE) - sizeof(WORD))
+	{
+		TraceError("GIFT_LIST: wSize too large %u", packet->wSize);
+		return false;
+	}
+	if (restSize > 0 && !Recv(restSize, abBuf + sizeof(BYTE) + sizeof(WORD)))
+		return false;
+
+	if (!m_apoPhaseWnd[PHASE_WINDOW_GAME])
+		return true;
+
+	PyObject* giftList = PyList_New(0);
+	const BYTE count = (packet->bCount <= GIFT_LIST_MAX) ? packet->bCount : 0;
+	for (BYTE i = 0; i < count; ++i)
+	{
+		packet->entries[i].szName[sizeof(packet->entries[i].szName) - 1] = '\0';
+		packet->entries[i].szDesc[sizeof(packet->entries[i].szDesc) - 1] = '\0';
+		// (index, iconVnum, priceEP, page, slot, name, desc)
+		PyObject* entry = Py_BuildValue("(ikkiiss)",
+			(int) packet->entries[i].wIndex,
+			(unsigned long) packet->entries[i].dwIconVnum,
+			(unsigned long) packet->entries[i].dwPriceEP,
+			(int) packet->entries[i].bPage,
+			(int) packet->entries[i].bSlot,
+			packet->entries[i].szName,
+			packet->entries[i].szDesc);
+		if (!entry)
+		{
+			Py_DECREF(giftList);
+			return false;
+		}
+		PyList_Append(giftList, entry);
+		Py_DECREF(entry);
+	}
+
+	PyObject* poArg = Py_BuildValue("(O)", giftList);
+	Py_DECREF(giftList);
+	if (!poArg)
+		return false;
+
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_GiftList", poArg);
+	Py_DECREF(poArg);
+	return true;
+}
+
+bool CPythonNetworkStream::RecvGiftFindResultPacket()
+{
+	TPacketGCGiftFindResult packet;
+	if (!Recv(sizeof(packet), &packet))
+		return false;
+
+	if (!m_apoPhaseWnd[PHASE_WINDOW_GAME])
+		return true;
+
+	packet.szName[sizeof(packet.szName) - 1] = '\0';
+
+	PyObject* poArg = Py_BuildValue("(is)", (int) packet.bResult, packet.szName);
+	if (!poArg)
+		return false;
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_GiftFindResult", poArg);
+	Py_DECREF(poArg);
+	return true;
+}
+
+bool CPythonNetworkStream::RecvGiftSendResultPacket()
+{
+	TPacketGCGiftSendResult packet;
+	if (!Recv(sizeof(packet), &packet))
+		return false;
+
+	if (!m_apoPhaseWnd[PHASE_WINDOW_GAME])
+		return true;
+
+	// (result, newEP, giftIndex, count)
+	PyObject* poArg = Py_BuildValue("(ikii)",
+		(int) packet.bResult,
+		(unsigned long) packet.dwNewEP,
+		(int) packet.wGiftIndex,
+		(int) packet.bCount);
+	if (!poArg)
+		return false;
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_GiftSendResult", poArg);
+	Py_DECREF(poArg);
+	return true;
+}
+
+bool CPythonNetworkStream::RecvGiftEPPacket()
+{
+	TPacketGCGiftEP packet;
+	if (!Recv(sizeof(packet), &packet))
+		return false;
+
+	if (!m_apoPhaseWnd[PHASE_WINDOW_GAME])
+		return true;
+
+	PyObject* poArg = Py_BuildValue("(k)", (unsigned long) packet.dwEP);
+	if (!poArg)
+		return false;
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_GiftEp", poArg);
+	Py_DECREF(poArg);
+	return true;
+}
+
+bool CPythonNetworkStream::RecvGiftPointPacket()
+{
+	TPacketGCGiftPoint packet;
+	if (!Recv(sizeof(packet), &packet))
+		return false;
+
+	if (!m_apoPhaseWnd[PHASE_WINDOW_GAME])
+		return true;
+
+	PyObject* poArg = Py_BuildValue("(k)", (unsigned long) packet.dwPoint);
+	if (!poArg)
+		return false;
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_GiftPoint", poArg);
+	Py_DECREF(poArg);
+	return true;
+}
+
+bool CPythonNetworkStream::SendGiftRankPacket(int boardType)
+{
+	TPacketCGGiftRank packet;
+	packet.bHeader = HEADER_CG_GIFT_RANK;
+	packet.bBoardType = (BYTE)boardType;
+	if (!Send(sizeof(packet), &packet))
+		return false;
+	return SendSequence();
+}
+
+bool CPythonNetworkStream::RecvGiftRankPacket()
+{
+	TPacketGCGiftRank packet;
+	if (!Recv(sizeof(packet), &packet))
+		return false;
+
+	if (!m_apoPhaseWnd[PHASE_WINDOW_GAME])
+		return true;
+
+	PyObject* rankList = PyList_New(0);
+	const BYTE count = (packet.bCount <= GIFT_RANK_MAX) ? packet.bCount : 0;
+	for (BYTE i = 0; i < count; ++i)
+	{
+		packet.entries[i].szName[sizeof(packet.entries[i].szName) - 1] = '\0';
+		PyObject* entry = Py_BuildValue("(sk)",
+			packet.entries[i].szName,
+			(unsigned long) packet.entries[i].dwPoint);
+		if (!entry)
+		{
+			Py_DECREF(rankList);
+			return false;
+		}
+		PyList_Append(rankList, entry);
+		Py_DECREF(entry);
+	}
+
+	// (boardType, [(name, point), ...], myRank, myPoint)
+	PyObject* poArg = Py_BuildValue("(iOkk)",
+		(int) packet.bBoardType,
+		rankList,
+		(unsigned long) packet.dwMyRank,
+		(unsigned long) packet.dwMyPoint);
+	Py_DECREF(rankList);
+	if (!poArg)
+		return false;
+
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_GiftRank", poArg);
+	Py_DECREF(poArg);
+	return true;
+}
+
+bool CPythonNetworkStream::RecvGiftNotifyPacket()
+{
+	TPacketGCGiftNotify packet;
+	if (!Recv(sizeof(packet), &packet))
+		return false;
+
+	if (!m_apoPhaseWnd[PHASE_WINDOW_GAME])
+		return true;
+
+	packet.szSenderName[sizeof(packet.szSenderName) - 1] = '\0';
+	packet.szGiftName[sizeof(packet.szGiftName) - 1] = '\0';
+	packet.szMessage[sizeof(packet.szMessage) - 1] = '\0';
+
+	// (anonymous, senderName, giftName, message, point, totalPoint)
+	PyObject* poArg = Py_BuildValue("(issskk)",
+		(int) packet.bAnonymous,
+		packet.szSenderName,
+		packet.szGiftName,
+		packet.szMessage,
+		(unsigned long) packet.dwPoint,
+		(unsigned long) packet.dwTotalPoint);
+	if (!poArg)
+		return false;
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "BINARY_GiftNotify", poArg);
 	Py_DECREF(poArg);
 	return true;
 }

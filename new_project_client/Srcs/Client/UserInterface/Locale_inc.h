@@ -86,6 +86,8 @@
 // #define USE_ACCE_ABSORB_WITH_NO_NEGATIVE_BONUS
 #endif
 
+#define ENABLE_NPC_SCALE // NPC modellerini client tarafinda olcekleme (orn. buff NPC 20094 buyutme); liste InstanceBase.cpp CInstanceBase::Create icinde
+
 #define ENABLE_HIGHLIGHT_NEW_ITEM //if you want to see highlighted a new item when dropped or when exchanged
 #ifdef ENABLE_HIGHLIGHT_NEW_ITEM
 #define BL_ENABLE_PICKUP_ITEM_EFFECT // enable some extra highlight features from official
@@ -165,19 +167,18 @@
 #define ENABLE_OFFLINE_SHOP													// Offline pazar / çevrimdışı dükkan
 #define ENABLE_DROP_ITEM_OWNER_COLOR										// Bana ait olmayan (sahibi başkası olan) yer itemlerinin ismi kırmızı görünsün
 #define ENABLE_CHAT_TAIL_BACKGROUND											// Karakter üzerindeki chat mesajını 20px yukarı taşı + arkasına hafif siyah şeffaf zemin koy
-#define URIEL_ANTI_CHEAT													// Uriel Anti Cheat
 #define ENABLE_WHISPER_COPY													// PM penceresinde bir mesaja tıklayınca o mesajı panoya kopyala
 #define ENABLE_INVENTORY_SLOT_MARKING										// Envanter slot işaretleme: ticaret/pazar/kasa/işleme pencerelerinde kullanılamayan slota gri, kilitli slota kırmızı overlay
 #define ENABLE_FOV_OPTION													// Sistem secenekleri: Gorus alani (FOV) kaydiricisi
 #define ENABLE_BOT_CONTROL													// Bot Kontrol Sistemi (dogrulama paneli)
-
 #define ENABLE_SHOP_SEARCH_ITEM_SELECT										// Pazar Arama: grid'den item secip SADECE secilenleri aratma
+//#define ENABLE_GIFT_SEND_SYSTEM												// Hediye gonderme sistemi (server ENABLE_GIFT_SEND_SYSTEM ile ayni)
 
-// #define METIN35_ADMIN_PANEL												// Yönetim Paneli
+#define METIN35_ADMIN_PANEL												// Yönetim Paneli
 #ifdef METIN35_ADMIN_PANEL
-	#define CUR_CLIENT_VERSION 17										//versiyon key
+	#define CUR_CLIENT_VERSION 25										//versiyon key
 #endif
 
-// ### New System Defines - Extended Version ###
-//////////////////////////////////////////////////////////////////////////
-//archive's 6b9a24beef838d9382c750a6b44ccdb4
+
+//#define ENABLE_RASCAL_ANTICHEAT_V2
+//#define ENABLE_SECURE_MOB_LIST

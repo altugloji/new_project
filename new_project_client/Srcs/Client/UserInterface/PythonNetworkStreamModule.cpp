@@ -708,6 +708,60 @@ PyObject* netSendCharacterChestPacket(PyObject* poSelf, PyObject* poArgs)
 }
 #endif
 
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+PyObject* netSendGiftListPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+	rkNetStream.SendGiftListPacket();
+	return Py_BuildNone();
+}
+
+PyObject* netSendGiftFindPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	char* szName = nullptr;
+	if (!PyTuple_GetString(poArgs, 0, &szName))
+		return Py_BuildException();
+
+	CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+	rkNetStream.SendGiftFindPacket(szName);
+	return Py_BuildNone();
+}
+
+PyObject* netSendGiftSendPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	char* szName = nullptr;
+	int iGiftIndex = 0;
+	int iCount = 0;
+	int iFlags = 0;
+	char* szMessage = nullptr;
+
+	if (!PyTuple_GetString(poArgs, 0, &szName))
+		return Py_BuildException();
+	if (!PyTuple_GetInteger(poArgs, 1, &iGiftIndex))
+		return Py_BuildException();
+	if (!PyTuple_GetInteger(poArgs, 2, &iCount))
+		return Py_BuildException();
+	if (!PyTuple_GetInteger(poArgs, 3, &iFlags))
+		return Py_BuildException();
+	PyTuple_GetString(poArgs, 4, &szMessage);		// mesaj istege bagli
+
+	CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+	rkNetStream.SendGiftSendPacket(szName, iGiftIndex, iCount, iFlags, szMessage);
+	return Py_BuildNone();
+}
+
+PyObject* netSendGiftRankPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	int iBoardType = 0;
+	if (!PyTuple_GetInteger(poArgs, 0, &iBoardType))
+		return Py_BuildException();
+
+	CPythonNetworkStream& rkNetStream = CPythonNetworkStream::Instance();
+	rkNetStream.SendGiftRankPacket(iBoardType);
+	return Py_BuildNone();
+}
+#endif
+
 PyObject* netSendItemUseToItemPacket(PyObject* poSelf, PyObject* poArgs)
 {
 	TItemPos SourceCell;
@@ -1956,6 +2010,12 @@ void initnet()
 		{ "SendItemUsePacket",					netSendItemUsePacket,					METH_VARARGS },
 #ifdef ENABLE_CHARACTER_CHEST
 		{ "SendCharacterChestPacket",			netSendCharacterChestPacket,			METH_VARARGS },
+#endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+		{ "SendGiftListPacket",					netSendGiftListPacket,					METH_VARARGS },
+		{ "SendGiftFindPacket",					netSendGiftFindPacket,					METH_VARARGS },
+		{ "SendGiftSendPacket",					netSendGiftSendPacket,					METH_VARARGS },
+		{ "SendGiftRankPacket",					netSendGiftRankPacket,					METH_VARARGS },
 #endif
 #ifdef ENABLE_BULK_POTION_PANEL
 		{ "SendBulkPotionUsePacket",			netSendBulkPotionUsePacket,				METH_VARARGS },

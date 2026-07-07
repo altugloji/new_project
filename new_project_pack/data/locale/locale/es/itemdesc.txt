@@ -5371,7 +5371,7 @@
 50286	Baúl zona combate oro	Un baúl con contenido valioso.
 50287	Caja de campo 1	Un baúl con equipamiento útil.
 50288	Caja de campo 2	Un baúl con equipamiento útil.
-50289	Reencarnación	Con la reencarnación resucitas de inmediato y sin tiempo de espera.
+50289	Efecto Buff	Te permite recibir el Efecto Buff del NPC.
 50290	Baúl zona combate madera	Un baúl con contenido valioso.
 50294	Baúl de la reina Meley	Este baúl se sacó del refugio de la reina dragona Meley. Alberga un tesoro auténticamente real.
 50296	Caja del contraatacante	Esta caja contiene 5 Libros de contraataque
@@ -7382,7 +7382,7 @@
 83008	Cofre de joyas	Contiene un anillo, amuleto, piruleta o poción aleatorios.
 83009	Caja de mascotas	Contiene un huevo aleatorio.
 83010	Caja de estolas	Contiene una estola aleatoria.
-83011	Caja de adornos	Contiene un talismán aleatorio, 50 Arquetas del zodíaco u objetos para entrar al Templo del Zodíaco.
+83011	Water Chest	Contiene 100 unidades de Agua.
 83012	Caja man. mascota defin.	Contiene un objeto aleatorio para entrenar a tu mascota y mejorar.
 83013	Caja dentada+	Contiene un arma dentada+ de tu elección.
 83014	Caja de cor draconis	Contiene un Cor draconis aleatorio o una Alubia del dragón.

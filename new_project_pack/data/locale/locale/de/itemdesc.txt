@@ -5371,7 +5371,7 @@
 50286	Goldene Kampfzonentruhe	Eine Truhe mit wertvollem Inhalt.
 50287	Feldkiste 1	Eine Kiste mit nützlicher Ausrüstung.
 50288	Feldkiste 2	Eine Kiste mit nützlicher Ausrüstung.
-50289	Reinkarnation	Reinkarnation belebt dich sofort und ohne Wartezeit wieder.
+50289	Buff-Effekt	Ermöglicht dir, den Buff-Effekt vom NPC zu erhalten.
 50290	Hölzerne Kampfzonentruhe	Eine Truhe mit wertvollem Inhalt.
 50294	Truhe der Königin Meley	Diese Truhe wurde aus dem Hort der Drachenkönigin Meley geborgen. Sie birgt einen wahrhaft königlichen Schatz.
 50296	Kiste des Konters	Diese Kiste enthält 5 Lehrbuch Konter.
@@ -7382,7 +7382,7 @@
 83008	Schmuckschatulle	Enthält zufällig einen Ring, ein Amulett, einen Lolli oder Trank.
 83009	Petkiste	Enthält ein zufälliges Ei.
 83010	Bänderbox	Enthält ein zufälliges Band.
-83011	Ornamentkiste	Enthält einen zufälligen Talisman, 50 Zodiakschatullen oder Items zum Eintritt in den Zodiak-Tempel.
+83011	Water Chest	Enthält 100 Wasser.
 83012	Ultimative Pet-Buchkiste	Enthält ein zufälliges Item, um dein Pet zu trainieren und zu verbessern.
 83013	Risserzahnkiste+	Enthält eine Risserzahnwaffe+ deiner Wahl.
 83014	Cor Draconis-Kiste	Enthält einen zufälligen Cor Draconis oder eine Drachenbohne.

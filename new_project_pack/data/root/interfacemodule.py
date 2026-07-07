@@ -60,6 +60,10 @@ import localeInfo
 if app.ENABLE_CHARACTER_CHEST:
 	import uicharacterchest
 
+if app.ENABLE_GIFT_SEND_SYSTEM:
+	import uigiftsend
+	import uigiftrank
+
 if app.ENABLE_CONQUEROR_UI:
 	import uicharacternew as uiCharacter
 else:
@@ -183,6 +187,9 @@ class Interface(object):
 			self.wndCharacterChestPack = None
 			self.wndCharacterChestUnpack = None
 			self.wndCharacterChestPreview = None
+		if app.ENABLE_GIFT_SEND_SYSTEM:
+			self.wndGiftSend = None
+			self.wndGiftRank = None
 		event.SetInterfaceWindow(self)
 		if app.__BL_MULTI_LANGUAGE_PREMIUM__:
 			self.EMPIRE_NAME = {
@@ -525,6 +532,10 @@ class Interface(object):
 			self.wndCharacterChestPreview = uicharacterchest.CharacterChestPreviewDialog()
 			if self.tooltipItem:
 				self.wndCharacterChestPreview.SetItemToolTip(self.tooltipItem)
+		if app.ENABLE_GIFT_SEND_SYSTEM:
+			self.wndGiftSend = uigiftsend.GiftSendDialog()
+			self.wndGiftRank = uigiftrank.GiftRankDialog()
+			self.wndGiftSend.SetRankOpenEvent(ui.__mem_func__(self.ToggleGiftRankWindow))
 		# ACCESSORY_REFINE_ADD_METIN_STONE
 		self.__MakeItemSelectWindow()
 		# END_OF_ACCESSORY_REFINE_ADD_METIN_STONE
@@ -671,6 +682,14 @@ class Interface(object):
 			if self.wndCharacterChestPreview:
 				self.wndCharacterChestPreview.Destroy()
 				self.wndCharacterChestPreview = None
+
+		if app.ENABLE_GIFT_SEND_SYSTEM:
+			if self.wndGiftSend:
+				self.wndGiftSend.Destroy()
+				self.wndGiftSend = None
+			if self.wndGiftRank:
+				self.wndGiftRank.Destroy()
+				self.wndGiftRank = None
 
 		if app.ENABLE_ITEM_SHOP_SYSTEM:
 			if self.ItemShop:
@@ -1794,6 +1813,58 @@ class Interface(object):
 		if _IsShown(self.wndCharacterChestPreview):
 			return True
 		return False
+
+	# ---- Hediye Gonderme Sistemi ----
+	def OpenGiftSendDialog(self, targetName=""):
+		if not app.ENABLE_GIFT_SEND_SYSTEM:
+			return
+		if not self.wndGiftSend:
+			return
+		self.wndGiftSend.Open(targetName)
+
+	def CloseGiftSendDialog(self):
+		if app.ENABLE_GIFT_SEND_SYSTEM and self.wndGiftSend:
+			self.wndGiftSend.Close()
+
+	def ToggleGiftSendDialog(self):
+		if not app.ENABLE_GIFT_SEND_SYSTEM or not self.wndGiftSend:
+			return
+		if self.wndGiftSend.IsShow():
+			self.wndGiftSend.Close()
+		else:
+			self.wndGiftSend.Open("")
+
+	def ToggleGiftRankWindow(self):
+		if not app.ENABLE_GIFT_SEND_SYSTEM or not self.wndGiftRank:
+			return
+		if self.wndGiftRank.IsShow():
+			self.wndGiftRank.Close()
+		else:
+			self.wndGiftRank.Open()
+
+	def GiftRankData(self, boardType, entries, myRank, myPoint):
+		if app.ENABLE_GIFT_SEND_SYSTEM and self.wndGiftRank:
+			self.wndGiftRank.SetRankData(boardType, entries, myRank, myPoint)
+
+	def GiftSetList(self, giftList):
+		if app.ENABLE_GIFT_SEND_SYSTEM and self.wndGiftSend:
+			self.wndGiftSend.SetGiftList(giftList)
+
+	def GiftSetEP(self, ep):
+		if app.ENABLE_GIFT_SEND_SYSTEM and self.wndGiftSend:
+			self.wndGiftSend.SetEP(ep)
+
+	def GiftSetPoint(self, point):
+		if app.ENABLE_GIFT_SEND_SYSTEM and self.wndGiftSend:
+			self.wndGiftSend.SetGiftPoint(point)
+
+	def GiftFindResult(self, result, name):
+		if app.ENABLE_GIFT_SEND_SYSTEM and self.wndGiftSend:
+			self.wndGiftSend.OnFindResult(result, name)
+
+	def GiftSendResult(self, result, newEP, giftIndex, count):
+		if app.ENABLE_GIFT_SEND_SYSTEM and self.wndGiftSend:
+			self.wndGiftSend.OnSendResult(result, newEP, giftIndex, count)
 
 	def IsCharacterChestBlockedByUI(self):
 		import uicharacterchest

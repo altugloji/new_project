@@ -14,7 +14,11 @@ int CHAR_STAGE_VIEW_BOUND = 200*100;
 
 struct FCharacterManagerCharacterInstanceUpdate
 {
-	inline void operator () (const std::pair<DWORD,CInstanceBase *>& cr_Pair) const
+#ifdef ENABLE_SECURE_MOB_LIST
+	inline void operator () (const CPythonCharacterManager::TCharacterInstanceMap::value_type& cr_Pair)
+#else
+	inline void operator () (const std::pair<DWORD,CInstanceBase *>& cr_Pair)
+#endif
 	{
 		cr_Pair.second->Update();
 	}
@@ -377,7 +381,11 @@ void CPythonCharacterManager::UpdateDeleting()
 
 struct FCharacterManagerCharacterInstanceDeform
 {
-	inline void operator () (const std::pair<DWORD,CInstanceBase *>& cr_Pair) const
+#ifdef ENABLE_SECURE_MOB_LIST
+	inline void operator () (const CPythonCharacterManager::TCharacterInstanceMap::value_type& cr_Pair)
+#else
+	inline void operator () (const std::pair<DWORD,CInstanceBase *>& cr_Pair)
+#endif
 	{
 		cr_Pair.second->Deform();
 		//pInstance->Update();
@@ -418,15 +426,26 @@ D3DXVECTOR2 & CPythonCharacterManager::OLD_GetPickedInstPosReference()
 
 bool CPythonCharacterManager::IsRegisteredVID(DWORD dwVID)
 {
-	if (!m_kAliveInstMap.contains(dwVID))
+#ifdef ENABLE_SECURE_MOB_LIST
+	if (!m_kAliveInstMap.contains_rscl(dwVID))
 		return false;
 
 	return true;
+#else
+	if (!m_kAliveInstMap.contains(dwVID))  //1dk bekle bakalým
+		return false;
+
+	return true;
+#endif
 }
 
 bool CPythonCharacterManager::IsAliveVID(DWORD dwVID)
 {
+#ifdef ENABLE_SECURE_MOB_LIST
+	return m_kAliveInstMap.contains_rscl(dwVID);
+#else
 	return m_kAliveInstMap.contains(dwVID);
+#endif
 }
 
 bool CPythonCharacterManager::IsDeadVID(DWORD dwVID)
@@ -450,7 +469,11 @@ struct LessCharacterInstancePtrRenderOrder
 
 struct FCharacterManagerCharacterInstanceRender
 {
-	inline void operator () (const std::pair<DWORD,CInstanceBase *>& cr_Pair) const
+#ifdef ENABLE_SECURE_MOB_LIST
+	inline void operator () (const CPythonCharacterManager::TCharacterInstanceMap::value_type& cr_Pair)
+#else
+	inline void operator () (const std::pair<DWORD,CInstanceBase *>& cr_Pair)
+#endif
 	{
 		cr_Pair.second->Render();
 		cr_Pair.second->RenderTrace();
@@ -473,17 +496,36 @@ struct FCharacterInstanceRenderTrace
 
 void CPythonCharacterManager::__RenderSortedAliveActorList()
 {
+#ifdef ENABLE_SECURE_MOB_LIST
+	m_vct_pkInstAliveSort.clear();
+#else
 	static std::vector<CInstanceBase*> s_kVct_pkInstAliveSort;
 	s_kVct_pkInstAliveSort.clear();
+#endif
 
 	TCharacterInstanceMap& rkMap_pkInstAlive=m_kAliveInstMap;
 	TCharacterInstanceMap::iterator i;
 	for (i=rkMap_pkInstAlive.begin(); i!=rkMap_pkInstAlive.end(); ++i)
+	{
+#ifdef ENABLE_SECURE_MOB_LIST
+		m_vct_pkInstAliveSort.push_back(i->second);
+#else
 		s_kVct_pkInstAliveSort.push_back(i->second);
+#endif
+	}
 
+#ifdef ENABLE_SECURE_MOB_LIST
+	LessCharacterInstancePtrRenderOrder kLess;
+	m_vct_pkInstAliveSort.sort(kLess);
+	FCharacterInstanceRender kRender;
+	m_vct_pkInstAliveSort.for_each(kRender);
+	FCharacterInstanceRenderTrace kRenderTrace;
+	m_vct_pkInstAliveSort.for_each(kRenderTrace);
+#else
 	std::sort(s_kVct_pkInstAliveSort.begin(), s_kVct_pkInstAliveSort.end(), LessCharacterInstancePtrRenderOrder());
 	std::for_each(s_kVct_pkInstAliveSort.begin(), s_kVct_pkInstAliveSort.end(), FCharacterInstanceRender());
 	std::for_each(s_kVct_pkInstAliveSort.begin(), s_kVct_pkInstAliveSort.end(), FCharacterInstanceRenderTrace());
+#endif
 }
 
 void CPythonCharacterManager::__RenderSortedDeadActorList()
@@ -533,7 +575,11 @@ void CPythonCharacterManager::RenderShadowMainInstance() const
 
 struct FCharacterManagerCharacterInstanceRenderToShadowMap
 {
-	inline void operator () (const std::pair<DWORD,CInstanceBase *>& cr_Pair) const
+#ifdef ENABLE_SECURE_MOB_LIST
+	inline void operator () (const CPythonCharacterManager::TCharacterInstanceMap::value_type& cr_Pair)
+#else
+	inline void operator () (const std::pair<DWORD,CInstanceBase *>& cr_Pair)
+#endif
 	{
 		cr_Pair.second->RenderToShadowMap();
 	}
@@ -546,7 +592,11 @@ void CPythonCharacterManager::RenderShadowAllInstances()
 
 struct FCharacterManagerCharacterInstanceRenderCollision
 {
-	inline void operator () (const std::pair<DWORD,CInstanceBase *>& cr_Pair) const
+#ifdef ENABLE_SECURE_MOB_LIST
+	inline void operator () (const CPythonCharacterManager::TCharacterInstanceMap::value_type& cr_Pair)
+#else
+	inline void operator () (const std::pair<DWORD,CInstanceBase *>& cr_Pair)
+#endif
 	{
 		cr_Pair.second->RenderCollision();
 	}

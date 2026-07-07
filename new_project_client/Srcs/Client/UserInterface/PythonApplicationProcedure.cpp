@@ -48,12 +48,6 @@ void CPythonApplication::__MinimizeFullScreenWindow(HWND hWnd, DWORD dwWidth, DW
 
 LRESULT CPythonApplication::WindowProcedure(HWND hWnd, UINT uiMsg, WPARAM wParam, LPARAM lParam)
 {
-#ifdef URIEL_ANTI_CHEAT
-	if (!m_anticheat->WndProc(hWnd, uiMsg, wParam, lParam))
-	{
-		return TRUE;
-	}
-#endif
 
 	constexpr int c_DoubleClickTime = 300;
 	constexpr int c_DoubleClickBox = 5;

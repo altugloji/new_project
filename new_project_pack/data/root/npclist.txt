@@ -536,6 +536,7 @@
 0	yu_hwa_rang_event_NPC	yu_hwa_rang
 0	zshop_griffon_1	zshop_griffon
 0	zshop_griffon_2	zshop_griffon
+0	shaman_buff_npc	maviruh_work/shaman_buff_npc
 101	stray_dog
 102	wolf
 103	wolf
@@ -2645,7 +2646,7 @@
 20091	backchon
 20092	ayuka
 20093	visal
-20094	yejin
+20094	shaman_buff_npc
 20095	sinseon
 20096	seal_stone
 20097	sinsu_warpgate

@@ -5371,7 +5371,7 @@
 50286	Cofre Zona Combate Ouro	Um cofre com conteúdos valiosos.
 50287	Caixa de Campo 1	Uma caixa que contém equipamento útil.
 50288	Caixa de Campo 2	Uma caixa que contém equipamento útil.
-50289	Reencarnação	A reencarnação ressuscita-te de imediato sem qualquer atraso.
+50289	Efeito Buff	Permite receber o Efeito Buff do NPC.
 50290	Cofre Zona Combate Mad.	Um cofre com conteúdos valiosos.
 50294	Cofre da Rainha Meley	Este cofre foi recuperado do covil da Rainha Dragão Meley. Contém um tesouro verdadeiramente magnífico.
 50296	Caixa de Guardas	Esta caixa contém 5 Manuais de Guarda.
@@ -7382,7 +7382,7 @@
 83008	Caixa de Jóias	Contém, aleatoriamente, um anel, amuleto, doce ou poção.
 83009	Cofre de Pet	Contém um ovo aleatório.
 83010	Caixa de Faixas	Contém uma Faixa aleatória.
-83011	Cofre de Ornamento	Contém, aleatoriamente, um talismão, 50 Caixas do Zodíaco ou itens para entrar no Templo do Zodíaco.
+83011	Water Chest	Contém 100 unidades de Água.
 83012	Super Cofre Livro do Pet	Contém um item aleatório para treinares e melhorares o teu pet.
 83013	Cofre de Motosserra+	Contém uma arma Motosserra+ à tua escolha.
 83014	Cofre de Cor Draconis	Contém, aleatoriamente, um Cor Draconis ou um Feijão do Dragão.

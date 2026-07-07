@@ -1,3 +1,55 @@
+[CZ]
+50289	Buff efekt
+83011	Vodní truhla
+
+[DE]
+50289	Buff-Effekt
+83011	Wassertruhe
+
+[DK]
+50289	Buff-effekt
+83011	Vandkiste
+
+[EN]
+50289	Buff Effect
+83011	Water Chest
+
+[ES]
+50289	Efecto Buff
+83011	Cofre de Agua
+
+[FR]
+50289	Effet Buff
+83011	Coffre d'eau
+
+[HU]
+50289	Buff hatás
+83011	Vízi láda
+
+[IT]
+50289	Effetto Buff
+83011	Forziere d'Acqua
+
+[NL]
+50289	Buff-effect
+83011	Waterkist
+
+[PL]
+50289	Efekt Buffa
+83011	Skrzynia Wody
+
+[PT]
+50289	Efeito Buff
+83011	Baú de Água
+
+[RO]
+50289	Efect Buff
+83011	Cufăr de Apă
+
 [AE]
-50903	مخطط ورقة التعزيز
-50904	مخطط أداة السحر
+50289	تأثير البف
+83011	صندوق الماء
+
+[TR]
+50289	Buff Effect
+83011	Su Sandığı

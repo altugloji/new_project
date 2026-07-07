@@ -5371,7 +5371,7 @@
 50286	Cufãr Aur Zonã Rãzboi	Un cufãr cu un conþinut valoros.
 50287	Câmp Cutie 1	O cutie ce conþine echipament folositor.
 50288	Câmp Cutie 2	O cutie ce conþine echipament folositor.
-50289	Reîncarnare	Reîncarnarea imediatã are loc fãrã întârziere.
+50289	Efect Buff	Îþi permite sã primeºti Efectul Buff de la NPC.
 50290	Cufãr Lemn Zonã Rãzboi	Un cufãr cu un conþinut valoros.
 50294	Cufãr Regina Meley	Acest cufãr a fost recuperat din adãpostul Reginei Dragon Meley. Conþine o comoarã valoroasã.
 50296	Cutia Respingerilor	Aceastã cutie conþine 5 Cãrþi de Respingere.
@@ -7382,7 +7382,7 @@
 83008	Cufãr de Bijuterii	Conþine aleatoriu un inel, o amuletã, o acadea sau o licoare.
 83009	Cufãr Însoþitori	Conþine un ou aleatoriu.
 83010	Cufãr Eºarfã	Conþine o eºarfã aleatorie.
-83011	Cufãr Obiect Bijuterie	Conþine un talisman aleatoriu, 50 Cutii Zodiac sau obiecte pentru a intra în Templul Zodiac.
+83011	Water Chest	Conþine 100 de unitãþi de Apã.
 83012	Cufãr Final Carte Însoþ.	Conþine un obiect aleatoriu pentru îmbunãtãþirea ºi antrenarea însoþitorului tãu.
 83013	Cufãr cu Dinþi+	Conþine o armã cu Dinþi+ la alegere.
 83014	Cufãr Cor Draconis	Conþine aleatoriu un Cor Draconis sau o Fasole Dragon.

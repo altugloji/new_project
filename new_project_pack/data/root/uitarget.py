@@ -482,6 +482,7 @@ class TargetBoard(ui.ThinBoard):
 		localeInfo.TARGET_BUTTON_BUILDING_DESTROY,
 		localeInfo.TARGET_BUTTON_EMOTION_ALLOW,
 		"VOTE_BLOCK_CHAT",
+		"GIFT_SEND",
 	)
 
 	GRADE_NAME =	{
@@ -599,6 +600,10 @@ class TargetBoard(ui.ThinBoard):
 		self.buttonDict[localeInfo.TARGET_BUTTON_EMOTION_ALLOW].SAFE_SetEvent(self.__OnEmotionAllow)
 
 		self.buttonDict["VOTE_BLOCK_CHAT"].SetEvent(ui.__mem_func__(self.__OnVoteBlockChat))
+
+		self.eventGiftSend = None
+		self.buttonDict["GIFT_SEND"].SetText("Hediye Gonder")
+		self.buttonDict["GIFT_SEND"].SetEvent(ui.__mem_func__(self.__OnGiftSend))
 
 		self.name = name
 		self.hpGauge = hpGauge
@@ -904,6 +909,13 @@ class TargetBoard(ui.ThinBoard):
 	def OnExchange(self):
 		net.SendExchangeStartPacket(self.vid)
 
+	def SetGiftSendEvent(self, event):
+		self.eventGiftSend = event
+
+	def __OnGiftSend(self):
+		if None != self.eventGiftSend and self.nameString:
+			self.eventGiftSend(self.nameString)
+
 	def OnPVP(self):
 		net.SendChatPacket("/pvp %d" % (self.vid))
 
@@ -968,6 +980,9 @@ class TargetBoard(ui.ThinBoard):
 			return
 
 		self.ShowDefaultButton()
+
+		if app.ENABLE_GIFT_SEND_SYSTEM:
+			self.__ShowButton("GIFT_SEND")
 
 		if guild.MainPlayerHasAuthority(guild.AUTH_ADD_MEMBER):
 			if not guild.IsMemberByName(self.nameString):

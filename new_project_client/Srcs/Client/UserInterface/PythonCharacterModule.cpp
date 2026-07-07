@@ -928,7 +928,7 @@ PyObject * chrGetInstanceType(PyObject* poSelf, PyObject* poArgs)
 	if (!PyTuple_GetInteger(poArgs, 0, &iVirtualID))
 		return Py_BuildException();
 
-	CInstanceBase * pkInst = CPythonCharacterManager::Instance().GetInstancePtr(iVirtualID);
+	const CInstanceBase * pkInst = CPythonCharacterManager::Instance().GetInstancePtr(iVirtualID);
 
 	if (nullptr != pkInst)
 		return Py_BuildValue("i", pkInst->GetInstanceType());

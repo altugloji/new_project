@@ -3,14 +3,18 @@
 #include "AbstractCharacterManager.h"
 #include "InstanceBase.h"
 #include "../GameLib/PhysicsObject.h"
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+#include "rascal_client.h"
+#endif
 
 class CPythonCharacterManager : public CSingleton<CPythonCharacterManager>, public IAbstractCharacterManager, public IObjectManager
 {
 	public:
 		// Character List
 		typedef std::list<CInstanceBase *>			TCharacterInstanceList;
-#ifdef URIEL_ANTI_CHEAT
-		typedef std::map<DWORD, safe_variable_weak<CInstanceBase*>>	TCharacterInstanceMap;
+
+#ifdef ENABLE_SECURE_MOB_LIST
+		typedef TSecureCharacterInstanceMap			TCharacterInstanceMap;
 #else
 		typedef std::map<DWORD, CInstanceBase *>	TCharacterInstanceMap;
 #endif
@@ -119,14 +123,13 @@ class CPythonCharacterManager : public CSingleton<CPythonCharacterManager>, publ
 		void __RenderSortedDeadActorList();
 
 	protected:
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<CInstanceBase*>						m_pkInstMain;
-#else
 		CInstanceBase *						m_pkInstMain;
-#endif
 		CInstanceBase *						m_pkInstPick;
 		CInstanceBase *						m_pkInstBind;
 		D3DXVECTOR2							m_v2PickedInstProjPos;
+#ifdef ENABLE_SECURE_MOB_LIST
+		TSecureInstancePtrVector				m_vct_pkInstAliveSort;
+#endif
 
 		TCharacterInstanceMap				m_kAliveInstMap;
 		TCharacterInstanceList				m_kDeadInstList;

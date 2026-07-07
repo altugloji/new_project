@@ -1,0 +1,84 @@
+ScriptType            RaceDataScript
+
+BaseModelFileName     "d:\ymir work\npc\maviruh_work\shaman_buff_npc\shaman_buff_npc.gr2"
+
+Group ShapeData
+{
+    PathName 		 ""
+    ShapeDataCount 		 1
+    Group ShapeData00
+    {
+        ShapeIndex 		 0
+        Model 		 "d:\ymir work\npc\maviruh_work\shaman_buff_npc\shaman_buff_npc.gr2"
+        SourceSkin 		 "d:\ymir work\npc\maviruh_work\shaman_buff_npc\textures\shaman_4-1.dds"
+        TargetSkin 		 "d:\ymir work\npc\maviruh_work\shaman_buff_npc\textures\shaman_4-1.dds"
+        SourceSkin2 		 "d:\ymir work\npc\maviruh_work\shaman_buff_npc\textures\weapon_choegogeup01_05.dds"
+        TargetSkin2 		 "d:\ymir work\npc\maviruh_work\shaman_buff_npc\textures\weapon_choegogeup01_05.dds"
+    }
+}
+Group AttachingData
+{
+    AttachingDataCount       4
+    
+    Group AttachingData00
+    {
+        AttachingDataType    1
+        
+        isAttaching          1
+        AttachingModelIndex  0
+        AttachingBoneName    "Bip01"
+        
+        CollisionType        1
+        
+        SphereDataCount      1
+        Group SphereData00
+        {
+            Radius           50.000000
+            Position         0.000000 0.000000 0.000000
+        }
+    }
+    
+    Group AttachingData01
+    {
+        AttachingDataType    1
+        
+        isAttaching          1
+        AttachingModelIndex  0
+        AttachingBoneName    "Bip01"
+        
+        CollisionType        3
+        
+        SphereDataCount      1
+        Group SphereData00
+        {
+            Radius           50.000000
+            Position         0.000000 0.000000 0.000000
+        }
+    }
+    
+    Group AttachingData02
+    {
+        AttachingDataType    2
+        
+        isAttaching          1
+        AttachingModelIndex  0
+        AttachingBoneName    "equip_right"
+        
+        EffectScriptName     "D:\ymir work\pc\shaman\effect\6gicheon_hand.mse"
+        EffectPosition       0.000000 0.000000 0.000000
+        EffectRotation       0.000000 0.000000 0.000000
+    }
+    
+    Group AttachingData03
+    {
+        AttachingDataType    2
+        
+        isAttaching          0
+        AttachingModelIndex  0
+        AttachingBoneName    "Bip01"
+        
+        EffectScriptName     "D:\ymir work\pc\shaman\effect\3hosin_loop.mse"
+        EffectPosition       0.000000 0.000000 0.000000
+        EffectRotation       0.000000 0.000000 0.000000
+    }
+}

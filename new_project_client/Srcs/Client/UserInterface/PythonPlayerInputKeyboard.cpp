@@ -5,6 +5,10 @@
 
 void CPythonPlayer::SetAttackKeyState(bool isPress)
 {
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+	rascal::RascalProtectRTypes(SETATTACKKEY, ptrit, isPress);
+#endif
+
 	if (isPress)
 	{
 		CInstanceBase* pkInstMain = NEW_GetMainActorPtr();

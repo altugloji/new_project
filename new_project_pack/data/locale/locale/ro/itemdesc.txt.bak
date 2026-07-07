@@ -2763,7 +2763,7 @@
 27988	Harta Comorii	O hartã uzatã care indicã locul unei vechi comori.
 27989	Busola Pietrei Metin	Busola iti indica directia catre urmatoarea piatra Metin. Cu cat straluceste mai tare cu atat esti mai aproape. Poate sa fie activata de 6 ori.
 27990	Bucatã de piatrã	Datorita dimensiunilor mici, poate fi transportata usor. Poate fi folosita in foarte multe feluri.
-27991	Piatrã de Apã	Un mineral valoros din mare.
+27991	Piatrã de Apã	Mineral valoros al mãrii.
 27992	Perla Alba	O perlã albã ca zãpada din interiorul unei scoici.
 27993	Perla Albastra	O superbã perlã albastrã din interiorul unei scoici.
 27994	Perla Visinie	O perlã viºinie din interiorul unei scoici.
@@ -2931,7 +2931,7 @@
 30153	Flori	Flori necunoscute, care prin mireasma lor te adâncesc în amintiri.
 30154	Cartea secretã din templ	Analiza învãþãturii ºi istoriei templului secret.
 30155	Brelocul lui Mirine	Breloc pentru un colier. Pe spate este gravat numele Mirine.
-30156	Carte Mov	O carte care conþine reþete pentru cãrþi de competenþã. Poate fi creatã la Alchimist.
+30156	Carte mov	Carte care conþine reþeta cãrþilor de abilitate. Poate fi creatã la Alchimist.
 30157	Vârf de sãgeatã	Aceste vârfuri de sãgeatã otrãvite vor fi de folos pentru a învinge imperiul.
 30177	Esenþã de Mosc	Esenþa de Mosc folositã de Negustorul de arme in timpul unei misiuni. Acest obiect nu are alte functionalitaþi.
 30179	Cheie Rãsucitã	Aceastã cheie magicã activeazã portalul cãtre Templul Dragonului.
@@ -3123,15 +3123,15 @@
 30586		
 30600	Model Cusut	
 30601	Design Armurã	
-30602	Vopsea Albastrã	Vopsea necesarã pentru creare.
-30603	Vopsea Roºie	Vopsea necesarã pentru creare.
-30604	Vopsea Gri	Vopsea necesarã pentru creare.
+30602	Vopsea albastrã	Vopsea necesarã pentru producþie.
+30603	Vopsea roºie	Vopsea necesarã pentru producþie.
+30604	Vopsea gri	Vopsea necesarã pentru producþie.
 30605	Foi de Aur	
 30606	Foi de Argint	
 30607	Foi de Cupru	
 30608	Foi de Oþel	
 30609	Foi de Bronz	
-30610	Mithril	Se obþine prin topirea minereurilor. Poate fi folosit în diverse reþete. Poate fi creat la Alchimist.
+30610	Mithril	Se obþine prin topirea minereurilor. Poate fi folosit în diverse producþii. Poate fi creat la Alchimist.
 30611	Curele Dure	
 30612	Frânghii Rezistente	
 30613	Piatra Driadelor	Învãluitã de o strãlucire verde, aceastã piatrã misterioasã îmbracã sufletul unei driade, un spirit copac. Driadele cunosc cuvintele secrete pentru a putea avea acces la temniþa Erebus.
@@ -3216,7 +3216,7 @@
 31032	Perla Leviatanului	Capsule reconfortante create din Lumina Interioara a existentei mitice si Esenta Eternitatii.
 31033	Mantia Conducatorului	Aceasta mantie este simbolul invulnerabilitãþii pentru Tâlharii Roºii.
 31034	Totem Gigant	Totemul are forma gigantica a unei piese de chihlimbar.
-31035	Piatrã Neagrã	Se obþine prin topirea pietrelor. Poate fi folositã în diverse reþete. Poate fi creatã la Alchimist.
+31035	Piatrã Neagrã	Se obþine prin topirea pietrelor. Poate fi folositã în diverse producþii. Poate fi creatã la Alchimist.
 31036	Aur Negru	Acest minereu negru cu proprietati magice poate fi gasit in Muntii Thunder.
 31037	Punga din Piele	Ai luat aceasta punga de la Capitanul Shruk. Se pare ca e mai usoara decat te asteptai...
 31038	Teren Sfant	Aceasta desaga plina cu Teren Sfant foloseste drept medium pentru a-i chema pe cei morti.
@@ -3292,7 +3292,7 @@
 31108	Piatrã Micã Redux	Aceastã piatrã îþi permite sã creezi obiecte cu o ºansã de 2% sã fie învãluite cu puterea unui dragon.
 31109	Piatrã Rafinatã Redux	Aceastã piatrã îþi permite sã creezi obiecte cu o ºansã de 5% sã fie învãluite cu puterea unui dragon.
 31110	Piatrã Medie Redux	Aceastã piatrã îþi permite sã creezi obiecte cu o ºansã de 10% sã fie învãluite cu puterea unui dragon.
-31111	Piatrã Epicã Redux	Aceastã piatrã îþi permite sã creezi obiecte cu o ºansã de 15% sã fie învãluite cu puterea unui dragon.
+31111	Piatrã valoroasã a Trezirii	Material necesar pentru crearea obiectelor de suflet.
 31112	Piatrã Legendarã Redux	Aceastã piatrã îþi permite sã creezi obiecte cu o ºansã de 25% sã fie învãluite cu puterea unui dragon.
 31113	Elixir Redux	Material folosit la rafinare.
 31114	Piele Normalã	Material folosit la rafinare.
@@ -5371,7 +5371,7 @@
 50286	Cufãr Aur Zonã Rãzboi	Un cufãr cu un conþinut valoros.
 50287	Câmp Cutie 1	O cutie ce conþine echipament folositor.
 50288	Câmp Cutie 2	O cutie ce conþine echipament folositor.
-50289	Reîncarnare	Reîncarnarea imediatã are loc fãrã întârziere.
+50289	Efect Buff	Îþi permite sã primeºti Efectul Buff de la NPC.
 50290	Cufãr Lemn Zonã Rãzboi	Un cufãr cu un conþinut valoros.
 50294	Cufãr Regina Meley	Acest cufãr a fost recuperat din adãpostul Reginei Dragon Meley. Conþine o comoarã valoroasã.
 50296	Cutia Respingerilor	Aceastã cutie conþine 5 Cãrþi de Respingere.
@@ -5658,7 +5658,7 @@
 50938	Cufãr Profet Roºu	Conþine 105 Cãrþi de Tarot pentru Duelul Profeþilor.
 50939	Cufãr Profet Albastru	Conþine 21 Cãrþi de Tarot pentru Duelul Profeþilor.
 50940	Cufãr Profet Roz	Conþine 5 Cãrþi de Tarot pentru Duelul Profeþilor.
-51001	Fragment de Energie	Se obþine prin topirea obiectelor valoroase. Poate fi folosit în diverse reþete. Poate fi creat la Alchimist.
+51001	Fragment de Energie	Se obþine prin topirea obiectelor valoroase. Poate fi folosit în diverse producþii. Poate fi creat la Alchimist.
 51002	Cristal de Energie	Cristalul iti mareste bonusurile pentru doua ore.
 51501	Cor Draconis (Brut)	Cristalul Inima de Dragon contine o Piatra Dragon aleatoare din clasa bruta.
 51502	Cor Draconis (Brut)	Cristalul Inima de Dragon contine o Piatra Dragon aleatoare din clasa bruta.
@@ -6585,7 +6585,7 @@
 71120	Leu (galben)	Magia acestui sigiliu va invoca spiritul unui animal puternic care te va purta la destinaþia doritã. Acesta îi creºte cãlãreþului sãu valoarea atacului cu 200.
 71121	Leu (albastru)	Magia acestui sigiliu va invoca spiritul unui animal puternic care te va purta la destinaþia doritã. Acesta îi creºte cãlãreþului sãu valoarea atacului cu 300.
 71122	Intrare Templul Dragon	Poate fi folosit pentru a intra în Templul Dragonului.
-71123	Balanþa Dragonului	Balan'a Dragonului este din cele mai grele materiale cunoscute.
+71123	Solz de Dragon	Solzii de dragon se numãrã printre cele mai puternice materiale cunoscute.
 71124	Leul Alb	Animalele cu blanã albã sunt foarte rare ºi mulþi oameni le venereazã, crezând cã acestea au puteri magice. Mãreºte experienþa colectatã cu 30%.
 71125	Mistreþ Sãlbatic Luptã	Îmblânzirea spiritelor animalelor malefice necesitã ablitãþi magice însã, rezultatele pot fi uimitoare. Acesta oferã cãlãreþului sãu +20% putere împotriva monºtrilor.
 71126	Lup de Luptã	Îmblânzirea spiritelor animalelor malefice necesitã ablitãþi magice însã, rezultatele pot fi uimitoare. Acesta mãreºte ºansa de loviturã criticã cu 10%.
@@ -6613,8 +6613,8 @@
 71148	Inel Vointa Puternica	Îþi oferã +30% EXP, +20% ºansã de apãrare împotriva Rãzboinicilor, +20% ºansã de apãrare împotriva Ninja, +20% ºansã de apãrare împotriva Lycanilor, +30% putere împotriva monºtrilor, +10% la maximum de PV ºi +10% la maximum de PM per duratã.
 71149	Inel Putere Mortala	Îþi oferã +30% EXP, +20% ºansã de apãrare împotriva Sura, +20% ºansã de apãrare împotriva ªamanilor, +20% ºansã de apãrare împotriva Lycanilor, +30% putere împotriva monºtrilor, +10% la maximul de PV ºi +10% la maximul de PM pentru o anumitã perioadã de timp.
 71150	Ou Magic	Un cufãr oval ºi frumos decorat ce conþine mai mult decât o surprizã de Paºte, îþi dezvãluie comoara puþin câte puþin.
-71151	Vrãjire Verde	Schimbã bonusul obiectului. Poate fi folosit doar pe obiecte de nivel 18 sau mai mic.
-71152	Putere Verde	Adaugã un bonus nou obiectului. Poate fi folosit doar pe obiecte de nivel 18 sau mai mic.
+71151	Vrajã Verde	Schimbã bonusul obiectului.| |Poate fi folositã pe armuri ºi arme sub nivelul 18.|Poate fi folositã pe obiecte interioare de nivel 1.
+71152	Putere Verde	Adaugã un bonus nou obiectului.| |Poate fi folositã pe armuri ºi arme sub nivelul 18.|Poate fi folositã pe obiecte interioare de nivel 1.
 71153	Licoarea Inþelepciunii	Aceasta licoare te ajuta sa castigi cu 100% mai multa experienta pe parcursul unei ore de joc. Nu se poate negocia.
 71154	Licoarea Cresterii (3h)	Aceasta licoare iti permite sa colectezi 80% mai multa experienta pe parcursul a trei ore de joc. Obiectul nu se poate negocia.
 71155	Lic. Inþelepciunii (3h)	Licoarea te ajutã sã câºtigi 100% mai multã experienþã în trei ore de joc. Nu se poate negocia.
@@ -6862,11 +6862,11 @@
 72723	Elixirul Soarelui (S)	Umplerea automata a PV-ului. Contine 1,000,000 de PV.
 72724	Elixirul Soarelui (M)	Umplerea automata a PV-ului. Contine 3,000,000 de PV.
 72725	Elixirul Soarelui (L)	Umplerea automata a PV-ului. Contine 7,000,000 de PV.
-72726	Elixirul Soarelui (M)	Conþine 10.000.000 HP. Îþi reface automat HP-ul. | Oferã extra +1000 HP.
+72726	Elixirul Soarelui (M)	Conþine 10.000.000 HP. Îþi reface automat HP-ul. | Oferã +1000 HP extra.
 72727	Elixirul Lunii (S)	Umplerea automata a PM-ului. Contine 100,000 de PM.
 72728	Elixirul Lunii (M)	Umplerea automata a PM-ului. Contine 300,000 de PM.
 72729	Elixirul Lunii (L)	Umplerea automata a PM-ului. Contine 700,000 de PM.
-72730	Elixirul Lunii (M)	Conþine 1.000.000 SP. Îþi reface automat SP-ul. | Oferã extra +1000 SP.
+72730	Elixirul Lunii (M)	Conþine 1.000.000 SP. Îþi reface automat SP-ul. | Oferã +1000 SP extra.
 72734	Cufãr Valoros Albastru	Dublu click pentru deschidere. Acum ai douã opþiuni: | 1. Apasã pe Acceptã Obiect pentru a primi obiectul vãzut. | 2. Foloseºte ªansã Obiect Nou pentru un alt obiect aleatoriu. | Poþi avea pânã la 15 încercãri dacã plãteºti o taxã de Yang. | Dacã nu ai Yang suficient în contul tãu, nu poþi alege un obiect nou. | Cutia nu poate fi resetatã sau închisã odatã ce a fost deschisã.
 72735	Cufãr Valoros Roºu	Dublu click pentru deschidere. Acum ai douã opþiuni: | 1. Apasã pe Acceptã Obiect pentru a primi obiectul vãzut. | 2. Foloseºte ªansã Obiect Nou pentru un alt obiect aleatoriu. | Poþi avea pânã la 15 încercãri dacã plãteºti o taxã de Yang. | Dacã nu ai Yang suficient în contul tãu, nu poþi alege un obiect nou. | Cutia nu poate fi resetatã sau închisã odatã ce a fost deschisã.
 72737	Cufãr Valoros Verde	Dublu click pentru deschidere. Acum ai douã opþiuni: | 1. Apasã pe Acceptã Obiect pentru a primi obiectul vãzut. | 2. Foloseºte ªansã Obiect Nou pentru un alt obiect aleatoriu. | Poþi avea pânã la 15 încercãri dacã plãteºti o taxã de Yang. | Dacã nu ai Yang suficient în contul tãu, nu poþi alege un obiect nou. | Cutia nu poate fi resetatã sau închisã odatã ce a fost deschisã. | Dacã vei închide jocul, vei primi obiectul afiºat.
@@ -7382,7 +7382,7 @@
 83008	Cufãr de Bijuterii	Conþine aleatoriu un inel, o amuletã, o acadea sau o licoare.
 83009	Cufãr Însoþitori	Conþine un ou aleatoriu.
 83010	Cufãr Eºarfã	Conþine o eºarfã aleatorie.
-83011	Cufãr Obiect Bijuterie	Conþine un talisman aleatoriu, 50 Cutii Zodiac sau obiecte pentru a intra în Templul Zodiac.
+83011	Conþine 100 de unitãþi de Apã.
 83012	Cufãr Final Carte Însoþ.	Conþine un obiect aleatoriu pentru îmbunãtãþirea ºi antrenarea însoþitorului tãu.
 83013	Cufãr cu Dinþi+	Conþine o armã cu Dinþi+ la alegere.
 83014	Cufãr Cor Draconis	Conþine aleatoriu un Cor Draconis sau o Fasole Dragon.

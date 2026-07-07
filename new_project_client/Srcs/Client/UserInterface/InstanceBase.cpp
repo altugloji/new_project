@@ -282,31 +282,31 @@ void CInstanceBase::__AttachHorseSaddle()
 {
 	if (!IsMountingHorse())
 		return;
-	m_kHorse.m_pkActor->AttachModelInstance(CRaceData::PART_MAIN, "saddle", M_GTI, CRaceData::PART_MAIN);
+	m_kHorse.m_pkActor->AttachModelInstance(CRaceData::PART_MAIN, "saddle", m_GraphicThingInstance, CRaceData::PART_MAIN);
 }
 
 void CInstanceBase::__DetachHorseSaddle()
 {
 	if (!IsMountingHorse())
 		return;
-	m_kHorse.m_pkActor->DetachModelInstance(CRaceData::PART_MAIN, M_GTI, CRaceData::PART_MAIN);
+	m_kHorse.m_pkActor->DetachModelInstance(CRaceData::PART_MAIN, m_GraphicThingInstance, CRaceData::PART_MAIN);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
 
 void CInstanceBase::BlockMovement()
 {
-	M_GTI.BlockMovement();
+	m_GraphicThingInstance.BlockMovement();
 }
 
 bool CInstanceBase::IsBlockObject(const CGraphicObjectInstance& c_rkBGObj)
 {
-	return M_GTI.IsBlockObject(c_rkBGObj);
+	return m_GraphicThingInstance.IsBlockObject(c_rkBGObj);
 }
 
 bool CInstanceBase::AvoidObject(const CGraphicObjectInstance& c_rkBGObj)
 {
-	return M_GTI.AvoidObject(c_rkBGObj);
+	return m_GraphicThingInstance.AvoidObject(c_rkBGObj);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -386,7 +386,7 @@ bool CInstanceBase::LessRenderOrder(CInstanceBase* pkInst)
 
 UINT CInstanceBase::__LessRenderOrder_GetLODLevel()
 {
-	CGrannyLODController* pLODCtrl=M_GTI.GetLODControllerPointer(0);
+	CGrannyLODController* pLODCtrl=m_GraphicThingInstance.GetLODControllerPointer(0);
 	if (!pLODCtrl)
 		return 0;
 
@@ -446,12 +446,12 @@ void CInstanceBase::__EnableSkipCollision()
 		TraceError("CInstanceBase::__EnableSkipCollision - You should not skip your own collisions!!");
 		return;
 	}
-	M_GTI.EnableSkipCollision();
+	m_GraphicThingInstance.EnableSkipCollision();
 }
 
 void CInstanceBase::__DisableSkipCollision()
 {
-	M_GTI.DisableSkipCollision();
+	m_GraphicThingInstance.DisableSkipCollision();
 }
 
 DWORD CInstanceBase::__GetShadowMapColor(float x, float y)
@@ -498,7 +498,7 @@ BOOL CInstanceBase::IsInvisibility()
 
 BOOL CInstanceBase::IsParalysis()
 {
-	return M_GTI.IsParalysis();
+	return m_GraphicThingInstance.IsParalysis();
 }
 
 BOOL CInstanceBase::IsGameMaster() const
@@ -603,7 +603,7 @@ bool CInstanceBase::IsPartyMember() const
 
 BOOL CInstanceBase::IsInSafe()
 {
-	const TPixelPosition& c_rkPPosCur=M_GTI.NEW_GetCurPixelPositionRef();
+	const TPixelPosition& c_rkPPosCur=m_GraphicThingInstance.NEW_GetCurPixelPositionRef();
 	if (CPythonBackground::Instance().isAttrOn(c_rkPPosCur.x, c_rkPPosCur.y, CTerrainImpl::ATTRIBUTE_BANPK))
 		return TRUE;
 
@@ -612,7 +612,7 @@ BOOL CInstanceBase::IsInSafe()
 
 float CInstanceBase::CalculateDistanceSq3d(const TPixelPosition& c_rkPPosDst)
 {
-	const TPixelPosition& c_rkPPosSrc=M_GTI.NEW_GetCurPixelPositionRef();
+	const TPixelPosition& c_rkPPosSrc=m_GraphicThingInstance.NEW_GetCurPixelPositionRef();
 	return SPixelPosition_CalculateDistanceSq3d(c_rkPPosSrc, c_rkPPosDst);
 }
 
@@ -691,7 +691,7 @@ void CInstanceBase::SetMainInstance()
 	const DWORD dwVID=GetVirtualID();
 	rkChrMgr.SetMainInstance(dwVID);
 
-	M_GTI.SetMainInstance();
+	m_GraphicThingInstance.SetMainInstance();
 }
 
 CInstanceBase* CInstanceBase::__GetMainInstancePtr() const
@@ -823,6 +823,23 @@ bool CInstanceBase::Create(const SCreateData& c_rkCreateData)
 	SetVirtualNumber(c_rkCreateData.m_dwRace);
 	SetRotation(c_rkCreateData.m_fRot);
 
+#ifdef ENABLE_NPC_SCALE
+	// Buyutulecek/kucultulecek NPC'ler: { irk vnum, olcek }
+	static const struct { DWORD dwRace; float fScale; } c_akNPCScaleList[] =
+	{
+		{ 20094, 1.5f },	// buff NPC
+	};
+
+	for (const auto& c_rkScale : c_akNPCScaleList)
+	{
+		if (c_rkScale.dwRace == c_rkCreateData.m_dwRace)
+		{
+			m_GraphicThingInstance.SetScaleWorld(c_rkScale.fScale, c_rkScale.fScale, c_rkScale.fScale);
+			break;
+		}
+	}
+#endif
+
 	SetAlignment(c_rkCreateData.m_sAlignment);
 	SetPKMode(c_rkCreateData.m_byPKMode);
 
@@ -831,8 +848,8 @@ bool CInstanceBase::Create(const SCreateData& c_rkCreateData)
 
 	if (!IsWearingDress())
 	{
-		M_GTI.SetAlphaValue(0.0f);
-		M_GTI.BlendAlphaValue(1.0f, 0.5f);
+		m_GraphicThingInstance.SetAlphaValue(0.0f);
+		m_GraphicThingInstance.BlendAlphaValue(1.0f, 0.5f);
 	}
 
 	if (!IsGuildWall())
@@ -889,11 +906,11 @@ bool CInstanceBase::Create(const SCreateData& c_rkCreateData)
 #endif
 
 	if (c_rkCreateData.m_dwStateFlags & ADD_CHARACTER_STATE_DEAD)
-		M_GTI.DieEnd();
+		m_GraphicThingInstance.DieEnd();
 
 	SetStateFlags(c_rkCreateData.m_dwStateFlags);
 
-	M_GTI.SetBattleHitEffect(ms_adwCRCAffectEffect[EFFECT_HIT]);
+	m_GraphicThingInstance.SetBattleHitEffect(ms_adwCRCAffectEffect[EFFECT_HIT]);
 
 	if (!IsPC())
 	{
@@ -912,12 +929,12 @@ bool CInstanceBase::Create(const SCreateData& c_rkCreateData)
 	{
 		const std::string strFileName = GetGuildSymbolFileName(m_dwGuildID);
 		if (IsFile(strFileName.c_str()))
-			M_GTI.ChangeMaterial(strFileName.c_str());
+			m_GraphicThingInstance.ChangeMaterial(strFileName.c_str());
 	}
 
 #ifdef ENABLE_CANSEEHIDDENTHING_FOR_GM
 	if (IsAffect(AFFECT_INVISIBILITY) && __MainCanSeeHiddenThing())
-		M_GTI.BlendAlphaValue(0.5f, 0.5f);
+		m_GraphicThingInstance.BlendAlphaValue(0.5f, 0.5f);
 #endif
 
 	return true;
@@ -977,19 +994,11 @@ bool CInstanceBase::SetRace(DWORD eRace)
 {
 	m_dwRace = eRace;
 
-	if (!M_GTI.SetRace(eRace))
+	if (!m_GraphicThingInstance.SetRace(eRace))
 		return false;
 
-#ifdef URIEL_ANTI_CHEAT
-	BYTE raceType = 0;
-	if (!__FindRaceType(m_dwRace, &raceType))
-		raceType = CActorInstance::TYPE_PC;
-
-	m_eRaceType = raceType;
-#else
 	if (!__FindRaceType(m_dwRace, &m_eRaceType))
 		m_eRaceType=CActorInstance::TYPE_PC;
-#endif
 
 	return true;
 }
@@ -1048,14 +1057,14 @@ int CInstanceBase::GetHorseVnum() const
 void CInstanceBase::MountHorse(UINT eRace)
 {
 	m_kHorse.Destroy();
-	m_kHorse.Create(M_GTI.NEW_GetCurPixelPositionRef(), eRace, ms_adwCRCAffectEffect[EFFECT_HIT]);
+	m_kHorse.Create(m_GraphicThingInstance.NEW_GetCurPixelPositionRef(), eRace, ms_adwCRCAffectEffect[EFFECT_HIT]);
 
 	SetMotionMode(CRaceMotionData::MODE_HORSE);
 	SetRotationSpeed(c_fDefaultHorseRotationSpeed);
 
-	M_GTI.MountHorse(m_kHorse.GetActorPtr());
-	M_GTI.Stop();
-	M_GTI.RefreshActorInstance();
+	m_GraphicThingInstance.MountHorse(m_kHorse.GetActorPtr());
+	m_GraphicThingInstance.Stop();
+	m_GraphicThingInstance.RefreshActorInstance();
 }
 
 void CInstanceBase::DismountHorse()
@@ -1084,58 +1093,58 @@ void CInstanceBase::ResetPerformanceCounter()
 
 bool CInstanceBase::NEW_IsLastPixelPosition()
 {
-	return M_GTI.IsPushing();
+	return m_GraphicThingInstance.IsPushing();
 }
 
 const TPixelPosition& CInstanceBase::NEW_GetLastPixelPositionRef()
 {
-	return M_GTI.NEW_GetLastPixelPositionRef();
+	return m_GraphicThingInstance.NEW_GetLastPixelPositionRef();
 }
 
 void CInstanceBase::NEW_SetDstPixelPositionZ(FLOAT z)
 {
-	M_GTI.NEW_SetDstPixelPositionZ(z);
+	m_GraphicThingInstance.NEW_SetDstPixelPositionZ(z);
 }
 
 void CInstanceBase::NEW_SetDstPixelPosition(const TPixelPosition& c_rkPPosDst)
 {
-	M_GTI.NEW_SetDstPixelPosition(c_rkPPosDst);
+	m_GraphicThingInstance.NEW_SetDstPixelPosition(c_rkPPosDst);
 }
 
 void CInstanceBase::NEW_SetSrcPixelPosition(const TPixelPosition& c_rkPPosSrc)
 {
-	M_GTI.NEW_SetSrcPixelPosition(c_rkPPosSrc);
+	m_GraphicThingInstance.NEW_SetSrcPixelPosition(c_rkPPosSrc);
 }
 
 const TPixelPosition& CInstanceBase::NEW_GetCurPixelPositionRef()
 {
-	return M_GTI.NEW_GetCurPixelPositionRef();
+	return m_GraphicThingInstance.NEW_GetCurPixelPositionRef();
 }
 
 const TPixelPosition& CInstanceBase::NEW_GetDstPixelPositionRef()
 {
-	return M_GTI.NEW_GetDstPixelPositionRef();
+	return m_GraphicThingInstance.NEW_GetDstPixelPositionRef();
 }
 
 const TPixelPosition& CInstanceBase::NEW_GetSrcPixelPositionRef()
 {
-	return M_GTI.NEW_GetSrcPixelPositionRef();
+	return m_GraphicThingInstance.NEW_GetSrcPixelPositionRef();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 void CInstanceBase::OnSyncing()
 {
-	M_GTI.__OnSyncing();
+	m_GraphicThingInstance.__OnSyncing();
 }
 
 void CInstanceBase::OnWaiting()
 {
-	M_GTI.__OnWaiting();
+	m_GraphicThingInstance.__OnWaiting();
 }
 
 void CInstanceBase::OnMoving()
 {
-	M_GTI.__OnMoving();
+	m_GraphicThingInstance.__OnMoving();
 }
 
 void CInstanceBase::ChangeGuild(DWORD dwGuildID)
@@ -1160,12 +1169,12 @@ DWORD CInstanceBase::GetShape() const
 
 bool CInstanceBase::CanAct()
 {
-	return M_GTI.CanAct();
+	return m_GraphicThingInstance.CanAct();
 }
 
 bool CInstanceBase::CanMove()
 {
-	return M_GTI.CanMove();
+	return m_GraphicThingInstance.CanMove();
 }
 
 bool CInstanceBase::CanUseSkill()
@@ -1182,7 +1191,7 @@ bool CInstanceBase::CanUseSkill()
 	if (!m_kHorse.CanUseSkill())
 		return false;
 
-	if (!M_GTI.CanUseSkill())
+	if (!m_GraphicThingInstance.CanUseSkill())
 		return false;
 
 	return true;
@@ -1199,27 +1208,27 @@ bool CInstanceBase::CanAttack()
 	if (IsHoldingPickAxe())
 		return false;
 
-	return M_GTI.CanAttack();
+	return m_GraphicThingInstance.CanAttack();
 }
 
 bool CInstanceBase::CanFishing()
 {
-	return M_GTI.CanFishing();
+	return m_GraphicThingInstance.CanFishing();
 }
 
 BOOL CInstanceBase::IsBowMode()
 {
-	return M_GTI.IsBowMode();
+	return m_GraphicThingInstance.IsBowMode();
 }
 
 BOOL CInstanceBase::IsHandMode()
 {
-	return M_GTI.IsHandMode();
+	return m_GraphicThingInstance.IsHandMode();
 }
 
 BOOL CInstanceBase::IsFishingMode()
 {
-	if (CRaceMotionData::MODE_FISHING == M_GTI.GetMotionMode())
+	if (CRaceMotionData::MODE_FISHING == m_GraphicThingInstance.GetMotionMode())
 		return true;
 
 	return false;
@@ -1227,37 +1236,37 @@ BOOL CInstanceBase::IsFishingMode()
 
 BOOL CInstanceBase::IsFishing()
 {
-	return M_GTI.IsFishing();
+	return m_GraphicThingInstance.IsFishing();
 }
 
 BOOL CInstanceBase::IsDead()
 {
-	return M_GTI.IsDead();
+	return m_GraphicThingInstance.IsDead();
 }
 
 BOOL CInstanceBase::IsStun()
 {
-	return M_GTI.IsStun();
+	return m_GraphicThingInstance.IsStun();
 }
 
 BOOL CInstanceBase::IsSleep()
 {
-	return M_GTI.IsSleep();
+	return m_GraphicThingInstance.IsSleep();
 }
 
 BOOL CInstanceBase::__IsSyncing()
 {
-	return M_GTI.__IsSyncing();
+	return m_GraphicThingInstance.__IsSyncing();
 }
 
 void CInstanceBase::NEW_SetOwner(DWORD dwVIDOwner)
 {
-	M_GTI.SetOwner(dwVIDOwner);
+	m_GraphicThingInstance.SetOwner(dwVIDOwner);
 }
 
 float CInstanceBase::GetLocalTime()
 {
-	return M_GTI.GetLocalTime();
+	return m_GraphicThingInstance.GetLocalTime();
 }
 
 DWORD	ELTimer_GetServerFrameMSec();
@@ -1323,12 +1332,12 @@ CInstanceBase::TStateQueue::iterator CInstanceBase::FindSameState(TStateQueue& r
 
 BOOL CInstanceBase::__CanProcessNetworkStatePacket()
 {
-	if (M_GTI.IsDead())
+	if (m_GraphicThingInstance.IsDead())
 		return FALSE;
-	if (M_GTI.IsKnockDown())
+	if (m_GraphicThingInstance.IsKnockDown())
 		return FALSE;
-	if (M_GTI.IsUsingSkill())
-		if (!M_GTI.CanCancelSkill())
+	if (m_GraphicThingInstance.IsUsingSkill())
+		if (!m_GraphicThingInstance.CanCancelSkill())
 			return FALSE;
 
 	return TRUE;
@@ -1336,7 +1345,7 @@ BOOL CInstanceBase::__CanProcessNetworkStatePacket()
 
 BOOL CInstanceBase::__IsEnableTCPProcess(UINT eCurFunc)
 {
-	if (M_GTI.IsActEmotion())
+	if (m_GraphicThingInstance.IsActEmotion())
 	{
 		return FALSE;
 	}
@@ -1393,7 +1402,7 @@ void CInstanceBase::StateProcess()
 
 		if (!__CanProcessNetworkStatePacket())
 		{
-			Lognf(0, "vid=%d Skip State as unable to process IsDead=%d, IsKnockDown=%d", uVID, M_GTI.IsDead(), M_GTI.IsKnockDown());
+			Lognf(0, "vid=%d Skip State as unable to process IsDead=%d, IsKnockDown=%d", uVID, m_GraphicThingInstance.IsDead(), m_GraphicThingInstance.IsKnockDown());
 			return;
 		}
 
@@ -1551,7 +1560,7 @@ void CInstanceBase::StateProcess()
 					SCRIPT_SetPixelPosition(kPPosDst.x, kPPosDst.y);
 					BlendRotation(fRotDst);
 
-					M_GTI.InterceptOnceMotion(CRaceMotionData::NAME_SPECIAL_1 + uArg);
+					m_GraphicThingInstance.InterceptOnceMotion(CRaceMotionData::NAME_SPECIAL_1 + uArg);
 				}
 				break;
 			}
@@ -1632,7 +1641,7 @@ void CInstanceBase::MovementProcess()
 
 	TPixelPosition kPPosNext;
 	{
-		const D3DXVECTOR3 & c_rkV3Mov = M_GTI.GetMovementVectorRef();
+		const D3DXVECTOR3 & c_rkV3Mov = m_GraphicThingInstance.GetMovementVectorRef();
 
 		kPPosNext.x = kPPosCur.x + (+c_rkV3Mov.x);
 		kPPosNext.y = kPPosCur.y + (-c_rkV3Mov.y);
@@ -1698,7 +1707,7 @@ void CInstanceBase::MovementProcess()
 			}
 			else if (fCurLen <= fTotalLen && fTotalLen <= fNextLen)
 			{
-				if (M_GTI.IsDead() || M_GTI.IsKnockDown())
+				if (m_GraphicThingInstance.IsDead() || m_GraphicThingInstance.IsKnockDown())
 				{
 					__DisableSkipCollision();
 
@@ -1771,7 +1780,7 @@ void CInstanceBase::MovementProcess()
 							SetAdvancingRotation(m_fDstRot);
 							SetRotation(m_fDstRot);
 
-							M_GTI.InterceptOnceMotion(CRaceMotionData::NAME_SPECIAL_1 + m_kMovAfterFunc.uArg);
+							m_GraphicThingInstance.InterceptOnceMotion(CRaceMotionData::NAME_SPECIAL_1 + m_kMovAfterFunc.uArg);
 							break;
 						}
 
@@ -1808,21 +1817,21 @@ void CInstanceBase::MovementProcess()
 		}
 	}
 
-	if (IsWalking() || M_GTI.IsUsingMovingSkill())
+	if (IsWalking() || m_GraphicThingInstance.IsUsingMovingSkill())
 	{
-		float fRotation = M_GTI.GetRotation();
-		const float fAdvancingRotation = M_GTI.GetAdvancingRotation();
+		float fRotation = m_GraphicThingInstance.GetRotation();
+		const float fAdvancingRotation = m_GraphicThingInstance.GetAdvancingRotation();
 		const int iDirection = GetRotatingDirection(fRotation, fAdvancingRotation);
 
 		if (DEGREE_DIRECTION_SAME != m_iRotatingDirection)
 		{
 			if (DEGREE_DIRECTION_LEFT == iDirection)
 			{
-				fRotation = fmodf(fRotation + m_fRotSpd*M_GTI.GetSecondElapsed(), 360.0f);
+				fRotation = fmodf(fRotation + m_fRotSpd*m_GraphicThingInstance.GetSecondElapsed(), 360.0f);
 			}
 			else if (DEGREE_DIRECTION_RIGHT == iDirection)
 			{
-				fRotation = fmodf(fRotation - m_fRotSpd*M_GTI.GetSecondElapsed() + 360.0f, 360.0f);
+				fRotation = fmodf(fRotation - m_fRotSpd*m_GraphicThingInstance.GetSecondElapsed() + 360.0f, 360.0f);
 			}
 
 			if (m_iRotatingDirection != GetRotatingDirection(fRotation, fAdvancingRotation))
@@ -1831,7 +1840,7 @@ void CInstanceBase::MovementProcess()
 				fRotation = fAdvancingRotation;
 			}
 
-			M_GTI.SetRotation(fRotation);
+			m_GraphicThingInstance.SetRotation(fRotation);
 		}
 
 		if (__IsInDustRange())
@@ -1880,14 +1889,14 @@ void CInstanceBase::__ProcessFunctionEmotion(DWORD dwMotionNumber, DWORD dwTarge
 		const int dst_job = RaceToJob(pTargetInstance->GetRace());
 
 		NEW_LookAtDestInstance(*pTargetInstance);
-		M_GTI.InterceptOnceMotion(wMotionNumber1 + dst_job);
-		M_GTI.SetRotation(M_GTI.GetTargetRotation());
-		M_GTI.SetAdvancingRotation(M_GTI.GetTargetRotation());
+		m_GraphicThingInstance.InterceptOnceMotion(wMotionNumber1 + dst_job);
+		m_GraphicThingInstance.SetRotation(m_GraphicThingInstance.GetTargetRotation());
+		m_GraphicThingInstance.SetAdvancingRotation(m_GraphicThingInstance.GetTargetRotation());
 
 		pTargetInstance->NEW_LookAtDestInstance(*this);
-		pTargetInstance->m_GraphicThingInstance->InterceptOnceMotion(wMotionNumber2 + src_job);
-		pTargetInstance->m_GraphicThingInstance->SetRotation(pTargetInstance->m_GraphicThingInstance->GetTargetRotation());
-		pTargetInstance->m_GraphicThingInstance->SetAdvancingRotation(pTargetInstance->m_GraphicThingInstance->GetTargetRotation());
+		pTargetInstance->GetGraphicThingInstanceRef().InterceptOnceMotion(wMotionNumber2 + src_job);
+		pTargetInstance->GetGraphicThingInstanceRef().SetRotation(pTargetInstance->GetGraphicThingInstanceRef().GetTargetRotation());
+		pTargetInstance->GetGraphicThingInstanceRef().SetAdvancingRotation(pTargetInstance->GetGraphicThingInstanceRef().GetTargetRotation());
 
 		if (pTargetInstance->__IsMainInstance())
 		{
@@ -1913,12 +1922,12 @@ void CInstanceBase::Update()
 	++ms_dwUpdateCounter;
 
 	StateProcess();
-	M_GTI.PhysicsProcess();
-	M_GTI.RotationProcess();
-	M_GTI.ComboProcess();
-	M_GTI.AccumulationMovement();
+	m_GraphicThingInstance.PhysicsProcess();
+	m_GraphicThingInstance.RotationProcess();
+	m_GraphicThingInstance.ComboProcess();
+	m_GraphicThingInstance.AccumulationMovement();
 
-	if (M_GTI.IsMovement())
+	if (m_GraphicThingInstance.IsMovement())
 	{
 		TPixelPosition kPPosCur;
 		NEW_GetPixelPosition(&kPPosCur);
@@ -1942,31 +1951,31 @@ void CInstanceBase::Update()
 #else
 			const DWORD dwMtrlColor=__GetShadowMapColor(kPPosCur.x, kPPosCur.y);
 #endif
-			M_GTI.SetMaterialColor(dwMtrlColor);
+			m_GraphicThingInstance.SetMaterialColor(dwMtrlColor);
 		}
 	}
 
-	M_GTI.UpdateAdvancingPointInstance();
+	m_GraphicThingInstance.UpdateAdvancingPointInstance();
 
 	AttackProcess();
 	MovementProcess();
 
-	M_GTI.MotionProcess(IsPC());
+	m_GraphicThingInstance.MotionProcess(IsPC());
 
 #ifdef ENABLE_EMOTION_HIDE_WEAPON
-	if (M_GTI.GetCurrentMotionIndex() < CRaceMotionData::NAME_CLAP || M_GTI.GetCurrentMotionIndex() == CRaceMotionData::NAME_DIG)
+	if (m_GraphicThingInstance.GetCurrentMotionIndex() < CRaceMotionData::NAME_CLAP || m_GraphicThingInstance.GetCurrentMotionIndex() == CRaceMotionData::NAME_DIG)
 	{
-		if (M_GTI.GetPartItemID(CRaceData::PART_WEAPON) != m_awPart[CRaceData::PART_WEAPON])
+		if (m_GraphicThingInstance.GetPartItemID(CRaceData::PART_WEAPON) != m_awPart[CRaceData::PART_WEAPON])
 		{
-			M_GTI.AttachWeapon(m_awPart[CRaceData::PART_WEAPON]);
+			m_GraphicThingInstance.AttachWeapon(m_awPart[CRaceData::PART_WEAPON]);
 			CItemData* pItemData{};
 			if (CItemManager::Instance().GetItemDataPointer(m_awPart[CRaceData::PART_WEAPON], &pItemData))
 				__GetRefinedEffect(pItemData);
 		}
 	}
-	else if (M_GTI.GetPartItemID(CRaceData::PART_WEAPON))
+	else if (m_GraphicThingInstance.GetPartItemID(CRaceData::PART_WEAPON))
 	{
-		M_GTI.AttachWeapon(0);
+		m_GraphicThingInstance.AttachWeapon(0);
 		__ClearWeaponRefineEffect();
 	}
 #endif
@@ -1989,9 +1998,9 @@ void CInstanceBase::Transform()
 	}
 	else
 	{
-		if (IsWalking() || M_GTI.IsUsingMovingSkill())
+		if (IsWalking() || m_GraphicThingInstance.IsUsingMovingSkill())
 		{
-			const D3DXVECTOR3& c_rv3Movment=M_GTI.GetMovementVectorRef();
+			const D3DXVECTOR3& c_rv3Movment=m_GraphicThingInstance.GetMovementVectorRef();
 
 			const float len=(c_rv3Movment.x*c_rv3Movment.x)+(c_rv3Movment.y*c_rv3Movment.y);
 			if (len>1.0f)
@@ -2001,7 +2010,7 @@ void CInstanceBase::Transform()
 		}
 	}
 
-	M_GTI.INSTANCEBASE_Transform();
+	m_GraphicThingInstance.INSTANCEBASE_Transform();
 }
 
 void CInstanceBase::Deform()
@@ -2011,7 +2020,7 @@ void CInstanceBase::Deform()
 
 	++ms_dwDeformCounter;
 
-	M_GTI.INSTANCEBASE_Deform();
+	m_GraphicThingInstance.INSTANCEBASE_Deform();
 
 	m_kHorse.Deform();
 }
@@ -2021,7 +2030,7 @@ void CInstanceBase::RenderTrace()
 	if (!__CanRender())
 		return;
 
-	M_GTI.RenderTrace();
+	m_GraphicThingInstance.RenderTrace();
 }
 
 void CInstanceBase::Render()
@@ -2032,7 +2041,7 @@ void CInstanceBase::Render()
 	++ms_dwRenderCounter;
 
 	m_kHorse.Render();
-	M_GTI.Render();
+	m_GraphicThingInstance.Render();
 
 	if (CActorInstance::IsDirLine())
 	{
@@ -2048,7 +2057,7 @@ void CInstanceBase::Render()
 			STATEMANAGER.SetRenderState(D3DRS_LIGHTING, FALSE);
 
 			TPixelPosition px;
-			M_GTI.GetPixelPosition(&px);
+			m_GraphicThingInstance.GetPixelPosition(&px);
 			const D3DXVECTOR3 kD3DVt3Cur(px.x, px.y, px.z);
 			//D3DXVECTOR3 kD3DVt3Cur(NEW_GetSrcPixelPositionRef().x, -NEW_GetSrcPixelPositionRef().y, NEW_GetSrcPixelPositionRef().z);
 			const D3DXVECTOR3 kD3DVt3Dest(NEW_GetDstPixelPositionRef().x, -NEW_GetDstPixelPositionRef().y, NEW_GetDstPixelPositionRef().z);
@@ -2088,12 +2097,12 @@ void CInstanceBase::RenderToShadowMap()
 	if (fDistance>=SHADOW_APPLY_DISTANCE)
 		return;
 
-	M_GTI.RenderToShadowMap();
+	m_GraphicThingInstance.RenderToShadowMap();
 }
 
 void CInstanceBase::RenderCollision()
 {
-	M_GTI.RenderCollisionData();
+	m_GraphicThingInstance.RenderCollisionData();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2101,7 +2110,7 @@ void CInstanceBase::RenderCollision()
 
 void CInstanceBase::SetVirtualID(DWORD dwVirtualID)
 {
-	M_GTI.SetVirtualID(dwVirtualID);
+	m_GraphicThingInstance.SetVirtualID(dwVirtualID);
 }
 
 void CInstanceBase::SetVirtualNumber(DWORD dwVirtualNumber)
@@ -2111,7 +2120,7 @@ void CInstanceBase::SetVirtualNumber(DWORD dwVirtualNumber)
 
 void CInstanceBase::SetInstanceType(int iInstanceType)
 {
-	M_GTI.SetActorType(iInstanceType);
+	m_GraphicThingInstance.SetActorType(iInstanceType);
 }
 
 void CInstanceBase::SetAlignment(short sAlignment)
@@ -2163,7 +2172,7 @@ void CInstanceBase::SetStateFlags(DWORD dwStateFlags)
 
 void CInstanceBase::SetComboType(UINT uComboType)
 {
-	M_GTI.SetComboType(uComboType);
+	m_GraphicThingInstance.SetComboType(uComboType);
 }
 
 const char * CInstanceBase::GetNameString() const
@@ -2362,7 +2371,7 @@ bool CInstanceBase::IsTargetableInstance(CInstanceBase& rkInstVictim) const
 
 bool CInstanceBase::CanChangeTarget()
 {
-	return M_GTI.CanChangeTarget();
+	return m_GraphicThingInstance.CanChangeTarget();
 }
 
 bool CInstanceBase::CanPickInstance()
@@ -2473,27 +2482,27 @@ bool CInstanceBase::CanViewTargetHP(CInstanceBase& rkInstVictim) const
 
 BOOL CInstanceBase::IsPoly()
 {
-	return M_GTI.IsPoly();
+	return m_GraphicThingInstance.IsPoly();
 }
 
 BOOL CInstanceBase::IsPC()
 {
-	return M_GTI.IsPC();
+	return m_GraphicThingInstance.IsPC();
 }
 
 BOOL CInstanceBase::IsNPC()
 {
-	return M_GTI.IsNPC();
+	return m_GraphicThingInstance.IsNPC();
 }
 
 BOOL CInstanceBase::IsEnemy()
 {
-	return M_GTI.IsEnemy();
+	return m_GraphicThingInstance.IsEnemy();
 }
 
 BOOL CInstanceBase::IsStone()
 {
-	return M_GTI.IsStone();
+	return m_GraphicThingInstance.IsStone();
 }
 
 BOOL CInstanceBase::IsGuildWall() const
@@ -2532,32 +2541,32 @@ BOOL CInstanceBase::IsResource() const
 
 BOOL CInstanceBase::IsWarp()
 {
-	return M_GTI.IsWarp();
+	return m_GraphicThingInstance.IsWarp();
 }
 
 BOOL CInstanceBase::IsGoto()
 {
-	return M_GTI.IsGoto();
+	return m_GraphicThingInstance.IsGoto();
 }
 
 BOOL CInstanceBase::IsObject()
 {
-	return M_GTI.IsObject();
+	return m_GraphicThingInstance.IsObject();
 }
 
 BOOL CInstanceBase::IsBuilding()
 {
-	return M_GTI.IsBuilding();
+	return m_GraphicThingInstance.IsBuilding();
 }
 
 BOOL CInstanceBase::IsDoor()
 {
-	return M_GTI.IsDoor();
+	return m_GraphicThingInstance.IsDoor();
 }
 
 BOOL CInstanceBase::IsWoodenDoor()
 {
-	if (M_GTI.IsDoor())
+	if (m_GraphicThingInstance.IsDoor())
 	{
 		const int vnum = GetVirtualNumber();
 		if (vnum == 13000)
@@ -2575,7 +2584,7 @@ BOOL CInstanceBase::IsWoodenDoor()
 
 BOOL CInstanceBase::IsStoneDoor()
 {
-	return M_GTI.IsDoor() && 13001 == GetVirtualNumber();
+	return m_GraphicThingInstance.IsDoor() && 13001 == GetVirtualNumber();
 }
 
 BOOL CInstanceBase::IsFlag() const
@@ -2601,14 +2610,14 @@ BOOL CInstanceBase::IsForceVisible()
 	return FALSE;
 }
 
-int	CInstanceBase::GetInstanceType()
+int	CInstanceBase::GetInstanceType() const
 {
-	return M_GTI.GetActorType();
+	return m_GraphicThingInstance.GetActorType();
 }
 
 DWORD CInstanceBase::GetVirtualID()
 {
-	return M_GTI.GetVirtualID();
+	return m_GraphicThingInstance.GetVirtualID();
 }
 
 DWORD CInstanceBase::GetVirtualNumber() const
@@ -2618,7 +2627,7 @@ DWORD CInstanceBase::GetVirtualNumber() const
 
 bool CInstanceBase::__IsInViewFrustum()
 {
-	return M_GTI.isShow();
+	return m_GraphicThingInstance.isShow();
 }
 
 bool CInstanceBase::__CanRender()
@@ -2653,25 +2662,25 @@ bool CInstanceBase::__CanRender()
 bool CInstanceBase::IntersectBoundingBox()
 {
 	float u, v, t;
-	return M_GTI.Intersect(&u, &v, &t);
+	return m_GraphicThingInstance.Intersect(&u, &v, &t);
 }
 
 bool CInstanceBase::IntersectDefendingSphere()
 {
-	return M_GTI.IntersectDefendingSphere();
+	return m_GraphicThingInstance.IntersectDefendingSphere();
 }
 
 float CInstanceBase::GetDistance(CInstanceBase * pkTargetInst)
 {
 	TPixelPosition TargetPixelPosition;
-	pkTargetInst->m_GraphicThingInstance->GetPixelPosition(&TargetPixelPosition);
+	pkTargetInst->GetGraphicThingInstanceRef().GetPixelPosition(&TargetPixelPosition);
 	return GetDistance(TargetPixelPosition);
 }
 
 float CInstanceBase::GetDistance(const TPixelPosition & c_rPixelPosition)
 {
 	TPixelPosition PixelPosition;
-	M_GTI.GetPixelPosition(&PixelPosition);
+	m_GraphicThingInstance.GetPixelPosition(&PixelPosition);
 
 	const float fdx = PixelPosition.x - c_rPixelPosition.x;
 	const float fdy = PixelPosition.y - c_rPixelPosition.y;
@@ -2681,17 +2690,17 @@ float CInstanceBase::GetDistance(const TPixelPosition & c_rPixelPosition)
 
 CActorInstance& CInstanceBase::GetGraphicThingInstanceRef()
 {
-	return M_GTI;
+	return m_GraphicThingInstance;
 }
 
 CActorInstance* CInstanceBase::GetGraphicThingInstancePtr()
 {
-	return M_GTI_PTR;
+	return (&m_GraphicThingInstance);
 }
 
 void CInstanceBase::RefreshActorInstance()
 {
-	M_GTI.RefreshActorInstance();
+	m_GraphicThingInstance.RefreshActorInstance();
 }
 
 void CInstanceBase::Refresh(DWORD dwMotIndex, bool isLoop)
@@ -2701,42 +2710,42 @@ void CInstanceBase::Refresh(DWORD dwMotIndex, bool isLoop)
 
 void CInstanceBase::RestoreRenderMode()
 {
-	M_GTI.RestoreRenderMode();
+	m_GraphicThingInstance.RestoreRenderMode();
 }
 
 void CInstanceBase::SetAddRenderMode()
 {
-	M_GTI.SetAddRenderMode();
+	m_GraphicThingInstance.SetAddRenderMode();
 }
 
 void CInstanceBase::SetModulateRenderMode()
 {
-	M_GTI.SetModulateRenderMode();
+	m_GraphicThingInstance.SetModulateRenderMode();
 }
 
 void CInstanceBase::SetRenderMode(int iRenderMode)
 {
-	M_GTI.SetRenderMode(iRenderMode);
+	m_GraphicThingInstance.SetRenderMode(iRenderMode);
 }
 
 void CInstanceBase::SetAddColor(const D3DXCOLOR & c_rColor)
 {
-	M_GTI.SetAddColor(c_rColor);
+	m_GraphicThingInstance.SetAddColor(c_rColor);
 }
 
 void CInstanceBase::__SetBlendRenderingMode()
 {
-	M_GTI.SetBlendRenderMode();
+	m_GraphicThingInstance.SetBlendRenderMode();
 }
 
 void CInstanceBase::__SetAlphaValue(float fAlpha)
 {
-	M_GTI.SetAlphaValue(fAlpha);
+	m_GraphicThingInstance.SetAlphaValue(fAlpha);
 }
 
 float CInstanceBase::__GetAlphaValue()
 {
-	return M_GTI.GetAlphaValue();
+	return m_GraphicThingInstance.GetAlphaValue();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2771,7 +2780,7 @@ void CInstanceBase::SetHair(DWORD eHair)
 	if (it != setAllowedHair.end())
 		fSpecularPower = it->second;
 	#endif
-	M_GTI.SetHair(eHair
+	m_GraphicThingInstance.SetHair(eHair
 		#ifdef ENABLE_HAIR_SPECULAR
 		, fSpecularPower
 		#endif
@@ -2829,11 +2838,11 @@ bool CInstanceBase::SetAcce(DWORD dwAcce)
 		dwAcce -= 500;
 		m_dwAcceEffect = EFFECT_ACCE_BACK;
 	}
-	M_GTI.AttachAcce(dwAcce, 0, CRaceData::PART_ACCE);
+	m_GraphicThingInstance.AttachAcce(dwAcce, 0, CRaceData::PART_ACCE);
 
 	auto fClear = [this]() {
 		ClearAcceEffect();
-		M_GTI.SetAcceScale(1.0f, 1.0f, 1.0f);
+		m_GraphicThingInstance.SetAcceScale(1.0f, 1.0f, 1.0f);
 		m_awPart[CRaceData::PART_ACCE] = 0;
 	};
 
@@ -2857,7 +2866,7 @@ bool CInstanceBase::SetAcce(DWORD dwAcce)
 	BYTE bJob = (BYTE)RaceToJob(bRace);
 	BYTE bSex = (BYTE)RaceToSex(bRace);
 
-	M_GTI.SetAcceScale(pItemData->GetItemScaleVector(bJob, bSex), bRace);
+	m_GraphicThingInstance.SetAcceScale(pItemData->GetItemScaleVector(bJob, bSex), bRace);
 	m_awPart[CRaceData::PART_ACCE] = dwAcce;
 
 	return true;
@@ -2885,11 +2894,11 @@ void CInstanceBase::SetShape(DWORD eShape, float fSpecular)
 {
 	if (IsPoly())
 	{
-		M_GTI.SetShape(0);
+		m_GraphicThingInstance.SetShape(0);
 	}
 	else
 	{
-		M_GTI.SetShape(eShape, fSpecular);
+		m_GraphicThingInstance.SetShape(eShape, fSpecular);
 	}
 
 	m_eShape = eShape;
@@ -3088,7 +3097,7 @@ bool CInstanceBase::SetWeapon(DWORD eWeapon)
 	if (__IsChangableWeapon(eWeapon) == false)
 		eWeapon = 0;
 
-	M_GTI.AttachWeapon(eWeapon);
+	m_GraphicThingInstance.AttachWeapon(eWeapon);
 	m_awPart[CRaceData::PART_WEAPON] = eWeapon;
 
 	//Weapon Effect
@@ -3103,7 +3112,7 @@ bool CInstanceBase::SetWeapon(DWORD eWeapon)
 
 void CInstanceBase::ChangeWeapon(DWORD eWeapon)
 {
-	if (eWeapon == M_GTI.GetPartItemID(CRaceData::PART_WEAPON)
+	if (eWeapon == m_GraphicThingInstance.GetPartItemID(CRaceData::PART_WEAPON)
 		#ifdef ENABLE_EMOTION_HIDE_WEAPON
 		&& m_awPart[CRaceData::PART_WEAPON] == eWeapon
 		#endif
@@ -3189,7 +3198,7 @@ DWORD CInstanceBase::__GetRaceType() const
 
 void CInstanceBase::RefreshState(DWORD dwMotIndex, bool isLoop)
 {
-	const DWORD dwPartItemID = M_GTI.GetPartItemID(CRaceData::PART_WEAPON);
+	const DWORD dwPartItemID = m_GraphicThingInstance.GetPartItemID(CRaceData::PART_WEAPON);
 
 	BYTE byItemType = 0xff;
 	BYTE bySubType = 0xff;
@@ -3314,9 +3323,9 @@ void CInstanceBase::RefreshState(DWORD dwMotIndex, bool isLoop)
 	}
 
 	if (isLoop)
-		M_GTI.InterceptLoopMotion(dwMotIndex);
+		m_GraphicThingInstance.InterceptLoopMotion(dwMotIndex);
 	else
-		M_GTI.InterceptOnceMotion(dwMotIndex);
+		m_GraphicThingInstance.InterceptOnceMotion(dwMotIndex);
 
 	RefreshActorInstance();
 }
@@ -3328,20 +3337,20 @@ void CInstanceBase::RegisterBoundingSphere()
 {
 	if (!IsStone())
 	{
-		M_GTI.DeformNoSkin();
+		m_GraphicThingInstance.DeformNoSkin();
 	}
 
-	M_GTI.RegisterBoundingSphere();
+	m_GraphicThingInstance.RegisterBoundingSphere();
 }
 
 bool CInstanceBase::CreateDeviceObjects()
 {
-	return M_GTI.CreateDeviceObjects();
+	return m_GraphicThingInstance.CreateDeviceObjects();
 }
 
 void CInstanceBase::DestroyDeviceObjects()
 {
-	M_GTI.DestroyDeviceObjects();
+	m_GraphicThingInstance.DestroyDeviceObjects();
 }
 
 void CInstanceBase::Destroy()
@@ -3358,10 +3367,7 @@ void CInstanceBase::Destroy()
 	if (__IsMainInstance())
 		__ClearMainInstance();
 
-	M_GTI.Destroy();
-#ifdef URIEL_ANTI_CHEAT
-	delete (CActorInstance*)m_GraphicThingInstance.get();
-#endif
+	m_GraphicThingInstance.Destroy();
 
 	__Initialize();
 }
@@ -3378,9 +3384,6 @@ void CInstanceBase::__Warrior_Initialize()
 
 void CInstanceBase::__Initialize()
 {
-#ifdef URIEL_ANTI_CHEAT
-	m_GraphicThingInstance = new CActorInstance();
-#endif
 
 	__Warrior_Initialize();
 	__StoneSmoke_Inialize();
@@ -3409,7 +3412,7 @@ void CInstanceBase::__Initialize()
 	m_dwBaseChkTime=0;
 	m_dwSkipTime=0;
 
-	M_GTI.Initialize();
+	m_GraphicThingInstance.Initialize();
 
 	m_dwAdvActorVID=0;
 	m_dwLastDmgActorVID=0;
@@ -3472,7 +3475,7 @@ CInstanceBase::~CInstanceBase()
 
 void CInstanceBase::GetBoundBox(D3DXVECTOR3 * vtMin, D3DXVECTOR3 * vtMax)
 {
-	M_GTI.GetBoundBox(vtMin, vtMax);
+	m_GraphicThingInstance.GetBoundBox(vtMin, vtMax);
 }
 
 #ifdef ENABLE_QUIVER_SYSTEM
@@ -3493,19 +3496,19 @@ bool CInstanceBase::SetArrow(DWORD eArrow)
 		{
 			if (pItemData->GetSubType() == CItemData::WEAPON_ARROW)
 			{
-				M_GTI.SetQuiverEffectID(0);
+				m_GraphicThingInstance.SetQuiverEffectID(0);
 				return true;
 			}
 
 			if (pItemData->GetSubType() == CItemData::WEAPON_QUIVER)
 			{
-				M_GTI.SetQuiverEffectID(pItemData->GetValue(0));
+				m_GraphicThingInstance.SetQuiverEffectID(pItemData->GetValue(0));
 				return true;
 			}
 		}
 	}
 
-	M_GTI.SetQuiverEffectID(0);
+	m_GraphicThingInstance.SetQuiverEffectID(0);
 	return false;
 }
 #endif
@@ -3552,7 +3555,7 @@ void CInstanceBase::ClearWikiAffect()
 }
 bool CInstanceBase::SetMotionIndex(DWORD motionIndex)
 {
-	return M_GTI.InterceptOnceMotion(motionIndex);
+	return m_GraphicThingInstance.InterceptOnceMotion(motionIndex);
 }
 #endif
 

@@ -4,15 +4,15 @@
 
 #include "FlyTarget.h"
 #include "RaceData.h"
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+#include "rascal_client.h"
+#endif
 #include "RaceMotionData.h"
 #include "PhysicsObject.h"
 #include "ActorInstanceInterface.h"
 #include "Interface.h"
 //#include "../eterGrnLib/ThingInstance.h"
 #include "GameLibDefines.h"
-#ifdef URIEL_ANTI_CHEAT
-#include "../UserInterface/urielacsdk.h"
-#endif
 #define ENABLE_HAIR_SPECULAR
 
 class CItemData;
@@ -729,15 +729,9 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		std::vector<CWeaponTrace*>	m_WeaponTraceVector;
 		CPhysicsObject				m_PhysicsObject;
 
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<DWORD>	m_dwcurComboIndex;
-
-		safe_variable_weak<DWORD>	m_eActorType;
-#else
 		DWORD						m_dwcurComboIndex;
 
 		DWORD						m_eActorType;
-#endif
 
 		DWORD						m_eRace;
 		DWORD						m_eShape;
@@ -746,11 +740,7 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		BOOL						m_isNextPreInput;
 		DWORD						m_dwcurComboBackMotionIndex;
 
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<WORD>	m_wcurComboType;
-#else
 		WORD						m_wcurComboType;
-#endif
 
 		float						m_fAtkDirRot;
 
@@ -766,17 +756,9 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		BOOL						m_isFaint;
 		BOOL						m_isParalysis;
 		BOOL						m_isStun;
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<BOOL>	m_isRealDead;
-#else
 		BOOL						m_isRealDead;
-#endif
 		BOOL						m_isWalking;
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<BOOL>	m_isMain;
-#else
 		BOOL						m_isMain;
-#endif
 
 		// Effect
 		DWORD						m_dwBattleHitEffectID;
@@ -788,9 +770,16 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		int							m_iFishingEffectID;
 
 		// Position
+
+#ifdef ENABLE_SECURE_MOB_LIST
+		SecureMobDetail::EncryptedFloat	m_x;
+		SecureMobDetail::EncryptedFloat	m_y;
+		SecureMobDetail::EncryptedFloat	m_z;
+#else
 		float						m_x;
 		float						m_y;
 		float						m_z;
+#endif
 		D3DXVECTOR3					m_v3Pos;
 		D3DXVECTOR3					m_v3Movement;
 		BOOL						m_bNeedUpdateCollision;
@@ -798,13 +787,8 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		DWORD						m_dwShakeTime;
 
 		float						m_fReachScale;
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<float>	m_fMovSpd;
-		safe_variable_weak<float>	m_fAtkSpd;
-#else
 		float						m_fMovSpd;
 		float						m_fAtkSpd;
-#endif
 
 		// Rotation
 		float						m_fcurRotation;
@@ -848,13 +832,13 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 		CSpeedTreeWrapper *			m_pkTree;
 
 	protected:
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<DWORD> m_dwSelfVID;
-		safe_variable_weak<DWORD> m_dwOwnerVID;
+
+#ifdef ENABLE_SECURE_MOB_LIST
+		SecureMobDetail::EncryptedDword m_dwSelfVID;
 #else
 		DWORD m_dwSelfVID;
-		DWORD m_dwOwnerVID;
 #endif
+		DWORD m_dwOwnerVID;
 
 	protected:
 		void __InitializeStateData();
@@ -889,11 +873,7 @@ class CActorInstance : public IActorInstance, public IFlyTargetableObject
 	protected:
 		void __InitializeCollisionData();
 
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<bool> m_canSkipCollision;
-#else
 		bool m_canSkipCollision;
-#endif
 
 	protected:
 		struct SBlendAlpha

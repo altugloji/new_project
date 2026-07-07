@@ -170,6 +170,12 @@ enum
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 	HEADER_CG_SAFETRADE						= 234,
 #endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	HEADER_CG_GIFT_LIST						= 226,
+	HEADER_CG_GIFT_FIND						= 227,
+	HEADER_CG_GIFT_SEND						= 228,
+	HEADER_CG_GIFT_RANK						= 229,
+#endif
 	HEADER_CG_TIME_SYNC							= 0xfc,
 	HEADER_CG_CLIENT_VERSION2					= 0xf1,
 	HEADER_CG_PONG								= 0xfe,
@@ -366,6 +372,15 @@ enum
 #endif
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 	HEADER_GC_SAFETRADE							= 238,
+#endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+	HEADER_GC_GIFT_LIST							= 239,
+	HEADER_GC_GIFT_FIND_RESULT					= 240,
+	HEADER_GC_GIFT_SEND_RESULT					= 241,
+	HEADER_GC_GIFT_EP							= 242,
+	HEADER_GC_GIFT_NOTIFY						= 243,
+	HEADER_GC_GIFT_POINT						= 244,
+	HEADER_GC_GIFT_RANK							= 245,
 #endif
 
 
@@ -3293,6 +3308,10 @@ typedef struct SPacketGCGmPlayerPanel
 
 #ifdef ENABLE_CHARACTER_CHEST
 #include "CharacterChestPacket.h"
+#endif
+
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+#include "GiftPacket.h"
 #endif
 
 #ifdef __GEM_SHOP__

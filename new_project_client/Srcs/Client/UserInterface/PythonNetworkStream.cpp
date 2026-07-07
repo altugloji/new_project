@@ -206,6 +206,15 @@ class CMainPacketHeaderMap : public CNetworkPacketHeaderMap
 #ifdef ENABLE_CHARACTER_CHEST
 			Set(HEADER_GC_CHARACTER_CHEST, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCCharacterChest), DYNAMIC_SIZE_PACKET));
 #endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+			Set(HEADER_GC_GIFT_LIST, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGiftList), DYNAMIC_SIZE_PACKET));
+			Set(HEADER_GC_GIFT_FIND_RESULT, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGiftFindResult), STATIC_SIZE_PACKET));
+			Set(HEADER_GC_GIFT_SEND_RESULT, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGiftSendResult), STATIC_SIZE_PACKET));
+			Set(HEADER_GC_GIFT_EP, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGiftEP), STATIC_SIZE_PACKET));
+			Set(HEADER_GC_GIFT_NOTIFY, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGiftNotify), STATIC_SIZE_PACKET));
+			Set(HEADER_GC_GIFT_POINT, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGiftPoint), STATIC_SIZE_PACKET));
+			Set(HEADER_GC_GIFT_RANK, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGiftRank), STATIC_SIZE_PACKET));
+#endif
 #ifdef ENABLE_GM_PLAYER_PANEL
 			Set(HEADER_GC_GM_PLAYER_PANEL, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGmPlayerPanel), DYNAMIC_SIZE_PACKET));
 #endif

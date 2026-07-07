@@ -2,8 +2,9 @@
 
 #include <algorithm>
 #include "../eterBase/Debug.h"
-#ifdef URIEL_ANTI_CHEAT
-#include "../UserInterface/urielacsdk.h"
+#include "../UserInterface/Locale_inc.h"
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+#include "rascal_client.h"
 #endif
 
 //#define DYNAMIC_POOL_STRICT
@@ -33,7 +34,14 @@ class CDynamicPool
 
 		void Destroy()
 		{
-			std::for_each(m_kVct_pkData.begin(), m_kVct_pkData.end(), Delete);
+
+#ifdef ENABLE_SECURE_MOB_LIST
+		for (auto enc : m_kVct_pkData)
+			Delete(SecureMobDetail::DecRawPtr<T>(enc));
+#else
+		for (auto v : m_kVct_pkData)
+			Delete(v);
+#endif
 			m_kVct_pkData.clear();
 			m_kVct_pkFree.clear();
 		}
@@ -49,12 +57,22 @@ class CDynamicPool
 			if (m_kVct_pkFree.empty())
 			{
 				T* pkNewData=new T;
-				m_kVct_pkData.push_back(pkNewData);
+
+#ifdef ENABLE_SECURE_MOB_LIST
+			m_kVct_pkData.push_back(SecureMobDetail::EncRawPtr(pkNewData));
+#else
+			m_kVct_pkData.push_back(pkNewData);
+#endif
 				++m_uUsedCapacity;
 				return pkNewData;
 			}
 
-			T* pkFreeData=m_kVct_pkFree.back();
+
+#ifdef ENABLE_SECURE_MOB_LIST
+		T* pkFreeData = SecureMobDetail::DecRawPtr<T>(m_kVct_pkFree.back());
+#else
+		T* pkFreeData=m_kVct_pkFree.back();
+#endif
 			m_kVct_pkFree.pop_back();
 			return pkFreeData;
 		}
@@ -64,7 +82,12 @@ class CDynamicPool
 			assert(__IsValidData(pkData));
 			assert(!__IsFreeData(pkData));
 #endif
-			m_kVct_pkFree.push_back(pkData);
+
+#ifdef ENABLE_SECURE_MOB_LIST
+		m_kVct_pkFree.push_back(SecureMobDetail::EncRawPtr(pkData));
+#else
+		m_kVct_pkFree.push_back(pkData);
+#endif
 		}
 		void FreeAll()
 		{
@@ -77,18 +100,32 @@ class CDynamicPool
 		}
 
 	protected:
+
 		bool __IsValidData(T* pkData)
 		{
-			if (m_kVct_pkData.end()==std::find(m_kVct_pkData.begin(), m_kVct_pkData.end(), pkData))
-				return false;
-			return true;
+#ifdef ENABLE_SECURE_MOB_LIST
+		const uintptr_t enc = SecureMobDetail::EncRawPtr(pkData);
+		if (m_kVct_pkData.end() == std::find(m_kVct_pkData.begin(), m_kVct_pkData.end(), enc))
+			return false;
+#else
+		if (m_kVct_pkData.end()==std::find(m_kVct_pkData.begin(), m_kVct_pkData.end(), pkData))
+			return false;
+#endif
+		return true;
 		}
+
 		bool __IsFreeData(T* pkData)
 		{
-			if (m_kVct_pkFree.end()==std::find(m_kVct_pkFree.begin(), m_kVct_pkFree.end(), pkData))
-				return false;
+#ifdef ENABLE_SECURE_MOB_LIST
+		const uintptr_t enc = SecureMobDetail::EncRawPtr(pkData);
+		if (m_kVct_pkFree.end() == std::find(m_kVct_pkFree.begin(), m_kVct_pkFree.end(), enc))
+			return false;
+#else
+		if (m_kVct_pkFree.end()==std::find(m_kVct_pkFree.begin(), m_kVct_pkFree.end(), pkData))
+			return false;
+#endif
 
-			return true;
+		return true;
 		}
 
 		static void Delete(T* pkData)
@@ -97,101 +134,19 @@ class CDynamicPool
 		}
 
 	protected:
+
+#ifdef ENABLE_SECURE_MOB_LIST
+		std::vector<uintptr_t> m_kVct_pkData;
+		std::vector<uintptr_t> m_kVct_pkFree;
+#else
 		std::vector<T*> m_kVct_pkData;
 		std::vector<T*> m_kVct_pkFree;
+#endif
 
 		UINT m_uInitCapacity;
 		UINT m_uUsedCapacity;
 };
 
-#ifdef URIEL_ANTI_CHEAT
-template<typename T>
-class CDynamicPoolUriel
-{
-public:
-	CDynamicPoolUriel()
-	{
-		//Tracen(typeid(T).name());
-		m_uInitCapacity = 0;
-		m_uUsedCapacity = 0;
-	}
-
-	virtual ~CDynamicPoolUriel()
-	{
-		assert(m_kVct_pkData.empty());
-	}
-
-	void Clear()
-	{
-		Destroy();
-	}
-
-	void Destroy()
-	{
-		std::for_each(m_kVct_pkData.begin(), m_kVct_pkData.end(), Delete);
-		m_kVct_pkData.clear();
-		m_kVct_pkFree.clear();
-	}
-
-	void Create(UINT uCapacity)
-	{
-		m_uInitCapacity = uCapacity;
-		m_kVct_pkData.reserve(uCapacity);
-		m_kVct_pkFree.reserve(uCapacity);
-	}
-
-	T* Alloc()
-	{
-		if (m_kVct_pkFree.empty())
-		{
-			T* p = new T;
-			safe_variable_weak<T*> pkNewData(p);
-			m_kVct_pkData.push_back(pkNewData);
-			++m_uUsedCapacity;
-			return p;
-		}
-
-		safe_variable_weak<T*>& pkFreeData = m_kVct_pkFree.back();
-		m_kVct_pkFree.pop_back();
-
-		return pkFreeData;
-	}
-
-	void Free(T* pkData)
-	{
-		for (auto& data : m_kVct_pkData)
-		{
-			if (pkData == data)
-			{
-				m_kVct_pkFree.push_back(data);
-				break;
-			}
-		}
-	}
-
-	void FreeAll()
-	{
-		m_kVct_pkFree = m_kVct_pkData;
-	}
-
-	DWORD GetCapacity()
-	{
-		return m_kVct_pkData.size();
-	}
-
-protected:
-	static void Delete(safe_variable_weak<T*>& pkData)
-	{
-		delete (T*)pkData;
-	}
-protected:
-	std::vector<safe_variable_weak<T*>> m_kVct_pkData;
-	std::vector<safe_variable_weak<T*>> m_kVct_pkFree;
-
-	UINT m_uInitCapacity;
-	UINT m_uUsedCapacity;
-};
-#endif
 
 template<typename T>
 class CDynamicPoolEx

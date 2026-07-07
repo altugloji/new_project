@@ -5371,7 +5371,7 @@
 50286	Zlatá Truhla bit. zóny	Truhla s cenným obsahem.
 50287	Polní truhla 1	Truhla obsahující užiteènou výbavu.
 50288	Polní truhla 2	Truhla obsahující užiteènou výbavu.
-50289	Reinkarnace	Reinkarnace tì oživí okamžitì, bez èekání.
+50289	Buff efekt	Umožòuje získat Buff efekt od NPC.
 50290	Døevìná Truhla bit. zóny	Truhla s cenným obsahem.
 50294	Truhla královny Meley	Tato truhla byla nalezena v doupìti draèí královny Meley. Obsahuje skuteènì drahocenný poklad.
 50296	Truhla Knih ochrany	Tato bedna obsahuje 5 Knih ochrany
@@ -7382,7 +7382,7 @@
 83008	Šperkovnice	Obsahuje náhodnì prsten, náhrdelník, lízátko nebo lektvar.
 83009	Truhla mazlíka	Obsahuje náhodné vejce.
 83010	Truhla šerpy	Obsahuje náhodnou šerpu.
-83011	Zdobená truhla	Obsahuje a náhodnì talisman, 50 Beden Zvìrokruhu nebo pøedmìty pro vstup do Chrámu Zvìrokruhu.
+83011	Water Chest	Obsahuje 100 kusù vody.
 83012	Max. truh. Knihy zvíøete	Obsahuje náhodný pøedmìt pro trénink a vylepšení tvého mazlíka.
 83013	Truhla Zubaté zbranì+	Obsahuje Zubatou zbraò+ dle tvého výbìru.
 83014	Truhla Cor Draconis	Obsahuje náhodné Cor Draconis nebo Draèí fazoli.

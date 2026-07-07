@@ -828,6 +828,20 @@ public:
 	bool SendCharacterChestPacket(BYTE subOp, DWORD targetPid, WORD itemCell, const char* password);
 	bool RecvCharacterChestPacket();
 #endif
+#ifdef ENABLE_GIFT_SEND_SYSTEM
+public:
+	bool SendGiftListPacket();
+	bool SendGiftFindPacket(const char* name);
+	bool SendGiftSendPacket(const char* name, int giftIndex, int count, int flags, const char* message);
+	bool SendGiftRankPacket(int boardType);
+	bool RecvGiftListPacket();
+	bool RecvGiftRankPacket();
+	bool RecvGiftFindResultPacket();
+	bool RecvGiftSendResultPacket();
+	bool RecvGiftEPPacket();
+	bool RecvGiftNotifyPacket();
+	bool RecvGiftPointPacket();
+#endif
 #ifdef ENABLE_BULK_POTION_PANEL
 public:
 	bool SendBulkPotionUsePacket(const DWORD* adwSlotVnum, size_t count);

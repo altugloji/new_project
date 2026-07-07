@@ -90,6 +90,10 @@ CInstanceBase* CPythonPlayer::__GetTargetActorPtr() const
 
 void CPythonPlayer::__SetTargetVID(DWORD dwVID)
 {
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+	rascal::RascalProtectRTypes(ATTACK, ptrti, dwVID);
+#endif
+
 	m_dwTargetVID=dwVID;
 }
 

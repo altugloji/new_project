@@ -8,50 +8,50 @@ constexpr float c_fFishingDistance = 600.0f;
 
 void CInstanceBase::SetMotionMode(int iMotionMode)
 {
-	M_GTI.SetMotionMode(iMotionMode);
+	m_GraphicThingInstance.SetMotionMode(iMotionMode);
 }
 
 int CInstanceBase::GetMotionMode(DWORD dwMotionIndex)
 {
-	return M_GTI.GetMotionMode();
+	return m_GraphicThingInstance.GetMotionMode();
 }
 
 void CInstanceBase::SetLoopMotion(WORD wMotion, float fBlendTime/* =0.1f */, float fSpeedRatio)
 {
-	M_GTI.SetLoopMotion(wMotion, fBlendTime, fSpeedRatio);
+	m_GraphicThingInstance.SetLoopMotion(wMotion, fBlendTime, fSpeedRatio);
 }
 
 void CInstanceBase::PushOnceMotion(WORD wMotion, float fBlendTime, float fSpeedRatio)
 {
-	M_GTI.PushOnceMotion(wMotion, fBlendTime, fSpeedRatio);
+	m_GraphicThingInstance.PushOnceMotion(wMotion, fBlendTime, fSpeedRatio);
 }
 
 void CInstanceBase::PushLoopMotion(WORD wMotion, float fBlendTime, float fSpeedRatio)
 {
-	M_GTI.PushLoopMotion(wMotion, fBlendTime, fSpeedRatio);
+	m_GraphicThingInstance.PushLoopMotion(wMotion, fBlendTime, fSpeedRatio);
 }
 
 void CInstanceBase::ResetLocalTime()
 {
-	M_GTI.ResetLocalTime();
+	m_GraphicThingInstance.ResetLocalTime();
 }
 
 void CInstanceBase::SetEndStopMotion()
 {
-	M_GTI.SetEndStopMotion();
+	m_GraphicThingInstance.SetEndStopMotion();
 }
 
 BOOL CInstanceBase::isLock()
 {
-	return M_GTI.isLock();
+	return m_GraphicThingInstance.isLock();
 }
 
 void CInstanceBase::StartFishing(float frot)
 {
 	BlendRotation(frot);
 
-	const TPixelPosition& c_rkPPosCur=M_GTI.NEW_GetCurPixelPositionRef();
-	const float fRot = M_GTI.GetTargetRotation();
+	const TPixelPosition& c_rkPPosCur=m_GraphicThingInstance.NEW_GetCurPixelPositionRef();
+	const float fRot = m_GraphicThingInstance.GetTargetRotation();
 	//float fPlainCoordRot=ELRightCoord_ConvertToPlainCoordDegree(fRightCoordRot);
 
 	TPixelPosition kPPosFishing;
@@ -61,14 +61,14 @@ void CInstanceBase::StartFishing(float frot)
 
 	D3DXVECTOR3 v3Fishing;
 	PixelPositionToD3DXVECTOR3(kPPosFishing, &v3Fishing);
-	M_GTI.SetFishingPosition(v3Fishing);
+	m_GraphicThingInstance.SetFishingPosition(v3Fishing);
 
 	PushOnceMotion(CRaceMotionData::NAME_FISHING_THROW);
 	PushLoopMotion(CRaceMotionData::NAME_FISHING_WAIT);
 }
 void CInstanceBase::StopFishing()
 {
-	M_GTI.InterceptOnceMotion(CRaceMotionData::NAME_FISHING_STOP);
+	m_GraphicThingInstance.InterceptOnceMotion(CRaceMotionData::NAME_FISHING_STOP);
 	PushLoopMotion(CRaceMotionData::NAME_WAIT);
 }
 void CInstanceBase::ReactFishing()
@@ -78,19 +78,19 @@ void CInstanceBase::ReactFishing()
 }
 void CInstanceBase::CatchSuccess()
 {
-	M_GTI.InterceptOnceMotion(CRaceMotionData::NAME_FISHING_CATCH);
+	m_GraphicThingInstance.InterceptOnceMotion(CRaceMotionData::NAME_FISHING_CATCH);
 	PushLoopMotion(CRaceMotionData::NAME_WAIT);
 }
 void CInstanceBase::CatchFail()
 {
-	M_GTI.InterceptOnceMotion(CRaceMotionData::NAME_FISHING_FAIL);
+	m_GraphicThingInstance.InterceptOnceMotion(CRaceMotionData::NAME_FISHING_FAIL);
 	PushLoopMotion(CRaceMotionData::NAME_WAIT);
 }
 
 BOOL CInstanceBase::GetFishingRot(int * pirot)
 {
-	const TPixelPosition& c_rkPPosCur=M_GTI.NEW_GetCurPixelPositionRef();
-	const float fCharacterRot = M_GTI.GetRotation();
+	const TPixelPosition& c_rkPPosCur=m_GraphicThingInstance.NEW_GetCurPixelPositionRef();
+	const float fCharacterRot = m_GraphicThingInstance.GetRotation();
 
 	//float frot = fCharacterRot;
 
@@ -130,11 +130,11 @@ void CInstanceBase::ActDualEmotion(CInstanceBase & rkDstInst, WORD wMotionNumber
 {
 	if (!IsWaiting())
 	{
-		M_GTI.SetLoopMotion(CRaceMotionData::NAME_WAIT, 0.05f);
+		m_GraphicThingInstance.SetLoopMotion(CRaceMotionData::NAME_WAIT, 0.05f);
 	}
 	if (!rkDstInst.IsWaiting())
 	{
-		rkDstInst.m_GraphicThingInstance->SetLoopMotion(CRaceMotionData::NAME_WAIT, 0.05f);
+		rkDstInst.GetGraphicThingInstanceRef().SetLoopMotion(CRaceMotionData::NAME_WAIT, 0.05f);
 	}
 
 	constexpr float c_fEmotionDistance = 100.0f;

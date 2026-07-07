@@ -2763,7 +2763,7 @@
 27988	Carte au Trésor	Carte révélant l'emplacement d'un ancien Trésor
 27989	Compas de la Metin	Le compas indique la position de la pierre Metin la plus proche et plus il brille, plus vous vous rapprochez d'une pierre. Il peut être activé 6 fois.
 27990	Morceau de Pierre	Grâce à sa petite taille, il peut être transporté facilement. Il peut être utilisé de plusieurs façons.
-27991	Pierre d'eau	Un minerai précieux provenant de la mer.
+27991	Pierre d'eau	Un minerai précieux de la mer.
 27992	Perle blanche	Ce trésor nacré provient d'un coquillage.
 27993	Perle bleue	Ce trésor bleu foncé provient d'un coquillage.
 27994	Perle de sang	Ce trésor ardent provient d'un coquillage.
@@ -2931,7 +2931,7 @@
 30153	Fleur rare	Une fleur rare qui vous rappelle par son odeur des souvenirs enfouis.
 30154	Livre secret du Temple	Cet ouvrage traite de l'histoire et de la doctrine du Temple secret.
 30155	Pendentif de Mirine	Un pendentif de collier. Le nom de Mirine est gravé au revers.
-30156	Livre violet	Un livre contenant les recettes des livres de compétence. Peut être fabriqué chez l'Alchimiste.
+30156	Livre violet	Livre contenant la recette des livres de compétence. Peut être fabriqué chez l'Alchimiste.
 30157	Haut de flèche	Ces Hauts de Flèches empoisonnés vont aider à défendre l'empire.
 30177	Huile de Musc	L'huile de Musc est utilisée par Marchand d'Armes pour une quête. Cet objet n'a pas d'autre utilité.
 30179	Clé en spirale	Cette clé magique active le portail vers le temple du dragon.
@@ -3292,7 +3292,7 @@
 31108	Pierre d'éveil mineure	Cette pierre augmente vos chances de fabrication pour les objets contenant la force du dragon de 2 %.
 31109	Pierre d'éveil raffinée	Cette pierre augmente vos chances de fabrication pour les objets contenant la force du dragon de 5 %.
 31110	Pierre d'éveil splendide	Cette pierre augmente vos chances de fabrication pour les objets contenant la force du dragon de 10 %.
-31111	Pierre d'éveil noble	Cette pierre augmente vos chances de fabrication pour les objets contenant la force du dragon de 15 %.
+31111	Pierre d'éveil précieuse	Matériau nécessaire pour fabriquer des objets d'âme.
 31112	Pierre d'éveil puissante	Cette pierre augmente vos chances de fabrication pour les objets contenant la force du dragon de 25 %.
 31113	Âme de l'éveil	Matériel de raffinage
 31114	Cuir ordinaire	Matériel de raffinage
@@ -5371,7 +5371,7 @@
 50286	Coffre de Zone en or	Un coffre au contenu précieux.
 50287	Caisse du front 1	Une caisse contenant de l'équipement utile.
 50288	Caisse du front 2	Une caisse contenant de l'équipement utile.
-50289	Réincarnation	La Réincarnation vous ressuscite sur le champ et sans attente.
+50289	Effet Buff	Permet de recevoir l'effet Buff auprès du PNJ.
 50290	Coffre de Zone en bois	Un coffre au contenu précieux.
 50294	Coffre de la reine Meley	Ce coffre a été découvert dans le Repaire de Meley, reine des dragons. Il contient un trésor véritablement royal.
 50296	Boîte de parade	Cette boîte contient 5 Livres de parade.
@@ -6585,7 +6585,7 @@
 71120	Lion (jaune)	Ce sceau magique appellera l'esprit d'un puissant animal qui vous amènera rapidement à l'endroit de votre choix. Il augmente la valeur d'attaque de son cavalier de 200.
 71121	Lion (bleu)	Ce sceau magique appellera l'esprit d'un puissant animal qui vous amènera rapidement à l'endroit de votre choix. Il augmente la valeur d'attaque de son cavalier de 300.
 71122	Entrée Temple du dragon	Ceci permet d'accéder au Temple du dragon.
-71123	Écaille de dragon	Les écailles de dragon comptent parmi les matériaux les plus résistants.
+71123	Écaille de dragon	Les écailles de dragon font partie des matériaux les plus puissants connus.
 71124	Lion blanc	Les animaux au pelage blanc sont très rares et sont considérés par de multiples cultures comme possédant des pouvoirs particuliers. Cet animal augmente le gain d'expérience de 30 %.
 71125	Sanglier pugnace	Dompter des âmes animales malveillantes nécessite des pouvoirs magiques considérables. Le résultat en est tout aussi impressionnant. Cet animal confère à son cavalier +20 % de force contre les monstres.
 71126	Loup bagarreur	Dompter des âmes animales malveillantes nécessite des pouvoirs magiques considérables. Le résultat en est tout aussi impressionnant. Cet animal augmente votre chance de faire un coup critique de 10 %.
@@ -6613,8 +6613,8 @@
 71148	Anneau de Volonté	Vous bénéficiez de +30 % d'EXP, +20 % de chances de parer les Guerriers, +20 % de chances de parer les Ninjas, +20 % de chances de parer les Lycans, +30 % de force contre les monstres, +10 % de PV maximums et +10 % de PM maximums.
 71149	Anneau de Force mortelle	Pendant une certaine durée, cet objet vous confère +30 % d'EXP, +20 % de chances de parer les Suras, +20 % de chances de parer les Chamanes, +20 % de chances de parer les Lycans, +30 % de force contre les monstres, +10 % de PV max. et +10 % PM max.
 71150	Œuf magique	Ce coffre ovale ouvragé contient plus qu'une simple surprise de Pâques et délivre progressivement ses trésors.
-71151	Enchantement vert	Change le bonus de l'objet. Utilisable uniquement sur les objets de niveau 18 ou inférieur.
-71152	Force verte	Ajoute un nouveau bonus à l'objet. Utilisable uniquement sur les objets de niveau 18 ou inférieur.
+71151	Enchantement vert	Change le bonus de l'objet.| |Utilisable sur les armures et armes de niveau inférieur à 18.|Utilisable sur les objets intérieurs de niveau 1.
+71152	Puissance verte	Ajoute un nouveau bonus à l'objet.| |Utilisable sur les armures et armes de niveau inférieur à 18.|Utilisable sur les objets intérieurs de niveau 1.
 71153	Potion de sagesse	Grâce à cette potion, vous gagnez en une heure de jeu 100 % d'expérience en plus. Non échangeable.
 71154	Potion d'ascension (3h)	Grâce à cette potion, vous gagnez en trois heures de jeu 80 % d'expérience en plus. Non échangeable.
 71155	Potion de sagesse (3h)	Grâce à cette potion, vous gagnez en trois heures de jeu 100 % d'expérience en plus. Non échangeable.
@@ -6862,11 +6862,11 @@
 72723	Élixir du soleil (p)	Régénère automatiquement vos PV. Contient 1.000.000 PV.
 72724	Élixir du soleil (m)	Régénère automatiquement vos PV. Contient 3.000.000 PV.
 72725	Élixir du soleil (g)	Régénère automatiquement vos PV. Contient 7.000.000 PV.
-72726	Élixir du Soleil (P)	Contient 10.000.000 PV. Restaure automatiquement tes PV. | Donne +1000 PV supplémentaires.
+72726	Élixir du Soleil (P)	Contient 10.000.000 HP. Restaure automatiquement tes HP. | Donne +1000 HP supplémentaires.
 72727	Élixir de la lune (p)	Régénère automatiquement vos PM. Contient 100.000 PM.
 72728	Élixir de la lune (m)	Régénère automatiquement vos PM. Contient 300.000 PM.
 72729	Élixir de la lune (g)	Régénère automatiquement vos PM. Contient 700.000 PM.
-72730	Élixir de la Lune (P)	Contient 1.000.000 PM. Restaure automatiquement tes PM. | Donne +1000 PM supplémentaires.
+72730	Élixir de la Lune (P)	Contient 1.000.000 SP. Restaure automatiquement tes SP. | Donne +1000 SP supplémentaires.
 72734	Coff. bonne fortune bleu	Ouvrez-le en effectuant un double-clic. Vous avez 2 options : | 1. Cliquez sur « Accepter l'objet » pour récupérer l'objet affiché. | 2. Utilisez « Nouvelle chance d'objet » pour recevoir un autre objet aléatoire. | Vous avez jusqu'à 15 essais (contre un paiement en Yangs). | Si vous n'avez plus assez de Yangs sur votre compte, vous ne pourrez pas choisir de nouvel objet. | Une fois ouverte, la boîte ne peut pas être réinitialisée ou refermée.
 72735	Cof. bonne fortune rouge	Ouvrez-le en effectuant un double-clic. Vous avez 2 options : | 1. Cliquez sur « Accepter l'objet » pour récupérer l'objet affiché. | 2. Utilisez « Nouvelle chance d'objet » pour recevoir un autre objet aléatoire. | Vous avez jusqu'à 15 essais (contre un paiement en Yangs). | Si vous n'avez plus assez de Yangs sur votre compte, vous ne pourrez pas choisir de nouvel objet. | Une fois ouverte, la boîte ne peut pas être réinitialisée ou refermée.
 72737	Coffret de fortune vert	Effectuez un clic droit pour l'ouvrir. Vous avez 2 options : | 1. Cliquez sur « Accepter l'objet » pour récupérer l'objet affiché. | 2. Utilisez « Nouvelle chance d'objet » pour recevoir un autre objet aléatoire. | Vous avez jusqu'à 15 essais (contre un paiement en Yangs). | Si vous n'avez plus assez de Yangs sur votre compte, vous ne pourrez pas choisir de nouvel objet. | Une fois ouverte, la boîte ne peut pas être réinitialisée ou refermée. | Si le jeu est fermé, vous obtenez l'objet affiché.
@@ -7382,7 +7382,7 @@
 83008	Boîte à bijoux	Elle renferme une bague, une amulette, une sucette ou une potion.
 83009	Caisse de familier	Elle contient un œuf aléatoire.
 83010	Boîte à étole	Elle contient une étole aléatoire.
-83011	Caisse d'ornements	Une renferme un talisman aléatoire, 50 coffrets zodiacaux ou des objets permettant d'accéder au Temple du zodiaque.
+83011	Contient 100 unités d'Eau.
 83012	Malle de livre de fam.	Cet objet contient un objet aléatoire permettant d'entraîner et d'améliorer ton familier
 83013	Caisse crantée+	Elle contient une arme crantée+ de votre choix.
 83014	Caisse Cor Draconis	Elle contient un Cor Draconis aléatoire ou un haricot-dragon.

@@ -8859,7 +8859,7 @@ VNUM	LOCALE_NAME
 50286	Cofre Zona Combate Ouro
 50287	Caixa de Campo 1
 50288	Caixa de Campo 2
-50289	Reencarnação
+50289	Efeito Buff
 50290	Cofre Zona Combate Mad.
 50294	Cofre da Rainha Meley
 50296	Caixa de Guardas
@@ -10626,7 +10626,7 @@ VNUM	LOCALE_NAME
 83008	Caixa de Jóias
 83009	Cofre de Pet
 83010	Caixa de Faixas
-83011	Cofre de Ornamento
+83011	Baú de Água
 83012	Super Cofre Livro do Pet
 83013	Cofre de Motosserra+
 83014	Cofre de Cor Draconis

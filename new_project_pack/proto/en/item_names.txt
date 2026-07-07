@@ -8859,7 +8859,7 @@ VNUM	LOCALE_NAME
 50286	Golden Combat Zone Chest
 50287	Field Box 1
 50288	Field Box 2
-50289	Reincarnation
+50289	Buff Effect
 50290	Wooden Combat Zone Chest
 50294	Queen Meley's Chest
 50296	Box of Wards
@@ -10626,7 +10626,7 @@ VNUM	LOCALE_NAME
 83008	Jewellery Box
 83009	Pet Chest
 83010	Sash Box
-83011	Ornament Chest
+83011	Water Chest
 83012	Ultimate Pet Book Chest
 83013	Riptooth Chest+
 83014	Cor Draconis Chest

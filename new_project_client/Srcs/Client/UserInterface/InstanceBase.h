@@ -2,6 +2,9 @@
 
 #include "../gamelib/RaceData.h"
 #include "../gamelib/ActorInstance.h"
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+#include "rascal_client.h"
+#endif
 #include "../gamelib/GameLibDefines.h"
 
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM
@@ -10,13 +13,6 @@
 
 #include "AffectFlagContainer.h"
 
-#ifdef URIEL_ANTI_CHEAT
-#define M_GTI (*m_GraphicThingInstance.get())
-#define M_GTI_PTR (m_GraphicThingInstance.get())
-#else
-#define M_GTI m_GraphicThingInstance
-#define M_GTI_PTR (&m_GraphicThingInstance)
-#endif
 
 class CInstanceBase
 {
@@ -584,7 +580,7 @@ class CInstanceBase
 #ifdef ENABLE_TEXT_LEVEL_REFRESH
 		void					SetLevel(DWORD dwLevel);
 #endif
-		int						GetInstanceType();
+		int						GetInstanceType() const;
 		DWORD					GetPart(CRaceData::EParts part) const;
 		DWORD					GetShape() const;
 		DWORD					GetRace() const;
@@ -1028,18 +1024,15 @@ class CInstanceBase
 		void __StoneSmoke_Create(DWORD eSmoke);
 
 	protected:
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<BYTE>					m_eType;
-		safe_variable_weak<BYTE>					m_eRaceType;
-#else
 		BYTE					m_eType;
 		BYTE					m_eRaceType;
-#endif
 		DWORD					m_eShape;
-		DWORD					m_dwRace;
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<DWORD>					m_dwVirtualNumber;
+
+#ifdef ENABLE_SECURE_MOB_LIST
+		SecureMobDetail::EncryptedDword	m_dwRace;
+		SecureMobDetail::EncryptedDword	m_dwVirtualNumber;
 #else
+		DWORD					m_dwRace;
 		DWORD					m_dwVirtualNumber;
 #endif
 		short					m_sAlignment;
@@ -1088,11 +1081,7 @@ class CInstanceBase
 		BOOL m_bEnableTCPState;
 
 		// Graphic Instance
-#ifdef URIEL_ANTI_CHEAT
-		safe_variable_weak<CActorInstance*> m_GraphicThingInstance;
-#else
 		CActorInstance m_GraphicThingInstance;
-#endif
 
 	protected:
 		struct SCommand

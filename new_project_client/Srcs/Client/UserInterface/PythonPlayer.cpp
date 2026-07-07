@@ -1040,6 +1040,10 @@ int CPythonPlayer::GetSkillGrade(DWORD dwSlotIndex) const
 
 int CPythonPlayer::GetSkillLevel(DWORD dwSlotIndex) const
 {
+#ifdef ENABLE_RASCAL_ANTICHEAT_V2
+	rascal::RascalProtectRTypes(MODULE, NULL, NULL);
+#endif
+
 	if (dwSlotIndex >= SKILL_MAX_NUM)
 		return 0;
 

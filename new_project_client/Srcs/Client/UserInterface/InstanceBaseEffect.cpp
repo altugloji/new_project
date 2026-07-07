@@ -96,8 +96,8 @@ bool CInstanceBase::ProcessDamage()
 
 	CEffectManager& rkEftMgr=CEffectManager::Instance();
 
-	D3DXVECTOR3 v3Pos = M_GTI.GetPosition();
-	v3Pos.z += float(M_GTI.GetHeight());
+	D3DXVECTOR3 v3Pos = m_GraphicThingInstance.GetPosition();
+	v3Pos.z += float(m_GraphicThingInstance.GetHeight());
 
 	auto v3Rot = D3DXVECTOR3(0.0f, 0.0f, cameraAngle);
 
@@ -195,7 +195,7 @@ void CInstanceBase::SkillUp()
 
 void CInstanceBase::CreateSpecialEffect(DWORD iEffectIndex)
 {
-	const D3DXMATRIX & c_rmatGlobal = M_GTI.GetTransform();
+	const D3DXMATRIX & c_rmatGlobal = m_GraphicThingInstance.GetTransform();
 
 	const DWORD dwEffectIndex = CEffectManager::Instance().GetEmptyIndex();
 	const DWORD dwEffectCRC = ms_adwCRCAffectEffect[iEffectIndex];
@@ -348,7 +348,7 @@ void CInstanceBase::__StoneSmoke_Destroy()
 
 void CInstanceBase::__StoneSmoke_Create(DWORD eSmoke)
 {
-	m_kStoneSmoke.m_dwEftID=M_GTI.AttachSmokeEffect(eSmoke);
+	m_kStoneSmoke.m_dwEftID=m_GraphicThingInstance.AttachSmokeEffect(eSmoke);
 }
 
 void CInstanceBase::SetAlpha(float fAlpha)
@@ -709,7 +709,7 @@ void CInstanceBase::__ClearAffects()
 		__ClearAffectFlagContainer();
 	}
 
-	M_GTI.__OnClearAffects();
+	m_GraphicThingInstance.__OnClearAffects();
 }
 
 /////////////////////////////////////////////////
@@ -726,9 +726,9 @@ void CInstanceBase::__SetNormalAffectFlagContainer(const CAffectFlagContainer& c
 			__SetAffect(i, isNewSet);
 
 			if (isNewSet)
-				M_GTI.__OnSetAffect(i);
+				m_GraphicThingInstance.__OnSetAffect(i);
 			else
-				M_GTI.__OnResetAffect(i);
+				m_GraphicThingInstance.__OnResetAffect(i);
 		}
 	}
 
@@ -772,7 +772,7 @@ void CInstanceBase::SetAffectFlagContainer(const CAffectFlagContainer& c_rkAffec
 //				|| c_rkAffectFlagContainer.IsSet(AFFECT_REVIVE_INVISIBILITY)
 //				|| c_rkAffectFlagContainer.IsSet(AFFECT_EUNHYEONG))
 //		)
-//			M_GTI.HideAllAttachingEffect();
+//			m_GraphicThingInstance.HideAllAttachingEffect();
 //#endif
 	}
 }
@@ -789,11 +789,11 @@ void CInstanceBase::__SetReviveInvisibilityAffect(bool isVisible)
 		if (IsWearingDress())
 			return;
 
-		M_GTI.BlendAlphaValue(0.5f, 1.0f);
+		m_GraphicThingInstance.BlendAlphaValue(0.5f, 1.0f);
 	}
 	else
 	{
-		M_GTI.BlendAlphaValue(1.0f, 1.0f);
+		m_GraphicThingInstance.BlendAlphaValue(1.0f, 1.0f);
 	}
 }
 
@@ -806,12 +806,12 @@ void CInstanceBase::__Assassin_SetEunhyeongAffect(bool isVisible)
 
 		if (__IsMainInstance() || __MainCanSeeHiddenThing())
 		{
-			M_GTI.BlendAlphaValue(0.5f, 1.0f);
+			m_GraphicThingInstance.BlendAlphaValue(0.5f, 1.0f);
 		}
 		else
 		{
-			M_GTI.BlendAlphaValue(0.0f, 1.0f);
-			M_GTI.HideAllAttachingEffect();
+			m_GraphicThingInstance.BlendAlphaValue(0.0f, 1.0f);
+			m_GraphicThingInstance.HideAllAttachingEffect();
 		}
 	}
 	else
@@ -820,14 +820,14 @@ void CInstanceBase::__Assassin_SetEunhyeongAffect(bool isVisible)
 		if (IsAffect(AFFECT_INVISIBILITY) && __MainCanSeeHiddenThing())
 			return;
 #endif
-		M_GTI.BlendAlphaValue(1.0f, 1.0f);
-		M_GTI.ShowAllAttachingEffect();
+		m_GraphicThingInstance.BlendAlphaValue(1.0f, 1.0f);
+		m_GraphicThingInstance.ShowAllAttachingEffect();
 	}
 }
 
 void CInstanceBase::__Shaman_SetParalysis(bool isParalysis)
 {
-	M_GTI.SetParalysis(isParalysis);
+	m_GraphicThingInstance.SetParalysis(isParalysis);
 }
 
 void CInstanceBase::__Warrior_SetGeomgyeongAffect(bool isVisible)
@@ -840,15 +840,15 @@ void CInstanceBase::__Warrior_SetGeomgyeongAffect(bool isVisible)
 		if (m_kWarrior.m_dwGeomgyeongEffect)
 			__DetachEffect(m_kWarrior.m_dwGeomgyeongEffect);
 
-		M_GTI.SetReachScale(1.5f);
-		if (M_GTI.IsTwoHandMode())
+		m_GraphicThingInstance.SetReachScale(1.5f);
+		if (m_GraphicThingInstance.IsTwoHandMode())
 			m_kWarrior.m_dwGeomgyeongEffect=__AttachEffect(EFFECT_WEAPON+WEAPON_TWOHAND);
 		else
 			m_kWarrior.m_dwGeomgyeongEffect=__AttachEffect(EFFECT_WEAPON+WEAPON_ONEHAND);
 	}
 	else
 	{
-		M_GTI.SetReachScale(1.0f);
+		m_GraphicThingInstance.SetReachScale(1.0f);
 
 		__DetachEffect(m_kWarrior.m_dwGeomgyeongEffect);
 		m_kWarrior.m_dwGeomgyeongEffect=0;
@@ -870,7 +870,7 @@ void CInstanceBase::__SetAffect(UINT eAffect, bool isVisible)
 			break;
 
 		case AFFECT_CHEONGEUN:
-			M_GTI.SetResistFallen(isVisible);
+			m_GraphicThingInstance.SetResistFallen(isVisible);
 			break;
 		case AFFECT_GEOMGYEONG:
 			__Warrior_SetGeomgyeongAffect(isVisible);
@@ -892,34 +892,34 @@ void CInstanceBase::__SetAffect(UINT eAffect, bool isVisible)
 			if (__MainCanSeeHiddenThing())
 			{
 				if (isVisible)
-					M_GTI.BlendAlphaValue(0.5f, 1.0f);
+					m_GraphicThingInstance.BlendAlphaValue(0.5f, 1.0f);
 				else
-					M_GTI.BlendAlphaValue(1.0f, 1.0f);
+					m_GraphicThingInstance.BlendAlphaValue(1.0f, 1.0f);
 				break;
 			}
 #endif
 			if (isVisible)
 			{
 				#ifdef __ENABLE_STEALTH_FIX__
-				M_GTI.HideAllAttachingEffect();
+				m_GraphicThingInstance.HideAllAttachingEffect();
 				#else
-				M_GTI.ClearAttachingEffect();
+				m_GraphicThingInstance.ClearAttachingEffect();
 				#endif
 				__EffectContainer_Destroy();
 				DetachTextTail();
 			}
 			else
 			{
-				M_GTI.BlendAlphaValue(1.0f, 1.0f);
+				m_GraphicThingInstance.BlendAlphaValue(1.0f, 1.0f);
 				#ifdef __ENABLE_STEALTH_FIX__
-				M_GTI.ShowAllAttachingEffect();
+				m_GraphicThingInstance.ShowAllAttachingEffect();
 				#endif
 				AttachTextTail();
 				RefreshTextTail();
 			}
 			return;
 		case AFFECT_STUN:
-			M_GTI.SetSleep(isVisible);
+			m_GraphicThingInstance.SetSleep(isVisible);
 			break;
 	}
 
@@ -995,11 +995,11 @@ void CInstanceBase::SetEmoticon(UINT eEmoticon)
 #endif
 	if (IsPossibleEmoticon())
 	{
-		D3DXVECTOR3 v3Pos = M_GTI.GetPosition();
+		D3DXVECTOR3 v3Pos = m_GraphicThingInstance.GetPosition();
 #ifdef ENABLE_RACE_HEIGHT
-		v3Pos.z += float(GetBaseHeight() + M_GTI.GetHeight());
+		v3Pos.z += float(GetBaseHeight() + m_GraphicThingInstance.GetHeight());
 #else
-		v3Pos.z += float(M_GTI.GetHeight());
+		v3Pos.z += float(m_GraphicThingInstance.GetHeight());
 #endif
 
 		const CCamera * pCamera = CCameraManager::Instance().GetCurrentCamera();
@@ -1009,12 +1009,12 @@ void CInstanceBase::SetEmoticon(UINT eEmoticon)
 
 		v3Pos = D3DXVECTOR3(0,0,0);
 #ifdef ENABLE_RACE_HEIGHT
-		v3Pos.z += float(GetBaseHeight() + M_GTI.GetHeight());
+		v3Pos.z += float(GetBaseHeight() + m_GraphicThingInstance.GetHeight());
 #else
-		v3Pos.z += float(M_GTI.GetHeight());
+		v3Pos.z += float(m_GraphicThingInstance.GetHeight());
 #endif
 
-		M_GTI.AttachEffectByID(0, nullptr, ms_adwCRCAffectEffect[EFFECT_EMOTICON+eEmoticon],&v3Pos);
+		m_GraphicThingInstance.AttachEffectByID(0, nullptr, ms_adwCRCAffectEffect[EFFECT_EMOTICON+eEmoticon],&v3Pos);
 		m_dwEmoticonTime = ELTimer_GetMSec();
 	}
 }
@@ -1031,7 +1031,7 @@ void CInstanceBase::SetHorseDustGap(float fDustGap)
 
 void CInstanceBase::__DetachEffect(DWORD dwEID)
 {
-	M_GTI.DettachEffect(dwEID);
+	m_GraphicThingInstance.DettachEffect(dwEID);
 }
 
 DWORD CInstanceBase::__AttachEffect(UINT eEftType)
@@ -1049,7 +1049,7 @@ DWORD CInstanceBase::__AttachEffect(UINT eEftType)
 
 	if (ms_astAffectEffectAttachBone[eEftType].empty())
 	{
-		return M_GTI.AttachEffectByID(0, nullptr, ms_adwCRCAffectEffect[eEftType]);
+		return m_GraphicThingInstance.AttachEffectByID(0, nullptr, ms_adwCRCAffectEffect[eEftType]);
 	}
 	else
 	{
@@ -1057,21 +1057,21 @@ DWORD CInstanceBase::__AttachEffect(UINT eEftType)
 		const char * c_szBoneName;
 		if (0 == rstrBoneName.compare("PART_WEAPON"))
 		{
-			if (M_GTI.GetAttachingBoneName(CRaceData::PART_WEAPON, &c_szBoneName))
+			if (m_GraphicThingInstance.GetAttachingBoneName(CRaceData::PART_WEAPON, &c_szBoneName))
 			{
-				return M_GTI.AttachEffectByID(0, c_szBoneName, ms_adwCRCAffectEffect[eEftType]);
+				return m_GraphicThingInstance.AttachEffectByID(0, c_szBoneName, ms_adwCRCAffectEffect[eEftType]);
 			}
 		}
 		else if (0 == rstrBoneName.compare("PART_WEAPON_LEFT"))
 		{
-			if (M_GTI.GetAttachingBoneName(CRaceData::PART_WEAPON_LEFT, &c_szBoneName))
+			if (m_GraphicThingInstance.GetAttachingBoneName(CRaceData::PART_WEAPON_LEFT, &c_szBoneName))
 			{
-				return M_GTI.AttachEffectByID(0, c_szBoneName, ms_adwCRCAffectEffect[eEftType]);
+				return m_GraphicThingInstance.AttachEffectByID(0, c_szBoneName, ms_adwCRCAffectEffect[eEftType]);
 			}
 		}
 		else
 		{
-			return M_GTI.AttachEffectByID(0, rstrBoneName.c_str(), ms_adwCRCAffectEffect[eEftType]);
+			return m_GraphicThingInstance.AttachEffectByID(0, rstrBoneName.c_str(), ms_adwCRCAffectEffect[eEftType]);
 		}
 	}
 

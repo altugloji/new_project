@@ -105,6 +105,8 @@ class GameWindow(ui.ScriptWindow):
 
 		self.targetBoard = uiTarget.TargetBoard()
 		self.targetBoard.SetWhisperEvent(ui.__mem_func__(self.interface.OpenWhisperDialog))
+		if app.ENABLE_GIFT_SEND_SYSTEM:
+			self.targetBoard.SetGiftSendEvent(ui.__mem_func__(self.interface.OpenGiftSendDialog))
 		self.targetBoard.Hide()
 
 		self.console = consoleModule.ConsoleWindow()
@@ -400,6 +402,10 @@ class GameWindow(ui.ScriptWindow):
 
 		# Pazar Arama (ShopSearch) - F7
 		onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenShopSearch()
+
+		# Hediye Gonder - F8 (test/hizli acilis; ayrica oyuncuya sag tik menusunden de acilir)
+		if app.ENABLE_GIFT_SEND_SYSTEM:
+			onPressKeyDict[app.DIK_F8]	= lambda : self.interface.ToggleGiftSendDialog()
 
 		if app.ENABLE_GM_PLAYER_PANEL or app.ENABLE_BULK_POTION_PANEL:
 			onPressKeyDict[app.DIK_TAB]	= lambda : self.interface.ToggleTabPanel()
@@ -1947,6 +1953,70 @@ class GameWindow(ui.ScriptWindow):
 		}
 		localeKey, defaultText = errMap.get(result, ("CHARACTER_CHEST_FAILED", "Islem basarisiz."))
 		chat.AppendChat(chat.CHAT_TYPE_INFO, uicharacterchest.GetChestLocale(localeKey, defaultText))
+
+	# ---- Hediye Gonderme Sistemi (ENABLE_GIFT_SEND_SYSTEM) ----
+	def BINARY_GiftList(self, giftList):
+		import dbg
+		try:
+			if self.interface:
+				self.interface.GiftSetList(giftList)
+		except Exception, e:
+			dbg.TraceError("BINARY_GiftList error: %s" % e)
+
+	def BINARY_GiftEp(self, ep):
+		import dbg
+		try:
+			if self.interface:
+				self.interface.GiftSetEP(ep)
+		except Exception, e:
+			dbg.TraceError("BINARY_GiftEp error: %s" % e)
+
+	def BINARY_GiftPoint(self, point):
+		import dbg
+		try:
+			if self.interface:
+				self.interface.GiftSetPoint(point)
+		except Exception, e:
+			dbg.TraceError("BINARY_GiftPoint error: %s" % e)
+
+	def BINARY_GiftFindResult(self, result, name):
+		import dbg
+		try:
+			if self.interface:
+				self.interface.GiftFindResult(int(result), name)
+		except Exception, e:
+			dbg.TraceError("BINARY_GiftFindResult error: %s" % e)
+
+	def BINARY_GiftSendResult(self, result, newEP, giftIndex, count):
+		import dbg
+		try:
+			if self.interface:
+				self.interface.GiftSendResult(int(result), int(newEP), int(giftIndex), int(count))
+		except Exception, e:
+			dbg.TraceError("BINARY_GiftSendResult error: %s" % e)
+
+	def BINARY_GiftRank(self, boardType, rankList, myRank, myPoint):
+		import dbg
+		try:
+			if self.interface:
+				self.interface.GiftRankData(int(boardType), rankList, int(myRank), int(myPoint))
+		except Exception, e:
+			dbg.TraceError("BINARY_GiftRank error: %s" % e)
+
+	def BINARY_GiftNotify(self, anonymous, senderName, giftName, message, point, totalPoint):
+		# Pencere acik olmasa bile bildirim chat'te gosterilir.
+		import chat
+		import dbg
+		try:
+			import uigiftsend
+			if anonymous:
+				chat.AppendChat(chat.CHAT_TYPE_INFO, uigiftsend.GL("NOTIFY_ANON") % (giftName, uigiftsend.FormatEP(point)))
+			else:
+				chat.AppendChat(chat.CHAT_TYPE_INFO, uigiftsend.GL("NOTIFY_RECV") % (senderName, giftName, uigiftsend.FormatEP(point)))
+			if message:
+				chat.AppendChat(chat.CHAT_TYPE_INFO, uigiftsend.GL("NOTIFY_MSG") % message)
+		except Exception, e:
+			dbg.TraceError("BINARY_GiftNotify error: %s" % e)
 
 	def BINARY_Cube_ResultList(self, npcVNUM, listText):
 		#print listText

@@ -2931,7 +2931,7 @@
 30153	Flowers	A rare flower, its scent reminds you of something from the past.
 30154	Secret Temple Book	The analysis of the history and doctrine of the secret temple.
 30155	Mirine's Pendant	A necklace pendant. Engraved on the reverse side, is the name "Mirine".
-30156	Purple Book	A book containing recipes for skill books. Can be crafted at the Alchemist.
+30156	Purple Book	A book containing the recipe for skill books. Can be crafted by the Alchemist.
 30157	Arrowhead	These poisonous arrowheads will help to defend the kingdom.
 30177	Musk Oil	Musk Oil is used by the Weapon Shop Dealer during a quest. The item does not have any further functions.
 30179	Twisted Key	This magic key activates the portal to the Dragon's Temple.
@@ -3131,7 +3131,7 @@
 30607	Copper Sheets	
 30608	Steel Sheets	
 30609	Bronze Sheets	
-30610	Mithril	Obtained by melting ores. Can be used in various crafting recipes. Can be crafted at the Alchemist.
+30610	Mithril	Obtained by melting ores. Can be used in various crafting recipes. Can be crafted by the Alchemist.
 30611	Tough Straps	
 30612	Sturdy Cords	
 30613	Stone of the Dryads	Shrouded in a green shimmer, this mysterious stone encases the soul of a dryad, a tree spirit. The dryads know the secret words which will grant you access to the Erebus dungeon.
@@ -3216,7 +3216,7 @@
 31032	Leviathan Pearls	Effective strengthening capsules made from the Inner Light of mythical beings and the Millennium Essence.
 31033	Chief's Cape	This cape is the symbol of their invulnerability for the Red Thieves.
 31034	Giants' Totem	The totem has the form of a giant piece of amber.
-31035	Black Stone	Obtained by melting stones. Can be used in various crafting recipes. Can be crafted at the Alchemist.
+31035	Black Stone	Obtained by melting stones. Can be used in various crafting recipes. Can be crafted by the Alchemist.
 31036	Black Gold	This black ore with magical properties can be found in the Thunder Mountains.
 31037	Leather Bag	You took this bag from Captain Shruk. It seems to be lighter than you expected...
 31038	Holy Ground	This bag full of Holy Ground serves as a medium for summoning the dead.
@@ -3292,7 +3292,7 @@
 31108	Small Redux Stone	This stone allows you to craft items with a 2% chance of being suffused with the power of a dragon.
 31109	Refined Redux Stone	This stone allows you to craft items with a 5% chance of being suffused with the power of a dragon.
 31110	Craft Redux Stone	This stone allows you to craft items with a 10% chance of being suffused with the power of a dragon.
-31111	Epic Redux Stone	This stone allows you to craft items with a 15% chance of being suffused with the power of a dragon.
+31111	Valuable Awakening Stone	Material required to craft soul items.
 31112	Powerful Redux Stone	This stone allows you to craft items with a 25% chance of being suffused with the power of a dragon.
 31113	Redux Elixir	A material used for refinement.
 31114	Common Leather	A material used for refinement.
@@ -5371,7 +5371,7 @@
 50286	Golden Combat Zone Chest	A chest with valuable contents.
 50287	Field Box 1	A box containing useful equipment.
 50288	Field Box 2	A box containing useful equipment.
-50289	Reincarnation	Reincarnation immediately revives you without delay.
+50289	Buff Effect	Allows you to receive the Buff Effect from the NPC.
 50290	Wooden Combat Zone Chest	A chest with valuable contents.
 50294	Queen Meley's Chest	This chest was recovered from the Dragon Queen Meley's lair. It contains a truly magnificent treasure.
 50296	Box of Wards	This box contains 5 Ward Manuals.
@@ -5658,7 +5658,7 @@
 50938	Red Seer Chest	Contains 105 Tarot Cards for the Duel of the Seers.
 50939	Blue Seer Chest	Contains 21 Tarot Cards for the Duel of the Seers.
 50940	Pink Seer Chest	Contains 5 Tarot Cards for the Duel of the Seers.
-51001	Energy Fragment	Obtained by melting valuable items. Can be used in various crafting recipes. Can be crafted at the Alchemist.
+51001	Energy Fragment	Obtained by melting valuable items. Can be used in various crafting recipes. Can be crafted by the Alchemist.
 51002	Energy Crystal	This crystal increases your bonuses for two hours.
 51501	Cor Draconis (Rough)	The crystal dragon heart contains a random Dragon Stone from the rough class.
 51502	Cor Draconis (Rough)	The crystal dragon heart contains a random Dragon Stone from the rough class.
@@ -6585,7 +6585,7 @@
 71120	Lion (yellow)	The magic of this seal summons a mighty animal spirit that will quickly carry you to your destination of choice. It increases its rider's attack value by 200.
 71121	Lion (blue)	The magic of this seal summons a mighty animal spirit that will quickly carry you to your destination of choice. It increases its rider's attack value by 300.
 71122	Dragon's Temple Entry	Can be used to enter the Dragon's Temple.
-71123	Dragon Scales	Dragon scales are some of the toughest known materials.
+71123	Dragon Scale	Dragon scales are among the fiercest known materials.
 71124	White Lion	Animals with white fur are very rare and many cultures worship them, believing that they carry remarkable powers. It increases experience gain by 30%.
 71125	Wild Battle Boar	Taming evil animal spirits requires some skilful use of magic, but the results can be very impressive. It grants its rider +20% strength against monsters.
 71126	Fight Wolf	Taming evil animal spirits requires some skilful use of magic, but the results can be very impressive. It increases your chance of critical hits by 10%.
@@ -6613,8 +6613,8 @@
 71148	Ring of Will Power	Gives you +30% EXP, +20% defence chance against Warriors, +20% defence chance against Ninjas, +20% defence chance against Lycans, +30% strength against monsters, +10% maximum HP and +10% maximum SP for the duration.
 71149	Ring of Deadly Power	Gives you +30% EXP, +20% defence chance against Suras, +20% defence chance against Shamans, +20% defence chance against Lycans, +30% strength against monsters, +10% maximum HP and +10% maximum SP for a period of time.
 71150	Magic Egg	The artfully decorated oval chest contains more than just an Easter surprise, it reveals its treasures little by little.
-71151	Green Enchant	Changes the item's bonus. Can only be used on items level 18 or below.
-71152	Green Strength	Adds a new bonus to the item. Can only be used on items level 18 or below.
+71151	Green Enchant	Changes the item's bonus.| |Can be used on armor and weapons below level 18.|Can be used on level 1 inner items.
+71152	Green Power	Adds a new bonus to the item.| |Can be used on armor and weapons below level 18.|Can be used on level 1 inner items.
 71153	Potion of Wisdom	This potion allows you to gather 100% more experience in one hour of game time. Not tradeable.
 71154	Potion of Ascension (3h)	This potion allows you to gather 80% more experience in three hours of game time. Not tradeable.
 71155	Potion of Wisdom (3h)	This potion allows you to gather 100% more experience in three hours of game time. Not tradeable.
@@ -6862,11 +6862,11 @@
 72723	Sun Elixir (S)	Automatically refills your HP. Contains 1,000,000 HP.
 72724	Sun Elixir (M)	Automatically refills your HP. Contains 3,000,000 HP.
 72725	Sun Elixir (L)	Automatically refills your HP. Contains 7,000,000 HP.
-72726	Sun Elixir (S)	Contains 10.000.000 HP. Automatically restores your HP. | Grants an extra +1000 HP.
+72726	Sun Elixir (S)	Contains 10.000.000 HP. Automatically restores your HP. | Gives an extra +1000 HP.
 72727	Moon Elixir (S)	Automatically refills your SP. Contains 100,000 SP.
 72728	Moon Elixir (M)	Automatically refills your SP. Contains 300,000 SP.
 72729	Moon Elixir (L)	Automatically refills your SP. Contains 700,000 SP.
-72730	Moon Elixir (S)	Contains 1.000.000 SP. Automatically restores your SP. | Grants an extra +1000 SP.
+72730	Moon Elixir (S)	Contains 1.000.000 SP. Automatically restores your SP. | Gives an extra +1000 SP.
 72734	Blue Fortune Chest	Double-click to open. You now have two options: | 1. Click Accept Item to receive the item shown. | 2. Use New Item Fortune to get another random item. | You can have up to 15 attempts on paying a Yang fee. | If you have insufficient Yang in your account, you cannot choose a new item. | The box cannot be reset or closed again once it has been opened.
 72735	Red Fortune Chest	Double-click to open. You now have two options: | 1. Click Accept Item to receive the item shown. | 2. Use New Item Fortune to get another random item. | You can have up to 15 attempts on paying a Yang fee. | If you have insufficient Yang in your account, you cannot choose a new item. | The box cannot be reset or closed again once it has been opened.
 72737	Green Fortune Chest	Double-click to open. You now have two options: | 1. Click Accept Item to receive the item shown. | 2. Use New Item Fortune to get another random item. | You can have up to 15 attempts on paying a Yang fee. | If you have insufficient Yang in your account, you cannot choose a new item. | The box cannot be reset or closed again once it has been opened. | If you close the game, you will receive the item displayed.
@@ -7382,7 +7382,7 @@
 83008	Jewellery Box	Contains a ring, amulet, lolly or potion at random.
 83009	Pet Chest	Contains a random egg.
 83010	Sash Box	Contains a random sash.
-83011	Ornament Chest	Contains a random talisman, 50 Zodiac Cases or items for entering the Zodiac Temple.
+83011	Contains 100 Water.
 83012	Ultimate Pet Book Chest	Contains a random item to train and improve your pet.
 83013	Riptooth Chest+	Contains a Riptooth+ weapon of your choice.
 83014	Cor Draconis Chest	Contains a random Cor Draconis or a Dragon Bean.

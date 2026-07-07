@@ -24,7 +24,7 @@ void CGraphicObjectInstance::Clear()
 	m_fYaw = m_fPitch = m_fRoll = 0.0f;
 	D3DXMatrixIdentity(&m_worldMatrix);
 
-#ifdef ENABLE_ACCE_COSTUME_SYSTEM
+#if defined(ENABLE_ACCE_COSTUME_SYSTEM) || defined(ENABLE_NPC_SCALE)
 	m_v3ScaleAcce.x = m_v3ScaleAcce.y = m_v3ScaleAcce.z = 0.0f;
 	m_bAttachedAcceRace = 0;
 	D3DXMatrixIdentity(&m_matAbsoluteTrans);
@@ -95,7 +95,7 @@ void CGraphicObjectInstance::Deform()
 
 void CGraphicObjectInstance::Transform()
 {
-	#ifdef ENABLE_ACCE_COSTUME_SYSTEM
+	#if defined(ENABLE_ACCE_COSTUME_SYSTEM) || defined(ENABLE_NPC_SCALE)
 	m_worldMatrix = m_matScaleWorld * m_mRotation;
 	#else
 	m_worldMatrix = m_mRotation;
@@ -106,7 +106,7 @@ void CGraphicObjectInstance::Transform()
 	m_worldMatrix._43	+= m_v3Position.z;
 }
 
-#ifdef ENABLE_ACCE_COSTUME_SYSTEM
+#if defined(ENABLE_ACCE_COSTUME_SYSTEM) || defined(ENABLE_NPC_SCALE)
 void CGraphicObjectInstance::SetScaleWorld(float x, float y, float z)
 {
 	m_v3Scale.x = x;
@@ -326,7 +326,7 @@ void CGraphicObjectInstance::Initialize()
 	D3DXMatrixIdentity(&m_worldMatrix);
 	D3DXMatrixIdentity(&m_mRotation);
 
-#ifdef ENABLE_ACCE_COSTUME_SYSTEM
+#if defined(ENABLE_ACCE_COSTUME_SYSTEM) || defined(ENABLE_NPC_SCALE)
 	m_v3ScaleAcce.x = m_v3ScaleAcce.y = m_v3ScaleAcce.z = 0.0f;
 	D3DXMatrixIdentity(&m_matAbsoluteTrans);
 	D3DXMatrixIdentity(&m_matScale);
