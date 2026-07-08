@@ -243,6 +243,9 @@ void CHARACTER::Initialize()
 #ifdef ENABLE_MOVE_CHANNEL
 	m_pkChangeChannelEvent = nullptr;
 #endif
+#ifdef ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
+	m_pkWarpMyShopEvent = nullptr;
+#endif
 
 	// MINING
 	m_pkMiningEvent = nullptr;
@@ -667,6 +670,9 @@ void CHARACTER::Destroy()
 	//END_DELAYED_WARP
 #ifdef ENABLE_MOVE_CHANNEL
 	event_cancel(&m_pkChangeChannelEvent);
+#endif
+#ifdef ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
+	event_cancel(&m_pkWarpMyShopEvent);
 #endif
 
 	// MINING
@@ -1402,6 +1408,387 @@ bool CHARACTER::WarpToMyShop()
 	}
 	SetShopOwner(NULL);
 	return true;
+}
+#endif
+
+#ifdef ENABLE_OFFLINE_SHOP_REMOTE_VIEW
+// 50200 "Pazarimi Gor" (SALT-GORUNTULEME): pazarin DB anlik goruntusunu (player_shop_items)
+// dogrudan SHOP_START paketi olarak gonderir. Canli CShop/misafir kaydi KURULMAZ; bu yuzden
+// pazar hangi kanal/core'da olursa olsun calisir. Client byIsMyShop=2 ile pencereyi salt-okunur
+// acar (satin alma / duzenleme / ekleme-cikarma yok). Goruntu statiktir; canli UPDATE_ITEM gelmez.
+bool CHARACTER::ViewMyShopRemote()
+{
+	// Baska bir pencere acikken acilamaz (OpenMyShopRemote ile ayni guard listesi)
+	if (GetExchange() || IsOpenSafebox() || IsCubeOpen() || GetMyShop() || GetShop() || GetShopOwner() || IsEditingShop())
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDIT_OTHER_WINDOW"));
+		return false;
+	}
+
+	if (!GetDesc())
+		return false;
+
+	// Anti-spam: sorgu senkron calisir; ust uste tiklamayi kisitla (create gate'i ile ayni sayac)
+	if (GetLastCreateShopTime() > get_global_time())
+		return false;
+	SetLastCreateShopTime(get_global_time() + 2);
+
+	// OpenShop'taki kolon duzeninin aynisi; 'sold' EN SONDA kalmali (kolon kaymasi tuzagi)
+	char szSockets[128];
+	char szAttrs[256];
+	int socLen = snprintf(szSockets, sizeof(szSockets), "socket0");
+	int attrLen = snprintf(szAttrs, sizeof(szAttrs), "attrtype0, attrvalue0");
+	for (BYTE i = 1; i < ITEM_SOCKET_MAX_NUM; i++)
+		socLen += snprintf(szSockets + socLen, sizeof(szSockets) - socLen, ", socket%d", i);
+	for (BYTE i = 1; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
+		attrLen += snprintf(szAttrs + attrLen, sizeof(szAttrs) - attrLen, ", attrtype%d, attrvalue%d", i, i);
+
+	char szQuery[1024];
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+	snprintf(szQuery, sizeof(szQuery), "SELECT vnum, count, display_pos, price, %s, %s, sold FROM player_shop_items WHERE player_id = %u", szSockets, szAttrs, GetPlayerID());
+#else
+	snprintf(szQuery, sizeof(szQuery), "SELECT vnum, count, display_pos, price, %s, %s FROM player_shop_items WHERE player_id = %u", szSockets, szAttrs, GetPlayerID());
+#endif
+	auto pkMsg = DBManager::instance().DirectQuery(szQuery);
+	if (!pkMsg || !pkMsg->Get())
+		return false;
+
+	if (pkMsg->Get()->uiNumRows == 0)
+	{
+		// Pazar yok ya da az once kapandi (duz metin: LC_TEXT bilinmeyen key'e "@0949" ekler)
+		ChatPacket(CHAT_TYPE_INFO, "Goruntulenecek aktif pazarin yok.");
+		return false;
+	}
+
+	// SHOP_START paketini elle kur (AddGuest kalibi): dizi indeksi = display_pos, bos slotlar sifir kalir
+	TPacketGCShop pack;
+	pack.header = HEADER_GC_SHOP;
+	pack.subheader = SHOP_SUBHEADER_GC_START;
+
+	TPacketGCShopStart pack2;
+	memset(&pack2, 0, sizeof(pack2));
+	pack2.owner_vid = 0;	// bu core'da tezgah NPC'si olmayabilir; client salt-okunur modda VID kullanmaz
+	pack2.byIsMyShop = 2;	// 2 = uzaktan salt-goruntuleme (1 = sahip gorunumu ile karistirma)
+
+	int iValidRows = 0;
+	MYSQL_ROW row = NULL;
+	while ((row = mysql_fetch_row(pkMsg->Get()->pSQLResult)) != NULL)
+	{
+		int col = 0;
+		DWORD dwVnum = 0, dwCount = 0, dwDisplayPos = 0, dwPrice = 0;
+		str_to_number(dwVnum,		row[col++]);
+		str_to_number(dwCount,		row[col++]);
+		str_to_number(dwDisplayPos,	row[col++]);
+		str_to_number(dwPrice,		row[col++]);
+
+		// DB'den gelen display_pos'u dogrula (wire dizisi 40 slot; grid disi satiri atla)
+		if (dwDisplayPos >= SHOP_HOST_ITEM_MAX_NUM)
+		{
+			sys_err("ViewMyShopRemote: invalid display_pos %u (pid %u)", dwDisplayPos, GetPlayerID());
+			continue;
+		}
+
+		++iValidRows;
+		TShopItemData & r_item = pack2.items[dwDisplayPos];
+		r_item.vnum = dwVnum;
+		r_item.count = (BYTE) (dwCount > 255 ? 255 : dwCount);
+		r_item.price = dwPrice;
+
+		for (int s = 0; s < ITEM_SOCKET_MAX_NUM; ++s)
+		{
+			long lSocket = 0;
+			str_to_number(lSocket, row[col++]);
+			r_item.alSockets[s] = lSocket;
+		}
+
+		for (int at = 0; at < ITEM_ATTRIBUTE_MAX_NUM; ++at)
+		{
+			DWORD dwAttrType = 0;
+			long lAttrValue = 0;
+			str_to_number(dwAttrType,	row[col++]);
+			str_to_number(lAttrValue,	row[col++]);
+			r_item.aAttr[at].bType = (BYTE) dwAttrType;
+			r_item.aAttr[at].sValue = (short) lAttrValue;
+		}
+
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		// 'sold' kolonu (SELECT'te en son): satilmis item client'ta kirmizi hayalet
+		DWORD dwSold = 0;
+		str_to_number(dwSold, row[col++]);
+		r_item.bSold = dwSold ? 1 : 0;
+#endif
+	}
+
+	// Tum satirlar display_pos'tan elendiyse (bozuk DB) bos pencere acma
+	if (iValidRows == 0)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Goruntulenecek aktif pazarin yok.");
+		return false;
+	}
+
+	pack.size = sizeof(pack) + sizeof(pack2);
+	GetDesc()->BufferedPacket(&pack, sizeof(TPacketGCShop));
+	GetDesc()->Packet(&pack2, sizeof(TPacketGCShopStart));
+	return true;
+}
+#endif
+
+#ifdef ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
+// "Pazarima Isinlan" v2: 5 sn geri sayim; sure dolunca pazar hangi kanal/haritadaysa oraya isinlanir.
+// change_channel_event kalibi: DynamicCharacterPtr (logout-guvenli), harita degisirse iptal,
+// savas iptali char_battle.cpp Damage() kancasindan gelir (CancelWarpToMyShop).
+static const int WARP_MY_SHOP_DELAY_SEC = 5;
+
+EVENTINFO(warp_my_shop_event_info)
+{
+	DynamicCharacterPtr ch;
+	BYTE bChannel;    // pazarin kanali (g_bChannel ile ayni olabilir)
+	long lMapIndex;   // sayim baslarkenki harita; degisirse iptal
+	long lX, lY;      // pazar konumu (global koordinat, player_shop.x/y)
+	int  iSecLeft;
+
+	warp_my_shop_event_info()
+	: ch()
+	, bChannel(0)
+	, lMapIndex(0)
+	, lX(0)
+	, lY(0)
+	, iSecLeft(0)
+	{
+	}
+};
+
+// Ortak dogrulama (baslangicta + her tikte + ateslemede). CanChangeChannel AYNEN kullanilamaz:
+// o "ayni kanala gecemezsin" der; pazar ayni kanalda da olabilir. Portal-limit sureleri (CanWarp)
+// bilerek dahil degil: eski WarpToMyShop da kullanmiyordu ve pencere kapanisi MyShopTime set eder.
+static bool __CanWarpToMyShopNow(LPCHARACTER ch, BYTE bTargetChannel)
+{
+	if (ch->IsDead())
+		return false;
+
+	// pencere durumlari (WarpToMyShop guard listesi; client pencereyi zaten kapatti ama paket-sahtekarligina karsi)
+	if (ch->GetExchange() || ch->GetMyShop() || ch->GetShop() || ch->GetShopOwner()
+		|| ch->IsOpenSafebox() || ch->IsCubeOpen() || ch->IsEditingShop()
+#ifdef ENABLE_SAFE_TRADE_SYSTEM
+		|| ch->GetSafeTrade() || ch->IsSafeTradeClaiming()
+#endif
+		)
+		return false;
+
+	// baska bir warp bekliyor/ucusta ise (gecikmeli warp esyasi, portal, GM warp) yeni isinlanma yok:
+	// WarpSet sonrasi GetMapIndex degismez ama m_posWarp dolar; WarpEnd/Initialize sifirlar
+	if (ch->IsWarping() || ch->GetWarpPosition().x != 0 || ch->GetWarpPosition().y != 0)
+		return false;
+
+	// portal-limit: kasa/takas/refine kapanisindan hemen sonra isinlanma yok (CanWarp ile ayni, anti-dupe).
+	// GetMyShopTime bilerek MUAF: pencere kapanisi onu set eder (eski WarpToMyShop davranisi)
+	{
+		const int iPulse = thecore_pulse();
+		const int iLimit = PASSES_PER_SEC(g_nPortalLimitTime);
+		if (iPulse - ch->GetSafeboxLoadTime() < iLimit)
+			return false;
+		if (iPulse - ch->GetExchangeTime() < iLimit)
+			return false;
+		if (iPulse - ch->GetRefineTime() < iLimit)
+			return false;
+	}
+
+	// zindan/ozel haritadan isinlanma yok (kanal degisimi ile ayni kural)
+	if (ch->GetDungeon() || ch->GetMapIndex() >= 10000)
+		return false;
+
+#ifdef ENABLE_BOT_CONTROL
+	if (ch->IsAtBotControl() && BotControlEnforced())
+		return false;
+#endif
+
+#ifdef ENABLE_MOVE_CHANNEL
+	// bekleyen kanal degisimi ile ayni anda calismasin
+	if (ch->IsChangingChannel())
+		return false;
+	// 99 kanali kurallari (kanal degisimi ile ayni)
+	if (bTargetChannel != g_bChannel && (bTargetChannel == 99 || g_bChannel == 99))
+		return false;
+#else
+	if (bTargetChannel != g_bChannel)
+		return false;
+#endif
+
+	return true;
+}
+
+EVENTFUNC(warp_my_shop_event)
+{
+	const auto info = dynamic_cast<warp_my_shop_event_info*>(event->info);
+	if (info == nullptr)
+	{
+		sys_err("warp_my_shop_event> <Factor> Null pointer");
+		return 0;
+	}
+
+	const LPCHARACTER ch = info->ch;
+	if (ch == nullptr)
+		return 0;
+
+	// bekleme sirasinda baska warp ile harita degistiyse, baglanti koptuysa (desc NULL -> WarpSet
+	// icindeki GetDesc()->Packet cakilir) veya durum bozulduysa iptal
+	if (ch->GetMapIndex() != info->lMapIndex || !ch->GetDesc() || !__CanWarpToMyShopNow(ch, info->bChannel))
+	{
+		ch->m_pkWarpMyShopEvent = nullptr;
+		ch->ChatPacket(CHAT_TYPE_COMMAND, "offline_shop_warp_cancel");
+		ch->ChatPacket(CHAT_TYPE_INFO, "Pazara isinlanma iptal edildi.");
+		return 0;
+	}
+
+	if (--info->iSecLeft > 0)
+		return PASSES_PER_SEC(1);
+
+	// geri sayim bitti -> gercek isinlanma
+	ch->m_pkWarpMyShopEvent = nullptr;
+
+	bool bWarpOk = false;
+#if defined(ENABLE_MOVE_CHANNEL) && defined(WARP_CH_UPDATE)
+	// Hedef kanalin bu haritayi GERCEKTEN barindirdigini fallback'siz dogrula: CMapLocation'in
+	// x,y'li Get'i kayit bulamayinca SESSIZCE 99. kanala duser (map_location.cpp) -> 99 kilidi
+	// delinmesin diye fallback'siz indeks-varyantiyla kontrol edip oyle WarpSet cagiriyoruz.
+	// (ilk Get basarili olacagi icin WarpSet icindeki fallback hicbir zaman devreye girmez)
+	{
+		long lTargetMapIndex = SECTREE_MANAGER::instance().GetMapIndex(info->lX, info->lY);
+		long lTargetAddr = 0;
+		WORD wTargetPort = 0;
+		if (lTargetMapIndex != 0 && CMapLocation::instance().Get(lTargetMapIndex, lTargetAddr, wTargetPort, info->bChannel))
+			bWarpOk = ch->WarpSet(info->lX, info->lY, 0, info->bChannel);
+	}
+#else
+	// kanallar-arasi altyapi kapali: baslangic dogrulamasi zaten sadece ayni kanala izin verdi
+	bWarpOk = ch->WarpSet(info->lX, info->lY);
+#endif
+
+	if (!bWarpOk)
+	{
+		ch->ChatPacket(CHAT_TYPE_COMMAND, "offline_shop_warp_cancel");
+		ch->ChatPacket(CHAT_TYPE_INFO, "Pazar konumuna isinlanilamadi.");
+	}
+	return 0;
+}
+
+// "Pazarima Isinlan": pazar konumunu DB'den okur (kanal dahil), 5 sn geri sayim baslatir.
+// Client'a popup komutu gider; sure dolunca warp_my_shop_event isinlar (kanal fark etmez).
+bool CHARACTER::StartWarpToMyShopCountdown()
+{
+	if (!IsPC() || !GetDesc())
+		return false;
+
+	if (m_pkWarpMyShopEvent)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Zaten pazara isinlaniyorsun, lutfen bekle.");
+		return false;
+	}
+
+	// Anti-spam: sorgu senkron calisir ve chat komutlari flood korumasindan ONCE islenir ->
+	// komut spam'i DB'yi dovmesin (ViewMyShopRemote ile ayni sayac/kalip)
+	if (GetLastCreateShopTime() > get_global_time())
+		return false;
+	SetLastCreateShopTime(get_global_time() + 2);
+
+	// Ucuz yerel dogrulamalar DB sorgusundan ONCE (hedef kanal henuz bilinmedigi icin kendi kanali
+	// ile; kanala bagli kurallar sorgudan sonra gercek hedefle tekrar dogrulanir)
+	if (!__CanWarpToMyShopNow(this, g_bChannel))
+	{
+		// sebebe gore mesaj (hepsi icin "pencere kapat" demek yaniltici)
+		if (GetDungeon() || GetMapIndex() >= 10000)
+			ChatPacket(CHAT_TYPE_INFO, "Buradan pazara isinlanamazsin.");
+#ifdef ENABLE_MOVE_CHANNEL
+		else if (IsChangingChannel())
+			ChatPacket(CHAT_TYPE_INFO, "Kanal degistirme beklemedeyken pazara isinlanamazsin.");
+#endif
+		else if (IsWarping() || GetWarpPosition().x != 0 || GetWarpPosition().y != 0)
+			ChatPacket(CHAT_TYPE_INFO, "Zaten bir isinlanma bekleniyor.");
+		else if (!IsDead())
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_EDIT_OTHER_WINDOW"));
+		return false;
+	}
+
+	// Pazar konumu + kanali DB'den (canli CShop gerekmez -> kanal/harita bagimsiz)
+	auto pkMsg = DBManager::instance().DirectQuery("SELECT channel, map_index, x, y FROM player_shop WHERE player_id = %u", GetPlayerID());
+	if (!pkMsg || !pkMsg->Get())
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Pazar konumu okunamadi.");
+		return false;
+	}
+
+	if (pkMsg->Get()->uiNumRows == 0)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Aktif pazarin yok.");
+		return false;
+	}
+
+	MYSQL_ROW row = mysql_fetch_row(pkMsg->Get()->pSQLResult);
+	if (!row)
+		return false;
+
+	int iChannel = 0;
+	long lMapIndex = 0, lX = 0, lY = 0;
+	str_to_number(iChannel,	row[0]);
+	str_to_number(lMapIndex,	row[1]);
+	str_to_number(lX,		row[2]);
+	str_to_number(lY,		row[3]);
+
+	// BYTE'a daralirken sarmayi onle (DoChangeChannel'daki guard kalibi) + bozuk koordinat
+	if (iChannel <= 0 || iChannel >= 99 || lX <= 0 || lY <= 0)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Pazar konumu okunamadi.");
+		return false;
+	}
+
+	// map_index tutarlilik kontrolu: x,y kayitli haritanin disina dusuyorsa satir bozuk demektir
+	if (SECTREE_MANAGER::instance().GetMapIndex(lX, lY) != lMapIndex)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Pazar konumu okunamadi.");
+		return false;
+	}
+
+#if !(defined(ENABLE_MOVE_CHANNEL) && defined(WARP_CH_UPDATE))
+	// kanallar-arasi warp altyapisi kapali -> eski davranis: sadece ayni kanal
+	if ((BYTE) iChannel != g_bChannel)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Pazarin bu kanalda bulunamadi. Pazarinin oldugu kanala gec.");
+		return false;
+	}
+#endif
+
+	if (!__CanWarpToMyShopNow(this, (BYTE) iChannel))
+	{
+		// on-dogrulama kendi kanaliyla gecti; buradaki tek yeni sebep hedef kanal kurallaridir (99 vb.)
+		ChatPacket(CHAT_TYPE_INFO, "Pazarin kanalina su an gecilemiyor.");
+		return false;
+	}
+
+	warp_my_shop_event_info* info = AllocEventInfo<warp_my_shop_event_info>();
+	info->ch = this;
+	info->bChannel = (BYTE) iChannel;
+	info->lMapIndex = GetMapIndex();
+	info->lX = lX;
+	info->lY = lY;
+	info->iSecLeft = WARP_MY_SHOP_DELAY_SEC;
+
+	m_pkWarpMyShopEvent = event_create(warp_my_shop_event, info, PASSES_PER_SEC(1));
+
+	// Client popup: "Isinlaniyorsun" + geri sayim (pure-python; game.py serverCommandList)
+	ChatPacket(CHAT_TYPE_COMMAND, "offline_shop_warp_countdown %d", WARP_MY_SHOP_DELAY_SEC);
+	ChatPacket(CHAT_TYPE_INFO, "Pazarina isinlaniyorsun...");
+	return true;
+}
+
+// savas vb. nedeniyle bekleyen pazara-isinlanmayi iptal et (char_battle.cpp Damage kancasi)
+void CHARACTER::CancelWarpToMyShop()
+{
+	if (!m_pkWarpMyShopEvent)
+		return;
+
+	event_cancel(&m_pkWarpMyShopEvent);
+	ChatPacket(CHAT_TYPE_COMMAND, "offline_shop_warp_cancel");
+	ChatPacket(CHAT_TYPE_INFO, "Savasa girdigin icin pazara isinlanma iptal edildi.");
 }
 #endif
 #endif
@@ -9100,6 +9487,14 @@ bool CHARACTER::CanChangeChannel(BYTE newChannel)
 
 bool CHARACTER::ChangeChannel(BYTE newChannel)
 {
+#ifdef ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
+	// bekleyen "pazara isinlan" geri sayimi varken kanal degisimi baslatma (iki warp yarismasin)
+	if (IsWarpingToMyShop())
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Pazara isinlanma beklemedeyken kanal degistiremezsin.");
+		return false;
+	}
+#endif
 	// zaten bir kanal degistirme bekleniyorsa yenisini engelle
 	if (IsChangingChannel())
 	{

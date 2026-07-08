@@ -373,6 +373,9 @@ class Interface(object):
 		# Boylece uiscript/shopsearchwindow.py eksik olsa bile login etkilenmez.
 		self.offlineShopSearch = None
 
+		# "Pazarima Isinlan" geri sayim popup'i - ilk kullanimda (lazy) olusturulur
+		self.shopWarpCountdownDlg = None
+
 		if app.ENABLE_OFFLINE_SHOP:
 			self.wndGiftBox = uigift.GiftDialog()
 			self.wndGiftBox.Hide()
@@ -770,6 +773,10 @@ class Interface(object):
 			self.wndMoveChannel.Destroy()
 			self.wndMoveChannel = None
 
+		if app.ENABLE_OFFLINE_SHOP and getattr(self, "shopWarpCountdownDlg", None):
+			self.shopWarpCountdownDlg.Destroy()
+			self.shopWarpCountdownDlg = None
+
 		if app.ENABLE_WON_EXCHANGE_WINDOW:
 			self.wndWonExchange.Destroy()
 			self.wndWonExchange = None
@@ -1133,6 +1140,16 @@ class Interface(object):
 			self.wndPopupDialog = uiCommon.PopupDialog()
 			self.wndPopupDialog.SetText("Dukkana yaklas.")
 			self.wndPopupDialog.Open()
+
+		# "Pazarima Isinlan": server geri sayimi basladiginda popup ac, iptal komutunda kapat
+		def OfflineShopWarpCountdown(self, sec):
+			if not self.shopWarpCountdownDlg:
+				self.shopWarpCountdownDlg = uiShop.ShopWarpCountdownDialog()
+			self.shopWarpCountdownDlg.Open(sec)
+
+		def OfflineShopWarpCancel(self):
+			if self.shopWarpCountdownDlg:
+				self.shopWarpCountdownDlg.Close()
 
 	## Quest
 	def OpenCharacterWindowQuestPage(self):

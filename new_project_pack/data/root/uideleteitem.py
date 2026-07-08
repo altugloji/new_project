@@ -593,9 +593,51 @@ class DeleteItem(ui.ScriptWindow):
 		toplamfiyat += fiyat
 
 			
+	def __CountValuableStagedItems(self):
+		# Esik degerinden FAZLA dolu efsunu (attribute) olan degerli staged nesne sayisi
+		if not constInfo.ENABLE_ITEM_DELETE_ATTR_WARNING:
+			return 0
+		threshold = constInfo.ITEM_DELETE_ATTR_WARNING_THRESHOLD
+		count = 0
+		for privatePos, (invenType, invenPos) in self.itemStock.items():
+			attrCount = 0
+			for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM):
+				(attrType, attrValue) = player.GetItemAttribute(invenType, invenPos, i)
+				if 0 != attrType:
+					attrCount += 1
+			if attrCount > threshold:
+				count += 1
+		return count
+
+	def __OpenValuableWarning(self, valuable, isSell):
+		# Degerli (cok efsunlu) nesne tespit edilince gosterilen kirmizi ikinci onay
+		threshold = constInfo.ITEM_DELETE_ATTR_WARNING_THRESHOLD
+		if isSell:
+			actionWord = "satmak"
+			acceptEvent = lambda arg=True: self.RequestSellItem(arg)
+			cancelEvent = lambda arg=False: self.RequestSellItem(arg)
+		else:
+			actionWord = "silmek"
+			acceptEvent = lambda arg=True: self.RequestDropItem(arg)
+			cancelEvent = lambda arg=False: self.RequestDropItem(arg)
+
+		dlg = uiCommon.QuestionDialog2()
+		dlg.SetText1("|cffFF3333|hDIKKAT!|h|r Sectiklerinden |cffFDD017|h%d|h|r nesnede %d'den fazla efsun var!" % (valuable, threshold))
+		dlg.SetText2("Toplam %d nesneyi %s istedigine emin misin?" % (len(self.itemStock), actionWord))
+		dlg.SetWidth(420)
+		dlg.SetAcceptEvent(acceptEvent)
+		dlg.SetCancelEvent(cancelEvent)
+		dlg.Open()
+		self.itemDropQuestionDialog = dlg
+
 	def OnOk(self):
 		if (len(self.itemStock) == 0):
 			chat.AppendChat(chat.CHAT_TYPE_INFO, "Silinecek nesne yok.")
+			return
+
+		valuable = self.__CountValuableStagedItems()
+		if valuable > 0:
+			self.__OpenValuableWarning(valuable, False)
 			return
 
 		itemDropQuestionDialog = uiCommon.QuestionDialog()
@@ -608,6 +650,11 @@ class DeleteItem(ui.ScriptWindow):
 	def OnSat(self):
 		if (len(self.itemStock) == 0):
 			chat.AppendChat(chat.CHAT_TYPE_INFO, "Satilacak nesne yok.")
+			return
+
+		valuable = self.__CountValuableStagedItems()
+		if valuable > 0:
+			self.__OpenValuableWarning(valuable, True)
 			return
 
 		itemDropQuestionDialog = uiCommon.QuestionDialog()

@@ -40,6 +40,10 @@ def ITEM_DELETE_GET_INVEN_SLOTS():
 			result[invenPos] = 1
 	return result
 
+# F5 sil/sat penceresinde cok efsunlu (degerli) nesneler icin ekstra kirmizi onay uyarisi
+ENABLE_ITEM_DELETE_ATTR_WARNING = True		# pure-python ozellik anahtari (binary recompile gerektirmez)
+ITEM_DELETE_ATTR_WARNING_THRESHOLD = 3		# bu sayidan FAZLA efsunu olan nesne "degerli" sayilir ve uyari verilir
+
 if app.ENABLE_ITEM_SHOP_SYSTEM:
 	ITEM_SEARCH_DATA = []
 	ITEM_DATA = {}#for item shop

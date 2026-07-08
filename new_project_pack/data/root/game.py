@@ -1081,6 +1081,17 @@ class GameWindow(ui.ScriptWindow):
 		def offline_shop_too_far(self):
 			self.interface.OfflineShopTooFar()
 
+		def offline_shop_warp_countdown(self, sec):
+			# "Pazarima Isinlan": server geri sayimi basladi -> popup ac
+			try:
+				sec = int(sec)
+			except ValueError:
+				sec = 5
+			self.interface.OfflineShopWarpCountdown(sec)
+
+		def offline_shop_warp_cancel(self):
+			self.interface.OfflineShopWarpCancel()
+
 	def SetShopSellingPrice(self, Price):
 		pass
 
@@ -2303,6 +2314,8 @@ class GameWindow(ui.ScriptWindow):
 				"offline_shop_edit_start"	: self.offline_shop_edit_start,
 				"offline_shop_edit_start_remote"	: self.offline_shop_edit_start_remote,
 				"offline_shop_too_far"		: self.offline_shop_too_far,
+				"offline_shop_warp_countdown"	: self.offline_shop_warp_countdown,
+				"offline_shop_warp_cancel"	: self.offline_shop_warp_cancel,
 			})
 
 		if app.AUTO_CHAT_ENABLE:

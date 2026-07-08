@@ -1250,13 +1250,16 @@ ACMD(do_gift_refresh)
 #endif
 
 #ifdef ENABLE_OFFLINE_SHOP_REMOTE
-// "Pazarima Isinlan" butonu (uishop) /warp_my_shop gonderir -> sahibi kendi pazar konumuna isinlar
 ACMD(do_warp_my_shop)
 {
 	if (!ch || !ch->IsPC())
 		return;
 
+#ifdef ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
+	ch->StartWarpToMyShopCountdown();
+#else
 	ch->WarpToMyShop();
+#endif
 }
 #endif
 

@@ -1309,6 +1309,19 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		bool			OpenMyShopRemote();
 		bool			WarpToMyShop();
 #endif
+#ifdef ENABLE_OFFLINE_SHOP_REMOTE_VIEW
+		// 50200 itemi SALT-GORUNTULEME: player_shop_items DB anlik goruntusu SHOP_START olarak gonderilir
+		// (canli CShop/misafir kaydi yok -> kanal/harita fark etmez; client byIsMyShop=2 ile salt-okunur acar)
+		bool			ViewMyShopRemote();
+#endif
+#ifdef ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
+		// "Pazarima Isinlan" v2: 5 sn geri sayimli isinlanma; pazar farkli kanaldaysa kanallar-arasi warp (player_shop DB konumu)
+		bool			StartWarpToMyShopCountdown();
+		void			CancelWarpToMyShop();		// savas vb. nedeniyle bekleyen isinlanmayi iptal et (char_battle Damage kancasi)
+		bool			IsWarpingToMyShop() const	{ return m_pkWarpMyShopEvent ? true : false; }
+
+		LPEVENT			m_pkWarpMyShopEvent;		// bekleyen geri sayim eventi (move-channel kalibi: EVENTFUNC dogrudan erisir)
+#endif
 #endif
 
 #ifdef GIFT_SYSTEM

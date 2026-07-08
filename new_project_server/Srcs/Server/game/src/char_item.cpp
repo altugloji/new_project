@@ -3191,7 +3191,9 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 									break;
 								if (pkMsgShop->Get()->uiNumRows > 0)
 								{
-#ifdef ENABLE_OFFLINE_SHOP_REMOTE
+#ifdef ENABLE_OFFLINE_SHOP_REMOTE_VIEW
+									ViewMyShopRemote();
+#elif defined(ENABLE_OFFLINE_SHOP_REMOTE)
 									OpenMyShopRemote();
 #else
 									ChatPacket(CHAT_TYPE_INFO, LC_TEXT("OFFLINE_SHOP_ACTIVE"));

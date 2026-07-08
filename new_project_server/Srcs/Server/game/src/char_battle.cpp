@@ -1666,6 +1666,21 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 	}
 #endif
 
+#ifdef ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
+	{
+		bool bDirectDamageShopWarp = (type != DAMAGE_TYPE_POISON && type != DAMAGE_TYPE_FIRE && type != DAMAGE_TYPE_SPECIAL);
+#ifdef ENABLE_WOLFMAN_CHARACTER
+		if (type == DAMAGE_TYPE_BLEEDING)
+			bDirectDamageShopWarp = false;
+#endif
+		if (bDirectDamageShopWarp && pAttacker && pAttacker != this && pAttacker->IsPC() && pAttacker->IsWarpingToMyShop())
+			pAttacker->CancelWarpToMyShop();
+
+		if (IsPC() && IsWarpingToMyShop() && pAttacker && pAttacker != this)
+			CancelWarpToMyShop();
+	}
+#endif
+
 	if (GetRaceNum() == 5001)
 	{
 		bool bDropMoney = false;
@@ -2302,7 +2317,7 @@ static bool ApplyLevelMapExpLimit(LPCHARACTER to, int& iExp)
 	if ((lMapIndex == 3 || lMapIndex == 23 || lMapIndex == 43) && iLevel >= 33 && iLevel <= 40)
 		iExp /= 2;
 
-	if (iLevel >= 50 && iLevel <= 75)
+	if (iLevel >= 50 && iLevel < 75)
 	{
 		if (lMapIndex != 71 && lMapIndex != 104)
 			iExp /= 10;

@@ -35,6 +35,7 @@ class ShopDialog(ui.ScriptWindow):
 			self.btnTeleport = None
 			self.ownerButtonBoard = None
 			self.editMode = False
+			self.remoteView = False		# uzaktan SALT-GORUNTULEME (server byIsMyShop=2 gonderir)
 			self.shopVID = 0
 			self.editAdded = {}			# display_pos -> {invType, invPos, vnum, count, price}
 			self.editRemoved = []		# display_pos listesi (orijinal item'lar)
@@ -78,6 +79,10 @@ class ShopDialog(ui.ScriptWindow):
 		searched = getattr(constInfo, "OFFLINESHOP_LAST_SEARCHED_ITEMS", None)
 		wearable = getattr(constInfo, "OFFLINESHOP_LAST_SEARCH_WEARABLE", None)
 		isAttr   = getattr(constInfo, "OFFLINESHOP_LAST_SEARCH_IS_ATTR", False)
+		if getattr(self, "remoteView", False):
+			# Salt-goruntuleme: eski Pazar Arama sonucunun yesil isaretini kendi pazarina sizdirma
+			searched = None
+			wearable = None
 		for i in xrange(shop.SHOP_SLOT_COUNT):
 			idx = self.__GetRealIndex(i)
 			vnum = shop.GetItemID(idx)
@@ -273,7 +278,13 @@ class ShopDialog(ui.ScriptWindow):
 
 		import chr
 		isOfflineShop = False
-		if app.ENABLE_OFFLINE_SHOP and chr.IsOfflineShop(vid):
+		# isMyShop == 2: uzaktan SALT-GORUNTULEME (server DB anlik goruntusu gonderdi; vid=0,
+		# tezgah bu kanalda/haritada olmayabilir -> chr.* VID siniflandirmasina guvenilmez)
+		remoteView = app.ENABLE_OFFLINE_SHOP and isMyShop == 2
+		if remoteView:
+			isPrivateShop = True
+			isOfflineShop = True
+		elif app.ENABLE_OFFLINE_SHOP and chr.IsOfflineShop(vid):
 			isPrivateShop = True
 			isOfflineShop = True
 		elif chr.IsNPC(vid):
@@ -286,6 +297,7 @@ class ShopDialog(ui.ScriptWindow):
 			self.shopVID = vid
 			self.editMode = False
 			self.remoteEdit = False
+			self.remoteView = remoteView
 			self.editAdded = {}
 			self.editRemoved = []
 			self.editPriceUpdated = {}
@@ -297,8 +309,8 @@ class ShopDialog(ui.ScriptWindow):
 			showEditButton = False
 			if self.btnEdit:
 				self.btnEdit.SetText("Dukkani Duzenle")
-				# Sadece kendi offline dukkanini duzenleyebilir
-				if isMyShop and isOfflineShop:
+				# Sadece kendi offline dukkanini duzenleyebilir (uzaktan goruntulemede duzenleme YOK -> isMyShop==1 sart)
+				if isMyShop == 1 and isOfflineShop:
 					self.btnEdit.Show()
 					showEditButton = True
 				else:
@@ -314,15 +326,36 @@ class ShopDialog(ui.ScriptWindow):
 					self.ownerButtonBoard.Show()
 				else:
 					self.ownerButtonBoard.Hide()
+				# Uzaktan goruntulemede Duzenle gizli -> panel 31px kisalir, butonlar yukari kayar
+				if remoteView:
+					self.ownerButtonBoard.SetSize(184, 73)
+				else:
+					self.ownerButtonBoard.SetSize(184, 104)
 			if self.btnTeleport:
-				if showEditButton:
+				# Isinlan: tezgah basindaki sahipte VE uzaktan goruntulemede (server 5 sn geri sayimla
+				# pazar hangi kanal/haritadaysa oraya isinlar)
+				if showEditButton or remoteView:
 					self.btnTeleport.Show()
 				else:
 					self.btnTeleport.Hide()
+				if remoteView:
+					self.btnTeleport.SetPosition(0, 10)
+				else:
+					self.btnTeleport.SetPosition(0, 41)
+			if self.btnClose and self.ownerButtonBoard:
+				if remoteView:
+					self.btnClose.SetPosition(0, 41)
+				else:
+					self.btnClose.SetPosition(0, 72)
 
 		SHOP_DIALOG_BOARD_HEIGHT = 328		# ana board (item alani) - her zaman sabit
 		SHOP_DIALOG_OWNER_WIN    = 436		# sahip: ana board + ALTINDAKI ayri buton paneli icin pencere yuksekligi
-		winH = SHOP_DIALOG_OWNER_WIN if isOwnerView else SHOP_DIALOG_BOARD_HEIGHT
+		if remoteView:
+			winH = SHOP_DIALOG_OWNER_WIN - 31	# Duzenle butonu yok, panel kisaldi
+		elif isOwnerView:
+			winH = SHOP_DIALOG_OWNER_WIN
+		else:
+			winH = SHOP_DIALOG_BOARD_HEIGHT
 		self.SetSize(184, winH)
 		if self.board:
 			self.board.SetSize(184, SHOP_DIALOG_BOARD_HEIGHT)		# ana board 328'de kalir; OwnerButtonBoard onun ALTINDA ayri panel
@@ -400,6 +433,8 @@ class ShopDialog(ui.ScriptWindow):
 		net.SendShopEndPacket()
 		self.CancelShopping()
 		self.tooltipItem.HideToolTip()
+		if app.ENABLE_OFFLINE_SHOP:
+			self.remoteView = False
 		self.Hide()
 
 	def GetIndexFromSlotPos(self, slotPos):
@@ -412,6 +447,10 @@ class ShopDialog(ui.ScriptWindow):
 	def AskClosePrivateShop(self):
 		if app.ENABLE_OFFLINE_SHOP and self.editMode:
 			# Duzenleme modunda "Kapat" = pazari AKTIF ET + kapat (Close() uygular; limit asiliyorsa acik kalir)
+			self.Close()
+			return True
+		if app.ENABLE_OFFLINE_SHOP and getattr(self, "remoteView", False):
+			# Salt-goruntuleme: "Kapat" SADECE pencereyi kapatir (pazari kapatma sorusu sorulmaz)
 			self.Close()
 			return True
 		questionDialog = uiCommon.QuestionDialog()
@@ -554,7 +593,8 @@ class ShopDialog(ui.ScriptWindow):
 				shop.OfflineShopEnter()		# paket ile giris (sunucu dogrular)
 
 		def __OnClickTeleportButton(self):
-			# Once pazar penceresini kapat (server shop/edit state'ini temizler), sonra pazar konumuna isinlan
+			# Pencereyi kapat; server 5 sn geri sayim baslatir ("offline_shop_warp_countdown" komutu
+			# popup'i acar), sure dolunca pazar hangi kanal/haritadaysa oraya isinlanir.
 			self.Close()
 			net.SendChatPacket("/warp_my_shop")
 
@@ -849,6 +889,11 @@ class ShopDialog(ui.ScriptWindow):
 		if app.ENABLE_OFFLINE_SHOP and self.editMode:
 			self.__EditAddItem(selectedSlotPos)
 			return
+		if app.ENABLE_OFFLINE_SHOP and getattr(self, "remoteView", False):
+			# salt-goruntuleme: item ekleme/satma yok; surukleme varsa cursor'dan birak
+			if mouseModule.mouseController.isAttached():
+				mouseModule.mouseController.DeattachObject()
+			return
 		isAttached = mouseModule.mouseController.isAttached()
 		if isAttached:
 			self.SellAttachedItem()
@@ -857,6 +902,8 @@ class ShopDialog(ui.ScriptWindow):
 		if app.ENABLE_OFFLINE_SHOP and self.editMode:
 			self.__EditRemoveItem(selectedSlotPos)
 			return
+		if app.ENABLE_OFFLINE_SHOP and getattr(self, "remoteView", False):
+			return	# salt-goruntuleme: satin alma yok
 		if constInfo.GET_ITEM_QUESTION_DIALOG_STATUS() == 1:
 			return
 		if shop.IsPrivateShop():
@@ -871,6 +918,11 @@ class ShopDialog(ui.ScriptWindow):
 				self.__EditAddItem(selectedSlotPos)
 			else:
 				self.__EditPriceItem(selectedSlotPos)
+			return
+		if app.ENABLE_OFFLINE_SHOP and getattr(self, "remoteView", False):
+			# salt-goruntuleme: item alma/satma yok; surukleme varsa cursor'dan birak
+			if mouseModule.mouseController.isAttached():
+				mouseModule.mouseController.DeattachObject()
 			return
 		if constInfo.GET_ITEM_QUESTION_DIALOG_STATUS() == 1:
 			return
@@ -909,6 +961,9 @@ class ShopDialog(ui.ScriptWindow):
 
 	def AskBuyItem(self, slotPos):
 		slotPos = self.__GetRealIndex(slotPos)
+
+		if app.ENABLE_OFFLINE_SHOP and getattr(self, "remoteView", False):
+			return	# salt-goruntuleme backstop: satin alma diyalogu acilmaz
 
 		if app.ENABLE_OFFLINE_SHOP and shop.IsItemSold(slotPos):
 			chat.AppendChat(chat.CHAT_TYPE_INFO, "Bu esya satilmis.")
@@ -983,8 +1038,8 @@ class ShopDialog(ui.ScriptWindow):
 			self.tooltipItem.HideToolTip()
 
 	def OnUpdate(self):
-		# 50200 "Pazarimi Gor" ile uzaktan duzenlemede mesafe sinirlamasi yok
-		if app.ENABLE_OFFLINE_SHOP and getattr(self, "remoteEdit", False):
+		# 50200 "Pazarimi Gor" ile uzaktan duzenleme/goruntulemede mesafe sinirlamasi yok
+		if app.ENABLE_OFFLINE_SHOP and (getattr(self, "remoteEdit", False) or getattr(self, "remoteView", False)):
 			return
 
 		USE_SHOP_LIMIT_RANGE = 1000
@@ -1066,3 +1121,65 @@ class MallPageDialog(ui.ScriptWindow):
 		itemBuyQuestionDialog.Open()
 		itemBuyQuestionDialog.pos = slotPos
 		self.itemBuyQuestionDialog = itemBuyQuestionDialog
+
+
+if app.ENABLE_OFFLINE_SHOP:
+	class ShopWarpCountdownDialog(ui.ScriptWindow):
+		# "Pazarima Isinlan" geri sayim penceresi. Server "offline_shop_warp_countdown <sn>" komutu
+		# ile acilir; SADECE gosterge - isinlanmayi server yapar (warp gelince phase degisimi pencereyi
+		# zaten yikar). Iptalde server "offline_shop_warp_cancel" gonderir -> Close().
+		def __init__(self):
+			ui.ScriptWindow.__init__(self, "TOP_MOST")
+			self.endTime = 0
+			self.__CreateDialog()
+
+		def __del__(self):
+			ui.ScriptWindow.__del__(self)
+
+		def __CreateDialog(self):
+			self.SetSize(230, 80)
+
+			self.board = ui.Board()
+			self.board.SetParent(self)
+			self.board.SetSize(230, 80)
+			self.board.Show()
+
+			self.messageLine = ui.TextLine()
+			self.messageLine.SetParent(self.board)
+			self.messageLine.SetWindowHorizontalAlignCenter()
+			self.messageLine.SetHorizontalAlignCenter()
+			self.messageLine.SetPosition(0, 20)
+			self.messageLine.SetText("Pazarina isinlaniyorsun...")
+			self.messageLine.Show()
+
+			self.timeLine = ui.TextLine()
+			self.timeLine.SetParent(self.board)
+			self.timeLine.SetWindowHorizontalAlignCenter()
+			self.timeLine.SetHorizontalAlignCenter()
+			self.timeLine.SetPosition(0, 44)
+			self.timeLine.SetFontColor(1.0, 0.78, 0.09)
+			self.timeLine.SetText("")
+			self.timeLine.Show()
+
+		@ui.WindowDestroy
+		def Destroy(self):
+			self.Hide()
+			self.ClearDictionary()
+
+		def Open(self, sec):
+			self.endTime = app.GetTime() + sec
+			self.timeLine.SetText("%d" % sec)
+			self.SetCenterPosition()
+			self.SetTop()
+			self.Show()
+
+		def Close(self):
+			self.Hide()
+
+		def OnUpdate(self):
+			left = self.endTime - app.GetTime()
+			if left <= 0:
+				# Sure doldu; isinlanmayi server yapar, popup isini bitirdi
+				self.Hide()
+				return
+			self.timeLine.SetText("%d" % (int(left) + 1))

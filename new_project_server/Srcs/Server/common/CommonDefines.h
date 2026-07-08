@@ -171,7 +171,7 @@ enum eCommonDefines {
 	#define WHISPER_LEVEL_LIMIT 10									// PM gonderebilmek icin gereken minimum seviye
 #endif
 // #define ENABLE_GIFT_SEND_SYSTEM										// Hediye gonderme sistemi (oyuncudan oyuncuya kozmetik hediye, EP -> hediye puani; item verilmez). NOT: mevcut GIFT_SYSTEM'den ayridir.
-
+#define ENABLE_HORSE_MONSTER_DAMAGE_BONUS								// At seviyesine gore canavara ek guc: seviye 11-21 arasi her seviye +%1 (21'de +%10)
 
 
 #define OFFLINE_SHOP												// Offline shops system
