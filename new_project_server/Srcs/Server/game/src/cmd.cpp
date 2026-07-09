@@ -336,6 +336,10 @@ ACMD(do_gm_only_login);
 #ifdef ENABLE_BOT_CONTROL_SOFT_MODE
 ACMD(do_bot_control_enforce);
 #endif
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+ACMD(do_clientless_trap);
+ACMD(do_clientless_trap_enforce);
+#endif
 
 struct command_info cmd_info[] =
 {
@@ -711,6 +715,11 @@ struct command_info cmd_info[] =
 #ifdef ENABLE_BOT_CONTROL_SOFT_MODE
 	{ "bot_control_enforce",	do_bot_control_enforce,	0,			POS_DEAD,	GM_IMPLEMENTOR	},
 #endif
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+	{ "clientless_trap",		do_clientless_trap,		0,			POS_DEAD,	GM_IMPLEMENTOR	},
+	{ "clientless_trap_enforce",	do_clientless_trap_enforce,	0,			POS_DEAD,	GM_IMPLEMENTOR	},
+#endif
+
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}
 };

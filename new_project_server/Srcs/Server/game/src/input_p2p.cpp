@@ -652,6 +652,16 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 		break;
 #endif
 
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+		case HEADER_GG_CLIENTLESS_TRAP:
+		{
+			const TPacketGGClientlessTrap* pTrap = (const TPacketGGClientlessTrap*)c_pData;
+			g_bClientlessTrap = (pTrap->byEnable != 0);
+			sys_log(0, "CLIENTLESS_TRAP: P2P sistem guncellendi: %d", g_bClientlessTrap ? 1 : 0);
+		}
+		break;
+#endif
+
 #ifdef ENABLE_RELOAD_ETC_DROP_ITEM
 		case HEADER_GG_RELOAD_ETC_DROP:
 			ITEM_MANAGER::instance().ReloadEtcDropItemFile();

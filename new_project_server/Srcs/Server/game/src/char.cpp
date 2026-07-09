@@ -9774,7 +9774,7 @@ void CHARACTER::LoadExchangeLog()
 	m_mapExchangeLog.clear();
 
 	char szQuery[524];
-	snprintf(szQuery, sizeof(szQuery), "SELECT id, owner, owner_pid, owner_gold, owner_ip, target, target_pid, target_gold, target_ip, UNIX_TIMESTAMP(date) FROM log.exchange_log WHERE (owner_pid = %d AND owner_delete = 0) OR (target_pid = %d AND target_delete = 0)", GetPlayerID(), GetPlayerID());
+	snprintf(szQuery, sizeof(szQuery), "SELECT id, owner, owner_pid, owner_gold, owner_ip, target, target_pid, target_gold, target_ip, UNIX_TIMESTAMP(date) FROM log.exchange_log WHERE (owner_pid = %d AND owner_delete = 0) OR (target_pid = %d AND target_delete = 0) ORDER BY date DESC LIMIT 20", GetPlayerID(), GetPlayerID());
 	std::unique_ptr<SQLMsg> pMsg(DBManager::instance().DirectQuery(szQuery));
 
 	if (pMsg && pMsg->Get()->uiNumRows != 0)

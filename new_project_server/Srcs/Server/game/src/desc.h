@@ -181,6 +181,10 @@ class DESC
 
 		bool			isChannelStatusRequested() const { return m_bChannelStatusRequested; }
 		void			SetChannelStatusRequested(bool bChannelStatusRequested) { m_bChannelStatusRequested = bChannelStatusRequested; }
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+		bool			IsClientlessTrap() const { return m_bClientlessTrap; }
+		void			SetClientlessTrap(bool b) { m_bClientlessTrap = b; }
+#endif
 
 	protected:
 		void			Initialize();
@@ -259,6 +263,9 @@ class DESC
 
 		bool			m_bDestroyed;
 		bool			m_bChannelStatusRequested;
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+		bool			m_bClientlessTrap;
+#endif
 
 
 	public:

@@ -94,6 +94,11 @@ std::array<BYTE, GM_ONLY_LOGIN_MAX_NUM> g_arrGMOnlyLogin{};
 #ifdef ENABLE_BOT_CONTROL_SOFT_MODE
 bool g_bBotControlEnforce = false;	// gozlem modu varsayilani: bloklar/DC kapali; /bot_control_enforce veya CONFIG ile acilir
 #endif
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+bool g_bClientlessTrap        = true;	// ana anahtar: ACIK=tuzak calisir; /clientless_trap ile kapanir (orijinal handshake'e doner)
+bool g_bClientlessTrapEnforce = false;	// false=gozlem(sadece logla), true=account BLOCK; CONFIG: clientless_trap_enforce
+#endif
+
 
 string g_stHostname = "";
 string g_table_postfix = "";
@@ -384,6 +389,25 @@ static bool __LoadConnectConfigFile(const char* configName)
 			str_to_number(iEnforce, value_string);
 			g_bBotControlEnforce = (iEnforce != 0);
 			fprintf(stdout, "BOT_CONTROL_ENFORCE: %d\n", iEnforce ? 1 : 0);
+			continue;
+		}
+#endif
+
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+		TOKEN("clientless_trap")
+		{
+			int iCT = 0;
+			str_to_number(iCT, value_string);
+			g_bClientlessTrap = (iCT != 0);
+			fprintf(stdout, "CLIENTLESS_TRAP: %d\n", iCT ? 1 : 0);
+			continue;
+		}
+		TOKEN("clientless_trap_enforce")
+		{
+			int iCTE = 0;
+			str_to_number(iCTE, value_string);
+			g_bClientlessTrapEnforce = (iCTE != 0);
+			fprintf(stdout, "CLIENTLESS_TRAP_ENFORCE: %d\n", iCTE ? 1 : 0);
 			continue;
 		}
 #endif

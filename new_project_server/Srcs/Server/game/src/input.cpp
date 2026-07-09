@@ -560,8 +560,35 @@ int CInputHandshake::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 	}
 	else if (bHeader == HEADER_CG_PONG)
 		Pong(d);
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+	else if (bHeader == HEADER_CG_HANDSHAKE_REAL)	// gercek client (rebuild) bu header'i gonderir
+		Handshake(d, c_pData);
+	else if (bHeader == HEADER_CG_HANDSHAKE)		// eski header = clientless bot tuzagi
+	{
+		if (g_bClientlessTrap && !d->IsClientlessTrap())
+		{
+			d->SetClientlessTrap(true);
+			sys_err("CLIENTLESS_TRAP: eski handshake(0x%02x) IP=%s port=%u fd=%d flagged enforce=%d",
+					HEADER_CG_HANDSHAKE, d->GetHostName(), d->GetPort(), d->GetSocket(),
+					g_bClientlessTrapEnforce ? 1 : 0);
+			FILE* fpTrap = fopen("clientless_trap.log", "a");
+			if (fpTrap)
+			{
+				time_t nowTrap = time(0);
+				char szTrapTime[64];
+				strftime(szTrapTime, sizeof(szTrapTime), "%Y-%m-%d %H:%M:%S", localtime(&nowTrap));
+				fprintf(fpTrap, "[%s] FLAG ip=%s port=%u fd=%d header=0x%02x\n",
+						szTrapTime, d->GetHostName(), d->GetPort(), d->GetSocket(), HEADER_CG_HANDSHAKE);
+				fclose(fpTrap);
+			}
+		}
+		// ACIK ise botu sessizce login fazina birak (account orada BLOCK edilir); KAPALI ise orijinal handshake
+		Handshake(d, c_pData);
+	}
+#else
 	else if (bHeader == HEADER_CG_HANDSHAKE)
 		Handshake(d, c_pData);
+#endif
 	else
 		sys_err("Handshake phase does not handle packet %d (fd %d) from %s:%u", bHeader, d->GetSocket(), d->GetHostName(), d->GetPort()); //@warme016 host and port
 

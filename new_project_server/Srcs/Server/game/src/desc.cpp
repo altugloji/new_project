@@ -58,6 +58,10 @@ void DESC::Initialize()
 	m_dwClientTime = 0;
 	m_bHandshaking = false;
 
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+	m_bClientlessTrap = false;
+#endif
+
 	m_lpBufferedOutputBuffer = nullptr;
 	m_lpOutputBuffer = nullptr;
 

@@ -102,6 +102,9 @@ CPacketInfoCG::CPacketInfoCG()
 {
 	Set(HEADER_CG_TEXT, sizeof(TPacketCGText), "Text", false);
 	Set(HEADER_CG_HANDSHAKE, sizeof(TPacketCGHandshake), "Handshake", false);
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+	Set(HEADER_CG_HANDSHAKE_REAL, sizeof(TPacketCGHandshake), "HandshakeReal", false);
+#endif
 	Set(HEADER_CG_TIME_SYNC, sizeof(TPacketCGHandshake), "TimeSync", true);
 	Set(HEADER_CG_MARK_LOGIN, sizeof(TPacketCGMarkLogin), "MarkLogin", false);
 	Set(HEADER_CG_MARK_IDXLIST, sizeof(TPacketCGMarkIDXList), "MarkIdxList", false);
@@ -296,6 +299,9 @@ CPacketInfoGG::CPacketInfoGG()
 
 #ifdef ENABLE_BOT_CONTROL_SOFT_MODE
 	Set(HEADER_GG_BOT_CONTROL_ENFORCE,	sizeof(TPacketGGBotControlEnforce),	"BotControlEnforce",	false);
+#endif
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+	Set(HEADER_GG_CLIENTLESS_TRAP,	sizeof(TPacketGGClientlessTrap),	"GGClientlessTrap",	false);
 #endif
 
 #ifdef ENABLE_RELOAD_ETC_DROP_ITEM

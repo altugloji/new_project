@@ -433,6 +433,7 @@ void CHARACTER::SetItem(TItemPos Cell, LPITEM pItem
 		if (pItem)
 		{
 			TPacketGCItemSet pack;
+			memset(&pack, 0, sizeof(pack));
 			pack.header = HEADER_GC_ITEM_SET;
 			pack.Cell = Cell;
 

@@ -136,7 +136,7 @@ void CPythonNetworkStream::LoadingPhase()
 			break;
 
 		case HEADER_GC_ITEM_SET:
-			if (RecvItemSetPacket())
+			if (RecvItemSetPacket2())
 				return;
 			break;
 

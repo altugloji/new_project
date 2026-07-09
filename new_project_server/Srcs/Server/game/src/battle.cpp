@@ -356,7 +356,7 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 		iAtk += (iAtk * pkAttacker->GetPoint(POINT_ATTBONUS_MONSTER)) / 100;
 
 #ifdef ENABLE_HORSE_MONSTER_DAMAGE_BONUS
-		if (pkAttacker->IsPC() && pkAttacker->IsHorseRiding())
+		if (pkAttacker->IsPC() && pkAttacker->IsRiding())
 		{
 			int iHorseMonsterBonus = (int) pkAttacker->GetHorseLevel() - 11;
 			if (iHorseMonsterBonus > 10)

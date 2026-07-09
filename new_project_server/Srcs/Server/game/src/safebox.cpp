@@ -65,6 +65,7 @@ bool CSafebox::Add(DWORD dwPos, LPITEM pkItem)
 	m_pkItems[dwPos] = pkItem;
 
 	TPacketGCItemSet pack;
+	memset(&pack, 0, sizeof(pack));
 
 	pack.header	= m_bWindowMode == SAFEBOX ? HEADER_GC_SAFEBOX_SET : HEADER_GC_MALL_SET;
 	pack.Cell	= TItemPos(m_bWindowMode, dwPos);

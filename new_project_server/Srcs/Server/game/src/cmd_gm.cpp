@@ -132,6 +132,62 @@ ACMD(do_gm_only_login)
 }
 #endif
 
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+ACMD(do_clientless_trap)
+{
+	if (!ch || !ch->IsPC())
+		return;
+
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (*arg1)
+	{
+		int iOnOff = 0;
+		str_to_number(iOnOff, arg1);
+		g_bClientlessTrap = (iOnOff != 0);
+	}
+	else
+		g_bClientlessTrap = !g_bClientlessTrap;
+
+	TPacketGGClientlessTrap ggPacket{};
+	ggPacket.byHeader = HEADER_GG_CLIENTLESS_TRAP;
+	ggPacket.byEnable = g_bClientlessTrap ? 1 : 0;
+	ggPacket.byEnforce = g_bClientlessTrapEnforce ? 1 : 0;
+	P2P_MANAGER::instance().Send(&ggPacket, sizeof(TPacketGGClientlessTrap));
+
+	ch->ChatPacket(CHAT_TYPE_INFO, "[CLIENTLESS-TRAP] Sistem: %s",
+			g_bClientlessTrap ? "ACIK (tuzak aktif)" : "KAPALI (orijinal handshake devam)");
+}
+
+ACMD(do_clientless_trap_enforce)
+{
+	if (!ch || !ch->IsPC())
+		return;
+
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (*arg1)
+	{
+		int iOnOff = 0;
+		str_to_number(iOnOff, arg1);
+		g_bClientlessTrapEnforce = (iOnOff != 0);
+	}
+	else
+		g_bClientlessTrapEnforce = !g_bClientlessTrapEnforce;
+
+	TPacketGGClientlessTrap ggPacket{};
+	ggPacket.byHeader = HEADER_GG_CLIENTLESS_TRAP;
+	ggPacket.byEnable = g_bClientlessTrap ? 1 : 0;
+	ggPacket.byEnforce = g_bClientlessTrapEnforce ? 1 : 0;
+	P2P_MANAGER::instance().Send(&ggPacket, sizeof(TPacketGGClientlessTrap));
+
+	ch->ChatPacket(CHAT_TYPE_INFO, "[CLIENTLESS-TRAP] Enforce: %s",
+			g_bClientlessTrapEnforce ? "ACIK (account BLOCK aktif)" : "KAPALI (sadece gozlem/log)");
+}
+#endif
+
 #ifdef ENABLE_BOT_CONTROL_SOFT_MODE
 ACMD(do_bot_control_enforce)
 {

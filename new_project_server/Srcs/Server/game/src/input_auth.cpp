@@ -101,6 +101,27 @@ void CInputAuth::Login(LPDESC d, const char * c_pData) const
 		return;
 	}
 
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+	if (d->IsClientlessTrap() && g_bClientlessTrapEnforce)
+	{
+		char szTrapLogin[LOGIN_MAX_LEN * 2 + 1];
+		DBManager::instance().EscapeString(szTrapLogin, sizeof(szTrapLogin), login, strlen(login));
+		DBManager::instance().DirectQuery("UPDATE account.account SET status = 'BLOCK' WHERE login = '%s'", szTrapLogin);
+		sys_err("CLIENTLESS_TRAP: account BLOCK login=%s ip=%s", login, d->GetHostName());
+		FILE* fpTrap = fopen("clientless_trap.log", "a");
+		if (fpTrap)
+		{
+			time_t nowTrap = time(0); char szTrapTime[64];
+			strftime(szTrapTime, sizeof(szTrapTime), "%Y-%m-%d %H:%M:%S", localtime(&nowTrap));
+			fprintf(fpTrap, "[%s] BLOCK account=%s ip=%s\n", szTrapTime, login, d->GetHostName());
+			fclose(fpTrap);
+		}
+		LoginFailure(d, "BLOCK");
+		d->DelayedDisconnect(3);
+		return;
+	}
+#endif
+
 	if (g_bNoMoreClient)
 	{
 		TPacketGCLoginFailure failurePacket;

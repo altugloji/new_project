@@ -86,6 +86,11 @@ inline bool BotControlEnforced() { return true; }
 #endif
 #endif
 
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+extern bool g_bClientlessTrap;
+extern bool g_bClientlessTrapEnforce;
+#endif
+
 extern bool	map_allow_find(int index);
 extern void	map_allow_copy(long * pl, int size);
 extern bool	no_wander;

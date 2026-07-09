@@ -179,7 +179,8 @@ enum
 	HEADER_CG_TIME_SYNC							= 0xfc,
 	HEADER_CG_CLIENT_VERSION2					= 0xf1,
 	HEADER_CG_PONG								= 0xfe,
-    HEADER_CG_HANDSHAKE                         = 0xff,
+	HEADER_CG_HANDSHAKE							= 0xff,
+	HEADER_CG_HANDSHAKE_REAL					= 0xa0, // clientless tuzak: gercek handshake cevabi
 
 	/////////////////////////////////////////////////
 	// From Server

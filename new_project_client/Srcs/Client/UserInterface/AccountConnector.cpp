@@ -229,6 +229,7 @@ bool CAccountConnector::__AuthState_RecvHandshake()
 
 		Tracenf("HANDSHAKE SEND %u", kPacketHandshake.dwTime);
 
+			kPacketHandshake.header = HEADER_CG_HANDSHAKE_REAL; // auth server handshake yeni CG header
 		if (!Send(sizeof(kPacketHandshake), &kPacketHandshake))
 		{
 			Tracen(" CAccountConnector::__AuthState_RecvHandshake - SendHandshake Error");

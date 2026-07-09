@@ -9,6 +9,9 @@
 enum
 {
 	HEADER_CG_HANDSHAKE				= 0xff,
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+	HEADER_CG_HANDSHAKE_REAL		= 0xa0,	// clientless tuzak: gercek client bu yeni CG header'i gonderir
+#endif
 	HEADER_CG_PONG					= 0xfe,
 	HEADER_CG_TIME_SYNC				= 0xfc,
 
@@ -414,6 +417,9 @@ enum
 #endif
 #ifdef ENABLE_GIFT_SEND_SYSTEM
 	HEADER_GG_GIFT_NOTIFY						= 40,
+#endif
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+	HEADER_GG_CLIENTLESS_TRAP					= 41,
 #endif
 
 };
@@ -2894,6 +2900,15 @@ typedef struct SPacketGGBotControlEnforce
 	BYTE	byHeader;
 	BYTE	byEnforce;
 } TPacketGGBotControlEnforce;
+#endif
+
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+typedef struct SPacketGGClientlessTrap
+{
+	BYTE	byHeader;
+	BYTE	byEnable;
+	BYTE	byEnforce;
+} TPacketGGClientlessTrap;
 #endif
 
 #ifdef ENABLE_BOT_CONTROL

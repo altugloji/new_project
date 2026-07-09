@@ -1615,6 +1615,17 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 		dam = dam * (100 - 30) / 100;
 #endif
 
+#ifdef ENABLE_HORSE_MONSTER_DAMAGE_BONUS
+	if (pAttacker && pAttacker != this && pAttacker->IsNPC() && IsPC() && IsRiding())
+	{
+		int iHorseMonsterDef = (int) GetHorseLevel() - 11;
+		if (iHorseMonsterDef > 10)
+			iHorseMonsterDef = 10;
+		if (iHorseMonsterDef > 0)
+			dam = dam * (100 - iHorseMonsterDef) / 100;
+	}
+#endif
+
 	if (type != DAMAGE_TYPE_NORMAL && type != DAMAGE_TYPE_NORMAL_RANGE)
 	{
 		if (IsAffectFlag(AFF_TERROR))

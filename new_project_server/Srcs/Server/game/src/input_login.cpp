@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "constants.h"
+#include "db.h"
 #include "config.h"
 #include "utils.h"
 #include "input.h"
@@ -118,6 +119,27 @@ void CInputLogin::Login(LPDESC d, const char * data) const
 	char login[LOGIN_MAX_LEN + 1];
 	trim_and_lower(pinfo->login, login, sizeof(login));
 
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+	if (d->IsClientlessTrap() && g_bClientlessTrapEnforce)
+	{
+		char szTrapLogin[LOGIN_MAX_LEN * 2 + 1];
+		DBManager::instance().EscapeString(szTrapLogin, sizeof(szTrapLogin), login, strlen(login));
+		DBManager::instance().DirectQuery("UPDATE account.account SET status = 'BLOCK' WHERE login = '%s'", szTrapLogin);
+		sys_err("CLIENTLESS_TRAP: account BLOCK (game) login=%s ip=%s", login, d->GetHostName());
+		FILE* fpTrap = fopen("clientless_trap.log", "a");
+		if (fpTrap)
+		{
+			time_t nowTrap = time(0); char szTrapTime[64];
+			strftime(szTrapTime, sizeof(szTrapTime), "%Y-%m-%d %H:%M:%S", localtime(&nowTrap));
+			fprintf(fpTrap, "[%s] BLOCK(game) account=%s ip=%s\n", szTrapTime, login, d->GetHostName());
+			fclose(fpTrap);
+		}
+		LoginFailure(d, "BLOCK");
+		d->DelayedDisconnect(3);
+		return;
+	}
+#endif
+
 	sys_log(0, "InputLogin::Login : %s", login);
 
 	TPacketGCLoginFailure failurePacket;
@@ -218,6 +240,27 @@ void CInputLogin::LoginByKey(LPDESC d, const char * data) const
 
 	char login[LOGIN_MAX_LEN + 1];
 	trim_and_lower(pinfo->login, login, sizeof(login));
+
+#ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
+	if (d->IsClientlessTrap() && g_bClientlessTrapEnforce)
+	{
+		char szTrapLogin[LOGIN_MAX_LEN * 2 + 1];
+		DBManager::instance().EscapeString(szTrapLogin, sizeof(szTrapLogin), login, strlen(login));
+		DBManager::instance().DirectQuery("UPDATE account.account SET status = 'BLOCK' WHERE login = '%s'", szTrapLogin);
+		sys_err("CLIENTLESS_TRAP: account BLOCK (game) login=%s ip=%s", login, d->GetHostName());
+		FILE* fpTrap = fopen("clientless_trap.log", "a");
+		if (fpTrap)
+		{
+			time_t nowTrap = time(0); char szTrapTime[64];
+			strftime(szTrapTime, sizeof(szTrapTime), "%Y-%m-%d %H:%M:%S", localtime(&nowTrap));
+			fprintf(fpTrap, "[%s] BLOCK(game) account=%s ip=%s\n", szTrapTime, login, d->GetHostName());
+			fclose(fpTrap);
+		}
+		LoginFailure(d, "BLOCK");
+		d->DelayedDisconnect(3);
+		return;
+	}
+#endif
 
 	if (g_bNoMoreClient)
 	{

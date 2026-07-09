@@ -40,6 +40,7 @@ void CPythonNetworkStream::HandShakePhase()
 
 				Tracenf("HANDSHAKE SEND %u", m_HandshakeData.dwTime);
 
+					m_HandshakeData.header = HEADER_CG_HANDSHAKE_REAL; // eski 0xff yerine yeni CG header
 				if (!Send(sizeof(TPacketGCHandshake), &m_HandshakeData))
 				{
 					assert(!"Failed Sending Handshake");

@@ -172,6 +172,7 @@ enum eCommonDefines {
 #endif
 // #define ENABLE_GIFT_SEND_SYSTEM										// Hediye gonderme sistemi (oyuncudan oyuncuya kozmetik hediye, EP -> hediye puani; item verilmez). NOT: mevcut GIFT_SYSTEM'den ayridir.
 #define ENABLE_HORSE_MONSTER_DAMAGE_BONUS								// At seviyesine gore canavara ek guc: seviye 11-21 arasi her seviye +%1 (21'de +%10)
+#define ENABLE_CLIENTLESS_HANDSHAKE_TRAP							// Clientless bot honeypot: eski handshake header'i (0xff) tuzak; gercek client 0xa0 gonderir
 
 
 #define OFFLINE_SHOP												// Offline shops system
