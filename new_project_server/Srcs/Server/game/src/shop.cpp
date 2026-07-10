@@ -1366,16 +1366,18 @@ void CShop::ClearItemPointer(LPITEM pkItem)
 }
 
 #ifdef OFFLINE_SHOP
-// ---------------------------------------------------------------------------
-// Pazar Arama (ShopSearch) - esya eslestirme yardimcilari
-// Kaynak (mt2009 ikarus) CShop::HasItem / HasItemType / HasSoulStoneSocket
-// fonksiyonlarinin new_project CShop::m_itemVector modeline uyarlanmis halidir.
-// ---------------------------------------------------------------------------
 bool CShop::HasItem(DWORD itemVnum, int socket0) const
 {
 	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
 	{
 		const SHOP_ITEM & item = m_itemVector[i];
+
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		if (item.sold)
+			continue;
+#endif
+		if (!item.pkItem)
+			continue;
 
 		if (item.vnum != itemVnum)
 			continue;
@@ -1399,6 +1401,12 @@ bool CShop::HasItemType(BYTE type, BYTE subtype, bool checkAttribute) const
 		if (!pkItem)
 			continue;
 
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		// Satilmis hayalet tip/alttip aramasinda da eslesmesin
+		if (m_itemVector[i].sold)
+			continue;
+#endif
+
 		const TItemTable * proto = pkItem->GetProto();
 		if (proto && proto->bType == type && proto->bSubType == subtype)
 		{
@@ -1416,6 +1424,15 @@ bool CShop::HasSoulStoneSocket(BYTE level) const
 {
 	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
 	{
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		// Satilmis hayalet ruh tasi aramasinda eslesmesin
+		if (m_itemVector[i].sold)
+			continue;
+#endif
+
+		// Bayat slot (pkItem=NULL, vnum kalinti) eslesmesin
+		if (!m_itemVector[i].pkItem)
+			continue;
 		const DWORD vnum = m_itemVector[i].vnum;
 		if (vnum >= (DWORD)(28030 + 100 * level) && vnum <= (DWORD)(28043 + 100 * level))
 			return true;

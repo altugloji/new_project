@@ -596,6 +596,9 @@ class ShopDialog(ui.ScriptWindow):
 			# Pencereyi kapat; server 5 sn geri sayim baslatir ("offline_shop_warp_countdown" komutu
 			# popup'i acar), sure dolunca pazar hangi kanal/haritadaysa oraya isinlanir.
 			self.Close()
+			if self.IsShow():
+				# Kapanamadi (ornegin edit modda 2mlr limit asildi) -> komut gonderme
+				return
 			net.SendChatPacket("/warp_my_shop")
 
 		def StartEditMode(self, remote = False):
@@ -1138,10 +1141,12 @@ if app.ENABLE_OFFLINE_SHOP:
 
 		def __CreateDialog(self):
 			self.SetSize(230, 80)
+			self.AddFlag("not_pick")
 
 			self.board = ui.Board()
 			self.board.SetParent(self)
 			self.board.SetSize(230, 80)
+			self.board.AddFlag("not_pick")
 			self.board.Show()
 
 			self.messageLine = ui.TextLine()

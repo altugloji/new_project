@@ -185,6 +185,8 @@ enum eCommonDefines {
 	#define ENABLE_OFFLINE_SHOP_REMOTE								// 50200 itemi ile pazara gitmeden uzaktan yonetim
 	#define ENABLE_OFFLINE_SHOP_SOLD_RED							// Satilan item pazardan silinmesin
 	#define ENABLE_SHOP_SEARCH_ITEM_SELECT						// Pazar Arama: grid'den item secip SADECE secilenleri arama (secim yoksa eski kategori-geneli davranis)
+	#define ENABLE_OFFLINE_SHOP_REMOTE_VIEW
+	#define ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
 #endif
 
 #endif

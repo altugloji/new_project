@@ -3334,7 +3334,7 @@ void CHARACTER::ComputeBattlePoints()
 				}
 			}
 
-		if( true == IsHorseRiding() )
+		if( true == IsRiding() )
 		{
 			if (iArmor < GetHorseArmor())
 				iArmor = GetHorseArmor();
