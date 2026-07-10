@@ -67,6 +67,9 @@ extern bool	g_bDisableEmpireLanguageCheck;
 
 extern BYTE	g_bChannel;
 
+extern bool g_bItemPickupAuthEnabled;
+extern bool g_bItemPickupAutoBlockEnabled;
+
 #ifdef METIN35_ADMIN_PANEL
 extern void ReadAdminPanelData();
 extern std::array<BYTE, ADMIN_PANEL_MAX_NUM> g_arrAdminPanel;

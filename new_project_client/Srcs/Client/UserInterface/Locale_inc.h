@@ -176,7 +176,7 @@
 
 #define METIN35_ADMIN_PANEL												// Yönetim Paneli
 #ifdef METIN35_ADMIN_PANEL
-	#define CUR_CLIENT_VERSION 25										//versiyon key
+	#define CUR_CLIENT_VERSION 30										//versiyon key
 #endif
 
 

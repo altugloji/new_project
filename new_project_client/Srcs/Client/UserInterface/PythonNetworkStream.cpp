@@ -900,6 +900,7 @@ void CPythonNetworkStream::SendEmoticon(UINT eEmoticon)
 CPythonNetworkStream::CPythonNetworkStream()
 {
 	m_rokNetActorMgr=new CNetworkActorManager;
+	m_dwItemPickupSequence = 0;
 
 	memset(m_akSimplePlayerInfo, 0, sizeof(m_akSimplePlayerInfo));
 

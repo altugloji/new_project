@@ -69,6 +69,9 @@ void CPythonNetworkStream::HandShakePhase()
 
 void CPythonNetworkStream::SetHandShakePhase()
 {
+	// Every TCP connection starts a fresh authenticated pickup sequence.
+	m_dwItemPickupSequence = 0;
+
 	if ("HandShake"!=m_strPhase)
 		m_phaseLeaveFunc.Run();
 

@@ -147,6 +147,7 @@ void CInputProcessor::Handshake(LPDESC d, const char * c_pData) const
 		{
 			if (d->HandshakeProcess(p->dwTime, p->lDelta, false))
 			{
+				d->ResetItemPickupSequence();
 				if (g_bAuthServer)
 					d->SetPhase(PHASE_AUTH);
 				else

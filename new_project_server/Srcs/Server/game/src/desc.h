@@ -148,6 +148,10 @@ class DESC
 		bool			IsHandshaking() const;
 
 		DWORD			GetHandshake() const	{ return m_dwHandshake; }
+		DWORD			GetItemPickupSequence() const { return m_dwItemPickupSequence; }
+		void			ResetItemPickupSequence() { m_dwItemPickupSequence = 0; }
+		void			SetItemPickupSequence(DWORD sequence) { m_dwItemPickupSequence = sequence; }
+		void			AdvanceItemPickupSequence() { ++m_dwItemPickupSequence; }
 		DWORD			GetClientTime() const;
 
 
@@ -215,6 +219,7 @@ class DESC
 		int				m_iHandshakeRetry;
 		DWORD			m_dwClientTime;
 		bool			m_bHandshaking;
+		DWORD			m_dwItemPickupSequence{};
 
 		LPBUFFER		m_lpBufferedOutputBuffer;
 		LPBUFFER		m_lpOutputBuffer;

@@ -131,7 +131,8 @@ class CInputMain : public CInputProcessor
 		void		ItemSell(LPCHARACTER ch, const char* data);
 #endif
 		void		ItemMove(LPCHARACTER ch, const char * data) const;
-		void		ItemPickup(LPCHARACTER ch, const char * data) const;
+		void		ItemPickupLegacy(LPCHARACTER ch, const char * data) const;
+		void		ItemPickupAuth(LPCHARACTER ch, const char * data) const;
 		void		ItemToItem(LPCHARACTER ch, const char * pcData) const;
 		void		QuickslotAdd(LPCHARACTER ch, const char * data) const;
 		void		QuickslotDelete(LPCHARACTER ch, const char * data) const;

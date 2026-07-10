@@ -1368,7 +1368,19 @@ namespace quest
 		sys_log(0, "QUEST eventflag %s %d prev_value %d", name.c_str(), value, m_mapEventFlag[name]);
 		m_mapEventFlag[name] = value;
 
-		if (name == "mob_item")
+		if (name == "pickup_auth_enabled")
+		{
+			g_bItemPickupAuthEnabled = (value != 0);
+			sys_log(0, "ITEM_PICKUP_AUTH runtime validation: %s",
+				g_bItemPickupAuthEnabled ? "ENABLED" : "DISABLED (legacy allowed)");
+		}
+		else if (name == "pickup_auth_autoblock")
+		{
+			g_bItemPickupAutoBlockEnabled = (value != 0);
+			sys_log(0, "ITEM_PICKUP_AUTH runtime autoblock: %s",
+				g_bItemPickupAutoBlockEnabled ? "ENABLED" : "DISABLED");
+		}
+		else if (name == "mob_item")
 		{
 			CHARACTER_MANAGER::instance().SetMobItemRate(value);
 		}

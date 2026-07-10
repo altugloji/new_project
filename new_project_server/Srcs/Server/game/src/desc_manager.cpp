@@ -11,6 +11,7 @@
 #include "messenger_manager.h"
 #include "p2p.h"
 #include "ClientPackageCryptInfo.h"
+#include "ban_ip.h"
 #include <msl/msl.h>
 #ifdef ENABLE_BUFFER_SECURITY
 #include <map>
@@ -225,6 +226,21 @@ LPDESC DESC_MANAGER::AcceptDesc(LPFDWATCH fdw, socket_t s)
 
 	++connCount;
 	sys_log(0, "AcceptDesc: IP %s connection count: %d/%d", host, connCount, MAX_CONNECTION_PER_IP);
+#endif
+
+#ifdef ENABLE_IP_BAN
+	// Her baglantida player.ban_ip'e DOGRUDAN bakilir; IP kayitliysa DESC olusturulmadan reddedilir.
+	// Kontrol, accept rate-limit blogundan SONRA yapilir ki flood, DB sorgusundan once accept-cap ile
+	// sinirlansin (sorgu hizi accept hizina baglidir).
+	if (IsIPBanned(host))
+	{
+		sys_log(0, "AcceptDesc: yasakli IP reddedildi: %s", host);
+		socket_close(desc);
+#ifdef ENABLE_BUFFER_SECURITY
+		--s_ipConnectionCount[host];
+#endif
+		return nullptr;
+	}
 #endif
 
 	if (!IsValidIP(admin_ip, host))

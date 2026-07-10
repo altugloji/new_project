@@ -3,6 +3,7 @@
 #include "Locale.h"
 #include "../gamelib/RaceData.h"
 #include "../gamelib/ItemData.h"
+#include <cstddef>
 
 #ifdef GUILD_LARGE_ICON
 	#include "MarkImage.h"
@@ -28,7 +29,8 @@ enum
 	HEADER_CG_ITEM_USE							= 11,
 	HEADER_CG_ITEM_DROP							= 12,
 	HEADER_CG_ITEM_MOVE							= 13,
-	HEADER_CG_ITEM_PICKUP						= 15,
+	HEADER_CG_ITEM_PICKUP_AUTH				= 14,	// authenticated 13-byte format
+	HEADER_CG_ITEM_PICKUP						= 15,	// legacy 5-byte emergency format
 	HEADER_CG_QUICKSLOT_ADD                     = 16,
 	HEADER_CG_QUICKSLOT_DEL                     = 17,
 	HEADER_CG_QUICKSLOT_SWAP                    = 18,
@@ -691,6 +693,20 @@ typedef struct command_item_pickup
 	BYTE header;
 	DWORD vid;
 } TPacketCGItemPickUp;
+
+static_assert(sizeof(TPacketCGItemPickUp) == 5, "TPacketCGItemPickUp legacy wire size changed");
+
+typedef struct command_item_pickup_auth
+{
+	BYTE header;
+	DWORD vid;
+	DWORD sequence;
+	DWORD hash;
+} TPacketCGItemPickUpAuth;
+
+static_assert(sizeof(TPacketCGItemPickUpAuth) == 13, "TPacketCGItemPickUpAuth wire size changed");
+static_assert(offsetof(TPacketCGItemPickUpAuth, sequence) == 5, "TPacketCGItemPickUpAuth sequence offset changed");
+static_assert(offsetof(TPacketCGItemPickUpAuth, hash) == 9, "TPacketCGItemPickUpAuth hash must be the last field");
 
 typedef struct command_quickslot_add
 {

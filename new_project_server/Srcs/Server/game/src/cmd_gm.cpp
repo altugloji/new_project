@@ -2180,6 +2180,14 @@ ACMD(do_event_flag)
 	if (!(*arg1) || !(*arg2))
 		return;
 
+	if ((!strcmp(arg1, "pickup_auth_enabled") || !strcmp(arg1, "pickup_auth_autoblock")) &&
+		(!ch || ch->GetGMLevel() < GM_IMPLEMENTOR))
+	{
+		if (ch)
+			ch->ChatPacket(CHAT_TYPE_INFO, "This security flag requires GM_IMPLEMENTOR.");
+		return;
+	}
+
 	int value = 0;
 	str_to_number(value, arg2);
 

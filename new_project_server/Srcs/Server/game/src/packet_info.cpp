@@ -133,7 +133,8 @@ CPacketInfoCG::CPacketInfoCG()
 	Set(HEADER_CG_ITEM_SELL, sizeof(TPacketCGItemSell), "ItemSell", true);
 #endif
 	Set(HEADER_CG_ITEM_MOVE, sizeof(TPacketCGItemMove), "ItemMove", true);
-	Set(HEADER_CG_ITEM_PICKUP, sizeof(TPacketCGItemPickup), "ItemPickup", true);
+	Set(HEADER_CG_ITEM_PICKUP_AUTH, sizeof(TPacketCGItemPickupAuth), "ItemPickupAuth", true);
+	Set(HEADER_CG_ITEM_PICKUP, sizeof(TPacketCGItemPickup), "ItemPickupLegacy", true);
 
 	Set(HEADER_CG_QUICKSLOT_ADD, sizeof(TPacketCGQuickslotAdd), "QuickslotAdd", true);
 	Set(HEADER_CG_QUICKSLOT_DEL, sizeof(TPacketCGQuickslotDel), "QuickslotDel", true);

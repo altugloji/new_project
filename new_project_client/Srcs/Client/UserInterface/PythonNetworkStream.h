@@ -681,6 +681,7 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 
 	protected:
 		TPacketGCHandshake m_HandshakeData;
+		DWORD m_dwItemPickupSequence;
 		DWORD m_dwChangingPhaseTime;
 		DWORD m_dwBindupRetryCount;
 		DWORD m_dwMainActorVID;

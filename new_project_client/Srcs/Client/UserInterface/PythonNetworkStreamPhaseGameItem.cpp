@@ -1,4 +1,6 @@
 #include "StdAfx.h"
+#include <cstddef>
+#include <cstdint>
 #include "PythonNetworkStream.h"
 #include "PythonItem.h"
 #include "PythonShop.h"
@@ -10,6 +12,75 @@
 #include "PythonCharacterManager.h"
 
 #include "AbstractPlayer.h"
+
+// VMProtect GUI target: ItemPickupHashVmp.
+// Keep this function extern "C" and noinline so it remains a stable, standalone
+// symbol in the Release PDB/MAP. The server implementation must stay identical.
+extern "C" __declspec(noinline) DWORD __cdecl ItemPickupHashVmp(const void* data, size_t size, DWORD sessionNonce)
+{
+	if (!data)
+		return 0;
+
+	const auto* bytes = static_cast<const std::uint8_t*>(data);
+	const std::uint64_t session = (static_cast<std::uint64_t>(sessionNonce) << 32) | sessionNonce;
+
+	// Rotate both constants for every client/server build and protect this
+	// function with VMProtect. The handshake value binds tags to one connection.
+	const std::uint64_t k0 = 0xED9DE0801B44BE27ULL ^ session;
+	const std::uint64_t k1 = 0x485B6527237AB93AULL ^ ((session << 17) | (session >> 47));
+
+	std::uint64_t v0 = 0x736f6d6570736575ULL ^ k0;
+	std::uint64_t v1 = 0x646f72616e646f6dULL ^ k1;
+	std::uint64_t v2 = 0x6c7967656e657261ULL ^ k0;
+	std::uint64_t v3 = 0x7465646279746573ULL ^ k1;
+
+#define ITEM_PICKUP_SIPROUND() \
+	do { \
+		v0 += v1; v1 = (v1 << 13) | (v1 >> 51); v1 ^= v0; v0 = (v0 << 32) | (v0 >> 32); \
+		v2 += v3; v3 = (v3 << 16) | (v3 >> 48); v3 ^= v2; \
+		v0 += v3; v3 = (v3 << 21) | (v3 >> 43); v3 ^= v0; \
+		v2 += v1; v1 = (v1 << 17) | (v1 >> 47); v1 ^= v2; v2 = (v2 << 32) | (v2 >> 32); \
+	} while (0)
+
+	size_t offset = 0;
+	while (size - offset >= 8)
+	{
+		std::uint64_t block = 0;
+		for (size_t i = 0; i < 8; ++i)
+			block |= static_cast<std::uint64_t>(bytes[offset + i]) << (i * 8);
+
+		v3 ^= block;
+		ITEM_PICKUP_SIPROUND();
+		ITEM_PICKUP_SIPROUND();
+		v0 ^= block;
+		offset += 8;
+	}
+
+	std::uint64_t tail = static_cast<std::uint64_t>(size & 0xff) << 56;
+	for (size_t i = 0; i < size - offset; ++i)
+		tail |= static_cast<std::uint64_t>(bytes[offset + i]) << (i * 8);
+
+	v3 ^= tail;
+	ITEM_PICKUP_SIPROUND();
+	ITEM_PICKUP_SIPROUND();
+	v0 ^= tail;
+	v2 ^= 0xff;
+	ITEM_PICKUP_SIPROUND();
+	ITEM_PICKUP_SIPROUND();
+	ITEM_PICKUP_SIPROUND();
+	ITEM_PICKUP_SIPROUND();
+
+#undef ITEM_PICKUP_SIPROUND
+
+	const std::uint64_t tag = v0 ^ v1 ^ v2 ^ v3;
+	std::uint32_t folded = static_cast<std::uint32_t>(tag ^ (tag >> 32));
+	folded ^= folded >> 16;
+	folded *= 0x7feb352dU;
+	folded ^= folded >> 15;
+	folded *= 0x846ca68bU;
+	folded ^= folded >> 16;
+	return static_cast<DWORD>(folded);
+}
 
 //////////////////////////////////////////////////////////////////////////
 // SafeBox
@@ -911,15 +982,22 @@ bool CPythonNetworkStream::SendItemPickUpPacket(DWORD vid)
 	if (!__CanActMainInstance())
 		return true;
 
-	TPacketCGItemPickUp	itemPickUpPacket;
-	itemPickUpPacket.header = HEADER_CG_ITEM_PICKUP;
+	TPacketCGItemPickUpAuth	itemPickUpPacket{};
+	itemPickUpPacket.header = HEADER_CG_ITEM_PICKUP_AUTH;
 	itemPickUpPacket.vid = vid;
+	itemPickUpPacket.sequence = m_dwItemPickupSequence;
+	itemPickUpPacket.hash = ItemPickupHashVmp(
+		&itemPickUpPacket,
+		offsetof(TPacketCGItemPickUpAuth, hash),
+		m_HandshakeData.dwHandshake);
 
 	if (!Send(itemPickUpPacket))
 	{
 		Tracen("SendItemPickUpPacket Error");
 		return false;
 	}
+
+	++m_dwItemPickupSequence;
 
 	return SendSequence();
 }

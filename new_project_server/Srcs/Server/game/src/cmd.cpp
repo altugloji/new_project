@@ -341,6 +341,9 @@ ACMD(do_clientless_trap);
 ACMD(do_clientless_trap_enforce);
 #endif
 
+ACMD(do_pickup_auth);
+ACMD(do_pickup_block);
+
 struct command_info cmd_info[] =
 {
 	{ "!RESERVED!", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	},
@@ -720,6 +723,9 @@ struct command_info cmd_info[] =
 	{ "clientless_trap_enforce",	do_clientless_trap_enforce,	0,			POS_DEAD,	GM_IMPLEMENTOR	},
 #endif
 
+
+	{ "pickup_auth",		do_pickup_auth,			0,			POS_DEAD,	GM_IMPLEMENTOR	},
+	{ "pickup_block",		do_pickup_block,		0,			POS_DEAD,	GM_IMPLEMENTOR	},
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}
 };

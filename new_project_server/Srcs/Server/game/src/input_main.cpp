@@ -46,6 +46,7 @@
 #include "belt_inventory_helper.h" // @fixme119
 
 #include "input.h"
+#include "item_pickup_auth.h"
 #include "../../common/PulseManager.h"
 
 #ifdef ENABLE_CHARACTER_CHEST
@@ -1132,11 +1133,38 @@ void CInputMain::ItemMove(LPCHARACTER ch, const char * data) const
 		ch->MoveItem(pinfo->Cell, pinfo->CellTo, pinfo->count);
 }
 
-void CInputMain::ItemPickup(LPCHARACTER ch, const char * data) const
+void CInputMain::ItemPickupLegacy(LPCHARACTER ch, const char * data) const
 {
-	const auto pinfo = (struct command_item_pickup*) data;
-	if (ch)
-		ch->PickupItem(pinfo->vid);
+	if (!ch || !data)
+		return;
+
+	DWORD vid = 0;
+	memcpy(&vid, data + offsetof(TPacketCGItemPickup, vid), sizeof(vid));
+
+	if (!g_bItemPickupAuthEnabled)
+	{
+		ch->PickupItem(vid);
+		return;
+	}
+
+	RejectLegacyItemPickup(ch, vid);
+}
+
+void CInputMain::ItemPickupAuth(LPCHARACTER ch, const char * data) const
+{
+	if (!ch || !data)
+		return;
+
+	DWORD vid = 0;
+	if (!g_bItemPickupAuthEnabled)
+	{
+		if (DecodeItemPickupAuthFallback(ch, data, vid))
+			ch->PickupItem(vid);
+		return;
+	}
+
+	if (ValidateItemPickupAuth(ch, data, vid))
+		ch->PickupItem(vid);
 }
 
 void CInputMain::QuickslotAdd(LPCHARACTER ch, const char * data) const
@@ -3539,9 +3567,12 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 				ItemMove(ch, c_pData);
 			break;
 
+		case HEADER_CG_ITEM_PICKUP_AUTH:
+			ItemPickupAuth(ch, c_pData);
+			break;
+
 		case HEADER_CG_ITEM_PICKUP:
-			if (!ch->IsObserverMode())
-				ItemPickup(ch, c_pData);
+			ItemPickupLegacy(ch, c_pData);
 			break;
 
 		case HEADER_CG_ITEM_USE_TO_ITEM:

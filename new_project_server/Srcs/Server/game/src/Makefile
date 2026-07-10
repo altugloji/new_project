@@ -129,7 +129,7 @@ MAINCPP = main.cpp
 CFILE	= minilzo.c
 
 CPPFILE = FSM.cpp MarkConvert.cpp MarkImage.cpp MarkManager.cpp OXEvent.cpp ani.cpp\
-		  arena.cpp banword.cpp battle.cpp blend_item.cpp buffer_manager.cpp building.cpp\
+		  arena.cpp ban_ip.cpp banword.cpp battle.cpp blend_item.cpp buffer_manager.cpp building.cpp\
 		  char.cpp char_affect.cpp char_battle.cpp char_change_empire.cpp char_horse.cpp char_item.cpp char_character_chest.cpp char_manager.cpp\
 		  gift.cpp\
 		  char_quickslot.cpp char_resist.cpp char_skill.cpp char_state.cpp PetSystem.cpp cmd.cpp cmd_emotion.cpp cmd_general.cpp\
@@ -137,7 +137,7 @@ CPPFILE = FSM.cpp MarkConvert.cpp MarkImage.cpp MarkManager.cpp OXEvent.cpp ani.
 		  desc_client.cpp desc_manager.cpp desc_p2p.cpp dungeon.cpp empire_text_convert.cpp entity.cpp\
 		  entity_view.cpp event.cpp event_queue.cpp exchange.cpp file_loader.cpp fishing.cpp gm.cpp guild.cpp\
 		  guild_manager.cpp guild_war.cpp horse_rider.cpp horsename_manager.cpp input.cpp input_auth.cpp input_db.cpp\
-		  input_login.cpp input_main.cpp input_p2p.cpp\
+		  input_login.cpp input_main.cpp input_p2p.cpp item_pickup_auth.cpp item_pickup_commands.cpp\
 		  item.cpp item_addon.cpp item_attribute.cpp item_manager.cpp item_manager_idrange.cpp locale.cpp\
 		  locale_service.cpp log.cpp login_data.cpp lzo_manager.cpp marriage.cpp\
 		  messenger_manager.cpp mining.cpp mob_manager.cpp monarch.cpp motion.cpp p2p.cpp packet_info.cpp\
