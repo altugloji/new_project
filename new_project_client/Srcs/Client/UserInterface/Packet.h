@@ -107,7 +107,9 @@ enum
 	HEADER_CG_ANSWER_MAKE_GUILD					= 81,
     HEADER_CG_FISHING                           = 82,
     HEADER_CG_GIVE_ITEM                         = 83,
-	//HEADER_BLANK84								= 84,
+#ifdef ENABLE_IKASHOP_SEARCH
+	HEADER_CG_NEW_OFFLINESHOP					= 84,	// IKASHOP arama: FILTER / BUY / VIEW_SHOP istegi (sabit 80 bayt)
+#endif
 	//HEADER_BLANK85								= 85,
 	//HEADER_BLANK86								= 86,
 	//HEADER_BLANK87								= 87,
@@ -330,6 +332,10 @@ enum
 	HEADER_GC_MAIN_CHARACTER3_BGM				= 137,
 	HEADER_GC_MAIN_CHARACTER4_BGM_VOL			= 138,
 	// END_OF_SUPPORT_BGM
+
+#ifdef ENABLE_IKASHOP_SEARCH
+	HEADER_GC_NEW_OFFLINESHOP					= 139,	// IKASHOP arama: RESULT / RESULT_DELETE / POPUP cevabi (dinamik boyut)
+#endif
 
     HEADER_GC_AUTH_SUCCESS                      = 150,
     HEADER_GC_PANAMA_PACK						= 151,
@@ -2043,6 +2049,83 @@ typedef struct packet_gc_shop_search
 	WORD	size;			// toplam paket boyutu
 	WORD	count;			// sonuc sayisi; ardindan count adet TShopSearchResultElement gelir
 } TPacketGCShopSearch;
+
+#ifdef ENABLE_IKASHOP_SEARCH
+// IKASHOP tarzi global Pazar Arama - sunucu game/src/packet.h ile BIREBIR AYNI
+// olmak zorunda (wire degisikligi = server+client rebuild + repack BIRLIKTE).
+enum EIkaSearchWire
+{
+	IKASEARCH_FILTER_NAME_LEN	= 25,	// 24 karakter + NUL
+	IKASEARCH_FILTER_ATTR_NUM	= 5,	// ayni anda filtrelenebilir efsun sayisi
+	IKASEARCH_SHOPNAME_LEN		= 40,
+	IKASEARCH_POPUP_KEY_LEN		= 64,	// ASCII locale anahtari; ceviriyi client yapar
+	IKASEARCH_MAX_RESULTS		= 250,
+};
+
+enum EIkaSearchCGSub
+{
+	IKASEARCH_CG_FILTER			= 0,
+	IKASEARCH_CG_BUY			= 1,
+	IKASEARCH_CG_VIEW_SHOP		= 2,
+};
+
+enum EIkaSearchGCSub
+{
+	IKASEARCH_GC_RESULT			= 0,	// zarf + wCount x SIkaSearchResult
+	IKASEARCH_GC_RESULT_DELETE	= 1,	// zarf + DWORD itemDBID
+	IKASEARCH_GC_POPUP			= 2,	// zarf + char szLocaleKey[IKASEARCH_POPUP_KEY_LEN]
+};
+
+// CG 84: tek sabit struct (80 bayt); kullanilmayan alanlar 0 gider
+typedef struct SPacketCGIkaShopSearch
+{
+	BYTE	bHeader;						// HEADER_CG_NEW_OFFLINESHOP
+	BYTE	bSubheader;						// EIkaSearchCGSub
+	char	szName[IKASEARCH_FILTER_NAME_LEN];
+	BYTE	bType;							// 0xFF = filtre yok
+	BYTE	bSubType;						// 0xFF = filtre yok
+	DWORD	dwPriceMin;
+	DWORD	dwPriceMax;						// 0 = filtre yok
+	int		iLevelMin;
+	int		iLevelMax;						// 0 = filtre yok
+	TPlayerItemAttribute	aFilterAttrs[IKASEARCH_FILTER_ATTR_NUM];
+	int		iReserved1;
+	int		iReserved2;
+	DWORD	dwOwnerPID;						// BUY / VIEW_SHOP
+	DWORD	dwItemDBID;						// BUY (player_shop_items.id)
+	DWORD	dwSeenPrice;					// BUY (front-run korumasi)
+} TPacketCGIkaShopSearch;
+
+// GC 139 zarfi (DYNAMIC_SIZE_PACKET)
+typedef struct SPacketGCIkaShopSearch
+{
+	BYTE	bHeader;
+	WORD	wSize;
+	BYTE	bSubheader;						// EIkaSearchGCSub
+	WORD	wCount;
+} TPacketGCIkaShopSearch;
+
+// RESULT: zarfin ardindan wCount adet
+typedef struct SIkaSearchResult
+{
+	DWORD	dwItemDBID;
+	DWORD	dwOwnerPID;
+	char	szShopName[IKASEARCH_SHOPNAME_LEN];
+	BYTE	bChannel;
+	int		iMapIndex;
+	DWORD	dwVnum;
+	BYTE	bCount;
+	DWORD	dwPrice;
+	int		aiSockets[ITEM_SOCKET_SLOT_MAX_NUM];
+	TPlayerItemAttribute	aAttrs[ITEM_ATTRIBUTE_SLOT_MAX_NUM];
+	int		iDurationMin;					// dukkanin kalan suresi (dakika)
+} SIkaSearchResult;
+
+// Wire boyutlari sunucu (gcc -m32) ile birebir ayni olmak zorunda
+static_assert(sizeof(TPacketCGIkaShopSearch) == 80, "ikasearch CG wire boyutu bozuldu");
+static_assert(sizeof(TPacketGCIkaShopSearch) == 6, "ikasearch GC zarf boyutu bozuldu");
+static_assert(sizeof(SIkaSearchResult) == 99, "ikasearch sonuc karti boyutu bozuldu");
+#endif
 
 // Pazar Arama kategori sabitleri - sunucu common/length.h EShopOfflineSearchCategories
 // ile BIREBIR AYNI olmak zorundadir (searchIndex = category*SHOP_CATEGORY_MAX_SUB + sub).

@@ -400,10 +400,8 @@ class GameWindow(ui.ScriptWindow):
 		if app.ENABLE_EXCHANGE_LOG:
 			onPressKeyDict[app.DIK_F6]	= lambda : self.interface.OpenExchangeLog()
 
-		# Pazar Arama (ShopSearch) - F7
-		onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenShopSearch()
+		# onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenShopSearch()
 
-		# Hediye Gonder - F8 (test/hizli acilis; ayrica oyuncuya sag tik menusunden de acilir)
 		if app.ENABLE_GIFT_SEND_SYSTEM:
 			onPressKeyDict[app.DIK_F8]	= lambda : self.interface.ToggleGiftSendDialog()
 
@@ -1207,6 +1205,16 @@ class GameWindow(ui.ScriptWindow):
 
 	def CloseSafeTradeWindow(self):
 		self.interface.CloseSafeTradeWindow()
+
+	# IKASHOP global arama callback'leri (PythonNetworkStreamIkaShopSearch.cpp cagirir)
+	def OnIkaShopSearchResult(self, count):
+		self.interface.OnIkaShopSearchResult(count)
+
+	def OnIkaShopResultDelete(self, itemDBID):
+		self.interface.OnIkaShopResultDelete(itemDBID)
+
+	def OnIkaShopPopup(self, localeKey):
+		self.interface.OnIkaShopPopup(localeKey)
 
 	def OpenSafeTradeListWindow(self, outgoing):
 		self.interface.OpenSafeTradeListWindow(outgoing)

@@ -1001,6 +1001,7 @@ class EditLine(TextLine):
 		self.eventReturn = Window.NoneMethod
 		self.eventEscape = Window.NoneMethod
 		self.eventTab = None
+		self.eventUpdate = None		# IKASHOP arama: metin degisince tetiklenir (SetUpdateEvent)
 		self.numberMode = False
 		self.useIME = True
 		self.canEdit = True
@@ -1072,6 +1073,10 @@ class EditLine(TextLine):
 
 	def SetReturnEvent(self, event):
 		self.eventReturn = event
+
+	def SetUpdateEvent(self, event):
+		# IKASHOP arama: her metin degisiminde cagirilir (canli isim onerisi icin)
+		self.eventUpdate = event
 
 	def SetEscapeEvent(self, event):
 		self.eventEscape = event
@@ -1208,6 +1213,9 @@ class EditLine(TextLine):
 	def OnIMEUpdate(self):
 		snd.PlaySound("sound/ui/type.wav")
 		TextLine.SetText(self, ime.GetText(self.bCodePage))
+
+		if self.eventUpdate:		# IKASHOP arama: canli isim onerisi
+			self.eventUpdate()
 
 		if app.ENABLE_WIKI:
 			if self.backText:
@@ -1396,7 +1404,14 @@ class ImageBox(Window):
 		else :
 			print("[ERROR] ui.py SetEvent, Can`t Find has_key : %s" % args[0])
 
+	def SetOnMouseLeftButtonUpEvent(self, func, *args):
+		# IKASHOP: kutuya tiklayinca ic EditLine'a odak vermek icin (argumansiz callback)
+		self._ikaLeftUpEvent = func
+		self._ikaLeftUpArgs = args
+
 	def OnMouseLeftButtonUp(self) :
+		if getattr(self, "_ikaLeftUpEvent", None):
+			apply(self._ikaLeftUpEvent, self._ikaLeftUpArgs)
 		if self.eventFunc["mouse_click"] :
 			apply(self.eventFunc["mouse_click"], self.eventArgs["mouse_click"])
 
@@ -3317,6 +3332,15 @@ class ScrollBar(Window):
 		self.SCROLLBAR_MIDDLE_HEIGHT = int(pageScale * float(realHeight))
 		self.middleBar.SetSize(self.SCROLLBAR_MIDDLE_HEIGHT)
 		self.pageSize = (self.GetHeight() - self.SCROLLBAR_BUTTON_HEIGHT*2) - self.SCROLLBAR_MIDDLE_HEIGHT - (self.TEMP_SPACE)
+
+	def UpdateScrollbarLenght(self, scrollableSpace):
+		# IKASHOP: gorunur alan / toplam kaydirilabilir alan oranina gore orta cubugu boyutlandirir
+		if scrollableSpace <= 0:
+			self.SetMiddleBarSize(1.0)
+			return
+		visible = self.GetHeight()
+		pageScale = min(1.0, float(visible) / float(scrollableSpace))
+		self.SetMiddleBarSize(pageScale)
 
 	def SetScrollBarSize(self, height):
 		self.pageSize = (height - self.SCROLLBAR_BUTTON_HEIGHT*2) - self.SCROLLBAR_MIDDLE_HEIGHT - (self.TEMP_SPACE)

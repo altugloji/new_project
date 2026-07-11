@@ -102,6 +102,11 @@ class CShop
 		// Verilen item bu dukkanda satilmis (sold=1) kirmizi hayalet mi?
 		bool		IsSoldGhost(LPITEM pkItem) const;
 #endif
+#ifdef ENABLE_IKASHOP_SEARCH
+		// Uzak satis (GG 42): itemid'li slotu sold=1 isaretle + misafirlere UPDATE_ITEM yayinla.
+		// Donus: bulunan slot pozisyonu; -1 = bu dukkanda yok (bayat bildirim, zararsiz)
+		int			MarkSoldAndBroadcast(DWORD itemid);
+#endif
 #endif
 
 	protected:

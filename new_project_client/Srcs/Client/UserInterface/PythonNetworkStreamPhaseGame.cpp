@@ -347,6 +347,12 @@ void CPythonNetworkStream::GamePhase()
 				ret = RecvShopSearchResultPacket();
 				break;
 
+#ifdef ENABLE_IKASHOP_SEARCH
+			case HEADER_GC_NEW_OFFLINESHOP:	// IKASHOP global arama: sonuc/silme/popup
+				ret = RecvIkaShopSearchPacket();
+				break;
+#endif
+
 			case HEADER_GC_SHOP_SIGN:
 				ret = RecvShopSignPacket();
 				break;

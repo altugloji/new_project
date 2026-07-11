@@ -189,6 +189,13 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		// Shop
 		bool SendShopEndPacket();
 		bool SendShopSearchItem(DWORD searchIndex, int socket0, const DWORD * c_adwSelVnum = NULL, const int * c_aiSelSocket = NULL, BYTE bySelCount = 0);	// Pazar Arama
+#ifdef ENABLE_IKASHOP_SEARCH
+		// IKASHOP global arama - Python modulunden cagrilir (PUBLIC olmali)
+		bool SendIkaShopFilterRequest(const char * c_szName, int iType, int iSubType, DWORD dwPriceMin, DWORD dwPriceMax, int iLevelMin, int iLevelMax);
+		bool SendIkaShopFillRequest();
+		bool SendIkaShopBuyPacket(DWORD dwOwnerPID, DWORD dwItemDBID, DWORD dwSeenPrice);
+		bool SendIkaShopViewShopPacket(DWORD dwOwnerPID);
+#endif
 		bool SendShopBuyPacket(BYTE byCount);
 		bool SendShopSellPacket(BYTE bySlot);
 #ifdef ENABLE_EXCHANGE_LOG
@@ -517,6 +524,10 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		bool RecvShopPacket();
 		bool RecvShopSignPacket();
 		bool RecvShopSearchResultPacket();	// Pazar Arama
+#ifdef ENABLE_IKASHOP_SEARCH
+		// IKASHOP global arama - GC handler (dahili dispatch'ten cagrilir; protected kalabilir)
+		bool RecvIkaShopSearchPacket();
+#endif
 		bool RecvExchangePacket();
 #ifdef ENABLE_BOT_CONTROL
 		bool RecvBotControlPacket();

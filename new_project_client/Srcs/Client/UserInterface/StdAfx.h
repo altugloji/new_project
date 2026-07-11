@@ -79,6 +79,9 @@ void initsafebox();
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 void initSafeTrade();
 #endif
+#ifdef ENABLE_IKASHOP_SEARCH
+void initikashop();
+#endif
 void initguild();
 void initMessenger();
 #ifdef ENABLE_ACCE_COSTUME_SYSTEM

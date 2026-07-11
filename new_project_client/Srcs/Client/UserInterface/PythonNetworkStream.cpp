@@ -89,6 +89,9 @@ class CMainPacketHeaderMap : public CNetworkPacketHeaderMap
 
 			Set(HEADER_GC_SHOP,			CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCShop), DYNAMIC_SIZE_PACKET));
 			Set(HEADER_GC_SHOP_SEARCH,	CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCShopSearch), DYNAMIC_SIZE_PACKET));	// Pazar Arama
+#ifdef ENABLE_IKASHOP_SEARCH
+			Set(HEADER_GC_NEW_OFFLINESHOP,	CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCIkaShopSearch), DYNAMIC_SIZE_PACKET));	// IKASHOP global arama (kayit UNUTULURSA baglanti kopar)
+#endif
 			Set(HEADER_GC_SHOP_SIGN,	CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCShopSign), STATIC_SIZE_PACKET));
 			Set(HEADER_GC_EXCHANGE,		CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCExchange), STATIC_SIZE_PACKET));
 #ifdef ENABLE_SAFE_TRADE_SYSTEM

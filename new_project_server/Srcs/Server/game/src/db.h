@@ -17,6 +17,9 @@ enum
 	QID_SAFEBOX_SIZE,
 	QID_AUTH_LOGIN,
 	QID_BLOCK_CHAT_LIST,
+#ifdef ENABLE_IKASHOP_SEARCH
+	QID_IKASEARCH,		// IKASHOP global pazar aramasi (async ReturnQuery; arama yolunda DirectQuery YASAK)
+#endif
 };
 
 class CQueryInfo

@@ -141,6 +141,9 @@ class CInputMain : public CInputProcessor
 #ifdef OFFLINE_SHOP
 		int			ShopSearch(LPCHARACTER ch, const char * data, size_t uiBytes) const;	// Pazar Arama
 #endif
+#ifdef ENABLE_IKASHOP_SEARCH
+		int			IkaShopSearch(LPCHARACTER ch, const char * data, size_t uiBytes) const;	// IKASHOP global arama + uzaktan alim
+#endif
 		void		OnClick(LPCHARACTER ch, const char * data) const;
 		void		Exchange(LPCHARACTER ch, const char * data) const;
 		void		Position(LPCHARACTER ch, const char * data) const;

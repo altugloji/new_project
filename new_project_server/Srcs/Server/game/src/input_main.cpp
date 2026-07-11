@@ -15,6 +15,9 @@
 #include "cmd.h"
 #include "shop.h"
 #include "shop_manager.h"
+#ifdef ENABLE_IKASHOP_SEARCH
+#include "ikashop_search.h"
+#endif
 #include "safebox.h"
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 #include "safetrade.h"
@@ -1321,6 +1324,18 @@ int CInputMain::ShopSearch(LPCHARACTER ch, const char * data, size_t uiBytes) co
 	CShopManager::instance().SearchShopItem(ch, p->searchIndex, p->socket0);
 #endif
 	return 0;	// sabit boyutlu paket; ek (degisken) veri yok
+}
+#endif
+
+#ifdef ENABLE_IKASHOP_SEARCH
+int CInputMain::IkaShopSearch(LPCHARACTER ch, const char * data, size_t uiBytes) const
+{
+	// IKASHOP global arama: data, ana header (HEADER_CG_NEW_OFFLINESHOP) dahil tum paketi gosterir.
+	if (uiBytes < sizeof(TPacketCGIkaShopSearch))
+		return -1;
+
+	CIkaShopSearchManager::Instance().ReceivePacket(ch, reinterpret_cast<const TPacketCGIkaShopSearch *>(data));
+	return 0;	// sabit 80 baytlik paket; ek veri yok
 }
 #endif
 
@@ -3630,6 +3645,13 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 #ifdef OFFLINE_SHOP
 		case HEADER_CG_SHOP_SEARCH:	// Pazar Arama
 			if ((iExtraLen = ShopSearch(ch, c_pData, m_iBufferLeft)) < 0)
+				return -1;
+			break;
+#endif
+
+#ifdef ENABLE_IKASHOP_SEARCH
+		case HEADER_CG_NEW_OFFLINESHOP:	// IKASHOP global arama + uzaktan alim
+			if ((iExtraLen = IkaShopSearch(ch, c_pData, m_iBufferLeft)) < 0)
 				return -1;
 			break;
 #endif

@@ -145,6 +145,9 @@ CPacketInfoCG::CPacketInfoCG()
 #ifdef OFFLINE_SHOP
 	Set(HEADER_CG_SHOP_SEARCH, sizeof(TPacketCGShopSearch), "ShopSearch", true);	// Pazar Arama
 #endif
+#ifdef ENABLE_IKASHOP_SEARCH
+	Set(HEADER_CG_NEW_OFFLINESHOP, sizeof(TPacketCGIkaShopSearch), "IkaShopSearch", true);	// IKASHOP global arama + uzaktan alim
+#endif
 
 	Set(HEADER_CG_ON_CLICK, sizeof(TPacketCGOnClick), "OnClick", true);
 	Set(HEADER_CG_EXCHANGE, sizeof(TPacketCGExchange), "Exchange", true);
@@ -311,6 +314,10 @@ CPacketInfoGG::CPacketInfoGG()
 
 #ifdef ENABLE_GIFT_SEND_SYSTEM
 	Set(HEADER_GG_GIFT_NOTIFY,			sizeof(TPacketGGGiftNotify),		"GiftNotify",		false);
+#endif
+
+#ifdef ENABLE_IKASHOP_SEARCH
+	Set(HEADER_GG_IKASHOP_SOLD,			sizeof(TPacketGGIkaShopSold),		"IkaShopSold",		false);
 #endif
 
 }

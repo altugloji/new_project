@@ -190,7 +190,7 @@ class DeleteItem(ui.ScriptWindow):
 			attrSlot = [player.GetItemAttribute(attachedSlotPos, i) for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM)]
 			if int(attachedSlotPos) > 180:
 				self.uyari2 = uiCommon.PopupDialog()
-				self.uyari2.SetText("Giyili itemleri silemessin.")
+				self.uyari2.SetText("Giyili itemleri silemezsin.")
 				self.uyari2.Open()
 				return
 			

@@ -30,6 +30,12 @@ try:
 	import offlineshopsearch
 except ImportError:
 	offlineshopsearch = None
+# IKASHOP global arama penceresi (define acikken F7'nin actigi pencere).
+# Eski binary'de modul yoksa login'i bozmasin diye guvenli import.
+try:
+	import uiikashopsearch
+except ImportError:
+	uiikashopsearch = None
 import uiExchange
 import uiSystem
 import uiRestart
@@ -373,6 +379,9 @@ class Interface(object):
 		# Boylece uiscript/shopsearchwindow.py eksik olsa bile login etkilenmez.
 		self.offlineShopSearch = None
 
+		# IKASHOP global arama penceresi - ilk acilista (lazy) olusturulur.
+		self.ikaShopSearch = None
+
 		# "Pazarima Isinlan" geri sayim popup'i - ilk kullanimda (lazy) olusturulur
 		self.shopWarpCountdownDlg = None
 
@@ -713,6 +722,10 @@ class Interface(object):
 		if self.offlineShopSearch:
 			self.offlineShopSearch.Destroy()
 
+		if self.ikaShopSearch:
+			self.ikaShopSearch.Destroy()
+			self.ikaShopSearch = None
+
 		if self.dlgRestart:
 			self.dlgRestart.Destroy()
 
@@ -860,6 +873,7 @@ class Interface(object):
 		del self.dlgPointReset
 		del self.dlgShop
 		del self.offlineShopSearch
+		del self.ikaShopSearch
 		del self.dlgRestart
 		del self.dlgSystem
 		del self.dlgPassword
@@ -2101,6 +2115,35 @@ class Interface(object):
 			self.offlineShopSearch.SetToolTip(self.tooltipItem)
 			self.offlineShopSearch.Hide()
 		self.offlineShopSearch.Open()
+
+	# IKASHOP global arama penceresini ac/kapat (ilk cagrida olusturulur)
+	def OpenIkaShopSearch(self):
+		if uiikashopsearch is None:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, getattr(localeInfo, "IKASHOP_SEARCH_MODULE_MISSING", "Pazar Arama modulu bulunamadi."))
+			return
+		if not self.ikaShopSearch:
+			self.ikaShopSearch = uiikashopsearch.IkaShopSearchWindow()
+			self.ikaShopSearch.SetToolTip(self.tooltipItem)
+			self.ikaShopSearch.Hide()
+		if self.ikaShopSearch.IsShow():
+			self.ikaShopSearch.Close()
+		else:
+			self.ikaShopSearch.Open()
+
+	# Binary -> game.py -> interface callback zinciri (arama sonucu/silme/popup)
+	def OnIkaShopSearchResult(self, count):
+		if self.ikaShopSearch:
+			self.ikaShopSearch.OnIkaShopSearchResult(count)
+
+	def OnIkaShopResultDelete(self, itemDBID):
+		if self.ikaShopSearch:
+			self.ikaShopSearch.OnIkaShopResultDelete(itemDBID)
+
+	def OnIkaShopPopup(self, localeKey):
+		if self.ikaShopSearch:
+			self.ikaShopSearch.OnIkaShopPopup(localeKey)
+		else:
+			chat.AppendChat(chat.CHAT_TYPE_INFO, getattr(localeInfo, localeKey, localeKey))
 
 	def AppearPrivateShop(self, vid, text):
 

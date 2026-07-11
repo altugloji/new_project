@@ -289,6 +289,26 @@ int CShop::BuyOffline(LPCHARACTER ch, BYTE pos)
 	if (iEmptyPos < 0)
 		return SHOP_SUBHEADER_GC_INVENTORY_FULL;
 
+#ifdef ENABLE_IKASHOP_SEARCH
+	// DUPE-1 (claim-first): uzak alicilar (IKASHOP arama) ayni DB satirini kosullu UPDATE ile
+	// kilitler; tezgah alicisi da AYNI satirda serilesmek zorunda. Claim kaybedilirse
+	// HICBIR SEY dusulmez. Bu blok olmadan uzak+tezgah cift satisi GERCEK bir dupe'dur.
+	{
+		auto pkClaim = DBManager::instance().DirectQuery(
+			"UPDATE player_shop_items SET sold = 1 WHERE player_id = %u AND id = %u AND sold = 0",
+			m_pkPC->GetPrivShopOwner(), r_item.itemid);
+
+		if (!pkClaim || !pkClaim->Get() || pkClaim->Get()->uiAffectedRows != 1)
+		{
+			// Yaris kaybedildi (uzak alici kazandi): yerel gorunumu de kirmizila
+			r_item.sold = 1;
+			BroadcastUpdateItem(pos);
+			ch->ChatPacket(CHAT_TYPE_INFO, "Bu esya satilmis.");
+			return SHOP_SUBHEADER_GC_OK;
+		}
+	}
+#endif
+
 	if (dwPrice > 0)
 		ch->PointChange(POINT_GOLD, -static_cast<int>(dwPrice), false);
 
@@ -330,7 +350,10 @@ int CShop::BuyOffline(LPCHARACTER ch, BYTE pos)
 #ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
 	// Kalici "satildi": satir SILINMEZ, sold=1 isaretlenir -> restart sonrasi da KIRMIZI hayalet olarak yuklenir.
 	// (player_shop_items tablosuna 'sold' kolonu sart: ALTER TABLE ... ADD sold TINYINT(1) NOT NULL DEFAULT 0)
+#ifndef ENABLE_IKASHOP_SEARCH
+	// IKASHOP_SEARCH acikken sold=1 yukaridaki claim-first tarafindan ATOMIK yazildi; tekrar yazma
 	DBManager::instance().DirectQuery("UPDATE player_shop_items SET sold = 1 WHERE player_id = %u AND id = %u", m_pkPC->GetPrivShopOwner(), r_item.itemid);
+#endif
 #else
 	DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE player_id = %u AND id = %u", m_pkPC->GetPrivShopOwner(), r_item.itemid);
 #endif
@@ -378,6 +401,28 @@ void CShop::SetItemSoldByItemID(DWORD itemid)
 		}
 	}
 }
+
+#ifdef ENABLE_IKASHOP_SEARCH
+// Uzak satis (GG 42 / yerel alim): itemid'li slotu sold=1 isaretle + misafirlere yayinla.
+// Dupe korumasi SQL claim'dedir; bu yalnizca gorsel senkrondur.
+int CShop::MarkSoldAndBroadcast(DWORD itemid)
+{
+	for (DWORD i = 0; i < m_itemVector.size() && i < SHOP_HOST_ITEM_MAX_NUM; ++i)
+	{
+		if (m_itemVector[i].pkItem && (DWORD)m_itemVector[i].itemid == itemid)
+		{
+			if (!m_itemVector[i].sold)
+			{
+				m_itemVector[i].sold = 1;
+				BroadcastUpdateItem((BYTE) i);
+			}
+			return (int) i;
+		}
+	}
+
+	return -1;
+}
+#endif
 
 bool CShop::IsSoldGhost(LPITEM pkItem) const
 {

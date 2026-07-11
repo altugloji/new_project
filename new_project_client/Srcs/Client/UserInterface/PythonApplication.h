@@ -33,6 +33,9 @@
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 #include "PythonSafeTrade.h"
 #endif
+#ifdef ENABLE_IKASHOP_SEARCH
+#include "PythonIkaShopSearch.h"
+#endif
 #include "PythonGuild.h"
 
 #include "GuildMarkDownloader.h"
@@ -375,6 +378,9 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 		CPythonSafeBox				m_pySafeBox;
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 		CPythonSafeTrade			m_pySafeTrade;
+#endif
+#ifdef ENABLE_IKASHOP_SEARCH
+		CPythonIkaShopSearch		m_pyIkaShopSearch;	// CSingleton ms_singleton bu uye ile insa edilir (Instance() null-deref onlemi)
 #endif
 		CPythonGuild				m_pyGuild;
 #ifdef ENABLE_WIKI

@@ -1722,7 +1722,14 @@ class InventoryWindow(ui.ScriptWindow):
 	def __UseItem(self, slotIndex):
 		ItemVNum = player.GetItemIndex(slotIndex)
 		item.SelectItem(ItemVNum)
-		
+
+		# IKASHOP Pazar Arama itemi (60005): kullaninca arama penceresini ac (tuketmez;
+		# server'a use paketi gonderilmez). F7 yerine bu item ile acilir.
+		if getattr(app, "ENABLE_IKASHOP_SEARCH", 0) and ItemVNum == 60005:
+			if self.interface:
+				self.interface.OpenIkaShopSearch()
+			return
+
 		if app.ENABLE_WIKI:
 			if app.IsPressed(app.DIK_LCONTROL) and app.IsPressed(app.DIK_Z):
 				if not self.interface.wndWiki:

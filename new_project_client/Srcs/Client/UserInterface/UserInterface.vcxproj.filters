@@ -99,6 +99,9 @@
     <ClCompile Include="PythonGem.cpp" />
     <ClCompile Include="PythonSafeTrade.cpp" />
     <ClCompile Include="PythonSafeTradeModule.cpp" />
+    <ClCompile Include="PythonIkaShopSearch.cpp" />
+    <ClCompile Include="PythonIkaShopSearchModule.cpp" />
+    <ClCompile Include="PythonNetworkStreamIkaShopSearch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AffectFlagContainer.h" />
@@ -158,6 +161,7 @@
     <ClInclude Include="PythonCubeRenewal.h" />
     <ClInclude Include="PythonGem.h" />
     <ClInclude Include="PythonSafeTrade.h" />
+    <ClInclude Include="PythonIkaShopSearch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Cursors\cursor.cur">

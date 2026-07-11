@@ -3,6 +3,7 @@
 #include "../eterLib/ResourceManager.h"
 
 #include "ItemManager.h"
+#include <set>	// CollectNamesByKeyword (IKASHOP arama onerileri)
 
 static DWORD s_adwItemProtoKey[4] =
 {
@@ -452,6 +453,50 @@ bool CItemManager::LoadItemScale(const char* szItemScale)
 	return true;
 }
 #endif
+
+// IKASHOP arama kutusu onerileri: kucuk-harf substring eslesen benzersiz isimler.
+// ASCII-disi baytlar (Turkce cp1254) oldugu gibi karsilastirilir; yalnizca A-Z kucultulur.
+void CItemManager::CollectNamesByKeyword(const char * c_szKeyword, DWORD dwMaxCount, std::vector<std::string> & rVecNames)
+{
+	rVecNames.clear();
+
+	if (!c_szKeyword || !c_szKeyword[0] || dwMaxCount == 0)
+		return;
+
+	std::string stKeyword(c_szKeyword);
+	for (size_t i = 0; i < stKeyword.size(); ++i)
+		if (stKeyword[i] >= 'A' && stKeyword[i] <= 'Z')
+			stKeyword[i] = stKeyword[i] - 'A' + 'a';
+
+	std::set<std::string> setSeen;
+
+	for (TItemMap::const_iterator it = m_ItemMap.begin(); it != m_ItemMap.end(); ++it)
+	{
+		const CItemData * pItemData = it->second;
+		if (!pItemData)
+			continue;
+
+		const char * c_szName = pItemData->GetName();
+		if (!c_szName || !c_szName[0])
+			continue;
+
+		std::string stLower(c_szName);
+		for (size_t i = 0; i < stLower.size(); ++i)
+			if (stLower[i] >= 'A' && stLower[i] <= 'Z')
+				stLower[i] = stLower[i] - 'A' + 'a';
+
+		if (stLower.find(stKeyword) == std::string::npos)
+			continue;
+
+		if (!setSeen.insert(stLower).second)
+			continue;	// ayni isim (item gelistirme kademeleri) tekrarlanmasin
+
+		rVecNames.push_back(c_szName);
+
+		if (rVecNames.size() >= dwMaxCount)
+			break;
+	}
+}
 
 CItemManager::CItemManager() : m_pSelectedItemData(nullptr)
 {

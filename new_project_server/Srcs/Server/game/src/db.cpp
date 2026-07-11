@@ -16,6 +16,9 @@
 #include "login_data.h"
 #include "locale_service.h"
 #include "spam.h"
+#ifdef ENABLE_IKASHOP_SEARCH
+#include "ikashop_search.h"
+#endif
 
 DBManager::DBManager() : m_bIsConnect(false)
 {
@@ -434,6 +437,14 @@ void DBManager::AnalyzeReturnQuery(SQLMsg * pMsg)
 			}
 			break;
 			// END_OF_BLOCK_CHAT
+
+#ifdef ENABLE_IKASHOP_SEARCH
+		case QID_IKASEARCH:
+			// IKASHOP global pazar aramasi: sonuc isleme + post-filter + GC gonderimi manager'da.
+			// pvData (filtre kopyasi) sahipligi manager'a gecer; orada M2_DELETE edilir.
+			CIkaShopSearchManager::Instance().OnSearchQueryResult(pMsg, qi->dwIdent, qi->pvData);
+			break;
+#endif
 
 		default:
 			sys_err("FATAL ERROR!!! Unhandled return query id %d", qi->iType);

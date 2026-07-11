@@ -225,6 +225,9 @@
     <ClCompile Include="PythonSafeBox.cpp" />
     <ClCompile Include="PythonSafeTrade.cpp" />
     <ClCompile Include="PythonSafeTradeModule.cpp" />
+    <ClCompile Include="PythonIkaShopSearch.cpp" />
+    <ClCompile Include="PythonIkaShopSearchModule.cpp" />
+    <ClCompile Include="PythonNetworkStreamIkaShopSearch.cpp" />
     <ClCompile Include="PythonShop.cpp" />
     <ClCompile Include="PythonTextTail.cpp" />
     <ClCompile Include="PythonTextTailModule.cpp" />
@@ -303,6 +306,7 @@
     <ClInclude Include="PythonMiniMap.h" />
     <ClInclude Include="PythonSafeBox.h" />
     <ClInclude Include="PythonSafeTrade.h" />
+    <ClInclude Include="PythonIkaShopSearch.h" />
     <ClInclude Include="PythonShop.h" />
     <ClInclude Include="PythonTextTail.h" />
     <ClInclude Include="ProcessScanner.h" />

@@ -54,6 +54,10 @@ class CItemManager : public CSingleton<CItemManager>
 #ifdef ENABLE_WIKI
 		std::map<DWORD, CItemData*>			GetItemsVector() { return m_ItemMap; }
 #endif
+		// IKASHOP arama kutusu onerileri: kucuk-harf substring eslesen benzersiz
+		// item isimlerini toplar (ENABLE_IKASHOP_SEARCH kullanir; zararsiz genel yardimci)
+		void			CollectNamesByKeyword(const char * c_szKeyword, DWORD dwMaxCount, std::vector<std::string> & rVecNames);
+
 	protected:
 		TItemMap m_ItemMap;
 		std::vector<CItemData*>  m_vec_ItemRange;

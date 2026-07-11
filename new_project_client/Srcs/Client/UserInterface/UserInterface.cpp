@@ -632,6 +632,9 @@ bool RunMainScript(CPythonLauncher& pyLauncher, const char* lpCmdLine)
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 	initSafeTrade();
 #endif
+#ifdef ENABLE_IKASHOP_SEARCH
+	initikashop();
+#endif
 	initguild();
 	initServerStateChecker();
 #ifdef KYGN_CHEST_INFO

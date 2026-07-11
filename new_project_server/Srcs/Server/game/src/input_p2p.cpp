@@ -21,6 +21,9 @@
 #include "questmanager.h"
 #include "skill.h"
 #include "threeway_war.h"
+#ifdef ENABLE_IKASHOP_SEARCH
+#include "ikashop_search.h"
+#endif
 #ifdef __BL_CLIENT_LOCALE_STRING__
 	#include "buffer_manager.h"
 #endif
@@ -672,6 +675,17 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 		case HEADER_GG_GIFT_NOTIFY:
 			GiftNotify(c_pData);
 			break;
+#endif
+
+#ifdef ENABLE_IKASHOP_SEARCH
+		case HEADER_GG_IKASHOP_SOLD:
+		{
+			// Uzak satis bildirimi: canli tezgah bu core'daysa kirmizi ghost + oto-kapanis;
+			// sahip bu core'da online ise gift yenileme. Dupe korumasi SQL claim'dedir.
+			const TPacketGGIkaShopSold * pSold = (const TPacketGGIkaShopSold *) c_pData;
+			CIkaShopSearchManager::Instance().OnShopItemSold(pSold->dwOwnerPID, pSold->dwItemDBID);
+		}
+		break;
 #endif
 
 	}

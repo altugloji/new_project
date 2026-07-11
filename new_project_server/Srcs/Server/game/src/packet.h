@@ -86,6 +86,10 @@ enum
 
 	HEADER_CG_ITEM_GIVE				= 83,
 
+#ifdef ENABLE_IKASHOP_SEARCH
+	HEADER_CG_NEW_OFFLINESHOP		= 84,	// IKASHOP arama: FILTER / BUY / VIEW_SHOP istegi (sabit 80 bayt)
+#endif
+
 	HEADER_CG_EMPIRE				= 90,
 
 	HEADER_CG_REFINE				= 96,
@@ -306,6 +310,10 @@ enum
 	HEADER_GC_MAIN_CHARACTER4_BGM_VOL			= 138,
 	// END_OF_SUPPORT_BGM
 
+#ifdef ENABLE_IKASHOP_SEARCH
+	HEADER_GC_NEW_OFFLINESHOP					= 139,	// IKASHOP arama: RESULT / RESULT_DELETE / POPUP cevabi (dinamik boyut)
+#endif
+
 	HEADER_GC_AUTH_SUCCESS						= 150,
 
 	HEADER_GC_PANAMA_PACK						= 151,
@@ -422,6 +430,9 @@ enum
 #endif
 #ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
 	HEADER_GG_CLIENTLESS_TRAP					= 41,
+#endif
+#ifdef ENABLE_IKASHOP_SEARCH
+	HEADER_GG_IKASHOP_SOLD						= 42,	// uzak satis: canli tezgahi tasiyan core'da kirmizi ghost + oto-kapanis senkronu
 #endif
 
 };
@@ -1505,6 +1516,94 @@ typedef struct packet_gc_shop_search
 	WORD	size;			// toplam paket boyutu
 	WORD	count;			// sonuc sayisi
 } TPacketGCShopSearch;
+#endif
+
+#ifdef ENABLE_IKASHOP_SEARCH
+// IKASHOP tarzi global Pazar Arama: kanal/harita bagimsiz filtreli arama + uzaktan satin alma.
+// Kalici veri mevcut player_shop/player_shop_items(sold) tablolarindadir; bu paketler yalnizca
+// arama/alim/goruntuleme tasir. Client Packet.h ile BIREBIR ayni olmak zorunda (rebuild+repack birlikte).
+enum EIkaSearchWire
+{
+	IKASEARCH_FILTER_NAME_LEN	= 25,	// 24 karakter + NUL
+	IKASEARCH_FILTER_ATTR_NUM	= 5,	// ayni anda filtrelenebilir efsun sayisi
+	IKASEARCH_SHOPNAME_LEN		= 40,	// player_shop.name (tabela 32+NUL, pay birakildi)
+	IKASEARCH_POPUP_KEY_LEN		= 64,	// ASCII locale anahtari; ceviriyi client yapar
+};
+
+enum EIkaSearchCGSub
+{
+	IKASEARCH_CG_FILTER			= 0,	// filtreli arama istegi
+	IKASEARCH_CG_BUY			= 1,	// sonuc listesinden uzaktan satin alma
+	IKASEARCH_CG_VIEW_SHOP		= 2,	// dukkanin DB anlik goruntusu (salt-okunur, byIsMyShop=2)
+};
+
+enum EIkaSearchGCSub
+{
+	IKASEARCH_GC_RESULT			= 0,	// zarf + wCount x SIkaSearchResult
+	IKASEARCH_GC_RESULT_DELETE	= 1,	// zarf + DWORD itemDBID (kart "SATILDI" kirmizisi)
+	IKASEARCH_GC_POPUP			= 2,	// zarf + char szLocaleKey[IKASEARCH_POPUP_KEY_LEN]
+};
+
+// CG 84: tek sabit struct (ShopSearch 250B emsali); kullanilmayan alanlar 0 gider
+typedef struct SPacketCGIkaShopSearch
+{
+	BYTE	bHeader;						// HEADER_CG_NEW_OFFLINESHOP
+	BYTE	bSubheader;						// EIkaSearchCGSub
+	// --- FILTER alanlari ---
+	char	szName[IKASEARCH_FILTER_NAME_LEN];	// isim aramasi (kucuk-harf substring); bos = filtre yok
+	BYTE	bType;							// item tipi; 0xFF = filtre yok
+	BYTE	bSubType;						// alt tip; 0xFF = filtre yok
+	DWORD	dwPriceMin;						// yang; 0 = alt sinir yok
+	DWORD	dwPriceMax;						// yang; 0 = filtre yok (GOLD_MAX 2e9 < 2^32)
+	int		iLevelMin;						// item seviye limiti araligi; 0 = sinir yok
+	int		iLevelMax;
+	TPlayerItemAttribute	aFilterAttrs[IKASEARCH_FILTER_ATTR_NUM];	// bType=0 gecersiz; sValue = minimum deger
+	int		iReserved1;						// IKASHOP sash/simya alanlarinin yeri; v1'de 0
+	int		iReserved2;
+	// --- BUY / VIEW_SHOP alanlari ---
+	DWORD	dwOwnerPID;						// player_shop.player_id
+	DWORD	dwItemDBID;						// player_shop_items.id (AUTO_INCREMENT; bayat istek zararsiz)
+	DWORD	dwSeenPrice;					// alicinin ekranda gordugu fiyat (front-run korumasi)
+} TPacketCGIkaShopSearch;
+
+// GC 139 zarfi (dinamik; DYNAMIC_SIZE_PACKET, LARGE degil: 6 + 250x99 = 24756 < 65535)
+typedef struct SPacketGCIkaShopSearch
+{
+	BYTE	bHeader;						// HEADER_GC_NEW_OFFLINESHOP
+	WORD	wSize;							// zarf dahil toplam boyut
+	BYTE	bSubheader;						// EIkaSearchGCSub
+	WORD	wCount;							// RESULT: sonuc sayisi; digerlerinde 0
+} TPacketGCIkaShopSearch;
+
+// RESULT: zarfin ardindan wCount adet
+typedef struct SIkaSearchResult
+{
+	DWORD	dwItemDBID;						// satin almanin anahtari
+	DWORD	dwOwnerPID;
+	char	szShopName[IKASEARCH_SHOPNAME_LEN];
+	BYTE	bChannel;						// kartta "Ch2" etiketi
+	int		iMapIndex;						// bilgi amacli
+	DWORD	dwVnum;
+	BYTE	bCount;
+	DWORD	dwPrice;
+	int		aiSockets[ITEM_SOCKET_MAX_NUM];	// wire'da long KULLANILMAZ (64-bit goc dersi)
+	TPlayerItemAttribute	aAttrs[ITEM_ATTRIBUTE_MAX_NUM];
+	int		iDurationMin;					// dukkanin kalan suresi (dakika)
+} SIkaSearchResult;
+
+// GG 42: uzak satis bildirimi (tum core'lara); dupe korumasi SQL claim'dedir, bu paket yalniz gorsel senkron
+typedef struct SPacketGGIkaShopSold
+{
+	BYTE	bHeader;						// HEADER_GG_IKASHOP_SOLD
+	DWORD	dwOwnerPID;
+	DWORD	dwItemDBID;
+} TPacketGGIkaShopSold;
+
+// Wire boyutlari iki tarafta (gcc -m32 / MSVC) birebir ayni olmak zorunda
+static_assert(sizeof(TPacketCGIkaShopSearch) == 80, "ikasearch CG wire boyutu bozuldu");
+static_assert(sizeof(TPacketGCIkaShopSearch) == 6, "ikasearch GC zarf boyutu bozuldu");
+static_assert(sizeof(SIkaSearchResult) == 99, "ikasearch sonuc karti boyutu bozuldu");
+static_assert(sizeof(TPacketGGIkaShopSold) == 9, "ikasearch GG boyutu bozuldu");
 #endif
 
 struct packet_exchange

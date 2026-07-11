@@ -24,7 +24,7 @@ window = {
 			"width" : 185+30,
 			"height" : 417+17-5,
 			
-			"title" : "HÄ±zlÄ± sil sat (Delete/Sell)",
+			"title" : "Hýzlý sil sat (Delete/Sell)",
 
 			"children" :
 			(				
