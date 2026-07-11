@@ -214,17 +214,17 @@ void CShopManager::DestroyPCShop(LPCHARACTER ch)
 }
 
 #ifdef OFFLINE_SHOP
-void CShopManager::CreateOfflineShop(LPCHARACTER owner, const char *szSign, const std::vector<TShopItemTable *> pTable)
+bool CShopManager::CreateOfflineShop(LPCHARACTER owner, const char *szSign, const std::vector<TShopItemTable *> pTable)
 {
 	if (!owner || !owner->IsPC())
-		return;
+		return false;
 
 	char szOriginalSign[SHOP_SIGN_MAX_LEN * 2 + 1];
 	DBManager::Instance().EscapeString(szOriginalSign, sizeof(szOriginalSign), szSign, strlen(szSign));
 	if (strlen(szOriginalSign) == 0 || strstr(szOriginalSign, "%") || strstr(szOriginalSign, "'") || strstr(szOriginalSign, "/"))
 	{
 		owner->ChatPacket(CHAT_TYPE_INFO, "string yanlis");
-		return;
+		return false;
 	}
 
 	// Grid kontrolu
@@ -240,7 +240,7 @@ void CShopManager::CreateOfflineShop(LPCHARACTER owner, const char *szSign, cons
 		{
 			owner->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
 			M2_DELETE(pGrid);
-			return;
+			return false;
 		}
 #endif
 
@@ -250,7 +250,7 @@ void CShopManager::CreateOfflineShop(LPCHARACTER owner, const char *szSign, cons
 		{
 			owner->ChatPacket(CHAT_TYPE_INFO, "Pazarda Hatali Item Var... - [Slot Num: %d]", display_pos);
 			M2_DELETE(pGrid);
-			return;
+			return false;
 		}
 
 		pGrid->Put(display_pos, 1, itemProto->bSize);
@@ -263,8 +263,8 @@ void CShopManager::CreateOfflineShop(LPCHARACTER owner, const char *szSign, cons
 									owner->GetPlayerID(), szOriginalSign, owner->GetMapIndex(), owner->GetX(), owner->GetY(), date_close, g_bChannel);
 
 	auto pkMsg = DBManager::instance().DirectQuery(szQuery);
-	if (!pkMsg || !pkMsg->Get())
-		return;
+	if (!pkMsg || !pkMsg->Get() || pkMsg->uiSQLErrno != 0)
+		return false;
 
 	for (size_t i = 0; i < pTable.size(); i++)
 	{
@@ -297,6 +297,7 @@ void CShopManager::CreateOfflineShop(LPCHARACTER owner, const char *szSign, cons
 
 	StartOfflineShop(owner->GetPlayerID());
 	owner->SetMyShopTime();
+	return true;
 }
 
 bool CShopManager::StartOfflineShop(DWORD dwPID, bool onboot)

@@ -3201,6 +3201,16 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 #endif
 									break;
 								}
+								if (g_bEnableBootaryCheck && IS_BOTARYABLE_ZONE(GetMapIndex()) != true)
+								{
+									ChatPacket(CHAT_TYPE_INFO, "Bu bolgede pazar kurulamaz.");
+									break;
+								}
+								if (!CheckMyShopPlacement())
+								{
+									SetLastCreateShopTime(get_global_time() + 2);
+									break;
+								}
 								SetLastCreateShopTime(get_global_time() + 10);
 #endif
 								if (g_bEnableBootaryCheck)

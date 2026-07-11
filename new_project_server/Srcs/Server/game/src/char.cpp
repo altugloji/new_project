@@ -730,6 +730,85 @@ const char * CHARACTER::GetName() const
 }
 
 #ifdef OFFLINE_SHOP
+// Pazar kurulacak noktanin cevresini tarar: yakinda baska bir pazar veya sabit NPC (NPC/WARP/GOTO)
+// varsa isaretler. Oyunculara bagli takipciler (at/binek: GetRider, pet: IsPet) engel sayilmaz.
+struct FuncShopPlacementBlocker
+{
+	LPCHARACTER	m_me;
+	bool		m_bNearShop;
+	bool		m_bNearNPC;
+
+	FuncShopPlacementBlocker(LPCHARACTER me) : m_me(me), m_bNearShop(false), m_bNearNPC(false) {}
+
+	void operator()(LPENTITY ent)
+	{
+		if (!ent->IsType(ENTITY_CHARACTER))
+			return;
+
+		const LPCHARACTER tch = (LPCHARACTER) ent;
+		if (tch == m_me)
+			return;
+
+		const int iDist = DISTANCE_APPROX(tch->GetX() - m_me->GetX(), tch->GetY() - m_me->GetY());
+
+		if (tch->IsPrivShop())
+		{
+			if (iDist <= 150)
+				m_bNearShop = true;
+			return;
+		}
+
+		const BYTE bType = tch->GetCharType();
+		if (bType != CHAR_TYPE_NPC && bType != CHAR_TYPE_WARP && bType != CHAR_TYPE_GOTO)
+			return;
+
+		// Oyuncuya bagli takipciler (cagrilmis at/binek) engel olmasin
+		if (tch->GetRider())
+			return;
+
+		// Uzak-moda yuruyen rider'siz at/binekler de muaf (HorseSummon(false, true) penceresi;
+		// OpenMyShop da kurulum sonrasi bu yolla takipciyi geri cagirir). 20101-20299 =
+		// at + tum binek vnum ailesi (mob_proto 201xx-202xx, hepsi NPC tipi)
+		if (tch->GetRaceNum() >= 20101 && tch->GetRaceNum() <= 20299)
+			return;
+#ifdef __PET_SYSTEM__
+		if (tch->IsPet())
+			return;
+#endif
+
+		if (iDist <= 150)
+			m_bNearNPC = true;
+	}
+};
+
+// Pazar kurulacak nokta uygun mu: yakinda baska pazar veya sabit NPC varsa oyuncuya
+// hata mesaji gonderip false doner. Iki yerden cagrilir: 50200 bohca kullanimi
+// (char_item.cpp - pencere hic acilmadan) ve OpenMyShop (son kontrol; oyuncu pencere
+// acikken NPC yanina yurumus olabilir).
+bool CHARACTER::CheckMyShopPlacement()
+{
+	LPSECTREE pSec = GetSectree();
+	if (!pSec)
+		return true;
+
+	FuncShopPlacementBlocker f(this);
+	pSec->ForEachAround(f);
+
+	if (f.m_bNearShop)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Bu noktada baska bir pazar var, pazarinizi biraz daha uzaga kurun.");
+		return false;
+	}
+
+	if (f.m_bNearNPC)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "NPC'lerin yakinina pazar kurulamaz, pazarinizi biraz daha uzaga kurun.");
+		return false;
+	}
+
+	return true;
+}
+
 void CHARACTER::OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE bItemCount)
 {
 	if (GetExchange() || IsOpenSafebox() || GetShopOwner() || IsCubeOpen())
@@ -752,6 +831,20 @@ void CHARACTER::OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE
 		ChatPacket(CHAT_TYPE_INFO, "Tekrar Deneyin...");
 		return;
 	}
+
+	{
+		auto pkMsgShop = DBManager::instance().DirectQuery("SELECT player_id FROM player_shop WHERE player_id = %u", GetPlayerID());
+		if (!pkMsgShop || !pkMsgShop->Get())
+			return;
+		if (pkMsgShop->Get()->uiNumRows > 0)
+		{
+			ChatPacket(CHAT_TYPE_INFO, "Zaten aktif bir pazariniz var.");
+			return;
+		}
+	}
+
+	if (!CheckMyShopPlacement())
+		return;
 
 	if (GetGiftPages() > 0)
 	{
@@ -840,8 +933,8 @@ void CHARACTER::OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE
 		m_pkExchange->Cancel();
 
 	SetMyShopTime();
-	CShopManager::instance().CreateOfflineShop(this, m_stShopSign.c_str(), map_shop);
-	RemoveSpecifyItem(50200, 1);
+	if (CShopManager::instance().CreateOfflineShop(this, m_stShopSign.c_str(), map_shop))
+		RemoveSpecifyItem(50200, 1);
 	m_stShopSign.clear();
 }
 #else

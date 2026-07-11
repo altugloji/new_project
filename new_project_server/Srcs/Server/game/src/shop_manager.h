@@ -32,7 +32,7 @@ public:
 #ifdef OFFLINE_SHOP
 public:
 	bool	StartOfflineShop(DWORD dwPID, bool onboot = false);
-	void	CreateOfflineShop(LPCHARACTER owner, const char *szSign, const std::vector<TShopItemTable*> pTable);
+	bool	CreateOfflineShop(LPCHARACTER owner, const char *szSign, const std::vector<TShopItemTable*> pTable);
 	LPSHOP	CreateNPCShop(LPCHARACTER ch, std::vector<TShopItemTable *> map_shop);
 #endif
 

@@ -1276,6 +1276,9 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		LPCHARACTER		GetShopOwner() const { return m_pkChrShopOwner;}
 
 		void			OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE bItemCount);
+#ifdef OFFLINE_SHOP
+		bool			CheckMyShopPlacement();
+#endif
 		LPSHOP			GetMyShop() const { return m_pkMyShop; }
 		void			CloseMyShop();
 
