@@ -187,6 +187,10 @@ enum eCommonDefines {
 	#define ENABLE_SHOP_SEARCH_ITEM_SELECT						// Pazar Arama: grid'den item secip SADECE secilenleri arama (secim yoksa eski kategori-geneli davranis)
 	#define ENABLE_OFFLINE_SHOP_REMOTE_VIEW
 	#define ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
+	// #define ENABLE_IKASHOP_SEARCH									// IKASHOP tarzi global Pazar Arama: kanal/harita bagimsiz filtreli arama + uzaktan satin alma + dukkan goruntuleme (CG 84 / GC 139 / GG 42; wire degisti -> server+client rebuild + repack BIRLIKTE)
+	#if defined(ENABLE_IKASHOP_SEARCH) && !defined(ENABLE_OFFLINE_SHOP_SOLD_RED)
+		#error "ENABLE_IKASHOP_SEARCH icin ENABLE_OFFLINE_SHOP_SOLD_RED acik olmali (uzak alim kilidi sold kolonuna dayanir)"
+	#endif
 #endif
 
 #endif

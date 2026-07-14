@@ -158,7 +158,7 @@
 #define ENABLE_REFINE_RENEWAL
 #define ENABLE_GM_PLAYER_PANEL
 #define ENABLE_SAFE_TRADE_SYSTEM										// Güvenli Ticaret
-#define ENABLE_IKASHOP_SEARCH											// IKASHOP tarzi global Pazar Arama: filtreli arama + uzaktan satin alma (CG 84 / GC 139; server ile BIRLIKTE derlenir)
+//#define ENABLE_IKASHOP_SEARCH											// IKASHOP tarzi global Pazar Arama: filtreli arama + uzaktan satin alma (CG 84 / GC 139; server ile BIRLIKTE derlenir)
 #define ENABLE_ITEM_UPGRADE_OWNER
 #define ENABLE_ITEM_ENCHANT_USE_COUNT
 #define ENABLE_EFSUN_CHANGE_DIALOG

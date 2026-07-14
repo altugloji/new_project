@@ -400,7 +400,7 @@ class GameWindow(ui.ScriptWindow):
 		if app.ENABLE_EXCHANGE_LOG:
 			onPressKeyDict[app.DIK_F6]	= lambda : self.interface.OpenExchangeLog()
 
-		# onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenShopSearch()
+		onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenShopSearch()
 
 		if app.ENABLE_GIFT_SEND_SYSTEM:
 			onPressKeyDict[app.DIK_F8]	= lambda : self.interface.ToggleGiftSendDialog()
