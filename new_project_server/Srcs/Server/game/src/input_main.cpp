@@ -549,6 +549,30 @@ int CInputMain::Whisper(LPCHARACTER ch, const char * data, size_t uiBytes) const
 				ch->GetDesc()->Packet(&pack, sizeof(pack));
 			}
 		}
+#ifdef ENABLE_MESSENGER_BLOCK
+		else if (MessengerManager::instance().CheckMessengerList(ch->GetName(), (pkChr ? pkChr->GetName() : pinfo->szNameTo), SYST_BLOCK))
+		{
+			if (ch->GetDesc())
+			{
+				TPacketGCWhisper pack;
+
+				char msg_2[CHAT_MAX_LEN + 1];
+				snprintf(msg_2, sizeof(msg_2), LC_TEXT("Bu oyuncu ile aranizda engel var, mesaj gonderilemedi."));
+				int len = MIN(CHAT_MAX_LEN, strlen(msg_2) + 1);
+
+				pack.bHeader = HEADER_GC_WHISPER;
+				pack.wSize = sizeof(TPacketGCWhisper) + len;
+				pack.bType = WHISPER_TYPE_SYSTEM;
+				strlcpy(pack.szNameFrom, pinfo->szNameTo, sizeof(pack.szNameFrom));
+
+				TEMP_BUFFER buf;
+
+				buf.write(&pack, sizeof(TPacketGCWhisper));
+				buf.write(msg_2, len);
+				ch->GetDesc()->Packet(buf.read_peek(), buf.size());
+			}
+		}
+#endif
 		else
 		{
 			BYTE bType = WHISPER_TYPE_NORMAL;
@@ -699,9 +723,19 @@ struct FEmpireChatPacket
 	BYTE bEmpire;
 	int iMapIndex;
 	int namelen;
+#ifdef ENABLE_MESSENGER_BLOCK
+	const char* m_writenPlayer;
+#endif
 
-	FEmpireChatPacket(packet_chat& p, const char* chat_msg, int len, BYTE bEmpire, int iMapIndex, int iNameLen)
+	FEmpireChatPacket(packet_chat& p, const char* chat_msg, int len, BYTE bEmpire, int iMapIndex, int iNameLen
+#ifdef ENABLE_MESSENGER_BLOCK
+		, const char* writenPlayer
+#endif
+	)
 		: p(p), orig_msg(chat_msg), orig_len(len), bEmpire(bEmpire), iMapIndex(iMapIndex), namelen(iNameLen)
+#ifdef ENABLE_MESSENGER_BLOCK
+		, m_writenPlayer(writenPlayer)
+#endif
 	{
 		memset( converted_msg, 0, sizeof(converted_msg) );
 	}
@@ -713,6 +747,11 @@ struct FEmpireChatPacket
 
 		if (d->GetCharacter()->GetMapIndex() != iMapIndex)
 			return;
+
+#ifdef ENABLE_MESSENGER_BLOCK
+		if (MessengerManager::instance().CheckMessengerList(d->GetCharacter()->GetName(), m_writenPlayer, SYST_BLOCK))
+			return;
+#endif
 
 		d->BufferedPacket(&p, sizeof(packet_chat));
 
@@ -969,7 +1008,11 @@ int CInputMain::Chat(LPCHARACTER ch, const char * data, size_t uiBytes) const
 					                                len,
 					                                (ch->GetGMLevel() > GM_PLAYER ||
 						                                ch->IsEquipUniqueGroup(UNIQUE_GROUP_RING_OF_LANGUAGE)) ? 0 : ch->GetEmpire(),
-					                                ch->GetMapIndex(), strlen(ch->GetName())));
+					                                ch->GetMapIndex(), strlen(ch->GetName())
+#ifdef ENABLE_MESSENGER_BLOCK
+						                                , ch->GetName()
+#endif
+						                                ));
 #ifdef ENABLE_CHAT_LOGGING
 					LogManager::instance().EscapeString(__escape_string, sizeof(__escape_string), chatbuf, len);
 					LogManager::instance().ChatLog(ch->GetMapIndex(), ch->GetPlayerID(), ch->GetName(), 0, "", "NORMAL", __escape_string, ch->GetDesc() ? ch->GetDesc()->GetHostName() : "");
@@ -1200,6 +1243,122 @@ int CInputMain::Messenger(LPCHARACTER ch, const char* c_pData, size_t uiBytes) c
 
 	switch (p->subheader)
 	{
+#ifdef ENABLE_MESSENGER_BLOCK
+		case MESSENGER_SUBHEADER_CG_ADD_BLOCK_BY_VID:
+			{
+				if (uiBytes < sizeof(TPacketCGMessengerAddBlockByVID))
+					return -1;
+
+				const auto p2 = (TPacketCGMessengerAddBlockByVID *) c_pData;
+				const LPCHARACTER ch_companion = CHARACTER_MANAGER::instance().Find(p2->vid);
+
+				if (!ch_companion)
+					return sizeof(TPacketCGMessengerAddBlockByVID);
+
+				if (ch->IsObserverMode())
+					return sizeof(TPacketCGMessengerAddBlockByVID);
+
+				LPDESC d = ch_companion->GetDesc();
+
+				if (!d)
+					return sizeof(TPacketCGMessengerAddBlockByVID);
+
+				if (ch->GetDesc() == d)
+					return sizeof(TPacketCGMessengerAddBlockByVID);
+
+				if (ch_companion->GetGuild() && ch->GetGuild() && ch_companion->GetGuild() == ch->GetGuild())
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Ayni loncadan birini engelleyemezsin."));
+					return sizeof(TPacketCGMessengerAddBlockByVID);
+				}
+
+				if (MessengerManager::instance().CheckMessengerList(ch->GetName(), ch_companion->GetName(), SYST_FRIEND))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Arkadas listendeki birini engelleyemezsin, once listeden sil."));
+					return sizeof(TPacketCGMessengerAddBlockByVID);
+				}
+
+				if (MessengerManager::instance().CheckMessengerList(ch->GetName(), ch_companion->GetName(), SYST_BLOCK))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu oyuncu zaten engelli."));
+					return sizeof(TPacketCGMessengerAddBlockByVID);
+				}
+
+				if (ch->GetGMLevel() == GM_PLAYER && ch_companion->GetGMLevel() != GM_PLAYER)
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("GM engellenemez."));
+					return sizeof(TPacketCGMessengerAddBlockByVID);
+				}
+
+				MessengerManager::instance().AddToBlockList(ch->GetName(), ch_companion->GetName());
+			}
+			return sizeof(TPacketCGMessengerAddBlockByVID);
+
+		case MESSENGER_SUBHEADER_CG_ADD_BLOCK_BY_NAME:
+			{
+				if (uiBytes < CHARACTER_NAME_MAX_LEN)
+					return -1;
+
+				char name[CHARACTER_NAME_MAX_LEN + 1];
+				strlcpy(name, c_pData, sizeof(name));
+
+				if (ch->GetGMLevel() == GM_PLAYER && gm_get_level(name) != GM_PLAYER)
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("GM engellenemez."));
+					return CHARACTER_NAME_MAX_LEN;
+				}
+
+				const LPCHARACTER tch = CHARACTER_MANAGER::instance().FindPC(name);
+
+				if (!tch)
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("%s isimli oyuncu oyunda degil."), name);
+				else
+				{
+					if (tch == ch)
+						return CHARACTER_NAME_MAX_LEN;
+
+					if (tch->GetGuild() && ch->GetGuild() && tch->GetGuild() == ch->GetGuild())
+					{
+						ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Ayni loncadan birini engelleyemezsin."));
+						return CHARACTER_NAME_MAX_LEN;
+					}
+
+					if (MessengerManager::instance().CheckMessengerList(ch->GetName(), tch->GetName(), SYST_FRIEND))
+					{
+						ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Arkadas listendeki birini engelleyemezsin, once listeden sil."));
+						return CHARACTER_NAME_MAX_LEN;
+					}
+
+					if (MessengerManager::instance().CheckMessengerList(ch->GetName(), tch->GetName(), SYST_BLOCK))
+					{
+						ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu oyuncu zaten engelli."));
+						return CHARACTER_NAME_MAX_LEN;
+					}
+
+					MessengerManager::instance().AddToBlockList(ch->GetName(), tch->GetName());
+				}
+			}
+			return CHARACTER_NAME_MAX_LEN;
+
+		case MESSENGER_SUBHEADER_CG_REMOVE_BLOCK:
+			{
+				if (uiBytes < CHARACTER_NAME_MAX_LEN)
+					return -1;
+
+				char char_name[CHARACTER_NAME_MAX_LEN + 1];
+				strlcpy(char_name, c_pData, sizeof(char_name));
+
+				if (!MessengerManager::instance().CheckMessengerList(ch->GetName(), char_name, SYST_BLOCK))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu oyuncu engelli degil."));
+					return CHARACTER_NAME_MAX_LEN;
+				}
+
+				MessengerManager::instance().RemoveFromBlockList(ch->GetName(), char_name);
+			}
+			return CHARACTER_NAME_MAX_LEN;
+#endif
+
 		case MESSENGER_SUBHEADER_CG_ADD_BY_VID:
 			{
 				if (uiBytes < sizeof(TPacketCGMessengerAddByVID))
@@ -1233,6 +1392,20 @@ int CInputMain::Messenger(LPCHARACTER ch, const char* c_pData, size_t uiBytes) c
 
 				if (ch->GetDesc() == d)
 					return sizeof(TPacketCGMessengerAddByVID);
+
+#ifdef ENABLE_MESSENGER_BLOCK
+				if (MessengerManager::instance().CheckMessengerList(ch->GetName(), ch_companion->GetName(), SYST_FRIEND))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Zaten arkadassiniz."));
+					return sizeof(TPacketCGMessengerAddByVID);
+				}
+
+				if (MessengerManager::instance().CheckMessengerList(ch->GetName(), ch_companion->GetName(), SYST_BLOCK))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Engelli oyuncu arkadas olarak eklenemez."));
+					return sizeof(TPacketCGMessengerAddByVID);
+				}
+#endif
 
 				MessengerManager::instance().RequestToAdd(ch, ch_companion);
 				//MessengerManager::instance().AddToList(ch->GetName(), ch_companion->GetName());
@@ -1268,6 +1441,20 @@ int CInputMain::Messenger(LPCHARACTER ch, const char* c_pData, size_t uiBytes) c
 					}
 					else
 					{
+#ifdef ENABLE_MESSENGER_BLOCK
+						if (MessengerManager::instance().CheckMessengerList(ch->GetName(), tch->GetName(), SYST_FRIEND))
+						{
+							ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Zaten arkadassiniz."));
+							return CHARACTER_NAME_MAX_LEN;
+						}
+
+						if (MessengerManager::instance().CheckMessengerList(ch->GetName(), tch->GetName(), SYST_BLOCK))
+						{
+							ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Engelli oyuncu arkadas olarak eklenemez."));
+							return CHARACTER_NAME_MAX_LEN;
+						}
+#endif
+
 						MessengerManager::instance().RequestToAdd(ch, tch);
 						//MessengerManager::instance().AddToList(ch->GetName(), tch->GetName());
 					}
@@ -2569,6 +2756,14 @@ void CInputMain::PartyInvite(LPCHARACTER ch, const char * c_pData) const
 		return;
 	}
 
+#ifdef ENABLE_MESSENGER_BLOCK
+	if (MessengerManager::instance().CheckMessengerList(ch->GetName(), pInvitee->GetName(), SYST_BLOCK))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Engelli oyuncu partiye davet edilemez."));
+		return;
+	}
+#endif
+
 	ch->PartyInvite(pInvitee);
 }
 
@@ -2919,6 +3114,14 @@ int CInputMain::Guild(LPCHARACTER ch, const char * data, size_t uiBytes) const
 				if (!ch->IsPC() || !newmember->IsPC())
 					return SubPacketLen;
 				// @fixme145 END
+
+#ifdef ENABLE_MESSENGER_BLOCK
+				if (MessengerManager::instance().CheckMessengerList(ch->GetName(), newmember->GetName(), SYST_BLOCK))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Engelli oyuncu loncaya davet edilemez."));
+					return SubPacketLen;
+				}
+#endif
 
 				pGuild->Invite(ch, newmember);
 			}

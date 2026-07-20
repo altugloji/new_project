@@ -3824,3 +3824,33 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	Náhrdelník
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	Náramek
 IKASHOP_SEARCH_SUB_JEWEL_EAR	Náušnice
 IKASHOP_SEARCH_PLACEHOLDER	Hledat item...
+LUCKYDRAW_TITLE	Šastné losování
+LUCKYDRAW_STATE_ACTIVE	Stav: AKTIVNÍ
+LUCKYDRAW_STATE_CLOSED	Stav: ZAVØENO
+LUCKYDRAW_TIME	Zbıvající èas: %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	Zbıvající èas: -
+LUCKYDRAW_JOIN_COUNT	Celkem lístkù: %s / %s
+LUCKYDRAW_MY_COUNT	Mé lístky: %s / %s
+LUCKYDRAW_COST	Cena úèasti: %s
+LUCKYDRAW_COST_FREE	Cena úèasti: Zdarma
+LUCKYDRAW_WINNERS	Vıherci
+LUCKYDRAW_REWARD_PREFIX	Odmìna: 
+LUCKYDRAW_BTN_JOIN	Zúèastnit se
+LUCKYDRAW_BTN_REWARD	Vyzvednout odmìnu
+LUCKYDRAW_BTN_REFRESH	Obnovit
+LUCKYDRAW_JOIN_SENT	ádost o úèast byla odeslána. Aktuální stav mùeš zobrazit pomocí Obnovit.
+LUCKYDRAW_REWARD_SENT	ádost o odmìnu byla odeslána.
+LUCKYDRAW_REQ_TITLE	Poadavky pro úèast:
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	Odmìny
+LUCKYDRAW_WINNER_LABEL	%d. vıherce
+LUCKYDRAW_JOINERS_TITLE	Úèastníci %s / %s
+LUCKYDRAW_TICKETS	Tvé lístky: %s / %s
+LUCKYDRAW_MAX_NOTE	Mùeš pouít maximálnì %s lístkù.
+LUCKYDRAW_BTN_BUY	Koupit lístek
+LUCKYDRAW_BOTTOM_NOTE	Losování probìhne na konci eventu a vıherci budou oznámeni.
+LUCKYDRAW_JOINER_TICKETS	%s lístkù
+LUCKYDRAW_CLOSED	Event je momentálnì zavøenı.
+LUCKYDRAW_TIME_HEADER	Zbıvající èas
+LUCKYDRAW_YANG_NEEDED	Potøebnı Yang:
+LUCKYDRAW_WINNER_TICKETS	%s (%s lístkù)

@@ -1186,6 +1186,12 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 
 		bool			DoRefineWithScroll(LPITEM item);
 		bool			RefineInformation(BYTE bCell, BYTE bType, int iAdditionalCell = -1);
+#ifdef ENABLE_NEXT_REFINE_SUCCESS
+		// GM'in verdigi tek seferlik %100 refine hakki. Quest flag'te tutulur:
+		// warp/kanal degisimi/relog'da KAYBOLMAZ, zar atilinca tuketilir (bkz. deviltower_zone.can_refine deseni).
+		void			SetNextRefineSuccess(bool bSet)	{ SetQuestFlag("gm_refine.next_success", bSet ? 1 : 0); }
+		bool			IsNextRefineSuccess() const		{ return GetQuestFlag("gm_refine.next_success") > 0; }
+#endif
 
 		void			SetRefineMode(int iAdditionalCell = -1);
 		void			ClearRefineMode();
@@ -1580,6 +1586,13 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		int					ComputeSkillAtPosition(DWORD dwVnum, const PIXEL_POSITION& posTarget, BYTE bSkillLevel = 0);
 		void				ComputeSkillPoints() const;
 
+#ifdef NEW_PASSIVE_SKILLS
+		int					GetAddHPSkillLevel() const;
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+		int					GetMonsterHunterSkillLevel() const;
+#endif
+#endif
+
 		void				SetSkillGroup(BYTE bSkillGroup);
 		BYTE				GetSkillGroup() const		{ return m_points.skill_group; }
 
@@ -1762,6 +1775,9 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 
 		virtual	bool		StartRiding();
 		virtual	bool		StopRiding();
+#ifdef ENABLE_HORSE_RIDE_SKILL_DELAY
+		bool				IsRideSkillDelayed() const;	// skill sonrasi 1500ms ata binme gecikmesi (char_item.cpp)
+#endif
 
 		virtual	DWORD		GetMyHorseVnum() const;
 
@@ -2429,6 +2445,21 @@ protected:
 			m_dwFishingCount = 0;
 			m_dwMiningCount = 0;
 		};
+#endif
+
+#ifdef ENABLE_LUCKY_DRAW
+	protected:
+		DWORD				m_dwLastLDRequestTime;
+		DWORD				m_dwLastLDRequestRewardTime;
+		DWORD				m_dwLastLDJoinTime;
+
+	public:
+		void	SetLastLuckyDrawRequestTime() { m_dwLastLDRequestTime = get_dword_time() + 10000; }
+		void	SetLastLuckyDrawRequestRewardTime() { m_dwLastLDRequestRewardTime = get_dword_time() + 10000; }
+		void	SetLastLuckyDrawJoinTime() { m_dwLastLDJoinTime = get_dword_time() + 3000; }
+		bool	CanRequestLD() { return get_dword_time() > m_dwLastLDRequestTime; }
+		bool	CanRequestLDReward() { return get_dword_time() > m_dwLastLDRequestRewardTime; }
+		bool	CanJoinLD() { return get_dword_time() > m_dwLastLDJoinTime; }
 #endif
 };
 

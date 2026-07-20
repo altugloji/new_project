@@ -11435,3 +11435,5 @@ VNUM	LOCALE_NAME
 30406	Gem Coupon (25)
 30407	Gem Coupon (50)
 30408	Gem Coupon (100)
+49100	Canavar Avcýsý Kitabý
+49102	Ýlham Kitabý

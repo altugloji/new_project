@@ -687,6 +687,11 @@ void CPythonNetworkStream::GamePhase()
 			ret = RecvGem();
 			break;
 #endif
+#ifdef ENABLE_LUCKY_DRAW
+			case HEADER_GC_LUCKYDRAW_INFO:
+				ret = RecvLuckyDrawInfoPacket();
+				break;
+#endif
 			default:
 				ret = RecvDefaultPacket(header);
 				break;
@@ -1172,6 +1177,51 @@ bool CPythonNetworkStream::SendMessengerRemovePacket(const char * c_szKey, const
 	__RefreshTargetBoardByName(c_szName);
 	return SendSequence();
 }
+
+#ifdef ENABLE_MESSENGER_BLOCK
+bool CPythonNetworkStream::SendMessengerAddBlockByVIDPacket(DWORD vid)
+{
+	TPacketCGMessenger packet;
+	packet.header = HEADER_CG_MESSENGER;
+	packet.subheader = MESSENGER_SUBHEADER_CG_ADD_BLOCK_BY_VID;
+	if (!Send(sizeof(packet), &packet))
+		return false;
+	if (!Send(sizeof(vid), &vid))
+		return false;
+	return SendSequence();
+}
+
+bool CPythonNetworkStream::SendMessengerAddBlockByNamePacket(const char* c_szName)
+{
+	TPacketCGMessenger packet;
+	packet.header = HEADER_CG_MESSENGER;
+	packet.subheader = MESSENGER_SUBHEADER_CG_ADD_BLOCK_BY_NAME;
+	if (!Send(sizeof(packet), &packet))
+		return false;
+	char szName[CHARACTER_NAME_MAX_LEN];
+	strncpy(szName, c_szName, CHARACTER_NAME_MAX_LEN - 1);
+	szName[CHARACTER_NAME_MAX_LEN - 1] = '\0';
+	if (!Send(sizeof(szName), &szName))
+		return false;
+	return SendSequence();
+}
+
+bool CPythonNetworkStream::SendMessengerRemoveBlockPacket(const char* c_szKey, const char* c_szName)
+{
+	TPacketCGMessenger packet;
+	packet.header = HEADER_CG_MESSENGER;
+	packet.subheader = MESSENGER_SUBHEADER_CG_REMOVE_BLOCK;
+	if (!Send(sizeof(packet), &packet))
+		return false;
+	char szKey[CHARACTER_NAME_MAX_LEN];
+	strncpy(szKey, c_szKey, CHARACTER_NAME_MAX_LEN - 1);
+	szKey[CHARACTER_NAME_MAX_LEN - 1] = '\0';
+	if (!Send(sizeof(szKey), &szKey))
+		return false;
+	__RefreshTargetBoardByName(c_szName);
+	return SendSequence();
+}
+#endif
 
 bool CPythonNetworkStream::SendCharacterStatePacket(const TPixelPosition& c_rkPPosDst, float fDstRot, UINT eFunc, UINT uArg)
 {
@@ -3133,6 +3183,57 @@ bool CPythonNetworkStream::RecvMessenger()
 			break;
 		}
 		#endif
+
+#ifdef ENABLE_MESSENGER_BLOCK
+		case MESSENGER_SUBHEADER_GC_BLOCK_LIST:
+		{
+			TPacketGCMessengerBlockListOnline onn;
+			while (iSize)
+			{
+				if (!Recv(sizeof(TPacketGCMessengerBlockListOffline), &onn))
+					return false;
+
+				if (!Recv(onn.length, char_name))
+					return false;
+
+				char_name[onn.length] = 0;
+
+				if (onn.connected & MESSENGER_CONNECTED_STATE_ONLINE)
+					CPythonMessenger::Instance().OnBlockLogin(char_name);
+				else
+					CPythonMessenger::Instance().OnBlockLogout(char_name);
+
+				iSize -= sizeof(TPacketGCMessengerBlockListOffline);
+				iSize -= onn.length;
+			}
+			break;
+		}
+
+		case MESSENGER_SUBHEADER_GC_BLOCK_LOGIN:
+		{
+			TPacketGCMessengerLogin pp;
+			if (!Recv(sizeof(pp), &pp))
+				return false;
+			if (!Recv(pp.length, char_name))
+				return false;
+			char_name[pp.length] = 0;
+			CPythonMessenger::Instance().OnBlockLogin(char_name);
+			__RefreshTargetBoardByName(char_name);
+			break;
+		}
+
+		case MESSENGER_SUBHEADER_GC_BLOCK_LOGOUT:
+		{
+			TPacketGCMessengerLogout logout2;
+			if (!Recv(sizeof(logout2), &logout2))
+				return false;
+			if (!Recv(logout2.length, char_name))
+				return false;
+			char_name[logout2.length] = 0;
+			CPythonMessenger::Instance().OnBlockLogout(char_name);
+			break;
+		}
+#endif
 	}
 	return true;
 }
@@ -6076,6 +6177,38 @@ bool CPythonNetworkStream::RecvBotControlPacket() {
 	TPacketGCBotControl kPacket;
 	if (!Recv(sizeof(TPacketGCBotControl), &kPacket)) { return false; }
 	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "ShowBotControlWnd", Py_BuildValue("(s)", kPacket.botData));
+	return true;
+}
+#endif
+
+#ifdef ENABLE_LUCKY_DRAW
+bool CPythonNetworkStream::RecvLuckyDrawInfoPacket()
+{
+	TPacketGCLuckyDrawInfo rPacket;
+	if (!Recv(sizeof(rPacket), &rPacket)) { return false; }
+
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_ClearCachedData", Py_BuildValue("()"));
+
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_SetLuckyDrawInfo", Py_BuildValue("(iiiiiK)", rPacket.endTime, rPacket.joinCount, rPacket.maxJoinCount, rPacket.myJoinCount, rPacket.maxTicketCount,
+		rPacket.neededYang));
+
+	for (uint8_t r = 0; r < LD_MAX_REQ_ITEMS; r++)
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_SetRequirement", Py_BuildValue("(iii)", r, rPacket.neededItemVnum[r], rPacket.neededItemCount[r]));
+
+	for (uint8_t i = 0; i < LD_MAX_WINNERS; i++) {
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_SetWinnerName", Py_BuildValue("(isi)", i, rPacket.winnerNames[i], rPacket.winnerTickets[i]));
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_SetRewards", Py_BuildValue("(ii)", i, rPacket.iReward1[i]));
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_SetRewards", Py_BuildValue("(ii)", i, rPacket.iReward2[i]));
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_SetRewards", Py_BuildValue("(ii)", i, rPacket.iReward3[i]));
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_SetRewards", Py_BuildValue("(ii)", i, rPacket.iReward4[i]));
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_SetRewards", Py_BuildValue("(ii)", i, rPacket.iReward5[i]));
+	}
+
+	for (uint8_t j = 0; j < LD_MAX_JOINER_LIST; j++)
+		PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_SetJoiner", Py_BuildValue("(isi)", j, rPacket.joinerNames[j], rPacket.joinerTickets[j]));
+
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "LD_RefreshUI", Py_BuildValue("()"));
+
 	return true;
 }
 #endif

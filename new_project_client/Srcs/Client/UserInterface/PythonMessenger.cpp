@@ -1,6 +1,42 @@
 #include "stdafx.h"
 #include "PythonMessenger.h"
 
+#ifdef ENABLE_MESSENGER_BLOCK
+void CPythonMessenger::OnBlockLogin(const char* c_szKey)
+{
+	m_BlockNameMap.insert(c_szKey);
+
+	if (m_poMessengerHandler)
+		PyCallClassMemberFunc(m_poMessengerHandler, "OnLogin", Py_BuildValue("(is)", MESSENGER_GROUP_INDEX_BLOCK, c_szKey));
+}
+
+void CPythonMessenger::OnBlockLogout(const char* c_szKey)
+{
+	m_BlockNameMap.insert(c_szKey);
+
+	if (m_poMessengerHandler)
+		PyCallClassMemberFunc(m_poMessengerHandler, "OnLogout", Py_BuildValue("(is)", MESSENGER_GROUP_INDEX_BLOCK, c_szKey));
+}
+
+BOOL CPythonMessenger::IsBlockByKey(const char* c_szKey)
+{
+	return m_BlockNameMap.contains(c_szKey);
+}
+
+BOOL CPythonMessenger::IsBlockByName(const char* c_szName)
+{
+	return IsBlockByKey(c_szName);
+}
+
+void CPythonMessenger::RemoveBlock(const char* c_szKey)
+{
+	m_BlockNameMap.erase(c_szKey);
+
+	if (m_poMessengerHandler)
+		PyCallClassMemberFunc(m_poMessengerHandler, "OnRemoveList", Py_BuildValue("(is)", MESSENGER_GROUP_INDEX_BLOCK, c_szKey));
+}
+#endif
+
 void CPythonMessenger::RemoveFriend(const char * c_szKey)
 {
 	m_FriendNameMap.erase(c_szKey);
@@ -89,6 +125,9 @@ void CPythonMessenger::Destroy()
 {
 	m_FriendNameMap.clear();
 	m_GuildMemberStateMap.clear();
+#ifdef ENABLE_MESSENGER_BLOCK
+	m_BlockNameMap.clear();
+#endif
 }
 
 void CPythonMessenger::SetMessengerHandler(PyObject* poHandler)
@@ -148,6 +187,27 @@ PyObject * messengerSetMessengerHandler(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_MESSENGER_BLOCK
+PyObject* messengerIsBlockByName(PyObject* poSelf, PyObject* poArgs)
+{
+	char* szName;
+	if (!PyTuple_GetString(poArgs, 0, &szName))
+		return Py_BuildException();
+
+	return Py_BuildValue("i", CPythonMessenger::Instance().IsBlockByName(szName));
+}
+
+PyObject* messengerRemoveBlock(PyObject* poSelf, PyObject* poArgs)
+{
+	char* szKey;
+	if (!PyTuple_GetString(poArgs, 0, &szKey))
+		return Py_BuildException();
+
+	CPythonMessenger::Instance().RemoveBlock(szKey);
+	return Py_BuildNone();
+}
+#endif
+
 void initMessenger()
 {
 	static PyMethodDef s_methods[] =
@@ -157,6 +217,10 @@ void initMessenger()
 		{ "Destroy",					messengerDestroy,					METH_VARARGS },
 		{ "RefreshGuildMember",			messengerRefreshGuildMember,		METH_VARARGS },
 		{ "SetMessengerHandler",		messengerSetMessengerHandler,		METH_VARARGS },
+#ifdef ENABLE_MESSENGER_BLOCK
+		{ "IsBlockByName",				messengerIsBlockByName,				METH_VARARGS },
+		{ "RemoveBlock",				messengerRemoveBlock,				METH_VARARGS },
+#endif
 		{nullptr, nullptr},
 	};
 

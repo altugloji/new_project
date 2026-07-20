@@ -3820,3 +3820,33 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	Colier
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	Brãþarã
 IKASHOP_SEARCH_SUB_JEWEL_EAR	Cercel
 IKASHOP_SEARCH_PLACEHOLDER	Cautã item...
+LUCKYDRAW_TITLE	Extragere Norocoasã
+LUCKYDRAW_STATE_ACTIVE	Stare: ACTIV
+LUCKYDRAW_STATE_CLOSED	Stare: ÎNCHIS
+LUCKYDRAW_TIME	Timp rãmas: %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	Timp rãmas: -
+LUCKYDRAW_JOIN_COUNT	Total bilete: %s / %s
+LUCKYDRAW_MY_COUNT	Biletele mele: %s / %s
+LUCKYDRAW_COST	Cost participare: %s
+LUCKYDRAW_COST_FREE	Cost participare: Gratuit
+LUCKYDRAW_WINNERS	Câºtigãtori
+LUCKYDRAW_REWARD_PREFIX	Recompensã: 
+LUCKYDRAW_BTN_JOIN	Participã
+LUCKYDRAW_BTN_REWARD	Primeºte recompensa
+LUCKYDRAW_BTN_REFRESH	Reîmprospãteazã
+LUCKYDRAW_JOIN_SENT	Cererea de participare a fost trimisã. Poþi vedea starea actualã cu Reîmprospãteazã.
+LUCKYDRAW_REWARD_SENT	Cererea de recompensã a fost trimisã.
+LUCKYDRAW_REQ_TITLE	Cerinþe pentru participare:
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	Recompense
+LUCKYDRAW_WINNER_LABEL	Câºtigãtorul %d
+LUCKYDRAW_JOINERS_TITLE	Participanþi %s / %s
+LUCKYDRAW_TICKETS	Biletele tale: %s / %s
+LUCKYDRAW_MAX_NOTE	Poþi folosi maximum %s bilete.
+LUCKYDRAW_BTN_BUY	Cumpãrã bilet
+LUCKYDRAW_BOTTOM_NOTE	Extragerea va avea loc la finalul evenimentului, iar câºtigãtorii vor fi anunþaþi.
+LUCKYDRAW_JOINER_TICKETS	%s bilete
+LUCKYDRAW_CLOSED	Evenimentul este închis momentan.
+LUCKYDRAW_TIME_HEADER	Timp rãmas
+LUCKYDRAW_YANG_NEEDED	Yang necesar:
+LUCKYDRAW_WINNER_TICKETS	%s (%s Bilete)

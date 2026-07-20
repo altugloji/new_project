@@ -437,6 +437,9 @@ class ITEM_MANAGER : public singleton<ITEM_MANAGER>
 #endif
 		bool			ReadDropItemGroup(const char * c_pszFileName);
 		bool			ReadMonsterDropItemGroup(const char * c_pszFileName);
+#ifdef ENABLE_RELOAD_MOB_DROP_ITEM
+		bool			ReloadMobDropItemFile();
+#endif
 		bool			ReadSpecialDropItemFile(const char * c_pszFileName);
 
 		// convert name -> vnum special_item_group.txt

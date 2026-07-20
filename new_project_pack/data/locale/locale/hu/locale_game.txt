@@ -3824,3 +3824,33 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	Nyaklánc
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	Karkötõ
 IKASHOP_SEARCH_SUB_JEWEL_EAR	Fülbevaló
 IKASHOP_SEARCH_PLACEHOLDER	Item keresése...
+LUCKYDRAW_TITLE	Szerencsesorsolás
+LUCKYDRAW_STATE_ACTIVE	Állapot: AKTÍV
+LUCKYDRAW_STATE_CLOSED	Állapot: ZÁRVA
+LUCKYDRAW_TIME	Hátralévõ idõ: %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	Hátralévõ idõ: -
+LUCKYDRAW_JOIN_COUNT	Összes jegy: %s / %s
+LUCKYDRAW_MY_COUNT	Jegyeim: %s / %s
+LUCKYDRAW_COST	Részvételi díj: %s
+LUCKYDRAW_COST_FREE	Részvételi díj: Ingyenes
+LUCKYDRAW_WINNERS	Nyertesek
+LUCKYDRAW_REWARD_PREFIX	Jutalom: 
+LUCKYDRAW_BTN_JOIN	Csatlakozás
+LUCKYDRAW_BTN_REWARD	Jutalom átvétele
+LUCKYDRAW_BTN_REFRESH	Frissítés
+LUCKYDRAW_JOIN_SENT	Részvételi kérés elküldve. Az aktuális állapotot a Frissítés gombbal láthatod.
+LUCKYDRAW_REWARD_SENT	Jutalomigény elküldve.
+LUCKYDRAW_REQ_TITLE	Részvételi feltételek:
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	Jutalmak
+LUCKYDRAW_WINNER_LABEL	%d. nyertes
+LUCKYDRAW_JOINERS_TITLE	Résztvevõk %s / %s
+LUCKYDRAW_TICKETS	Jegyeid: %s / %s
+LUCKYDRAW_MAX_NOTE	Legfeljebb %s jegyet használhatsz.
+LUCKYDRAW_BTN_BUY	Jegy vásárlása
+LUCKYDRAW_BOTTOM_NOTE	A sorsolás az event végén lesz megtartva, és a nyertesek kihirdetésre kerülnek.
+LUCKYDRAW_JOINER_TICKETS	%s jegy
+LUCKYDRAW_CLOSED	Az event jelenleg zárva van.
+LUCKYDRAW_TIME_HEADER	Hátralévõ idõ
+LUCKYDRAW_YANG_NEEDED	Szükséges Yang:
+LUCKYDRAW_WINNER_TICKETS	%s (%s jegy)

@@ -140,6 +140,12 @@ void CPythonPlayerEventHandler::OnHit(UINT uSkill, CActorInstance& rkActorVictim
 	if (!rkActorVictim.IsPushing())
 		return;
 
+	// At dash desync fix: dash (137) izlenirken kopya surekli blend'de (IsPushing) oldugundan bu yol
+	// her vurusta TEMP_Push + CG_SYNC_POSITION uretir; dash'cinin server pozisyonu zaten caster'in
+	// kendi 150ms akisiyla otoriter. Kurban-sync'i dash kurbanlari icin atla (knockback sync'i etkilenmez).
+	if (rkActorVictim.IsUsingMovingSkill())
+		return;
+
 	extern bool IS_HUGE_RACE(unsigned int vnum);
 	if (IS_HUGE_RACE(rkActorVictim.GetRace()))
 		return;

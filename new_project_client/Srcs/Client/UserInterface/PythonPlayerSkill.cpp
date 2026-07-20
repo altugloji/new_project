@@ -666,12 +666,27 @@ bool CPythonPlayer::__UseSkill(DWORD dwSlotIndex)
 	}
 
 	// @fixme051 BEGIN
-	const DWORD dwMotionIndex = pSkillData->GetSkillMotionIndex(rkSkillInst.iGrade);
-	const DWORD dwLoopCount = pSkillData->GetMotionLoopCount(rkSkillInst.fcurEfficientPercentage);
-	if (!pkInstMain->NEW_UseSkill(rkSkillInst.dwIndex, dwMotionIndex, dwLoopCount, pSkillData->IsMovingSkill()))
+	// At dash'inde (137 / MOVING_SKILL) buradaki erken NEW_UseSkill cagrisi skill basina
+	// FUNC_SKILL/FUNC_WAIT paket patlamasi yaratip pozisyon desync'ini besliyordu; SADECE o durumda
+	// yan etkisiz kontrole dusuyoruz (NEW_UseSkill'in tek basarisizlik seti bu ucu).
+	// Diger tum skillerde eski davranis birebir korunur.
+	if (pSkillData->IsMovingSkill())
 	{
-		Tracenf("CPythonPlayer::__UseSkill(%d) - pkInstMain->NEW_UseSkill - ERROR BOW", dwSlotIndex);
-		return false;
+		if (pkInstMain->IsDead() || pkInstMain->IsStun() || pkInstMain->IsKnockDown())
+		{
+			Tracenf("CPythonPlayer::__UseSkill(%d) - pkInstMain->NEW_UseSkill - ERROR BOW", dwSlotIndex);
+			return false;
+		}
+	}
+	else
+	{
+		const DWORD dwMotionIndex = pSkillData->GetSkillMotionIndex(rkSkillInst.iGrade);
+		const DWORD dwLoopCount = pSkillData->GetMotionLoopCount(rkSkillInst.fcurEfficientPercentage);
+		if (!pkInstMain->NEW_UseSkill(rkSkillInst.dwIndex, dwMotionIndex, dwLoopCount, pSkillData->IsMovingSkill()))
+		{
+			Tracenf("CPythonPlayer::__UseSkill(%d) - pkInstMain->NEW_UseSkill - ERROR BOW", dwSlotIndex);
+			return false;
+		}
 	}
 	// @fixme051 END
 

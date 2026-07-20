@@ -1570,6 +1570,20 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_IKASHOP_SEARCH",	0);
 #endif
 
+	// Pasif Beceriler: HER ZAMAN 0/1 tanimli (root'ta getattr'siz erisim siyah ekran yaratmasin)
+#ifdef NEW_PASSIVE_SKILLS
+	PyModule_AddIntConstant(poModule, "NEW_PASSIVE_SKILLS",	1);
+#else
+	PyModule_AddIntConstant(poModule, "NEW_PASSIVE_SKILLS",	0);
+#endif
+
+	// Canavar Avcisi pasifi: HER ZAMAN 0/1 tanimli (root getattr'siz erisim)
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+	PyModule_AddIntConstant(poModule, "ENABLE_MONSTER_HUNTER_SKILL",	1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_MONSTER_HUNTER_SKILL",	0);
+#endif
+
 #ifdef ENABLE_KADIM_EFSUN_SYSTEM
 	PyModule_AddIntConstant(poModule, "ENABLE_KADIM_EFSUN_SYSTEM", 1);
 #else
@@ -2166,6 +2180,18 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_INVENTORY_SLOT_MARKING", 1);
 #else
 	PyModule_AddIntConstant(poModule, "ENABLE_INVENTORY_SLOT_MARKING", 0);
+#endif
+
+#ifdef ENABLE_LUCKY_DRAW
+	PyModule_AddIntConstant(poModule, "ENABLE_LUCKY_DRAW", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_LUCKY_DRAW", 0);
+#endif
+
+#ifdef ENABLE_MESSENGER_BLOCK
+	PyModule_AddIntConstant(poModule, "ENABLE_MESSENGER_BLOCK", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_MESSENGER_BLOCK", 0);
 #endif
 
 }

@@ -444,7 +444,22 @@ int CPythonPlayer::GetStatus(DWORD dwType)
 		return 0;
 	}
 
-	return m_playerStatus.GetPoint(dwType);
+	int returnVal = m_playerStatus.GetPoint(dwType);
+
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+	if (dwType == POINT_ATTBONUS_MONSTER)
+	{
+		DWORD dwSlotIndex{};
+		if (GetSkillSlotIndex(c_iSkillIndex_MonsterHunter, &dwSlotIndex))
+		{
+			int skillGrade = GetSkillGrade(dwSlotIndex);
+			int skillLevel = (GetSkillLevel(dwSlotIndex) + (skillGrade == 1 ? (19) : (skillGrade >= 2 ? (9 + skillGrade * 10) : 0))) / 2;
+			returnVal += skillLevel;
+		}
+	}
+#endif
+
+	return returnVal;
 }
 
 const char* CPythonPlayer::GetName()

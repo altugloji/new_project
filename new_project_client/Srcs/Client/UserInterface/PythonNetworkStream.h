@@ -382,6 +382,11 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 		bool SendMessengerAddByVIDPacket(DWORD vid);
 		bool SendMessengerAddByNamePacket(const char * c_szName);
 		bool SendMessengerRemovePacket(const char * c_szKey, const char * c_szName);
+#ifdef ENABLE_MESSENGER_BLOCK
+		bool SendMessengerAddBlockByVIDPacket(DWORD vid);
+		bool SendMessengerAddBlockByNamePacket(const char* c_szName);
+		bool SendMessengerRemoveBlockPacket(const char* c_szKey, const char* c_szName);
+#endif
 
 	protected:
 		bool OnProcess();
@@ -862,6 +867,10 @@ public:
 public:
 	bool SendGmPlayerPanelRequestListPacket();
 	bool SendGmPlayerPanelWarpPacket(const char* pszName);
+#endif
+#ifdef ENABLE_LUCKY_DRAW
+public:
+	bool RecvLuckyDrawInfoPacket();
 #endif
 };
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

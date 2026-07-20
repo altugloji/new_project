@@ -44,6 +44,9 @@ ACMD(do_map_big_notice);
 ACMD(do_who);
 ACMD(do_user);
 ACMD(do_disconnect);
+#ifdef ENABLE_NEXT_REFINE_SUCCESS
+ACMD(do_next_refine_success);
+#endif
 ACMD(do_kill);
 ACMD(do_emotion_allow);
 ACMD(do_emotion);
@@ -343,6 +346,11 @@ ACMD(do_clientless_trap_enforce);
 
 ACMD(do_pickup_auth);
 ACMD(do_pickup_block);
+
+#ifdef ENABLE_LUCKY_DRAW
+ACMD(do_lucky_draw);
+ACMD(do_lucky_draw_manage);
+#endif
 
 struct command_info cmd_info[] =
 {
@@ -726,6 +734,16 @@ struct command_info cmd_info[] =
 
 	{ "pickup_auth",		do_pickup_auth,			0,			POS_DEAD,	GM_IMPLEMENTOR	},
 	{ "pickup_block",		do_pickup_block,		0,			POS_DEAD,	GM_IMPLEMENTOR	},
+
+#ifdef ENABLE_NEXT_REFINE_SUCCESS
+	{ "refine_success",	do_next_refine_success,	0,	POS_DEAD,	GM_GOD		},
+#endif
+
+#ifdef ENABLE_LUCKY_DRAW
+	// prefix eslesmesi: "lucky_draw" once, "lucky_draw_manage" sonra kalmali
+	{ "lucky_draw",			do_lucky_draw,			0,			POS_DEAD,	GM_PLAYER		},
+	{ "lucky_draw_manage",	do_lucky_draw_manage,	0,			POS_DEAD,	GM_IMPLEMENTOR	},
+#endif
 
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}
 };

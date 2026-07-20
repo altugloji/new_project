@@ -2876,6 +2876,17 @@ class SkillToolTip(ToolTip):
 				self.AppendTextLine(localeInfo.TOOLTIP_SKILL_LEVEL % (skillLevel+1), self.NEGATIVE_COLOR)
 				self.__AppendSummonDescription(skillLevel+1, self.NEGATIVE_COLOR)
 
+		elif app.NEW_PASSIVE_SKILLS and (skillIndex == player.SKILL_INDEX_MAX_HP or (app.ENABLE_MONSTER_HUNTER_SKILL and skillIndex == player.SKILL_INDEX_MONSTER_HUNTER)):
+
+			self.AppendDefaultData(skillIndex)
+			slotIndex = player.GetSkillSlotIndex(skillIndex)
+			skillLevel = player.GetSkillLevel(slotIndex)
+			if int(skillGrade) == 1:
+				skillLevel += 19
+			elif int(skillGrade) >= 2:
+				skillLevel += (9 + (int(skillGrade) * 10))
+			self.AppendNewPassiveSkillData(skillIndex, skillLevel)
+
 		elif skill.SKILL_TYPE_GUILD == skill.GetSkillType(skillIndex):
 
 			if self.SKILL_TOOL_TIP_WIDTH != self.toolTipWidth:
@@ -2904,6 +2915,26 @@ class SkillToolTip(ToolTip):
 
 		self.__AppendGMSkillIndex(skillIndex)
 		self.ShowToolTip()
+
+	def GetNewPassivePointValue(self, skillIndex, skillLevel):
+		if skillIndex == player.SKILL_INDEX_MAX_HP:
+			return skillLevel * 125
+		return float(skillLevel) / 2
+
+	def AppendNewPassiveSkillData(self, skillIndex, skillLevel):
+		PASSIVE_SKILL_BONUS = {
+			player.SKILL_INDEX_MAX_HP : localeInfo.NEW_PASSIVE_SKILL_TEXT_0,
+		}
+		if app.ENABLE_MONSTER_HUNTER_SKILL:
+			PASSIVE_SKILL_BONUS[player.SKILL_INDEX_MONSTER_HUNTER] = localeInfo.NEW_PASSIVE_SKILL_TEXT_1
+		self.AppendSpace(5)
+		self.AutoAppendTextLine(localeInfo.TOOLTIP_PARTY_SKILL_LEVEL % skillLevel, self.NORMAL_COLOR)
+		self.AutoAppendTextLine(PASSIVE_SKILL_BONUS[skillIndex] % (self.GetNewPassivePointValue(skillIndex, skillLevel)))
+		maxLevel = skill.GetSkillMaxLevel(skillIndex)
+		if skillLevel < maxLevel:
+			self.AppendTextLine(localeInfo.TOOLTIP_NEXT_SKILL_LEVEL_1 % (skillLevel+1, maxLevel), self.DISABLE_COLOR)
+			self.AutoAppendTextLine(PASSIVE_SKILL_BONUS[skillIndex] % (self.GetNewPassivePointValue(skillIndex, skillLevel+1)), self.DISABLE_COLOR)
+		self.AlignHorizonalCenter()
 
 	def __SetSkillTitle(self, skillIndex, skillGrade):
 		self.SetTitle(skill.GetSkillName(skillIndex, skillGrade))
@@ -3050,7 +3081,7 @@ class SkillToolTip(ToolTip):
 			if skillLevel < skillMaxLevelEnd:
 				if self.HasSkillLevelDescription(skillIndex, skillLevel+skillLevelUpPoint):
 					self.AppendSpace(5)
-					if skillIndex == 141 or skillIndex == 142:
+					if (not app.NEW_PASSIVE_SKILLS and skillIndex == 141) or skillIndex == 142:
 						self.AppendTextLine(localeInfo.TOOLTIP_NEXT_SKILL_LEVEL_3 % (skillLevel+1), self.DISABLE_COLOR)
 					else:
 						self.AppendTextLine(localeInfo.TOOLTIP_NEXT_SKILL_LEVEL_1 % (skillLevel+1, skillMaxLevelEnd), self.DISABLE_COLOR)

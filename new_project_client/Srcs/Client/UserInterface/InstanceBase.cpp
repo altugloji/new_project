@@ -1374,6 +1374,38 @@ void CInstanceBase::StateProcess()
 		if (dwCurChkTime < dwDstChkTime)
 			return;
 
+		// At 137 (wild attack) dash desync fix: SADECE dash animasyonu (IsUsingMovingSkill, yani
+		// uSkill=137) oynarken olgunlasan komutlari dusurme. Yoksa caster'in dash sirasinda /
+		// hemen sonrasinda yolladigi FUNC_MOVE/FUNC_WAIT pozisyon duzeltmeleri kalici olarak
+		// kaybolur ve gozlemci client karakteri yanlis pozisyonda gormeye devam eder.
+		// Diger tum skill/mob animasyonlarinda vanilla davranis (asagidaki pop+drop) aynen korunur.
+		if (!m_GraphicThingInstance.IsDead() && !m_GraphicThingInstance.IsKnockDown() &&
+			m_GraphicThingInstance.IsUsingSkill() && !m_GraphicThingInstance.CanCancelSkill() &&
+			m_GraphicThingInstance.IsUsingMovingSkill())
+		{
+			// FUNC_MOVE animasyon SIRASINDA aninda uygulanir: rotasyon caster'in direksiyonunu
+			// aynalar (137'de IsUsingMovingSkill sayesinde donus blogu calisir), pozisyon kisa bir
+			// blend ile caster'in bildirdigi gercek konuma cekilir - animasyon kesilmez.
+			if (FUNC_MOVE == m_kQue_kCmdNew.front().m_eFunc)
+			{
+				const SCommand kCmdMove = m_kQue_kCmdNew.front();
+				m_kQue_kCmdNew.pop_front();
+
+				SetAdvancingRotation(kCmdMove.m_fDstRot);
+
+				// SetBlendingPosition render koordinati bekler (y negatif, z delta'si zaten 0'lanir)
+				const D3DXVECTOR3& c_rv3Cur = m_GraphicThingInstance.GetPosition();
+				m_GraphicThingInstance.SetBlendingPosition(
+					TPixelPosition(kCmdMove.m_kPPosDst.x, -kCmdMove.m_kPPosDst.y, c_rv3Cur.z), 0.3f);
+				continue;
+			}
+
+			// Diger komutlar (FUNC_WAIT dahil) animasyon bitene kadar kuyrukta bekler;
+			// 3 sn'yi asan komutlarda eski davranisa (dusurme) don ki kuyruk sinirsiz buyumesin
+			if (dwCurChkTime - dwDstChkTime < 3000)
+				return;
+		}
+
 		const SCommand kCmdTop = m_kQue_kCmdNew.front();
 		m_kQue_kCmdNew.pop_front();
 
@@ -1625,7 +1657,11 @@ void CInstanceBase::StateProcess()
 						SetAdvancingRotation(fRotDst);
 						SetRotation(fRotDst);
 
-						NEW_UseSkill(0, eFunc & 0x7f, uArg&0x0f, (uArg>>4) ? true : false);
+						// At dash desync fix: MOVING_SKILL biti (uArg bit4) setliyse gercek skill no'yu (137)
+						// gecir ki kopyada IsUsingMovingSkill aktif olsun ve MovementProcess'teki donus blogu
+						// dash yonunu caster'in direksiyonu gibi dondurebilsin (kopyalarin event handler'i bos,
+						// paket riski yok).
+						NEW_UseSkill((uArg>>4) ? 137 : 0, eFunc & 0x7f, uArg&0x0f, (uArg>>4) ? true : false);
 					}
 				}
 				break;
@@ -1790,7 +1826,9 @@ void CInstanceBase::MovementProcess()
 							{
 								SetAdvancingRotation(m_fDstRot);
 								BlendRotation(m_fDstRot);
-								NEW_UseSkill(0, m_kMovAfterFunc.eFunc & 0x7f, m_kMovAfterFunc.uArg&0x0f, (m_kMovAfterFunc.uArg>>4) ? true : false);
+								// At dash desync fix: MOVING_SKILL bitinde gercek skill no'yu (137) gecir (ust taraftaki
+								// yakin-durum cagrisiyla ayni gerekce).
+								NEW_UseSkill((m_kMovAfterFunc.uArg>>4) ? 137 : 0, m_kMovAfterFunc.eFunc & 0x7f, m_kMovAfterFunc.uArg&0x0f, (m_kMovAfterFunc.uArg>>4) ? true : false);
 							}
 							else
 							{

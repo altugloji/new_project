@@ -11010,3 +11010,5 @@ VNUM	LOCALE_NAME
 30406	Coupon Gaya (25)
 30407	Coupon Gaya (50)
 30408	Coupon Gaya (100)
+49100	Libro del Cacciatore di Mostri
+49102	Libro dell'Ispirazione

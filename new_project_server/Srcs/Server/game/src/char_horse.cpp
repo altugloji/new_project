@@ -49,6 +49,15 @@ bool CHARACTER::StartRiding()
 	if (CArenaManager::instance().IsArenaMap(GetMapIndex()) == true)
 		return false;
 
+#ifdef ENABLE_HORSE_RIDE_SKILL_DELAY
+	// Ozel binekteki gibi: skill kullandiktan sonra 1.5 sn ata binilemez
+	if (IsRideSkillDelayed())
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Beceri kullandiktan hemen sonra ata binemezsin.");
+		return false;
+	}
+#endif
+
 	const DWORD dwMountVnum = m_chHorse ? m_chHorse->GetRaceNum() : GetMyHorseVnum();
 
 	if (false == CHorseRider::StartRiding())

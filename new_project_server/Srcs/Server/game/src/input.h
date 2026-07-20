@@ -413,6 +413,15 @@ class CInputP2P : public CInputProcessor
 		void		GiftNotify(const char* c_pData) const;
 #endif
 
+#ifdef ENABLE_LUCKY_DRAW
+		void		LuckyDraw(LPDESC d, const char* c_pData);
+#endif
+
+#ifdef ENABLE_MESSENGER_BLOCK
+		void		MessengerBlockAdd(const char * c_pData) const;
+		void		MessengerBlockRemove(const char * c_pData) const;
+#endif
+
 	protected:
 		CPacketInfoGG 	m_packetInfoGG;
 };

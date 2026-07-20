@@ -370,6 +370,9 @@ enum
 	HEADER_GC_GIFT_POINT						= 244,
 	HEADER_GC_GIFT_RANK							= 245,
 #endif
+#ifdef ENABLE_LUCKY_DRAW
+	HEADER_GC_LUCKYDRAW_INFO					= 246,
+#endif
 	/////////////////////////////////////////////////////////////////////////////
 
 	HEADER_GG_LOGIN								= 1,
@@ -418,9 +421,9 @@ enum
 	HEADER_GG_GM_ONLY_LOGIN						= 38,
 #endif
 
-#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+	// bilerek ifdef'siz: define kapali derlenen core bu header'i tanimazsa P2P linkini koparir
+	// (input.cpp UNKNOWN HEADER -> PHASE_CLOSE); kayit kossulsuz, gonderici/isleyici define'lidir
 	HEADER_GG_RELOAD_ETC_DROP					= 37,
-#endif
 
 #ifdef ENABLE_BOT_CONTROL_SOFT_MODE
 	HEADER_GG_BOT_CONTROL_ENFORCE				= 39,
@@ -433,6 +436,16 @@ enum
 #endif
 #ifdef ENABLE_IKASHOP_SEARCH
 	HEADER_GG_IKASHOP_SOLD						= 42,	// uzak satis: canli tezgahi tasiyan core'da kirmizi ghost + oto-kapanis senkronu
+#endif
+	HEADER_GG_RELOAD_MOB_DROP					= 43,	// bilerek ifdef'siz (bkz. HEADER_GG_RELOAD_ETC_DROP notu)
+
+#ifdef ENABLE_LUCKY_DRAW
+	HEADER_GG_LUCKY_DRAW						= 44,
+#endif
+
+#ifdef ENABLE_MESSENGER_BLOCK
+	HEADER_GG_MESSENGER_BLOCK_ADD				= 45,
+	HEADER_GG_MESSENGER_BLOCK_REMOVE			= 46,
 #endif
 
 };
@@ -1810,6 +1823,13 @@ struct packet_quest_info
 
 enum
 {
+#ifdef ENABLE_MESSENGER_BLOCK
+	// dikkat: block girisleri basta -> mevcut GC degerleri +4 kayar; client Packet.h ile BIREBIR ayni sira sart
+	MESSENGER_SUBHEADER_GC_BLOCK_LIST,
+	MESSENGER_SUBHEADER_GC_BLOCK_LOGIN,
+	MESSENGER_SUBHEADER_GC_BLOCK_LOGOUT,
+	MESSENGER_SUBHEADER_GC_BLOCK_INVITE,	// kullanilmiyor (donor paritesi icin duruyor)
+#endif
 	MESSENGER_SUBHEADER_GC_LIST,
 	MESSENGER_SUBHEADER_GC_LOGIN,
 	MESSENGER_SUBHEADER_GC_LOGOUT,
@@ -1858,8 +1878,28 @@ typedef struct packet_messenger_list_online
 	BYTE length;
 } TPacketGCMessengerListOnline;
 
+#ifdef ENABLE_MESSENGER_BLOCK
+typedef struct packet_messenger_block_list_offline
+{
+	BYTE connected; // always 0
+	BYTE length;
+} TPacketGCMessengerBlockListOffline;
+
+typedef struct packet_messenger_block_list_online
+{
+	BYTE connected; // always 1
+	BYTE length;
+} TPacketGCMessengerBlockListOnline;
+#endif
+
 enum
 {
+#ifdef ENABLE_MESSENGER_BLOCK
+	// dikkat: block girisleri basta -> mevcut CG degerleri +3 kayar; client Packet.h ile BIREBIR ayni sira sart
+	MESSENGER_SUBHEADER_CG_ADD_BLOCK_BY_VID,
+	MESSENGER_SUBHEADER_CG_ADD_BLOCK_BY_NAME,
+	MESSENGER_SUBHEADER_CG_REMOVE_BLOCK,
+#endif
 	MESSENGER_SUBHEADER_CG_ADD_BY_VID,
 	MESSENGER_SUBHEADER_CG_ADD_BY_NAME,
 	MESSENGER_SUBHEADER_CG_REMOVE,
@@ -1888,6 +1928,23 @@ typedef struct command_messenger_remove
 	char login[LOGIN_MAX_LEN+1];
 	//DWORD account;
 } TPacketCGMessengerRemove;
+
+#ifdef ENABLE_MESSENGER_BLOCK
+typedef struct command_messenger_add_block_by_vid
+{
+	DWORD vid;
+} TPacketCGMessengerAddBlockByVID;
+
+typedef struct command_messenger_add_block_by_name
+{
+	BYTE length;
+} TPacketCGMessengerAddBlockByName;
+
+typedef struct command_messenger_remove_block
+{
+	char login[LOGIN_MAX_LEN+1];
+} TPacketCGMessengerRemoveBlock;
+#endif
 
 typedef struct command_safebox_checkout
 {
@@ -3178,6 +3235,38 @@ typedef struct SPacketGGGiftNotify
 	char	szGiftName[GIFT_NAME_MAX_LEN + 1];
 	char	szMessage[GIFT_MESSAGE_MAX_LEN + 1];
 } TPacketGGGiftNotify;
+#endif
+
+#ifdef ENABLE_LUCKY_DRAW
+typedef struct SPacketGGLuckyDraw
+{
+	BYTE	bHeader;							// HEADER_GG_LUCKY_DRAW
+	DWORD	bArg;								// 1=baslat 2=katilimci yenile 3=config yenile 4=kazanan yenile 5=kazanan+config yenile
+	DWORD	bArg_2;								// baslat icin sure (saniye)
+	DWORD	bArg_3;
+} TPacketGGLuckyDraw;
+
+typedef struct SPacketGCLuckyDrawInfo
+{
+	BYTE		bHeader;						// HEADER_GC_LUCKYDRAW_INFO
+	uint32_t	joinCount;
+	uint32_t	maxJoinCount;
+	uint32_t	myJoinCount;
+	uint32_t	maxTicketCount;
+	int32_t		endTime;						// kalan sure (saniye), 0 = etkinlik kapali
+	uint32_t	neededItemVnum[LD_MAX_REQ_ITEMS];
+	uint32_t	neededItemCount[LD_MAX_REQ_ITEMS];
+	uint64_t	neededYang;
+	char		winnerNames[LD_MAX_WINNERS][CHARACTER_NAME_MAX_LEN + 1];
+	int32_t		iReward1[LD_MAX_WINNERS];
+	int32_t		iReward2[LD_MAX_WINNERS];
+	int32_t		iReward3[LD_MAX_WINNERS];
+	int32_t		iReward4[LD_MAX_WINNERS];
+	int32_t		iReward5[LD_MAX_WINNERS];
+	uint32_t	winnerTickets[LD_MAX_WINNERS];	// kazananin bilet sayisi
+	char		joinerNames[LD_MAX_JOINER_LIST][CHARACTER_NAME_MAX_LEN + 1];
+	uint32_t	joinerTickets[LD_MAX_JOINER_LIST];
+} TPacketGCLuckyDrawInfo;
 #endif
 
 #pragma pack()

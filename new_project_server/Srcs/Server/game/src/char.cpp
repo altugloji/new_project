@@ -322,6 +322,12 @@ void CHARACTER::Initialize()
 	m_adwGiftRankCachePoint[0] = m_adwGiftRankCachePoint[1] = 0;
 #endif
 
+#ifdef ENABLE_LUCKY_DRAW
+	m_dwLastLDRequestTime = 0;
+	m_dwLastLDRequestRewardTime = 0;
+	m_dwLastLDJoinTime = 0;
+#endif
+
 	m_pkMall = nullptr;
 	m_iMallLoadTime = 0;
 
@@ -3532,6 +3538,9 @@ void CHARACTER::ComputePoints()
 		iMaxSP = JobInitialPoints[GetJob()].max_sp + m_points.iRandomSP + GetPoint(POINT_IQ) * JobInitialPoints[GetJob()].sp_per_iq;
 		iMaxStamina = JobInitialPoints[GetJob()].max_stamina + GetPoint(POINT_HT) * JobInitialPoints[GetJob()].stamina_per_con;
 
+#ifdef NEW_PASSIVE_SKILLS
+		iMaxHP += (GetAddHPSkillLevel() * 125);
+#else
 		{
 			CSkillProto* pkSk = CSkillManager::instance().Get(SKILL_ADD_HP);
 
@@ -3542,6 +3551,7 @@ void CHARACTER::ComputePoints()
 				iMaxHP += static_cast<int>(pkSk->kPointPoly.Eval());
 			}
 		}
+#endif
 
 		SetPoint(POINT_MOV_SPEED,	100);
 		SetPoint(POINT_ATT_SPEED,	100);
@@ -9525,7 +9535,7 @@ EVENTFUNC(change_channel_event)
 		return 0;
 	}
 
-	// geri sayim bitti › gercek isinlanma
+	// geri sayim bitti -> gercek isinlanma
 	if (info->iSecLeft <= 0)
 	{
 		ch->m_pkChangeChannelEvent = nullptr;

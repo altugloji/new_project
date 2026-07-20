@@ -9625,6 +9625,8 @@
 50312	ETC	icon/item/book_02.tga
 50313	ETC	icon/item/book_06.tga
 50314	ETC	icon/item/book_07.tga
+49100	ETC	icon/item/book_07.tga
+49102	ETC	icon/item/book_07.tga
 50315	ETC	icon/item/book_07.tga
 50316	ETC	icon/item/book_07.tga
 50317	ETC	icon/item/50307.tga

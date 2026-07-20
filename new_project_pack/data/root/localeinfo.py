@@ -44,7 +44,7 @@ VIRTUAL_KEY_ALPHABET_LOWERS  = r"[1234567890]/qwertyuiop\=asdfghjkl;`'zxcvbnm.,"
 VIRTUAL_KEY_ALPHABET_UPPERS  = r'{1234567890}?QWERTYUIOP|+ASDFGHJKL:~"ZXCVBNM<>'
 VIRTUAL_KEY_SYMBOLS    = '!@#$%^&*()_+|{}:"<>?~'
 VIRTUAL_KEY_NUMBERS    = "1234567890-=\[];',./`"
-VIRTUAL_KEY_SYMBOLS_BR    = '!@#$%^&*()_+|{}:"<>?~ùùùùùùùùùùùùùùùù'
+VIRTUAL_KEY_SYMBOLS_BR    = '!@#$%^&*()_+|{}:"<>?~·‡„‚ÈËÍÌÏÛÚÙı˙˘Á'
 
 __IS_ENGLISH	= "ENGLISH" == app.GetLocaleServiceName()
 __IS_HONGKONG	= "HONGKONG" == app.GetLocaleServiceName()
@@ -449,6 +449,15 @@ if app.ENABLE_LOCALE_COMMON:
 				LoadLocaleFile(filename, globals())
 	TryLoadLocaleFile("locale/common/locale_game_ex.txt")
 	TryLoadLocaleFile("%s/locale_game_ex.txt" % app.GetLocalePath())
+
+try:
+	NEW_PASSIVE_SKILL_TEXT_0
+except NameError:
+	NEW_PASSIVE_SKILL_TEXT_0 = "Max HP: +%d"
+try:
+	NEW_PASSIVE_SKILL_TEXT_1
+except NameError:
+	NEW_PASSIVE_SKILL_TEXT_1 = "Canavarlara Kar\xfe\xfd G\xfc\xe7l\xfc: +%d"
 
 try:
 	GM_CALL_CONFIRM_TITLE

@@ -308,9 +308,10 @@ CPacketInfoGG::CPacketInfoGG()
 	Set(HEADER_GG_CLIENTLESS_TRAP,	sizeof(TPacketGGClientlessTrap),	"GGClientlessTrap",	false);
 #endif
 
-#ifdef ENABLE_RELOAD_ETC_DROP_ITEM
+	// bilerek ifdef'siz: define kapali core header'i tanimayip P2P linkini koparmasin,
+	// kayitli-ama-islenmeyen paket sadece atlanir (gonderici/isleyici define'lidir)
 	Set(HEADER_GG_RELOAD_ETC_DROP,		sizeof(BYTE),						"ReloadEtcDrop",	false);
-#endif
+	Set(HEADER_GG_RELOAD_MOB_DROP,		sizeof(BYTE),						"ReloadMobDrop",	false);
 
 #ifdef ENABLE_GIFT_SEND_SYSTEM
 	Set(HEADER_GG_GIFT_NOTIFY,			sizeof(TPacketGGGiftNotify),		"GiftNotify",		false);
@@ -318,6 +319,15 @@ CPacketInfoGG::CPacketInfoGG()
 
 #ifdef ENABLE_IKASHOP_SEARCH
 	Set(HEADER_GG_IKASHOP_SOLD,			sizeof(TPacketGGIkaShopSold),		"IkaShopSold",		false);
+#endif
+
+#ifdef ENABLE_LUCKY_DRAW
+	Set(HEADER_GG_LUCKY_DRAW,			sizeof(TPacketGGLuckyDraw),			"LuckyDraw",		false);
+#endif
+
+#ifdef ENABLE_MESSENGER_BLOCK
+	Set(HEADER_GG_MESSENGER_BLOCK_ADD,		sizeof(TPacketGGMessenger),		"MessengerBlockAdd",	false);
+	Set(HEADER_GG_MESSENGER_BLOCK_REMOVE,	sizeof(TPacketGGMessenger),		"MessengerBlockRemove",	false);
 #endif
 
 }

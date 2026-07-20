@@ -3824,3 +3824,33 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	Ketting
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	Armband
 IKASHOP_SEARCH_SUB_JEWEL_EAR	Oorbel
 IKASHOP_SEARCH_PLACEHOLDER	Item zoeken...
+LUCKYDRAW_TITLE	Gelukstrekking
+LUCKYDRAW_STATE_ACTIVE	Status: ACTIEF
+LUCKYDRAW_STATE_CLOSED	Status: GESLOTEN
+LUCKYDRAW_TIME	Resterende tijd: %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	Resterende tijd: -
+LUCKYDRAW_JOIN_COUNT	Totale tickets: %s / %s
+LUCKYDRAW_MY_COUNT	Mijn tickets: %s / %s
+LUCKYDRAW_COST	Deelnamekosten: %s
+LUCKYDRAW_COST_FREE	Deelnamekosten: Gratis
+LUCKYDRAW_WINNERS	Winnaars
+LUCKYDRAW_REWARD_PREFIX	Beloning: 
+LUCKYDRAW_BTN_JOIN	Deelnemen
+LUCKYDRAW_BTN_REWARD	Beloning claimen
+LUCKYDRAW_BTN_REFRESH	Vernieuwen
+LUCKYDRAW_JOIN_SENT	Deelnameverzoek verzonden. Je kunt de huidige status bekijken met Vernieuwen.
+LUCKYDRAW_REWARD_SENT	Beloningsverzoek verzonden.
+LUCKYDRAW_REQ_TITLE	Vereisten voor deelname:
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	Beloningen
+LUCKYDRAW_WINNER_LABEL	%d. winnaar
+LUCKYDRAW_JOINERS_TITLE	Deelnemers %s / %s
+LUCKYDRAW_TICKETS	Je tickets: %s / %s
+LUCKYDRAW_MAX_NOTE	Je kunt maximaal %s tickets gebruiken.
+LUCKYDRAW_BTN_BUY	Ticket kopen
+LUCKYDRAW_BOTTOM_NOTE	De trekking vindt plaats aan het einde van het event en de winnaars worden bekendgemaakt.
+LUCKYDRAW_JOINER_TICKETS	%s tickets
+LUCKYDRAW_CLOSED	Het event is momenteel gesloten.
+LUCKYDRAW_TIME_HEADER	Resterende tijd
+LUCKYDRAW_YANG_NEEDED	Vereiste Yang:
+LUCKYDRAW_WINNER_TICKETS	%s (%s tickets)

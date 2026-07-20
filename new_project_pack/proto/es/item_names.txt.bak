@@ -8859,7 +8859,7 @@ VNUM	LOCALE_NAME
 50286	Baúl zona combate oro
 50287	Caja de campo 1
 50288	Caja de campo 2
-50289	Reencarnación
+50289	Efecto Buff
 50290	Baúl zona combate madera
 50294	Baúl de la reina Meley
 50296	Caja del contraatacante
@@ -10626,7 +10626,7 @@ VNUM	LOCALE_NAME
 83008	Cofre de joyas
 83009	Caja de mascotas
 83010	Caja de estolas
-83011	Caja de adornos
+83011	Cofre de Agua
 83012	Caja man. mascota defin.
 83013	Caja dentada+
 83014	Caja de cor draconis

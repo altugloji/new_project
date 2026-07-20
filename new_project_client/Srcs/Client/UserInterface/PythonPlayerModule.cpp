@@ -2853,6 +2853,13 @@ void initPlayer()
 	PyModule_AddIntConstant(poModule, "SKILL_INDEX_RIDING",			c_iSkillIndex_Riding);
 	PyModule_AddIntConstant(poModule, "SKILL_INDEX_SUMMON",			c_iSkillIndex_Summon);
 
+#ifdef NEW_PASSIVE_SKILLS
+	PyModule_AddIntConstant(poModule, "SKILL_INDEX_MAX_HP",			c_iSkillIndex_MaxHP);
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+	PyModule_AddIntConstant(poModule, "SKILL_INDEX_MONSTER_HUNTER",	c_iSkillIndex_MonsterHunter);
+#endif
+#endif
+
 	// PK Mode
 	PyModule_AddIntConstant(poModule, "PK_MODE_PEACE",				PK_MODE_PEACE);
 	PyModule_AddIntConstant(poModule, "PK_MODE_REVENGE",			PK_MODE_REVENGE);

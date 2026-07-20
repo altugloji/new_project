@@ -38,6 +38,9 @@
 #ifdef ENABLE_CHARACTER_CHEST
 	#include "char_character_chest.h"
 #endif
+#ifdef ENABLE_LUCKY_DRAW
+	#include "LuckyDraw.h"
+#endif
 #include "../../common/VnumHelper.h"
 
 ACMD(do_user_horse_ride)
@@ -807,6 +810,14 @@ ACMD(do_pvp)
 		return;
 	}
 
+#ifdef ENABLE_MESSENGER_BLOCK
+	if (MessengerManager::instance().CheckMessengerList(ch->GetName(), pkVictim->GetName(), SYST_BLOCK))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Engelli oyuncuya duello teklif edemezsin."));
+		return;
+	}
+#endif
+
 	CPVPManager::instance().Insert(ch, pkVictim);
 }
 
@@ -872,8 +883,10 @@ ACMD(do_skillup)
 			case SKILL_8_C_ANTI_MAHWAN:
 			case SKILL_8_D_ANTI_BYEURAK:
 
+#ifndef NEW_PASSIVE_SKILLS
 			case SKILL_ADD_HP:
 			case SKILL_RESIST_PENETRATE:
+#endif
 				ch->SkillLevelUp(vnum);
 				break;
 		}
@@ -3157,6 +3170,57 @@ ACMD(do_get_skills)
 		ch->SkillLevelPacket();
 	}
 	else { sys_err("do_beceri_al birileri birseyler yapmaya calisiyor sanirim %d", ch->GetPlayerID()); return; }
+}
+#endif
+
+#ifdef ENABLE_LUCKY_DRAW
+ACMD(do_lucky_draw)
+{
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+	if (!*arg1) { return; }
+
+	uint8_t commandType = 0;
+	str_to_number(commandType, arg1);
+
+	if (commandType == 1)	// bilgi iste (pencereyi doldurur)
+		CLuckyDraw::Instance().ClientPacket(ch);
+	if (commandType == 2)	// katil
+		CLuckyDraw::Instance().JoinLuckyDraw(ch);
+	if (commandType == 3)	// odul al
+		CLuckyDraw::Instance().RequestReward(ch);
+}
+
+ACMD(do_lucky_draw_manage)
+{
+	char arg1[256], arg2[256];
+	two_arguments(argument, arg1, sizeof(arg1), arg2, sizeof(arg2));
+
+	if (!*arg1 || !*arg2)
+		return;
+
+	DWORD iArg1 = 0, iArg2 = 0;
+	str_to_number(iArg1, arg1);
+	str_to_number(iArg2, arg2);
+
+	if (iArg1 == 1)			// baslat: arg2 = sure (saniye)
+		CLuckyDraw::Instance().StartLuckyDraw(iArg2, false);
+
+	if (iArg1 == 2)			// bitir: arg2 = 1 ise kazananlar belirlenir
+		CLuckyDraw::Instance().EndLuckyDraw(iArg2 == 1);
+
+	if (iArg1 == 3)			// katilimci sayisini yenile (diger core'lara da duyur)
+		CLuckyDraw::Instance().RequestLuckyDrawJoiners(true);
+
+	if (iArg1 == 4)			// config yenile
+		CLuckyDraw::Instance().RequestLuckyDraw();
+
+	if (iArg1 == 5) {		// hepsini yenile + diger core'lara duyur
+		CLuckyDraw::Instance().RequestWinnerInfo();
+		CLuckyDraw::Instance().RequestLuckyDraw();
+		CLuckyDraw::Instance().RequestLuckyDrawJoiners(true);
+		CLuckyDraw::Instance().SendP2PPacket(5);
+	}
 }
 #endif
 

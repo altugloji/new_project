@@ -481,6 +481,8 @@ class TargetBoard(ui.ThinBoard):
 		localeInfo.TARGET_BUTTON_REQUEST_ENTER_PARTY,
 		localeInfo.TARGET_BUTTON_BUILDING_DESTROY,
 		localeInfo.TARGET_BUTTON_EMOTION_ALLOW,
+		localeInfo.TARGET_BUTTON_BLOCK,
+		localeInfo.TARGET_BUTTON_BLOCK_REMOVE,
 		"VOTE_BLOCK_CHAT",
 		"GIFT_SEND",
 	)
@@ -598,6 +600,10 @@ class TargetBoard(ui.ThinBoard):
 		self.buttonDict[localeInfo.TARGET_BUTTON_REQUEST_ENTER_PARTY].SAFE_SetEvent(self.__OnRequestParty)
 		self.buttonDict[localeInfo.TARGET_BUTTON_BUILDING_DESTROY].SAFE_SetEvent(self.__OnDestroyBuilding)
 		self.buttonDict[localeInfo.TARGET_BUTTON_EMOTION_ALLOW].SAFE_SetEvent(self.__OnEmotionAllow)
+
+		if app.ENABLE_MESSENGER_BLOCK:
+			self.buttonDict[localeInfo.TARGET_BUTTON_BLOCK].SetEvent(ui.__mem_func__(self.OnAppendToBlockMessenger))
+			self.buttonDict[localeInfo.TARGET_BUTTON_BLOCK_REMOVE].SetEvent(ui.__mem_func__(self.OnRemoveToBlockMessenger))
 
 		self.buttonDict["VOTE_BLOCK_CHAT"].SetEvent(ui.__mem_func__(self.__OnVoteBlockChat))
 
@@ -922,6 +928,16 @@ class TargetBoard(ui.ThinBoard):
 	def OnAppendToMessenger(self):
 		net.SendMessengerAddByVIDPacket(self.vid)
 
+	if app.ENABLE_MESSENGER_BLOCK:
+		def OnAppendToBlockMessenger(self):
+			net.SendMessengerAddBlockByVIDPacket(self.vid)
+
+		def OnRemoveToBlockMessenger(self):
+			# blok listesinde anahtar = karakter adi; donordeki constInfo.ME_KEY hack'i yerine dogrudan hedef adi
+			if self.nameString:
+				messenger.RemoveBlock(self.nameString)
+				net.SendMessengerRemoveBlockPacket(self.nameString, self.nameString)
+
 	def OnPartyInvite(self):
 		net.SendPartyInvitePacket(self.vid)
 
@@ -991,6 +1007,14 @@ class TargetBoard(ui.ThinBoard):
 
 		if not messenger.IsFriendByName(self.nameString):
 			self.__ShowButton(localeInfo.TARGET_BUTTON_FRIEND)
+
+		if app.ENABLE_MESSENGER_BLOCK and self.nameString and str(self.nameString)[0] != "[":
+			if not messenger.IsBlockByName(self.nameString):
+				self.__ShowButton(localeInfo.TARGET_BUTTON_BLOCK)
+				self.__HideButton(localeInfo.TARGET_BUTTON_BLOCK_REMOVE)
+			else:
+				self.__ShowButton(localeInfo.TARGET_BUTTON_BLOCK_REMOVE)
+				self.__HideButton(localeInfo.TARGET_BUTTON_BLOCK)
 
 		if player.IsPartyMember(self.vid):
 

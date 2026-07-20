@@ -14,6 +14,9 @@
 #include "exchange.h"
 #include "DragonSoul.h"
 #include "questmanager.h" // @fixme150
+#ifdef ENABLE_MESSENGER_BLOCK
+	#include "messenger_manager.h"
+#endif
 
 #ifdef ENABLE_EXCHANGE_LOG
 	#include "quest.h"
@@ -75,6 +78,14 @@ bool CHARACTER::ExchangeStart(LPCHARACTER victim)
 
 	if (victim->IsNPC())
 		return false;
+
+#ifdef ENABLE_MESSENGER_BLOCK
+	if (MessengerManager::instance().CheckMessengerList(GetName(), victim->GetName(), SYST_BLOCK))
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Engelli oyuncuyla ticaret yapamazsin."));
+		return false;
+	}
+#endif
 
 	//PREVENT_TRADE_WINDOW
 	if ( IsOpenSafebox() || GetShopOwner() || GetMyShop() || IsCubeOpen()

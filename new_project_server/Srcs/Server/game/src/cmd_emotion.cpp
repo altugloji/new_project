@@ -7,6 +7,9 @@
 #include "buffer_manager.h"
 #include "unique_item.h"
 #include "wedding.h"
+#ifdef ENABLE_MESSENGER_BLOCK
+	#include "messenger_manager.h"
+#endif
 
 #define NEED_TARGET	(1 << 0)
 #define NEED_PC		(1 << 1)
@@ -67,6 +70,20 @@ ACMD(do_emotion_allow)
 		return;
 
 	DWORD	val = 0; str_to_number(val, arg1);
+
+#ifdef ENABLE_MESSENGER_BLOCK
+	const LPCHARACTER tch = CHARACTER_MANAGER::instance().Find(val);
+
+	if (!tch)
+		return;
+
+	if (MessengerManager::instance().CheckMessengerList(ch->GetName(), tch->GetName(), SYST_BLOCK))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Engelli oyuncuyla duygu hareketi yapamazsin."));
+		return;
+	}
+#endif
+
 	s_emotion_set.emplace(ch->GetVID(), val);
 }
 

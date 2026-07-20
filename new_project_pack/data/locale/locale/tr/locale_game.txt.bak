@@ -3349,6 +3349,8 @@ TOOLTIP_PARTY_INFO_RECALL_20_LEVEL	Ayný serverda olduðunuz zaman grup üyeleriniz
 TOOLTIP_PARTY_INFO_SET_ATTACKER	Saldýrý Seviyesi +(Grup üye sayisi./2) %d Saldýrý birimi seçilebilir.
 TOOLTIP_PARTY_INFO_SET_TANKER	Savunma Seviyesi +(Grup üye sayisi)  1 Yakýn Dövüs Savasçýsý seçilebilir.
 TOOLTIP_PARTY_SKILL_LEVEL	Mevcut Seviye: %d
+NEW_PASSIVE_SKILL_TEXT_0	Max HP: +%d
+NEW_PASSIVE_SKILL_TEXT_1	Canavarlara Karþý Güçlü: +%d
 TOOLTIP_PARTY_TITLE_GRADE_UP	[Saldýrý/Savunma yükseltildi]
 TOOLTIP_PARTY_TITLE_HEAL	[Yükleme]
 TOOLTIP_PARTY_TITLE_INFO_BONUS_EXP	%d Grup üyesi olduðunda %%%d bonus EXP alýrsýn.
@@ -3955,3 +3957,32 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	Kolye
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	Bileklik
 IKASHOP_SEARCH_SUB_JEWEL_EAR	Kupe
 IKASHOP_SEARCH_PLACEHOLDER	Item ara...
+LUCKYDRAW_TITLE	Þanslý Çekiliþ
+LUCKYDRAW_STATE_ACTIVE	Durum: AKTÝF
+LUCKYDRAW_STATE_CLOSED	Durum: KAPALI
+LUCKYDRAW_TIME	Kalan Süre: %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	Kalan Süre: -
+LUCKYDRAW_JOIN_COUNT	Toplam Bilet: %s / %s
+LUCKYDRAW_MY_COUNT	Biletlerim: %s / %s
+LUCKYDRAW_COST	Katýlým Bedeli: %s
+LUCKYDRAW_COST_FREE	Katýlým Bedeli: Ücretsiz
+LUCKYDRAW_WINNERS	Kazananlar
+LUCKYDRAW_REWARD_PREFIX	Ödül: 
+LUCKYDRAW_BTN_JOIN	Katýl
+LUCKYDRAW_BTN_REWARD	Ödül Al
+LUCKYDRAW_BTN_REFRESH	Yenile
+LUCKYDRAW_JOIN_SENT	Katýlým isteði gönderildi. Güncel durumu Yenile ile görebilirsiniz.
+LUCKYDRAW_REWARD_SENT	Ödül talebi gönderildi.
+LUCKYDRAW_REQ_TITLE	Katýlým için gerekenler:
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	Ödüller
+LUCKYDRAW_WINNER_LABEL	%d. Kazanan
+LUCKYDRAW_JOINERS_TITLE	Katýlýmcýlar %s / %s
+LUCKYDRAW_TICKETS	Biletlerin: %s / %s
+LUCKYDRAW_MAX_NOTE	Maksimum %s bilet kullanabilirsin.
+LUCKYDRAW_BTN_BUY	Bilet Al
+LUCKYDRAW_BOTTOM_NOTE	Etkinlik bitiminde çekiliþ yapýlacak ve kazananlar ilan edilecektir.
+LUCKYDRAW_JOINER_TICKETS	%s bilet
+LUCKYDRAW_CLOSED	Etkinlik þu an kapalý.
+LUCKYDRAW_TIME_HEADER	Kalan Süre
+LUCKYDRAW_YANG_NEEDED	Gereken Yang:

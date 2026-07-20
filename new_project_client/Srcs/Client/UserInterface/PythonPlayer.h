@@ -716,4 +716,11 @@ constexpr inline DWORD c_iSkillIndex_Language3 = 128;
 constexpr inline DWORD c_iSkillIndex_Polymorph = 129;
 constexpr inline DWORD c_iSkillIndex_Riding = 130;
 constexpr inline DWORD c_iSkillIndex_Summon = 131;
+
+#ifdef NEW_PASSIVE_SKILLS
+constexpr inline DWORD c_iSkillIndex_MaxHP = 141;
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+constexpr inline DWORD c_iSkillIndex_MonsterHunter = 144;
+#endif
+#endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

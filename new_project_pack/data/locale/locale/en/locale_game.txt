@@ -3824,3 +3824,33 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	Necklace
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	Bracelet
 IKASHOP_SEARCH_SUB_JEWEL_EAR	Earring
 IKASHOP_SEARCH_PLACEHOLDER	Search item...
+LUCKYDRAW_TITLE	Lucky Draw
+LUCKYDRAW_STATE_ACTIVE	Status: ACTIVE
+LUCKYDRAW_STATE_CLOSED	Status: CLOSED
+LUCKYDRAW_TIME	Time Left: %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	Time Left: -
+LUCKYDRAW_JOIN_COUNT	Total Tickets: %s / %s
+LUCKYDRAW_MY_COUNT	My Tickets: %s / %s
+LUCKYDRAW_COST	Entry Cost: %s
+LUCKYDRAW_COST_FREE	Entry Cost: Free
+LUCKYDRAW_WINNERS	Winners
+LUCKYDRAW_REWARD_PREFIX	Reward: 
+LUCKYDRAW_BTN_JOIN	Join
+LUCKYDRAW_BTN_REWARD	Claim Reward
+LUCKYDRAW_BTN_REFRESH	Refresh
+LUCKYDRAW_JOIN_SENT	Join request sent. You can view the current status with Refresh.
+LUCKYDRAW_REWARD_SENT	Reward request sent.
+LUCKYDRAW_REQ_TITLE	Requirements to join:
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	Rewards
+LUCKYDRAW_WINNER_LABEL	%d. Winner
+LUCKYDRAW_JOINERS_TITLE	Participants %s / %s
+LUCKYDRAW_TICKETS	Your Tickets: %s / %s
+LUCKYDRAW_MAX_NOTE	You can use a maximum of %s tickets.
+LUCKYDRAW_BTN_BUY	Buy Ticket
+LUCKYDRAW_BOTTOM_NOTE	The draw will be held at the end of the event and the winners will be announced.
+LUCKYDRAW_JOINER_TICKETS	%s tickets
+LUCKYDRAW_CLOSED	The event is currently closed.
+LUCKYDRAW_TIME_HEADER	Time Left
+LUCKYDRAW_YANG_NEEDED	Required Yang:
+LUCKYDRAW_WINNER_TICKETS	%s (%s Tickets)

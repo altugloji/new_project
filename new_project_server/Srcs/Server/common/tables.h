@@ -1570,6 +1570,14 @@ typedef struct SPacketDGCharacterChest
 } TPacketDGCharacterChest;
 #endif
 
+#ifdef ENABLE_MESSENGER_BLOCK
+enum BlockSystem
+{
+	SYST_BLOCK,
+	SYST_FRIEND
+};
+#endif
+
 #pragma pack()
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

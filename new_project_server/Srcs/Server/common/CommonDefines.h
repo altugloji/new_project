@@ -149,7 +149,9 @@ enum eCommonDefines {
 #define ENABLE_PC_NPC_DAMAGE_BONUS									// Moblara %30 daha fazla hasar
 #define ENABLE_NPC_MAX_HP_BONUS										// Moblarda %30 daha fazla HP
 #define ENABLE_RELOAD_ETC_DROP_ITEM									// Etc_drop_item.txt yenileme
+#define ENABLE_RELOAD_MOB_DROP_ITEM									// Mob_drop_item.txt canli yenileme (/reload m, tum core'lara P2P; drop_item_group.txt ile birlikte okunur)
 #define ENABLE_MOUNT_SKILL_DELAY_BYPASS								// Bazı skillerde at binme engelini kapatma (kutsama hava vb.)
+#define ENABLE_HORSE_RIDE_SKILL_DELAY								// Normal ata binerken de (StartRiding) skill sonrası 1500ms bekleme — özel binek ile parite, bypass listesi ortak
 #define ENABLE_DUNGEON_REJOIN_SYSTEM 								// Kuleye geri dönüş sistemi
 #define ENABLE_SCROLL_76016_LV_LIMIT								// Basit Kutsama Kagidi (30 level alti itemler icin)
 #define ENABLE_GM_ONLY_LOGIN										// GM girisi
@@ -174,6 +176,16 @@ enum eCommonDefines {
 #define ENABLE_HORSE_MONSTER_DAMAGE_BONUS								// At seviyesine gore canavara ek guc: seviye 11-21 arasi her seviye +%1 (21'de +%10)
 #define ENABLE_CLIENTLESS_HANDSHAKE_TRAP							// Clientless bot honeypot: eski handshake header'i (0xff) tuzak; gercek client 0xa0 gonderir
 #define ENABLE_IP_BAN
+#define ENABLE_NEXT_REFINE_SUCCESS									// GM komutu /refine_success <oyuncu> [off]: hedefin SADECE bir sonraki +basma denemesi %100 basarili olur (tek seferlik; quest flag'te tutulur, warp/relog'da kaybolmaz, zar aninda tuketilir)
+// #define NEW_PASSIVE_SKILLS											// Pasif Beceriler: Ilham (141) proto formulu yerine sabit +125 HP/seviye (maks 40 lvl = 5000 HP); 49102 kitabi ile ogrenilir (server rebuild + client rebuild/repack birlikte)
+// #define ENABLE_MONSTER_HUNTER_SKILL							// Canavar Avcisi pasifi (144): canavara +seviye/2 %% hasar, 49100 kitabi. NEW_PASSIVE_SKILLS gerektirir; SIMDILIK KAPALI (acmak icin yorumu kaldir)
+#define ENABLE_LUCKY_DRAW											// Sansli Cekilis etkinligi: /lucky_draw ile bilet alinir (item ve/veya yang), sure bitince 3 rastgele kazanan belirlenir, oduller /lucky_draw 3 ile teslim alinir. GM: /lucky_draw_manage. (server rebuild + client rebuild/repack birlikte; player DB'ye sql/luckydraw.sql uygulanmali; GC 246 / GG 44)
+#ifdef ENABLE_LUCKY_DRAW
+	#define LD_MAX_WINNERS 5										// kazanan sayisi (SQL luckydraw_winners satir sayisi ile ayni olmali)
+	#define LD_MAX_REWARDS 5										// kazanan basina odul kolonu (reward1..5_vnum)
+	#define LD_MAX_REQ_ITEMS 5										// katilim icin istenebilecek farkli item sayisi
+	#define LD_MAX_JOINER_LIST 20									// pencerede gosterilen katilimci sayisi (en cok bileti olanlar)
+#endif
 
 #define OFFLINE_SHOP												// Offline shops system
 #ifdef OFFLINE_SHOP
@@ -187,11 +199,13 @@ enum eCommonDefines {
 	#define ENABLE_SHOP_SEARCH_ITEM_SELECT						// Pazar Arama: grid'den item secip SADECE secilenleri arama (secim yoksa eski kategori-geneli davranis)
 	#define ENABLE_OFFLINE_SHOP_REMOTE_VIEW
 	#define ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
-	// #define ENABLE_IKASHOP_SEARCH									// IKASHOP tarzi global Pazar Arama: kanal/harita bagimsiz filtreli arama + uzaktan satin alma + dukkan goruntuleme (CG 84 / GC 139 / GG 42; wire degisti -> server+client rebuild + repack BIRLIKTE)
+	#define ENABLE_IKASHOP_SEARCH									// IKASHOP tarzi global Pazar Arama: kanal/harita bagimsiz filtreli arama + uzaktan satin alma + dukkan goruntuleme (CG 84 / GC 139 / GG 42; wire degisti -> server+client rebuild + repack BIRLIKTE)
 	#if defined(ENABLE_IKASHOP_SEARCH) && !defined(ENABLE_OFFLINE_SHOP_SOLD_RED)
 		#error "ENABLE_IKASHOP_SEARCH icin ENABLE_OFFLINE_SHOP_SOLD_RED acik olmali (uzak alim kilidi sold kolonuna dayanir)"
 	#endif
 #endif
+
+#define ENABLE_MESSENGER_BLOCK										// Oyuncu Engelleme sistemi: PM/ticaret/parti/lonca/duello/duygu blok + messenger Engellendi grubu (wire degisti -> server+client rebuild + repack BIRLIKTE; SQL: messenger_block_list)
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

@@ -115,6 +115,8 @@ if app.ENABLE_BULK_POTION_PANEL:
 	import uiBulkPotion
 if app.ENABLE_GM_PLAYER_PANEL:
 	import uigmpanel
+if getattr(app, "ENABLE_LUCKY_DRAW", 0):
+	import uiluckydraw
 IsQBHide = 0
 
 
@@ -352,6 +354,11 @@ class Interface(object):
 		if app.ENABLE_BOT_CONTROL:
 			self.wndBotControl = uibotcontrol.BotControlBoard()
 
+		if getattr(app, "ENABLE_LUCKY_DRAW", 0):
+			self.wndLuckyDraw = uiluckydraw.LuckyDrawWindow()
+			self.wndLuckyDrawPromo = None		# tembel: ilk promo komutunda kurulur
+			self.wndLuckyDrawIndicator = None	# tembel: ilk durum komutunda kurulur
+
 	def __MakeDialogs(self):
 		self.dlgExchange = uiExchange.ExchangeDialog()
 		self.dlgExchange.LoadDialog()
@@ -571,6 +578,10 @@ class Interface(object):
 
 		if app.KYGN_CHEST_INFO and self.wndKygnChestInfo:
 			self.wndKygnChestInfo.SetItemToolTip(self.tooltipItem)
+
+		if getattr(app, "ENABLE_LUCKY_DRAW", 0):
+			if self.wndLuckyDraw:
+				self.wndLuckyDraw.SetItemToolTip(self.tooltipItem)
 
 		if app.WJ_NEW_DROP_DIALOG:
 			self.deleteitem.SetItemToolTip(self.tooltipItem)
@@ -835,6 +846,14 @@ class Interface(object):
 			if self.wndBotControl:
 				self.wndBotControl.Destroy()
 
+		if getattr(app, "ENABLE_LUCKY_DRAW", 0):
+			if self.wndLuckyDraw:
+				self.wndLuckyDraw.Destroy()
+			if self.wndLuckyDrawPromo:
+				self.wndLuckyDrawPromo.Destroy()
+			if self.wndLuckyDrawIndicator:
+				self.wndLuckyDrawIndicator.Destroy()
+
 		self.wndChatLog.Destroy()
 		for btn in self.questButtonList:
 			btn.SetEvent(0)
@@ -903,6 +922,11 @@ class Interface(object):
 
 		if app.ENABLE_BOT_CONTROL:
 			del self.wndBotControl
+
+		if getattr(app, "ENABLE_LUCKY_DRAW", 0):
+			del self.wndLuckyDraw
+			del self.wndLuckyDrawPromo
+			del self.wndLuckyDrawIndicator
 
 		if app.ENABLE_ACCE_COSTUME_SYSTEM:
 			del self.wndAcceCombine
@@ -1420,6 +1444,14 @@ class Interface(object):
 		if app.ENABLE_BOT_CONTROL:
 			if self.wndBotControl:
 				self.wndBotControl.Hide()
+
+		if getattr(app, "ENABLE_LUCKY_DRAW", 0):
+			if self.wndLuckyDraw:
+				self.wndLuckyDraw.Hide()
+			if self.wndLuckyDrawPromo:
+				self.wndLuckyDrawPromo.Hide()
+			if self.wndLuckyDrawIndicator:
+				self.wndLuckyDrawIndicator.Hide()
 
 	def ShowMouseImage(self):
 		self.wndTaskBar.ShowMouseImage()
@@ -2121,14 +2153,25 @@ class Interface(object):
 		if uiikashopsearch is None:
 			chat.AppendChat(chat.CHAT_TYPE_INFO, getattr(localeInfo, "IKASHOP_SEARCH_MODULE_MISSING", "Pazar Arama modulu bulunamadi."))
 			return
-		if not self.ikaShopSearch:
-			self.ikaShopSearch = uiikashopsearch.IkaShopSearchWindow()
-			self.ikaShopSearch.SetToolTip(self.tooltipItem)
-			self.ikaShopSearch.Hide()
-		if self.ikaShopSearch.IsShow():
-			self.ikaShopSearch.Close()
-		else:
-			self.ikaShopSearch.Open()
+		# Pencere olusturma/acma sirasinda herhangi bir hata (eksik PNG, eski ui.py vs.)
+		# oyuncuyu oyundan atmasin diye try/except ile sarildi.
+		try:
+			if not self.ikaShopSearch:
+				self.ikaShopSearch = uiikashopsearch.IkaShopSearchWindow()
+				self.ikaShopSearch.SetToolTip(self.tooltipItem)
+				self.ikaShopSearch.Hide()
+			if self.ikaShopSearch.IsShow():
+				self.ikaShopSearch.Close()
+			else:
+				self.ikaShopSearch.Open()
+		except Exception, e:
+			self.ikaShopSearch = None
+			try:
+				import dbg
+				dbg.TraceError("OpenIkaShopSearch error: %s" % str(e))
+			except:
+				pass
+			chat.AppendChat(chat.CHAT_TYPE_INFO, "Pazar Arama penceresi acilamadi (repack gerekli olabilir): %s" % str(e))
 
 	# Binary -> game.py -> interface callback zinciri (arama sonucu/silme/popup)
 	def OnIkaShopSearchResult(self, count):
@@ -2708,6 +2751,66 @@ class Interface(object):
 	if app.ENABLE_BOT_CONTROL:
 		def ShowBotControlWnd(self, verifyCode, remainSec):
 			self.wndBotControl.ShowBotControl(verifyCode, remainSec)
+
+	if getattr(app, "ENABLE_LUCKY_DRAW", 0):
+		# Sansli Cekilis: game.py LD_* callback'lerinden pencereye iletim
+		def LD_ClearCachedData(self):
+			if self.wndLuckyDraw:
+				self.wndLuckyDraw.ClearCachedData()
+
+		def LD_SetLuckyDrawInfo(self, endTime, joinCount, maxJoinCount, myJoinCount, maxTicketCount, neededYang):
+			if self.wndLuckyDraw:
+				self.wndLuckyDraw.SetLuckyDrawInfo(endTime, joinCount, maxJoinCount, myJoinCount, maxTicketCount, neededYang)
+
+		def LD_SetRequirement(self, reqIndex, itemVnum, itemCount):
+			if self.wndLuckyDraw:
+				self.wndLuckyDraw.SetRequirement(reqIndex, itemVnum, itemCount)
+
+		def LD_SetWinnerName(self, winnerIndex, name, ticketCount):
+			if self.wndLuckyDraw:
+				self.wndLuckyDraw.SetWinnerName(winnerIndex, name, ticketCount)
+
+		def LD_SetRewards(self, winnerIndex, rewardVnum):
+			if self.wndLuckyDraw:
+				self.wndLuckyDraw.SetRewards(winnerIndex, rewardVnum)
+
+		def LD_SetJoiner(self, joinerIndex, name, ticketCount):
+			if self.wndLuckyDraw:
+				self.wndLuckyDraw.SetJoiner(joinerIndex, name, ticketCount)
+
+		def LD_RefreshUI(self):
+			if self.wndLuckyDraw:
+				self.wndLuckyDraw.RefreshUI()
+
+		# Giris tanitim gorseli: tiklayinca cekilis penceresi acilir.
+		# Donus: 1 = gosterildi (game.py bayragi ancak o zaman isaretler)
+		def ShowLuckyDrawPromo(self):
+			if self.wndLuckyDrawPromo is None:
+				self.wndLuckyDrawPromo = uiluckydraw.LuckyDrawPromoWindow()
+				self.wndLuckyDrawPromo.SetClickEvent(ui.__mem_func__(self.__OnLuckyDrawPromoClick))
+			if self.wndLuckyDrawPromo.IsImageLoaded():
+				self.wndLuckyDrawPromo.Open()
+				return 1
+			return 0
+
+		def __OnLuckyDrawPromoClick(self):
+			if self.wndLuckyDrawPromo:
+				self.wndLuckyDrawPromo.Close()
+			net.SendChatPacket("/lucky_draw 1")
+
+		# Minimap gostergesi: etkinlik aktifken minimap solunda ikon
+		def SetLuckyDrawIndicator(self, isActive):
+			if isActive:
+				if self.wndLuckyDrawIndicator is None:
+					self.wndLuckyDrawIndicator = uiluckydraw.LuckyDrawMinimapIcon()
+					self.wndLuckyDrawIndicator.SetClickEvent(ui.__mem_func__(self.__OnLuckyDrawIndicatorClick))
+				self.wndLuckyDrawIndicator.Open()
+			else:
+				if self.wndLuckyDrawIndicator:
+					self.wndLuckyDrawIndicator.Close()
+
+		def __OnLuckyDrawIndicatorClick(self):
+			net.SendChatPacket("/lucky_draw 1")
 
 	if app.__BL_MULTI_LANGUAGE__:
 		def LanguageChange(self):

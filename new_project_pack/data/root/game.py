@@ -400,7 +400,7 @@ class GameWindow(ui.ScriptWindow):
 		if app.ENABLE_EXCHANGE_LOG:
 			onPressKeyDict[app.DIK_F6]	= lambda : self.interface.OpenExchangeLog()
 
-		onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenShopSearch()
+		# onPressKeyDict[app.DIK_F7]	= lambda : self.interface.OpenShopSearch()
 
 		if app.ENABLE_GIFT_SEND_SYSTEM:
 			onPressKeyDict[app.DIK_F8]	= lambda : self.interface.ToggleGiftSendDialog()
@@ -2256,7 +2256,37 @@ class GameWindow(ui.ScriptWindow):
 		def ShowBotControlWnd(self, botData):
 			if self.interface:
 				self.interface.ShowBotControlWnd(int(botData.split('|')[0]), int(botData.split('|')[1]))
-		
+
+	if getattr(app, "ENABLE_LUCKY_DRAW", 0):
+		# Sansli Cekilis callback'leri (PythonNetworkStreamPhaseGame.cpp RecvLuckyDrawInfoPacket cagirir)
+		def LD_ClearCachedData(self):
+			if self.interface:
+				self.interface.LD_ClearCachedData()
+
+		def LD_SetLuckyDrawInfo(self, endTime, joinCount, maxJoinCount, myJoinCount, maxTicketCount, neededYang):
+			if self.interface:
+				self.interface.LD_SetLuckyDrawInfo(endTime, joinCount, maxJoinCount, myJoinCount, maxTicketCount, neededYang)
+
+		def LD_SetRequirement(self, reqIndex, itemVnum, itemCount):
+			if self.interface:
+				self.interface.LD_SetRequirement(reqIndex, itemVnum, itemCount)
+
+		def LD_SetWinnerName(self, winnerIndex, name, ticketCount):
+			if self.interface:
+				self.interface.LD_SetWinnerName(winnerIndex, name, ticketCount)
+
+		def LD_SetRewards(self, winnerIndex, rewardVnum):
+			if self.interface:
+				self.interface.LD_SetRewards(winnerIndex, rewardVnum)
+
+		def LD_SetJoiner(self, joinerIndex, name, ticketCount):
+			if self.interface:
+				self.interface.LD_SetJoiner(joinerIndex, name, ticketCount)
+
+		def LD_RefreshUI(self):
+			if self.interface:
+				self.interface.LD_RefreshUI()
+
 	## BINARY CALLBACK
 	######################################################################################
 
@@ -2311,6 +2341,18 @@ class GameWindow(ui.ScriptWindow):
 
 			# Pazar Arama (ShopSearch): NPC/quest 'shop_search' komutu ile acilir
 			"shop_search"			: self.__OpenShopSearch,
+
+			# Sansli Cekilis: NPC/quest 'lucky_draw_open' komutu ile pencere acilir
+			# (server /lucky_draw 1 cevabi pencereyi doldurup gosterir)
+			"lucky_draw_open"		: self.__OpenLuckyDraw,
+
+			# Sansli Cekilis giris tanitimi: server entergame'de gonderir,
+			# client ayni oturumda yalnizca 1 kez gosterir
+			"lucky_draw_promo"		: self.__ShowLuckyDrawPromo,
+
+			# Sansli Cekilis minimap gostergesi: server aktif/pasif durumunu yollar
+			# (entergame'de ve etkinlik baslayip/bitince tum online oyunculara)
+			"lucky_draw_state"		: self.__SetLuckyDrawState,
 		}
 
 		if app.ENABLE_OFFLINE_SHOP:
@@ -2494,6 +2536,37 @@ class GameWindow(ui.ScriptWindow):
 	# Pazar Arama (ShopSearch) penceresini ac (NPC/quest 'shop_search' komutu)
 	def __OpenShopSearch(self):
 		self.interface.OpenShopSearch()
+
+	# Sansli Cekilis: sunucudan guncel veriyi iste; cevap paketi pencereyi acar
+	def __OpenLuckyDraw(self):
+		if getattr(app, "ENABLE_LUCKY_DRAW", 0):
+			net.SendChatPacket("/lucky_draw 1")
+
+	# Sansli Cekilis giris tanitimi: client process'i basina yalnizca 1 kez.
+	# Kanal/karakter degisimi ayni process'te kaldigi icin tekrar cikmaz;
+	# oyun tamamen kapatilip acilinca modul bayragi sifirlanir ve tekrar cikar.
+	def __ShowLuckyDrawPromo(self):
+		if not getattr(app, "ENABLE_LUCKY_DRAW", 0):
+			return
+		import uiluckydraw
+		if uiluckydraw.WasPromoShown():
+			return
+		if self.interface:
+			# bayrak yalnizca gorsel GERCEKTEN gosterildiyse isaretlenir;
+			# gorsel eksikse hak yanmaz, gorsel eklenince sonraki giriste cikar
+			if self.interface.ShowLuckyDrawPromo():
+				uiluckydraw.MarkPromoShown()
+
+	# Sansli Cekilis minimap gostergesi (1 = goster, 0 = gizle)
+	def __SetLuckyDrawState(self, state="0"):
+		if not getattr(app, "ENABLE_LUCKY_DRAW", 0):
+			return
+		if self.interface:
+			try:
+				isActive = int(state)
+			except ValueError:
+				isActive = 0
+			self.interface.SetLuckyDrawIndicator(isActive)
 
 	if app.ENABLE_CUBE_RENEWAL:
 		# YENI: server 'cube_skill_grid <0|1>' gonderir; beceri kitabi grid'ini ac/kapat

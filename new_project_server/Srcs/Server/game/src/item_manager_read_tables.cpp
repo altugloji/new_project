@@ -542,6 +542,10 @@ bool ITEM_MANAGER::ReloadEtcDropItemFile()
 }
 #endif
 
+// canli /reload m sirasinda satir-basi tablo loglari susturulur (boot ciktisi degismez);
+// binlerce sys_log+fflush tum core'larda ayni anda calisip oyun dongusunu takltir
+static bool s_bQuietDropLog = false;
+
 bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 {
 	CTextFileLoader loader;
@@ -553,12 +557,17 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 	{
 		std::string stName("");
 
+		// node adi ancak child node'a inince okunabiliyor; ust node'da hep bos donuyordu
+		// (bos ad = tum hata loglari isimsiz + kr_ atlama hic calismiyordu)
+		loader.SetChildNode(i);
+
 		loader.GetCurrentNodeName(&stName);
 
 		if (strncmp (stName.c_str(), "kr_", 3) == 0)
+		{
+			loader.SetParentNode();
 			continue;
-
-		loader.SetChildNode(i);
+		}
 
 		int iMobVnum = 0;
 		int iKillDrop = 0;
@@ -608,7 +617,8 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 			iLevelLimit = 0;
 		}
 
-		sys_log(0,"MOB_ITEM_GROUP %s [%s] %d %d", stName.c_str(), strType.c_str(), iMobVnum, iKillDrop);
+		if (!s_bQuietDropLog)
+			sys_log(0,"MOB_ITEM_GROUP %s [%s] %d %d", stName.c_str(), strType.c_str(), iMobVnum, iKillDrop);
 
 		if (iKillDrop == 0)
 		{
@@ -633,6 +643,14 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 					std::string& name = pTok->at(0);
 					DWORD dwVnum = 0;
 
+					// eksik kolonlu satirda at() exception atar; canli reload'da core yerine temiz hata
+					if (pTok->size() < 3)
+					{
+						sys_err("ReadMonsterDropItemGroup : missing count/pct column for item %s : node %s", name.c_str(), stName.c_str());
+						M2_DELETE(pkGroup);
+						return false;
+					}
+
 					if (!GetValidVnum(name.c_str(), dwVnum)
 						&& !GetVnumByOriginalName(name.c_str(), dwVnum))
 					{
@@ -656,23 +674,30 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 
 					if (iPartPct == 0)
 					{
-						sys_err("ReadMonsterDropItemGroup : there is no drop percent for item %s : node %s : vnum %d, count %d, pct %d", name.c_str(), stName.c_str(), iPartPct);
+						sys_err("ReadMonsterDropItemGroup : there is no drop percent for item %s : node %s : vnum %d, count %d, pct %d", name.c_str(), stName.c_str(), dwVnum, iCount, iPartPct);
 						M2_DELETE(pkGroup); // @fixme340
 						return false;
 					}
 
 					int iRarePct = 0;
-					str_to_number(iRarePct, pTok->at(3).c_str());
+					if (pTok->size() > 3)
+						str_to_number(iRarePct, pTok->at(3).c_str());
 					iRarePct = MINMAX(0, iRarePct, 100);
 
-					sys_log(0,"        %s count %d rare %d", name.c_str(), iCount, iRarePct);
+					if (!s_bQuietDropLog)
+						sys_log(0,"        %s count %d rare %d", name.c_str(), iCount, iRarePct);
 					pkGroup->AddItem(dwVnum, iCount, iPartPct, iRarePct);
 					continue;
 				}
 
 				break;
 			}
-			m_map_pkMobItemGroup.emplace(iMobVnum, pkGroup);
+			// ayni mob vnum ikinci kez tanimliysa ilk grup gecerli kalir, kopya birikmesin diye silinir
+			if (!m_map_pkMobItemGroup.emplace(iMobVnum, pkGroup).second)
+			{
+				sys_err("ReadMonsterDropItemGroup : duplicate kill group for mob %d, node %s", iMobVnum, stName.c_str());
+				M2_DELETE(pkGroup);
+			}
 
 		}
 		else if (strType == "drop")
@@ -700,11 +725,21 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 					std::string& name = pTok->at(0);
 					DWORD dwVnum = 0;
 
+					// eksik kolonlu satirda at() exception atar; canli reload'da core yerine temiz hata
+					if (pTok->size() < 3)
+					{
+						sys_err("ReadMonsterDropItemGroup : missing count/pct column for item %s : node %s", name.c_str(), stName.c_str());
+						if (bNew)
+							M2_DELETE(pkGroup);
+						return false;
+					}
+
 					if (!GetValidVnum(name.c_str(), dwVnum)
 						&& !GetVnumByOriginalName(name.c_str(), dwVnum))
 					{
 						sys_err("ReadDropItemGroup : there is no item %s : node %s", name.c_str(), stName.c_str());
-						M2_DELETE(pkGroup);
+						if (bNew)
+							M2_DELETE(pkGroup);
 						return false;
 					}
 
@@ -714,7 +749,8 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 					if (iCount < 1)
 					{
 						sys_err("ReadMonsterDropItemGroup : there is no count for item %s : node %s", name.c_str(), stName.c_str());
-						M2_DELETE(pkGroup);
+						if (bNew)
+							M2_DELETE(pkGroup);
 
 						return false;
 					}
@@ -723,7 +759,8 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 
 					DWORD dwPct = (DWORD)(10000.0f * fPercent);
 
-					sys_log(0,"        name %s pct %d count %d", name.c_str(), dwPct, iCount);
+					if (!s_bQuietDropLog)
+						sys_log(0,"        name %s pct %d count %d", name.c_str(), dwPct, iCount);
 					pkGroup->AddItem(dwVnum, dwPct, iCount);
 
 					continue;
@@ -749,6 +786,14 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 					std::string& name = pTok->at(0);
 					DWORD dwItemVnum = 0;
 
+					// eksik kolonlu satirda at() exception atar; canli reload'da core yerine temiz hata
+					if (pTok->size() < 3)
+					{
+						sys_err("ReadMonsterDropItemGroup : missing count/pct column for item %s : node %s", name.c_str(), stName.c_str());
+						M2_DELETE(pkLevelItemGroup);
+						return false;
+					}
+
 					if (!GetValidVnum(name.c_str(), dwItemVnum)
 						&& !GetVnumByOriginalName(name.c_str(), dwItemVnum))
 					{
@@ -770,7 +815,8 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 					float fPct = atof(pTok->at(2).c_str());
 					DWORD dwPct = (DWORD)(10000.0f * fPct);
 
-					sys_log(0,"        name %s pct %d count %d", name.c_str(), dwPct, iCount);
+					if (!s_bQuietDropLog)
+						sys_log(0,"        name %s pct %d count %d", name.c_str(), dwPct, iCount);
 					pkLevelItemGroup->AddItem(dwItemVnum, dwPct, iCount);
 
 					continue;
@@ -779,7 +825,11 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 				break;
 			}
 
-			m_map_pkLevelItemGroup.emplace(iMobVnum, pkLevelItemGroup);
+			if (!m_map_pkLevelItemGroup.emplace(iMobVnum, pkLevelItemGroup).second)
+			{
+				sys_err("ReadMonsterDropItemGroup : duplicate limit group for mob %d, node %s", iMobVnum, stName.c_str());
+				M2_DELETE(pkLevelItemGroup);
+			}
 		}
 		else if (strType == "thiefgloves")
 		{
@@ -794,6 +844,14 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 				{
 					std::string& name = pTok->at(0);
 					DWORD dwVnum = 0;
+
+					// eksik kolonlu satirda at() exception atar; canli reload'da core yerine temiz hata
+					if (pTok->size() < 3)
+					{
+						sys_err("ReadMonsterDropItemGroup : missing count/pct column for item %s : node %s", name.c_str(), stName.c_str());
+						M2_DELETE(pkGroup);
+						return false;
+					}
 
 					if (!GetValidVnum(name.c_str(), dwVnum)
 						&& !GetVnumByOriginalName(name.c_str(), dwVnum))
@@ -818,7 +876,8 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 
 					DWORD dwPct = (DWORD)(10000.0f * fPercent);
 
-					sys_log(0,"        name %s pct %d count %d", name.c_str(), dwPct, iCount);
+					if (!s_bQuietDropLog)
+						sys_log(0,"        name %s pct %d count %d", name.c_str(), dwPct, iCount);
 					pkGroup->AddItem(dwVnum, dwPct, iCount);
 
 					continue;
@@ -827,7 +886,11 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 				break;
 			}
 
-			m_map_pkGloveItemGroup.emplace(iMobVnum, pkGroup);
+			if (!m_map_pkGloveItemGroup.emplace(iMobVnum, pkGroup).second)
+			{
+				sys_err("ReadMonsterDropItemGroup : duplicate thiefgloves group for mob %d, node %s", iMobVnum, stName.c_str());
+				M2_DELETE(pkGroup);
+			}
 		}
 		else
 		{
@@ -841,6 +904,72 @@ bool ITEM_MANAGER::ReadMonsterDropItemGroup(const char * c_pszFileName)
 
 	return true;
 }
+
+#ifdef ENABLE_RELOAD_MOB_DROP_ITEM
+bool ITEM_MANAGER::ReloadMobDropItemFile()
+{
+	// drop_item_group.txt ile mob_drop_item.txt ayni m_map_pkDropItemGroup tablosunu
+	// besledigi icin ikisi boot sirasiyla birlikte okunur. Mevcut tablolar kenara alinir;
+	// parse hata verirse eskiler geri konur, yarim yuklu tablo hicbir an olusmaz.
+	std::map<DWORD, CMobItemGroup*> map_pkOldMobItemGroup;
+	std::map<DWORD, CDropItemGroup*> map_pkOldDropItemGroup;
+	std::map<DWORD, CLevelItemGroup*> map_pkOldLevelItemGroup;
+	std::map<DWORD, CBuyerThiefGlovesItemGroup*> map_pkOldGloveItemGroup;
+
+	m_map_pkMobItemGroup.swap(map_pkOldMobItemGroup);
+	m_map_pkDropItemGroup.swap(map_pkOldDropItemGroup);
+	m_map_pkLevelItemGroup.swap(map_pkOldLevelItemGroup);
+	m_map_pkGloveItemGroup.swap(map_pkOldGloveItemGroup);
+
+	char szDropItemGroupFileName[256];
+	char szMobDropItemFileName[256];
+	snprintf(szDropItemGroupFileName, sizeof(szDropItemGroupFileName), "%s/drop_item_group.txt", LocaleService_GetBasePath().c_str());
+	snprintf(szMobDropItemFileName, sizeof(szMobDropItemFileName), "%s/mob_drop_item.txt", LocaleService_GetBasePath().c_str());
+
+	bool bOk = false;
+	s_bQuietDropLog = true;
+
+	// beklenmedik bir parse exception'i canli sunucuyu dusurmesin: rollback yolu calisir
+	try
+	{
+		bOk = ReadDropItemGroup(szDropItemGroupFileName) && ReadMonsterDropItemGroup(szMobDropItemFileName);
+	}
+	catch (...)
+	{
+		sys_err("ReloadMobDropItemFile: exception during parse");
+		bOk = false;
+	}
+
+	s_bQuietDropLog = false;
+
+	std::map<DWORD, CMobItemGroup*> * pMapDeleteMob = &map_pkOldMobItemGroup;
+	std::map<DWORD, CDropItemGroup*> * pMapDeleteDrop = &map_pkOldDropItemGroup;
+	std::map<DWORD, CLevelItemGroup*> * pMapDeleteLevel = &map_pkOldLevelItemGroup;
+	std::map<DWORD, CBuyerThiefGlovesItemGroup*> * pMapDeleteGlove = &map_pkOldGloveItemGroup;
+
+	if (!bOk)
+	{
+		sys_err("ReloadMobDropItemFile: parse failed, keeping previous drop tables");
+
+		// yarim yuklenen yeni gruplar silinecek, eski tablolar geri gelecek
+		m_map_pkMobItemGroup.swap(map_pkOldMobItemGroup);
+		m_map_pkDropItemGroup.swap(map_pkOldDropItemGroup);
+		m_map_pkLevelItemGroup.swap(map_pkOldLevelItemGroup);
+		m_map_pkGloveItemGroup.swap(map_pkOldGloveItemGroup);
+	}
+
+	for (itertype(*pMapDeleteMob) it = pMapDeleteMob->begin(); it != pMapDeleteMob->end(); ++it)
+		M2_DELETE(it->second);
+	for (itertype(*pMapDeleteDrop) it = pMapDeleteDrop->begin(); it != pMapDeleteDrop->end(); ++it)
+		M2_DELETE(it->second);
+	for (itertype(*pMapDeleteLevel) it = pMapDeleteLevel->begin(); it != pMapDeleteLevel->end(); ++it)
+		M2_DELETE(it->second);
+	for (itertype(*pMapDeleteGlove) it = pMapDeleteGlove->begin(); it != pMapDeleteGlove->end(); ++it)
+		M2_DELETE(it->second);
+
+	return bOk;
+}
+#endif
 
 bool ITEM_MANAGER::ReadDropItemGroup(const char * c_pszFileName)
 {
@@ -874,7 +1003,8 @@ bool ITEM_MANAGER::ReadDropItemGroup(const char * c_pszFileName)
 			return false;
 		}
 
-		sys_log(0,"DROP_ITEM_GROUP %s %d", stName.c_str(), iMobVnum);
+		if (!s_bQuietDropLog)
+			sys_log(0,"DROP_ITEM_GROUP %s %d", stName.c_str(), iMobVnum);
 
 		TTokenVector * pTok;
 
@@ -896,6 +1026,15 @@ bool ITEM_MANAGER::ReadDropItemGroup(const char * c_pszFileName)
 			{
 				std::string& name = pTok->at(0);
 				DWORD dwVnum = 0;
+
+				// eksik kolonlu satirda at() exception atar; canli reload'da core yerine temiz hata
+				if (pTok->size() < 2)
+				{
+					sys_err("ReadDropItemGroup : missing percent column for item %s : node %s", name.c_str(), stName.c_str());
+					if (it == m_map_pkDropItemGroup.end())
+						M2_DELETE(pkGroup);
+					return false;
+				}
 
 				if (!GetValidVnum(name.c_str(), dwVnum)
 					&& !GetVnumByOriginalName(name.c_str(), dwVnum))
@@ -924,7 +1063,8 @@ bool ITEM_MANAGER::ReadDropItemGroup(const char * c_pszFileName)
 					return false;
 				}
 
-				sys_log(0,"        %s %d %d", name.c_str(), dwPct, iCount);
+				if (!s_bQuietDropLog)
+					sys_log(0,"        %s %d %d", name.c_str(), dwPct, iCount);
 				pkGroup->AddItem(dwVnum, dwPct, iCount);
 				continue;
 			}

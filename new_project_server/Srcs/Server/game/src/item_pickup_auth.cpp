@@ -34,7 +34,8 @@ namespace
 	constexpr BYTE ITEM_PICKUP_AUTH_BAD_SEQUENCE = 2;
 	constexpr BYTE ITEM_PICKUP_AUTH_LEGACY_PACKET = 3;
 
-	// Must stay byte-for-byte compatible with ItemPickupHashVmp in the client.
+	// Must stay byte-for-byte compatible with EterResourceLruTick in the client
+	// (the VMProtect-target hash; its name is deliberately innocuous).
 	DWORD ComputeItemPickupPacketHash(const void* data, size_t size, DWORD sessionNonce)
 	{
 		if (!data)

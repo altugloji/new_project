@@ -2157,6 +2157,9 @@ teleport_area:
 
 		/* delete messenger list */
 		MessengerManager::instance().RemoveAllList(ch->GetName());
+#ifdef ENABLE_MESSENGER_BLOCK
+		MessengerManager::instance().RemoveAllBlockList(ch->GetName());
+#endif
 
 		/* change_name_log */
 		LogManager::instance().ChangeNameLog(pid, ch->GetName(), szName, ch->GetDesc()->GetHostName());
@@ -3520,6 +3523,36 @@ teleport_area:
 	}
 #endif
 
+#ifdef ENABLE_MESSENGER_BLOCK
+	ALUA(pc_is_blocked)
+	{
+		const LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
+
+		if (!ch || lua_isstring(L, 1) != true)
+		{
+			lua_pushboolean(L, 0);
+			return 1;
+		}
+
+		lua_pushboolean(L, MessengerManager::instance().CheckMessengerList(ch->GetName(), lua_tostring(L, 1), SYST_BLOCK));
+		return 1;
+	}
+
+	ALUA(pc_is_friend)
+	{
+		const LPCHARACTER ch = CQuestManager::instance().GetCurrentCharacterPtr();
+
+		if (!ch || lua_isstring(L, 1) != true)
+		{
+			lua_pushboolean(L, 0);
+			return 1;
+		}
+
+		lua_pushboolean(L, MessengerManager::instance().CheckMessengerList(ch->GetName(), lua_tostring(L, 1), SYST_FRIEND));
+		return 1;
+	}
+#endif
+
 	void RegisterPCFunctionTable()
 	{
 		luaL_reg pc_functions[] =
@@ -3837,6 +3870,10 @@ teleport_area:
 			{ "open_gemconvertshop", pc_open_gemconvertshop },
 			{ "get_gem", pc_get_gem },
 			{ "change_gem", pc_change_gem },
+#endif
+#ifdef ENABLE_MESSENGER_BLOCK
+			{ "is_blocked",		pc_is_blocked },
+			{ "is_friend",		pc_is_friend },
 #endif
 			{nullptr, nullptr}
 		};

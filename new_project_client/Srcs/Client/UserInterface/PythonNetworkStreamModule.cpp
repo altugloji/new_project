@@ -1263,6 +1263,47 @@ PyObject* netSendMessengerRemovePacket(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_MESSENGER_BLOCK
+PyObject* netSendMessengerAddBlockByVIDPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	int vid;
+	if (!PyTuple_GetInteger(poArgs, 0, &vid))
+		return Py_BuildException();
+
+	CPythonNetworkStream& rns = CPythonNetworkStream::Instance();
+	rns.SendMessengerAddBlockByVIDPacket(vid);
+
+	return Py_BuildNone();
+}
+
+PyObject* netSendMessengerAddBlockByNamePacket(PyObject* poSelf, PyObject* poArgs)
+{
+	char* szName;
+	if (!PyTuple_GetString(poArgs, 0, &szName))
+		return Py_BuildException();
+
+	CPythonNetworkStream& rns = CPythonNetworkStream::Instance();
+	rns.SendMessengerAddBlockByNamePacket(szName);
+
+	return Py_BuildNone();
+}
+
+PyObject* netSendMessengerRemoveBlockPacket(PyObject* poSelf, PyObject* poArgs)
+{
+	char* szKey;
+	if (!PyTuple_GetString(poArgs, 0, &szKey))
+		return Py_BuildException();
+	char* szName;
+	if (!PyTuple_GetString(poArgs, 1, &szName))
+		return Py_BuildException();
+
+	CPythonNetworkStream& rns = CPythonNetworkStream::Instance();
+	rns.SendMessengerRemoveBlockPacket(szKey, szName);
+
+	return Py_BuildNone();
+}
+#endif
+
 PyObject* netSendPartyInvitePacket(PyObject* poSelf, PyObject* poArgs)
 {
 	int vid;
@@ -2072,6 +2113,11 @@ void initnet()
 		{ "SendMessengerAddByVIDPacket",		netSendMessengerAddByVIDPacket,			METH_VARARGS },
 		{ "SendMessengerAddByNamePacket",		netSendMessengerAddByNamePacket,		METH_VARARGS },
 		{ "SendMessengerRemovePacket",			netSendMessengerRemovePacket,			METH_VARARGS },
+#ifdef ENABLE_MESSENGER_BLOCK
+		{ "SendMessengerAddBlockByVIDPacket",	netSendMessengerAddBlockByVIDPacket,	METH_VARARGS },
+		{ "SendMessengerAddBlockByNamePacket",	netSendMessengerAddBlockByNamePacket,	METH_VARARGS },
+		{ "SendMessengerRemoveBlockPacket",		netSendMessengerRemoveBlockPacket,		METH_VARARGS },
+#endif
 
 		// Party
 		{ "SendPartyInvitePacket",				netSendPartyInvitePacket,				METH_VARARGS },

@@ -46,6 +46,9 @@
 #ifdef BERAN_SETAOU
 	#include "beran_setaou.h"
 #endif
+#ifdef ENABLE_LUCKY_DRAW
+	#include "LuckyDraw.h"
+#endif
 
 #ifdef ENABLE_WOLFMAN_CHARACTER
 
@@ -814,6 +817,17 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 #ifdef ENABLE_GUILD_TOKEN_AUTH
 	// ch->ChatPacket(CHAT_TYPE_INFO, "pid %d, guild id %d, guild leader id %d", ch->GetPlayerID(), ch->GetGuild() ? ch->GetGuild()->GetID() : 0, ch->GetGuild() ? ch->GetGuild()->GetMasterPID() : 0);
 	ch->SendGuildToken();
+#endif
+
+#ifdef ENABLE_LUCKY_DRAW
+	// Sansli Cekilis aktifse giriste minimap gostergesi + tanitim gorseli komutlari.
+	// Gosterge her entergame'de acilir; promo'yu client ayni oturumda (process)
+	// yalnizca ILK entergame'de gosterir, kanal/karakter degisiminde tekrarlamaz.
+	if (CLuckyDraw::Instance().IsLuckyDrawActivated())
+	{
+		ch->ChatPacket(CHAT_TYPE_COMMAND, "lucky_draw_state 1");
+		ch->ChatPacket(CHAT_TYPE_COMMAND, "lucky_draw_promo");
+	}
 #endif
 
 	_send_bonus_info(ch);

@@ -19,6 +19,9 @@ enum class ePulse {
 	RideMount,
 	SharedRequest,
 	ShopSearch,			//Shop search #ifdef OFFLINE_SHOP
+	IkaShopSearch,		//IKASHOP global arama cooldown #ifdef ENABLE_IKASHOP_SEARCH
+	IkaShopBuy,			//IKASHOP uzaktan satin alma flood #ifdef ENABLE_IKASHOP_SEARCH
+	IkaShopView,		//IKASHOP dukkan goruntuleme flood #ifdef ENABLE_IKASHOP_SEARCH
 };
 
 // #define __PULSEMANAGER__SECOND_SUPPORT__

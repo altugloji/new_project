@@ -87,6 +87,10 @@
 #include "beran_setaou.h"
 #endif
 
+#ifdef ENABLE_LUCKY_DRAW
+#include "LuckyDraw.h"
+#endif
+
 extern void WriteVersion();
 
 #if !defined(__WIN32__) && defined(ENABLE_ASAN)
@@ -374,6 +378,10 @@ int main(int argc, char **argv)
 	CGiftManager	gift_manager;		// hediye tanimlari ilk istekte lazy yuklenir
 #endif
 
+#ifdef ENABLE_LUCKY_DRAW
+	CLuckyDraw	luckyDrawManager;
+#endif
+
 	if (!start(argc, argv)) {
 		CleanUpForEarlyExit();
 		return 0;
@@ -404,6 +412,9 @@ int main(int argc, char **argv)
 	if (!g_bAuthServer) {
 #ifdef BERAN_SETAOU
 		beranSetaou.Initialize();
+#endif
+#ifdef ENABLE_LUCKY_DRAW
+		luckyDrawManager.Initialize();
 #endif
 	}
 
@@ -484,6 +495,10 @@ int main(int argc, char **argv)
 #ifdef BERAN_SETAOU
 		sys_log(0, "<shutdown> Destroying beranSetaou...");
 		beranSetaou.Destroy();
+#endif
+#ifdef ENABLE_LUCKY_DRAW
+		sys_log(0, "<shutdown> Destroying luckyDrawManager...");
+		luckyDrawManager.Destroy();
 #endif
 	}
 

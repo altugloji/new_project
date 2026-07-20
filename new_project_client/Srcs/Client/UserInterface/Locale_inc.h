@@ -146,6 +146,8 @@
 #define ENABLE_USER_REPORT_SYSTEM 										//Official User Report System
 #define ENABLE_ITEM_SHOP_SYSTEM											// Nesne Market Sistemi
 #define __RENEWAL_SKILL_BOOK__
+// #define NEW_PASSIVE_SKILLS												// Pasif Beceriler (Ilham 141 sabit HP) - server define ile birlikte acilmali
+// #define ENABLE_MONSTER_HUNTER_SKILL								// Canavar Avcisi pasifi (144); SIMDILIK KAPALI, server ile birlikte ac
 #define ENABLE_CUBE_RENEWAL
 #define ENABLE_CHARACTER_CHEST
 #define ENABLE_BULK_POTION_PANEL
@@ -158,7 +160,7 @@
 #define ENABLE_REFINE_RENEWAL
 #define ENABLE_GM_PLAYER_PANEL
 #define ENABLE_SAFE_TRADE_SYSTEM										// Güvenli Ticaret
-//#define ENABLE_IKASHOP_SEARCH											// IKASHOP tarzi global Pazar Arama: filtreli arama + uzaktan satin alma (CG 84 / GC 139; server ile BIRLIKTE derlenir)
+#define ENABLE_IKASHOP_SEARCH											// IKASHOP tarzi global Pazar Arama: filtreli arama + uzaktan satin alma (CG 84 / GC 139; server ile BIRLIKTE derlenir)
 #define ENABLE_ITEM_UPGRADE_OWNER
 #define ENABLE_ITEM_ENCHANT_USE_COUNT
 #define ENABLE_EFSUN_CHANGE_DIALOG
@@ -174,10 +176,19 @@
 #define ENABLE_BOT_CONTROL													// Bot Kontrol Sistemi (dogrulama paneli)
 #define ENABLE_SHOP_SEARCH_ITEM_SELECT										// Pazar Arama: grid'den item secip SADECE secilenleri aratma
 //#define ENABLE_GIFT_SEND_SYSTEM												// Hediye gonderme sistemi (server ENABLE_GIFT_SEND_SYSTEM ile ayni)
+#define ENABLE_LUCKY_DRAW													// Sansli Cekilis etkinligi (server ENABLE_LUCKY_DRAW ile ayni; GC 246, rebuild+repack birlikte)
+#ifdef ENABLE_LUCKY_DRAW
+	#define LD_MAX_WINNERS 5
+	#define LD_MAX_REWARDS 5
+	#define LD_MAX_REQ_ITEMS 5
+	#define LD_MAX_JOINER_LIST 20
+#endif
+
+#define ENABLE_MESSENGER_BLOCK											// Oyuncu Engelleme Sistemi (server ENABLE_MESSENGER_BLOCK ile ayni; wire degisti -> rebuild+repack birlikte)
 
 #define METIN35_ADMIN_PANEL												// Yönetim Paneli
 #ifdef METIN35_ADMIN_PANEL
-	#define CUR_CLIENT_VERSION 30										//versiyon key
+	#define CUR_CLIENT_VERSION 50										//versiyon key
 #endif
 
 

@@ -13,10 +13,11 @@
 
 #include "AbstractPlayer.h"
 
-// VMProtect GUI target: ItemPickupHashVmp.
+// VMProtect GUI target: EterResourceLruTick (item pickup hash; the name is
+// deliberately innocuous so the symbol does not stand out in the PDB/MAP).
 // Keep this function extern "C" and noinline so it remains a stable, standalone
 // symbol in the Release PDB/MAP. The server implementation must stay identical.
-extern "C" __declspec(noinline) DWORD __cdecl ItemPickupHashVmp(const void* data, size_t size, DWORD sessionNonce)
+extern "C" __declspec(noinline) DWORD __cdecl EterResourceLruTick(const void* data, size_t size, DWORD sessionNonce)
 {
 	if (!data)
 		return 0;
@@ -986,7 +987,7 @@ bool CPythonNetworkStream::SendItemPickUpPacket(DWORD vid)
 	itemPickUpPacket.header = HEADER_CG_ITEM_PICKUP_AUTH;
 	itemPickUpPacket.vid = vid;
 	itemPickUpPacket.sequence = m_dwItemPickupSequence;
-	itemPickUpPacket.hash = ItemPickupHashVmp(
+	itemPickUpPacket.hash = EterResourceLruTick(
 		&itemPickUpPacket,
 		offsetof(TPacketCGItemPickUpAuth, hash),
 		m_HandshakeData.dwHandshake);

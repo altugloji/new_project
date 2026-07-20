@@ -411,6 +411,24 @@ bool CPythonSkill::RegisterSkillDesc(const char * c_szFileName)
 
 				__RegisterGradeIconImage(rSkillData, szIconFileNameHeader, c_rstrIconName.c_str());
 			}
+#ifdef NEW_PASSIVE_SKILLS
+			else if (iSkillIndex == c_iSkillIndex_MaxHP
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+				|| iSkillIndex == c_iSkillIndex_MonsterHunter
+#endif
+				)
+			{
+				char szIconFileNameHeader[64+1];
+				_snprintf(szIconFileNameHeader, sizeof(szIconFileNameHeader), "%sskill/common/support/%s.tga", g_strImagePath.c_str(), c_rstrIconName.c_str());
+
+				rSkillData.pImage = (CGraphicImage *)CResourceManager::Instance().GetResourcePointer(szIconFileNameHeader);
+				for (int j = 0; j < SKILL_GRADE_COUNT; ++j)
+				{
+					TGradeData & rGradeData = rSkillData.GradeData[j];
+					rGradeData.pImage = rSkillData.pImage;
+				}
+			}
+#endif
 			else if (m_PathNameMap.contains(c_rstrJob))
 			{
 				char szIconFileNameHeader[64+1];

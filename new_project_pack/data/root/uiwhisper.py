@@ -7,6 +7,7 @@ import localeInfo
 import ime
 import chr
 import wndMgr
+import messenger
 
 class WhisperButton(ui.Button):
 	def __init__(self):
@@ -250,11 +251,15 @@ class WhisperDialog(ui.ScriptWindow):
 		self.targetName = targetName
 		self.textRenderer.SetTargetName(targetName)
 		self.titleNameEdit.Hide()
-		self.ignoreButton.Hide()
 		if app.IsDevStage():
 			self.reportViolentWhisperButton.Show()
 		else:
 			self.reportViolentWhisperButton.Hide()
+		# Engelle butonu ayni yuvayi kullanan report butonu (sadece DevStage) acikken gizli kalir
+		if app.ENABLE_MESSENGER_BLOCK and not app.IsDevStage():
+			self.__RefreshIgnoreButton()
+		else:
+			self.ignoreButton.Hide()
 		self.acceptButton.Hide()
 		self.gamemasterMark.Hide()
 		self.minimizeButton.Show()
@@ -300,8 +305,33 @@ class WhisperDialog(ui.ScriptWindow):
 	def ReportViolentWhisper(self):
 		net.SendChatPacket("/reportviolentwhisper " + self.targetName)
 
-	def IgnoreTarget(self):
-		net.SendChatPacket("/ignore " + self.targetName)
+	if app.ENABLE_MESSENGER_BLOCK:
+		def IgnoreTarget(self):
+			# donordeki olu /ignore komutu yerine ENABLE_MESSENGER_BLOCK sistemi (toggle)
+			if not self.targetName or self.targetName == 0:
+				return
+			if messenger.IsBlockByName(self.targetName):
+				messenger.RemoveBlock(self.targetName)
+				net.SendMessengerRemoveBlockPacket(self.targetName, self.targetName)
+			else:
+				net.SendMessengerAddBlockByNamePacket(self.targetName)
+			self.__RefreshIgnoreButton()
+
+		def __RefreshIgnoreButton(self):
+			if not self.ignoreButton:
+				return
+			if not self.targetName or self.targetName == 0:
+				self.ignoreButton.Hide()
+				return
+			self.ignoreButton.SetUp()
+			if messenger.IsBlockByName(self.targetName):
+				self.ignoreButton.SetText("Engeli Kaldir")
+			else:
+				self.ignoreButton.SetText(localeInfo.TARGET_BUTTON_BLOCK)
+			self.ignoreButton.Show()
+	else:
+		def IgnoreTarget(self):
+			net.SendChatPacket("/ignore " + self.targetName)
 
 	def AcceptTarget(self):
 		name = self.titleNameEdit.GetText()

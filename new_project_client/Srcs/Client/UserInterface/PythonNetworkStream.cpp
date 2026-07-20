@@ -224,6 +224,9 @@ class CMainPacketHeaderMap : public CNetworkPacketHeaderMap
 #ifdef __GEM_SHOP__
 			Set(HEADER_GC_GEM, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGem), DYNAMIC_SIZE_PACKET));
 #endif
+#ifdef ENABLE_LUCKY_DRAW
+			Set(HEADER_GC_LUCKYDRAW_INFO, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCLuckyDrawInfo), STATIC_SIZE_PACKET));
+#endif
 		}
 };
 

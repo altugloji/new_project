@@ -3824,3 +3824,33 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	Halskæde
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	Armbånd
 IKASHOP_SEARCH_SUB_JEWEL_EAR	Ørering
 IKASHOP_SEARCH_PLACEHOLDER	Søg item...
+LUCKYDRAW_TITLE	Lykketrækning
+LUCKYDRAW_STATE_ACTIVE	Status: AKTIV
+LUCKYDRAW_STATE_CLOSED	Status: LUKKET
+LUCKYDRAW_TIME	Resterende tid: %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	Resterende tid: -
+LUCKYDRAW_JOIN_COUNT	Totale billetter: %s / %s
+LUCKYDRAW_MY_COUNT	Mine billetter: %s / %s
+LUCKYDRAW_COST	Deltagelsespris: %s
+LUCKYDRAW_COST_FREE	Deltagelsespris: Gratis
+LUCKYDRAW_WINNERS	Vindere
+LUCKYDRAW_REWARD_PREFIX	Belønning: 
+LUCKYDRAW_BTN_JOIN	Deltag
+LUCKYDRAW_BTN_REWARD	Hent belønning
+LUCKYDRAW_BTN_REFRESH	Opdater
+LUCKYDRAW_JOIN_SENT	Deltagelsesanmodning sendt. Du kan se den aktuelle status med Opdater.
+LUCKYDRAW_REWARD_SENT	Belønningsanmodning sendt.
+LUCKYDRAW_REQ_TITLE	Krav for deltagelse:
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	Belønninger
+LUCKYDRAW_WINNER_LABEL	%d. vinder
+LUCKYDRAW_JOINERS_TITLE	Deltagere %s / %s
+LUCKYDRAW_TICKETS	Dine billetter: %s / %s
+LUCKYDRAW_MAX_NOTE	Du kan maksimalt bruge %s billetter.
+LUCKYDRAW_BTN_BUY	Køb billet
+LUCKYDRAW_BOTTOM_NOTE	Trækningen finder sted ved eventets afslutning, og vinderne bliver annonceret.
+LUCKYDRAW_JOINER_TICKETS	%s billetter
+LUCKYDRAW_CLOSED	Eventet er lukket lige nu.
+LUCKYDRAW_TIME_HEADER	Resterende tid
+LUCKYDRAW_YANG_NEEDED	Påkrævet Yang:
+LUCKYDRAW_WINNER_TICKETS	%s (%s billetter)

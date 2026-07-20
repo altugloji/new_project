@@ -3824,3 +3824,33 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	Naszyjnik
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	Bransoleta
 IKASHOP_SEARCH_SUB_JEWEL_EAR	Kolczyk
 IKASHOP_SEARCH_PLACEHOLDER	Szukaj itemu...
+LUCKYDRAW_TITLE	Szczêœliwe Losowanie
+LUCKYDRAW_STATE_ACTIVE	Status: AKTYWNE
+LUCKYDRAW_STATE_CLOSED	Status: ZAMKNIÊTE
+LUCKYDRAW_TIME	Pozosta³y czas: %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	Pozosta³y czas: -
+LUCKYDRAW_JOIN_COUNT	£¹cznie biletów: %s / %s
+LUCKYDRAW_MY_COUNT	Moje bilety: %s / %s
+LUCKYDRAW_COST	Koszt udzia³u: %s
+LUCKYDRAW_COST_FREE	Koszt udzia³u: Darmowy
+LUCKYDRAW_WINNERS	Zwyciêzcy
+LUCKYDRAW_REWARD_PREFIX	Nagroda: 
+LUCKYDRAW_BTN_JOIN	Do³¹cz
+LUCKYDRAW_BTN_REWARD	Odbierz nagrodê
+LUCKYDRAW_BTN_REFRESH	Odœwie¿
+LUCKYDRAW_JOIN_SENT	Proœba o udzia³ zosta³a wys³ana. Aktualny status mo¿esz zobaczyæ przez Odœwie¿.
+LUCKYDRAW_REWARD_SENT	Proœba o nagrodê zosta³a wys³ana.
+LUCKYDRAW_REQ_TITLE	Wymagania udzia³u:
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	Nagrody
+LUCKYDRAW_WINNER_LABEL	%d. zwyciêzca
+LUCKYDRAW_JOINERS_TITLE	Uczestnicy %s / %s
+LUCKYDRAW_TICKETS	Twoje bilety: %s / %s
+LUCKYDRAW_MAX_NOTE	Mo¿esz u¿yæ maksymalnie %s biletów.
+LUCKYDRAW_BTN_BUY	Kup bilet
+LUCKYDRAW_BOTTOM_NOTE	Losowanie odbêdzie siê po zakoñczeniu eventu, a zwyciêzcy zostan¹ og³oszeni.
+LUCKYDRAW_JOINER_TICKETS	%s biletów
+LUCKYDRAW_CLOSED	Event jest obecnie zamkniêty.
+LUCKYDRAW_TIME_HEADER	Pozosta³y czas
+LUCKYDRAW_YANG_NEEDED	Wymagany Yang:
+LUCKYDRAW_WINNER_TICKETS	%s (%s biletów)

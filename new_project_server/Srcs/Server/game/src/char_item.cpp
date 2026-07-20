@@ -943,6 +943,15 @@ bool CHARACTER::DoRefine(LPITEM item, bool bMoneyOnly)
 
 	// END_OF_REFINE_COST
 
+#ifdef ENABLE_NEXT_REFINE_SUCCESS
+	// GM'in verdigi tek seferlik %100 basari hakki: zar atilan anda tuketilir
+	if (IsNextRefineSuccess())
+	{
+		SetNextRefineSuccess(false);
+		prob = 0;	// prt->prob >= 0 oldugundan garanti basari
+	}
+#endif
+
 	if (prob <= prt->prob)
 	{
 		const LPITEM pkNewItem = ITEM_MANAGER::instance().CreateItem(result_vnum, 1, 0, false);
@@ -1200,6 +1209,15 @@ bool CHARACTER::DoRefineWithScroll(LPITEM item)
 	}
 
 	pkItemScroll->SetCount(pkItemScroll->GetCount() - 1);
+
+#ifdef ENABLE_NEXT_REFINE_SUCCESS
+	// GM'in verdigi tek seferlik %100 basari hakki (parsomenli basma dahil)
+	if (IsNextRefineSuccess())
+	{
+		SetNextRefineSuccess(false);
+		success_prob = 100;	// prob 1-100 arasinda oldugundan garanti basari
+	}
+#endif
 
 	if (prob <= success_prob)
 	{
@@ -3394,9 +3412,11 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 											dwSkillVnum = SKILL_POLYMORPH;
 											break;
 
+#ifndef NEW_PASSIVE_SKILLS
 										case 50323: case 50324:
 											dwSkillVnum = SKILL_ADD_HP;
 											break;
+#endif
 
 										case 50325: case 50326:
 											dwSkillVnum = SKILL_RESIST_PENETRATE;
@@ -3444,6 +3464,52 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 									}
 								}
 								break;
+
+#ifdef NEW_PASSIVE_SKILLS
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+							case 49100:	// Canavar Avcisi Kitabi (value0=144)
+#endif
+							case 49102:	// Ilham Kitabi (value0=141)
+								{
+									if (IsPolymorphed())
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Donusum halindeyken kitap okuyamazsin."));
+										return false;
+									}
+
+									DWORD dwSkillVnum = item->GetValue(0);
+									const CSkillProto* pkSk = CSkillManager::instance().Get(dwSkillVnum);
+									if (!pkSk)
+										return false;
+									if (!IsLearnableSkill(dwSkillVnum))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu beceriyi ogrenemezsin."));
+										return false;
+									}
+
+									int skillLevel = GetSkillLevel(dwSkillVnum);
+									if (skillLevel < item->GetValue(2))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu kitabi okumak icin beceri seviyen yetersiz."));
+										return false;
+									}
+									if (skillLevel >= item->GetValue(3))
+									{
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu kitapla daha fazla gelisemezsin."));
+										return false;
+									}
+
+									if (number(1, 100) <= item->GetValue(1))
+									{
+										SkillLevelUp(dwSkillVnum, SKILL_UP_BY_BOOK);
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Kitabi okudun ve becerin gelisti!"));
+									}
+									else
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Kitabi anlamakta basarisiz oldun."));
+									item->SetCount(item->GetCount() - 1);
+								}
+								break;
+#endif
 
 							case 50902:
 							case 50903:
@@ -6738,6 +6804,25 @@ static bool IsMountSkillDelayBypass(DWORD dwSkillVnum)
 		default:
 			return false;
 	}
+}
+#endif
+
+#ifdef ENABLE_HORSE_RIDE_SKILL_DELAY
+// Son skill kullanimindan sonra 1500ms ata binme gecikmesi hala suruyor mu? (StartRiding kullanir)
+bool CHARACTER::IsRideSkillDelayed() const
+{
+	if (get_dword_time() - m_dwLastSkillTime > 1500)
+		return false;
+#ifdef ENABLE_MOUNT_SKILL_DELAY_BYPASS
+	// Bu oturumda henuz hic skill kullanilmadiysa gecikme yok: login/kanal degisiminde
+	// karakter nesnesi yeni kurulur (ctor m_dwLastSkillTime=simdi) ve EnterHorse->StartRiding
+	// otomatik binisi bu kapiya takilip oyuncuyu attan indiriyordu.
+	if (m_dwLastSkillVnum == 0)
+		return false;
+	if (IsMountSkillDelayBypass(m_dwLastSkillVnum))
+		return false;
+#endif
+	return true;
 }
 #endif
 

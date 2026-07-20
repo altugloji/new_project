@@ -44,6 +44,9 @@ static const DWORD s_adwSubSkillVnums[] =
 	SKILL_HORSE_WILDATTACK_RANGE,
 	SKILL_ADD_HP,
 	SKILL_RESIST_PENETRATE
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+	, SKILL_MONSTER_HUNTER
+#endif
 };
 
 time_t CHARACTER::GetSkillNextReadTime(DWORD dwVnum) const
@@ -3737,4 +3740,19 @@ bool CHARACTER::CheckSkillHitCount(const BYTE SkillID, const VID TargetVID)
 
 	return true;
 }
+
+#ifdef NEW_PASSIVE_SKILLS
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+int CHARACTER::GetMonsterHunterSkillLevel() const
+{
+	int level = GetSkillLevel(SKILL_MONSTER_HUNTER);
+	return MIN(level, 40);
+}
+#endif
+int CHARACTER::GetAddHPSkillLevel() const
+{
+	int level = GetSkillLevel(SKILL_ADD_HP);
+	return MIN(level, 40);
+}
+#endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

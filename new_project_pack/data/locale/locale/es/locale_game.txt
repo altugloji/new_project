@@ -3824,3 +3824,33 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	Collar
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	Brazalete
 IKASHOP_SEARCH_SUB_JEWEL_EAR	Pendiente
 IKASHOP_SEARCH_PLACEHOLDER	Buscar item...
+LUCKYDRAW_TITLE	Sorteo de la Suerte
+LUCKYDRAW_STATE_ACTIVE	Estado: ACTIVO
+LUCKYDRAW_STATE_CLOSED	Estado: CERRADO
+LUCKYDRAW_TIME	Tiempo restante: %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	Tiempo restante: -
+LUCKYDRAW_JOIN_COUNT	Total de boletos: %s / %s
+LUCKYDRAW_MY_COUNT	Mis boletos: %s / %s
+LUCKYDRAW_COST	Coste de participación: %s
+LUCKYDRAW_COST_FREE	Coste de participación: Gratis
+LUCKYDRAW_WINNERS	Ganadores
+LUCKYDRAW_REWARD_PREFIX	Recompensa: 
+LUCKYDRAW_BTN_JOIN	Participar
+LUCKYDRAW_BTN_REWARD	Recoger recompensa
+LUCKYDRAW_BTN_REFRESH	Actualizar
+LUCKYDRAW_JOIN_SENT	Solicitud de participación enviada. Puedes ver el estado actual con Actualizar.
+LUCKYDRAW_REWARD_SENT	Solicitud de recompensa enviada.
+LUCKYDRAW_REQ_TITLE	Requisitos para participar:
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	Recompensas
+LUCKYDRAW_WINNER_LABEL	%d. Ganador
+LUCKYDRAW_JOINERS_TITLE	Participantes %s / %s
+LUCKYDRAW_TICKETS	Tus boletos: %s / %s
+LUCKYDRAW_MAX_NOTE	Puedes usar un máximo de %s boletos.
+LUCKYDRAW_BTN_BUY	Comprar boleto
+LUCKYDRAW_BOTTOM_NOTE	El sorteo se realizará al finalizar el evento y se anunciarán los ganadores.
+LUCKYDRAW_JOINER_TICKETS	%s boletos
+LUCKYDRAW_CLOSED	El evento está cerrado actualmente.
+LUCKYDRAW_TIME_HEADER	Tiempo restante
+LUCKYDRAW_YANG_NEEDED	Yang requerido:
+LUCKYDRAW_WINNER_TICKETS	%s (%s boletos)

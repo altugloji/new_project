@@ -1,55 +1,55 @@
 [CZ]
-50289	Buff efekt
-83011	Vodní truhla
+49100	Kniha lovce monster
+49102	Kniha inspirace
 
 [DE]
-50289	Buff-Effekt
-83011	Wassertruhe
+49100	Buch des Monsterjägers
+49102	Buch der Inspiration
 
 [DK]
-50289	Buff-effekt
-83011	Vandkiste
+49100	Monsterjægerens bog
+49102	Inspirationsbog
 
 [EN]
-50289	Buff Effect
-83011	Water Chest
+49100	Monster Hunter Book
+49102	Inspiration Book
 
 [ES]
-50289	Efecto Buff
-83011	Cofre de Agua
+49100	Libro del Cazador de Monstruos
+49102	Libro de Inspiración
 
 [FR]
-50289	Effet Buff
-83011	Coffre d'eau
+49100	Livre du chasseur de monstres
+49102	Livre d'inspiration
 
 [HU]
-50289	Buff hatás
-83011	Vízi láda
+49100	Szörnyvadász könyve
+49102	Ihlet könyve
 
 [IT]
-50289	Effetto Buff
-83011	Forziere d'Acqua
+49100	Libro del Cacciatore di Mostri
+49102	Libro dell'Ispirazione
 
 [NL]
-50289	Buff-effect
-83011	Waterkist
+49100	Monsterjagersboek
+49102	Inspiratieboek
 
 [PL]
-50289	Efekt Buffa
-83011	Skrzynia Wody
+49100	Księga Łowcy Potworów
+49102	Księga Inspiracji
 
 [PT]
-50289	Efeito Buff
-83011	Baú de Água
+49100	Livro do Caçador de Monstros
+49102	Livro da Inspiração
 
 [RO]
-50289	Efect Buff
-83011	Cufăr de Apă
+49100	Cartea Vânătorului de Monștri
+49102	Cartea Inspirației
 
 [AE]
-50289	تأثير البف
-83011	صندوق الماء
+49100	كتاب صياد الوحوش
+49102	كتاب الإلهام
 
 [TR]
-50289	Buff Effect
-83011	Su Sandığı
+49100	Canavar Avcısı Kitabı
+49102	İlham Kitabı

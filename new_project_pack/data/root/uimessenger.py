@@ -14,6 +14,7 @@ from _weakref import proxy
 
 FRIEND = 0
 GUILD = 1
+BLOCK = 2
 
 class MessengerItem(ui.Window):
 
@@ -238,6 +239,20 @@ class MessengerFriendItem(MessengerMemberItem):
 		net.SendMessengerRemovePacket(self.key, self.name)
 		return True
 
+if app.ENABLE_MESSENGER_BLOCK:
+	class MessengerBlockItem(MessengerMemberItem):
+
+		def __init__(self, getParentEvent):
+			MessengerMemberItem.__init__(self, getParentEvent)
+
+		def CanRemove(self):
+			return True
+
+		def OnRemove(self):
+			messenger.RemoveBlock(self.key)
+			net.SendMessengerRemoveBlockPacket(self.key, self.name)
+			return True
+
 class MessengerGuildItem(MessengerMemberItem):
 
 	def __init__(self, getParentEvent):
@@ -275,6 +290,17 @@ class MessengerFriendGroup(MessengerGroupItem):
 	def AppendMember(self, key, name):
 		item = MessengerFriendItem(self.getParentEvent)
 		return MessengerGroupItem.AppendMember(self, item, key, name)
+
+if app.ENABLE_MESSENGER_BLOCK:
+	class MessengerBlockGroup(MessengerGroupItem):
+
+		def __init__(self, getParentEvent):
+			MessengerGroupItem.__init__(self, getParentEvent)
+			self.SetName(localeInfo.MESSENGER_BLOCK)
+
+		def AppendMember(self, key, name):
+			item = MessengerBlockItem(self.getParentEvent)
+			return MessengerGroupItem.AppendMember(self, item, key, name)
 
 class MessengerGuildGroup(MessengerGroupItem):
 
@@ -363,6 +389,7 @@ class MessengerWindow(ui.ScriptWindow):
 			self.removeButton = self.GetChild("RemoveButton")
 			self.addFriendButton = self.GetChild("AddFriendButton")
 			self.guildButton = self.GetChild("GuildButton")
+			self.addBlockButton = self.GetChild("BlockFriendButton")
 		except:
 			import exception
 			exception.Abort("MessengerWindow.__LoadWindow.__Bind")
@@ -373,13 +400,18 @@ class MessengerWindow(ui.ScriptWindow):
 		self.removeButton.SetEvent(ui.__mem_func__(self.OnPressRemoveButton))
 		self.addFriendButton.SetEvent(ui.__mem_func__(self.OnPressAddFriendButton))
 		self.guildButton.SetEvent(ui.__mem_func__(self.OnPressGuildButton))
+		if app.ENABLE_MESSENGER_BLOCK:
+			self.addBlockButton.SetEvent(ui.__mem_func__(self.OnPressAddBlockButton))
 
 		width = self.GetWidth()
 		height = self.GetHeight()
-		self.addFriendButton.SetPosition(-60, 30)
-		self.whisperButton.SetPosition(-20, 30)
-		self.removeButton.SetPosition(20, 30)
-		self.guildButton.SetPosition(60, 30)
+		# ENABLE_MESSENGER_BLOCK acikken 5 buton uiscript'teki BUTTON_X_STEP dizilimiyle kalir (-60,-30,0,30,60)
+		if not app.ENABLE_MESSENGER_BLOCK:
+			self.addBlockButton.Hide()
+			self.addFriendButton.SetPosition(-60, 30)
+			self.whisperButton.SetPosition(-20, 30)
+			self.removeButton.SetPosition(20, 30)
+			self.guildButton.SetPosition(60, 30)
 
 		self.whisperButton.Disable()
 		self.removeButton.Disable()
@@ -415,6 +447,7 @@ class MessengerWindow(ui.ScriptWindow):
 
 		self.whisperButton = None
 		self.removeButton = None
+		self.addBlockButton = None
 
 	def OnCloseQuestionDialog(self):
 		self.questionDialog.Close()
@@ -486,6 +519,13 @@ class MessengerWindow(ui.ScriptWindow):
 		member.Show()
 		self.groupList.append(member)
 
+		if app.ENABLE_MESSENGER_BLOCK:
+			# sira onemli: C++ MESSENGER_GROUP_INDEX_BLOCK = 2 (FRIEND=0, GUILD=1)
+			member = MessengerBlockGroup(ui.__mem_func__(self.GetSelf))
+			member.Open()
+			member.Show()
+			self.groupList.append(member)
+
 	def __AddFamilyGroup(self):
 		member = MessengerFamilyGroup(ui.__mem_func__(self.GetSelf))
 		member.Open()
@@ -530,6 +570,28 @@ class MessengerWindow(ui.ScriptWindow):
 		self.friendNameBoard.Close()
 		self.friendNameBoard = None
 		return True
+
+	if app.ENABLE_MESSENGER_BLOCK:
+		def OnPressAddBlockButton(self):
+			blockNameBoard = uiCommon.InputDialog()
+			blockNameBoard.SetTitle(localeInfo.MESSENGER_ADD_BLOCK_FRIEND)
+			blockNameBoard.SetAcceptEvent(ui.__mem_func__(self.OnAddBlock))
+			blockNameBoard.SetCancelEvent(ui.__mem_func__(self.OnCancelAddBlock))
+			blockNameBoard.Open()
+			self.blockNameBoard = blockNameBoard
+
+		def OnAddBlock(self):
+			text = self.blockNameBoard.GetText()
+			if text:
+				net.SendMessengerAddBlockByNamePacket(text)
+			self.blockNameBoard.Close()
+			self.blockNameBoard = None
+			return True
+
+		def OnCancelAddBlock(self):
+			self.blockNameBoard.Close()
+			self.blockNameBoard = None
+			return True
 
 	def OnPressWhisperButton(self):
 		if self.selectedItem:

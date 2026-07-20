@@ -471,6 +471,14 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 			iAtk += (iAtk * 85 * pkAttacker->GetPoint(POINT_ENCHANT_DARK))	/ 10000;
 	}
 
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+	if (pkAttacker && pkVictim && pkAttacker->IsPC())
+	{
+		if (pkVictim->IsMonster())
+			iAtk += (iAtk * (pkAttacker->GetMonsterHunterSkillLevel()/2)) / 100;
+	}
+#endif
+
 	return iAtk;
 }
 

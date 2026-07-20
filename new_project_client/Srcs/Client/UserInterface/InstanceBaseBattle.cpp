@@ -678,6 +678,10 @@ void CInstanceBase::Stun()
 
 void CInstanceBase::Die()
 {
+	// Skill animasyonu sirasinda bekletilen (StateProcess defer) komutlar olumden sonra
+	// revive edilirse tekrar oynamasin diye kuyrugu temizle.
+	m_kQue_kCmdNew.clear();
+
 	__DetachHorseSaddle();
 
 	// if (IsAffect(AFFECT_SPAWN))

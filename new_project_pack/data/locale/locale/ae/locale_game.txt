@@ -3949,3 +3949,33 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	ﬁ·«œ…
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	”Ê«—
 IKASHOP_SEARCH_SUB_JEWEL_EAR	ﬁ—ÿ
 IKASHOP_SEARCH_PLACEHOLDER	«»ÕÀ ⁄‰ item...
+LUCKYDRAW_TITLE	«·”Õ» «·„ÕŸÊŸ
+LUCKYDRAW_STATE_ACTIVE	«·Õ«·…: ‰‘ÿ
+LUCKYDRAW_STATE_CLOSED	«·Õ«·…: „€·ﬁ
+LUCKYDRAW_TIME	«·Êﬁ  «·„ »ﬁÌ: %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	«·Êﬁ  «·„ »ﬁÌ: -
+LUCKYDRAW_JOIN_COUNT	≈Ã„«·Ì «· –«ﬂ—: %s / %s
+LUCKYDRAW_MY_COUNT	 –«ﬂ—Ì: %s / %s
+LUCKYDRAW_COST	—”Ê„ «·„‘«—ﬂ…: %s
+LUCKYDRAW_COST_FREE	—”Ê„ «·„‘«—ﬂ…: „Ã«‰Ì
+LUCKYDRAW_WINNERS	«·›«∆“Ê‰
+LUCKYDRAW_REWARD_PREFIX	«·Ã«∆“…: 
+LUCKYDRAW_BTN_JOIN	‘«—ﬂ
+LUCKYDRAW_BTN_REWARD	«” ·„ «·Ã«∆“…
+LUCKYDRAW_BTN_REFRESH	 ÕœÌÀ
+LUCKYDRAW_JOIN_SENT	 „ ≈—”«· ÿ·» «·„‘«—ﬂ…. Ì„ﬂ‰ﬂ —ƒÌ… «·Õ«·… «·Õ«·Ì… ⁄»—  ÕœÌÀ.
+LUCKYDRAW_REWARD_SENT	 „ ≈—”«· ÿ·» «·Ã«∆“….
+LUCKYDRAW_REQ_TITLE	«·„ ÿ·»«  ··„‘«—ﬂ…:
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	«·ÃÊ«∆“
+LUCKYDRAW_WINNER_LABEL	«·›«∆“ %d
+LUCKYDRAW_JOINERS_TITLE	«·„‘«—ﬂÊ‰ %s / %s
+LUCKYDRAW_TICKETS	 –«ﬂ—ﬂ: %s / %s
+LUCKYDRAW_MAX_NOTE	Ì„ﬂ‰ﬂ «” Œœ«„ %s  –«ﬂ— ﬂÕœ √ﬁ’Ï.
+LUCKYDRAW_BTN_BUY	‘—«¡  –ﬂ—…
+LUCKYDRAW_BOTTOM_NOTE	”Ì „ ≈Ã—«¡ «·”Õ» ⁄‰œ «‰ Â«¡ «·›⁄«·Ì… Ê”Ì „ ≈⁄·«‰ «·›«∆“Ì‰.
+LUCKYDRAW_JOINER_TICKETS	%s  –ﬂ—…
+LUCKYDRAW_CLOSED	«·›⁄«·Ì… „€·ﬁ… Õ«·Ì«.
+LUCKYDRAW_TIME_HEADER	«·Êﬁ  «·„ »ﬁÌ
+LUCKYDRAW_YANG_NEEDED	Yang «·„ÿ·Ê»:
+LUCKYDRAW_WINNER_TICKETS	%s (%s  –ﬂ—…)

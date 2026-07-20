@@ -6,6 +6,8 @@
 110	SHAMAN	Çabukluk	Çabukluk	Çabukluk	Rüzgar kadar hýzlý koþ. DEX ile güçlenir.	Hareket hýzýný artýrýr.	Becerilerin yüklenme süresini düþürür	Grup üyeleri üzerinde kullanýlabilir	Kendine uygulamada bonus	STANDING_SKILL|CAN_USE_FOR_ME|NEED_TARGET|ONLY_FOR_ALLIANCE		kwaesok	20	4			Hareket hýzý: +%.0f%%	(dex*0.2)+35*k		Yüklenme süresi -%.0f%%	3+33*k						
 111	SHAMAN	Saldýrý +	Saldýrý +	Saldýrý +	Bir ortaðýný güçlendir.	Saldýrý deðerini artýrýr	Grup üyeleri üzerinde kullanýlabilir	INT ve STR ile güçlenir		STANDING_SKILL|CAN_USE_FOR_ME|NEED_TARGET|ONLY_FOR_ALLIANCE		jeungryeok	21	4			Saldýrý deðeri: +%.1f	3+(iq*0.2+str*0.1+ 11)*k									
 121	SUPPORT	Liderlik			Grup üyelerine liderlik etme becerisi.					PASSIVE		tongsol															
+141	SUPPORT	Ýlham			Maksimum canýn artar.|Maks: 5.000HP					PASSIVE		max_hp															
+144	SUPPORT	Canavar Avcýsý			Canavarlara karþý hasarýn artar.|Maks: +%20					PASSIVE		monster															
 122	SUPPORT	Kombo			Toplu Saldýrýlarý güçlendirir.					CANNOT_LEVEL_UP|TOGGLE		combo															
 123	SUPPORT	Balýkçýlýk			Balýk avlama bilgisi.					CANNOT_LEVEL_UP		fishing															
 124	SUPPORT	Madencilik			Mineral çýkarma.					PASSIVE		mining															

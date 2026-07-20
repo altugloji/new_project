@@ -456,7 +456,9 @@ class IkaShopSearchWindow(IkashopBoardWithTitleBar):
 		# --- USTTE: item adi + arama + sifirla ---
 		self.inputNameBox = self.CreateWidget(ui.ExpandedImageBox, pos = (14, 40))
 		self.inputNameBox.LoadImage(SS + "input_name.png")
-		self.inputNameBox.SetScale(200.0 / self.inputNameBox.GetWidth(), 1.0)
+		_inw = self.inputNameBox.GetWidth()
+		if _inw > 0:	# PNG yuklenemezse sifira bolme crash'ini onle
+			self.inputNameBox.SetScale(200.0 / _inw, 1.0)
 
 		self.searchButton = self.CreateWidget(ui.Button, pos = (14 + self.inputNameBox.GetWidth() + 4, 42))
 		self.searchButton.SetUpVisual(SS + "mini_search_button/default.png")
@@ -497,9 +499,10 @@ class IkaShopSearchWindow(IkashopBoardWithTitleBar):
 		self.resultBox.LoadImage(SS + "result_box.png")
 		if hasattr(self.resultBox, "SetMouseWheelEvent"):
 			self.resultBox.SetMouseWheelEvent(ui.__mem_func__(self._OnScrollMouseWheelResultItems))
-		hs = float(self.resultBox.GetWidth() - 10) / self.resultBox.GetWidth()
-		vs = 469.0 / self.resultBox.GetHeight()
-		self.resultBox.SetScale(hs, vs)
+		_rbw = self.resultBox.GetWidth()
+		_rbh = self.resultBox.GetHeight()
+		if _rbw > 0 and _rbh > 0:	# PNG yuklenemezse sifira bolme crash'ini onle
+			self.resultBox.SetScale(float(_rbw - 10) / _rbw, 469.0 / _rbh)
 
 		self.resultItems = []
 		for i in xrange(self.RESULT_ITEM_VIEW_COUNT):

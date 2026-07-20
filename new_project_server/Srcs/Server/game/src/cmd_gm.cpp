@@ -2582,6 +2582,8 @@ ACMD(do_reload)
 				break;
 				//END_RELOAD_ADMIN
 			case 'c':	// cube
+				Cube_init ();
+				break;
 
 #ifdef ENABLE_RELOAD_ETC_DROP_ITEM
 			case 'e':
@@ -2598,6 +2600,21 @@ ACMD(do_reload)
 				break;
 #endif
 
+#ifdef ENABLE_RELOAD_MOB_DROP_ITEM
+			case 'm':
+				if (ITEM_MANAGER::instance().ReloadMobDropItemFile())
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, "Reloading mob_drop_item + drop_item_group.");
+					sys_log(0, "Reloading mob_drop_item + drop_item_group.");
+
+					BYTE bHeader = HEADER_GG_RELOAD_MOB_DROP;
+					P2P_MANAGER::instance().Send(&bHeader, sizeof(BYTE));
+				}
+				else
+					ch->ChatPacket(CHAT_TYPE_INFO, "Cannot reload mob_drop_item, check syserr.");
+				break;
+#endif
+
 #ifdef ENABLE_ITEM_SHOP_SYSTEM
 			case 'n':
 			{
@@ -2610,9 +2627,6 @@ ACMD(do_reload)
 				break;
 			}
 #endif
-
-				Cube_init ();
-				break;
 		}
 	}
 	else
@@ -5051,6 +5065,56 @@ ACMD(do_beran) {
 	}
 	break;
 	}
+}
+#endif
+
+#ifdef ENABLE_NEXT_REFINE_SUCCESS
+// Hedef oyuncunun SADECE bir sonraki +basma denemesini %100 basarili yapar (tek seferlik).
+// Kullanim: /refine_success <oyuncu> [off] -- "off" verilirse hak geri alinir.
+// Oyuncuya HICBIR bildirim gitmez (pencerede de gercek oran gorunur); sistem oyuncu tarafinda gorunmezdir.
+// Not: FindPC ayni cekirdekle sinirlidir; GM hedefle ayni kanal/harita cekirdeginde olmali.
+ACMD(do_next_refine_success)
+{
+	char arg1[256], arg2[256];
+	two_arguments(argument, arg1, sizeof(arg1), arg2, sizeof(arg2));
+
+	if (!*arg1)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Kullanim: /refine_success <oyuncu adi> [off]");
+		return;
+	}
+
+	LPCHARACTER tch = CHARACTER_MANAGER::instance().FindPC(arg1);
+
+	if (!tch || !tch->GetDesc())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "%s: oyuncu bu cekirdekte bulunamadi (ayni kanal/haritada olmalisiniz).", arg1);
+		return;
+	}
+
+	if (*arg2)
+	{
+		// Sadece "off" kabul edilir; bilinmeyen arguman hak vermeye DUSMEZ (yanlislikla verme onlemi)
+		if (!strcasecmp(arg2, "off"))
+		{
+			tch->SetNextRefineSuccess(false);
+			ch->ChatPacket(CHAT_TYPE_INFO, "%s: tek seferlik %%100 basari hakki geri alindi.", tch->GetName());
+			sys_log(0, "NEXT_REFINE_SUCCESS: GM %s cleared flag of %s", ch->GetName(), tch->GetName());
+		}
+		else
+			ch->ChatPacket(CHAT_TYPE_INFO, "Kullanim: /refine_success <oyuncu adi> [off]");
+		return;
+	}
+
+	if (tch->IsNextRefineSuccess())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "%s: hak zaten aktif (kapatmak icin: /refine_success %s off).", tch->GetName(), tch->GetName());
+		return;
+	}
+
+	tch->SetNextRefineSuccess(true);
+	ch->ChatPacket(CHAT_TYPE_INFO, "%s: bir sonraki +basma denemesi %%100 basarili olacak (tek seferlik).", tch->GetName());
+	sys_log(0, "NEXT_REFINE_SUCCESS: GM %s set flag for %s", ch->GetName(), tch->GetName());
 }
 #endif
 

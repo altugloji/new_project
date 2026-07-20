@@ -3824,3 +3824,33 @@ IKASHOP_SEARCH_SUB_JEWEL_HELM	Collier
 IKASHOP_SEARCH_SUB_JEWEL_WRIST	Bracelet
 IKASHOP_SEARCH_SUB_JEWEL_EAR	Boucle d'oreille
 IKASHOP_SEARCH_PLACEHOLDER	Rechercher item...
+LUCKYDRAW_TITLE	Tirage au sort
+LUCKYDRAW_STATE_ACTIVE	État : ACTIF
+LUCKYDRAW_STATE_CLOSED	État : FERMÉ
+LUCKYDRAW_TIME	Temps restant : %02d:%02d:%02d
+LUCKYDRAW_TIME_NONE	Temps restant : -
+LUCKYDRAW_JOIN_COUNT	Total des tickets : %s / %s
+LUCKYDRAW_MY_COUNT	Mes tickets : %s / %s
+LUCKYDRAW_COST	Coût de participation : %s
+LUCKYDRAW_COST_FREE	Coût de participation : Gratuit
+LUCKYDRAW_WINNERS	Gagnants
+LUCKYDRAW_REWARD_PREFIX	Récompense : 
+LUCKYDRAW_BTN_JOIN	Participer
+LUCKYDRAW_BTN_REWARD	Récupérer la récompense
+LUCKYDRAW_BTN_REFRESH	Actualiser
+LUCKYDRAW_JOIN_SENT	Demande de participation envoyée. Tu peux voir l'état actuel avec Actualiser.
+LUCKYDRAW_REWARD_SENT	Demande de récompense envoyée.
+LUCKYDRAW_REQ_TITLE	Conditions de participation :
+LUCKYDRAW_YANG	Yang
+LUCKYDRAW_PRIZES	Récompenses
+LUCKYDRAW_WINNER_LABEL	%d. gagnant
+LUCKYDRAW_JOINERS_TITLE	Participants %s / %s
+LUCKYDRAW_TICKETS	Tes tickets : %s / %s
+LUCKYDRAW_MAX_NOTE	Tu peux utiliser au maximum %s tickets.
+LUCKYDRAW_BTN_BUY	Acheter un ticket
+LUCKYDRAW_BOTTOM_NOTE	Le tirage aura lieu à la fin de l'événement et les gagnants seront annoncés.
+LUCKYDRAW_JOINER_TICKETS	%s tickets
+LUCKYDRAW_CLOSED	L'événement est actuellement fermé.
+LUCKYDRAW_TIME_HEADER	Temps restant
+LUCKYDRAW_YANG_NEEDED	Yang requis :
+LUCKYDRAW_WINNER_TICKETS	%s (%s tickets)

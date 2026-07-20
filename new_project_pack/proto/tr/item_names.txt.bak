@@ -10995,7 +10995,7 @@ VNUM	LOCALE_NAME
 83008	Mücevher kutusu
 83009	Pet sandýðý
 83010	Kuþak kutusu
-83011	Su sandýðý
+83011	Su Sandýðý
 83012	Nihai pet kitap sandýðý
 83013	Kesici diþ sandýðý+
 83014	Cor Draconis sandýðý
@@ -11425,7 +11425,8 @@ VNUM	LOCALE_NAME
 165100	Mitsi ejderha oniksi
 165200	Mitsi ejderha oniksi
 165300	Mitsi ejderha oniksi
-165400	Mitsi ejderha oniksi30400	Gemstones
+165400	Mitsi ejderha oniksi
+30400	Gemstones
 30401	Piece of Gem
 30402	Gem Coupon (1)
 30403	Gaya Kuponu (5)

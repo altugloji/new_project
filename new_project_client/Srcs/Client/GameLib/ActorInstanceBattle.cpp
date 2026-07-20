@@ -616,7 +616,11 @@ void CActorInstance::__ProcessDataAttackSuccess(const NRaceData::TAttackData & c
 	}
 
 	// Invisible Time
-	if (uiSkill || m_isMain)
+	// At dash desync fix notu: kopyalara uSkill=137 gecirildiginden beri (uiSkill || m_isMain) kapisi
+	// non-main aktorlerde de acilabiliyordu ve izlenen dash'in carptigi kurbanlar YEREL oyuncunun
+	// vurus kaydina 0.3sn gorunmez kaliyordu. Eski kodda non-main'de uiSkill hep 0 oldugu icin kapi
+	// fiilen m_isMain'di; ayni davranisi acikca yaziyoruz.
+	if (m_isMain)
 		rVictim.m_fInvisibleTime = CTimer::Instance().GetCurrentSecond() + __GetInvisibleTimeAdjust(uiSkill, c_rAttackData); // @fixme053 adjust the invisible time
 
 	// Stiffen Time

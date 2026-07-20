@@ -24,6 +24,9 @@
 #ifdef ENABLE_IKASHOP_SEARCH
 #include "ikashop_search.h"
 #endif
+#ifdef ENABLE_LUCKY_DRAW
+#include "LuckyDraw.h"
+#endif
 #ifdef __BL_CLIENT_LOCALE_STRING__
 	#include "buffer_manager.h"
 #endif
@@ -341,6 +344,22 @@ void CInputP2P::MessengerRemove(const char * c_pData) const
 	sys_log(0, "P2P: Messenger Remove %s %s", p->szAccount, p->szCompanion);
 	MessengerManager::instance().__RemoveFromList(p->szAccount, p->szCompanion);
 }
+
+#ifdef ENABLE_MESSENGER_BLOCK
+void CInputP2P::MessengerBlockAdd(const char * c_pData) const
+{
+	const auto p = (TPacketGGMessenger *) c_pData;
+	sys_log(0, "P2P: Messenger Block Add %s %s", p->szAccount, p->szCompanion);
+	MessengerManager::instance().__AddToBlockList(p->szAccount, p->szCompanion);
+}
+
+void CInputP2P::MessengerBlockRemove(const char * c_pData) const
+{
+	const auto p = (TPacketGGMessenger *) c_pData;
+	sys_log(0, "P2P: Messenger Block Remove %s %s", p->szAccount, p->szCompanion);
+	MessengerManager::instance().__RemoveFromBlockList(p->szAccount, p->szCompanion);
+}
+#endif
 
 void CInputP2P::FindPosition(LPDESC d, const char* c_pData) const
 {
@@ -671,6 +690,16 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			break;
 #endif
 
+#ifdef ENABLE_RELOAD_MOB_DROP_ITEM
+		case HEADER_GG_RELOAD_MOB_DROP:
+			// sonuc loglanir: uzak core'da hata GM'e gorunmez, tek iz bu makinenin syserr/syslog'u
+			if (ITEM_MANAGER::instance().ReloadMobDropItemFile())
+				sys_log(0, "P2P: mob_drop_item + drop_item_group reloaded");
+			else
+				sys_err("P2P: mob_drop_item reload FAILED on this core, keeping previous drop tables");
+			break;
+#endif
+
 #ifdef ENABLE_GIFT_SEND_SYSTEM
 		case HEADER_GG_GIFT_NOTIFY:
 			GiftNotify(c_pData);
@@ -688,6 +717,22 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 		break;
 #endif
 
+#ifdef ENABLE_LUCKY_DRAW
+		case HEADER_GG_LUCKY_DRAW:
+			LuckyDraw(d, c_pData);
+			break;
+#endif
+
+#ifdef ENABLE_MESSENGER_BLOCK
+		case HEADER_GG_MESSENGER_BLOCK_ADD:
+			MessengerBlockAdd(c_pData);
+			break;
+
+		case HEADER_GG_MESSENGER_BLOCK_REMOVE:
+			MessengerBlockRemove(c_pData);
+			break;
+#endif
+
 	}
 
 	return (iExtraLen);
@@ -698,6 +743,25 @@ void CInputP2P::GiftNotify(const char* c_pData) const
 {
 	// Baska core'da online olan aliciya canli hediye bildirimi teslimati.
 	CGiftManager::instance().OnP2PGiftNotify(c_pData);
+}
+#endif
+
+#ifdef ENABLE_LUCKY_DRAW
+void CInputP2P::LuckyDraw(LPDESC d, const char* c_pData)
+{
+	const TPacketGGLuckyDraw* p = (const TPacketGGLuckyDraw*)c_pData;
+	if (p->bArg == 1)		// baslat (sure = bArg_2)
+		CLuckyDraw::Instance().StartLuckyDraw(p->bArg_2);
+	if (p->bArg == 2)		// katilimci sayisini yenile
+		CLuckyDraw::Instance().RequestLuckyDrawJoiners();
+	if (p->bArg == 3)		// config yenile
+		CLuckyDraw::Instance().RequestLuckyDraw();
+	if (p->bArg == 4)		// kazanan bilgisi yenile
+		CLuckyDraw::Instance().RequestWinnerInfo();
+	if (p->bArg == 5) {		// kazananlar belirlendi: kazanan + config yenile
+		CLuckyDraw::Instance().RequestWinnerInfo();
+		CLuckyDraw::Instance().RequestLuckyDraw();
+	}
 }
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4
