@@ -132,3 +132,5 @@
 310	MOUNT_UPGRADE	—яж» (≈—«ѕ… ”ждџ г«ен –я«Ѕ)			н“нѕ ≈—«ѕ… ”ждџ г«ен (–я«Ѕ) Џдѕ «бё «б гд Џбм ўе— «бЌ’«д					PASSIVE		mount_upgrade_skill_sungma_immune					≈—«ѕ… ”ждџ г«ен (–я«Ѕ): +%.0f	3+(horselv*skilllv)*(skilllv/500)					
 311	MOUNT_UPGRADE	—яж» («бѕё…)			 —ЁЏ «бѕё… «Ћд«Ѕ «б—яж»					PASSIVE		mount_upgrade_skill_hit_pct					Џб«ж… «бѕё…: +%.0f	1+(skilllv*horselv/100)					
 322	SUPPORT	 џнн— «бЏ «ѕ «бћ«д»н			«б »ѕнб »нд ’ЁЌ«  «бЏ «ѕ.					CANNOT_LEVEL_UP|TOGGLE		change_equipment											
+141	SUPPORT	«б≈бе«г			н“нѕ «бЌѕ «б√ё’м гд HP бѕня.|«бЌѕ «б√ё’м: 5.000HP					PASSIVE		max_hp															
+144	SUPPORT	’н«ѕ «бжЌж‘			н“нѕ ÷——я ÷ѕ «бжЌж‘.|«бЌѕ «б√ё’м: +%20					PASSIVE		monster															

@@ -132,3 +132,5 @@
 310	MOUNT_UPGRADE	Cãlãrie (Voinþã Sung Ma INT)			Creºte Voinþa Sung Ma (INT) în timp ce ataci folosind Lupta Cãlare.					PASSIVE		mount_upgrade_skill_sungma_immune					Vointã Sung Ma (INT): +%.0f	3+(horselv*skilllv)*(skilllv/500)					
 311	MOUNT_UPGRADE	Cãlãrie (Precizie)			Creºte Precizia în timpul cãlãriei.					PASSIVE		mount_upgrade_skill_hit_pct					Precizie: +%.0f	1+(skilllv*horselv/100)					
 322	SUPPORT	Schimbã Pagina de Echipament			Comutã între paginile echipamentului.					CANNOT_LEVEL_UP|TOGGLE		change_equipment											
+141	SUPPORT	Inspiraþie			Îþi creºte HP-ul maxim.|Max: 5.000HP					PASSIVE		max_hp															
+144	SUPPORT	Vânãtor de Monºtri			Îþi creºte daunele împotriva monºtrilor.|Max: +%20					PASSIVE		monster															
