@@ -7311,7 +7311,7 @@
 79659	5* Kæledyrs Catalyst	Øger chancen for succes ved skabelsen af kæledyrs genstande med 20%.
 80001	Pung	En mørk, slidt læderpung.
 80002	Blankt Papir	Et indtil nu ubrugt pergament af god kvalitet.
-80008	Guldklump	Usleben guldklump, der kan sælges i butikker for høj pris.
+80008	Guldstykke	Kan sælges for 100.000.000 Yang.
 80014	DR Gavekort (100)	Værdi af gavekort 100 Drage mønter. Genstand kan handles.
 80015	DR Gavekort (500)	Værdi af gavekort 500 Drage mønter. Genstand kan handles.
 80016	DR Gavekort (1000)	Værdi af gavekort 1000 Drage mønter. Genstand kan handles.

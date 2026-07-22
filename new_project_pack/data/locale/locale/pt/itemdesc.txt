@@ -7311,7 +7311,7 @@
 79659	Runa de Forja Pet 5*	Aumenta em 20% a probabilidade de sucesso ao criar itens de pet.
 80001	Saco de Dinheiro	Um saco desgastado cosido com pele escura.
 80002	Papel em Branco	Um pergaminho de boa qualidade, até agora em branco.
-80008	Peça d'Ouro	Pedaço de Ouro que nunca foi forjado. É vendido numa loja a um alto preço.
+80008	Pedaço de Ouro	Pode ser vendido por 100.000.000 Yang.
 80014	Voucher de MD (100)	Voucher no valor de 100 Moedas Dragão. Item negociável.
 80015	Voucher de MD (500)	Voucher no valor de 500 Moedas Dragão. Item negociável.
 80016	Voucher de MD (1000)	Voucher no valor de 1000 Moedas Dragão. Item negociável.

@@ -7311,7 +7311,7 @@
 79659	5* Catalyse-familier	La probabilité de réussir la fabrication d'objets pour familiers augmente de 20 %.
 80001	Bourse de monnaie	Une bourse en cuir déjà utilisée.
 80002	Papier vierge	Un parchemin inutilisé de bonne qualité.
-80008	Pépite d'or	Une pépite d'or qui n'a jamais été retravaillée par l'homme. Peut être vendue dans les magasins pour une somme très élevée.
+80008	Morceau d'or	Peut être vendu pour 100.000.000 Yang.
 80014	Bon de DC (100)	Bon d'une valeur de 100 Monnaies du Dragon. L'objet est échangeable.
 80015	Bon de DC (500)	Bon d'une valeur de 500 Monnaies du Dragon. L'objet est échangeable.
 80016	Bon de DC (1 000)	Bon d'une valeur de 1000 Monnaies du Dragon. L'objet est échangeable.

@@ -146,7 +146,7 @@
 #define ENABLE_USER_REPORT_SYSTEM 										//Official User Report System
 #define ENABLE_ITEM_SHOP_SYSTEM											// Nesne Market Sistemi
 #define __RENEWAL_SKILL_BOOK__
-// #define NEW_PASSIVE_SKILLS												// Pasif Beceriler (Ilham 141 sabit HP) - server define ile birlikte acilmali
+//#define NEW_PASSIVE_SKILLS												// Pasif Beceriler (Ilham 141 sabit HP) - server define ile birlikte acilmali
 // #define ENABLE_MONSTER_HUNTER_SKILL								// Canavar Avcisi pasifi (144); SIMDILIK KAPALI, server ile birlikte ac
 #define ENABLE_CUBE_RENEWAL
 #define ENABLE_CHARACTER_CHEST
@@ -192,5 +192,5 @@
 #endif
 
 
-//#define ENABLE_RASCAL_ANTICHEAT_V2
+#define ENABLE_RASCAL_ANTICHEAT_V2
 //#define ENABLE_SECURE_MOB_LIST

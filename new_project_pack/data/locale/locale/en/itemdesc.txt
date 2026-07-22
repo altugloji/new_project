@@ -7311,7 +7311,7 @@
 79659	5* Pet Catalyst	Increases the chance of success when crafting pet items by 20%.
 80001	Money Pouch	A dark and already worn out pouch sewed from leather.
 80002	Blank Paper	An unused parchment of good quality.
-80008	Lump of Gold	A lump of gold that has never been crafted. It is being sold in a shop for a high price.
+80008	Piece of Gold	Can be sold for 100.000.000 Yang.
 80014	DR Voucher (100)	Voucher to the value of 100 Dragon Coins. Item is tradeable.
 80015	DR Voucher (500)	Voucher to the value of 500 Dragon Coins. Item is tradeable.
 80016	DR Voucher (1000)	Voucher to the value of 1000 Dragon Coins. Item is tradeable.

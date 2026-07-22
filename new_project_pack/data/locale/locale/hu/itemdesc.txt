@@ -7311,7 +7311,7 @@
 79659	5* Kedvenc kovácsrúna	Növeli a siker esélyét házikedvenc tárgyak készítésekor 20%-kal.
 80001	Pénztárca	Egy sötét és viharvert pénztárca bõrbõl.
 80002	Üres papír	Egy használatlan jó minõségû pergamen.
-80008	Aranyrög	Aranyrög, amelyet még nem munkáltak meg. A boltokban magas áron lehet eladni.
+80008	Aranydarab	100.000.000 Yangért eladható.
 80014	SÉ utalvány (100)	100 Sárkányérme értékû utalvány. Ez a tárgy átadható.
 80015	SÉ utalvány (500)	500 Sárkányérme értékû utalvány. A tárgy átadható.
 80016	SÉ utalvány (1000)	1000 Sárkányérme értékû utalvány. A tárgy átadható.

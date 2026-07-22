@@ -7311,7 +7311,7 @@
 79659	Runa forjada 5: mascota	Aumenta en un 20 % la probabilidad de éxito al fabricar objetos para mascotas.
 80001	MPote Dinero	Una bolsita oscura y ya utilizada tejida con cuero.
 80002	Papel en Blanco	Un pergamino sin usar de buena calidad.
-80008	Terrón Oro	Terrón del oro que nunca se ha hecho a mano. Se vende en una tienda con un alto precio.
+80008	Fragmento de Oro	Puede venderse por 100.000.000 Yang.
 80014	Cupón de Dr (100)	Cupón por valor de 100 Monedas Dragón. Este objeto es comerciable.
 80015	Cupón de Dr (500)	Cupón por valor de 500 Monedas Dragón. Este objeto es comerciable.
 80016	Cupón de Dr (1000)	Cupón por valor de 1000 Monedas Dragón. Este objeto es comerciable.

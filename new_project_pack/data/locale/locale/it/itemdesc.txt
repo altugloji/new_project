@@ -7311,7 +7311,7 @@
 79659	5* RunaFabbro Pet	Incrementa del 20% la probabilità che la produzione di item per pet vada a buon fine.
 80001	Sacca dei Soldi	Un borsello scuro di pelle, leggermente consumato.
 80002	Foglio vuoto	Una pergamena di buona qualità ancora inutilizzata.
-80008	Pezzo d'Oro	Un pezzo d'oro allo stato grezzo. È venduto ad un alto prezzo in un negozio.
+80008	Pezzo d'Oro	Può essere venduto per 100.000.000 Yang.
 80014	Buono DR (100)	Un buono del valore di 100 Monete del Drago. L'item è commerciabile.
 80015	Buono DR (500)	Un buono del valore di 500 Monete del Drago. L'item è commerciabile.
 80016	Buono DR (1000)	Un buono del valore di 1000 Monete del Drago. L'item è commerciabile.

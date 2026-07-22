@@ -10922,9 +10922,9 @@ VNUM	LOCALE_NAME
 80003	Gümüþ Bar(50.000Yang)
 80004	Gümüþ Bar(100.000Yang)
 80005	Altýn Külçe(500.000Yang)
-80006	Altýn külçe(1 mio. Yang)
-80007	Altýn Külçe(2 mio. Yang)
-80008	Altýn Parçasý
+80006	Altýn külçe(1M Yang)
+80007	Altýn Külçe(2M Yang)
+80008	Altýn Külçe(100M Yang)
 80014	EP kuponu (100)
 80015	EP kuponu (500)
 80016	EP kuponu (1000)
