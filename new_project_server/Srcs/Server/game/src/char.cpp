@@ -793,6 +793,25 @@ struct FuncShopPlacementBlocker
 // acikken NPC yanina yurumus olabilir).
 bool CHARACTER::CheckMyShopPlacement()
 {
+	// Pazar yalnizca izinli haritalarda kurulabilir (liste: CommonDefines.h SHOP_ALLOWED_MAP_INDEXES).
+	// Private kopyalar (map index 10000+) listede olmadigindan otomatik engellenir.
+	static const int c_anAllowedMaps[] = { SHOP_ALLOWED_MAP_INDEXES };
+	bool bMapAllowed = false;
+	for (size_t i = 0; i < sizeof(c_anAllowedMaps) / sizeof(c_anAllowedMaps[0]); ++i)
+	{
+		if (GetMapIndex() == c_anAllowedMaps[i])
+		{
+			bMapAllowed = true;
+			break;
+		}
+	}
+
+	if (!bMapAllowed)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Bu haritada pazar kurulamaz.");
+		return false;
+	}
+
 	LPSECTREE pSec = GetSectree();
 	if (!pSec)
 		return true;
@@ -3018,9 +3037,21 @@ void CHARACTER::SetPlayerProto(const TPlayerTable * t)
 
 	if (t->lMapIndex >= 10000)
 	{
+#ifdef ENABLE_DUNGEON_REJOIN_SYSTEM
+		// Zindan geri donus: private map hala canliysa m_posWarp'i bayat exit konumuyla doldurma;
+		// dolarsa CreateSaveData her kaydi exit'e cevirir ve relog oyuncuyu guncel kata dondurmez.
+		// Map olmusse (geri donus penceresi kapandi) eski davranis: exit konumu sigorta olarak kalir.
+		if (nullptr == SECTREE_MANAGER::instance().GetMap(t->lMapIndex))
+		{
+			m_posWarp.x = t->lExitX;
+			m_posWarp.y = t->lExitY;
+			m_lWarpMapIndex = t->lExitMapIndex;
+		}
+#else
 		m_posWarp.x = t->lExitX;
 		m_posWarp.y = t->lExitY;
 		m_lWarpMapIndex = t->lExitMapIndex;
+#endif
 	}
 
 	SetRealPoint(POINT_PLAYTIME, t->playtime);
@@ -5450,6 +5481,12 @@ void CHARACTER::fishing()
 			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FISHING_ONLY_VILLAGE"));
 			return;
 		}
+	}
+	// Balik tutma sadece 41 no'lu haritada (koy) serbesttir; diger tum haritalarda olta atma engellenir.
+	else
+	{
+		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("FISHING_ONLY_VILLAGE"));
+		return;
 	}
 
 	float fx, fy;

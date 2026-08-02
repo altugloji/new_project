@@ -1016,7 +1016,10 @@ ACMD(do_ungroup)
 }
 
 #ifdef OFFLINE_SHOP
-void DeleteShop(DWORD dwPID)
+// Donus: tezgah bu core'da bulunup DeleteMyShop cagrildiysa true (banli-pazar
+// kapatma logu yalnizca gercekten kapatan core'da basilsin diye; eski cagiranlar
+// donus degerini yok sayar)
+bool DeleteShop(DWORD dwPID)
 {
 	CharacterVectorInteractor i;
 	if (CHARACTER_MANAGER::instance().GetCharactersByRaceNum(30000, i))
@@ -1029,10 +1032,12 @@ void DeleteShop(DWORD dwPID)
 			if (pc && pc->IsPrivShop() && pc->GetPrivShopOwner() == dwPID)
 			{
 				pc->DeleteMyShop();
-				return;
+				return true;
 			}
 		}
 	}
+
+	return false;
 }
 
 ACMD(do_close_shop)
@@ -1133,6 +1138,14 @@ bool GetGift(LPCHARACTER ch, DWORD id, bool all=false)
 				return true;
 			}
 
+			// DUPE-FIX (M7): delete-first claim - satir once kosullu silinir, KAZANILIRSA
+			// odul verilir. Eskiden odul verildikten SONRA kontrolsuz DELETE calisiyordu;
+			// DELETE sessizce dusunce ayni satir tekrar tekrar alinabiliyordu.
+			{
+				auto pkDel = DBManager::instance().DirectQuery("DELETE FROM player_gift WHERE id = %u AND owner_id = %u", id, ch->GetPlayerID());
+				if (!pkDel || !pkDel->Get() || pkDel->Get()->uiAffectedRows != 1)
+					continue;
+			}
 			ch->PointChange(POINT_GOLD, count, false);
 
 			char szLogBuf[128];
@@ -1178,6 +1191,14 @@ bool GetGift(LPCHARACTER ch, DWORD id, bool all=false)
 			int iEmptyPos = ch->GetEmptyInventoryEx(item);
 			if (iEmptyPos != -1)
 			{
+				// DUPE-FIX (M7): delete-first claim - satiri kazanamayan item alamaz
+				auto pkDel = DBManager::instance().DirectQuery("DELETE FROM player_gift WHERE id = %u AND owner_id = %u", id, ch->GetPlayerID());
+				if (!pkDel || !pkDel->Get() || pkDel->Get()->uiAffectedRows != 1)
+				{
+					M2_DESTROY_ITEM(item);
+					continue;
+				}
+
 				item->AddToCharacter(ch, TItemPos(item->GetWindowInventoryEx(), iEmptyPos));
 
 				char szLogBuf[128];
@@ -1193,7 +1214,6 @@ bool GetGift(LPCHARACTER ch, DWORD id, bool all=false)
 			}
 		}
 
-		DBManager::instance().DirectQuery("DELETE FROM player_gift WHERE id = %u", id);
 	}
 
 	if (force)

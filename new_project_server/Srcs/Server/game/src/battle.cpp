@@ -698,6 +698,11 @@ int CalcArrowDamage(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, LPITEM pkBow, 
 		iPercent = 100;
 #endif
 
+#ifdef ENABLE_BOW_FLAT_DAMAGE_PERCENT
+	// Okcu mesafe cezasi iptal: ok hasari her mesafede sabit yuzde vurur
+	iPercent = ENABLE_BOW_FLAT_DAMAGE_PERCENT;
+#endif
+
 	if (iPercent <= 0)
 		return 0;
 	else if (iPercent > 100)

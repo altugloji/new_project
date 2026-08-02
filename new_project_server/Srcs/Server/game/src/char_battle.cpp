@@ -1626,6 +1626,19 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 	}
 #endif
 
+#if defined(ATTBONUS_ELEXIR) && defined(ENABLE_ELEXIR_MISSING_DAMAGE_PENALTY)
+	// harita listesi battle.cpp'deki ATTBONUS_ELEXIR listesiyle ayni tutulmali
+	if (pAttacker && pAttacker != this && pAttacker->IsNPC() && IsPC())
+	{
+		const long lElexirMap = GetMapIndex();
+		if (lElexirMap == 72 || lElexirMap == 73 || lElexirMap == 208)
+		{
+			if (GetPoint(POINT_ATTBONUS_CZ) < 1 && GetPoint(POINT_RESIST_DARK) < 1)
+				dam = dam * 2;
+		}
+	}
+#endif
+
 	if (type != DAMAGE_TYPE_NORMAL && type != DAMAGE_TYPE_NORMAL_RANGE)
 	{
 		if (IsAffectFlag(AFF_TERROR))

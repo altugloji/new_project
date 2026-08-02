@@ -776,6 +776,34 @@ namespace
 	// Tum haritadaki dukkanlari isaretlemek isterseniz bu degeri buyutun.
 	const int SHOP_SEARCH_MAX_DISTANCE = 7500;
 	const size_t SHOP_SEARCH_MAX_RESULTS = 400;
+
+#ifdef ENABLE_SHOP_SEARCH_CLASS_SUBCAT
+	// Giyilebilir grid alt-kategorileri: aile tabani (+0 vnum'u) + azami arti.
+	// {taban .. taban+maxPlus} araligindaki her vnum filtre tablosuna acilir.
+	// DIKKAT: client offlineshopsearch.py SHOP_SEARCH_GRID_FAMILIES ile BIREBIR ayni
+	// tutulmali (uretec: _plan_shopsearch_subcat/gen_wearable_filters.py).
+	struct SGridFamily
+	{
+		DWORD	dwBase;		// ailenin +0 vnum'u (son hane genelde 0)
+		BYTE	byMaxPlus;	// mevcut en yuksek arti (genelde 9, 65'lik ailelerde 5)
+	};
+
+	// searchIndex yeni grid alt-kategorilerinden biri mi? (arti filtresi yalnizca bunlarda)
+	bool IsShopSearchGridIndex(DWORD dwSearchIndex)
+	{
+		const DWORD dwCat = dwSearchIndex / SHOP_CATEGORY_MAX_SUB;
+		const DWORD dwSub = dwSearchIndex % SHOP_CATEGORY_MAX_SUB;
+		if (dwSub < 10)
+			return false;
+		if (dwCat == SHOP_SEARCH_CATEGORY_ARMOR)
+			return dwSub <= 14;
+		if (dwCat == SHOP_SEARCH_CATEGORY_WEAPON)
+			return dwSub <= 15;
+		if (dwCat == SHOP_SEARCH_CATEGORY_JEWELRY)
+			return dwSub <= 13;
+		return false;
+	}
+#endif
 }
 
 void CShopManager::PrepareShopSearchFilters()
@@ -905,23 +933,135 @@ void CShopManager::PrepareShopSearchFilters()
 
 	// SHOP_SEARCH_CATEGORY_SPECIAL
 	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_REFINE] = {
-		{25040, 0}, {70039, 0},
+		{25040, 0}, {70039, 0}, {76016, 0},
 	};
 	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_TOITEM] = {
 		{31035, 0}, {30602, 0}, {30603, 0}, {30604, 0}, {30610, 0}, {30156, 0}, {27991, 0}, {51001, 0},
 	};
 	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_CHARACTER] = {
-		{71084, 0}, {71085, 0}, {70024, 0}, {50904, 0}, {50903, 0},
+		{71084, 0}, {71085, 0}, {70024, 0}, {50904, 0}, {50903, 0}, {71152, 0}, {71151, 0},
 	};
 	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_OTHER] = {
-		{50513, 0}, {71001, 0}, {71094, 0}, {70102, 0}, {70043, 0}, {70005, 0},
+		{50513, 0}, {71001, 0}, {71094, 0}, {70102, 0}, {70043, 0}, {70005, 0}, {50082, 0}, {50186, 0},
 	};
 	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_DRAGON_VOUCHER] = {
 		{80014, 0}, {80015, 0}, {80016, 0}, {30403, 0}, {30404, 0},
 	};
+
+#ifdef ENABLE_SHOP_SEARCH_CLASS_SUBCAT
+	// ===== Giyilebilir grid alt-kategorileri (sinif/grup + arti secimi) =====
+	// Aileler (taban, azamiArti) olarak tutulur ve asagida tek tek vnum'a acilir.
+	// 2026-08-02 guncelleme: silah gruplari tur bazli (sub 10..15); kalkan+taki
+	// listeleri kullanicinin verdigi ailelere indirildi. Kullanici listesi degisirse:
+	// gen_wearable_filters.py (OVERRIDES) yeniden calistirilip bu blok VE client
+	// SHOP_SEARCH_GRID_FAMILIES birlikte degistirilmeli.
+	{
+		// Zirh > Savasci (govde) (searchIndex = 190)
+		static const SGridFamily aArmorWarrior[] = {
+			{11200,9}, {11210,9}, {11220,9}, {11230,9}, {11240,9}, {11250,9}, {11260,9}, {11270,9},
+			{11280,9}, {11290,9},
+		};
+		// Zirh > Ninja (govde) (searchIndex = 191)
+		static const SGridFamily aArmorAssassin[] = {
+			{11400,9}, {11410,9}, {11420,9}, {11430,9}, {11440,9}, {11450,9}, {11460,9}, {11470,9},
+			{11480,9}, {11490,9},
+		};
+		// Zirh > Sura (govde) (searchIndex = 192)
+		static const SGridFamily aArmorSura[] = {
+			{11600,9}, {11610,9}, {11620,9}, {11630,9}, {11640,9}, {11650,9}, {11660,9}, {11670,9},
+			{11680,9}, {11690,9},
+		};
+		// Zirh > Saman (govde) (searchIndex = 193)
+		static const SGridFamily aArmorShaman[] = {
+			{11800,9}, {11810,9}, {11820,9}, {11830,9}, {11840,9}, {11850,9}, {11860,9}, {11870,9},
+			{11880,9}, {11890,9},
+		};
+		// Zirh > Kalkan (searchIndex = 194)
+		static const SGridFamily aArmorShield[] = {
+			{13000,9}, {13020,9}, {13040,9}, {13060,9}, {13080,9}, {13100,9}, {13120,9},
+		};
+		// Silah > Savasci Tek El (searchIndex = 230)
+		static const SGridFamily aWeaponOneHand[] = {
+			{10,9}, {20,9}, {30,9}, {40,9}, {50,9}, {60,9}, {70,9}, {80,9}, {90,9}, {100,9}, {110,9},
+			{120,9}, {130,9}, {140,9}, {150,9}, {160,9}, {170,9}, {240,9}, {250,9}, {290,9},
+		};
+		// Silah > Savasci Cift El (searchIndex = 231)
+		static const SGridFamily aWeaponTwoHand[] = {
+			{3000,9}, {3010,9}, {3020,9}, {3030,9}, {3040,9}, {3050,9}, {3060,9}, {3070,9}, {3080,9},
+			{3090,9}, {3100,9}, {3110,9}, {3120,9}, {3130,9}, {3140,9}, {3150,9}, {3210,9},
+		};
+		// Silah > Ninja Hancer (searchIndex = 232)
+		static const SGridFamily aWeaponDagger[] = {
+			{1000,9}, {1010,9}, {1020,9}, {1030,9}, {1040,9}, {1050,9}, {1060,9}, {1070,9}, {1080,9},
+			{1090,9}, {1100,9}, {1110,9}, {1120,9}, {1170,9},
+		};
+		// Silah > Ninja Okcu (searchIndex = 233)
+		static const SGridFamily aWeaponBow[] = {
+			{2000,9}, {2010,9}, {2020,9}, {2030,9}, {2040,9}, {2050,9}, {2060,9}, {2070,9}, {2080,9},
+			{2090,9}, {2100,9}, {2110,9}, {2120,9}, {2130,9}, {2140,9}, {2150,9}, {2180,9},
+		};
+		// Silah > Saman Can (searchIndex = 234)
+		static const SGridFamily aWeaponBell[] = {
+			{5000,9}, {5010,9}, {5020,9}, {5030,9}, {5040,9}, {5050,9}, {5060,9}, {5070,9}, {5080,9},
+			{5090,9}, {5100,9}, {5110,9},
+		};
+		// Silah > Saman Yelpaze (searchIndex = 235)
+		static const SGridFamily aWeaponFan[] = {
+			{7000,9}, {7010,9}, {7020,9}, {7030,9}, {7040,9}, {7050,9}, {7060,9}, {7070,9}, {7080,9},
+			{7090,9}, {7100,9}, {7110,9}, {7120,9}, {7130,9}, {7140,9}, {7150,9}, {7160,9},
+		};
+		// Taki > Kupe (searchIndex = 270)
+		static const SGridFamily aJewEar[] = {
+			{17000,9}, {17020,9}, {17040,9}, {17060,9}, {17080,9}, {17100,9}, {17120,9}, {17140,9},
+			{17160,9}, {17180,9}, {17200,9}, {17220,9},
+		};
+		// Taki > Kolye (searchIndex = 271)
+		static const SGridFamily aJewNeck[] = {
+			{16000,9}, {16020,9}, {16040,9}, {16060,9}, {16080,9}, {16100,9}, {16120,9}, {16140,9},
+			{16160,9}, {16180,9}, {16200,9}, {16220,9},
+		};
+		// Taki > Bileklik (searchIndex = 272)
+		static const SGridFamily aJewWrist[] = {
+			{14000,9}, {14020,9}, {14040,9}, {14060,9}, {14080,9}, {14100,9}, {14120,9}, {14140,9},
+			{14160,9}, {14180,9}, {14200,9}, {14220,9},
+		};
+		// Taki > Ayakkabi (searchIndex = 273)
+		static const SGridFamily aJewBoots[] = {
+			{15000,9}, {15020,9}, {15040,9}, {15060,9}, {15080,9}, {15100,9}, {15120,9}, {15140,9},
+			{15160,9}, {15180,9}, {15200,9}, {15220,9},
+		};
+
+		struct SGridDef { DWORD dwIndex; const SGridFamily * pFam; size_t uCount; };
+		const SGridDef aGridDefs[] = {
+			{ SHOP_SEARCH_CATEGORY_ARMOR * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_WARRIOR, aArmorWarrior, sizeof(aArmorWarrior) / sizeof(aArmorWarrior[0]) },
+			{ SHOP_SEARCH_CATEGORY_ARMOR * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_ASSASSIN, aArmorAssassin, sizeof(aArmorAssassin) / sizeof(aArmorAssassin[0]) },
+			{ SHOP_SEARCH_CATEGORY_ARMOR * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_SURA, aArmorSura, sizeof(aArmorSura) / sizeof(aArmorSura[0]) },
+			{ SHOP_SEARCH_CATEGORY_ARMOR * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_SHAMAN, aArmorShaman, sizeof(aArmorShaman) / sizeof(aArmorShaman[0]) },
+			{ SHOP_SEARCH_CATEGORY_ARMOR * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_SHIELD, aArmorShield, sizeof(aArmorShield) / sizeof(aArmorShield[0]) },
+			{ SHOP_SEARCH_CATEGORY_WEAPON * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_WPN_ONEHAND, aWeaponOneHand, sizeof(aWeaponOneHand) / sizeof(aWeaponOneHand[0]) },
+			{ SHOP_SEARCH_CATEGORY_WEAPON * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_WPN_TWOHAND, aWeaponTwoHand, sizeof(aWeaponTwoHand) / sizeof(aWeaponTwoHand[0]) },
+			{ SHOP_SEARCH_CATEGORY_WEAPON * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_WPN_DAGGER, aWeaponDagger, sizeof(aWeaponDagger) / sizeof(aWeaponDagger[0]) },
+			{ SHOP_SEARCH_CATEGORY_WEAPON * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_WPN_BOW, aWeaponBow, sizeof(aWeaponBow) / sizeof(aWeaponBow[0]) },
+			{ SHOP_SEARCH_CATEGORY_WEAPON * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_WPN_BELL, aWeaponBell, sizeof(aWeaponBell) / sizeof(aWeaponBell[0]) },
+			{ SHOP_SEARCH_CATEGORY_WEAPON * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_WPN_FAN, aWeaponFan, sizeof(aWeaponFan) / sizeof(aWeaponFan[0]) },
+			{ SHOP_SEARCH_CATEGORY_JEWELRY * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_JEW_EAR, aJewEar, sizeof(aJewEar) / sizeof(aJewEar[0]) },
+			{ SHOP_SEARCH_CATEGORY_JEWELRY * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_JEW_NECK, aJewNeck, sizeof(aJewNeck) / sizeof(aJewNeck[0]) },
+			{ SHOP_SEARCH_CATEGORY_JEWELRY * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_JEW_WRIST, aJewWrist, sizeof(aJewWrist) / sizeof(aJewWrist[0]) },
+			{ SHOP_SEARCH_CATEGORY_JEWELRY * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_JEW_BOOTS, aJewBoots, sizeof(aJewBoots) / sizeof(aJewBoots[0]) },
+		};
+
+		for (size_t d = 0; d < sizeof(aGridDefs) / sizeof(aGridDefs[0]); ++d)
+		{
+			std::vector<SOfflineShopFilter> & vec = m_shopSearchFilters[aGridDefs[d].dwIndex];
+			for (size_t i = 0; i < aGridDefs[d].uCount; ++i)
+				for (BYTE p = 0; p <= aGridDefs[d].pFam[i].byMaxPlus; ++p)
+					vec.push_back({ aGridDefs[d].pFam[i].dwBase + p, 0 });
+		}
+	}
+#endif
 }
 
-bool CShopManager::SearchItemsByCategory(DWORD category, LPSHOP shop)
+bool CShopManager::SearchItemsByCategory(DWORD category, LPSHOP shop, int socket0)
 {
 	if (!shop)
 		return false;
@@ -1016,8 +1156,26 @@ bool CShopManager::SearchItemsByCategory(DWORD category, LPSHOP shop)
 			auto it = m_shopSearchFilters.find(category);
 			if (it != m_shopSearchFilters.end())
 			{
+#ifdef ENABLE_SHOP_SEARCH_CLASS_SUBCAT
+				// Grid alt-kategorisinde socket0 arti suzgecidir: 1..9 = tek arti (son hane
+				// esit; 11204 = +4 kaligi), 15 = +0..+5 araligi (client '+0 / +5' secenegi).
+				// socket0=0 = filtre yok (eski istemci / eski kategoriler).
+				const bool bGridIndex = IsShopSearchGridIndex(category);
+				const bool bPlusFilter = (bGridIndex && socket0 >= 1 && socket0 <= 9);
+				const bool bPlusRange15 = (bGridIndex && socket0 == 15);
+#endif
 				for (const auto & filter : it->second)
 				{
+#ifdef ENABLE_SHOP_SEARCH_CLASS_SUBCAT
+					if (bPlusFilter && (int)(filter.itemVnum % 10) != socket0)
+						continue;
+					if (bPlusRange15)
+					{
+						const int iPlus = (int)(filter.itemVnum % 10);
+						if (iPlus > 5)
+							continue;
+					}
+#endif
 					if (shop->HasItem(filter.itemVnum, filter.socket0))
 						return true;
 				}
@@ -1121,6 +1279,26 @@ void CShopManager::SearchShopItem(LPCHARACTER ch, DWORD searchIndex, int socket0
 			bool bFound = false;
 			for (const auto & e : vecSelection)
 			{
+#ifdef ENABLE_SHOP_SEARCH_CLASS_SUBCAT
+				// '+0 / +5' modunda (socket0=15) grid yalnizca +5 temsilcisini gosterir;
+				// secilen temsilci tum aileyi kapsar: taban+0..taban+5'ten herhangi biri
+				// dukkanda varsa eslesir.
+				if (socket0 == 15 && IsShopSearchGridIndex(searchIndex))
+				{
+					const DWORD dwBase = e.itemVnum - (e.itemVnum % 10);
+					for (BYTE p = 0; p <= 5; ++p)
+					{
+						if (shop->HasItem(dwBase + p, e.socket0))
+						{
+							bFound = true;
+							break;
+						}
+					}
+					if (bFound)
+						break;
+					continue;
+				}
+#endif
 				if (shop->HasItem(e.itemVnum, e.socket0))
 				{
 					bFound = true;
@@ -1130,10 +1308,10 @@ void CShopManager::SearchShopItem(LPCHARACTER ch, DWORD searchIndex, int socket0
 			if (!bFound)
 				continue;
 		}
-		else if (!SearchItemsByCategory(searchIndex, shop))
+		else if (!SearchItemsByCategory(searchIndex, shop, socket0))
 			continue;
 #else
-		if (!SearchItemsByCategory(searchIndex, shop))
+		if (!SearchItemsByCategory(searchIndex, shop, socket0))
 			continue;
 #endif
 

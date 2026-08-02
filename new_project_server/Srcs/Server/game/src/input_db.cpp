@@ -472,6 +472,12 @@ void CInputDB::PlayerLoad(LPDESC d, const char * data) const
 #ifdef OFFLINE_SHOP
 static LPEVENT s_pkShopEvent = NULL;
 static LPEVENT s_pkFixShopEvent = NULL;
+#ifdef ENABLE_OFFLINE_SHOP_BAN_CLOSE
+static LPEVENT s_pkBanShopEvent = NULL;
+static LPEVENT s_pkBanShopDrainEvent = NULL;		// kuyruk bosalinca kendini sonlandirir (lazy kurulum)
+static std::vector<DWORD> s_kBanShopCloseQueue;	// kapatilacak banli sahip PID'leri (sira onemsiz)
+bool DeleteShop(DWORD dwPID);	// cmd_general.cpp - banli sahibin tezgahini bu core'da bulup DeleteMyShop yapar (bulduysa true)
+#endif
 
 EVENTINFO(shop_event_info)
 {
@@ -556,6 +562,16 @@ EVENTFUNC(fix_shop_event)
 				str_to_number(attr[i][1],	row[col++]);
 			}
 
+			// DUPE-FIX (M2/M6): once kosullu claim. Kapanistaki GetItems veya baska core'un
+			// supurmesi satiri coktan aldiysa atla - cift gift INSERT yapisal olarak imkansiz.
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+			auto pkClaim = DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u AND sold = 0", id);
+#else
+			auto pkClaim = DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", id);
+#endif
+			if (!pkClaim || !pkClaim->Get() || pkClaim->Get()->uiAffectedRows != 1)
+				continue;
+
 			char szGiftQuery[1024];
 			int giftQueryLen = snprintf(szGiftQuery, sizeof(szGiftQuery), "INSERT INTO player_gift SET owner_id = %u, vnum=%u, count=%u", pid, vnum, count);
 
@@ -565,13 +581,91 @@ EVENTFUNC(fix_shop_event)
 			for (BYTE i = 0; i < ITEM_ATTRIBUTE_MAX_NUM; i++)
 				giftQueryLen += snprintf(szGiftQuery + giftQueryLen, sizeof(szGiftQuery) - giftQueryLen, ", attrtype%d=%d, attrvalue%d=%d", i, attr[i][0], i, attr[i][1]);
 
-			DBManager::instance().DirectQuery(szGiftQuery);
-			DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", id);
+			giftQueryLen += snprintf(szGiftQuery + giftQueryLen, sizeof(szGiftQuery) - giftQueryLen, ", src_shop_item_id = %u", id);
+
+			auto pkGiftIns = DBManager::instance().DirectQuery(szGiftQuery);
+			if (!pkGiftIns || pkGiftIns->uiSQLErrno != 0)
+				sys_err("DUPE_GUARD: fix_shop_event gift INSERT basarisiz (pid %u rowid %u vnum %u)", pid, id, vnum);
 		}
 	}
 
 	return PASSES_PER_SEC(SHOP_TIME_REFRESH*60);
 }
+
+#ifdef ENABLE_OFFLINE_SHOP_BAN_CLOSE
+// Kapatma kuyrugu drenaji: saniyede 1 pazar kapatir. Pazar basina ~80 senkron SQL
+// round-trip oldugundan (claim DELETE + item basina DELETE/gift INSERT) toplu ban
+// dalgasinda tek pulse'ta hepsini kapatmak ana thread'i dondururdu. Kuyruk bosalinca
+// event kendini sonlandirir (return 0); yeni dalgada callback yeniden kurar.
+EVENTFUNC(ban_shop_drain_event)
+{
+	if (s_kBanShopCloseQueue.empty())
+	{
+		s_pkBanShopDrainEvent = NULL;
+		return 0;
+	}
+
+	DWORD dwPID = s_kBanShopCloseQueue.back();
+	s_kBanShopCloseQueue.pop_back();
+
+	// log yalnizca tezgahi gercekten bu core'da bulup kapatan yerde basilir
+	// (kanalin diger core'lari ayni PID icin no-op kalir, yaniltici log olmaz)
+	if (DeleteShop(dwPID))
+		sys_log(0, "BAN_SHOP_CLOSE: pid %u pazari kapatildi (hesap banli)", dwPID);
+
+	return PASSES_PER_SEC(1);
+}
+
+// Banli hesap pazari kapatma: 60 dk'da bir bu kanalin pazar sahipleri tek toplu
+// sorguyla kontrol edilir (account.status <> 'OK' = kalici ban, availDt > NOW() =
+// sureli ban). Banli cikan sahipler kuyruga alinir; drain eventi saniyede 1 pazari
+// DeleteShop -> DeleteMyShop ile kapatir (itemlar player_gift'e gider, kayip yok,
+// ban acilirsa Hediye Kutusu'ndan alinir).
+// Sorgu async (FuncQuery, ana thread SQL'e bloke olmaz); DB hatasinda hicbir pazar
+// kapatilmaz (fail-open). Kanal sorgusu ayni kanalin tum core'larinda calisir;
+// tezgahi barindirmayan core'da DeleteShop mob bulamaz ve dokunmaz, kapanisi
+// haritayi barindiran core yapar (DeleteMyShop claim-first DELETE ile zaten yarissiz).
+EVENTFUNC(ban_shop_event)
+{
+	// Bu core'da hic tezgah yoksa sorguya gerek yok (DeleteShop zaten lokal calisir)
+	CharacterVectorInteractor i;
+	if (!CHARACTER_MANAGER::instance().GetCharactersByRaceNum(30000, i))
+		return PASSES_PER_SEC(SHOP_TIME_REFRESH * 60);
+
+	DBManager::instance().FuncQuery(
+		[](SQLMsg* pMsg)
+		{
+			// fail-open: hata/bos sonucta hicbir pazar kapatilmaz
+			if (!pMsg || pMsg->uiSQLErrno != 0 || !pMsg->Get() || !pMsg->Get()->pSQLResult)
+				return;
+
+			MYSQL_ROW row;
+			while ((row = mysql_fetch_row(pMsg->Get()->pSQLResult)) != NULL)
+			{
+				DWORD dwPID = 0;
+				str_to_number(dwPID, row[0]);
+
+				if (!dwPID)
+					continue;
+
+				// dogrudan kapatma YOK (tek pulse'ta N x ~80 senkron sorgu stall'i);
+				// kuyruga alinir, drain eventi saniyede 1 pazar isler
+				s_kBanShopCloseQueue.push_back(dwPID);
+			}
+
+			if (!s_kBanShopCloseQueue.empty() && NULL == s_pkBanShopDrainEvent)
+			{
+				shop_event_info* info = AllocEventInfo<shop_event_info>();
+				s_pkBanShopDrainEvent = event_create(ban_shop_drain_event, info, PASSES_PER_SEC(1));
+			}
+		},
+		"SELECT ps.player_id FROM player_shop ps, player p, account.account a "
+		"WHERE p.id = ps.player_id AND a.id = p.account_id AND ps.channel = %d "
+		"AND (a.status != 'OK' OR a.availDt > NOW())", g_bChannel);
+
+	return PASSES_PER_SEC(SHOP_TIME_REFRESH * 60);
+}
+#endif
 
 void CreateShops()
 {
@@ -606,6 +700,16 @@ void CreateShops()
 		shop_event_info* info = AllocEventInfo<shop_event_info>();
 		s_pkFixShopEvent = event_create(fix_shop_event, info, 1);
 	}
+
+#ifdef ENABLE_OFFLINE_SHOP_BAN_CLOSE
+	if (NULL == s_pkBanShopEvent)
+	{
+		shop_event_info* info = AllocEventInfo<shop_event_info>();
+		// ilk tarama boot'tan 60 sn sonra (reboot sonrasi birikmis banlari bekletmeden
+		// yakala), devami EVENTFUNC donus degeriyle 60 dk periyot
+		s_pkBanShopEvent = event_create(ban_shop_event, info, PASSES_PER_SEC(SHOP_TIME_REFRESH));
+	}
+#endif
 }
 #endif
 

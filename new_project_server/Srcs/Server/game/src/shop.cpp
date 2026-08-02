@@ -456,6 +456,27 @@ bool CShop::GetItems()
 			continue;
 #endif
 
+		// DUPE-FIX (M1/M2/M4/M5): once kosullu claim - satiri KAZANAN gift'e yazar.
+		// Uzak satis (sold=1) veya fix_shop_event supurmesi satiri coktan aldiysa
+		// affectedRows=0 doner ve item sahibe IKINCI kez verilmez (DB tek otorite;
+		// bellek-ici sold bayragi yalnizca gorsel ipucu). DELETE'in INSERT'ten once
+		// olmasi bilinclidir: tam arada cokme tek item kaybi (sys_err'li) uretir, dupe uretmez.
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+		auto pkClaim = DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %d AND sold = 0", m_itemVector[i].itemid);
+#else
+		auto pkClaim = DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %d", m_itemVector[i].itemid);
+#endif
+		if (!pkClaim || !pkClaim->Get() || pkClaim->Get()->uiAffectedRows != 1)
+		{
+			sys_log(0, "OFFLINE_SHOP: GetItems claim kaybedildi (rowid %d pid %u vnum %u) - uzak satis/supurme kazandi", m_itemVector[i].itemid, m_pkPC->GetPrivShopOwner(), m_itemVector[i].vnum);
+			pkItem->SetShop(NULL);
+			pkItem->RemoveFromCharacter();
+			M2_DESTROY_ITEM(pkItem);
+			m_itemVector[i].pkItem = NULL;
+			BroadcastUpdateItem(i);
+			continue;
+		}
+
 		char szGiftQuery[4096];
 		int giftQueryLen = snprintf(szGiftQuery, sizeof(szGiftQuery),
 				"INSERT INTO player_gift SET owner_id = %u, vnum = %u, count = %u",
@@ -471,9 +492,12 @@ bool CShop::GetItems()
 			giftQueryLen += snprintf(szGiftQuery + giftQueryLen, sizeof(szGiftQuery) - giftQueryLen, ", attrtype%d=%d, attrvalue%d=%d", ia, attr.bType, ia, attr.sValue);
 		}
 
-		DBManager::instance().DirectQuery(szGiftQuery);
+		// src_shop_item_id + UNIQUE kisit: ayni pazar satiri iki kez gift'lenemez (sema sigortasi)
+		giftQueryLen += snprintf(szGiftQuery + giftQueryLen, sizeof(szGiftQuery) - giftQueryLen, ", src_shop_item_id = %d", m_itemVector[i].itemid);
 
-		DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %d", m_itemVector[i].itemid);
+		auto pkGiftIns = DBManager::instance().DirectQuery(szGiftQuery);
+		if (!pkGiftIns || pkGiftIns->uiSQLErrno != 0)
+			sys_err("DUPE_GUARD: GetItems gift INSERT basarisiz (pid %u rowid %d vnum %u count %u) - GM manuel iade gerekli!", m_pkPC->GetPrivShopOwner(), m_itemVector[i].itemid, m_itemVector[i].vnum, m_itemVector[i].count);
 		pkItem->SetShop(NULL);
 		pkItem->RemoveFromCharacter();
 		M2_DESTROY_ITEM(pkItem);
@@ -706,7 +730,24 @@ void CShop::ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byR
 				continue;
 #endif
 
-			DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", r.itemid);
+			// DUPE-FIX (M3/M4): kosullu claim - uzak satis bu satiri sold=1 yaptiysa (GG42
+			// P2P paketi henuz islenmemis olabilir) kopya VERILMEZ; slot 'satildi' hayaletine
+			// cevrilir. DB tek otorite, bellek-ici r.sold yalnizca gorseldir.
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+			auto pkClaim = DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u AND sold = 0", r.itemid);
+#else
+			auto pkClaim = DBManager::instance().DirectQuery("DELETE FROM player_shop_items WHERE id = %u", r.itemid);
+#endif
+			if (!pkClaim || !pkClaim->Get() || pkClaim->Get()->uiAffectedRows != 1)
+			{
+				sys_log(0, "OFFLINE_SHOP: edit-remove claim kaybedildi (rowid %u pid %u) - esya az once satilmis", r.itemid, dwOwnerPID);
+#ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
+				r.sold = 1;
+				BroadcastUpdateItem(pos);
+#endif
+				owner->ChatPacket(CHAT_TYPE_INFO, "Bu esya az once satildi; geri alinamaz. Satis bedeli hediye kutunda.");
+				continue;
+			}
 
 			LPITEM pkNew = ITEM_MANAGER::instance().CreateItem(r.vnum, r.count);
 			if (pkNew)
@@ -734,7 +775,10 @@ void CShop::ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byR
 						const TPlayerItemAttribute & attr = pkNew->GetAttribute(ia);
 						giftLen += snprintf(szGiftQuery + giftLen, sizeof(szGiftQuery) - giftLen, ", attrtype%d=%d, attrvalue%d=%d", ia, attr.bType, ia, attr.sValue);
 					}
-					DBManager::instance().DirectQuery(szGiftQuery);
+					giftLen += snprintf(szGiftQuery + giftLen, sizeof(szGiftQuery) - giftLen, ", src_shop_item_id = %u", r.itemid);
+					auto pkGiftIns = DBManager::instance().DirectQuery(szGiftQuery);
+					if (!pkGiftIns || pkGiftIns->uiSQLErrno != 0)
+						sys_err("DUPE_GUARD: edit-remove gift INSERT basarisiz (pid %u rowid %u vnum %u)", dwOwnerPID, r.itemid, pkNew->GetVnum());
 					M2_DESTROY_ITEM(pkNew);
 
 					LPCHARACTER online = CHARACTER_MANAGER::instance().FindByPID(dwOwnerPID);

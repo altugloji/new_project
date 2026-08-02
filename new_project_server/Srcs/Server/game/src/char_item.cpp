@@ -150,6 +150,18 @@ bool IS_BOTARYABLE_ZONE(int nMapIndex)
 {
 	if (!g_bEnableBootaryCheck) return true;
 
+#ifdef OFFLINE_SHOP
+	// Izinli harita listesi tek kaynaktan (CommonDefines.h SHOP_ALLOWED_MAP_INDEXES);
+	// CheckMyShopPlacement'taki kosulsuz kontrolle ayni liste, celiski olmasin
+	static const int c_anAllowedMaps[] = { SHOP_ALLOWED_MAP_INDEXES };
+	for (size_t i = 0; i < sizeof(c_anAllowedMaps) / sizeof(c_anAllowedMaps[0]); ++i)
+	{
+		if (nMapIndex == c_anAllowedMaps[i])
+			return true;
+	}
+
+	return false;
+#else
 	switch (nMapIndex)
 	{
 		case 1 :
@@ -162,6 +174,7 @@ bool IS_BOTARYABLE_ZONE(int nMapIndex)
 	}
 
 	return false;
+#endif
 }
 
 static bool FN_check_item_socket(LPITEM item)
@@ -1798,6 +1811,19 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 	{
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("대련 중에는 이용할 수 없는 물품입니다."));
 		return false;
+	}
+#endif
+
+#ifdef ENABLE_SPINED_ITEM_COUNT
+	if (item->GetVnum() == SPINED_COUNT_ITEM_VNUM)
+	{
+		if (GetDesc())
+		{
+			DBManager::instance().Query("UPDATE account.account SET spined = spined + 1 WHERE id = %u", GetDesc()->GetAccountTable().id);
+			item->SetCount(item->GetCount() - 1);
+			ChatPacket(CHAT_TYPE_INFO, "Hesap sayaciniz 1 artti.");
+		}
+		return true;
 	}
 #endif
 
@@ -5777,6 +5803,8 @@ bool CHARACTER::UseItem(TItemPos Cell, TItemPos DestCell)
 
 bool CHARACTER::DropItem(TItemPos Cell, BYTE bCount)
 {
+	return false;
+
 #ifdef OFFLINE_SHOP
 	if (IsEditingShop())
 	{
@@ -6790,6 +6818,7 @@ static bool IsMountSkillDelayBypass(DWORD dwSkillVnum)
 	{
 		case 3:
 		case 4:
+		case 16:
 		case 63:
 		case 64:
 		case 65:

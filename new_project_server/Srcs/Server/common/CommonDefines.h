@@ -139,6 +139,7 @@ enum eCommonDefines {
 #define ENABLE_ITEM_ENCHANT_USE_COUNT								// Tooltip efsun sayısı
 #define ENABLE_GM_PLAYER_PANEL										// GM paneli TAB
 #define ATTBONUS_ELEXIR												// Sürgüne karşı saldırı ve savunma efsunu
+#define ENABLE_ELEXIR_MISSING_DAMAGE_PENALTY						// Elexir bonusu olmayan surgunde (72/73/208) canavardan 3 kat hasar yer
 #define SKILL_SELECT												// Uzaktan skill seçme
 #define COLLECTIVE_DAMAGE_INFO										// Toplu hasar pc & npc
 #define METIN35_ADMIN_PANEL											// Yönetim Paneli
@@ -200,12 +201,23 @@ enum eCommonDefines {
 	#define ENABLE_OFFLINE_SHOP_REMOTE_VIEW
 	#define ENABLE_OFFLINE_SHOP_WARP_COUNTDOWN
 	#define ENABLE_IKASHOP_SEARCH									// IKASHOP tarzi global Pazar Arama: kanal/harita bagimsiz filtreli arama + uzaktan satin alma + dukkan goruntuleme (CG 84 / GC 139 / GG 42; wire degisti -> server+client rebuild + repack BIRLIKTE)
+	#define SHOP_ALLOWED_MAP_INDEXES 1, 21, 41, 3, 23, 43, 61, 64, 65	// Pazar kurulabilen harita indexleri; listede olmayan haritalarda (private kopyalar dahil) pazar acilamaz
+	#define ENABLE_OFFLINE_SHOP_BAN_CLOSE						// Banli hesabin pazarini otomatik kapat: 60 dk'da bir account.status/availDt toplu kontrolu (async FuncQuery); banli sahibin pazari DeleteMyShop ile kapanir, itemlar player_gift'e gider (server-only rebuild)
+	#define ENABLE_SHOP_SEARCH_CLASS_SUBCAT						// Pazar Arama: Zirh/Silah/Taki'de sinif-grup alt-kategorileri (sub 10..15) + arti secimi (+1..+9) + vnum grid'i; "Bonuslu Ara" bu kategorilerden kaldirildi. Arti seviyesi paketteki mevcut socket0 alaniyla tasinir -> WIRE DEGISMEDI: server rebuild + root repack yeter, client exe rebuild GEREKMEZ. Tablolar: shop_manager.cpp + offlineshopsearch.py (uretec: _plan_shopsearch_subcat/gen_wearable_filters.py)
 	#if defined(ENABLE_IKASHOP_SEARCH) && !defined(ENABLE_OFFLINE_SHOP_SOLD_RED)
 		#error "ENABLE_IKASHOP_SEARCH icin ENABLE_OFFLINE_SHOP_SOLD_RED acik olmali (uzak alim kilidi sold kolonuna dayanir)"
+	#endif
+	#if defined(ENABLE_SHOP_SEARCH_CLASS_SUBCAT) && !defined(ENABLE_SHOP_SEARCH_ITEM_SELECT)
+		#error "ENABLE_SHOP_SEARCH_CLASS_SUBCAT icin ENABLE_SHOP_SEARCH_ITEM_SELECT acik olmali (grid secimli arama ayni paket alanlarina dayanir)"
 	#endif
 #endif
 
 #define ENABLE_MESSENGER_BLOCK										// Oyuncu Engelleme sistemi: PM/ticaret/parti/lonca/duello/duygu blok + messenger Engellendi grubu (wire degisti -> server+client rebuild + repack BIRLIKTE; SQL: messenger_block_list)
+#define ENABLE_BOW_FLAT_DAMAGE_PERCENT 90							// Okcu mesafe cezasi iptal: ok hasari her mesafede sabit %75 (eski: 0-5m %100, 5m sonrasi her metre -%5, 25m ustu 0 vururdu; normal ok atisi + tum okcu skillerini kapsar, battle.cpp CalcArrowDamage) (server-only rebuild)
+#define ENABLE_SPINED_ITEM_COUNT									// her kullanildiginda hesabin account.account.spined kolonu 1 artar, item 1 adet tukenir (SQL sart: ALTER TABLE account.account ADD COLUMN spined INT UNSIGNED NOT NULL DEFAULT 0) (server-only rebuild)
+#ifdef ENABLE_SPINED_ITEM_COUNT
+	#define SPINED_COUNT_ITEM_VNUM 71122							// sayaci artiran item vnum
+#endif
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

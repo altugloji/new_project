@@ -40,6 +40,9 @@ class MessengerManager : public singleton<MessengerManager>
 		// type: SYST_BLOCK -> bellek-ici cift yonlu kontrol (SQL yok, chat/whisper sicak yolu),
 		//       SYST_FRIEND -> bellek + offline iliskiler icin DB nokta sorgusu fallback'i
 		bool	CheckMessengerList(keyA account, keyA companion, BYTE type);
+
+		// farkli core'daki hedefin loncasi (isimle engellemede ayni-lonca kontrolu icin DB nokta sorgusu)
+		DWORD	GetGuildIDByName(keyA name);
 #endif
 
 		void	Initialize() const;

@@ -995,6 +995,28 @@ enum EShopOfflineSearchCategories {
 	SHOP_SEARCH_SUB_HORSE_LEARN = 0,
 	SHOP_SEARCH_SUB_HORSE_OTHER,
 
+#ifdef ENABLE_SHOP_SEARCH_CLASS_SUBCAT
+	// Giyilebilir (Zirh/Silah/Taki) sinif-grup alt-kategorileri: vnum-listeli grid + arti secimi.
+	// searchIndex = kategori*20 + alt; paketteki socket0 alani arti seviyesini (1..9) tasir.
+	// Eski tip-bazli altlar (0..5) eski istemciler icin aynen korunur; yeniler 10'dan baslar.
+	SHOP_SEARCH_SUB_GRID_WARRIOR = 10,		// Zirh: Savasci govde
+	SHOP_SEARCH_SUB_GRID_ASSASSIN = 11,		// Zirh: Ninja govde
+	SHOP_SEARCH_SUB_GRID_SURA = 12,			// Zirh: Sura govde
+	SHOP_SEARCH_SUB_GRID_SHAMAN = 13,		// Zirh: Saman govde
+	SHOP_SEARCH_SUB_GRID_SHIELD = 14,		// Zirh: Kalkan (sinifsiz)
+	// Silah gruplari tur bazli (2026-08-02 kullanici istegi; sinif on-adi etiket)
+	SHOP_SEARCH_SUB_GRID_WPN_ONEHAND = 10,	// Silah: Savasci Tek El (tum tek-el kiliclar)
+	SHOP_SEARCH_SUB_GRID_WPN_TWOHAND = 11,	// Silah: Savasci Cift El
+	SHOP_SEARCH_SUB_GRID_WPN_DAGGER = 12,	// Silah: Ninja Hancer
+	SHOP_SEARCH_SUB_GRID_WPN_BOW = 13,		// Silah: Ninja Okcu
+	SHOP_SEARCH_SUB_GRID_WPN_BELL = 14,		// Silah: Saman Can
+	SHOP_SEARCH_SUB_GRID_WPN_FAN = 15,		// Silah: Saman Yelpaze
+	SHOP_SEARCH_SUB_GRID_JEW_EAR = 10,		// Taki: Kupe
+	SHOP_SEARCH_SUB_GRID_JEW_NECK = 11,		// Taki: Kolye
+	SHOP_SEARCH_SUB_GRID_JEW_WRIST = 12,	// Taki: Bileklik
+	SHOP_SEARCH_SUB_GRID_JEW_BOOTS = 13,	// Taki: Ayakkabi
+
+#endif
 	SHOP_CATEGORY_MAX_SUB = 20,
 };
 #endif

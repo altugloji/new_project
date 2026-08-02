@@ -391,6 +391,29 @@ void MessengerManager::RemoveAllBlockList(keyA account)
 	m_BlockRelation.erase(account);
 	m_InverseBlockRelation.erase(account);
 }
+
+DWORD MessengerManager::GetGuildIDByName(keyA name)
+{
+	// farkli core'daki (baska kanal/harita) hedefin lonca id'si; sadece kullanici
+	// eyleminde (isimle engelleme) calisir, sicak yolda kullanilmaz
+	DBManager::instance().EscapeString(__account, sizeof(__account), name.c_str(), name.size());
+	if (name.compare(__account))
+		return 0;
+
+	std::unique_ptr<SQLMsg> pMsg(DBManager::instance().DirectQuery(
+			"SELECT g.guild_id FROM guild_member%s g, player%s p WHERE p.name='%s' AND g.pid=p.id LIMIT 1",
+			get_table_postfix(), get_table_postfix(), __account));
+
+	if (!pMsg || !pMsg->Get() || pMsg->Get()->uiNumRows == 0)
+		return 0;
+
+	MYSQL_ROW row = mysql_fetch_row(pMsg->Get()->pSQLResult);
+
+	if (!row || !row[0])
+		return 0;
+
+	return (DWORD) strtoul(row[0], nullptr, 10);
+}
 #endif
 
 void MessengerManager::Logout(MessengerManager::keyA account)

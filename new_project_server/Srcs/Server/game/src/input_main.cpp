@@ -1302,41 +1302,56 @@ int CInputMain::Messenger(LPCHARACTER ch, const char* c_pData, size_t uiBytes) c
 				char name[CHARACTER_NAME_MAX_LEN + 1];
 				strlcpy(name, c_pData, sizeof(name));
 
-				if (ch->GetGMLevel() == GM_PLAYER && gm_get_level(name) != GM_PLAYER)
+				// hedef bu core'da yoksa P2P CCI'dan bak: farkli kanal/harita core'undaki
+				// online oyuncu da isimle engellenebilsin (PM penceresi / messenger dialogu)
+				const LPCHARACTER tch = CHARACTER_MANAGER::instance().FindPC(name);
+				const CCI * pkCCI = tch ? nullptr : P2P_MANAGER::instance().Find(name);
+
+				if (!tch && !pkCCI)
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("%s isimli oyuncu oyunda degil."), name);
+					return CHARACTER_NAME_MAX_LEN;
+				}
+
+				// kanonik isim: buyuk/kucuk harf farkli yazilmis olabilir, sunucu kaydini esas al
+				const char * c_szTargetName = tch ? tch->GetName() : pkCCI->szName;
+
+				if (!strcmp(ch->GetName(), c_szTargetName))
+					return CHARACTER_NAME_MAX_LEN;
+
+				if (ch->GetGMLevel() == GM_PLAYER && gm_get_level(c_szTargetName) != GM_PLAYER)
 				{
 					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("GM engellenemez."));
 					return CHARACTER_NAME_MAX_LEN;
 				}
 
-				const LPCHARACTER tch = CHARACTER_MANAGER::instance().FindPC(name);
-
-				if (!tch)
-					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("%s isimli oyuncu oyunda degil."), name);
-				else
+				if (ch->GetGuild())
 				{
-					if (tch == ch)
-						return CHARACTER_NAME_MAX_LEN;
+					// ayni core'da lonca dogrudan, farkli core'da DB nokta sorgusuyla kontrol edilir
+					const DWORD dwTargetGuildID = tch
+						? (tch->GetGuild() ? tch->GetGuild()->GetID() : 0)
+						: MessengerManager::instance().GetGuildIDByName(c_szTargetName);
 
-					if (tch->GetGuild() && ch->GetGuild() && tch->GetGuild() == ch->GetGuild())
+					if (dwTargetGuildID != 0 && dwTargetGuildID == ch->GetGuild()->GetID())
 					{
 						ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Ayni loncadan birini engelleyemezsin."));
 						return CHARACTER_NAME_MAX_LEN;
 					}
-
-					if (MessengerManager::instance().CheckMessengerList(ch->GetName(), tch->GetName(), SYST_FRIEND))
-					{
-						ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Arkadas listendeki birini engelleyemezsin, once listeden sil."));
-						return CHARACTER_NAME_MAX_LEN;
-					}
-
-					if (MessengerManager::instance().CheckMessengerList(ch->GetName(), tch->GetName(), SYST_BLOCK))
-					{
-						ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu oyuncu zaten engelli."));
-						return CHARACTER_NAME_MAX_LEN;
-					}
-
-					MessengerManager::instance().AddToBlockList(ch->GetName(), tch->GetName());
 				}
+
+				if (MessengerManager::instance().CheckMessengerList(ch->GetName(), c_szTargetName, SYST_FRIEND))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Arkadas listendeki birini engelleyemezsin, once listeden sil."));
+					return CHARACTER_NAME_MAX_LEN;
+				}
+
+				if (MessengerManager::instance().CheckMessengerList(ch->GetName(), c_szTargetName, SYST_BLOCK))
+				{
+					ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu oyuncu zaten engelli."));
+					return CHARACTER_NAME_MAX_LEN;
+				}
+
+				MessengerManager::instance().AddToBlockList(ch->GetName(), c_szTargetName);
 			}
 			return CHARACTER_NAME_MAX_LEN;
 

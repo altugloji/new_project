@@ -46,7 +46,9 @@ public:
 	};
 
 	void	PrepareShopSearchFilters();
-	bool	SearchItemsByCategory(DWORD category, LPSHOP shop);
+	// socket0: ENABLE_SHOP_SEARCH_CLASS_SUBCAT grid alt-kategorilerinde arti seviyesi (1..9);
+	// diger kategorilerde 0 gelir ve yok sayilir (davranis degismez).
+	bool	SearchItemsByCategory(DWORD category, LPSHOP shop, int socket0 = 0);
 
 #ifdef ENABLE_SHOP_SEARCH_ITEM_SELECT
 	// Item-secmeli arama: secim listesi doluysa yalnizca secilen (vnum, socket0)
