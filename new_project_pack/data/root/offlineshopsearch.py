@@ -153,14 +153,36 @@ SHOP_SEARCH_SUB_GRID_WPN_BOW		= 13
 SHOP_SEARCH_SUB_GRID_WPN_BELL		= 14
 SHOP_SEARCH_SUB_GRID_WPN_FAN		= 15
 
-# Secilebilir arti seviyeleri (kullanici istegi: +1..+9)
-SHOP_SEARCH_PLUS_CHOICES = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# Arti secenekleri (kullanici istegi 2026-08-02): +0..+5 TEK secenek ("+0 / +5"),
+# +6..+9 ayri ayri. 15 = +0..+5 araliginin ozel socket0 degeri; paket socket0
+# alaninda aynen gider, server 15'i "son hane 0..5" araligi olarak okur.
+SHOP_SEARCH_PLUS_RANGE_0_5 = 15
+SHOP_SEARCH_PLUS_CHOICES = [SHOP_SEARCH_PLUS_RANGE_0_5, 6, 7, 8, 9]
+
+def shopsearch_plus_label(plusVal):
+	if plusVal == SHOP_SEARCH_PLUS_RANGE_0_5:
+		return "+0 / +5"
+	return "+%d" % plusVal
+
+def shopsearch_plus_match(vnum, plusLevel):
+	# ARAMA/VURGU: vnum'un son hanesi secili artiya uyuyor mu (15 = 0..5 araligi)
+	p = vnum % 10
+	if plusLevel == SHOP_SEARCH_PLUS_RANGE_0_5:
+		return p <= 5
+	return p == plusLevel
+
+def shopsearch_plus_display_match(vnum, plusLevel):
+	# GRID GORUNUMU: "+0 / +5" secilince aile temsilcisi olarak YALNIZCA +5'ler
+	# gosterilir (kullanici istegi 2026-08-02); arama yine +0..+5'in tamamini bulur.
+	if plusLevel == SHOP_SEARCH_PLUS_RANGE_0_5:
+		return vnum % 10 == 5
+	return vnum % 10 == plusLevel
 
 # DIKKAT: getattr(localeInfo, ...) fallback'i BU FORK'TA CALISMAZ: system.py
 # LocaleInfoWrapper.__getattr__ eksik anahtarda syserr'e hata yazip anahtarin
 # ADINI dondurur (AttributeError yukselmez) -> default hic devreye girmez.
 # Bu yuzden duz ASCII literal kullanilir (yeni locale anahtari gerektirmez).
-TXT_SELECT_PLUS = "Lutfen arti seviyesi secin (+1 / +9)."
+TXT_SELECT_PLUS = "Lutfen arti secin (+0 / +5 ya da +6..+9)."
 
 # Aile tablolari: (taban_vnum, azami_arti). Uretec: _plan_shopsearch_subcat/gen_wearable_filters.py
 # DIKKAT: server shop_manager.cpp PrepareShopSearchFilters tablolari ile BIREBIR ayni tutulmali.
@@ -645,7 +667,7 @@ SHOP_SEARCH_FILTERS = {
 			SHOP_SEARCH_SUB_SPECIAL_REFINE: {
 				"name": localeInfo.SHOP_SEARCH_SUBCAT_SPECIAL_REFINE,
 				"itemList": [
-					(25040, 0), (70039, 0),
+					(25040, 0), (70039, 0), (76016, 0),
 				]
 			},
 			SHOP_SEARCH_SUB_SPECIAL_TOITEM: { #craft malzemeleri
@@ -657,7 +679,7 @@ SHOP_SEARCH_FILTERS = {
 			SHOP_SEARCH_SUB_SPECIAL_CHARACTER: { #efsunlar
 				"name": localeInfo.SHOP_SEARCH_SUBCAT_SPECIAL_CHARACTER,
 				"itemList": [
-					(71084, 0), (71085, 0), (70024, 0), (50904, 0), (50903, 0),
+					(71084, 0), (71085, 0), (70024, 0), (50904, 0), (50903, 0), (71152, 0), (71151, 0),
 				]
 			},
 			SHOP_SEARCH_SUB_SPECIAL_OTHER: {
@@ -872,7 +894,7 @@ def shopsearch_send(category, sub_category=-1, isSearchAttr=False, selectedItems
 	# Giyilebilir grid: arti secimi zorunlu; arti seviyesi paketin socket0 alaninda gider
 	sendSocket0 = 0
 	if shopsearch_is_wearable(category):
-		if plusLevel < 1 or plusLevel > 9:
+		if not (1 <= plusLevel <= 9 or plusLevel == SHOP_SEARCH_PLUS_RANGE_0_5):
 			chat.AppendChat(chat.CHAT_TYPE_INFO, TXT_SELECT_PLUS)
 			return
 		sendSocket0 = plusLevel
@@ -888,8 +910,16 @@ def shopsearch_send(category, sub_category=-1, isSearchAttr=False, selectedItems
 			chat.AppendChat(chat.CHAT_TYPE_INFO, "Secili arama icin istemci guncellemesi gerekli; tum liste araniyor.")
 
 	if useSelection:
-		for data in selectedItems:
-			constInfo.OFFLINESHOP_LAST_SEARCHED_ITEMS.append(data)
+		if shopsearch_is_wearable(category) and plusLevel == SHOP_SEARCH_PLUS_RANGE_0_5:
+			# "+0 / +5" gorunumunde secilen +5 temsilcisi vurguda tum aileyi (+0..+5) kapsar
+			# (server da secimi ayni sekilde aile olarak esler)
+			for data in selectedItems:
+				base = data[0] - (data[0] % 10)
+				for p in xrange(0, 6):
+					constInfo.OFFLINESHOP_LAST_SEARCHED_ITEMS.append((base + p, data[1]))
+		else:
+			for data in selectedItems:
+				constInfo.OFFLINESHOP_LAST_SEARCHED_ITEMS.append(data)
 	elif shopsearch_is_wearable(category):
 		# Yesil vurgu yalnizca secilen artinin itemlarina uygulanir
 		for data in shopsearch_get_item_list(category, sub_category, plusLevel):
@@ -903,18 +933,23 @@ def shopsearch_send(category, sub_category=-1, isSearchAttr=False, selectedItems
 	else:
 		shop.SendSearchItem(searchIndex, sendSocket0)
 
-def shopsearch_get_item_list(category, sub_category=-1, plusLevel=0):
+def shopsearch_get_item_list(category, sub_category=-1, plusLevel=0, forDisplay=False):
 	data = SHOP_SEARCH_FILTERS[category]
 	if "sub" in data:
 		itemList = data["sub"][sub_category]["itemList"]
 	else:
 		itemList = data["itemList"]
-	# Giyilebilir grid: arti secildiyse yalnizca son hanesi artiya esit vnumlar
-	# gosterilir/aranir (11204 = +4 kaligi)
+	# Giyilebilir grid: arti secildiyse son hanesi uyan vnumlar gosterilir/aranir
+	# (11204 = +4 kaligi). "+0 / +5" (15) modunda: gorunum yalnizca +5 temsilcileri,
+	# arama/vurgu ise araligin tamami (0..5).
 	if plusLevel >= 1 and shopsearch_is_wearable(category):
 		filtered = []
 		for d in itemList:
-			if d[0] % 10 == plusLevel:
+			if forDisplay:
+				matched = shopsearch_plus_display_match(d[0], plusLevel)
+			else:
+				matched = shopsearch_plus_match(d[0], plusLevel)
+			if matched:
 				filtered.append(d)
 		return filtered
 	return itemList
@@ -1208,7 +1243,7 @@ class ShopSearchWindow(ui.ScriptWindow):
 			if self.subCategory < 0 or self.selectedPlus < 1:
 				return []
 		try:
-			return shopsearch_get_item_list(self.category, self.subCategory, self.selectedPlus)
+			return shopsearch_get_item_list(self.category, self.subCategory, self.selectedPlus, True)
 		except Exception:
 			return []
 
@@ -1250,7 +1285,7 @@ class ShopSearchWindow(ui.ScriptWindow):
 				spacer.Show()
 				plusList = [(spacer, None)]
 				for plusVal in SHOP_SEARCH_PLUS_CHOICES:
-					plusBtn = self.__CreateCategoryButton(self.subCategoryContent, "+%d" % plusVal)
+					plusBtn = self.__CreateCategoryButton(self.subCategoryContent, shopsearch_plus_label(plusVal))
 					plusBtn.SetClippingMaskWindow(self.subCategoryMask)
 					plusBtn.SAFE_SetEvent(self.__OnClickPlus, plusVal)
 					plusList.append((plusBtn, plusVal))
