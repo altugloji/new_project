@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tiger (blau)
 71120	Löwe (gelb)
 71121	Löwe (blau)
-71122	Siehe Kommentar
+71122	Rad-Ticket
 71123	Drachenschuppe
 71124	Weißer Löwe
 71125	Kriegskeiler

@@ -1,55 +1,41 @@
 [CZ]
-49100	Kniha lovce monster
-49102	Kniha inspirace
+71122	Lístek do kola
 
 [DE]
-49100	Buch des Monsterjägers
-49102	Buch der Inspiration
+71122	Rad-Ticket
 
 [DK]
-49100	Monsterjægerens bog
-49102	Inspirationsbog
+71122	Hjulbillet
 
 [EN]
-49100	Monster Hunter Book
-49102	Inspiration Book
+71122	Wheel Ticket
 
 [ES]
-49100	Libro del Cazador de Monstruos
-49102	Libro de Inspiración
+71122	Boleto de la Ruleta
 
 [FR]
-49100	Livre du chasseur de monstres
-49102	Livre d'inspiration
+71122	Ticket de Roue
 
 [HU]
-49100	Szörnyvadász könyve
-49102	Ihlet könyve
+71122	Kerék jegy
 
 [IT]
-49100	Libro del Cacciatore di Mostri
-49102	Libro dell'Ispirazione
+71122	Biglietto Ruota
 
 [NL]
-49100	Monsterjagersboek
-49102	Inspiratieboek
+71122	Rad Ticket
 
 [PL]
-49100	Księga Łowcy Potworów
-49102	Księga Inspiracji
+71122	Bilet Koła
 
 [PT]
-49100	Livro do Caçador de Monstros
-49102	Livro da Inspiração
+71122	Bilhete da Roda
 
 [RO]
-49100	Cartea Vânătorului de Monștri
-49102	Cartea Inspirației
+71122	Bilet Roată
 
 [AE]
-49100	كتاب صياد الوحوش
-49102	كتاب الإلهام
+71122	تذكرة العجلة
 
 [TR]
-49100	Canavar Avcısı Kitabı
-49102	İlham Kitabı
+71122	Çark Bileti

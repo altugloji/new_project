@@ -6754,7 +6754,7 @@ VNUM	LOCALE_NAME
 30645	Pet taslaðý
 30646	Kuþak taslaðý
 30647	Süs tasarýmý
-30648	Pet kitabý taslaðý
+30648	Çark Bileti
 30649	Kesici diþ taslaðý+
 30650	Cor Draconis taslaðý
 30651	Gaya tasarýmý
@@ -10205,7 +10205,7 @@ VNUM	LOCALE_NAME
 71119	Kaplan (mavi)
 71120	Aslan (sarý)
 71121	Aslan (mavi)
-71122	NoNAme
+71122	Çark Bileti
 71123	Ejderha Pulu
 71124	Beyaz Aslan
 71125	Savaþ yaban domuzu

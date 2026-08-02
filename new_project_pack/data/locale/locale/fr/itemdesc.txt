@@ -6584,7 +6584,7 @@
 71119	Tigre (bleu)	Ce sceau magique appellera l'esprit d'un puissant animal qui vous amènera rapidement à l'endroit de votre choix. Il augmente la valeur de défense de son cavalier de 200.
 71120	Lion (jaune)	Ce sceau magique appellera l'esprit d'un puissant animal qui vous amènera rapidement à l'endroit de votre choix. Il augmente la valeur d'attaque de son cavalier de 200.
 71121	Lion (bleu)	Ce sceau magique appellera l'esprit d'un puissant animal qui vous amènera rapidement à l'endroit de votre choix. Il augmente la valeur d'attaque de son cavalier de 300.
-71122	Entrée Temple du dragon	Ceci permet d'accéder au Temple du dragon.
+71122	Ticket de Roue	Une fois utilisé, tu obtiens 1 essai dans l'événement de la Roue.
 71123	Écaille de dragon	Les écailles de dragon font partie des matériaux les plus puissants connus.
 71124	Lion blanc	Les animaux au pelage blanc sont très rares et sont considérés par de multiples cultures comme possédant des pouvoirs particuliers. Cet animal augmente le gain d'expérience de 30 %.
 71125	Sanglier pugnace	Dompter des âmes animales malveillantes nécessite des pouvoirs magiques considérables. Le résultat en est tout aussi impressionnant. Cet animal confère à son cavalier +20 % de force contre les monstres.

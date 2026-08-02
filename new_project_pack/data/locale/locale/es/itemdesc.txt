@@ -6584,7 +6584,7 @@
 71119	Tigre (azul)	La magia del sello invoca a un poderoso espíritu animal que te llevará rápidamente al lugar de tu elección. Aumenta el valor de defensa de su jinete en 200.
 71120	León (amarillo)	La magia del sello invoca a un poderoso espíritu animal que te llevará rápidamente al lugar de tu elección. Aumenta el valor de ataque de su jinete en 200.
 71121	León (azul)	La magia del sello invoca a un poderoso espíritu animal que te llevará rápidamente al lugar de tu elección. Aumenta el valor de ataque de su jinete en 300.
-71122	Acceso Templo del Dragón	Permite entrar en el Templo del Dragón.
+71122	Boleto de la Ruleta	Al usarlo, obtienes 1 intento en el evento de la Ruleta.
 71123	Escama de Dragón	Las escamas de dragón están entre los materiales más poderosos conocidos.
 71124	León Blanco	Los animales con pelaje blanco son sumamente escasos y son venerados por muchas culturas como portadores de extraordinarios poderes. Aumenta la ganancia de experiencia en un 30%.
 71125	Jabalí de combate	Domar espíritus animales malvados requiere un dominio excepcional de las artes mágicas. El resultado siempre es impresionante. Aumenta la fuerza contra monstruos de su jinete en un 20%.

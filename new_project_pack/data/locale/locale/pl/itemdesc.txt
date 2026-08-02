@@ -6584,7 +6584,7 @@
 71119	Tygrys (niebieski)	Czar pieczêci wzywa potê¿nego ducha zwierz¹t, który przeniesie ciê szybko do miejsca twojego wyboru. Zwiêksza on si³ê obrony swojego jeŸdŸca o 200.
 71120	Lew (¿ó³ty)	Czar pieczêci wzywa potê¿nego ducha zwierz¹t, który przeniesie ciê szybko do miejsca twojego wyboru. Zwiêksza on si³ê ataku swojego jeŸdŸca o 200.
 71121	Lew (niebieski)	Czar pieczêci wzywa potê¿nego ducha zwierz¹t, który przeniesie ciê szybko do miejsca twojego wyboru. Zwiêksza on si³ê ataku swojego jeŸdŸca o 300.
-71122	Wstêp do Œwi¹tyni Smoka	Za pomoc¹ tego przedmiotu mo¿na wejœæ do Œwi¹tyni Smoka.
+71122	Bilet Ko³a	Po u¿yciu otrzymujesz 1 próbê w evencie Ko³a.
 71123	Smocza £uska	Smocze ³uski nale¿¹ do najpotê¿niejszych znanych materia³ów.
 71124	Bia³y Lew	Zwierzêta o bia³ym futrze s¹ rzadkoœci¹ i wiele kultur przypisuje im nadzwyczajne si³y. Zwiêksza otrzymywane punkty doœwiadczenia o 30%.
 71125	Dzik Wojenny	Okie³znanie z³ych duchów zwierz¹t wymaga nie lada kunsztu magicznego. Odpowiednio zadziwiaj¹cy jest rezultat. Daje swojemu w³aœcicielowi +20% do si³y w walce z potworami.

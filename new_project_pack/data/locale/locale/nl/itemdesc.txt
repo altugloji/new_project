@@ -6584,7 +6584,7 @@
 71119	Tijger (blauw)	De magie van dit zegel roept een machtige dierengeest op die je naar een bestemming van jouw keuze zal voeren. Het verhoogt zijn berijder's verdedigingswaarde met 200.
 71120	Leeuw (geel)	De magie van dit zegel roept een machtige dierengeest op die je naar een bestemming van jouw keuze zal voeren. Het verhoogt zijn berijder's aanvalswaarde met 200.
 71121	Leeuw (blauw)	De magie van dit zegel roept een machtige dierengeest op die je naar een bestemming van jouw keuze zal voeren. Het verhoogt zijn berijder's aanvalswaarde met 300.
-71122	Drakentempel Toegang	Kan gebruikt worden om de Drakentempel binnen te gaan.
+71122	Rad Ticket	Bij gebruik krijg je 1 poging in het Rad-event.
 71123	Drakenschub	Drakenschubben behoren tot de krachtigste bekende materialen.
 71124	Witte Leeuw	Dieren met een witte vacht zijn enorm zeldzaam en vele culturen aanbidden gelovende dat ze opmerkelijke krachten bij zich dragen. Het verhoogt ervaringsopname met 30%.
 71125	Wild Strijd Zwijn	Het temmen van kwaadaardige dierengeesten vergt best wat vakkundig gebruik van magie, maar de resultaten kunnen echt indrukwekkend zijn. Het geeft zijn berijder +20% kracht tegen monsters.

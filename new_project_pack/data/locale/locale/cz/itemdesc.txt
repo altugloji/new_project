@@ -6584,7 +6584,7 @@
 71119	Tygr (modrý)	Kouzlo této peèetì pøivolá mocného ducha zvíøete, který tì rychle pøenese na místo, které si vybereš. Zvyšuje hodnotu obrany svého jezdce o 200.
 71120	Lev (žlutý)	Kouzlo této peèetì pøivolá mocného ducha zvíøete, který tì rychle pøenese na místo, které si vybereš. Zvyšuje hodnotu útoku svého jezdce o 200.
 71121	Lev (modrý)	Kouzlo této peèetì pøivolá mocného ducha zvíøete, který tì rychle pøenese na místo, které si vybereš. Zvyšuje hodnotu útoku svého jezdce o 300.
-71122	Vstup do Draèího chrámu	Lze jej použít pro vstup do Draèího chrámu.
+71122	Lístek do kola	Pøi použití získáš 1 pokus v eventu Kolo.
 71123	Draèí šupina	Draèí šupiny patøí mezi nejsilnìjší známé materiály.
 71124	Bílý Lev	Zvíøata s bílou kožešinou jsou velmi vzácná a mnoho kultur je uctívá, protože vìøí, že jsou nositelé pozoruhodných sil. Zvyšuje zisk zkušeností o 30 %.
 71125	Divoký bojový kanec	Ochoèení si zlého zvíøecího ducha vyžaduje dobré schopnosti užití magie, ale výsledky mohou být velmi pùsobivé. Pøidává svému jezdci +20 % síly proti monstrùm.

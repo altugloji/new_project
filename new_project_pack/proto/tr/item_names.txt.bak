@@ -6754,7 +6754,7 @@ VNUM	LOCALE_NAME
 30645	Pet taslaðý
 30646	Kuþak taslaðý
 30647	Süs tasarýmý
-30648	Pet kitabý taslaðý
+30648	Çark Bileti
 30649	Kesici diþ taslaðý+
 30650	Cor Draconis taslaðý
 30651	Gaya tasarýmý
@@ -10205,7 +10205,7 @@ VNUM	LOCALE_NAME
 71119	Kaplan (mavi)
 71120	Aslan (sarý)
 71121	Aslan (mavi)
-71122	NoNAme
+71122	Çark Bileti
 71123	Ejderha Pulu
 71124	Beyaz Aslan
 71125	Savaþ yaban domuzu
@@ -10922,9 +10922,9 @@ VNUM	LOCALE_NAME
 80003	Gümüþ Bar(50.000Yang)
 80004	Gümüþ Bar(100.000Yang)
 80005	Altýn Külçe(500.000Yang)
-80006	Altýn külçe(1 mio. Yang)
-80007	Altýn Külçe(2 mio. Yang)
-80008	Altýn Parçasý
+80006	Altýn külçe(1M Yang)
+80007	Altýn Külçe(2M Yang)
+80008	Altýn Külçe(100M Yang)
 80014	EP kuponu (100)
 80015	EP kuponu (500)
 80016	EP kuponu (1000)
@@ -11435,3 +11435,5 @@ VNUM	LOCALE_NAME
 30406	Gem Coupon (25)
 30407	Gem Coupon (50)
 30408	Gem Coupon (100)
+49100	Canavar Avcýsý Kitabý
+49102	Ýlham Kitabý

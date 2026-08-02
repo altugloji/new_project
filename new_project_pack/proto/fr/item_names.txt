@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tigre (bleu)
 71120	Lion (jaune)
 71121	Lion (bleu)
-71122	NoNAme
+71122	Ticket de Roue
 71123	Écaille de dragon
 71124	Lion blanc
 71125	Sanglier pugnace

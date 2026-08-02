@@ -6584,7 +6584,7 @@
 71119	Tigris (kék)	A pecsét mágiája megidéz egy hatalmas állat szellemet, amivel pillanatok alatt a célodhoz érhetsz. Megnöveli lovaglója védelmi értékét 200-zal.
 71120	Oroszlán (sárga)	A pecsét mágiája megidéz egy hatalmas állat szellemet, amivel pillanatok alatt a célodhoz érhetsz. Megnöveli lovaglója támadó értékét 200-zal.
 71121	Oroszlán (kék)	A pecsét mágiája megidéz egy hatalmas állat szellemet, amivel pillanatok alatt a célodhoz érhetsz. Megnöveli lovaglója támadó értékét 300-zal.
-71122	Sárkány temploma belépõ	Beléphetsz vele a Sárkány templomába.
+71122	Kerék jegy	Használatakor 1 próbálkozást kapsz a Kerék eventben.
 71123	Sárkánypikkely	A sárkánypikkelyek a legerõsebb ismert anyagok közé tartoznak.
 71124	Fehér oroszlán	A fehér bundás állatok nagyon ritkák és számos kultúrában imádják õket, mert azt gondolják, hogy nagy hatalommal rendelkeznek. Megnöveli a tapasztalat szerzést 30%-kal.
 71125	Harci Vadkan	A vadállatok megszelídítése gyakorlott mágiahasználatot igényel, de az eredmények lenyûgözõek lehetnek. Lovaglójának +20% szörnyek elleni erõt biztosít.

@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tigru (albastru)
 71120	Leu (galben)
 71121	Leu (albastru)
-71122	NoNAme
+71122	Bilet Roatã
 71123	Balanþa Dragonului
 71124	Leul Alb
 71125	Mistreþ Sãlbatic Luptã

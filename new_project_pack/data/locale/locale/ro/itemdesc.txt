@@ -6584,7 +6584,7 @@
 71119	Tigru (albastru)	Magia acestui sigiliu va invoca spiritul unui animal puternic care te va purta la destinaþia doritã. Acesta îi creºte cãlãreþului sãu valoarea apãrãrii cu 200.
 71120	Leu (galben)	Magia acestui sigiliu va invoca spiritul unui animal puternic care te va purta la destinaþia doritã. Acesta îi creºte cãlãreþului sãu valoarea atacului cu 200.
 71121	Leu (albastru)	Magia acestui sigiliu va invoca spiritul unui animal puternic care te va purta la destinaþia doritã. Acesta îi creºte cãlãreþului sãu valoarea atacului cu 300.
-71122	Intrare Templul Dragon	Poate fi folosit pentru a intra în Templul Dragonului.
+71122	Bilet Roatã	Când este folosit, primeºti 1 încercare în eventul Roatã.
 71123	Solz de Dragon	Solzii de dragon se numãrã printre cele mai puternice materiale cunoscute.
 71124	Leul Alb	Animalele cu blanã albã sunt foarte rare ºi mulþi oameni le venereazã, crezând cã acestea au puteri magice. Mãreºte experienþa colectatã cu 30%.
 71125	Mistreþ Sãlbatic Luptã	Îmblânzirea spiritelor animalelor malefice necesitã ablitãþi magice însã, rezultatele pot fi uimitoare. Acesta oferã cãlãreþului sãu +20% putere împotriva monºtrilor.

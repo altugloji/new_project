@@ -6584,7 +6584,7 @@
 71119	Tiger (blå)	Dette segls magi påkalder en mægtig dyre-ånd der hurtigt vil bære dig til din destination efter dit ønske. Den øger dens rytters forsvarsværdi med 200.
 71120	Løve (gul)	Dette segls magi påkalder en mægtig dyre-ånd der hurtigt vil bære dig til din destination efter dit ønske. Den øger dens rytters angrebsværdi med 200.
 71121	Løve (blå)	Dette segls magi påkalder en mægtig dyre-ånd der hurtigt vil bære dig til din destination efter dit ønske. Den øger dens rytters angrebsværdi med 300.
-71122	Dragens Tempel Indgang	Kan bruges til at komme ind i Dragens Tempel.
+71122	Hjulbillet	Når den bruges, får du 1 forsøg i hjul-eventet.
 71123	Drageskæl	Drageskæl er blandt de mest kraftfulde kendte materialer.
 71124	Hvid løve	Dyr med hvid pels er meget sjældne og mange kulturer tilbeder dem, da de tror på at de har bemærkelsesværdige kræfter. Den øger erfaring med 30%.
 71125	Krigs-Vildsvin	Tæmning af onde dyr ånder kræver noget dygtigt brug af magi, men resultaterne kan være meget imponerende. Den giver sin rytter +20% styrke imod monstre.

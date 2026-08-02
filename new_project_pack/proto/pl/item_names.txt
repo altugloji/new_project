@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tygrys (niebieski)
 71120	Lew (¿ó³ty)
 71121	Lew (niebieski)
-71122	NoNAme
+71122	Bilet Ko³a
 71123	Smocza £uska
 71124	Bia³y Lew
 71125	Dzik Wojenny

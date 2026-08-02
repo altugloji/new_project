@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tijger (blauw)
 71120	Leeuw (geel)
 71121	Leeuw (blauw)
-71122	NoNAme
+71122	Rad Ticket
 71123	Draken Schubben
 71124	Witte Leeuw
 71125	Wild Strijd Zwijn

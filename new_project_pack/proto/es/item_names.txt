@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tigre (azul)
 71120	León (amarillo)
 71121	León (azul)
-71122	NoNAme
+71122	Boleto de la Ruleta
 71123	Escamas de Dragón
 71124	León Blanco
 71125	Jabalí de combate

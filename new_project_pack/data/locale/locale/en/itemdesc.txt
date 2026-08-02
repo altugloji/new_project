@@ -6584,7 +6584,7 @@
 71119	Tiger (blue)	The magic of this seal summons a mighty animal spirit that will quickly carry you to your destination of choice. It increases its rider's defence value by 200.
 71120	Lion (yellow)	The magic of this seal summons a mighty animal spirit that will quickly carry you to your destination of choice. It increases its rider's attack value by 200.
 71121	Lion (blue)	The magic of this seal summons a mighty animal spirit that will quickly carry you to your destination of choice. It increases its rider's attack value by 300.
-71122	Dragon's Temple Entry	Can be used to enter the Dragon's Temple.
+71122	Wheel Ticket	When used, you gain 1 chance in the Wheel event.
 71123	Dragon Scale	Dragon scales are among the fiercest known materials.
 71124	White Lion	Animals with white fur are very rare and many cultures worship them, believing that they carry remarkable powers. It increases experience gain by 30%.
 71125	Wild Battle Boar	Taming evil animal spirits requires some skilful use of magic, but the results can be very impressive. It grants its rider +20% strength against monsters.

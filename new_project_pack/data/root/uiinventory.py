@@ -1153,7 +1153,8 @@ class InventoryWindow(ui.ScriptWindow):
 				self.RefineItem(srcItemSlotPos, dstItemSlotPos)
 				self.wndItem.SetUseMode(False)
 
-		elif item.IsMetin(srcItemVID):
+		# elif item.IsMetin(srcItemVID):
+		elif item.IsMetin(srcItemVID) and not item.IsMetin(player.GetItemIndex(dstItemSlotPos)):
 			self.AttachMetinToItem(srcItemSlotPos, dstItemSlotPos)
 
 		elif item.IsDetachScroll(srcItemVID):

@@ -6584,7 +6584,7 @@
 71119	Kaplan (mavi)	Mührün büyüsü, seni hýzlýca istediðin yere götürecek, güçlü bir hayvanýn ruhunu çaðýrýr. Binicisinin savunma deðerini 200 yükseltir.
 71120	Aslan (sarý)	Mührün büyüsü, seni hýzlýca istediðin yere götürecek, güçlü bir hayvanýn ruhunu çaðýrýr. Binicisinin saldýrý deðerini 200 yükseltir.
 71121	Aslan (mavi)	Mührün büyüsü, seni hýzlýca istediðin yere götürecek, güçlü bir hayvanýn ruhunu çaðýrýr. Binicisinin saldýrý deðerini 300 yükseltir.
-71122	Ejderha tapýnaðý giriþi	Bununla ejderha odasýna girilebilir.
+71122	Çark Bileti	Kullanýldýðýnda çark etkinliðinde 1 hak kazanýrsýn.
 71123	Ejderha Pulu	Ejderha pullarý bilinen en þiddetli malzemeler arasýnda yer alýyor.
 71124	Beyaz Aslan	Beyaz kürklü hayvanlara oldukça ender rastlanýyor.
 71125	Savaþ yaban domuzu	Kötü hayvan ruhlarýný dizginleþtirmek ancak sihir sanatý ile mümkün. Sonucuysa çok etkileyici. Binicisine, canavarlara karþý %20 güç kazandýrýr.

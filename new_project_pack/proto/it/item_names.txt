@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tigre (blu)
 71120	Leone (giallo)
 71121	Leone (blu)
-71122	NoNAme
+71122	Biglietto Ruota
 71123	Squame di Drago
 71124	Leone bianco
 71125	Cinghiale combattimento

@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tigre (Azul)
 71120	Leão (Amarelo)
 71121	Leão (Azul)
-71122	NoNAme
+71122	Bilhete da Roda
 71123	Escamas do Dragão
 71124	Leão Branco
 71125	Javali de Guerra
