@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tiger (blue)
 71120	Lion (yellow)
 71121	Lion (blue)
-71122	The Spirit of Mastery
+71122	Wheel Ticket
 71123	Dragon Scales
 71124	White Lion
 71125	Wild Battle Boar

@@ -8,8 +8,8 @@ def get_item_from_list(_list):
 
 SRV1 = {
 	"name": "AyazMt2",
-	# "host":"45.131.198.34",
-	"host":"5.196.21.148", #Test sunucusu
+	"host":"45.131.198.34",
+	# "host":"5.196.21.148", #Test sunucusu
 	# "host":"185.128.112.203", #ry
 	"srv1-auth1":30001,
 	"srv1-auth2":30003,

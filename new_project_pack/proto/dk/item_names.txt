@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tiger (blå)
 71120	Løve (gul)
 71121	Løve (blå)
-71122	The Spirit of Mastery
+71122	Hjulbillet
 71123	Drageskæl
 71124	Hvid løve
 71125	Krigs-Vildsvin

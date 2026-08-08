@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tigris (kék)
 71120	Oroszlán (sárga)
 71121	Oroszlán (kék)
-71122	The Spirit of Mastery
+71122	Kerék jegy
 71123	Sárkány pikkely
 71124	Fehér oroszlán
 71125	Harci Vadkan

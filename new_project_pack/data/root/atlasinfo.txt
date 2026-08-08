@@ -37,7 +37,7 @@ metin2_map_dawnmistwood	1177600	1664000	7	4
 metin2_map_defensewave	128000	486400	3	3
 metin2_map_defensewave_port	128000	563200	3	3
 metin2_map_devilsCatacomb	307200	1203200	8	8
-metin2_map_deviltower1	204800	665600	3	3
+metin2_map_deviltower1	128000	793600	3	3
 metin2_map_duel	844800	0	1	1
 metin2_map_e1	768000	896000	2	2
 metin2_map_e1	819200	896000	2	2

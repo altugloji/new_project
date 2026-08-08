@@ -10205,7 +10205,7 @@ VNUM	LOCALE_NAME
 71119	Kaplan (mavi)
 71120	Aslan (sarý)
 71121	Aslan (mavi)
-71122	Ustalýk Ruhu
+71122	Çark Bileti
 71123	Ejderha Pulu
 71124	Beyaz Aslan
 71125	Savaþ yaban domuzu

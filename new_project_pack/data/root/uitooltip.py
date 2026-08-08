@@ -1319,8 +1319,17 @@ class ItemToolTip(ToolTip):
 		self.__SetItemTitle(itemVnum, metinSlot, attrSlot)
 		if 71202 == itemVnum and 0 != metinSlot and int(metinSlot[2]) >= 1:
 			self.AppendTextLine("Uzatma hakk\xfd kalmad\xfd.", self.SPECIAL_TITLE_COLOR)
-		if 71202 == itemVnum and 0 != metinSlot and int(metinSlot[0]) > 1000000000:
-			self.AppendMallItemLastTime(metinSlot[0])
+		# if 71202 == itemVnum and 0 != metinSlot and int(metinSlot[0]) > 1000000000:
+			# self.AppendMallItemLastTime(metinSlot[0])
+		if 71202 == itemVnum: # onizleme (craft/kup): efsunlar henuz yok -> bilgi satiri
+			hasAttr = 0
+			if 0 != attrSlot:
+				for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM):
+					if 0 != attrSlot[i][1]:
+						hasAttr = 1
+						break
+			if not hasAttr:
+				self.AppendTextLine("Rastgele 5 Efsun", self.SPECIAL_POSITIVE_COLOR)
 		if app.ENABLE_ITEM_SHOP_SYSTEM:
 			self.__AppendItemShopEmBindInformation(window_type, slotIndex, attrSlot)
 
