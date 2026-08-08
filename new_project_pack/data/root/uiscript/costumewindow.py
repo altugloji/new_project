@@ -14,7 +14,7 @@ if app.ENABLE_WEAPON_COSTUME_SYSTEM:
 		"style" : ("movable", "float",),
 
 		"width" : 140,
-		"height" : (180 + 47),
+		"height" : (180 + 90),
 
 		"children" :
 		(
@@ -27,7 +27,7 @@ if app.ENABLE_WEAPON_COSTUME_SYSTEM:
 				"y" : 0,
 
 				"width" : 140,
-				"height" : (180 + 47),
+				"height" : (180 + 90),
 
 				"children" :
 				(
@@ -70,13 +70,14 @@ if app.ENABLE_WEAPON_COSTUME_SYSTEM:
 								"y" : 3,
 
 								"width" : 127,
-								"height" : 175,
+								"height" : 175+30,
 
 								"slot" : (
 											{"index":COSTUME_START_INDEX+0, "x":37, "y":51, "width":32, "height":64},	#zırh
 											{"index":COSTUME_START_INDEX+1, "x":37, "y":14, "width":32, "height":32},	#kask
 											{"index":COSTUME_START_INDEX+2, "x":37, "y":126, "width":32, "height":32},	#binek
-											# {"index":COSTUME_START_INDEX+3, "x":37, "y":126, "width":32, "height":32},
+											{"index":180+25, "x":37, "y":126+37, "width":32, "height":32},
+																						# {"index":COSTUME_START_INDEX+3, "x":37, "y":126, "width":32, "height":32},
 											# {"index":item.COSTUME_SLOT_WEAPON, "x":13, "y":13, "width":32, "height":96}, #silah
 										),
 							},
@@ -160,7 +161,8 @@ elif app.ENABLE_MOUNT_COSTUME_SYSTEM:
 											    {"index":COSTUME_START_INDEX+1, "x":62, "y": 9, "width":32, "height":32},
 											    {"index":COSTUME_START_INDEX+2, "x":13, "y":126, "width":32, "height":32},
 											    {"index":COSTUME_START_INDEX+3, "x":62, "y":126, "width":32, "height":32},
-										    ),
+											    {"index":180+25, "x":13, "y":9, "width":32, "height":32},	#eldiven
+											    										    ),
 							    },
 						    ),
 					    },
@@ -241,7 +243,8 @@ elif app.ENABLE_MOUNT_COSTUME_SYSTEM:
 											    {"index":COSTUME_START_INDEX+0, "x":62, "y":45, "width":32, "height":64},
 											    {"index":COSTUME_START_INDEX+1, "x":62, "y": 9, "width":32, "height":32},
 											    {"index":COSTUME_START_INDEX+2, "x":13, "y":125, "width":32, "height":32},
-										    ),
+											    {"index":180+25, "x":13, "y":9, "width":32, "height":32},	#eldiven
+											    										    ),
 							    },
 						    ),
 					    },
@@ -322,7 +325,8 @@ else:
 											{"index":COSTUME_START_INDEX+0, "x":61, "y":45, "width":32, "height":64},
 											{"index":COSTUME_START_INDEX+1, "x":61, "y": 8, "width":32, "height":32},
 											{"index":COSTUME_START_INDEX+2, "x":5, "y":145, "width":32, "height":32},
-										),
+											{"index":180+25, "x":5, "y":8, "width":32, "height":32},	#eldiven
+																					),
 							},
 						),
 					},

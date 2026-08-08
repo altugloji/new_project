@@ -3257,7 +3257,7 @@
 31073	Aranyvadász-nyakpánt	Ez a nyakpánt segít elemelni az érmecsomagokat a szörnyek zsebeibõl.
 31074	Szegecselt nyakék	A szélén szegecsekkel kivert, bõrbõl készült nyakék.
 31075	Drót nyakék	Martyaxwar dekoratív nyakéke. Egy levél van a belsejébe rejtve.
-31076	Nap-növények	Ezek a gyógynövények száraz, meleg helyen nõnek.
+31076	It is obtained from the wonders of the Red Forest.
 31077	Alapkõ-por	Finom porrá õrölt Alapkõ.
 31078	Tiszta fény	Fehér energia, semlegesíti a Sötét anyag erejét.
 31079	Levél Yak-Hwan-nak	A felderítõ utolsó szavai, egy nyakláncba rejtve.
@@ -3486,7 +3486,7 @@
 38100	Erõ Snack (7 napos)	Megnöveli Fejleszthetõ hátasod élettartamát 7 nappal.
 38101	Erõ Snack (15 napos)	Megnöveli Fejleszthetõ hátasod élettartamát 15 nappal.
 38102	Erõ Snack (30 napos)	Megnöveli Fejleszthetõ hátasod élettartamát 30 nappal.
-38103	Appaloosa Snack (7 nap)	Megnöveli Appaloosa-d élettartamát 7 nappal.
+38103	Extends the duration of the Mastery Seal.
 38200	Rufusz	Ezt a pecsétet farkaskölyköd, Rufusz megidézésére használhatod.
 38201	Rufusz	Ezt a pecsétet farkaskölyköd, Rufusz megidézésére használhatod.
 38305	Föld tanúsítvány	Helyezd el a céhbankban és szerezz egy jó elhelyezkedésû céh területet. Nem használható a 2020. év eleji föld felosztás után.
@@ -6657,7 +6657,7 @@
 71198	Muffin (rózsaszín)	E pecsét használatával idézheted meg Muffint, a dermesztõ harci csibét.
 71199	Csokoládé amulett	Ez a mágikus Csokoládé amulett erõsebbé tesz a csatában. Biztosít neked: | 50% EXP | +20 támadósebesség | +20 varázssebesség | +10% szörnyek elleni erõ | +10% max. TP | +10% max. MP | Valentinoval vagy Valentiniaval kombinálva további EXP szett bónuszt kapsz.
 71201	Meley belépési engedély	Ha felmutatod ezt a Belépési engedélyt az õrnek, beléphetsz Meley barlangjába. Ez a tárgy átadható.
-71202	Nazar amulett	Ez a medál, rajta Fatima szemével biztosít neked +50% EXP-t, +20 támadósebességet, +20 varázssebességet, +10% szörnyek elleni erõt és +30% fizikai és mágikus sebzést.
+71202	
 71203	Szaturnusz lex. (kicsi)	10 véletlenszerûen kiválasztott készségkönyvet tartalmazó csomag Testi harcosok számára.
 71204	Szaturnusz lex. (nagy)	25 véletlenszerûen kiválasztott készségkönyvet tartalmazó csomag Testi harcosok számára.
 71205	Föld lexikon (kicsi)	10 véletlenszerûen kiválasztott készségkönyvet tartalmazó csomag Mentális harcosok számára.

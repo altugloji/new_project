@@ -3257,7 +3257,7 @@
 31073	Jagerens guld bånd	Dette halsbånd hjælper dig med at erhverve mønt tasker fra monstrenes lommer.
 31074	Nittet halskæde	Hals smykke lavet af læder med en nittet kant
 31075	Pig halskæde	Dekorativ halskæde båret af Martyaxwar. Et brev er gemt inden i.
-31076	Sol urter	Disse urter vokser på varme, tørre steder.
+31076	It is obtained from the wonders of the Red Forest.
 31077	Fundamentstens pulver	Fundamentsten som er malet til fint pulver.
 31078	Ren lumen	Hvid energi, som neutralisere kraften fra den sorte substans.
 31079	Brev til Yak-Hwan	Spejderens sidste ord gemt i en halskæde.
@@ -3486,7 +3486,7 @@
 38100	Energi Snack (7 dage)	Forøger levetiden for din Ganger med 7 dage.
 38101	Energi Snack (15 dage)	Forøger levetiden for din Ganger med 15 dage.
 38102	Energi Snack (30 dage)	Forøger levetiden for din Ganger med 30 dage.
-38103	Appaloosa Snack (7 Dage)	Forøger levetiden for din Appaloosa med 7 dage.
+38103	Extends the duration of the Mastery Seal.
 38200	Rufus	Du kan bruge dette selg at tilkalde din ulve hvalp, Rufus.
 38201	Rufus	Du kan bruge dette selg at tilkalde din ulve hvalp, Rufus.
 38305	Jord Certifikat	Opbevar den i ordens banken for at modtage et velplaceret ordens område. Ubrugelig efter jordfordelingen i starten af 2020.
@@ -6584,7 +6584,7 @@
 71119	Tiger (blå)	Dette segls magi påkalder en mægtig dyre-ånd der hurtigt vil bære dig til din destination efter dit ønske. Den øger dens rytters forsvarsværdi med 200.
 71120	Løve (gul)	Dette segls magi påkalder en mægtig dyre-ånd der hurtigt vil bære dig til din destination efter dit ønske. Den øger dens rytters angrebsværdi med 200.
 71121	Løve (blå)	Dette segls magi påkalder en mægtig dyre-ånd der hurtigt vil bære dig til din destination efter dit ønske. Den øger dens rytters angrebsværdi med 300.
-71122	Dragens Tempel Indgang	Kan bruges til at komme ind i Dragens Tempel.
+71122	Hjulbillet	Når den bruges, får du 1 forsøg i hjul-eventet.
 71123	Drageskæl	Drageskæl er blandt de mest kraftfulde kendte materialer.
 71124	Hvid løve	Dyr med hvid pels er meget sjældne og mange kulturer tilbeder dem, da de tror på at de har bemærkelsesværdige kræfter. Den øger erfaring med 30%.
 71125	Krigs-Vildsvin	Tæmning af onde dyr ånder kræver noget dygtigt brug af magi, men resultaterne kan være meget imponerende. Den giver sin rytter +20% styrke imod monstre.
@@ -6657,7 +6657,7 @@
 71198	Muffin (lyserød)	Du kan bruge dette segl til at tilkalde Muffin, den kølige kamp kylling.
 71199	Chokolade Amulet	Denne magiske Chokolade Amulet forstærker dig i kamp. Den giver dig | 50% EXP | +20 angrebshastighed | +20 tryllehastighed | +10% styrke imod monstre | +10% maks. HP | +10% maks. MP | I sammenarbejde med Valentino eller Valentinia, får du en yderligere EXP sæt bonus.
 71201	Passage Dokument (Meley)	Du må indtræde i Meleys Grotte når du viser dit Passage Dokument til den ansvarlige vagt. Denne genstand er handelbar.
-71202	Nazar Amulet	Denne pendant bærer øjet af Fatima og velsigner dig med +50% EXP, +20 angrebshastighed, +20 tryllehastighed, +10% styrke imod monstre og +30% fysisk og magisk skade.
+71202	
 71203	Saturn Leksikon (L)	Pakke indeholdende 10 tilfældigt udvalgte færdighedsbøger til Kampstyrke Krigere.
 71204	Saturn Leksikon (S)	Pakke indeholdende 25 tilfældigt udvalgte færdighedsbøger til Kampstyrke Krigere.
 71205	Jord Leksikon (L)	Pakke indeholdende 10 tilfældigt udvalgte færdighedsbøger til Mental Krigere.

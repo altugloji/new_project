@@ -107,6 +107,8 @@ SHOP_SEARCH_SUB_SPECIAL_OTHER			= 3
 SHOP_SEARCH_SUB_SPECIAL_DRAGON_VOUCHER	= 4
 SHOP_SEARCH_SUB_SPECIAL_QUEST			= 5
 SHOP_SEARCH_SUB_SPECIAL_LOOTBOX			= 6
+SHOP_SEARCH_SUB_SPECIAL_BIOLOG			= 7
+SHOP_SEARCH_SUB_SPECIAL_MISC			= 8
 
 SHOP_SEARCH_SUB_MINING_ORE	= 0
 SHOP_SEARCH_SUB_MINING_MELT	= 1
@@ -140,11 +142,12 @@ SHOP_SEARCH_SUB_GRID_WARRIOR	= 10
 SHOP_SEARCH_SUB_GRID_ASSASSIN	= 11
 SHOP_SEARCH_SUB_GRID_SURA		= 12
 SHOP_SEARCH_SUB_GRID_SHAMAN		= 13
-SHOP_SEARCH_SUB_GRID_SHIELD		= 14
 SHOP_SEARCH_SUB_GRID_JEW_EAR	= 10
 SHOP_SEARCH_SUB_GRID_JEW_NECK	= 11
 SHOP_SEARCH_SUB_GRID_JEW_WRIST	= 12
 SHOP_SEARCH_SUB_GRID_JEW_BOOTS	= 13
+SHOP_SEARCH_SUB_GRID_JEW_HELMET	= 14
+SHOP_SEARCH_SUB_GRID_JEW_SHIELD	= 15
 # Silah gruplari tur bazli (kullanici istegi 2026-08-02): sinif on-adi sadece etiket
 SHOP_SEARCH_SUB_GRID_WPN_ONEHAND	= 10
 SHOP_SEARCH_SUB_GRID_WPN_TWOHAND	= 11
@@ -207,9 +210,9 @@ SHOP_SEARCH_GRID_FAMILIES = {
 		(11800, 9), (11810, 9), (11820, 9), (11830, 9), (11840, 9), (11850, 9), (11860, 9), (11870, 9),
 		(11880, 9), (11890, 9),
 	],
-	# Zirh > Kalkan (searchIndex = 9*20+14 = 194)
-	(SHOP_SEARCH_CATEGORY_ARMOR, 14): [
-		(13000, 9), (13020, 9), (13040, 9), (13060, 9), (13080, 9), (13100, 9), (13120, 9),
+	# Zirh > Kalkan (searchIndex = 13*20+15 = 275)
+	(SHOP_SEARCH_CATEGORY_JEWELRY, 15): [
+		(13000, 9), (13020, 9), (13060, 9), (13080, 9), (13100, 9), (13120, 9), (13200, 9),
 	],
 	# Silah > Savasci Tek El (searchIndex = 11*20+10 = 230)
 	(SHOP_SEARCH_CATEGORY_WEAPON, 10): [
@@ -264,6 +267,11 @@ SHOP_SEARCH_GRID_FAMILIES = {
 	(SHOP_SEARCH_CATEGORY_JEWELRY, 13): [
 		(15000, 9), (15020, 9), (15040, 9), (15060, 9), (15080, 9), (15100, 9), (15120, 9), (15140, 9),
 		(15160, 9), (15180, 9), (15200, 9), (15220, 9),
+	],
+	# Taki > Kasklar (searchIndex = 13*20+14 = 274)
+	(SHOP_SEARCH_CATEGORY_JEWELRY, 14): [
+		(12200, 9), (12220, 9), (12240, 9), (12260, 9), (12340, 9), (12360, 9), (12380, 9), (12390, 9),
+		(12480, 9), (12500, 9), (12520, 9), (12530, 9), (12620, 9), (12640, 9), (12660, 9), (12670, 9),
 	],
 }
 
@@ -663,6 +671,13 @@ SHOP_SEARCH_FILTERS = {
 
 	SHOP_SEARCH_CATEGORY_SPECIAL: {
 		"name": localeInfo.SHOP_SEARCH_CAT_SPECIAL,
+		# sub_sort SART: sub degerleri artik ardisik degil (5 bos, 6-7 dolu);
+		# sub_sort olmadan varsayilan range(len) taramasi 7'yi hic gostermez.
+		"sub_sort": [
+		SHOP_SEARCH_SUB_SPECIAL_REFINE, SHOP_SEARCH_SUB_SPECIAL_TOITEM, SHOP_SEARCH_SUB_SPECIAL_CHARACTER,
+		SHOP_SEARCH_SUB_SPECIAL_OTHER, SHOP_SEARCH_SUB_SPECIAL_MISC, SHOP_SEARCH_SUB_SPECIAL_DRAGON_VOUCHER,
+		SHOP_SEARCH_SUB_SPECIAL_LOOTBOX, SHOP_SEARCH_SUB_SPECIAL_BIOLOG,
+		],
 		"sub": {
 			SHOP_SEARCH_SUB_SPECIAL_REFINE: {
 				"name": localeInfo.SHOP_SEARCH_SUBCAT_SPECIAL_REFINE,
@@ -670,10 +685,11 @@ SHOP_SEARCH_FILTERS = {
 					(25040, 0), (70039, 0), (76016, 0),
 				]
 			},
-			SHOP_SEARCH_SUB_SPECIAL_TOITEM: { #craft malzemeleri
+			SHOP_SEARCH_SUB_SPECIAL_TOITEM: { #donusum esyalari / craft malzemeleri
 				"name": localeInfo.SHOP_SEARCH_SUBCAT_SPECIAL_TOITEM,
 				"itemList": [
 					(31035, 0), (30602, 0), (30603, 0), (30604, 0), (30610, 0), (30156, 0), (27991, 0), (51001, 0),
+					(31111, 0),
 				]
 			},
 			SHOP_SEARCH_SUB_SPECIAL_CHARACTER: { #efsunlar
@@ -694,14 +710,25 @@ SHOP_SEARCH_FILTERS = {
 					(80014, 0), (80015, 0), (80016, 0), (30403, 0), (30404, 0),
 				]
 			},
-			# SHOP_SEARCH_SUB_SPECIAL_LOOTBOX: {
-				# "name": localeInfo.SHOP_SEARCH_SUBCAT_SPECIAL_LOOTBOX,
-				# "itemList": [
-					# (50011, 0), (50096, 0), (50037, 0), (50024, 0), (50025, 0),
-					# (50070, 0), (50071, 0), (50073, 0), (50076, 0), (50077, 0),
-					# (50078, 0), (50079, 0), (50081, 0), (50082, 0),
-				# ]
-			# },
+			SHOP_SEARCH_SUB_SPECIAL_MISC: { #ozel esyalar (kullanici tercihi: duz ASCII ad)
+				"name": "Ozel Esyalar",
+				"itemList": [
+					(30319, 0), (30179, 0), (70031, 0), (72323, 0), (71124, 0),
+				]
+			},
+			SHOP_SEARCH_SUB_SPECIAL_LOOTBOX: { #sandiklar (locale anahtari mevcut)
+				"name": localeInfo.SHOP_SEARCH_SUBCAT_SPECIAL_LOOTBOX,
+				"itemList": [
+					(50082, 0), (50186, 0), (83027, 0),
+				]
+			},
+			SHOP_SEARCH_SUB_SPECIAL_BIOLOG: { #biyolog gorev esyalari (kullanici tercihi: duz ASCII ad)
+				"name": "Biyolog Esyalari",
+				"itemList": [
+					(30220, 0), (30221, 0), (30222, 0), (30223, 0), (30224, 0), (30225, 0), (30226, 0), (30227, 0),
+					(30228, 0), (30251, 0), (30252, 0),
+				]
+			},
 		},
 	},
 
@@ -712,7 +739,7 @@ SHOP_SEARCH_FILTERS = {
 		"name": localeInfo.SHOP_SEARCH_CAT_ARMOR,
 		"sub_sort": [
 		SHOP_SEARCH_SUB_GRID_WARRIOR, SHOP_SEARCH_SUB_GRID_ASSASSIN, SHOP_SEARCH_SUB_GRID_SURA,
-		SHOP_SEARCH_SUB_GRID_SHAMAN, SHOP_SEARCH_SUB_GRID_SHIELD,
+		SHOP_SEARCH_SUB_GRID_SHAMAN,
 		],
 		"sub": {
 			SHOP_SEARCH_SUB_GRID_WARRIOR: {
@@ -731,47 +758,41 @@ SHOP_SEARCH_FILTERS = {
 				"name": getattr(localeInfo, "JOB_SHAMAN", "Saman"),
 				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_ARMOR, SHOP_SEARCH_SUB_GRID_SHAMAN)]),
 			},
-			SHOP_SEARCH_SUB_GRID_SHIELD: {
-				"name": localeInfo.SHOP_SEARCH_SUBCAT_ARMOR_SHIELD,
-				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_ARMOR, SHOP_SEARCH_SUB_GRID_SHIELD)]),
-			},
 		}
 	},
 
 	SHOP_SEARCH_CATEGORY_WEAPON: {
 		"name": localeInfo.SHOP_SEARCH_CAT_WEAPON,
 		# Silah gruplari tur bazli (kullanici istegi 2026-08-02); Sura kiliclari da
-		# "Savasci Tek El" altindadir (tum tek-el kiliclar). Buton adlari cp1254 \x
-		# kacislariyla gomulu (LocaleInfoWrapper eksik-anahtar tuzagi + locale repack
-		# gerektirmemek icin): \xfe=s(cengelli) \xe7=c(cengelli) \xfd=i(noktasiz)
-		# \xde=S(cengelli) \xc7=C(cengelli).
+		# "Savasci Tek El" altindadir (tum tek-el kiliclar). Buton adlari kullanici
+		# tercihiyle DUZ ASCII (Turkce karaktersiz; \x kacisi istenmiyor, 2026-08-02).
 		"sub_sort": [
 		SHOP_SEARCH_SUB_GRID_WPN_ONEHAND, SHOP_SEARCH_SUB_GRID_WPN_TWOHAND, SHOP_SEARCH_SUB_GRID_WPN_DAGGER,
 		SHOP_SEARCH_SUB_GRID_WPN_BOW, SHOP_SEARCH_SUB_GRID_WPN_BELL, SHOP_SEARCH_SUB_GRID_WPN_FAN,
 		],
 		"sub": {
 			SHOP_SEARCH_SUB_GRID_WPN_ONEHAND: {
-				"name": "Sava\xfe\xe7\xfd Tek El",
+				"name": "Savasci Tek El",
 				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_WEAPON, SHOP_SEARCH_SUB_GRID_WPN_ONEHAND)]),
 			},
 			SHOP_SEARCH_SUB_GRID_WPN_TWOHAND: {
-				"name": "Sava\xfe\xe7\xfd \xc7ift El",
+				"name": "Savasci Cift El",
 				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_WEAPON, SHOP_SEARCH_SUB_GRID_WPN_TWOHAND)]),
 			},
 			SHOP_SEARCH_SUB_GRID_WPN_DAGGER: {
-				"name": "Ninja Han\xe7er",
+				"name": "Ninja Hancer",
 				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_WEAPON, SHOP_SEARCH_SUB_GRID_WPN_DAGGER)]),
 			},
 			SHOP_SEARCH_SUB_GRID_WPN_BOW: {
-				"name": "Ninja Ok\xe7u",
+				"name": "Ninja Okcu",
 				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_WEAPON, SHOP_SEARCH_SUB_GRID_WPN_BOW)]),
 			},
 			SHOP_SEARCH_SUB_GRID_WPN_BELL: {
-				"name": "\xdeaman \xc7an",
+				"name": "Saman Can",
 				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_WEAPON, SHOP_SEARCH_SUB_GRID_WPN_BELL)]),
 			},
 			SHOP_SEARCH_SUB_GRID_WPN_FAN: {
-				"name": "\xdeaman Yelpaze",
+				"name": "Saman Yelpaze",
 				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_WEAPON, SHOP_SEARCH_SUB_GRID_WPN_FAN)]),
 			},
 		}
@@ -783,7 +804,7 @@ SHOP_SEARCH_FILTERS = {
 		# arti secimi + grid akisi digerleriyle ayni.
 		"sub_sort": [
 		SHOP_SEARCH_SUB_GRID_JEW_EAR, SHOP_SEARCH_SUB_GRID_JEW_NECK, SHOP_SEARCH_SUB_GRID_JEW_WRIST,
-		SHOP_SEARCH_SUB_GRID_JEW_BOOTS,
+		SHOP_SEARCH_SUB_GRID_JEW_BOOTS, SHOP_SEARCH_SUB_GRID_JEW_HELMET, SHOP_SEARCH_SUB_GRID_JEW_SHIELD,
 		],
 		"sub": {
 			SHOP_SEARCH_SUB_GRID_JEW_EAR: {
@@ -801,6 +822,14 @@ SHOP_SEARCH_FILTERS = {
 			SHOP_SEARCH_SUB_GRID_JEW_BOOTS: {
 				"name": localeInfo.SHOP_SEARCH_SUBCAT_JEWELRY_BOOTS,
 				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_JEWELRY, SHOP_SEARCH_SUB_GRID_JEW_BOOTS)]),
+			},
+			SHOP_SEARCH_SUB_GRID_JEW_HELMET: {
+				"name": "Kasklar",
+				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_JEWELRY, SHOP_SEARCH_SUB_GRID_JEW_HELMET)]),
+			},
+			SHOP_SEARCH_SUB_GRID_JEW_SHIELD: { #kalkan (2026-08-02 Zirh'tan tasindi)
+				"name": localeInfo.SHOP_SEARCH_SUBCAT_ARMOR_SHIELD,
+				"itemList": _shopsearch_expand_families(SHOP_SEARCH_GRID_FAMILIES[(SHOP_SEARCH_CATEGORY_JEWELRY, SHOP_SEARCH_SUB_GRID_JEW_SHIELD)]),
 			},
 		}
 	},

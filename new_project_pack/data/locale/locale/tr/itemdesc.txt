@@ -3257,7 +3257,7 @@
 31073	Altýn Avcý Tasmasý	Bu tasmayla canavarlarýn çantasýndan para kesesini çekebilirsin.
 31074	Zýmbalý Tasma	Zýmbalý deri bir boyun aksesuarý.
 31075	Dikenli Tasma	Martyaxwar'ýn boyun aksesuarý. Ýç kýsmýnda bir mektup gizlidir.
-31076	Güneþ Bitkileri	Bu bitkiler sýcak ve kuru ortamlarda yetiþir.
+31076	Kýzýl Orman haritasýndan elde edilir.
 31077	Temel Taþý Tozu	Ýnce toz þeklinde öðütülmüþ temel taþý.
 31078	Saf Lumen	Kara maddenin gücünü ortadan kaldýran beyaz enerji.
 31079	Yak-Hwan'a Mektup	Casusun bir tasmada saklý son sözleri.
@@ -3486,7 +3486,7 @@
 38100	Güçlü Atýþtýrmalýk(7 Gn)	Güçlü bineðinin ömrünü 7 gün uzatýr.
 38101	Güçlü atýþtýrmalýk (15g)	Güçlü bineðinin ömrünü 15 gün uzatýr.
 38102	Güçlü Atýþtýrmalk(30 Gn)	Güçlü bineðinin ömrünü 30 gün uzatýr.
-38103	Appaloosa Çerezi (7 Gün)	Appaloosanýn ömrünü 7 gün uzatýr.
+38103	Ustalýk Mührünün süresini uzatýr.
 38200	Rufus	Kurt yavrusu Rufus'u yanýna çaðýran bir mühür.
 38201	Rufus	Kurt yavrusu Rufus'u yanýna çaðýran bir mühür.
 38305	Arazi Sertifikasý	Ýyi bir lonca bölgesi edinmek için lonca bankasýnda topla. 2020'nin baþlarýndaki bölge daðýtýmýndan beri deðersiz.
@@ -6657,7 +6657,7 @@
 71198	Muffin (pembe)	Bu mühürle, korku salan savaþ tavuðu Muffin'i yanýna çaðýrýrsýn.
 71199	Çikolata Týlsýmý	Bu güzeller güzeli çikolata týlsýmý seni savaþta güçlendirir. Sana saðladýklarý: | +%50 EXP | +20 saldýrý hýzý | +20 sihir hýzý | Canavarlara karþý +%10 güç | +%10 maksimum HP | +%10 maksimum SP | Valentino veya Valentinia ile birlikte ekstra bir EXP set bonusu alýrsýn.
 71201	Geçit Bileti (Meley)	Bu geçit biletini yetkili bekçiye sunduðunda, Meley'in Ýnine girebilirsin. Bu eþyanýn ticareti yapýlabilir.
-71202	Nazar týlsýmý	Fatima'nýn gözüne sahip kolye sana +%50 EXP, +20 saldýrý hýzý, +20 sihir hýzý, +%10 canavarlara karþý güç ve +%30 fiziksel ve büyülü hasar saðlar.
+71202	
 71203	Satürn Ansiklopedisi/k	Bedensel Savaþçý'ya özel 10 rastgele seçili beceri kitaplarý içeren paket
 71204	Satürn Ansiklopedisi/b	Bedensel Savaþçý'ya özel 25 rastgele seçili beceri kitaplarý içeren paket
 71205	Toprak Ansiklopedisi/k	Zihinsel Savaþçý'ya özel 10 rastgele seçili beceri kitaplarý içeren paket

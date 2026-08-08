@@ -6819,7 +6819,7 @@ VNUM	LOCALE_NAME
 31073	Aranyvadász-nyakpánt
 31074	Szegecselt nyakék
 31075	Drót nyakék
-31076	Nap-növények
+31076	Crimson Root
 31077	Alapkõ-por
 31078	Tiszta fény
 31079	Levél Yak-Hwan-nak
@@ -7000,7 +7000,7 @@ VNUM	LOCALE_NAME
 38100	Erõ Snack (7 napos)
 38101	Erõ Snack (15 napos)
 38102	Erõ Snack (30 napos)
-38103	Appaloosa Snack (7 nap)
+38103	Extension Seal (7 Days)
 38200	Rufusz
 38201	Rufusz
 38305	Föld tanúsítvány
@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tigris (kék)
 71120	Oroszlán (sárga)
 71121	Oroszlán (kék)
-71122	Kerék jegy
+71122	The Spirit of Mastery
 71123	Sárkány pikkely
 71124	Fehér oroszlán
 71125	Harci Vadkan
@@ -10028,7 +10028,7 @@ VNUM	LOCALE_NAME
 71198	Muffin (rózsaszín)
 71199	Csokoládé amulett
 71201	Meley belépési engedély
-71202	Nazar amulett
+71202	Ayaz Talisman
 71203	Szaturnusz lex. (kicsi)
 71204	Szaturnusz lex. (nagy)
 71205	Föld lexikon (kicsi)

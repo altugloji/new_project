@@ -3257,7 +3257,7 @@
 31073	Gold Hunter's Band	This neck band helps you to acquire Coin Bags from the pockets of monsters.
 31074	Riveted Necklace	Neck jewellery made from leather with a riveted border
 31075	Barb Necklace	Decorative neck wear of the Martyaxwar. A letter is hidden on the inside.
-31076	Sun Herbs	These herbs grow in hot, dry locations.
+31076	It is obtained from the wonders of the Red Forest.
 31077	Foundation Stone Powder	Foundation Stone ground into a fine powder.
 31078	Pure Lumen	White energy, neutralises the power of Black Matter.
 31079	Letter to Yak-Hwan	The final words of the scout, hidden in a necklace.
@@ -3486,7 +3486,7 @@
 38100	Power Snack (7 days)	Increases the lifespan of your Power Mount by 7 days.
 38101	Power Snack (15 days)	Increases the lifespan of your Power Mount by 15 days.
 38102	Power Snack (30 days)	Increases the lifespan of your Power Mount by 30 days.
-38103	Appaloosa Snack (7 Days)	Increases the lifespan of your Appaloosa by 7 days.
+38103	Extends the duration of the Mastery Seal.
 38200	Rufus	You can use this seal to summon your wolf whelp, Rufus.
 38201	Rufus	You can use this seal to summon your wolf whelp, Rufus.
 38305	Land Certificate	Store it in the guild bank to receive well-situated guild territory. Useless after the land distribution at the beginning of 2020.
@@ -6657,7 +6657,7 @@
 71198	Muffin (Pink)	You can use this seal to summon Muffin, the chilling combat chicken.
 71199	Chocolate Amulet	This magical Chocolate Amulet empowers you in combat. It grants you | 50% EXP | +20 attack speed | +20 casting speed | +10% strength against monsters | +10% max. HP | +10% max. SP | In collaboration with Valentino or Valentinia you'll get an additional EXP set bonus.
 71201	Passage Ticket (Meley)	You may enter Meley's Lair when you present this Passage Ticket to the responsible guard. This item is tradeable.
-71202	Nazar Amulet	This pendant bearing the eye of Fatima blesses you with +50% EXP, +20 attack speed, +20 casting speed, +10% strength against monsters and +30% physical and magic damage.
+71202	
 71203	Saturn Encyclopedia (S)	Pack containing 10 randomly selected skill books for Body Warriors.
 71204	Saturn Encyclopedia (L)	Pack containing 25 randomly selected skill books for Body Warriors.
 71205	Earth Encyclopedia (S)	Pack containing 10 randomly selected skill books for Mental Warriors.

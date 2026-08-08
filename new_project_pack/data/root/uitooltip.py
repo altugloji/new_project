@@ -1172,6 +1172,10 @@ class ItemToolTip(ToolTip):
 	def AddItemData_Offline(self, itemVnum, itemDesc, itemSummary, metinSlot, attrSlot):
 		self.__AdjustMaxWidth(attrSlot, itemDesc)
 		self.__SetItemTitle(itemVnum, metinSlot, attrSlot)
+		if 71202 == itemVnum and 0 != metinSlot and int(metinSlot[2]) >= 1:
+			self.AppendTextLine("Uzatma hakk\xfd kalmad\xfd.", self.SPECIAL_TITLE_COLOR)
+		if 71202 == itemVnum and 0 != metinSlot and int(metinSlot[0]) > 1000000000:
+			self.AppendMallItemLastTime(metinSlot[0])
 
 		if self.__IsHair(itemVnum):
 			self.__AppendHairIcon(itemVnum)
@@ -1313,6 +1317,10 @@ class ItemToolTip(ToolTip):
 
 		self.__AdjustMaxWidth(attrSlot, itemDesc)
 		self.__SetItemTitle(itemVnum, metinSlot, attrSlot)
+		if 71202 == itemVnum and 0 != metinSlot and int(metinSlot[2]) >= 1:
+			self.AppendTextLine("Uzatma hakk\xfd kalmad\xfd.", self.SPECIAL_TITLE_COLOR)
+		if 71202 == itemVnum and 0 != metinSlot and int(metinSlot[0]) > 1000000000:
+			self.AppendMallItemLastTime(metinSlot[0])
 		if app.ENABLE_ITEM_SHOP_SYSTEM:
 			self.__AppendItemShopEmBindInformation(window_type, slotIndex, attrSlot)
 
@@ -1532,6 +1540,8 @@ class ItemToolTip(ToolTip):
 				self.AppendTextLine("BLEND_POTION_NO_INFO")
 
 		elif item.ITEM_TYPE_UNIQUE == itemType:
+			self.__AppendAttributeInformation(attrSlot)
+
 			if 0 != metinSlot:
 				if not self.AppendLastTimeInformation(metinSlot):
 					time = metinSlot[player.METIN_SOCKET_MAX_NUM-1]
@@ -2261,6 +2271,8 @@ class ItemToolTip(ToolTip):
 			mtrlPos+=1
 
 	def __AppendMetinSlotInfo(self, metinSlot):
+		if 71202 == self.itemVnum: # Nazar Tilsimi: soketler sure/hak verisidir, cevher olarak gosterme
+			return
 		if self.__AppendMetinSlotInfo_IsEmptySlotList(metinSlot):
 			return
 

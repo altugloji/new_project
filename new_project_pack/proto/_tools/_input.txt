@@ -1,41 +1,40 @@
 [CZ]
-71122	Lístek do kola
+31076	Crimson Root
 
 [DE]
-71122	Rad-Ticket
-
+31076	Crimson Root
 [DK]
-71122	Hjulbillet
+31076	Crimson Root
 
 [EN]
-71122	Wheel Ticket
+31076	Crimson Root
 
 [ES]
-71122	Boleto de la Ruleta
+31076	Crimson Root
 
 [FR]
-71122	Ticket de Roue
+31076	Crimson Root
 
 [HU]
-71122	Kerék jegy
+31076	Crimson Root
 
 [IT]
-71122	Biglietto Ruota
+31076	Crimson Root
 
 [NL]
-71122	Rad Ticket
+31076	Crimson Root
 
 [PL]
-71122	Bilet Koła
+31076	Crimson Root
 
 [PT]
-71122	Bilhete da Roda
+31076	Crimson Root
 
 [RO]
-71122	Bilet Roată
+31076	Crimson Root
 
 [AE]
-71122	تذكرة العجلة
+31076	Crimson Root
 
 [TR]
-71122	Çark Bileti
+31076	Kızıl Kökü

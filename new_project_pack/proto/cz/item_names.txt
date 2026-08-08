@@ -6819,7 +6819,7 @@ VNUM	LOCALE_NAME
 31073	Zlatá lovecká páska
 31074	Nýtovaný náhrdelník
 31075	Ostnatý náhrdelník
-31076	Sluneèní byliny
+31076	Crimson Root
 31077	Prášek ze základ. kamene
 31078	Èisté svìtlo
 31079	Dopis Yak-Hwanovi
@@ -7000,7 +7000,7 @@ VNUM	LOCALE_NAME
 38100	Posilující svaèinka (7)
 38101	Posilující svaèinka (15)
 38102	Posilující svaèinka (30)
-38103	Svaè. pro Appaloosu (7d)
+38103	Extension Seal (7 Days)
 38200	Rufus
 38201	Rufus
 38305	Certifikát území
@@ -10028,7 +10028,7 @@ VNUM	LOCALE_NAME
 71198	Muffin (rùžový)
 71199	Èokoládový amulet
 71201	Propustka (Meley)
-71202	Nazarùv amulet
+71202	Ayaz Talisman
 71203	Encyklopedie Saturnu (M)
 71204	Encyklopedie Saturnu (V)
 71205	Encyklopedie Zemì (M)

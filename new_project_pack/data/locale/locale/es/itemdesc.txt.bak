@@ -3257,7 +3257,7 @@
 31073	Banda del buscaoro	Gracias a este collar puedes arrebatarle a los monstruos sus bolsas de monedas.
 31074	Collar remachado	Un adorno para el cuello con remaches.
 31075	Collar espinoso	Adorno para el cuello del Martyaxwar. En su interior se oculta una carta.
-31076	Hierbas del sol	Estas hierbas crecen en lugares cálidos y secos.
+31076	It is obtained from the wonders of the Red Forest.
 31077	Polvo piedra fundación	Piedras fundación molidas en polvo fino.
 31078	Lumen puro	Energía blanca que neutraliza el poder de la Materia negra.
 31079	Carta a Yak-Hwan	Las últimas palabras del espía, ocultas en un colgante.
@@ -3486,7 +3486,7 @@
 38100	Supercomida (7 días)	Prorroga 7 días la vida de tu Supermontura.
 38101	Supercomida (15 días)	Prorroga 15 días la vida de tu Supermontura.
 38102	Supercomida (30 días)	Prorroga 30 días la vida de tu Supermontura.
-38103	Snack Appaloosa (7 días)	Prorroga 7 días la vida de tu Appaloosa.
+38103	Extends the duration of the Mastery Seal.
 38200	Rufus	Con este sello puedes invocar a Rufus, tu cachorro de lobo.
 38201	Rufus	Con este sello puedes invocar a Rufus, tu cachorro de lobo.
 38305	Escritura	Se guarda en el banco del gremio para disfrutar de terrenos de gremio bien situados. Deja de tener valor tras la redistribución de terrenos a principios de 2020.
@@ -6584,7 +6584,7 @@
 71119	Tigre (azul)	La magia del sello invoca a un poderoso espíritu animal que te llevará rápidamente al lugar de tu elección. Aumenta el valor de defensa de su jinete en 200.
 71120	León (amarillo)	La magia del sello invoca a un poderoso espíritu animal que te llevará rápidamente al lugar de tu elección. Aumenta el valor de ataque de su jinete en 200.
 71121	León (azul)	La magia del sello invoca a un poderoso espíritu animal que te llevará rápidamente al lugar de tu elección. Aumenta el valor de ataque de su jinete en 300.
-71122	Acceso Templo del Dragón	Permite entrar en el Templo del Dragón.
+71122	Boleto de la Ruleta	Al usarlo, obtienes 1 intento en el evento de la Ruleta.
 71123	Escama de Dragón	Las escamas de dragón están entre los materiales más poderosos conocidos.
 71124	León Blanco	Los animales con pelaje blanco son sumamente escasos y son venerados por muchas culturas como portadores de extraordinarios poderes. Aumenta la ganancia de experiencia en un 30%.
 71125	Jabalí de combate	Domar espíritus animales malvados requiere un dominio excepcional de las artes mágicas. El resultado siempre es impresionante. Aumenta la fuerza contra monstruos de su jinete en un 20%.
@@ -6657,7 +6657,7 @@
 71198	Muffin (rosa)	Con este sello puedes invocar a Muffin, el temible pollo de combate.
 71199	Amuleto de chocolate	Este fantástico Amuleto de chocolate te endulzará la batalla. Te otorga | +50 % de EXP | +20 de velocidad de ataque | +20 de velocidad de hechizo | +10 % de fuerza contra monstruos | +10 % de HP máximo | +10 % de SP máximo | Junto con Valentino o Valentinia disfrutarás de una bonificación de set extra de EXP.
 71201	Tique de entrada (Meley)	Si le das el Tique de entrada al respectivo guardián, podrás acceder al Refugio de Meley. Este objeto es comerciable.
-71202	Amuleto de Nazar	Colgante con el que el Ojo de Fátima te bendice con un 50% más EXP, 20 puntos más de velocidad de ataque, 20 puntos más de velocidad de hechizo, un 10% más de fuerza contra monstruos, así como un 30% más de daño físico y mágico.
+71202	
 71203	Enciclop. de Saturno (P)	Paquete con 10 Manuales de habilidad aleatorios para Guerreros Corporales
 71204	Enciclop. de Saturno (G)	Paquete con 25 Manuales de habilidad aleatorios para Guerreros Corporales
 71205	Enciclop. Tierra (P)	Paquete con 10 Manuales de habilidad aleatorios para Guerreros Mentales

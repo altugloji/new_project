@@ -368,6 +368,8 @@ class DeleteItem(ui.ScriptWindow):
 		self.itemDropQuestionDialog = None
 		self.DeleteGrid = None
 		self.interface = None
+		self.addAttrWarningDialog = None
+		self.pendingAddItem = None
 
 	def __del__(self):
 		ui.ScriptWindow.__del__(self)
@@ -409,6 +411,8 @@ class DeleteItem(ui.ScriptWindow):
 		self.board = None
 		self.itemDropQuestionDialog = None
 		self.DeleteGrid = None
+		self.addAttrWarningDialog = None
+		self.pendingAddItem = None
 
 	def BindInterface(self, interface):
 		self.interface = interface
@@ -426,6 +430,11 @@ class DeleteItem(ui.ScriptWindow):
 		# Envanterdeki kirmizi overlay'i temizle (F5 sil/sat penceresi kapandi)
 		if constInfo.ENABLE_ITEM_DELETE_HIGHLIGHT and self.interface:
 			self.interface.RefreshInventory()
+		# Acik efsun uyarisi varsa kapat (pencere kapaniyor)
+		if self.addAttrWarningDialog:
+			self.addAttrWarningDialog.Close()
+			self.addAttrWarningDialog = None
+		self.pendingAddItem = None
 		self.Hide()
 
 	def Temizle(self):
@@ -519,24 +528,13 @@ class DeleteItem(ui.ScriptWindow):
 				self.uyari2.Open()
 				return
 			
-			(width, height) = item.GetItemSize()
-			
-			for privatePos, (itemWindowType, itemSlotIndex) in self.itemStock.items():
-				if itemWindowType == attachedInvenType and itemSlotIndex == attachedSlotPos:
-					del self.itemStock[selectedSlotPos]
-					del constInfo.ITEM_DELETE_LIST[selectedSlotPos]
-					self.DeleteGrid.clear(selectedSlotPos, width, height)
+			# Efsun uyarisi artik EKLEME aninda: esikten fazla efsunlu nesne once kirmizi onaydan gecer
+			attrCount = self.__GetItemAttrCount(attachedInvenType, attachedSlotPos)
+			if attrCount > constInfo.ITEM_DELETE_ATTR_WARNING_THRESHOLD:
+				self.__OpenAddAttrWarning(selectedSlotPos, attachedInvenType, attachedSlotPos, attrCount)
+				return
 
-			available_position = self.DeleteGrid.find_blank(width, height)
-			if available_position != -1:
-				self.DeleteGrid.put(selectedSlotPos, width, height)
-
-			self.itemStock[selectedSlotPos] = (attachedInvenType, attachedSlotPos)
-			constInfo.ITEM_DELETE_LIST[selectedSlotPos] = (attachedInvenType, attachedSlotPos)
-			self.Refresh()
-			fiyat = self.__GetSlotSellGold(attachedInvenType, attachedSlotPos)
-			global toplamfiyat
-			toplamfiyat += fiyat
+			self.__AddStagedItem(selectedSlotPos, attachedInvenType, attachedSlotPos)
 
 
 	def OnSelectItemSlot(self, selectedSlotPos):
@@ -563,81 +561,120 @@ class DeleteItem(ui.ScriptWindow):
 			
 			self.Refresh()
 	def AddItemWithoutMouse(self, inven_type, inven_pos):
+		# Efsun uyarisi artik EKLEME aninda (cift-tik / fare olmadan ekleme yolu)
+		attrCount = self.__GetItemAttrCount(inven_type, inven_pos)
+		if attrCount > constInfo.ITEM_DELETE_ATTR_WARNING_THRESHOLD:
+			self.__OpenAddAttrWarning(None, inven_type, inven_pos, attrCount)
+			return
+		self.__AddStagedItemAuto(inven_type, inven_pos)
+
+	def __AddStagedItemAuto(self, inven_type, inven_pos):
+		# Bos hucre otomatik secilerek ekleme (eski AddItemWithoutMouse govdesi)
+		global toplamfiyat
 		itemID = player.GetItemIndex(inven_type, inven_pos)
+		if 0 == itemID:
+			return
 		item.SelectItem(itemID)
-		
+
 		(width, height) = item.GetItemSize()
 		available_position = self.DeleteGrid.find_blank(width, height)
-		
+
 		if available_position == -1:
 			chat.AppendChat(1,"Yeterli bosluk yok.")
 			return
-		
-		fiyat = self.__GetSlotSellGold(inven_type, inven_pos)
-		global toplamfiyat
 
-		
+		fiyat = self.__GetSlotSellGold(inven_type, inven_pos)
+
 		for privatePos, (itemWindowType, itemSlotIndex) in self.itemStock.items():
 			if itemWindowType == inven_type and itemSlotIndex == inven_pos:
 				del self.itemStock[privatePos]
 				del constInfo.ITEM_DELETE_LIST[privatePos]
 				self.DeleteGrid.clear(privatePos, width, height)
-
 				toplamfiyat -= self.__GetSlotSellGold(inven_type, inven_pos)
+
+		self.DeleteGrid.put(available_position, width, height)
+		self.itemStock[available_position] = (inven_type, inven_pos)
+		constInfo.ITEM_DELETE_LIST[available_position] = (inven_type, inven_pos)
+		self.Refresh()
+		toplamfiyat += fiyat
+
+	def __AddStagedItem(self, selectedSlotPos, attachedInvenType, attachedSlotPos):
+		# Kullanicinin biraktigi hucreye ekleme (eski OnSelectEmptySlot kuyrugu)
+		global toplamfiyat
+		if (selectedSlotPos in self.itemStock):
+			return
+
+		itemVNum = player.GetItemIndex(attachedInvenType, attachedSlotPos)
+		if 0 == itemVNum:
+			return
+		item.SelectItem(itemVNum)
+
+		(width, height) = item.GetItemSize()
+
+		for privatePos, (itemWindowType, itemSlotIndex) in self.itemStock.items():
+			if itemWindowType == attachedInvenType and itemSlotIndex == attachedSlotPos:
+				toplamfiyat -= self.__GetSlotSellGold(attachedInvenType, attachedSlotPos)
+				del self.itemStock[privatePos]
+				del constInfo.ITEM_DELETE_LIST[privatePos]
+				self.DeleteGrid.clear(privatePos, width, height)
+				break
+
+		available_position = self.DeleteGrid.find_blank(width, height)
 		if available_position != -1:
-			self.DeleteGrid.put(available_position, width, height)
-			self.itemStock[available_position] = (inven_type, inven_pos)
-			constInfo.ITEM_DELETE_LIST[available_position] = (inven_type, inven_pos)
-			self.Refresh()
-			
+			self.DeleteGrid.put(selectedSlotPos, width, height)
+
+		self.itemStock[selectedSlotPos] = (attachedInvenType, attachedSlotPos)
+		constInfo.ITEM_DELETE_LIST[selectedSlotPos] = (attachedInvenType, attachedSlotPos)
+		self.Refresh()
+		fiyat = self.__GetSlotSellGold(attachedInvenType, attachedSlotPos)
 		toplamfiyat += fiyat
 
 			
-	def __CountValuableStagedItems(self):
-		# Esik degerinden FAZLA dolu efsunu (attribute) olan degerli staged nesne sayisi
+	def __GetItemAttrCount(self, invenType, invenPos):
+		# Nesnenin dolu efsun (attribute) sayisi; ozellik kapaliysa 0 doner
 		if not constInfo.ENABLE_ITEM_DELETE_ATTR_WARNING:
 			return 0
-		threshold = constInfo.ITEM_DELETE_ATTR_WARNING_THRESHOLD
-		count = 0
-		for privatePos, (invenType, invenPos) in self.itemStock.items():
-			attrCount = 0
-			for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM):
-				(attrType, attrValue) = player.GetItemAttribute(invenType, invenPos, i)
-				if 0 != attrType:
-					attrCount += 1
-			if attrCount > threshold:
-				count += 1
-		return count
+		attrCount = 0
+		for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM):
+			(attrType, attrValue) = player.GetItemAttribute(invenType, invenPos, i)
+			if 0 != attrType:
+				attrCount += 1
+		return attrCount
 
-	def __OpenValuableWarning(self, valuable, isSell):
-		# Degerli (cok efsunlu) nesne tespit edilince gosterilen kirmizi ikinci onay
-		threshold = constInfo.ITEM_DELETE_ATTR_WARNING_THRESHOLD
-		if isSell:
-			actionWord = "satmak"
-			acceptEvent = lambda arg=True: self.RequestSellItem(arg)
-			cancelEvent = lambda arg=False: self.RequestSellItem(arg)
-		else:
-			actionWord = "silmek"
-			acceptEvent = lambda arg=True: self.RequestDropItem(arg)
-			cancelEvent = lambda arg=False: self.RequestDropItem(arg)
-
+	def __OpenAddAttrWarning(self, targetSlotPos, invenType, invenPos, attrCount):
+		# Efsunlu nesne pencereye EKLENIRKEN cikan kirmizi onay (silme onayindan buraya tasindi)
+		if self.addAttrWarningDialog:
+			self.addAttrWarningDialog.Close()
 		dlg = uiCommon.QuestionDialog2()
-		dlg.SetText1("|cffFF3333|hDIKKAT!|h|r Sectiklerinden |cffFDD017|h%d|h|r nesnede %d'den fazla efsun var!" % (valuable, threshold))
-		dlg.SetText2("Toplam %d nesneyi %s istedigine emin misin?" % (len(self.itemStock), actionWord))
+		dlg.SetText1("|cffFF3333|hDIKKAT!|h|r Bu nesnede |cffFDD017|h%d|h|r efsun var!" % attrCount)
+		dlg.SetText2("Yine de sil/sat penceresine eklemek istiyor musun?")
 		dlg.SetWidth(420)
-		dlg.SetAcceptEvent(acceptEvent)
-		dlg.SetCancelEvent(cancelEvent)
+		dlg.SetAcceptEvent(lambda arg=True: self.__AnswerAddAttrWarning(arg))
+		dlg.SetCancelEvent(lambda arg=False: self.__AnswerAddAttrWarning(arg))
 		dlg.Open()
-		self.itemDropQuestionDialog = dlg
+		self.addAttrWarningDialog = dlg
+		self.pendingAddItem = (targetSlotPos, invenType, invenPos)
+
+	def __AnswerAddAttrWarning(self, answer):
+		dlg = self.addAttrWarningDialog
+		pending = self.pendingAddItem
+		self.addAttrWarningDialog = None
+		self.pendingAddItem = None
+		if dlg:
+			dlg.Close()
+		if not answer:
+			return
+		if not pending:
+			return
+		(targetSlotPos, invenType, invenPos) = pending
+		if targetSlotPos is None:
+			self.__AddStagedItemAuto(invenType, invenPos)
+		else:
+			self.__AddStagedItem(targetSlotPos, invenType, invenPos)
 
 	def OnOk(self):
 		if (len(self.itemStock) == 0):
 			chat.AppendChat(chat.CHAT_TYPE_INFO, "Silinecek nesne yok.")
-			return
-
-		valuable = self.__CountValuableStagedItems()
-		if valuable > 0:
-			self.__OpenValuableWarning(valuable, False)
 			return
 
 		itemDropQuestionDialog = uiCommon.QuestionDialog()
@@ -650,11 +687,6 @@ class DeleteItem(ui.ScriptWindow):
 	def OnSat(self):
 		if (len(self.itemStock) == 0):
 			chat.AppendChat(chat.CHAT_TYPE_INFO, "Satilacak nesne yok.")
-			return
-
-		valuable = self.__CountValuableStagedItems()
-		if valuable > 0:
-			self.__OpenValuableWarning(valuable, True)
 			return
 
 		itemDropQuestionDialog = uiCommon.QuestionDialog()

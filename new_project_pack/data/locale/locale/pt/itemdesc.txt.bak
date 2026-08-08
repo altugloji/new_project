@@ -3257,7 +3257,7 @@
 31073	Faixa do Caçador de Ouro	Esta faixa para o pescoço ajuda-te a adquirires Sacos de Moedas dos bolsos de monstros.
 31074	Colar Rebitado	Joalharia para o pescoço feita de couro com uma borda rebitada
 31075	Colar de Farpas	Colar decorativo dos Martyaxwar. Uma carta está escondida no seu interior.
-31076	Ervas do Sol	Estas ervas crescente em locais secos e quentes.
+31076	It is obtained from the wonders of the Red Forest.
 31077	Pó de Pedra Basilar	Pedra Basilar desfeita num pó fino.
 31078	Lumen Puro	Energia branca, neutraliza o poder da Matéria Negra.
 31079	Carta para Yak-Hwan	A últimas palavras do batedor, escondidas num colar.
@@ -3486,7 +3486,7 @@
 38100	Snack do Poder (7 Dias)	Aumenta a duração da tua Montada Melhorável em 7 dias.
 38101	Snack do Poder (15 Dias)	Aumenta a duração da tua Montada Melhorável em 15 dias.
 38102	Snack do Poder (30 Dias)	Aumenta a duração da tua Montada Melhorável em 30 dias.
-38103	Snack Appaloosa (7 Dias)	Aumenta a duração do teu Appaloosa em 7 dias.
+38103	Extends the duration of the Mastery Seal.
 38200	Rufus	Podes usar este Selo para invocares a tua cria de lobo, Rufus.
 38201	Rufus	Podes usar este Selo para invocares a tua cria de lobo, Rufus.
 38305	Certificado de Terreno	Armazena-o no Banco da Guild para receberes um terreno de Guild bem localizado. Será inútil após a distribuição de terrenos no início de 2020.
@@ -6584,7 +6584,7 @@
 71119	Tigre (Azul)	A magia deste selo invoca um poderoso espírito animal capaz de te transportar rapidamente para o destino da tua escolha. Aumenta o valor de Defesa de quem o monta em 200.
 71120	Leão (Amarelo)	A magia deste selo invoca um poderoso espírito animal capaz de te transportar rapidamente para o destino da tua escolha. Aumenta o Valor de Ataque de quem o monta em 200.
 71121	Leão (Azul)	A magia deste selo invoca um poderoso espírito animal capaz de te transportar rapidamente para o destino da tua escolha. Aumenta o Valor de Ataque de quem o monta em 300.
-71122	Bilhete Templo do Dragão	Pode ser usado para entrar no Templo do Dragão.
+71122	Bilhete da Roda	Ao usar, recebes 1 tentativa no evento da Roda.
 71123	Escama de Dragão	As escamas de dragão estão entre os materiais mais poderosos conhecidos.
 71124	Leão Branco	Animais de pêlo branco são extremamente raros e muitas culturas adoram-nos, crendo que eles possuem poderes extraordinários. Aumenta a experiência obtida em 30%.
 71125	Javali de Guerra	Domesticar espíritos de animais maléficos requer uma hábil utilização da magia, mas os resultados podem ser muito impressionantes. Proporciona a quem o monta +20% Forte contra Monstros.
@@ -6657,7 +6657,7 @@
 71198	Muffin (Rosa)	Podes usar este selo para invocares Muffin, o temido frango de combate.
 71199	Amuleto de Chocolate	Este Amuleto de Chocolate mágico fortalece-te em combate. Proporciona-te | 50% EXP | +20 Rapidez de Ataque | +20 Rapidez de Feitiço | +10% Forte contra Monstros | +10% VD Máx. | +10% MN Máx. | Se também juntares um Valentino ou Valentinia, obterás um bónus de conjunto adicional de EXP.
 71201	Passagem (Meley)	Podes entrar no Covil de Meley quando apresentas esta Passagem ao guarda responsável. Este item é negociável.
-71202	Amuleto de Nazar	Este pendente com o olho de Fatima abençoa-te com +50% EXP, +20 Rapidez de Ataque, +20 Rapidez de Feitiço, +10% Forte contra Monstros e +30% Dano Físico e Mágico.
+71202	
 71203	Enciclopédia Saturnal(P)	Pacote que contém 10 livros de habilidade para Guerreiros Corpo aleatoriamente seleccionados.
 71204	Enciclopédia Saturnal(G)	Pacote que contém 25 livros de habilidade para Guerreiros Corpo aleatoriamente seleccionados.
 71205	Enciclopédia da Terra(P)	Pacote que contém 10 Livros de Habilidade para Guerreiros Mentais aleatoriamente seleccionados.

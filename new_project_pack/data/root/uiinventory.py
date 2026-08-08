@@ -116,6 +116,9 @@ class CostumeWindow(ui.ScriptWindow):
 
 		if app.ENABLE_WEAPON_COSTUME_SYSTEM:
 			self.wndEquip.SetItemSlot(item.COSTUME_SLOT_WEAPON, getItemVNum(item.COSTUME_SLOT_WEAPON), 0)
+			
+		# Eldiven slotu (WEAR_GLOVE=25, hucre 205) - Nazar Tilsimi kostum penceresinde
+		self.wndEquip.SetItemSlot(180+25, getItemVNum(180+25), 0)
 
 		self.wndEquip.RefreshSlot()
 
@@ -1163,6 +1166,9 @@ class InventoryWindow(ui.ScriptWindow):
 		elif item.IsKey(srcItemVID):
 			self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
 
+		elif srcItemVID == 38103: # Appaloosa Cerezi: Nazar Tilsimi'na surukle -> sure uzat
+			self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
+
 		elif (player.GetItemFlags(srcItemSlotPos) & ITEM_FLAG_APPLICABLE) == ITEM_FLAG_APPLICABLE:
 			self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
 
@@ -1383,6 +1389,8 @@ class InventoryWindow(ui.ScriptWindow):
 			return True
 		elif item.IsKey(srcItemVNum):
 			return True
+		elif srcItemVNum == 38103: # Appaloosa Cerezi
+			return True
 		elif (player.GetItemFlags(srcSlotPos) & ITEM_FLAG_APPLICABLE) == ITEM_FLAG_APPLICABLE:
 			return True
 		elif app.ENABLE_KADIM_EFSUN_SYSTEM and srcItemVNum == 71189:
@@ -1412,6 +1420,10 @@ class InventoryWindow(ui.ScriptWindow):
 				return True
 		elif item.IsKey(srcItemVNum):
 			if player.CanUnlock(srcItemVNum, dstSlotPos):
+				return True
+
+		elif srcItemVNum == 38103: # Appaloosa Cerezi -> sadece Nazar Tilsimi
+			if player.GetItemIndex(dstSlotPos) == 71202:
 				return True
 
 		elif (player.GetItemFlags(srcSlotPos) & ITEM_FLAG_APPLICABLE) == ITEM_FLAG_APPLICABLE:

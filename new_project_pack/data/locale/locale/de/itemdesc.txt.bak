@@ -3257,7 +3257,7 @@
 31073	Band des Goldjägers	Mit diesem Halsband ziehst du Monstern Münzbeutel aus der Tasche.
 31074	Nietenhalsband	Halsschmuck aus Leder mit Nietenbesatz
 31075	Stachelhalsband	Halsschmuck des Martyaxwar. Ein Brief ist auf der Innenseite versteckt.
-31076	Sonnenkräuter	Diese Kräuter wachsen an heißen, trockenen Orten.
+31076	It is obtained from the wonders of the Red Forest.
 31077	Fundamentsteinpulver	Zu feinem Pulver gemahlene Fundamentsteine
 31078	Reines Lumen	Weiße Energie, neutralisiert die Kraft der Schwarzen Materie.
 31079	Brief an Yak-Hwan	Die letzten Worte des Spähers, versteckt in einem Halsband.
@@ -3486,7 +3486,7 @@
 38100	Powersnack (7 Tage)	Verlängert das Leben deines Power Mounts um 7 Tage.
 38101	Powersnack (15 Tage)	Verlängert das Leben deines Power Mounts um 15 Tage.
 38102	Powersnack (30 Tage)	Verlängert das Leben deines Power Mounts um 30 Tage.
-38103	Appaloosasnack (7 Tage)	Verlängert das Leben deines Appaloosas um 7 Tage.
+38103	Extends the duration of the Mastery Seal.
 38200	Rufus	Mit diesem Siegel rufst du deinen Wolfswelpen, Rufus, herbei.
 38201	Rufus	Mit diesem Siegel rufst du deinen Wolfswelpen, Rufus, herbei.
 38305	Landurkunde	In der Gildenbank sammeln, um gut gelegenes Gildenland zu erhalten. Nach der Landverteilung Anfang 2020 wertlos.
@@ -6584,7 +6584,7 @@
 71119	Tiger (blau)	Der Zauber des Siegels ruft einen mächtigen Tiergeist, der dich schnell an den Ort deiner Wahl trägt.
 71120	Löwe (gelb)	Der Zauber des Siegels ruft einen mächtigen Tiergeist, der dich schnell an den Ort deiner Wahl trägt.
 71121	Löwe (blau)	Der Zauber des Siegels ruft einen mächtigen Tiergeist, der dich schnell an den Ort deiner Wahl trägt.
-71122	Drachenraum-Eintritt	Hiermit kann der Drachenraum betreten werden.
+71122	Rad-Ticket	Bei Verwendung erhältst du 1 Versuch im Rad-Event.
 71123	Drachenschuppe	Drachenschuppen gehören zu den stärksten bekannten Materialien.
 71124	Weißer Löwe	Tiere mit weißem Fell sind äußerst selten und werden von vielen Kulturen als Träger außergewöhnlicher Kräfte verehrt.
 71125	Kriegskeiler	Böse Tiergeister zu bändigen, bedarf erheblicher magischer Künste. Entsprechend beeindruckend ist das Ergebnis.
@@ -6657,7 +6657,7 @@
 71198	Muffin (rosa)	Mit diesem Siegel rufst du Muffin, das gefürchtete Kampfhühnchen, herbei.
 71199	Schoko-Amulett	Dieses wunderschöne Schoko-Amulett stärkt dich im Kampf. Es verleiht dir |  50% EXP | +20 Angriffsgeschwindigkeit | +20 Zaubergeschwindigkeit | +10% Stark gegen Monster | +10% Maximum-TP | +10% Maximum-MP | Zusammen mit Valentino oder Valentinia erhältst du einen zusätzlichen EXP Set-Bonus.
 71201	Passierschein (Meley)	Du darfst Meleys Hort betreten, wenn du diesen Passierschein dem zuständigen Wächter vorlegst. Dieses Item ist handelbar.
-71202	Nazar-Amulett	Anhänger mit dem Auge der Fatima segnet dich mit +50% EXP, +20 Angriffsgeschwindigkeit, +20 Zaubergeschwindigkeit, +10% Stark gegen Monster sowie +30% physischem und magischem Schaden.
+71202	
 71203	Enzyklopädie d. Saturn/K	Paket mit 10 zufällig ausgewählten Fertigkeitsbüchern für Körperkrieger
 71204	Enzyklopädie d. Saturn/G	Paket mit 25 zufällig ausgewählten Fertigkeitsbüchern für Körperkrieger
 71205	Enzyklopädie d. Erde/K	Paket mit 10 zufällig ausgewählten Fertigkeitsbüchern für Mentalkrieger

@@ -6819,7 +6819,7 @@ VNUM	LOCALE_NAME
 31073	Faixa do Caçador de Ouro
 31074	Colar Rebitado
 31075	Colar de Farpas
-31076	Ervas do Sol
+31076	Crimson Root
 31077	Pó de Pedra Basilar
 31078	Lumen Puro
 31079	Carta para Yak-Hwan
@@ -7000,7 +7000,7 @@ VNUM	LOCALE_NAME
 38100	Snack do Poder (7 Dias)
 38101	Snack do Poder (15 Dias)
 38102	Snack do Poder (30 Dias)
-38103	Snack Appaloosa (7 Dias)
+38103	Extension Seal (7 Days)
 38200	Rufus
 38201	Rufus
 38305	Certificado de Terreno
@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tigre (Azul)
 71120	Leão (Amarelo)
 71121	Leão (Azul)
-71122	Bilhete da Roda
+71122	The Spirit of Mastery
 71123	Escamas do Dragão
 71124	Leão Branco
 71125	Javali de Guerra
@@ -10028,7 +10028,7 @@ VNUM	LOCALE_NAME
 71198	Muffin (Rosa)
 71199	Amuleto de Chocolate
 71201	Passagem (Meley)
-71202	Amuleto de Nazar
+71202	Ayaz Talisman
 71203	Enciclopédia Saturnal(P)
 71204	Enciclopédia Saturnal(G)
 71205	Enciclopédia da Terra(P)

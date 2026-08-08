@@ -6819,7 +6819,7 @@ VNUM	LOCALE_NAME
 31073	Opaska Posz. Z³ota
 31074	Wysadzany Naszyjnik
 31075	Kolczatka
-31076	S³oneczne Zio³a
+31076	Crimson Root
 31077	Proszek z Kam.Wêgielnego
 31078	Czysty Lumen
 31079	List do Yak-Hwan
@@ -7000,7 +7000,7 @@ VNUM	LOCALE_NAME
 38100	Mega Przek¹ska (7 dni)
 38101	Mega Przek¹ska (15 dni)
 38102	Mega Przek¹ska (30 dni)
-38103	Przek¹ska Appaloosa (7d)
+38103	Extension Seal (7 Days)
 38200	Rufus
 38201	Rufus
 38305	Akt W³asnoœci Ziemi
@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tygrys (niebieski)
 71120	Lew (¿ó³ty)
 71121	Lew (niebieski)
-71122	Bilet Ko³a
+71122	The Spirit of Mastery
 71123	Smocza £uska
 71124	Bia³y Lew
 71125	Dzik Wojenny
@@ -10028,7 +10028,7 @@ VNUM	LOCALE_NAME
 71198	Muffin (ró¿owy)
 71199	Czekoladowy Amulet
 71201	Przepustka (Meley)
-71202	Amulet Nazara
+71202	Ayaz Talisman
 71203	Encyklopedia Saturna (M)
 71204	Encyklopedia Saturna (D)
 71205	Encyklopedia Ziemi (M)

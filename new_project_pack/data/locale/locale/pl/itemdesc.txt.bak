@@ -3257,7 +3257,7 @@
 31073	Opaska Posz. Z³ota	Za pomoc¹ tej opaski wyci¹gniesz z potworów sakiewki z monetami.
 31074	Wysadzany Naszyjnik	Skórzany naszyjnik "przyozdobiony" nitami
 31075	Kolczatka	Obro¿a Martyaxwara. Wewn¹trz obro¿y ukryty jest list.
-31076	S³oneczne Zio³a	Te zio³a rosn¹ w gor¹cym i suchym miejscu.
+31076	It is obtained from the wonders of the Red Forest.
 31077	Proszek z Kam.Wêgielnego	Kamieñ Wêgielny zmielony na drobny proszek
 31078	Czysty Lumen	Bia³a energia neutralizuje moc Czarnej Materii.
 31079	List do Yak-Hwan	Ostatnie s³owa zwiadowcy ukryte w opasce.
@@ -3486,7 +3486,7 @@
 38100	Mega Przek¹ska (7 dni)	Przed³u¿a ¿ycie Twojego Mega Wierzchowca o 7 dni.
 38101	Mega Przek¹ska (15 dni)	Przed³u¿a ¿ycie Twojego Mega Wierzchowca o 15 dni.
 38102	Mega Przek¹ska (30 dni)	Przed³u¿a ¿ycie Twojego Mega Wierzchowca o 30 dni.
-38103	Przek¹ska Appaloosa (7d)	Przed³u¿a ¿ycie twojego Appaloosa o 7 dni.
+38103	Extends the duration of the Mastery Seal.
 38200	Rufus	Za pomoc¹ tej pieczêci mo¿esz przywo³aæ wilka Rufusa.
 38201	Rufus	Za pomoc¹ tej pieczêci mo¿esz przywo³aæ wilka Rufusa.
 38305	Akt W³asnoœci Ziemi	Zbieraj do banku gildii, by otrzymaæ dobrze po³o¿ony obszar gildii. Bez wartoœci po podzieleniu obszaru na pocz¹tku 2020.
@@ -6584,7 +6584,7 @@
 71119	Tygrys (niebieski)	Czar pieczêci wzywa potê¿nego ducha zwierz¹t, który przeniesie ciê szybko do miejsca twojego wyboru. Zwiêksza on si³ê obrony swojego jeŸdŸca o 200.
 71120	Lew (¿ó³ty)	Czar pieczêci wzywa potê¿nego ducha zwierz¹t, który przeniesie ciê szybko do miejsca twojego wyboru. Zwiêksza on si³ê ataku swojego jeŸdŸca o 200.
 71121	Lew (niebieski)	Czar pieczêci wzywa potê¿nego ducha zwierz¹t, który przeniesie ciê szybko do miejsca twojego wyboru. Zwiêksza on si³ê ataku swojego jeŸdŸca o 300.
-71122	Wstêp do Œwi¹tyni Smoka	Za pomoc¹ tego przedmiotu mo¿na wejœæ do Œwi¹tyni Smoka.
+71122	Bilet Ko³a	Po u¿yciu otrzymujesz 1 próbê w evencie Ko³a.
 71123	Smocza £uska	Smocze ³uski nale¿¹ do najpotê¿niejszych znanych materia³ów.
 71124	Bia³y Lew	Zwierzêta o bia³ym futrze s¹ rzadkoœci¹ i wiele kultur przypisuje im nadzwyczajne si³y. Zwiêksza otrzymywane punkty doœwiadczenia o 30%.
 71125	Dzik Wojenny	Okie³znanie z³ych duchów zwierz¹t wymaga nie lada kunsztu magicznego. Odpowiednio zadziwiaj¹cy jest rezultat. Daje swojemu w³aœcicielowi +20% do si³y w walce z potworami.
@@ -6657,7 +6657,7 @@
 71198	Muffin (ró¿owy)	Za pomoc¹ tej pieczêci mo¿esz przywo³aæ Muffina, groŸnego bojowego kurczaczka.
 71199	Czekoladowy Amulet	Ten przepiêkny czekoladowy amulet wzmocni ciê w walce. Daje ci on | 50% PD | +20 szybkoœæ ataku | +20 szybkoœæ zaklêcia | +10% si³a w walce z potworami | +10% maks. P¯ | +10% maks. PE | Razem z Walentynem lub Walentynk¹ otrzymujesz dodatkowy bonus zestawu PD.
 71201	Przepustka (Meley)	Jeœli poka¿esz odpowiedniemu stra¿nikowi przepustkê, mo¿esz wejœæ do Schronienia Meley. Przedmiot ten jest zdatny do handlu.
-71202	Amulet Nazara	Amulet z Okiem Fatimy b³ogos³awi ciê +50% PD, +20 szybkoœci ataku, +20 szybkoœci zaklêcia, +10% si³y przeciwko potworom oraz +30% obra¿eñ fizycznych i magicznych.
+71202	
 71203	Encyklopedia Saturna (M)	Pakiet zawieraj¹cy 10 losowo wybranych ksi¹g z instrukcjami umiejêtnoœci dla Wojowników Mocy Cia³a.
 71204	Encyklopedia Saturna (D)	Pakiet zawieraj¹cy 25 losowo wybranych ksi¹g z instrukcjami umiejêtnoœci dla Wojowników Mocy Cia³a.
 71205	Encyklopedia Ziemi (M)	Pakiet zawieraj¹cy 10 losowo wybranych ksi¹g z instrukcjami umiejêtnoœci dla Wojowników Mocy Duchowej.

@@ -6819,7 +6819,7 @@ VNUM	LOCALE_NAME
 31073	Jagerens guld bånd
 31074	Nittet halskæde
 31075	Pig halskæde
-31076	Sol urter
+31076	Crimson Root
 31077	Fundamentstens pulver
 31078	Ren lumen
 31079	Brev til Yak-Hwan
@@ -7000,7 +7000,7 @@ VNUM	LOCALE_NAME
 38100	Energi Snack (7 dage)
 38101	Energi Snack (15 dage)
 38102	Energi Snack (30 dage)
-38103	Appaloosa Snack (7 Dage)
+38103	Extension Seal (7 Days)
 38200	Rufus
 38201	Rufus
 38305	Jord Certifikat
@@ -9955,7 +9955,7 @@ VNUM	LOCALE_NAME
 71119	Tiger (blå)
 71120	Løve (gul)
 71121	Løve (blå)
-71122	Hjulbillet
+71122	The Spirit of Mastery
 71123	Drageskæl
 71124	Hvid løve
 71125	Krigs-Vildsvin
@@ -10028,7 +10028,7 @@ VNUM	LOCALE_NAME
 71198	Muffin (lyserød)
 71199	Chokolade Amulet
 71201	Passage Dokument (Meley)
-71202	Nazar Amulet
+71202	Ayaz Talisman
 71203	Saturn Leksikon (L)
 71204	Saturn Leksikon (S)
 71205	Jord Leksikon (L)

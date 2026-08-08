@@ -3257,7 +3257,7 @@
 31073	Bandeau du prospecteur	Avec ce bandeau, vous pouvez dérober les bourses de la poche des monstres.
 31074	Collier clouté	Un collier en cuir orné de clous.
 31075	Collier à clous	Collier de Martyaxwar. Une lettre est cachée à l'intérieur.
-31076	Herbes solaires	Ces herbes poussent dans des lieux chauds et secs.
+31076	It is obtained from the wonders of the Red Forest.
 31077	Poudre de fondation	Des pierres de fondation finement moulues.
 31078	Lumen pur	Une énergie blanche, permettant de neutraliser la force dévastatrice de la matière obscure.
 31079	Lettre pour Yak-Hwan	Les derniers mots de l'éclaireur, cachés dans un bandeau.
@@ -3486,7 +3486,7 @@
 38100	Remontant (7 jours)	Prolonge l'existence de votre super monture de 7 jours.
 38101	Remontant (15 jours)	Prolonge l'existence de votre super monture de 15 jours.
 38102	Remontant (30 jours)	Prolonge l'existence de votre super monture de 30 jours.
-38103	En-cas d'appaloosa (7 j)	Prolongez l'existence de votre appaloosa de 7 jours.
+38103	Extends the duration of the Mastery Seal.
 38200	Rufus	Ce sceau vous permet d'appeler votre louveteau, Rufus.
 38201	Rufus	Ce sceau vous permet d'appeler votre louveteau, Rufus.
 38305	Certificat de propriété	Collectez-les dans la banque de guilde pour obtenir des terrains de guilde. Après la répartition des terres début 2020, ils n'ont plus aucune valeur.
@@ -6657,7 +6657,7 @@
 71198	Muffin (rose)	Avec ce sceau, vous appelez Muffin, le redoutable poussin batailleur.
 71199	Choco-amulette	Cette magnifique choco-amulette vous renforce en combat. Il vous procure | +50 % d'EXP | +20 de vitesse d'attaque | +20 de vitesse de sort | +10 % de force contre les monstres | +10 % de PV maximums | +10 % de PM maximums | Avec Valentino ou Valentinia, vous obtenez un bonus de lot d'EXP supplémentaire.
 71201	Ticket (Meley)	Remettez ce ticket au gardien de la forteresse du Repaire de Meley pour pouvoir y entrer. Cet objet est échangeable.
-71202	Amulette de Nazar	Le pendentif de l'œil de Fatima vous prodigue +50 % d'EXP, +20 de vitesse d'attaque, +20 de vitesse de sort, +10 % de force contre les monstres ainsi que +30 % de dégâts physiques et magiques.
+71202	
 71203	Encyclo. Saturne (p)	Paquet contenant 10 livres de compétence aléatoires pour les Guerriers Corps à Corps
 71204	Encyclo. Saturne (g)	Paquet contenant 25 livres de compétence aléatoires pour les Guerriers Corps à Corps
 71205	Encyclo. Terre (p)	Paquet contenant 10 livres de compétence aléatoires pour les Guerriers Mentaux

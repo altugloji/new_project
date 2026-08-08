@@ -6850,7 +6850,7 @@ VNUM	LOCALE_NAME
 31073	Altýn Avcý Tasmasý
 31074	Zýmbalý Tasma
 31075	Dikenli Tasma
-31076	Güneþ Bitkileri
+31076	Kýzýl Kökü
 31077	Temel Taþý Tozu
 31078	Saf Lumen
 31079	Yak-Hwan'a Mektup
@@ -7080,7 +7080,7 @@ VNUM	LOCALE_NAME
 38100	Güçlü Atýþtýrmalýk(7 Gn)
 38101	Güçlü atýþtýrmalýk (15g)
 38102	Güçlü Atýþtýrmalk(30 Gn)
-38103	Appaloosa Çerezi (7 Gün)
+38103	Uzatma Mührü (7 Gün)
 38200	Rufus
 38201	Rufus
 38305	Arazi Sertifikasý
@@ -10205,7 +10205,7 @@ VNUM	LOCALE_NAME
 71119	Kaplan (mavi)
 71120	Aslan (sarý)
 71121	Aslan (mavi)
-71122	Çark Bileti
+71122	Ustalýk Ruhu
 71123	Ejderha Pulu
 71124	Beyaz Aslan
 71125	Savaþ yaban domuzu
@@ -10278,7 +10278,7 @@ VNUM	LOCALE_NAME
 71198	Muffin (pembe)
 71199	Çikolata Týlsýmý
 71201	Geçit Bileti (Meley)
-71202	Nazar týlsýmý
+71202	Ayaz Týlsýmý
 71203	Satürn Ansiklopedisi/k
 71204	Satürn Ansiklopedisi/b
 71205	Toprak Ansiklopedisi/k

@@ -3257,7 +3257,7 @@
 31073	Zlatá lovecká páska	Tato ozdoba krku ti pomùe získat Pytle penìz z kapes zabitıch monster.
 31074	Nıtovanı náhrdelník	Ozdoba krku, vyrobená z kùe, pobitá nıty na okrajích.
 31075	Ostnatı náhrdelník	Dekorativní náhrdelník, kterı nosil Martyaxwar. Na jedné stranì je skryto písmeno.
-31076	Sluneèní byliny	Tyto byliny rostou na horkıch a suchıch místech.
+31076	It is obtained from the wonders of the Red Forest.
 31077	Prášek ze základ. kamene	Základovı kámen rozdrcenı na jemnı prášek.
 31078	Èisté svìtlo	Bílá energie, která neutralizuje sílu Èerné hmoty.
 31079	Dopis Yak-Hwanovi	Poslední slova zvìda, ukrytá v náhrdelníku.
@@ -3486,7 +3486,7 @@
 38100	Posilující svaèinka (7)	Prodlouí ivot tvého jezdeckého zvíøete o 7 dnù.
 38101	Posilující svaèinka (15)	Prodlouí ivot tvého jezdeckého zvíøete o 15 dnù.
 38102	Posilující svaèinka (30)	Prodlouí ivot tvého jezdeckého zvíøete o 30 dnù.
-38103	Svaè. pro Appaloosu (7d)	Prodlouí ivot tvé Appaloosy o 7 dnù.
+38103	Extends the duration of the Mastery Seal.
 38200	Rufus	Tuto peèe mùeš pouít pro zavolání tvého mladého vlka Rufuse.
 38201	Rufus	Tuto peèe mùeš pouít pro zavolání tvého mladého vlka Rufuse.
 38305	Certifikát území	Dávej je do cechovní pokladnice, aby jste získali dobøe situované cechovní území. Po distribuci zemì na poèátku 2020 nepouitelné.
@@ -6657,7 +6657,7 @@
 71198	Muffin (rùovı)	Tuto peèe mùeš pouít pro pøivolání Muffina, hrozivého bojového kuøete.
 71199	Èokoládovı amulet	Kouzelnı Èokoládovı amulet tì posílí v boji. Pøidá ti | +50 % BZK | +20 rychlost útoku | +20 rychlost kouzel | +10 % síly proti monstrùm | +10 % max. ZB | +10 % max. MB | Valentino nebo Valentinia ti mohou pøidat další sadu BZK bonusù.
 71201	Propustka (Meley)	Pokud tuto propustku ukáek stránému, pustí tì do Doupìte Meley. S pøedmìtem lze obchodovat.
-71202	Nazarùv amulet	Tento pøívìsek nesoucí oko Fatimy ti pøidá +50 % k zisku zkušeností, +20 k rychlosti útoku, +20 k rychlosti kouzel, +10 % síly proti monstrùm a +30 % fyzického a magického poškození.
+71202	
 71203	Encyklopedie Saturnu (M)	Balík obsahující 10 náhodnıch knih schopností pro váleèníky na tìlo.
 71204	Encyklopedie Saturnu (V)	Balík obsahující 25 náhodnıch knih schopností pro váleèníky na tìlo.
 71205	Encyklopedie Zemì (M)	Balík obsahující 10 náhodnıch knih schopností pro mentální váleèníky.
