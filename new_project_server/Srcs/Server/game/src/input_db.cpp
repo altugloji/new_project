@@ -924,6 +924,9 @@ void CInputDB::Boot(const char* data) const
 
 			g_map_itemRare[p->dwApplyIndex] = *p;
 			sys_log(0, "ITEM_RARE[%d]: %s %u", p->dwApplyIndex, p->szApply, p->dwProb);
+#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+			sys_log(0, "ITEM_RARE[%d]: glove_tavan=%d", p->dwApplyIndex, p->bMaxLevelBySet[ATTRIBUTE_SET_GLOVE]);
+#endif
 		}
 	}
 

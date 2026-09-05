@@ -60,6 +60,19 @@ class CHARACTER_MANAGER : public singleton<CHARACTER_MANAGER>
 
 		void			KillLog(DWORD dwVnum);
 
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+		// Harita bazli yang giris sayaclari; CollectYangFlow biriktirir, Update() saatte bir yang_flow tablosuna yazar
+		enum EYangFlowSource
+		{
+			YANG_FLOW_MOB_GOLD = 1,		// mob altin dropu (yere dusen toplam; WAEGU 5001 dahil)
+			YANG_FLOW_NPC_SELL = 2,		// NPC'ye item satisi (satisin yapildigi harita)
+			YANG_FLOW_QUEST = 3,		// quest yang odulu (pc.change_money pozitifleri dahil)
+			YANG_FLOW_STEAL_GOLD = 4,	// altin calma efsunu (POINT_STEAL_GOLD)
+			YANG_FLOW_QUICK_SELL = 5,	// F5 hizli sil/sat satisi (SellItem; NPC satisindan farki: %3 vergi kesilmez)
+		};
+		void			CollectYangFlow(BYTE bSource, long lMapIndex, int iGold);
+#endif
+
 		void			RegisterRaceNum(DWORD dwVnum);
 		void			RegisterRaceNumMap(LPCHARACTER ch);
 		void			UnregisterRaceNumMap(LPCHARACTER ch);
@@ -119,6 +132,10 @@ class CHARACTER_MANAGER : public singleton<CHARACTER_MANAGER>
 		LPCHARACTER			m_pkChrSelectedStone;
 
 		std::map<DWORD, DWORD> m_map_dwMobKillCount;
+
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+		std::map<std::pair<BYTE, long>, std::pair<long long, DWORD> > m_map_YangFlow;	// (kaynak, harita) -> (toplam yang, olay sayisi)
+#endif
 
 		std::set<DWORD>		m_set_dwRegisteredRaceNum;
 		std::map<DWORD, CHARACTER_SET> m_map_pkChrByRaceNum;

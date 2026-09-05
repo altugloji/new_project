@@ -391,6 +391,10 @@ void CPythonPlayer::__OnPressItem(CInstanceBase& rkInstMain, DWORD dwPickedItemI
 
 void CPythonPlayer::__OnClickGround(CInstanceBase& rkInstMain, const TPixelPosition& c_rkPPosPickedGround)
 {
+#ifdef ENABLE_WS_TOURNAMENT
+	if (IsWSMoveLocked())
+		return;
+#endif
 	if (!__IsMovableGroundDistance(rkInstMain, c_rkPPosPickedGround))
 		return;
 
@@ -416,6 +420,10 @@ bool CPythonPlayer::__IsMovableGroundDistance(CInstanceBase& rkInstMain, const T
 
 void CPythonPlayer::__OnPressGround(CInstanceBase& rkInstMain, const TPixelPosition& c_rkPPosPickedGround)
 {
+#ifdef ENABLE_WS_TOURNAMENT
+	if (IsWSMoveLocked())
+		return;
+#endif
 	__ClearReservedAction();
 	__ClearAutoAttackTargetActorID();
 
@@ -682,6 +690,10 @@ bool CPythonPlayer::__CanChangeTarget()
 
 bool CPythonPlayer::__CanMove()
 {
+#ifdef ENABLE_WS_TOURNAMENT
+	if (IsWSMoveLocked())
+		return false;
+#endif
 	if (__IsProcessingEmotion())
 	{
 		return false;
@@ -702,6 +714,11 @@ bool CPythonPlayer::__CanMove()
 
 bool CPythonPlayer::__CanAttack()
 {
+#ifdef ENABLE_WS_TOURNAMENT
+	// hazirlik kilidi: normal saldiri (ve saldiri-kosusu) kapali; beceriler ayri kapidan gecer
+	if (IsWSMoveLocked())
+		return false;
+#endif
 	if (__IsProcessingEmotion())
 	{
 		return false;

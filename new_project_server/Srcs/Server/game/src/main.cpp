@@ -91,6 +91,17 @@
 #include "LuckyDraw.h"
 #endif
 
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#endif
+
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
+#ifdef ENABLE_PLAYER_STATISTICS
+#include "statistics_rank.h"
+#endif
+
 extern void WriteVersion();
 
 #if !defined(__WIN32__) && defined(ENABLE_ASAN)
@@ -265,6 +276,9 @@ void heartbeat(LPHEART ht, int pulse)
 	s_dwProfiler[PROF_HEARTBEAT] += (get_dword_time() - t);
 
 	DBManager::instance().Process();
+#ifdef ENABLE_GM_FISH_INFO
+	LogManager::instance().Process();	// GM Balik Bilgisi sorgu sonuclari (log db FuncQuery)
+#endif
 	AccountDB::instance().Process();
 	CPVPManager::instance().Process();
 
@@ -382,6 +396,17 @@ int main(int argc, char **argv)
 	CLuckyDraw	luckyDrawManager;
 #endif
 
+#ifdef ENABLE_WS_TOURNAMENT
+	CWSTournamentManager	wsTournamentManager;
+#endif
+
+#ifdef ENABLE_FFA_EVENT
+	CFFAManager	ffaManager;
+#endif
+#ifdef ENABLE_PLAYER_STATISTICS
+	CStatisticsRanking	statisticsRanking;
+#endif
+
 	if (!start(argc, argv)) {
 		CleanUpForEarlyExit();
 		return 0;
@@ -415,6 +440,12 @@ int main(int argc, char **argv)
 #endif
 #ifdef ENABLE_LUCKY_DRAW
 		luckyDrawManager.Initialize();
+#endif
+#ifdef ENABLE_WS_TOURNAMENT
+		wsTournamentManager.Initialize();
+#endif
+#ifdef ENABLE_FFA_EVENT
+		ffaManager.Initialize();
 #endif
 	}
 
@@ -460,6 +491,20 @@ int main(int argc, char **argv)
 	arena_manager.Destroy();
 	sys_log(0, "<shutdown> Destroying COXEventManager...");
 	OXEvent_manager.Destroy();
+
+#ifdef ENABLE_WS_TOURNAMENT
+	sys_log(0, "<shutdown> Destroying CWSTournamentManager...");
+	wsTournamentManager.Destroy();
+#endif
+
+#ifdef ENABLE_FFA_EVENT
+	sys_log(0, "<shutdown> Destroying CFFAManager...");
+	ffaManager.Destroy();
+#endif
+#ifdef ENABLE_PLAYER_STATISTICS
+	sys_log(0, "<shutdown> Destroying CStatisticsRanking...");
+	statisticsRanking.Destroy();
+#endif
 
 #ifdef ENABLE_NEW_MOB_TIMER
 	CNewMobTimer::instance().Destroy();

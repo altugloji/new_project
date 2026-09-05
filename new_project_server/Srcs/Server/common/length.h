@@ -971,7 +971,9 @@ enum EShopOfflineSearchCategories {
 	SHOP_SEARCH_SUB_SPECIAL_OTHER,
 	SHOP_SEARCH_SUB_SPECIAL_DRAGON_VOUCHER,
 	SHOP_SEARCH_SUB_SPECIAL_QUEST,
-	SHOP_SEARCH_SUB_SPECIAL_LOOTBOX,
+	SHOP_SEARCH_SUB_SPECIAL_LOOTBOX,		// Sandiklar (2026-08-02'den beri kullaniliyor)
+	SHOP_SEARCH_SUB_SPECIAL_BIOLOG,			// Biyolog gorev esyalari (2026-08-02)
+	SHOP_SEARCH_SUB_SPECIAL_MISC,			// Diger Esyalar (2026-08-02)
 
 	SHOP_SEARCH_SUB_MINING_ORE = 0,
 	SHOP_SEARCH_SUB_MINING_MELT,
@@ -1003,7 +1005,7 @@ enum EShopOfflineSearchCategories {
 	SHOP_SEARCH_SUB_GRID_ASSASSIN = 11,		// Zirh: Ninja govde
 	SHOP_SEARCH_SUB_GRID_SURA = 12,			// Zirh: Sura govde
 	SHOP_SEARCH_SUB_GRID_SHAMAN = 13,		// Zirh: Saman govde
-	SHOP_SEARCH_SUB_GRID_SHIELD = 14,		// Zirh: Kalkan (sinifsiz)
+	// (SHOP_SEARCH_SUB_GRID_SHIELD = 14 kaldirildi: Kalkan 2026-08-02'de Taki'ya tasindi, asagida JEW_SHIELD)
 	// Silah gruplari tur bazli (2026-08-02 kullanici istegi; sinif on-adi etiket)
 	SHOP_SEARCH_SUB_GRID_WPN_ONEHAND = 10,	// Silah: Savasci Tek El (tum tek-el kiliclar)
 	SHOP_SEARCH_SUB_GRID_WPN_TWOHAND = 11,	// Silah: Savasci Cift El
@@ -1015,6 +1017,8 @@ enum EShopOfflineSearchCategories {
 	SHOP_SEARCH_SUB_GRID_JEW_NECK = 11,		// Taki: Kolye
 	SHOP_SEARCH_SUB_GRID_JEW_WRIST = 12,	// Taki: Bileklik
 	SHOP_SEARCH_SUB_GRID_JEW_BOOTS = 13,	// Taki: Ayakkabi
+	SHOP_SEARCH_SUB_GRID_JEW_HELMET = 14,	// Taki: Kasklar (2026-08-02)
+	SHOP_SEARCH_SUB_GRID_JEW_SHIELD = 15,	// Taki: Kalkan (2026-08-02 Zirh'tan tasindi)
 
 #endif
 	SHOP_CATEGORY_MAX_SUB = 20,

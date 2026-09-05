@@ -26,6 +26,12 @@
 #include "wedding.h"
 #include "affect.h"
 #include "arena.h"
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#endif
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 #include "OXEvent.h"
 #include "priv_manager.h"
 #include "log.h"
@@ -933,8 +939,16 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 		}
 		else if (memberFlag == MEMBER_NO)
 		{
+#ifdef ENABLE_WS_TOURNAMENT
+			// WS turnuvasi: mac davetlisi veya seyirci ise haritada kalir
+			if (CWSTournamentManager::instance().OnPlayerEnterArenaMap(ch) == false)
+			{
+#endif
 			if (ch->GetGMLevel() == GM_PLAYER)
 				ch->WarpSet(EMPIRE_START_X(ch->GetEmpire()), EMPIRE_START_Y(ch->GetEmpire()));
+#ifdef ENABLE_WS_TOURNAMENT
+			}
+#endif
 		}
 		else
 		{
@@ -949,6 +963,17 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 				ch->WarpSet(EMPIRE_START_X(ch->GetEmpire()), EMPIRE_START_Y(ch->GetEmpire()));
 		}
 	}
+#ifdef ENABLE_FFA_EVENT
+	else if (CFFAManager::instance().IsFFAMap(ch->GetMapIndex()))
+	{
+		// FFA: kapaliyken relog -> sehre; acikken giris duzeni (parti dagit, binek indir, skor gonder)
+		if (CFFAManager::instance().OnPlayerEnterMap(ch) == false)
+		{
+			if (ch->GetGMLevel() == GM_PLAYER)
+				ch->WarpSet(EMPIRE_START_X(ch->GetEmpire()), EMPIRE_START_Y(ch->GetEmpire()));
+		}
+	}
+#endif
 	else
 	{
 		if (CWarMapManager::instance().IsWarMap(ch->GetMapIndex()) ||
@@ -971,6 +996,11 @@ void CInputLogin::Entergame(LPDESC d, const char * data) const
 		ch->SkillLevelPacket();
 		// @fixme182 END
 	}
+
+#ifdef ENABLE_WS_TOURNAMENT
+	// mac ici relog: duello anahtarlarini tazele / maci devam ettir (Show+PHASE_GAME sonrasi olmali)
+	CWSTournamentManager::instance().OnPlayerLogin(ch);
+#endif
 
 	if (ch && ch->IsGM())
 		ch->ChatPacket(CHAT_TYPE_INFO, "Map Index: %ld - %s", ch->GetMapIndex(), g_stHostname.c_str());

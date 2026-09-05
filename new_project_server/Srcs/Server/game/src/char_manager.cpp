@@ -10,6 +10,7 @@
 #include "p2p.h"
 #include "dungeon.h"
 #include "db.h"
+#include "log.h"
 #include "config.h"
 #include "xmas_event.h"
 #include "questmanager.h"
@@ -690,6 +691,12 @@ void CHARACTER_MANAGER::Update(int iPulse)
 			DBManager::instance().SendMoneyLog(MONEY_LOG_MONSTER_KILL, it->first, it->second);
 
 		m_map_dwMobKillCount.clear();
+
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+		for (itertype(m_map_YangFlow) it = m_map_YangFlow.begin(); it != m_map_YangFlow.end(); ++it)
+			LogManager::instance().YangFlowLog(it->first.first, it->first.second, it->second.first, it->second.second);
+		m_map_YangFlow.clear();
+#endif
 	}
 
 	if (test_server && 0 == (iPulse % PASSES_PER_SEC(60)))
@@ -697,6 +704,18 @@ void CHARACTER_MANAGER::Update(int iPulse)
 
 	FlushPendingDestroy();
 }
+
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+void CHARACTER_MANAGER::CollectYangFlow(BYTE bSource, long lMapIndex, int iGold)
+{
+	if (iGold <= 0)
+		return;
+
+	std::pair<long long, DWORD> & r = m_map_YangFlow[std::make_pair(bSource, lMapIndex)];
+	r.first += iGold;
+	r.second += 1;
+}
+#endif
 
 void CHARACTER_MANAGER::ProcessDelayedSave()
 {

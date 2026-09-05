@@ -94,12 +94,24 @@ class LogManager : public singleton<LogManager>
 		void		FishingTimeLog(uint32_t playerID, const char* szName, uint32_t accID, uint32_t totalMs, const char * szState);
 #endif
 
+#ifdef ENABLE_GM_FISH_INFO
+		// GM Balik Bilgisi: log DB'den SONUC donduren async sorgu. LogManager'in normal Query'si
+		// fire-and-forget'tir; buradaki bReturn'lu sorgularin sonuclarini Process() pompasi
+		// (main.cpp heartbeat idle dongusu) ana thread'de f callback'ine teslim eder.
+		void		FuncQuery(any_function f, const char * c_pszFormat, ...);
+		void		Process();
+#endif
+
 #ifdef ENABLE_BOT_CONTROL
 		void		BotControlLog(uint32_t playerID, const char* szName, uint32_t accID, uint32_t verifyMs);
 #endif
 
 #ifdef ENABLE_GIFT_SEND_SYSTEM
 		void		GiftLog(uint32_t senderPID, const char* szSenderName, uint32_t targetPID, const char* szTargetName, DWORD dwGiftId, DWORD dwCount, const char* szType);
+#endif
+
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+		void		YangFlowLog(BYTE bSource, long lMapIndex, long long llGold, DWORD dwCount);
 #endif
 
 		size_t EscapeString(char* dst, size_t dstSize, const char *src, size_t srcSize);

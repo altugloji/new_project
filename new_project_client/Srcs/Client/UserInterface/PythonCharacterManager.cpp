@@ -949,6 +949,35 @@ CInstanceBase * CPythonCharacterManager::GetCloseInstance(CInstanceBase * pInsta
 	return pCloseInstance;
 }
 
+#ifdef ENABLE_WS_TOURNAMENT
+DWORD CPythonCharacterManager::GetCloseInstanceVID(CInstanceBase* pInstance)
+{
+	float fMinDistance = 10000.0f;
+	DWORD dwCloseVID = 0;
+
+	TCharacterInstanceMap::iterator itor = m_kAliveInstMap.begin();
+	for (; itor != m_kAliveInstMap.end(); ++itor)
+	{
+		CInstanceBase* pTargetInstance = itor->second;
+
+		if (pTargetInstance == pInstance)
+			continue;
+
+		if (!pTargetInstance->IsPC())
+			continue;
+
+		float fDistance = pInstance->GetDistance(pTargetInstance);
+		if (fDistance < fMinDistance)
+		{
+			fMinDistance = fDistance;
+			dwCloseVID = pTargetInstance->GetVirtualID();
+		}
+	}
+
+	return dwCloseVID;
+}
+#endif
+
 void CPythonCharacterManager::RefreshAllPCTextTail()
 {
 	CPythonCharacterManager::CharacterIterator itor = CharacterInstanceBegin();

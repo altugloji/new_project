@@ -652,6 +652,9 @@ namespace quest
 		RegisterQuestFunctionTable();
 		RegisterTargetFunctionTable();
 		RegisterArenaFunctionTable();
+#ifdef ENABLE_WS_TOURNAMENT
+		RegisterWSFunctionTable();
+#endif
 		RegisterForkedFunctionTable();
 		RegisterMonarchFunctionTable();
 		RegisterOXEventFunctionTable();

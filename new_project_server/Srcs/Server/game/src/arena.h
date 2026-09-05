@@ -71,12 +71,41 @@ class CArena
 	PIXEL_POSITION GetObserverPoint() const { return m_ObserverPoint; }
 
 	void EndDuel();
+#ifdef ENABLE_WS_TOURNAMENT
+	bool WSPauseIfMember(DWORD dwPID);					// kopma: eventleri durdur, arena canli kalsin
+	bool WSResumeDuelIfMember(DWORD dwPID, int iRemainSec);	// donus: anahtar tazele + mac saatini kalanla kur
+	bool WSSendDuelStartIfMember(DWORD dwPID);	// relog: duello anahtarlarini (taze VID) iki tarafa yeniden gonder
+#endif
 	void ClearEvent() { m_pEvent = nullptr; }
 	void OnDisconnect(DWORD pid);
 	void RemoveObserver(DWORD pid);
 
 	void SendPacketToObserver(const void * c_pvData, int iSize) const;
 	void SendChatPacketToObserver(BYTE type, const char * format, ...) const;
+
+#ifdef ENABLE_WS_TOURNAMENT
+	DWORD GetSetPointA() const { return m_dwSetPointOfA; }
+	DWORD GetSetPointB() const { return m_dwSetPointOfB; }
+
+	// kopma sonrasi yeniden kurulan turnuva macinda korunan set skorunu geri yukle
+	// (pid bu arenanin uyesiyse uygular ve true doner - IsMember protected oldugu icin kontrol burada)
+	bool WSRestoreSetPoints(DWORD dwPID, DWORD dwOwnPoints, DWORD dwOppPoints)
+	{
+		if (m_dwPIDA == dwPID)
+		{
+			m_dwSetPointOfA = dwOwnPoints;
+			m_dwSetPointOfB = dwOppPoints;
+			return true;
+		}
+		if (m_dwPIDB == dwPID)
+		{
+			m_dwSetPointOfB = dwOwnPoints;
+			m_dwSetPointOfA = dwOppPoints;
+			return true;
+		}
+		return false;
+	}
+#endif
 };
 
 class CArenaMap
@@ -139,6 +168,16 @@ class CArenaManager : public singleton<CArenaManager>
 		MEMBER_IDENTITY IsMember(DWORD dwMapIndex, DWORD PID);
 
 		bool IsLimitedItem( long lMapIndex, DWORD dwVnum );
+
+#ifdef ENABLE_WS_TOURNAMENT
+		// WS Turnuvasi yardimcilari
+		int GetArenaCount(DWORD dwMapIndex);
+		bool GetObserverPoint(DWORD dwMapIndex, WORD & wX, WORD & wY);
+		bool WSRestoreSetPoints(DWORD dwPID, DWORD dwOwnPoints, DWORD dwOppPoints);
+		bool WSPauseDuel(DWORD dwPID);
+		bool WSResumeDuel(DWORD dwPID, int iRemainSec);
+		bool WSSendDuelStart(DWORD dwPID);
+#endif
 };
 
 #endif /*__CLASS_ARENA_MANAGER__*/

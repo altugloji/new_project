@@ -4,6 +4,9 @@
 #include "char.h"
 #include "char_manager.h"
 #include "affect.h"
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#endif
 #include "packet.h"
 #include "buffer_manager.h"
 #include "desc_client.h"
@@ -524,6 +527,11 @@ bool CHARACTER::AddAffect(DWORD dwType, BYTE bApplyOn, long lApplyValue, DWORD d
 	}
 	// END_OF_CHAT_BLOCK
 
+#ifdef ENABLE_WS_TOURNAMENT
+	// duello haritasinda gorunmezlik en fazla 15 sn (pasif kacis onlemi, Eski_A paritesi)
+	if (dwType == 34 /* SKILL_EUNHYUNG (skill.h:75, dogrulandi) */ && GetArena() != nullptr && GetMapIndex() == WS_TOURNAMENT_MAP_INDEX && lDuration > 15)
+		lDuration = 15;
+#endif
 	if (lDuration == 0)
 	{
 		sys_err("Character::AddAffect lDuration == 0 type %u apply %u value %ld", dwType, bApplyOn, lApplyValue); // @warme016 (adjusted n more fields)

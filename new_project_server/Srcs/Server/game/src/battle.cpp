@@ -17,6 +17,12 @@
 #include "unique_item.h"
 #include "lua_incl.h"
 #include "arena.h"
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#endif
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 #include "sectree.h"
 #include "ani.h"
 #include "locale_service.h"
@@ -105,6 +111,27 @@ bool battle_is_attackable(LPCHARACTER ch, LPCHARACTER victim)
 #endif
 	if (ch->IsStun() || ch->IsDead())
 		return false;
+
+#ifdef ENABLE_WS_TOURNAMENT
+	// hazirlik kilidi TUM izin yollarindan once: lonca-savasi erken donusu bile delemez
+	// (kendine buff serbest - bu kapi yalniz ch->victim saldirisini keser)
+	if (ch->IsPC() && victim->IsPC() && CWSTournamentManager::instance().IsPrepBlocked(ch->GetPlayerID(), victim->GetPlayerID()))
+		return false;
+#endif
+
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasi: herkes herkese (ayni imparatorluk/lonca/parti dahil); GM'e vurulamaz,
+	// dogus korumasi cift yonlu; kapi harita-varligina bagli (bayrak dususu unmask etmez)
+	{
+		const int iFFA = CFFAManager::instance().CheckAttack(ch, victim);
+
+		if (iFFA > 0)
+			return true;
+
+		if (iFFA < 0)
+			return false;
+	}
+#endif
 
 	if (ch->IsPC() && victim->IsPC())
 	{

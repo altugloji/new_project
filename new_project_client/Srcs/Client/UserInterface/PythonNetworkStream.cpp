@@ -221,6 +221,10 @@ class CMainPacketHeaderMap : public CNetworkPacketHeaderMap
 #ifdef ENABLE_GM_PLAYER_PANEL
 			Set(HEADER_GC_GM_PLAYER_PANEL, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGmPlayerPanel), DYNAMIC_SIZE_PACKET));
 #endif
+#ifdef ENABLE_WS_TOURNAMENT
+			Set(HEADER_GC_WS_TOURNAMENT, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCWSTournament), DYNAMIC_SIZE_PACKET));
+			Set(HEADER_GC_SKILL_COOLDOWN, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCSkillCooldown), STATIC_SIZE_PACKET));
+#endif
 #ifdef __GEM_SHOP__
 			Set(HEADER_GC_GEM, CNetworkPacketHeaderMap::TPacketType(sizeof(TPacketGCGem), DYNAMIC_SIZE_PACKET));
 #endif

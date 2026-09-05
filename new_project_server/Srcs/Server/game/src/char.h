@@ -358,6 +358,16 @@ enum EPointTypes
 	POINT_GEM 					= 162,
 #endif
 
+#ifdef ENABLE_PLAYER_STATISTICS
+	// Oyun ici siralama istatistikleri (istemci Packet.h ile AYNI numaralar!)
+	POINT_ST_DESTROYED_BOSS_COUNT	= 163,
+	POINT_ST_DESTROYED_STONE_COUNT	= 164,
+	POINT_ST_MAX_BOSS_DMG			= 165,
+	POINT_ST_MAX_STONE_DMG			= 166,
+	POINT_ST_MAX_PLAYER_DMG			= 167,
+	POINT_ST_RONARK_SCORE			= 168,
+#endif
+
 	POINT_MAX,
 };
 
@@ -451,6 +461,15 @@ typedef struct character_point
 	int				stamina;
 
 	BYTE			skill_group;
+
+#ifdef ENABLE_PLAYER_STATISTICS
+	long long		st_dst_boss_count;
+	long long		st_dst_stone_count;
+	long long		st_max_boss_dmg;
+	long long		st_max_stone_dmg;
+	long long		st_max_player_dmg;
+	long long		st_ronark_scores;
+#endif
 } CHARACTER_POINT;
 
 typedef struct character_point_instant
@@ -799,6 +818,10 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		int				GetRandomSP() const	{ return m_points.iRandomSP; }
 
 		int				GetHPPct() const;
+#ifdef ENABLE_WS_TOURNAMENT
+		void			WSSetSkillCooldown(DWORD dwSkillVnum, DWORD dwNextUsableTimeMs);	// 0 = sifirla; client'a GC 231 gider
+		void			WSResetAllSkillCooldowns();
+#endif
 
 		void			SetRealPoint(BYTE idx, int val);
 		int				GetRealPoint(BYTE idx) const;
@@ -2054,10 +2077,10 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		int		GetMyShopTime() const	{ return m_iMyShopTime; }
 		void	SetMyShopTime() { m_iMyShopTime = thecore_pulse(); }
 
-#ifdef ENABLE_MARRIAGE_RING_COOLTIME
-	int		m_iMarriageRingTime;
-	int		GetMarriageRingTime() const	{ return m_iMarriageRingTime; }
-	void	SetMarriageRingTime() { m_iMarriageRingTime = thecore_pulse(); }
+#ifdef ENABLE_HERB_POTION_USE_COOLTIME
+	int		m_iHerbPotionTime;
+	int		GetHerbPotionTime() const	{ return m_iHerbPotionTime; }
+	void	SetHerbPotionTime() { m_iHerbPotionTime = thecore_pulse(); }
 #endif
 
 		bool	IsHack(bool bSendMsg = true, bool bCheckShopOwner = true, int limittime = g_nPortalLimitTime) const;
@@ -2352,6 +2375,23 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 	public:
 		void			SetLastFishCatchTime(DWORD dwTime) { m_dwLastFishCatchTime = dwTime; }
 		DWORD			GetLastFishCatchTime() { return m_dwLastFishCatchTime; }
+#endif
+
+#ifdef ENABLE_PLAYER_STATISTICS
+	public:
+		void			SetDestroyedBossCount(long long iValue) { m_points.st_dst_boss_count = iValue; }
+		void			SetDestroyedStoneCount(long long iValue) { m_points.st_dst_stone_count = iValue; }
+		void			SetMaxBossDamage(long long iValue) { m_points.st_max_boss_dmg = iValue; }
+		void			SetMaxStoneDamage(long long iValue) { m_points.st_max_stone_dmg = iValue; }
+		void			SetMaxPlayerDamage(long long iValue) { m_points.st_max_player_dmg = iValue; }
+		void			SetRonarkScore(long long iValue) { m_points.st_ronark_scores = iValue; }
+
+		long long		GetDestroyedBossCount() const { return m_points.st_dst_boss_count; }
+		long long		GetDestroyedStoneCount() const { return m_points.st_dst_stone_count; }
+		long long		GetMaxBossDamage() const { return m_points.st_max_boss_dmg; }
+		long long		GetMaxStoneDamage() const { return m_points.st_max_stone_dmg; }
+		long long		GetMaxPlayerDamage() const { return m_points.st_max_player_dmg; }
+		long long		GetRonarkScore() const { return m_points.st_ronark_scores; }
 #endif
 
 #ifdef ENABLE_EXCHANGE_LOG

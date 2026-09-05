@@ -10,6 +10,9 @@
 #include "desc_client.h"
 #include "desc_manager.h"
 #include "char.h"
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 #include "char_manager.h"
 #include "motion.h"
 #include "packet.h"
@@ -40,6 +43,9 @@
 #endif
 #ifdef ENABLE_LUCKY_DRAW
 	#include "LuckyDraw.h"
+#endif
+#ifdef ENABLE_PLAYER_STATISTICS
+	#include "statistics_rank.h"
 #endif
 #include "../../common/VnumHelper.h"
 
@@ -528,6 +534,12 @@ ACMD(do_restart)
 	ch->SetPosition(POS_STANDING);
 	ch->StartRecoveryEvent();
 
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasi: "buradan devam" spawn noktasina (olum yerinde dirilme yok), "sehre don" = cikis
+	if (CFFAManager::instance().OnRestart(ch, subcmd == SCMD_RESTART_TOWN))
+		return;
+#endif
+
 	//FORKED_LOAD
 
 	if (1 == quest::CQuestManager::instance().GetEventFlag("threeway_war"))
@@ -785,6 +797,14 @@ ACMD(do_stat)
 
 ACMD(do_pvp)
 {
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasinda /pvp kapali: Insert() iki tarafa da gercek ismi yazar (kimlik sizintisi)
+	if (CFFAManager::instance().IsFFAMap(ch->GetMapIndex()))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Savas alaninda duello teklifi kullanilamaz.");
+		return;
+	}
+#endif
 	if (ch->GetArena() != nullptr || CArenaManager::instance().IsArenaMap(ch->GetMapIndex()) == true)
 	{
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("대련장에서 사용하실 수 없습니다."));
@@ -803,6 +823,15 @@ ACMD(do_pvp)
 
 	if (pkVictim->IsNPC())
 		return;
+
+#ifdef ENABLE_FFA_EVENT
+	// kurban savas alanindaysa da kapali: Insert() gercek ismi IKI tarafa yazar (review bulgusu)
+	if (CFFAManager::instance().IsFFAMap(pkVictim->GetMapIndex()))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Savas alanindaki oyuncuya duello teklif edemezsin.");
+		return;
+	}
+#endif
 
 	if (pkVictim->GetArena() != nullptr)
 	{
@@ -2913,6 +2942,15 @@ ACMD(DoChangeChannel)
 		return;
 	}
 
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasinda kanal degisimi kapali (6 instance arasi skor farmi + kapidan kacis onlemi)
+	if (CFFAManager::instance().IsFFAMap(ch->GetMapIndex()))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Savas alaninda kanal degistiremezsin.");
+		return;
+	}
+#endif
+
 	if (ch->GetMapIndex() == 66 || ch->GetMapIndex() >= 10000){
 		ch->ChatPacket(CHAT_TYPE_INFO, "Yapamazsin...");
 		return;
@@ -3241,6 +3279,25 @@ ACMD(do_lucky_draw_manage)
 		CLuckyDraw::Instance().RequestLuckyDrawJoiners(true);
 		CLuckyDraw::Instance().SendP2PPacket(5);
 	}
+}
+#endif
+
+#ifdef ENABLE_PLAYER_STATISTICS
+ACMD(do_request_ranking_list)
+{
+	if (!ch || !ch->GetDesc())
+		return;
+
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (!*arg1)
+		return;
+
+	BYTE rankType = 0;
+	str_to_number(rankType, arg1);
+
+	CStatisticsRanking::instance().RequestRankingList(rankType, ch);
 }
 #endif
 

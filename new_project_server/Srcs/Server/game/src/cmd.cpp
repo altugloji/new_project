@@ -47,6 +47,17 @@ ACMD(do_disconnect);
 #ifdef ENABLE_NEXT_REFINE_SUCCESS
 ACMD(do_next_refine_success);
 #endif
+
+#ifdef ENABLE_WS_TOURNAMENT
+ACMD(do_ws);
+ACMD(do_ws_admin);
+#endif
+#ifdef ENABLE_FFA_EVENT
+ACMD(do_ffa);
+#endif
+#ifdef ENABLE_GM_FISH_INFO
+ACMD(do_fish_info);
+#endif
 ACMD(do_kill);
 ACMD(do_emotion_allow);
 ACMD(do_emotion);
@@ -350,6 +361,9 @@ ACMD(do_pickup_block);
 #ifdef ENABLE_LUCKY_DRAW
 ACMD(do_lucky_draw);
 ACMD(do_lucky_draw_manage);
+#endif
+#ifdef ENABLE_PLAYER_STATISTICS
+ACMD(do_request_ranking_list);
 #endif
 
 struct command_info cmd_info[] =
@@ -745,6 +759,26 @@ struct command_info cmd_info[] =
 	{ "lucky_draw_manage",	do_lucky_draw_manage,	0,			POS_DEAD,	GM_IMPLEMENTOR	},
 #endif
 
+#ifdef ENABLE_GM_FISH_INFO
+	// GM Balik Bilgisi: hedef oyuncunun fishing_log kayitlari (sonuc chat-command ile; bkz. cmd_gm.cpp do_fish_info)
+	{ "fish_info",		do_fish_info,		0,			POS_DEAD,	GM_LOW_WIZARD	},
+#endif
+
+#ifdef ENABLE_WS_TOURNAMENT
+	// WS 1v1 Turnuvasi (prefix eslesme: "ws" once, "ws_admin" sonra; yeni komutlar tabloda sona)
+	{ "ws",				do_ws,					0,			POS_DEAD,	GM_PLAYER		},
+	{ "ws_admin",		do_ws_admin,			0,			POS_DEAD,	GM_HIGH_WIZARD	},
+#endif
+
+#ifdef ENABLE_FFA_EVENT
+	// FFA savas etkinligi: GM durum/siralama goruntuleme (acma-kapama: /e ffa_open 1|0)
+	{ "ffa",			do_ffa,					0,			POS_DEAD,	GM_LOW_WIZARD	},
+#endif
+
+#ifdef ENABLE_PLAYER_STATISTICS
+	// Oyun ici siralama: istemci penceresi veri istegi (cevap ChatPacket komutlariyla doner)
+	{ "request_ranking_list",	do_request_ranking_list,	0,			POS_DEAD,	GM_PLAYER		},
+#endif
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}
 };
 

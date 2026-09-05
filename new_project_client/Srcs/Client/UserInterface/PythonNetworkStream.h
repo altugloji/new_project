@@ -204,6 +204,10 @@ class CPythonNetworkStream : public CNetworkStream, public CSingleton<CPythonNet
 #ifdef ENABLE_GM_PLAYER_PANEL
 		bool RecvGmPlayerPanelPacket();
 #endif
+#ifdef ENABLE_WS_TOURNAMENT
+		bool RecvWSTournamentPacket();
+		bool RecvWSSkillCooldownPacket();
+#endif
 		bool SendShopSellPacketNew(BYTE bySlot, BYTE byCount);
 
 		// Exchange
@@ -867,6 +871,10 @@ public:
 public:
 	bool SendGmPlayerPanelRequestListPacket();
 	bool SendGmPlayerPanelWarpPacket(const char* pszName);
+#endif
+#ifdef ENABLE_WS_TOURNAMENT
+public:
+	bool SendWSTournamentRequestPacket();
 #endif
 #ifdef ENABLE_LUCKY_DRAW
 public:

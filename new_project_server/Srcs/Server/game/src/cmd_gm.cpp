@@ -25,6 +25,9 @@
 #include "building.h"
 #include "battle.h"
 #include "arena.h"
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#endif
 #include "start_position.h"
 #include "party.h"
 #include "monarch.h"
@@ -3806,6 +3809,13 @@ ACMD(do_end_duel)
 
 ACMD(do_duel)
 {
+#ifdef ENABLE_WS_TOURNAMENT
+	if (CWSTournamentManager::instance().IsBusy())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "WS turnuvasi devam ederken normal duello baslatilamaz.");
+		return;
+	}
+#endif
 	char szName1[256];
 	char szName2[256];
 	char szSet[256];
@@ -5115,6 +5125,125 @@ ACMD(do_next_refine_success)
 	tch->SetNextRefineSuccess(true);
 	ch->ChatPacket(CHAT_TYPE_INFO, "%s: bir sonraki +basma denemesi %%100 basarili olacak (tek seferlik).", tch->GetName());
 	sys_log(0, "NEXT_REFINE_SUCCESS: GM %s set flag for %s", ch->GetName(), tch->GetName());
+}
+#endif
+
+#ifdef ENABLE_GM_FISH_INFO
+// GM Balik Bilgisi: hedef oyuncunun log DB fishing_log kayitlarini client'a gonderir.
+// Kullanim: /fish_info <oyuncu adi>
+// Sorgu LogManager'in KENDI baglantisindan async gider (FuncQuery, log db AYRI MySQL sunucusunda
+// olabilir); oyun thread'i bloke olmaz. Sonuc CHAT_TYPE_COMMAND satirlariyla akar (tokenlar
+// bosluksuz; client stringCommander bosluga gore boler):
+//   fish_info_begin <isim> <toplam>
+//   fish_info <tarih|durum|ms>;<tarih|durum|ms>;...
+//   fish_info_end
+// Sayfalama tamamen client tarafindadir (uifishinfo.py: 10 sayfa x 50 = son 500 kayit).
+ACMD(do_fish_info)
+{
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (!*arg1)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Kullanim: /fish_info <oyuncu adi>");
+		return;
+	}
+
+	// SQL injection onlemi: ASCII'de sadece alfanumerik + '_' + '-';
+	// yuksek baytlar (>=0x80, orn. latin1 umlaut isim karakterleri) serbest
+	char szName[32];
+	size_t j = 0;
+	for (size_t i = 0; arg1[i] != '\0'; ++i)
+	{
+		const unsigned char c = static_cast<unsigned char>(arg1[i]);
+
+		if (c < 0x80 && !isalnum(c) && c != '_' && c != '-')
+		{
+			ch->ChatPacket(CHAT_TYPE_INFO, "Gecersiz oyuncu adi.");
+			return;
+		}
+
+		if (j >= sizeof(szName) - 1)
+		{
+			ch->ChatPacket(CHAT_TYPE_INFO, "Oyuncu adi cok uzun.");
+			return;
+		}
+
+		szName[j++] = static_cast<char>(c);
+	}
+	szName[j] = '\0';
+
+	if (!*szName)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Kullanim: /fish_info <oyuncu adi>");
+		return;
+	}
+
+	sys_log(0, "FISH_INFO: GM %s queried fishing_log of %s", ch->GetName(), szName);
+
+	const DWORD dwGMPID = ch->GetPlayerID();
+	const std::string stName(szName);
+
+	LogManager::instance().FuncQuery(
+		[dwGMPID, stName](SQLMsg * pMsg)
+		{
+			// callback ana thread'de kosar (LogManager::Process); GM bu arada cikmis olabilir
+			LPCHARACTER gm = CHARACTER_MANAGER::instance().FindByPID(dwGMPID);
+			if (!gm || !gm->GetDesc())
+				return;
+
+			if (!pMsg || pMsg->uiSQLErrno != 0 || !pMsg->Get())
+			{
+				gm->ChatPacket(CHAT_TYPE_INFO, "Balik logu sorgusu basarisiz oldu (log db).");
+				return;
+			}
+
+			SQLResult * pRes = pMsg->Get();
+			const int iTotal = static_cast<int>(pRes->uiNumRows);
+
+			gm->ChatPacket(CHAT_TYPE_COMMAND, "fish_info_begin %s %d", stName.c_str(), iTotal);
+
+			if (iTotal > 0 && pRes->pSQLResult)
+			{
+				// satir basina ~10 kayit paketle (CHAT_MAX_LEN 512 sinirinin guvenli altinda)
+				char szLine[420];
+				size_t uLen = 0;
+				MYSQL_ROW row;
+
+				while ((row = mysql_fetch_row(pRes->pSQLResult)))
+				{
+					char szRow[128];
+					const int iRowLen = snprintf(szRow, sizeof(szRow), "%s|%s|%s",
+							row[0] ? row[0] : "-",
+							row[1] ? row[1] : "-",
+							row[2] ? row[2] : "0");
+
+					if (iRowLen <= 0 || iRowLen >= static_cast<int>(sizeof(szRow)))
+						continue;
+
+					if (uLen > 0 && uLen + 1 + static_cast<size_t>(iRowLen) >= sizeof(szLine) - 1)
+					{
+						gm->ChatPacket(CHAT_TYPE_COMMAND, "fish_info %s", szLine);
+						uLen = 0;
+					}
+
+					if (uLen > 0)
+						szLine[uLen++] = ';';
+
+					memcpy(szLine + uLen, szRow, iRowLen);
+					uLen += iRowLen;
+					szLine[uLen] = '\0';
+				}
+
+				if (uLen > 0)
+					gm->ChatPacket(CHAT_TYPE_COMMAND, "fish_info %s", szLine);
+			}
+
+			gm->ChatPacket(CHAT_TYPE_COMMAND, "fish_info_end");
+		},
+		"SELECT DATE_FORMAT(take_time, '%%d.%%m.%%Y_%%H:%%i:%%S'), state, take_time_ms "
+		"FROM fishing_log WHERE player_name = '%s' ORDER BY take_time DESC LIMIT 500",
+		szName);
 }
 #endif
 

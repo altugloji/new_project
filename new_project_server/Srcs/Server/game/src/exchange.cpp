@@ -4,6 +4,9 @@
 #include "desc.h"
 #include "desc_client.h"
 #include "char.h"
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 #include "item.h"
 #include "item_manager.h"
 #include "packet.h"
@@ -78,6 +81,12 @@ bool CHARACTER::ExchangeStart(LPCHARACTER victim)
 
 	if (victim->IsNPC())
 		return false;
+
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasinda ticaret kapali (kimlik + kill-feeding onlemi)
+	if (CFFAManager::instance().BlocksInteraction(this, victim))
+		return false;
+#endif
 
 #ifdef ENABLE_MESSENGER_BLOCK
 	if (MessengerManager::instance().CheckMessengerList(GetName(), victim->GetName(), SYST_BLOCK))

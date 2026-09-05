@@ -146,7 +146,7 @@
 #define ENABLE_USER_REPORT_SYSTEM 										//Official User Report System
 #define ENABLE_ITEM_SHOP_SYSTEM											// Nesne Market Sistemi
 #define __RENEWAL_SKILL_BOOK__
-//#define NEW_PASSIVE_SKILLS												// Pasif Beceriler (Ilham 141 sabit HP) - server define ile birlikte acilmali
+// #define NEW_PASSIVE_SKILLS												// Pasif Beceriler (Ilham 141 sabit HP) - server define ile birlikte acilmali
 // #define ENABLE_MONSTER_HUNTER_SKILL								// Canavar Avcisi pasifi (144); SIMDILIK KAPALI, server ile birlikte ac
 #define ENABLE_CUBE_RENEWAL
 #define ENABLE_CHARACTER_CHEST
@@ -159,6 +159,7 @@
 #define BOSS_EFFECT
 #define ENABLE_REFINE_RENEWAL
 #define ENABLE_GM_PLAYER_PANEL
+#define ENABLE_WS_TOURNAMENT										// WS 1v1 Turnuva paneli (server ile BIRLIKTE derlenir; CG 235 / GC 247)
 #define ENABLE_SAFE_TRADE_SYSTEM										// Güvenli Ticaret
 #define ENABLE_IKASHOP_SEARCH											// IKASHOP tarzi global Pazar Arama: filtreli arama + uzaktan satin alma (CG 84 / GC 139; server ile BIRLIKTE derlenir)
 #define ENABLE_ITEM_UPGRADE_OWNER
@@ -185,6 +186,7 @@
 #endif
 
 #define ENABLE_MESSENGER_BLOCK											// Oyuncu Engelleme Sistemi (server ENABLE_MESSENGER_BLOCK ile ayni; wire degisti -> rebuild+repack birlikte)
+#define ENABLE_PLAYER_STATISTICS										// Oyun ici siralama sistemi (server ile ayni; POINT 163-168 paritesi sart)
 
 #define METIN35_ADMIN_PANEL												// Yönetim Paneli
 #ifdef METIN35_ADMIN_PANEL

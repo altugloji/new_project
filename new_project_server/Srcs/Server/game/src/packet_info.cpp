@@ -236,6 +236,9 @@ CPacketInfoCG::CPacketInfoCG()
 #ifdef ENABLE_GM_PLAYER_PANEL
 	Set(HEADER_CG_GM_PLAYER_PANEL, sizeof(TPacketCGGmPlayerPanel), "GmPlayerPanel", true);
 #endif
+#ifdef ENABLE_WS_TOURNAMENT
+	Set(HEADER_CG_WS_TOURNAMENT, sizeof(TPacketCGWSTournament), "WSTournamentPanel", true);
+#endif
 #ifdef ENABLE_GIFT_SEND_SYSTEM
 	Set(HEADER_CG_GIFT_LIST, sizeof(TPacketCGGiftList), "GiftList", true);
 	Set(HEADER_CG_GIFT_FIND, sizeof(TPacketCGGiftFind), "GiftFind", true);
@@ -329,6 +332,10 @@ CPacketInfoGG::CPacketInfoGG()
 	Set(HEADER_GG_MESSENGER_BLOCK_ADD,		sizeof(TPacketGGMessenger),		"MessengerBlockAdd",	false);
 	Set(HEADER_GG_MESSENGER_BLOCK_REMOVE,	sizeof(TPacketGGMessenger),		"MessengerBlockRemove",	false);
 #endif
+
+	// bilerek ifdef'siz (bkz. RELOAD_ETC_DROP notu): kayit kosulsuz, isleyici define'lidir
+	Set(HEADER_GG_WS_TOURNAMENT,		sizeof(TPacketGGWSTournament),		"WSTournament",		false);
+	Set(HEADER_GG_WS_BRACKET,			sizeof(TPacketGGWSBracket),			"WSBracket",		false);
 
 }
 

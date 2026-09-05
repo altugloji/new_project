@@ -682,6 +682,14 @@ void CPythonNetworkStream::GamePhase()
 				ret = RecvGmPlayerPanelPacket();
 				break;
 #endif
+#ifdef ENABLE_WS_TOURNAMENT
+			case HEADER_GC_WS_TOURNAMENT:
+				ret = RecvWSTournamentPacket();
+				break;
+			case HEADER_GC_SKILL_COOLDOWN:
+				ret = RecvWSSkillCooldownPacket();
+				break;
+#endif
 #ifdef __GEM_SHOP__
 		case HEADER_GC_GEM:
 			ret = RecvGem();
@@ -2737,8 +2745,34 @@ bool CPythonNetworkStream::RecvDamageInfoPacket()
 	}
 
 	CInstanceBase * pInstTarget = CPythonCharacterManager::Instance().GetInstancePtr(DamageInfoPacket.dwVID);
+#ifdef ENABLE_WS_TOURNAMENT
+	// izleme modunda stil izlenen oyuncuya gore secilir (Eski_A paritesi):
+	// izlenenin yedigi hasar 'self', rakibininki 'target' dokusuyla cizilir
+	bool bSelf = false, bTarget = false;
+	if (CPythonApplication::Instance().IsWatchingMode())
+	{
+		const DWORD watchingVID = CPythonApplication::Instance().GetWatchingPlayerVID();
+		bSelf = (watchingVID == DamageInfoPacket.dwVID);
+		if (watchingVID == 0)
+		{
+			bTarget = true;
+		}
+		else if (!bSelf)
+		{
+			CInstanceBase * pInstWatchingPlayer = CPythonCharacterManager::Instance().GetInstancePtr(watchingVID);
+			if (pInstWatchingPlayer)
+				bTarget = (CPythonCharacterManager::Instance().GetCloseInstanceVID(pInstWatchingPlayer) == DamageInfoPacket.dwVID);
+		}
+	}
+	else
+	{
+		bSelf = (pInstTarget == CPythonCharacterManager::Instance().GetMainInstancePtr());
+		bTarget = (pInstTarget == m_pInstTarget);
+	}
+#else
 	const bool bSelf = (pInstTarget == CPythonCharacterManager::Instance().GetMainInstancePtr());
 	const bool bTarget = (pInstTarget==m_pInstTarget);
+#endif
 
 	if (pInstTarget)
 	{
@@ -5451,6 +5485,112 @@ bool CPythonNetworkStream::SendGmPlayerPanelWarpPacket(const char* pszName)
 	}
 
 	return SendSequence();
+}
+#endif
+
+#ifdef ENABLE_WS_TOURNAMENT
+bool CPythonNetworkStream::RecvWSTournamentPacket()
+{
+	TPacketGCWSTournament pack;
+	if (!Recv(sizeof(TPacketGCWSTournament), &pack))
+		return false;
+
+	PyObject* poEntryList = PyList_New(0);
+	if (!poEntryList)
+		return false;
+
+	for (int i = 0; i < (int) pack.bEntryCount; ++i)
+	{
+		TWSTournamentEntryInfo entry;
+		if (!Recv(sizeof(TWSTournamentEntryInfo), &entry))
+		{
+			Py_DECREF(poEntryList);
+			return false;
+		}
+
+		PyObject* poTuple = Py_BuildValue("(siii)", entry.szName, (int) entry.bLevel, (int) entry.bJob, (int) entry.bAlive);
+		if (!poTuple)
+		{
+			Py_DECREF(poEntryList);
+			return false;
+		}
+		PyList_Append(poEntryList, poTuple);
+		Py_DECREF(poTuple);
+	}
+
+	PyObject* poMatchList = PyList_New(0);
+	if (!poMatchList)
+	{
+		Py_DECREF(poEntryList);
+		return false;
+	}
+
+	for (int i = 0; i < (int) pack.bMatchCount; ++i)
+	{
+		TWSTournamentMatchInfo match;
+		if (!Recv(sizeof(TWSTournamentMatchInfo), &match))
+		{
+			Py_DECREF(poEntryList);
+			Py_DECREF(poMatchList);
+			return false;
+		}
+
+		PyObject* poTuple = Py_BuildValue("(ssiii)", match.szNameA, match.szNameB, (int) match.bRound, (int) match.bState, (int) match.bResult);
+		if (!poTuple)
+		{
+			Py_DECREF(poEntryList);
+			Py_DECREF(poMatchList);
+			return false;
+		}
+		PyList_Append(poMatchList, poTuple);
+		Py_DECREF(poTuple);
+	}
+
+	PyCallClassMemberFunc(m_apoPhaseWnd[PHASE_WINDOW_GAME], "WST_SetData",
+		Py_BuildValue("(OOiiiiiiiiiLL)", poEntryList, poMatchList,
+			(int) pack.bState,
+			(int) pack.bRound,
+			(int) pack.bMinLevel,
+			(int) pack.bMaxLevel,
+			(int) pack.bJobFilter,
+			(int) pack.bSetCount,
+			(int) pack.bMatchMinutes,
+			(int) pack.bMyStatus,
+			(int) pack.iSecondsLeft,
+			(long long) pack.llFee,
+			(long long) pack.llPool));
+	Py_DECREF(poEntryList);
+	Py_DECREF(poMatchList);
+	return true;
+}
+
+bool CPythonNetworkStream::SendWSTournamentRequestPacket()
+{
+	if (!__CanActMainInstance())
+		return true;
+
+	TPacketCGWSTournament packet;
+	memset(&packet, 0, sizeof(packet));
+	packet.bHeader = HEADER_CG_WS_TOURNAMENT;
+	packet.bSubHeader = 0;
+
+	if (!Send(sizeof(packet), &packet))
+	{
+		Tracen("SendWSTournamentRequestPacket Error");
+		return false;
+	}
+
+	return SendSequence();
+}
+
+bool CPythonNetworkStream::RecvWSSkillCooldownPacket()
+{
+	TPacketGCSkillCooldown pack;
+	if (!Recv(sizeof(pack), &pack))
+		return false;
+
+	CPythonPlayer::Instance().WSSetSkillCD(pack.dwSkillVnum, pack.iCooldown);
+	return true;
 }
 #endif
 

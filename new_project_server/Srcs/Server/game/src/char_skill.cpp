@@ -7,6 +7,13 @@
 #include "char.h"
 #include "char_manager.h"
 #include "battle.h"
+#ifdef ENABLE_WS_TOURNAMENT
+#include "arena.h"
+#include "ws_tournament.h"
+#endif
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 #include "desc.h"
 #include "desc_manager.h"
 #include "packet.h"
@@ -1064,6 +1071,12 @@ struct FuncSplashDamage
 			return;
 		}
 
+#ifdef ENABLE_PLAYER_STATISTICS
+		// Metin taslari beceri alan hasarindan muaf (istatistik adaleti; eski sunucu davranisi)
+		if (pkChrVictim->IsStone())
+			return;
+#endif
+
 		if (!battle_is_attackable(m_pkChr, pkChrVictim))
 		{
 			if(test_server)
@@ -1978,6 +1991,12 @@ int CHARACTER::ComputeSkill(DWORD dwVnum, LPCHARACTER pkVictim, BYTE bSkillLevel
 		return BATTLE_NONE;
 	}
 
+#ifdef ENABLE_PLAYER_STATISTICS
+	// Oyuncular metin taslarina beceri kullanamaz (istatistik adaleti; eski sunucu davranisi)
+	if (IsPC() && pkVictim && pkVictim->IsStone())
+		return BATTLE_NONE;
+#endif
+
 	if (pkSk->dwTargetRange && DISTANCE_SQRT(GetX() - pkVictim->GetX(), GetY() - pkVictim->GetY()) >= pkSk->dwTargetRange + 50)
 	{
 		if (test_server)
@@ -2001,6 +2020,20 @@ int CHARACTER::ComputeSkill(DWORD dwVnum, LPCHARACTER pkVictim, BYTE bSkillLevel
 		}
 	}
 
+#ifdef ENABLE_WS_TOURNAMENT
+	// duello haritasinda baskasina iyi-affect/buff atilamaz (Eski_A paritesi:
+	// seyirci mudahalesi + rakibe buff engeli; kendine buff serbest)
+	if (GetMapIndex() == WS_TOURNAMENT_MAP_INDEX && pkVictim != nullptr && pkVictim != this
+			&& (pkVictim->IsGoodAffect(dwVnum) || dwVnum == SKILL_JEONGEOP))
+		return BATTLE_NONE;
+#endif
+
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasinda baskasina iyi-affect/buff atilamaz (takimlasma onlemi; kendine serbest)
+	if (CFFAManager::instance().IsFFAMap(GetMapIndex()) && pkVictim != nullptr && pkVictim != this
+			&& (pkVictim->IsGoodAffect(dwVnum) || dwVnum == SKILL_JEONGEOP))
+		return BATTLE_NONE;
+#endif
 	if (pkVictim->IsAffectFlag(AFF_PABEOP) && pkVictim->IsGoodAffect(dwVnum))
 	{
 		return BATTLE_NONE;
@@ -2729,6 +2762,19 @@ EVENTFUNC(skill_muyoung_event)
 		return 0;
 	}
 
+#ifdef ENABLE_WS_TOURNAMENT
+	// duello haritasinda ucan kilic rastgele hedef yerine arena rakibini vurur (Eski_A paritesi)
+	if (ch->GetArena() != nullptr && ch->GetMapIndex() == WS_TOURNAMENT_MAP_INDEX)
+	{
+		LPCHARACTER pkOpp = (ch->GetArena()->GetPlayerAPID() == ch->GetPlayerID()) ? ch->GetArena()->GetPlayerB() : ch->GetArena()->GetPlayerA();
+		if (pkOpp != nullptr && !pkOpp->IsDead())
+		{
+			ch->CreateFly(FLY_SKILL_MUYEONG, pkOpp);
+			ch->ComputeSkill(SKILL_MUYEONG, pkOpp);
+			return PASSES_PER_SEC(3);
+		}
+	}
+#endif
 	// 1. Find Victim
 	FFindNearVictim f(ch, ch);
 	if (ch->GetSectree())
@@ -3756,3 +3802,36 @@ int CHARACTER::GetAddHPSkillLevel() const
 }
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4
+
+#ifdef ENABLE_WS_TOURNAMENT
+void CHARACTER::WSSetSkillCooldown(DWORD dwSkillVnum, DWORD dwNextUsableTimeMs)
+{
+	auto it = m_SkillUseInfo.find((int) dwSkillVnum);
+	if (it != m_SkillUseInfo.end())
+		it->second.dwNextSkillUsableTime = dwNextUsableTimeMs;
+
+	if (GetDesc() != nullptr)
+	{
+		TPacketGCSkillCooldown pack;
+		pack.bHeader = HEADER_GC_SKILL_COOLDOWN;
+		pack.dwSkillVnum = dwSkillVnum;
+		pack.iCooldown = (int) dwNextUsableTimeMs;
+		GetDesc()->Packet(&pack, sizeof(pack));
+	}
+}
+
+void CHARACTER::WSResetAllSkillCooldowns()
+{
+	// sabit vnum araligi yerine ogrenilmis-skill taramasi: lycan/yeni skiller de kapsanir
+	if (m_pSkillLevels == nullptr)
+		return;
+
+	for (DWORD dwVnum = 1; dwVnum < SKILL_MAX_NUM; ++dwVnum)
+	{
+		if (GetSkillLevel(dwVnum) == 0)
+			continue;
+
+		WSSetSkillCooldown(dwVnum, 0);
+	}
+}
+#endif // ENABLE_WS_TOURNAMENT

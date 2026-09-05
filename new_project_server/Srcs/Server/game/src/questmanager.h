@@ -136,8 +136,8 @@ namespace quest
 			bool		DungeonEliminate(uint32_t arg);
 #endif
 			void		LevelUp(unsigned int pc);
-#ifdef ENABLE_FISHING_ANTI_MACRO
-			void		FishingCaptcha(unsigned int pc);
+#ifdef ENABLE_FISHING_KILL_QUEST
+			void		FishingKill(unsigned int pc);
 #endif
 			void		AttrIn(unsigned int pc, LPCHARACTER ch, int attr);
 			void		AttrOut(unsigned int pc, LPCHARACTER ch, int attr);

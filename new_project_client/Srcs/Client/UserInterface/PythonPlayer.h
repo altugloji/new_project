@@ -221,6 +221,15 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 		void	NEW_SetAutoCameraRotationSpeed(float fRotSpd);
 		void	NEW_ResetCameraRotation() const;
 
+#ifdef ENABLE_WS_TOURNAMENT
+		// WS turnuva hazirlik kilidi: sure bazli (takili kalma imkansiz), server 'WSMoveLock <sn>' komutuyla yonetir
+		void	SetWSMoveLock(UINT uLockSeconds);
+		bool	IsWSMoveLocked() const;
+		void	WSSetSkillCD(DWORD dwSkillVnum, int iCooldownMs);	// GC 231: raunt basi skill sifirlama
+	protected:
+		DWORD	m_dwWSMoveLockEndTime{0};
+	public:
+#endif
 		void	NEW_SetSingleDirKeyState(int eDirKey, bool isPress);
 		void	NEW_SetSingleDIKKeyState(int eDIKKey, bool isPress);
 		void	NEW_SetMultiDirKeyState(bool isLeft, bool isRight, bool isUp, bool isDown);

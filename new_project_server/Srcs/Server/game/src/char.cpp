@@ -4,6 +4,9 @@
 #include "../../common/VnumHelper.h"
 
 #include "char.h"
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 
 #include "config.h"
 #include "utils.h"
@@ -463,8 +466,8 @@ void CHARACTER::Initialize()
 
 	m_iMyShopTime = 0;
 
-#ifdef ENABLE_MARRIAGE_RING_COOLTIME
-	m_iMarriageRingTime = 0;
+#ifdef ENABLE_HERB_POTION_USE_COOLTIME
+	m_iHerbPotionTime = 0;
 #endif
 
 	InitMC();
@@ -1681,6 +1684,12 @@ EVENTINFO(warp_my_shop_event_info)
 // bilerek dahil degil: eski WarpToMyShop da kullanmiyordu ve pencere kapanisi MyShopTime set eder.
 static bool __CanWarpToMyShopNow(LPCHARACTER ch, BYTE bTargetChannel)
 {
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasindan pazara isinlanma = canli cikis kapisi; kapali
+	// (baslatma + tick + ates ayni fonksiyondan gectigi icin tek kapi yeter)
+	if (CFFAManager::instance().IsFFAMap(ch->GetMapIndex()))
+		return false;
+#endif
 	if (ch->IsDead())
 		return false;
 
@@ -2156,6 +2165,10 @@ void CHARACTER::EncodeInsertPacket(LPENTITY entity)
 		return;
 
 	const auto ch = (LPCHARACTER) entity;
+#ifdef ENABLE_FFA_EVENT
+	// FFA maskesi aktifken lonca id->isim paketi de gonderilmez (korelasyon sizintisi)
+	if (!CFFAManager::instance().ShouldMask(this, entity))
+#endif
 	ch->SendGuildName(GetGuild());
 
 	TPacketGCCharacterAdd pack;
@@ -2228,6 +2241,30 @@ void CHARACTER::EncodeInsertPacket(LPENTITY entity)
 		strlcpy(addPacket.name, GetName(), sizeof(addPacket.name));
 		addPacket.dwGuildID = GetGuild() ? GetGuild()->GetID() : 0;
 		addPacket.sAlignment = m_iAlignment / 10;
+#ifdef ENABLE_FFA_EVENT
+		// FFA haritasinda diger oyunculara kimlik maskesi: isim/lonca/unvan/seviye gizli.
+		// Izleyiciye DUSMAN imparatorluk gonderilir: client IsAttackableInstance farkli-
+		// imparatorluk dalinda saldiriya KOSULSUZ izin verir ve ismi kirmizi (NAMECOLOR_PVP) cizer.
+		// (PK_MODE_FREE denemesi ISE YARAMAZDI: client saldiri izninde SALDIRANIN kendi
+		// PK modunu okur, o da self'e gercek/PEACE gider - canli test bulgusu.)
+		if (CFFAManager::instance().ShouldMask(this, entity))
+		{
+			strlcpy(addPacket.name, FFA_MASK_NAME, sizeof(addPacket.name));
+			addPacket.dwGuildID = 0;
+			addPacket.sAlignment = 0;
+			addPacket.dwLevel = 0;
+			addPacket.bEmpire = (ch->GetEmpire() == 1) ? 2 : 1;
+			// gorsel uniforma: gercek ekipman gorunumu gizlenir (guc degismez);
+			// silah TUR bazli sabit (animasyon dogru kalir), zirh sinif bazli, kask/sac/acce yok
+			addPacket.awPart[CHR_EQUIPPART_ARMOR] = CFFAManager::instance().GetUniformArmorPart(this);
+			addPacket.awPart[CHR_EQUIPPART_WEAPON] = CFFAManager::instance().GetUniformWeaponPart(this);
+			addPacket.awPart[CHR_EQUIPPART_HEAD] = 0;
+			addPacket.awPart[CHR_EQUIPPART_HAIR] = 0;
+#ifdef ENABLE_ACCE_COSTUME_SYSTEM
+			addPacket.awPart[CHR_EQUIPPART_ACCE] = 0;
+#endif
+		}
+#endif
 		d->Packet(addPacket);
 	}
 
@@ -2332,6 +2369,29 @@ void CHARACTER::UpdatePacket()
 	pack.dwLastPlaytime = time(nullptr); // probably client-side only is enough
 #endif
 
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasinda cevreye maskeli kopya (lonca/unvan gizli), kendine gercek kopya:
+	// kendi dwGuildID'si maskelenirse client kendi lonca durumunu sifirlar (__SetGuildID)
+	if (IsPC() && GetGMLevel() == GM_PLAYER && CFFAManager::instance().IsFFAMap(GetMapIndex()))
+	{
+		TPacketGCCharacterUpdate maskPack = pack;
+		maskPack.dwGuildID = 0;
+		maskPack.sAlignment = 0;
+		maskPack.awPart[CHR_EQUIPPART_ARMOR] = CFFAManager::instance().GetUniformArmorPart(this);
+		maskPack.awPart[CHR_EQUIPPART_WEAPON] = CFFAManager::instance().GetUniformWeaponPart(this);
+		maskPack.awPart[CHR_EQUIPPART_HEAD] = 0;
+		maskPack.awPart[CHR_EQUIPPART_HAIR] = 0;
+#ifdef ENABLE_ACCE_COSTUME_SYSTEM
+		maskPack.awPart[CHR_EQUIPPART_ACCE] = 0;
+#endif
+		PacketAround(&maskPack, sizeof(maskPack), this);
+
+		if (GetDesc())
+			GetDesc()->Packet(pack);
+
+		return;
+	}
+#endif
 	PacketAround(pack);
 }
 
@@ -2518,6 +2578,15 @@ void CHARACTER::CreatePlayerProto(TPlayerTable & tab)
 	// END_OF_REMOVE_REAL_SKILL_LEVLES
 
 	tab.horse = GetHorseData();
+
+#ifdef ENABLE_PLAYER_STATISTICS
+	tab.iStDstBossCnt = GetDestroyedBossCount();
+	tab.iStDstStoneCnt = GetDestroyedStoneCount();
+	tab.iStMaxBossDmg = GetMaxBossDamage();
+	tab.iStMaxStoneDmg = GetMaxStoneDamage();
+	tab.iStMaxPlayerDmg = GetMaxPlayerDamage();
+	tab.iStRonarkScores = GetRonarkScore();
+#endif
 }
 
 void CHARACTER::SaveReal()
@@ -2892,6 +2961,15 @@ void CHARACTER::PointsPacket() const
 	pack.points[POINT_CHEQUE] = GetCheque();
 #endif
 
+#ifdef ENABLE_PLAYER_STATISTICS
+	pack.points[POINT_ST_DESTROYED_BOSS_COUNT] = GetDestroyedBossCount();
+	pack.points[POINT_ST_DESTROYED_STONE_COUNT] = GetDestroyedStoneCount();
+	pack.points[POINT_ST_MAX_BOSS_DMG] = GetMaxBossDamage();
+	pack.points[POINT_ST_MAX_STONE_DMG] = GetMaxStoneDamage();
+	pack.points[POINT_ST_MAX_PLAYER_DMG] = GetMaxPlayerDamage();
+	pack.points[POINT_ST_RONARK_SCORE] = GetRonarkScore();
+#endif
+
 	GetDesc()->Packet(pack);
 }
 
@@ -3099,6 +3177,15 @@ void CHARACTER::SetPlayerProto(const TPlayerTable * t)
 	SetHP(t->hp);
 	SetSP(t->sp);
 	SetStamina(t->stamina);
+
+#ifdef ENABLE_PLAYER_STATISTICS
+	SetDestroyedBossCount(t->iStDstBossCnt);
+	SetDestroyedStoneCount(t->iStDstStoneCnt);
+	SetMaxBossDamage(t->iStMaxBossDmg);
+	SetMaxStoneDamage(t->iStMaxStoneDmg);
+	SetMaxPlayerDamage(t->iStMaxPlayerDmg);
+	SetRonarkScore(t->iStRonarkScores);
+#endif
 
 #ifndef ENABLE_GM_FLAG_IF_TEST_SERVER
 	if (!test_server)
@@ -4970,6 +5057,38 @@ void CHARACTER::PointChange(BYTE type, int amount, bool bAmount, bool bBroadcast
 			}
 			break;
 
+#ifdef ENABLE_PLAYER_STATISTICS
+		case POINT_ST_DESTROYED_BOSS_COUNT:
+			SetDestroyedBossCount(amount);
+			val = amount;
+			break;
+
+		case POINT_ST_DESTROYED_STONE_COUNT:
+			SetDestroyedStoneCount(amount);
+			val = amount;
+			break;
+
+		case POINT_ST_MAX_BOSS_DMG:
+			SetMaxBossDamage(amount);
+			val = amount;
+			break;
+
+		case POINT_ST_MAX_STONE_DMG:
+			SetMaxStoneDamage(amount);
+			val = amount;
+			break;
+
+		case POINT_ST_MAX_PLAYER_DMG:
+			SetMaxPlayerDamage(amount);
+			val = amount;
+			break;
+
+		case POINT_ST_RONARK_SCORE:
+			SetRonarkScore(amount);
+			val = amount;
+			break;
+#endif
+
 		default:
 			sys_err("CHARACTER::PointChange: %s: unknown point change type %d", GetName(), type);
 			return;
@@ -5409,19 +5528,27 @@ void CHARACTER::fishing()
 		return;
 	}
 
-#ifdef ENABLE_FISHING_ANTI_MACRO
-	// Balik makro engeli: captcha (bot kontrolu) basarisiz/cevapsiz kaldiysa belirli sure balik tutulamaz.
-	// Yasak zamani fishing_captcha questi tarafindan "fishcap.ban" flag'ine get_global_time()+sure olarak yazilir.
+#ifdef ENABLE_FISHING_KILL_QUEST
+	// Balik bot onlemi: mob kesme gorevi aktifken yeni olta ATILAMAZ.
+	// Gorev C++'ta atanir (fishing.cpp Take esiginde); "fishkill.mob" (vnum) ve
+	// "fishkill.remain" (kalan kesim) flag'leri gorev bitene kadar dolu kalir.
+	// [MN;vnum] etiketi client tarafinda mob adina cevrilir (bCanFormat).
 	{
-		const int iFishBanUntil = GetQuestFlag("fishcap.ban");
-		if (iFishBanUntil > (int) get_global_time())
+		const int iFishKillMob = GetQuestFlag("fishkill.mob");
+		if (iFishKillMob > 0)
 		{
-			const int iRemainMin = (iFishBanUntil - (int) get_global_time() + 59) / 60;
-			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bot kontrolunu gecemedigin icin %d dakika balik tutamazsin."), iRemainMin);
+			const int iFishKillRemain = GetQuestFlag("fishkill.remain");
+			ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Balik tutmaya devam etmek icin %d adet [MN;%d] kesmen gerekiyor."), iFishKillRemain, iFishKillMob);
+			// Gorev penceresini yeniden ac: quest "when fishing_kill" flag'leri okuyup
+			// guncel kalan sayiyla gosterir. Oyuncu baska bir quest diyalogunu askida
+			// tutuyorsa event sessizce duser; ustteki chat mesaji o durumun yedegidir.
+			quest::CQuestManager::instance().FishingKill(GetPlayerID());
 			return;
 		}
 	}
+#endif
 
+#ifdef ENABLE_FISHING_ANTI_MACRO
 	// Balik makro engeli: NPC penceresi (pazar/takas/depo) acikken yeni olta ATILAMAZ.
 	// (Bu kontrol m_pkFishingEvent kontrolunden sonradir; boylece zaten atilmis bir olta
 	//  normal sekilde cekilip event temizlenebilir, askida event kalmaz.)
@@ -8779,6 +8906,12 @@ bool CHARACTER::CanWarp() const
 		return false;
 #endif
 
+#ifdef ENABLE_WS_TOURNAMENT
+	// arena duellosu / WS turnuva maci sirasinda warp ile kacis (ve kanal degisimi) engellenir
+	if (GetArena() != nullptr)
+		return false;
+#endif
+
 	return true;
 }
 
@@ -9645,6 +9778,10 @@ bool CHARACTER::ChangeChannel(BYTE newChannel)
 	if (!CanChangeChannel(newChannel))
 		return false;
 
+	// GM karakterler bekleme suresi olmadan aninda kanal degistirir
+	if (GetGMLevel() > GM_PLAYER)
+		return ProcessChangeChannel(newChannel);
+
 	// 5->1 geri sayim baslat; sifira inince ProcessChangeChannel isinlar
 	change_channel_event_info* info = AllocEventInfo<change_channel_event_info>();
 	info->ch = this;
@@ -9761,6 +9898,15 @@ bool CHARACTER::SummonPetFromItem(LPITEM item)
 	else
 	{
 		// summon
+#ifdef ENABLE_FFA_EVENT
+		// FFA haritasinda pet cagrilamaz: pet NPC ismi sahibinin gercek adini tasir (review bulgusu)
+		if (CFFAManager::instance().IsFFAMap(GetMapIndex()))
+		{
+			ChatPacket(CHAT_TYPE_INFO, "Savas alaninda pet cagrilamaz.");
+			return false;
+		}
+
+#endif
 		constexpr bool bFromFar = false;
 		const auto * pkMob = CMobManager::instance().Get(mobVnum);
 		const auto * petName = (pkMob) ? pkMob->GetLocaleName() : "";

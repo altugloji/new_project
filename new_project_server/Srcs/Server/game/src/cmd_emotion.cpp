@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "utils.h"
 #include "char.h"
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 #include "char_manager.h"
 #include "motion.h"
 #include "packet.h"
@@ -112,6 +115,15 @@ bool CHARACTER_CanEmotion(CHARACTER& rch)
 
 ACMD(do_emotion)
 {
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasinda emotion kapali: isimle hedef cozdugu icin isim->avatar eslestirme
+	// oraklidir; bulundu/bulunamadi cevabi bile varlik sizdirir (review bulgusu)
+	if (ch->GetGMLevel() == GM_PLAYER && CFFAManager::instance().IsFFAMap(ch->GetMapIndex()))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Savas alaninda ifade kullanilamaz.");
+		return;
+	}
+#endif
 	int i;
 	{
 		if (ch->IsRiding())

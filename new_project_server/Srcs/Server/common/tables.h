@@ -557,6 +557,14 @@ typedef struct SPlayerTable
 #ifdef __GEM_SYSTEM__
 	int			gem;
 #endif
+#ifdef ENABLE_PLAYER_STATISTICS
+	int64_t	iStDstBossCnt;
+	int64_t	iStDstStoneCnt;
+	int64_t	iStMaxBossDmg;
+	int64_t	iStMaxStoneDmg;
+	int64_t	iStMaxPlayerDmg;
+	int64_t	iStRonarkScores;
+#endif
 } TPlayerTable;
 
 typedef struct SMobSkillLevel

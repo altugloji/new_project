@@ -4,6 +4,10 @@
 #include "../eterbase/timer.h"
 #include "../eterlib/Camera.h"
 
+#ifdef ENABLE_WS_TOURNAMENT
+#include "PythonCharacterManager.h"
+#endif
+
 float BlendValueByLinear(float fElapsedTime, float fDuration, float fBeginValue, float fEndValue)
 {
 	if (fElapsedTime >= fDuration)
@@ -60,6 +64,48 @@ void CPythonApplication::__UpdateCamera()
 		GetCamera(&fDistance, &fPitch, &fRotation, &fHeight);
 		m_pyGraphic.SetPositionCamera(m_v3CenterPosition.x, m_v3CenterPosition.y, m_v3CenterPosition.z + pMainCamera->GetTargetHeight(), fDistance, fPitch, fRotation);
 	}
+#ifdef ENABLE_WS_TOURNAMENT
+	else if (CAMERA_MODE_WATCH == m_iCameraMode)
+	{
+		float fDistance, fPitch, fRotation, fHeight;
+		GetCamera(&fDistance, &fPitch, &fRotation, &fHeight);
+		if (m_iWatchingPlayerVID) {
+			TPixelPosition kPPosDst = {};
+			CInstanceBase* pkWatchPlayer = CPythonCharacterManager::Instance().GetInstancePtr(m_iWatchingPlayerVID);
+			if (pkWatchPlayer) {
+				m_fWatchLostTime = 0.0f;
+
+				if (pkWatchPlayer->IsInSafe()) {
+					SetDefaultCamera();
+					return;
+				}
+
+				pkWatchPlayer->NEW_GetPixelPosition(&kPPosDst);
+				m_pyGraphic.SetPositionCamera(kPPosDst.x, -kPPosDst.y, kPPosDst.z + pMainCamera->GetTargetHeight(), fDistance, fPitch, fRotation);
+				m_SoundManager.SetPosition(kPPosDst.x, -kPPosDst.y, kPPosDst.z);
+			}
+			else {
+				// hedef instance yok: view disina warp veya relog (VID degisti).
+				// Kisa tolerans (warp sirasinda gecici kaybolabilir), sonra kendine
+				// don - kamera bos sahnede asili kalmasin
+				const float fCurTime = CTimer::Instance().GetCurrentSecond();
+				if (m_fWatchLostTime == 0.0f) {
+					m_fWatchLostTime = fCurTime;
+				}
+				else if (fCurTime - m_fWatchLostTime > 2.0f) {
+					SetDefaultCamera();
+					return;
+				}
+				m_pyGraphic.SetPositionCamera(m_kEventCameraSetting.v3CenterPosition.x, m_kEventCameraSetting.v3CenterPosition.y, m_kEventCameraSetting.v3CenterPosition.z + pMainCamera->GetTargetHeight(), fDistance, fPitch, fRotation);
+				m_SoundManager.SetPosition(m_v3CenterPosition.x, m_v3CenterPosition.y, m_v3CenterPosition.z);
+			}
+		}
+		else {
+			m_pyGraphic.SetPositionCamera(m_kEventCameraSetting.v3CenterPosition.x, m_kEventCameraSetting.v3CenterPosition.y, m_kEventCameraSetting.v3CenterPosition.z + pMainCamera->GetTargetHeight(), fDistance, fPitch, fRotation);
+			m_SoundManager.SetPosition(m_v3CenterPosition.x, m_v3CenterPosition.y, m_v3CenterPosition.z);
+		}
+	}
+#endif
 
 	if (0.0f != m_fRotationSpeed)
 		pMainCamera->Roll(m_fRotationSpeed);
@@ -91,7 +137,12 @@ void CPythonApplication::__UpdateCamera()
 	// Sound Setting
 	const D3DXVECTOR3 & c_rv3CameraDirection = pMainCamera->GetView();
 	const D3DXVECTOR3 & c_rv3CameraUp = pMainCamera->GetUp();
+#ifdef ENABLE_WS_TOURNAMENT
+	if (CAMERA_MODE_WATCH != m_iCameraMode)
+		m_SoundManager.SetPosition(m_v3CenterPosition.x, m_v3CenterPosition.y, m_v3CenterPosition.z);
+#else
 	m_SoundManager.SetPosition(m_v3CenterPosition.x, m_v3CenterPosition.y, m_v3CenterPosition.z);
+#endif
 	m_SoundManager.SetDirection(c_rv3CameraDirection.x, c_rv3CameraDirection.y, c_rv3CameraDirection.z, c_rv3CameraUp.x, c_rv3CameraUp.y, c_rv3CameraUp.z);
 	m_SoundManager.Update();
 	//////////////////////
@@ -271,6 +322,25 @@ void CPythonApplication::SetEventCamera(const SCameraSetting & c_rCameraSetting)
 	m_iCameraMode = CAMERA_MODE_STAND;
 }
 
+#ifdef ENABLE_WS_TOURNAMENT
+void CPythonApplication::SetWatchCamera(const SCameraSetting & c_rCameraSetting, DWORD dwWatchVID)
+{
+	if (CCameraManager::DEFAULT_PERSPECTIVE_CAMERA == CCameraManager::Instance().GetCurrentCameraNum())
+		GetCameraSetting(&m_DefaultCameraSetting);
+
+	CCameraManager::Instance().SetCurrentCamera(EVENT_CAMERA_NUMBER);
+	CCamera * pCamera = CCameraManager::Instance().GetCurrentCamera();
+	if (!pCamera)
+		return;
+
+	SetCameraSetting(c_rCameraSetting);
+	m_kEventCameraSetting = c_rCameraSetting;
+	m_iCameraMode = CAMERA_MODE_WATCH;
+	m_iWatchingPlayerVID = dwWatchVID;
+	m_fWatchLostTime = 0.0f;
+}
+#endif
+
 void CPythonApplication::BlendEventCamera(const SCameraSetting & c_rCameraSetting, float fBlendTime)
 {
 	m_iCameraMode = CAMERA_MODE_BLEND;
@@ -286,6 +356,10 @@ void CPythonApplication::BlendEventCamera(const SCameraSetting & c_rCameraSettin
 void CPythonApplication::SetDefaultCamera()
 {
 	m_iCameraMode = CAMERA_MODE_NORMAL;
+#ifdef ENABLE_WS_TOURNAMENT
+	m_iWatchingPlayerVID = 0;
+	m_fWatchLostTime = 0.0f;
+#endif
 	m_fBlendCameraStartTime = 0.0f;
 	m_fBlendCameraBlendTime = 0.0f;
 

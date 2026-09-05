@@ -480,13 +480,22 @@ void CPythonTextTail::UpdateDistance(const TPixelPosition& c_rCenterPosition, TT
 	pTextTail->fDistanceFromPlayer = D3DXVec2Length(&v2Distance);
 }
 
+#ifdef ENABLE_WS_TOURNAMENT
+#include "PythonApplication.h"
+#endif
 void CPythonTextTail::ShowAllTextTail()
 {
+#ifdef ENABLE_WS_TOURNAMENT
+	// izleme modunda isimler uzaktan da gorunsun (Eski_A paritesi)
+	const float hideDist = CPythonApplication::Instance().IsWatchingMode() ? 10000.0f : 3500.0f;
+#else
+	const float hideDist = 3500.0f;
+#endif
 	TTextTailMap::iterator itor;
 	for (itor = m_CharacterTextTailMap.begin(); itor != m_CharacterTextTailMap.end(); ++itor)
 	{
 		const TTextTail* pTextTail = itor->second;
-		if (pTextTail->fDistanceFromPlayer < 3500.0f)
+		if (pTextTail->fDistanceFromPlayer < hideDist)
 			ShowCharacterTextTail(itor->first);
 	}
 	for (itor = m_ItemTextTailMap.begin(); itor != m_ItemTextTailMap.end(); ++itor)

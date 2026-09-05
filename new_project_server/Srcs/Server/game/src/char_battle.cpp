@@ -21,6 +21,15 @@
 #include "vector.h"
 #include "marriage.h"
 #include "arena.h"
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#endif
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
+#ifdef ENABLE_PLAYER_STATISTICS
+#include "statistics_rank.h"
+#endif
 #include "regen.h"
 #include "monarch.h"
 #include "exchange.h"
@@ -458,6 +467,15 @@ EVENTFUNC(dead_event)
 
 	if (ch->GetDesc())
 	{
+#ifdef ENABLE_FFA_EVENT
+		// FFA haritasinda dogus akisi yonetici uzerinden: rastgele spawn + tam can
+		// (etkinlik kapandiysa sehre); asagidaki vanilla akis calismaz
+		if (CFFAManager::instance().OnDeadRespawn(ch))
+		{
+			ch->ChatPacket(CHAT_TYPE_COMMAND, "CloseRestartWindow");
+			return 0;
+		}
+#endif
 		ch->GetDesc()->SetPhase(PHASE_GAME);
 
 		ch->SetPosition(POS_STANDING);
@@ -676,6 +694,9 @@ void CHARACTER::RewardGold(LPCHARACTER pkAttacker) const
 		}
 	}
 
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+	CHARACTER_MANAGER::instance().CollectYangFlow(CHARACTER_MANAGER::YANG_FLOW_MOB_GOLD, GetRealMapIndex(), iTotalGold);
+#endif
 	DBManager::instance().SendMoneyLog(MONEY_LOG_MONSTER, GetRaceNum(), iTotalGold);
 }
 
@@ -717,6 +738,10 @@ void CHARACTER::Reward(bool bItemDrop
 				item->StartDestroyEvent();
 			}
 		}
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+		// WAEGU (5001) altin patlamasi da mob altini sayilir
+		CHARACTER_MANAGER::instance().CollectYangFlow(CHARACTER_MANAGER::YANG_FLOW_MOB_GOLD, GetRealMapIndex(), (iGold / iSplitCount) * iSplitCount);
+#endif
 		return;
 	}
 
@@ -1201,6 +1226,12 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 	bool isUnderGuildWar = false;
 	bool isDuel = false;
 	bool isForked = false;
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasinda olum cezasiz; kapi harita-varligina bagli (bayraga degil)
+	const bool isFFA = IsPC() && CFFAManager::instance().IsFFAMap(GetMapIndex());
+#else
+	const bool isFFA = false;
+#endif
 
 	if (pkKiller && pkKiller->IsPC())
 	{
@@ -1222,9 +1253,17 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 				if (g1->UnderWar(g2->GetID()))
 					isUnderGuildWar = true;
 
-			pkKiller->SetQuestNPCID(GetVID());
-			quest::CQuestManager::instance().Kill(pkKiller->GetPlayerID(), quest::QUEST_NO_NPC);
-			CGuildManager::instance().Kill(pkKiller, this);
+			if (!isFFA)
+			{
+				pkKiller->SetQuestNPCID(GetVID());
+				quest::CQuestManager::instance().Kill(pkKiller->GetPlayerID(), quest::QUEST_NO_NPC);
+				CGuildManager::instance().Kill(pkKiller, this);
+			}
+#ifdef ENABLE_FFA_EVENT
+			else
+				// FFA kill: gorev/lonca-savasi sayaclari islemez, sadece skorboard
+				CFFAManager::instance().OnKill(pkKiller, this);
+#endif
 		}
 	}
 
@@ -1249,6 +1288,7 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 	if (pkKiller &&
 			!isAgreedPVP &&
 			!isUnderGuildWar &&
+			!isFFA &&
 			IsPC() &&
 			!isDuel &&
 			!isForked)
@@ -1271,19 +1311,21 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 	{
 		if (!pkKiller->IsPC())
 		{
-			if (!isForked)
+			if (!isForked && !isFFA)
 			{
 				sys_log(1, "DEAD: %s %p WITH PENALTY", GetName(), this);
 				SET_BIT(m_pointsInstant.instant_flag, INSTANT_FLAG_DEATH_PENALTY);
 				LogManager::instance().CharLog(this, pkKiller->GetRaceNum(), "DEAD_BY_NPC", pkKiller->GetName());
 			}
+			else if (isFFA)
+				REMOVE_BIT(m_pointsInstant.instant_flag, INSTANT_FLAG_DEATH_PENALTY);
 		}
 		else
 		{
 			sys_log(1, "DEAD_BY_PC: %s %p KILLER %s %p", GetName(), this, pkKiller->GetName(), get_pointer(pkKiller));
 			REMOVE_BIT(m_pointsInstant.instant_flag, INSTANT_FLAG_DEATH_PENALTY);
 
-			if (GetEmpire() != pkKiller->GetEmpire())
+			if (!isFFA && GetEmpire() != pkKiller->GetEmpire())
 			{
 				const int iEP = MIN(GetPoint(POINT_EMPIRE_POINT), pkKiller->GetPoint(POINT_EMPIRE_POINT));
 
@@ -1304,7 +1346,7 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 			}
 			else
 			{
-				if (!isAgreedPVP && !isUnderGuildWar && !IsKillerMode() && GetAlignment() >= 0 && !isDuel && !isForked)
+				if (!isAgreedPVP && !isUnderGuildWar && !IsKillerMode() && GetAlignment() >= 0 && !isDuel && !isForked && !isFFA)
 				{
 					int iNoPenaltyProb = 0;
 
@@ -1428,6 +1470,18 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 	// BOSS_KILL_LOG
 	if (GetMobRank() >= MOB_RANK_BOSS && pkKiller && pkKiller->IsPC())
 	{
+#ifdef ENABLE_PLAYER_STATISTICS
+		// Seviye farki 20'yi asmayan ve 45+ boss/metin kesimleri sayilir
+		const int lvDiff = abs((int) pkKiller->GetLevel() - (int) GetLevel());
+		if (lvDiff <= 20 && GetLevel() >= 45)
+		{
+			if (IsStone())
+				pkKiller->PointChange(POINT_ST_DESTROYED_STONE_COUNT, pkKiller->GetDestroyedStoneCount() + 1);
+			else
+				pkKiller->PointChange(POINT_ST_DESTROYED_BOSS_COUNT, pkKiller->GetDestroyedBossCount() + 1);
+		}
+#endif
+
 		char buf[51];
 		snprintf(buf, sizeof(buf), "%d %ld", g_bChannel, pkKiller->GetMapIndex());
 		if (IsStone())
@@ -1436,6 +1490,16 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 			LogManager::instance().CharLog(pkKiller, GetRaceNum(), "BOSS_KILL", buf);
 	}
 	// END_OF_BOSS_KILL_LOG
+
+#ifdef ENABLE_PLAYER_STATISTICS
+	// Isimli boss kesim sayaclari (Aylik Siralama; player.boss_kill_ranking, async yazim)
+	if (pkKiller && pkKiller->IsPC() && !IsPC())
+	{
+		const int iBossGroup = CStatisticsRanking::GetBossGroupByVnum(GetRaceNum());
+		if (iBossGroup >= 0)
+			CStatisticsRanking::instance().UpdateBossKillCount(pkKiller->GetPlayerID(), iBossGroup);
+	}
+#endif
 
 	TPacketGCDead pack;
 	pack.header	= HEADER_GC_DEAD;
@@ -1474,7 +1538,12 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 			pEventInfo->isPC = true;
 			pEventInfo->dwID = this->GetPlayerID();
 
+#ifdef ENABLE_FFA_EVENT
+			// FFA: hizli dogus (5 sn); dead_event icindeki OnDeadRespawn dali akisi devralir
+			m_pkDeadEvent = event_create(dead_event, pEventInfo, PASSES_PER_SEC(isFFA ? FFA_RESPAWN_SECONDS : 180));
+#else
 			m_pkDeadEvent = event_create(dead_event, pEventInfo, PASSES_PER_SEC(180));
+#endif
 		}
 		else
 		{
@@ -1580,6 +1649,16 @@ void CHARACTER::SendDamagePacket(LPCHARACTER pAttacker, int Damage, BYTE DamageF
 		{
 			pAttacker->GetDesc()->Packet(&damageInfo, sizeof(TPacketGCDamageInfo));
 		}
+
+#ifdef ENABLE_WS_TOURNAMENT
+		// turnuva haritasindaki seyirciler de hasari gorsun (Eski_A SHOW_DAMAGE_TO_WATCHERS):
+		// kurban DUELLOCUYSA paket harita capinda yayinlanir, client VID'den cozer.
+		// PID kontrolu sart: bu agacta arena SEYIRCILERI de SetArena'li - kapi gevsek
+		// kalirsa seyirci-seyirci kavgasi cift sayi basardi (review bulgusu)
+		if (GetArena() != nullptr && GetMapIndex() == WS_TOURNAMENT_MAP_INDEX
+				&& (GetArena()->GetPlayerAPID() == GetPlayerID() || GetArena()->GetPlayerBPID() == GetPlayerID()))
+			CWSTournamentManager::instance().BroadcastToWatchers(&damageInfo, sizeof(TPacketGCDamageInfo));
+#endif
 	}
 }
 
@@ -2012,6 +2091,9 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 					int iAmount = number(1, GetLevel());
 					pAttacker->PointChange(POINT_GOLD, iAmount);
 					DBManager::instance().SendMoneyLog(MONEY_LOG_MISC, 1, iAmount);
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+					CHARACTER_MANAGER::instance().CollectYangFlow(CHARACTER_MANAGER::YANG_FLOW_STEAL_GOLD, GetRealMapIndex(), iAmount);
+#endif
 				}
 			}
 
@@ -2203,6 +2285,35 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 
 	if (pAttacker)
 	{
+#ifdef ENABLE_PLAYER_STATISTICS
+		if (pAttacker->IsPC())
+		{
+			const int lvDiff = abs((int) pAttacker->GetLevel() - (int) GetLevel());
+			if (lvDiff <= 20)
+			{
+				if (GetMobRank() >= MOB_RANK_BOSS)
+				{
+					if (IsStone())
+					{
+						if (dam > pAttacker->GetMaxStoneDamage())
+							pAttacker->PointChange(POINT_ST_MAX_STONE_DMG, dam);
+					}
+					else
+					{
+						if (dam > pAttacker->GetMaxBossDamage())
+							pAttacker->PointChange(POINT_ST_MAX_BOSS_DMG, dam);
+					}
+				}
+
+				if (IsPC())
+				{
+					if (dam > pAttacker->GetMaxPlayerDamage())
+						pAttacker->PointChange(POINT_ST_MAX_PLAYER_DMG, dam);
+				}
+			}
+		}
+#endif
+
 		if (pAttacker->IsMonster() && pAttacker->IsDeathBlower())
 		{
 			if (pAttacker->IsDeathBlow())
@@ -2289,6 +2400,11 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 	{
 		if (GetHP() - dam <= 0) // @fixme137
 			dam = GetHP();
+#ifdef ENABLE_WS_TOURNAMENT
+		// turnuva beraberlik cozumu icin verilen hasari biriktir (yalnizca arena maci)
+		if (IsPC() && GetArena() != nullptr && pAttacker != nullptr && pAttacker->IsPC())
+			CWSTournamentManager::instance().OnPlayerDamage(this, pAttacker, dam);
+#endif
 		PointChange(POINT_HP, -dam, false);
 	}
 
@@ -2329,10 +2445,10 @@ void CHARACTER::DistributeHP(LPCHARACTER pkKiller) const
 }
 
 #ifdef ENABLE_LEVEL_MAP_EXP_LIMIT
-// Seviye-harita bazlý EXP sýnýrý:
-//   45-74 lvl -> 71 ve 104 dýþýndaki haritalarda kazanýlan EXP /10
-//   75-99 lvl -> sadece 72, 73, 208 haritalarýnda EXP kazanýlýr; diðerlerinde hiç EXP yok
-// Dönüþ false ise oyuncu bu haritada hiç EXP almaz (çaðýran fonksiyon erken çýkmalý).
+// Seviye-harita bazli EXP siniri:
+//   45-74 lvl -> 71 ve 104 disindaki haritalarda kazanilan EXP /10
+//   75-99 lvl -> sadece 72, 73, 208 haritalarinda EXP kazanilir; digerlerinde hic EXP yok
+// Donus false ise oyuncu bu haritada hic EXP almaz (cagiran fonksiyon erken cikmali).
 static bool ApplyLevelMapExpLimit(LPCHARACTER to, int& iExp)
 {
 	const int iLevel = to->GetLevel();
@@ -3460,6 +3576,13 @@ void CHARACTER::UpdateKillerMode()
 
 void CHARACTER::SetPKMode(BYTE bPKMode)
 {
+#ifdef ENABLE_WS_TOURNAMENT
+	// duello haritasinda PK modu YUKSELTILEMEZ (GM haric); PEACE/PROTECT serbest -
+	// arena EndDuel'in PK_MODE_PEACE reset'i ve seviye korumasi calismaya devam eder
+	if (GetMapIndex() == WS_TOURNAMENT_MAP_INDEX && !IsGM()
+			&& bPKMode != PK_MODE_PEACE && bPKMode != PK_MODE_PROTECT)
+		return;
+#endif
 	if (bPKMode >= PK_MODE_MAX_NUM)
 		return;
 

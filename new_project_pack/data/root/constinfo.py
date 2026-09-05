@@ -4,6 +4,9 @@ import item
 import net
 import player
 
+# Oyun ici siralama onbellegi (ENABLE_PLAYER_STATISTICS)
+RANKING_CACHE = {}
+
 if app.ENABLE_OFFLINE_SHOP:
 	gift_items={}
 	OFFLINE_SHOP_EDITING = 0		# pazar duzenleme modunda iken envanter eylemlerini kilitler

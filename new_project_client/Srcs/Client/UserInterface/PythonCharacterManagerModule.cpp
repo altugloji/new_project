@@ -748,6 +748,40 @@ PyObject * chrmgrSetRaceHeight(PyObject* poSelf, PyObject* poArgs)
 }
 #endif
 
+#ifdef ENABLE_WS_TOURNAMENT
+PyObject* chrmgrGetPlayerListInUnsafe(PyObject* poSelf, PyObject* poArgs)
+{
+	CPythonCharacterManager& rkChrMgr = CPythonCharacterManager::Instance();
+	CInstanceBase* pkMain = rkChrMgr.GetMainInstancePtr();
+	if (!pkMain)
+		return Py_BuildException();
+
+	PyObject* pyList = PyList_New(0);
+
+	CPythonCharacterManager::CharacterIterator i;
+	for (i = rkChrMgr.CharacterInstanceBegin(); i != rkChrMgr.CharacterInstanceEnd(); ++i)
+	{
+		CInstanceBase* pkInstEach = *i;
+		if (pkInstEach == NULL)
+			continue;
+		if (pkInstEach == pkMain)
+			continue;
+		if (!pkInstEach->IsPC())
+			continue;
+		if (pkInstEach->IsInSafe())
+			continue;
+		PyObject* pyEntry = Py_BuildValue("(si)", pkInstEach->GetNameString(), pkInstEach->GetVirtualID());
+		if (pyEntry)
+		{
+			PyList_Append(pyList, pyEntry);
+			Py_DECREF(pyEntry);
+		}
+	}
+
+	return pyList;
+}
+#endif
+
 void initchrmgr()
 {
 	static PyMethodDef s_methods[] =
@@ -795,6 +829,9 @@ void initchrmgr()
 		{ "HasAffectByVID",				chrmgrHasAffectByVID,					METH_VARARGS },
 		{ "GetHorseVnumByVID",			chrmgrGetHorseVnumByVID,				METH_VARARGS },
 		{ "GetMainVID",					chrmgrGetMainVID,						METH_VARARGS },
+#ifdef ENABLE_WS_TOURNAMENT
+		{ "GetPlayerListInUnsafe",		chrmgrGetPlayerListInUnsafe,			METH_VARARGS },
+#endif
 
 #ifdef ENABLE_RACE_HEIGHT
 		{ "SetRaceHeight",				chrmgrSetRaceHeight,					METH_VARARGS },

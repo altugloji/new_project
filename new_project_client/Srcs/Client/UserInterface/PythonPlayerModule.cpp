@@ -368,6 +368,18 @@ PyObject * playerSetSingleDIKKeyState(PyObject* poSelf, PyObject* poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_WS_TOURNAMENT
+PyObject * playerSetWSMoveLock(PyObject* poSelf, PyObject* poArgs)
+{
+	int iSeconds;
+	if (!PyTuple_GetInteger(poArgs, 0, &iSeconds))
+		return Py_BuildException();
+
+	CPythonPlayer::Instance().SetWSMoveLock((iSeconds > 0) ? (UINT) iSeconds : 0);
+	return Py_BuildNone();
+}
+#endif
+
 PyObject * playerEndKeyWalkingImmediately(PyObject* poSelf, PyObject* poArgs)
 {
 	CPythonPlayer::Instance().NEW_Stop();
@@ -2429,6 +2441,9 @@ void initPlayer()
 		{ "SetAttackKeyState",			playerSetAttackKeyState,			METH_VARARGS },
 		{ "SetSingleDIKKeyState",		playerSetSingleDIKKeyState,			METH_VARARGS },
 		{ "EndKeyWalkingImmediately",	playerEndKeyWalkingImmediately,		METH_VARARGS },
+#ifdef ENABLE_WS_TOURNAMENT
+		{ "SetWSMoveLock",				playerSetWSMoveLock,				METH_VARARGS },
+#endif
 		{ "StartMouseWalking",			playerStartMouseWalking,			METH_VARARGS },
 		{ "EndMouseWalking",			playerEndMouseWalking,				METH_VARARGS },
 		{ "ResetCameraRotation",		playerResetCameraRotation,			METH_VARARGS },
@@ -2922,6 +2937,14 @@ void initPlayer()
 	PyModule_AddIntConstant(poModule, "DS_SUB_HEADER_DO_REFINE",	DS_SUB_HEADER_DO_REFINE);
 #ifdef __GEM_SHOP__
 	PyModule_AddIntConstant(poModule, "GEM", POINT_GEM);
+#endif
+#ifdef ENABLE_PLAYER_STATISTICS
+	PyModule_AddIntConstant(poModule, "POINT_ST_DESTROYED_BOSS_COUNT", POINT_ST_DESTROYED_BOSS_COUNT);
+	PyModule_AddIntConstant(poModule, "POINT_ST_DESTROYED_STONE_COUNT", POINT_ST_DESTROYED_STONE_COUNT);
+	PyModule_AddIntConstant(poModule, "POINT_ST_MAX_BOSS_DMG", POINT_ST_MAX_BOSS_DMG);
+	PyModule_AddIntConstant(poModule, "POINT_ST_MAX_STONE_DMG", POINT_ST_MAX_STONE_DMG);
+	PyModule_AddIntConstant(poModule, "POINT_ST_MAX_PLAYER_DMG", POINT_ST_MAX_PLAYER_DMG);
+	PyModule_AddIntConstant(poModule, "POINT_ST_RONARK_SCORE", POINT_ST_RONARK_SCORE);
 #endif
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

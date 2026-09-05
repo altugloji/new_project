@@ -3,6 +3,9 @@
 #include "char.h"
 #include "char_manager.h"
 #include "arena.h"
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#endif
 
 namespace quest
 {
@@ -17,6 +20,15 @@ namespace quest
 			lua_pushnumber(L, 0);
 			return 1;
 		}
+
+#ifdef ENABLE_WS_TOURNAMENT
+		// WS turnuvasi devam ederken ringler turnuvaya ayrilir
+		if (CWSTournamentManager::instance().IsBusy())
+		{
+			lua_pushnumber(L, 3);
+			return 1;
+		}
+#endif
 
 		if ( ch->IsHorseRiding() == true )
 		{

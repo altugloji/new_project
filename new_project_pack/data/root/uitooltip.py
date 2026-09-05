@@ -1318,7 +1318,7 @@ class ItemToolTip(ToolTip):
 		self.__AdjustMaxWidth(attrSlot, itemDesc)
 		self.__SetItemTitle(itemVnum, metinSlot, attrSlot)
 		if 71202 == itemVnum and 0 != metinSlot and int(metinSlot[2]) >= 1:
-			self.AppendTextLine("Uzatma hakk\xfd kalmad\xfd.", self.SPECIAL_TITLE_COLOR)
+			self.AppendTextLine("Uzatma hakki kalmadi.", self.SPECIAL_TITLE_COLOR)
 		# if 71202 == itemVnum and 0 != metinSlot and int(metinSlot[0]) > 1000000000:
 			# self.AppendMallItemLastTime(metinSlot[0])
 		if 71202 == itemVnum: # onizleme (craft/kup): efsunlar henuz yok -> bilgi satiri

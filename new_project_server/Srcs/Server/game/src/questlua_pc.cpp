@@ -331,6 +331,9 @@ namespace quest
 		}
 
 		DBManager::instance().SendMoneyLog(MONEY_LOG_QUEST, ch->GetPlayerID(), iAmount);
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+		CHARACTER_MANAGER::instance().CollectYangFlow(CHARACTER_MANAGER::YANG_FLOW_QUEST, ch->GetRealMapIndex(), iAmount);
+#endif
 		ch->PointChange(POINT_GOLD, iAmount, true);
 		return 0;
 	}
@@ -1026,6 +1029,9 @@ namespace quest
 		else
 		{
 			DBManager::instance().SendMoneyLog(MONEY_LOG_QUEST, ch->GetPlayerID(), gold);
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+			CHARACTER_MANAGER::instance().CollectYangFlow(CHARACTER_MANAGER::YANG_FLOW_QUEST, ch->GetRealMapIndex(), gold);
+#endif
 			ch->PointChange(POINT_GOLD, gold, true);
 		}
 

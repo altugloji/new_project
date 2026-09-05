@@ -98,7 +98,6 @@ class TipBoard(ui.Bar):
 			index += 1
 
 	def SetTip(self, text):
-		return
 		if not app.IsVisibleNotice():
 			return
 

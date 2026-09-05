@@ -27,7 +27,14 @@
 #define ENABLE_GOTO_LAG_FIX
 #define ENABLE_MOUNT_COSTUME_EX_SYSTEM
 // #define ENABLE_PENDANT_SYSTEM
-// #define ENABLE_GLOVE_SYSTEM
+#define ENABLE_GLOVE_SYSTEM // Eldiven altyapisi: item_attr/item_attr_rare 'glove' kolonu + ATTRIBUTE_SET_GLOVE. ONCE src_server/sql/glove_system.sql uygulanmali; db+game BIRLIKTE derlenmeli!
+#ifdef ENABLE_GLOVE_SYSTEM
+	// Nazar Tilsimi: 71202 her uretildiginde item_attr_rare 'glove' havuzundan prob-agirlikli 5 rastgele efsunla dogar (seviye 1..glove tavani arasi rastgele)
+	#define ENABLE_GLOVE_RANDOM_ATTR
+	#define GLOVE_RANDOM_ATTR_VNUM		71202
+	#define GLOVE_RANDOM_ATTR_COUNT	5
+#endif
+#define ENABLE_COSTUME_PERMA_AND_REFRESHING // Kostum/tilsim sure uzatma + perma sistemi (itemler 71400-71407; hak sayaci socket2, perma=socket2>=4; GLOVE_RANDOM_ATTR ile 71202 de kapsanir; CreateItem REAL_TIME socket0 guard'i bu define ile geri geldi)
 #define ENABLE_MOVE_CHANNEL
 // #define ENABLE_QUIVER_SYSTEM
 #define ENABLE_REDUCED_ENTITY_VIEW
@@ -160,6 +167,7 @@ enum eCommonDefines {
 #define EXP_DEC_IN_DUNGEON											// Zindanlarda %90 Daha Az EXP
 #define ENABLE_LEVEL_MAP_EXP_LIMIT									// 45-75 ve 75-99 harita exp engelleri
 #define ENABLE_FISHING_ANTI_MACRO									// Balik makro engeli: envanterde solucan varken yeni solucan alinamaz + NPC penceresi acikken balik tutulamaz
+#define ENABLE_FISHING_KILL_QUEST									// Balik bot onlemi: cekis sayisi esiginde mob kesme gorevi; gorev bitmeden yeni olta atilamaz
 // #define ENABLE_HORSE_ADDITIVE_STATS									// At statlarinin karakter statlarina + eklenmesi
 #define FISHING_TIME_LOG											// Balik sure
 #define ENABLE_MOUNT_PVP_DAMAGE_REDUCTION							// At üzerinde pvp'de %30 hasar azaltma
@@ -219,5 +227,19 @@ enum eCommonDefines {
 	#define SPINED_COUNT_ITEM_VNUM 71122							// sayaci artiran item vnum
 #endif
 
+#define ENABLE_HERB_POTION_USE_COOLTIME							// 50804 (Gango Koku Suyu) & 50816 (Ying Suyu) iksirlerine 1 saniye kullanim bekleme suresi (pulse tabanli bellek-ici, iki item ortak sayac; char_item.cpp 50801-50820 blogu USE_POTION_NODELAY) (server-only rebuild)
+#define ENABLE_DROP_LEVEL_PENALTY_EXEMPT						// Seviye-farki drop cezasi muafiyeti: muaf hedeflerde oyuncu seviyesi mobdan yuksekse aiPercentByDeltaLev tablo cezasi atlanir, esit seviye (%100) sayilir; dusuk seviyeli oyuncu tarafi ve altin dususu degismez (item_manager.cpp GetDropPct choke) (server-only rebuild)
+#ifdef ENABLE_DROP_LEVEL_PENALTY_EXEMPT
+	#define DROP_LEVEL_PENALTY_EXEMPT_MAP	68						// Kizil Orman (metin2_map_trent02) - haritadaki tum moblar muaf
+	#define DROP_LEVEL_PENALTY_EXEMPT_MOB1	1093					// Lusifer - her haritada muaf
+	#define DROP_LEVEL_PENALTY_EXEMPT_MOB2	2598					// Azrail - her haritada muaf
+#endif
+
+#define ENABLE_GM_FISH_INFO										// GM Balik Bilgisi: target penceresinde GM'e ozel buton; hedef oyuncunun log DB fishing_log kayitlarini client'ta sayfali pencerede gosterir (/fish_info <isim>; son 500 kayit, 10 sayfa x 50 satir; LogManager::FuncQuery async - oyun donmaz) (game rebuild + root repack; db core GEREKMEZ)
+
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4
+#define ENABLE_YANG_FLOW_ANALYTICS									// Harita bazli yang giris analizi: mob altini + NPC satis + quest odulu + altin calma sayaclari RAM'de birikir, saatte bir log DB yang_flow tablosuna yazilir (ONCE sql/yang_flow.sql log DB'ye uygulanmali; server-only game rebuild, db core / client / repack GEREKMEZ)
+#define ENABLE_WS_TOURNAMENT									// WS 1v1 Turnuva: kayit ucretli tek eleme turnuvasi, arena map 112 host core'unda calisir (GG 47 relay ile tum kanallardan kayit; odul/iade player.ws_claim idempotent claim; ONCE sql/ws_tournament.sql player DB'ye! TUM game core'lar birlikte rebuild - GG wire; db core/client/repack GEREKMEZ)
+#define ENABLE_FFA_EVENT										// Anonim FFA Savas Etkinligi (Kaos Savasi): map 70 herkes-herkese PvP, isimler "Player" maskeli, canli kill siralamasi, 20dk otomatik kapanis; acilis /e ffa_open 1 (sure: ffa_minutes flag); server-only Faz 1 - SQL/wire/client-binary GEREKMEZ (quest systems/ffa_savas.quest derlenmeli; skor penceresi Faz 2 root repack)
+#define ENABLE_PLAYER_STATISTICS		// Oyun ici siralama sistemi (kisisel istatistikler + ranking penceresi; SQL: player.player st_* kolonlari ONCE eklenmeli)

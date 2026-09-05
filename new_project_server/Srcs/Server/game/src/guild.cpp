@@ -2,6 +2,9 @@
 #include "utils.h"
 #include "config.h"
 #include "char.h"
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 #include "packet.h"
 #include "desc_client.h"
 #include "buffer_manager.h"
@@ -1281,10 +1284,26 @@ void CGuild::UseSkill(DWORD dwVnum, LPCHARACTER ch, DWORD pid)
 	switch (dwVnum)
 	{
 		case GUILD_SKILL_TELEPORT:
+#ifdef ENABLE_FFA_EVENT
+			// FFA haritasindan lonca isinlanmasiyla cikis kapali
+			if (CFFAManager::instance().IsFFAMap(ch->GetMapIndex()))
+			{
+				ch->ChatPacket(CHAT_TYPE_INFO, "Savas alaninda kullanilamaz.");
+				break;
+			}
+#endif
 
 			SendDBSkillUpdate(-iNeededSP);
 			if ((victim = (CHARACTER_MANAGER::instance().FindByPID(pid))))
+			{
+#ifdef ENABLE_FFA_EVENT
+				// FFA haritasindaki uyeye isinlanma kapali (giris kapisi bypass onlemi)
+				if (CFFAManager::instance().IsFFAMap(victim->GetMapIndex()))
+					ch->ChatPacket(CHAT_TYPE_INFO, "Savas alanina isinlanamazsin.");
+				else
+#endif
 				ch->WarpSet(victim->GetX(), victim->GetY());
+			}
 			else
 			{
 				if (m_memberP2POnline.contains(pid))
@@ -1295,6 +1314,12 @@ void CGuild::UseSkill(DWORD dwVnum, LPCHARACTER ch, DWORD pid)
 					{
 						ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("<길드> 상대가 %d 채널에 있습니다. (현재 채널 %d)"), pcci->bChannel, g_bChannel);
 					}
+#ifdef ENABLE_FFA_EVENT
+					else if (pcci != nullptr && CFFAManager::instance().IsFFAMap(pcci->lMapIndex))
+					{
+						ch->ChatPacket(CHAT_TYPE_INFO, "Savas alanina isinlanamazsin.");
+					}
+#endif
 					else
 					{
 						TPacketGGFindPosition p;
@@ -1323,6 +1348,12 @@ void CGuild::UseSkill(DWORD dwVnum, LPCHARACTER ch, DWORD pid)
 				for (itertype(m_memberOnline) it = m_memberOnline.begin(); it != m_memberOnline.end(); ++it)
 				{
 					const LPCHARACTER victim = *it;
+#ifdef ENABLE_FFA_EVENT
+					// FFA haritasindaki uyeye disaridan lonca becerisi gecmez (takimlasma onlemi)
+					if (CFFAManager::instance().IsFFAMap(victim->GetMapIndex()))
+						continue;
+#endif
+
 					victim->RemoveAffect(dwVnum);
 					ch->ComputeSkill(dwVnum, victim, m_data.abySkill[dwRealVnum]);
 				}
@@ -1819,6 +1850,12 @@ EVENTFUNC( GuildInviteEvent )
 
 void CGuild::Invite( LPCHARACTER pchInviter, LPCHARACTER pchInvitee )
 {
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasindaki oyuncuya/oyuncudan lonca daveti kapali (lonca adi kimlik sizdirir)
+	if (CFFAManager::instance().BlocksInteraction(pchInviter, pchInvitee))
+		return;
+#endif
+
 	if (quest::CQuestManager::instance().GetPCForce(pchInviter->GetPlayerID())->IsRunning() == true)
 	{
 	    pchInviter->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("<길드> 상대방이 초대 신청을 받을 수 없는 상태입니다."));

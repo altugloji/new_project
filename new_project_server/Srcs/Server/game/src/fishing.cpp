@@ -589,30 +589,6 @@ void Take(fishing_event_info* info, LPCHARACTER ch)
 							true,
 							item ? item->GetSocket(0) : 0);
 
-#ifdef ENABLE_FISHING_ANTI_MACRO
-					// Balik makro engeli: her ~15-30 gercek yakalamada bir bot kontrolu (captcha) tetikle.
-					// Sayac/hedef quest flag'lerinde tutulur (relog'a karsi kalici).
-					{
-						int target = ch->GetQuestFlag("fishcap.target");
-						if (target <= 0)
-						{
-							target = number(15, 30);
-							ch->SetQuestFlag("fishcap.target", target);
-						}
-
-						const int cnt = ch->GetQuestFlag("fishcap.count") + 1;
-						if (cnt >= target)
-						{
-							ch->SetQuestFlag("fishcap.count", 0);
-							ch->SetQuestFlag("fishcap.target", number(15, 30));
-							quest::CQuestManager::instance().FishingCaptcha(ch->GetPlayerID());
-						}
-						else
-						{
-							ch->SetQuestFlag("fishcap.count", cnt);
-						}
-					}
-#endif
 
 				}
 				else
@@ -664,6 +640,63 @@ void Take(fishing_event_info* info, LPCHARACTER ch)
 	{
 		FishingPractice(ch);
 	}
+
+#ifdef ENABLE_FISHING_KILL_QUEST
+	// Balik bot onlemi: HER olta cekisi sayilir (bos / gec / erken cekme dahil).
+	// Esik dolunca gorev DOGRUDAN BURADA atanir: rastgele mob + 10-30 adet
+	// "fishkill.mob" / "fishkill.remain" flag'lerine yazilir; char.cpp fishing()
+	// fishkill.mob > 0 iken yeni olta atmayi engeller (suda kalan olta cekilebilir,
+	// o cekis sayilmaz). Ardindan tetiklenen "fishing_kill" quest event'i SADECE
+	// bilgi penceresini acar; kesimleri fish_kill_quest.quest when kill'de sayar.
+	// NOT: Atama bilerek quest'e birakilmadi - HandleReceiveAllEvent, oyuncu bir
+	// quest diyalogunu askida tutarken (pc.IsRunning) event'i SESSIZCE dusurur;
+	// atama Lua'da olsaydi diyalog askida tutularak engel tamamen atlatilirdi.
+	if (ch->GetQuestFlag("fishkill.mob") <= 0)
+	{
+		int target = ch->GetQuestFlag("fishkill.target");
+		if (target <= 0)
+		{
+			// Ilk esik 10-50 cekis; sonraki esikler asagida 50-100 olarak yazilir.
+			target = number(10, 50);
+			ch->SetQuestFlag("fishkill.target", target);
+		}
+
+		// GM hizli test: gorev GM'lerde her 2 cekiste bir gelir. Flag'e YAZILMAZ,
+		// normal oyuncularin kayitli esigi etkilenmez (GM yetkisi alinirsa
+		// kayitli 10-50 / 50-100 esigi kaldigi yerden devam eder).
+		if (ch->IsGM())
+			target = 2;
+
+		const int cnt = ch->GetQuestFlag("fishkill.count") + 1;
+
+		if (cnt >= target)
+		{
+			// Kesilecek mob adaylari (vnum). Degistirmek game rebuild ister.
+			static const int c_aiFishKillMobVnums[] =
+			{
+				101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113,
+				171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183,
+				301, 302, 303, 304,
+				331, 332, 333, 334,
+			};
+			const int iPick = number(0, (int) (sizeof(c_aiFishKillMobVnums) / sizeof(c_aiFishKillMobVnums[0])) - 1);
+
+			ch->SetQuestFlag("fishkill.mob", c_aiFishKillMobVnums[iPick]);
+			ch->SetQuestFlag("fishkill.remain", number(10, 30));
+			ch->SetQuestFlag("fishkill.count", 0);
+			ch->SetQuestFlag("fishkill.target", number(50, 100));
+
+			// Bilgi penceresi (askida diyalog varsa acilmaz; olta denemesinde
+			// char.cpp gorevi zaten chat mesajiyla soyler).
+			quest::CQuestManager::instance().FishingKill(ch->GetPlayerID());
+		}
+		else
+		{
+			ch->SetQuestFlag("fishkill.count", cnt);
+		}
+	}
+#endif
+
 	//Motion(MOTION_FISHING_PULL);
 }
 

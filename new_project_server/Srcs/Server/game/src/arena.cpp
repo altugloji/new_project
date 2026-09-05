@@ -9,6 +9,10 @@
 #include "char.h"
 #include "char_manager.h"
 #include "arena.h"
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#endif
+#include <cstdarg>
 
 CArena::CArena(WORD startA_X, WORD startA_Y, WORD startB_X, WORD startB_Y)
 {
@@ -212,6 +216,10 @@ EVENTFUNC(ready_to_start_event)
 	{
 		sys_err("ARENA: Player err in event func ready_start_event");
 
+#ifdef ENABLE_WS_TOURNAMENT
+		CWSTournamentManager::instance().OnArenaMatchAborted(pArena->GetPlayerAPID(), pArena->GetPlayerBPID(), chA != nullptr, chB != nullptr, pArena->GetSetPointA(), pArena->GetSetPointB());
+#endif
+
 		if (chA != nullptr)
 		{
 			chA->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("대련 상대가 사라져 대련을 종료합니다."));
@@ -237,6 +245,7 @@ EVENTFUNC(ready_to_start_event)
 				chA->SetArena(pArena);
 				chB->SetArena(pArena);
 
+#ifndef ENABLE_WS_TOURNAMENT	// pot engeli kaldirildi (WS)
 				const int count = quest::CQuestManager::instance().GetEventFlag("arena_potion_limit_count");
 
 				if (count > 10000)
@@ -252,10 +261,21 @@ EVENTFUNC(ready_to_start_event)
 					chA->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("물약을 %d 개 까지 사용 가능합니다."), chA->GetPotionLimit());
 					chB->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("물약을 %d 개 까지 사용 가능합니다."), chB->GetPotionLimit());
 				}
+#endif
 				chA->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("10초뒤 대련이 시작됩니다."));
 				chB->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("10초뒤 대련이 시작됩니다."));
 				pArena->SendChatPacketToObserver(CHAT_TYPE_INFO, LC_TEXT("10초뒤 대련이 시작됩니다."));
 
+#ifdef ENABLE_WS_TOURNAMENT
+				// turnuva maci: 10 sn hazirlik - hareket kilitli, beceri serbest
+				if (CWSTournamentManager::instance().BeginMatchPrep(pArena->GetPlayerAPID(), pArena->GetPlayerBPID()))
+				{
+					chA->WSResetAllSkillCooldowns();	// raunt basi taze baslangic (client GC 231 ile senkron)
+					chB->WSResetAllSkillCooldowns();
+					chA->ChatPacket(CHAT_TYPE_NOTICE, "WS: 10 saniye hazirlik! Becerilerini simdi kullan - hareket kilitli.");
+					chB->ChatPacket(CHAT_TYPE_NOTICE, "WS: 10 saniye hazirlik! Becerilerini simdi kullan - hareket kilitli.");
+				}
+#endif
 				info->state++;
 				return PASSES_PER_SEC(10);
 			}
@@ -263,6 +283,16 @@ EVENTFUNC(ready_to_start_event)
 
 		case 1:
 			{
+#ifdef ENABLE_WS_TOURNAMENT
+				if (CWSTournamentManager::instance().EndMatchPrep(pArena->GetPlayerAPID(), pArena->GetPlayerBPID()))
+				{
+					// kilit boyunca dusurulen hareketlere karsi son konum duzeltmesi
+					chA->SyncPacket();
+					chB->SyncPacket();
+					chA->ChatPacket(CHAT_TYPE_NOTICE, "WS: DOVUS BASLADI!");
+					chB->ChatPacket(CHAT_TYPE_NOTICE, "WS: DOVUS BASLADI!");
+				}
+#endif
 				chA->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("대련이 시작되었습니다."));
 				chB->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("대련이 시작되었습니다."));
 				pArena->SendChatPacketToObserver(CHAT_TYPE_INFO, LC_TEXT("대련이 시작되었습니다."));
@@ -317,6 +347,18 @@ EVENTFUNC(ready_to_start_event)
 				chB->PointChange(POINT_SP, chB->GetMaxSP() - chB->GetSP());
 				chB->ViewReencode();
 
+#ifdef ENABLE_WS_TOURNAMENT
+				// turnuva: set arasinda da 10 sn hazirlik; sure bitince case 1 DUEL_START gonderir
+				if (CWSTournamentManager::instance().BeginMatchPrep(pArena->GetPlayerAPID(), pArena->GetPlayerBPID()))
+				{
+					chA->WSResetAllSkillCooldowns();	// raunt basi taze baslangic (client GC 231 ile senkron)
+					chB->WSResetAllSkillCooldowns();
+					chA->ChatPacket(CHAT_TYPE_NOTICE, "WS: 10 saniye hazirlik! Becerilerini simdi kullan - hareket kilitli.");
+					chB->ChatPacket(CHAT_TYPE_NOTICE, "WS: 10 saniye hazirlik! Becerilerini simdi kullan - hareket kilitli.");
+					info->state = 1;
+					return PASSES_PER_SEC(WS_PREP_SECONDS);
+				}
+#endif
 				TEMP_BUFFER buf;
 				TEMP_BUFFER buf2;
 				DWORD dwOppList[8];
@@ -398,6 +440,9 @@ EVENTFUNC(duel_time_out)
 
 		pArena->SendChatPacketToObserver(CHAT_TYPE_INFO, LC_TEXT("대련 상대가 사라져 대련을 종료합니다."));
 
+#ifdef ENABLE_WS_TOURNAMENT
+		CWSTournamentManager::instance().OnArenaMatchAborted(pArena->GetPlayerAPID(), pArena->GetPlayerBPID(), chA != nullptr, chB != nullptr, pArena->GetSetPointA(), pArena->GetSetPointB());
+#endif
 		pArena->EndDuel();
 		return 0;
 	}
@@ -420,8 +465,11 @@ EVENTFUNC(duel_time_out)
 				duelStart.wSize = sizeof(TPacketGCDuelStart);
 
 				chA->GetDesc()->Packet(&duelStart, sizeof(TPacketGCDuelStart));
-				chA->GetDesc()->Packet(&duelStart, sizeof(TPacketGCDuelStart));
+				chB->GetDesc()->Packet(&duelStart, sizeof(TPacketGCDuelStart));
 
+#ifdef ENABLE_WS_TOURNAMENT
+				CWSTournamentManager::instance().OnArenaTimeout(pArena->GetPlayerAPID(), pArena->GetPlayerBPID(), pArena->GetSetPointA(), pArena->GetSetPointB(), chA, chB);
+#endif
 				info->state++;
 
 				sys_log(0, "ARENA: Because of time over, duel is end. PIDA(%d) vs PIDB(%d)", pArena->GetPlayerAPID(), pArena->GetPlayerBPID());
@@ -479,6 +527,131 @@ bool CArena::StartDuel(LPCHARACTER pCharFrom, LPCHARACTER pCharTo, int nSetPoint
 	return true;
 }
 
+#ifdef ENABLE_WS_TOURNAMENT
+bool CArena::WSPauseIfMember(DWORD dwPID)
+{
+	if (m_dwPIDA != dwPID && m_dwPIDB != dwPID)
+		return false;
+
+	// eventler durdurulur (hazirlik/mac saati); arena ve skorlar CANLI kalir,
+	// rakip ringde serbest bekler (kopma-bekleme: Eski_A modeli)
+	if (m_pEvent != nullptr)
+		event_cancel(&m_pEvent);
+	if (m_pTimeOutEvent != nullptr)
+		event_cancel(&m_pTimeOutEvent);
+
+	return true;
+}
+
+bool CArena::WSResumeDuelIfMember(DWORD dwPID, int iRemainSec)
+{
+	if (m_dwPIDA != dwPID && m_dwPIDB != dwPID)
+		return false;
+
+	const LPCHARACTER chA = GetPlayerA();
+	const LPCHARACTER chB = GetPlayerB();
+
+	if (chA == nullptr || chB == nullptr || chA->GetDesc() == nullptr || chB->GetDesc() == nullptr)
+		return false;
+
+	// relog sonrasi arena uyeligi ve duello anahtarlari (VID degisir) iki tarafta da tazelenir
+	chA->SetArena(this);
+	chB->SetArena(this);
+
+	// set arasi kopus: taraflardan biri olu ise seti bastan kur - pause bekleyen ready
+	// eventini iptal etmisti; state 3 zinciri revive + kose warp + prep yapar ve
+	// DUEL_START'i case 1 gonderir (in-place resume olu oyuncuyu asla canlandiramazdi)
+	if (chA->IsDead() || chB->IsDead())
+	{
+		if (m_pEvent != nullptr)
+			event_cancel(&m_pEvent);
+
+		TArenaEventInfo* info0 = AllocEventInfo<TArenaEventInfo>();
+		info0->pArena = this;
+		info0->state = 3;
+		m_pEvent = event_create(ready_to_start_event, info0, PASSES_PER_SEC(2));
+	}
+	else
+	{
+		TPacketGCDuelStart duelStart;
+		duelStart.header = HEADER_GC_DUEL_START;
+		duelStart.wSize = sizeof(TPacketGCDuelStart) + 4;
+
+		DWORD dwOppList[1];
+
+		TEMP_BUFFER buf;
+		dwOppList[0] = (DWORD) chB->GetVID();
+		buf.write(&duelStart, sizeof(TPacketGCDuelStart));
+		buf.write(&dwOppList[0], 4);
+		chA->GetDesc()->Packet(buf.read_peek(), buf.size());
+
+		TEMP_BUFFER buf2;
+		dwOppList[0] = (DWORD) chA->GetVID();
+		buf2.write(&duelStart, sizeof(TPacketGCDuelStart));
+		buf2.write(&dwOppList[0], 4);
+		chB->GetDesc()->Packet(buf2.read_peek(), buf2.size());
+	}
+
+	// mac saati kalan sureyle yeniden kurulur
+	if (m_pTimeOutEvent != nullptr)
+		event_cancel(&m_pTimeOutEvent);
+
+	TArenaEventInfo* info = AllocEventInfo<TArenaEventInfo>();
+	info->pArena = this;
+	info->state = 0;
+	m_pTimeOutEvent = event_create(duel_time_out, info, PASSES_PER_SEC(iRemainSec > 30 ? iRemainSec : 30));
+
+	sys_log(0, "ARENA: WS resume duel PID_A(%d) vs PID_B(%d) remain(%d)", GetPlayerAPID(), GetPlayerBPID(), iRemainSec);
+	return true;
+}
+
+bool CArena::WSSendDuelStartIfMember(DWORD dwPID)
+{
+	if (m_dwPIDA != dwPID && m_dwPIDB != dwPID)
+		return false;
+
+	const LPCHARACTER chA = GetPlayerA();
+	const LPCHARACTER chB = GetPlayerB();
+
+	// relog sonrasi arena uyeligi tazelenir (vanilla MEMBER_DUELIST SetArena yapmaz);
+	// tek tarafli donuste bile: ikinci kopusun DC sayacina islenmesi GetArena'ya bagli
+	if (chA != nullptr)
+		chA->SetArena(this);
+	if (chB != nullptr)
+		chB->SetArena(this);
+
+	if (chA == nullptr || chB == nullptr)
+		return false;
+
+	TPacketGCDuelStart duelStart;
+	duelStart.header = HEADER_GC_DUEL_START;
+	duelStart.wSize = sizeof(TPacketGCDuelStart) + 4;
+
+	DWORD dwOppList[1];
+
+	if (chA->GetDesc() != nullptr)
+	{
+		TEMP_BUFFER buf;
+		dwOppList[0] = (DWORD) chB->GetVID();
+		buf.write(&duelStart, sizeof(TPacketGCDuelStart));
+		buf.write(&dwOppList[0], 4);
+		chA->GetDesc()->Packet(buf.read_peek(), buf.size());
+	}
+
+	if (chB->GetDesc() != nullptr)
+	{
+		TEMP_BUFFER buf2;
+		dwOppList[0] = (DWORD) chA->GetVID();
+		buf2.write(&duelStart, sizeof(TPacketGCDuelStart));
+		buf2.write(&dwOppList[0], 4);
+		chB->GetDesc()->Packet(buf2.read_peek(), buf2.size());
+	}
+
+	sys_log(0, "ARENA: WS resend duel start PID_A(%d) vs PID_B(%d)", GetPlayerAPID(), GetPlayerBPID());
+	return true;
+}
+#endif
+
 void CArenaManager::EndAllDuel()
 {
 	for (auto & iter : m_mapArenaMap)
@@ -522,6 +695,13 @@ void CArena::EndDuel()
 
 		playerA->SetArena(nullptr);
 
+#ifdef ENABLE_WS_TOURNAMENT
+		// turnuva: turlar arasinda sehre degil haritadaki baslangic noktasina don
+		long lWsAX = 0, lWsAY = 0;
+		if (CWSTournamentManager::instance().GetIntermissionPoint(GetPlayerAPID(), lWsAX, lWsAY))
+			playerA->WarpSet(lWsAX, lWsAY);
+		else
+#endif
 		playerA->WarpSet(ARENA_RETURN_POINT_X(playerA->GetEmpire()), ARENA_RETURN_POINT_Y(playerA->GetEmpire()));
 	}
 
@@ -535,6 +715,12 @@ void CArena::EndDuel()
 
 		playerB->SetArena(nullptr);
 
+#ifdef ENABLE_WS_TOURNAMENT
+		long lWsBX = 0, lWsBY = 0;
+		if (CWSTournamentManager::instance().GetIntermissionPoint(GetPlayerBPID(), lWsBX, lWsBY))
+			playerB->WarpSet(lWsBX, lWsBY);
+		else
+#endif
 		playerB->WarpSet(ARENA_RETURN_POINT_X(playerB->GetEmpire()), ARENA_RETURN_POINT_Y(playerB->GetEmpire()));
 	}
 
@@ -542,11 +728,25 @@ void CArena::EndDuel()
 	{
 		const LPCHARACTER pChar = CHARACTER_MANAGER::instance().FindByPID(iter.first);
 		if (pChar != nullptr)
+		{
+#ifdef ENABLE_WS_TOURNAMENT
+			// turnuva seyircileri de haritada kalir
+			long lWsOX = 0, lWsOY = 0;
+			if (CWSTournamentManager::instance().GetSpectatorIntermissionPoint(lWsOX, lWsOY))
+			{
+				pChar->WarpSet(lWsOX, lWsOY);
+				continue;
+			}
+#endif
 			pChar->WarpSet(ARENA_RETURN_POINT_X(pChar->GetEmpire()), ARENA_RETURN_POINT_Y(pChar->GetEmpire()));
+		}
 	}
 
 	m_mapObserver.clear();
 
+	#ifdef ENABLE_WS_TOURNAMENT
+	CWSTournamentManager::instance().OnArenaClosed(m_dwPIDA, m_dwPIDB, m_dwSetPointOfA, m_dwSetPointOfB);
+#endif
 	sys_log(0, "ARENA: End Duel PID_A(%d) vs PID_B(%d)", GetPlayerAPID(), GetPlayerBPID());
 
 	Clear();
@@ -710,6 +910,10 @@ bool CArena::OnDead(DWORD dwPIDA, DWORD dwPIDB)
 
 				sys_log(0, "ARENA: Duel is end. Winner %s(%d) Loser %s(%d)",
 						pCharA->GetName(), GetPlayerAPID(), pCharB->GetName(), GetPlayerBPID());
+
+#ifdef ENABLE_WS_TOURNAMENT
+				CWSTournamentManager::instance().OnArenaMatchEnd(m_dwPIDA, m_dwPIDB);
+#endif
 			}
 			else
 			{
@@ -736,6 +940,10 @@ bool CArena::OnDead(DWORD dwPIDA, DWORD dwPIDB)
 				SendChatPacketToObserver(CHAT_TYPE_NOTICE, LC_TEXT("%s 님이 대련에서 승리하였습니다."), pCharB->GetName());
 
 				sys_log(0, "ARENA: Duel is end. Winner(%d) Loser(%d)", GetPlayerBPID(), GetPlayerAPID());
+
+#ifdef ENABLE_WS_TOURNAMENT
+				CWSTournamentManager::instance().OnArenaMatchEnd(m_dwPIDB, m_dwPIDA);
+#endif
 			}
 			else
 			{
@@ -887,12 +1095,19 @@ bool CArena::IsObserver(DWORD PID)
 
 void CArena::OnDisconnect(DWORD pid)
 {
+#ifdef ENABLE_WS_TOURNAMENT
+	// turnuva maci: yerinde duraklat (arena kapatilmaz, rakip ringde bekler, kopan donunce devam)
+	if ((m_dwPIDA == pid || m_dwPIDB == pid)
+			&& CWSTournamentManager::instance().OnArenaPlayerDisconnect(m_dwPIDA, m_dwPIDB, pid))
+		return;
+#endif
 	if (m_dwPIDA == pid)
 	{
 		if (GetPlayerB() != nullptr)
 			GetPlayerB()->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("상대방 캐릭터가 접속을 종료하여 대련을 중지합니다."));
 
 		sys_log(0, "ARENA : Duel is end because of Opp(%d) is disconnect. MyPID(%d)", GetPlayerAPID(), GetPlayerBPID());
+
 		EndDuel();
 	}
 	else if (m_dwPIDB == pid)
@@ -901,6 +1116,7 @@ void CArena::OnDisconnect(DWORD pid)
 			GetPlayerA()->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("상대방 캐릭터가 접속을 종료하여 대련을 중지합니다."));
 
 		sys_log(0, "ARENA : Duel is end because of Opp(%d) is disconnect. MyPID(%d)", GetPlayerBPID(), GetPlayerAPID());
+
 		EndDuel();
 	}
 }
@@ -915,10 +1131,29 @@ void CArena::RemoveObserver(DWORD pid)
 
 void CArena::SendPacketToObserver(const void * c_pvData, int iSize) const
 {
+	for (const auto & iter : m_mapObserver)
+	{
+		const LPCHARACTER pChar = CHARACTER_MANAGER::instance().FindByPID(iter.first);
+		if (pChar != nullptr && pChar->GetDesc() != nullptr)
+			pChar->GetDesc()->Packet(c_pvData, iSize);
+	}
 }
 
 void CArena::SendChatPacketToObserver(BYTE type, const char * format, ...) const
 {
+	char szBuf[CHAT_MAX_LEN + 1];
+
+	va_list args;
+	va_start(args, format);
+	vsnprintf(szBuf, sizeof(szBuf), format, args);
+	va_end(args);
+
+	for (const auto & iter : m_mapObserver)
+	{
+		const LPCHARACTER pChar = CHARACTER_MANAGER::instance().FindByPID(iter.first);
+		if (pChar != nullptr)
+			pChar->ChatPacket(type, "%s", szBuf);
+	}
 }
 
 bool CArenaManager::EndDuel(DWORD pid)
@@ -984,6 +1219,69 @@ bool CArena::RegisterObserverPtr(LPCHARACTER pChar)
 	m_mapObserver[pid] = pChar;
 	return true;
 }
+
+#ifdef ENABLE_WS_TOURNAMENT
+int CArenaManager::GetArenaCount(DWORD dwMapIndex)
+{
+	auto iter = m_mapArenaMap.find(dwMapIndex);
+	if (iter == m_mapArenaMap.end())
+		return 0;
+
+	return (int) iter->second->m_listArena.size();
+}
+
+bool CArenaManager::WSPauseDuel(DWORD dwPID)
+{
+	for (auto & iter : m_mapArenaMap)
+		for (auto & pArena : iter.second->m_listArena)
+			if (pArena->WSPauseIfMember(dwPID))
+				return true;
+	return false;
+}
+
+bool CArenaManager::WSResumeDuel(DWORD dwPID, int iRemainSec)
+{
+	for (auto & iter : m_mapArenaMap)
+		for (auto & pArena : iter.second->m_listArena)
+			if (pArena->WSResumeDuelIfMember(dwPID, iRemainSec))
+				return true;
+	return false;
+}
+
+bool CArenaManager::WSSendDuelStart(DWORD dwPID)
+{
+	for (auto & iter : m_mapArenaMap)
+		for (auto & pArena : iter.second->m_listArena)
+			if (pArena->WSSendDuelStartIfMember(dwPID))
+				return true;
+	return false;
+}
+
+bool CArenaManager::WSRestoreSetPoints(DWORD dwPID, DWORD dwOwnPoints, DWORD dwOppPoints)
+{
+	for (auto & iter : m_mapArenaMap)
+	{
+		for (auto & pArena : iter.second->m_listArena)
+		{
+			if (pArena->WSRestoreSetPoints(dwPID, dwOwnPoints, dwOppPoints))
+				return true;
+		}
+	}
+	return false;
+}
+
+bool CArenaManager::GetObserverPoint(DWORD dwMapIndex, WORD & wX, WORD & wY)
+{
+	auto iter = m_mapArenaMap.find(dwMapIndex);
+	if (iter == m_mapArenaMap.end() || iter->second->m_listArena.empty())
+		return false;
+
+	const CArena * pArena = iter->second->m_listArena.front();
+	wX = (WORD) pArena->GetObserverPoint().x;
+	wY = (WORD) pArena->GetObserverPoint().y;
+	return true;
+}
+#endif
 
 // #ifdef ENABLE_NEWSTUFF
 bool IsAllowedPotionOnPVP(DWORD dwVnum)

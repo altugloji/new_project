@@ -115,8 +115,14 @@ if app.ENABLE_BULK_POTION_PANEL:
 	import uiBulkPotion
 if app.ENABLE_GM_PLAYER_PANEL:
 	import uigmpanel
+if getattr(app, "ENABLE_WS_TOURNAMENT", 0):
+	import uiwswatch
 if getattr(app, "ENABLE_LUCKY_DRAW", 0):
 	import uiluckydraw
+# Kaos Savasi (FFA) skor penceresi + isinma sayaci (server komutlariyla surulur; define gerektirmez)
+if getattr(app, "ENABLE_PLAYER_STATISTICS", 0):
+	import uigeneralranking
+import uiffaboard
 IsQBHide = 0
 
 
@@ -166,6 +172,7 @@ class Interface(object):
 		self.wndChat = None
 		self.wndMessenger = None
 		self.wndMiniMap = None
+		self.wndGeneralRanking = None
 		self.wndGuild = None
 		self.wndGuildBuilding = None
 		if app.WJ_NEW_DROP_DIALOG:
@@ -358,6 +365,10 @@ class Interface(object):
 			self.wndLuckyDraw = uiluckydraw.LuckyDrawWindow()
 			self.wndLuckyDrawPromo = None		# tembel: ilk promo komutunda kurulur
 			self.wndLuckyDrawIndicator = None	# tembel: ilk durum komutunda kurulur
+		if getattr(app, "ENABLE_PLAYER_STATISTICS", 0):
+			self.wndGeneralRanking = uigeneralranking.GeneralRankingWindow()
+			# Minimap uzerindeki siralama butonu interface'e bu referansla ulasir
+			self.wndMiniMap.interfaceClass = self
 
 	def __MakeDialogs(self):
 		self.dlgExchange = uiExchange.ExchangeDialog()
@@ -449,6 +460,16 @@ class Interface(object):
 		if app.ENABLE_GM_PLAYER_PANEL:
 			self.wndGmPlayerPanel = uigmpanel.GmPlayerPanelWindow()
 			self.wndGmPlayerPanel.Hide()
+
+		if getattr(app, "ENABLE_WS_TOURNAMENT", 0):
+			self.wndWSWatch = uiwswatch.WSWatchBoard()
+			self.wndWSWatch.Hide()
+
+		# FFA: pencereler server ffa_rank/ffa_warmup komutlari gelince kendini gosterir
+		self.wndFFABoard = uiffaboard.FFABoardWindow()
+		self.wndFFABoard.Hide()
+		self.wndFFAWarmup = uiffaboard.FFAWarmupCounter()
+		self.wndFFAWarmup.Hide()
 
 	def __MakeHelpWindow(self):
 		self.wndHelp = uiHelp.HelpWindow()
@@ -770,6 +791,27 @@ class Interface(object):
 				self.wndGmPlayerPanel.Hide()
 				self.wndGmPlayerPanel.Destroy()
 				self.wndGmPlayerPanel = None
+
+		if getattr(app, "ENABLE_WS_TOURNAMENT", 0):
+			for wndName in ("wndWSWatch",):
+				wnd = getattr(self, wndName, None)
+				if wnd:
+					wnd.Hide()
+					wnd.Destroy()
+					setattr(self, wndName, None)
+
+		for wndName in ("wndFFABoard", "wndFFAWarmup"):
+			wnd = getattr(self, wndName, None)
+			if wnd:
+				wnd.Hide()
+				wnd.Destroy()
+				setattr(self, wndName, None)
+
+		wnd = getattr(self, "wndGeneralRanking", None)
+		if wnd:
+			wnd.Hide()
+			wnd.Destroy()
+			self.wndGeneralRanking = None
 
 		if self.wndWeb:
 			self.wndWeb.Destroy()
@@ -1452,6 +1494,8 @@ class Interface(object):
 				self.wndLuckyDrawPromo.Hide()
 			if self.wndLuckyDrawIndicator:
 				self.wndLuckyDrawIndicator.Hide()
+		if getattr(self, "wndGeneralRanking", None):
+			self.wndGeneralRanking.Hide()
 
 	def ShowMouseImage(self):
 		self.wndTaskBar.ShowMouseImage()
@@ -1545,6 +1589,14 @@ class Interface(object):
 
 	def ToggleCharacterWindowStatusPage(self):
 		self.ToggleCharacterWindow("STATUS")
+
+	def ToggleGeneralRankingWindow(self):
+		wnd = getattr(self, "wndGeneralRanking", None)
+		if wnd:
+			wnd.ToggleWindow()
+
+	def GetRankingWindow(self):
+		return getattr(self, "wndGeneralRanking", None)
 
 	def ToggleInventoryWindow(self):
 		if False == player.IsObserverMode():
@@ -2071,6 +2123,9 @@ class Interface(object):
 
 		if app.ENABLE_MOVE_CHANNEL and self.wndMoveChannel:
 			hideWindows += self.wndMoveChannel,
+
+		if getattr(self, "wndGeneralRanking", None):
+			hideWindows += self.wndGeneralRanking,
 
 		hideWindows = filter(lambda x:x.IsShow(), hideWindows)
 		map(lambda x:x.Hide(), hideWindows)
@@ -2726,8 +2781,42 @@ class Interface(object):
 			if self.wndGmPlayerPanel:
 				self.wndGmPlayerPanel.SetPlayerList(playerList, total, ch1, ch2, ch3, ch4)
 
+	if getattr(app, "ENABLE_WS_TOURNAMENT", 0):
+		def ToggleWSWatch(self):
+			if not self.wndWSWatch:
+				return
+			if self.wndWSWatch.IsShow():
+				self.wndWSWatch.Close()
+			else:
+				self.wndWSWatch.Open()
+
+	def FFA_SetRank(self, payload):
+		wnd = getattr(self, "wndFFABoard", None)
+		if wnd:
+			wnd.SetRankPayload(payload)
+		# kalan sure ekran-ortasi sayacta gosterilir (ayni payload iki pencereyi besler)
+		cnt = getattr(self, "wndFFAWarmup", None)
+		if cnt:
+			cnt.SetWarRemainPayload(payload)
+
+	def FFA_Warmup(self, seconds):
+		wnd = getattr(self, "wndFFAWarmup", None)
+		if wnd:
+			wnd.StartCountdown(seconds)
+
+	def FFA_FightStart(self):
+		wnd = getattr(self, "wndFFAWarmup", None)
+		if wnd:
+			wnd.FightStart()
+
 	if app.ENABLE_GM_PLAYER_PANEL or app.ENABLE_BULK_POTION_PANEL:
 		def ToggleTabPanel(self):
+			# WS Turnuvasi: duello haritasinda TAB seyirci kamera panelini acar/kapatir
+			if getattr(app, "ENABLE_WS_TOURNAMENT", 0):
+				import background
+				if background.GetCurrentMapName() == "metin2_map_duel":
+					self.ToggleWSWatch()
+					return
 			if app.ENABLE_GM_PLAYER_PANEL and chr.IsGameMaster(player.GetMainCharacterIndex()):
 				self.ToggleGmPlayerPanel()
 				return

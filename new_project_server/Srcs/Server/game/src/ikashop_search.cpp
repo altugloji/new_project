@@ -27,6 +27,10 @@
 // Yardimcilar
 // ============================================================================
 
+// Pazar Arama penceresini acan "Ticaret Cami" itemi (client uiinventory.py ayni vnum ile acar).
+// Sunucu her IKASHOP isteginde bu itemin envanterde oldugunu dogrular = yetkilendirme kapisi.
+static const DWORD IKASHOP_OPENER_ITEM_VNUM = 60005;
+
 static void __LowerAscii(char * s)
 {
 	for (; *s; ++s)
@@ -221,6 +225,17 @@ void CIkaShopSearchManager::ReceivePacket(LPCHARACTER ch, const TPacketCGIkaShop
 	if (quest::CQuestManager::instance().GetEventFlag("ikasearch_off") == 1)
 	{
 		SendPopup(ch, "IKASHOP_SEARCH_OFF");
+		return;
+	}
+
+	// GUVENLIK: acilis itemi (Ticaret Cami 60005) envanterde YOKSA reddet. Pencereyi acan
+	// client kapisi (uiinventory.py) tek basina yeterli degildi; paket enjeksiyonu / pack
+	// duzenlemesiyle 60005 olmadan FILTER/BUY/VIEW_SHOP gonderilebiliyordu. Sunucuda item
+	// sahipligi tum alt-basliklarda ZORUNLU kilinir.
+	if (ch->CountSpecifyItem(IKASHOP_OPENER_ITEM_VNUM) == 0)
+	{
+		SendPopup(ch, "IKASHOP_GENERIC_FAIL");
+		sys_err("IKASEARCH: 60005 yok, erisim reddi (pid %u, subheader %u)", ch->GetPlayerID(), p->bSubheader);
 		return;
 	}
 
@@ -767,8 +782,8 @@ void CIkaShopSearchManager::HandleBuyRequest(LPCHARACTER ch, const TPacketCGIkaS
 	DBManager::instance().DirectQuery("INSERT INTO player_gift SET owner_id = %u, vnum = 1, count = %u", dwOwnerPID, dwPrice);
 
 	char buf[512];
-	snprintf(buf, sizeof(buf), "REMOTE %s satici_pid %u fiyat %u adet %u itemdbid %u",
-		pkNewItem->GetName(), dwOwnerPID, dwPrice, pkNewItem->GetCount(), dwItemDBID);
+	snprintf(buf, sizeof(buf), "REMOTE %s satici_pid %u alici_pid %u(%s) fiyat %u adet %u itemdbid %u",
+		pkNewItem->GetName(), dwOwnerPID, dwPID, ch->GetName(), dwPrice, pkNewItem->GetCount(), dwItemDBID);
 	LogManager::instance().ItemLog(ch, pkNewItem, "OFFLINE_SHOP_BUY", buf);
 	LogManager::instance().ItemLog(dwOwnerPID, 0, 0, pkNewItem->GetID(), "OFFLINE_SHOP_SELL", buf, "", pkNewItem->GetOriginalVnum());
 

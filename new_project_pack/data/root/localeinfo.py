@@ -869,6 +869,12 @@ def NumberToString(n):
 		return "0"
 	return '.'.join([ i-3<0 and str(n)[:i] or str(n)[i-3:i] for i in range(len(str(n))%3, len(str(n))+1, 3) if i ])
 
+def NumberToMoney(n):
+	n = long(n)
+	if n <= 0:
+		return "0"
+	return "%s" % ('.'.join([ i-3<0 and str(n)[:i] or str(n)[i-3:i] for i in range(len(str(n))%3, len(str(n))+1, 3) if i ]))
+
 def NumberToMoneyString(n) :
 	if n <= 0 :
 		return "0 %s" % (MONETARY_UNIT0)
@@ -911,3 +917,33 @@ if app.ENABLE_WIKI:
 def GetApplyString(affectType, affectValue):
 	import localeinfo_point
 	return localeinfo_point.GetApplyString(affectType, affectValue)
+
+# ENABLE_PLAYER_STATISTICS locale yedekleri (locale_game.txt eksikse ASCII varsayilan)
+for _psKey, _psVal in (
+	("GENERAL_RANKING_TITLE", "Siralama"),
+	("GENERAL_RANKING_TOOLTIP1", "Kuresel Siralama"),
+	("GENERAL_RANKING_TOOLTIP2", "Aylik Siralama"),
+	("GENERAL_RANKING_LAST_REFRESH_TIME", "Son Yenileme Saati %s"),
+	("GLOBAL_RANKING_LIST_EMPTY", "Liste henuz bos."),
+	("GLOBAL_RANKING_PLAYTIME_TYPE", "Oyun Suresi"),
+	("GLOBAL_RANKING_MAX_BOSS_DMG", "Boss Hasari"),
+	("GLOBAL_RANKING_MAX_STONE_DMG", "Metin Hasari"),
+	("GLOBAL_RANKING_MAX_PLAYER_DMG", "Oyuncu Hasari"),
+	("GLOBAL_RANKING_BOSS_COUNT", "Kesilen Boss"),
+	("GLOBAL_RANKING_STONE_COUNT", "Kesilen Metin"),
+	("GLOBAL_RANKING_LUSIFER_COUNT", "Kesilen Lusifer"),
+	("GLOBAL_RANKING_AZRAIL_COUNT", "Kesilen Azrail"),
+	("GLOBAL_RANKING_GENERAL_COUNT", "Kesilen General"),
+	("GLOBAL_RANKING_CADI_COUNT", "Kesilen Cadi"),
+	("GLOBAL_RANKING_EJDER_COUNT", "Kesilen Ejder"),
+	("RANKING_PRIZEDETAILS", "Siralama %s - Odul %s"),
+	("CHARACTER_STATISTICS_TITLE", "Kisisel Istatistikler"),
+	("CS_DESTROYED_BOSS", "Kesilen Boss: %s"),
+	("CS_DESTROYED_STONES", "Kesilen Metin: %s"),
+	("CS_MAX_BOSS_DMG", "Maksimum Boss Hasari: %s"),
+	("CS_MAX_STONE_DMG", "Maksimum Metin Hasari: %s"),
+	("CS_MAX_PLAYER_DMG", "Maksimum Oyuncu Hasari: %s"),
+	("CS_RONARK_SCORE", "Savas Puani: %s"),
+):
+	if _psKey not in globals():
+		globals()[_psKey] = _psVal

@@ -6,6 +6,9 @@
 #include "char.h"
 #include "desc.h"
 #include "item.h"
+#ifdef ENABLE_GM_FISH_INFO
+#include "db.h"	// CQueryInfo / CFuncQueryInfo / QUERY_TYPE_FUNCTION (LogManager::FuncQuery + Process)
+#endif
 
 static char	__escape_hint[1024];
 
@@ -56,6 +59,58 @@ void LogManager::FishingTimeLog(uint32_t playerID, const char* szName, uint32_t 
 }
 #endif
 
+#ifdef ENABLE_GM_FISH_INFO
+// Sonuc donduren async sorgu: DBManager::FuncQuery ile ayni desen, ama LOG DB baglantisi uzerinden.
+// (fishing_log ayri MySQL sunucusundaki log db'sindedir; DBManager/player baglantisindan erisilemez.)
+// LOG_LEVEL kapisi BILEREK yok: GM araci db_log_level'dan bagimsiz calismali.
+void LogManager::FuncQuery(any_function f, const char * c_pszFormat, ...)
+{
+	char szQuery[4096];
+	va_list args;
+
+	va_start(args, c_pszFormat);
+	vsnprintf(szQuery, sizeof(szQuery), c_pszFormat, args);
+	va_end(args);
+
+	const auto p = new CFuncQueryInfo;
+
+	p->iQueryType = QUERY_TYPE_FUNCTION;
+	p->f = f;
+
+	m_sql.ReturnQuery(szQuery, p);
+}
+
+// main.cpp heartbeat idle dongusunden cagrilir (DBManager::Process ile ayni desen).
+// Sadece ReturnQuery'li (bReturn) sorgular kuyruga duser; normal AsyncQuery INSERT'leri
+// CAsyncSQL icinde silinir, burada birikmez.
+void LogManager::Process()
+{
+	SQLMsg * pMsg = nullptr;
+
+	while (m_sql.PopResult(&pMsg))
+	{
+		if (pMsg->pvUserData)
+		{
+			switch (reinterpret_cast<CQueryInfo*>(pMsg->pvUserData)->iQueryType)
+			{
+				case QUERY_TYPE_FUNCTION:
+					{
+						const auto qi = reinterpret_cast<CFuncQueryInfo*>(pMsg->pvUserData);
+						qi->f(pMsg);
+						delete qi;
+					}
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		delete pMsg;
+	}
+}
+#endif
+
 #ifdef ENABLE_BOT_CONTROL
 void LogManager::BotControlLog(uint32_t playerID, const char* szName, uint32_t accID, uint32_t verifyMs)
 {
@@ -75,6 +130,16 @@ void LogManager::GiftLog(uint32_t senderPID, const char* szSenderName, uint32_t 
 
 	Query("INSERT INTO gift_log (sender_id, sender_name, target_id, target_name, item_vnum, count, type, log_time) VALUES (%u, '%s', %u, '%s', %u, %u, '%s', NOW())",
 		senderPID, szEscSender, targetPID, szEscTarget, dwGiftId, dwCount, szType ? szType : "");
+}
+#endif
+
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+// Harita bazli yang giris sayaci dokumu (CHARACTER_MANAGER saatte bir flush eder)
+// Bilerek LOG_LEVEL kapisi yok: satir sayisi cok dusuk (kaynak x harita), db_log_level=1'de de yazmali
+void LogManager::YangFlowLog(BYTE bSource, long lMapIndex, long long llGold, DWORD dwCount)
+{
+	Query("INSERT INTO yang_flow (time, channel, map_index, source, gold, cnt) VALUES (NOW(), %d, %ld, %d, %lld, %u)",
+			g_bChannel, lMapIndex, bSource, llGold, dwCount);
 }
 #endif
 

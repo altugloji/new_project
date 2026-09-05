@@ -1771,6 +1771,56 @@ void CPythonPlayer::Clear()
 	__ClearAutoAttackTargetActorID();
 }
 
+#ifdef ENABLE_WS_TOURNAMENT
+void CPythonPlayer::SetWSMoveLock(UINT uLockSeconds)
+{
+	m_dwWSMoveLockEndTime = (uLockSeconds > 0) ? (ELTimer_GetMSec() + uLockSeconds * 1000) : 0;
+
+	// mac/set basi kilidi geldiginde seyirci (watch) veya ring (stand) kamerasi
+	// acik kalmis olabilir - izlerken maca isinlanan oyuncunun ekrani bos kaliyordu.
+	// Kamerayi kendi karakterine dondur (normal kameradaysa dokunma)
+	if (uLockSeconds > 0)
+	{
+		CPythonApplication & rkApp = CPythonApplication::Instance();
+		if (rkApp.IsEventCameraMode())
+			rkApp.SetDefaultCamera();
+	}
+}
+
+bool CPythonPlayer::IsWSMoveLocked() const
+{
+	return m_dwWSMoveLockEndTime != 0 && ELTimer_GetMSec() < m_dwWSMoveLockEndTime;
+}
+
+void CPythonPlayer::WSSetSkillCD(DWORD dwSkillVnum, int iCooldownMs)
+{
+	DWORD dwSlotIndex;
+	if (!GetSkillSlotIndex(dwSkillVnum, &dwSlotIndex))
+		return;
+	if (dwSlotIndex >= SKILL_MAX_NUM)
+		return;
+
+	TSkillInstance & rkSkillInst = m_playerStatus.aSkill[dwSlotIndex];
+
+	if (iCooldownMs <= 0)
+	{
+		// gercek sifirlama: kontrol fLastUsedTime + fCoolTime'a bakar (isCoolTime okunmaz)
+		rkSkillInst.isCoolTime = FALSE;
+		rkSkillInst.fLastUsedTime = 0.0f;
+	}
+	else
+	{
+		rkSkillInst.isCoolTime = TRUE;
+		rkSkillInst.fCoolTime = iCooldownMs / 1000.0f;
+		rkSkillInst.fLastUsedTime = CTimer::Instance().GetCurrentSecond();
+	}
+
+	// taskbar/skill penceresi gostergesini guncelle (0 sn = sifirla)
+	PyCallClassMemberFunc(m_ppyGameWindow, "RunUseSkillEvent",
+			Py_BuildValue("(if)", dwSlotIndex, (iCooldownMs > 0) ? (iCooldownMs / 1000.0f) : 0.0f));
+}
+#endif
+
 CPythonPlayer::CPythonPlayer(void)
 {
 	SetMovableGroundDistance(40.0f);

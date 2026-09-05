@@ -60,6 +60,14 @@
 #include "gift.h"
 #endif
 
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#include "arena.h"
+#endif
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
+
 #if !defined(__BL_MULTI_LANGUAGE_PREMIUM__)
 #define ENABLE_CHAT_COLOR_SYSTEM
 #endif
@@ -726,15 +734,24 @@ struct FEmpireChatPacket
 #ifdef ENABLE_MESSENGER_BLOCK
 	const char* m_writenPlayer;
 #endif
+#ifdef ENABLE_WS_TOURNAMENT
+	DWORD m_dwSenderPID;
+#endif
 
 	FEmpireChatPacket(packet_chat& p, const char* chat_msg, int len, BYTE bEmpire, int iMapIndex, int iNameLen
 #ifdef ENABLE_MESSENGER_BLOCK
 		, const char* writenPlayer
 #endif
+#ifdef ENABLE_WS_TOURNAMENT
+		, DWORD dwSenderPID
+#endif
 	)
 		: p(p), orig_msg(chat_msg), orig_len(len), bEmpire(bEmpire), iMapIndex(iMapIndex), namelen(iNameLen)
 #ifdef ENABLE_MESSENGER_BLOCK
 		, m_writenPlayer(writenPlayer)
+#endif
+#ifdef ENABLE_WS_TOURNAMENT
+		, m_dwSenderPID(dwSenderPID)
 #endif
 	{
 		memset( converted_msg, 0, sizeof(converted_msg) );
@@ -751,6 +768,28 @@ struct FEmpireChatPacket
 #ifdef ENABLE_MESSENGER_BLOCK
 		if (MessengerManager::instance().CheckMessengerList(d->GetCharacter()->GetName(), m_writenPlayer, SYST_BLOCK))
 			return;
+#endif
+
+#ifdef ENABLE_WS_TOURNAMENT
+		// duello sirasinda dis chat gizli (Eski_A NEW_DUEL_TOURNAMENT paritesi):
+		// alici DUELLOCUYSA yalnizca kendisinin ve rakibinin konusmasi gecer.
+		// PID kontrolu sart - bu agacta arena SEYIRCILERI de SetArena'li.
+		// m_dwSenderPID == 0 => filtre uygulanmaz (sistem/anonim gonderim).
+		if (m_dwSenderPID != 0)
+		{
+			LPCHARACTER rcv = d->GetCharacter();
+			CArena * pArena = rcv->GetArena();
+			if (pArena != nullptr)
+			{
+				const DWORD dwRcvPID = rcv->GetPlayerID();
+				if (pArena->GetPlayerAPID() == dwRcvPID || pArena->GetPlayerBPID() == dwRcvPID)
+				{
+					const DWORD dwOppPID = (pArena->GetPlayerAPID() == dwRcvPID) ? pArena->GetPlayerBPID() : pArena->GetPlayerAPID();
+					if (m_dwSenderPID != dwRcvPID && m_dwSenderPID != dwOppPID)
+						return;
+				}
+			}
+		}
 #endif
 
 		d->BufferedPacket(&p, sizeof(packet_chat));
@@ -922,6 +961,16 @@ int CInputMain::Chat(LPCHARACTER ch, const char * data, size_t uiBytes) const
 	//ch->SetLastChatTime((DWORD)get_global_time());
 #endif
 
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasinda normal konusma kapali (kimlik gizliligi; kullanici karari).
+	// Bagirma serbest: gonderen kendini ifsa etmeyi secebilir, skorboardda isimler zaten acik.
+	if (pinfo->type == CHAT_TYPE_TALKING && ch->IsPC() && CFFAManager::instance().IsFFAMap(ch->GetMapIndex()))
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Savas alaninda konusma kapalidir.");
+		return iExtraLen;
+	}
+#endif
+
 	char chatbuf[CHAT_MAX_LEN + 1];
 #ifdef ENABLE_CHAT_COLOR_SYSTEM
 	static const char* colorbuf[] = {"|cFFffa200|H|h[Staff]|h|r", "|cFFff0000|H|h[Shinsoo]|h|r", "|cFFffc700|H|h[Chunjo]|h|r", "|cFF000bff|H|h[Jinno]|h|r"};
@@ -1011,6 +1060,9 @@ int CInputMain::Chat(LPCHARACTER ch, const char * data, size_t uiBytes) const
 					                                ch->GetMapIndex(), strlen(ch->GetName())
 #ifdef ENABLE_MESSENGER_BLOCK
 						                                , ch->GetName()
+#endif
+#ifdef ENABLE_WS_TOURNAMENT
+						                                , ch->GetPlayerID()
 #endif
 						                                ));
 #ifdef ENABLE_CHAT_LOGGING
@@ -1255,6 +1307,11 @@ int CInputMain::Messenger(LPCHARACTER ch, const char* c_pData, size_t uiBytes) c
 				if (!ch_companion)
 					return sizeof(TPacketCGMessengerAddBlockByVID);
 
+#ifdef ENABLE_FFA_EVENT
+				if (CFFAManager::instance().BlocksInteraction(ch, ch_companion))
+					return sizeof(TPacketCGMessengerAddBlockByVID);
+#endif
+
 				if (ch->IsObserverMode())
 					return sizeof(TPacketCGMessengerAddBlockByVID);
 
@@ -1384,6 +1441,11 @@ int CInputMain::Messenger(LPCHARACTER ch, const char* c_pData, size_t uiBytes) c
 
 				if (!ch_companion)
 					return sizeof(TPacketCGMessengerAddByVID);
+
+#ifdef ENABLE_FFA_EVENT
+				if (CFFAManager::instance().BlocksInteraction(ch, ch_companion))
+					return sizeof(TPacketCGMessengerAddByVID);
+#endif
 
 				if (ch->IsObserverMode())
 					return sizeof(TPacketCGMessengerAddByVID);
@@ -2061,6 +2123,22 @@ void CInputMain::Move(LPCHARACTER ch, const char * data) const
 		sys_err("invalid move type: %s", ch->GetName());
 		return;
 	}
+
+#ifdef ENABLE_WS_TOURNAMENT
+	// turnuva hazirlik kilidi: yurume/durma paketleri dusurulur; beceri/saldiri
+	// fonksiyonlari gecer ama pozisyon kaymasi tasiyamaz (cast-yuruyerek kacis kapali).
+	// Cift-ici saldiri battle_is_attackable'da ayrica engellidir.
+	if (CWSTournamentManager::instance().IsMoveLocked(ch->GetPlayerID()))
+	{
+		if (pinfo->bFunc == FUNC_MOVE || pinfo->bFunc == FUNC_WAIT)
+		{
+			CWSTournamentManager::instance().OnPlayerMoveBlocked(ch);
+			return;
+		}
+		pinfo->lX = ch->GetX();
+		pinfo->lY = ch->GetY();
+	}
+#endif
 
 	//enum EMoveFuncType
 	//{
@@ -2771,6 +2849,11 @@ void CInputMain::PartyInvite(LPCHARACTER ch, const char * c_pData) const
 		return;
 	}
 
+#ifdef ENABLE_FFA_EVENT
+	if (CFFAManager::instance().BlocksInteraction(ch, pInvitee))
+		return;
+#endif
+
 #ifdef ENABLE_MESSENGER_BLOCK
 	if (MessengerManager::instance().CheckMessengerList(ch->GetName(), pInvitee->GetName(), SYST_BLOCK))
 	{
@@ -2793,6 +2876,11 @@ void CInputMain::PartyInviteAnswer(LPCHARACTER ch, const char * c_pData) const
 	const auto p = (TPacketCGPartyInviteAnswer*) c_pData;
 
 	const LPCHARACTER pInviter = CHARACTER_MANAGER::instance().Find(p->leader_vid);
+
+#ifdef ENABLE_FFA_EVENT
+	if (pInviter && CFFAManager::instance().BlocksInteraction(ch, pInviter))
+		return;
+#endif
 
 	if (!pInviter)
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("<파티> 파티요청을 한 캐릭터를 찾을수 없습니다."));
@@ -3756,6 +3844,12 @@ int CInputMain::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 		case HEADER_CG_BOT_CONTROL:
 		{DoBotControl(ch, c_pData); }
 		break;
+#endif
+
+#ifdef ENABLE_WS_TOURNAMENT
+		case HEADER_CG_WS_TOURNAMENT:
+			CWSTournamentManager::instance().OnClientInfoRequest(ch);
+			break;
 #endif
 #ifdef ENABLE_CHARACTER_CHEST
 		case HEADER_CG_CHARACTER_CHEST:

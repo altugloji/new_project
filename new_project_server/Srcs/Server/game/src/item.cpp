@@ -2,6 +2,9 @@
 #include "utils.h"
 #include "config.h"
 #include "char.h"
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 #include "desc.h"
 #include "sectree_manager.h"
 #include "packet.h"
@@ -559,6 +562,12 @@ bool CItem::CanUsedBy(LPCHARACTER ch)
 
 int CItem::FindEquipCell(LPCHARACTER ch, int iCandidateCell)
 {
+#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+	// Nazar Tilsimi: proto tipi ne olursa olsun (armor/kostum) her zaman kendi hucresine takilir
+	if (GetVnum() == GLOVE_RANDOM_ATTR_VNUM)
+		return WEAR_GLOVE;
+#endif
+
 	if ((0 == GetWearFlag() || ITEM_TOTEM == GetType()) && ITEM_COSTUME != GetType() && ITEM_DS != GetType() && ITEM_SPECIAL_DS != GetType() && ITEM_RING != GetType() && ITEM_BELT != GetType()
 		#ifdef ENABLE_PENDANT_SYSTEM
 		&& !(GetType() == ITEM_ARMOR && GetSubType() == ARMOR_PENDANT) // bypass missing wearflag check
@@ -894,6 +903,12 @@ void CItem::ModifyPoints(bool bAdd)
 
 		case ITEM_COSTUME:
 			{
+#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+				// Nazar Tilsimi: kostum tipinde ama karakter gorunumunu (part) DEGISTIRMEZ
+				if (GetVnum() == GLOVE_RANDOM_ATTR_VNUM)
+					break;
+#endif
+
 				DWORD toSetValue = this->GetVnum();
 				EParts toSetPart = PART_MAX_NUM;
 
@@ -1296,6 +1311,12 @@ void CItem::SetOwnership(LPCHARACTER ch, int iSec)
 	m_dwOwnershipPID = ch->GetPlayerID();
 
 	item_event_info* info = AllocEventInfo<item_event_info>();
+#ifdef ENABLE_FFA_EVENT
+	// FFA haritasinda sahiplik etiketi gercek ismi sizdirmasin (gec-gelen izleyici yayini dahil)
+	if (ch->IsPC() && CFFAManager::instance().IsFFAMap(ch->GetMapIndex()))
+		strlcpy(info->szOwnerName, FFA_MASK_NAME, sizeof(info->szOwnerName));
+	else
+#endif
 	strlcpy(info->szOwnerName, ch->GetName(), sizeof(info->szOwnerName));
 	info->item = this;
 
@@ -1305,6 +1326,11 @@ void CItem::SetOwnership(LPCHARACTER ch, int iSec)
 
 	p.bHeader = HEADER_GC_ITEM_OWNERSHIP;
 	p.dwVID = m_dwVID;
+#ifdef ENABLE_FFA_EVENT
+	if (ch->IsPC() && CFFAManager::instance().IsFFAMap(ch->GetMapIndex()))
+		strlcpy(p.szName, FFA_MASK_NAME, sizeof(p.szName));
+	else
+#endif
 	strlcpy(p.szName, ch->GetName(), sizeof(p.szName));
 
 	PacketAround(&p, sizeof(p));
@@ -1567,6 +1593,12 @@ EVENTFUNC(real_time_expire_event)
 	if (!item)
 		return 0;
 
+#ifdef ENABLE_COSTUME_PERMA_AND_REFRESHING
+	// Perma yapilmis item: sure event'i devre disi
+	if (item->IsDurationAddedItems() && item->GetSocket(2) >= 4)
+		return 0;
+#endif
+
 	const time_t current = get_global_time();
 
 	if (current > item->GetSocket(0))
@@ -1586,6 +1618,11 @@ void CItem::StartRealTimeExpireEvent()
 {
 	if (m_pkRealTimeExpireEvent)
 		return;
+
+#ifdef ENABLE_COSTUME_PERMA_AND_REFRESHING
+	if (IsDurationAddedItems() && GetSocket(2) >= 4)
+		return;
+#endif
 	for (int i=0 ; i < ITEM_LIMIT_MAX_NUM ; i++)
 	{
 		if (LIMIT_REAL_TIME == GetProto()->aLimits[i].bType || LIMIT_REAL_TIME_START_FIRST_USE == GetProto()->aLimits[i].bType)
@@ -1621,6 +1658,12 @@ EVENTFUNC(OffShopItemRemoveEvent)
 
 	if (!item)
 		return 0;
+
+#ifdef ENABLE_COSTUME_PERMA_AND_REFRESHING
+	// Perma yapilmis item offline pazarda sure-dolumu diye silinmesin
+	if (item->IsDurationAddedItems() && item->GetSocket(2) >= 4)
+		return 0;
+#endif
 
 	const time_t current = get_global_time();
 
@@ -1718,6 +1761,11 @@ void CItem::StartTimerBasedOnWearExpireEvent()
 {
 	if (m_pkTimerBasedOnWearExpireEvent)
 		return;
+
+#ifdef ENABLE_COSTUME_PERMA_AND_REFRESHING
+	if (IsDurationAddedItems() && GetSocket(2) >= 4)
+		return;
+#endif
 
 	if (IsRealTimeItem())
 		return;
@@ -1923,6 +1971,32 @@ bool CItem::IsRamadanRing() const
 		return true;
 	return false;
 }
+
+#ifdef ENABLE_COSTUME_PERMA_AND_REFRESHING
+bool CItem::IsDurationAddedItems() const
+{
+#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+	// Nazar Tilsimi da sure uzatma/perma kapsaminda
+	if (GetVnum() == GLOVE_RANDOM_ATTR_VNUM)
+		return true;
+#endif
+
+	if (GetType() != ITEM_COSTUME)
+		return false;
+
+	if (GetSubType() == COSTUME_BODY || GetSubType() == COSTUME_HAIR
+#ifdef ENABLE_WEAPON_COSTUME_SYSTEM
+		|| GetSubType() == COSTUME_WEAPON
+#endif
+#ifdef ENABLE_MOUNT_COSTUME_SYSTEM
+		|| GetSubType() == COSTUME_MOUNT
+#endif
+		)
+		return true;
+
+	return false;
+}
+#endif
 
 void CItem::ClearMountAttributeAndAffect()
 {

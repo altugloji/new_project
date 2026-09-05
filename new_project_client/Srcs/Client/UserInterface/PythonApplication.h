@@ -139,6 +139,9 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 			CAMERA_MODE_NORMAL = 0,
 			CAMERA_MODE_STAND = 1,
 			CAMERA_MODE_BLEND = 2,
+#ifdef ENABLE_WS_TOURNAMENT
+			CAMERA_MODE_WATCH = 3,
+#endif
 
 			EVENT_CAMERA_NUMBER = 101,
 		};
@@ -268,6 +271,12 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 
 		bool IsLockCurrentCamera() const;
 		void SetEventCamera(const SCameraSetting & c_rCameraSetting);
+#ifdef ENABLE_WS_TOURNAMENT
+		void SetWatchCamera(const SCameraSetting & c_rCameraSetting, DWORD dwWatchVID);
+		DWORD GetWatchingPlayerVID() { return m_iWatchingPlayerVID; }
+		bool IsWatchingMode() { return CAMERA_MODE_WATCH == m_iCameraMode; }
+		bool IsEventCameraMode() { return CAMERA_MODE_WATCH == m_iCameraMode || CAMERA_MODE_STAND == m_iCameraMode; }
+#endif
 		void BlendEventCamera(const SCameraSetting & c_rCameraSetting, float fBlendTime);
 		void SetDefaultCamera();
 
@@ -437,6 +446,10 @@ class CPythonApplication : public CMSApplication, public CInputKeyboard, public 
 		SCameraSetting				m_kEventCameraSetting;
 
 		int							m_iCameraMode;
+#ifdef ENABLE_WS_TOURNAMENT
+		DWORD						m_iWatchingPlayerVID;
+		float						m_fWatchLostTime;
+#endif
 		float						m_fBlendCameraStartTime;
 		float						m_fBlendCameraBlendTime;
 		SCameraSetting				m_kEndBlendCameraSetting;

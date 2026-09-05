@@ -705,6 +705,8 @@ class GameWindow(ui.ScriptWindow):
 
 	# Start
 	def StartGame(self):
+		if getattr(app, "ENABLE_PLAYER_STATISTICS", 0):
+			constInfo.RANKING_CACHE = {}
 		self.RefreshInventory()
 		self.RefreshEquipment()
 		self.RefreshCharacter()
@@ -2375,6 +2377,31 @@ class GameWindow(ui.ScriptWindow):
 			# YENI: beceri kitabi grid'ini sadece 20001 NPC'sinde acmak icin server->client komutu
 			serverCommandList.update({"cube_skill_grid" : self.__CubeSkillGrid_Set})
 
+		# GM Balik Bilgisi: /fish_info sonuc satirlari (bkz. uifishinfo.py; server ENABLE_GM_FISH_INFO)
+		serverCommandList.update({
+			"fish_info_begin"	: self.__FishInfo_Begin,
+			"fish_info"			: self.__FishInfo_Row,
+			"fish_info_end"		: self.__FishInfo_End,
+		})
+
+		# WS turnuva hazirlik kilidi: "WSMoveLock <saniye|0>" (client tarafi hareket kilidi)
+		if getattr(app, "ENABLE_WS_TOURNAMENT", 0):
+			serverCommandList.update({"WSMoveLock" : self.__WSMoveLock})
+
+		# Kaos Savasi (FFA): skor tablosu + isinma sayaci komutlari
+		# (server ENABLE_FFA_EVENT gonderir; eski server hic gondermez - skew-safe)
+		serverCommandList.update({
+			"ffa_rank"		: self.__FFARank,
+			"ffa_warmup"	: self.__FFAWarmup,
+			"ffa_start"		: self.__FFAStart,
+		})
+
+		if getattr(app, "ENABLE_PLAYER_STATISTICS", 0):
+			serverCommandList.update({
+				"RankingProcess"	: self.__RankingProcess,
+				"RankingData"		: self.__RankingData,
+			})
+
 		self.serverCommander=stringCommander.Analyzer()
 		for serverCommandItem in serverCommandList.items():
 			self.serverCommander.SAFE_RegisterCallBack(
@@ -2574,6 +2601,19 @@ class GameWindow(ui.ScriptWindow):
 			if self.interface:
 				self.interface.SetCubeSkillGridEnable(int(flag))
 
+	# GM Balik Bilgisi server->client veri satirlari (uifishinfo.py penceresine yonlendirilir)
+	def __FishInfo_Begin(self, name, total):
+		import uifishinfo
+		uifishinfo.BeginData(name, total)
+
+	def __FishInfo_Row(self, rows):
+		import uifishinfo
+		uifishinfo.AppendData(rows)
+
+	def __FishInfo_End(self):
+		import uifishinfo
+		uifishinfo.EndData()
+
 	def BINARY_PrivateShop_Appear(self, vid, text):
 		self.interface.AppearPrivateShop(vid, text)
 
@@ -2733,6 +2773,54 @@ class GameWindow(ui.ScriptWindow):
 		def GmPlayerPanelSetList(self, playerList, total=0, ch1=0, ch2=0, ch3=0, ch4=0):
 			if self.interface:
 				self.interface.GmPlayerPanelSetList(playerList, total, ch1, ch2, ch3, ch4)
+
+	if getattr(app, "ENABLE_WS_TOURNAMENT", 0):
+		def __WSMoveLock(self, seconds="0"):
+			try:
+				player.SetWSMoveLock(int(seconds))
+			except (ValueError, AttributeError):
+				pass
+
+	# Kaos Savasi (FFA) skor/sayac kopruleri (bkz. uiffaboard.py; interface delege eder)
+	def __FFARank(self, payload="0"):
+		if self.interface:
+			self.interface.FFA_SetRank(payload)
+
+	def __FFAWarmup(self, seconds="0"):
+		if self.interface:
+			self.interface.FFA_Warmup(seconds)
+
+	def __FFAStart(self):
+		if self.interface:
+			self.interface.FFA_FightStart()
+
+	# Oyun ici siralama koprusu (uigeneralranking; interface delege eder)
+	def __RankingProcess(self, processID):
+		if not self.interface:
+			return
+		rankWnd = self.interface.GetRankingWindow()
+		if not rankWnd:
+			return
+		if processID == "start":
+			rankWnd.StartLoading()
+		elif processID == "end":
+			rankWnd.StopLoading()
+		elif processID == "null":
+			rankWnd.ListIsEmpty()
+
+	def __RankingData(self, serverData):
+		if not self.interface:
+			return
+		rankWnd = self.interface.GetRankingWindow()
+		if not rankWnd:
+			return
+		try:
+			rankingInfo = serverData.split("|")
+			rankWnd.AppendRank(int(str(rankingInfo[1])), str(rankingInfo[4]), long(str(rankingInfo[3])), str(rankingInfo[5]), int(str(rankingInfo[2])))
+			rankWnd.SetLastRefreshTime(str(rankingInfo[5]))
+		except:
+			dbg.TraceError("__RankingData: bozuk veri: %s" % str(serverData))
+
 
 	if app.ENABLE_EXCHANGE_LOG:
 		def ExchangeLogClear(self, playerCode):

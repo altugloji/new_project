@@ -92,6 +92,10 @@ m_dwLastIdleTime(0)
 	m_fCameraZoomSpeed = c_fDefaultCameraZoomSpeed;
 
 	m_iCameraMode = CAMERA_MODE_NORMAL;
+#ifdef ENABLE_WS_TOURNAMENT
+	m_iWatchingPlayerVID = 0;
+	m_fWatchLostTime = 0.0f;
+#endif
 	m_fBlendCameraStartTime = 0.0f;
 	m_fBlendCameraBlendTime = 0.0f;
 

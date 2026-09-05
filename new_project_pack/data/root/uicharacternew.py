@@ -853,6 +853,17 @@ class CharacterWindow(ui.ScriptWindow):
 		self.toolTipAlignment.ClearToolTip()
 		self.toolTipAlignment.AutoAppendTextLine(localeInfo.TITLE_NAME_LIST[grade], gradeColor)
 		self.toolTipAlignment.AutoAppendTextLine(localeInfo.ALIGNMENT_NAME + str(point))
+		if getattr(app, "ENABLE_PLAYER_STATISTICS", 0):
+			import grp
+			_psTitleColor = grp.GenerateColor(0.53, 0.81, 0.92, 1.0)
+			_psLineColor = grp.GenerateColor(0.5, 0.75, 1.0, 1.0)
+			self.toolTipAlignment.AutoAppendTextLine(localeInfo.CHARACTER_STATISTICS_TITLE, _psTitleColor)
+			self.toolTipAlignment.AutoAppendTextLine(localeInfo.CS_DESTROYED_BOSS % localeInfo.NumberToMoney(player.GetStatus(player.POINT_ST_DESTROYED_BOSS_COUNT)), _psLineColor)
+			self.toolTipAlignment.AutoAppendTextLine(localeInfo.CS_DESTROYED_STONES % localeInfo.NumberToMoney(player.GetStatus(player.POINT_ST_DESTROYED_STONE_COUNT)), _psLineColor)
+			self.toolTipAlignment.AutoAppendTextLine(localeInfo.CS_MAX_BOSS_DMG % localeInfo.NumberToMoney(player.GetStatus(player.POINT_ST_MAX_BOSS_DMG)), _psLineColor)
+			self.toolTipAlignment.AutoAppendTextLine(localeInfo.CS_MAX_STONE_DMG % localeInfo.NumberToMoney(player.GetStatus(player.POINT_ST_MAX_STONE_DMG)), _psLineColor)
+			self.toolTipAlignment.AutoAppendTextLine(localeInfo.CS_MAX_PLAYER_DMG % localeInfo.NumberToMoney(player.GetStatus(player.POINT_ST_MAX_PLAYER_DMG)), _psLineColor)
+			self.toolTipAlignment.AutoAppendTextLine(localeInfo.CS_RONARK_SCORE % localeInfo.NumberToMoney(player.GetStatus(player.POINT_ST_RONARK_SCORE)), _psLineColor)
 		self.toolTipAlignment.AlignHorizonalCenter()
 
 	def __ShowStatusMinusButtonList(self):

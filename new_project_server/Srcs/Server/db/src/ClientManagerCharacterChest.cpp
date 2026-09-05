@@ -459,7 +459,7 @@ void CClientManager::QUERY_CHARACTER_CHEST(CPeer* peer, DWORD dwHandle, TPacketG
 				return;
 			}
 
-			char szQuery[512];
+			char szQuery[1024];
 			snprintf(szQuery, sizeof(szQuery),
 				"SELECT account_id, name FROM player%s WHERE id=%u LIMIT 1",
 				GetTablePostfix(), p->dwTargetPID);
@@ -500,11 +500,19 @@ void CClientManager::QUERY_CHARACTER_CHEST(CPeer* peer, DWORD dwHandle, TPacketG
 				#ifdef ENABLE_BOT_CONTROL
 				",bot_control_time "
 				#endif
+				#ifdef ENABLE_PLAYER_STATISTICS
+				", st_dst_boss_cnt "
+				", st_dst_stone_cnt "
+				", st_max_boss_dmg "
+				", st_max_stone_dmg "
+				", st_max_player_dmg "
+				", st_ronark_scores "
+				#endif
 				" FROM player%s WHERE id=%u LIMIT 1",
 				GetTablePostfix(), p->dwTargetPID);
 
 			const auto pPlayer(CDBManager::instance().DirectQuery(szQuery, SQL_PLAYER));
-			if (!pPlayer->Get() || !CreatePlayerTableFromRes(pPlayer->Get()->pSQLResult, &pack.playerTable))
+			if (!pPlayer->Get() || !pPlayer->Get()->pSQLResult || !CreatePlayerTableFromRes(pPlayer->Get()->pSQLResult, &pack.playerTable))
 			{
 				SendReply(CHARACTER_CHEST_ERR_DB);
 				return;

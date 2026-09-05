@@ -520,6 +520,9 @@ void CShopManager::Sell(LPCHARACTER ch, BYTE bCell, BYTE bCount) const
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("판매금액의 %d %% 가 세금으로 나가게됩니다"), iVal);
 
 	DBManager::instance().SendMoneyLog(MONEY_LOG_SHOP, item->GetVnum(), dwPrice);
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+	CHARACTER_MANAGER::instance().CollectYangFlow(CHARACTER_MANAGER::YANG_FLOW_NPC_SELL, ch->GetRealMapIndex(), (int) dwPrice);
+#endif
 
 	if (bCount == item->GetCount())
 		ITEM_MANAGER::instance().RemoveItem(item, "SELL");
@@ -796,11 +799,11 @@ namespace
 		if (dwSub < 10)
 			return false;
 		if (dwCat == SHOP_SEARCH_CATEGORY_ARMOR)
-			return dwSub <= 14;
+			return dwSub <= 13;
 		if (dwCat == SHOP_SEARCH_CATEGORY_WEAPON)
 			return dwSub <= 15;
 		if (dwCat == SHOP_SEARCH_CATEGORY_JEWELRY)
-			return dwSub <= 13;
+			return dwSub <= 15;
 		return false;
 	}
 #endif
@@ -937,15 +940,26 @@ void CShopManager::PrepareShopSearchFilters()
 	};
 	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_TOITEM] = {
 		{31035, 0}, {30602, 0}, {30603, 0}, {30604, 0}, {30610, 0}, {30156, 0}, {27991, 0}, {51001, 0},
+		{31111, 0},
 	};
 	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_CHARACTER] = {
 		{71084, 0}, {71085, 0}, {70024, 0}, {50904, 0}, {50903, 0}, {71152, 0}, {71151, 0},
 	};
 	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_OTHER] = {
-		{50513, 0}, {71001, 0}, {71094, 0}, {70102, 0}, {70043, 0}, {70005, 0}, {50082, 0}, {50186, 0},
+		{50513, 0}, {71001, 0}, {71094, 0}, {70102, 0}, {70043, 0}, {70005, 0},
 	};
 	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_DRAGON_VOUCHER] = {
 		{80014, 0}, {80015, 0}, {80016, 0}, {30403, 0}, {30404, 0},
+	};
+	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_LOOTBOX] = {
+		{50082, 0}, {50186, 0}, {83027, 0},
+	};
+	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_BIOLOG] = {
+		{30220, 0}, {30221, 0}, {30222, 0}, {30223, 0}, {30224, 0}, {30225, 0}, {30226, 0}, {30227, 0},
+		{30228, 0}, {30251, 0}, {30252, 0},
+	};
+	m_shopSearchFilters[SHOP_SEARCH_CATEGORY_SPECIAL * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_SPECIAL_MISC] = {
+		{30319, 0}, {30179, 0}, {70031, 0}, {72323, 0}, {71124, 0}, {31076, 0}, {71202, 0},
 	};
 
 #ifdef ENABLE_SHOP_SEARCH_CLASS_SUBCAT
@@ -976,9 +990,9 @@ void CShopManager::PrepareShopSearchFilters()
 			{11800,9}, {11810,9}, {11820,9}, {11830,9}, {11840,9}, {11850,9}, {11860,9}, {11870,9},
 			{11880,9}, {11890,9},
 		};
-		// Zirh > Kalkan (searchIndex = 194)
-		static const SGridFamily aArmorShield[] = {
-			{13000,9}, {13020,9}, {13040,9}, {13060,9}, {13080,9}, {13100,9}, {13120,9},
+		// Zirh > Kalkan (searchIndex = 275)
+		static const SGridFamily aJewShield[] = {
+			{13000,9}, {13020,9}, {13060,9}, {13080,9}, {13100,9}, {13120,9}, {13200,9},
 		};
 		// Silah > Savasci Tek El (searchIndex = 230)
 		static const SGridFamily aWeaponOneHand[] = {
@@ -1003,7 +1017,7 @@ void CShopManager::PrepareShopSearchFilters()
 		// Silah > Saman Can (searchIndex = 234)
 		static const SGridFamily aWeaponBell[] = {
 			{5000,9}, {5010,9}, {5020,9}, {5030,9}, {5040,9}, {5050,9}, {5060,9}, {5070,9}, {5080,9},
-			{5090,9}, {5100,9}, {5110,9},
+			{5090,9}, {5100,9}, {5110,9}, {5120,9},
 		};
 		// Silah > Saman Yelpaze (searchIndex = 235)
 		static const SGridFamily aWeaponFan[] = {
@@ -1030,6 +1044,11 @@ void CShopManager::PrepareShopSearchFilters()
 			{15000,9}, {15020,9}, {15040,9}, {15060,9}, {15080,9}, {15100,9}, {15120,9}, {15140,9},
 			{15160,9}, {15180,9}, {15200,9}, {15220,9},
 		};
+		// Taki > Kasklar (searchIndex = 274)
+		static const SGridFamily aJewHelmet[] = {
+			{12200,9}, {12220,9}, {12240,9}, {12260,9}, {12340,9}, {12360,9}, {12380,9}, {12390,9},
+			{12480,9}, {12500,9}, {12520,9}, {12530,9}, {12620,9}, {12640,9}, {12660,9}, {12670,9},
+		};
 
 		struct SGridDef { DWORD dwIndex; const SGridFamily * pFam; size_t uCount; };
 		const SGridDef aGridDefs[] = {
@@ -1037,7 +1056,7 @@ void CShopManager::PrepareShopSearchFilters()
 			{ SHOP_SEARCH_CATEGORY_ARMOR * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_ASSASSIN, aArmorAssassin, sizeof(aArmorAssassin) / sizeof(aArmorAssassin[0]) },
 			{ SHOP_SEARCH_CATEGORY_ARMOR * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_SURA, aArmorSura, sizeof(aArmorSura) / sizeof(aArmorSura[0]) },
 			{ SHOP_SEARCH_CATEGORY_ARMOR * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_SHAMAN, aArmorShaman, sizeof(aArmorShaman) / sizeof(aArmorShaman[0]) },
-			{ SHOP_SEARCH_CATEGORY_ARMOR * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_SHIELD, aArmorShield, sizeof(aArmorShield) / sizeof(aArmorShield[0]) },
+			{ SHOP_SEARCH_CATEGORY_JEWELRY * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_JEW_SHIELD, aJewShield, sizeof(aJewShield) / sizeof(aJewShield[0]) },
 			{ SHOP_SEARCH_CATEGORY_WEAPON * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_WPN_ONEHAND, aWeaponOneHand, sizeof(aWeaponOneHand) / sizeof(aWeaponOneHand[0]) },
 			{ SHOP_SEARCH_CATEGORY_WEAPON * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_WPN_TWOHAND, aWeaponTwoHand, sizeof(aWeaponTwoHand) / sizeof(aWeaponTwoHand[0]) },
 			{ SHOP_SEARCH_CATEGORY_WEAPON * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_WPN_DAGGER, aWeaponDagger, sizeof(aWeaponDagger) / sizeof(aWeaponDagger[0]) },
@@ -1048,6 +1067,7 @@ void CShopManager::PrepareShopSearchFilters()
 			{ SHOP_SEARCH_CATEGORY_JEWELRY * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_JEW_NECK, aJewNeck, sizeof(aJewNeck) / sizeof(aJewNeck[0]) },
 			{ SHOP_SEARCH_CATEGORY_JEWELRY * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_JEW_WRIST, aJewWrist, sizeof(aJewWrist) / sizeof(aJewWrist[0]) },
 			{ SHOP_SEARCH_CATEGORY_JEWELRY * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_JEW_BOOTS, aJewBoots, sizeof(aJewBoots) / sizeof(aJewBoots[0]) },
+			{ SHOP_SEARCH_CATEGORY_JEWELRY * SHOP_CATEGORY_MAX_SUB + SHOP_SEARCH_SUB_GRID_JEW_HELMET, aJewHelmet, sizeof(aJewHelmet) / sizeof(aJewHelmet[0]) },
 		};
 
 		for (size_t d = 0; d < sizeof(aGridDefs) / sizeof(aGridDefs[0]); ++d)

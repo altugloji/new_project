@@ -150,6 +150,22 @@ window = {
 
 					"text" : "",
 				},
+
+				{
+					"name" : "StatisticsBtn",
+					"type" : "button",
+
+					"x" : 5,
+					"y" : 90,
+
+					"tooltip_text" : "Siralama",
+					"tooltip_x" : -56,
+					"tooltip_y" : 10,
+
+					"default_image" : "d:/ymir work/ui/game/ranking/minimap/ranking_button2_01_normal.png",
+					"over_image" : "d:/ymir work/ui/game/ranking/minimap/ranking_button2_01_hover.png",
+					"down_image" : "d:/ymir work/ui/game/ranking/minimap/ranking_button2_01_down.png",
+				},
 			),
 		},
 		{

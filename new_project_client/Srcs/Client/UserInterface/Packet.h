@@ -171,6 +171,9 @@ enum
 #ifdef ENABLE_GM_PLAYER_PANEL
 	HEADER_CG_GM_PLAYER_PANEL				= 233,
 #endif
+#ifdef ENABLE_WS_TOURNAMENT
+	HEADER_CG_WS_TOURNAMENT					= 235,
+#endif
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 	HEADER_CG_SAFETRADE						= 234,
 #endif
@@ -393,6 +396,10 @@ enum
 #endif
 #ifdef ENABLE_LUCKY_DRAW
 	HEADER_GC_LUCKYDRAW_INFO					= 246,
+#endif
+#ifdef ENABLE_WS_TOURNAMENT
+	HEADER_GC_WS_TOURNAMENT						= 247,
+	HEADER_GC_SKILL_COOLDOWN					= 231,	// WS turnuva: raunt basi skill sifirlama
 #endif
 
 
@@ -1840,6 +1847,15 @@ enum EPointTypes
 #endif
 #ifdef __GEM_SHOP__
 	POINT_GEM = 162,
+#endif
+#ifdef ENABLE_PLAYER_STATISTICS
+	// Server char.h ile AYNI numaralar (TPacketGCPoints indeksleri)
+	POINT_ST_DESTROYED_BOSS_COUNT = 163,
+	POINT_ST_DESTROYED_STONE_COUNT = 164,
+	POINT_ST_MAX_BOSS_DMG = 165,
+	POINT_ST_MAX_STONE_DMG = 166,
+	POINT_ST_MAX_PLAYER_DMG = 167,
+	POINT_ST_RONARK_SCORE = 168,
 #endif
 	POINT_MIN_WEP = 200,
 	POINT_MAX_WEP,
@@ -3434,6 +3450,58 @@ typedef struct SPacketGCGmPlayerPanel
 	BYTE	header;
 	WORD	wSize;
 } TPacketGCGmPlayerPanel;
+#endif
+
+#ifdef ENABLE_WS_TOURNAMENT
+// server packet.h ile BAYT-BIREBIR ayni olmali (CG 235 / GC 247)
+typedef struct SPacketCGWSTournament
+{
+	BYTE	bHeader;
+	BYTE	bSubHeader;						// 0 = bilgi istegi
+} TPacketCGWSTournament;
+
+typedef struct SPacketGCWSTournament
+{
+	BYTE	bHeader;
+	WORD	wSize;
+	BYTE	bState;
+	BYTE	bRound;
+	BYTE	bEntryCount;
+	BYTE	bMatchCount;
+	BYTE	bMinLevel;
+	BYTE	bMaxLevel;
+	BYTE	bJobFilter;
+	BYTE	bSetCount;
+	BYTE	bMatchMinutes;
+	BYTE	bMyStatus;
+	int		iSecondsLeft;
+	long long	llFee;
+	long long	llPool;
+} TPacketGCWSTournament;
+
+typedef struct SWSTournamentEntryInfo
+{
+	char	szName[CHARACTER_NAME_MAX_LEN + 1];
+	BYTE	bLevel;
+	BYTE	bJob;
+	BYTE	bAlive;
+} TWSTournamentEntryInfo;
+
+typedef struct SWSTournamentMatchInfo
+{
+	char	szNameA[CHARACTER_NAME_MAX_LEN + 1];
+	char	szNameB[CHARACTER_NAME_MAX_LEN + 1];
+	BYTE	bRound;
+	BYTE	bState;
+	BYTE	bResult;
+} TWSTournamentMatchInfo;
+
+typedef struct SPacketGCSkillCooldown
+{
+	BYTE	bHeader;						// HEADER_GC_SKILL_COOLDOWN
+	DWORD	dwSkillVnum;
+	int		iCooldown;						// ms; 0 = sifirla (server packet.h ile BAYT-BIREBIR)
+} TPacketGCSkillCooldown;
 #endif
 
 #ifdef ENABLE_CHARACTER_CHEST

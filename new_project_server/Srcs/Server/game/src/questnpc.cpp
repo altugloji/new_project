@@ -360,10 +360,10 @@ namespace quest
 		return HandleReceiveAllEvent(pc, QUEST_LEVELUP_EVENT);
 	}
 
-#ifdef ENABLE_FISHING_ANTI_MACRO
-	bool NPC::OnFishingCaptcha(PC& pc)
+#ifdef ENABLE_FISHING_KILL_QUEST
+	bool NPC::OnFishingKill(PC& pc)
 	{
-		return HandleReceiveAllEvent(pc, QUEST_FISHING_CAPTCHA_EVENT);
+		return HandleReceiveAllEvent(pc, QUEST_FISHING_KILL_EVENT);
 	}
 #endif
 

@@ -23,6 +23,9 @@ namespace quest
 	extern void RegisterGuildFunctionTable();
 	extern void RegisterGameFunctionTable();
 	extern void RegisterArenaFunctionTable();
+#ifdef ENABLE_WS_TOURNAMENT
+	extern void RegisterWSFunctionTable();
+#endif
 	extern void RegisterGlobalFunctionTable(lua_State* L);
 	extern void RegisterForkedFunctionTable();
 	extern void RegisterMonarchFunctionTable();

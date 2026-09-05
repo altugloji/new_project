@@ -17,6 +17,7 @@
 #include "locale_service.h"
 #include "item.h"
 #include "item_manager.h"
+#include "constants.h"
 
 #include "../../common/VnumHelper.h"
 #include "DragonSoul.h"
@@ -115,6 +116,74 @@ bool ITEM_MANAGER::Initialize(TItemTable * table, int size)
 
 	return true;
 }
+
+#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+// Nazar Tilsimi (GLOVE_RANDOM_ATTR_VNUM): uretim aninda item_attr_rare tablosunun 'glove'
+// kolonu efsun havuzu kabul edilir; glove > 0 olan apply'lar dwProb agirligiyla secilir,
+// seviye 1..min(glove, 5) arasi rastgele gelir (bos lv degerleri dolu ust seviyeye yuvarlanir).
+static void GiveGloveRandomAttributes(LPITEM item)
+{
+	for (int iGiven = 0; iGiven < GLOVE_RANDOM_ATTR_COUNT; ++iGiven)
+	{
+		std::vector<int> avail;
+		std::vector<int> availMaxLv;
+		int iTotalProb = 0;
+
+		for (int i = 0; i < MAX_APPLY_NUM; ++i)
+		{
+			const TItemAttrTable & r = g_map_itemRare[i];
+
+			if (0 == r.dwApplyIndex || 0 == r.dwProb || item->HasAttr((BYTE) i))
+				continue;
+
+			int iMaxLv = MIN((int) r.bMaxLevelBySet[ATTRIBUTE_SET_GLOVE], ITEM_ATTRIBUTE_MAX_LEVEL);
+
+			while (iMaxLv > 0 && 0 == r.lValues[iMaxLv - 1])
+				--iMaxLv;
+
+			if (iMaxLv <= 0)
+				continue;
+
+			avail.push_back(i);
+			availMaxLv.push_back(iMaxLv);
+			iTotalProb += (int) r.dwProb;
+		}
+
+		if (avail.empty() || iTotalProb <= 0)
+		{
+			sys_log(0, "GLOVE_RANDOM_ATTR: havuz tukendi, item %u efsun %d/%d", item->GetID(), iGiven, GLOVE_RANDOM_ATTR_COUNT);
+			break;
+		}
+
+		int iProb = number(1, iTotalProb);
+		size_t uiPick = 0;
+
+		for (size_t k = 0; k < avail.size(); ++k)
+		{
+			const TItemAttrTable & r = g_map_itemRare[avail[k]];
+
+			if (iProb <= (int) r.dwProb)
+			{
+				uiPick = k;
+				break;
+			}
+
+			iProb -= (int) r.dwProb;
+		}
+
+		const TItemAttrTable & rPicked = g_map_itemRare[avail[uiPick]];
+		int iLevel = number(1, availMaxLv[uiPick]);
+
+		while (iLevel < availMaxLv[uiPick] && 0 == rPicked.lValues[iLevel - 1])
+			++iLevel;
+
+		item->AddAttribute((BYTE) avail[uiPick], (short) rPicked.lValues[iLevel - 1]);
+		sys_log(0, "GLOVE_RANDOM_ATTR: [%d] havuz=%d toplamprob=%d apply=%d lv=%d deger=%ld", iGiven, (int) avail.size(), iTotalProb, avail[uiPick], iLevel, rPicked.lValues[iLevel - 1]);
+	}
+
+	sys_log(0, "GLOVE_RANDOM_ATTR: tamamlandi item=%u efsun_sayisi=%d", item->GetID(), item->GetAttributeCount());
+}
+#endif
 
 LPITEM ITEM_MANAGER::CreateItem(DWORD vnum, DWORD count, DWORD id, bool bTryMagic, int iRarePct, bool bSkipSave)
 {
@@ -322,6 +391,15 @@ LPITEM ITEM_MANAGER::CreateItem(DWORD vnum, DWORD count, DWORD id, bool bTryMagi
 			if (number(1, 100) <= iRarePct)
 				item->AlterToMagicItem();
 		}
+
+#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+		// Nazar Tilsimi: her yeni uretimde 5 rastgele efsun (havuz: item_attr_rare.glove)
+		if (GLOVE_RANDOM_ATTR_VNUM == vnum)
+		{
+			sys_log(0, "GLOVE_RANDOM_ATTR: uretim hook girdi vnum=%u id=%u", vnum, item->GetID());
+			GiveGloveRandomAttributes(item);
+		}
+#endif
 
 		if (table->bGainSocketPct)
 			item->AlterToSocketItem(table->bGainSocketPct);
@@ -993,6 +1071,15 @@ bool ITEM_MANAGER::GetDropPct(LPCHARACTER pkChr, LPCHARACTER pkKiller, OUT int& 
 		iDeltaPercent = PERCENT_LVDELTA_BOSS(pkKiller->GetLevel(), pkChr->GetLevel());
 	else
 		iDeltaPercent = PERCENT_LVDELTA(pkKiller->GetLevel(), pkChr->GetLevel());
+
+#ifdef ENABLE_DROP_LEVEL_PENALTY_EXEMPT
+	// Muaf hedeflerde (harita 68 + boss 1093/2598) oyuncu seviyesi mobdan yuksekken seviye-farki cezasi uygulanmaz, esit seviye sayilir
+	if (pkKiller->GetLevel() > pkChr->GetLevel() &&
+		(pkChr->GetRealMapIndex() == DROP_LEVEL_PENALTY_EXEMPT_MAP ||
+		 pkChr->GetRaceNum() == DROP_LEVEL_PENALTY_EXEMPT_MOB1 ||
+		 pkChr->GetRaceNum() == DROP_LEVEL_PENALTY_EXEMPT_MOB2))
+		iDeltaPercent = 100;
+#endif
 
     const BYTE bRank = pkChr->GetMobRank();
 

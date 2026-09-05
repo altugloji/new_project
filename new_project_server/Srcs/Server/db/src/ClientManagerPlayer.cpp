@@ -136,6 +136,14 @@ size_t CreatePlayerSaveQuery(char * pszQuery, size_t querySize, TPlayerTable * p
 #ifdef __GEM_SYSTEM__
 			"gem = %d, "
 #endif
+#ifdef ENABLE_PLAYER_STATISTICS
+			"st_dst_boss_cnt = %lld, "
+			"st_dst_stone_cnt = %lld, "
+			"st_max_boss_dmg = %lld, "
+			"st_max_stone_dmg = %lld, "
+			"st_max_player_dmg = %lld, "
+			"st_ronark_scores = %lld, "
+#endif
 			,
 		GetTablePostfix(),
 		pkTab->job,
@@ -188,6 +196,14 @@ size_t CreatePlayerSaveQuery(char * pszQuery, size_t querySize, TPlayerTable * p
 #endif
 #ifdef __GEM_SYSTEM__
 		, pkTab->gem
+#endif
+#ifdef ENABLE_PLAYER_STATISTICS
+		, pkTab->iStDstBossCnt
+		, pkTab->iStDstStoneCnt
+		, pkTab->iStMaxBossDmg
+		, pkTab->iStMaxStoneDmg
+		, pkTab->iStMaxPlayerDmg
+		, pkTab->iStRonarkScores
 #endif
 	);
 
@@ -408,6 +424,14 @@ void CClientManager::QUERY_PLAYER_LOAD(CPeer * peer, DWORD dwHandle, TPlayerLoad
 #ifdef ENABLE_BOT_CONTROL
 				",bot_control_time "
 #endif
+#ifdef ENABLE_PLAYER_STATISTICS
+				", st_dst_boss_cnt "
+				", st_dst_stone_cnt "
+				", st_max_boss_dmg "
+				", st_max_stone_dmg "
+				", st_max_player_dmg "
+				", st_ronark_scores "
+#endif
 				" FROM player%s WHERE id=%d",
 				GetTablePostfix(), packet->player_id);
 
@@ -572,6 +596,14 @@ bool CreatePlayerTableFromRes(MYSQL_RES * res, TPlayerTable * pkTab)
 #endif
 #ifdef ENABLE_BOT_CONTROL
 	str_to_number(pkTab->botControlTime, row[col++]);
+#endif
+#ifdef ENABLE_PLAYER_STATISTICS
+	str_to_number(pkTab->iStDstBossCnt, row[col++]);
+	str_to_number(pkTab->iStDstStoneCnt, row[col++]);
+	str_to_number(pkTab->iStMaxBossDmg, row[col++]);
+	str_to_number(pkTab->iStMaxStoneDmg, row[col++]);
+	str_to_number(pkTab->iStMaxPlayerDmg, row[col++]);
+	str_to_number(pkTab->iStRonarkScores, row[col++]);
 #endif
 	// reset sub_skill_point
 	{

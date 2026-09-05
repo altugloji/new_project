@@ -64,7 +64,22 @@ class Analyzer:
 				raise(RuntimeError, "Analyzer.Run(line=%s) - cmd=%s, curArgCount[%d]<needArgCount[%d]" % (line, cmd, len(tokens), argCount))
 				return 0
 
+			try:
+				# RankingData: son alan (tarih) bosluk icerir, tekrar birlestir
+				if cmd == "RankingData":
+					tokens[0] += (" " + tokens[1])
+			except:
+				pass
+
 			tokens=tokens[:argCount]
+
+		try:
+			if cmd == "RankingData":
+				argCount=callBackFunc.GetArgumentCount()-1
+				tokens[0] += (" " + tokens[1])
+				tokens=tokens[:argCount]
+		except:
+			pass
 
 		callBackFunc(*tokens)
 		return 1

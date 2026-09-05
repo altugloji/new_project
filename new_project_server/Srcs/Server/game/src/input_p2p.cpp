@@ -27,6 +27,9 @@
 #ifdef ENABLE_LUCKY_DRAW
 #include "LuckyDraw.h"
 #endif
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#endif
 #ifdef __BL_CLIENT_LOCALE_STRING__
 	#include "buffer_manager.h"
 #endif
@@ -730,6 +733,18 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 
 		case HEADER_GG_MESSENGER_BLOCK_REMOVE:
 			MessengerBlockRemove(c_pData);
+			break;
+#endif
+
+#ifdef ENABLE_WS_TOURNAMENT
+		case HEADER_GG_WS_TOURNAMENT:
+			CWSTournamentManager::instance().OnP2P(reinterpret_cast<const TPacketGGWSTournament*>(c_pData));
+			break;
+
+		case HEADER_GG_WS_BRACKET:
+			// host kendi snapshot'ini yerelde uygular; ikinci bir (yanlis-config) host'un yayini cache'i ezmesin
+			if (!CWSTournamentManager::instance().IsHostCore())
+				CWSTournamentManager::instance().ApplySnapshot(reinterpret_cast<const TPacketGGWSBracket*>(c_pData));
 			break;
 #endif
 

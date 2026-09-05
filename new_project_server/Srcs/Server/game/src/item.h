@@ -286,6 +286,9 @@ class CItem : public CEntity
 		bool		IsOldMountItem() const;
 		bool		IsNewMountItem() const;
 		bool		IsRamadanRing() const;
+#ifdef ENABLE_COSTUME_PERMA_AND_REFRESHING
+		bool		IsDurationAddedItems() const;
+#endif
 
 		void		ClearMountAttributeAndAffect();
 

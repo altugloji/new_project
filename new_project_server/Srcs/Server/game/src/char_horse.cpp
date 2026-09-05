@@ -10,6 +10,9 @@
 #include "horsename_manager.h"
 #include "locale_service.h"
 #include "arena.h"
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 
 #include "../../common/VnumHelper.h"
 
@@ -48,6 +51,14 @@ bool CHARACTER::StartRiding()
 	// @warme005
 	if (CArenaManager::instance().IsArenaMap(GetMapIndex()) == true)
 		return false;
+
+#ifdef ENABLE_FFA_EVENT
+	if (CFFAManager::instance().IsFFAMap(GetMapIndex()))
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Savas alaninda ata binemezsin.");
+		return false;
+	}
+#endif
 
 #ifdef ENABLE_HORSE_RIDE_SKILL_DELAY
 	// Ozel binekteki gibi: skill kullandiktan sonra 1.5 sn ata binilemez
@@ -160,6 +171,12 @@ void CHARACTER::HorseSummon(bool bSummon, bool bFromFar, DWORD dwVnum, const cha
 
 		if (IsRiding())
 			return;
+
+#ifdef ENABLE_FFA_EVENT
+		// FFA haritasinda at cagrilamaz: at NPC ismi ("X nin ati") sahibinin kimligini sizdirir
+		if (CFFAManager::instance().IsFFAMap(GetMapIndex()))
+			return;
+#endif
 
 		#ifdef ENABLE_MOUNT_COSTUME_EX_SYSTEM
 		if (GetMountVnum())

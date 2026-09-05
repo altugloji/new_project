@@ -240,7 +240,7 @@ SHOP_SEARCH_GRID_FAMILIES = {
 	# Silah > Saman Can (searchIndex = 11*20+14 = 234)
 	(SHOP_SEARCH_CATEGORY_WEAPON, 14): [
 		(5000, 9), (5010, 9), (5020, 9), (5030, 9), (5040, 9), (5050, 9), (5060, 9), (5070, 9),
-		(5080, 9), (5090, 9), (5100, 9), (5110, 9),
+		(5080, 9), (5090, 9), (5100, 9), (5110, 9), (5120, 9),
 	],
 	# Silah > Saman Yelpaze (searchIndex = 11*20+15 = 235)
 	(SHOP_SEARCH_CATEGORY_WEAPON, 15): [
@@ -713,7 +713,7 @@ SHOP_SEARCH_FILTERS = {
 			SHOP_SEARCH_SUB_SPECIAL_MISC: { #ozel esyalar (kullanici tercihi: duz ASCII ad)
 				"name": "Ozel Esyalar",
 				"itemList": [
-					(30319, 0), (30179, 0), (70031, 0), (72323, 0), (71124, 0),
+					(30319, 0), (30179, 0), (70031, 0), (72323, 0), (71124, 0), (31076, 0), (71202, 0),
 				]
 			},
 			SHOP_SEARCH_SUB_SPECIAL_LOOTBOX: { #sandiklar (locale anahtari mevcut)

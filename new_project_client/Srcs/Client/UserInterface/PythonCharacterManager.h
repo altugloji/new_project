@@ -95,6 +95,9 @@ class CPythonCharacterManager : public CSingleton<CPythonCharacterManager>, publ
 		// Pick
 		int									PickAll();
 		CInstanceBase *						GetCloseInstance(CInstanceBase * pInstance);
+#ifdef ENABLE_WS_TOURNAMENT
+		DWORD								GetCloseInstanceVID(CInstanceBase * pInstance);
+#endif
 
 		// Refresh TextTail
 		void								RefreshAllPCTextTail();

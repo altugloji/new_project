@@ -145,6 +145,9 @@ enum
 #ifdef ENABLE_SAFE_TRADE_SYSTEM
 	HEADER_CG_SAFETRADE				= 234,
 #endif
+#ifdef ENABLE_WS_TOURNAMENT
+	HEADER_CG_WS_TOURNAMENT				= 235,
+#endif
 #ifdef ENABLE_GIFT_SEND_SYSTEM
 	HEADER_CG_GIFT_LIST					= 226,
 	HEADER_CG_GIFT_FIND					= 227,
@@ -373,6 +376,10 @@ enum
 #ifdef ENABLE_LUCKY_DRAW
 	HEADER_GC_LUCKYDRAW_INFO					= 246,
 #endif
+#ifdef ENABLE_WS_TOURNAMENT
+	HEADER_GC_WS_TOURNAMENT						= 247,
+	HEADER_GC_SKILL_COOLDOWN					= 231,	// WS turnuva: raunt basi skill sifirlama (Eski_A paritesi)
+#endif
 	/////////////////////////////////////////////////////////////////////////////
 
 	HEADER_GG_LOGIN								= 1,
@@ -447,6 +454,10 @@ enum
 	HEADER_GG_MESSENGER_BLOCK_ADD				= 45,
 	HEADER_GG_MESSENGER_BLOCK_REMOVE			= 46,
 #endif
+
+	// bilerek ifdef'siz (bkz. HEADER_GG_RELOAD_ETC_DROP notu): kayit kosulsuz, gonderici/isleyici define'lidir
+	HEADER_GG_WS_TOURNAMENT						= 47,
+	HEADER_GG_WS_BRACKET						= 48,	// bilerek ifdef'siz (bkz. 47 notu); bracket snapshot yayini
 
 };
 
@@ -3267,6 +3278,123 @@ typedef struct SPacketGCLuckyDrawInfo
 	char		joinerNames[LD_MAX_JOINER_LIST][CHARACTER_NAME_MAX_LEN + 1];
 	uint32_t	joinerTickets[LD_MAX_JOINER_LIST];
 } TPacketGCLuckyDrawInfo;
+#endif
+
+// WS 1v1 Turnuva P2P paketi - bilerek ifdef'siz (bkz. HEADER_GG_RELOAD_ETC_DROP notu)
+typedef struct SPacketGGWSTournament
+{
+	BYTE		bHeader;						// HEADER_GG_WS_TOURNAMENT
+	BYTE		bSubHeader;						// EWSGGSubHeader (ws_tournament.h)
+	DWORD		dwPID;
+	DWORD		dwAID;
+	char		szName[CHARACTER_NAME_MAX_LEN + 1];
+	char		szIP[16];						// kayit IP filtresi icin origin IP'si
+	BYTE		bLevel;
+	BYTE		bJob;
+	BYTE		bState;
+	BYTE		bMinLevel;
+	BYTE		bMaxLevel;
+	BYTE		bJobFilter;
+	BYTE		bSetCount;
+	BYTE		bRegMinutes;
+	BYTE		bMatchMinutes;
+	int			iValue1;						// genel amac (sonuc kodu / sayi / admin op)
+	int			iValue2;						// genel amac (kalan sn / tur / kayit dk)
+	long long	llGold;							// ucret / odul (yang)
+} TPacketGGWSTournament;
+
+// WS bracket snapshot (GG 48) - bilerek ifdef'siz; host uretir, tum core'lar cache'ler
+enum
+{
+	WS_SYNC_MAX_ENTRIES	= 64,
+	WS_SYNC_MAX_MATCHES	= 32,
+};
+
+typedef struct SPacketGGWSBracket
+{
+	BYTE	bHeader;							// HEADER_GG_WS_BRACKET
+	BYTE	bState;
+	BYTE	bRound;
+	BYTE	bEntryCount;
+	BYTE	bMatchCount;
+	BYTE	bMinLevel;
+	BYTE	bMaxLevel;
+	BYTE	bJobFilter;
+	BYTE	bSetCount;
+	BYTE	bMatchMinutes;
+	int		iSecondsLeft;
+	long long	llFee;
+	long long	llPool;
+	struct
+	{
+		DWORD	dwPID;
+		char	szName[CHARACTER_NAME_MAX_LEN + 1];
+		BYTE	bLevel;
+		BYTE	bJob;
+		BYTE	bAlive;
+	} aEntries[WS_SYNC_MAX_ENTRIES];
+	struct
+	{
+		DWORD	dwPIDA;
+		DWORD	dwPIDB;
+		char	szNameA[CHARACTER_NAME_MAX_LEN + 1];
+		char	szNameB[CHARACTER_NAME_MAX_LEN + 1];
+		BYTE	bRound;
+		BYTE	bState;
+		BYTE	bResult;
+	} aMatches[WS_SYNC_MAX_MATCHES];
+} TPacketGGWSBracket;
+
+#ifdef ENABLE_WS_TOURNAMENT
+// client turnuva paneli (CG 235 / GC 247) - client Packet.h ile BAYT-BIREBIR ayni olmali
+typedef struct SPacketCGWSTournament
+{
+	BYTE	bHeader;
+	BYTE	bSubHeader;						// 0 = bilgi istegi
+} TPacketCGWSTournament;
+
+typedef struct SPacketGCWSTournament
+{
+	BYTE	bHeader;
+	WORD	wSize;							// header + N*entry + M*match toplami
+	BYTE	bState;							// 0=yok 1=kayit 2=devam
+	BYTE	bRound;
+	BYTE	bEntryCount;
+	BYTE	bMatchCount;
+	BYTE	bMinLevel;
+	BYTE	bMaxLevel;
+	BYTE	bJobFilter;
+	BYTE	bSetCount;
+	BYTE	bMatchMinutes;
+	BYTE	bMyStatus;						// 0=kayitsiz 1=kayitli 2=elendi 3=aktif mac
+	int		iSecondsLeft;
+	long long	llFee;
+	long long	llPool;
+} TPacketGCWSTournament;
+
+typedef struct SWSTournamentEntryInfo
+{
+	char	szName[CHARACTER_NAME_MAX_LEN + 1];
+	BYTE	bLevel;
+	BYTE	bJob;
+	BYTE	bAlive;
+} TWSTournamentEntryInfo;
+
+typedef struct SWSTournamentMatchInfo
+{
+	char	szNameA[CHARACTER_NAME_MAX_LEN + 1];
+	char	szNameB[CHARACTER_NAME_MAX_LEN + 1];
+	BYTE	bRound;
+	BYTE	bState;							// EWSMatchState
+	BYTE	bResult;						// EWSMatchResult
+} TWSTournamentMatchInfo;
+
+typedef struct SPacketGCSkillCooldown
+{
+	BYTE	bHeader;						// HEADER_GC_SKILL_COOLDOWN
+	DWORD	dwSkillVnum;
+	int		iCooldown;						// ms; 0 = sifirla (client Packet.h ile BAYT-BIREBIR)
+} TPacketGCSkillCooldown;
 #endif
 
 #pragma pack()

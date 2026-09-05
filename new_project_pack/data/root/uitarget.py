@@ -485,6 +485,7 @@ class TargetBoard(ui.ThinBoard):
 		localeInfo.TARGET_BUTTON_BLOCK_REMOVE,
 		"VOTE_BLOCK_CHAT",
 		"GIFT_SEND",
+		"FISH_INFO",
 	)
 
 	GRADE_NAME =	{
@@ -610,6 +611,10 @@ class TargetBoard(ui.ThinBoard):
 		self.eventGiftSend = None
 		self.buttonDict["GIFT_SEND"].SetText("Hediye Gonder")
 		self.buttonDict["GIFT_SEND"].SetEvent(ui.__mem_func__(self.__OnGiftSend))
+
+		# GM'e ozel: hedef oyuncunun balik loglarini gosterir (server: ENABLE_GM_FISH_INFO)
+		self.buttonDict["FISH_INFO"].SetText("Balik Bilgisi")
+		self.buttonDict["FISH_INFO"].SetEvent(ui.__mem_func__(self.__OnFishInfo))
 
 		self.name = name
 		self.hpGauge = hpGauge
@@ -922,6 +927,22 @@ class TargetBoard(ui.ThinBoard):
 		if None != self.eventGiftSend and self.nameString:
 			self.eventGiftSend(self.nameString)
 
+	def __OnFishInfo(self):
+		# GM Balik Bilgisi: pencereyi ac + server'dan loglari iste (/fish_info)
+		if not chr.IsGameMaster(player.GetMainCharacterIndex()):
+			return
+
+		# nameString "Lv.X (...)" onekli olabilir; temiz ismi VID'den al
+		name = chr.GetNameByVID(self.vid)
+		if not name:
+			name = self.nameString
+		if not name:
+			return
+
+		import uifishinfo
+		uifishinfo.Open(name)
+		net.SendChatPacket("/fish_info " + str(name))
+
 	def OnPVP(self):
 		net.SendChatPacket("/pvp %d" % (self.vid))
 
@@ -999,6 +1020,10 @@ class TargetBoard(ui.ThinBoard):
 
 		if app.ENABLE_GIFT_SEND_SYSTEM:
 			self.__ShowButton("GIFT_SEND")
+
+		# GM Balik Bilgisi: sadece GM ve hedef oyuncu ise (PVP/observer erken-return'unde cikmaz, DC butonu ile ayni sinir)
+		if chr.IsGameMaster(player.GetMainCharacterIndex()) and chr.INSTANCE_TYPE_PLAYER == chr.GetInstanceType(self.vid):
+			self.__ShowButton("FISH_INFO")
 
 		if guild.MainPlayerHasAuthority(guild.AUTH_ADD_MEMBER):
 			if not guild.IsMemberByName(self.nameString):

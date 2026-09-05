@@ -33,6 +33,12 @@
 #include "polymorph.h"
 #include "blend_item.h"
 #include "arena.h"
+#ifdef ENABLE_WS_TOURNAMENT
+#include "ws_tournament.h"
+#endif
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 #include "threeway_war.h"
 
 #include "safebox.h"
@@ -138,6 +144,9 @@ bool IS_SUMMONABLE_ZONE(int map_index)
 		case 208 :
 
 		case 113 :
+#ifdef ENABLE_FFA_EVENT
+		case FFA_EVENT_MAP_INDEX :	// FFA savas haritasi: evlilik yuzugu / WarpToPID ile giris kapali
+#endif
 			return false;
 	}
 
@@ -1801,11 +1810,21 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 		sys_log(0, "USE_ITEM %d %s, Inven %d, Cell %d, DestInven %d, DestCell %d, ItemType %d, SubType %d", item->GetVnum(), item->GetName(), item->GetWindow(), item->GetCell(), bDestInven, wDestCell, item->GetType(), item->GetSubType());
 	}
 
+#ifndef ENABLE_WS_TOURNAMENT
 	if ( CArenaManager::instance().IsLimitedItem( GetMapIndex(), item->GetVnum() ) == true )
 	{
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("대련 중에는 이용할 수 없는 물품입니다."));
 		return false;
 	}
+#else
+	// pot engeli kaldirildi; Eski_A NEW_DUEL_TOURNAMENT paritesi: yalnizca su itemler engelli
+	if (GetMapIndex() == WS_TOURNAMENT_MAP_INDEX
+			&& ((item->GetVnum() == 50816 || item->GetVnum() == 50804) || (item->GetVnum() >= 27001 && item->GetVnum() <= 27006)))
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Bu esya burada kullanilamaz.");
+		return false;
+	}
+#endif
 #ifdef ENABLE_NEWSTUFF
 	else if (g_NoPotionsOnPVP && CPVPManager::instance().IsFighting(GetPlayerID()) && IsLimitedPotionOnPVP(item->GetVnum()))
 	{
@@ -1876,6 +1895,14 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 			return ItemProcess_Hair(item, wDestCell);
 
 		case ITEM_POLYMORPH:
+#ifdef ENABLE_FFA_EVENT
+			// FFA haritasinda donusum yasak: polymorph gorunumu uniforma/maskeyi deler
+			if (CFFAManager::instance().IsFFAMap(GetMapIndex()))
+			{
+				ChatPacket(CHAT_TYPE_INFO, "Savas alaninda donusum kullanilamaz.");
+				return false;
+			}
+#endif
 			return ItemProcess_Polymorph(item);
 
 		case ITEM_QUEST:
@@ -2469,6 +2496,14 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 					case USE_POTION_NODELAY:
 						{
+#ifdef ENABLE_HERB_POTION_USE_COOLTIME
+							// 50804 & 50816: 1 saniye kullanim bekleme suresi
+							if (item->GetVnum() == 50804 || item->GetVnum() == 50816)
+							{
+								if (thecore_pulse() - GetHerbPotionTime() < PASSES_PER_SEC(1))
+									return false;
+							}
+#endif
 							if (CArenaManager::instance().IsArenaMap(GetMapIndex()) == true)
 							{
 								if (quest::CQuestManager::instance().GetEventFlag("arena_potion_limit") > 0)
@@ -2564,6 +2599,10 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 									GetWarMap()->UsePotion(this, item);
 
 								m_nPotionLimit--;
+#ifdef ENABLE_HERB_POTION_USE_COOLTIME
+								if (item->GetVnum() == 50804 || item->GetVnum() == 50816)
+									SetHerbPotionTime();
+#endif
 
 								//RESTRICT_USE_SEED_OR_MOONBOTTLE
 								item->SetCount(item->GetCount() - 1);
@@ -2752,13 +2791,11 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 										}
 
 #ifdef ENABLE_MARRIAGE_RING_COOLTIME
-										const int iRingPulse = thecore_pulse();
-										if (iRingPulse - GetMarriageRingTime() < PASSES_PER_SEC(30))
+										const int iRingNextUse = GetQuestFlag("marriage_ring.next_use");
+										const int iRingNow = (int) get_global_time();
+										if (iRingNow < iRingNextUse)
 										{
-											int iLeft = 30 - (iRingPulse - GetMarriageRingTime()) / PASSES_PER_SEC(1);
-											if (iLeft < 1)
-												iLeft = 1;
-											ChatPacket(CHAT_TYPE_INFO, "Evlilik yuzugunu tekrar kullanmak icin %d saniye beklemelisin.", iLeft);
+											ChatPacket(CHAT_TYPE_INFO, "Evlilik yuzugunu tekrar kullanmak icin %d saniye beklemelisin.", iRingNextUse - iRingNow);
 											break;
 										}
 #endif
@@ -2772,7 +2809,7 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 #ifdef ENABLE_MARRIAGE_RING_COOLTIME
 										if (WarpToPID(pMarriage->GetOther(GetPlayerID())))
-											SetMarriageRingTime();
+											SetQuestFlag("marriage_ring.next_use", iRingNow + 30);
 #else
 										WarpToPID(pMarriage->GetOther(GetPlayerID()));
 #endif
@@ -2790,6 +2827,11 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 							case UNIQUE_ITEM_CAPE_OF_COURAGE:
 							case 70057:
 							case REWARD_BOX_UNIQUE_ITEM_CAPE_OF_COURAGE:
+#ifdef ENABLE_WS_TOURNAMENT
+								// duello haritasinda islevsiz, item tuketilmez (Eski_A paritesi)
+								if (GetMapIndex() == WS_TOURNAMENT_MAP_INDEX)
+									break;
+#endif
 								AggregateMonster();
 								item->SetCount(item->GetCount()-1);
 								break;
@@ -2813,6 +2855,15 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 #endif
 
 							case UNIQUE_ITEM_WHITE_FLAG:
+#ifdef ENABLE_WS_TOURNAMENT
+								if (GetMapIndex() == WS_TOURNAMENT_MAP_INDEX)
+									break;
+#endif
+#ifdef ENABLE_FFA_EVENT
+								// FFA haritasinda islevsiz: 5 sn cift-yonlu dokunulmazlik istismari (review bulgusu); tuketilmez
+								if (CFFAManager::instance().IsFFAMap(GetMapIndex()))
+									break;
+#endif
 								ForgetMyAttacker();
 								item->SetCount(item->GetCount()-1);
 								break;
@@ -3812,6 +3863,51 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 								}
 								break;
 
+#if defined(ENABLE_COSTUME_PERMA_AND_REFRESHING) && defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+							case 38103: // Appaloosa Cerezi: Nazar Tilsimi'nin suresini 7 gun uzatir
+								{
+									LPITEM item2;
+
+									if (!IsValidItemPosition(DestCell) || !(item2 = GetItem(DestCell)))
+										return false;
+
+									if (item2->IsExchanging() || item2->IsEquipped())
+										return false;
+
+									if (GLOVE_RANDOM_ATTR_VNUM != item2->GetVnum())
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Bu esya sadece Nazar Tilsimi uzerinde kullanilabilir.");
+										return false;
+									}
+
+									if (item2->GetSocket(0) == 0)
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Bu esyanin suresi yok.");
+										return false;
+									}
+
+									if (item2->GetSocket(2) >= 1)
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Bu esyanin uzatma hakki kalmadi.");
+										return false;
+									}
+
+									if (item2->GetSocket(0) >= get_global_time() + (60 * 60 * 24 * 365 * 5))
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Bu esyanin suresi daha fazla uzatilamaz.");
+										return false;
+									}
+
+									item2->SetSocket(0, item2->GetSocket(0) + 60 * 60 * 24 * 7);
+									item2->SetSocket(2, 1); // uzatma hakki tuketildi (tek kullanim)
+									ChatPacket(CHAT_TYPE_INFO, "Esyanizin suresi 7 gun uzatildi.");
+
+									LogManager::instance().ItemLog(this, item, "TILSIM_DURATION", std::to_string(item2->GetID()).c_str());
+									item->SetCount(item->GetCount() - 1);
+								}
+								break;
+#endif
+
 							case 70201:
 							case 70202:
 							case 70203:
@@ -4138,6 +4234,14 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 									if (item2->IsExchanging() || item2->IsEquipped()) // @fixme114
 										return false;
 
+									#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+									if (GLOVE_RANDOM_ATTR_VNUM == item2->GetVnum())
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Bu esyanin efsunlari degistirilemez.");
+										return false;
+									}
+									#endif
+
 									if (item2->GetAttributeSetIndex() == -1)
 									{
 										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("속성을 변경할 수 없는 아이템입니다."));
@@ -4188,6 +4292,14 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 									if (item2->IsExchanging() || item2->IsEquipped()) // @fixme114
 										return false;
+
+									#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+									if (GLOVE_RANDOM_ATTR_VNUM == item2->GetVnum())
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Bu esyanin efsunlari degistirilemez.");
+										return false;
+									}
+									#endif
 
 									if (item2->GetAttributeSetIndex() == -1)
 									{
@@ -4922,6 +5034,15 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 							if (item2->IsExchanging() || item2->IsEquipped()) // @fixme114
 								return false;
 
+							#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+							// Nazar Tilsimi: kostum efsun taslari dogum efsunlarini degistiremesin
+							if (GLOVE_RANDOM_ATTR_VNUM == item2->GetVnum())
+							{
+								ChatPacket(CHAT_TYPE_INFO, "Bu esyanin efsunlari degistirilemez.");
+								return false;
+							}
+							#endif
+
 							if (item2->GetAttributeSetIndex() == -1)
 							{
 								ChatPacket(CHAT_TYPE_INFO, LC_TEXT("속성을 변경할 수 없는 아이템입니다."));
@@ -4981,6 +5102,22 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 							if (item2->IsExchanging() || item2->IsEquipped()) // @fixme114
 								return false;
+
+							#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
+							// Nazar Tilsimi: dogum efsunlari degistirilemez/eklenemez (havuzu item_attr degil item_attr_rare)
+							if (GLOVE_RANDOM_ATTR_VNUM == item2->GetVnum())
+							{
+								switch (item->GetSubType())
+								{
+									case USE_CHANGE_ATTRIBUTE:
+									case USE_CHANGE_ATTRIBUTE2:
+									case USE_ADD_ATTRIBUTE:
+									case USE_ADD_ATTRIBUTE2:
+										ChatPacket(CHAT_TYPE_INFO, "Bu esyanin efsunlari degistirilemez.");
+										return false;
+								}
+							}
+							#endif
 
 							switch (item->GetSubType())
 							{
@@ -6077,6 +6214,11 @@ bool CHARACTER::SellItem(TItemPos Cell)
 	ITEM_MANAGER::instance().RemoveItem(item);
 	PointChange(POINT_GOLD, dwPrice, false);
 
+#ifdef ENABLE_YANG_FLOW_ANALYTICS
+	// F5 hizli sil/sat penceresinden satis (WJ_NEW_DROP_DIALOG SellItem yolu)
+	CHARACTER_MANAGER::instance().CollectYangFlow(CHARACTER_MANAGER::YANG_FLOW_QUICK_SELL, GetRealMapIndex(), (int) dwPrice);
+#endif
+
 	return true;
 }
 #endif
@@ -6241,6 +6383,16 @@ bool CHARACTER::MoveItem(TItemPos Cell, TItemPos DestCell, BYTE count)
 	{
 		if (!CanUnequipNow(item))
 			return false;
+
+#ifdef ENABLE_WS_TOURNAMENT
+		// surukle-cikar yolu UnequipItem'i cagirmaz: dovus-ici ekipman kilidi burada da gecerli
+		if ((item->GetType() == ITEM_WEAPON || (item->GetType() == ITEM_ARMOR && item->GetSubType() == ARMOR_BODY))
+				&& CWSTournamentManager::instance().IsGearLocked(GetPlayerID()))
+		{
+			ChatPacket(CHAT_TYPE_INFO, "WS: Dovus sirasinda ekipman degistiremezsin.");
+			return false;
+		}
+#endif
 
 #ifdef ENABLE_WEAPON_COSTUME_SYSTEM
 		const int iWearCell = item->FindEquipCell(this);
@@ -6796,6 +6948,16 @@ bool CHARACTER::UnequipItem(LPITEM item)
 	if (false == CanUnequipNow(item))
 		return false;
 
+#ifdef ENABLE_WS_TOURNAMENT
+	// dovus sirasinda (hazirlik penceresi haric) silah/zirh degistirilemez (Eski_A paritesi)
+	if ((item->GetType() == ITEM_WEAPON || (item->GetType() == ITEM_ARMOR && item->GetSubType() == ARMOR_BODY))
+			&& CWSTournamentManager::instance().IsGearLocked(GetPlayerID()))
+	{
+		ChatPacket(CHAT_TYPE_INFO, "WS: Dovus sirasinda ekipman degistiremezsin.");
+		return false;
+	}
+#endif
+
 	const int pos = GetEmptyInventoryEx(item);
 
 	// HARD CODING
@@ -6867,10 +7029,37 @@ bool CHARACTER::EquipItem(LPITEM item, int iCandidateCell)
 	if (false == CanEquipNow(item))
 		return false;
 
+#ifdef ENABLE_WS_TOURNAMENT
+	if ((item->GetType() == ITEM_WEAPON || (item->GetType() == ITEM_ARMOR && item->GetSubType() == ARMOR_BODY))
+			&& CWSTournamentManager::instance().IsGearLocked(GetPlayerID()))
+	{
+		ChatPacket(CHAT_TYPE_INFO, "WS: Dovus sirasinda ekipman degistiremezsin.");
+		return false;
+	}
+#endif
+
 	const int iWearCell = item->FindEquipCell(this, iCandidateCell);
 
 	if (iWearCell < 0)
 		return false;
+
+#if defined(ENABLE_WS_TOURNAMENT) && defined(ENABLE_MOUNT_COSTUME_SYSTEM)
+	// duello haritasinda binek kostumu takilamaz (Eski_A paritesi)
+	if (iWearCell == WEAR_COSTUME_MOUNT && GetMapIndex() == WS_TOURNAMENT_MAP_INDEX)
+	{
+		ChatPacket(CHAT_TYPE_INFO, "WS: Duello haritasinda binek kostumu takilamaz.");
+		return false;
+	}
+#endif
+
+#if defined(ENABLE_FFA_EVENT) && defined(ENABLE_MOUNT_COSTUME_SYSTEM)
+	// FFA haritasinda binek kostumu takilamaz
+	if (iWearCell == WEAR_COSTUME_MOUNT && CFFAManager::instance().IsFFAMap(GetMapIndex()))
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Savas alaninda binek kostumu takilamaz.");
+		return false;
+	}
+#endif
 
 	if (iWearCell == WEAR_BODY && IsRiding() && (item->GetVnum() >= 11901 && item->GetVnum() <= 11904))
 	{

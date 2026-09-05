@@ -789,6 +789,12 @@ class MiniMap(ui.ScriptWindow):
 			import exception
 			exception.Abort("MiniMap.LoadWindow.Bind")
 
+		# Siralama butonu opsiyonel (ENABLE_PLAYER_STATISTICS kapaliyken uiscript'te olmayabilir)
+		try:
+			self.statisticsBtn = self.GetChild("StatisticsBtn")
+		except:
+			self.statisticsBtn = None
+
 		# Tarih/saat gostergesi - uiscript kopyasinda alan yoksa sessizce devre disi kalir
 		try:
 			self.dateTimeInfo = self.GetChild("DateTimeInfo")
@@ -807,6 +813,11 @@ class MiniMap(ui.ScriptWindow):
 		self.ScaleDownButton.SetEvent(ui.__mem_func__(self.ScaleDown))
 		self.MiniMapHideButton.SetEvent(ui.__mem_func__(self.HideMiniMap))
 		self.MiniMapShowButton.SetEvent(ui.__mem_func__(self.ShowMiniMap))
+		if self.statisticsBtn:
+			if getattr(app, "ENABLE_PLAYER_STATISTICS", 0):
+				self.statisticsBtn.SetEvent(ui.__mem_func__(self.ToggleRankingWindow))
+			else:
+				self.statisticsBtn.Hide()
 
 		if miniMap.IsAtlas():
 			self.AtlasShowButton.SetEvent(ui.__mem_func__(self.ToggleAtlasWindow)) # @fixme014 ShowAtlas
@@ -982,6 +993,11 @@ class MiniMap(ui.ScriptWindow):
 			self.AtlasWindow.Hide()
 		else:
 			self.AtlasWindow.Show()
+
+	def ToggleRankingWindow(self):
+		ifClass = getattr(self, "interfaceClass", None)
+		if ifClass:
+			ifClass.ToggleGeneralRankingWindow()
 
 	def PersistAtlasZoom(self):
 		if self.AtlasWindow:

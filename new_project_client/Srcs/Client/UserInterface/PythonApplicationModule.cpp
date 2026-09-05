@@ -946,6 +946,73 @@ PyObject * appLoadCameraSetting(PyObject * poSelf, PyObject * poArgs)
 	return Py_BuildValue("i", bResult);
 }
 
+#ifdef ENABLE_WS_TOURNAMENT
+PyObject * appWSTWatchCamera(PyObject * poSelf, PyObject * poArgs)
+{
+	float fX, fY, fZoom, fPitch, fRotation;
+	if (!PyTuple_GetFloat(poArgs, 0, &fX))
+		return Py_BuildException();
+	if (!PyTuple_GetFloat(poArgs, 1, &fY))
+		return Py_BuildException();
+	if (!PyTuple_GetFloat(poArgs, 2, &fZoom))
+		return Py_BuildException();
+	if (!PyTuple_GetFloat(poArgs, 3, &fPitch))
+		return Py_BuildException();
+	if (!PyTuple_GetFloat(poArgs, 4, &fRotation))
+		return Py_BuildException();
+
+	IAbstractApplication::SCameraSetting kSetting;
+	CPythonApplication::Instance().GetCameraSetting(&kSetting);
+	kSetting.v3CenterPosition.x = fX;
+	kSetting.v3CenterPosition.y = -fY;	// server koordinati -> grafik uzayi (y ters)
+	kSetting.fZoom = fZoom;
+	kSetting.fPitch = fPitch;
+	kSetting.fRotation = fRotation;
+	CPythonApplication::Instance().SetEventCamera(kSetting);
+	return Py_BuildNone();
+}
+
+PyObject * appSetWatchCamera(PyObject * poSelf, PyObject * poArgs)
+{
+	int ix;
+	if (!PyTuple_GetInteger(poArgs, 0, &ix))
+		return Py_BuildException();
+	int iy;
+	if (!PyTuple_GetInteger(poArgs, 1, &iy))
+		return Py_BuildException();
+	int iz;
+	if (!PyTuple_GetInteger(poArgs, 2, &iz))
+		return Py_BuildException();
+	int iZoom;
+	if (!PyTuple_GetInteger(poArgs, 3, &iZoom))
+		return Py_BuildException();
+	int iRotation;
+	if (!PyTuple_GetInteger(poArgs, 4, &iRotation))
+		return Py_BuildException();
+	int iPitch;
+	if (!PyTuple_GetInteger(poArgs, 5, &iPitch))
+		return Py_BuildException();
+
+	int iVID = 0;
+	if (7 == PyTuple_Size(poArgs))
+	{
+		if (!PyTuple_GetInteger(poArgs, 6, &iVID))
+			return Py_BuildException();
+	}
+
+	CPythonApplication::SCameraSetting settingCamera;
+	ZeroMemory(&settingCamera, sizeof(settingCamera));
+	settingCamera.v3CenterPosition.x = float(ix);
+	settingCamera.v3CenterPosition.y = float(iy);
+	settingCamera.v3CenterPosition.z = float(iz);
+	settingCamera.fZoom = float(iZoom);
+	settingCamera.fRotation = float(iRotation);
+	settingCamera.fPitch = float(iPitch);
+	CPythonApplication::Instance().SetWatchCamera(settingCamera, (DWORD)iVID);
+	return Py_BuildNone();
+}
+#endif
+
 PyObject * appSetDefaultCamera(PyObject * poSelf, PyObject * poArgs)
 {
 	CPythonApplication::Instance().SetDefaultCamera();
@@ -1343,6 +1410,10 @@ void initapp()
 		{ "SaveCameraSetting",			appSaveCameraSetting,			METH_VARARGS },
 		{ "LoadCameraSetting",			appLoadCameraSetting,			METH_VARARGS },
 		{ "SetDefaultCamera",			appSetDefaultCamera,			METH_VARARGS },
+#ifdef ENABLE_WS_TOURNAMENT
+		{ "WSTWatchCamera",				appWSTWatchCamera,				METH_VARARGS },
+		{ "SetWatchCamera",				appSetWatchCamera,				METH_VARARGS },
+#endif
 		{ "SetCameraSetting",			appSetCameraSetting,			METH_VARARGS },
 
 		{ "SetSightRange",				appSetSightRange,				METH_VARARGS },
@@ -2152,6 +2223,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_GM_PLAYER_PANEL", 0);
 #endif
 
+#ifdef ENABLE_WS_TOURNAMENT
+	PyModule_AddIntConstant(poModule, "ENABLE_WS_TOURNAMENT", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_WS_TOURNAMENT", 0);
+#endif
+
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	PyModule_AddIntConstant(poModule, "ENABLE_ITEM_UPGRADE_OWNER",	1);
 #else
@@ -2192,6 +2269,12 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_MESSENGER_BLOCK", 1);
 #else
 	PyModule_AddIntConstant(poModule, "ENABLE_MESSENGER_BLOCK", 0);
+#endif
+
+#ifdef ENABLE_PLAYER_STATISTICS
+	PyModule_AddIntConstant(poModule, "ENABLE_PLAYER_STATISTICS", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_PLAYER_STATISTICS", 0);
 #endif
 
 }
