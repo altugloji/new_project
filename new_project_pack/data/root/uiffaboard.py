@@ -1,4 +1,4 @@
-# Kaos Savasi (FFA) - skor penceresi + ekran ortasi sayac (server ENABLE_FFA_EVENT)
+# Death Valley (FFA) - skor penceresi + ekran ortasi sayac (server ENABLE_FFA_EVENT)
 # Gorsel stil: Eski_A uiigriswarranking deseni (ThinBoard + satir basina ThinBoardCircle
 # kutulari + irk ikonlari, yesil basliklar) - ANCAK widget'lar BIR KEZ kurulur,
 # guncellemede sadece SetText/LoadImage yapilir (Eski_A her seferinde yeniden yaratip
@@ -49,6 +49,7 @@ class FFABoardWindow(ui.ScriptWindow):
 		ui.ScriptWindow.__init__(self)
 		self.__lastRecvTime = 0.0
 		self.__userClosed = 0
+		self.__defaultPosSet = 0	# konum yalniz ILK acilista atanir; oyuncunun tasidigi yer korunur
 		self.__rows = []
 		self.__widgets = []
 		self.__BuildWindow()
@@ -111,11 +112,16 @@ class FFABoardWindow(ui.ScriptWindow):
 		height = ROWS_Y + ROW_COUNT * ROW_HEIGHT + 26
 		self.SetSize(BOARD_WIDTH, height)
 
+		# tasima bayraklari DIS pencerede olmali: board'a konursa surukleme ic parcayi
+		# kaydirip dis pencereden ayirir (pencere "takiliyor" hatasi); board "attach" ile
+		# tiklamalari dis pencerenin tasimasina baglar (uiscript igris kalibi)
+		self.AddFlag("movable")
+		self.AddFlag("float")
+
 		self.board = ui.ThinBoard()
 		self.board.SetParent(self)
 		self.board.SetSize(BOARD_WIDTH, height)
-		self.board.AddFlag("movable")
-		self.board.AddFlag("float")
+		self.board.AddFlag("attach")
 		self.board.Show()
 
 		# basliklar (yesil, gorseldeki gibi; baslik satiri yok - kullanici istegi)
@@ -146,6 +152,7 @@ class FFABoardWindow(ui.ScriptWindow):
 			icon = ui.ExpandedImageBox()
 			icon.SetParent(self.board)
 			icon.SetPosition(ICON_X, y)
+			icon.AddFlag("attach")	# ikona tiklayarak da pencere tasinabilsin
 			icon.Hide()
 			self.__widgets.append(icon)
 
@@ -218,7 +225,11 @@ class FFABoardWindow(ui.ScriptWindow):
 			self.Open()
 
 	def Open(self):
-		self.SetPosition(wndMgr.GetScreenWidth() - BOARD_WIDTH - 10, 250)
+		# varsayilan konum yalniz ilk acilista; sonraki acilislarda oyuncunun
+		# tasidigi konum korunur (oturum boyunca)
+		if not self.__defaultPosSet:
+			self.__defaultPosSet = 1
+			self.SetPosition(wndMgr.GetScreenWidth() - BOARD_WIDTH - 10, 250)
 		self.SetTop()
 		self.Show()
 
@@ -309,7 +320,7 @@ class FFAWarmupCounter(ui.ScriptWindow):
 		self.__mode = TIMER_FIGHT_FLASH
 		self.__fightTextUntil = now + FIGHT_TEXT_SECONDS
 		self.textLine.SetFontColor(1.0, 0.2, 0.2)
-		self.textLine.SetText("SAVAS BASLADI! Herkes dusman!")
+		self.textLine.SetText("DEATH VALLEY BASLADI! Herkes dusman!")
 		self.__ShowCentered()
 
 	def SetWarRemainPayload(self, payload):

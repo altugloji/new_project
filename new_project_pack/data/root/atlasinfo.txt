@@ -141,3 +141,4 @@ season2/metin2_map_skipia_dungeon_01	0	1510400	6	6
 season2/metin2_map_skipia_dungeon_01	0	1664000	6	6
 season2/metin2_map_trent_a	768000	1049600	2	2
 season2/metin2_map_trent02_a	921600	1126400	3	3
+loknarash_pvp_area	998400	1100800	2	2

@@ -1,0 +1,64 @@
+TextureSet
+
+TextureCount 6
+
+Start Texture001
+    "d:\ymir work\terrainmaps\common_terrain_dst\texture2d\sand_dst_01_diff.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    1
+    0
+    0
+End Texture001
+Start Texture002
+    "d:\ymir work\terrainmaps\common_terrain_canyon\ca_sand_002.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    1
+    0
+    0
+End Texture002
+Start Texture003
+    "d:\ymir work\terrainmaps\common_terrain\grass_dst_02_diff.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    1
+    0
+    0
+End Texture003
+Start Texture004
+    "d:\ymir work\terrainmaps\common_terrain\grass_all_09_diff.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    1
+    0
+    0
+End Texture004
+Start Texture005
+    "d:\ymir work\terrainmaps\common_terrain\rock_all_08_diff.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    1
+    0
+    0
+End Texture005
+Start Texture006
+    "d:\ymir work\terrainmaps\common_terrain_aut\grass_aut_07_diff.dds"
+    4.000000
+    4.000000
+    0.000000
+    0.000000
+    1
+    0
+    0
+End Texture006

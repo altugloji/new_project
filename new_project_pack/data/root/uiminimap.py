@@ -619,6 +619,10 @@ class AtlasWindow(ui.ScriptWindow):
 		ui.ScriptWindow.Hide(self)
 
 	def Show(self):
+		# Death Valley haritasinda (loknarash_pvp_area) buyuk harita kapali
+		import background
+		if "loknarash_pvp_area" in str(background.GetCurrentMapName()):
+			return
 		if self.AtlasMainWindow:
 			(bGet, iSizeX, iSizeY) = miniMap.GetAtlasSize()
 			if bGet:
