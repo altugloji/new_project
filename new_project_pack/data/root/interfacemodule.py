@@ -123,6 +123,7 @@ if getattr(app, "ENABLE_LUCKY_DRAW", 0):
 if getattr(app, "ENABLE_PLAYER_STATISTICS", 0):
 	import uigeneralranking
 import uiffaboard
+import uibossrank
 IsQBHide = 0
 
 
@@ -471,6 +472,10 @@ class Interface(object):
 		self.wndFFAWarmup = uiffaboard.FFAWarmupCounter()
 		self.wndFFAWarmup.Hide()
 
+		# Boss Hasar Siralamasi: pencere server boss_rank komutu gelince kendini gosterir
+		self.wndBossRank = uibossrank.BossRankBoard()
+		self.wndBossRank.Hide()
+
 	def __MakeHelpWindow(self):
 		self.wndHelp = uiHelp.HelpWindow()
 		self.wndHelp.LoadDialog()
@@ -800,7 +805,7 @@ class Interface(object):
 					wnd.Destroy()
 					setattr(self, wndName, None)
 
-		for wndName in ("wndFFABoard", "wndFFAWarmup"):
+		for wndName in ("wndFFABoard", "wndFFAWarmup", "wndBossRank"):
 			wnd = getattr(self, wndName, None)
 			if wnd:
 				wnd.Hide()
@@ -2808,6 +2813,16 @@ class Interface(object):
 		wnd = getattr(self, "wndFFAWarmup", None)
 		if wnd:
 			wnd.FightStart()
+
+	def BOSSRANK_SetRank(self, payload):
+		wnd = getattr(self, "wndBossRank", None)
+		if wnd:
+			wnd.SetRankPayload(payload)
+
+	def BOSSRANK_End(self, vid):
+		wnd = getattr(self, "wndBossRank", None)
+		if wnd:
+			wnd.OnBossEnd(vid)
 
 	if app.ENABLE_GM_PLAYER_PANEL or app.ENABLE_BULK_POTION_PANEL:
 		def ToggleTabPanel(self):

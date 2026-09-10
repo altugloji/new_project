@@ -2396,6 +2396,12 @@ class GameWindow(ui.ScriptWindow):
 			"ffa_start"		: self.__FFAStart,
 		})
 
+		# Boss Hasar Siralamasi (bkz. uibossrank.py; server ENABLE_BOSS_DAMAGE_RANKING)
+		serverCommandList.update({
+			"boss_rank"		: self.__BossRank,
+			"boss_rank_end"	: self.__BossRankEnd,
+		})
+
 		if getattr(app, "ENABLE_PLAYER_STATISTICS", 0):
 			serverCommandList.update({
 				"RankingProcess"	: self.__RankingProcess,
@@ -2793,6 +2799,15 @@ class GameWindow(ui.ScriptWindow):
 	def __FFAStart(self):
 		if self.interface:
 			self.interface.FFA_FightStart()
+
+	# Boss Hasar Siralamasi koprusu (uibossrank; interface delege eder)
+	def __BossRank(self, payload="0"):
+		if self.interface:
+			self.interface.BOSSRANK_SetRank(payload)
+
+	def __BossRankEnd(self, vid="0"):
+		if self.interface:
+			self.interface.BOSSRANK_End(vid)
 
 	# Oyun ici siralama koprusu (uigeneralranking; interface delege eder)
 	def __RankingProcess(self, processID):

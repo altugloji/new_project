@@ -21,11 +21,31 @@ import net
 SYSTEM_UI_PATH_27 = "d:/ymir work/ui/game/ranking/new/"
 
 
+def SetTextAlignLTRLeft(textLine):
+	# CP_ARABIC'te LEFT/RIGHT metin hizalamalari AYNA anlamlidir
+	# (GrpTextInstance.cpp:619 - LEFT capadan SOLA cizer). EU'daki
+	# soldan-saga gorunum icin AE'de RIGHT hizalama gerekir.
+	if localeInfo.IsARABIC():
+		textLine.SetHorizontalAlignRight()
+	else:
+		textLine.SetHorizontalAlignLeft()
+
+
+def SetTextAlignLTRRight(textLine):
+	# SetTextAlignLTRLeft'in tersi: EU'daki saga-yasli gorunum (metin
+	# capadan sola uzar) icin AE'de LEFT hizalama gerekir.
+	if localeInfo.IsARABIC():
+		textLine.SetHorizontalAlignLeft()
+	else:
+		textLine.SetHorizontalAlignRight()
+
+
 def MakeTextLineNew(parent, text, x, y):
 	textLine = ui.TextLine()
 	textLine.SetParent(parent)
 	textLine.SetText(text)
 	textLine.SetPosition(x, y)
+	SetTextAlignLTRLeft(textLine)
 	textLine.Show()
 	return textLine
 
@@ -350,7 +370,7 @@ class GeneralRankingWindow(ui.BoardWithTitleBar):
 			self.imageRankingType = MakeExpandedImageBox(self.background, SYSTEM_UI_PATH_27 + "global_ranking/global_ranking_type.png", 0, 4)
 			self.lastRefresh = MakeTextLineNew(self.background, "", 17, 18)
 			self.lastRefresh.SetWindowHorizontalAlignRight()
-			self.lastRefresh.SetHorizontalAlignRight()
+			SetTextAlignLTRRight(self.lastRefresh)
 			self.lastRefresh.SetVerticalAlignCenter()
 			self.buttonGlobal = HoverWindow()
 			self.buttonGlobal.SetParent(self.background)

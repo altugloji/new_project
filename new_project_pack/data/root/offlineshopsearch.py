@@ -1037,8 +1037,19 @@ class ShopSearchWindow(ui.ScriptWindow):
 
 	def LoadDialog(self):
 		try:
-			PythonScriptLoader = ui.PythonScriptLoader()
-			PythonScriptLoader.LoadScriptFile(self, "UIScript/shopsearchwindow.py")
+			# Arapca'da (locale/ae) ui.py'deki genel RTL ayna kodu (AddFlag("rtl") +
+			# LoadDefaultData) bu pencerenin cocuklarini saga aynalayip duzeni bozuyordu;
+			# ustelik AE dalinda "float"/"movable" style'lari da uygulanmiyordu.
+			# uiitemshop.py'deki kanitlanmis teknik: yukleme suresince IsARABIC'i gecici
+			# kapat -> pencere birebir EU/LTR yuklenir, Arapca metin (kod sayfasindan
+			# geldigi icin) etkilenmez.
+			__origIsArabic = localeInfo.IsARABIC
+			localeInfo.IsARABIC = lambda: False
+			try:
+				PythonScriptLoader = ui.PythonScriptLoader()
+				PythonScriptLoader.LoadScriptFile(self, "UIScript/shopsearchwindow.py")
+			finally:
+				localeInfo.IsARABIC = __origIsArabic
 
 			self.titleBar = self.GetChild("TitleBar")
 
@@ -1328,9 +1339,14 @@ class ShopSearchWindow(ui.ScriptWindow):
 		btn.SetDownVisual("d:/ymir work/ui/flamewind/public/big_button_03.sub")
 		btn.SetText(name)
 
-		btn.ButtonText.SetHorizontalAlignLeft()
-		btn.ButtonText.SetWindowVerticalAlignCenter()
-		btn.ButtonText.SetPosition(7, 0)
+		# Arapca istemcide (CP_ARABIC) ALIGN_LEFT metni ankrajdan SOLA uzatir
+		# (GrpTextInstance.cpp ~623: fStanX -= m_textWidth) -> sola dayali baslik
+		# butonun disina tasip sadece tek harf gorunuyordu. AE'de Button.SetText'in
+		# ortalanmis varsayilani korunur (uiscript butonlariyla ayni davranis).
+		if not localeInfo.IsARABIC():
+			btn.ButtonText.SetHorizontalAlignLeft()
+			btn.ButtonText.SetWindowVerticalAlignCenter()
+			btn.ButtonText.SetPosition(7, 0)
 
 		btn.SetWindowHorizontalAlignCenter()
 		btn.Show()

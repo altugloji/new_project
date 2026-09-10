@@ -1343,3 +1343,4 @@ GIFT_NEXT_PAGE	«б «бн
 GIFT_MONEY_DESC	н«дџ
 GIFT_GET_QUEST_ALL	еб  —нѕ «” б«г ћгнЏ «беѕ«н«њ
 GIFT_GET_QUEST	еб  —нѕ «” б«г еѕн… %sњ
+RANKING_TOOLTIP	«б ’днЁ
