@@ -38,6 +38,9 @@ class IAbstractPlayer : public TAbstractSingleton<IAbstractPlayer>
 #ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
 		virtual void	SetItemEnchantUseCount(TItemPos itemPos, DWORD dw) = 0;
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+		virtual void	SetItemUnbindTime(TItemPos itemPos, long lSealBind) = 0;
+#endif
 
 		virtual DWORD	GetItemIndex(TItemPos itemPos) = 0;
 		virtual DWORD	GetItemFlags(TItemPos itemPos) = 0;

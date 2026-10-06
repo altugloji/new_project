@@ -235,6 +235,41 @@ PyObject * safeboxGetItemAttribute(PyObject * poSelf, PyObject * poArgs)
 	return Py_BuildValue("ii", 0, 0);
 }
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+// safebox.GetItemSeal(slot) -> 0 = serbest, -1 = ruha bagli, >0 = bagin dusecegi unix zamani. Gecersiz / bos slot = 0 (hata yok).
+PyObject * safeboxGetItemSeal(PyObject * poSelf, PyObject * poArgs)
+{
+	int iSlotIndex;
+	if (!PyTuple_GetInteger(poArgs, 0, &iSlotIndex))
+		return Py_BadArgument();
+
+	CPythonSafeBox & rkSafeBox = CPythonSafeBox::Instance();
+
+	// sinir kontrolu once: GetItemDataPtr gecersiz indexte syserr yazar
+	TItemData * pItemData = nullptr;
+	if (iSlotIndex < 0 || iSlotIndex >= rkSafeBox.GetCurrentSafeBoxSize() || !rkSafeBox.GetItemDataPtr(iSlotIndex, &pItemData) || !pItemData)
+		return Py_BuildValue("i", 0);
+
+	return Py_BuildValue("i", 0 != pItemData->vnum ? (int) pItemData->sealbind : 0);
+}
+
+// safebox.GetMallItemSeal(slot) -> ayni deger, nesne market deposu icin
+PyObject * safeboxGetMallItemSeal(PyObject * poSelf, PyObject * poArgs)
+{
+	int iSlotIndex;
+	if (!PyTuple_GetInteger(poArgs, 0, &iSlotIndex))
+		return Py_BadArgument();
+
+	CPythonSafeBox & rkSafeBox = CPythonSafeBox::Instance();
+
+	TItemData * pItemData = nullptr;
+	if (iSlotIndex < 0 || (DWORD) iSlotIndex >= rkSafeBox.GetMallSize() || !rkSafeBox.GetMallItemDataPtr(iSlotIndex, &pItemData) || !pItemData)
+		return Py_BuildValue("i", 0);
+
+	return Py_BuildValue("i", 0 != pItemData->vnum ? (int) pItemData->sealbind : 0);
+}
+#endif
+
 PyObject * safeboxGetMoney(PyObject * poSelf, PyObject * poArgs)
 {
 	return Py_BuildValue("i", CPythonSafeBox::Instance().GetMoney());
@@ -320,6 +355,10 @@ void initsafebox()
 		{ "GetItemFlags",				safeboxGetItemFlags,					METH_VARARGS },
 		{ "GetItemMetinSocket",			safeboxGetItemMetinSocket,				METH_VARARGS },
 		{ "GetItemAttribute",			safeboxGetItemAttribute,				METH_VARARGS },
+#ifdef ENABLE_SOULBIND_SYSTEM
+		{ "GetItemSeal",				safeboxGetItemSeal,						METH_VARARGS },
+		{ "GetMallItemSeal",			safeboxGetMallItemSeal,					METH_VARARGS },
+#endif
 		{ "GetMoney",					safeboxGetMoney,						METH_VARARGS },
 
 		// Mall

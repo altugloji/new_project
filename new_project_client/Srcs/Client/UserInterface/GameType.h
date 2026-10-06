@@ -384,6 +384,9 @@ typedef struct packet_item
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	char		szUpgradeOwner[25]; /* CHARACTER_NAME_MAX_LEN(24) + 1 */
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+	long		sealbind;	// 0 = serbest, -1 = kalici ruha bagli, >0 = bagin dusecegi unix zamani. SON uye kalmali.
+#endif
 } TItemData;
 
 typedef struct packet_shop_item

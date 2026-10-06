@@ -584,6 +584,9 @@ class InventoryWindow(ui.ScriptWindow):
 		self.equipmentTab = []
 
 	def Hide(self):
+		if app.ENABLE_SOULBIND_SYSTEM:
+			self.__CloseSealQuestionDialog()
+
 		if constInfo.GET_ITEM_QUESTION_DIALOG_STATUS():
 			self.OnCloseQuestionDialog()
 			return
@@ -930,6 +933,8 @@ class InventoryWindow(ui.ScriptWindow):
 	def RefreshItemSlot(self):
 		if app.ENABLE_EFSUN_CHANGE_DIALOG and self.efsunChangeDialog and self.efsunChangeDialog.IsShow():
 			self.efsunChangeDialog.RefreshDisplay()
+		if app.ENABLE_SOULBIND_SYSTEM:
+			self.__RefreshSealQuestionDialog()
 		self.RefreshBagSlotWindow()
 		self.RefreshEquipSlotWindow()
 
@@ -1146,8 +1151,13 @@ class InventoryWindow(ui.ScriptWindow):
 			return
 
 		# cyh itemseal 2013 11 08
-		if app.ENABLE_SOULBIND_SYSTEM and item.IsSealScroll(srcItemVID):
-			self.__SendUseItemToItemPacket(srcItemSlotPos, dstItemSlotPos)
+		# Baglama / Ayirma Parsomeni gecerli hedefe birakildi: paket onay penceresinden sonra gider
+		if app.ENABLE_SOULBIND_SYSTEM and self.__GetSoulbindScrollAction(srcItemVID, dstItemSlotPos):
+			self.__OpenSealQuestionDialog(srcItemVID, srcItemSlotPos, dstItemSlotPos)
+
+		# Parsomen gecersiz bir hedefe (dolu hucre) birakildi: sessiz bir tasima paketi yerine nedenini soyle
+		elif app.ENABLE_SOULBIND_SYSTEM and self.__IsSoulbindScroll(srcItemVID) and not player.GetItemIndex(dstItemSlotPos) in (0, srcItemVID):
+			chat.AppendChat(chat.CHAT_TYPE_INFO, self.__GetSoulbindScrollRefuseText(srcItemVID, dstItemSlotPos))
 
 		elif item.IsRefineScroll(srcItemVID):
 			if constInfo.ENABLE_SELF_STACK_SCROLLS and player.GetItemIndex(srcItemSlotPos) == player.GetItemIndex(dstItemSlotPos):
@@ -1383,6 +1393,8 @@ class InventoryWindow(ui.ScriptWindow):
 	def __IsUsableItemToItem(self, srcItemVNum, srcSlotPos):
 		if item.IsRefineScroll(srcItemVNum):
 			return True
+		elif app.ENABLE_SOULBIND_SYSTEM and self.__IsSoulbindScroll(srcItemVNum):
+			return True
 		elif item.IsMetin(srcItemVNum):
 			return True
 		elif item.IsDetachScroll(srcItemVNum):
@@ -1420,6 +1432,9 @@ class InventoryWindow(ui.ScriptWindow):
 				return True
 		elif item.IsKey(srcItemVNum):
 			if player.CanUnlock(srcItemVNum, dstSlotPos):
+				return True
+		elif app.ENABLE_SOULBIND_SYSTEM and self.__IsSoulbindScroll(srcItemVNum):
+			if self.__GetSoulbindScrollAction(srcItemVNum, dstSlotPos):
 				return True
 
 		elif srcItemVNum == 38103: # Appaloosa Cerezi -> sadece Nazar Tilsimi
@@ -1473,6 +1488,170 @@ class InventoryWindow(ui.ScriptWindow):
 					return True
 
 		return False
+
+	## ENABLE_SOULBIND_SYSTEM: Baglama / Ayirma Parsomeni (item.IsSealScroll / item.IsUnSealScroll)
+	def __IsSoulbindScroll(self, itemVNum):
+		if not app.ENABLE_SOULBIND_SYSTEM:
+			return False
+
+		# Yari guncel client: gereken C fonksiyonlari yoksa ozellik sessizce kapali kalir
+		if not (hasattr(item, "IsSealScroll") and hasattr(item, "IsUnSealScroll") and hasattr(player, "GetItemSealDate")):
+			return False
+
+		if item.IsSealScroll(itemVNum) or item.IsUnSealScroll(itemVNum):
+			return True
+
+		return False
+
+	# Sunucudaki parsomen kontrolunun aynasi (scrollVNum = parsomen vnum, dstSlotPos = hedef hucre).
+	# Donus: 0 = gecersiz hedef, 1 = ruha bagla, 2 = suren ayirma islemini iptal et, 3 = ayirma islemini baslat
+	def __GetSoulbindScrollAction(self, scrollVNum, dstSlotPos):
+		if not self.__IsSoulbindScroll(scrollVNum):
+			return 0
+
+		# Sadece canta hucreleri: giyili esya, kostum ve kemer hucrelerini sunucu reddeder
+		if dstSlotPos < 0 or dstSlotPos >= player.EQUIPMENT_SLOT_START:
+			return 0
+
+		dstItemVNum = player.GetItemIndex(dstSlotPos)
+		if dstItemVNum == 0:
+			return 0
+
+		item.SelectItem(dstItemVNum)
+
+		if not item.GetItemType() in (item.ITEM_TYPE_WEAPON, item.ITEM_TYPE_ARMOR, item.ITEM_TYPE_COSTUME):
+			return 0
+
+		# Ust uste konabilen esya ruha baglanamaz
+		if item.IsFlag(item.ITEM_FLAG_STACKABLE) or player.GetItemCount(dstSlotPos) > 1:
+			return 0
+
+		sealDefault = getattr(item, "E_SEAL_DATE_DEFAULT_TIMESTAMP", 0)
+		sealUnlimited = getattr(item, "E_SEAL_DATE_UNLIMITED_TIMESTAMP", -1)
+		sealDate = player.GetItemSealDate(player.INVENTORY, dstSlotPos)
+
+		if item.IsSealScroll(scrollVNum):
+			if sealDate == sealDefault:
+				return 1
+			elif sealDate > 0:
+				return 2
+		elif sealDate == sealUnlimited:
+			return 3
+
+		return 0
+
+	# Gecersiz hedef icin aciklama metni (sunucudaki ret mesajlariyla ayni anlam). Yalnizca
+	# __GetSoulbindScrollAction 0 dondugunde ve hedef hucre dolu oldugunda cagrilir.
+	def __GetSoulbindScrollRefuseText(self, scrollVNum, dstSlotPos):
+		if dstSlotPos < 0 or dstSlotPos >= player.EQUIPMENT_SLOT_START:
+			return getattr(localeInfo, "SOULBIND_REFUSE_BAG_ONLY", "Parsomen yalnizca cantadaki esyalarda kullanilabilir.")
+
+		item.SelectItem(player.GetItemIndex(dstSlotPos))
+
+		if not item.GetItemType() in (item.ITEM_TYPE_WEAPON, item.ITEM_TYPE_ARMOR, item.ITEM_TYPE_COSTUME):
+			return getattr(localeInfo, "SOULBIND_REFUSE_TYPE", "Bu esya ruha baglanamaz.")
+		if item.IsFlag(item.ITEM_FLAG_STACKABLE) or player.GetItemCount(dstSlotPos) > 1:
+			return getattr(localeInfo, "SOULBIND_REFUSE_TYPE", "Bu esya ruha baglanamaz.")
+
+		if item.IsSealScroll(scrollVNum):
+			return getattr(localeInfo, "SOULBIND_REFUSE_ALREADY", "Bu esya zaten ruha bagli.")
+		if player.GetItemSealDate(player.INVENTORY, dstSlotPos) > 0:
+			return getattr(localeInfo, "SOULBIND_REFUSE_UNSEALING", "Bu esyanin ayirma islemi zaten suruyor.")
+		return getattr(localeInfo, "SOULBIND_REFUSE_NOT_SEALED", "Bu esya ruha bagli degil.")
+
+	def __OpenSealQuestionDialog(self, scrollVNum, scrollSlotPos, targetSlotPos):
+		action = self.__GetSoulbindScrollAction(scrollVNum, targetSlotPos)
+		if 0 == action:
+			return
+
+		targetVNum = player.GetItemIndex(targetSlotPos)
+		item.SelectItem(targetVNum)
+		itemName = item.GetItemName()
+
+		if 1 == action:
+			text1 = getattr(localeInfo, "SOULBIND_SEAL_QUESTION1", "%s ruha baglansin mi?")
+			text2 = getattr(localeInfo, "SOULBIND_SEAL_QUESTION2", "Bagli esya takas edilemez, satilamaz, yukseltilemez ve efsunlanamaz.")
+		elif 2 == action:
+			text1 = getattr(localeInfo, "SOULBIND_RESEAL_QUESTION1", "%s yeniden ruha baglansin mi?")
+			text2 = getattr(localeInfo, "SOULBIND_RESEAL_QUESTION2", "Suren ayirma islemi iptal edilir.")
+		else:
+			text1 = getattr(localeInfo, "SOULBIND_UNSEAL_QUESTION1", "%s ruhtan ayrilsin mi?")
+			text2 = getattr(localeInfo, "SOULBIND_UNSEAL_QUESTION2", "Ayirma hemen bitmez, sure dolana kadar esya bagli kalir.")
+
+		try:
+			text1 = text1 % itemName
+		except (TypeError, ValueError):
+			pass
+
+		# Onceki onay penceresi (varsa) yenisiyle degisir; durum bayragi (ITEM_QUESTION_DIALOG_STATUS) kullanilmaz,
+		# bunun yerine kabul aninda hucreler yeniden dogrulanir.
+		questionDialog = uiCommon.QuestionDialog2()
+		questionDialog.SetText1(text1)
+		questionDialog.SetText2(text2)
+		questionDialog.SetWidth(max(460, 6 * max(len(text1), len(text2)) + 60))
+		questionDialog.SetAcceptEvent(ui.__mem_func__(self.__OnAcceptSealQuestionDialog))
+		questionDialog.SetCancelEvent(ui.__mem_func__(self.__CloseSealQuestionDialog))
+		questionDialog.sealAction = action
+		questionDialog.sealScrollPos = scrollSlotPos
+		questionDialog.sealScrollVNum = scrollVNum
+		questionDialog.sealTargetPos = targetSlotPos
+		questionDialog.sealTargetSignature = self.__GetSealTargetSignature(targetSlotPos)
+		questionDialog.Open()
+		self.questionDialog = questionDialog
+
+	# Hedef hucredeki esyanin izi: vnum + taslar + efsunlar. Ayni hucreye ayni vnum ile baska bir esya gelirse
+	# (ornegin giyili esya ile yer degistirme) onay penceresi gecersiz sayilir.
+	def __GetSealTargetSignature(self, slotPos):
+		metinSlot = [player.GetItemMetinSocket(slotPos, i) for i in xrange(player.METIN_SOCKET_MAX_NUM)]
+		attrSlot = [player.GetItemAttribute(slotPos, i) for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM)]
+		return (player.GetItemIndex(slotPos), metinSlot, attrSlot)
+
+	def __IsSealQuestionDialog(self):
+		if not self.questionDialog:
+			return False
+		return hasattr(self.questionDialog, "sealTargetPos")
+
+	# Sadece parsomen onay penceresini kapatir; diger onay pencerelerine ve durum bayragina dokunmaz
+	def __CloseSealQuestionDialog(self):
+		if not self.__IsSealQuestionDialog():
+			return
+
+		self.questionDialog.Close()
+		self.questionDialog = None
+
+	def __IsSealQuestionDialogValid(self):
+		questionDialog = self.questionDialog
+
+		if player.GetItemIndex(questionDialog.sealScrollPos) != questionDialog.sealScrollVNum:
+			return False
+		if self.__GetSealTargetSignature(questionDialog.sealTargetPos) != questionDialog.sealTargetSignature:
+			return False
+		if self.__GetSoulbindScrollAction(questionDialog.sealScrollVNum, questionDialog.sealTargetPos) != questionDialog.sealAction:
+			return False
+
+		return True
+
+	# Envanter yenilendiginde: pencere gizlendiyse (ESC) ya da hucreler degistiyse onay penceresi dusurulur
+	def __RefreshSealQuestionDialog(self):
+		if not self.__IsSealQuestionDialog():
+			return
+
+		if not self.questionDialog.IsShow() or not self.__IsSealQuestionDialogValid():
+			self.__CloseSealQuestionDialog()
+
+	def __OnAcceptSealQuestionDialog(self):
+		if not self.__IsSealQuestionDialog():
+			return
+
+		scrollSlotPos = self.questionDialog.sealScrollPos
+		targetSlotPos = self.questionDialog.sealTargetPos
+
+		# Pencere acikken hucreler degismis olabilir: paket gitmeden once yeniden dogrula
+		isValid = self.__IsSealQuestionDialogValid()
+		self.__CloseSealQuestionDialog()
+
+		if isValid:
+			self.__SendUseItemToItemPacket(scrollSlotPos, targetSlotPos)
 
 	def __CanCleanBrokenMetinStone(self, dstSlotPos):
 		dstItemVNum = player.GetItemIndex(dstSlotPos)
@@ -1751,6 +1930,11 @@ class InventoryWindow(ui.ScriptWindow):
 				self.interface.wndWiki.Open()
 				return
 		
+		if app.ENABLE_SOULBIND_SYSTEM and self.__IsSoulbindScroll(ItemVNum):
+			# Parsomen sag tikla kullanilmaz, hedef esyanin uzerine suruklenir
+			chat.AppendChat(chat.CHAT_TYPE_INFO, getattr(localeInfo, "SOULBIND_SCROLL_USE_HINT", "Parsomeni kullanmak icin bir silah, zirh veya kostumun uzerine surukle."))
+			return
+
 		if item.IsFlag(item.ITEM_FLAG_CONFIRM_WHEN_USE):
 			self.questionDialog = uiCommon.QuestionDialog()
 			self.questionDialog.SetText(localeInfo.INVENTORY_REALLY_USE_ITEM)

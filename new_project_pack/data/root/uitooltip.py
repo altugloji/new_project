@@ -890,6 +890,10 @@ class ItemToolTip(ToolTip):
 		for i in xrange(player.ATTRIBUTE_SLOT_MAX_NUM):
 			attrSlot.append(safebox.GetItemAttribute(slotIndex, i))
 
+		if app.ENABLE_SOULBIND_SYSTEM and hasattr(safebox, "GetItemSeal"):
+			self.AddItemData(itemVnum, metinSlot, attrSlot, safebox.GetItemFlags(slotIndex), safebox.GetItemSeal(slotIndex))
+			return
+
 		self.AddItemData(itemVnum, metinSlot, attrSlot, safebox.GetItemFlags(slotIndex))
 
 	def SetMallItem(self, slotIndex):
@@ -1238,7 +1242,7 @@ class ItemToolTip(ToolTip):
 					name += " "
 					name += localeInfo.NumberToMoneyString(metinSlot[0])
 			self.SetTitle(name)
-			self.__AppendSealInformation(window_type, slotIndex) ## cyh itemseal 2013 11 11
+			self.__AppendSealInformation(window_type, slotIndex, unbindTime) ## cyh itemseal 2013 11 11
 			self.AdditionalTips(window_type, itemVnum, metinSlot, slotIndex)
 			self.ShowToolTip()
 			return
@@ -1251,7 +1255,7 @@ class ItemToolTip(ToolTip):
 				self.SetTitle(item.GetItemName())
 				self.AppendDescription(item.GetItemDescription(), 26)
 				self.AppendDescription(item.GetItemSummary(), 26, self.CONDITION_COLOR)
-			self.__AppendSealInformation(window_type, slotIndex) ## cyh itemseal 2013 11 11
+			self.__AppendSealInformation(window_type, slotIndex, unbindTime) ## cyh itemseal 2013 11 11
 			self.AdditionalTips(window_type, itemVnum, metinSlot, slotIndex)
 			self.ShowToolTip()
 			return
@@ -1263,7 +1267,7 @@ class ItemToolTip(ToolTip):
 				self.SetTitle(item.GetItemName())
 			self.AppendDescription(item.GetItemDescription(), 26)
 			self.AppendDescription(item.GetItemSummary(), 26, self.CONDITION_COLOR)
-			self.__AppendSealInformation(window_type, slotIndex) ## cyh itemseal 2013 11 11
+			self.__AppendSealInformation(window_type, slotIndex, unbindTime) ## cyh itemseal 2013 11 11
 			self.AdditionalTips(window_type, itemVnum, metinSlot, slotIndex)
 			self.ShowToolTip()
 			return
@@ -1272,7 +1276,7 @@ class ItemToolTip(ToolTip):
 				self.__SetSkillBookToolTip(metinSlot[0], localeInfo.TOOLTIP_SKILL_FORGET_BOOK_NAME, 0)
 			self.AppendDescription(item.GetItemDescription(), 26)
 			self.AppendDescription(item.GetItemSummary(), 26, self.CONDITION_COLOR)
-			self.__AppendSealInformation(window_type, slotIndex) ## cyh itemseal 2013 11 11
+			self.__AppendSealInformation(window_type, slotIndex, unbindTime) ## cyh itemseal 2013 11 11
 			self.AdditionalTips(window_type, itemVnum, metinSlot, slotIndex)
 			self.ShowToolTip()
 			return
@@ -1281,7 +1285,7 @@ class ItemToolTip(ToolTip):
 				self.__SetSkillBookToolTip(metinSlot[0], localeInfo.TOOLTIP_SKILL_FORGET_BOOK_NAME, 0)
 			self.AppendDescription(item.GetItemDescription(), 26)
 			self.AppendDescription(item.GetItemSummary(), 26, self.CONDITION_COLOR)
-			self.__AppendSealInformation(window_type, slotIndex) ## cyh itemseal 2013 11 11
+			self.__AppendSealInformation(window_type, slotIndex, unbindTime) ## cyh itemseal 2013 11 11
 			self.AdditionalTips(window_type, itemVnum, metinSlot, slotIndex)
 			self.ShowToolTip()
 			return
@@ -1672,7 +1676,7 @@ class ItemToolTip(ToolTip):
 				self.AppendTimerBasedOnWearLastTime(metinSlot)
 				#dbg.TraceError("1) REAL_TIME flag On ")
 
-		self.__AppendSealInformation(window_type, slotIndex) ## cyh itemseal 2013 11 11
+		self.__AppendSealInformation(window_type, slotIndex, unbindTime) ## cyh itemseal 2013 11 11
 
 		self.AdditionalTips(window_type, itemVnum, metinSlot, slotIndex)
 		self.AppendAntiFlagInformation()
@@ -1964,22 +1968,38 @@ class ItemToolTip(ToolTip):
 			"""
 
 	## cyh itemseal 2013 11 11
-	def __AppendSealInformation(self, window_type, slotIndex):
+	## ENABLE_SOULBIND_SYSTEM - sealDate: 0 = serbest, -1 = ruha bagli, >0 = bagin dusecegi unix zamani.
+	## sealDate verilmezse deger oyuncunun kendi hucresinden okunur (window_type + slotIndex).
+	def __AppendSealInformation(self, window_type, slotIndex, sealDate = 0):
 		if not app.ENABLE_SOULBIND_SYSTEM:
 			return
 
-		itemSealDate = player.GetItemSealDate(window_type, slotIndex)
-		if itemSealDate == item.GetDefaultSealDate():
-			return
+		sealDefault = getattr(item, "E_SEAL_DATE_DEFAULT_TIMESTAMP", 0)
+		sealUnlimited = getattr(item, "E_SEAL_DATE_UNLIMITED_TIMESTAMP", -1)
 
-		if itemSealDate == item.GetUnlimitedSealDate():
+		itemSealDate = sealDate
+		if not itemSealDate or itemSealDate == sealDefault:
+			# Pazar, ticaret, link gibi cagrilarda slotIndex -1 gelir: satir yok, C cagrisi yok
+			if slotIndex < 0:
+				return
+			if window_type != player.INVENTORY and window_type != player.EQUIPMENT:
+				return
+			if not hasattr(player, "GetItemSealDate"):
+				return
+			itemSealDate = player.GetItemSealDate(window_type, slotIndex)
+
+		if itemSealDate == sealUnlimited:
 			self.AppendSpace(5)
 			self.AppendTextLine(localeInfo.TOOLTIP_SEALED, self.NEGATIVE_COLOR)
 
 		elif itemSealDate > 0:
+			# Kalan sure sunucu saatinden hesaplanir: eksiye dusmez, dakikaya yukari yuvarlanir
+			leftSec = int(itemSealDate) - int(app.GetGlobalTimeStamp())
+			if leftSec < 0:
+				leftSec = 0
+			leftMin = (leftSec + 59) / 60
 			self.AppendSpace(5)
-			hours, minutes = player.GetItemUnSealLeftTime(window_type, slotIndex)
-			self.AppendTextLine(localeInfo.TOOLTIP_UNSEAL_LEFT_TIME % (hours, minutes), self.NEGATIVE_COLOR)
+			self.AppendTextLine(localeInfo.TOOLTIP_UNSEAL_LEFT_TIME % (leftMin / 60, leftMin % 60), self.NEGATIVE_COLOR)
 
 	def __GetAffectString(self, affectType, affectValue):
 		if 0 == affectType:

@@ -2399,6 +2399,124 @@ PyObject* playerGetGem(PyObject* poSelf, PyObject* poArgs)
 }
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+// Ortak arguman cozucu: (cell) -> INVENTORY penceresi, (window_type, cell) -> acik pencere.
+// false = arguman sayisi hatali. Gecersiz / bos hucre hata DEGILDIR: cagiranlar 0 / FALSE doner.
+static bool __SoulbindGetCell(PyObject* poArgs, TItemPos& rCell)
+{
+	bool bResult = false;
+
+	switch (PyTuple_Size(poArgs))
+	{
+	case 1:
+		rCell.window_type = INVENTORY;
+		bResult = PyTuple_GetInteger(poArgs, 0, &rCell.cell);
+		break;
+	case 2:
+		bResult = PyTuple_GetByte(poArgs, 0, &rCell.window_type) && PyTuple_GetInteger(poArgs, 1, &rCell.cell);
+		break;
+	}
+
+	// sayi olmayan arguman (None vb.) bekleyen bir python hatasi birakir: temizle ve gecersiz hucre say
+	if (PyErr_Occurred())
+	{
+		PyErr_Clear();
+		rCell = TItemPos();
+	}
+
+	return bResult;
+}
+
+// Sunucudaki parsomen kurali ile ayni: yalnizca silah / zirh / kostum, giyili degil, istiflenemez (adet 1).
+static bool __SoulbindIsBindableItem(const TItemPos& c_rCell)
+{
+	if (!c_rCell.IsValidCell() || c_rCell.IsEquipCell())
+		return false;
+
+	CPythonPlayer& rkPlayer = CPythonPlayer::Instance();
+
+	const DWORD dwVnum = rkPlayer.GetItemIndex(c_rCell);
+	if (0 == dwVnum)
+		return false;
+
+	// GetItemDataPointer, SelectItemData'nin aksine global "secili item"i degistirmez (tooltip kurulurken guvenli)
+	CItemData* pItemData = nullptr;
+	if (!CItemManager::Instance().GetItemDataPointer(dwVnum, &pItemData) || !pItemData)
+		return false;
+
+	switch (pItemData->GetType())
+	{
+	case CItemData::ITEM_TYPE_WEAPON:
+	case CItemData::ITEM_TYPE_ARMOR:
+	case CItemData::ITEM_TYPE_COSTUME:
+		break;
+	default:
+		return false;
+	}
+
+	if (pItemData->IsFlag(CItemData::ITEM_FLAG_STACKABLE) || rkPlayer.GetItemCount(c_rCell) > 1)
+		return false;
+
+	return true;
+}
+
+// player.GetItemSealDate(slot) / (window, slot) -> 0 = serbest, -1 = ruha bagli, >0 = bagin dusecegi unix zamani
+PyObject* playerGetItemSealDate(PyObject* poSelf, PyObject* poArgs)
+{
+	TItemPos Cell;
+	if (!__SoulbindGetCell(poArgs, Cell))
+		return Py_BadArgument();
+
+	return Py_BuildValue("i", (int) CPythonPlayer::Instance().GetItemUnbindTime(Cell));
+}
+
+// player.GetItemUnSealLeftTime(slot) / (window, slot) -> (saat, dakika); yalnizca ayirma surerken (sealbind > 0) anlamli, aksi halde (0, 0)
+PyObject* playerGetItemUnSealLeftTime(PyObject* poSelf, PyObject* poArgs)
+{
+	TItemPos Cell;
+	if (!__SoulbindGetCell(poArgs, Cell))
+		return Py_BadArgument();
+
+	long lLeft = 0;
+	const long lSealBind = CPythonPlayer::Instance().GetItemUnbindTime(Cell);
+	if (lSealBind > 0)
+	{
+		lLeft = lSealBind - (long) CPythonApplication::Instance().GetServerTimeStamp();
+		if (lLeft < 0)
+			lLeft = 0;
+	}
+
+	return Py_BuildValue("ii", (int) (lLeft / 3600), (int) ((lLeft / 60) % 60));
+}
+
+// player.CanSealItem(slot) / (window, slot): Baglama Parsomeni (50263) hedefi olabilir mi?
+// sealbind > 0 (ayirma suruyor) da gecerlidir: yeniden baglamak geri sayimi iptal eder.
+PyObject* playerCanSealItem(PyObject* poSelf, PyObject* poArgs)
+{
+	TItemPos Cell;
+	if (!__SoulbindGetCell(poArgs, Cell))
+		return Py_BadArgument();
+
+	if (!__SoulbindIsBindableItem(Cell))
+		return Py_BuildValue("i", FALSE);
+
+	return Py_BuildValue("i", CPythonPlayer::Instance().GetItemUnbindTime(Cell) != CItemData::SEAL_DATE_UNLIMITED_TIMESTAMP ? TRUE : FALSE);
+}
+
+// player.CanUnSealItem(slot) / (window, slot): Ayirma Parsomeni (50264) hedefi olabilir mi? Yalnizca kalici bagli (-1) esya.
+PyObject* playerCanUnSealItem(PyObject* poSelf, PyObject* poArgs)
+{
+	TItemPos Cell;
+	if (!__SoulbindGetCell(poArgs, Cell))
+		return Py_BadArgument();
+
+	if (!__SoulbindIsBindableItem(Cell))
+		return Py_BuildValue("i", FALSE);
+
+	return Py_BuildValue("i", CPythonPlayer::Instance().GetItemUnbindTime(Cell) == CItemData::SEAL_DATE_UNLIMITED_TIMESTAMP ? TRUE : FALSE);
+}
+#endif
+
 void initPlayer()
 {
 	static PyMethodDef s_methods[] =
@@ -2591,10 +2709,11 @@ void initPlayer()
 		{ "SendDragonSoulRefine",		playerSendDragonSoulRefine,			METH_VARARGS },
 		{ "RefreshInventory",			playerRefreshInventory,			METH_VARARGS },
 
-#ifdef ENABLE_SEALBIND_SYSTEM
+#ifdef ENABLE_SOULBIND_SYSTEM
 		{ "CanSealItem",				playerCanSealItem,					METH_VARARGS },
+		{ "CanUnSealItem",				playerCanUnSealItem,				METH_VARARGS },
 		{ "GetItemSealDate",			playerGetItemSealDate,				METH_VARARGS },
-		{ "GetItemUnSealLeftTime",		GetItemUnSealLeftTime,				METH_VARARGS },
+		{ "GetItemUnSealLeftTime",		playerGetItemUnSealLeftTime,		METH_VARARGS },
 #endif
 #ifdef ENABLE_PLAYER_CHECKAFFECT
 		{ "CheckAffect",				playerCheckAffect,					METH_VARARGS },

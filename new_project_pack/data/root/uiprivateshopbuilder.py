@@ -472,6 +472,11 @@ class PrivateShopBuilder(ui.ScriptWindow):
 				chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.PRIVATE_SHOP_CANNOT_SELL_ITEM)
 				return
 
+			# ENABLE_SOULBIND_SYSTEM: ruha bagli esya pazara konulamaz (sunucu aksi halde tum pazari reddeder)
+			if app.ENABLE_SOULBIND_SYSTEM and hasattr(player, "GetItemSealDate") and 0 != player.GetItemSealDate(attachedInvenType, attachedSlotPos):
+				chat.AppendChat(chat.CHAT_TYPE_INFO, getattr(localeInfo, "SOULBIND_REFUSE_SHOP", "Ruha bagli esya pazarda satilamaz."))
+				return
+
 			if app.ENABLE_INVENTORY_SLOT_MARKING and player.SLOT_TYPE_INVENTORY == attachedSlotType:
 				self.CantTradableItem(selectedSlotPos, attachedSlotPos)
 

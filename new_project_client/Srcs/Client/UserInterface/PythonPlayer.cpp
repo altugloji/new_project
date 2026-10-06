@@ -787,6 +787,55 @@ DWORD CPythonPlayer::GetItemEnchantUseCount(TItemPos Cell) const
 }
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+// sealbind: 0 = serbest, -1 = kalici ruha bagli, >0 = bagin dusecegi unix zamani.
+// Gecersiz hucre / bos slot icin HER ZAMAN 0 doner (tooltip slotIndex -1 yollayabilir -> WORD 65535).
+long CPythonPlayer::GetItemUnbindTime(TItemPos Cell) const
+{
+	if (Cell.window_type == SAFEBOX || Cell.window_type == MALL)
+	{
+		CPythonSafeBox& rkSafeBox = CPythonSafeBox::Instance();
+		TItemData* pInstance = nullptr;
+
+		// sinir kontrolu once: Get*ItemDataPtr gecersiz indexte syserr yazar
+		if (Cell.window_type == SAFEBOX)
+		{
+			if (Cell.cell >= (DWORD) rkSafeBox.GetCurrentSafeBoxSize() || !rkSafeBox.GetItemDataPtr(Cell.cell, &pInstance))
+				return 0;
+		}
+		else
+		{
+			if (Cell.cell >= rkSafeBox.GetMallSize() || !rkSafeBox.GetMallItemDataPtr(Cell.cell, &pInstance))
+				return 0;
+		}
+
+		if (!pInstance || 0 == pInstance->vnum)
+			return 0;
+
+		return pInstance->sealbind;
+	}
+
+	if (!Cell.IsValidCell())
+		return 0;
+
+	const TItemData* p = GetItemData(Cell);
+	if (!p || 0 == p->vnum)
+		return 0;
+
+	return p->sealbind;
+}
+
+void CPythonPlayer::SetItemUnbindTime(TItemPos Cell, long lSealBind)
+{
+	if (!Cell.IsValidCell())
+		return;
+	TItemData* p = const_cast<TItemData*>(GetItemData(Cell));
+	if (!p)
+		return;
+	p->sealbind = lSealBind;
+}
+#endif
+
 int CPythonPlayer::GetQuickPage() const
 {
 	return m_playerStatus.lQuickPageIndex;

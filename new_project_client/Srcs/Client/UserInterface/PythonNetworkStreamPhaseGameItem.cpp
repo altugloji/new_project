@@ -283,6 +283,10 @@ bool CPythonNetworkStream::RecvSafeBoxSetPacket()
 	for (int iattr=0; iattr<ITEM_ATTRIBUTE_SLOT_MAX_NUM; ++iattr)
 		kItemData.aAttr[iattr] = kItemSet.aAttr[iattr];
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+	kItemData.sealbind = kItemSet.sealbind;
+#endif
+
 	CPythonSafeBox::Instance().SetItemData(kItemSet.Cell.cell, kItemData);
 
 	__RefreshSafeboxWindow();
@@ -399,6 +403,10 @@ bool CPythonNetworkStream::RecvMallItemSetPacket()
 	}
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+	kItemData.sealbind = kItemSet.sealbind;
+#endif
+
 	CPythonSafeBox::Instance().SetMallItemData(kItemSet.Cell.cell, kItemData);
 
 	__RefreshMallWindow();
@@ -442,6 +450,10 @@ bool CPythonNetworkStream::RecvItemSetPacket()
 	kItemData.szUpgradeOwner[0] = '\0';
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+	kItemData.sealbind = 0;	// ITEM_DEL paketi sealbind tasimaz; yerel struct sifirlanmadigi icin zorla 0
+#endif
+
 	IAbstractPlayer& rkPlayer=IAbstractPlayer::GetSingleton();
 
 	rkPlayer.SetItemData(packet_item_set.Cell, kItemData);
@@ -480,6 +492,10 @@ bool CPythonNetworkStream::RecvItemSetPacket2()
 		} else
 			kItemData.szUpgradeOwner[0] = '\0';
 	}
+#endif
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+	kItemData.sealbind = packet_item_set.sealbind;
 #endif
 
 	IAbstractPlayer& rkPlayer=IAbstractPlayer::GetSingleton();
@@ -528,6 +544,9 @@ bool CPythonNetworkStream::RecvItemUpdatePacket()
 		else
 			rkPlayer.SetItemUpgradeOwner(packet_item_update.Cell, "");
 	}
+#endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+	rkPlayer.SetItemUnbindTime(packet_item_update.Cell, packet_item_update.sealbind);
 #endif
 
 	__RefreshInventoryWindow();

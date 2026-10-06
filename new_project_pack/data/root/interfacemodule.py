@@ -119,10 +119,14 @@ if getattr(app, "ENABLE_WS_TOURNAMENT", 0):
 	import uiwswatch
 if getattr(app, "ENABLE_LUCKY_DRAW", 0):
 	import uiluckydraw
-# Kaos Savasi (FFA) skor penceresi + isinma sayaci (server komutlariyla surulur; define gerektirmez)
 if getattr(app, "ENABLE_PLAYER_STATISTICS", 0):
 	import uigeneralranking
-import uiffaboard
+# Death Valley (FFA) skor penceresi + isinma sayaci; toleransli import:
+# dosya pack'te eksikse client oyuna giremez hale gelmesin, penceresiz calissin
+try:
+	import uiffaboard
+except ImportError:
+	uiffaboard = None
 import uibossrank
 IsQBHide = 0
 
@@ -467,10 +471,13 @@ class Interface(object):
 			self.wndWSWatch.Hide()
 
 		# FFA: pencereler server ffa_rank/ffa_warmup komutlari gelince kendini gosterir
-		self.wndFFABoard = uiffaboard.FFABoardWindow()
-		self.wndFFABoard.Hide()
-		self.wndFFAWarmup = uiffaboard.FFAWarmupCounter()
-		self.wndFFAWarmup.Hide()
+		self.wndFFABoard = None
+		self.wndFFAWarmup = None
+		if uiffaboard:
+			self.wndFFABoard = uiffaboard.FFABoardWindow()
+			self.wndFFABoard.Hide()
+			self.wndFFAWarmup = uiffaboard.FFAWarmupCounter()
+			self.wndFFAWarmup.Hide()
 
 		# Boss Hasar Siralamasi: pencere server boss_rank komutu gelince kendini gosterir
 		self.wndBossRank = uibossrank.BossRankBoard()

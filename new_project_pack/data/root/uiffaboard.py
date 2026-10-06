@@ -48,7 +48,6 @@ class FFABoardWindow(ui.ScriptWindow):
 	def __init__(self):
 		ui.ScriptWindow.__init__(self)
 		self.__lastRecvTime = 0.0
-		self.__userClosed = 0
 		self.__defaultPosSet = 0	# konum yalniz ILK acilista atanir; oyuncunun tasidigi yer korunur
 		self.__rows = []
 		self.__widgets = []
@@ -178,9 +177,6 @@ class FFABoardWindow(ui.ScriptWindow):
 
 	def SetRankPayload(self, payload):
 		now = app.GetTime()
-		# 15+ sn sessizlik = yeni etkinlik girisi sayilir; elle kapatma sifirlanir
-		if self.__userClosed and self.__lastRecvTime and now - self.__lastRecvTime > 15.0:
-			self.__userClosed = 0
 		self.__lastRecvTime = now
 
 		try:
@@ -221,7 +217,7 @@ class FFABoardWindow(ui.ScriptWindow):
 		else:
 			self.myLine.SetText("Sen: henuz kill yok")
 
-		if not self.IsShow() and not self.__userClosed:
+		if not self.IsShow():
 			self.Open()
 
 	def Open(self):
@@ -234,7 +230,6 @@ class FFABoardWindow(ui.ScriptWindow):
 		self.Show()
 
 	def Close(self):
-		self.__userClosed = 1
 		self.Hide()
 
 	def OnUpdate(self):
@@ -242,9 +237,9 @@ class FFABoardWindow(ui.ScriptWindow):
 		if self.IsShow() and self.__lastRecvTime and app.GetTime() - self.__lastRecvTime > STALE_HIDE_SECONDS:
 			self.Hide()
 
-	def OnPressEscapeKey(self):
-		self.Close()
-		return 1
+	# NOT: OnPressEscapeKey BILEREK yok. ESC savasta surekli kullanilir (hedef iptali,
+	# pencere kapatma); skorboardu sessizce kapatip "bir daha acilmiyor" sikayeti
+	# yaratiyordu (canli bulgu). Pano pasif HUD'dir: yayin kesilince kendini gizler.
 
 
 class FFAWarmupCounter(ui.ScriptWindow):

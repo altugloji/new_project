@@ -1918,6 +1918,9 @@ typedef struct packet_set_item
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	char		szUpgradeOwner[CHARACTER_NAME_MAX_LEN + 1];
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+	long		sealbind;	// server TPacketGCItemSet ile ayni: SON uye (ITEM_SET / SAFEBOX_SET / MALL_SET)
+#endif
 } TPacketGCItemSet;
 
 typedef struct packet_item_del
@@ -1948,6 +1951,9 @@ typedef struct packet_update_item
 #endif
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	char		szUpgradeOwner[CHARACTER_NAME_MAX_LEN + 1];
+#endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+	long		sealbind;	// server TPacketGCItemUpdate ile ayni: SON uye
 #endif
 } TPacketGCItemUpdate;
 

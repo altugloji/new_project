@@ -12,6 +12,12 @@
 # Eski alan sayisi toleransi: len>=4 satir kabul edilir (irk/imp/seviye yoksa sade).
 # Coklu boss: pencere ilk gelen VID'e kilitlenir; yayin bayatlarsa digerine gecer.
 # Eski server komut gondermez = pencere hic acilmaz; eski root komutu yok sayar.
+# AE (Arapca) duzeltmesi (2026-09-10, F7 pazar arama dersiyle ayni GENEL KURAL):
+#   GrpTextInstance CP_ARABIC'te ALIGN_LEFT metni ankrajdan SOLA uzatir (619-631);
+#   ALIGN_RIGHT ise kaydirmaz = LTR sol-hizali davranisin karsiligi. Bu yuzden
+#   AE'de tum TextLine'lara SetHorizontalAlignRight verilir (ayni x, ayni kutu).
+#   Ayrica RTL cizici ()[] sembollerini aynalayip bas/sona tasidigindan AE
+#   metin bicimleri ayracsiz kurulur ("Nick Lv.75", parantezsiz Sen satiri).
 # NOT: wndMgr python referansi tutmaz - her widget self uzerinde saklanmali.
 import ui
 import app
@@ -65,6 +71,19 @@ class BossRankBoard(ui.ScriptWindow):
 		self.board = None
 		self.myLine = None
 
+	def __MakeRowText(self, x, y):
+		# AE: CP_ARABIC'te ALIGN_RIGHT = ankrajdan saga akis (dosya basi nota bak)
+		text = ui.TextLine()
+		text.SetParent(self.board)
+		text.SetPosition(x, y)
+		if localeInfo.IsARABIC():
+			text.SetHorizontalAlignRight()
+		text.SetFontColor(DEFAULT_ROW_COLOR[0], DEFAULT_ROW_COLOR[1], DEFAULT_ROW_COLOR[2])
+		text.SetText("")
+		text.Hide()
+		self.__widgets.append(text)
+		return text
+
 	def __BuildWindow(self):
 		# tasima bayraklari DIS pencerede olmali (uiffaboard dersi); board "attach" ile
 		# tiklamalari dis pencerenin tasimasina baglar
@@ -86,21 +105,8 @@ class BossRankBoard(ui.ScriptWindow):
 			icon.Hide()
 			self.__widgets.append(icon)
 
-			nameText = ui.TextLine()
-			nameText.SetParent(self.board)
-			nameText.SetPosition(NAME_X, y - 4)
-			nameText.SetFontColor(DEFAULT_ROW_COLOR[0], DEFAULT_ROW_COLOR[1], DEFAULT_ROW_COLOR[2])
-			nameText.SetText("")
-			nameText.Hide()
-			self.__widgets.append(nameText)
-
-			dmgText = ui.TextLine()
-			dmgText.SetParent(self.board)
-			dmgText.SetPosition(DMG_X, y - 4)
-			dmgText.SetFontColor(DEFAULT_ROW_COLOR[0], DEFAULT_ROW_COLOR[1], DEFAULT_ROW_COLOR[2])
-			dmgText.SetText("")
-			dmgText.Hide()
-			self.__widgets.append(dmgText)
+			nameText = self.__MakeRowText(NAME_X, y - 4)
+			dmgText = self.__MakeRowText(DMG_X, y - 4)
 
 			gauge = ui.Gauge()
 			gauge.SetParent(self.board)
@@ -114,13 +120,7 @@ class BossRankBoard(ui.ScriptWindow):
 			gauge.Hide()
 			self.__widgets.append(gauge)
 
-			pctText = ui.TextLine()
-			pctText.SetParent(self.board)
-			pctText.SetPosition(PCT_X, y - 4)
-			pctText.SetFontColor(DEFAULT_ROW_COLOR[0], DEFAULT_ROW_COLOR[1], DEFAULT_ROW_COLOR[2])
-			pctText.SetText("")
-			pctText.Hide()
-			self.__widgets.append(pctText)
+			pctText = self.__MakeRowText(PCT_X, y - 4)
 
 			self.__rows.append({"icon" : icon, "name" : nameText, "dmg" : dmgText, "gauge" : gauge, "pct" : pctText, "race" : -1})
 
@@ -128,6 +128,8 @@ class BossRankBoard(ui.ScriptWindow):
 		myLine = ui.TextLine()
 		myLine.SetParent(self.board)
 		myLine.SetPosition(NAME_X, Y_START)	# gercek konumu __Relayout ayarlar
+		if localeInfo.IsARABIC():
+			myLine.SetHorizontalAlignRight()
 		myLine.SetFontColor(0.3, 1.0, 0.3)
 		myLine.SetText("")
 		myLine.Show()
@@ -224,7 +226,11 @@ class BossRankBoard(ui.ScriptWindow):
 						race = -1
 
 				if level > 0:
-					row["name"].SetText("%s [Lv.%d]" % (cols[1], level))
+					# AE: koseli ayraclar RTL cizicide aynalanip yer degistirir - ayracsiz bicim
+					if localeInfo.IsARABIC():
+						row["name"].SetText("%s Lv.%d" % (cols[1], level))
+					else:
+						row["name"].SetText("%s [Lv.%d]" % (cols[1], level))
 				else:
 					row["name"].SetText(cols[1])
 				color = EMPIRE_COLORS.get(empire, DEFAULT_ROW_COLOR)
@@ -256,7 +262,11 @@ class BossRankBoard(ui.ScriptWindow):
 
 		meCols = mePart.split("|")
 		if len(meCols) >= 3 and meCols[0] != "0":
-			self.myLine.SetText("Sen: %s. sira - %s (%%%s)" % (meCols[0], self.__FormatDamage(meCols[1]), meCols[2]))
+			# AE: parantezler RTL cizicide aynalanip basa tasinir - parantezsiz bicim
+			if localeInfo.IsARABIC():
+				self.myLine.SetText("Sen: %s. sira - %s - %%%s" % (meCols[0], self.__FormatDamage(meCols[1]), meCols[2]))
+			else:
+				self.myLine.SetText("Sen: %s. sira - %s (%%%s)" % (meCols[0], self.__FormatDamage(meCols[1]), meCols[2]))
 		else:
 			self.myLine.SetText("Sen: henuz hasar yok")
 

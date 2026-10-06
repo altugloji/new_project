@@ -306,6 +306,10 @@ class CPythonPlayer : public CSingleton<CPythonPlayer>, public IAbstractPlayer
 		void	SetItemEnchantUseCount(TItemPos Cell, DWORD dw) override;
 		DWORD	GetItemEnchantUseCount(TItemPos Cell) const;
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+		void	SetItemUnbindTime(TItemPos Cell, long lSealBind) override;
+		long	GetItemUnbindTime(TItemPos Cell) const;
+#endif
 		DWORD	GetItemIndex(TItemPos Cell);
 		DWORD	GetItemFlags(TItemPos Cell);
 #ifdef ENABLE_INVENTORY_SLOT_MARKING

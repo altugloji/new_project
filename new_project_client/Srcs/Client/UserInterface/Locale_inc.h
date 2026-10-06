@@ -187,6 +187,7 @@
 
 #define ENABLE_MESSENGER_BLOCK											// Oyuncu Engelleme Sistemi (server ENABLE_MESSENGER_BLOCK ile ayni; wire degisti -> rebuild+repack birlikte)
 #define ENABLE_PLAYER_STATISTICS										// Oyun ici siralama sistemi (server ile ayni; POINT 163-168 paritesi sart)
+#define ENABLE_SOULBIND_SYSTEM											// Ruha baglama (soulbind): Baglama Parsomeni 50263 / Ayirma Parsomeni 50264; server ENABLE_SOULBIND_SYSTEM ile ayni; wire +4 bayt (ITEM_SET/ITEM_UPDATE/SAFEBOX_SET/MALL_SET) -> server+client rebuild + repack birlikte
 
 #define METIN35_ADMIN_PANEL												// Yönetim Paneli
 #ifdef METIN35_ADMIN_PANEL

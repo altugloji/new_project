@@ -766,6 +766,40 @@ PyObject* itemSelectItemWiki(PyObject* poSelf, PyObject* poArgs)
 }
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+// item.IsSealScroll(vnum): Baglama Parsomeni (50263) mi?
+PyObject* itemIsSealScroll(PyObject* poSelf, PyObject* poArgs)
+{
+	int iItemIndex;
+	if (!PyTuple_GetInteger(poArgs, 0, &iItemIndex))
+		return Py_BadArgument();
+
+	return Py_BuildValue("i", iItemIndex == CItemData::SEAL_ITEM_BINDING_VNUM ? TRUE : FALSE);
+}
+
+// item.IsUnSealScroll(vnum): Ayirma Parsomeni (50264) mi?
+PyObject* itemIsUnSealScroll(PyObject* poSelf, PyObject* poArgs)
+{
+	int iItemIndex;
+	if (!PyTuple_GetInteger(poArgs, 0, &iItemIndex))
+		return Py_BadArgument();
+
+	return Py_BuildValue("i", iItemIndex == CItemData::SEAL_ITEM_UNBINDING_VNUM ? TRUE : FALSE);
+}
+
+// item.GetDefaultSealDate() -> 0 (serbest)
+PyObject* itemGetDefaultSealDate(PyObject* poSelf, PyObject* poArgs)
+{
+	return Py_BuildValue("i", (int) CItemData::SEAL_DATE_DEFAULT_TIMESTAMP);
+}
+
+// item.GetUnlimitedSealDate() -> -1 (kalici ruha bagli)
+PyObject* itemGetUnlimitedSealDate(PyObject* poSelf, PyObject* poArgs)
+{
+	return Py_BuildValue("i", (int) CItemData::SEAL_DATE_UNLIMITED_TIMESTAMP);
+}
+#endif
+
 void initItem()
 {
 	static PyMethodDef s_methods[] =
@@ -811,8 +845,9 @@ void initItem()
 		{ "LoadItemTable",					itemLoadItemTable,						METH_VARARGS },
 		{ "GetApplyPoint",					itemGetApplyPoint,						METH_VARARGS },
 
-#ifdef ENABLE_SEALBIND_SYSTEM
+#ifdef ENABLE_SOULBIND_SYSTEM
 		{ "IsSealScroll",					itemIsSealScroll,						METH_VARARGS },
+		{ "IsUnSealScroll",					itemIsUnSealScroll,						METH_VARARGS },
 		{ "GetDefaultSealDate",				itemGetDefaultSealDate,					METH_VARARGS },
 		{ "GetUnlimitedSealDate",			itemGetUnlimitedSealDate,				METH_VARARGS },
 #endif
@@ -1246,7 +1281,7 @@ void initItem()
 	PyModule_AddIntConstant(poModule, "APPLY_RESIST_MOUNT_FALL", CItemData::APPLY_RESIST_MOUNT_FALL);
 	PyModule_AddIntConstant(poModule, "APPLY_MOUNT", CItemData::APPLY_MOUNT);
 
-#ifdef ENABLE_SEALBIND_SYSTEM
+#ifdef ENABLE_SOULBIND_SYSTEM
 	PyModule_AddIntConstant(poModule, "E_SEAL_DATE_DEFAULT_TIMESTAMP",		CItemData::SEAL_DATE_DEFAULT_TIMESTAMP);
 	PyModule_AddIntConstant(poModule, "E_SEAL_DATE_UNLIMITED_TIMESTAMP",	CItemData::SEAL_DATE_UNLIMITED_TIMESTAMP);
 #endif

@@ -747,6 +747,11 @@ class ShopDialog(ui.ScriptWindow):
 				chat.AppendChat(chat.CHAT_TYPE_INFO, "Bu esya pazara konulamaz.")
 				return
 
+			# ENABLE_SOULBIND_SYSTEM: ruha bagli esya pazara eklenemez (sunucu uygulamada zaten atlar)
+			if app.ENABLE_SOULBIND_SYSTEM and hasattr(player, "GetItemSealDate") and 0 != player.GetItemSealDate(attachedInvenType, attachedSlotPos):
+				chat.AppendChat(chat.CHAT_TYPE_INFO, getattr(localeInfo, "SOULBIND_REFUSE_SHOP", "Ruha bagli esya pazarda satilamaz."))
+				return
+
 			realPos = self.__GetRealIndex(selectedSlotPos)
 			if realPos in self.editAdded:
 				return
