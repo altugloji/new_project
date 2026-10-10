@@ -2959,7 +2959,7 @@ class SkillToolTip(ToolTip):
 
 	def GetNewPassivePointValue(self, skillIndex, skillLevel):
 		if skillIndex == player.SKILL_INDEX_MAX_HP:
-			return skillLevel * 125
+			return skillLevel * 125 / 2
 		return float(skillLevel) / 2
 
 	def AppendNewPassiveSkillData(self, skillIndex, skillLevel):
