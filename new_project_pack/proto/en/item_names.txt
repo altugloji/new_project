@@ -11011,4 +11011,4 @@ VNUM	LOCALE_NAME
 30407	Gaya Coupon (50)
 30408	Gaya Coupon (100)
 49100	Monster Hunter Book
-49102	Inspiration Book
+49102	Passive Skill Book

@@ -11436,4 +11436,4 @@ VNUM	LOCALE_NAME
 30407	Gem Coupon (50)
 30408	Gem Coupon (100)
 49100	Canavar Avcýsý Kitabý
-49102	Ýlham Kitabý
+49102	Pasif Beceri Kitabý

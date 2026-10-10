@@ -11011,4 +11011,4 @@ VNUM	LOCALE_NAME
 30407	Gaya-kupon (50)
 30408	Gaya-kupon (100)
 49100	Monsterjægerens bog
-49102	Inspirationsbog
+49102	Passiv færdighedsbog

@@ -11011,4 +11011,4 @@ VNUM	LOCALE_NAME
 30407	Cupón Gaya (50)
 30408	Cupón Gaya (100)
 49100	Libro del Cazador de Monstruos
-49102	Libro de Inspiración
+49102	Libro de Habilidad Pasiva

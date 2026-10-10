@@ -1,41 +1,41 @@
 [CZ]
-71122	Lístek do kola
+49102	Kniha pasivní dovednosti
 
 [DE]
-71122	Rad-Ticket
+49102	Buch der passiven Fertigkeit
 
 [DK]
-71122	Hjulbillet
+49102	Passiv færdighedsbog
 
 [EN]
-71122	Wheel Ticket
+49102	Passive Skill Book
 
 [ES]
-71122	Boleto de la Ruleta
+49102	Libro de Habilidad Pasiva
 
 [FR]
-71122	Ticket de Roue
+49102	Livre de compétence passive
 
 [HU]
-71122	Kerék jegy
+49102	Passzív készség könyve
 
 [IT]
-71122	Biglietto Ruota
+49102	Libro Abilità Passiva
 
 [NL]
-71122	Rad Ticket
+49102	Passief Vaardigheidsboek
 
 [PL]
-71122	Bilet Koła
+49102	Księga Umiejętności Pasywnej
 
 [PT]
-71122	Bilhete da Roda
+49102	Livro de Habilidade Passiva
 
 [RO]
-71122	Bilet Roată
+49102	Carte de Abilitate Pasivă
 
 [AE]
-71122	تذكرة العجلة
+49102	كتاب المهارة السلبية
 
 [TR]
-71122	Çark Bileti
+49102	Pasif Beceri Kitabı

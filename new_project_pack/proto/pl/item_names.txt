@@ -11011,4 +11011,4 @@ VNUM	LOCALE_NAME
 30407	Kupon Gaya (50)
 30408	Kupon Gaya (100)
 49100	Ksiêga £owcy Potworów
-49102	Ksiêga Inspiracji
+49102	Ksiêga Umiejêtnoœci Pasywnej

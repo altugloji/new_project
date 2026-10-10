@@ -11011,4 +11011,4 @@ VNUM	LOCALE_NAME
 30407	Gaya Coupon (50)
 30408	Gaya Coupon (100)
 49100	Monsterjagersboek
-49102	Inspiratieboek
+49102	Passief Vaardigheidsboek

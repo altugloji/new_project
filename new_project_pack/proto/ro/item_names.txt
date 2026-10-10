@@ -11011,4 +11011,4 @@ VNUM	LOCALE_NAME
 30407	Cupon Gaya (50)
 30408	Cupon Gaya (100)
 49100	Cartea Vânãtorului de Monºtri
-49102	Cartea Inspiraþiei
+49102	Carte de Abilitate Pasivã

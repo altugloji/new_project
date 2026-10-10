@@ -4011,3 +4011,16 @@ GLOBAL_RANKING_AZRAIL_COUNT	Kesilen Azrail
 GLOBAL_RANKING_GENERAL_COUNT	Kesilen General
 GLOBAL_RANKING_CADI_COUNT	Kesilen Cadi
 GLOBAL_RANKING_EJDER_COUNT	Kesilen Ejder
+SOULBIND_SEAL_QUESTION1	%s ruha baglansin mi?
+SOULBIND_SEAL_QUESTION2	Bagli esya takas edilemez, satilamaz, yukseltilemez ve efsunlanamaz.
+SOULBIND_RESEAL_QUESTION1	%s yeniden ruha baglansin mi?
+SOULBIND_RESEAL_QUESTION2	Suren ayirma islemi iptal edilir.
+SOULBIND_UNSEAL_QUESTION1	%s ruhtan ayrilsin mi?
+SOULBIND_UNSEAL_QUESTION2	Ayirma hemen bitmez, sure dolana kadar esya bagli kalir.
+SOULBIND_SCROLL_USE_HINT	Parsomeni kullanmak icin bir silah, zirh veya kostumun uzerine surukle.
+SOULBIND_REFUSE_BAG_ONLY	Parsomen yalnizca cantadaki esyalarda kullanilabilir.
+SOULBIND_REFUSE_TYPE	Bu esya ruha baglanamaz.
+SOULBIND_REFUSE_ALREADY	Bu esya zaten ruha bagli.
+SOULBIND_REFUSE_UNSEALING	Bu esyanin ayirma islemi zaten suruyor.
+SOULBIND_REFUSE_NOT_SEALED	Bu esya ruha bagli degil.
+SOULBIND_REFUSE_SHOP	Ruha bagli esya pazarda satilamaz.
