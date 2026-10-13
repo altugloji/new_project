@@ -268,6 +268,10 @@ class GameWindow(ui.ScriptWindow):
 
 		net.SendEnterGamePacket()
 
+		# Kure Avi: client hazir bildirimi (server ENABLE_ORB_EVENT; bkz. uiorbevent.py)
+		if getattr(app, "ENABLE_ORB_EVENT", 0):
+			net.SendChatPacket("/orb_ready")
+
 		# START_GAME_ERROR_EXIT
 		try:
 			self.StartGame()
@@ -2402,6 +2406,20 @@ class GameWindow(ui.ScriptWindow):
 			"boss_rank_end"	: self.__BossRankEnd,
 		})
 
+		# Kure Avi (bkz. uiorbevent.py; server ENABLE_ORB_EVENT gonderir, eski server hic gondermez)
+		if getattr(app, "ENABLE_ORB_EVENT", 0):
+			serverCommandList.update({
+				"orb_start"	: self.__OrbStart,
+				"orb_put"		: self.__OrbPut,
+				"orb_take"		: self.__OrbTake,
+				"orb_clear"	: self.__OrbClear,
+				"orb_del"		: self.__OrbDel,
+				"orb_top"		: self.__OrbTop,
+				"orb_me"		: self.__OrbMe,
+				"orb_end"		: self.__OrbEnd,
+				"orb_result"	: self.__OrbResult,
+			})
+
 		if getattr(app, "ENABLE_PLAYER_STATISTICS", 0):
 			serverCommandList.update({
 				"RankingProcess"	: self.__RankingProcess,
@@ -2473,9 +2491,14 @@ class GameWindow(ui.ScriptWindow):
 	def LearnSkillGroup(self, data):
 		import uiLearnSkill
 		pJob = int(data.split("#")[1])
+		# Pencere zaten acikken (ayni karede ikinci skill_select / pencere acikken seviye atlama) yeniden kurma:
+		# eski SkillBoard GC ile yok oluyor, constInfo.skillBoard 1 kaliyordu -> secim penceresi oturum boyunca bir daha acilmiyordu.
+		# Karar canli nesneye gore verilir (constInfo.skillBoard faz degisiminde 1 kalabiliyor; BuildWindow onu yeniden 1 yapar).
+		sel = getattr(self, "skillSelect", None)
+		if sel and sel.Board and sel.Board.IsShow():
+			return
 		self.skillSelect = uiLearnSkill.SkillBoard()
-		if constInfo.skillBoard == 0:
-			self.skillSelect.BuildWindow(pJob)
+		self.skillSelect.BuildWindow(pJob)
 
 	def __Horse_HideState(self):
 		self.affectShower.SetHorseState(0, 0, 0)
@@ -2808,6 +2831,76 @@ class GameWindow(ui.ScriptWindow):
 	def __BossRankEnd(self, vid="0"):
 		if self.interface:
 			self.interface.BOSSRANK_End(vid)
+
+	# Kure Avi (orb event) kopruleri (bkz. uiorbevent.py; interface delege eder).
+	# stringCommander satiri BOSLUKTAN boler ve ENABLE_CMDCHAT_VARIADIC_ARGS ile her
+	# parcayi AYRI arguman olarak verir: imzalar wire alan sayisiyla birebir, fazla
+	# parca *rest'e duser, eksik parca varsayilana. Bozuk satir handler'i oldurmesin
+	# diye her kopru try/except + dbg.TraceError.
+	if getattr(app, "ENABLE_ORB_EVENT", 0):
+		def __OrbStart(self, eid="0", remain="0", minscore="0", *rest):
+			try:
+				if self.interface:
+					self.interface.ORB_Start(int(eid), int(remain), int(minscore))
+			except Exception as e:
+				dbg.TraceError("game.__OrbStart(%s %s): %s" % (eid, remain, e))
+
+		def __OrbPut(self, payload="", *rest):
+			try:
+				if self.interface:
+					self.interface.ORB_Put(payload)
+			except Exception as e:
+				dbg.TraceError("game.__OrbPut(%s): %s" % (payload, e))
+
+		def __OrbTake(self, slot="0", gain="0", total="0", nx="0", ny="0", ntype="0", *rest):
+			try:
+				if self.interface:
+					self.interface.ORB_Take(int(slot), int(gain), int(total), int(nx), int(ny), int(ntype))
+			except Exception as e:
+				dbg.TraceError("game.__OrbTake(%s %s %s %s %s %s): %s" % (slot, gain, total, nx, ny, ntype, e))
+
+		def __OrbClear(self, *rest):
+			try:
+				if self.interface:
+					self.interface.ORB_Clear()
+			except Exception as e:
+				dbg.TraceError("game.__OrbClear: %s" % e)
+
+		def __OrbDel(self, slot="0", *rest):
+			# sari kure omru doldu: sessizce silinir (ses/puan yok)
+			try:
+				if self.interface:
+					self.interface.ORB_Del(int(slot))
+			except Exception as e:
+				dbg.TraceError("game.__OrbDel(%s): %s" % (slot, e))
+
+		def __OrbTop(self, payload="0", *rest):
+			try:
+				if self.interface:
+					self.interface.ORB_Top(payload)
+			except Exception as e:
+				dbg.TraceError("game.__OrbTop(%s): %s" % (payload, e))
+
+		def __OrbMe(self, rank="0", score="0", participants="0", *rest):
+			try:
+				if self.interface:
+					self.interface.ORB_Me(int(rank), int(score), int(participants))
+			except Exception as e:
+				dbg.TraceError("game.__OrbMe(%s %s %s): %s" % (rank, score, participants, e))
+
+		def __OrbEnd(self, eid="0", *rest):
+			try:
+				if self.interface:
+					self.interface.ORB_End(int(eid))
+			except Exception as e:
+				dbg.TraceError("game.__OrbEnd(%s): %s" % (eid, e))
+
+		def __OrbResult(self, rank="0", count="0", *rest):
+			try:
+				if self.interface:
+					self.interface.ORB_Result(int(rank), int(count))
+			except Exception as e:
+				dbg.TraceError("game.__OrbResult(%s %s): %s" % (rank, count, e))
 
 	# Oyun ici siralama koprusu (uigeneralranking; interface delege eder)
 	def __RankingProcess(self, processID):

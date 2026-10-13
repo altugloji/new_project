@@ -128,6 +128,16 @@ try:
 except ImportError:
 	uiffaboard = None
 import uibossrank
+# Kure Avi (orb event) penceresi + kure alani; toleransli import (uiffaboard kalibi):
+# dosya pack'te eksikse client oyuna giremez hale gelmesin, penceresiz calissin
+try:
+	import uiorbevent
+except Exception:
+	# ImportError disi hata (modul-duzeyi NameError/AttributeError vb.) da tum
+	# interfacemodule import'unu dusurup oyuna girisi kilitlemesin; tek satir log
+	uiorbevent = None
+	import dbg
+	dbg.TraceError("uiorbevent import basarisiz")
 IsQBHide = 0
 
 
@@ -483,6 +493,15 @@ class Interface(object):
 		self.wndBossRank = uibossrank.BossRankBoard()
 		self.wndBossRank.Hide()
 
+		# Kure Avi: pano server orb_start gelince kendini gosterir; kure alani dunya
+		# efektlerini tutar (binary ENABLE_ORB_EVENT kapaliysa ikisi de kurulmaz)
+		self.wndOrbBoard = None
+		self.orbField = None
+		if uiorbevent and getattr(app, "ENABLE_ORB_EVENT", 0):
+			self.orbField = uiorbevent.OrbField()
+			self.wndOrbBoard = uiorbevent.OrbBoard()
+			self.wndOrbBoard.Hide()
+
 	def __MakeHelpWindow(self):
 		self.wndHelp = uiHelp.HelpWindow()
 		self.wndHelp.LoadDialog()
@@ -812,7 +831,14 @@ class Interface(object):
 					wnd.Destroy()
 					setattr(self, wndName, None)
 
-		for wndName in ("wndFFABoard", "wndFFAWarmup", "wndBossRank"):
+		# Kure Avi: dunya efektleri select fazina donuste motor tarafindan silinmez - elle temizle
+		orbField = getattr(self, "orbField", None)
+		if orbField:
+			orbField.Clear()
+			orbField.Destroy()
+			self.orbField = None
+
+		for wndName in ("wndFFABoard", "wndFFAWarmup", "wndBossRank", "wndOrbBoard"):
 			wnd = getattr(self, wndName, None)
 			if wnd:
 				wnd.Hide()
@@ -2830,6 +2856,61 @@ class Interface(object):
 		wnd = getattr(self, "wndBossRank", None)
 		if wnd:
 			wnd.OnBossEnd(vid)
+
+	# Kure Avi (orb event) kopruleri (bkz. uiorbevent.py; define kapaliysa ikisi de None)
+	def ORB_Start(self, eid, remain, minscore=0):
+		field = getattr(self, "orbField", None)
+		if field:
+			field.Clear()
+		wnd = getattr(self, "wndOrbBoard", None)
+		if wnd:
+			wnd.OnRoundStart(eid, remain, minscore)
+
+	def ORB_Put(self, payload):
+		field = getattr(self, "orbField", None)
+		if field:
+			field.PutPayload(payload)
+
+	def ORB_Take(self, slot, gain, total, nx, ny, ntype):
+		field = getattr(self, "orbField", None)
+		if field:
+			field.Collect(slot, nx, ny, ntype, gain)
+		wnd = getattr(self, "wndOrbBoard", None)
+		if wnd:
+			wnd.OnTake(gain, total)
+
+	def ORB_Clear(self):
+		field = getattr(self, "orbField", None)
+		if field:
+			field.Clear()
+
+	def ORB_Del(self, slot):
+		field = getattr(self, "orbField", None)
+		if field:
+			field.Take(slot)
+
+	def ORB_Top(self, payload):
+		wnd = getattr(self, "wndOrbBoard", None)
+		if wnd:
+			wnd.SetTopPayload(payload)
+
+	def ORB_Me(self, rank, score, participants):
+		wnd = getattr(self, "wndOrbBoard", None)
+		if wnd:
+			wnd.SetMe(rank, score, participants)
+
+	def ORB_End(self, eid):
+		field = getattr(self, "orbField", None)
+		if field:
+			field.Clear()
+		wnd = getattr(self, "wndOrbBoard", None)
+		if wnd:
+			wnd.OnRoundEnd(eid)
+
+	def ORB_Result(self, rank, count):
+		wnd = getattr(self, "wndOrbBoard", None)
+		if wnd:
+			wnd.OnResult(rank, count)
 
 	if app.ENABLE_GM_PLAYER_PANEL or app.ENABLE_BULK_POTION_PANEL:
 		def ToggleTabPanel(self):

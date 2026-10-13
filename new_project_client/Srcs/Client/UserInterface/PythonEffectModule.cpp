@@ -32,6 +32,10 @@ PyObject * effectCreateEffect(PyObject * poSelf, PyObject * poArgs)
 		return Py_BuildException();
 
 	CInstanceBase * pInstance = CPythonCharacterManager::Instance().GetSelectedInstancePtr();
+	// ifdef'siz bugfix: secili karakter yokken (secim/yukleme fazi) null deref yerine -1 don
+	if (!pInstance)
+		return Py_BuildValue("i", -1);
+
 	TPixelPosition PixelPosition;
 	pInstance->NEW_GetPixelPosition(&PixelPosition);
 	const int iIndex = CEffectManager::Instance().CreateEffect(szEffectName, PixelPosition, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
@@ -88,6 +92,73 @@ PyObject * effectRegisterIndexedFlyData(PyObject * poSelf, PyObject * poArgs)
 	return Py_BuildNone();
 }
 
+#ifdef ENABLE_ORB_EVENT
+// Kure Avi: dunya koordinatinda (local cm) serbest efekt olusturma / tasima / yasam kontrolu.
+// Python pozitif local y gonderir; client dunyasi -y kullanir (bkz. PythonItem.cpp CreateEffect(D3DXVECTOR3(x, -y, z))).
+// CreateEffect kayitsiz efektte bile indeks dondurur (CreateEffectInstance sessizce instance uretmez);
+// bu yuzden once RegisterEffect (idempotent: kayitliysa TRUE) ve ardindan SelectEffectInstance ile dogrulama yapilir.
+PyObject * effectCreateWorld(PyObject * poSelf, PyObject * poArgs)
+{
+	char * szFileName;
+	if (!PyTuple_GetString(poArgs, 0, &szFileName))
+		return Py_BuildException();
+	float fx;
+	if (!PyTuple_GetFloat(poArgs, 1, &fx))
+		return Py_BuildException();
+	float fy;
+	if (!PyTuple_GetFloat(poArgs, 2, &fy))
+		return Py_BuildException();
+	float fz;
+	if (!PyTuple_GetFloat(poArgs, 3, &fz))
+		return Py_BuildException();
+
+	CEffectManager & rkEftMgr = CEffectManager::Instance();
+	if (!rkEftMgr.RegisterEffect(szFileName))
+		return Py_BuildValue("i", -1);
+
+	const int iIndex = rkEftMgr.CreateEffect(szFileName, D3DXVECTOR3(fx, -fy, fz), D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	if (!rkEftMgr.SelectEffectInstance(iIndex))
+		return Py_BuildValue("i", -1);
+
+	return Py_BuildValue("i", iIndex);
+}
+
+PyObject * effectMoveWorld(PyObject * poSelf, PyObject * poArgs)
+{
+	int iIndex;
+	if (!PyTuple_GetInteger(poArgs, 0, &iIndex))
+		return Py_BuildException();
+	float fx;
+	if (!PyTuple_GetFloat(poArgs, 1, &fx))
+		return Py_BuildException();
+	float fy;
+	if (!PyTuple_GetFloat(poArgs, 2, &fy))
+		return Py_BuildException();
+	float fz;
+	if (!PyTuple_GetFloat(poArgs, 3, &fz))
+		return Py_BuildException();
+
+	CEffectManager & rkEftMgr = CEffectManager::Instance();
+	if (!rkEftMgr.SelectEffectInstance(iIndex))
+		return Py_BuildValue("i", 0);
+
+	D3DXMATRIX mat;
+	D3DXMatrixTranslation(&mat, fx, -fy, fz);
+	rkEftMgr.SetEffectInstanceGlobalMatrix(mat);
+
+	return Py_BuildValue("i", 1);
+}
+
+PyObject * effectIsAlive(PyObject * poSelf, PyObject * poArgs)
+{
+	int iIndex;
+	if (!PyTuple_GetInteger(poArgs, 0, &iIndex))
+		return Py_BuildException();
+
+	return Py_BuildValue("i", CEffectManager::Instance().IsAliveEffect(iIndex) ? 1 : 0);
+}
+#endif
+
 void initeffect()
 {
 	static PyMethodDef s_methods[] =
@@ -96,6 +167,11 @@ void initeffect()
 		{ "CreateEffect",				effectCreateEffect,				METH_VARARGS },
 		{ "DeleteEffect",				effectDeleteEffect,				METH_VARARGS },
 		{ "SetPosition",				effectSetPosition,				METH_VARARGS },
+#ifdef ENABLE_ORB_EVENT
+		{ "CreateWorld",				effectCreateWorld,				METH_VARARGS },
+		{ "MoveWorld",					effectMoveWorld,					METH_VARARGS },
+		{ "IsAlive",					effectIsAlive,					METH_VARARGS },
+#endif
 
 		{ "RegisterIndexedFlyData",		effectRegisterIndexedFlyData,	METH_VARARGS },
 

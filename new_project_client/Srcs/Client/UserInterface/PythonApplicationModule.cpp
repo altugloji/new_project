@@ -2277,5 +2277,11 @@ void initapp()
 	PyModule_AddIntConstant(poModule, "ENABLE_PLAYER_STATISTICS", 0);
 #endif
 
+#ifdef ENABLE_ORB_EVENT
+	PyModule_AddIntConstant(poModule, "ENABLE_ORB_EVENT", 1);
+#else
+	PyModule_AddIntConstant(poModule, "ENABLE_ORB_EVENT", 0);
+#endif
+
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4
