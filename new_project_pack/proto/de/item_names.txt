@@ -8825,7 +8825,7 @@ VNUM	LOCALE_NAME
 50216	Glühwein
 50249	Truhe des Triumphs
 50252	Cor Draconis
-50253	Purpurne Blattgold-Kiste
+50253	Orb Reward Chest
 50254	Truhe der Dunkelheit
 50255	Cor Draconis (Roh)
 50256	Cor Draconis (Schliff)

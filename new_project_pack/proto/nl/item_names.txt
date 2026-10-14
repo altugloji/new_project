@@ -8825,7 +8825,7 @@ VNUM	LOCALE_NAME
 50216	Glühwijn
 50249	Kist der Triomf
 50252	Cor Draconis
-50253	NoNAme
+50253	Orb Reward Chest
 50254	Kist van het Duister.
 50255	Cor Draconis (Ruw)
 50256	Cor Draconis (Geslepen)

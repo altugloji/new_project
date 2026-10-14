@@ -8825,7 +8825,7 @@ VNUM	LOCALE_NAME
 50216	Vin Brulé
 50249	Baule del Trionfo
 50252	Cor draconis
-50253	NoNAme
+50253	Orb Reward Chest
 50254	Scrigno dell'oscurità
 50255	Cor draconis (grezzo)
 50256	Cor draconis (tagliato)

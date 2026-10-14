@@ -8825,7 +8825,7 @@ VNUM	LOCALE_NAME
 50216	Forralt bor
 50249	Diadal ládája
 50252	Cor Draconis
-50253	NoNAme
+50253	Orb Reward Chest
 50254	Sötétség ládája
 50255	Cor Draconis (Nyers)
 50256	Cor Draconis (Metszett)

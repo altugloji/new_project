@@ -8825,7 +8825,7 @@ VNUM	LOCALE_NAME
 50216	Vino Caliente
 50249	Baúl del Triunfo
 50252	Cor Draconis
-50253	NoNAme
+50253	Orb Reward Chest
 50254	Baúl de la Oscuridad
 50255	Cor Draconis (en bruto)
 50256	Cor Draconis (afilado)

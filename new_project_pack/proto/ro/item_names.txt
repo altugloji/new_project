@@ -8825,7 +8825,7 @@ VNUM	LOCALE_NAME
 50216	Vin Fiert
 50249	Cufãrul Triumfului
 50252	Cor Draconis
-50253	NoNAme
+50253	Orb Reward Chest
 50254	Cufãrul Întunericului
 50255	Cor Draconis (Brut)
 50256	Cor Draconis (Taiat)

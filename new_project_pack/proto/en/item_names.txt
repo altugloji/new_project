@@ -8825,7 +8825,7 @@ VNUM	LOCALE_NAME
 50216	Mulled Wine
 50249	Chest of Triumph
 50252	Cor Draconis
-50253	NoNAme
+50253	Orb Reward Chest
 50254	Chest of Darkness
 50255	Cor Draconis (Rough)
 50256	Cor Draconis (Cut)

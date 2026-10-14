@@ -8916,7 +8916,7 @@ VNUM	LOCALE_NAME
 50221	Galibin Anahtarý
 50249	Zafer Sandýðý
 50252	Cor Draconis
-50253	NoNAme
+50253	Orb Ödül Sandýðý
 50254	Karanlýðýn Sandýðý
 50255	Cor Draconis, Ýþlenmemiþ
 50256	Cor Draconis, Yontulmuþ

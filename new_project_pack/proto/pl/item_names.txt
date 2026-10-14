@@ -8825,7 +8825,7 @@ VNUM	LOCALE_NAME
 50216	Grzaniec
 50249	Skrzynia Triumfu
 50252	Cor Draconis
-50253	NoNAme
+50253	Orb Reward Chest
 50254	Skrzynia Mroku
 50255	Cor Draconis (surowe)
 50256	Cor Draconis (szlif.)

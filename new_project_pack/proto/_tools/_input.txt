@@ -1,41 +1,41 @@
 [CZ]
-49102	Kniha pasivní dovednosti
+50253	Orb Reward Chest
 
 [DE]
-49102	Buch der passiven Fertigkeit
+50253	Orb Reward Chest
 
 [DK]
-49102	Passiv færdighedsbog
+50253	Orb Reward Chest
 
 [EN]
-49102	Passive Skill Book
+50253	Orb Reward Chest
 
 [ES]
-49102	Libro de Habilidad Pasiva
+50253	Orb Reward Chest
 
 [FR]
-49102	Livre de compétence passive
+50253	Orb Reward Chest
 
 [HU]
-49102	Passzív készség könyve
+50253	Orb Reward Chest
 
 [IT]
-49102	Libro Abilità Passiva
+50253	Orb Reward Chest
 
 [NL]
-49102	Passief Vaardigheidsboek
+50253	Orb Reward Chest
 
 [PL]
-49102	Księga Umiejętności Pasywnej
+50253	Orb Reward Chest
 
 [PT]
-49102	Livro de Habilidade Passiva
+50253	Orb Reward Chest
 
 [RO]
-49102	Carte de Abilitate Pasivă
+50253	Orb Reward Chest
 
 [AE]
-49102	كتاب المهارة السلبية
+50253	Orb Reward Chest
 
 [TR]
-49102	Pasif Beceri Kitabı
+50253	Orb Ödül Sandığı

@@ -8825,7 +8825,7 @@ VNUM	LOCALE_NAME
 50216	Vin chaud
 50249	Coffre du triomphe
 50252	Cor Draconis
-50253	NoNAme
+50253	Orb Reward Chest
 50254	Coffre de l'obscurité
 50255	Cor Draconis (brut)
 50256	Cor Draconis (taillé)
