@@ -173,8 +173,15 @@ void CItemCache::OnFlush()
 		);
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+		// ruha baglama: sealbind, ustteki #if varyantlarinin hepsine TEK noktadan eklenir (INSERT ... SET + ON DUPLICATE KEY UPDATE)
+		const auto sealSetQuery = fmt::format(FMT_COMPILE("{}, sealbind={} "), setQuery, static_cast<long>(p->sealbind));
+		const auto itemQuery = fmt::format(FMT_COMPILE("INSERT INTO item{} SET {} ON DUPLICATE KEY UPDATE {}"),
+														GetTablePostfix(), sealSetQuery, sealSetQuery);
+#else
 		const auto itemQuery = fmt::format(FMT_COMPILE("INSERT INTO item{} SET {} ON DUPLICATE KEY UPDATE {}"),
 														GetTablePostfix(), setQuery, setQuery);
+#endif
 
 		if (g_test_server)
 			sys_log(0, "ItemCache::Flush :REPLACE  (%s)", itemQuery.c_str());

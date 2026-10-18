@@ -505,6 +505,12 @@ namespace character_chest
 				ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CHARACTER_CHEST_INVALID"));
 				SendGCPacket(d, *pack);
 				return;
+#ifdef ENABLE_SOULBIND_SYSTEM
+			case CHARACTER_CHEST_ERR_ITEM:
+				ch->ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya tasiyan karakter sandiga konulamaz. Once esyayi depoya koy ya da bagini coz.");
+				SendGCPacket(d, *pack);
+				return;
+#endif
 			default:
 				ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("CHARACTER_CHEST_FAILED"));
 				SendGCPacket(d, *pack);

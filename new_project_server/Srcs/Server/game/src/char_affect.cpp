@@ -7,6 +7,9 @@
 #ifdef ENABLE_WS_TOURNAMENT
 #include "ws_tournament.h"
 #endif
+#ifdef ENABLE_FFA_EVENT
+#include "ffa_event.h"
+#endif
 #include "packet.h"
 #include "buffer_manager.h"
 #include "desc_client.h"
@@ -516,6 +519,12 @@ void CHARACTER::LoadAffect(DWORD dwCount, TPacketAffectElement * pElements)
 		PointChange(POINT_SP, GetMaxSP() - GetSP());
 	}
 	// @fixme118 END
+
+#ifdef ENABLE_FFA_EVENT
+	// FFA: sehir->harita warp'i cekirdekler-arasi; afektler Entergame'den SONRA
+	// buradan yuklenir, giristeki temizlik bos gecer - yukleme sonrasi da temizle
+	CFFAManager::instance().StripOutsideBuffs(this);
+#endif
 }
 
 bool CHARACTER::AddAffect(DWORD dwType, BYTE bApplyOn, long lApplyValue, DWORD dwFlag, long lDuration, long lSPCost, bool bOverride, bool IsCube )

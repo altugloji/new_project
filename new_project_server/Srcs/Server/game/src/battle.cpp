@@ -373,7 +373,13 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 		{
 			const long lMapIndex = pkAttacker->GetMapIndex();
 			if (lMapIndex == 72 || lMapIndex == 73 || lMapIndex == 208)
-				iAtk += (iAtk * pkAttacker->GetPoint(POINT_ATTBONUS_CZ)) / 100;
+			{
+				int iElexirAtk = pkAttacker->GetPoint(POINT_ATTBONUS_CZ);
+				// 1192 (Cadi) bossunda saldiri efsunu %60 daha guclu isler
+				if (pkVictim->GetRaceNum() == 1192)
+					iElexirAtk = iElexirAtk * 160 / 100;
+				iAtk += (iAtk * iElexirAtk) / 100;
+			}
 		}
 #else
 		else if (pkVictim->IsRaceFlag(RACE_FLAG_CZ))
@@ -501,7 +507,8 @@ int CalcAttBonus(LPCHARACTER pkAttacker, LPCHARACTER pkVictim, int iAtk)
 #ifdef ENABLE_MONSTER_HUNTER_SKILL
 	if (pkAttacker && pkVictim && pkAttacker->IsPC())
 	{
-		if (pkVictim->IsMonster())
+		// Metin taslari da pasiften faydalanir (efsunla ayni kapsam: IsNPC, STONE dahil)
+		if (pkVictim->IsMonster() || pkVictim->IsStone())
 			iAtk += (iAtk * (pkAttacker->GetMonsterHunterSkillLevel()/2)) / 100;
 	}
 #endif

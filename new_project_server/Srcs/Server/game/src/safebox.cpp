@@ -75,6 +75,9 @@ bool CSafebox::Add(DWORD dwPos, LPITEM pkItem)
 	pack.anti_flags	= pkItem->GetAntiFlag();
 	thecore_memcpy(pack.alSockets, pkItem->GetSockets(), sizeof(pack.alSockets));
 	thecore_memcpy(pack.aAttr, pkItem->GetAttributes(), sizeof(pack.aAttr));
+#ifdef ENABLE_SOULBIND_SYSTEM
+	pack.sealbind = pkItem->GetSealBindTime();
+#endif
 
 	m_pkChrOwner->GetDesc()->Packet(&pack, sizeof(pack));
 	sys_log(1, "SAFEBOX: ADD %s %s count %d", m_pkChrOwner->GetName(), pkItem->GetName(), pkItem->GetCount());

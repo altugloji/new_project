@@ -375,7 +375,11 @@ class ITEM_MANAGER : public singleton<ITEM_MANAGER>
 		LPITEM                  CreateItem(DWORD vnum, DWORD count = 1, DWORD dwID = 0, bool bTryMagic = false, int iRarePct = -1, bool bSkipSave = false);
 		void DestroyItem(LPITEM item);
 		void			DecreaseItem(LPITEM item, const char* c_pszReason = nullptr);
+#ifdef OFFLINE_SHOP
+		void			RemoveItem(LPITEM item, const char * c_pszReason= nullptr, const char * c_pszHintExtra = nullptr) const;
+#else
 		void			RemoveItem(LPITEM item, const char * c_pszReason= nullptr) const;
+#endif
 
 		LPITEM			Find(DWORD id);
 		LPITEM                  FindByVID(DWORD vid);

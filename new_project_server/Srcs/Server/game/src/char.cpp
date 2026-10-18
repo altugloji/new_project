@@ -7,6 +7,12 @@
 #ifdef ENABLE_FFA_EVENT
 #include "ffa_event.h"
 #endif
+#ifdef ENABLE_BOSS_DAMAGE_RANKING
+#include "boss_ranking.h"
+#endif
+#ifdef ENABLE_ORB_EVENT
+#include "orb_event.h"
+#endif
 
 #include "config.h"
 #include "utils.h"
@@ -389,6 +395,9 @@ void CHARACTER::Initialize()
 	m_dwUnderGuildWarInfoMessageTime = get_dword_time()-60000;
 
 	m_bUnderRefine = false;
+#ifdef ENABLE_NEWBIE_DOUBLE_LEVEL
+	m_bNewbieBonusLevel = false;
+#endif
 
 	// REFINE_NPC
 	m_dwRefineNPCVID = 0;
@@ -533,6 +542,15 @@ void CHARACTER::Create(const char * c_pszName, DWORD vid, bool isPC)
 void CHARACTER::Destroy()
 {
 	CloseMyShop();
+
+#ifdef ENABLE_BOSS_DAMAGE_RANKING
+	// olmeden despawn (purge/dungeon temizligi vb.) dahil her yikimda oturumu sil
+	CBossRankingManager::instance().OnDestroy(this);
+#endif
+#ifdef ENABLE_ORB_EVENT
+	// Kure Avi: hazir listesinden dus (skor oturumu tur sonuna kadar kalir, flush devam eder)
+	COrbEventManager::instance().OnDestroy(this);
+#endif
 
 	if (m_pkRegen)
 	{
@@ -921,6 +939,15 @@ void CHARACTER::OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE
 			return;
 		}
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+		// player_shop_items satirinda sealbind yok: ruha bagli esya pazara girerse bag sessizce kalkardi
+		if (pkItem->IsSealed())
+		{
+			ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya pazarda satilamaz. - [Slot Num: %d]", pTabVal->pos.cell);
+			return;
+		}
+#endif
+
 		const TItemTable * itemProto = pkItem->GetProto();
 		if (!itemProto || (IS_SET(itemProto->dwAntiFlags, ITEM_ANTIFLAG_GIVE | ITEM_ANTIFLAG_MYSHOP)))
 		{
@@ -1080,6 +1107,14 @@ void CHARACTER::OpenMyShop(const char * c_pszSign, TShopItemTable * pTable, BYTE
 				ChatPacket(CHAT_TYPE_INFO, LC_TEXT("사용중인 아이템은 개인상점에서 판매할 수 없습니다."));
 				return;
 			}
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+			if (pkItem->IsSealed())
+			{
+				ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya pazarda satilamaz.");
+				return;
+			}
+#endif
 
 #ifdef ENABLE_ITEM_SHOP_SYSTEM
 			if (pkItem->IsItemShopEmBound())
@@ -2052,11 +2087,11 @@ void CHARACTER::RefreshGift()
 	if (!pkMsg || !pkMsg->Get())
 		return;
 
-	gift_grid = M2_NEW CGrid(15, 8);
-	gift_grid->Clear();
-
 	if (pkMsg->Get()->uiNumRows > 0)
 	{
+		gift_grid = M2_NEW CGrid(15, 8);
+		gift_grid->Clear();
+
 		AddGiftGrid(1);
 
 		int page =									1;
@@ -2099,6 +2134,7 @@ void CHARACTER::RefreshGift()
 		}
 
 		M2_DELETE(gift_grid);
+		gift_grid = NULL;
 	}
 
 	if (GetGiftPages() > 0)
@@ -3359,6 +3395,11 @@ void CHARACTER::SetProto(const CMob * pkMob)
 		m_pkMiningEvent = event_create(kill_ore_load_event, info, PASSES_PER_SEC(number(7 * 60, 15 * 60)));
 	}
 	// END_OF_MINING
+
+#ifdef ENABLE_BOSS_DAMAGE_RANKING
+	// Boss hasar siralamasi: vnum listedeyse oturum ac (bkz. boss_ranking.cpp)
+	CBossRankingManager::instance().OnSpawn(this);
+#endif
 }
 
 const TMobTable & CHARACTER::GetMobTable() const
@@ -3657,7 +3698,7 @@ void CHARACTER::ComputePoints()
 		iMaxStamina = JobInitialPoints[GetJob()].max_stamina + GetPoint(POINT_HT) * JobInitialPoints[GetJob()].stamina_per_con;
 
 #ifdef NEW_PASSIVE_SKILLS
-		iMaxHP += (GetAddHPSkillLevel() * 125);
+		iMaxHP += (GetAddHPSkillLevel() * 125) / 2;	// Ilham: 62.5 HP/seviye, maks 40 lvl = 2500 HP (client uitooltip ile ayni formul)
 #else
 		{
 			CSkillProto* pkSk = CSkillManager::instance().Get(SKILL_ADD_HP);
@@ -4458,7 +4499,13 @@ void CHARACTER::PointChange(BYTE type, int amount, bool bAmount, bool bBroadcast
 			PointChange(POINT_NEXT_EXP,	GetNextExp(), false);
 
 #ifdef SKILL_SELECT
+#ifdef ENABLE_NEWBIE_DOUBLE_LEVEL
+			// 1+1 bonus seviyede ikinci "skill_select" gonderilmez: ayni karede iki komut client'taki beceri secim penceresini yok eder (game.py LearnSkillGroup).
+			// ISTISNA: bonus seviye 5 ise gonderilir - dogal seviye 4'tu, o hic gondermemisti (1'den baslayan karakterde 5 HER ZAMAN bonus seviyedir).
+			if (GetLevel() >= 5 && GetSkillGroup() == 0 && (!m_bNewbieBonusLevel || GetLevel() == 5))
+#else
 			if (GetLevel() >= 5 && GetSkillGroup() == 0) 
+#endif
 				CheckSkills();
 #endif
 
@@ -4539,6 +4586,24 @@ void CHARACTER::PointChange(BYTE type, int amount, bool bAmount, bool bBroadcast
 					{
 						for (int i = 0; i < 4 - iLevStep; ++i)
 							PointChange(POINT_LEVEL_STEP, 1, false, true);
+#ifdef ENABLE_NEWBIE_DOUBLE_LEVEL
+						// 1+1 seviye: dogal seviye atlamasi tamamlandiysa (LEVEL_STEP 0'a dondu) ve seviye NEWBIE_DOUBLE_LEVEL_MAX_LEVEL altindaysa
+						// bir tam seviye daha: 4 x LEVEL_STEP = 3 stat + rastgele HP/SP + beceri puani + POINT_LEVEL (quest/lonca/parti/log kancalari dahil).
+						// EXP'e dokunmaz, POINT_EXP'e geri donmez; artan EXP (iExpBalance) asagida bonus sonrasi seviyeye islenir.
+						if (GetLevel() < NEWBIE_DOUBLE_LEVEL_MAX_LEVEL && GetLevel() < gPlayerMaxLevel && GetPoint(POINT_LEVEL_STEP) == 0 && GetRealPoint(POINT_LEVEL_STEP) == 0)
+						{
+							const int iLevelBeforeBonus = GetLevel();
+							m_bNewbieBonusLevel = true;
+							for (int i = 0; i < 4; ++i)
+								PointChange(POINT_LEVEL_STEP, 1, false, true);
+							m_bNewbieBonusLevel = false;
+							if (GetLevel() > iLevelBeforeBonus)
+							{
+								sys_log(0, "NEWBIE_DOUBLE_LEVEL: %s %d -> %d", GetName(), iLevelBeforeBonus, GetLevel());
+								ChatPacket(CHAT_TYPE_INFO, "Yeni baslayan bonusu: 1+1 seviye! Seviye %d oldunuz.", GetLevel());
+							}
+						}
+#endif
 					}
 					else if (exp >= q * 3 && iLevStep < 3)
 					{
@@ -7249,6 +7314,9 @@ void CHARACTER::LoadSafebox(int iSize, DWORD dwGold, int iItemCount, TPlayerItem
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 			item->SetUpgradeOwner(pItems->szUpgradeOwner);
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+			item->SetSealBind(pItems->sealbind);	// saf setter; Add() paketten ONCE deger yerinde olmali
+#endif
 
 			if (!m_pkSafebox->Add(pItems->pos, item))
 			{
@@ -7349,6 +7417,9 @@ void CHARACTER::LoadMall(int iItemCount, TPlayerItem * pItems)
 #endif
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 			item->SetUpgradeOwner(pItems->szUpgradeOwner);
+#endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+			item->SetSealBind(pItems->sealbind);	// saf setter; Add() paketten ONCE deger yerinde olmali
 #endif
 
 			if (!m_pkMall->Add(pItems->pos, item))
@@ -9274,8 +9345,8 @@ void CHARACTER::AddAcceMaterial(TItemPos tPos, BYTE bPos) const
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("You can't add locked items."));
 		return;
 	}
-#ifdef __SOULBINDING_SYSTEM__
-	else if ((pkItem->IsBind()) || (pkItem->IsUntilBind()))
+#ifdef ENABLE_SOULBIND_SYSTEM
+	else if (pkItem->IsSealed())
 	{
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("You can't add binded items."));
 		return;

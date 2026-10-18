@@ -30,6 +30,9 @@
 #ifdef ENABLE_WS_TOURNAMENT
 #include "ws_tournament.h"
 #endif
+#ifdef ENABLE_ORB_EVENT
+#include "orb_event.h"
+#endif
 #ifdef __BL_CLIENT_LOCALE_STRING__
 	#include "buffer_manager.h"
 #endif
@@ -687,6 +690,17 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 		break;
 #endif
 
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+		case HEADER_GG_PHANTOM_TRAP:
+		{
+			const TPacketGGPhantomTrap* pPhantom = (const TPacketGGPhantomTrap*)c_pData;
+			g_bPhantomTrap = (pPhantom->byEnable != 0);
+			g_bPhantomTrapEnforce = (pPhantom->byEnforce != 0);	// clientless-trap'in aksine iki bayrak da uygulanir
+			sys_log(0, "PHANTOM_TRAP: P2P guncellendi enable=%d enforce=%d", g_bPhantomTrap ? 1 : 0, g_bPhantomTrapEnforce ? 1 : 0);
+		}
+		break;
+#endif
+
 #ifdef ENABLE_RELOAD_ETC_DROP_ITEM
 		case HEADER_GG_RELOAD_ETC_DROP:
 			ITEM_MANAGER::instance().ReloadEtcDropItemFile();
@@ -700,6 +714,18 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 				sys_log(0, "P2P: mob_drop_item + drop_item_group reloaded");
 			else
 				sys_err("P2P: mob_drop_item reload FAILED on this core, keeping previous drop tables");
+			break;
+#endif
+
+#ifdef ENABLE_RELOAD_SPAM_DB
+		case HEADER_GG_RELOAD_SPAM_DB:
+			{
+				// sorgu asenkron: sonuc AccountDB thread'inden doner; sorgu hatasinda eski liste
+				// korunur (bkz. AccountDB::AnalyzeReturnQuery, QID_SPAM_DB)
+				extern void LoadSpamDB();
+				LoadSpamDB();
+				sys_log(0, "P2P: spam_db reload requested");
+			}
 			break;
 #endif
 
@@ -745,6 +771,13 @@ int CInputP2P::Analyze(LPDESC d, BYTE bHeader, const char * c_pData)
 			// host kendi snapshot'ini yerelde uygular; ikinci bir (yanlis-config) host'un yayini cache'i ezmesin
 			if (!CWSTournamentManager::instance().IsHostCore())
 				CWSTournamentManager::instance().ApplySnapshot(reinterpret_cast<const TPacketGGWSBracket*>(c_pData));
+			break;
+#endif
+
+#ifdef ENABLE_ORB_EVENT
+		case HEADER_GG_ORB_EVENT:
+			// Kure Avi: master core siralama snapshot'i (sub 1) / odul sonucu (sub 2); master kendi snapshot'ini OnP2P icinde yok sayar
+			COrbEventManager::instance().OnP2P(reinterpret_cast<const TPacketGGOrbEvent*>(c_pData));
 			break;
 #endif
 

@@ -98,6 +98,13 @@ bool CSafeTrade::AddItem(TItemPos inv_pos, BYTE bDepotPos)
 	if (IS_SET(item->GetFlag(), ITEM_FLAG_IRREMOVABLE)) return false;        // ruha bağlı -> KATI blok
 	if (item->isLocked()) return false;
 	if (item->IsItemShopEmBound()) return false;
+#ifdef ENABLE_SOULBIND_SYSTEM
+	if (item->IsSealed())                                                    // ruha bagli esya emanete konulamaz
+	{
+		m_pkOwner->ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya guvenli ticarete konulamaz.");
+		return false;
+	}
+#endif
 	if (SafeTrade_IsBlockedVnum(item->GetVnum())) return false;
 	if (!m_pkGrid->IsEmpty(bDepotPos, 1, item->GetSize())) return false;
 
@@ -627,6 +634,9 @@ void CSafeTradeManager::OnClaimResult(LPCHARACTER ch, DWORD dwTradeID, BYTE bRes
 		item->SetSkipSave(false);
 		item->SetSockets(p->alSockets);
 		item->SetAttributes(p->aAttr);
+#ifdef ENABLE_SOULBIND_SYSTEM
+		item->SetSealBind(p->sealbind);	// saf setter (paket / kayit / sayac yok); AddToCharacter'dan ONCE
+#endif
 		item->SetSafeTrading(false);
 		item->SetSafeTradeID(0);
 		item->AddToCharacter(ch, TItemPos(INVENTORY, pos));   // window=INVENTORY, owner=B, Save

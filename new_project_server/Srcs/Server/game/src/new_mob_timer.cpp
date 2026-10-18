@@ -11,6 +11,7 @@
 #include "event.h"
 
 #include <time.h>
+#include <sys/time.h>
 #include <stdio.h>
 
 //#define NEW_MOB_TIMER_DEBUG
@@ -23,6 +24,8 @@
 
 namespace
 {
+	const BYTE NMT_NO_FIXED_TIME = 0xFF;
+
 	struct SNewMobTimerConfigRow
 	{
 		BYTE	bId;
@@ -32,24 +35,50 @@ namespace
 		long	lYPos;
 		BYTE	bPerHour;
 		BYTE	bPerMin;
+		BYTE	bFixHour;
+		BYTE	bFixMin;
+		BYTE	bMaxChannel;
 	};
 
-	// ID, VNUM, MAP_INDEX, X_POS, Y_POS, PER_HOUR, PER_MIN
+	// ID, VNUM, MAP_INDEX, X_POS, Y_POS, PER_HOUR, PER_MIN, FIX_HOUR, FIX_MIN, MAX_CHANNEL
+	// FIX_HOUR != 0xFF ise sabit saat modu: her gun FIX_HOUR:FIX_MIN'de dogar, PER_* yok sayilir
+	// MAX_CHANNEL != 0 ise satir sadece g_bChannel <= MAX_CHANNEL olan core'larda aktif
 	const SNewMobTimerConfigRow g_aNewMobTimerConfig[] =
 	{
-		{ 0,	1901,	61,		775,	575,	3,	0 },		// Dokuz kuyruk
-		{ 1,	2206,	62,		125,	785,	3,	0 },		// Alev kral
-		{ 2,	791,	65,		910,	847,	3,	0 },		// Karanlik lider
-		{ 3,	691,	64,		770,	810,	3,	0 },		// Ork reisi
-		{ 4,	1304,	65,		370,	420,	3,	0 },		// Sari kaplan
-		{ 5,	2191,	63,		900,	619,	3,	0 },		// Kaplumbaga
-		{ 6,	2091,	104,	390,	390,	3,	0 },		// Orumcek
-		{ 7,	2491,	73,		395,	175,	4,	0 },		// Komutan
-		{ 8,	2492,	73,		735,	1115,	4,	0 },		// General1
-		{ 9,	2492,	73,		1260,	576,	4,	0 },		// General2
-		{ 10,	2492,	73,		350,	275,	4,	0 },		// General3
-		// { 11,	1192,	72,		1355,	1405,	12,	0 },		// Cadi
+		{ 0,	1901,	61,		775,	575,	3,	0,	0xFF,	0,	0 },		// Dokuz kuyruk
+		{ 1,	2206,	62,		125,	785,	3,	0,	0xFF,	0,	0 },		// Alev kral
+		{ 2,	791,	65,		910,	847,	3,	0,	0xFF,	0,	0 },		// Karanlik lider
+		{ 3,	691,	64,		770,	810,	3,	0,	0xFF,	0,	0 },		// Ork reisi
+		{ 4,	1304,	65,		370,	420,	3,	0,	0xFF,	0,	0 },		// Sari kaplan
+		{ 5,	2191,	63,		900,	619,	3,	0,	0xFF,	0,	0 },		// Kaplumbaga
+		{ 6,	2091,	104,	390,	390,	3,	0,	0xFF,	0,	0 },		// Orumcek
+		{ 7,	2491,	73,		395,	175,	4,	0,	0xFF,	0,	0 },		// Komutan
+		{ 8,	2492,	73,		735,	1115,	4,	0,	0xFF,	0,	0 },		// General1
+		{ 9,	2492,	73,		1260,	576,	4,	0,	0xFF,	0,	0 },		// General2
+		{ 10,	2492,	73,		350,	275,	4,	0,	0xFF,	0,	0 },		// General3
+		{ 11,	1192,	72,		1355,	1405,	0,	0,	22,	0,	4 },		// Cadi - her gun 22:00 ch1-4
 	};
+
+	// Bir sonraki tam dakika sinirina kalan pulse sayisi. Tum core'lar ayni :00.000
+	// sinirini hedefler, boylece kanallar arasi spawn sapmasi tek pulse'a iner.
+	// Tavan + 1 pulse pay: sinirdan once ateslenme olmaz.
+	int GetPulsesUntilNextMinute()
+	{
+		struct timeval tv;
+		gettimeofday(&tv, nullptr);
+
+		const long lUsecIntoMinute = (long)(tv.tv_sec % 60) * 1000000L + tv.tv_usec;
+		long lUsecLeft = 60L * 1000000L - lUsecIntoMinute;
+		if (lUsecLeft < 1)
+			lUsecLeft = 1;
+
+		// -m32: long 32-bit; passes_per_sec CONFIG ile buyutulurse tasmasin diye long long
+		long lPulses = (long)(((long long)lUsecLeft * passes_per_sec + 999999LL) / 1000000LL) + 1;
+		if (lPulses < 1)
+			lPulses = 1;
+
+		return (int)lPulses;
+	}
 
 	EVENTINFO(new_mob_timer_event_info)
 	{
@@ -67,7 +96,7 @@ namespace
 		}
 
 		CNewMobTimer::instance().Update();
-		return PASSES_PER_SEC(CNewMobTimer::MAIN_UPDATE_INTERVAL);
+		return GetPulsesUntilNextMinute();
 	}
 
 	int BuildSpawnDay(const struct tm& tmLocal)
@@ -150,6 +179,9 @@ bool CNewMobTimer::Initialize()
 		entry.lYPos = row.lYPos;
 		entry.bPerHour = row.bPerHour;
 		entry.bPerMin = row.bPerMin;
+		entry.bFixHour = row.bFixHour;
+		entry.bFixMin = row.bFixMin;
+		entry.bMaxChannel = row.bMaxChannel;
 		entry.bValid = true;
 		entry.dwSpawnedVID = 0;
 		entry.iLastSpawnDay = -1;
@@ -158,7 +190,15 @@ bool CNewMobTimer::Initialize()
 		if (row.bId != i)
 			sys_err("NewMobTimer: config row index %u id mismatch (id=%u)", (unsigned)i, row.bId);
 
-		if (row.bPerHour == 0 && row.bPerMin == 0)
+		if (row.bFixHour != NMT_NO_FIXED_TIME)
+		{
+			if (row.bFixHour > 23 || row.bFixMin > 59)
+			{
+				sys_err("NewMobTimer: invalid fixed time for id %u vnum %u (%u:%u)", row.bId, row.dwVnum, row.bFixHour, row.bFixMin);
+				entry.bValid = false;
+			}
+		}
+		else if (row.bPerHour == 0 && row.bPerMin == 0)
 		{
 			sys_err("NewMobTimer: invalid interval for id %u vnum %u (per_hour=0 per_min=0)", row.bId, row.dwVnum);
 			entry.bValid = false;
@@ -169,10 +209,16 @@ bool CNewMobTimer::Initialize()
 			sys_err("NewMobTimer: invalid vnum for id %u", row.bId);
 			entry.bValid = false;
 		}
+
+		if (row.bMaxChannel != 0 && g_bChannel > row.bMaxChannel)
+		{
+			NMT_LOG("id %u disabled on channel %u (max %u)", row.bId, g_bChannel, row.bMaxChannel);
+			entry.bValid = false;
+		}
 	}
 
 	new_mob_timer_event_info* info = AllocEventInfo<new_mob_timer_event_info>();
-	m_pkUpdateEvent = event_create(new_mob_timer_update_event, info, PASSES_PER_SEC(MAIN_UPDATE_INTERVAL));
+	m_pkUpdateEvent = event_create(new_mob_timer_update_event, info, GetPulsesUntilNextMinute());
 
 	if (!m_pkUpdateEvent)
 	{
@@ -215,12 +261,20 @@ bool CNewMobTimer::CanSpawnNow(const SRuntimeEntry& entry, int iSpawnDay, int iT
 	if (!entry.bValid)
 		return false;
 
-	const int intervalMinute = GetIntervalMinute(entry);
-	if (intervalMinute <= 0)
-		return false;
+	if (entry.bFixHour != NMT_NO_FIXED_TIME)
+	{
+		if (iTimeAsMin != entry.bFixHour * 60 + entry.bFixMin)
+			return false;
+	}
+	else
+	{
+		const int intervalMinute = GetIntervalMinute(entry);
+		if (intervalMinute <= 0)
+			return false;
 
-	if (iTimeAsMin % intervalMinute != 0)
-		return false;
+		if (iTimeAsMin % intervalMinute != 0)
+			return false;
+	}
 
 	if (entry.iLastSpawnDay == iSpawnDay && entry.iLastSpawnMinute == iTimeAsMin)
 		return false;
@@ -290,8 +344,7 @@ void CNewMobTimer::NotifyGMs(SRuntimeEntry& entry, int iSpawnDay, int iTimeAsMin
 	if (!entry.bValid)
 		return;
 
-	const int iIntervalMinute = GetIntervalMinute(entry);
-	if (iIntervalMinute <= 0)
+	if (entry.bFixHour == NMT_NO_FIXED_TIME && GetIntervalMinute(entry) <= 0)
 		return;
 
 	char szBuf[256];
@@ -312,7 +365,13 @@ void CNewMobTimer::NotifyGMs(SRuntimeEntry& entry, int iSpawnDay, int iTimeAsMin
 		return;
 	}
 
-	const int iNextMin = GetNextSpawnMinute(iTimeAsMin, iIntervalMinute);
+	int iNextMin;
+
+	if (entry.bFixHour != NMT_NO_FIXED_TIME)
+		iNextMin = entry.bFixHour * 60 + entry.bFixMin;
+	else
+		iNextMin = GetNextSpawnMinute(iTimeAsMin, GetIntervalMinute(entry));
+
 	if (iNextMin < 0)
 		return;
 

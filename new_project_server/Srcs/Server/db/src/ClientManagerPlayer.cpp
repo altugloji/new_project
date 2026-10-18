@@ -73,6 +73,11 @@ bool CreateItemTableFromRes(MYSQL_RES * res, std::vector<TPlayerItem> * pVec, DW
 				item.szUpgradeOwner[0] = '\0';
 		}
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+		// ruha baglama: sealbind item SELECT'lerinin HEPSINDE en son kolondur (6 SELECT; biri eksik kalirsa row[] tasar)
+		item.sealbind = 0;	// NULL/bos hucrede str_to_number yazmaz; vektor yeniden kullanildigi icin once sifirla
+		str_to_number(item.sealbind, row[cur++]);
+#endif
 
 		item.owner		= dwPID;
 	}
@@ -366,6 +371,9 @@ void CClientManager::QUERY_PLAYER_LOAD(CPeer * peer, DWORD dwHandle, TPlayerLoad
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 					",upgrade_owner"
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+					",sealbind"
+#endif
 					" FROM item%s WHERE owner_id=%d AND (`window` in ('INVENTORY','EQUIPMENT','DRAGON_SOUL_INVENTORY','BELT_INVENTORY'))",
 					GetTablePostfix(), pTab->id);
 
@@ -449,6 +457,9 @@ void CClientManager::QUERY_PLAYER_LOAD(CPeer * peer, DWORD dwHandle, TPlayerLoad
 #endif
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 				",upgrade_owner"
+#endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+				",sealbind"
 #endif
 				" FROM item%s WHERE owner_id=%d AND (`window` in ('INVENTORY','EQUIPMENT','DRAGON_SOUL_INVENTORY','BELT_INVENTORY'))",
 				GetTablePostfix(), packet->player_id);

@@ -248,6 +248,16 @@ class CItem : public CEntity
 		void		Lock(bool f) { m_isLocked = f; }
 		bool		isLocked() const { return m_isLocked; }
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+		// Ruha baglama (sealbind): 0 = serbest, -1 = kalici bagli, >0 = bagin cozulecegi unix zamani (get_global_time tabanli)
+		long		GetSealBindTime() const { return m_lSealbind; }
+		bool		IsSealed() const { return m_lSealbind != 0; }
+		void		SetSealBind(long lSealBind) { m_lSealbind = lSealBind; }	// SAF setter: sadece yukleme / kopyalama yollari. Paket, kayit, sayac YOK.
+		void		ChangeSealBind(long lSealBind);		// oyun-ici degisiklik: sayac yonetimi + UpdatePacket + Save
+		void		StartUnSealBindTimerExpireEvent();
+		void		SetUnSealTimerExpireEvent(LPEVENT pkEvent) { m_pkUnSealTimerExpireEvent = pkEvent; }
+#endif
+
 	private :
 		void		SetAttribute(int i, BYTE bType, short sValue);
 	public:
@@ -347,6 +357,10 @@ class CItem : public CEntity
 
 		DWORD		m_dwMaskVnum;
 		DWORD		m_dwSIGVnum;
+#ifdef ENABLE_SOULBIND_SYSTEM
+		long		m_lSealbind;
+		LPEVENT		m_pkUnSealTimerExpireEvent;
+#endif
 #if defined(__BL_MULTI_LANGUAGE__)
 		std::string	m_strClientName;
 #endif

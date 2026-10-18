@@ -459,6 +459,15 @@ enum
 	HEADER_GG_WS_TOURNAMENT						= 47,
 	HEADER_GG_WS_BRACKET						= 48,	// bilerek ifdef'siz (bkz. 47 notu); bracket snapshot yayini
 
+	// bilerek ifdef'siz (bkz. HEADER_GG_RELOAD_ETC_DROP notu): kayit kosulsuz, gonderici/isleyici define'lidir
+	HEADER_GG_PHANTOM_TRAP						= 49,
+
+	// bilerek ifdef'siz (bkz. HEADER_GG_RELOAD_ETC_DROP notu): kayit kosulsuz, gonderici/isleyici define'lidir
+	HEADER_GG_RELOAD_SPAM_DB					= 50,
+
+	// bilerek ifdef'siz (bkz. HEADER_GG_RELOAD_ETC_DROP notu): kayit kosulsuz, gonderici/isleyici define'lidir
+	HEADER_GG_ORB_EVENT							= 51,	// Kure Avi: master core siralama snapshot'i (sub 1) + odul sonucu (sub 2)
+
 };
 
 #pragma pack(1)
@@ -1328,6 +1337,9 @@ typedef struct packet_item_set
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	char	szUpgradeOwner[CHARACTER_NAME_MAX_LEN + 1];
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+	long	sealbind;
+#endif
 } TPacketGCItemSet;
 
 typedef struct packet_item_del
@@ -1364,6 +1376,9 @@ typedef struct packet_item_update
 #endif
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	char	szUpgradeOwner[CHARACTER_NAME_MAX_LEN + 1];
+#endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+	long	sealbind;
 #endif
 } TPacketGCItemUpdate;
 
@@ -3094,6 +3109,14 @@ typedef struct SPacketGGClientlessTrap
 } TPacketGGClientlessTrap;
 #endif
 
+// bilerek ifdef'siz (bkz. HEADER_GG_PHANTOM_TRAP notu): struct kosulsuz, gonderici/isleyici define'lidir
+typedef struct SPacketGGPhantomTrap
+{
+	BYTE	byHeader;
+	BYTE	byEnable;
+	BYTE	byEnforce;
+} TPacketGGPhantomTrap;
+
 #ifdef ENABLE_BOT_CONTROL
 typedef struct SPacketBotControl {
 	BYTE	bHeader;
@@ -3344,6 +3367,23 @@ typedef struct SPacketGGWSBracket
 		BYTE	bResult;
 	} aMatches[WS_SYNC_MAX_MATCHES];
 } TPacketGGWSBracket;
+
+// Kure Avi (GG 51) - bilerek ifdef'siz (WS bracket deseni): master core uretir, tum core'lar cache'ler;
+// kayit packet_info.cpp'de kosulsuz, gonderici/isleyici ENABLE_ORB_EVENT'lidir
+enum { ORB_EVENT_TOP_COUNT = 10, ORB_EVENT_RANK_COUNT = 100, ORB_EVENT_SUB_SNAPSHOT = 1, ORB_EVENT_SUB_RESULT = 2 };
+typedef struct SPacketGGOrbEventTop  { DWORD dwPID; int iScore; char szName[CHARACTER_NAME_MAX_LEN + 1]; } TPacketGGOrbEventTop;	// iScore isaretli (beyaz kure eksi puan)
+typedef struct SPacketGGOrbEventRank { DWORD dwPID; int iScore; } TPacketGGOrbEventRank;
+typedef struct SPacketGGOrbEvent
+{
+	BYTE	bHeader;		// HEADER_GG_ORB_EVENT
+	BYTE	bSub;			// ORB_EVENT_SUB_*
+	DWORD	dwEventID;
+	DWORD	dwParticipants;
+	BYTE	bTopCount;
+	BYTE	bRankCount;
+	TPacketGGOrbEventTop	top[ORB_EVENT_TOP_COUNT];
+	TPacketGGOrbEventRank	rank[ORB_EVENT_RANK_COUNT];
+} TPacketGGOrbEvent;	// 12 + 10*33 + 100*8 = 1142 bayt (sabit boyut; define kapali core'da bile Set kaydi tutar)
 
 #ifdef ENABLE_WS_TOURNAMENT
 // client turnuva paneli (CG 235 / GC 247) - client Packet.h ile BAYT-BIREBIR ayni olmali

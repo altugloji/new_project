@@ -215,6 +215,14 @@ bool CExchange::AddItem(TItemPos item_pos, BYTE display_pos)
 	}
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+	if (item->IsSealed())
+	{
+		m_pOwner->ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya ticarete konulamaz.");
+		return false;
+	}
+#endif
+
 	if (true == item->isLocked())
 	{
 		return false;

@@ -42,6 +42,10 @@ CItem::CItem(DWORD dwVnum)
 {
 	memset( &m_alSockets, 0, sizeof(m_alSockets) );
 	memset( &m_aAttr, 0, sizeof(m_aAttr) );
+#ifdef ENABLE_SOULBIND_SYSTEM
+	m_lSealbind = 0;
+	m_pkUnSealTimerExpireEvent = nullptr;
+#endif
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	m_szUpgradeOwner[0] = '\0';
 #endif
@@ -82,6 +86,10 @@ void CItem::Initialize()
 	m_pkRealTimeExpireEvent = nullptr;
 
 	m_pkAccessorySocketExpireEvent = nullptr;
+#ifdef ENABLE_SOULBIND_SYSTEM
+	m_lSealbind = 0;
+	m_pkUnSealTimerExpireEvent = nullptr;
+#endif
 
 	m_bSkipSave = false;
 	m_dwLastOwnerPID = 0;
@@ -106,6 +114,9 @@ void CItem::Destroy()
 	event_cancel(&m_pkTimerBasedOnWearExpireEvent);
 	event_cancel(&m_pkRealTimeExpireEvent);
 	event_cancel(&m_pkAccessorySocketExpireEvent);
+#ifdef ENABLE_SOULBIND_SYSTEM
+	event_cancel(&m_pkUnSealTimerExpireEvent);
+#endif
 #ifdef OFFLINE_SHOP
 	event_cancel(&e_OffshopRItemEvent);
 
@@ -272,6 +283,9 @@ void CItem::UpdatePacket()
 #endif
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	strlcpy(pack.szUpgradeOwner, m_szUpgradeOwner, sizeof(pack.szUpgradeOwner));
+#endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+	pack.sealbind = m_lSealbind;
 #endif
 
 	sys_log(2, "UpdatePacket %s -> %s", GetName(), m_pOwner->GetName());
@@ -2286,6 +2300,12 @@ int CItem::GetRealUseLimit()
 
 bool CItem::OnAfterCreatedItem()
 {
+#ifdef ENABLE_SOULBIND_SYSTEM
+	// Ayirma sureci suren (sealbind > 0) esya yuklendi: sayaci kalan sureye gore yeniden kur
+	if (GetSealBindTime() > 0)
+		StartUnSealBindTimerExpireEvent();
+#endif
+
 	if (-1 != this->GetProto()->cLimitRealTimeFirstUseIndex)
 	{
 		if (0 != GetSocket(1))
@@ -2381,6 +2401,104 @@ bool CItem::IsSameSpecialGroup(const LPITEM item) const
 
 	return false;
 }
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+// Ruha baglama - oyun-ici degisiklik (parsomen kullanimi / ayirma suresinin dolmasi).
+// Yukleme ve kopyalama yollari bunu DEGIL, saf setter SetSealBind()'i kullanir.
+void CItem::ChangeSealBind(long lSealBind)
+{
+	m_lSealbind = lSealBind;
+
+	// 0 (serbest) ya da -1 (kalici bagli): bekleyen ayirma sayaci iptal edilir.
+	// >0: sayac yeni bitis zamanina gore bastan kurulur.
+	if (lSealBind <= 0)
+		event_cancel(&m_pkUnSealTimerExpireEvent);
+	else
+		StartUnSealBindTimerExpireEvent();
+
+	// Sahipsiz item ASLA kaydedilmez (SaveSingleItem sahipsiz item icin ITEM_DESTROY gonderir)
+	if (!m_pOwner)
+		return;
+
+	// Client ITEM_UPDATE'i yalnizca karakter pencereleri icin isler (depo / nesne market deposu haric)
+	if (GetWindow() != SAFEBOX && GetWindow() != MALL)
+		UpdatePacket();
+
+	Save();
+}
+
+EVENTFUNC(unseal_timer_expire_event)
+{
+	const auto info = dynamic_cast<item_vid_event_info*>( event->info );
+
+	if (!info)
+	{
+		sys_err( "unseal_timer_expire_event> <Factor> Null pointer" );
+		return 0;
+	}
+
+	const LPITEM item = ITEM_MANAGER::instance().FindByVID(info->item_vid);
+
+	if (!item)
+		return 0;
+
+	const long lSealBind = item->GetSealBindTime();
+
+	// Bag bu arada kalkmis (0) ya da kalici hale gelmis (-1): sayacin isi bitti
+	if (lSealBind <= 0)
+	{
+		item->SetUnSealTimerExpireEvent(nullptr);
+		return 0;
+	}
+
+	const long lLeft = lSealBind - static_cast<long>(get_global_time());
+
+	// Sure dolmadi: kalan sure kadar (en fazla 1 saat) sonra yeniden bak
+	if (lLeft > 0)
+		return PASSES_PER_SEC(lLeft > 3600 ? 3600 : lLeft);
+
+	const LPCHARACTER pkOwner = item->GetOwner();
+
+	// Sure doldu ama esya su an sahipsiz: sahipsiz item kaydedilmez, biraz sonra yeniden dene
+	if (!pkOwner)
+		return PASSES_PER_SEC(10);
+
+	sys_log(0, "SOULBIND: unseal time end item %u owner %s", item->GetID(), pkOwner->GetName());
+
+	item->SetUnSealTimerExpireEvent(nullptr);
+	item->ChangeSealBind(0);
+
+#if defined(__BL_MULTI_LANGUAGE__)
+	pkOwner->ChatPacket(CHAT_TYPE_INFO, "%s artik ruha bagli degil.", item->GetClientName());
+#else
+	pkOwner->ChatPacket(CHAT_TYPE_INFO, "%s artik ruha bagli degil.", item->GetName());
+#endif
+	LogManager::instance().ItemLog(pkOwner, item, "REMOVE_SEALBIND_TIME_END", "");
+
+	return 0;
+}
+
+// Ayirma sayaci: 1 saniyelik yoklama YOK; kalan sure (en az 1 sn, en fazla 1 saat) icin TEK event kurulur.
+void CItem::StartUnSealBindTimerExpireEvent()
+{
+	if (m_lSealbind <= 0)
+		return;
+
+	event_cancel(&m_pkUnSealTimerExpireEvent);
+
+	long lSec = m_lSealbind - static_cast<long>(get_global_time());
+
+	if (lSec < 1)
+		lSec = 1;
+	else if (lSec > 3600)
+		lSec = 3600;
+
+	item_vid_event_info* info = AllocEventInfo<item_vid_event_info>();
+	info->item_vid = GetVID();
+
+	SetUnSealTimerExpireEvent(event_create(unseal_timer_expire_event, info, PASSES_PER_SEC(lSec)));
+}
+#endif
 
 int CItem::GetWindowInventoryEx()
 {

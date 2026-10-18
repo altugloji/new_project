@@ -169,6 +169,9 @@ bool CItem::CheckItemEnchant()
 	{
 		BYTE attrType =					m_aAttr[i].bType;
 		short attrValue =				m_aAttr[i].sValue;
+		// item_attr'de 63 satiri yok; tavan kontrolu bu efsunun her degerini reddederdi
+		if (attrType == APPLY_ATTBONUS_MONSTER)
+			continue;
 		if (attrType == 71)
 		{
 			if (attrValue > 30)

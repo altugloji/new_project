@@ -140,7 +140,7 @@ CPPFILE = FSM.cpp MarkConvert.cpp MarkImage.cpp MarkManager.cpp OXEvent.cpp ani.
 		  input_login.cpp input_main.cpp input_p2p.cpp item_pickup_auth.cpp item_pickup_commands.cpp\
 		  item.cpp item_addon.cpp item_attribute.cpp item_manager.cpp item_manager_idrange.cpp locale.cpp\
 		  locale_service.cpp log.cpp login_data.cpp lzo_manager.cpp marriage.cpp\
-		  messenger_manager.cpp mining.cpp mob_manager.cpp monarch.cpp motion.cpp p2p.cpp packet_info.cpp\
+		  messenger_manager.cpp mining.cpp mob_manager.cpp monarch.cpp motion.cpp p2p.cpp packet_info.cpp phantom_metin_trap.cpp\
 		  party.cpp polymorph.cpp priv_manager.cpp pvp.cpp\
 		  questevent.cpp questlua.cpp questlua_affect.cpp questlua_arena.cpp questlua_building.cpp\
 		  questlua_dungeon.cpp questlua_forked.cpp questlua_game.cpp questlua_global.cpp\
@@ -156,7 +156,7 @@ CPPFILE = FSM.cpp MarkConvert.cpp MarkImage.cpp MarkManager.cpp OXEvent.cpp ani.
 		  buff_on_attributes.cpp dragon_soul_table.cpp DragonSoul.cpp\
 		  group_text_parse_tree.cpp char_dragonsoul.cpp questlua_dragonsoul.cpp\
 		  shop_manager.cpp shopEx.cpp item_manager_read_tables.cpp\
-		  questlua_dnd.cpp beran_setaou.cpp ikashop_search.cpp LuckyDraw.cpp ws_tournament.cpp questlua_ws.cpp ffa_event.cpp statistics_rank.cpp
+		  questlua_dnd.cpp beran_setaou.cpp ikashop_search.cpp LuckyDraw.cpp ws_tournament.cpp questlua_ws.cpp ffa_event.cpp statistics_rank.cpp boss_ranking.cpp orb_event.cpp
 # PROJECT_SRC_FILES END
 
 # PROJECT_OBJ_FILES BEGIN

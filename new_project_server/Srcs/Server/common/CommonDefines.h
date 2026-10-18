@@ -158,6 +158,7 @@ enum eCommonDefines {
 #define ENABLE_NPC_MAX_HP_BONUS										// Moblarda %30 daha fazla HP
 #define ENABLE_RELOAD_ETC_DROP_ITEM									// Etc_drop_item.txt yenileme
 #define ENABLE_RELOAD_MOB_DROP_ITEM									// Mob_drop_item.txt canli yenileme (/reload m, tum core'lara P2P; drop_item_group.txt ile birlikte okunur)
+#define ENABLE_RELOAD_SPAM_DB										// spam_db canli yenileme (/reload s, tum core'lara GG50 P2P; kelimeler COMMON_SQL veritabanindaki spam_db tablosundan asenkron okunur)
 #define ENABLE_MOUNT_SKILL_DELAY_BYPASS								// Bazı skillerde at binme engelini kapatma (kutsama hava vb.)
 #define ENABLE_HORSE_RIDE_SKILL_DELAY								// Normal ata binerken de (StartRiding) skill sonrası 1500ms bekleme — özel binek ile parite, bypass listesi ortak
 #define ENABLE_DUNGEON_REJOIN_SYSTEM 								// Kuleye geri dönüş sistemi
@@ -184,10 +185,11 @@ enum eCommonDefines {
 // #define ENABLE_GIFT_SEND_SYSTEM										// Hediye gonderme sistemi (oyuncudan oyuncuya kozmetik hediye, EP -> hediye puani; item verilmez). NOT: mevcut GIFT_SYSTEM'den ayridir.
 #define ENABLE_HORSE_MONSTER_DAMAGE_BONUS								// At seviyesine gore canavara ek guc: seviye 11-21 arasi her seviye +%1 (21'de +%10)
 #define ENABLE_CLIENTLESS_HANDSHAKE_TRAP							// Clientless bot honeypot: eski handshake header'i (0xff) tuzak; gercek client 0xa0 gonderir
+#define ENABLE_PHANTOM_METIN_TRAP									// Phantom metin tuzagi: tas kesiminden sonra client pack'inde olmayan vnum'lu sahte tas yayinlanir; ona paket atan = stok-disi client (bot). /phantom_trap ac-kapa, /phantom_trap_enforce otoban (2. vurusta account BLOCK + DC)
 #define ENABLE_IP_BAN
 #define ENABLE_NEXT_REFINE_SUCCESS									// GM komutu /refine_success <oyuncu> [off]: hedefin SADECE bir sonraki +basma denemesi %100 basarili olur (tek seferlik; quest flag'te tutulur, warp/relog'da kaybolmaz, zar aninda tuketilir)
-// #define NEW_PASSIVE_SKILLS											// Pasif Beceriler: Ilham (141) proto formulu yerine sabit +125 HP/seviye (maks 40 lvl = 5000 HP); 49102 kitabi ile ogrenilir (server rebuild + client rebuild/repack birlikte)
-// #define ENABLE_MONSTER_HUNTER_SKILL							// Canavar Avcisi pasifi (144): canavara +seviye/2 %% hasar, 49100 kitabi. NEW_PASSIVE_SKILLS gerektirir; SIMDILIK KAPALI (acmak icin yorumu kaldir)
+#define NEW_PASSIVE_SKILLS											// Pasif Beceriler: Ilham (141) proto formulu yerine sabit +62.5 HP/seviye (lvl*125/2, maks 40 lvl = 2500 HP); 49102 Pasif Beceri Kitabi TEK kitapla 141 + 144 birlikte gelistirir (server rebuild + client rebuild/repack birlikte)
+#define ENABLE_MONSTER_HUNTER_SKILL							// Canavar Avcisi pasifi (144): canavara ve metin tasina +seviye/2 %% hasar (IsStone 2026-10-17); ayri kitabi YOK, 49102 ile Ilham'la birlikte gelisir. NEW_PASSIVE_SKILLS gerektirir
 #define ENABLE_LUCKY_DRAW											// Sansli Cekilis etkinligi: /lucky_draw ile bilet alinir (item ve/veya yang), sure bitince 3 rastgele kazanan belirlenir, oduller /lucky_draw 3 ile teslim alinir. GM: /lucky_draw_manage. (server rebuild + client rebuild/repack birlikte; player DB'ye sql/luckydraw.sql uygulanmali; GC 246 / GG 44)
 #ifdef ENABLE_LUCKY_DRAW
 	#define LD_MAX_WINNERS 5										// kazanan sayisi (SQL luckydraw_winners satir sayisi ile ayni olmali)
@@ -228,14 +230,22 @@ enum eCommonDefines {
 #endif
 
 #define ENABLE_HERB_POTION_USE_COOLTIME							// 50804 (Gango Koku Suyu) & 50816 (Ying Suyu) iksirlerine 1 saniye kullanim bekleme suresi (pulse tabanli bellek-ici, iki item ortak sayac; char_item.cpp 50801-50820 blogu USE_POTION_NODELAY) (server-only rebuild)
-#define ENABLE_DROP_LEVEL_PENALTY_EXEMPT						// Seviye-farki drop cezasi muafiyeti: muaf hedeflerde oyuncu seviyesi mobdan yuksekse aiPercentByDeltaLev tablo cezasi atlanir, esit seviye (%100) sayilir; dusuk seviyeli oyuncu tarafi ve altin dususu degismez (item_manager.cpp GetDropPct choke) (server-only rebuild)
+#define ENABLE_DROP_LEVEL_PENALTY_EXEMPT						// Seviye-farki drop muafiyeti: muaf hedeflerde (harita + boss listesi) oyuncu seviyesi DROP_LEVEL_PENALTY_EXEMPT_MIN_LEVEL (75) ve uzerindeyse, mobdan yuksek ya da dusuk farketmez, aiPercentByDeltaLev tablo sonucu atlanir ve sabit DROP_LEVEL_PENALTY_EXEMPT_PERCENT (tablonun -15 satiri = %180) sayilir; 75 alti oyuncu normal tablo; altin dususu degismez (item_manager.cpp GetDropPct choke) (server-only rebuild)
 #ifdef ENABLE_DROP_LEVEL_PENALTY_EXEMPT
 	#define DROP_LEVEL_PENALTY_EXEMPT_MAP	68						// Kizil Orman (metin2_map_trent02) - haritadaki tum moblar muaf
-	#define DROP_LEVEL_PENALTY_EXEMPT_MOB1	1093					// Lusifer - her haritada muaf
-	#define DROP_LEVEL_PENALTY_EXEMPT_MOB2	2598					// Azrail - her haritada muaf
+	#define DROP_LEVEL_PENALTY_EXEMPT_MOBS	{ 1093, 1192, 2491, 2492, 2493, 2598 }	// her haritada muaf bosslar: Lusifer, Buz Cadisi, Komutan, General, Beran-Setaou, Azrail
+	#define DROP_LEVEL_PENALTY_EXEMPT_PERCENT	180					// muaf hedefte sabit drop yuzdesi (180 = tablonun -15 satiri; oyuncu mobdan 15 seviye dusukmus gibi sayilir)
+	#define DROP_LEVEL_PENALTY_EXEMPT_MIN_LEVEL	75				// muafiyet icin oyuncunun (katilin) minimum seviyesi; altindakiler normal aiPercentByDeltaLev tablosunu kullanir
 #endif
 
 #define ENABLE_GM_FISH_INFO										// GM Balik Bilgisi: target penceresinde GM'e ozel buton; hedef oyuncunun log DB fishing_log kayitlarini client'ta sayfali pencerede gosterir (/fish_info <isim>; son 500 kayit, 10 sayfa x 50 satir; LogManager::FuncQuery async - oyun donmaz) (game rebuild + root repack; db core GEREKMEZ)
+
+#define ENABLE_SOULBIND_SYSTEM									// Ruha Baglama (soulbind) sistemi: Baglama Parsomeni (50263) silah/zirh/kostumu ruha baglar; ruha bagli esya ticaret / guvenli ticaret / pazar / NPC satis / silme / yere atma / PK dusurme / NPC'ye verme / +basma / efsun degistirme / tas cikarma islemlerine giremez (giyme, kullanma, envanter ici tasima ve depo serbest). Ayirma Parsomeni (50264) bagi SOULBIND_UNBIND_DURATION_SEC sonra cozer; sure dolana kadar esya bagli kalir, 50263 ile ayirma iptal edilir. player.item.sealbind: 0=serbest, -1=kalici bagli, >0=cozulme unix zamani. WIRE DEGISTI: TPlayerItem (game<->db) + GC ITEM_SET / ITEM_UPDATE / SAFEBOX_SET / MALL_SET -> db core + TUM game core'lar + client exe rebuild + root repack BIRLIKTE; ONCE SQL: sql/soulbind_system.sql (ALTER TABLE player.item ADD COLUMN sealbind INT NOT NULL DEFAULT 0)
+#ifdef ENABLE_SOULBIND_SYSTEM
+	#define SOULBIND_BIND_SCROLL_VNUM		50263	// Baglama Parsomeni
+	#define SOULBIND_UNBIND_SCROLL_VNUM		50264	// Ayirma Parsomeni
+	#define SOULBIND_UNBIND_DURATION_SEC	(72 * 60 * 60)	// ayirma suresi (sn)
+#endif
 
 #endif
 //archive's 6b9a24beef838d9382c750a6b44ccdb4
@@ -243,3 +253,42 @@ enum eCommonDefines {
 #define ENABLE_WS_TOURNAMENT									// WS 1v1 Turnuva: kayit ucretli tek eleme turnuvasi, arena map 112 host core'unda calisir (GG 47 relay ile tum kanallardan kayit; odul/iade player.ws_claim idempotent claim; ONCE sql/ws_tournament.sql player DB'ye! TUM game core'lar birlikte rebuild - GG wire; db core/client/repack GEREKMEZ)
 #define ENABLE_FFA_EVENT										// Anonim FFA Savas Etkinligi (Kaos Savasi): map 70 herkes-herkese PvP, isimler "Player" maskeli, canli kill siralamasi, 20dk otomatik kapanis; acilis /e ffa_open 1 (sure: ffa_minutes flag); server-only Faz 1 - SQL/wire/client-binary GEREKMEZ (quest systems/ffa_savas.quest derlenmeli; skor penceresi Faz 2 root repack)
 #define ENABLE_PLAYER_STATISTICS		// Oyun ici siralama sistemi (kisisel istatistikler + ranking penceresi; SQL: player.player st_* kolonlari ONCE eklenmeli)
+#define ENABLE_BOSS_DAMAGE_RANKING								// Boss hasar siralamasi: listedeki bosslar dogunca cevredeki oyunculara canli top-5 hasar tablosu (CHAT_TYPE_COMMAND boss_rank/boss_rank_end; boss_ranking.cpp/h + uibossrank.py; client binary GEREKMEZ - game rebuild + root repack; SQL/quest YOK)
+#ifdef ENABLE_BOSS_DAMAGE_RANKING
+	#define BOSS_RANKING_VNUMS			1093, 2598, 2491, 2492, 2494, 2495, 1192	// Lusifer, Azrail, 4 General, Cadi (2493 Mavi Ejder BILEREK haric - kullanici karari 2026-09-09)
+	#define BOSS_RANKING_TOP_COUNT		10											// yayindaki satir sayisi (isimler wire'da 11 karaktere kesilir - 10 satir CHAT_MAX_LEN butcesine boyle sigar; satir siniri 420B, asiri uc durumda son satir dusebilir, tasma/cokme OLMAZ)
+	#define BOSS_RANKING_TICK_SECONDS	3											// yayin araligi (sn)
+	#define BOSS_RANKING_DROP_RULES		{ 1192, 30179, 1 }							// (bossVnum, itemVnum, sira) uclu listesi: bossun drop tablosundan o item DUSERSE sahipligi olum-ani siralamasindaki o siradaki oyuncuya verilir (virgulle coklu kural: { 1192, 30179, 1 }, { 2491, 30179, 1 } gibi; AYNI boss+item icin ikinci kural OLU KALIR - ilk eslesme kazanir; listeyi BOS BIRAKMA - sifir-uzunluk dizi derlenmez); sahip cevrimdisi/baska core'daysa item STOK akisla duser (kaybolmaz, alt siraya GECMEZ - kullanici karari 2026-09-10); ayni itemin tum kopyalari ayni sira sahibine
+	#define BOSS_RANKING_DROP_OWN_SECS	60											// kural iteminin yerdeki sahiplik suresi (stok 30sn; boss sonrasi kalabalik payi)
+#endif
+#define ENABLE_NEWBIE_DOUBLE_LEVEL									// Yeni baslayan 1+1 seviye: EXP ile dogal seviye atlayan oyuncu, atladigi seviye NEWBIE_DOUBLE_LEVEL_MAX_LEVEL (40) altindaysa otomatik 1 tam seviye daha alir (3 stat + rastgele HP/SP + beceri puani + quest/lonca/parti/log level kancalari dahil); sonuc seviyesi 40'i GECMEZ (38->39 dogal + 40 bonus; 39->40 dogal atlamada bonus YOK; 1'den baslayan karakter 3,5,...,39 bonus alir). SADECE PointChange(POINT_EXP) yolu tetikler (mob/metin/parti EXP, special_item_group EXP, pc.give_exp2, GM /set exp); GM /level, pc.set_level, pc.set_level0 ikiye KATLANMAZ (char.cpp POINT_EXP choke). Beceri grubu secilmeden gecilen bonus seviyeler puan kaybettirmez (do_get_skills / pc.clear_skill seviye-1'e gore yeniden hesaplar). SKILL_SELECT ile: bonus seviyede ikinci skill_select BASTIRILIR (m_bNewbieBonusLevel; bonus seviye 5 ise HARIC - 1'den baslayan karakterde 5 her zaman bonus seviyedir, dogal 4 hic gondermemisti) + game.py LearnSkillGroup pencere-acikken-yeniden-kurma bugfix'i (root repack). Levelup quest'leri `== N` yerine `>= N` kullanmali (ayni cagrida ikinci levelup tetigi quest calisirken dusebilir). (server-only game rebuild; SQL/db core GEREKMEZ; client exe GEREKMEZ; game.py bugfix icin root repack)
+#ifdef ENABLE_NEWBIE_DOUBLE_LEVEL
+	#define NEWBIE_DOUBLE_LEVEL_MAX_LEVEL	40						// bonusun verilebilecegi en yuksek sonuc seviyesi (dogal atlamadan SONRA seviye bu degerin ALTINDAYSA +1 verilir)
+#endif
+#define ENABLE_ORB_EVENT												// Kure Avi: her saatin ORB_EVENT_START_MINUTE. dakikasinda 5 dk, oyuncunun etrafinda kisiye ozel kureler (mavi=+2, beyaz=-1 puan), tum core'larda siralama, odul 50253 player_gift ile (GIFT_SYSTEM sart). Server: orb_event.cpp/h + sql/orb_event.sql (ONCE uygulanir) + GG 51 (packet.h ifdef'siz kayit); client: Locale_inc.h ENABLE_ORB_EVENT + effect.CreateWorld + root uiorbevent.py (rebuild+repack birlikte). Acma: /e orb_event 1; test: /orb_admin start; acil: /orb_admin cancel (odulsuz)
+#ifdef ENABLE_ORB_EVENT
+	#define ORB_EVENT_START_MINUTE		30		// tur her saatin bu dakikasinda baslar (30 = 01:30, 02:30 ...); START_MINUTE*60 + DURATION_SEC <= 3600 olmali
+	#define ORB_EVENT_DURATION_SEC		300		// tur suresi (sn), baslangic dakikasindan itibaren (30 -> :30-:35)
+	#define ORB_EVENT_ORB_COUNT			25		// oyuncu basina kure sayisi (en fazla 30)
+	#define ORB_EVENT_BLUE_PCT			30		// mavi kure yuzdesi (gerisi beyaz)
+	#define ORB_EVENT_BLUE_POINTS		2		// mavi kure puani
+	#define ORB_EVENT_WHITE_POINTS		(-1)	// beyaz kure puani (eksi = ceza; toplam negatif olabilir, odul icin toplam > 0 sart)
+	#define ORB_EVENT_GOLD_POINTS		10		// sari kure puani
+	#define ORB_EVENT_GOLD_PCT			10		// her ORB_EVENT_GOLD_INTERVAL_SEC'de sari kure cikma sansi (%); oyuncu basina ayni anda en fazla 1 sari kure
+	#define ORB_EVENT_GOLD_INTERVAL_SEC	3		// sari kure sans kontrolu araligi (sn)
+	#define ORB_EVENT_GOLD_LIFETIME_SEC	3		// sari kure bu sure icinde alinmazsa kaybolur (sn)
+	#define ORB_EVENT_GOLD_MAX_DIST		1500		// sari kurenin oyuncuya en uzak dogma mesafesi (cm; 3 sn'de yetisilebilsin)
+	#define ORB_EVENT_PICK_RADIUS		100		// toplama yaricapi (cm)
+	#define ORB_EVENT_SPAWN_MIN_DIST	400		// kurenin oyuncuya en yakin dogma mesafesi (cm)
+	#define ORB_EVENT_SPAWN_MAX_DIST	1500	// kurenin oyuncuya en uzak dogma mesafesi (cm)
+	#define ORB_EVENT_ORB_MIN_GAP		300		// iki kure arasi en az mesafe (cm)
+	#define ORB_EVENT_RELOCATE_DIST		2500	// oyuncudan bu kadar uzak kalan kure yeniden dogar (cm)
+	#define ORB_EVENT_MAX_MAP_INDEX		1000	// bu degerden BUYUK map index'lerde (zindan kopyalari) kure cikmaz
+	#define ORB_EVENT_BLOCKED_MAPS		5, 25, 45, 66, 72, 73, 81, 100, 103, 105, 107, 108, 109, 110, 111, 112, 113, 181, 182, 183, 200, 208, 216, 217, 250, 351	// statik zindan/etkinlik haritalari (kullanici duzenler)
+	#define ORB_EVENT_REWARD_VNUM		50253	// odul itemi (player_gift)
+	#define ORB_EVENT_REWARD_TOP3		5		// 1-3. sira adet
+	#define ORB_EVENT_REWARD_TOP50		3		// 4-50. sira adet
+	#define ORB_EVENT_REWARD_REST		1		// 51+ adet
+	#define ORB_EVENT_REWARD_MIN_SCORE	50		// odul icin gereken en az toplam puan (altinda kalan siralamada gorunur ama odul almaz)
+	#define ORB_EVENT_LINE_MAX			380		// CHAT_TYPE_COMMAND satir siniri (bayt)
+#endif

@@ -484,6 +484,18 @@ ACMD(do_restart)
 
 	const int iTimeToDead = (event_time(ch->m_pkDeadEvent) / passes_per_sec);
 
+#ifdef ENABLE_FFA_EVENT
+	// FFA: yeniden kalkmak icin olu-yatma suresi (5 sn) dolmali - "buradan devam"
+	// erken dirilisi atlayamaz; sure dolunca dead_event zaten yerinde kaldirir.
+	// "Sehre don" beklemeden serbest (cikis yolu kapanmasin).
+	if (subcmd == SCMD_RESTART_HERE && CFFAManager::instance().IsFFAMap(ch->GetMapIndex())
+			&& CFFAManager::instance().IsOpen() && iTimeToDead > 0)
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Yeniden kalkmak icin %d saniye beklemelisin.", iTimeToDead);
+		return;
+	}
+#endif
+
 	if (subcmd != SCMD_RESTART_TOWN && (!ch->GetWarMap() || ch->GetWarMap()->GetType() == GUILD_WAR_TYPE_FLAG))
 	{
 		if (!test_server)

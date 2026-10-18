@@ -1589,6 +1589,16 @@ namespace quest
 			return 1;
 		}
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+		// Ruha bagli esya quest ile de yukseltilemez (yeni esya uretilir, bag kaybolurdu)
+		if (item->IsSealed())
+		{
+			ch->ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya yukseltilemez.");
+			lua_pushboolean(L, 0);
+			return 1;
+		}
+#endif
+
 		if (item->GetRefinedVnum() == 0)
 		{
 			lua_pushboolean(L, 0);

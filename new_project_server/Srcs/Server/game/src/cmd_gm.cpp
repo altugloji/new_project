@@ -191,6 +191,62 @@ ACMD(do_clientless_trap_enforce)
 }
 #endif
 
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+ACMD(do_phantom_trap)
+{
+	if (!ch || !ch->IsPC())
+		return;
+
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (*arg1)
+	{
+		int iOnOff = 0;
+		str_to_number(iOnOff, arg1);
+		g_bPhantomTrap = (iOnOff != 0);
+	}
+	else
+		g_bPhantomTrap = !g_bPhantomTrap;
+
+	TPacketGGPhantomTrap ggPacket{};
+	ggPacket.byHeader = HEADER_GG_PHANTOM_TRAP;
+	ggPacket.byEnable = g_bPhantomTrap ? 1 : 0;
+	ggPacket.byEnforce = g_bPhantomTrapEnforce ? 1 : 0;
+	P2P_MANAGER::instance().Send(&ggPacket, sizeof(TPacketGGPhantomTrap));
+
+	ch->ChatPacket(CHAT_TYPE_INFO, "[PHANTOM-TRAP] Sistem: %s",
+			g_bPhantomTrap ? "ACIK (tas kesiminde sahte-tas testi)" : "KAPALI");
+}
+
+ACMD(do_phantom_trap_enforce)
+{
+	if (!ch || !ch->IsPC())
+		return;
+
+	char arg1[256];
+	one_argument(argument, arg1, sizeof(arg1));
+
+	if (*arg1)
+	{
+		int iOnOff = 0;
+		str_to_number(iOnOff, arg1);
+		g_bPhantomTrapEnforce = (iOnOff != 0);
+	}
+	else
+		g_bPhantomTrapEnforce = !g_bPhantomTrapEnforce;
+
+	TPacketGGPhantomTrap ggPacket{};
+	ggPacket.byHeader = HEADER_GG_PHANTOM_TRAP;
+	ggPacket.byEnable = g_bPhantomTrap ? 1 : 0;
+	ggPacket.byEnforce = g_bPhantomTrapEnforce ? 1 : 0;
+	P2P_MANAGER::instance().Send(&ggPacket, sizeof(TPacketGGPhantomTrap));
+
+	ch->ChatPacket(CHAT_TYPE_INFO, "[PHANTOM-TRAP] Enforce: %s",
+			g_bPhantomTrapEnforce ? "ACIK (otoban: 2. vurusta account BLOCK + DC)" : "KAPALI (sadece gozlem/log)");
+}
+#endif
+
 #ifdef ENABLE_BOT_CONTROL_SOFT_MODE
 ACMD(do_bot_control_enforce)
 {
@@ -2616,6 +2672,22 @@ ACMD(do_reload)
 				else
 					ch->ChatPacket(CHAT_TYPE_INFO, "Cannot reload mob_drop_item, check syserr.");
 				break;
+#endif
+
+#ifdef ENABLE_RELOAD_SPAM_DB
+			case 's':
+			{
+				// sorgu AccountDB thread'inde asenkron kosar; liste cevap gelince guncellenir
+				// (dogrulama: bu core'un syslog'unda "SPAM: n kelime yuklendi" satiri)
+				extern void LoadSpamDB();
+				LoadSpamDB();
+				ch->ChatPacket(CHAT_TYPE_INFO, "Reloading spam_db (all cores).");
+				sys_log(0, "Reloading spam_db.");
+
+				BYTE bHeader = HEADER_GG_RELOAD_SPAM_DB;
+				P2P_MANAGER::instance().Send(&bHeader, sizeof(BYTE));
+				break;
+			}
 #endif
 
 #ifdef ENABLE_ITEM_SHOP_SYSTEM

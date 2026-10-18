@@ -98,6 +98,10 @@ bool g_bBotControlEnforce = false;	// gozlem modu varsayilani: bloklar/DC kapali
 bool g_bClientlessTrap        = true;	// ana anahtar: ACIK=tuzak calisir; /clientless_trap ile kapanir (orijinal handshake'e doner)
 bool g_bClientlessTrapEnforce = false;	// false=gozlem(sadece logla), true=account BLOCK; CONFIG: clientless_trap_enforce
 #endif
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+bool g_bPhantomTrap        = true;	// ana anahtar: tas kesiminde sahte-tas (honeypot) testi; /phantom_trap ile ac/kapa
+bool g_bPhantomTrapEnforce = false;	// false=gozlem(sadece log), true=2dk surekli saldiri esiginde account BLOCK + DC; /phantom_trap_enforce, CONFIG: phantom_trap_enforce
+#endif
 
 
 string g_stHostname = "";
@@ -408,6 +412,25 @@ static bool __LoadConnectConfigFile(const char* configName)
 			str_to_number(iCTE, value_string);
 			g_bClientlessTrapEnforce = (iCTE != 0);
 			fprintf(stdout, "CLIENTLESS_TRAP_ENFORCE: %d\n", iCTE ? 1 : 0);
+			continue;
+		}
+#endif
+
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+		TOKEN("phantom_trap")
+		{
+			int iPT = 0;
+			str_to_number(iPT, value_string);
+			g_bPhantomTrap = (iPT != 0);
+			fprintf(stdout, "PHANTOM_TRAP: %d\n", iPT ? 1 : 0);
+			continue;
+		}
+		TOKEN("phantom_trap_enforce")
+		{
+			int iPTE = 0;
+			str_to_number(iPTE, value_string);
+			g_bPhantomTrapEnforce = (iPTE != 0);
+			fprintf(stdout, "PHANTOM_TRAP_ENFORCE: %d\n", iPTE ? 1 : 0);
 			continue;
 		}
 #endif

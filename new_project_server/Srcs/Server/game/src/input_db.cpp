@@ -1744,6 +1744,9 @@ void CInputDB::ItemLoad(LPDESC d, const char * c_pData) const
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 		item->SetUpgradeOwner(p->szUpgradeOwner);
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+		item->SetSealBind(p->sealbind);	// saf setter; sayaci OnAfterCreatedItem kurar
+#endif
 
 #ifdef ENABLE_HIGHLIGHT_NEW_ITEM
 		item->SetLastOwnerPID(p->owner);
@@ -1812,6 +1815,10 @@ void CInputDB::ItemLoad(LPDESC d, const char * c_pData) const
 			coord.x = ch->GetX();
 			coord.y = ch->GetY();
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+			if (item->IsSealed())
+				item->SetLastOwnerPID(ch->GetPlayerID());	// yerden yalnizca sahibi geri alabilsin (PickupItem kontrolu)
+#endif
 			item->AddToGround(ch->GetMapIndex(), coord);
 			item->SetOwnership(ch, 180);
 			item->StartDestroyEvent();

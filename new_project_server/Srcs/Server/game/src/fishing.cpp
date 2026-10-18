@@ -656,14 +656,14 @@ void Take(fishing_event_info* info, LPCHARACTER ch)
 		int target = ch->GetQuestFlag("fishkill.target");
 		if (target <= 0)
 		{
-			// Ilk esik 10-50 cekis; sonraki esikler asagida 50-100 olarak yazilir.
+			// Ilk esik 10-50 cekis; sonraki esikler asagida 70-150 olarak yazilir.
 			target = number(10, 50);
 			ch->SetQuestFlag("fishkill.target", target);
 		}
 
 		// GM hizli test: gorev GM'lerde her 2 cekiste bir gelir. Flag'e YAZILMAZ,
 		// normal oyuncularin kayitli esigi etkilenmez (GM yetkisi alinirsa
-		// kayitli 10-50 / 50-100 esigi kaldigi yerden devam eder).
+		// kayitli 10-50 / 70-150 esigi kaldigi yerden devam eder).
 		if (ch->IsGM())
 			target = 2;
 
@@ -676,15 +676,13 @@ void Take(fishing_event_info* info, LPCHARACTER ch)
 			{
 				101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113,
 				171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183,
-				301, 302, 303, 304,
-				331, 332, 333, 334,
 			};
 			const int iPick = number(0, (int) (sizeof(c_aiFishKillMobVnums) / sizeof(c_aiFishKillMobVnums[0])) - 1);
 
 			ch->SetQuestFlag("fishkill.mob", c_aiFishKillMobVnums[iPick]);
 			ch->SetQuestFlag("fishkill.remain", number(10, 30));
 			ch->SetQuestFlag("fishkill.count", 0);
-			ch->SetQuestFlag("fishkill.target", number(50, 100));
+			ch->SetQuestFlag("fishkill.target", number(70, 150));
 
 			// Bilgi penceresi (askida diyalog varsa acilmaz; olta denemesinde
 			// char.cpp gorevi zaten chat mesajiyla soyler).

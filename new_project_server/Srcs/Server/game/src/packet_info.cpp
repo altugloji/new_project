@@ -310,11 +310,14 @@ CPacketInfoGG::CPacketInfoGG()
 #ifdef ENABLE_CLIENTLESS_HANDSHAKE_TRAP
 	Set(HEADER_GG_CLIENTLESS_TRAP,	sizeof(TPacketGGClientlessTrap),	"GGClientlessTrap",	false);
 #endif
+	// bilerek ifdef'siz: define kapali core header 49'u tanisin, P2P linki kopmasin
+	Set(HEADER_GG_PHANTOM_TRAP,	sizeof(TPacketGGPhantomTrap),	"GGPhantomTrap",	false);
 
 	// bilerek ifdef'siz: define kapali core header'i tanimayip P2P linkini koparmasin,
 	// kayitli-ama-islenmeyen paket sadece atlanir (gonderici/isleyici define'lidir)
 	Set(HEADER_GG_RELOAD_ETC_DROP,		sizeof(BYTE),						"ReloadEtcDrop",	false);
 	Set(HEADER_GG_RELOAD_MOB_DROP,		sizeof(BYTE),						"ReloadMobDrop",	false);
+	Set(HEADER_GG_RELOAD_SPAM_DB,			sizeof(BYTE),						"ReloadSpamDB",		false);
 
 #ifdef ENABLE_GIFT_SEND_SYSTEM
 	Set(HEADER_GG_GIFT_NOTIFY,			sizeof(TPacketGGGiftNotify),		"GiftNotify",		false);
@@ -336,6 +339,8 @@ CPacketInfoGG::CPacketInfoGG()
 	// bilerek ifdef'siz (bkz. RELOAD_ETC_DROP notu): kayit kosulsuz, isleyici define'lidir
 	Set(HEADER_GG_WS_TOURNAMENT,		sizeof(TPacketGGWSTournament),		"WSTournament",		false);
 	Set(HEADER_GG_WS_BRACKET,			sizeof(TPacketGGWSBracket),			"WSBracket",		false);
+	// bilerek ifdef'siz: Kure Avi GG 51 (sabit 1142 bayt), isleyici define'lidir
+	Set(HEADER_GG_ORB_EVENT,				sizeof(TPacketGGOrbEvent),			"OrbEvent",			false);
 
 }
 

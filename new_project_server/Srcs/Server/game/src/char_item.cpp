@@ -478,6 +478,9 @@ void CHARACTER::SetItem(TItemPos Cell, LPITEM pItem
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 			strlcpy(pack.szUpgradeOwner, pItem->GetUpgradeOwner(), sizeof(pack.szUpgradeOwner));
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+			pack.sealbind = pItem->GetSealBindTime();
+#endif
 
 			GetDesc()->Packet(&pack, sizeof(TPacketGCItemSet));
 		}
@@ -1341,6 +1344,15 @@ bool CHARACTER::RefineInformation(BYTE bCell, BYTE bType, int iAdditionalCell)
 	if (!item)
 		return false;
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+	// Ruha bagli esya yukseltilemez: pencere hic acilmaz, SetRefineMode cagrilmaz
+	if (item->IsSealed())
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya yukseltilemez.");
+		return false;
+	}
+#endif
+
 	// REFINE_COST
 	if (bType == REFINE_TYPE_MONEY_ONLY && !GetQuestFlag("deviltower_zone.can_refine"))
 	{
@@ -1433,6 +1445,18 @@ bool CHARACTER::RefineItem(LPITEM pkItem, LPITEM pkTarget)
 {
 	if (!CanHandleItem())
 		return false;
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+	// Ruha bagli esya: parsomenle yukseltme (USE_TUNING) ve tas sokme (USE_DETACHMENT) kapali
+	if (pkTarget->IsSealed())
+	{
+		if (pkItem->GetSubType() == USE_DETACHMENT)
+			ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esyadan tas cikarilamaz.");
+		else
+			ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya yukseltilemez.");
+		return false;
+	}
+#endif
 
 #ifdef ENABLE_SCROLL_76016_LV_LIMIT
 	// 76016 Kutsama Parsomeni: yalnizca 30 seviye altindaki silah ve zirhlarda (aksesuar haric) kullanilabilir
@@ -1916,6 +1940,15 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 				if (item2->IsExchanging() || item2->IsEquipped()) // @fixme114
 					return false;
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+				// Ruha bagli esya quest surukle-birak (DND) hedefi olamaz: dnd.* API'si hedefi silebilir / degistirebilir
+				if (item2->IsSealed())
+				{
+					ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya uzerinde kullanilamaz.");
+					return false;
+				}
+#endif
 
 				quest::CQuestManager::instance().DND(GetPlayerID(), item, item2, false);
 				return true;
@@ -2730,6 +2763,87 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 						switch (item->GetVnum())
 						{
+#ifdef ENABLE_SOULBIND_SYSTEM
+							case SOULBIND_BIND_SCROLL_VNUM:		// Baglama Parsomeni: hedef esyayi ruha baglar (sealbind = -1)
+							case SOULBIND_UNBIND_SCROLL_VNUM:	// Ayirma Parsomeni: ayirma geri sayimini baslatir (sealbind = bitis zamani)
+								{
+									LPITEM item2;
+
+									if (!IsValidItemPosition(DestCell) || !(item2 = GetItem(DestCell)) || item2 == item)
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Parsomeni baglamak istedigin esyanin uzerine surukle.");
+										return false;
+									}
+
+									if (item2->IsEquipped())
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Giyili esya uzerinde kullanilamaz.");
+										return false;
+									}
+
+									if (item2->IsExchanging() || item2->isLocked())
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Bu esya su anda kullanimda.");
+										return false;
+									}
+
+									// yalnizca silah / zirh / kostum; istiflenebilir esyalar (ok vb.) baglanamaz
+									if ((item2->GetType() != ITEM_WEAPON && item2->GetType() != ITEM_ARMOR && item2->GetType() != ITEM_COSTUME)
+										|| item2->IsStackable() || item2->GetCount() > 1)
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Bu esya ruha baglanamaz.");
+										return false;
+									}
+
+									const long lSealBind = item2->GetSealBindTime(); // 0 = serbest, -1 = bagli, >0 = ayirma bitis zamani
+
+									if (item->GetVnum() == SOULBIND_BIND_SCROLL_VNUM)
+									{
+										if (lSealBind < 0)
+										{
+											ChatPacket(CHAT_TYPE_INFO, "Bu esya zaten ruha bagli.");
+											return false;
+										}
+
+										item2->ChangeSealBind(-1);
+
+										if (lSealBind > 0)
+										{
+											// ayirma geri sayimi suruyordu: iptal edilir, esya yeniden kalici olarak baglanir
+											ChatPacket(CHAT_TYPE_INFO, "Ayirma islemi iptal edildi, esya yeniden ruha baglandi.");
+											LogManager::instance().ItemLog(this, item, "SET_SEALBIND_CANCEL_UNBIND", std::to_string(item2->GetID()).c_str());
+										}
+										else
+										{
+											ChatPacket(CHAT_TYPE_INFO, "Esya ruhuna baglandi.");
+											LogManager::instance().ItemLog(this, item, "SET_SEALBIND_SUCCESS", std::to_string(item2->GetID()).c_str());
+										}
+									}
+									else
+									{
+										if (lSealBind == 0)
+										{
+											ChatPacket(CHAT_TYPE_INFO, "Bu esya ruha bagli degil.");
+											return false;
+										}
+
+										if (lSealBind > 0)
+										{
+											ChatPacket(CHAT_TYPE_INFO, "Bu esyanin ayirma islemi zaten suruyor.");
+											return false;
+										}
+
+										item2->ChangeSealBind((long) get_global_time() + SOULBIND_UNBIND_DURATION_SEC);
+										ChatPacket(CHAT_TYPE_INFO, "Ayirma islemi basladi. Esya %d saat sonra ruhundan ayrilacak.", (int) (SOULBIND_UNBIND_DURATION_SEC / 3600));
+										LogManager::instance().ItemLog(this, item, "REMOVE_SEALBIND_TIME_BEGIN", std::to_string(item2->GetID()).c_str());
+									}
+
+									ITEM_MANAGER::instance().FlushDelayedSave(item2); // bag degisikligi, parsomen DB'den silinmeden ONCE db core'a gitsin
+									item->SetCount(item->GetCount() - 1); // parsomen, degisiklikten SONRA tuketilir
+								}
+								break;
+#endif
+
 							case ITEM_NOG_POCKET:
 								{
 									if (FindAffect(AFFECT_NOG_ABILITY))
@@ -3543,10 +3657,7 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 								break;
 
 #ifdef NEW_PASSIVE_SKILLS
-#ifdef ENABLE_MONSTER_HUNTER_SKILL
-							case 49100:	// Canavar Avcisi Kitabi (value0=144)
-#endif
-							case 49102:	// Ilham Kitabi (value0=141)
+							case 49102:	// Pasif Beceri Kitabi: TEK kitapla Ilham (141) + Canavar Avcisi (144) birlikte gelisir
 								{
 									if (IsPolymorphed())
 									{
@@ -3554,32 +3665,64 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 										return false;
 									}
 
-									DWORD dwSkillVnum = item->GetValue(0);
-									const CSkillProto* pkSk = CSkillManager::instance().Get(dwSkillVnum);
-									if (!pkSk)
-										return false;
-									if (!IsLearnableSkill(dwSkillVnum))
+									// SkillLevelUp grup secilmemisse sessizce doner; kitabi bosa harcamamak icin burada kes
+									if (!GetSkillGroup())
 									{
-										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu beceriyi ogrenemezsin."));
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu kitabi okumak icin once beceri grubunu secmelisin."));
 										return false;
 									}
 
-									int skillLevel = GetSkillLevel(dwSkillVnum);
-									if (skillLevel < item->GetValue(2))
+									// Kitabin value1=sans, value2=min seviye, value3=max seviye her beceri icin ayri ayri uygulanir;
+									// tek zar atilir ve uygun olan TUM pasif beceriler ayni anda bir seviye yukselir.
+									static const DWORD s_adwPassiveBookSkills[] = {
+										SKILL_ADD_HP,
+#ifdef ENABLE_MONSTER_HUNTER_SKILL
+										SKILL_MONSTER_HUNTER,
+#endif
+									};
+									const int iPassiveBookSkillCount = (int) (sizeof(s_adwPassiveBookSkills) / sizeof(s_adwPassiveBookSkills[0]));
+
+									DWORD adwLevelUp[sizeof(s_adwPassiveBookSkills) / sizeof(s_adwPassiveBookSkills[0])];
+									int iLevelUpCount = 0;
+									bool bLowSkillLevel = false;
+
+									for (int i = 0; i < iPassiveBookSkillCount; ++i)
 									{
-										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu kitabi okumak icin beceri seviyen yetersiz."));
-										return false;
+										DWORD dwSkillVnum = s_adwPassiveBookSkills[i];
+										const CSkillProto* pkSk = CSkillManager::instance().Get(dwSkillVnum);
+										if (!pkSk)
+											continue;	// skill_proto'da satir yok (orn. 144 eklenmemis) -> bu beceri atlanir, kitap digerini gelistirir
+										if (GetLevel() < pkSk->bLevelLimit)
+											continue;
+										if (!IsLearnableSkill(dwSkillVnum))
+											continue;	// bMaxLevel (40) dolmus
+
+										int skillLevel = GetSkillLevel(dwSkillVnum);
+										if (skillLevel < item->GetValue(2))
+										{
+											bLowSkillLevel = true;
+											continue;
+										}
+										if (skillLevel >= item->GetValue(3))
+											continue;
+
+										adwLevelUp[iLevelUpCount++] = dwSkillVnum;
 									}
-									if (skillLevel >= item->GetValue(3))
+
+									if (0 == iLevelUpCount)
 									{
-										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu kitapla daha fazla gelisemezsin."));
+										if (bLowSkillLevel)
+											ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu kitabi okumak icin beceri seviyen yetersiz."));
+										else
+											ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Bu kitapla daha fazla gelisemezsin."));
 										return false;
 									}
 
 									if (number(1, 100) <= item->GetValue(1))
 									{
-										SkillLevelUp(dwSkillVnum, SKILL_UP_BY_BOOK);
-										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Kitabi okudun ve becerin gelisti!"));
+										for (int i = 0; i < iLevelUpCount; ++i)
+											SkillLevelUp(adwLevelUp[i], SKILL_UP_BY_BOOK);
+										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Kitabi okudun ve pasif becerilerin gelisti!"));
 									}
 									else
 										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("Kitabi anlamakta basarisiz oldun."));
@@ -3802,6 +3945,14 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 									if (item2->IsExchanging() || item2->IsEquipped()) // @fixme114
 										return false;
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+									if (item2->IsSealed())
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esyadan tas cikarilamaz.");
+										return false;
+									}
+#endif
 
 									if (item2->GetSocketCount() == 0)
 										return false;
@@ -4248,6 +4399,14 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 										return false;
 									}
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+									if (item2->IsSealed())
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esyanin efsunlari degistirilemez.");
+										return false;
+									}
+#endif
+
 #ifdef ENABLE_ITEM_RARE_ATTR_LEVEL_PCT
 									if (item2->AddRareAttribute2())
 #else
@@ -4306,6 +4465,14 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 										ChatPacket(CHAT_TYPE_INFO, LC_TEXT("속성을 변경할 수 없는 아이템입니다."));
 										return false;
 									}
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+									if (item2->IsSealed())
+									{
+										ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esyanin efsunlari degistirilemez.");
+										return false;
+									}
+#endif
 
 									#ifdef ENABLE_ITEM_RARE_ATTR_LEVEL_PCT
 									if (item2->ChangeRareAttribute2())
@@ -5034,6 +5201,14 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 							if (item2->IsExchanging() || item2->IsEquipped()) // @fixme114
 								return false;
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+							if (item2->IsSealed())
+							{
+								ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esyanin efsunlari degistirilemez.");
+								return false;
+							}
+#endif
+
 							#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
 							// Nazar Tilsimi: kostum efsun taslari dogum efsunlarini degistiremesin
 							if (GLOVE_RANDOM_ATTR_VNUM == item2->GetVnum())
@@ -5102,6 +5277,22 @@ bool CHARACTER::UseItemEx(LPITEM item, TItemPos DestCell)
 
 							if (item2->IsExchanging() || item2->IsEquipped()) // @fixme114
 								return false;
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+							// Ruha bagli esya: efsun degistirme / ekleme kapali; soket islemleri (soket temizleme, aksesuar soketi) acik kalir
+							if (item2->IsSealed())
+							{
+								switch (item->GetSubType())
+								{
+									case USE_CHANGE_ATTRIBUTE:
+									case USE_CHANGE_ATTRIBUTE2:
+									case USE_ADD_ATTRIBUTE:
+									case USE_ADD_ATTRIBUTE2:
+										ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esyanin efsunlari degistirilemez.");
+										return false;
+								}
+							}
+#endif
 
 							#if defined(ENABLE_GLOVE_SYSTEM) && defined(ENABLE_GLOVE_RANDOM_ATTR)
 							// Nazar Tilsimi: dogum efsunlari degistirilemez/eklenemez (havuzu item_attr degil item_attr_rare)
@@ -5979,6 +6170,14 @@ bool CHARACTER::DropItem(TItemPos Cell, BYTE bCount)
 	if (quest::CQuestManager::instance().GetPCForce(GetPlayerID())->IsRunning() == true)
 		return false;
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+	if (item->IsSealed())
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya yere atilamaz.");
+		return false;
+	}
+#endif
+
 	if (IS_SET(item->GetAntiFlag(), ITEM_ANTIFLAG_DROP | ITEM_ANTIFLAG_GIVE))
 	{
 		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("버릴 수 없는 아이템입니다."));
@@ -6065,10 +6264,10 @@ bool CHARACTER::DeleteItem(TItemPos Cell)
 	if (item->IsExchanging() || item->IsEquipped())
 		return false;
 
-#ifdef ENABLE_ITEM_SEALBIND_SYSTEM
+#ifdef ENABLE_SOULBIND_SYSTEM
 	if (item->IsSealed())
 	{
-		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("You can't do this because item is sealed!"));
+		ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya silinemez.");
 		return false;
 	}
 #endif
@@ -6121,10 +6320,10 @@ bool CHARACTER::SellItem(TItemPos Cell)
 	if (true == item->isLocked() || item->IsExchanging() || item->IsEquipped())
 		return false;
 
-#ifdef ENABLE_ITEM_SEALBIND_SYSTEM
+#ifdef ENABLE_SOULBIND_SYSTEM
 	if (item->IsSealed())
 	{
-		ChatPacket(CHAT_TYPE_INFO, LC_TEXT("You can't do this because item is sealed!"));
+		ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya satilamaz.");
 		return false;
 	}
 #endif
@@ -6460,6 +6659,11 @@ bool CHARACTER::MoveItem(TItemPos Cell, TItemPos DestCell, BYTE count)
 				return false;
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+			if (item->IsSealed() || item2->IsSealed()) // ruha bagli esya istiflenmez (savunma amacli: istiflenebilir esya zaten baglanamaz)
+				return false;
+#endif
+
 			if (count == 0)
 				count = item->GetCount();
 
@@ -6498,6 +6702,10 @@ bool CHARACTER::MoveItem(TItemPos Cell, TItemPos DestCell, BYTE count)
 				ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
 				return false;
 			}
+#endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+			if (item->IsSealed()) // ruha bagli esya bolunmez (bolunen parca baglanmamis yeni bir esya olurdu)
+				return false;
 #endif
 			sys_log(0, "%s: ITEM_SPLIT %s (window: %d, cell : %d) -> (window:%d, cell %d) count %d", GetName(), item->GetName(), Cell.window_type, Cell.cell,
 				DestCell.window_type, DestCell.cell, count);
@@ -6673,6 +6881,13 @@ bool CHARACTER::PickupItem(DWORD dwVID)
 			}
 		}
 		// @fixme150 END
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+		// Ruha bagli esya yere dusmusse (giris yuklemesinde envanter tasmasi vb.) yalnizca son sahibi geri alabilir:
+		// sahiplik suresi dolsa da, parti dagitimi yoluyla da baskasina gecmez. Son sahip bilinmiyorsa (0) eski davranis.
+		if (item->IsSealed() && item->GetLastOwnerPID() != 0 && item->GetLastOwnerPID() != GetPlayerID())
+			return false;
+#endif
 
 		if (item->IsOwnership(this))
 		{
@@ -7410,6 +7625,10 @@ LPITEM CHARACTER::FindSpecifyItem(DWORD vnum) const
 		MSL_FOR_LOOP(inventoryMaxNum)
 		{
 			auto pkItem = getInventoryItem(i);
+#ifdef ENABLE_SOULBIND_SYSTEM
+			if (pkItem && pkItem->IsSealed()) // ruha bagli esya vnum ile bulunup tuketilmez (Count/RemoveSpecifyItem ile ayni kural)
+				continue;
+#endif
 			if (pkItem && pkItem->GetVnum() == vnum)
 				return pkItem;
 		}
@@ -7458,6 +7677,11 @@ int CHARACTER::CountSpecifyItem(DWORD vnum, const std::unordered_set<LPITEM> * s
 			auto item = getInventoryItem(i);
 			if (item && item->GetVnum() == vnum)
 			{
+#ifdef ENABLE_SOULBIND_SYSTEM
+				if (item->IsSealed()) // ruha bagli esya malzeme sayilmaz (RemoveSpecifyItem ile ayni kural)
+					continue;
+#endif
+
 				if (m_pkMyShop && m_pkMyShop->IsSellingItem(item->GetID()))
 					continue;
 
@@ -7491,6 +7715,11 @@ void CHARACTER::RemoveSpecifyItem(DWORD vnum, DWORD count, const std::unordered_
 
 			if (pkItem->GetVnum() != vnum)
 				continue;
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+			if (pkItem->IsSealed()) // ruha bagli esya malzeme olarak tuketilmez (CountSpecifyItem ile ayni kural)
+				continue;
+#endif
 
 			if (skipList && skipList->contains(pkItem)) // @fixme346
 				continue;
@@ -7851,6 +8080,10 @@ LPITEM CHARACTER::AutoGiveItem(DWORD dwItemVnum, BYTE bCount, int iRarePct, bool
 	}
 	else
 	{
+#ifdef ENABLE_SOULBIND_SYSTEM
+		if (item->IsSealed())
+			item->SetLastOwnerPID(GetPlayerID());	// yerden yalnizca bu oyuncu geri alabilsin (PickupItem kontrolu)
+#endif
 		item->AddToGround(GetMapIndex(), GetXYZ());
 #ifdef ENABLE_NEWSTUFF
 		item->StartDestroyEvent(g_aiItemDestroyTime[ITEM_DESTROY_TIME_AUTOGIVE]);
@@ -7913,6 +8146,15 @@ bool CHARACTER::CanReceiveItem(LPCHARACTER from, LPITEM item) const
 	if (DISTANCE_APPROX(GetX() - from->GetX(), GetY() - from->GetY()) > 2000)
 		return false;
 	// END_OF_TOO_LONG_DISTANCE_EXCHANGE_BUG_FIX
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+	// Ruha bagli esya hicbir NPC'ye verilemez: demirci yukseltmesi ve quest 'take' yolu kapali
+	if (item->IsSealed())
+	{
+		from->ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya verilemez.");
+		return false;
+	}
+#endif
 
 	switch (GetRaceNum())
 	{
@@ -8893,6 +9135,14 @@ bool CHARACTER::UseItemNewAttribute(TItemPos source_pos, TItemPos target_pos, BY
 
 	if (item_target->IsEquipped())
 		return false;
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+	if (item_target->IsSealed())
+	{
+		ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esyanin efsunlari degistirilemez.");
+		return false;
+	}
+#endif
 
 	// Sadece silah ve zirhlara efsun eklenebilir (costume ve diger turler haric)
 	if (item_target->GetType() != ITEM_WEAPON && item_target->GetType() != ITEM_ARMOR)

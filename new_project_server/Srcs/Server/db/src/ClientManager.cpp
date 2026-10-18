@@ -691,6 +691,9 @@ void CClientManager::RESULT_SAFEBOX_LOAD(CPeer * pkPeer, SQLMsg * msg)
 #if defined(ENABLE_ITEM_UPGRADE_OWNER)
 				", upgrade_owner"
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+				", sealbind"
+#endif
 				" FROM item%s WHERE owner_id=%d AND `window`='%s'",
 				GetTablePostfix(), pi->account_id, pi->ip[0] == 0 ? "SAFEBOX" : "MALL");
 
@@ -1493,8 +1496,15 @@ void CClientManager::QUERY_ITEM_SAVE(CPeer * pkPeer, const char * c_pData)
 		);
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+		// ruha baglama: sealbind, ustteki #if varyantlarinin hepsine TEK noktadan eklenir (INSERT ... SET + ON DUPLICATE KEY UPDATE)
+		const auto sealSetQuery = fmt::format(FMT_COMPILE("{}, sealbind={} "), setQuery, static_cast<long>(p->sealbind));
+		const auto itemQuery = fmt::format(FMT_COMPILE("INSERT INTO item{} SET {} ON DUPLICATE KEY UPDATE {}"),
+														GetTablePostfix(), sealSetQuery, sealSetQuery);
+#else
 		const auto itemQuery = fmt::format(FMT_COMPILE("INSERT INTO item{} SET {} ON DUPLICATE KEY UPDATE {}"),
 														GetTablePostfix(), setQuery, setQuery);
+#endif
 
 		if (g_test_server)
 			sys_log(0, "QUERY_ITEM_SAVE :REPLACE  (%s)", itemQuery.c_str());
@@ -2370,6 +2380,20 @@ void CClientManager::ProcessPackets(CPeer * peer)
 				break;
 
 			case HEADER_GD_ITEM_SAVE:
+#ifdef ENABLE_SOULBIND_SYSTEM
+				// TPlayerItem buyudu (+4 bayt sealbind). db ile AYNI common/ ile derlenmemis (define'i farkli) bir game
+				// core'un item kaydi buraya yanlis boyutta gelir: paket disindaki bayti sealbind diye diske YAZMA, kaydi atla.
+				// syserr: ilk uyusmazlik + sonraki her 100 uyusmazlikta bir satir (log seli db core'u yavaslatmasin).
+				if (dwLength != sizeof(TPlayerItem))
+				{
+					static DWORD s_dwItemSaveSizeMismatch = 0;
+
+					if ((s_dwItemSaveSizeMismatch++ % 100) == 0)
+						sys_err("HEADER_GD_ITEM_SAVE: boyut uyusmuyor (gelen %u, beklenen %u, kanal %d, p2p port %d, toplam %u) - bu game core db ile ayni common/ ile derlenmemis, item kaydi atlandi",
+								dwLength, (DWORD) sizeof(TPlayerItem), peer->GetChannel(), peer->GetP2PPort(), s_dwItemSaveSizeMismatch);
+					break;
+				}
+#endif
 				QUERY_ITEM_SAVE(peer, data);
 				break;
 
@@ -4318,6 +4342,9 @@ void CClientManager::QUERY_SAFETRADE_LOADITEM(CPeer * pkPeer, DWORD dwHandle, TP
 #if defined(ENABLE_ITEM_UPGRADE_OWNER)
 		", upgrade_owner"
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+		", sealbind"
+#endif
 		" FROM item%s WHERE owner_id=%u AND `window`='SAFETRADE' AND "
 		"%u IN (SELECT id FROM safetrade WHERE id=%u AND "
 		"(initiator_id=%u OR partner_id=%u) AND status IN('LOCKED','READY_TO_CLAIM')) "
@@ -4385,6 +4412,9 @@ void CClientManager::RESULT_SAFETRADE_CLAIM(CPeer * pkPeer, SQLMsg * msg)
 #endif
 #if defined(ENABLE_ITEM_UPGRADE_OWNER)
 			", upgrade_owner"
+#endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+			", sealbind"
 #endif
 			" FROM item%s WHERE owner_id=%u AND `window`='SAFETRADE'",
 			GetTablePostfix(), trade_id);

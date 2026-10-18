@@ -334,8 +334,9 @@ int CShop::BuyOffline(LPCHARACTER ch, BYTE pos)
 	char buf[512];
 	snprintf(buf, sizeof(buf), "%s %u(%s) %u %u", pkNewItem->GetName(), mpid, m_pkPC->GetName(), dwPrice, pkNewItem->GetCount());
 	LogManager::instance().ItemLog(ch, pkNewItem, "OFFLINE_SHOP_BUY", buf);
-	snprintf(buf, sizeof(buf), "%s %u(%s) %u %u", pkNewItem->GetName(), ch->GetPlayerID(), ch->GetName(), dwPrice, pkNewItem->GetCount());
-	LogManager::instance().ItemLog(m_pkPC, pkNewItem, "OFFLINE_SHOP_SELL", buf);
+	// Tezgahin dummy NPC'sinin oyuncu ID'si yok (who=0 yazilirdi) - satis kaydi gercek sahibin PID'ine duser
+	snprintf(buf, sizeof(buf), "%s x%u %u Yang'a %s(%u) aldi", pkNewItem->GetName(), pkNewItem->GetCount(), dwPrice, ch->GetName(), ch->GetPlayerID());
+	LogManager::instance().ItemLog(mpid, m_pkPC->GetX(), m_pkPC->GetY(), pkNewItem->GetID(), "Pazarda Satildi", buf, "", pkNewItem->GetOriginalVnum());
 
 #ifdef ENABLE_OFFLINE_SHOP_SOLD_RED
 	// Item slotunda KIRMIZI "satildi" hayaleti olarak kalir (pkItem canli birakildi).
@@ -826,6 +827,15 @@ void CShop::ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byR
 	  }
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+			// Ruha bagli esya pazara eklenemez (player_shop_items sealbind tasimaz); EmBound gibi atlanir
+			if (pkSrc->IsSealed())
+			{
+				owner->ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya pazarda satilamaz.");
+				continue;
+			}
+#endif
+
 			WORD iPos = t.display_pos;
 			if (!m_pGrid || iPos >= SHOP_HOST_ITEM_MAX_NUM || !m_pGrid->IsEmpty(iPos, 1, proto->bSize))
 			{
@@ -892,7 +902,9 @@ void CShop::ApplyOwnerEdit(LPCHARACTER owner, const BYTE * pbRemovePos, BYTE byR
 			pkDisplay->AddToCharacter(m_pkPC, TItemPos(INVENTORY, iCell));
 
 			// Sahibin envanterindeki orijinali tuket
-			ITEM_MANAGER::instance().RemoveItem(pkSrc, "Pazara Eklendi (Duzenleme)");
+			char szLogHint[64];
+			snprintf(szLogHint, sizeof(szLogHint), "fiyat %u Yang", dwPrice);
+			ITEM_MANAGER::instance().RemoveItem(pkSrc, "Pazara Eklendi (Duzenleme)", szLogHint);
 
 			SHOP_ITEM & it = m_itemVector[iPos];
 			it.pkItem = pkDisplay;

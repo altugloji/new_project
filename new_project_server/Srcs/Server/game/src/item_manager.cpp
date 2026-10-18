@@ -546,6 +546,9 @@ void ITEM_MANAGER::SaveSingleItem(LPITEM item) const
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	strlcpy(t.szUpgradeOwner, item->GetUpgradeOwner(), sizeof(t.szUpgradeOwner));
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+	t.sealbind = item->GetSealBindTime();
+#endif
 
 	db_clientdesc->DBPacketHeader(HEADER_GD_ITEM_SAVE, 0, sizeof(TPlayerItem));
 	db_clientdesc->Packet(&t, sizeof(TPlayerItem));
@@ -591,14 +594,27 @@ void ITEM_MANAGER::DecreaseItem(LPITEM item, const char * c_pszReason)
 	item->SetCount(item->GetCount() - 1);
 }
 
+#ifdef OFFLINE_SHOP
+void ITEM_MANAGER::RemoveItem(LPITEM item, const char * c_pszReason, const char * c_pszHintExtra) const
+#else
 void ITEM_MANAGER::RemoveItem(LPITEM item, const char * c_pszReason) const
+#endif
 {
 	LPCHARACTER o;
 
 	if ((o = item->GetOwner()))
 	{
+#ifdef OFFLINE_SHOP
+		char szHint[128];
+#else
 		char szHint[64];
+#endif
 		snprintf(szHint, sizeof(szHint), "%s %u ", item->GetName(), item->GetCount());
+#ifdef OFFLINE_SHOP
+		// Cagiran yer ek bilgi verebilir (or. pazar fiyati) - log hint sonuna eklenir
+		if (c_pszHintExtra && *c_pszHintExtra)
+			snprintf(szHint + strlen(szHint), sizeof(szHint) - strlen(szHint), "%s", c_pszHintExtra);
+#endif
 		LogManager::instance().ItemLog(o, item, c_pszReason ? c_pszReason : "REMOVE", szHint);
 
 		// SAFEBOX_TIME_LIMIT_ITEM_BUG_FIX
@@ -1073,12 +1089,18 @@ bool ITEM_MANAGER::GetDropPct(LPCHARACTER pkChr, LPCHARACTER pkKiller, OUT int& 
 		iDeltaPercent = PERCENT_LVDELTA(pkKiller->GetLevel(), pkChr->GetLevel());
 
 #ifdef ENABLE_DROP_LEVEL_PENALTY_EXEMPT
-	// Muaf hedeflerde (harita 68 + boss 1093/2598) oyuncu seviyesi mobdan yuksekken seviye-farki cezasi uygulanmaz, esit seviye sayilir
-	if (pkKiller->GetLevel() > pkChr->GetLevel() &&
-		(pkChr->GetRealMapIndex() == DROP_LEVEL_PENALTY_EXEMPT_MAP ||
-		 pkChr->GetRaceNum() == DROP_LEVEL_PENALTY_EXEMPT_MOB1 ||
-		 pkChr->GetRaceNum() == DROP_LEVEL_PENALTY_EXEMPT_MOB2))
-		iDeltaPercent = 100;
+	static const DWORD c_adwDropExemptMobs[] = DROP_LEVEL_PENALTY_EXEMPT_MOBS;
+
+	bool bExempt = (pkChr->GetRealMapIndex() == DROP_LEVEL_PENALTY_EXEMPT_MAP);
+
+	for (size_t i = 0; !bExempt && i < sizeof(c_adwDropExemptMobs) / sizeof(c_adwDropExemptMobs[0]); ++i)
+	{
+		if (pkChr->GetRaceNum() == c_adwDropExemptMobs[i])
+			bExempt = true;
+	}
+
+	if (bExempt && pkKiller->GetLevel() >= DROP_LEVEL_PENALTY_EXEMPT_MIN_LEVEL)
+		iDeltaPercent = DROP_LEVEL_PENALTY_EXEMPT_PERCENT;
 #endif
 
     const BYTE bRank = pkChr->GetMobRank();
@@ -1921,6 +1943,13 @@ void ITEM_MANAGER::CopyAllAttrTo(LPITEM pkOldItem, LPITEM pkNewItem)
 #endif
 #ifdef ENABLE_ITEM_ENCHANT_USE_COUNT
 	pkNewItem->SetEnchantUseCount(pkOldItem->GetEnchantUseCount());
+#endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+	// Donusum / +basma ile olusan yeni esya, eskisinin ruha bagini devralir (saf setter: paket / kayit yok;
+	// yeni esya zaten AddToCharacter ile kaydedilir). Ayirma sureci suruyorsa sayac yeni esyada da kurulur.
+	pkNewItem->SetSealBind(pkOldItem->GetSealBindTime());
+	if (pkNewItem->GetSealBindTime() > 0)
+		pkNewItem->StartUnSealBindTimerExpireEvent();
 #endif
 }
 //archive's 6b9a24beef838d9382c750a6b44ccdb4

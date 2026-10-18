@@ -354,6 +354,10 @@ ACMD(do_bot_control_enforce);
 ACMD(do_clientless_trap);
 ACMD(do_clientless_trap_enforce);
 #endif
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+ACMD(do_phantom_trap);
+ACMD(do_phantom_trap_enforce);
+#endif
 
 ACMD(do_pickup_auth);
 ACMD(do_pickup_block);
@@ -364,6 +368,10 @@ ACMD(do_lucky_draw_manage);
 #endif
 #ifdef ENABLE_PLAYER_STATISTICS
 ACMD(do_request_ranking_list);
+#endif
+#ifdef ENABLE_ORB_EVENT
+ACMD(do_orb_ready);
+ACMD(do_orb_admin);
 #endif
 
 struct command_info cmd_info[] =
@@ -779,6 +787,17 @@ struct command_info cmd_info[] =
 	// Oyun ici siralama: istemci penceresi veri istegi (cevap ChatPacket komutlariyla doner)
 	{ "request_ranking_list",	do_request_ranking_list,	0,			POS_DEAD,	GM_PLAYER		},
 #endif
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+	// Phantom metin tuzagi (yeni komutlar tabloda sona; prefix: "phantom_trap" once, "phantom_trap_enforce" sonra)
+	{ "phantom_trap",		do_phantom_trap,		0,			POS_DEAD,	GM_IMPLEMENTOR	},
+	{ "phantom_trap_enforce",	do_phantom_trap_enforce,	0,			POS_DEAD,	GM_IMPLEMENTOR	},
+#endif
+#ifdef ENABLE_ORB_EVENT
+	// Kure Avi (yeni komutlar tabloda sona): orb_ready = client hazir bildirimi, orb_admin = GM start|stop|cancel|status
+	{ "orb_ready",		do_orb_ready,			0,			POS_DEAD,	GM_PLAYER		},
+	{ "orb_admin",		do_orb_admin,			0,			POS_DEAD,	GM_IMPLEMENTOR	},
+#endif
+	
 	{ "\n", nullptr,			0,			POS_DEAD,	GM_IMPLEMENTOR	}
 };
 

@@ -98,6 +98,9 @@
 #ifdef ENABLE_FFA_EVENT
 #include "ffa_event.h"
 #endif
+#ifdef ENABLE_ORB_EVENT
+#include "orb_event.h"
+#endif
 #ifdef ENABLE_PLAYER_STATISTICS
 #include "statistics_rank.h"
 #endif
@@ -403,6 +406,9 @@ int main(int argc, char **argv)
 #ifdef ENABLE_FFA_EVENT
 	CFFAManager	ffaManager;
 #endif
+#ifdef ENABLE_ORB_EVENT
+	COrbEventManager	orbEventManager;
+#endif
 #ifdef ENABLE_PLAYER_STATISTICS
 	CStatisticsRanking	statisticsRanking;
 #endif
@@ -446,6 +452,9 @@ int main(int argc, char **argv)
 #endif
 #ifdef ENABLE_FFA_EVENT
 		ffaManager.Initialize();
+#endif
+#ifdef ENABLE_ORB_EVENT
+		orbEventManager.Initialize();
 #endif
 	}
 
@@ -500,6 +509,10 @@ int main(int argc, char **argv)
 #ifdef ENABLE_FFA_EVENT
 	sys_log(0, "<shutdown> Destroying CFFAManager...");
 	ffaManager.Destroy();
+#endif
+#ifdef ENABLE_ORB_EVENT
+	sys_log(0, "<shutdown> Destroying COrbEventManager...");
+	orbEventManager.Destroy();
 #endif
 #ifdef ENABLE_PLAYER_STATISTICS
 	sys_log(0, "<shutdown> Destroying CStatisticsRanking...");

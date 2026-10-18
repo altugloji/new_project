@@ -4,9 +4,10 @@
 #ifdef ENABLE_FFA_EVENT
 
 // ============================================================================
-// Anonim FFA Savas Etkinligi (Kaos Savasi)
+// Anonim FFA Savas Etkinligi (Death Valley)
 // ----------------------------------------------------------------------------
-// - Map 70 (metin2_map_nusluck01) uzerinde herkes-herkese PvP: ayni imparatorluk,
+// - Map 250 (kullanicinin yukledigi ozel savas haritasi; sunucu map dosyalari repo
+//   DISINDA canliya eklendi) uzerinde herkes-herkese PvP: ayni imparatorluk,
 //   ayni lonca, ayni parti fark etmez (battle_is_attackable erken-izin kapisi).
 // - Kimlik maskesi SERVER tarafinda: haritadaki oyuncular birbirini FFA_MASK_NAME
 //   ("Player") olarak gorur; lonca/unvan/seviye gizli. Izleyiciye DUSMAN bEmpire
@@ -27,12 +28,12 @@
 //   ve char.h'den SONRA include edilmelidir.
 // ============================================================================
 
-#define FFA_EVENT_MAP_INDEX			70			// metin2_map_nusluck01 (test haritasi)
+#define FFA_EVENT_MAP_INDEX			250			// ozel savas haritasi (kullanici karari, 2026-09-04)
 #define FFA_MASK_NAME				"Player"	// haritada gorunen takma isim (kullanici karari)
-#define FFA_SPAWN_X					829900		// giris/dogus noktasi (global cm; kullanici karari)
-#define FFA_SPAWN_Y					763300
-#define FFA_SPAWN_SPREAD			600			// dogus noktasi rastgele yayilim (+-cm; spawn-camp onlemi)
+// Giris noktalari QUEST'te (ffa_savas.quest): 3 koordinattan rastgele biri secilir:
+//   1061618,1118876 / 1020587,1130816 / 1024280,1121927 (global cm)
 #define FFA_RESPAWN_SECONDS			5			// olumden dogusa gecen sure
+#define FFA_DEATH_RESPAWN_SPREAD	1500		// olum noktasi cevresi dogus alani (+-cm; 30x30 birimlik kutu)
 #define FFA_DEFAULT_MINUTES			20			// varsayilan savas suresi (ffa_minutes flag ile ezilir; isinma haric)
 #define FFA_WARMUP_SECONDS			60			// isinma evresi: giris serbest, PC-PC saldiri kapali, ortada sayac
 #define FFA_TICK_SECONDS			2			// yonetici tick araligi
@@ -92,6 +93,11 @@ class CFFAManager : public singleton<CFFAManager>
 		// engellendiyse a'ya bilgi mesaji yazip true doner
 		bool	BlocksInteraction(LPCHARACTER a, LPCHARACTER b);
 
+		// disaridan tasinan saman bufflarini sil (haritadaysa). Hem giriste hem
+		// LoadAffect SONRASINDA cagrilir: sehir->harita warp'i cekirdekler-arasi
+		// oldugundan afektler Entergame'den sonra async yuklenir (giris temizligi bos gecer)
+		void	StripOutsideBuffs(LPCHARACTER ch);
+
 		void	OnEventFlagChange(int iPrev, int iNow);	// questmanager SetEventFlag("ffa_open") hook'u
 		bool	OnPlayerEnterMap(LPCHARACTER ch);		// Entergame; false = haritada kalamaz (sehre)
 		void	OnKill(LPCHARACTER pkKiller, LPCHARACTER pkVictim);
@@ -106,10 +112,10 @@ class CFFAManager : public singleton<CFFAManager>
 		void	FinishEvent();
 		void	CollectMapPlayers(std::vector<LPCHARACTER> & vecOut) const;
 		void	BroadcastCommandToMap(const char * c_pszCommand);
+		void	ReviveAtDeathSpot(LPCHARACTER ch);
 		void	BroadcastScoreboard(bool bForce);
 		void	SendScoreboard(LPCHARACTER ch);
 		void	BuildSortedRank(std::vector<std::pair<DWORD, const TFFAEntry *> > & vecOut) const;
-		void	WarpToSpawn(LPCHARACTER ch);
 		void	StartTick();
 		void	StopTick();
 

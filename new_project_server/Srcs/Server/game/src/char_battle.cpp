@@ -27,6 +27,9 @@
 #ifdef ENABLE_FFA_EVENT
 #include "ffa_event.h"
 #endif
+#ifdef ENABLE_BOSS_DAMAGE_RANKING
+#include "boss_ranking.h"
+#endif
 #ifdef ENABLE_PLAYER_STATISTICS
 #include "statistics_rank.h"
 #endif
@@ -45,6 +48,10 @@
 #include "threeway_war.h"
 #include "BlueDragon.h"
 #include "DragonLair.h"
+
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+#include "phantom_metin_trap.h"
+#endif
 
 #ifdef ENABLE_NEW_MOB_TIMER
 #include "new_mob_timer.h"
@@ -817,6 +824,17 @@ void CHARACTER::Reward(bool bItemDrop
 			item = s_vec_item[0];
 			item->AddToGround(GetMapIndex(), pos);
 
+#ifdef ENABLE_BOSS_DAMAGE_RANKING
+			// kural itemi olum-ani siralamasindaki sira sahibine; SetOwnership
+			// ilk-cagri-kazanir, asagidaki stok cagri sessiz no-op olur
+			// (sahip cevrimdisiysa nullptr -> stok akis, item kaybolmaz)
+			{
+				LPCHARACTER pkRankOwner = CBossRankingManager::instance().GetRankDropOwner(this, item->GetOriginalVnum());
+				if (pkRankOwner)
+					item->SetOwnership(pkRankOwner, BOSS_RANKING_DROP_OWN_SECS);
+			}
+#endif
+
 #ifdef ENABLE_DICE_SYSTEM
 			if (pkAttacker->GetParty())
 			{
@@ -892,6 +910,15 @@ void CHARACTER::Reward(bool bItemDrop
 
 					item->AddToGround(GetMapIndex(), pos);
 
+#ifdef ENABLE_BOSS_DAMAGE_RANKING
+					// kural itemi sira sahibine (ilk-cagri-kazanir; bkz. tek-item kancasi)
+					{
+						LPCHARACTER pkRankOwner = CBossRankingManager::instance().GetRankDropOwner(this, item->GetOriginalVnum());
+						if (pkRankOwner)
+							item->SetOwnership(pkRankOwner, BOSS_RANKING_DROP_OWN_SECS);
+					}
+#endif
+
 					//item->SetOwnership(pkAttacker);
 					item->StartDestroyEvent();
 
@@ -918,6 +945,15 @@ void CHARACTER::Reward(bool bItemDrop
 					}
 
 					item->AddToGround(GetMapIndex(), pos);
+
+#ifdef ENABLE_BOSS_DAMAGE_RANKING
+					// kural itemi sira sahibine (ilk-cagri-kazanir; bkz. tek-item kancasi)
+					{
+						LPCHARACTER pkRankOwner = CBossRankingManager::instance().GetRankDropOwner(this, item->GetOriginalVnum());
+						if (pkRankOwner)
+							item->SetOwnership(pkRankOwner, BOSS_RANKING_DROP_OWN_SECS);
+					}
+#endif
 
 					LPCHARACTER ch = *it;
 
@@ -1049,6 +1085,10 @@ void CHARACTER::ItemDropPenalty(LPCHARACTER pkKiller)
 			auto pkItem = GetInventoryItem(i);
 			if (!pkItem || (isQuestRunning && pkItem->GetType() == ITEM_QUEST)) // @fixme198 (item_quest items can be used without being consumed)
 				continue;
+#ifdef ENABLE_SOULBIND_SYSTEM
+			if (pkItem->IsSealed())	// ruha bagli esya PK olumunde dusmez
+				continue;
+#endif
 			vec_bSlots.push_back(i);
 		}
 
@@ -1074,6 +1114,23 @@ void CHARACTER::ItemDropPenalty(LPCHARACTER pkKiller)
 		}
 		else if (iAlignIndex == 8)
 			isDropAllEquipments = true;
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+		// Envanterde ruha bagli esya varsa envanter "bos" sayilmaz: tum ekipmani dusurme cezasi tetiklenmesin
+		// (dusurulemeyen antiflag'li esyalarla ayni davranis; gercekten bos envanter kurali aynen korunur)
+		if (isDropAllEquipments)
+		{
+			for (i = 0; i < INVENTORY_MAX_NUM; ++i)
+			{
+				const LPITEM pkSealedItem = GetInventoryItem(i);
+				if (pkSealedItem && pkSealedItem->IsSealed())
+				{
+					isDropAllEquipments = false;
+					break;
+				}
+			}
+		}
+#endif
 	}
 
 	if (bDropEquipment) // Drop Equipment
@@ -1103,6 +1160,11 @@ void CHARACTER::ItemDropPenalty(LPCHARACTER pkKiller)
 
 				if (IS_SET(pkItem->GetAntiFlag(), ITEM_ANTIFLAG_GIVE | ITEM_ANTIFLAG_PKDROP))
 					continue;
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+				if (pkItem->IsSealed())	// ruha bagli esya PK olumunde dusmez (karakterden cikarilmadan ONCE atla)
+					continue;
+#endif
 
 				SyncQuickslot(QUICKSLOT_TYPE_ITEM, vec_bSlots[i], 255);
 				vec_item.emplace_back(pkItem->RemoveFromCharacter(), EQUIPMENT);
@@ -1215,6 +1277,12 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 #ifdef ENABLE_NEW_MOB_TIMER
 	if (!IsPC())
 		CNewMobTimer::instance().BossIsDead(GetVID());
+#endif
+
+#ifdef ENABLE_BOSS_DAMAGE_RANKING
+	// final top-3 duyurusu + pencere kapatma komutu + oturum silme
+	if (!IsPC())
+		CBossRankingManager::instance().OnDead(this);
 #endif
 
 	if (!pkKiller && m_dwKillerPID)
@@ -1490,6 +1558,12 @@ void CHARACTER::Dead(LPCHARACTER pkKiller, bool bImmediateDead)
 			LogManager::instance().CharLog(pkKiller, GetRaceNum(), "BOSS_KILL", buf);
 	}
 	// END_OF_BOSS_KILL_LOG
+
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+	// tas kesimi = phantom tuzagi tetikleyicisi (olasilik + cooldown + gecikme filtreleri fonksiyonda)
+	if (IsStone() && pkKiller && pkKiller->IsPC())
+		PhantomTrap_OnStoneKilled(this, pkKiller);
+#endif
 
 #ifdef ENABLE_PLAYER_STATISTICS
 	// Isimli boss kesim sayaclari (Aylik Siralama; player.boss_kill_ranking, async yazim)
@@ -2423,6 +2497,11 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 		}
 		StartRecoveryEvent();
 		UpdateAggrPointEx(pAttacker, type, dam, it->second);
+
+#ifdef ENABLE_BOSS_DAMAGE_RANKING
+		// Boss hasar siralamasi: aktif oturumu olan bossa PC hasari PID bazli birikir
+		CBossRankingManager::instance().OnDamage(this, pAttacker, dam);
+#endif
 	}
 
 	if (GetHP() <= 0)

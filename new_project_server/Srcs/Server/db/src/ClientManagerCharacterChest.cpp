@@ -276,6 +276,52 @@ void CClientManager::QUERY_CHARACTER_CHEST(CPeer* peer, DWORD dwHandle, TPacketG
 				return;
 			}
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+			{
+				// Ruha bagli (ya da ayirma sayaci suren) esya tasiyan karakter sandiga konulamaz: kart serbestce el
+				// degistirdigi icin bagli esya, ayirma suresi beklenmeden baska hesaba gecerdi.
+				// Suresi dolmus sayac (0 < sealbind <= simdi) serbest sayilir (ilk giriste zaten 0'a duser).
+				bool bHasSealed = false;
+				const long lSealNow = static_cast<long>(time(nullptr));
+
+				// 1) db item cache: taze bir baglama henuz SQL'e yazilmamis olabilir (cikistan sonra cache bir sure yasar)
+				if (TItemCacheSet * pkSealSet = GetItemCacheSet(p->dwTargetPID))
+				{
+					for (auto itSeal = pkSealSet->begin(); itSeal != pkSealSet->end(); ++itSeal)
+					{
+						const TPlayerItem * pkCached = (*itSeal)->Get(false);
+						if (pkCached->vnum != 0 && (pkCached->sealbind < 0 || pkCached->sealbind > lSealNow))
+						{
+							bHasSealed = true;
+							break;
+						}
+					}
+				}
+
+				// 2) SQL satirlari (karakter pencereleri; depo satirlari hesaba aittir, karakterle tasinmaz)
+				if (!bHasSealed)
+				{
+					snprintf(szQuery, sizeof(szQuery),
+						"SELECT 1 FROM item%s WHERE owner_id=%u AND `window` IN ('INVENTORY','EQUIPMENT','DRAGON_SOUL_INVENTORY','BELT_INVENTORY') "
+						"AND (sealbind<0 OR sealbind>UNIX_TIMESTAMP()) LIMIT 1",
+						GetTablePostfix(), p->dwTargetPID);
+					const auto pSeal(CDBManager::instance().DirectQuery(szQuery, SQL_PLAYER));
+					if (!pSeal->Get() || !pSeal->Get()->pSQLResult)
+					{
+						SendReply(CHARACTER_CHEST_ERR_DB);	// sorgu hatasi: kapali tarafta kal
+						return;
+					}
+					bHasSealed = (pSeal->Get()->uiNumRows > 0);
+				}
+
+				if (bHasSealed)
+				{
+					SendReply(CHARACTER_CHEST_ERR_ITEM);
+					return;
+				}
+			}
+#endif
+
 			if (!CharacterChestBeginTx())
 			{
 				SendReply(CHARACTER_CHEST_ERR_DB);
@@ -525,6 +571,9 @@ void CClientManager::QUERY_CHARACTER_CHEST(CPeer* peer, DWORD dwHandle, TPacketG
 #endif
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 				",upgrade_owner"
+#endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+				",sealbind"
 #endif
 				" "
 				"FROM item%s WHERE owner_id=%u "

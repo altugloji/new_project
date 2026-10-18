@@ -12,6 +12,7 @@
 #include "char.h"
 #include "char_manager.h"
 #include "item.h"
+#include "skill.h"
 #include "affect.h"
 #ifdef USE_PET_SEAL_ON_LOGIN
 #include "PetSystem.h"
@@ -169,7 +170,7 @@ int CFFAManager::Tick()
 		// isinma bitti: savasi baslat (tek kez)
 		m_bFightAnnounced = true;
 		BroadcastCommandToMap("ffa_start");
-		SendNoticeMap("Kaos Savasi BASLADI! Herkes dusman, kimseye guvenme!", FFA_EVENT_MAP_INDEX, true);
+		SendNoticeMap("DEATH VALLEY BASLADI! Herkes dusman, kimseye guvenme!", FFA_EVENT_MAP_INDEX, true);
 		sys_log(0, "FFA: savas basladi (map %d)", FFA_EVENT_MAP_INDEX);
 	}
 
@@ -189,6 +190,20 @@ int CFFAManager::Tick()
 
 void CFFAManager::OnEventFlagChange(int iPrev, int iNow)
 {
+	// GLOBAL ACILIS DUYURUSU - haritayi kim host ederse etsin calismali.
+	// Eski kosul (haritayi host eden + kanal 1) map 250 baska core/kanala tasininca
+	// hic saglanamaz oldu ve duyuru susmustu (canli bulgu). Yeni secici haritadan
+	// bagimsiz: ch1'de ana sehir haritasini (map 1) host eden core her kurulumda
+	// tam BIR tanedir -> cluster genelinde tek yayin.
+	if (iPrev == 0 && iNow != 0 && g_bChannel == 1 && SECTREE_MANAGER::instance().GetMap(1) != nullptr)
+	{
+		char szNotice[192];
+		snprintf(szNotice, sizeof(szNotice),
+				"Death Valley etkinligi basliyor! Sehirdeki Savas Sorumlusundan katilabilirsiniz. Savas %d saniye sonra baslar!",
+				FFA_WARMUP_SECONDS);
+		BroadcastNotice(szNotice, true);
+	}
+
 	if (!HasMap())
 		return;
 
@@ -208,17 +223,15 @@ void CFFAManager::OnEventFlagChange(int iPrev, int iNow)
 		m_bFightAnnounced = false;
 		m_tLastBroadcast = 0;
 		StartTick();
-		sys_log(0, "FFA: etkinlik acildi, isinma %d sn + savas %d dk (map %d)", FFA_WARMUP_SECONDS, iMinutes, FFA_EVENT_MAP_INDEX);
 
-		// cluster-geneli buyuk duyuru; 6 kanal core'u da bu kenari gorur, tek kanal duyursun
-		if (g_bChannel == 1)
-		{
-			char szNotice[192];
-			snprintf(szNotice, sizeof(szNotice),
-					"Kaos Savasi basliyor! Sehirdeki Savas Sorumlusundan katilabilirsiniz. Savas %d saniye sonra baslar!",
-					FFA_WARMUP_SECONDS);
-			BroadcastNotice(szNotice, true);
-		}
+		// haritada zaten duran biri varsa (tipik: GM) ilk tick'i beklemeden
+		// sayac + skorboard hemen gitsin (2 sn'lik bos ekran cilasi; dogrulama bulgusu)
+		char szWarmupCmd[64];
+		snprintf(szWarmupCmd, sizeof(szWarmupCmd), "ffa_warmup %d", FFA_WARMUP_SECONDS);
+		BroadcastCommandToMap(szWarmupCmd);
+		BroadcastScoreboard(true);
+
+		sys_log(0, "FFA: etkinlik acildi, isinma %d sn + savas %d dk (map %d)", FFA_WARMUP_SECONDS, iMinutes, FFA_EVENT_MAP_INDEX);
 	}
 	else if (iPrev != 0 && iNow == 0)
 	{
@@ -240,6 +253,11 @@ int CFFAManager::CheckAttack(LPCHARACTER ch, LPCHARACTER victim) const
 {
 	if (!ch || !victim || !ch->IsPC() || !victim->IsPC())
 		return 0;
+
+	// alan (splash) hasari kendine islemesin: vanilla bunu CPVPManager'in self
+	// kontroluyle kesiyordu, bizim erken "vurabilir" donusumuz onu atliyordu
+	if (ch == victim)
+		return -1;
 
 	if (!IsFFAMap(ch->GetMapIndex()) || !IsFFAMap(victim->GetMapIndex()))
 		return 0;
@@ -331,6 +349,24 @@ DWORD CFFAManager::GetUniformWeaponPart(LPCHARACTER ch) const
 	return 0;	// pence/mizrak vb. esleme disi turler: yumruk gorunumu
 }
 
+void CFFAManager::StripOutsideBuffs(LPCHARACTER ch)
+{
+	if (!ch || !ch->IsPC() || !IsFFAMap(ch->GetMapIndex()))
+		return;
+
+	if (ch->GetGMLevel() > GM_PLAYER)
+		return;
+
+	// alti saman buffi (affect dwType = skill vnum; AddAffect(pkSk->dwVnum,...) ile basilir)
+	static const DWORD c_adwShamanBuffs[] = {
+		SKILL_HOSIN, SKILL_REFLECT, SKILL_GICHEON,
+		SKILL_JEONGEOP, SKILL_KWAESOK, SKILL_JEUNGRYEOK,
+	};
+
+	for (size_t i = 0; i < sizeof(c_adwShamanBuffs) / sizeof(c_adwShamanBuffs[0]); ++i)
+		ch->RemoveAffect(c_adwShamanBuffs[i]);
+}
+
 bool CFFAManager::BlocksInteraction(LPCHARACTER a, LPCHARACTER b)
 {
 	if (!a || !b || !a->IsPC() || !b->IsPC())
@@ -383,6 +419,10 @@ bool CFFAManager::OnPlayerEnterMap(LPCHARACTER ch)
 
 	if (ch->GetGMLevel() == GM_PLAYER)
 	{
+		// saman bufflari silinir (asil temizlik LoadAffect-sonrasi kancada; bu erken
+		// cagri afektlerin zaten bellekte oldugu ayni-cekirdek durumlari kapsar)
+		StripOutsideBuffs(ch);
+
 		// partiyi dagit (arena/duellist girisiyle ayni desen)
 		LPPARTY pParty = ch->GetParty();
 
@@ -402,7 +442,7 @@ bool CFFAManager::OnPlayerEnterMap(LPCHARACTER ch)
 
 		if (bNewEntry)
 		{
-			ch->ChatPacket(CHAT_TYPE_INFO, "Kaos Savasina hos geldin! Herkes dusman, kimseye guvenme.");
+			ch->ChatPacket(CHAT_TYPE_INFO, "Death Valley etkinligine hos geldin! Herkes dusman, kimseye guvenme.");
 
 			if (m_tEndTime != 0)
 			{
@@ -412,14 +452,9 @@ bool CFFAManager::OnPlayerEnterMap(LPCHARACTER ch)
 			}
 		}
 
-		// spawn cevresi disinda beliren oyuncu spawn'a alinir: olu-relog olum noktasinda
-		// dirilmeyi ve haritada saklanip relog etmeyi kapatir (review bulgusu).
-		// Kendi warp'imiz spawn +-600'e indigi icin dongusuz sonlanir.
-		if (DISTANCE_APPROX(ch->GetX() - FFA_SPAWN_X, ch->GetY() - FFA_SPAWN_Y) > FFA_SPAWN_SPREAD * 5)
-		{
-			WarpToSpawn(ch);
-			return true;
-		}
+		// NOT: eski "spawn cevresi disinda belireni spawn'a tasi" kontrolu KALDIRILDI:
+		// olum noktasi cevresinde dogus artik tasarimin kendisi oldugu icin (v8)
+		// olu-relog "istismari" anlamini yitirdi; relog eden oldugu/kaldigi yerde devam eder.
 	}
 
 	SendScoreboard(ch);
@@ -466,17 +501,25 @@ void CFFAManager::OnKill(LPCHARACTER pkKiller, LPCHARACTER pkVictim)
 	BroadcastScoreboard(false);
 }
 
-void CFFAManager::WarpToSpawn(LPCHARACTER ch)
+void CFFAManager::ReviveAtDeathSpot(LPCHARACTER ch)
 {
-	const long x = FFA_SPAWN_X + number(-FFA_SPAWN_SPREAD, FFA_SPAWN_SPREAD);
-	const long y = FFA_SPAWN_Y + number(-FFA_SPAWN_SPREAD, FFA_SPAWN_SPREAD);
+	// oldugu noktanin ~30x30 birimlik alaninda rastgele dogus. WarpSet DEGIL Show:
+	// yukleme ekrani olmadan yerinde dirilis (forked-war restart kalibi, cmd_general)
+	const long x = ch->GetX() + number(-FFA_DEATH_RESPAWN_SPREAD, FFA_DEATH_RESPAWN_SPREAD);
+	const long y = ch->GetY() + number(-FFA_DEATH_RESPAWN_SPREAD, FFA_DEATH_RESPAWN_SPREAD);
 
 	PIXEL_POSITION pos;
 
-	if (SECTREE_MANAGER::instance().GetMovablePosition(FFA_EVENT_MAP_INDEX, x, y, pos))
-		ch->WarpSet(pos.x, pos.y);
-	else
-		ch->WarpSet(FFA_SPAWN_X, FFA_SPAWN_Y);
+	if (!SECTREE_MANAGER::instance().GetMovablePosition(FFA_EVENT_MAP_INDEX, x, y, pos))
+	{
+		pos.x = ch->GetX();
+		pos.y = ch->GetY();
+	}
+
+	ch->Show(FFA_EVENT_MAP_INDEX, pos.x, pos.y);
+	ch->PointChange(POINT_HP, ch->GetMaxHP() - ch->GetHP());
+	ch->PointChange(POINT_SP, ch->GetMaxSP() - ch->GetSP());
+	ch->ReviveInvisible(5);
 }
 
 bool CFFAManager::OnDeadRespawn(LPCHARACTER ch)
@@ -493,10 +536,8 @@ bool CFFAManager::OnDeadRespawn(LPCHARACTER ch)
 
 	if (IsOpen())
 	{
-		WarpToSpawn(ch);
-		ch->PointChange(POINT_HP, ch->GetMaxHP() - ch->GetHP());
-		ch->PointChange(POINT_SP, ch->GetMaxSP() - ch->GetSP());
-		ch->ReviveInvisible(5);
+		// yerinde dogus: oldugu yerin cevresinde, yukleme ekransiz (kullanici istegi)
+		ReviveAtDeathSpot(ch);
 	}
 	else
 	{
@@ -523,11 +564,8 @@ bool CFFAManager::OnRestart(LPCHARACTER ch, bool bTown)
 	}
 	else
 	{
-		// buradan devam = spawn noktasi (olum yerinde dirilme yok; camp/istismar onlemi)
-		WarpToSpawn(ch);
-		ch->PointChange(POINT_HP, ch->GetMaxHP() - ch->GetHP());
-		ch->PointChange(POINT_SP, ch->GetMaxSP() - ch->GetSP());
-		ch->ReviveInvisible(5);
+		// buradan devam = oldugu yerin cevresinde yerinde dogus (kullanici istegi)
+		ReviveAtDeathSpot(ch);
 	}
 
 	return true;
@@ -579,7 +617,7 @@ void CFFAManager::FinishEvent()
 	{
 		LPCHARACTER ch = vecPlayers[i];
 
-		ch->ChatPacket(CHAT_TYPE_INFO, "Kaos Savasi sona erdi!");
+		ch->ChatPacket(CHAT_TYPE_INFO, "Death Valley sona erdi!");
 
 		for (size_t r = 0; r < vecRank.size() && r < 3; ++r)
 			ch->ChatPacket(CHAT_TYPE_INFO, "%d) %s - %d kill / %d olum",

@@ -94,6 +94,11 @@ extern bool g_bClientlessTrap;
 extern bool g_bClientlessTrapEnforce;
 #endif
 
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+extern bool g_bPhantomTrap;
+extern bool g_bPhantomTrapEnforce;
+#endif
+
 extern bool	map_allow_find(int index);
 extern void	map_allow_copy(long * pl, int size);
 extern bool	no_wander;

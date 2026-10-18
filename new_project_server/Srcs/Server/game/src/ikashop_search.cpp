@@ -785,7 +785,9 @@ void CIkaShopSearchManager::HandleBuyRequest(LPCHARACTER ch, const TPacketCGIkaS
 	snprintf(buf, sizeof(buf), "REMOTE %s satici_pid %u alici_pid %u(%s) fiyat %u adet %u itemdbid %u",
 		pkNewItem->GetName(), dwOwnerPID, dwPID, ch->GetName(), dwPrice, pkNewItem->GetCount(), dwItemDBID);
 	LogManager::instance().ItemLog(ch, pkNewItem, "OFFLINE_SHOP_BUY", buf);
-	LogManager::instance().ItemLog(dwOwnerPID, 0, 0, pkNewItem->GetID(), "OFFLINE_SHOP_SELL", buf, "", pkNewItem->GetOriginalVnum());
+	// Satici loguna okunur satis satiri (tezgah alimiyla ayni format)
+	snprintf(buf, sizeof(buf), "%s x%u %u Yang'a %s(%u) aldi (uzak)", pkNewItem->GetName(), pkNewItem->GetCount(), dwPrice, ch->GetName(), dwPID);
+	LogManager::instance().ItemLog(dwOwnerPID, 0, 0, pkNewItem->GetID(), "Pazarda Satildi", buf, "", pkNewItem->GetOriginalVnum());
 
 	sys_log(0, "IKASEARCH: BUY pid %u <- owner %u item %s(x%u) dbid %u fiyat %u",
 		dwPID, dwOwnerPID, pkNewItem->GetName(), pkNewItem->GetCount(), dwItemDBID, dwPrice);

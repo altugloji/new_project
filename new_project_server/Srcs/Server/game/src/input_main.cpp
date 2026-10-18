@@ -50,6 +50,9 @@
 
 #include "input.h"
 #include "item_pickup_auth.h"
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+#include "phantom_metin_trap.h"
+#endif
 #include "../../common/PulseManager.h"
 
 #ifdef ENABLE_CHARACTER_CHEST
@@ -1698,6 +1701,11 @@ int CInputMain::Shop(LPCHARACTER ch, const char * data, size_t uiBytes) const
 void CInputMain::OnClick(LPCHARACTER ch, const char * data) const
 {
 	const auto pinfo = (struct command_on_click *) data;
+
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+	if (PhantomTrap_CheckHit(ch, pinfo->vid, "ONCLICK"))
+		return;
+#endif
 	LPCHARACTER			victim;
 
 	if ((victim = CHARACTER_MANAGER::instance().Find(pinfo->vid)))
@@ -2346,6 +2354,11 @@ void CInputMain::Attack(LPCHARACTER ch, const BYTE header, const char* data) con
 
 				const auto packMelee = reinterpret_cast<const TPacketCGAttack*>(data);
 
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+				if (PhantomTrap_CheckHit(ch, packMelee->dwVID, "ATTACK"))
+					return;
+#endif
+
 				ch->GetDesc()->AssembleCRCMagicCube(packMelee->bCRCMagicCubeProcPiece, packMelee->bCRCMagicCubeFilePiece);
 
 				const LPCHARACTER	victim = CHARACTER_MANAGER::instance().Find(packMelee->dwVID);
@@ -2531,12 +2544,22 @@ int CInputMain::SyncPosition(LPCHARACTER ch, const char * c_pcData, size_t uiByt
 void CInputMain::FlyTarget(LPCHARACTER ch, const char * pcData, BYTE bHeader) const
 {
 	const auto p = (TPacketCGFlyTargeting *) pcData;
+
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+	if (PhantomTrap_CheckHit(ch, p->dwTargetVID, "FLYTARGET"))
+		return;
+#endif
 	ch->FlyTarget(p->dwTargetVID, p->x, p->y, bHeader);
 }
 
 void CInputMain::UseSkill(LPCHARACTER ch, const char * pcData) const
 {
 	const auto p = (TPacketCGUseSkill *) pcData;
+
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+	if (PhantomTrap_CheckHit(ch, p->dwVID, "USESKILL"))
+		return;
+#endif
 	ch->UseSkill(p->dwVnum, CHARACTER_MANAGER::instance().Find(p->dwVID));
 }
 
@@ -2611,6 +2634,11 @@ void CInputMain::QuestConfirm(LPCHARACTER ch, const void* c_pData) const
 void CInputMain::Target(LPCHARACTER ch, const char * pcData) const
 {
 	const auto p = (TPacketCGTarget *) pcData;
+
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+	if (PhantomTrap_CheckHit(ch, p->dwVID, "TARGET"))
+		return;
+#endif
 
 	const building::LPOBJECT pkObj = building::CManager::instance().FindObjectByVID(p->dwVID);
 
@@ -3692,6 +3720,16 @@ void CInputMain::Refine(LPCHARACTER ch, const char* c_pData) const
 		return;
 	}
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+	// Ruha bagli esya yukseltilemez (sahte paket savunmasi). ClearRefineMode sart: yoksa m_bUnderRefine takili kalir
+	if (item->IsSealed())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya yukseltilemez.");
+		ch->ClearRefineMode();
+		return;
+	}
+#endif
+
 	ch->SetRefineTime();
 
 	if (p->type == REFINE_TYPE_NORMAL)
@@ -4210,6 +4248,11 @@ void CInputMain::TargetInfoLoad(LPCHARACTER ch, const char* c_pData)
 		return;
 
 	TPacketCGTargetInfoLoad* p = (TPacketCGTargetInfoLoad*)c_pData;
+
+#ifdef ENABLE_PHANTOM_METIN_TRAP
+	if (PhantomTrap_CheckHit(ch, p->dwVID, "TARGETINFO"))
+		return;
+#endif
 	TPacketGCTargetInfo pInfo;
 	pInfo.header = HEADER_GC_TARGET_INFO;
 	static std::vector<ITEM_MANAGER::STargetInfoData> s_vec_item;
@@ -4217,7 +4260,7 @@ void CInputMain::TargetInfoLoad(LPCHARACTER ch, const char* c_pData)
 	// LPITEM pkInfoItem;
 	LPCHARACTER m_pkChrTarget = CHARACTER_MANAGER::instance().Find(p->dwVID);
 
-	if (ITEM_MANAGER::instance().CreateDropItemVector(m_pkChrTarget, ch, s_vec_item) && (m_pkChrTarget->IsMonster() || m_pkChrTarget->IsStone()))
+	if (m_pkChrTarget && ITEM_MANAGER::instance().CreateDropItemVector(m_pkChrTarget, ch, s_vec_item) && (m_pkChrTarget->IsMonster() || m_pkChrTarget->IsStone()))
 	{
 		if (s_vec_item.size() == 0);
 		else if (s_vec_item.size() == 1)

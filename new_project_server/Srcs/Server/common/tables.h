@@ -384,6 +384,9 @@ typedef struct SPlayerItem
 #ifdef ENABLE_ITEM_UPGRADE_OWNER
 	char	szUpgradeOwner[CHARACTER_NAME_MAX_LEN + 1];
 #endif
+#ifdef ENABLE_SOULBIND_SYSTEM
+	long	sealbind;
+#endif
 } TPlayerItem;
 
 #ifdef ENABLE_SAFE_TRADE_SYSTEM

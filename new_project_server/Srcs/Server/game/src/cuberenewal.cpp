@@ -560,6 +560,10 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 						LPITEM it = ch->GetInventoryItem(slot);
 						if (!it || it->GetVnum() != mvnum)
 							continue;
+#ifdef ENABLE_SOULBIND_SYSTEM
+						if (it->IsSealed()) // ruha bagli esya slot ile de malzeme sayilmaz (tuketim dongusuyle ayni kural)
+							continue;
+#endif
 						got += it->GetCount();
 					}
 					if (got < need)
@@ -599,6 +603,14 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 				{
 
 					LPITEM item = ch->GetInventoryItem(index_item_improve);
+#ifdef ENABLE_SOULBIND_SYSTEM
+					// Ruha bagli esya sans arttirici olarak tuketilemez (hucre istemciden gelir, vnum kontrolu yok). Henuz hicbir sey tuketilmedi.
+					if (item != NULL && item->IsSealed())
+					{
+						ch->ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya malzeme olarak kullanilamaz.");
+						return;
+					}
+#endif
 					if(item != NULL)
 					{
 
@@ -679,6 +691,10 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 					LPITEM object = ch->GetInventoryItem(i);//Select Item via LPITEM
 					if (NULL == object)
 						continue; // Skip if is null to avoiding crashes
+#ifdef ENABLE_SOULBIND_SYSTEM
+					if (object->IsSealed()) // ruha bagli esya tuketilmez (RemoveSpecifyItem atlar) -> efsun/soket kaynagi da olamaz
+						continue;
+#endif
 					if (object->GetType() == ITEM_WEAPON || object->GetType() == ITEM_ARMOR) // Check if is armor or weapon
 					{
 						if (object->GetVnum() == materialInfo.material[0].vnum) // Check if Select item is same item with crafting item
@@ -731,6 +747,10 @@ void Cube_Make(LPCHARACTER ch, int index, int count_item, int index_item_improve
 							LPITEM it = ch->GetInventoryItem(slot);
 							if (!it || it->GetVnum() != mvnum)
 								continue;
+#ifdef ENABLE_SOULBIND_SYSTEM
+							if (it->IsSealed()) // ruha bagli esya slot ile de tuketilmez (sayim dongusuyle ayni kural)
+								continue;
+#endif
 							const int take = MIN(need, (int)it->GetCount());
 							it->SetCount(it->GetCount() - take); // 0 olunca motor item'i yok eder
 							need -= take;

@@ -612,6 +612,21 @@ void AccountDB::AnalyzeReturnQuery(SQLMsg * pMsg) const
 	{
 		case QID_SPAM_DB:
 			{
+#ifdef ENABLE_RELOAD_SPAM_DB
+				// basarili-ama-bos sonuc da gecerli: tablo tamamen bosaltildiysa liste de bosalmali;
+				// sorgu hatasinda (result set yok) eski liste korunur
+				if (pMsg->Get()->pSQLResult)
+				{
+					MYSQL_ROW row;
+
+					SpamManager::instance().Clear();
+
+					while ((row = mysql_fetch_row(pMsg->Get()->pSQLResult)))
+						SpamManager::instance().Insert(row[0], atoi(row[1]));
+
+					sys_log(0, "SPAM: %u kelime yuklendi", (unsigned int) pMsg->Get()->uiNumRows);
+				}
+#else
 				if (pMsg->Get()->uiNumRows > 0)
 				{
 					MYSQL_ROW row;
@@ -621,6 +636,7 @@ void AccountDB::AnalyzeReturnQuery(SQLMsg * pMsg) const
 					while ((row = mysql_fetch_row(pMsg->Get()->pSQLResult)))
 						SpamManager::instance().Insert(row[0], atoi(row[1]));
 				}
+#endif
 			}
 			break;
 	}

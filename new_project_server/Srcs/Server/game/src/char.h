@@ -1277,6 +1277,9 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		int				m_iRefineAdditionalCell;
 		bool			m_bUnderRefine;
 		DWORD			m_dwRefineNPCVID;
+#ifdef ENABLE_NEWBIE_DOUBLE_LEVEL
+		bool			m_bNewbieBonusLevel;	// 1+1 bonus seviye verilirken true (POINT_LEVEL'deki ikinci skill_select'i bastirir)
+#endif
 
 	public:
 		////////////////////////////////////////////////////////////////////////////////////////

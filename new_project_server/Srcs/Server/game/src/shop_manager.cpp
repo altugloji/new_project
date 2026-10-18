@@ -244,6 +244,15 @@ bool CShopManager::CreateOfflineShop(LPCHARACTER owner, const char *szSign, cons
 		}
 #endif
 
+#ifdef ENABLE_SOULBIND_SYSTEM
+		if (item->IsSealed())
+		{
+			owner->ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya pazarda satilamaz.");
+			M2_DELETE(pGrid);
+			return false;
+		}
+#endif
+
 		const BYTE display_pos = pTable[i]->display_pos;
 		const TItemTable * itemProto = item->GetProto();
 		if (!itemProto || !pGrid->IsEmpty(display_pos, 1, itemProto->bSize))
@@ -292,7 +301,9 @@ bool CShopManager::CreateOfflineShop(LPCHARACTER owner, const char *szSign, cons
 		}
 
 		DBManager::instance().DirectQuery(query);
-		ITEM_MANAGER::Instance().RemoveItem(item, "Pazara Eklendi");
+		char szLogHint[64];
+		snprintf(szLogHint, sizeof(szLogHint), "fiyat %u Yang", pTable[i]->price);
+		ITEM_MANAGER::Instance().RemoveItem(item, "Pazara Eklendi", szLogHint);
 	}
 
 	StartOfflineShop(owner->GetPlayerID());
@@ -460,6 +471,14 @@ void CShopManager::Sell(LPCHARACTER ch, BYTE bCell, BYTE bCount) const
 	if (item->IsItemShopEmBound())
 	{
 		ch->ChatPacket(CHAT_TYPE_INFO, LC_TEXT("nesnemarketemitemkisitli"));
+		return;
+	}
+#endif
+
+#ifdef ENABLE_SOULBIND_SYSTEM
+	if (item->IsSealed())
+	{
+		ch->ChatPacket(CHAT_TYPE_INFO, "Ruha bagli esya satilamaz.");
 		return;
 	}
 #endif

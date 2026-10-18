@@ -33,6 +33,9 @@ private:
 		long	lYPos;
 		BYTE	bPerHour;
 		BYTE	bPerMin;
+		BYTE	bFixHour;
+		BYTE	bFixMin;
+		BYTE	bMaxChannel;
 		bool	bValid;
 
 		DWORD	dwSpawnedVID;
