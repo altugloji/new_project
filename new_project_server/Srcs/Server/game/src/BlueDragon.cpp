@@ -6,6 +6,7 @@
 #include "vector.h"
 #include "utils.h"
 #include "char.h"
+#include "desc.h"
 #include "mob_manager.h"
 #include "sectree_manager.h"
 #include "battle.h"
@@ -129,23 +130,38 @@ int BlueDragon_StateBattle(LPCHARACTER pChar)
 	return PASSES_PER_SEC(1);
 }
 
+bool BlueDragon::HasRequiredNearbyPlayers(const CHARACTER& boss)
+{
+	const auto sectree = boss.GetSectree();
+	if (!sectree)
+		return false;
+
+	int players = 0;
+	auto countPlayer = [&](LPENTITY entity) {
+		if (!entity->IsType(ENTITY_CHARACTER))
+			return false;
+
+		const auto player = static_cast<LPCHARACTER>(entity);
+		if (!player->IsPC() || player->IsObserverMode())
+			return false;
+
+		const auto desc = player->GetDesc();
+		if (!desc->IsPhase(PHASE_GAME) && !desc->IsPhase(PHASE_DEAD))
+			return false;
+
+		if (DISTANCE_APPROX(boss.GetX() - player->GetX(), boss.GetY() - player->GetY()) > NearbyPlayerRange)
+			return false;
+
+		return ++players == RequiredNearbyPlayers;
+	};
+	sectree->for_each_for_find_victim(countPlayer);
+	return players >= RequiredNearbyPlayers;
+}
+
 int BlueDragon_Damage (LPCHARACTER me, LPCHARACTER pAttacker, int dam)
 {
 	if (nullptr == me || nullptr == pAttacker)
 		return dam;
-
-	#ifdef ENABLE_BLUEDRAGON_RENEWAL
-	if (pAttacker->IsMonster() && BlueDragon::BossVnum == pAttacker->GetMobTable().dwVnum)
-	{
-		for (int i=1; i <= BlueDragon::StoneCount; ++i)
-		{
-			const auto dwDragonStoneID = BlueDragon_GetIndexFactor("DragonStone", i, "vnum");
-			const auto cnt = SECTREE_MANAGER::instance().GetMonsterCountInMap( me->GetMapIndex(), dwDragonStoneID);
-			if (cnt > 0)
-				return 0;
-		}
-	}
-	#endif
 
 	if (pAttacker->IsMonster() && BlueDragon::BossVnum == pAttacker->GetMobTable().dwVnum)
 	{

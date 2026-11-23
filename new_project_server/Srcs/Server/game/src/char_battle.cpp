@@ -1760,6 +1760,13 @@ bool CHARACTER::Damage(LPCHARACTER pAttacker, int dam, EDamageType type) // retu
 	if (pAttacker && pAttacker->IsAtBotControl() && BotControlEnforced()) { return false; }
 #endif
 
+	if (IsMonster() && GetMobTable().dwVnum == BlueDragon::BossVnum && !BlueDragon::HasRequiredNearbyPlayers(*this))
+	{
+		if (pAttacker)
+			SendDamagePacket(pAttacker, 0, DAMAGE_BLOCK);
+		return false;
+	}
+
 	if (DAMAGE_TYPE_MAGIC == type)
 		dam = (int)((float)dam * (100 + (pAttacker->GetPoint(POINT_MAGIC_ATT_BONUS_PER) + pAttacker->GetPoint(POINT_MELEE_MAGIC_ATT_BONUS_PER))) / 100.f + 0.5f);
 

@@ -1059,6 +1059,9 @@ class CHARACTER : public CEntity, public CFSM, public CHorseRider
 		bool			IsGoodAffect(BYTE bAffectType) const;
 
 		void			RemoveSkillAffect();
+#ifdef BERAN_SETAOU
+		void			RemoveDragonRoomEntryBuffs();
+#endif
 		void			RemoveGoodAffect();
 		void			RemoveBadAffect();
 

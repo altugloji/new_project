@@ -4,6 +4,10 @@
 #include "char.h"
 #include "char_manager.h"
 #include "affect.h"
+#ifdef BERAN_SETAOU
+#include "beran_setaou.h"
+#include "skill.h"
+#endif
 #ifdef ENABLE_WS_TOURNAMENT
 #include "ws_tournament.h"
 #endif
@@ -421,6 +425,16 @@ EVENTFUNC(load_affect_login_event)
 	}
 }
 
+#ifdef BERAN_SETAOU
+static constexpr std::array<DWORD, 3> dragonRoomEntryBuffs = { SKILL_HOSIN, SKILL_REFLECT, SKILL_GICHEON };
+
+void CHARACTER::RemoveDragonRoomEntryBuffs()
+{
+	for (DWORD skill : dragonRoomEntryBuffs)
+		RemoveAffect(skill);
+}
+#endif
+
 void CHARACTER::LoadAffect(DWORD dwCount, TPacketAffectElement * pElements)
 {
 	m_bIsLoadedAffect = false;
@@ -454,6 +468,15 @@ void CHARACTER::LoadAffect(DWORD dwCount, TPacketAffectElement * pElements)
 
 	for (DWORD i = 0; i < dwCount; ++i, ++pElements)
 	{
+#ifdef BERAN_SETAOU
+		// Affects saved before entry can arrive from the DB after the player enters the room.
+		if (GetMapIndex() == CRYSTAL_ROOM_MAP_IDX &&
+			std::find(dragonRoomEntryBuffs.begin(), dragonRoomEntryBuffs.end(), pElements->dwType) != dragonRoomEntryBuffs.end())
+		{
+			SendAffectRemovePacket(GetDesc(), GetPlayerID(), pElements->dwType, pElements->bApplyOn);
+			continue;
+		}
+#endif
 		if (pElements->dwType == SKILL_MUYEONG)
 			continue;
 

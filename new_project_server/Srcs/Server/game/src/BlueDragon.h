@@ -7,6 +7,10 @@
 namespace BlueDragon {
 	constexpr int BossVnum = 2493;
 	constexpr int StoneCount = 4;
+	constexpr int RequiredNearbyPlayers = 3;
+	constexpr int NearbyPlayerRange = 4000;
+
+	bool HasRequiredNearbyPlayers(const CHARACTER& boss);
 }
 
 extern int BlueDragon_StateBattle (LPCHARACTER);

@@ -2793,6 +2793,10 @@ bool CHARACTER::Show(long lMapIndex, long x, long y, long z, bool bShowSpawnMoti
 		return false;
 	}
 
+#ifdef BERAN_SETAOU
+	if (IsPC() && lMapIndex == CRYSTAL_ROOM_MAP_IDX && GetMapIndex() != lMapIndex)
+		RemoveDragonRoomEntryBuffs();
+#endif
 	SetMapIndex(lMapIndex);
 
 	bool bChangeTree = false;
